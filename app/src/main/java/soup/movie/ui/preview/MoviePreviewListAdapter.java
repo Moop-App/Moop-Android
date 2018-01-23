@@ -1,5 +1,6 @@
 package soup.movie.ui.preview;
 
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,12 @@ import java.util.List;
 
 import soup.movie.R;
 import soup.movie.data.Movie;
+import soup.movie.ui.util.ListUtil;
 
 public class MoviePreviewListAdapter extends RecyclerView.Adapter<MoviePreviewListAdapter.ViewHolder>
         implements MoviePreviewContract.AdapterView {
 
-    private List<Movie> mValues = new ArrayList<>();
+    private List<Movie> mItems = new ArrayList<>();
 
     MoviePreviewListAdapter() {
     }
@@ -30,21 +32,41 @@ public class MoviePreviewListAdapter extends RecyclerView.Adapter<MoviePreviewLi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Movie item = mValues.get(position);
+        Movie item = mItems.get(position);
         holder.mTitleView.setText(item.getTitle());
         holder.mSubtitleView.setText(item.getSubtitle());
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return ListUtil.size(mItems);
     }
 
     @Override
-    public void updateList(List<Movie> items) {
-        //TODO: update using DiffUtil
-        mValues = items;
-        notifyDataSetChanged();
+    public void updateList(List<Movie> newItems) {
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return ListUtil.size(mItems);
+            }
+
+            @Override
+            public int getNewListSize() {
+                return ListUtil.size(newItems);
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return false;
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                return false;
+            }
+        }, false);
+        mItems = newItems;
+        result.dispatchUpdatesTo(this);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

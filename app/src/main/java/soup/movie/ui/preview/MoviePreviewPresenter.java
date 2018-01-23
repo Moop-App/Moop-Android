@@ -25,10 +25,13 @@ public class MoviePreviewPresenter implements MoviePreviewContract.Presenter {
 
     @Override
     public void refresh() {
-        mView.onListUpdated(Arrays.asList(DummyContents.ITEMS));
+        mView.onClearList();
         Observable.timer(3, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(ignore -> mView.onRefreshDone());
+                .subscribe(ignore -> {
+                    mView.onRefreshDone();
+                    mView.onListUpdated(Arrays.asList(DummyContents.ITEMS));
+                });
     }
 
     @Override

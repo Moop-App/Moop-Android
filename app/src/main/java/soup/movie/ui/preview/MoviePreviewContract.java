@@ -14,6 +14,7 @@ class MoviePreviewContract {
     }
 
     interface View {
+        void onClearList();
         void onListUpdated(List<Movie> items);
         void onRefreshDone();
     }

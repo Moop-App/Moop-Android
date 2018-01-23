@@ -2,7 +2,6 @@ package soup.movie.ui.preview;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
 import soup.movie.data.Movie;
 
@@ -43,14 +43,19 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
 
         Context context = view.getContext();
 
-        mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.n_blue);
-        mSwipeRefreshLayout.setOnRefreshListener(() -> mPresenter.refresh());
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.n_blue);
+        swipeRefreshLayout.setOnRefreshListener(() -> mPresenter.refresh());
+        mSwipeRefreshLayout = swipeRefreshLayout;
 
         MoviePreviewListAdapter adapterView = new MoviePreviewListAdapter();
         RecyclerView recyclerView = view.findViewById(R.id.preview_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapterView);
+        recyclerView.setItemAnimator(new SlideInUpAnimator());
+        //TODO: insert equal spacing
+        // refer to https://gist.github.com/alexfu/f7b8278009f3119f523a
+        //recyclerView.addItemDecoration();
         mAdapterView = adapterView;
 
         mPresenter.bind();
@@ -73,6 +78,14 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onClearList() {
+        MoviePreviewContract.AdapterView adapterView = mAdapterView;
+        if (adapterView != null) {
+            adapterView.updateList(null);
+        }
     }
 
     @Override

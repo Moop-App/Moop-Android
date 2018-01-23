@@ -58,6 +58,9 @@ dependencies {
     // Mosby
     implementation "com.hannesdorfmann.mosby3:mvi:$MosbyVersion"
 
+    // UX
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
+
     // network
     implementation "com.squareup.retrofit2:retrofit:$RetrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$RetrofitVersion"
