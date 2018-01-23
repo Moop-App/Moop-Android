@@ -2,7 +2,9 @@ package soup.movie.ui.preview;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
 
     private MoviePreviewContract.Presenter mPresenter;
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private MoviePreviewContract.AdapterView mAdapterView;
 
     public MoviePreviewFragment() {
@@ -37,16 +40,22 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.movie_preview_list, container, false);
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            MoviePreviewListAdapter adapterView = new MoviePreviewListAdapter();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(adapterView);
-            mAdapterView = adapterView;
-            mPresenter.bind();
-            mPresenter.loadItems();
-        }
+
+        Context context = view.getContext();
+
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.n_blue);
+        mSwipeRefreshLayout.setOnRefreshListener(() -> mPresenter.refresh());
+
+        MoviePreviewListAdapter adapterView = new MoviePreviewListAdapter();
+        RecyclerView recyclerView = view.findViewById(R.id.preview_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(adapterView);
+        mAdapterView = adapterView;
+
+        mPresenter.bind();
+        mPresenter.loadItems();
+
         return view;
     }
 
@@ -67,10 +76,15 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
     }
 
     @Override
-    public void showList(List<Movie> items) {
+    public void onListUpdated(List<Movie> items) {
         MoviePreviewContract.AdapterView adapterView = mAdapterView;
         if (adapterView != null) {
             adapterView.updateList(items);
         }
+    }
+
+    @Override
+    public void onRefreshDone() {
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

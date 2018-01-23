@@ -9,11 +9,13 @@ class MoviePreviewContract {
         void bind();
         void unbind();
 
+        void refresh();
         void loadItems();
     }
 
     interface View {
-        void showList(List<Movie> items);
+        void onListUpdated(List<Movie> items);
+        void onRefreshDone();
     }
 
     interface AdapterView {
