@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        applicationId "soup.movie"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+ext {
+    supportLibraryVersion = '27.0.2'
+    constraintVersion = '1.0.2'
+    roomVersion = "1.0.0"
+
+    MosbyVersion = '3.1.0'
+    daggerVersion = '2.13'
+    daggerAndroidVersion = '2.13'
+    butterknifeVersion = '8.8.1'
+
+    RetrofitVersion = '2.3.0'
+
+    RxJavaVersion = '2.1.8'
+    RxAndroidVersion = '2.0.1'
+    RxRelayVersion = '2.0.0'
+    RxBindingVersion = '2.0.0'
+
+    junitVersion = '4.12'
+    espressoVersion = '3.0.1'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // default
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:transition:$supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
+
+    // Mosby
+    implementation "com.hannesdorfmann.mosby3:mvi:$MosbyVersion"
+
+    // UX
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
+
+    // network
+    implementation "com.squareup.retrofit2:retrofit:$RetrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$RetrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RetrofitVersion"
+
+    // database
+    implementation "android.arch.lifecycle:extensions:$roomVersion"
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$RxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$RxAndroidVersion"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$RxRelayVersion"
+
+    // RxBinding
+    implementation "com.jakewharton.rxbinding2:rxbinding:$RxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:$RxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$RxBindingVersion"
+
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    // logging
+    implementation 'com.jakewharton.timber:timber:4.6.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4',
+            'com.facebook.stetho:stetho:1.5.0',
+            'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
+    // Dagger dependencies
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerAndroidVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerAndroidVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
