@@ -11,6 +11,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // API Keys
+        buildConfigField 'String', 'KOBIS_API_KEY', "\"" + getKobisApiKey() + "\""
     }
     buildTypes {
         release {
@@ -22,6 +25,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+def getKobisApiKey() {
+    def properties = new Properties()
+    properties.load(project.rootProject.file('key.properties').newDataInputStream())
+    return properties.getProperty("KobisApiKey");
 }
 
 ext {
