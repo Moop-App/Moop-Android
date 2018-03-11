@@ -10,6 +10,6 @@
         android:id="@+id/preview_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/movie_preview_item" />
+        tools:listitem="@layout/item_movie_with_thumbnail" />
 
 </android.support.v4.widget.SwipeRefreshLayout>

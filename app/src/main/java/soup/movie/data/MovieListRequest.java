@@ -22,48 +22,59 @@ public class MovieListRequest implements QueryMapProvider {
     public MovieListRequest() {
     }
 
-    public void setKey(String key) {
+    public MovieListRequest setKey(String key) {
         this.key = key;
+        return this;
     }
 
-    public void setCurPage(String curPage) {
+    public MovieListRequest setCurPage(String curPage) {
         this.curPage = curPage;
+        return this;
     }
 
-    public void setItemPerPage(String itemPerPage) {
+    public MovieListRequest setItemPerPage(String itemPerPage) {
         this.itemPerPage = itemPerPage;
+        return this;
     }
 
-    public void setMovieNm(String movieNm) {
+    public MovieListRequest setMovieNm(String movieNm) {
         this.movieNm = movieNm;
+        return this;
     }
 
-    public void setDirectorNm(String directorNm) {
+    public MovieListRequest setDirectorNm(String directorNm) {
         this.directorNm = directorNm;
+        return this;
     }
 
-    public void setOpenStartDt(String openStartDt) {
+    public MovieListRequest setOpenStartDt(String openStartDt) {
         this.openStartDt = openStartDt;
+        return this;
     }
 
-    public void setOpenEndDt(String openEndDt) {
+    public MovieListRequest setOpenEndDt(String openEndDt) {
         this.openEndDt = openEndDt;
+        return this;
     }
 
-    public void setPrdtStartYear(String prdtStartYear) {
+    public MovieListRequest setPrdtStartYear(String prdtStartYear) {
         this.prdtStartYear = prdtStartYear;
+        return this;
     }
 
-    public void setPrdtEndYear(String prdtEndYear) {
+    public MovieListRequest setPrdtEndYear(String prdtEndYear) {
         this.prdtEndYear = prdtEndYear;
+        return this;
     }
 
-    public void setRepNationCd(String repNationCd) {
+    public MovieListRequest setRepNationCd(String repNationCd) {
         this.repNationCd = repNationCd;
+        return this;
     }
 
-    public void setMovieTypeCd(String movieTypeCd) {
+    public MovieListRequest setMovieTypeCd(String movieTypeCd) {
         this.movieTypeCd = movieTypeCd;
+        return this;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class MoviePreviewListAdapter extends RecyclerView.Adapter<MoviePreviewLi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.movie_preview_item, parent, false);
+                .inflate(R.layout.item_movie, parent, false);
         return new ViewHolder(view);
     }
 
@@ -71,23 +71,20 @@ public class MoviePreviewListAdapter extends RecyclerView.Adapter<MoviePreviewLi
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        final ImageView mPosterView;
+        //final ImageView mPosterView;
         final TextView mTitleView;
         final TextView mSubtitleView;
         final View mFavoriteButton;
-        final View mBookmarkButton;
         final View mShareButton;
 
         ViewHolder(View view) {
             super(view);
             view.findViewById(R.id.preview_card).setOnClickListener(v -> {});
-            mPosterView = view.findViewById(R.id.movie_poster);
+            //mPosterView = view.findViewById(R.id.movie_poster);
             mTitleView = view.findViewById(R.id.primary_text);
             mSubtitleView = view.findViewById(R.id.sub_text);
             mFavoriteButton = view.findViewById(R.id.favorite_button);
             mFavoriteButton.setOnClickListener(v -> {});
-            mBookmarkButton = view.findViewById(R.id.bookmark_button);
-            mBookmarkButton.setOnClickListener(v -> {});
             mShareButton = view.findViewById(R.id.share_button);
             mShareButton.setOnClickListener(v -> {});
         }

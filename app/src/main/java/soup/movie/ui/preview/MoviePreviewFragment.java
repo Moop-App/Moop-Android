@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.movie_preview_list, container, false);
+        View view = inflater.inflate(R.layout.list_movie_preview, container, false);
 
         Context context = view.getContext();
 
@@ -50,7 +51,7 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
 
         MoviePreviewListAdapter adapterView = new MoviePreviewListAdapter();
         RecyclerView recyclerView = view.findViewById(R.id.preview_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInUpAnimator());
         //TODO: insert equal spacing
