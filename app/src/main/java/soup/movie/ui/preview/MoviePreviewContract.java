@@ -1,19 +1,18 @@
 package soup.movie.ui.preview;
 
 import soup.movie.data.Movie;
+import soup.movie.ui.BaseContract;
+
 import java.util.List;
 
 class MoviePreviewContract {
 
-    interface Presenter {
-        void bind();
-        void unbind();
-
+    interface Presenter extends BaseContract.Presenter<View> {
         void refresh();
         void loadItems();
     }
 
-    interface View {
+    interface View extends BaseContract.View {
         void onClearList();
         void onListUpdated(List<Movie> items);
         void onRefreshDone();

@@ -61,17 +61,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
-            app:srcCompat="@drawable/ic_favorite_black_24dp"
-            app:layout_constraintTop_toTopOf="@+id/bookmark_button"
-            app:layout_constraintEnd_toStartOf="@+id/bookmark_button" />
-
-        <ImageButton
-            android:id="@+id/bookmark_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_bookmark_black_24dp"
+            app:srcCompat="@drawable/ic_favorite"
             app:layout_constraintTop_toTopOf="@+id/share_button"
             app:layout_constraintEnd_toStartOf="@+id/share_button" />
 
@@ -83,7 +73,7 @@
             android:layout_marginBottom="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
-            app:srcCompat="@drawable/ic_share_black_24dp"
+            app:srcCompat="@drawable/ic_share"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 

@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
-            app:srcCompat="@drawable/ic_favorite_black_24dp"
+            app:srcCompat="@drawable/ic_favorite"
             app:layout_constraintTop_toTopOf="@+id/share_button"
             app:layout_constraintEnd_toStartOf="@+id/share_button" />
 
@@ -65,7 +65,7 @@
             android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_share_black_24dp" />
+            app:srcCompat="@drawable/ic_share" />
 
     </android.support.constraint.ConstraintLayout>
 

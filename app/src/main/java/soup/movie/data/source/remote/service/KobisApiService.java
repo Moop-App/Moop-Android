@@ -7,7 +7,9 @@ import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 import soup.movie.BuildConfig;
+import soup.movie.data.DailyBoxOfficeResponse;
 import soup.movie.data.MovieListResponse;
+import soup.movie.data.WeeklyBoxOfficeResponse;
 
 // http://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do
 
@@ -17,13 +19,13 @@ public interface KobisApiService {
 
     String API_KEY = BuildConfig.KOBIS_API_KEY;
 
-    //TODO: 일별 박스오피스
+    //일별 박스오피스
     @GET("boxoffice/searchDailyBoxOfficeList.json")
-    Completable getDailyBoxOfficeList();
+    Single<DailyBoxOfficeResponse> getDailyBoxOfficeList(@QueryMap Map<String, String> queryMap);
 
-    //TODO: 주간/주말 박스오피스
+    //주간/주말 박스오피스
     @GET("boxoffice/searchWeeklyBoxOfficeList.json")
-    Completable getWeeklyBoxOfficeList();
+    Single<WeeklyBoxOfficeResponse> getWeeklyBoxOfficeList(@QueryMap Map<String, String> queryMap);
 
     //TODO: 공통코드 조회
     @GET("code/searchCodeList.json")

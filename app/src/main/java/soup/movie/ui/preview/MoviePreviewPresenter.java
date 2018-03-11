@@ -9,17 +9,18 @@ public class MoviePreviewPresenter implements MoviePreviewContract.Presenter {
     private MoviePreviewContract.View mView;
     private Injection mInjection;
 
-    MoviePreviewPresenter(MoviePreviewContract.View view) {
-        mView = view;
+    MoviePreviewPresenter() {
         mInjection = new Injection();
     }
 
     @Override
-    public void bind() {
+    public void attach(MoviePreviewContract.View view) {
+        mView = view;
     }
 
     @Override
-    public void unbind() {
+    public void detach() {
+        mView = null;
     }
 
     @Override

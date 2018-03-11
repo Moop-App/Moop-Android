@@ -1,33 +1,32 @@
-package soup.movie.ui.preview;
+package soup.movie.ui.boxoffice;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
-import soup.movie.data.Movie;
+import timber.log.Timber;
 
-public class MoviePreviewFragment extends Fragment implements MoviePreviewContract.View {
+public class BoxOfficeFragment extends Fragment implements BoxOfficeContract.View {
 
-    private MoviePreviewContract.Presenter mPresenter;
+    private BoxOfficeContract.Presenter mPresenter;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private MoviePreviewContract.AdapterView mAdapterView;
+    private BoxOfficeListAdapter mAdapterView;
 
-    public MoviePreviewFragment() {
+    public BoxOfficeFragment() {
     }
 
-    public static MoviePreviewFragment newInstance() {
-        return new MoviePreviewFragment();
+    public static BoxOfficeFragment newInstance() {
+        return new BoxOfficeFragment();
     }
 
     @Override
@@ -36,7 +35,7 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_with_pull_to_request, container, false);
 
@@ -47,19 +46,15 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
         swipeRefreshLayout.setOnRefreshListener(() -> mPresenter.refresh());
         mSwipeRefreshLayout = swipeRefreshLayout;
 
-        MoviePreviewListAdapter adapterView = new MoviePreviewListAdapter();
+        BoxOfficeListAdapter adapterView = new BoxOfficeListAdapter();
         RecyclerView recyclerView = view.findViewById(R.id.list);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInUpAnimator());
-        //TODO: insert equal spacing
-        // refer to https://gist.github.com/alexfu/f7b8278009f3119f523a
-        //recyclerView.addItemDecoration();
         mAdapterView = adapterView;
 
-        mPresenter = new MoviePreviewPresenter();
+        mPresenter = new BoxOfficePresenter();
         mPresenter.attach(this);
-        mPresenter.loadItems();
 
         return view;
     }
@@ -81,23 +76,22 @@ public class MoviePreviewFragment extends Fragment implements MoviePreviewContra
     }
 
     @Override
-    public void onClearList() {
-        MoviePreviewContract.AdapterView adapterView = mAdapterView;
-        if (adapterView != null) {
-            adapterView.updateList(null);
+    public void render(BoxOfficeUiModel uiModel) {
+        Timber.i("render: %s", uiModel);
+        if (uiModel instanceof BoxOfficeUiModel.InProgress) {
+            BoxOfficeListAdapter adapterView = mAdapterView;
+            if (adapterView != null) {
+                adapterView.updateList(null);
+            }
+        } else if (uiModel instanceof BoxOfficeUiModel.Data) {
+            BoxOfficeUiModel.Data data = (BoxOfficeUiModel.Data)uiModel;
+            mSwipeRefreshLayout.setRefreshing(false);
+            BoxOfficeListAdapter adapterView = mAdapterView;
+            if (adapterView != null) {
+                adapterView.updateList(data.getMovies());
+            }
+        } else {
+            throw new IllegalStateException("Unknown UI Model");
         }
-    }
-
-    @Override
-    public void onListUpdated(List<Movie> items) {
-        MoviePreviewContract.AdapterView adapterView = mAdapterView;
-        if (adapterView != null) {
-            adapterView.updateList(items);
-        }
-    }
-
-    @Override
-    public void onRefreshDone() {
-        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Movie</string>
+    <string name="app_name">SOUP Movie</string>
+
+    <string name="box_office">Box Office</string>
+    <string name="home">Home</string>
+    <string name="archive">Archive</string>
 </resources>
