@@ -1,9 +1,15 @@
 package soup.movie.ui.boxoffice;
 
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
 import soup.movie.data.DailyBoxOfficeRequest;
+import soup.movie.data.DailyBoxOfficeResult;
+import soup.movie.data.source.MovieRepository;
+
+import static soup.movie.util.TimeUtil.today;
+import static soup.movie.util.TimeUtil.yesterday;
 
 public class BoxOfficePresenter implements BoxOfficeContract.Presenter {
 
@@ -37,9 +43,20 @@ public class BoxOfficePresenter implements BoxOfficeContract.Presenter {
     }
 
     private void loadMovieList() {
-        mDisposable = mInjection.getMovieRepository()
-                .getDailyBoxOfficeList(new DailyBoxOfficeRequest())
+        MovieRepository movieRepository = mInjection.getMovieRepository();
+        Single<DailyBoxOfficeResult> todayBoxOffice = movieRepository.getDailyBoxOfficeList(
+                new DailyBoxOfficeRequest().setTargetDt(today()));
+        Single<DailyBoxOfficeResult> yesterdayBoxOffice = movieRepository.getDailyBoxOfficeList(
+                new DailyBoxOfficeRequest().setTargetDt(yesterday()));
+        mDisposable = Single.concat(todayBoxOffice, yesterdayBoxOffice)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(boxOfficeList -> mView.render(new BoxOfficeUiModel.Data(boxOfficeList)));
+                .take(1)
+                .subscribe(boxOfficeResult -> {
+                    mView.render(new BoxOfficeUiModel.Data(
+                            boxOfficeResult.getBoxOfficeType() + ": "
+                                    + boxOfficeResult.getShowRange().substring(0, 8),
+                            boxOfficeResult.getDailyBoxOfficeList()));
+                }, throwable -> {
+                });
     }
 }

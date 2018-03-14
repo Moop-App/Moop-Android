@@ -2,10 +2,12 @@ package soup.movie.data;
 
 import android.support.annotation.NonNull;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import soup.movie.data.source.remote.service.KobisApiService;
+import soup.movie.util.TimeUtil;
 
 public class DailyBoxOfficeRequest implements QueryMapProvider {
 
@@ -54,7 +56,9 @@ public class DailyBoxOfficeRequest implements QueryMapProvider {
         // dummy
         HashMap<String, String> queryMap = new HashMap<String, String>();
         queryMap.put("key", KobisApiService.API_KEY);
-        queryMap.put("targetDt", "20180310");
+        queryMap.put("targetDt", targetDt);
         return queryMap;
     }
+
+
 }

@@ -22,10 +22,17 @@ interface BoxOfficeUiModel extends BaseUiModel {
 
     class Data implements BoxOfficeUiModel {
 
+        private final String mTitle;
         private final List<BoxOfficeMovie> mMovies;
 
-        Data(@NonNull List<BoxOfficeMovie> movies) {
+        Data(@NonNull String title, @NonNull List<BoxOfficeMovie> movies) {
+            mTitle = title;
             mMovies = movies;
+        }
+
+        @NonNull
+        String getTitle() {
+            return mTitle;
         }
 
         @NonNull
@@ -36,7 +43,8 @@ interface BoxOfficeUiModel extends BaseUiModel {
         @Override
         public String toString() {
             return "BoxOfficeUiModel.Data{" +
-                    "movies=" + mMovies +
+                    "mTitle='" + mTitle + '\'' +
+                    ", mMovies=" + mMovies +
                     '}';
         }
     }

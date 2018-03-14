@@ -85,6 +85,7 @@ public class BoxOfficeFragment extends Fragment implements BoxOfficeContract.Vie
             }
         } else if (uiModel instanceof BoxOfficeUiModel.Data) {
             BoxOfficeUiModel.Data data = (BoxOfficeUiModel.Data)uiModel;
+            getActivity().setTitle(data.getTitle());
             mSwipeRefreshLayout.setRefreshing(false);
             BoxOfficeListAdapter adapterView = mAdapterView;
             if (adapterView != null) {

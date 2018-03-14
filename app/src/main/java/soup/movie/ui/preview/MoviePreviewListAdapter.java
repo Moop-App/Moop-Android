@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.List;
 
 import soup.movie.R;
 import soup.movie.data.Movie;
-import soup.movie.ui.util.ListUtil;
+import soup.movie.util.ListUtil;
 
 public class MoviePreviewListAdapter extends RecyclerView.Adapter<MoviePreviewListAdapter.ViewHolder>
         implements MoviePreviewContract.AdapterView {

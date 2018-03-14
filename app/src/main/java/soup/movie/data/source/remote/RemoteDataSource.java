@@ -6,7 +6,6 @@ import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
-import soup.movie.data.BoxOfficeMovie;
 import soup.movie.data.DailyBoxOfficeRequest;
 import soup.movie.data.DailyBoxOfficeResponse;
 import soup.movie.data.DailyBoxOfficeResult;
@@ -39,20 +38,18 @@ public class RemoteDataSource implements MovieDataSource {
     }
 
     @Override
-    public Single<List<BoxOfficeMovie>> getDailyBoxOfficeList(DailyBoxOfficeRequest dailyBoxOfficeRequest) {
+    public Single<DailyBoxOfficeResult> getDailyBoxOfficeList(DailyBoxOfficeRequest dailyBoxOfficeRequest) {
         return mKobisApi.getDailyBoxOfficeList(dailyBoxOfficeRequest.toQueryMap())
                 .doOnSuccess(response -> Timber.d("doOnSuccess: %s", response.toString()))
                 .map(DailyBoxOfficeResponse::getResult)
-                .map(DailyBoxOfficeResult::getDailyBoxOfficeList)
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
-    public Single<List<BoxOfficeMovie>> getWeeklyBoxOfficeList(WeeklyBoxOfficeRequest weeklyBoxOfficeRequest) {
+    public Single<WeeklyBoxOfficeResult> getWeeklyBoxOfficeList(WeeklyBoxOfficeRequest weeklyBoxOfficeRequest) {
         return mKobisApi.getWeeklyBoxOfficeList(weeklyBoxOfficeRequest.toQueryMap())
                 .doOnSuccess(response -> Timber.d("doOnSuccess: %s", response.toString()))
                 .map(WeeklyBoxOfficeResponse::getResult)
-                .map(WeeklyBoxOfficeResult::getWeeklyBoxOfficeList)
                 .subscribeOn(Schedulers.io());
     }
 }

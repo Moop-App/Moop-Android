@@ -3,11 +3,12 @@ package soup.movie.data.source;
 import java.util.List;
 
 import io.reactivex.Single;
-import soup.movie.data.BoxOfficeMovie;
 import soup.movie.data.DailyBoxOfficeRequest;
+import soup.movie.data.DailyBoxOfficeResult;
 import soup.movie.data.Movie;
 import soup.movie.data.MovieListRequest;
 import soup.movie.data.WeeklyBoxOfficeRequest;
+import soup.movie.data.WeeklyBoxOfficeResult;
 
 public class MovieRepository implements MovieDataSource {
 
@@ -23,12 +24,12 @@ public class MovieRepository implements MovieDataSource {
     }
 
     @Override
-    public Single<List<BoxOfficeMovie>> getDailyBoxOfficeList(DailyBoxOfficeRequest dailyBoxOfficeRequest) {
+    public Single<DailyBoxOfficeResult> getDailyBoxOfficeList(DailyBoxOfficeRequest dailyBoxOfficeRequest) {
         return mRemoteDataSource.getDailyBoxOfficeList(dailyBoxOfficeRequest);
     }
 
     @Override
-    public Single<List<BoxOfficeMovie>> getWeeklyBoxOfficeList(WeeklyBoxOfficeRequest weeklyBoxOfficeRequest) {
+    public Single<WeeklyBoxOfficeResult> getWeeklyBoxOfficeList(WeeklyBoxOfficeRequest weeklyBoxOfficeRequest) {
         return mRemoteDataSource.getWeeklyBoxOfficeList(weeklyBoxOfficeRequest);
     }
 }

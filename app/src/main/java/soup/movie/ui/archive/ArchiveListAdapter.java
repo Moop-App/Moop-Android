@@ -12,7 +12,7 @@ import java.util.List;
 
 import soup.movie.R;
 import soup.movie.data.Movie;
-import soup.movie.ui.util.ListUtil;
+import soup.movie.util.ListUtil;
 
 class ArchiveListAdapter extends RecyclerView.Adapter<ArchiveListAdapter.ViewHolder> {
 
