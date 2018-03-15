@@ -51,11 +51,11 @@ public class BoxOfficePresenter implements BoxOfficeContract.Presenter {
         mDisposable = Single.concat(todayBoxOffice, yesterdayBoxOffice)
                 .observeOn(AndroidSchedulers.mainThread())
                 .take(1)
-                .subscribe(boxOfficeResult -> {
+                .doOnSubscribe(notUse -> mView.render(new BoxOfficeUiModel.InProgress()))
+                .subscribe(result -> {
+                    String title = result.getBoxOfficeType() + ": " + result.getShowRange().substring(0, 8);
                     mView.render(new BoxOfficeUiModel.Data(
-                            boxOfficeResult.getBoxOfficeType() + ": "
-                                    + boxOfficeResult.getShowRange().substring(0, 8),
-                            boxOfficeResult.getDailyBoxOfficeList()));
+                            title, result.getDailyBoxOfficeList()));
                 }, throwable -> {
                 });
     }

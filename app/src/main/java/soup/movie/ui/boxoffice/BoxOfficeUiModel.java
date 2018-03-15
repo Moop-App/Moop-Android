@@ -11,7 +11,7 @@ interface BoxOfficeUiModel extends BaseUiModel {
 
     class InProgress implements BoxOfficeUiModel {
 
-        public InProgress() {
+        InProgress() {
         }
 
         @Override
@@ -45,6 +45,27 @@ interface BoxOfficeUiModel extends BaseUiModel {
             return "BoxOfficeUiModel.Data{" +
                     "mTitle='" + mTitle + '\'' +
                     ", mMovies=" + mMovies +
+                    '}';
+        }
+    }
+
+    class Empty implements BoxOfficeUiModel {
+
+        private final String mTitle;
+
+        Empty(@NonNull String title) {
+            mTitle = title;
+        }
+
+        @NonNull
+        String getTitle() {
+            return mTitle;
+        }
+
+        @Override
+        public String toString() {
+            return "BoxOfficeUiModel.Empty{" +
+                    "mTitle='" + mTitle + '\'' +
                     '}';
         }
     }

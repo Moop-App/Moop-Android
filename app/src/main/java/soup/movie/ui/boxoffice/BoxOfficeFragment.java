@@ -20,6 +20,8 @@ public class BoxOfficeFragment extends Fragment implements BoxOfficeContract.Vie
     private BoxOfficeContract.Presenter mPresenter;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private View mEmptyView;
+
     private BoxOfficeListAdapter mAdapterView;
 
     public BoxOfficeFragment() {
@@ -40,6 +42,8 @@ public class BoxOfficeFragment extends Fragment implements BoxOfficeContract.Vie
         View view = inflater.inflate(R.layout.list_with_pull_to_request, container, false);
 
         Context context = view.getContext();
+
+        mEmptyView = view.findViewById(R.id.empty);
 
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_layout);
         swipeRefreshLayout.setColorSchemeResources(R.color.n_blue);
@@ -79,18 +83,24 @@ public class BoxOfficeFragment extends Fragment implements BoxOfficeContract.Vie
     public void render(BoxOfficeUiModel uiModel) {
         Timber.i("render: %s", uiModel);
         if (uiModel instanceof BoxOfficeUiModel.InProgress) {
+            //mSwipeRefreshLayout.setRefreshing(true);
+            mEmptyView.setVisibility(View.GONE);
             BoxOfficeListAdapter adapterView = mAdapterView;
             if (adapterView != null) {
                 adapterView.updateList(null);
             }
         } else if (uiModel instanceof BoxOfficeUiModel.Data) {
-            BoxOfficeUiModel.Data data = (BoxOfficeUiModel.Data)uiModel;
-            getActivity().setTitle(data.getTitle());
             mSwipeRefreshLayout.setRefreshing(false);
+            mEmptyView.setVisibility(View.GONE);
+            BoxOfficeUiModel.Data data = (BoxOfficeUiModel.Data) uiModel;
+            getActivity().setTitle(data.getTitle());
             BoxOfficeListAdapter adapterView = mAdapterView;
             if (adapterView != null) {
                 adapterView.updateList(data.getMovies());
             }
+        } else if (uiModel instanceof BoxOfficeUiModel.Empty) {
+            mSwipeRefreshLayout.setRefreshing(false);
+            mEmptyView.setVisibility(View.VISIBLE);
         } else {
             throw new IllegalStateException("Unknown UI Model");
         }
