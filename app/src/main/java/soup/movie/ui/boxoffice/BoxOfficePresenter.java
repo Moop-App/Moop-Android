@@ -43,19 +43,13 @@ public class BoxOfficePresenter implements BoxOfficeContract.Presenter {
     }
 
     private void loadMovieList() {
-        MovieRepository movieRepository = mInjection.getMovieRepository();
-        Single<DailyBoxOfficeResult> todayBoxOffice = movieRepository.getDailyBoxOfficeList(
-                new DailyBoxOfficeRequest().setTargetDt(today()));
-        Single<DailyBoxOfficeResult> yesterdayBoxOffice = movieRepository.getDailyBoxOfficeList(
-                new DailyBoxOfficeRequest().setTargetDt(yesterday()));
-        mDisposable = Single.concat(todayBoxOffice, yesterdayBoxOffice)
+        mDisposable = mInjection.getMovieRepository()
+                .getDailyBoxOfficeList(new DailyBoxOfficeRequest().setTargetDt(yesterday()))
                 .observeOn(AndroidSchedulers.mainThread())
-                .take(1)
                 .doOnSubscribe(notUse -> mView.render(new BoxOfficeUiModel.InProgress()))
                 .subscribe(result -> {
                     String title = result.getBoxOfficeType() + ": " + result.getShowRange().substring(0, 8);
-                    mView.render(new BoxOfficeUiModel.Data(
-                            title, result.getDailyBoxOfficeList()));
+                    mView.render(new BoxOfficeUiModel.Data(title, result.getDailyBoxOfficeList()));
                 }, throwable -> {
                 });
     }
