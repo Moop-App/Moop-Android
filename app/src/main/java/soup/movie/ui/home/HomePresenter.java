@@ -1,10 +1,9 @@
 package soup.movie.ui.home;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
-import soup.movie.data.MovieListRequest;
+import soup.movie.data.kobis.model.MovieListRequest;
 
 public class HomePresenter implements HomeContract.Presenter {
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import soup.movie.R;
-import soup.movie.data.BoxOfficeMovie;
+import soup.movie.data.kobis.model.BoxOfficeMovie;
 import soup.movie.util.ListUtil;
 
 class BoxOfficeListAdapter extends RecyclerView.Adapter<BoxOfficeListAdapter.ViewHolder> {

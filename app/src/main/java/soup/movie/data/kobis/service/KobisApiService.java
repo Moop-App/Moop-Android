@@ -1,4 +1,4 @@
-package soup.movie.data.source.remote.service;
+package soup.movie.data.kobis.service;
 
 import java.util.Map;
 
@@ -7,9 +7,9 @@ import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 import soup.movie.BuildConfig;
-import soup.movie.data.DailyBoxOfficeResponse;
-import soup.movie.data.MovieListResponse;
-import soup.movie.data.WeeklyBoxOfficeResponse;
+import soup.movie.data.kobis.model.DailyBoxOfficeResponse;
+import soup.movie.data.kobis.model.MovieListResponse;
+import soup.movie.data.kobis.model.WeeklyBoxOfficeResponse;
 
 // http://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do
 

@@ -1,4 +1,4 @@
-package soup.movie.data;
+package soup.movie.data.kobis.model;
 
 public class Director {
     private String peopleNm; //영화감독명

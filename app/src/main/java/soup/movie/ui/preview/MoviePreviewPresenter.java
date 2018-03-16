@@ -2,7 +2,7 @@ package soup.movie.ui.preview;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import soup.movie.Injection;
-import soup.movie.data.MovieListRequest;
+import soup.movie.data.kobis.model.MovieListRequest;
 
 public class MoviePreviewPresenter implements MoviePreviewContract.Presenter {
 

@@ -1,4 +1,4 @@
-package soup.movie.data;
+package soup.movie.data.kobis.model;
 
 import java.util.List;
 

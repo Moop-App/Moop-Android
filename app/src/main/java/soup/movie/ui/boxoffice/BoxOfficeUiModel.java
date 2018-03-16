@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import soup.movie.data.BoxOfficeMovie;
+import soup.movie.data.kobis.model.BoxOfficeMovie;
 import soup.movie.ui.BaseUiModel;
 
 interface BoxOfficeUiModel extends BaseUiModel {

@@ -5,8 +5,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import soup.movie.data.source.MovieRepository;
-import soup.movie.data.source.remote.RemoteDataSource;
-import soup.movie.data.source.remote.service.KobisApiService;
+import soup.movie.data.kobis.KobisDataSource;
+import soup.movie.data.kobis.service.KobisApiService;
 
 public class Injection {
 
@@ -25,12 +25,12 @@ public class Injection {
         return mMovieRepository;
     }
 
-    private MovieRepository provideRecordRepository(RemoteDataSource remoteDataSource) {
+    private MovieRepository provideRecordRepository(KobisDataSource remoteDataSource) {
         return new MovieRepository(remoteDataSource);
     }
 
-    private RemoteDataSource provideRemoteDataSource(KobisApiService kobisApi) {
-        return new RemoteDataSource(kobisApi);
+    private KobisDataSource provideRemoteDataSource(KobisApiService kobisApi) {
+        return new KobisDataSource(kobisApi);
     }
 
     private KobisApiService provideServerApiService(GsonConverterFactory gsonConverterFactory,

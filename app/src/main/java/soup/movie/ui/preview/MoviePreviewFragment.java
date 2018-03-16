@@ -14,7 +14,7 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
-import soup.movie.data.Movie;
+import soup.movie.data.kobis.model.Movie;
 
 public class MoviePreviewFragment extends Fragment implements MoviePreviewContract.View {
 

@@ -1,13 +1,12 @@
-package soup.movie.data;
+package soup.movie.data.kobis.model;
 
 import android.support.annotation.NonNull;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import soup.movie.data.source.remote.service.KobisApiService;
-import soup.movie.util.TimeUtil;
+import soup.movie.data.base.QueryMapProvider;
+import soup.movie.data.kobis.service.KobisApiService;
 
 public class DailyBoxOfficeRequest implements QueryMapProvider {
 

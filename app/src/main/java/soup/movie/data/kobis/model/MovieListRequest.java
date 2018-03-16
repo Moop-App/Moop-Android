@@ -1,9 +1,10 @@
-package soup.movie.data;
+package soup.movie.data.kobis.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import soup.movie.data.source.remote.service.KobisApiService;
+import soup.movie.data.base.QueryMapProvider;
+import soup.movie.data.kobis.service.KobisApiService;
 
 public class MovieListRequest implements QueryMapProvider {
 

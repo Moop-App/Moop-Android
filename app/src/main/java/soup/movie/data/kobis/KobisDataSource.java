@@ -1,4 +1,4 @@
-package soup.movie.data.source.remote;
+package soup.movie.data.kobis;
 
 import android.support.annotation.NonNull;
 
@@ -6,25 +6,25 @@ import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
-import soup.movie.data.DailyBoxOfficeRequest;
-import soup.movie.data.DailyBoxOfficeResponse;
-import soup.movie.data.DailyBoxOfficeResult;
-import soup.movie.data.Movie;
-import soup.movie.data.MovieListResponse;
-import soup.movie.data.MovieListResult;
-import soup.movie.data.MovieListRequest;
-import soup.movie.data.WeeklyBoxOfficeRequest;
-import soup.movie.data.WeeklyBoxOfficeResponse;
-import soup.movie.data.WeeklyBoxOfficeResult;
-import soup.movie.data.source.MovieDataSource;
-import soup.movie.data.source.remote.service.KobisApiService;
+import soup.movie.data.kobis.model.DailyBoxOfficeRequest;
+import soup.movie.data.kobis.model.DailyBoxOfficeResponse;
+import soup.movie.data.kobis.model.DailyBoxOfficeResult;
+import soup.movie.data.kobis.model.Movie;
+import soup.movie.data.kobis.model.MovieListResponse;
+import soup.movie.data.kobis.model.MovieListResult;
+import soup.movie.data.kobis.model.MovieListRequest;
+import soup.movie.data.kobis.model.WeeklyBoxOfficeRequest;
+import soup.movie.data.kobis.model.WeeklyBoxOfficeResponse;
+import soup.movie.data.kobis.model.WeeklyBoxOfficeResult;
+import soup.movie.data.kobis.IKobisDataSource;
+import soup.movie.data.kobis.service.KobisApiService;
 import timber.log.Timber;
 
-public class RemoteDataSource implements MovieDataSource {
+public class KobisDataSource implements IKobisDataSource {
 
     private final KobisApiService mKobisApi;
 
-    public RemoteDataSource(@NonNull KobisApiService serverApiService) {
+    public KobisDataSource(@NonNull KobisApiService serverApiService) {
         mKobisApi = serverApiService;
     }
 

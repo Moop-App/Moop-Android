@@ -3,33 +3,34 @@ package soup.movie.data.source;
 import java.util.List;
 
 import io.reactivex.Single;
-import soup.movie.data.DailyBoxOfficeRequest;
-import soup.movie.data.DailyBoxOfficeResult;
-import soup.movie.data.Movie;
-import soup.movie.data.MovieListRequest;
-import soup.movie.data.WeeklyBoxOfficeRequest;
-import soup.movie.data.WeeklyBoxOfficeResult;
+import soup.movie.data.kobis.IKobisDataSource;
+import soup.movie.data.kobis.model.DailyBoxOfficeRequest;
+import soup.movie.data.kobis.model.DailyBoxOfficeResult;
+import soup.movie.data.kobis.model.Movie;
+import soup.movie.data.kobis.model.MovieListRequest;
+import soup.movie.data.kobis.model.WeeklyBoxOfficeRequest;
+import soup.movie.data.kobis.model.WeeklyBoxOfficeResult;
 
-public class MovieRepository implements MovieDataSource {
+public class MovieRepository implements IKobisDataSource {
 
-    private final MovieDataSource mRemoteDataSource;
+    private final IKobisDataSource mKobis;
 
-    public MovieRepository(MovieDataSource remoteDataSource) {
-        mRemoteDataSource = remoteDataSource;
+    public MovieRepository(IKobisDataSource kobisDataSource) {
+        mKobis = kobisDataSource;
     }
 
     @Override
     public Single<List<Movie>> getMovieList(MovieListRequest movieListRequest) {
-        return mRemoteDataSource.getMovieList(movieListRequest);
+        return mKobis.getMovieList(movieListRequest);
     }
 
     @Override
     public Single<DailyBoxOfficeResult> getDailyBoxOfficeList(DailyBoxOfficeRequest dailyBoxOfficeRequest) {
-        return mRemoteDataSource.getDailyBoxOfficeList(dailyBoxOfficeRequest);
+        return mKobis.getDailyBoxOfficeList(dailyBoxOfficeRequest);
     }
 
     @Override
     public Single<WeeklyBoxOfficeResult> getWeeklyBoxOfficeList(WeeklyBoxOfficeRequest weeklyBoxOfficeRequest) {
-        return mRemoteDataSource.getWeeklyBoxOfficeList(weeklyBoxOfficeRequest);
+        return mKobis.getWeeklyBoxOfficeList(weeklyBoxOfficeRequest);
     }
 }

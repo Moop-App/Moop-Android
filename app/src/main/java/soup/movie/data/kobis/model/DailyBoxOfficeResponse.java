@@ -1,9 +1,6 @@
-package soup.movie.data;
+package soup.movie.data.kobis.model;
 
 import com.google.gson.annotations.SerializedName;
-
-import soup.movie.data.DailyBoxOfficeRequest;
-import soup.movie.data.MovieListResult;
 
 public class DailyBoxOfficeResponse {
 

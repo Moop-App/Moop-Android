@@ -1,14 +1,10 @@
 package soup.movie.ui.boxoffice;
 
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
-import soup.movie.data.DailyBoxOfficeRequest;
-import soup.movie.data.DailyBoxOfficeResult;
-import soup.movie.data.source.MovieRepository;
+import soup.movie.data.kobis.model.DailyBoxOfficeRequest;
 
-import static soup.movie.util.TimeUtil.today;
 import static soup.movie.util.TimeUtil.yesterday;
 
 public class BoxOfficePresenter implements BoxOfficeContract.Presenter {

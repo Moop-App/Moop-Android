@@ -3,7 +3,7 @@ package soup.movie.ui.archive;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
-import soup.movie.data.MovieListRequest;
+import soup.movie.data.kobis.model.MovieListRequest;
 
 public class ArchivePresenter implements ArchiveContract.Presenter {
 

@@ -1,6 +1,6 @@
 package soup.movie.ui.preview;
 
-import soup.movie.data.Movie;
+import soup.movie.data.kobis.model.Movie;
 import soup.movie.ui.BaseContract;
 
 import java.util.List;

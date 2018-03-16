@@ -1,4 +1,4 @@
-package soup.movie.data;
+package soup.movie.data.base;
 
 import java.util.Map;
 

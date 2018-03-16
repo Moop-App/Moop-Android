@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import soup.movie.data.Movie;
+import soup.movie.data.kobis.model.Movie;
 import soup.movie.ui.BaseUiModel;
 
 interface HomeUiModel extends BaseUiModel {

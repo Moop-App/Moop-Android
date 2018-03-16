@@ -1,4 +1,4 @@
-package soup.movie.data;
+package soup.movie.data.kobis.model;
 
 public class Company {
     private String companyCd; //제작사 코드
