@@ -1,4 +1,4 @@
-package soup.movie.data.source;
+package soup.movie.data;
 
 import java.util.List;
 

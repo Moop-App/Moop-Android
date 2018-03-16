@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import soup.movie.data.base.QueryMapProvider;
+import soup.movie.data.core.QueryMapProvider;
 import soup.movie.data.kobis.service.KobisApiService;
 
 public class WeeklyBoxOfficeRequest implements QueryMapProvider {

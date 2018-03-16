@@ -3,7 +3,7 @@ package soup.movie.data.kobis.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import soup.movie.data.base.QueryMapProvider;
+import soup.movie.data.core.QueryMapProvider;
 import soup.movie.data.kobis.service.KobisApiService;
 
 public class MovieListRequest implements QueryMapProvider {
