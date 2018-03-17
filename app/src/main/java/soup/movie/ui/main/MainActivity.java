@@ -3,6 +3,7 @@ package soup.movie.ui.main;
 import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationViewHelper;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private void initBottomNavigationView() {
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(navigationView);
         navigationView.setOnNavigationItemSelectedListener(item -> {
             Timber.d("Select %s", item.getTitle());
             setTitle(item.getTitle());
