@@ -8,8 +8,10 @@
     tools:context="soup.movie.ui.main.MainActivity" >
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:foreground="@color/black">
 
         <FrameLayout
             android:id="@+id/tab_container"
@@ -18,8 +20,7 @@
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/debug_background" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation"

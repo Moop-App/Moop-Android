@@ -1,5 +1,6 @@
 package soup.movie.ui.main;
 
+import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private MainContract.Presenter mPresenter;
 
+    private View mRootView;
     private BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         mPresenter = new MainPresenter();
         mPresenter.attach(this);
+
+        mRootView = findViewById(R.id.root);
 
         initBottomNavigationView();
         initBottomSheetView();
@@ -100,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                String stateString;
                 switch (newState) {
                     case BottomSheetBehavior.STATE_EXPANDED:
                         break;
@@ -111,10 +114,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                //TODO: apply blur
+                Timber.d("onSlide: %f", slideOffset);
+                setScrim(slideOffset);
             }
         });
         mBottomSheetBehavior = behavior;
+
+        setScrim(-1f);
+    }
+
+    private void setScrim(float slideOffset) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mRootView.getForeground().setAlpha((int) ((1 + slideOffset) * 75));
+        }
     }
 
     private static @MainContract.TabMode int parseToTabMode(@IdRes int itemId) {
