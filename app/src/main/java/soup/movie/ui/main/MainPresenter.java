@@ -3,6 +3,7 @@ package soup.movie.ui.main;
 import static soup.movie.ui.main.MainContract.TAB_MODE_ARCHIVE;
 import static soup.movie.ui.main.MainContract.TAB_MODE_BOX_OFFICE;
 import static soup.movie.ui.main.MainContract.TAB_MODE_HOME;
+import static soup.movie.ui.main.MainContract.TAB_MODE_SETTINGS;
 
 public class MainPresenter implements MainContract.Presenter {
 
@@ -30,6 +31,9 @@ public class MainPresenter implements MainContract.Presenter {
                 break;
             case TAB_MODE_ARCHIVE:
                 uiModel = new MainUiModel.Archive();
+                break;
+            case TAB_MODE_SETTINGS:
+                uiModel = new MainUiModel.Settings();
                 break;
             default:
                 throw new IllegalStateException("Unknown tab mode");

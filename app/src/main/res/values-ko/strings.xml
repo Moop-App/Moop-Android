@@ -4,6 +4,7 @@
     <string name="box_office">박스오피스</string>
     <string name="home">홈</string>
     <string name="archive">보관함</string>
+    <string name="settings">설정</string>
 
     <string name="action_filter">필터</string>
     <string name="action_page_settings">페이지 설정</string>

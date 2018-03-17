@@ -36,4 +36,15 @@ interface MainUiModel extends BaseUiModel {
             return "MainUiModel.Archive{}";
         }
     }
+
+    class Settings implements MainUiModel {
+
+        Settings() {
+        }
+
+        @Override
+        public String toString() {
+            return "MainUiModel.Settings{}";
+        }
+    }
 }

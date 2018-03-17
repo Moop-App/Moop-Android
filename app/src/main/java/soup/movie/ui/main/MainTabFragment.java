@@ -22,7 +22,10 @@ public abstract class MainTabFragment extends BaseFragment {
 
     @Override
     public final void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(getMenuResource(), menu);
+        int menuRes = getMenuResource();
+        if (menuRes != 0) {
+            inflater.inflate(menuRes, menu);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

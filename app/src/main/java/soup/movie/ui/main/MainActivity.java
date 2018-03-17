@@ -15,6 +15,7 @@ import soup.movie.R;
 import soup.movie.ui.archive.ArchiveFragment;
 import soup.movie.ui.boxoffice.BoxOfficeFragment;
 import soup.movie.ui.home.HomeFragment;
+import soup.movie.ui.settings.SettingsFragment;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             commit(R.id.tab_container, HomeFragment.newInstance());
         } else if (uiModel instanceof MainUiModel.Archive) {
             commit(R.id.tab_container, ArchiveFragment.newInstance());
+        } else if (uiModel instanceof MainUiModel.Settings) {
+            commit(R.id.tab_container, SettingsFragment.newInstance());
         } else {
             throw new IllegalStateException("Unknown UI Model");
         }
@@ -145,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 return MainContract.TAB_MODE_ARCHIVE;
             case R.id.action_box_office:
                 return MainContract.TAB_MODE_BOX_OFFICE;
+            case R.id.action_settings:
+                return MainContract.TAB_MODE_SETTINGS;
             default:
                 throw new IllegalStateException("Unknown resource ID");
         }
