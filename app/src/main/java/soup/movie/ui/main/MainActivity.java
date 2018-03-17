@@ -66,6 +66,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
+    public void onBackPressed() {
+        BottomSheetBehavior behavior = mBottomSheetBehavior;
+        if (behavior != null && behavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+            behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
     public void render(MainUiModel uiModel) {
         Timber.i("render: %s", uiModel);
         if (uiModel instanceof MainUiModel.BoxOffice) {
