@@ -2,7 +2,6 @@ package soup.movie.ui.archive;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +11,10 @@ import android.view.ViewGroup;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
+import soup.movie.ui.main.MainTabFragment;
 import timber.log.Timber;
 
-public class ArchiveFragment extends Fragment implements ArchiveContract.View {
+public class ArchiveFragment extends MainTabFragment implements ArchiveContract.View {
 
     private ArchiveContract.Presenter mPresenter;
 
@@ -65,13 +65,8 @@ public class ArchiveFragment extends Fragment implements ArchiveContract.View {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
+    protected int getMenuResource() {
+        return R.menu.menu_archive;
     }
 
     @Override
