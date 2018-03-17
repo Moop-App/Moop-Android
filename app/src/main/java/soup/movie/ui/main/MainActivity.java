@@ -8,8 +8,8 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import soup.movie.R;
 import soup.movie.ui.archive.ArchiveFragment;
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private MainContract.Presenter mPresenter;
 
     private View mRootView;
+    private TextView mSubPanelTitleView;
+
     private BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
@@ -34,22 +36,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         mPresenter.attach(this);
 
         mRootView = findViewById(R.id.root);
+        mSubPanelTitleView = findViewById(R.id.filter_title);
 
         initBottomNavigationView();
         initBottomSheetView();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_filter:
-                BottomSheetBehavior behavior = mBottomSheetBehavior;
-                if (behavior != null) {
-                    behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -60,12 +50,27 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void onBackPressed() {
-        BottomSheetBehavior behavior = mBottomSheetBehavior;
-        if (behavior != null && behavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
-            behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        if (setSubPanelVisibility(false)) {
             return;
         }
         super.onBackPressed();
+    }
+
+    public boolean setSubPanelVisibility(boolean show) {
+        int newState = show ? BottomSheetBehavior.STATE_COLLAPSED : BottomSheetBehavior.STATE_HIDDEN;
+        BottomSheetBehavior behavior = mBottomSheetBehavior;
+        if (behavior != null && behavior.getState() != newState) {
+            behavior.setState(newState);
+            return true;
+        }
+        return false;
+    }
+
+    public void setSubPanel(String title) {
+        TextView subPanelTitleView = mSubPanelTitleView;
+        if (subPanelTitleView != null) {
+            subPanelTitleView.setText(title);
+        }
     }
 
     @Override

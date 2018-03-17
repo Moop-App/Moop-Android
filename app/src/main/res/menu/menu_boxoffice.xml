@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_filter"
-        android:title="@string/filter"
+        android:title="@string/action_filter"
         android:icon="@drawable/ic_filter"
         app:iconTint="@color/white"
         app:showAsAction="ifRoom" />

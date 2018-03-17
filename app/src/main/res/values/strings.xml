@@ -4,5 +4,8 @@
     <string name="box_office">Box Office</string>
     <string name="home">Home</string>
     <string name="archive">Archive</string>
-    <string name="filter">Filter</string>
+
+    <string name="action_filter">Filter</string>
+    <string name="action_page_settings">Page Settings</string>
+    <string name="action_help">Help</string>
 </resources>

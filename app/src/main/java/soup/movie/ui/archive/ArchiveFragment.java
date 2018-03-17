@@ -2,10 +2,12 @@ package soup.movie.ui.archive;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,7 +36,7 @@ public class ArchiveFragment extends MainTabFragment implements ArchiveContract.
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_with_pull_to_request, container, false);
 
@@ -67,6 +69,16 @@ public class ArchiveFragment extends MainTabFragment implements ArchiveContract.
     @Override
     protected int getMenuResource() {
         return R.menu.menu_archive;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                showSubPanel(getString(R.string.action_help));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

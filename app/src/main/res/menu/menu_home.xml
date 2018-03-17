@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
-        android:id="@+id/action_filter"
-        android:title="@string/filter"
-        android:icon="@drawable/ic_search"
+        android:id="@+id/action_settings"
+        android:title="@string/action_page_settings"
+        android:icon="@drawable/ic_page_settings"
         app:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 
