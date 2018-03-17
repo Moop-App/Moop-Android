@@ -31,11 +31,6 @@ public class ArchivePresenter implements ArchiveContract.Presenter {
         }
     }
 
-    @Override
-    public void refresh() {
-        loadMovieList();
-    }
-
     private void loadMovieList() {
         mDisposable = mInjection.getMovieRepository()
                 .getMovieList(new MovieListRequest())
