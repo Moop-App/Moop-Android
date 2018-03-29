@@ -3,6 +3,7 @@ package soup.movie.ui.detail;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -18,11 +19,15 @@ import soup.movie.data.soup.model.Movie;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieUtil;
 import soup.movie.ui.util.ImageUtil;
+import soup.movie.ui.widget.ElasticDragDismissFrameLayout;
 import timber.log.Timber;
 
 import static soup.movie.ui.util.RecyclerViewUtil.createLinearLayoutManager;
 
 public class DetailActivity extends AppCompatActivity implements DetailContract.View {
+
+    @BindView(R.id.draggable_frame)
+    ElasticDragDismissFrameLayout draggableFrame;
 
     @BindView(R.id.movie_poster)
     ImageView mPosterView;
@@ -50,6 +55,8 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     private DetailContract.Presenter mPresenter;
     private DetailListAdapter mAdapterView;
 
+    private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +77,13 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         mFavoriteButton.setOnClickListener(v -> {});
         mShareButton.setOnClickListener(v -> {});
 
+        chromeFader = new ElasticDragDismissFrameLayout.SystemChromeFader(this) {
+            @Override
+            public void onDragDismissed() {
+                setResultAndFinish();
+            }
+        };
+
         DetailListAdapter adapterView = new DetailListAdapter(this);
         RecyclerView recyclerView = mMovieContents;
         recyclerView.setLayoutManager(createLinearLayoutManager(this, true));
@@ -82,6 +96,18 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         mPresenter = new DetailPresenter();
         mPresenter.attach(this);
         mPresenter.requestData(movie.getId());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        draggableFrame.addListener(chromeFader);
+    }
+
+    @Override
+    protected void onPause() {
+        draggableFrame.removeListener(chromeFader);
+        super.onPause();
     }
 
     @Override
@@ -111,5 +137,20 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         if (adapterView != null) {
             adapterView.updateList(trailerList);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResultAndFinish();
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        setResultAndFinish();
+        return true;
+    }
+
+    void setResultAndFinish() {
+        finishAfterTransition();
     }
 }
