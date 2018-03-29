@@ -53,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         Timber.d("onCreate: movie=%s", movie);
 
-        ImageUtil.loadAsync(this, mPosterView, movie.getThumbnailUrl());
+        ImageUtil.loadAsync(this, mPosterView, movie.getPosterUrl());
         mTitleView.setText(movie.getTitle());
         mAgeView.setText(movie.getAge());
         mEggView.setText(movie.getEgg());

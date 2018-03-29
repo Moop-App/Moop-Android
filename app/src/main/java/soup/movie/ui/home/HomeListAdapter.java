@@ -58,7 +58,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Movie item = mItems.get(position);
-        ImageUtil.loadAsync(mHost, holder.mPosterView, item.getThumbnailUrl());
+        ImageUtil.loadAsync(mHost, holder.mPosterView, item.getPosterUrl());
         holder.mTitleView.setText(item.getTitle());
         holder.mAgeView.setText(item.getAge());
         holder.mEggView.setText(item.getEgg());
