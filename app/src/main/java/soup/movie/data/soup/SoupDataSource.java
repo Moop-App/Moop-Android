@@ -12,6 +12,8 @@ import soup.movie.data.soup.model.PlanMovieRequest;
 import soup.movie.data.soup.model.PlanMovieResponse;
 import soup.movie.data.soup.model.TimeTableRequest;
 import soup.movie.data.soup.model.TimeTableResponse;
+import soup.movie.data.soup.model.TrailerRequest;
+import soup.movie.data.soup.model.TrailerResponse;
 import soup.movie.data.soup.service.SoupApiService;
 
 public class SoupDataSource implements ISoupDataSource {
@@ -50,6 +52,12 @@ public class SoupDataSource implements ISoupDataSource {
     public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
         return mSoupApi.getTimeTableList(
                 request.getAreaCode(), request.getTheaterCode(), request.getMovieCode())
+                .subscribeOn(Schedulers.io());
+    }
+
+    @Override
+    public Single<TrailerResponse> getTrailerList(TrailerRequest request) {
+        return mSoupApi.getTrailerList(request.getMovieCode())
                 .subscribeOn(Schedulers.io());
     }
 }

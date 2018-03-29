@@ -11,6 +11,8 @@ import soup.movie.data.soup.model.PlanMovieRequest;
 import soup.movie.data.soup.model.PlanMovieResponse;
 import soup.movie.data.soup.model.TimeTableRequest;
 import soup.movie.data.soup.model.TimeTableResponse;
+import soup.movie.data.soup.model.TrailerRequest;
+import soup.movie.data.soup.model.TrailerResponse;
 
 public interface ISoupDataSource {
 
@@ -19,4 +21,5 @@ public interface ISoupDataSource {
     Single<PlanMovieResponse> getPlanList(PlanMovieRequest request);
     Single<CodeResponse> getCodeList(CodeRequest request);
     Single<TimeTableResponse> getTimeTableList(TimeTableRequest request);
+    Single<TrailerResponse> getTrailerList(TrailerRequest request);
 }
