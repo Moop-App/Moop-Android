@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="debug_foreground">#660000FF</color>
     <color name="debug_background">#66FF0000</color>
 
     <color name="n_blue">#2D7AF6</color>
