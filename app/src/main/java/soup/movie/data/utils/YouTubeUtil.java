@@ -14,7 +14,7 @@ public class YouTubeUtil {
         LOW("default"),
         MEDIUM("mqdefault"),
         HIGH("hqdefault"),
-        STANDARD("sddfault"),
+        STANDARD("sddefault"),
         MAX("maxresdefault");
 
         private String mKey;
