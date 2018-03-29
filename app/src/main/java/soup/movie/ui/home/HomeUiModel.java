@@ -22,21 +22,29 @@ interface HomeUiModel extends BaseUiModel {
 
     class Data implements HomeUiModel {
 
+        private final String mTitle;
         private final List<Movie> mMovies;
 
-        Data(@NonNull List<Movie> movies) {
+        Data(@NonNull String title, @NonNull List<Movie> movies) {
+            mTitle = title;
             mMovies = movies;
         }
 
         @NonNull
-        List<Movie> getMovies() {
+        public String getTitle() {
+            return mTitle;
+        }
+
+        @NonNull
+        public List<Movie> getMovies() {
             return mMovies;
         }
 
         @Override
         public String toString() {
-            return "HomeUiModel.Data{" +
-                    "movies=" + mMovies +
+            return "Data{" +
+                    "mTitle='" + mTitle + '\'' +
+                    ", mMovies=" + mMovies +
                     '}';
         }
     }

@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
@@ -25,6 +28,12 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
     private HomeContract.Presenter mPresenter;
 
     private HomeListAdapter mAdapterView;
+
+    @BindView(R.id.title)
+    TextView mTitleView;
+
+    @BindView(R.id.list)
+    RecyclerView mListView;
 
     public HomeFragment() {
     }
@@ -41,12 +50,13 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list, container, false);
+        View view = inflater.inflate(R.layout.list_with_title, container, false);
+        ButterKnife.bind(this, view);
 
         Context context = view.getContext();
 
         HomeListAdapter adapterView = new HomeListAdapter(getActivity());
-        RecyclerView recyclerView = view.findViewById(R.id.list);
+        RecyclerView recyclerView = mListView;
         recyclerView.setLayoutManager(createLinearLayoutManager(context, false));
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInRightAnimator());
@@ -56,6 +66,7 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
 
         mPresenter = new HomePresenter();
         mPresenter.attach(this);
+        mPresenter.requestMovieList(HomeContract.Presenter.Type.NOW);
 
         return view;
     }
@@ -88,6 +99,7 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
             updateMovieList(null);
         } else if (uiModel instanceof HomeUiModel.Data) {
             HomeUiModel.Data data = (HomeUiModel.Data)uiModel;
+            mTitleView.setText(data.getTitle());
             updateMovieList(data.getMovies());
         } else {
             throw new IllegalStateException("Unknown UI Model");
