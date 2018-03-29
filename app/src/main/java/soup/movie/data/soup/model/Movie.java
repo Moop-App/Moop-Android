@@ -15,6 +15,9 @@ public class Movie {
     @SerializedName("thumbnail")
     private String thumbnailUrl;
 
+    @SerializedName("poster")
+    private String posterUrl;
+
     @SerializedName("age")
     private String age;
 
@@ -40,6 +43,10 @@ public class Movie {
 
     public String getThumbnailUrl() {
         return thumbnailUrl;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
     public String getAge() {
@@ -70,6 +77,10 @@ public class Movie {
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
+    }
+
     public void setAge(String age) {
         this.age = age;
     }
@@ -92,6 +103,7 @@ public class Movie {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", posterUrl='" + posterUrl + '\'' +
                 ", age='" + age + '\'' +
                 ", openDate='" + openDate + '\'' +
                 ", egg='" + egg + '\'' +

@@ -18,7 +18,8 @@ public class MovieUtil {
             Key.AGE,
             Key.EGG,
             Key.OPEN_DATE,
-            Key.THUMBNAIL
+            Key.THUMBNAIL,
+            Key.POSTER
     })
     private @interface Key {
         String ID = "id";
@@ -27,6 +28,7 @@ public class MovieUtil {
         String EGG = "egg";
         String OPEN_DATE = "openDate";
         String THUMBNAIL = "thumbnail";
+        String POSTER = "poster";
     }
 
     @Nullable
@@ -38,6 +40,7 @@ public class MovieUtil {
         movie.setEgg(bundle.getString(Key.EGG));
         movie.setOpenDate(bundle.getString(Key.OPEN_DATE));
         movie.setThumbnailUrl(bundle.getString(Key.THUMBNAIL));
+        movie.setPosterUrl(bundle.getString(Key.POSTER));
         return TextUtils.isEmpty(movie.getId()) ? null : movie;
     }
 
@@ -50,6 +53,7 @@ public class MovieUtil {
         movie.setEgg(intent.getStringExtra(Key.EGG));
         movie.setOpenDate(intent.getStringExtra(Key.OPEN_DATE));
         movie.setThumbnailUrl(intent.getStringExtra(Key.THUMBNAIL));
+        movie.setPosterUrl(intent.getStringExtra(Key.POSTER));
         return TextUtils.isEmpty(movie.getId()) ? null : movie;
     }
 
@@ -60,6 +64,7 @@ public class MovieUtil {
         bundle.putString(Key.EGG, movie.getEgg());
         bundle.putString(Key.OPEN_DATE, movie.getOpenDate());
         bundle.putString(Key.THUMBNAIL, movie.getThumbnailUrl());
+        bundle.putString(Key.POSTER, movie.getPosterUrl());
     }
 
     public static void saveTo(@NonNull Intent intent, @NonNull Movie movie) {
@@ -69,5 +74,6 @@ public class MovieUtil {
         intent.putExtra(Key.EGG, movie.getEgg());
         intent.putExtra(Key.OPEN_DATE, movie.getOpenDate());
         intent.putExtra(Key.THUMBNAIL, movie.getThumbnailUrl());
+        intent.putExtra(Key.POSTER, movie.getPosterUrl());
     }
 }

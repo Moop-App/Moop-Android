@@ -14,15 +14,15 @@ public interface SoupApiService {
     String API_BASE_URL = "https://soup-movie.firebaseio.com/";
 
     // 현재상영작
-    @GET("v1/cgv/now.json")
+    @GET("v1/cgv/now/asTicketRate/all.json") //TODO: supports option
     Single<NowMovieResponse> getNowList();
 
     // 아트하우스
-    @GET("v1/cgv/art.json")
+    @GET("v1/cgv/art/asTicketRate/all.json") //TODO: supports option
     Single<ArtMovieResponse> getArtList();
 
     // 개봉예정작
-    @GET("v1/cgv/plan.json")
+    @GET("v1/cgv/plan/asOpenDate.json") //TODO: supports option
     Single<PlanMovieResponse> getPlanList();
 
     // 공통코드
