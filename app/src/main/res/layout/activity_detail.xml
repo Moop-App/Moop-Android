@@ -11,6 +11,17 @@
     app:dragDismissScale="0.95"
     tools:context=".ui.detail.DetailActivity">
 
+    <!-- Use a separate view for the background, rather than on the root view because it is a
+         shared element. Otherwise it interferes with the window enter transition i.e. as it is
+         resized for the shared element transition, many views are considered 'off-screen' so
+         visibility transitions are not run. -->
+    <View
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_50"
+        android:transitionName="@string/transition_background" />
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp">
@@ -26,6 +37,15 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:foreground="@color/debug_foreground"
             tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_back"
+            android:scaleType="centerInside"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            />
 
         <TextView
             android:id="@+id/primary_text"

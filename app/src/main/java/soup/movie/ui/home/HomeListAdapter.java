@@ -44,6 +44,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
             MovieUtil.saveTo(intent, mItems.get(holder.getAdapterPosition()));
             ActivityOptions options =
                     ActivityOptions.makeSceneTransitionAnimation(mHost,
+                            Pair.create(holder.mBackground, mHost.getString(R.string.transition_background)),
                             Pair.create(holder.mPosterView, mHost.getString(R.string.transition_poster)),
                             Pair.create(holder.mTitleView, mHost.getString(R.string.transition_title)),
                             Pair.create(holder.mAgeView, mHost.getString(R.string.transition_age)),
@@ -97,6 +98,8 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.background)
+        View mBackground;
         @BindView(R.id.movie_poster)
         ImageView mPosterView;
         @BindView(R.id.primary_text)

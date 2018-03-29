@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="transition_background">background</string>
     <string name="transition_poster">poster</string>
     <string name="transition_title">title</string>
     <string name="transition_age">age</string>
