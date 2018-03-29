@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import soup.movie.R;
-import soup.movie.data.kobis.model.Movie;
+import soup.movie.data.soup.model.Movie;
 import soup.movie.util.ListUtil;
 
 class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
@@ -32,7 +32,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Movie item = mItems.get(position);
         holder.mTitleView.setText(item.getTitle());
-        holder.mSubtitleView.setText(item.getSubtitle());
+        holder.mSubtitleView.setText(item.getAge());
     }
 
     @Override

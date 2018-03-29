@@ -3,7 +3,8 @@ package soup.movie.ui.home;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
-import soup.movie.data.kobis.model.MovieListRequest;
+import soup.movie.data.soup.model.NowMovieRequest;
+import soup.movie.data.soup.model.NowMovieResponse;
 
 public class HomePresenter implements HomeContract.Presenter {
 
@@ -38,8 +39,9 @@ public class HomePresenter implements HomeContract.Presenter {
 
     private void loadMovieList() {
         mDisposable = mInjection.getMovieRepository()
-                .getMovieList(new MovieListRequest())
+                .getNowList(new NowMovieRequest())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movieList -> mView.render(new HomeUiModel.Data(movieList)));
+                .map(NowMovieResponse::getList)
+                .subscribe(list -> mView.render(new HomeUiModel.Data(list)));
     }
 }

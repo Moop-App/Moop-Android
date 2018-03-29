@@ -8,8 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import soup.movie.data.MovieRepository;
 import soup.movie.data.kobis.KobisDataSource;
 import soup.movie.data.kobis.service.KobisApiService;
-import soup.movie.data.movist.MovistDataSource;
-import soup.movie.data.movist.service.MovistApiService;
+import soup.movie.data.soup.SoupDataSource;
+import soup.movie.data.soup.service.SoupApiService;
 
 public class Injection {
 
@@ -23,12 +23,12 @@ public class Injection {
                                 provideRxJava2CallAdapterFactory(),
                                 provideOkHttpClient(
                                         null))),
-                provideMovistDataSource(
-                        provideMovistApiService(
+                provideSoupDataSource(
+                        provideSoupApiService(
                                 provideGsonConverterFactory(),
                                 provideRxJava2CallAdapterFactory(),
                                 provideOkHttpClient(
-                                        provideMovistHeaderInterceptor()))));
+                                        provideSoupHeaderInterceptor()))));
     }
 
     public MovieRepository getMovieRepository() {
@@ -38,8 +38,8 @@ public class Injection {
     // Internal Injection
 
     private MovieRepository provideRepository(KobisDataSource kobisDataSource,
-                                              MovistDataSource movistDataSource) {
-        return new MovieRepository(kobisDataSource, movistDataSource);
+                                              SoupDataSource soupDataSource) {
+        return new MovieRepository(kobisDataSource, soupDataSource);
     }
 
     private KobisDataSource provideKobisDataSource(KobisApiService kobisApi) {
@@ -75,25 +75,24 @@ public class Injection {
         return builder.build();
     }
 
-    private MovistDataSource provideMovistDataSource(MovistApiService movistApi) {
-        return new MovistDataSource(movistApi);
+    private SoupDataSource provideSoupDataSource(SoupApiService soupApi) {
+        return new SoupDataSource(soupApi);
     }
 
-    private MovistApiService provideMovistApiService(GsonConverterFactory gsonConverterFactory,
-                                                   RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
-                                                   OkHttpClient okHttpClient) {
+    private SoupApiService provideSoupApiService(GsonConverterFactory gsonConverterFactory,
+                                                 RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
+                                                 OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MovistApiService.API_BASE_URL)
+                .baseUrl(SoupApiService.API_BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .client(okHttpClient)
                 .build();
-        return retrofit.create(MovistApiService.class);
+        return retrofit.create(SoupApiService.class);
     }
 
-    private Interceptor provideMovistHeaderInterceptor() {
+    private Interceptor provideSoupHeaderInterceptor() {
         return chain -> chain.proceed(chain.request().newBuilder()
-                .addHeader("x-waple-authorization", MovistApiService.API_KEY)
                 .build());
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
-import soup.movie.data.kobis.model.Movie;
+import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
 import timber.log.Timber;
 

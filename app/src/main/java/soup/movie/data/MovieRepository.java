@@ -10,22 +10,26 @@ import soup.movie.data.kobis.model.Movie;
 import soup.movie.data.kobis.model.MovieListRequest;
 import soup.movie.data.kobis.model.WeeklyBoxOfficeRequest;
 import soup.movie.data.kobis.model.WeeklyBoxOfficeResult;
-import soup.movie.data.movist.IMovistDataSource;
-import soup.movie.data.movist.model.ComingMovieRequest;
-import soup.movie.data.movist.model.ComingMovieResponse;
-import soup.movie.data.movist.model.MovieDetailRequest;
-import soup.movie.data.movist.model.MovieDetailResponse;
-import soup.movie.data.movist.model.NowMovieRequest;
-import soup.movie.data.movist.model.NowMovieResponse;
+import soup.movie.data.soup.ISoupDataSource;
+import soup.movie.data.soup.model.ArtMovieRequest;
+import soup.movie.data.soup.model.ArtMovieResponse;
+import soup.movie.data.soup.model.CodeRequest;
+import soup.movie.data.soup.model.CodeResponse;
+import soup.movie.data.soup.model.NowMovieRequest;
+import soup.movie.data.soup.model.NowMovieResponse;
+import soup.movie.data.soup.model.PlanMovieRequest;
+import soup.movie.data.soup.model.PlanMovieResponse;
+import soup.movie.data.soup.model.TimeTableRequest;
+import soup.movie.data.soup.model.TimeTableResponse;
 
-public class MovieRepository implements IKobisDataSource, IMovistDataSource {
+public class MovieRepository implements IKobisDataSource, ISoupDataSource {
 
     private final IKobisDataSource mKobis;
-    private final IMovistDataSource mMovist;
+    private final ISoupDataSource mSoup;
 
-    public MovieRepository(IKobisDataSource kobisDataSource, IMovistDataSource movistDataSource) {
+    public MovieRepository(IKobisDataSource kobisDataSource, ISoupDataSource soupDataSource) {
         mKobis = kobisDataSource;
-        mMovist = movistDataSource;
+        mSoup = soupDataSource;
     }
 
     @Override
@@ -43,18 +47,27 @@ public class MovieRepository implements IKobisDataSource, IMovistDataSource {
         return mKobis.getWeeklyBoxOfficeList(weeklyBoxOfficeRequest);
     }
 
-    @Override
-    public Single<NowMovieResponse> getNowMovieList(NowMovieRequest nowMovieRequest) {
-        return mMovist.getNowMovieList(nowMovieRequest);
+    public Single<NowMovieResponse> getNowList(NowMovieRequest request) {
+        return mSoup.getNowList(request);
     }
 
     @Override
-    public Single<ComingMovieResponse> getComingMovieList(ComingMovieRequest comingMovieRequest) {
-        return mMovist.getComingMovieList(comingMovieRequest);
+    public Single<ArtMovieResponse> getArtList(ArtMovieRequest request) {
+        return mSoup.getArtList(request);
     }
 
     @Override
-    public Single<MovieDetailResponse> getMovieDetail(MovieDetailRequest movieDetailRequest) {
-        return mMovist.getMovieDetail(movieDetailRequest);
+    public Single<PlanMovieResponse> getPlanList(PlanMovieRequest request) {
+        return mSoup.getPlanList(request);
+    }
+
+    @Override
+    public Single<CodeResponse> getCodeList(CodeRequest request) {
+        return mSoup.getCodeList(request);
+    }
+
+    @Override
+    public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
+        return mSoup.getTimeTableList(request);
     }
 }
