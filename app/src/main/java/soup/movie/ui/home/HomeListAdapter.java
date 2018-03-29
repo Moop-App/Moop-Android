@@ -1,41 +1,49 @@
 package soup.movie.ui.home;
 
+import android.content.Context;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
+import soup.movie.ui.util.ImageUtil;
 import soup.movie.ui.util.OnItemClickListener;
 import soup.movie.util.ListUtil;
 import soup.movie.util.function.Consumer;
 
 class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 
-    private List<Movie> mItems = new ArrayList<>();
-
+    private final Context mContext;
     private final OnItemClickListener<Movie> mClickListener;
 
-    HomeListAdapter(OnItemClickListener<Movie> clickListener) {
+    private List<Movie> mItems = new ArrayList<>();
+
+    HomeListAdapter(Context context, OnItemClickListener<Movie> clickListener) {
+        mContext = context;
         mClickListener = clickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_movie, parent, false);
+                .inflate(R.layout.item_movie_for_home, parent, false);
         return new ViewHolder(view, position -> mClickListener.onItemClick(mItems.get(position)));
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Movie item = mItems.get(position);
+        ImageUtil.loadAsync(mContext, holder.mPosterView, item.getThumbnailUrl());
         holder.mTitleView.setText(item.getTitle());
         holder.mSubtitleView.setText(item.getAge());
     }
@@ -73,22 +81,23 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        //final ImageView mPosterView;
-        final TextView mTitleView;
-        final TextView mSubtitleView;
-        final View mFavoriteButton;
-        final View mShareButton;
+        @BindView(R.id.movie_poster)
+        ImageView mPosterView;
+        @BindView(R.id.primary_text)
+        TextView mTitleView;
+        @BindView(R.id.sub_text)
+        TextView mSubtitleView;
+        @BindView(R.id.favorite_button)
+        View mFavoriteButton;
+        @BindView(R.id.share_button)
+        View mShareButton;
 
         ViewHolder(View view, Consumer<Integer> positionConsumer) {
             super(view);
+            ButterKnife.bind(this, view);
             view.findViewById(R.id.preview_card).setOnClickListener(
                     v -> positionConsumer.accept(getAdapterPosition()));
-            //mPosterView = view.findViewById(R.id.movie_poster);
-            mTitleView = view.findViewById(R.id.primary_text);
-            mSubtitleView = view.findViewById(R.id.sub_text);
-            mFavoriteButton = view.findViewById(R.id.favorite_button);
             mFavoriteButton.setOnClickListener(v -> {});
-            mShareButton = view.findViewById(R.id.share_button);
             mShareButton.setOnClickListener(v -> {});
         }
     }
