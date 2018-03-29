@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.data.utils.MovieUtil;
 import soup.movie.ui.detail.DetailActivity;
 import soup.movie.ui.main.MainTabFragment;
-import soup.movie.ui.util.RecyclerViewUtil;
 import timber.log.Timber;
 
 import static soup.movie.ui.util.RecyclerViewUtil.createLinearLayoutManager;
@@ -57,7 +57,7 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
         RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(createLinearLayoutManager(context, false));
         recyclerView.setAdapter(adapterView);
-        recyclerView.setItemAnimator(new SlideInUpAnimator());
+        recyclerView.setItemAnimator(new SlideInRightAnimator());
         mAdapterView = adapterView;
 
         mPresenter = new HomePresenter();

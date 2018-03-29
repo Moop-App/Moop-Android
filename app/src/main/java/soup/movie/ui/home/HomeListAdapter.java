@@ -45,7 +45,8 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         Movie item = mItems.get(position);
         ImageUtil.loadAsync(mContext, holder.mPosterView, item.getThumbnailUrl());
         holder.mTitleView.setText(item.getTitle());
-        holder.mSubtitleView.setText(item.getAge());
+        holder.mAgeView.setText(item.getAge());
+        holder.mEggView.setText(item.getEgg());
     }
 
     @Override
@@ -85,8 +86,10 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         ImageView mPosterView;
         @BindView(R.id.primary_text)
         TextView mTitleView;
-        @BindView(R.id.sub_text)
-        TextView mSubtitleView;
+        @BindView(R.id.sub_text1)
+        TextView mAgeView;
+        @BindView(R.id.sub_text2)
+        TextView mEggView;
         @BindView(R.id.favorite_button)
         View mFavoriteButton;
         @BindView(R.id.share_button)
