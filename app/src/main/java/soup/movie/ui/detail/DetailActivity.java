@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.data.utils.MovieUtil;
+import soup.movie.ui.util.ImageUtil;
 import timber.log.Timber;
 
 public class DetailActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
             movie = MovieUtil.restoreFrom(savedInstanceState);
         }
         Timber.d("onCreate: movie=%s", movie);
+        ImageUtil.loadAsync(this, mMoviePosterView, movie.getThumbnailUrl());
     }
 
     @Override
