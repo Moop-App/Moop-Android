@@ -2,6 +2,8 @@ package soup.movie;
 
 import android.app.Application;
 
+import soup.movie.data.utils.TheaterUtil;
+
 public class MovieApplication extends Application {
 
     private static Application sInstance;
@@ -15,6 +17,7 @@ public class MovieApplication extends Application {
     public void onCreate() {
         super.onCreate();
         BuildType.init(this);
+        TheaterUtil.loadAsync(null); // pre-load
     }
 
     public static Application getInstance() {
