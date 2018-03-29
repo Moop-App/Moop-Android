@@ -13,9 +13,17 @@ import soup.movie.data.soup.service.SoupApiService;
 
 public class Injection {
 
+    private interface Singleton {
+        Injection INSTANCE = new Injection();
+    }
+
+    public static Injection get() {
+        return Singleton.INSTANCE;
+    }
+
     private final MovieRepository mMovieRepository;
 
-    public Injection() {
+    private Injection() {
         mMovieRepository = provideRepository(
                 provideKobisDataSource(
                         provideKobisApiService(

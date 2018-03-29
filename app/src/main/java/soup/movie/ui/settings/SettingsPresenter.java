@@ -1,14 +1,10 @@
 package soup.movie.ui.settings;
 
-import soup.movie.Injection;
-
 public class SettingsPresenter implements SettingsContract.Presenter {
 
-    private Injection mInjection;
     private SettingsContract.View mView;
 
     SettingsPresenter() {
-        mInjection = new Injection();
     }
 
     @Override

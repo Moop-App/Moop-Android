@@ -9,13 +9,11 @@ import static soup.movie.util.TimeUtil.yesterday;
 
 public class BoxOfficePresenter implements BoxOfficeContract.Presenter {
 
-    private Injection mInjection;
     private BoxOfficeContract.View mView;
 
     private Disposable mDisposable;
 
     BoxOfficePresenter() {
-        mInjection = new Injection();
     }
 
     @Override
@@ -39,7 +37,7 @@ public class BoxOfficePresenter implements BoxOfficeContract.Presenter {
     }
 
     private void loadMovieList() {
-        mDisposable = mInjection.getMovieRepository()
+        mDisposable = Injection.get().getMovieRepository()
                 .getDailyBoxOfficeList(new DailyBoxOfficeRequest().setTargetDt(yesterday()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(notUse -> mView.render(new BoxOfficeUiModel.InProgress()))

@@ -16,13 +16,11 @@ import soup.movie.data.soup.model.PlanMovieResponse;
 
 public class HomePresenter implements HomeContract.Presenter {
 
-    private Injection mInjection;
     private HomeContract.View mView;
 
     private Disposable mDisposable;
 
     HomePresenter() {
-        mInjection = new Injection();
     }
 
     @Override
@@ -61,20 +59,20 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     private Single<List<Movie>> getNowObservable() {
-        return mInjection.getMovieRepository()
+        return Injection.get().getMovieRepository()
                 .getNowList(new NowMovieRequest())
                 .map(NowMovieResponse::getList);
     }
 
     private Single<List<Movie>> getArtObservable() {
-        return mInjection.getMovieRepository()
+        return Injection.get().getMovieRepository()
                 .getArtList(new ArtMovieRequest())
                 .map(ArtMovieResponse::getList);
 
     }
 
     private Single<List<Movie>> getPlanObservable() {
-        return mInjection.getMovieRepository()
+        return Injection.get().getMovieRepository()
                 .getPlanList(new PlanMovieRequest())
                 .map(PlanMovieResponse::getList);
 

@@ -7,13 +7,11 @@ import soup.movie.data.kobis.model.MovieListRequest;
 
 public class ArchivePresenter implements ArchiveContract.Presenter {
 
-    private Injection mInjection;
     private ArchiveContract.View mView;
 
     private Disposable mDisposable;
 
     ArchivePresenter() {
-        mInjection = new Injection();
     }
 
     @Override
@@ -32,7 +30,7 @@ public class ArchivePresenter implements ArchiveContract.Presenter {
     }
 
     private void loadMovieList() {
-        mDisposable = mInjection.getMovieRepository()
+        mDisposable = Injection.get().getMovieRepository()
                 .getMovieList(new MovieListRequest())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieList -> mView.render(new ArchiveUiModel.Data(movieList)));
