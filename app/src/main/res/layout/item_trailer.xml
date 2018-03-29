@@ -6,15 +6,15 @@
     android:id="@+id/preview_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:foreground="?attr/selectableItemBackground" >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp" >
+        android:layout_height="160dp" >
 
         <ImageView
             android:id="@+id/trailer_thumbnail"
@@ -28,16 +28,22 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rounded_background_gradient" />
+
         <TextView
             android:id="@+id/primary_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="#DEFFFFFF"
+            android:textColor="@color/white"
             android:maxLines="1"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -45,13 +51,14 @@
 
         <TextView
             android:id="@+id/sub_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="#8AFFFFFF"
+            android:textColor="@color/white"
             android:maxLines="1"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/primary_text"
