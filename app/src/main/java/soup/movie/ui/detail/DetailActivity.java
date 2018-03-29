@@ -222,7 +222,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
                             statusBarColor = ColorUtils.scrimify(topColor.getRgb(),
                                     isDark, SCRIM_ADJUSTMENT);
                             // set a light status bar on M+
-                            if (!isDark && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (!isDark) {
                                 ViewUtils.setLightStatusBar(mPosterView);
                             }
                         }
@@ -233,7 +233,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
                                     getWindow().getStatusBarColor(), statusBarColor);
                             statusBarColorAnim.addUpdateListener(animation -> getWindow().setStatusBarColor(
                                     (int) animation.getAnimatedValue()));
-                            statusBarColorAnim.setDuration(1000L);
+                            statusBarColorAnim.setDuration(500L);
                             statusBarColorAnim.setInterpolator(
                                     getFastOutSlowInInterpolator(DetailActivity.this));
                             statusBarColorAnim.start();
