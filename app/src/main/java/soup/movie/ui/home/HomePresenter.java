@@ -3,6 +3,7 @@ package soup.movie.ui.home;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
+import soup.movie.data.soup.model.Movie;
 import soup.movie.data.soup.model.NowMovieRequest;
 import soup.movie.data.soup.model.NowMovieResponse;
 

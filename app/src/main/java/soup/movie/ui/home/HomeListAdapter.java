@@ -12,20 +12,25 @@ import java.util.List;
 
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
+import soup.movie.ui.util.OnItemClickListener;
 import soup.movie.util.ListUtil;
+import soup.movie.util.function.Consumer;
 
 class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 
     private List<Movie> mItems = new ArrayList<>();
 
-    HomeListAdapter() {
+    private final OnItemClickListener<Movie> mClickListener;
+
+    HomeListAdapter(OnItemClickListener<Movie> clickListener) {
+        mClickListener = clickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_movie, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, position -> mClickListener.onItemClick(mItems.get(position)));
     }
 
     @Override
@@ -74,9 +79,10 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         final View mFavoriteButton;
         final View mShareButton;
 
-        ViewHolder(View view) {
+        ViewHolder(View view, Consumer<Integer> positionConsumer) {
             super(view);
-            view.findViewById(R.id.preview_card).setOnClickListener(v -> {});
+            view.findViewById(R.id.preview_card).setOnClickListener(
+                    v -> positionConsumer.accept(getAdapterPosition()));
             //mPosterView = view.findViewById(R.id.movie_poster);
             mTitleView = view.findViewById(R.id.primary_text);
             mSubtitleView = view.findViewById(R.id.sub_text);

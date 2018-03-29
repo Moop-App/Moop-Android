@@ -19,7 +19,7 @@ public class Movie {
     private String age;
 
     @SerializedName("open_date")
-    private String open_date;
+    private String openDate;
 
     @SerializedName("egg")
     private String egg;
@@ -47,7 +47,7 @@ public class Movie {
     }
 
     public String getOpenDate() {
-        return open_date;
+        return openDate;
     }
 
     public String getEgg() {
@@ -58,6 +58,34 @@ public class Movie {
         return specialTypeList;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public void setOpenDate(String open_date) {
+        this.openDate = open_date;
+    }
+
+    public void setEgg(String egg) {
+        this.egg = egg;
+    }
+
+    public void setSpecialTypeList(List<String> specialTypeList) {
+        this.specialTypeList = specialTypeList;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -65,7 +93,7 @@ public class Movie {
                 ", title='" + title + '\'' +
                 ", thumbnailUrl='" + thumbnailUrl + '\'' +
                 ", age='" + age + '\'' +
-                ", open_date='" + open_date + '\'' +
+                ", openDate='" + openDate + '\'' +
                 ", egg='" + egg + '\'' +
                 ", specialTypeList=" + specialTypeList +
                 '}';

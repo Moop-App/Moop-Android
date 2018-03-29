@@ -1,6 +1,7 @@
 package soup.movie.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,8 @@ import java.util.List;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
+import soup.movie.data.utils.MovieUtil;
+import soup.movie.ui.detail.DetailActivity;
 import soup.movie.ui.main.MainTabFragment;
 import timber.log.Timber;
 
@@ -51,7 +54,11 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
         swipeRefreshLayout.setOnRefreshListener(() -> mPresenter.refresh());
         mSwipeRefreshLayout = swipeRefreshLayout;
 
-        HomeListAdapter adapterView = new HomeListAdapter();
+        HomeListAdapter adapterView = new HomeListAdapter(movie -> {
+            Intent intent = new Intent(getContext(), DetailActivity.class);
+            MovieUtil.saveTo(intent, movie);
+            startActivity(intent);
+        });
         RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapterView);
