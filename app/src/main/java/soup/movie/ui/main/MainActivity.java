@@ -3,6 +3,7 @@ package soup.movie.ui.main;
 import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationViewHelper;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
@@ -13,10 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import soup.movie.R;
-import soup.movie.ui.archive.ArchiveFragment;
-import soup.movie.ui.boxoffice.BoxOfficeFragment;
-import soup.movie.ui.home.HomeFragment;
-import soup.movie.ui.settings.SettingsFragment;
+import soup.movie.ui.BaseFragment;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
@@ -27,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private TextView mSubPanelTitleView;
 
     private BottomSheetBehavior mBottomSheetBehavior;
+
+    @Nullable
+    private BaseFragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,17 +79,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public void render(MainUiModel uiModel) {
         Timber.i("render: %s", uiModel);
-        if (uiModel instanceof MainUiModel.BoxOffice) {
-            commit(R.id.tab_container, BoxOfficeFragment.newInstance());
-        } else if (uiModel instanceof MainUiModel.Home) {
-            commit(R.id.tab_container, HomeFragment.newInstance());
-        } else if (uiModel instanceof MainUiModel.Archive) {
-            commit(R.id.tab_container, ArchiveFragment.newInstance());
-        } else if (uiModel instanceof MainUiModel.Settings) {
-            commit(R.id.tab_container, SettingsFragment.newInstance());
-        } else {
-            throw new IllegalStateException("Unknown UI Model");
-        }
+        mCurrentFragment = uiModel.newFragment();
+        commit(R.id.tab_container, mCurrentFragment);
     }
 
     private void commit(@IdRes int containerId, @NonNull Fragment fragment) {
