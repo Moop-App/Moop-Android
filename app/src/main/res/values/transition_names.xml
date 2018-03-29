@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transition_poster">poster</string>
+    <string name="transition_title">title</string>
+    <string name="transition_age">age</string>
+    <string name="transition_egg">egg</string>
+    <string name="transition_favorite">favorite</string>
+    <string name="transition_share">share</string>
+</resources>

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +18,22 @@ import timber.log.Timber;
 public class DetailActivity extends AppCompatActivity {
 
     @BindView(R.id.movie_poster)
-    ImageView mMoviePosterView;
+    ImageView mPosterView;
+
+    @BindView(R.id.primary_text)
+    TextView mTitleView;
+
+    @BindView(R.id.sub_text1)
+    TextView mAgeView;
+
+    @BindView(R.id.sub_text2)
+    TextView mEggView;
+
+    @BindView(R.id.favorite_button)
+    ImageView mFavoriteButton;
+
+    @BindView(R.id.share_button)
+    ImageView mShareButton;
 
     @BindView(R.id.movie_contents)
     RecyclerView mMovieContents;
@@ -36,7 +52,13 @@ public class DetailActivity extends AppCompatActivity {
             movie = MovieUtil.restoreFrom(savedInstanceState);
         }
         Timber.d("onCreate: movie=%s", movie);
-        ImageUtil.loadAsync(this, mMoviePosterView, movie.getThumbnailUrl());
+
+        ImageUtil.loadAsync(this, mPosterView, movie.getThumbnailUrl());
+        mTitleView.setText(movie.getTitle());
+        mAgeView.setText(movie.getAge());
+        mEggView.setText(movie.getEgg());
+        mFavoriteButton.setOnClickListener(v -> {});
+        mShareButton.setOnClickListener(v -> {});
     }
 
     @Override

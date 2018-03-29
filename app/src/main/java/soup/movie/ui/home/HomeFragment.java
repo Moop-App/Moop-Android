@@ -1,7 +1,6 @@
 package soup.movie.ui.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,12 +12,9 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
-import soup.movie.data.utils.MovieUtil;
-import soup.movie.ui.detail.DetailActivity;
 import soup.movie.ui.main.MainTabFragment;
 import timber.log.Timber;
 
@@ -49,15 +45,13 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
 
         Context context = view.getContext();
 
-        HomeListAdapter adapterView = new HomeListAdapter(context, movie -> {
-            Intent intent = new Intent(getContext(), DetailActivity.class);
-            MovieUtil.saveTo(intent, movie);
-            startActivity(intent);
-        });
+        HomeListAdapter adapterView = new HomeListAdapter(getActivity());
         RecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(createLinearLayoutManager(context, false));
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInRightAnimator());
+        recyclerView.getItemAnimator().setAddDuration(200);
+        recyclerView.getItemAnimator().setRemoveDuration(200);
         mAdapterView = adapterView;
 
         mPresenter = new HomePresenter();
