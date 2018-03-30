@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
+import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieUtil;
 import soup.movie.ui.util.ImageUtil;
@@ -110,7 +111,8 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
             }
         };
 
-        DetailListAdapter adapterView = new DetailListAdapter(this);
+        DetailListAdapter adapterView = new DetailListAdapter(this, theaters ->
+                mPresenter.requestData(theaters.get(0).getCode(), movie.getId()));
         RecyclerView recyclerView = mMovieContents;
         recyclerView.setLayoutManager(createLinearLayoutManager(this, true));
         recyclerView.setAdapter(adapterView);
@@ -152,16 +154,16 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     public void render(@NonNull DetailUiModel uiModel) {
         if (uiModel instanceof DetailUiModel.Loading) {
             //TODO: show loading state
-        } else if (uiModel instanceof DetailUiModel.Done) {
-            List<Trailer> trailers = ((DetailUiModel.Done) uiModel).getTrailers();
-            updateTrailerList(trailers);
+        } else if (uiModel instanceof DetailUiModel.Data) {
+            DetailUiModel.Data dataUiModel = ((DetailUiModel.Data) uiModel);
+            updateTrailerList(dataUiModel.getTimeTable(), dataUiModel.getTrailers());
         }
     }
 
-    private void updateTrailerList(@Nullable List<Trailer> trailerList) {
+    private void updateTrailerList(@Nullable TimeTable timeTable, @Nullable List<Trailer> trailerList) {
         DetailListAdapter adapterView = mAdapterView;
         if (adapterView != null) {
-            adapterView.updateList(trailerList);
+            adapterView.updateList(timeTable, trailerList);
         }
     }
 

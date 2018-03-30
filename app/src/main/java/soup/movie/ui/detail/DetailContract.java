@@ -8,6 +8,7 @@ class DetailContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
         void requestData(@NonNull String movieId);
+        void requestData(@NonNull String code, @NonNull String movieId);
     }
 
     interface View extends BaseContract.View {
