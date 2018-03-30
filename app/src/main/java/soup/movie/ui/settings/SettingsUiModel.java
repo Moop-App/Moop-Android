@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import soup.movie.data.kobis.model.Movie;
+import soup.movie.data.soup.model.TheaterCode;
 import soup.movie.ui.BaseUiModel;
 
 interface SettingsUiModel extends BaseUiModel {
@@ -22,21 +22,20 @@ interface SettingsUiModel extends BaseUiModel {
 
     class Data implements SettingsUiModel {
 
-        private final List<Movie> mMovies;
+        private List<TheaterCode> theaterList;
 
-        Data(@NonNull List<Movie> movies) {
-            mMovies = movies;
+        Data(@NonNull List<TheaterCode> theaterList) {
+            this.theaterList = theaterList;
         }
 
-        @NonNull
-        List<Movie> getMovies() {
-            return mMovies;
+        public List<TheaterCode> getTheaterList() {
+            return theaterList;
         }
 
         @Override
         public String toString() {
-            return "SettingsUiModel.Data{" +
-                    "movies=" + mMovies +
+            return "Data{" +
+                    "theaterList=" + theaterList +
                     '}';
         }
     }

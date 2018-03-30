@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
@@ -27,10 +28,12 @@ import timber.log.Timber;
 
 public class TheaterUtil {
 
-    private static final Key<String> PREF_KEY = new InerasableKey<>("theater_list", "");
+    private static final Key<String> KEY_THEATER_LIST = new InerasableKey<>("theater_list", "");
+
+    private static final Key<String> KEY_MY_THEATERS = new InerasableKey<>("my_theaters", "");
 
     public static void loadAsync(@Nullable AsyncLoadListener<List<TheaterCode>> listener) {
-        String theaterListJson = Preference.getInstance().getString(PREF_KEY);
+        String theaterListJson = Preference.getInstance().getString(KEY_THEATER_LIST);
         if (StringUtils.isEmpty(theaterListJson)) {
             //TODO:
             Disposable disposable = Injection.get()
@@ -43,7 +46,7 @@ public class TheaterUtil {
                             codes.addAll(area.getTheaterList());
                         }
                         Timber.d("loadAsync: complete, data=%s", codes);
-                        Preference.getInstance().putString(PREF_KEY, toJson(codes));
+                        Preference.getInstance().putString(KEY_THEATER_LIST, toJson(codes));
                         return codes;
                     })
                     .observeOn(AndroidSchedulers.mainThread())
@@ -67,5 +70,14 @@ public class TheaterUtil {
     private static List<TheaterCode> fromJson(String jsonStr) {
         Type theaterListType = new TypeToken<ArrayList<TheaterCode>>(){}.getType();
         return new Gson().fromJson(jsonStr, theaterListType);
+    }
+
+    public static void saveMyTheaterList(List<TheaterCode> theaterList) {
+        Preference.getInstance().putString(KEY_MY_THEATERS, toJson(theaterList));
+    }
+
+    @NonNull
+    public static List<TheaterCode> getMyTheaterList() {
+        return ListUtils.emptyIfNull(fromJson(Preference.getInstance().getString(KEY_MY_THEATERS)));
     }
 }

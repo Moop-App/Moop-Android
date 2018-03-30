@@ -9,4 +9,9 @@
     <string name="action_filter">Filter</string>
     <string name="action_page_settings">Page Settings</string>
     <string name="action_help">Help</string>
+
+    <string name="theater_select_title">극장 선택</string>
+    <string name="theater_select_description">선호하는 극장을 선택해주세요</string>
+    <string name="theater_select_action_confirm">Confirm</string>
+    <string name="theater_select_action_cancel">Cancel</string>
 </resources>

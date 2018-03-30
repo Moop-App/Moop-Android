@@ -1,24 +1,32 @@
 package soup.movie.ui.settings;
 
-import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import soup.movie.R;
+import soup.movie.data.soup.model.TheaterCode;
 import soup.movie.ui.main.MainTabFragment;
+import soup.movie.util.ListUtil;
 import timber.log.Timber;
 
 public class SettingsFragment extends MainTabFragment implements SettingsContract.View {
 
-    private SettingsContract.Presenter mPresenter;
+    @BindView(R.id.theater_option)
+    TextView mTheaterOption;
 
-    private SettingsListAdapter mAdapterView;
+    private SettingsContract.Presenter mPresenter;
 
     public SettingsFragment() {
     }
@@ -35,16 +43,8 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list, container, false);
-
-        Context context = view.getContext();
-
-        SettingsListAdapter adapterView = new SettingsListAdapter();
-        RecyclerView recyclerView = view.findViewById(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(adapterView);
-        recyclerView.setItemAnimator(new SlideInUpAnimator());
-        mAdapterView = adapterView;
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ButterKnife.bind(this, view);
 
         mPresenter = new SettingsPresenter();
         mPresenter.attach(this);
@@ -68,8 +68,21 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
         Timber.i("render: %s", uiModel);
         if (uiModel instanceof SettingsUiModel.InProgress) {
         } else if (uiModel instanceof SettingsUiModel.Data) {
+            List<TheaterCode> theaters = ((SettingsUiModel.Data) uiModel).getTheaterList();
+            if (theaters.isEmpty()) {
+                mTheaterOption.setText("없음");
+                mTheaterOption.setTextColor(Color.RED);
+            } else {
+                mTheaterOption.setText(StringUtils.join(ListUtil.toStringArray(theaters, TheaterCode::getName)));
+                mTheaterOption.setTextColor(Color.BLACK);
+            }
         } else {
             throw new IllegalStateException("Unknown UI Model");
         }
+    }
+
+    @OnClick(R.id.theater_option)
+    public void onClick(View view) {
+        mPresenter.onClick(view.getContext());
     }
 }
