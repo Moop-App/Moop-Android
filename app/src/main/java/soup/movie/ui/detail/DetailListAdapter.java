@@ -24,6 +24,7 @@ import soup.movie.data.soup.model.Day;
 import soup.movie.data.soup.model.TheaterCode;
 import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
+import soup.movie.data.utils.MovieAppUtil;
 import soup.movie.data.utils.YouTubeUtil;
 import soup.movie.ui.util.DialogUtil;
 import soup.movie.ui.util.ImageUtil;
@@ -66,8 +67,10 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                 view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_timetable, parent, false);
                 holder = new TimeTableViewHolder(view);
-                holder.itemView.setOnClickListener(v -> {});
-//TODO                        DialogUtil.startDialogToSelectTheaters(mHost, mConsumer::accept));
+                holder.itemView.setOnClickListener(v -> {
+                    //TODO: show notification with selected date and time
+                    MovieAppUtil.executeCgvApp(mHost);
+                });
                 break;
             default:
                 view = LayoutInflater.from(parent.getContext())
