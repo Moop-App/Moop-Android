@@ -49,11 +49,6 @@ public final class Preference {
     return storagePool;
   }
 
-  @VisibleForTesting
-  List<SharedPreferences> storagePool() {
-    return mStoragePool;
-  }
-
   @NonNull
   private static SharedPreferences createShareableStorage() {
     return PreferenceManager.getDefaultSharedPreferences(MovieApplication.getInstance());
@@ -142,48 +137,6 @@ public final class Preference {
     persistWith(getMutableStorage(trait).putString(key, value));
   }
 
-  @NonNull
-  @VisibleForTesting
-  Object get(@NonNull Key key) {
-    final Object defaultValue = key.defaultValue();
-    if (defaultValue instanceof Boolean)
-      return getBoolean(key);
-    if (defaultValue instanceof Double)
-      return getDouble(key);
-    if (defaultValue instanceof Float)
-      return getFloat(key);
-    if (defaultValue instanceof Integer)
-      return getInt(key);
-    if (defaultValue instanceof Long)
-      return getLong(key);
-    if (defaultValue instanceof String)
-      return getString(key);
-    if (defaultValue instanceof Set)
-      return getStringSet(key);
-    throw new UnsupportedOperationException(defaultValue.getClass() + " is unsupported");
-  }
-
-  @NonNull
-  @VisibleForTesting
-  void put(@NonNull Key key, @NonNull Object value) {
-    if (value instanceof Boolean)
-      putBoolean(key, (boolean)value);
-    else if (value instanceof Double)
-      putDouble(key, (double)value);
-    else if (value instanceof Float)
-      putFloat(key, (float)value);
-    else if (value instanceof Integer)
-      putInt(key, (int)value);
-    else if (value instanceof Long)
-      putLong(key, (long)value);
-    else if (value instanceof String)
-      putString(key, (String)value);
-    else if (value instanceof Set)
-      putStringSet(key, (Set<String>)value);
-    else
-      throw new UnsupportedOperationException(value.getClass() + " is unsupported");
-  }
-
   public void clear() {
     for (Key.Trait trait : Key.Trait.values()) {
       if (trait.mutable)
@@ -205,14 +158,12 @@ public final class Preference {
   }
 
   @NonNull
-  @VisibleForTesting
-  SharedPreferences getStorage(Key.Trait trait) {
+  private SharedPreferences getStorage(Key.Trait trait) {
     return mStoragePool.get(trait.ordinal());
   }
 
   @NonNull
-  @VisibleForTesting
-  SharedPreferences.Editor getMutableStorage(@NonNull Key.Trait trait) {
+  private SharedPreferences.Editor getMutableStorage(@NonNull Key.Trait trait) {
     return getStorage(trait).edit();
   }
 
