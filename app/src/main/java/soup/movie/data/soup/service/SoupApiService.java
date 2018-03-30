@@ -31,9 +31,8 @@ public interface SoupApiService {
     Single<CodeResponse> getCodeList();
 
     // 상영시간표
-    @GET("v1/cgv/timetable/asMovie/{ac}/{tc}/{mc}.json")
-    Single<TimeTableResponse> getTimeTableList(@Path("ac") String area,
-                                               @Path("tc") String theater,
+    @GET("v1/cgv/timetable/asMovie/{tc}/{mc}.json")
+    Single<TimeTableResponse> getTimeTableList(@Path("tc") String theater,
                                                @Path("mc") String movie);
 
     //TODO: 나중에

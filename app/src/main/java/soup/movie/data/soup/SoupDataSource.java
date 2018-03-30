@@ -50,8 +50,7 @@ public class SoupDataSource implements ISoupDataSource {
 
     @Override
     public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
-        return mSoupApi.getTimeTableList(
-                request.getAreaCode(), request.getTheaterCode(), request.getMovieCode())
+        return mSoupApi.getTimeTableList(request.getTheaterCode(), request.getMovieCode())
                 .subscribeOn(Schedulers.io());
     }
 

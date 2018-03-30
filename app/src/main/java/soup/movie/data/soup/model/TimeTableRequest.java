@@ -11,6 +11,10 @@ public class TimeTableRequest implements QueryMapProvider {
     private String theaterCode;
     private String movieCode;
 
+    public TimeTableRequest(String theaterCode, String movieCode) {
+        this(null, theaterCode, movieCode);
+    }
+
     public TimeTableRequest(String areaCode, String theaterCode, String movieCode) {
         this.areaCode = areaCode;
         this.theaterCode = theaterCode;
@@ -31,7 +35,11 @@ public class TimeTableRequest implements QueryMapProvider {
 
     @Override
     public String toString() {
-        return "TimeTableRequest{}";
+        return "TimeTableRequest{" +
+                "areaCode='" + areaCode + '\'' +
+                ", theaterCode='" + theaterCode + '\'' +
+                ", movieCode='" + movieCode + '\'' +
+                '}';
     }
 
     @Override
