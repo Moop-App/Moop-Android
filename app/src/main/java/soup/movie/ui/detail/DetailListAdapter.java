@@ -89,7 +89,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                 TimeTableViewHolder holder1 = (TimeTableViewHolder) holder;
                 TimeTable item = mTimeTable;
                 List<Day> days = item.getDayList();
-                if (days != null) {
+                if (days != null && !days.isEmpty()) {
                     holder1.empty.setVisibility(View.GONE);
                     int size = Math.min(3, days.size());
                     for (int i = 0; i < size; i++) {

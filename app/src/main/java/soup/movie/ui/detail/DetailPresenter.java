@@ -3,6 +3,7 @@ package soup.movie.ui.detail;
 import android.support.annotation.NonNull;
 import android.util.Pair;
 
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -77,6 +78,11 @@ public class DetailPresenter implements DetailContract.Presenter {
         return Injection.get()
                 .getMovieRepository()
                 .getTimeTableList(new TimeTableRequest(theaterId, movieId))
+                .onErrorReturn(throwable -> {
+                    TimeTableResponse response = new TimeTableResponse();
+                    response.setTimeTable(new TimeTable(Collections.emptyList()));
+                    return response;
+                })
                 .map(TimeTableResponse::getTimeTable);
     }
 
@@ -84,6 +90,11 @@ public class DetailPresenter implements DetailContract.Presenter {
         return Injection.get()
                 .getMovieRepository()
                 .getTrailerList(new TrailerRequest(movieId))
+                .onErrorReturn(throwable -> {
+                    TrailerResponse response = new TrailerResponse();
+                    response.setTrailerList(Collections.emptyList());
+                    return response;
+                })
                 .map(TrailerResponse::getTrailerList);
     }
 }
