@@ -3,6 +3,8 @@ package soup.movie.ui.home;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import soup.movie.R;
@@ -30,8 +33,21 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 
     private List<Movie> mItems = new ArrayList<>();
 
+    @BindColor(R.color.green)
+    int mGreenColor;
+
+    @BindColor(R.color.blue)
+    int mBlueColor;
+
+    @BindColor(R.color.amber)
+    int mAmberColor;
+
+    @BindColor(R.color.red)
+    int mRedColor;
+
     HomeListAdapter(Activity host) {
         mHost = host;
+        ButterKnife.bind(this, host);
     }
 
     @Override
@@ -61,8 +77,31 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         Movie item = mItems.get(position);
         ImageUtil.loadAsync(mHost, holder.mPosterView, item.getPosterUrl());
         holder.mTitleView.setText(item.getTitle());
-        holder.mAgeView.setText(item.getAge());
         holder.mEggView.setText(item.getEgg());
+        setAgeText(holder.mAgeView, item.getAge());
+    }
+
+    private void setAgeText(TextView ageView, String age) {
+        switch (age) {
+            case "전체 관람가":
+                ageView.setText("전체");
+                ageView.setBackgroundTintList(ColorStateList.valueOf(mGreenColor));
+                break;
+            case "12세 관람가":
+                ageView.setText("12");
+                ageView.setBackgroundTintList(ColorStateList.valueOf(mBlueColor));
+                break;
+            case "15세 관람가":
+                ageView.setText("15");
+                ageView.setBackgroundTintList(ColorStateList.valueOf(mAmberColor));
+                break;
+            case "청소년관람불가":
+                ageView.setText("청불");
+                ageView.setBackgroundTintList(ColorStateList.valueOf(mRedColor));
+                break;
+            default:
+                ageView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -104,7 +143,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         ImageView mPosterView;
         @BindView(R.id.primary_text)
         TextView mTitleView;
-        @BindView(R.id.sub_text1)
+        @BindView(R.id.age_icon)
         TextView mAgeView;
         @BindView(R.id.sub_text2)
         TextView mEggView;
