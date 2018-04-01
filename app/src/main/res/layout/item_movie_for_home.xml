@@ -87,6 +87,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_favorite"
             app:layout_constraintTop_toTopOf="@+id/share_button"
             app:layout_constraintEnd_toStartOf="@+id/share_button" />

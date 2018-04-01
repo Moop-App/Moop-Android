@@ -49,7 +49,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
                             Pair.create(holder.mTitleView, mHost.getString(R.string.transition_title)),
                             Pair.create(holder.mAgeView, mHost.getString(R.string.transition_age)),
                             Pair.create(holder.mEggView, mHost.getString(R.string.transition_egg)),
-                            Pair.create(holder.mFavoriteButton, mHost.getString(R.string.transition_favorite)),
+//                            Pair.create(holder.mFavoriteButton, mHost.getString(R.string.transition_favorite)),
                             Pair.create(holder.mShareButton, mHost.getString(R.string.transition_share)));
             mHost.startActivity(intent, options.toBundle());
         });

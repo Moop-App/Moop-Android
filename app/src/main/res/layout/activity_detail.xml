@@ -100,6 +100,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
             android:transitionName="@string/transition_favorite"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/share_button"
             app:layout_constraintTop_toTopOf="@+id/share_button"
             app:srcCompat="@drawable/ic_favorite" />
