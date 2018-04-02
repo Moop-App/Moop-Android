@@ -22,9 +22,12 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
@@ -123,7 +126,11 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
 
         mPresenter = new DetailPresenter();
         mPresenter.attach(this);
-        mPresenter.requestData(movie);
+
+        //TODO: call requestData() after transition animation is ended
+        Observable.timer(150, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(unused -> mPresenter.requestData(movie));
     }
 
     @Override

@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.soup.model.Day;
 import soup.movie.data.soup.model.TheaterCode;
+import soup.movie.data.soup.model.Thumbnail;
+import soup.movie.data.soup.model.Thumbnails;
 import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieAppUtil;
@@ -104,11 +106,29 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
         } else {
             TrailerViewHolder trailerViewHolder = (TrailerViewHolder)holder;
             Trailer item = mItems.get(position - 1);
-            ImageUtil.loadAsync(mHost, trailerViewHolder.mThumbnailView,
-                    YouTubeUtil.getThumbnailUrl(item.getId()));
+            ImageUtil.loadAsync(mHost, trailerViewHolder.mThumbnailView, getThumbnailUrl(item));
             trailerViewHolder.mTitleView.setText(item.getTitle());
             trailerViewHolder.mAuthorView.setText(item.getAuthor());
         }
+    }
+
+    private static String getThumbnailUrl(@NonNull Trailer trailer) {
+        Thumbnails thumbnails = trailer.getThumbnails();
+        if (thumbnails != null) {
+            Thumbnail high = thumbnails.getHigh();
+            if (high != null && high.getUrl() != null) {
+                return high.getUrl();
+            }
+            Thumbnail medium = thumbnails.getMedium();
+            if (medium != null && medium.getUrl() != null) {
+                return medium.getUrl();
+            }
+            Thumbnail low = thumbnails.getLow();
+            if (low != null && low.getUrl() != null) {
+                return low.getUrl();
+            }
+        }
+        return YouTubeUtil.getThumbnailUrl(trailer.getId());
     }
 
     @Override
