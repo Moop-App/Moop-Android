@@ -112,7 +112,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         };
 
         DetailListAdapter adapterView = new DetailListAdapter(this, theaters ->
-                mPresenter.requestData(theaters.get(0).getCode(), movie.getId()));
+                mPresenter.requestData(theaters.get(0).getCode(), movie));
         RecyclerView recyclerView = mMovieContents;
         recyclerView.setLayoutManager(createLinearLayoutManager(this, true));
         recyclerView.setAdapter(adapterView);
@@ -123,7 +123,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
 
         mPresenter = new DetailPresenter();
         mPresenter.attach(this);
-        mPresenter.requestData(movie.getId());
+        mPresenter.requestData(movie);
     }
 
     @Override

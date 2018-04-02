@@ -8,7 +8,6 @@ import soup.movie.data.soup.model.CodeResponse;
 import soup.movie.data.soup.model.NowMovieResponse;
 import soup.movie.data.soup.model.PlanMovieResponse;
 import soup.movie.data.soup.model.TimeTableResponse;
-import soup.movie.data.soup.model.TrailerResponse;
 
 public interface SoupApiService {
 
@@ -39,8 +38,4 @@ public interface SoupApiService {
     //@GET("v1/cgv/timetable/asMovie/{ac}/{tc}.json")
     //Single<TimeTableResponse> getTimeTableList(@Path("ac") String area,
     //                                           @Path("tc") String theater);
-
-    // 트레일러
-    @GET("trailers/{mc}.json")
-    Single<TrailerResponse> getTrailerList(@Path("mc") String area);
 }

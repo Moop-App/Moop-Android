@@ -2,9 +2,7 @@ package soup.movie.data.utils;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.StringDef;
-import android.text.TextUtils;
-
+import com.google.gson.Gson;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 import soup.movie.data.soup.model.Movie;
@@ -12,68 +10,31 @@ import soup.movie.data.soup.model.Movie;
 public class MovieUtil {
     private MovieUtil() {}
 
-    @StringDef({
-            Key.ID,
-            Key.TITLE,
-            Key.AGE,
-            Key.EGG,
-            Key.OPEN_DATE,
-            Key.THUMBNAIL,
-            Key.POSTER
-    })
-    private @interface Key {
-        String ID = "id";
-        String TITLE = "title";
-        String AGE = "age";
-        String EGG = "egg";
-        String OPEN_DATE = "openDate";
-        String THUMBNAIL = "thumbnail";
-        String POSTER = "poster";
-    }
+    private static final String KEY_JSON = "json";
 
     @Nullable
     public static Movie restoreFrom(@NonNull Bundle bundle) {
-        Movie movie = new Movie();
-        movie.setId(bundle.getString(Key.ID));
-        movie.setTitle(bundle.getString(Key.TITLE));
-        movie.setAge(bundle.getString(Key.AGE));
-        movie.setEgg(bundle.getString(Key.EGG));
-        movie.setOpenDate(bundle.getString(Key.OPEN_DATE));
-        movie.setThumbnailUrl(bundle.getString(Key.THUMBNAIL));
-        movie.setPosterUrl(bundle.getString(Key.POSTER));
-        return TextUtils.isEmpty(movie.getId()) ? null : movie;
+        return fromJson(bundle.getString(KEY_JSON));
     }
 
     @Nullable
     public static Movie restoreFrom(@NonNull Intent intent) {
-        Movie movie = new Movie();
-        movie.setId(intent.getStringExtra(Key.ID));
-        movie.setTitle(intent.getStringExtra(Key.TITLE));
-        movie.setAge(intent.getStringExtra(Key.AGE));
-        movie.setEgg(intent.getStringExtra(Key.EGG));
-        movie.setOpenDate(intent.getStringExtra(Key.OPEN_DATE));
-        movie.setThumbnailUrl(intent.getStringExtra(Key.THUMBNAIL));
-        movie.setPosterUrl(intent.getStringExtra(Key.POSTER));
-        return TextUtils.isEmpty(movie.getId()) ? null : movie;
+        return fromJson(intent.getStringExtra(KEY_JSON));
     }
 
     public static void saveTo(@NonNull Bundle bundle, @NonNull Movie movie) {
-        bundle.putString(Key.ID, movie.getId());
-        bundle.putString(Key.TITLE, movie.getTitle());
-        bundle.putString(Key.AGE, movie.getAge());
-        bundle.putString(Key.EGG, movie.getEgg());
-        bundle.putString(Key.OPEN_DATE, movie.getOpenDate());
-        bundle.putString(Key.THUMBNAIL, movie.getThumbnailUrl());
-        bundle.putString(Key.POSTER, movie.getPosterUrl());
+        bundle.putString(KEY_JSON, toJson(movie));
     }
 
     public static void saveTo(@NonNull Intent intent, @NonNull Movie movie) {
-        intent.putExtra(Key.ID, movie.getId());
-        intent.putExtra(Key.TITLE, movie.getTitle());
-        intent.putExtra(Key.AGE, movie.getAge());
-        intent.putExtra(Key.EGG, movie.getEgg());
-        intent.putExtra(Key.OPEN_DATE, movie.getOpenDate());
-        intent.putExtra(Key.THUMBNAIL, movie.getThumbnailUrl());
-        intent.putExtra(Key.POSTER, movie.getPosterUrl());
+        intent.putExtra(KEY_JSON, toJson(movie));
+    }
+
+    private static String toJson(Movie movie) {
+        return new Gson().toJson(movie);
+    }
+
+    private static Movie fromJson(String jsonStr) {
+        return new Gson().fromJson(jsonStr, Movie.class);
     }
 }

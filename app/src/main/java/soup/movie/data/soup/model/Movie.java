@@ -30,6 +30,9 @@ public class Movie {
     @SerializedName("special_types")
     private List<String> specialTypeList;
 
+    @SerializedName("trailers")
+    private List<Trailer> trailers;
+
     public Movie() {
     }
 
@@ -65,6 +68,10 @@ public class Movie {
         return specialTypeList;
     }
 
+    public List<Trailer> getTrailers() {
+        return trailers;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -97,6 +104,10 @@ public class Movie {
         this.specialTypeList = specialTypeList;
     }
 
+    public void setTrailers(List<Trailer> trailers) {
+        this.trailers = trailers;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -108,6 +119,7 @@ public class Movie {
                 ", openDate='" + openDate + '\'' +
                 ", egg='" + egg + '\'' +
                 ", specialTypeList=" + specialTypeList +
+                ", trailers=" + trailers +
                 '}';
     }
 }

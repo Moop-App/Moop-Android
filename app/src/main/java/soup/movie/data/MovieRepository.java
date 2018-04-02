@@ -21,8 +21,6 @@ import soup.movie.data.soup.model.PlanMovieRequest;
 import soup.movie.data.soup.model.PlanMovieResponse;
 import soup.movie.data.soup.model.TimeTableRequest;
 import soup.movie.data.soup.model.TimeTableResponse;
-import soup.movie.data.soup.model.TrailerRequest;
-import soup.movie.data.soup.model.TrailerResponse;
 
 public class MovieRepository implements IKobisDataSource, ISoupDataSource {
 
@@ -71,10 +69,5 @@ public class MovieRepository implements IKobisDataSource, ISoupDataSource {
     @Override
     public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
         return mSoup.getTimeTableList(request);
-    }
-
-    @Override
-    public Single<TrailerResponse> getTrailerList(TrailerRequest request) {
-        return mSoup.getTrailerList(request);
     }
 }

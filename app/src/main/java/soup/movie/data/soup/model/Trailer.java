@@ -16,6 +16,9 @@ public class Trailer {
     @SerializedName("youtube_id")
     private String id;
 
+    @SerializedName("thumbnails")
+    private Thumbnails thumbnails;
+
     public Trailer() {
     }
 
@@ -31,12 +34,17 @@ public class Trailer {
         return id;
     }
 
+    public Thumbnails getThumbnails() {
+        return thumbnails;
+    }
+
     @Override
     public String toString() {
         return "Trailer{" +
                 "author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", id='" + id + '\'' +
+                ", thumbnails=" + thumbnails +
                 '}';
     }
 }
