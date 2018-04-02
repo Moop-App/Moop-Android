@@ -36,7 +36,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="#DE000000"
-            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/favorite_button"
             app:layout_constraintStart_toEndOf="@+id/txt_rank"
             app:layout_constraintTop_toTopOf="parent"
