@@ -67,6 +67,9 @@ ext {
 }
 
 dependencies {
+    implementation project(':common')
+    implementation project(':data')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // default
