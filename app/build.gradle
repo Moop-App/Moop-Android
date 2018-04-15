@@ -30,28 +30,26 @@ android {
     }
 }
 
-def getKobisApiKey() {
+def getKeyProperties() {
     def properties = new Properties()
     properties.load(project.rootProject.file('key.properties').newDataInputStream())
-    return properties.getProperty("KobisApiKey");
+    return properties;
+}
+
+def getKobisApiKey() {
+    return getKeyProperties().getProperty("KobisApiKey");
 }
 
 def getMovistApiKey() {
-    def properties = new Properties()
-    properties.load(project.rootProject.file('key.properties').newDataInputStream())
-    return properties.getProperty("MovistApiKey");
+    return getKeyProperties().getProperty("MovistApiKey");
 }
 
 def getNaverClientID() {
-    def properties = new Properties()
-    properties.load(project.rootProject.file('key.properties').newDataInputStream())
-    return properties.getProperty("NaverClientID");
+    return getKeyProperties().getProperty("NaverClientID");
 }
 
 def getNaverClientSecret() {
-    def properties = new Properties()
-    properties.load(project.rootProject.file('key.properties').newDataInputStream())
-    return properties.getProperty("NaverClientSecret");
+    return getKeyProperties().getProperty("NaverClientSecret");
 }
 
 ext {
