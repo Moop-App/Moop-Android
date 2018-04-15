@@ -32,6 +32,16 @@ public class SnappyLinearLayoutManager extends LinearLayoutManager implements Sn
         mPhysicalCoeff = computeDeceleration(0.84f);
     }
 
+    public final SnappyLinearLayoutManager vertically() {
+        setOrientation(VERTICAL);
+        return this;
+    }
+
+    public final SnappyLinearLayoutManager horizontally() {
+        setOrientation(HORIZONTAL);
+        return this;
+    }
+
     public final void setFriction(float friction) {
         mPhysicalCoeff = computeDeceleration(friction);
         mFlingFriction = friction;

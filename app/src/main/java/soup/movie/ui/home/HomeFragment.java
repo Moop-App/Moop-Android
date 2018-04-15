@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -54,10 +55,9 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
 
         Context context = view.getContext();
 
-        SnappyLinearLayoutManager adapterManager = new SnappyLinearLayoutManager(context);
         HomeListAdapter adapterView = new HomeListAdapter(getActivity());
         RecyclerView recyclerView = mListView;
-        recyclerView.setLayoutManager(adapterManager);
+        recyclerView.setLayoutManager(new SnappyLinearLayoutManager(context).horizontally());
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInRightAnimator());
         recyclerView.getItemAnimator().setAddDuration(200);
