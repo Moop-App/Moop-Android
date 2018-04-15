@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    apply from: 'dependencies-variable.gradle'
 
     repositories {
         google()
@@ -17,15 +17,7 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    }
-}
+apply from: 'dependencies-app.gradle'
 
 task clean(type: Delete) {
     delete rootProject.buildDir
