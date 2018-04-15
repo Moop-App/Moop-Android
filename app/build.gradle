@@ -55,7 +55,7 @@ def getNaverClientSecret() {
 }
 
 ext {
-    supportLibraryVersion = '27.1.0'
+    supportLibraryVersion = '27.1.1'
 
     MosbyVersion = '3.1.0'
     daggerVersion = '2.13'
