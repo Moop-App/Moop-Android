@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
@@ -26,6 +25,8 @@ import soup.movie.data.utils.MovieUtil;
 import soup.movie.ui.detail.DetailActivity;
 import soup.movie.ui.util.ImageUtil;
 import soup.movie.util.ListUtil;
+
+import static soup.movie.common.util.IntentUtil.createShareIntentWithText;
 
 class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 
@@ -68,6 +69,11 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
 //                            Pair.create(holder.mFavoriteButton, mHost.getString(R.string.transition_favorite)),
                             Pair.create(holder.mShareButton, mHost.getString(R.string.transition_share)));
             mHost.startActivity(intent, options.toBundle());
+        });
+        holder.mShareButton.setOnClickListener(v -> {
+            Movie movie = mItems.get(holder.getAdapterPosition());
+            mHost.startActivity(createShareIntentWithText(
+                    "공유하기", MovieUtil.createShareDescription(movie)));
         });
         return holder;
     }
@@ -155,8 +161,6 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            mFavoriteButton.setOnClickListener(v -> {});
-            mShareButton.setOnClickListener(v -> {});
         }
     }
 }

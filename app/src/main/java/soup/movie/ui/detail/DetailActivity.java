@@ -1,6 +1,7 @@
 package soup.movie.ui.detail;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -41,6 +42,7 @@ import soup.movie.util.ViewUtils;
 import soup.movie.util.glide.GlideUtils;
 import timber.log.Timber;
 
+import static soup.movie.common.util.IntentUtil.createShareIntentWithText;
 import static soup.movie.ui.util.RecyclerViewUtil.createLinearLayoutManager;
 import static soup.movie.util.AnimUtils.getFastOutSlowInInterpolator;
 
@@ -103,8 +105,9 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         mAgeView.setText(movie.getAge());
         mEggView.setText(movie.getEgg());
         mFavoriteButton.setOnClickListener(v -> {});
-        mShareButton.setOnClickListener(v -> {});
-
+        mShareButton.setOnClickListener(v ->
+            startActivity(createShareIntentWithText(
+                    "공유하기", MovieUtil.createShareDescription(movie))));
 
         mBackButton.setOnClickListener(v -> setResultAndFinish());
         mChromeFader = new ElasticDragDismissFrameLayout.SystemChromeFader(this) {

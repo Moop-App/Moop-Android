@@ -37,4 +37,15 @@ public class MovieUtil {
     private static Movie fromJson(String jsonStr) {
         return new Gson().fromJson(jsonStr, Movie.class);
     }
+
+    public static String createShareDescription(Movie movie) {
+        return new StringBuilder()
+                .append("제목: ")
+                .append(movie.getTitle())
+                .append("\n개봉일: ")
+                .append(movie.getOpenDate())
+                .append("\n연령제한: ")
+                .append(movie.getAge())
+                .toString();
+    }
 }
