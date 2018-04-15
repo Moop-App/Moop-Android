@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Movie Title" />
 
-    <android.support.v7.widget.RecyclerView
+    <soup.movie.common.widget.snappy.SnappyRecyclerView
         android:id="@+id/list"
         android:layout_width="0dp"
         android:layout_height="0dp"

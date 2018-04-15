@@ -17,11 +17,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
+import soup.movie.common.widget.snappy.SnappyLinearLayoutManager;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
 import timber.log.Timber;
-
-import static soup.movie.ui.util.RecyclerViewUtil.createLinearLayoutManager;
 
 public class HomeFragment extends MainTabFragment implements HomeContract.View {
 
@@ -55,9 +54,10 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
 
         Context context = view.getContext();
 
+        SnappyLinearLayoutManager adapterManager = new SnappyLinearLayoutManager(context);
         HomeListAdapter adapterView = new HomeListAdapter(getActivity());
         RecyclerView recyclerView = mListView;
-        recyclerView.setLayoutManager(createLinearLayoutManager(context, false));
+        recyclerView.setLayoutManager(adapterManager);
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInRightAnimator());
         recyclerView.getItemAnimator().setAddDuration(200);
