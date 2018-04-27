@@ -66,7 +66,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
                             Pair.create(holder.mPosterView, mHost.getString(R.string.transition_poster)),
                             Pair.create(holder.mTitleView, mHost.getString(R.string.transition_title)),
                             Pair.create(holder.mAgeView, mHost.getString(R.string.transition_age)),
-                            Pair.create(holder.mEggView, mHost.getString(R.string.transition_egg)),
+                            Pair.create(holder.mSubTextView, mHost.getString(R.string.transition_egg)),
 //                            Pair.create(holder.mFavoriteButton, mHost.getString(R.string.transition_favorite)),
                             Pair.create(holder.mShareButton, mHost.getString(R.string.transition_share)));
             mHost.startActivity(intent, options.toBundle());
@@ -84,7 +84,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         Movie item = mItems.get(position);
         ImageUtil.loadAsync(mHost, holder.mPosterView, item.getPosterUrl());
         holder.mTitleView.setText(item.getTitle());
-        holder.mEggView.setText(item.getEgg());
+        holder.mSubTextView.setText(item.getOpenDate());
         updateAgeText(holder.mAgeBgView, holder.mAgeView, item.getAge());
     }
 
@@ -166,7 +166,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
         @BindView(R.id.age_icon)
         TextView mAgeView;
         @BindView(R.id.sub_text2)
-        TextView mEggView;
+        TextView mSubTextView;
         @BindView(R.id.favorite_button)
         View mFavoriteButton;
         @BindView(R.id.share_button)
