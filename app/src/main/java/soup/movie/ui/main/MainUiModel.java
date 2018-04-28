@@ -2,7 +2,6 @@ package soup.movie.ui.main;
 
 import soup.movie.ui.BaseFragment;
 import soup.movie.ui.BaseUiModel;
-import soup.movie.ui.archive.ArchiveFragment;
 import soup.movie.ui.boxoffice.BoxOfficeFragment;
 import soup.movie.ui.home.HomeFragment;
 import soup.movie.ui.settings.SettingsFragment;
@@ -40,22 +39,6 @@ interface MainUiModel extends BaseUiModel {
         @Override
         public BaseFragment newFragment() {
             return BoxOfficeFragment.newInstance();
-        }
-    }
-
-    class Archive implements MainUiModel {
-
-        Archive() {
-        }
-
-        @Override
-        public String toString() {
-            return "MainUiModel.Archive{}";
-        }
-
-        @Override
-        public BaseFragment newFragment() {
-            return ArchiveFragment.newInstance();
         }
     }
 

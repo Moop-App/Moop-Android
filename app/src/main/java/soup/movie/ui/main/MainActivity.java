@@ -138,8 +138,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         switch (itemId) {
             case R.id.action_home:
                 return MainContract.TAB_MODE_HOME;
-            case R.id.action_archive:
-                return MainContract.TAB_MODE_ARCHIVE;
             case R.id.action_box_office:
                 return MainContract.TAB_MODE_BOX_OFFICE;
             case R.id.action_settings:

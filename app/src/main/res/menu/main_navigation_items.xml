@@ -9,10 +9,6 @@
         android:title="@string/home"
         android:icon="@drawable/ic_home" />
 
-    <item android:id="@+id/action_archive"
-        android:title="@string/archive"
-        android:icon="@drawable/ic_archive" />
-
     <item android:id="@+id/action_settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings" />
