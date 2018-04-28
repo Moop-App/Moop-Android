@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,9 +29,6 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
 
     private NowListAdapter mAdapterView;
 
-    @BindView(R.id.title)
-    TextView mTitleView;
-
     @BindView(R.id.list)
     RecyclerView mListView;
 
@@ -51,7 +47,7 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_with_title, container, false);
+        View view = inflater.inflate(R.layout.list, container, false);
         ButterKnife.bind(this, view);
 
         Context context = view.getContext();
@@ -105,7 +101,6 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     }
 
     private void renderInternal(@NonNull DoneState viewState) {
-        mTitleView.setText(viewState.getTitle());
         updateMovieList(viewState.getMovies());
     }
 
