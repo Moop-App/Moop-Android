@@ -19,13 +19,13 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void setTabMode(@MainContract.TabMode int mode) {
-        MainUiModel uiModel;
+        MainViewState uiModel;
         switch (mode) {
             case TAB_MODE_HOME:
-                uiModel = new MainUiModel.Home();
+                uiModel = new MainViewState.Home();
                 break;
             case TAB_MODE_SETTINGS:
-                uiModel = new MainUiModel.Settings();
+                uiModel = new MainViewState.Settings();
                 break;
             default:
                 throw new IllegalStateException("Unknown tab mode");

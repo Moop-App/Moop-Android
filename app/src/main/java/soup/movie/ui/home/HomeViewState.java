@@ -5,22 +5,22 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import soup.movie.data.soup.model.Movie;
-import soup.movie.ui.BaseUiModel;
+import soup.movie.ui.BaseViewState;
 
-interface HomeUiModel extends BaseUiModel {
+interface HomeViewState extends BaseViewState {
 
-    class InProgress implements HomeUiModel {
+    class InProgress implements HomeViewState {
 
         InProgress() {
         }
 
         @Override
         public String toString() {
-            return "HomeUiModel.InProgress{}";
+            return "InProgress{}";
         }
     }
 
-    class Data implements HomeUiModel {
+    class Data implements HomeViewState {
 
         private final String mTitle;
         private final List<Movie> mMovies;

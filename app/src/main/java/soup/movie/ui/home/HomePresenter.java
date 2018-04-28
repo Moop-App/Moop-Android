@@ -55,7 +55,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     private void loadMovieList(final String title, Single<List<Movie>> movieObservable) {
         mDisposable = movieObservable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(list -> mView.render(new HomeUiModel.Data(title, list)));
+                .subscribe(list -> mView.render(new HomeViewState.Data(title, list)));
     }
 
     private Single<List<Movie>> getNowObservable() {

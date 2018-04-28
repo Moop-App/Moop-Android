@@ -16,7 +16,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void attach(SettingsContract.View view) {
         mView = view;
-        mView.render(new SettingsUiModel.Data(TheaterUtil.getMyTheaterList()));
+        mView.render(new SettingsViewState.Data(TheaterUtil.getMyTheaterList()));
     }
 
     @Override
@@ -27,6 +27,6 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void onClick(@NonNull Context context) {
         DialogUtil.startDialogToSelectTheaters(context,
-                asyncData -> mView.render(new SettingsUiModel.Data(asyncData)));
+                asyncData -> mView.render(new SettingsViewState.Data(asyncData)));
     }
 }

@@ -160,11 +160,11 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     }
 
     @Override
-    public void render(@NonNull DetailUiModel uiModel) {
-        if (uiModel instanceof DetailUiModel.Loading) {
+    public void render(@NonNull DetailViewState uiModel) {
+        if (uiModel instanceof DetailViewState.Loading) {
             //TODO: show loading state
-        } else if (uiModel instanceof DetailUiModel.Data) {
-            DetailUiModel.Data dataUiModel = ((DetailUiModel.Data) uiModel);
+        } else if (uiModel instanceof DetailViewState.Data) {
+            DetailViewState.Data dataUiModel = ((DetailViewState.Data) uiModel);
             updateTrailerList(dataUiModel.getTimeTable(), dataUiModel.getTrailers());
         }
     }

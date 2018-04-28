@@ -5,22 +5,22 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import soup.movie.data.soup.model.TheaterCode;
-import soup.movie.ui.BaseUiModel;
+import soup.movie.ui.BaseViewState;
 
-interface SettingsUiModel extends BaseUiModel {
+interface SettingsViewState extends BaseViewState {
 
-    class InProgress implements SettingsUiModel {
+    class InProgress implements SettingsViewState {
 
         InProgress() {
         }
 
         @Override
         public String toString() {
-            return "SettingsUiModel.InProgress{}";
+            return "SettingsViewState.InProgress{}";
         }
     }
 
-    class Data implements SettingsUiModel {
+    class Data implements SettingsViewState {
 
         private List<TheaterCode> theaterList;
 

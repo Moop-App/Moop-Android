@@ -24,6 +24,6 @@ public interface HomeContract {
     }
 
     interface View extends BaseContract.View {
-        void render(HomeUiModel uiModel);
+        void render(HomeViewState uiModel);
     }
 }

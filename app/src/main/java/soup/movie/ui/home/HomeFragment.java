@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -93,12 +92,12 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
     }
 
     @Override
-    public void render(HomeUiModel uiModel) {
+    public void render(HomeViewState uiModel) {
         Timber.i("render: %s", uiModel);
-        if (uiModel instanceof HomeUiModel.InProgress) {
+        if (uiModel instanceof HomeViewState.InProgress) {
             updateMovieList(null);
-        } else if (uiModel instanceof HomeUiModel.Data) {
-            HomeUiModel.Data data = (HomeUiModel.Data)uiModel;
+        } else if (uiModel instanceof HomeViewState.Data) {
+            HomeViewState.Data data = (HomeViewState.Data)uiModel;
             mTitleView.setText(data.getTitle());
             updateMovieList(data.getMovies());
         } else {

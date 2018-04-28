@@ -1,22 +1,22 @@
 package soup.movie.ui.main;
 
 import soup.movie.ui.BaseFragment;
-import soup.movie.ui.BaseUiModel;
+import soup.movie.ui.BaseViewState;
 import soup.movie.ui.home.HomeFragment;
 import soup.movie.ui.settings.SettingsFragment;
 
-interface MainUiModel extends BaseUiModel {
+interface MainViewState extends BaseViewState {
 
     BaseFragment newFragment();
 
-    class Home implements MainUiModel {
+    class Home implements MainViewState {
 
         Home() {
         }
 
         @Override
         public String toString() {
-            return "MainUiModel.Home{}";
+            return "MainViewState.Home{}";
         }
 
         @Override
@@ -25,14 +25,14 @@ interface MainUiModel extends BaseUiModel {
         }
     }
 
-    class Settings implements MainUiModel {
+    class Settings implements MainViewState {
 
         Settings() {
         }
 
         @Override
         public String toString() {
-            return "MainUiModel.Settings{}";
+            return "MainViewState.Settings{}";
         }
 
         @Override

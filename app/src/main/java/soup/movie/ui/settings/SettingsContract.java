@@ -12,6 +12,6 @@ public interface SettingsContract {
     }
 
     interface View extends BaseContract.View {
-        void render(SettingsUiModel uiModel);
+        void render(SettingsViewState uiModel);
     }
 }

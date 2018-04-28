@@ -64,11 +64,11 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     }
 
     @Override
-    public void render(SettingsUiModel uiModel) {
+    public void render(SettingsViewState uiModel) {
         Timber.i("render: %s", uiModel);
-        if (uiModel instanceof SettingsUiModel.InProgress) {
-        } else if (uiModel instanceof SettingsUiModel.Data) {
-            List<TheaterCode> theaters = ((SettingsUiModel.Data) uiModel).getTheaterList();
+        if (uiModel instanceof SettingsViewState.InProgress) {
+        } else if (uiModel instanceof SettingsViewState.Data) {
+            List<TheaterCode> theaters = ((SettingsViewState.Data) uiModel).getTheaterList();
             if (theaters.isEmpty()) {
                 mTheaterOption.setText("없음");
                 mTheaterOption.setTextColor(Color.RED);

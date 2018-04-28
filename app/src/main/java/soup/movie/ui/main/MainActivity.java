@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void render(MainUiModel uiModel) {
+    public void render(MainViewState uiModel) {
         Timber.i("render: %s", uiModel);
         mCurrentFragment = uiModel.newFragment();
         commit(R.id.tab_container, mCurrentFragment);

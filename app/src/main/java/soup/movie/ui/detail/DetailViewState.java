@@ -4,11 +4,11 @@ import java.util.List;
 
 import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
-import soup.movie.ui.BaseUiModel;
+import soup.movie.ui.BaseViewState;
 
-interface DetailUiModel extends BaseUiModel {
+interface DetailViewState extends BaseViewState {
 
-    class Loading implements DetailUiModel {
+    class Loading implements DetailViewState {
 
         private boolean mTheaterNotExists;
 
@@ -30,7 +30,7 @@ interface DetailUiModel extends BaseUiModel {
         }
     }
 
-    class Data implements DetailUiModel {
+    class Data implements DetailViewState {
 
         private TimeTable timeTable;
         private List<Trailer> trailers;

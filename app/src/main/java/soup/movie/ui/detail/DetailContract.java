@@ -13,6 +13,6 @@ class DetailContract {
     }
 
     interface View extends BaseContract.View {
-        void render(@NonNull DetailUiModel uiModel);
+        void render(@NonNull DetailViewState uiModel);
     }
 }
