@@ -46,7 +46,7 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_horizontal_list, container, false);
         ButterKnife.bind(this, view);
 
         Context context = view.getContext();
