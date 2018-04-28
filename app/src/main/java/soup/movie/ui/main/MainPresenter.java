@@ -1,6 +1,5 @@
 package soup.movie.ui.main;
 
-import static soup.movie.ui.main.MainContract.TAB_MODE_BOX_OFFICE;
 import static soup.movie.ui.main.MainContract.TAB_MODE_HOME;
 import static soup.movie.ui.main.MainContract.TAB_MODE_SETTINGS;
 
@@ -22,9 +21,6 @@ public class MainPresenter implements MainContract.Presenter {
     public void setTabMode(@MainContract.TabMode int mode) {
         MainUiModel uiModel;
         switch (mode) {
-            case TAB_MODE_BOX_OFFICE:
-                uiModel = new MainUiModel.BoxOffice();
-                break;
             case TAB_MODE_HOME:
                 uiModel = new MainUiModel.Home();
                 break;
