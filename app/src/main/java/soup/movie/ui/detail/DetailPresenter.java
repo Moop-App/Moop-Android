@@ -42,12 +42,12 @@ public class DetailPresenter implements DetailContract.Presenter {
     @Override
     public void requestData(@NonNull Movie movie) {
         List<TheaterCode> theaters = TheaterUtil.getMyTheaterList();
-        //mView.render(new DetailViewState.Loading(!theaters.isEmpty()));
+        //mView.render(new DetailViewState.LoadingState(!theaters.isEmpty()));
         if (theaters.isEmpty()) {
             mDisposable = getTrailerListObservable(movie)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            trailers -> mView.render(new DetailViewState.Data(new TimeTable(null), trailers)),
+                            trailers -> mView.render(new DetailViewState.DoneState(new TimeTable(null), trailers)),
                             Timber::e);
         } else {
             mDisposable = Single.zip(
@@ -56,7 +56,7 @@ public class DetailPresenter implements DetailContract.Presenter {
                     Pair::create)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            pair -> mView.render(new DetailViewState.Data(pair.first, pair.second)),
+                            pair -> mView.render(new DetailViewState.DoneState(pair.first, pair.second)),
                             Timber::e);
         }
     }
@@ -69,7 +69,7 @@ public class DetailPresenter implements DetailContract.Presenter {
                 Pair::create)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        pair -> mView.render(new DetailViewState.Data(pair.first, pair.second)),
+                        pair -> mView.render(new DetailViewState.DoneState(pair.first, pair.second)),
                         Timber::e);
     }
 

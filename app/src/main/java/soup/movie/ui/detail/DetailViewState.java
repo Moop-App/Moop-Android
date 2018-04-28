@@ -8,15 +8,15 @@ import soup.movie.ui.BaseViewState;
 
 interface DetailViewState extends BaseViewState {
 
-    class Loading implements DetailViewState {
+    class LoadingState implements DetailViewState {
 
         private boolean mTheaterNotExists;
 
-        Loading() {
+        LoadingState() {
             this(true);
         }
 
-        Loading(boolean theaterExists) {
+        LoadingState(boolean theaterExists) {
             mTheaterNotExists = theaterExists;
         }
 
@@ -26,16 +26,16 @@ interface DetailViewState extends BaseViewState {
 
         @Override
         public String toString() {
-            return "Loading{}";
+            return "LoadingState{}";
         }
     }
 
-    class Data implements DetailViewState {
+    class DoneState implements DetailViewState {
 
         private TimeTable timeTable;
         private List<Trailer> trailers;
 
-        Data(TimeTable timeTable, List<Trailer> trailers) {
+        DoneState(TimeTable timeTable, List<Trailer> trailers) {
             this.timeTable = timeTable;
             this.trailers = trailers;
         }
@@ -50,7 +50,7 @@ interface DetailViewState extends BaseViewState {
 
         @Override
         public String toString() {
-            return "Data{" +
+            return "DoneState{" +
                     "timeTable=" + timeTable +
                     ", trailers=" + trailers +
                     '}';

@@ -9,22 +9,22 @@ import soup.movie.ui.BaseViewState;
 
 interface SettingsViewState extends BaseViewState {
 
-    class InProgress implements SettingsViewState {
+    class LoadingState implements SettingsViewState {
 
-        InProgress() {
+        LoadingState() {
         }
 
         @Override
         public String toString() {
-            return "SettingsViewState.InProgress{}";
+            return "SettingsViewState.LoadingState{}";
         }
     }
 
-    class Data implements SettingsViewState {
+    class DoneState implements SettingsViewState {
 
         private List<TheaterCode> theaterList;
 
-        Data(@NonNull List<TheaterCode> theaterList) {
+        DoneState(@NonNull List<TheaterCode> theaterList) {
             this.theaterList = theaterList;
         }
 
@@ -34,7 +34,7 @@ interface SettingsViewState extends BaseViewState {
 
         @Override
         public String toString() {
-            return "Data{" +
+            return "DoneState{" +
                     "theaterList=" + theaterList +
                     '}';
         }

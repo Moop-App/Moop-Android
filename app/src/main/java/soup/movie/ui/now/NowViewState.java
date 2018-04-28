@@ -9,23 +9,23 @@ import soup.movie.ui.BaseViewState;
 
 interface NowViewState extends BaseViewState {
 
-    class InProgress implements NowViewState {
+    class LoadingState implements NowViewState {
 
-        InProgress() {
+        LoadingState() {
         }
 
         @Override
         public String toString() {
-            return "InProgress{}";
+            return "LoadingState{}";
         }
     }
 
-    class Data implements NowViewState {
+    class DoneState implements NowViewState {
 
         private final String mTitle;
         private final List<Movie> mMovies;
 
-        Data(@NonNull String title, @NonNull List<Movie> movies) {
+        DoneState(@NonNull String title, @NonNull List<Movie> movies) {
             mTitle = title;
             mMovies = movies;
         }
@@ -42,7 +42,7 @@ interface NowViewState extends BaseViewState {
 
         @Override
         public String toString() {
-            return "Data{" +
+            return "DoneState{" +
                     "mTitle='" + mTitle + '\'' +
                     ", mMovies=" + mMovies +
                     '}';

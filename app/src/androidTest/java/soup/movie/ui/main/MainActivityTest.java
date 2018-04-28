@@ -36,7 +36,7 @@ public class MainActivityTest {
     @Test
     public void mainActivityTest() {
         ViewInteraction textView = onView(
-                allOf(withText("Home"),
+                allOf(withText("NowState"),
                         childAtPosition(
                                 allOf(withId(R.id.action_bar),
                                         childAtPosition(
@@ -44,7 +44,7 @@ public class MainActivityTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("Home")));
+        textView.check(matches(withText("NowState")));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.action_filter), withContentDescription("Filter"),

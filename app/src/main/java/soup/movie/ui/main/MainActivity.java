@@ -3,7 +3,6 @@ package soup.movie.ui.main;
 import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationViewHelper;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
@@ -14,7 +13,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import soup.movie.R;
-import soup.movie.ui.BaseFragment;
+import soup.movie.ui.main.MainViewState.NowState;
+import soup.movie.ui.main.MainViewState.SettingsState;
+import soup.movie.ui.now.NowFragment;
+import soup.movie.ui.settings.SettingsFragment;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
@@ -25,9 +27,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private TextView mSubPanelTitleView;
 
     private BottomSheetBehavior mBottomSheetBehavior;
-
-    @Nullable
-    private BaseFragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +76,21 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void render(MainViewState uiModel) {
-        Timber.i("render: %s", uiModel);
-        mCurrentFragment = uiModel.newFragment();
-        commit(R.id.tab_container, mCurrentFragment);
+    public void render(@NonNull MainViewState viewState) {
+        Timber.i("render: %s", viewState);
+        if (viewState instanceof NowState) {
+            renderInternal((NowState) viewState);
+        } else if (viewState instanceof SettingsState) {
+            renderInternal((SettingsState) viewState);
+        }
+    }
+
+    private void renderInternal(@NonNull NowState viewState) {
+        commit(R.id.tab_container, NowFragment.newInstance());
+    }
+
+    private void renderInternal(@NonNull SettingsState viewState) {
+        commit(R.id.tab_container, SettingsFragment.newInstance());
     }
 
     private void commit(@IdRes int containerId, @NonNull Fragment fragment) {

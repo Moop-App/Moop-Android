@@ -20,6 +20,8 @@ import soup.movie.R;
 import soup.movie.common.widget.snappy.SnappyLinearLayoutManager;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
+import soup.movie.ui.now.NowViewState.DoneState;
+import soup.movie.ui.now.NowViewState.LoadingState;
 import timber.log.Timber;
 
 public class NowFragment extends MainTabFragment implements NowContract.View {
@@ -87,17 +89,24 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     }
 
     @Override
-    public void render(NowViewState uiModel) {
-        Timber.i("render: %s", uiModel);
-        if (uiModel instanceof NowViewState.InProgress) {
-            updateMovieList(null);
-        } else if (uiModel instanceof NowViewState.Data) {
-            NowViewState.Data data = (NowViewState.Data)uiModel;
-            mTitleView.setText(data.getTitle());
-            updateMovieList(data.getMovies());
+    public void render(@NonNull NowViewState viewState) {
+        Timber.i("render: %s", viewState);
+        if (viewState instanceof LoadingState) {
+            renderInternal((LoadingState) viewState);
+        } else if (viewState instanceof DoneState) {
+            renderInternal((DoneState)viewState);
         } else {
             throw new IllegalStateException("Unknown UI Model");
         }
+    }
+
+    private void renderInternal(@NonNull LoadingState viewState) {
+        updateMovieList(null);
+    }
+
+    private void renderInternal(@NonNull DoneState viewState) {
+        mTitleView.setText(viewState.getTitle());
+        updateMovieList(viewState.getMovies());
     }
 
     private void updateMovieList(@Nullable List<Movie> movieList) {

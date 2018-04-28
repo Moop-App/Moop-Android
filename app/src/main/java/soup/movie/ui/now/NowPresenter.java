@@ -55,7 +55,7 @@ public class NowPresenter implements NowContract.Presenter {
 
     private void loadMovieList(final String title, Single<List<Movie>> movieObservable) {
         mDisposable = movieObservable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(list -> mView.render(new NowViewState.Data(title, list)));
+                .subscribe(list -> mView.render(new NowViewState.DoneState(title, list)));
     }
 
     private Single<List<Movie>> getNowObservable() {

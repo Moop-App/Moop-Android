@@ -35,6 +35,8 @@ import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieUtil;
 import soup.movie.util.ImageUtil;
+import soup.movie.ui.detail.DetailViewState.DoneState;
+import soup.movie.ui.detail.DetailViewState.LoadingState;
 import soup.movie.ui.widget.ElasticDragDismissFrameLayout;
 import soup.movie.util.ColorUtils;
 import soup.movie.util.ViewUtils;
@@ -160,13 +162,20 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     }
 
     @Override
-    public void render(@NonNull DetailViewState uiModel) {
-        if (uiModel instanceof DetailViewState.Loading) {
-            //TODO: show loading state
-        } else if (uiModel instanceof DetailViewState.Data) {
-            DetailViewState.Data dataUiModel = ((DetailViewState.Data) uiModel);
-            updateTrailerList(dataUiModel.getTimeTable(), dataUiModel.getTrailers());
+    public void render(@NonNull DetailViewState viewState) {
+        if (viewState instanceof LoadingState) {
+            renderInternal((LoadingState) viewState);
+        } else if (viewState instanceof DoneState) {
+            renderInternal((DoneState) viewState);
         }
+    }
+
+    private void renderInternal(@NonNull LoadingState viewState) {
+        //TODO: show loading state
+    }
+
+    private void renderInternal(@NonNull DoneState viewState) {
+        updateTrailerList(viewState.getTimeTable(), viewState.getTrailers());
     }
 
     private void updateTrailerList(@Nullable TimeTable timeTable, @Nullable List<Trailer> trailerList) {

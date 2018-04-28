@@ -18,6 +18,8 @@ import butterknife.OnClick;
 import soup.movie.R;
 import soup.movie.data.soup.model.TheaterCode;
 import soup.movie.ui.main.MainTabFragment;
+import soup.movie.ui.settings.SettingsViewState.DoneState;
+import soup.movie.ui.settings.SettingsViewState.LoadingState;
 import soup.movie.util.ListUtil;
 import timber.log.Timber;
 
@@ -59,20 +61,28 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     }
 
     @Override
-    public void render(SettingsViewState uiModel) {
-        Timber.i("render: %s", uiModel);
-        if (uiModel instanceof SettingsViewState.InProgress) {
-        } else if (uiModel instanceof SettingsViewState.Data) {
-            List<TheaterCode> theaters = ((SettingsViewState.Data) uiModel).getTheaterList();
-            if (theaters.isEmpty()) {
-                mTheaterOption.setText("없음");
-                mTheaterOption.setTextColor(Color.RED);
-            } else {
-                mTheaterOption.setText(StringUtils.join(ListUtil.toStringArray(theaters, TheaterCode::getName)));
-                mTheaterOption.setTextColor(Color.BLACK);
-            }
+    public void render(@NonNull SettingsViewState viewState) {
+        Timber.i("render: %s", viewState);
+        if (viewState instanceof LoadingState) {
+            renderInternal((LoadingState) viewState);
+        } else if (viewState instanceof DoneState) {
+            renderInternal((DoneState) viewState);
         } else {
             throw new IllegalStateException("Unknown UI Model");
+        }
+    }
+
+    private void renderInternal(LoadingState viewState) {
+    }
+
+    private void renderInternal(DoneState viewState) {
+        List<TheaterCode> theaters = viewState.getTheaterList();
+        if (theaters.isEmpty()) {
+            mTheaterOption.setText("없음");
+            mTheaterOption.setTextColor(Color.RED);
+        } else {
+            mTheaterOption.setText(StringUtils.join(ListUtil.toStringArray(theaters, TheaterCode::getName)));
+            mTheaterOption.setTextColor(Color.BLACK);
         }
     }
 

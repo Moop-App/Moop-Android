@@ -22,6 +22,6 @@ class MainContract {
     }
 
     interface View extends BaseContract.View {
-        void render(@NonNull MainViewState uiModel);
+        void render(@NonNull MainViewState viewState);
     }
 }
