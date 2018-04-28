@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package soup.movie.util;
+package soup.widget.util;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;
 import android.content.Context;
-import android.transition.Transition;
 import android.util.ArrayMap;
 import android.util.Property;
 import android.view.animation.AnimationUtils;

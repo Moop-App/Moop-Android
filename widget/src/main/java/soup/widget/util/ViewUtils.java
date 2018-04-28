@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package soup.movie.util;
+package soup.widget.util;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

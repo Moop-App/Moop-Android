@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package soup.movie.ui.widget;
+package soup.widget.elastic;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,10 +28,10 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import soup.movie.R;
-import soup.movie.util.AnimUtils;
-import soup.movie.util.ColorUtils;
-import soup.movie.util.ViewUtils;
+import soup.widget.R;
+import soup.widget.util.AnimUtils;
+import soup.widget.util.ColorUtils;
+import soup.widget.util.ViewUtils;
 
 /**
  * A {@link FrameLayout} which responds to nested scrolls to create drag-dismissable layouts.

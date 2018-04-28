@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package soup.movie.util;
+package soup.widget.util;
 
 /**
  * Borrowed from github.com/romannurik/muzei

@@ -37,15 +37,15 @@ import soup.movie.data.utils.MovieUtil;
 import soup.movie.util.ImageUtil;
 import soup.movie.ui.detail.DetailViewState.DoneState;
 import soup.movie.ui.detail.DetailViewState.LoadingState;
-import soup.movie.ui.widget.ElasticDragDismissFrameLayout;
-import soup.movie.util.ColorUtils;
-import soup.movie.util.ViewUtils;
-import soup.movie.util.glide.GlideUtils;
+import soup.widget.elastic.ElasticDragDismissFrameLayout;
+import soup.widget.util.ColorUtils;
+import soup.widget.util.DrawableUtils;
+import soup.widget.util.ViewUtils;
 import timber.log.Timber;
 
 import static soup.movie.common.util.IntentUtil.createShareIntentWithText;
 import static soup.movie.util.RecyclerViewUtil.createLinearLayoutManager;
-import static soup.movie.util.AnimUtils.getFastOutSlowInInterpolator;
+import static soup.widget.util.AnimUtils.getFastOutSlowInInterpolator;
 
 public class DetailActivity extends AppCompatActivity implements DetailContract.View {
 
@@ -204,7 +204,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         @Override
         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
                                        DataSource dataSource, boolean isFirstResource) {
-            final Bitmap bitmap = GlideUtils.getBitmap(resource);
+            final Bitmap bitmap = DrawableUtils.getBitmap(resource);
             if (bitmap == null) return false;
             final int twentyFourDip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                     24, DetailActivity.this.getResources().getDisplayMetrics());
