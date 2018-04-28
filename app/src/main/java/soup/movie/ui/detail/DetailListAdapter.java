@@ -28,8 +28,8 @@ import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieAppUtil;
 import soup.movie.data.utils.YouTubeUtil;
-import soup.movie.ui.util.DialogUtil;
-import soup.movie.ui.util.ImageUtil;
+import soup.movie.util.DialogUtil;
+import soup.movie.util.ImageUtil;
 import soup.movie.util.ListUtil;
 import soup.movie.util.function.Consumer;
 

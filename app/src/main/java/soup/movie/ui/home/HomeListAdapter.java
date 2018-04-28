@@ -24,7 +24,7 @@ import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.data.utils.MovieUtil;
 import soup.movie.ui.detail.DetailActivity;
-import soup.movie.ui.util.ImageUtil;
+import soup.movie.util.ImageUtil;
 import soup.movie.util.ListUtil;
 
 import static soup.movie.common.util.IntentUtil.createShareIntentWithText;

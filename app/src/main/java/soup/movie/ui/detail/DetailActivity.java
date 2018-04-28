@@ -1,7 +1,6 @@
 package soup.movie.ui.detail;
 
 import android.animation.ValueAnimator;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -35,7 +34,7 @@ import soup.movie.data.soup.model.Movie;
 import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieUtil;
-import soup.movie.ui.util.ImageUtil;
+import soup.movie.util.ImageUtil;
 import soup.movie.ui.widget.ElasticDragDismissFrameLayout;
 import soup.movie.util.ColorUtils;
 import soup.movie.util.ViewUtils;
@@ -43,7 +42,7 @@ import soup.movie.util.glide.GlideUtils;
 import timber.log.Timber;
 
 import static soup.movie.common.util.IntentUtil.createShareIntentWithText;
-import static soup.movie.ui.util.RecyclerViewUtil.createLinearLayoutManager;
+import static soup.movie.util.RecyclerViewUtil.createLinearLayoutManager;
 import static soup.movie.util.AnimUtils.getFastOutSlowInInterpolator;
 
 public class DetailActivity extends AppCompatActivity implements DetailContract.View {

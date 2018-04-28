@@ -1,4 +1,4 @@
-package soup.movie.ui.util;
+package soup.movie.util;
 
 import android.app.AlertDialog;
 import android.content.Context;

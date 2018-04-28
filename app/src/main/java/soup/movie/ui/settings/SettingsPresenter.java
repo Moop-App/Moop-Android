@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import soup.movie.data.utils.TheaterUtil;
-import soup.movie.ui.util.DialogUtil;
+import soup.movie.util.DialogUtil;
 
 public class SettingsPresenter implements SettingsContract.Presenter {
 
