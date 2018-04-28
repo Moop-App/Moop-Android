@@ -2,7 +2,7 @@ package soup.movie.ui.main;
 
 import soup.movie.ui.BaseFragment;
 import soup.movie.ui.BaseViewState;
-import soup.movie.ui.home.HomeFragment;
+import soup.movie.ui.now.NowFragment;
 import soup.movie.ui.settings.SettingsFragment;
 
 interface MainViewState extends BaseViewState {
@@ -21,7 +21,7 @@ interface MainViewState extends BaseViewState {
 
         @Override
         public BaseFragment newFragment() {
-            return HomeFragment.newInstance();
+            return NowFragment.newInstance();
         }
     }
 

@@ -1,4 +1,4 @@
-package soup.movie.ui.home;
+package soup.movie.ui.now;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -29,7 +29,7 @@ import soup.movie.util.ListUtil;
 
 import static soup.movie.common.util.IntentUtil.createShareIntentWithText;
 
-class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
+class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
 
     private final Activity mHost;
 
@@ -47,7 +47,7 @@ class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
     @BindColor(R.color.red)
     int mRedColor;
 
-    HomeListAdapter(Activity host) {
+    NowListAdapter(Activity host) {
         mHost = host;
         ButterKnife.bind(this, host);
     }

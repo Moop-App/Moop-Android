@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             mPresenter.setTabMode(parseToTabMode(item.getItemId()));
             return true;
         });
-        navigationView.setSelectedItemId(R.id.action_home); //default
+        navigationView.setSelectedItemId(R.id.action_now); //default
     }
 
     private void initBottomSheetView() {
@@ -136,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private static @MainContract.TabMode int parseToTabMode(@IdRes int itemId) {
         switch (itemId) {
-            case R.id.action_home:
-                return MainContract.TAB_MODE_HOME;
+            case R.id.action_now:
+                return MainContract.TAB_MODE_NOW;
             case R.id.action_settings:
                 return MainContract.TAB_MODE_SETTINGS;
             default:

@@ -1,4 +1,4 @@
-package soup.movie.ui.home;
+package soup.movie.ui.now;
 
 import java.util.List;
 
@@ -14,17 +14,17 @@ import soup.movie.data.soup.model.NowMovieResponse;
 import soup.movie.data.soup.model.PlanMovieRequest;
 import soup.movie.data.soup.model.PlanMovieResponse;
 
-public class HomePresenter implements HomeContract.Presenter {
+public class NowPresenter implements NowContract.Presenter {
 
-    private HomeContract.View mView;
+    private NowContract.View mView;
 
     private Disposable mDisposable;
 
-    HomePresenter() {
+    NowPresenter() {
     }
 
     @Override
-    public void attach(HomeContract.View view) {
+    public void attach(NowContract.View view) {
         mView = view;
     }
 
@@ -55,7 +55,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     private void loadMovieList(final String title, Single<List<Movie>> movieObservable) {
         mDisposable = movieObservable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(list -> mView.render(new HomeViewState.Data(title, list)));
+                .subscribe(list -> mView.render(new NowViewState.Data(title, list)));
     }
 
     private Single<List<Movie>> getNowObservable() {

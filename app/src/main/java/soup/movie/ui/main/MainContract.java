@@ -11,10 +11,10 @@ import soup.movie.ui.BaseContract;
 class MainContract {
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({TAB_MODE_HOME, TAB_MODE_SETTINGS})
+    @IntDef({TAB_MODE_NOW, TAB_MODE_SETTINGS})
     @interface TabMode {}
 
-    static final int TAB_MODE_HOME = 2;
+    static final int TAB_MODE_NOW = 2;
     static final int TAB_MODE_SETTINGS = 4;
 
     interface Presenter extends BaseContract.Presenter<View> {

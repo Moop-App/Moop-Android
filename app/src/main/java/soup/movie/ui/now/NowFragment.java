@@ -1,4 +1,4 @@
-package soup.movie.ui.home;
+package soup.movie.ui.now;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,11 +22,11 @@ import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
 import timber.log.Timber;
 
-public class HomeFragment extends MainTabFragment implements HomeContract.View {
+public class NowFragment extends MainTabFragment implements NowContract.View {
 
-    private HomeContract.Presenter mPresenter;
+    private NowContract.Presenter mPresenter;
 
-    private HomeListAdapter mAdapterView;
+    private NowListAdapter mAdapterView;
 
     @BindView(R.id.title)
     TextView mTitleView;
@@ -34,11 +34,11 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
     @BindView(R.id.list)
     RecyclerView mListView;
 
-    public HomeFragment() {
+    public NowFragment() {
     }
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    public static NowFragment newInstance() {
+        return new NowFragment();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
 
         Context context = view.getContext();
 
-        HomeListAdapter adapterView = new HomeListAdapter(getActivity());
+        NowListAdapter adapterView = new NowListAdapter(getActivity());
         RecyclerView recyclerView = mListView;
         recyclerView.setLayoutManager(new SnappyLinearLayoutManager(context).horizontally());
         recyclerView.setAdapter(adapterView);
@@ -63,9 +63,9 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
         recyclerView.getItemAnimator().setRemoveDuration(200);
         mAdapterView = adapterView;
 
-        mPresenter = new HomePresenter();
+        mPresenter = new NowPresenter();
         mPresenter.attach(this);
-        mPresenter.requestMovieList(HomeContract.Presenter.Type.NOW);
+        mPresenter.requestMovieList(NowContract.Presenter.Type.NOW);
 
         return view;
     }
@@ -78,7 +78,7 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
 
     @Override
     protected int getMenuResource() {
-        return R.menu.menu_home;
+        return R.menu.menu_now;
     }
 
     @Override
@@ -92,12 +92,12 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
     }
 
     @Override
-    public void render(HomeViewState uiModel) {
+    public void render(NowViewState uiModel) {
         Timber.i("render: %s", uiModel);
-        if (uiModel instanceof HomeViewState.InProgress) {
+        if (uiModel instanceof NowViewState.InProgress) {
             updateMovieList(null);
-        } else if (uiModel instanceof HomeViewState.Data) {
-            HomeViewState.Data data = (HomeViewState.Data)uiModel;
+        } else if (uiModel instanceof NowViewState.Data) {
+            NowViewState.Data data = (NowViewState.Data)uiModel;
             mTitleView.setText(data.getTitle());
             updateMovieList(data.getMovies());
         } else {
@@ -106,7 +106,7 @@ public class HomeFragment extends MainTabFragment implements HomeContract.View {
     }
 
     private void updateMovieList(@Nullable List<Movie> movieList) {
-        HomeListAdapter adapterView = mAdapterView;
+        NowListAdapter adapterView = mAdapterView;
         if (adapterView != null) {
             adapterView.updateList(movieList);
         }

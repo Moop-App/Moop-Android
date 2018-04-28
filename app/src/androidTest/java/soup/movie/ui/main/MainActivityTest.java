@@ -67,7 +67,7 @@ public class MainActivityTest {
         frameLayout.check(matches(isDisplayed()));
 
         ViewInteraction frameLayout2 = onView(
-                allOf(withId(R.id.action_home),
+                allOf(withId(R.id.action_now),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.bottom_navigation),

@@ -1,8 +1,8 @@
-package soup.movie.ui.home;
+package soup.movie.ui.now;
 
 import soup.movie.ui.BaseContract;
 
-public interface HomeContract {
+public interface NowContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
 
@@ -24,6 +24,6 @@ public interface HomeContract {
     }
 
     interface View extends BaseContract.View {
-        void render(HomeViewState uiModel);
+        void render(NowViewState uiModel);
     }
 }
