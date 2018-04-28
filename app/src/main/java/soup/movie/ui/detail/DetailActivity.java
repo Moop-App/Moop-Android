@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -34,6 +33,7 @@ import soup.movie.data.soup.model.Movie;
 import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieUtil;
+import soup.movie.ui.BaseActivity;
 import soup.movie.util.DrawableUtils;
 import soup.movie.util.ImageUtil;
 import soup.movie.ui.detail.DetailViewState.DoneState;
@@ -47,7 +47,7 @@ import static soup.movie.util.IntentUtil.createShareIntentWithText;
 import static soup.movie.util.RecyclerViewUtil.createLinearLayoutManager;
 import static soup.widget.util.AnimUtils.getFastOutSlowInInterpolator;
 
-public class DetailActivity extends AppCompatActivity implements DetailContract.View {
+public class DetailActivity extends BaseActivity implements DetailContract.View {
 
     private static final float SCRIM_ADJUSTMENT = 0.075f;
 
@@ -132,9 +132,9 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         presenter.attach(this);
 
         //TODO: call requestData() after transition animation is ended
-        Observable.timer(150, TimeUnit.MILLISECONDS)
+        register(Observable.timer(150, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(unused -> presenter.requestData(movie));
+                .subscribe(unused -> presenter.requestData(movie)));
     }
 
     @Override

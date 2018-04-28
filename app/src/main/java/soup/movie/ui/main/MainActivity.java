@@ -4,13 +4,12 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationViewHelper;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import soup.movie.R;
+import soup.movie.ui.BaseActivity;
 import soup.movie.ui.main.MainViewState.NowState;
 import soup.movie.ui.main.MainViewState.PlanState;
 import soup.movie.ui.main.MainViewState.SettingsState;
@@ -19,7 +18,7 @@ import soup.movie.ui.plan.PlanFragment;
 import soup.movie.ui.settings.SettingsFragment;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView navigationView;
@@ -78,12 +77,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private void renderInternal(@NonNull SettingsState viewState) {
         commit(R.id.tab_container, SettingsFragment.newInstance());
-    }
-
-    private void commit(@IdRes int containerId, @NonNull Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(containerId, fragment, fragment.getClass().getSimpleName())
-                .commit();
     }
 
     private static @MainContract.TabMode int parseToTabMode(@IdRes int itemId) {

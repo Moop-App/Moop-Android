@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.widget.snappy.SnappyLinearLayoutManager;
@@ -46,24 +45,24 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_horizontal_list, container, false);
-        ButterKnife.bind(this, view);
+        return inflater.inflate(R.layout.fragment_horizontal_list, container, false);
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         Context context = view.getContext();
 
-        NowListAdapter adapterView = new NowListAdapter(getActivity());
+        adapterView = new NowListAdapter(getActivity());
         RecyclerView recyclerView = listView;
         recyclerView.setLayoutManager(new SnappyLinearLayoutManager(context).horizontally());
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInRightAnimator());
         recyclerView.getItemAnimator().setAddDuration(200);
         recyclerView.getItemAnimator().setRemoveDuration(200);
-        this.adapterView = adapterView;
 
         presenter = new NowPresenter();
         presenter.attach(this);
-
-        return view;
     }
 
     @Override
