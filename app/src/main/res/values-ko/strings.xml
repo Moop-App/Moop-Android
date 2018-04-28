@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">뭅</string>
 
-    <string name="box_office">박스오피스</string>
     <string name="now">현재상영</string>
-    <string name="archive">보관함</string>
     <string name="settings">설정</string>
 
     <string name="action_filter">필터</string>

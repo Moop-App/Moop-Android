@@ -29,7 +29,9 @@ public abstract class MainTabFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    protected abstract @MenuRes int getMenuResource();
+    protected @MenuRes int getMenuResource() {
+        return 0;
+    }
 
     protected final void setTitle(String title) {
         Activity activity = getActivity();

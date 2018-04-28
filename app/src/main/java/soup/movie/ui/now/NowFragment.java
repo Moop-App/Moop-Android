@@ -77,11 +77,6 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     }
 
     @Override
-    protected int getMenuResource() {
-        return R.menu.menu_now;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:

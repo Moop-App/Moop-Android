@@ -5,4 +5,4 @@
     android:id="@+id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:listitem="@layout/item_movie_with_thumbnail" />
+    tools:listitem="@layout/item_movie_for_home" />

@@ -56,16 +56,6 @@ public class MainActivityTest {
                         isDisplayed()));
         textView2.check(matches(isDisplayed()));
 
-        ViewInteraction frameLayout = onView(
-                allOf(withId(R.id.action_box_office),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.bottom_navigation),
-                                        0),
-                                0),
-                        isDisplayed()));
-        frameLayout.check(matches(isDisplayed()));
-
         ViewInteraction frameLayout2 = onView(
                 allOf(withId(R.id.action_now),
                         childAtPosition(
@@ -75,17 +65,6 @@ public class MainActivityTest {
                                 1),
                         isDisplayed()));
         frameLayout2.check(matches(isDisplayed()));
-
-        ViewInteraction frameLayout3 = onView(
-                allOf(withId(R.id.action_archive),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.bottom_navigation),
-                                        0),
-                                2),
-                        isDisplayed()));
-        frameLayout3.check(matches(isDisplayed()));
-
     }
 
     private static Matcher<View> childAtPosition(

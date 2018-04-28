@@ -59,11 +59,6 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     }
 
     @Override
-    protected int getMenuResource() {
-        return 0;
-    }
-
-    @Override
     public void render(SettingsViewState uiModel) {
         Timber.i("render: %s", uiModel);
         if (uiModel instanceof SettingsViewState.InProgress) {
