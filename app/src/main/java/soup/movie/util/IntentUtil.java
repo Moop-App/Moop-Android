@@ -1,4 +1,4 @@
-package soup.movie.common.util;
+package soup.movie.util;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;

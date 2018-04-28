@@ -56,7 +56,6 @@ ext {
 }
 
 dependencies {
-    implementation project(':common')
     implementation project(':data')
     implementation project(':widget')
 

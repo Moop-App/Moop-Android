@@ -43,7 +43,7 @@ import soup.widget.util.DrawableUtils;
 import soup.widget.util.ViewUtils;
 import timber.log.Timber;
 
-import static soup.movie.common.util.IntentUtil.createShareIntentWithText;
+import static soup.movie.util.IntentUtil.createShareIntentWithText;
 import static soup.movie.util.RecyclerViewUtil.createLinearLayoutManager;
 import static soup.widget.util.AnimUtils.getFastOutSlowInInterpolator;
 

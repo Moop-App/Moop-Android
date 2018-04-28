@@ -22,7 +22,5 @@ android {
 }
 
 dependencies {
-    implementation project(':common')
-
     implementation NETWORK
 }

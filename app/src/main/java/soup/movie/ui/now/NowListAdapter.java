@@ -27,7 +27,7 @@ import soup.movie.ui.detail.DetailActivity;
 import soup.movie.util.ImageUtil;
 import soup.movie.util.ListUtil;
 
-import static soup.movie.common.util.IntentUtil.createShareIntentWithText;
+import static soup.movie.util.IntentUtil.createShareIntentWithText;
 
 class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
 
