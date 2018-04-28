@@ -1,17 +1,15 @@
 package soup.movie.ui.main;
 
-import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationViewHelper;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.ui.main.MainViewState.NowState;
 import soup.movie.ui.main.MainViewState.PlanState;
@@ -23,58 +21,39 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
+    @BindView(R.id.bottom_navigation)
+    BottomNavigationView navigationView;
+
     private MainContract.Presenter presenter;
-
-    private View rootView;
-    private TextView subPanelTitleView;
-
-    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        initBottomNavigationView();
 
         presenter = new MainPresenter();
         presenter.attach(this);
 
-        rootView = findViewById(R.id.root);
-        subPanelTitleView = findViewById(R.id.filter_title);
+        navigationView.setSelectedItemId(R.id.action_now); //default
+    }
 
-        initBottomNavigationView();
-        initBottomSheetView();
+    private void initBottomNavigationView() {
+        BottomNavigationViewHelper.disableShiftMode(navigationView);
+        navigationView.setOnNavigationItemSelectedListener(item -> {
+            setTitle(item.getTitle());
+            presenter.setTabMode(parseToTabMode(item.getItemId()));
+            return true;
+        });
     }
 
     @Override
     protected void onDestroy() {
         presenter = null;
         super.onDestroy();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (setSubPanelVisibility(false)) {
-            return;
-        }
-        super.onBackPressed();
-    }
-
-    public boolean setSubPanelVisibility(boolean show) {
-        int newState = show ? BottomSheetBehavior.STATE_COLLAPSED : BottomSheetBehavior.STATE_HIDDEN;
-        BottomSheetBehavior behavior = bottomSheetBehavior;
-        if (behavior != null && behavior.getState() != newState) {
-            behavior.setState(newState);
-            return true;
-        }
-        return false;
-    }
-
-    public void setSubPanel(String title) {
-        TextView subPanelTitleView = this.subPanelTitleView;
-        if (subPanelTitleView != null) {
-            subPanelTitleView.setText(title);
-        }
     }
 
     @Override
@@ -105,51 +84,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         getSupportFragmentManager().beginTransaction()
                 .replace(containerId, fragment, fragment.getClass().getSimpleName())
                 .commit();
-    }
-
-    private void initBottomNavigationView() {
-        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
-        BottomNavigationViewHelper.disableShiftMode(navigationView);
-        navigationView.setOnNavigationItemSelectedListener(item -> {
-            Timber.d("Select %s", item.getTitle());
-            setTitle(item.getTitle());
-            presenter.setTabMode(parseToTabMode(item.getItemId()));
-            return true;
-        });
-        navigationView.setSelectedItemId(R.id.action_now); //default
-    }
-
-    private void initBottomSheetView() {
-        BottomSheetBehavior behavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet));
-        behavior.setHideable(true);
-        behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_peek_height));
-        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                switch (newState) {
-                    case BottomSheetBehavior.STATE_EXPANDED:
-                        break;
-                    case BottomSheetBehavior.STATE_HIDDEN:
-                        break;
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                Timber.d("onSlide: %f", slideOffset);
-                setScrim(slideOffset);
-            }
-        });
-        bottomSheetBehavior = behavior;
-
-        setScrim(-1f);
-    }
-
-    private void setScrim(float slideOffset) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            rootView.getForeground().setAlpha((int) ((1 + slideOffset) * 75));
-        }
     }
 
     private static @MainContract.TabMode int parseToTabMode(@IdRes int itemId) {
