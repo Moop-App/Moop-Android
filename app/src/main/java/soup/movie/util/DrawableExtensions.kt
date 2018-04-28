@@ -13,7 +13,7 @@
  */
 
 @file:JvmName("DrawableUtils")
-package soup.widget.util
+package soup.movie.util
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable

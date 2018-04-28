@@ -9,6 +9,11 @@ interface MainViewState extends BaseViewState {
         }
     }
 
+    class PlanState implements MainViewState {
+        PlanState() {
+        }
+    }
+
     class SettingsState implements MainViewState {
         SettingsState() {
         }

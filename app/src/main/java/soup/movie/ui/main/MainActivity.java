@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import soup.movie.R;
 import soup.movie.ui.main.MainViewState.NowState;
+import soup.movie.ui.main.MainViewState.PlanState;
 import soup.movie.ui.main.MainViewState.SettingsState;
 import soup.movie.ui.now.NowFragment;
+import soup.movie.ui.plan.PlanFragment;
 import soup.movie.ui.settings.SettingsFragment;
 import timber.log.Timber;
 
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         Timber.i("render: %s", viewState);
         if (viewState instanceof NowState) {
             renderInternal((NowState) viewState);
+        } else if (viewState instanceof PlanState) {
+            renderInternal((PlanState) viewState);
         } else if (viewState instanceof SettingsState) {
             renderInternal((SettingsState) viewState);
         }
@@ -87,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private void renderInternal(@NonNull NowState viewState) {
         commit(R.id.tab_container, NowFragment.newInstance());
+    }
+
+    private void renderInternal(@NonNull PlanState viewState) {
+        commit(R.id.tab_container, PlanFragment.newInstance());
     }
 
     private void renderInternal(@NonNull SettingsState viewState) {
@@ -148,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         switch (itemId) {
             case R.id.action_now:
                 return MainContract.TAB_MODE_NOW;
+            case R.id.action_plan:
+                return MainContract.TAB_MODE_PLAN;
             case R.id.action_settings:
                 return MainContract.TAB_MODE_SETTINGS;
             default:

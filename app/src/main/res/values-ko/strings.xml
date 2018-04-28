@@ -2,6 +2,7 @@
     <string name="app_name">뭅</string>
 
     <string name="now">현재상영</string>
+    <string name="plan">개봉예정</string>
     <string name="settings">설정</string>
 
     <string name="theater_select_title">극장 선택</string>

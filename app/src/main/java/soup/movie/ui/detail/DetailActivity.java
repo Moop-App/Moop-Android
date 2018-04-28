@@ -34,12 +34,12 @@ import soup.movie.data.soup.model.Movie;
 import soup.movie.data.soup.model.TimeTable;
 import soup.movie.data.soup.model.Trailer;
 import soup.movie.data.utils.MovieUtil;
+import soup.movie.util.DrawableUtils;
 import soup.movie.util.ImageUtil;
 import soup.movie.ui.detail.DetailViewState.DoneState;
 import soup.movie.ui.detail.DetailViewState.LoadingState;
 import soup.widget.elastic.ElasticDragDismissFrameLayout;
 import soup.widget.util.ColorUtils;
-import soup.widget.util.DrawableUtils;
 import soup.widget.util.ViewUtils;
 import timber.log.Timber;
 
