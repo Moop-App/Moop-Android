@@ -1,4 +1,4 @@
-package soup.movie.common.widget.snappy;
+package soup.widget.snappy;
 
 public interface SnappyLayoutManager {
 

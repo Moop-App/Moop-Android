@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package soup.movie.common.widget.snappy;
+package soup.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

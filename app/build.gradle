@@ -58,6 +58,7 @@ ext {
 dependencies {
     implementation project(':common')
     implementation project(':data')
+    implementation project(':widget')
 
     // UI
     implementation "com.hannesdorfmann.mosby3:mvi:3.1.0"

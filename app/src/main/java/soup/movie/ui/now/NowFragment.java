@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
-import soup.movie.common.widget.snappy.SnappyLinearLayoutManager;
+import soup.widget.snappy.SnappyLinearLayoutManager;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.now.NowViewState.DoneState;

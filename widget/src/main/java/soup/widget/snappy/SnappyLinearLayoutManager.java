@@ -1,4 +1,4 @@
-package soup.movie.common.widget.snappy;
+package soup.widget.snappy;
 
 import android.content.Context;
 import android.graphics.PointF;
