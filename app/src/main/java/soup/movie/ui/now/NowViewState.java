@@ -22,29 +22,21 @@ interface NowViewState extends BaseViewState {
 
     class DoneState implements NowViewState {
 
-        private final String mTitle;
-        private final List<Movie> mMovies;
+        private final List<Movie> movies;
 
-        DoneState(@NonNull String title, @NonNull List<Movie> movies) {
-            mTitle = title;
-            mMovies = movies;
-        }
-
-        @NonNull
-        public String getTitle() {
-            return mTitle;
+        DoneState(@NonNull List<Movie> movies) {
+            this.movies = movies;
         }
 
         @NonNull
         public List<Movie> getMovies() {
-            return mMovies;
+            return movies;
         }
 
         @Override
         public String toString() {
             return "DoneState{" +
-                    "mTitle='" + mTitle + '\'' +
-                    ", mMovies=" + mMovies +
+                    "movies=" + movies +
                     '}';
         }
     }

@@ -8,25 +8,25 @@ import soup.movie.util.DialogUtil;
 
 public class SettingsPresenter implements SettingsContract.Presenter {
 
-    private SettingsContract.View mView;
+    private SettingsContract.View view;
 
     SettingsPresenter() {
     }
 
     @Override
     public void attach(SettingsContract.View view) {
-        mView = view;
-        mView.render(new SettingsViewState.DoneState(TheaterUtil.getMyTheaterList()));
+        this.view = view;
+        this.view.render(new SettingsViewState.DoneState(TheaterUtil.getMyTheaterList()));
     }
 
     @Override
     public void detach() {
-        mView = null;
+        view = null;
     }
 
     @Override
     public void onClick(@NonNull Context context) {
         DialogUtil.startDialogToSelectTheaters(context,
-                asyncData -> mView.render(new SettingsViewState.DoneState(asyncData)));
+                asyncData -> view.render(new SettingsViewState.DoneState(asyncData)));
     }
 }

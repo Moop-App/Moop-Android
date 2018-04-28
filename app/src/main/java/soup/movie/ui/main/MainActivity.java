@@ -23,12 +23,12 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
-    private MainContract.Presenter mPresenter;
+    private MainContract.Presenter presenter;
 
-    private View mRootView;
-    private TextView mSubPanelTitleView;
+    private View rootView;
+    private TextView subPanelTitleView;
 
-    private BottomSheetBehavior mBottomSheetBehavior;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPresenter = new MainPresenter();
-        mPresenter.attach(this);
+        presenter = new MainPresenter();
+        presenter.attach(this);
 
-        mRootView = findViewById(R.id.root);
-        mSubPanelTitleView = findViewById(R.id.filter_title);
+        rootView = findViewById(R.id.root);
+        subPanelTitleView = findViewById(R.id.filter_title);
 
         initBottomNavigationView();
         initBottomSheetView();
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     protected void onDestroy() {
-        mPresenter = null;
+        presenter = null;
         super.onDestroy();
     }
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     public boolean setSubPanelVisibility(boolean show) {
         int newState = show ? BottomSheetBehavior.STATE_COLLAPSED : BottomSheetBehavior.STATE_HIDDEN;
-        BottomSheetBehavior behavior = mBottomSheetBehavior;
+        BottomSheetBehavior behavior = bottomSheetBehavior;
         if (behavior != null && behavior.getState() != newState) {
             behavior.setState(newState);
             return true;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     public void setSubPanel(String title) {
-        TextView subPanelTitleView = mSubPanelTitleView;
+        TextView subPanelTitleView = this.subPanelTitleView;
         if (subPanelTitleView != null) {
             subPanelTitleView.setText(title);
         }
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         navigationView.setOnNavigationItemSelectedListener(item -> {
             Timber.d("Select %s", item.getTitle());
             setTitle(item.getTitle());
-            mPresenter.setTabMode(parseToTabMode(item.getItemId()));
+            presenter.setTabMode(parseToTabMode(item.getItemId()));
             return true;
         });
         navigationView.setSelectedItemId(R.id.action_now); //default
@@ -141,14 +141,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 setScrim(slideOffset);
             }
         });
-        mBottomSheetBehavior = behavior;
+        bottomSheetBehavior = behavior;
 
         setScrim(-1f);
     }
 
     private void setScrim(float slideOffset) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mRootView.getForeground().setAlpha((int) ((1 + slideOffset) * 75));
+            rootView.getForeground().setAlpha((int) ((1 + slideOffset) * 75));
         }
     }
 

@@ -55,38 +55,38 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     ElasticDragDismissFrameLayout draggableFrame;
 
     @BindView(R.id.background)
-    View mBackground;
+    View background;
 
     @BindView(R.id.back)
-    ImageView mBackButton;
+    ImageView backButton;
 
     @BindView(R.id.movie_poster)
-    ImageView mPosterView;
+    ImageView posterView;
 
     @BindView(R.id.primary_text)
-    TextView mTitleView;
+    TextView titleView;
 
     @BindView(R.id.sub_text1)
-    TextView mAgeView;
+    TextView ageView;
 
     @BindView(R.id.sub_text2)
-    TextView mEggView;
+    TextView eggView;
 
     @BindView(R.id.favorite_button)
-    ImageView mFavoriteButton;
+    ImageView favoriteButton;
 
     @BindView(R.id.share_button)
-    ImageView mShareButton;
+    ImageView shareButton;
 
     @BindView(R.id.movie_contents)
-    RecyclerView mMovieContents;
+    RecyclerView movieContents;
 
     private Movie movie;
 
-    private DetailContract.Presenter mPresenter;
-    private DetailListAdapter mAdapterView;
+    private DetailContract.Presenter presenter;
+    private DetailListAdapter adapterView;
 
-    private ElasticDragDismissFrameLayout.SystemChromeFader mChromeFader;
+    private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,17 +101,17 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         }
         Timber.d("onCreate: movie=%s", movie);
 
-        ImageUtil.loadAsync(this, mPosterView, shotLoadListener, movie.getPosterUrl());
-        mTitleView.setText(movie.getTitle());
-        mAgeView.setText(movie.getAge());
-        mEggView.setText(movie.getEgg());
-        mFavoriteButton.setOnClickListener(v -> {});
-        mShareButton.setOnClickListener(v ->
+        ImageUtil.loadAsync(this, posterView, shotLoadListener, movie.getPosterUrl());
+        titleView.setText(movie.getTitle());
+        ageView.setText(movie.getAge());
+        eggView.setText(movie.getEgg());
+        favoriteButton.setOnClickListener(v -> {});
+        shareButton.setOnClickListener(v ->
             startActivity(createShareIntentWithText(
                     "공유하기", MovieUtil.createShareDescription(movie))));
 
-        mBackButton.setOnClickListener(v -> setResultAndFinish());
-        mChromeFader = new ElasticDragDismissFrameLayout.SystemChromeFader(this) {
+        backButton.setOnClickListener(v -> setResultAndFinish());
+        chromeFader = new ElasticDragDismissFrameLayout.SystemChromeFader(this) {
             @Override
             public void onDragDismissed() {
                 setResultAndFinish();
@@ -119,33 +119,33 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         };
 
         DetailListAdapter adapterView = new DetailListAdapter(this, theaters ->
-                mPresenter.requestData(theaters.get(0).getCode(), movie));
-        RecyclerView recyclerView = mMovieContents;
+                presenter.requestData(theaters.get(0).getCode(), movie));
+        RecyclerView recyclerView = movieContents;
         recyclerView.setLayoutManager(createLinearLayoutManager(this, true));
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInRightAnimator());
         recyclerView.getItemAnimator().setAddDuration(200);
         recyclerView.getItemAnimator().setRemoveDuration(200);
-        mAdapterView = adapterView;
+        this.adapterView = adapterView;
 
-        mPresenter = new DetailPresenter();
-        mPresenter.attach(this);
+        presenter = new DetailPresenter();
+        presenter.attach(this);
 
         //TODO: call requestData() after transition animation is ended
         Observable.timer(150, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(unused -> mPresenter.requestData(movie));
+                .subscribe(unused -> presenter.requestData(movie));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        draggableFrame.addListener(mChromeFader);
+        draggableFrame.addListener(chromeFader);
     }
 
     @Override
     protected void onPause() {
-        draggableFrame.removeListener(mChromeFader);
+        draggableFrame.removeListener(chromeFader);
         super.onPause();
     }
 
@@ -157,7 +157,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
 
     @Override
     protected void onDestroy() {
-        mPresenter = null;
+        presenter = null;
         super.onDestroy();
     }
 
@@ -179,7 +179,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     }
 
     private void updateTrailerList(@Nullable TimeTable timeTable, @Nullable List<Trailer> trailerList) {
-        DetailListAdapter adapterView = mAdapterView;
+        DetailListAdapter adapterView = this.adapterView;
         if (adapterView != null) {
             adapterView.updateList(timeTable, trailerList);
         }
@@ -225,12 +225,12 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
 
                         int adaptiveColor = ContextCompat.getColor(DetailActivity.this,
                                 isDark ? R.color.white : R.color.dark_icon);
-                        mBackButton.setColorFilter(adaptiveColor);
-                        mTitleView.setTextColor(adaptiveColor);
-                        mAgeView.setTextColor(adaptiveColor);
-                        mEggView.setTextColor(adaptiveColor);
-                        mFavoriteButton.setColorFilter(adaptiveColor);
-                        mShareButton.setColorFilter(adaptiveColor);
+                        backButton.setColorFilter(adaptiveColor);
+                        titleView.setTextColor(adaptiveColor);
+                        ageView.setTextColor(adaptiveColor);
+                        eggView.setTextColor(adaptiveColor);
+                        favoriteButton.setColorFilter(adaptiveColor);
+                        shareButton.setColorFilter(adaptiveColor);
 
                         // color the status bar. Set a complementary dark color on L,
                         // light or dark color on M (with matching status bar icons)
@@ -243,12 +243,12 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
                                     isDark, SCRIM_ADJUSTMENT);
                             // set a light status bar on M+
                             if (!isDark) {
-                                ViewUtils.setLightStatusBar(mPosterView);
+                                ViewUtils.setLightStatusBar(posterView);
                             }
                         }
 
                         if (statusBarColor != getWindow().getStatusBarColor()) {
-                            mBackground.setBackgroundColor(statusBarColor);
+                            background.setBackgroundColor(statusBarColor);
                             ValueAnimator statusBarColorAnim = ValueAnimator.ofArgb(
                                     getWindow().getStatusBarColor(), statusBarColor);
                             statusBarColorAnim.addUpdateListener(animation -> getWindow().setStatusBarColor(

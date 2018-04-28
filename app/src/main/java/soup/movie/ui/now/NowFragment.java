@@ -24,12 +24,12 @@ import timber.log.Timber;
 
 public class NowFragment extends MainTabFragment implements NowContract.View {
 
-    private NowContract.Presenter mPresenter;
+    private NowContract.Presenter presenter;
 
-    private NowListAdapter mAdapterView;
+    private NowListAdapter adapterView;
 
     @BindView(R.id.list)
-    RecyclerView mListView;
+    RecyclerView listView;
 
     public NowFragment() {
     }
@@ -52,24 +52,23 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
         Context context = view.getContext();
 
         NowListAdapter adapterView = new NowListAdapter(getActivity());
-        RecyclerView recyclerView = mListView;
+        RecyclerView recyclerView = listView;
         recyclerView.setLayoutManager(new SnappyLinearLayoutManager(context).horizontally());
         recyclerView.setAdapter(adapterView);
         recyclerView.setItemAnimator(new SlideInRightAnimator());
         recyclerView.getItemAnimator().setAddDuration(200);
         recyclerView.getItemAnimator().setRemoveDuration(200);
-        mAdapterView = adapterView;
+        this.adapterView = adapterView;
 
-        mPresenter = new NowPresenter();
-        mPresenter.attach(this);
-        mPresenter.requestMovieList(NowContract.Presenter.Type.NOW);
+        presenter = new NowPresenter();
+        presenter.attach(this);
 
         return view;
     }
 
     @Override
     public void onDestroyView() {
-        mPresenter.detach();
+        presenter.detach();
         super.onDestroyView();
     }
 
@@ -94,7 +93,7 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     }
 
     private void updateMovieList(@Nullable List<Movie> movieList) {
-        NowListAdapter adapterView = mAdapterView;
+        NowListAdapter adapterView = this.adapterView;
         if (adapterView != null) {
             adapterView.updateList(movieList);
         }

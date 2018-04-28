@@ -21,10 +21,10 @@ public class Injection {
         return Singleton.INSTANCE;
     }
 
-    private final MovieRepository mMovieRepository;
+    private final MovieRepository movieRepository;
 
     private Injection() {
-        mMovieRepository = provideRepository(
+        movieRepository = provideRepository(
                 provideKobisDataSource(
                         provideKobisApiService(
                                 provideGsonConverterFactory(),
@@ -40,7 +40,7 @@ public class Injection {
     }
 
     public MovieRepository getMovieRepository() {
-        return mMovieRepository;
+        return movieRepository;
     }
 
     // Internal Injection

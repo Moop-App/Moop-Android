@@ -31,24 +31,24 @@ import static soup.movie.util.IntentUtil.createShareIntentWithText;
 
 class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
 
-    private final Activity mHost;
+    private final Activity host;
 
-    private List<Movie> mItems = new ArrayList<>();
+    private List<Movie> items = new ArrayList<>();
 
     @BindColor(R.color.green)
-    int mGreenColor;
+    int greenColor;
 
     @BindColor(R.color.blue)
-    int mBlueColor;
+    int blueColor;
 
     @BindColor(R.color.amber)
-    int mAmberColor;
+    int amberColor;
 
     @BindColor(R.color.red)
-    int mRedColor;
+    int redColor;
 
     NowListAdapter(Activity host) {
-        mHost = host;
+        this.host = host;
         ButterKnife.bind(this, host);
     }
 
@@ -58,22 +58,22 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
                 .inflate(R.layout.item_movie_for_home, parent, false);
         ViewHolder holder = new ViewHolder(view);
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(mHost, DetailActivity.class);
-            MovieUtil.saveTo(intent, mItems.get(holder.getAdapterPosition()));
+            Intent intent = new Intent(host, DetailActivity.class);
+            MovieUtil.saveTo(intent, items.get(holder.getAdapterPosition()));
             ActivityOptions options =
-                    ActivityOptions.makeSceneTransitionAnimation(mHost,
-                            Pair.create(holder.mBackground, mHost.getString(R.string.transition_background)),
-                            Pair.create(holder.mPosterView, mHost.getString(R.string.transition_poster)),
-                            Pair.create(holder.mTitleView, mHost.getString(R.string.transition_title)),
-                            Pair.create(holder.mAgeView, mHost.getString(R.string.transition_age)),
-                            Pair.create(holder.mSubTextView, mHost.getString(R.string.transition_egg)),
-//                            Pair.create(holder.mFavoriteButton, mHost.getString(R.string.transition_favorite)),
-                            Pair.create(holder.mShareButton, mHost.getString(R.string.transition_share)));
-            mHost.startActivity(intent, options.toBundle());
+                    ActivityOptions.makeSceneTransitionAnimation(host,
+                            Pair.create(holder.backgroundView, host.getString(R.string.transition_background)),
+                            Pair.create(holder.posterView, host.getString(R.string.transition_poster)),
+                            Pair.create(holder.titleView, host.getString(R.string.transition_title)),
+                            Pair.create(holder.ageView, host.getString(R.string.transition_age)),
+                            Pair.create(holder.subTextView, host.getString(R.string.transition_egg)),
+//                            Pair.create(holder.favoriteButton, host.getString(R.string.transition_favorite)),
+                            Pair.create(holder.shareButton, host.getString(R.string.transition_share)));
+            host.startActivity(intent, options.toBundle());
         });
-        holder.mShareButton.setOnClickListener(v -> {
-            Movie movie = mItems.get(holder.getAdapterPosition());
-            mHost.startActivity(createShareIntentWithText(
+        holder.shareButton.setOnClickListener(v -> {
+            Movie movie = items.get(holder.getAdapterPosition());
+            host.startActivity(createShareIntentWithText(
                     "공유하기", MovieUtil.createShareDescription(movie)));
         });
         return holder;
@@ -81,11 +81,11 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Movie item = mItems.get(position);
-        ImageUtil.loadAsync(mHost, holder.mPosterView, item.getPosterUrl());
-        holder.mTitleView.setText(item.getTitle());
-        holder.mSubTextView.setText(item.getOpenDate());
-        updateAgeText(holder.mAgeBgView, holder.mAgeView, item.getAge());
+        Movie item = items.get(position);
+        ImageUtil.loadAsync(host, holder.posterView, item.getPosterUrl());
+        holder.titleView.setText(item.getTitle());
+        holder.subTextView.setText(item.getOpenDate());
+        updateAgeText(holder.ageBgView, holder.ageView, item.getAge());
     }
 
     private void updateAgeText(View ageBgView, TextView ageTextView, String ageText) {
@@ -93,19 +93,19 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
         switch (ageText) {
             case "전체 관람가":
                 ageText = "전체";
-                color = mGreenColor;
+                color = greenColor;
                 break;
             case "12세 관람가":
                 ageText = "12";
-                color = mBlueColor;
+                color = blueColor;
                 break;
             case "15세 관람가":
                 ageText = "15";
-                color = mAmberColor;
+                color = amberColor;
                 break;
             case "청소년관람불가":
                 ageText = "청불";
-                color = mRedColor;
+                color = redColor;
                 break;
             default:
                 ageText = null;
@@ -124,14 +124,14 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return ListUtil.size(mItems);
+        return ListUtil.size(items);
     }
 
     void updateList(List<Movie> newItems) {
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
             @Override
             public int getOldListSize() {
-                return ListUtil.size(mItems);
+                return ListUtil.size(items);
             }
 
             @Override
@@ -149,28 +149,28 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
                 return false;
             }
         }, false);
-        mItems = newItems;
+        items = newItems;
         result.dispatchUpdatesTo(this);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.background)
-        View mBackground;
+        View backgroundView;
         @BindView(R.id.movie_poster)
-        ImageView mPosterView;
+        ImageView posterView;
         @BindView(R.id.primary_text)
-        TextView mTitleView;
+        TextView titleView;
         @BindView(R.id.age_bg)
-        View mAgeBgView;
+        View ageBgView;
         @BindView(R.id.age_icon)
-        TextView mAgeView;
+        TextView ageView;
         @BindView(R.id.sub_text2)
-        TextView mSubTextView;
+        TextView subTextView;
         @BindView(R.id.favorite_button)
-        View mFavoriteButton;
+        View favoriteButton;
         @BindView(R.id.share_button)
-        View mShareButton;
+        View shareButton;
 
         ViewHolder(View view) {
             super(view);

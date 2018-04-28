@@ -35,24 +35,24 @@ import soup.movie.util.function.Consumer;
 
 class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolder> {
 
-    private static final int TYPE_HEADER = 3;
     private static final int TYPE_TIMETABLE_NONE = 0;
     private static final int TYPE_TIMETABLE = 1;
     private static final int TYPE_TRAILER = 2;
 
-    private final Activity mHost;
-    private final Consumer<List<TheaterCode>> mConsumer;
+    private final Activity host;
+    private final Consumer<List<TheaterCode>> consumer;
 
-    private TimeTable mTimeTable;
-    private List<Trailer> mItems = new ArrayList<>();
+    private TimeTable timeTable;
+    private List<Trailer> items = new ArrayList<>();
 
     DetailListAdapter(Activity host, Consumer<List<TheaterCode>> theaterCodeConsumer) {
-        mHost = host;
-        mConsumer = theaterCodeConsumer;
+        this.host = host;
+        consumer = theaterCodeConsumer;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         ViewHolder holder;
         switch (viewType) {
@@ -61,9 +61,9 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                         .inflate(R.layout.item_timetable_none, parent, false);
                 holder = new NoneTimeTableViewHolder(view);
                 View.OnClickListener listener = v ->
-                        DialogUtil.startDialogToSelectTheaters(mHost, mConsumer::accept);
+                        DialogUtil.startDialogToSelectTheaters(host, consumer::accept);
                 holder.itemView.setOnClickListener(listener);
-                ((NoneTimeTableViewHolder)holder).mSelect.setOnClickListener(listener);
+                ((NoneTimeTableViewHolder)holder).select.setOnClickListener(listener);
                 break;
             case TYPE_TIMETABLE:
                 view = LayoutInflater.from(parent.getContext())
@@ -71,7 +71,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                 holder = new TimeTableViewHolder(view);
                 holder.itemView.setOnClickListener(v -> {
                     //TODO: show notification with selected date and time
-                    MovieAppUtil.executeCgvApp(mHost);
+                    MovieAppUtil.executeCgvApp(host);
                 });
                 break;
             default:
@@ -79,7 +79,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                         .inflate(R.layout.item_trailer, parent, false);
                 holder = new TrailerViewHolder(view);
                 holder.itemView.setOnClickListener(v -> YouTubeUtil.executeYoutubeApp(
-                        mHost, mItems.get(holder.getAdapterPosition()).getId()));
+                        host, items.get(holder.getAdapterPosition()).getId()));
         }
         return holder;
     }
@@ -89,7 +89,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
         if (position == 0) {
             if (holder instanceof TimeTableViewHolder) {
                 TimeTableViewHolder holder1 = (TimeTableViewHolder) holder;
-                TimeTable item = mTimeTable;
+                TimeTable item = timeTable;
                 List<Day> days = item.getDayList();
                 if (days != null && !days.isEmpty()) {
                     holder1.empty.setVisibility(View.GONE);
@@ -105,10 +105,10 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
             }
         } else {
             TrailerViewHolder trailerViewHolder = (TrailerViewHolder)holder;
-            Trailer item = mItems.get(position - 1);
-            ImageUtil.loadAsync(mHost, trailerViewHolder.mThumbnailView, getThumbnailUrl(item));
-            trailerViewHolder.mTitleView.setText(item.getTitle());
-            trailerViewHolder.mAuthorView.setText(item.getAuthor());
+            Trailer item = items.get(position - 1);
+            ImageUtil.loadAsync(host, trailerViewHolder.thumbnailView, getThumbnailUrl(item));
+            trailerViewHolder.titleView.setText(item.getTitle());
+            trailerViewHolder.authorView.setText(item.getAuthor());
         }
     }
 
@@ -133,12 +133,12 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        return position != 0 ? TYPE_TRAILER : mTimeTable.getDayList() == null ? TYPE_TIMETABLE_NONE : TYPE_TIMETABLE;
+        return position != 0 ? TYPE_TRAILER : timeTable.getDayList() == null ? TYPE_TIMETABLE_NONE : TYPE_TIMETABLE;
     }
 
     @Override
     public int getItemCount() {
-        return ListUtil.size(mItems) + calcMoreCount(mTimeTable);
+        return ListUtil.size(items) + calcMoreCount(timeTable);
     }
 
     private int calcMoreCount(TimeTable timeTable) {
@@ -149,7 +149,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
             @Override
             public int getOldListSize() {
-                return ListUtil.size(mItems) + calcMoreCount(mTimeTable);
+                return ListUtil.size(items) + calcMoreCount(DetailListAdapter.this.timeTable);
             }
 
             @Override
@@ -167,8 +167,8 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                 return false;
             }
         }, false);
-        mTimeTable = timeTable;
-        mItems = newItems;
+        this.timeTable = timeTable;
+        items = newItems;
         result.dispatchUpdatesTo(this);
     }
 
@@ -181,11 +181,11 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
     class TrailerViewHolder extends ViewHolder {
 
         @BindView(R.id.trailer_thumbnail)
-        ImageView mThumbnailView;
+        ImageView thumbnailView;
         @BindView(R.id.primary_text)
-        TextView mTitleView;
+        TextView titleView;
         @BindView(R.id.sub_text)
-        TextView mAuthorView;
+        TextView authorView;
 
         TrailerViewHolder(View view) {
             super(view);
@@ -211,7 +211,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
     class NoneTimeTableViewHolder extends ViewHolder {
 
         @BindView(R.id.select)
-        View mSelect;
+        View select;
 
         NoneTimeTableViewHolder(View view) {
             super(view);

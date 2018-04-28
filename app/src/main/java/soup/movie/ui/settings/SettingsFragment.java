@@ -26,9 +26,9 @@ import timber.log.Timber;
 public class SettingsFragment extends MainTabFragment implements SettingsContract.View {
 
     @BindView(R.id.theater_option)
-    TextView mTheaterOption;
+    TextView theaterOption;
 
-    private SettingsContract.Presenter mPresenter;
+    private SettingsContract.Presenter presenter;
 
     public SettingsFragment() {
     }
@@ -48,15 +48,15 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, view);
 
-        mPresenter = new SettingsPresenter();
-        mPresenter.attach(this);
+        presenter = new SettingsPresenter();
+        presenter.attach(this);
 
         return view;
     }
 
     @Override
     public void onDestroyView() {
-        mPresenter.detach();
+        presenter.detach();
         super.onDestroyView();
     }
 
@@ -78,16 +78,16 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     private void renderInternal(DoneState viewState) {
         List<TheaterCode> theaters = viewState.getTheaterList();
         if (theaters.isEmpty()) {
-            mTheaterOption.setText("없음");
-            mTheaterOption.setTextColor(Color.RED);
+            theaterOption.setText("없음");
+            theaterOption.setTextColor(Color.RED);
         } else {
-            mTheaterOption.setText(StringUtils.join(ListUtil.toStringArray(theaters, TheaterCode::getName)));
-            mTheaterOption.setTextColor(Color.BLACK);
+            theaterOption.setText(StringUtils.join(ListUtil.toStringArray(theaters, TheaterCode::getName)));
+            theaterOption.setTextColor(Color.BLACK);
         }
     }
 
     @OnClick(R.id.theater_option)
     public void onClick(View view) {
-        mPresenter.onClick(view.getContext());
+        presenter.onClick(view.getContext());
     }
 }
