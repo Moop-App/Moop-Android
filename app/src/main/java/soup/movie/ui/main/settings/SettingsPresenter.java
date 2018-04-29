@@ -1,20 +1,11 @@
 package soup.movie.ui.main.settings;
 
-import android.content.SharedPreferences;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import soup.movie.data.MovieRepository;
-import soup.movie.data.model.Area;
-import soup.movie.data.model.CodeRequest;
-import soup.movie.data.model.CodeResponse;
-import soup.movie.data.model.TheaterCode;
+import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
 import timber.log.Timber;
@@ -22,14 +13,11 @@ import timber.log.Timber;
 public class SettingsPresenter extends BasePresenter<SettingsContract.View>
         implements SettingsContract.Presenter {
 
-    private final MovieRepository movieRepository;
-    private final SharedPreferences preferences;
+    private final TheaterSetting theaterSetting;
 
     @Inject
-    SettingsPresenter(MovieRepository movieRepository,
-                      SharedPreferences preferences) {
-        this.movieRepository = movieRepository;
-        this.preferences = preferences;
+    SettingsPresenter(TheaterSetting theaterSetting) {
+        this.theaterSetting = theaterSetting;
     }
 
     @Override
@@ -40,15 +28,7 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.View>
     }
 
     private Single<SettingsViewState> getViewStateObservable() {
-        return movieRepository.getCodeList(new CodeRequest())
-                .map(CodeResponse::getList)
-                .map(areas -> {
-                    List<TheaterCode> codes = new ArrayList<>();
-                    for (Area area : areas) {
-                        codes.addAll(area.getTheaterList());
-                    }
-                    return codes;
-                })
+        return Single.fromCallable(theaterSetting::getFavoriteTheaters)
                 .map(DoneState::new);
     }
 }

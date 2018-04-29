@@ -16,7 +16,8 @@ import soup.movie.data.MovieRepository;
         AndroidSupportInjectionModule.class,
         ApplicationModule.class,
         ActivityBindingModule.class,
-        MovieRepositoryModule.class
+        MovieRepositoryModule.class,
+        SharedPreferencesModule.class
 })
 public interface ApplicationComponent extends AndroidInjector<MovieApplication> {
 

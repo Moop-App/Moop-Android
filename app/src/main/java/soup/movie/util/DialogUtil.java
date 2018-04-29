@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -58,7 +59,7 @@ public class DialogUtil {
             @NonNull Context context, @NonNull AsyncLoadListener<List<TheaterCode>> asyncListener) {
 
         TheaterUtil.loadAsync(allItems -> {
-            List<TheaterCode> selections = TheaterUtil.getMyTheaterList();
+            List<TheaterCode> selections = Collections.emptyList();//TheaterUtil.getMyTheaterList();
             HashMap<String, TheaterCode> currentSelectedItems = new HashMap<>();
             for (TheaterCode tc : selections) {
                 currentSelectedItems.put(tc.getCode(), tc);
@@ -87,7 +88,7 @@ public class DialogUtil {
                     })
                     .setPositiveButton(R.string.theater_select_action_confirm, (dialog, id) -> {
                         List<TheaterCode> tcList = new ArrayList<>(currentSelectedItems.values());
-                        TheaterUtil.saveMyTheaterList(tcList);
+                        //TheaterUtil.saveMyTheaterList(tcList);
                         asyncListener.onLoaded(tcList);
                     })
                     .setNegativeButton(R.string.theater_select_action_cancel, (dialog, id) -> {

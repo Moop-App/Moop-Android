@@ -18,8 +18,8 @@ import soup.movie.data.model.TimeTableRequest;
 import soup.movie.data.model.TimeTableResponse;
 import soup.movie.data.model.Trailer;
 import soup.movie.di.ActivityScoped;
+import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
-import soup.movie.util.TheaterUtil;
 import timber.log.Timber;
 
 @ActivityScoped
@@ -27,15 +27,18 @@ public class DetailPresenter extends BasePresenter<DetailContract.View>
         implements DetailContract.Presenter {
 
     private final MovieRepository movieRepository;
+    private final TheaterSetting theaterSetting;
 
     @Inject
-    DetailPresenter(MovieRepository movieRepository) {
+    DetailPresenter(MovieRepository movieRepository,
+                    TheaterSetting theaterSetting) {
         this.movieRepository = movieRepository;
+        this.theaterSetting = theaterSetting;
     }
 
     @Override
     public void requestData(@NonNull Movie movie) {
-        List<TheaterCode> theaters = TheaterUtil.getMyTheaterList();
+        List<TheaterCode> theaters = theaterSetting.getFavoriteTheaters();
         //view.render(new DetailViewState.LoadingState(!theaters.isEmpty()));
         if (theaters.isEmpty()) {
             register(getTrailerListObservable(movie)
