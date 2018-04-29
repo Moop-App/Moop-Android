@@ -1,26 +1,21 @@
 package soup.movie.ui.main.now;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MovieRepository;
-import soup.movie.data.model.Movie;
 import soup.movie.data.model.NowMovieRequest;
 import soup.movie.data.model.NowMovieResponse;
 import soup.movie.di.FragmentScoped;
+import soup.movie.ui.BasePresenter;
 
 @FragmentScoped
-public class NowPresenter implements NowContract.Presenter {
+public class NowPresenter extends BasePresenter<NowContract.View>
+        implements NowContract.Presenter {
 
     private final MovieRepository movieRepository;
-
-    private NowContract.View view;
-
-    private Disposable disposable;
 
     @Inject
     NowPresenter(MovieRepository movieRepository) {
@@ -28,30 +23,15 @@ public class NowPresenter implements NowContract.Presenter {
     }
 
     @Override
-    public void attach(NowContract.View view) {
-        this.view = view;
-        loadMovieList(getNowObservable());
-    }
-
-    @Override
-    public void detach() {
-        this.view = null;
-        Disposable disposable = this.disposable;
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
-        }
-    }
-
-    private void loadMovieList(Single<List<Movie>> movieObservable) {
-        disposable = movieObservable
+    protected void initObservable(CompositeDisposable subscriptions) {
+        subscriptions.add(getViewStateObservable()
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(NowViewState.DoneState::new)
-                .subscribe(view::render);
+                .subscribe(view::render));
     }
 
-    private Single<List<Movie>> getNowObservable() {
-        return movieRepository
-                .getNowList(new NowMovieRequest())
-                .map(NowMovieResponse::getList);
+    private Single<NowViewState> getViewStateObservable() {
+        return movieRepository.getNowList(new NowMovieRequest())
+                .map(NowMovieResponse::getList)
+                .map(NowViewState.DoneState::new);
     }
 }

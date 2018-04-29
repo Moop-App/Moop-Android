@@ -8,18 +8,14 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.DaggerFragment;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 public abstract class BaseFragment extends DaggerFragment {
 
-    private CompositeDisposable subscriptions;
     private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        subscriptions = new CompositeDisposable();
     }
 
     @Override
@@ -32,12 +28,6 @@ public abstract class BaseFragment extends DaggerFragment {
     public void onDestroy() {
         unbinder.unbind();
         unbinder = null;
-        subscriptions.dispose();
-        subscriptions = null;
         super.onDestroy();
-    }
-
-    protected final void register(Disposable disposable) {
-        subscriptions.add(disposable);
     }
 }

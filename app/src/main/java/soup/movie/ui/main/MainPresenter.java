@@ -3,28 +3,18 @@ package soup.movie.ui.main;
 import javax.inject.Inject;
 
 import soup.movie.di.ActivityScoped;
+import soup.movie.ui.BasePresenter;
 
 import static soup.movie.ui.main.MainContract.TAB_MODE_NOW;
 import static soup.movie.ui.main.MainContract.TAB_MODE_PLAN;
 import static soup.movie.ui.main.MainContract.TAB_MODE_SETTINGS;
 
 @ActivityScoped
-public class MainPresenter implements MainContract.Presenter {
-
-    private MainContract.View view;
+public class MainPresenter extends BasePresenter<MainContract.View>
+        implements MainContract.Presenter {
 
     @Inject
     MainPresenter() {
-    }
-
-    @Override
-    public void attach(MainContract.View view) {
-        this.view = view;
-    }
-
-    @Override
-    public void detach() {
-        view = null;
     }
 
     @Override
