@@ -6,9 +6,9 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
-import soup.movie.data.soup.model.Movie;
-import soup.movie.data.soup.model.NowMovieRequest;
-import soup.movie.data.soup.model.NowMovieResponse;
+import soup.movie.data.model.Movie;
+import soup.movie.data.model.NowMovieRequest;
+import soup.movie.data.model.NowMovieResponse;
 
 public class NowPresenter implements NowContract.Presenter {
 

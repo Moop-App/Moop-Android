@@ -6,10 +6,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import soup.movie.data.MovieRepository;
-import soup.movie.data.kobis.KobisDataSource;
-import soup.movie.data.kobis.service.KobisApiService;
-import soup.movie.data.soup.SoupDataSource;
-import soup.movie.data.soup.service.SoupApiService;
+import soup.movie.data.SoupDataSource;
+import soup.movie.data.service.SoupApiService;
 
 public class Injection {
 
@@ -25,12 +23,6 @@ public class Injection {
 
     private Injection() {
         movieRepository = provideRepository(
-                provideKobisDataSource(
-                        provideKobisApiService(
-                                provideGsonConverterFactory(),
-                                provideRxJava2CallAdapterFactory(),
-                                provideOkHttpClient(
-                                        null))),
                 provideSoupDataSource(
                         provideSoupApiService(
                                 provideGsonConverterFactory(),
@@ -45,25 +37,8 @@ public class Injection {
 
     // Internal Injection
 
-    private MovieRepository provideRepository(KobisDataSource kobisDataSource,
-                                              SoupDataSource soupDataSource) {
-        return new MovieRepository(kobisDataSource, soupDataSource);
-    }
-
-    private KobisDataSource provideKobisDataSource(KobisApiService kobisApi) {
-        return new KobisDataSource(kobisApi);
-    }
-
-    private KobisApiService provideKobisApiService(GsonConverterFactory gsonConverterFactory,
-                                                   RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
-                                                   OkHttpClient okHttpClient) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(KobisApiService.API_BASE_URL)
-                .addConverterFactory(gsonConverterFactory)
-                .addCallAdapterFactory(rxJava2CallAdapterFactory)
-                .client(okHttpClient)
-                .build();
-        return retrofit.create(KobisApiService.class);
+    private MovieRepository provideRepository(SoupDataSource soupDataSource) {
+        return new MovieRepository(soupDataSource);
     }
 
     private GsonConverterFactory provideGsonConverterFactory() {

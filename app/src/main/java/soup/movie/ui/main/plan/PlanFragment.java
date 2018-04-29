@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
-import soup.movie.data.soup.model.Movie;
+import soup.movie.data.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.plan.PlanViewState.DoneState;
 import soup.movie.ui.main.plan.PlanViewState.LoadingState;

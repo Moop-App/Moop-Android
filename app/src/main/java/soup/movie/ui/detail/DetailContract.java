@@ -2,7 +2,7 @@ package soup.movie.ui.detail;
 
 import android.support.annotation.NonNull;
 
-import soup.movie.data.soup.model.Movie;
+import soup.movie.data.model.Movie;
 import soup.movie.ui.BaseContract;
 
 class DetailContract {

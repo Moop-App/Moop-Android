@@ -2,7 +2,7 @@ package soup.movie;
 
 import android.app.Application;
 
-import soup.movie.data.utils.TheaterUtil;
+import soup.movie.util.TheaterUtil;
 
 public class MovieApplication extends Application {
 

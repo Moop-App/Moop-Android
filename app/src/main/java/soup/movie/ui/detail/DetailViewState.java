@@ -2,8 +2,8 @@ package soup.movie.ui.detail;
 
 import java.util.List;
 
-import soup.movie.data.soup.model.TimeTable;
-import soup.movie.data.soup.model.Trailer;
+import soup.movie.data.model.TimeTable;
+import soup.movie.data.model.Trailer;
 import soup.movie.ui.BaseViewState;
 
 interface DetailViewState extends BaseViewState {

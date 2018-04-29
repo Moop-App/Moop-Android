@@ -10,13 +10,13 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
-import soup.movie.data.soup.model.Movie;
-import soup.movie.data.soup.model.TheaterCode;
-import soup.movie.data.soup.model.TimeTable;
-import soup.movie.data.soup.model.TimeTableRequest;
-import soup.movie.data.soup.model.TimeTableResponse;
-import soup.movie.data.soup.model.Trailer;
-import soup.movie.data.utils.TheaterUtil;
+import soup.movie.data.model.Movie;
+import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.TimeTable;
+import soup.movie.data.model.TimeTableRequest;
+import soup.movie.data.model.TimeTableResponse;
+import soup.movie.data.model.Trailer;
+import soup.movie.util.TheaterUtil;
 import timber.log.Timber;
 
 public class DetailPresenter implements DetailContract.Presenter {

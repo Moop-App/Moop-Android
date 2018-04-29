@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import soup.movie.data.soup.model.Movie;
+import soup.movie.data.model.Movie;
 import soup.movie.ui.BaseViewState;
 
 interface NowViewState extends BaseViewState {

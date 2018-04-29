@@ -11,10 +11,8 @@ import java.util.Set;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 import soup.movie.R;
-import soup.movie.data.core.AsyncLoadListener;
-import soup.movie.data.soup.model.TheaterCode;
-import soup.movie.data.utils.TheaterUtil;
-import soup.movie.util.ListUtil;
+import soup.movie.data.base.AsyncLoadListener;
+import soup.movie.data.model.TheaterCode;
 import soup.movie.util.function.Function;
 
 public class DialogUtil {
