@@ -51,25 +51,20 @@ def getNaverClientSecret() {
 }
 
 ext {
-    daggerVersion = '2.13'
-    daggerAndroidVersion = '2.13'
 }
 
 dependencies {
     implementation project(':data')
     implementation project(':widget')
 
+    implementation NETWORK
+    implementation RX
+    implementation SUPPORT_UI
+
     // UI
     implementation "com.hannesdorfmann.mosby3:mvi:3.1.0"
     implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation 'com.github.bumptech.glide:glide:4.1.1'
-
-    // Dagger dependencies
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android:$daggerAndroidVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerAndroidVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     // logging
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4',

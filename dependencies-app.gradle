@@ -38,13 +38,6 @@ rootProject.allprojects {
 
                 // common
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-                implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
-                implementation "com.android.support:cardview-v7:$supportLibraryVersion"
-                implementation "com.android.support:design:$supportLibraryVersion"
-                implementation "com.android.support:palette-v7:$supportLibraryVersion"
-                implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
-                implementation "com.android.support:transition:$supportLibraryVersion"
-                implementation "com.android.support.constraint:constraint-layout:1.1.0"
 
                 // common util
                 implementation "org.apache.commons:commons-collections4:4.1"
@@ -53,8 +46,12 @@ rootProject.allprojects {
                 implementation "com.jakewharton:butterknife:$butterknifeVersion"
                 annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-                implementation NETWORK
-                implementation RX
+                // Dagger dependencies
+                implementation "com.google.dagger:dagger:$daggerVersion"
+                implementation "com.google.dagger:dagger-android:$daggerAndroidVersion"
+                implementation "com.google.dagger:dagger-android-support:$daggerAndroidVersion"
+                annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+                annotationProcessor "com.google.dagger:dagger-android-processor:$daggerAndroidVersion"
 
                 testImplementation "junit:junit:4.12"
                 testImplementation "org.robolectric:robolectric:3.8-SNAPSHOT"
