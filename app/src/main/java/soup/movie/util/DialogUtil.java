@@ -10,50 +10,13 @@ import java.util.List;
 import java.util.Set;
 
 import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 import soup.movie.R;
 import soup.movie.data.base.AsyncLoadListener;
 import soup.movie.data.model.TheaterCode;
-import soup.movie.util.function.Function;
 
 public class DialogUtil {
 
     private DialogUtil() {}
-
-    public static <T> void startDialogForResult(@NonNull Context context,
-                                                @NonNull String title,
-                                                @NonNull String confirmLabel,
-                                                @NonNull List<T> items,
-                                                @NonNull List<T> selectedItems,
-                                                @NonNull Function<T, String> itemLabelFunction,
-                                                @NonNull AsyncLoadListener<List<T>> asyncListener) {
-        startDialogForResult(context, title, null, confirmLabel, null, items,
-                selectedItems, itemLabelFunction, asyncListener);
-    }
-
-    public static <T> void startDialogForResult(
-            @NonNull Context context,
-            @NonNull String title,
-            @Nullable String description,
-            @NonNull String confirmLabel,
-            @Nullable String cancelLabel,
-            @NonNull List<T> items,
-            @NonNull List<T> selectedItems,
-            @NonNull Function<T, String> itemLabelFunction,
-            @NonNull AsyncLoadListener<List<T>> asyncListener) {
-
-        boolean[] selectionFlags = new boolean[items.size()];
-        String[] itemLabels = ListUtil.toStringArray(items, itemLabelFunction);
-
-        new AlertDialog.Builder(context)
-                .setMultiChoiceItems(itemLabels, selectionFlags, (dialog, which, isChecked)
-                        -> selectionFlags[which] = isChecked)
-                .setPositiveButton("OK", (dialog, id) -> {
-                    asyncListener.onLoaded(null);
-                })
-                .setNegativeButton("Cancel", (dialog, id) -> dialog.dismiss())
-                .show();
-    }
 
     public static void startDialogToSelectTheaters(
             @NonNull Context context, @NonNull AsyncLoadListener<List<TheaterCode>> asyncListener) {
