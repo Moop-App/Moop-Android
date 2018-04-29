@@ -1,4 +1,4 @@
-package soup.movie.ui.now;
+package soup.movie.ui.main.plan;
 
 import android.support.annotation.NonNull;
 
@@ -7,9 +7,9 @@ import java.util.List;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.BaseViewState;
 
-interface NowViewState extends BaseViewState {
+interface PlanViewState extends BaseViewState {
 
-    class LoadingState implements NowViewState {
+    class LoadingState implements PlanViewState {
 
         LoadingState() {
         }
@@ -20,7 +20,7 @@ interface NowViewState extends BaseViewState {
         }
     }
 
-    class DoneState implements NowViewState {
+    class DoneState implements PlanViewState {
 
         private final List<Movie> movies;
 

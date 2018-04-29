@@ -1,4 +1,4 @@
-package soup.movie.ui.now;
+package soup.movie.ui.main.now;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,8 +17,8 @@ import soup.movie.R;
 import soup.widget.snappy.SnappyLinearLayoutManager;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
-import soup.movie.ui.now.NowViewState.DoneState;
-import soup.movie.ui.now.NowViewState.LoadingState;
+import soup.movie.ui.main.now.NowViewState.DoneState;
+import soup.movie.ui.main.now.NowViewState.LoadingState;
 import timber.log.Timber;
 
 public class NowFragment extends MainTabFragment implements NowContract.View {

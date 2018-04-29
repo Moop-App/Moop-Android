@@ -1,4 +1,4 @@
-package soup.movie.ui.plan;
+package soup.movie.ui.main.plan;
 
 import android.app.Activity;
 import android.app.ActivityOptions;

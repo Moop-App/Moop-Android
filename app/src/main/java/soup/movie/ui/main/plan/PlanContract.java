@@ -1,4 +1,4 @@
-package soup.movie.ui.plan;
+package soup.movie.ui.main.plan;
 
 import android.support.annotation.NonNull;
 

@@ -1,4 +1,4 @@
-package soup.movie.ui.plan;
+package soup.movie.ui.main.plan;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,8 +16,8 @@ import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.soup.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
-import soup.movie.ui.plan.PlanViewState.DoneState;
-import soup.movie.ui.plan.PlanViewState.LoadingState;
+import soup.movie.ui.main.plan.PlanViewState.DoneState;
+import soup.movie.ui.main.plan.PlanViewState.LoadingState;
 import soup.widget.snappy.SnappyLinearLayoutManager;
 import timber.log.Timber;
 

@@ -1,4 +1,4 @@
-package soup.movie.ui.now;
+package soup.movie.ui.main.plan;
 
 import java.util.List;
 
@@ -7,22 +7,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import soup.movie.Injection;
 import soup.movie.data.soup.model.Movie;
-import soup.movie.data.soup.model.NowMovieRequest;
-import soup.movie.data.soup.model.NowMovieResponse;
+import soup.movie.data.soup.model.PlanMovieRequest;
+import soup.movie.data.soup.model.PlanMovieResponse;
 
-public class NowPresenter implements NowContract.Presenter {
+public class PlanPresenter implements PlanContract.Presenter {
 
-    private NowContract.View view;
+    private PlanContract.View view;
 
     private Disposable disposable;
 
-    NowPresenter() {
+    PlanPresenter() {
     }
 
     @Override
-    public void attach(NowContract.View view) {
+    public void attach(PlanContract.View view) {
         this.view = view;
-        loadMovieList(getNowObservable());
+        loadMovieList(getPlanObservable());
     }
 
     @Override
@@ -35,15 +35,14 @@ public class NowPresenter implements NowContract.Presenter {
     }
 
     private void loadMovieList(Single<List<Movie>> movieObservable) {
-        disposable = movieObservable
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(NowViewState.DoneState::new)
-                .subscribe(view::render);
+        disposable = movieObservable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(list -> view.render(new PlanViewState.DoneState(list)));
     }
 
-    private Single<List<Movie>> getNowObservable() {
+    private Single<List<Movie>> getPlanObservable() {
         return Injection.get().getMovieRepository()
-                .getNowList(new NowMovieRequest())
-                .map(NowMovieResponse::getList);
+                .getPlanList(new PlanMovieRequest())
+                .map(PlanMovieResponse::getList);
+
     }
 }

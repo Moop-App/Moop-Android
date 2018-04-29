@@ -13,9 +13,9 @@ import soup.movie.ui.BaseActivity;
 import soup.movie.ui.main.MainViewState.NowState;
 import soup.movie.ui.main.MainViewState.PlanState;
 import soup.movie.ui.main.MainViewState.SettingsState;
-import soup.movie.ui.now.NowFragment;
-import soup.movie.ui.plan.PlanFragment;
-import soup.movie.ui.settings.SettingsFragment;
+import soup.movie.ui.main.now.NowFragment;
+import soup.movie.ui.main.plan.PlanFragment;
+import soup.movie.ui.main.settings.SettingsFragment;
 import timber.log.Timber;
 
 public class MainActivity extends BaseActivity implements MainContract.View {

@@ -1,4 +1,4 @@
-package soup.movie.ui.now;
+package soup.movie.ui.main.now;
 
 import android.support.annotation.NonNull;
 

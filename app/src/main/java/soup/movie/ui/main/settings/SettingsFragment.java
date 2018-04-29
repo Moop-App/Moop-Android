@@ -1,4 +1,4 @@
-package soup.movie.ui.settings;
+package soup.movie.ui.main.settings;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,8 +18,8 @@ import butterknife.OnClick;
 import soup.movie.R;
 import soup.movie.data.soup.model.TheaterCode;
 import soup.movie.ui.main.MainTabFragment;
-import soup.movie.ui.settings.SettingsViewState.DoneState;
-import soup.movie.ui.settings.SettingsViewState.LoadingState;
+import soup.movie.ui.main.settings.SettingsViewState.DoneState;
+import soup.movie.ui.main.settings.SettingsViewState.LoadingState;
 import soup.movie.util.ListUtil;
 import timber.log.Timber;
 
