@@ -2,21 +2,29 @@ package soup.movie.ui.main.now;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import soup.movie.Injection;
+import soup.movie.data.MovieRepository;
 import soup.movie.data.model.Movie;
 import soup.movie.data.model.NowMovieRequest;
 import soup.movie.data.model.NowMovieResponse;
+import soup.movie.di.FragmentScoped;
 
+@FragmentScoped
 public class NowPresenter implements NowContract.Presenter {
+
+    private final MovieRepository movieRepository;
 
     private NowContract.View view;
 
     private Disposable disposable;
 
-    NowPresenter() {
+    @Inject
+    NowPresenter(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -27,7 +35,7 @@ public class NowPresenter implements NowContract.Presenter {
 
     @Override
     public void detach() {
-        view = null;
+        this.view = null;
         Disposable disposable = this.disposable;
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
@@ -42,7 +50,7 @@ public class NowPresenter implements NowContract.Presenter {
     }
 
     private Single<List<Movie>> getNowObservable() {
-        return Injection.get().getMovieRepository()
+        return movieRepository
                 .getNowList(new NowMovieRequest())
                 .map(NowMovieResponse::getList);
     }

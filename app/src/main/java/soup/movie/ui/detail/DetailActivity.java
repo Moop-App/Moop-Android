@@ -23,6 +23,8 @@ import com.bumptech.glide.request.target.Target;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -32,6 +34,7 @@ import soup.movie.R;
 import soup.movie.data.model.Movie;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.Trailer;
+import soup.movie.di.ActivityScoped;
 import soup.movie.util.MovieUtil;
 import soup.movie.ui.BaseActivity;
 import soup.movie.util.DrawableUtils;
@@ -47,6 +50,7 @@ import static soup.movie.util.IntentUtil.createShareIntentWithText;
 import static soup.movie.util.RecyclerViewUtil.createLinearLayoutManager;
 import static soup.widget.util.AnimUtils.getFastOutSlowInInterpolator;
 
+@ActivityScoped
 public class DetailActivity extends BaseActivity implements DetailContract.View {
 
     private static final float SCRIM_ADJUSTMENT = 0.075f;
@@ -83,7 +87,9 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
 
     private Movie movie;
 
-    private DetailContract.Presenter presenter;
+    @Inject
+    DetailContract.Presenter presenter;
+
     private DetailListAdapter adapterView;
 
     private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
@@ -128,7 +134,6 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
         recyclerView.getItemAnimator().setRemoveDuration(200);
         this.adapterView = adapterView;
 
-        presenter = new DetailPresenter();
         presenter.attach(this);
 
         //TODO: call requestData() after transition animation is ended

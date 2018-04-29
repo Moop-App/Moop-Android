@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
+import soup.movie.di.FragmentScoped;
 import soup.widget.snappy.SnappyLinearLayoutManager;
 import soup.movie.data.model.Movie;
 import soup.movie.ui.main.MainTabFragment;
@@ -21,9 +24,11 @@ import soup.movie.ui.main.now.NowViewState.DoneState;
 import soup.movie.ui.main.now.NowViewState.LoadingState;
 import timber.log.Timber;
 
+@FragmentScoped
 public class NowFragment extends MainTabFragment implements NowContract.View {
 
-    private NowContract.Presenter presenter;
+    @Inject
+    NowContract.Presenter presenter;
 
     private NowListAdapter adapterView;
 
@@ -61,7 +66,6 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
         recyclerView.getItemAnimator().setAddDuration(200);
         recyclerView.getItemAnimator().setRemoveDuration(200);
 
-        presenter = new NowPresenter();
         presenter.attach(this);
     }
 

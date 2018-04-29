@@ -2,21 +2,29 @@ package soup.movie.ui.main.plan;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import soup.movie.Injection;
+import soup.movie.data.MovieRepository;
 import soup.movie.data.model.Movie;
 import soup.movie.data.model.PlanMovieRequest;
 import soup.movie.data.model.PlanMovieResponse;
+import soup.movie.di.FragmentScoped;
 
+@FragmentScoped
 public class PlanPresenter implements PlanContract.Presenter {
+
+    private final MovieRepository movieRepository;
 
     private PlanContract.View view;
 
     private Disposable disposable;
 
-    PlanPresenter() {
+    @Inject
+    PlanPresenter(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -40,7 +48,7 @@ public class PlanPresenter implements PlanContract.Presenter {
     }
 
     private Single<List<Movie>> getPlanObservable() {
-        return Injection.get().getMovieRepository()
+        return movieRepository
                 .getPlanList(new PlanMovieRequest())
                 .map(PlanMovieResponse::getList);
 

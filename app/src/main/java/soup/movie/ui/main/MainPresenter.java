@@ -1,21 +1,30 @@
 package soup.movie.ui.main;
 
+import javax.inject.Inject;
+
+import soup.movie.di.ActivityScoped;
+
 import static soup.movie.ui.main.MainContract.TAB_MODE_NOW;
 import static soup.movie.ui.main.MainContract.TAB_MODE_PLAN;
 import static soup.movie.ui.main.MainContract.TAB_MODE_SETTINGS;
 
+@ActivityScoped
 public class MainPresenter implements MainContract.Presenter {
 
-    private MainContract.View mView;
+    private MainContract.View view;
+
+    @Inject
+    MainPresenter() {
+    }
 
     @Override
     public void attach(MainContract.View view) {
-        mView = view;
+        this.view = view;
     }
 
     @Override
     public void detach() {
-        mView = null;
+        view = null;
     }
 
     @Override
@@ -34,6 +43,6 @@ public class MainPresenter implements MainContract.Presenter {
             default:
                 throw new IllegalStateException("Unknown tab mode");
         }
-        mView.render(viewState);
+        view.render(viewState);
     }
 }

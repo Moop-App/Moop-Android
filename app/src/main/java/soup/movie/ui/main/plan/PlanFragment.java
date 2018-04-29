@@ -11,19 +11,24 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.model.Movie;
+import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.plan.PlanViewState.DoneState;
 import soup.movie.ui.main.plan.PlanViewState.LoadingState;
 import soup.widget.snappy.SnappyLinearLayoutManager;
 import timber.log.Timber;
 
+@FragmentScoped
 public class PlanFragment extends MainTabFragment implements PlanContract.View {
 
-    private PlanContract.Presenter presenter;
+    @Inject
+    PlanContract.Presenter presenter;
 
     private PlanListAdapter adapterView;
 
@@ -61,7 +66,6 @@ public class PlanFragment extends MainTabFragment implements PlanContract.View {
         recyclerView.getItemAnimator().setAddDuration(200);
         recyclerView.getItemAnimator().setRemoveDuration(200);
 
-        presenter = new PlanPresenter();
         presenter.attach(this);
     }
 

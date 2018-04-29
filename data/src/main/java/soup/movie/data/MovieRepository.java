@@ -1,5 +1,8 @@
 package soup.movie.data;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Single;
 import soup.movie.data.model.CodeRequest;
 import soup.movie.data.model.CodeResponse;
@@ -10,30 +13,32 @@ import soup.movie.data.model.PlanMovieResponse;
 import soup.movie.data.model.TimeTableRequest;
 import soup.movie.data.model.TimeTableResponse;
 
+@Singleton
 public class MovieRepository implements ISoupDataSource {
 
-    private final ISoupDataSource soup;
+    private final ISoupDataSource remoteDataSource;
 
+    @Inject
     public MovieRepository(ISoupDataSource soupDataSource) {
-        soup = soupDataSource;
+        remoteDataSource = soupDataSource;
     }
 
     public Single<NowMovieResponse> getNowList(NowMovieRequest request) {
-        return soup.getNowList(request);
+        return remoteDataSource.getNowList(request);
     }
 
     @Override
     public Single<PlanMovieResponse> getPlanList(PlanMovieRequest request) {
-        return soup.getPlanList(request);
+        return remoteDataSource.getPlanList(request);
     }
 
     @Override
     public Single<CodeResponse> getCodeList(CodeRequest request) {
-        return soup.getCodeList(request);
+        return remoteDataSource.getCodeList(request);
     }
 
     @Override
     public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
-        return soup.getTimeTableList(request);
+        return remoteDataSource.getTimeTableList(request);
     }
 }

@@ -13,21 +13,26 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import soup.movie.R;
 import soup.movie.data.model.TheaterCode;
+import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
 import soup.movie.util.ListUtil;
 import timber.log.Timber;
 
+@FragmentScoped
 public class SettingsFragment extends MainTabFragment implements SettingsContract.View {
 
     @BindView(R.id.theater_option)
     TextView theaterOption;
 
-    private SettingsContract.Presenter presenter;
+    @Inject
+    SettingsContract.Presenter presenter;
 
     public SettingsFragment() {
     }
