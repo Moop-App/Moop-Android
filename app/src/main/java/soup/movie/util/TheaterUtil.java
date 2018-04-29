@@ -6,47 +6,23 @@ import android.support.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import soup.movie.core.preference.Preference;
-import soup.movie.core.preference.key.InerasableKey;
-import soup.movie.core.preference.key.Key;
 import soup.movie.data.base.AsyncLoadListener;
 import soup.movie.data.model.TheaterCode;
 
 public class TheaterUtil {
 
-    private static final Key<String> KEY_THEATER_LIST = new InerasableKey<>("theater_list", "");
-
-    private static final Key<String> KEY_MY_THEATERS = new InerasableKey<>("my_theaters", "");
-
     public static void loadAsync(@Nullable AsyncLoadListener<List<TheaterCode>> listener) {
-        String theaterListJson = Preference.getInstance().getString(KEY_THEATER_LIST);
-        if (StringUtils.isEmpty(theaterListJson)) {
-            //TODO:
-//            Disposable disposable = Injection.get()
-//                    .getMovieRepository()
-//                    .getCodeList(new CodeRequest())
-//                    .map(CodeResponse::getList)
-//                    .map(areas -> {
-//                        List<TheaterCode> codes = new ArrayList<>();
-//                        for (Area area : areas) {
-//                            codes.addAll(area.getTheaterList());
-//                        }
-//                        Timber.d("loadAsync: complete, data=%s", codes);
-//                        Preference.getInstance().putString(KEY_THEATER_LIST, toJson(codes));
-//                        return codes;
-//                    })
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(theaters -> fireOnLoaded(listener, theaters), Timber::e);
-        } else {
-            fireOnLoaded(listener, fromJson(theaterListJson));
-        }
+        //TODO
+        //String theaterListJson = Preference.getInstance().getString(KEY_THEATER_LIST);
+        //if (StringUtils.isEmpty(theaterListJson)) {
+        //} else {
+        //    fireOnLoaded(listener, fromJson(theaterListJson));
+        //}
     }
 
     private static void fireOnLoaded(@Nullable AsyncLoadListener<List<TheaterCode>> listener,
@@ -66,11 +42,14 @@ public class TheaterUtil {
     }
 
     public static void saveMyTheaterList(List<TheaterCode> theaterList) {
-        Preference.getInstance().putString(KEY_MY_THEATERS, toJson(theaterList));
+        //TODO
+        //Preference.getInstance().putString(KEY_MY_THEATERS, toJson(theaterList));
     }
 
     @NonNull
     public static List<TheaterCode> getMyTheaterList() {
-        return ListUtils.emptyIfNull(fromJson(Preference.getInstance().getString(KEY_MY_THEATERS)));
+        return Collections.emptyList();
+        //TODO
+        //return ListUtils.emptyIfNull(fromJson(Preference.getInstance().getString(KEY_MY_THEATERS)));
     }
 }

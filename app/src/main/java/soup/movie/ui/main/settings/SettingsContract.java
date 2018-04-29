@@ -8,7 +8,6 @@ import soup.movie.ui.BaseContract;
 public interface SettingsContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
-        void onClick(@NonNull Context instantContext);
     }
 
     interface View extends BaseContract.View {

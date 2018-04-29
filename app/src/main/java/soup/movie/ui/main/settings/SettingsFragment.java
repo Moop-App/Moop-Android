@@ -56,7 +56,6 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new SettingsPresenter();
         presenter.attach(this);
     }
 
@@ -89,6 +88,7 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
 
     @OnClick(R.id.theater_option)
     public void onClick(View view) {
-        presenter.onClick(view.getContext());
+        //TODO
+        //presenter.onClick(view.getContext());
     }
 }
