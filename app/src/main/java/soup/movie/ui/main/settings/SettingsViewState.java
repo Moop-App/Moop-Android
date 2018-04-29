@@ -11,10 +11,16 @@ interface SettingsViewState extends BaseViewState {
 
     class DoneState implements SettingsViewState {
 
+        private boolean isHomeTypeVertical;
         private List<TheaterCode> theaterList;
 
-        DoneState(@NonNull List<TheaterCode> theaterList) {
+        DoneState(boolean isHomeTypeVertical, @NonNull List<TheaterCode> theaterList) {
+            this.isHomeTypeVertical = isHomeTypeVertical;
             this.theaterList = theaterList;
+        }
+
+        public boolean isHomeTypeVertical() {
+            return isHomeTypeVertical;
         }
 
         public List<TheaterCode> getTheaterList() {
@@ -24,7 +30,8 @@ interface SettingsViewState extends BaseViewState {
         @Override
         public String toString() {
             return "DoneState{" +
-                    "theaterList=" + theaterList +
+                    "isHomeTypeVertical=" + isHomeTypeVertical +
+                    ", theaterList=" + theaterList +
                     '}';
         }
     }

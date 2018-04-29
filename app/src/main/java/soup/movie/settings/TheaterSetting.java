@@ -11,14 +11,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import soup.movie.data.model.TheaterCode;
 
 public class TheaterSetting {
 
     private static final String KEY = "favorite_theaters";
+    private static final String DEFAULT_VALUE = "";
 
     private final SharedPreferences preferences;
 
@@ -27,11 +25,11 @@ public class TheaterSetting {
     }
 
     public List<TheaterCode> getFavoriteTheaters() {
-        return ListUtils.emptyIfNull(fromJson(preferences.getString(KEY, "")));
+        return ListUtils.emptyIfNull(fromJson(preferences.getString(KEY, DEFAULT_VALUE)));
     }
 
     public void setFavoriteTheaters(List<TheaterCode> theaters) {
-        preferences.edit().putString(KEY, toJson(theaters));
+        preferences.edit().putString(KEY, toJson(theaters)).apply();
     }
 
     private static String toJson(List<TheaterCode> theaterCodeList) {

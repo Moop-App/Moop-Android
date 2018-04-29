@@ -8,10 +8,17 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import soup.movie.settings.HomeTypeSetting;
 import soup.movie.settings.TheaterSetting;
 
 @Module
 public class SharedPreferencesModule {
+
+    @Singleton
+    @Provides
+    HomeTypeSetting provideHomeTypeSetting(SharedPreferences preferences) {
+        return new HomeTypeSetting(preferences);
+    }
 
     @Singleton
     @Provides

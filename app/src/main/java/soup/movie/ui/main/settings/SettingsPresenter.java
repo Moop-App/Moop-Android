@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import soup.movie.settings.HomeTypeSetting;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
@@ -13,10 +14,13 @@ import timber.log.Timber;
 public class SettingsPresenter extends BasePresenter<SettingsContract.View>
         implements SettingsContract.Presenter {
 
+    private final HomeTypeSetting homeTypeSetting;
     private final TheaterSetting theaterSetting;
 
     @Inject
-    SettingsPresenter(TheaterSetting theaterSetting) {
+    SettingsPresenter(HomeTypeSetting homeTypeSetting,
+                      TheaterSetting theaterSetting) {
+        this.homeTypeSetting = homeTypeSetting;
         this.theaterSetting = theaterSetting;
     }
 
@@ -28,7 +32,9 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.View>
     }
 
     private Single<SettingsViewState> getViewStateObservable() {
-        return Single.fromCallable(theaterSetting::getFavoriteTheaters)
-                .map(DoneState::new);
+        return Single.zip(
+                Single.fromCallable(homeTypeSetting::isVerticalType),
+                Single.fromCallable(theaterSetting::getFavoriteTheaters),
+                DoneState::new);
     }
 }
