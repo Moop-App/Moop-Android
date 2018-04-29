@@ -16,11 +16,11 @@ public class SnappyLinearLayoutManager extends LinearLayoutManager implements Sn
 
     private static final int INVALID = -1;
 
-    private float mFlingFriction = ViewConfiguration.getScrollFriction();
-    private int mChildSize = INVALID;
+    private float flingFriction = ViewConfiguration.getScrollFriction();
+    private int childSize = INVALID;
 
-    private final float mPpi;
-    private float mPhysicalCoeff;
+    private final float ppi;
+    private float physicalCoeff;
 
     public SnappyLinearLayoutManager(Context context) {
         this(context, VERTICAL, false);
@@ -28,8 +28,8 @@ public class SnappyLinearLayoutManager extends LinearLayoutManager implements Sn
 
     public SnappyLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
-        mPpi = context.getResources().getDisplayMetrics().density * 160.0f;
-        mPhysicalCoeff = computeDeceleration(0.84f);
+        ppi = context.getResources().getDisplayMetrics().density * 160.0f;
+        physicalCoeff = computeDeceleration(0.84f);
     }
 
     public final SnappyLinearLayoutManager vertically() {
@@ -43,18 +43,18 @@ public class SnappyLinearLayoutManager extends LinearLayoutManager implements Sn
     }
 
     public final void setFriction(float friction) {
-        mPhysicalCoeff = computeDeceleration(friction);
-        mFlingFriction = friction;
+        physicalCoeff = computeDeceleration(friction);
+        flingFriction = friction;
     }
 
     public final void setChildSize(int size) {
-        mChildSize = size;
+        childSize = size;
     }
 
     private float computeDeceleration(float friction) {
         return SensorManager.GRAVITY_EARTH // g (m/s^2)
                 * 39.37f                   // inche/meter
-                * mPpi                     // pixels per inch
+                * ppi                     // pixels per inch
                 * friction;
     }
 
@@ -77,8 +77,8 @@ public class SnappyLinearLayoutManager extends LinearLayoutManager implements Sn
 
     private int calculateScrollPositionForVelocity(int velocity, int scrollPosition, int childSize,
                                                    int currPosition) {
-        if (mChildSize != INVALID) {
-            childSize = mChildSize;
+        if (this.childSize != INVALID) {
+            childSize = this.childSize;
         }
         final double dist = getSplineFlingDistance(velocity);
         final double tempScroll = scrollPosition + (velocity > 0 ? dist : -dist);
@@ -134,12 +134,12 @@ public class SnappyLinearLayoutManager extends LinearLayoutManager implements Sn
     }
 
     private double getSplineDeceleration(double velocity) {
-        return Math.log(INFLEXION * Math.abs(velocity) / (mFlingFriction * mPhysicalCoeff));
+        return Math.log(INFLEXION * Math.abs(velocity) / (flingFriction * physicalCoeff));
     }
 
     private double getSplineFlingDistance(double velocity) {
         final double l = getSplineDeceleration(velocity);
         final double decelMinusOne = DECELERATION_RATE - 1.0;
-        return mFlingFriction * mPhysicalCoeff * Math.exp(DECELERATION_RATE / decelMinusOne * l);
+        return flingFriction * physicalCoeff * Math.exp(DECELERATION_RATE / decelMinusOne * l);
     }
 }

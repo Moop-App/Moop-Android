@@ -7,19 +7,19 @@ import java.util.List;
 public class PlanMovieResponse {
 
     @SerializedName("list")
-    private List<Movie> mList;
+    private List<Movie> list;
 
     public PlanMovieResponse() {
     }
 
     public List<Movie> getList() {
-        return mList;
+        return list;
     }
 
     @Override
     public String toString() {
         return "PlanMovieResponse{" +
-                "mList=" + mList +
+                "list=" + list +
                 '}';
     }
 }

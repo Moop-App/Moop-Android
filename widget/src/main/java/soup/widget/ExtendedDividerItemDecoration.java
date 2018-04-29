@@ -50,24 +50,24 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{ android.R.attr.listDivider };
 
-    private Drawable mDivider;
+    private Drawable divider;
 
-    private ColorStateList mDrawableTintList = null;
-    private PorterDuff.Mode mDrawableTintMode = null;
-    private boolean mHasDrawableTint = false;
-    private boolean mHasDrawableTintMode = false;
+    private ColorStateList drawableTintList = null;
+    private PorterDuff.Mode drawableTintMode = null;
+    private boolean hasDrawableTint = false;
+    private boolean hasDrawableTintMode = false;
 
     /**
      * Current orientation. Either {@link #HORIZONTAL} or {@link #VERTICAL}.
      */
-    private int mOrientation;
+    private int orientation;
 
-    private final Rect mBounds = new Rect();
+    private final Rect bounds = new Rect();
 
-    private int mMarginLeft = 0;
-    private int mMarginTop = 0;
-    private int mMarginRight = 0;
-    private int mMarginBottom = 0;
+    private int marginLeft = 0;
+    private int marginTop = 0;
+    private int marginRight = 0;
+    private int marginBottom = 0;
 
     /**
      * Creates a divider {@link RecyclerView.ItemDecoration} that can be used with a
@@ -78,8 +78,8 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
      */
     public ExtendedDividerItemDecoration(Context context, int orientation) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
-        mDivider = a.getDrawable(0);
-        if (mDivider == null) {
+        divider = a.getDrawable(0);
+        if (divider == null) {
             Timber.w("@android:attr/listDivider was not set in the theme used for this "
                     + "DividerItemDecoration. Please set that attribute all call setDrawable()");
         }
@@ -98,7 +98,7 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
             throw new IllegalArgumentException(
                     "Invalid orientation. It should be either HORIZONTAL or VERTICAL");
         }
-        mOrientation = orientation;
+        this.orientation = orientation;
     }
 
     /**
@@ -110,15 +110,15 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
         if (drawable == null) {
             throw new IllegalArgumentException("Drawable cannot be null.");
         }
-        mDivider = drawable;
+        divider = drawable;
     }
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        if (parent.getLayoutManager() == null || mDivider == null) {
+        if (parent.getLayoutManager() == null || divider == null) {
             return;
         }
-        if (mOrientation == VERTICAL) {
+        if (orientation == VERTICAL) {
             drawVertical(c, parent);
         } else {
             drawHorizontal(c, parent);
@@ -141,22 +141,22 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
         }
 
         // apply margin
-        left += mMarginLeft;
-        right -= mMarginRight;
+        left += marginLeft;
+        right -= marginRight;
 
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
-            parent.getDecoratedBoundsWithMargins(child, mBounds);
-            int bottom = mBounds.bottom + Math.round(child.getTranslationY());
-            int top = bottom - mDivider.getIntrinsicHeight();
+            parent.getDecoratedBoundsWithMargins(child, bounds);
+            int bottom = bounds.bottom + Math.round(child.getTranslationY());
+            int top = bottom - divider.getIntrinsicHeight();
 
             // apply margin
-            top += mMarginTop;
-            bottom -= mMarginBottom;
+            top += marginTop;
+            bottom -= marginBottom;
 
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(canvas);
+            divider.setBounds(left, top, right, bottom);
+            divider.draw(canvas);
         }
         canvas.restore();
     }
@@ -177,22 +177,22 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
         }
 
         // apply margin
-        top += mMarginTop;
-        bottom -= mMarginBottom;
+        top += marginTop;
+        bottom -= marginBottom;
 
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
-            parent.getLayoutManager().getDecoratedBoundsWithMargins(child, mBounds);
-            int right = mBounds.right + Math.round(child.getTranslationX());
-            int left = right - mDivider.getIntrinsicWidth();
+            parent.getLayoutManager().getDecoratedBoundsWithMargins(child, bounds);
+            int right = bounds.right + Math.round(child.getTranslationX());
+            int left = right - divider.getIntrinsicWidth();
 
             // apply margin
-            left += mMarginLeft;
-            right -= mMarginRight;
+            left += marginLeft;
+            right -= marginRight;
 
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(canvas);
+            divider.setBounds(left, top, right, bottom);
+            divider.draw(canvas);
         }
         canvas.restore();
     }
@@ -200,14 +200,14 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {
-        if (mDivider == null) {
+        if (divider == null) {
             outRect.set(0, 0, 0, 0);
             return;
         }
-        if (mOrientation == VERTICAL) {
-            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
+        if (orientation == VERTICAL) {
+            outRect.set(0, 0, 0, divider.getIntrinsicHeight());
         } else {
-            outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+            outRect.set(0, 0, divider.getIntrinsicWidth(), 0);
         }
     }
 
@@ -226,8 +226,8 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
      * @see Drawable#setTintList(ColorStateList)
      */
     public void setTintList(@Nullable ColorStateList tint) {
-        mDrawableTintList = tint;
-        mHasDrawableTint = true;
+        drawableTintList = tint;
+        hasDrawableTint = true;
 
         applyImageTint();
     }
@@ -242,22 +242,22 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
      * @see Drawable#setTintMode(PorterDuff.Mode)
      */
     public void setTintMode(@Nullable PorterDuff.Mode tintMode) {
-        mDrawableTintMode = tintMode;
-        mHasDrawableTintMode = true;
+        drawableTintMode = tintMode;
+        hasDrawableTintMode = true;
 
         applyImageTint();
     }
 
     private void applyImageTint() {
-        if (mDivider != null && (mHasDrawableTint || mHasDrawableTintMode)) {
-            mDivider = mDivider.mutate();
+        if (divider != null && (hasDrawableTint || hasDrawableTintMode)) {
+            divider = divider.mutate();
 
-            if (mHasDrawableTint) {
-                mDivider.setTintList(mDrawableTintList);
+            if (hasDrawableTint) {
+                divider.setTintList(drawableTintList);
             }
 
-            if (mHasDrawableTintMode) {
-                mDivider.setTintMode(mDrawableTintMode);
+            if (hasDrawableTintMode) {
+                divider.setTintMode(drawableTintMode);
             }
         }
     }
@@ -272,10 +272,10 @@ public class ExtendedDividerItemDecoration extends RecyclerView.ItemDecoration {
      * @param bottom the bottom margin size
      */
     public void setMargins(int left, int top, int right, int bottom) {
-        mMarginLeft = left;
-        mMarginTop = top;
-        mMarginRight = right;
-        mMarginBottom = bottom;
+        marginLeft = left;
+        marginTop = top;
+        marginRight = right;
+        marginBottom = bottom;
     }
 
     public static class Builder {

@@ -24,50 +24,50 @@ import soup.movie.data.soup.model.TimeTableResponse;
 
 public class MovieRepository implements IKobisDataSource, ISoupDataSource {
 
-    private final IKobisDataSource mKobis;
-    private final ISoupDataSource mSoup;
+    private final IKobisDataSource kobis;
+    private final ISoupDataSource soup;
 
     public MovieRepository(IKobisDataSource kobisDataSource, ISoupDataSource soupDataSource) {
-        mKobis = kobisDataSource;
-        mSoup = soupDataSource;
+        kobis = kobisDataSource;
+        soup = soupDataSource;
     }
 
     @Override
     public Single<List<Movie>> getMovieList(MovieListRequest movieListRequest) {
-        return mKobis.getMovieList(movieListRequest);
+        return kobis.getMovieList(movieListRequest);
     }
 
     @Override
     public Single<DailyBoxOfficeResult> getDailyBoxOfficeList(DailyBoxOfficeRequest dailyBoxOfficeRequest) {
-        return mKobis.getDailyBoxOfficeList(dailyBoxOfficeRequest);
+        return kobis.getDailyBoxOfficeList(dailyBoxOfficeRequest);
     }
 
     @Override
     public Single<WeeklyBoxOfficeResult> getWeeklyBoxOfficeList(WeeklyBoxOfficeRequest weeklyBoxOfficeRequest) {
-        return mKobis.getWeeklyBoxOfficeList(weeklyBoxOfficeRequest);
+        return kobis.getWeeklyBoxOfficeList(weeklyBoxOfficeRequest);
     }
 
     public Single<NowMovieResponse> getNowList(NowMovieRequest request) {
-        return mSoup.getNowList(request);
+        return soup.getNowList(request);
     }
 
     @Override
     public Single<ArtMovieResponse> getArtList(ArtMovieRequest request) {
-        return mSoup.getArtList(request);
+        return soup.getArtList(request);
     }
 
     @Override
     public Single<PlanMovieResponse> getPlanList(PlanMovieRequest request) {
-        return mSoup.getPlanList(request);
+        return soup.getPlanList(request);
     }
 
     @Override
     public Single<CodeResponse> getCodeList(CodeRequest request) {
-        return mSoup.getCodeList(request);
+        return soup.getCodeList(request);
     }
 
     @Override
     public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
-        return mSoup.getTimeTableList(request);
+        return soup.getTimeTableList(request);
     }
 }

@@ -16,39 +16,39 @@ import soup.movie.data.soup.service.SoupApiService;
 
 public class SoupDataSource implements ISoupDataSource {
 
-    private SoupApiService mSoupApi;
+    private SoupApiService soupApiService;
 
     public SoupDataSource(SoupApiService soupApi) {
-        mSoupApi = soupApi;
+        soupApiService = soupApi;
     }
 
     @Override
     public Single<NowMovieResponse> getNowList(NowMovieRequest request) {
-        return mSoupApi.getNowList()
+        return soupApiService.getNowList()
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Single<ArtMovieResponse> getArtList(ArtMovieRequest request) {
-        return mSoupApi.getArtList()
+        return soupApiService.getArtList()
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Single<PlanMovieResponse> getPlanList(PlanMovieRequest request) {
-        return mSoupApi.getPlanList()
+        return soupApiService.getPlanList()
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Single<CodeResponse> getCodeList(CodeRequest request) {
-        return mSoupApi.getCodeList()
+        return soupApiService.getCodeList()
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
-        return mSoupApi.getTimeTableList(request.getTheaterCode(), request.getMovieCode())
+        return soupApiService.getTimeTableList(request.getTheaterCode(), request.getMovieCode())
                 .subscribeOn(Schedulers.io());
     }
 }

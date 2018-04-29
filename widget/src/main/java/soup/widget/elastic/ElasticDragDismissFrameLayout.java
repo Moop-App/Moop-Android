@@ -51,7 +51,7 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
     private float totalDrag;
     private boolean draggingDown = false;
     private boolean draggingUp = false;
-    private int mLastActionEvent;
+    private int lastActionEvent;
 
     private List<ElasticDragDismissCallback> callbacks;
 
@@ -138,7 +138,7 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
     }
 
     @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
-        mLastActionEvent = ev.getAction();
+        lastActionEvent = ev.getAction();
         return super.onInterceptTouchEvent(ev);
     }
 
@@ -147,7 +147,7 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
         if (Math.abs(totalDrag) >= dragDismissDistance) {
             dispatchDismissCallback();
         } else { // settle back to natural position
-            if (mLastActionEvent == MotionEvent.ACTION_DOWN) {
+            if (lastActionEvent == MotionEvent.ACTION_DOWN) {
                 // this is a 'defensive cleanup for new gestures',
                 // don't animate here
                 // see also https://github.com/nickbutcher/plaid/issues/185

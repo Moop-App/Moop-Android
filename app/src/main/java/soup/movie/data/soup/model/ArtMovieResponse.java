@@ -7,19 +7,19 @@ import java.util.List;
 public class ArtMovieResponse {
 
     @SerializedName("list")
-    private List<Movie> mList;
+    private List<Movie> list;
 
     public ArtMovieResponse() {
     }
 
     public List<Movie> getList() {
-        return mList;
+        return list;
     }
 
     @Override
     public String toString() {
         return "ArtMovieResponse{" +
-                "mList=" + mList +
+                "list=" + list +
                 '}';
     }
 }

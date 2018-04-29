@@ -7,51 +7,51 @@ import soup.movie.data.MovieConstants;
 public class BoxOfficeMovieList {
 
     @MovieConstants.Source
-    private int mSource; // 데이터 소스
+    private int source; // 데이터 소스
 
     @MovieConstants.BoxOfficeType
-    private int mBoxOfficeType;
-    private String mStartDate;
-    private String mEndDate;
-    private List<BoxOfficeMovie> mBoxOfficeMovieList;
+    private int boxOfficeType;
+    private String startDate;
+    private String endDate;
+    private List<BoxOfficeMovie> boxOfficeMovieList;
 
     public BoxOfficeMovieList(int source, int boxOfficeType, String startDate, String endDate,
                               List<BoxOfficeMovie> boxOfficeMovieList) {
-        this.mSource = source;
-        this.mBoxOfficeType = boxOfficeType;
-        this.mStartDate = startDate;
-        this.mEndDate = endDate;
-        this.mBoxOfficeMovieList = boxOfficeMovieList;
+        this.source = source;
+        this.boxOfficeType = boxOfficeType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.boxOfficeMovieList = boxOfficeMovieList;
     }
 
     public int getSource() {
-        return mSource;
+        return source;
     }
 
     public int getBoxOfficeType() {
-        return mBoxOfficeType;
+        return boxOfficeType;
     }
 
     public String getStartDate() {
-        return mStartDate;
+        return startDate;
     }
 
     public String getEndDate() {
-        return mEndDate;
+        return endDate;
     }
 
     public List<BoxOfficeMovie> getBoxOfficeMovieList() {
-        return mBoxOfficeMovieList;
+        return boxOfficeMovieList;
     }
 
     @Override
     public String toString() {
         return "BoxOfficeMovieList{" +
-                "mSource=" + mSource +
-                ", mBoxOfficeType=" + mBoxOfficeType +
-                ", mStartDate='" + mStartDate + '\'' +
-                ", mEndDate='" + mEndDate + '\'' +
-                ", mBoxOfficeMovieList=" + mBoxOfficeMovieList +
+                "source=" + source +
+                ", boxOfficeType=" + boxOfficeType +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", boxOfficeMovieList=" + boxOfficeMovieList +
                 '}';
     }
 }
