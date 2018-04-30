@@ -1,15 +1,14 @@
 package soup.movie.ui.main.settings;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.chip.Chip;
+import android.support.design.chip.ChipGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -22,14 +21,16 @@ import soup.movie.data.model.TheaterCode;
 import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
-import soup.movie.util.ListUtil;
 import timber.log.Timber;
 
 @FragmentScoped
 public class SettingsFragment extends MainTabFragment implements SettingsContract.View {
 
-    @BindView(R.id.theater_option)
-    TextView theaterOption;
+    @BindView(R.id.theater_empty)
+    TextView theaterEmpty;
+
+    @BindView(R.id.theater_group)
+    ChipGroup theaterGroup;
 
     @Inject
     SettingsContract.Presenter presenter;
@@ -78,17 +79,23 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     private void renderInternal(DoneState viewState) {
         List<TheaterCode> theaters = viewState.getTheaterList();
         if (theaters.isEmpty()) {
-            theaterOption.setText("없음");
-            theaterOption.setTextColor(Color.RED);
+            theaterEmpty.setVisibility(View.VISIBLE);
+            theaterGroup.removeAllViews();
+            theaterGroup.setVisibility(View.GONE);
         } else {
-            theaterOption.setText(StringUtils.join(ListUtil.toStringArray(theaters, TheaterCode::getName)));
-            theaterOption.setTextColor(Color.BLACK);
+            theaterEmpty.setVisibility(View.GONE);
+            theaterGroup.removeAllViews();
+            theaterGroup.setVisibility(View.VISIBLE);
+            for (TheaterCode theater : theaters) {
+                Chip theaterChip = new Chip(getContext());
+                theaterChip.setText(theater.getName());
+                theaterGroup.addView(theaterChip);
+            }
         }
     }
 
-    @OnClick(R.id.theater_option)
-    public void onClick(View view) {
+    @OnClick(R.id.theater_edit)
+    public void onTheaterEditClicked() {
         //TODO
-        //presenter.onClick(view.getContext());
     }
 }
