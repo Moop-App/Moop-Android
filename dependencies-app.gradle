@@ -2,7 +2,7 @@ rootProject.allprojects {
     project -> project.afterEvaluate {
 
         if (!project.hasProperty("android")) {
-            return;
+            return
         }
 
         repositories {
