@@ -9,4 +9,4 @@
     android:clipToPadding="false"
     tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
     tools:orientation="horizontal"
-    tools:listitem="@layout/item_movie_for_home" />
+    tools:listitem="@layout/item_movie_horizontal" />

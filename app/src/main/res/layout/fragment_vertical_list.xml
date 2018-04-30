@@ -14,6 +14,7 @@
         android:clipToPadding="false"
         tools:layoutManager="android.support.v7.widget.GridLayoutManager"
         tools:orientation="vertical"
-        tools:listitem="@layout/item_movie_for_home" />
+        tools:spanCount="3"
+        tools:listitem="@layout/item_movie_vertical" />
 
 </android.support.v4.widget.SwipeRefreshLayout>

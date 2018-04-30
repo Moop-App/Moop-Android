@@ -3,6 +3,7 @@ package soup.movie.ui.main;
 import javax.inject.Inject;
 
 import soup.movie.di.ActivityScoped;
+import soup.movie.settings.HomeTypeSetting;
 import soup.movie.ui.BasePresenter;
 
 import static soup.movie.ui.main.MainContract.TAB_MODE_NOW;
@@ -13,8 +14,11 @@ import static soup.movie.ui.main.MainContract.TAB_MODE_SETTINGS;
 public class MainPresenter extends BasePresenter<MainContract.View>
         implements MainContract.Presenter {
 
+    private final HomeTypeSetting homeTypeSetting;
+
     @Inject
-    MainPresenter() {
+    MainPresenter(HomeTypeSetting homeTypeSetting) {
+        this.homeTypeSetting = homeTypeSetting;
     }
 
     @Override
@@ -22,10 +26,10 @@ public class MainPresenter extends BasePresenter<MainContract.View>
         MainViewState viewState;
         switch (mode) {
             case TAB_MODE_NOW:
-                viewState = new MainViewState.NowState();
+                viewState = new MainViewState.NowState(homeTypeSetting.isVerticalType());
                 break;
             case TAB_MODE_PLAN:
-                viewState = new MainViewState.PlanState();
+                viewState = new MainViewState.PlanState(homeTypeSetting.isVerticalType());
                 break;
             case TAB_MODE_SETTINGS:
                 viewState = new MainViewState.SettingsState();

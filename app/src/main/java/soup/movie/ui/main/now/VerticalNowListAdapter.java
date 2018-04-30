@@ -1,8 +1,9 @@
-package soup.movie.ui.main.plan;
+package soup.movie.ui.main.now;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
@@ -13,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +23,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.model.Movie;
-import soup.movie.util.MovieUtil;
 import soup.movie.ui.detail.DetailActivity;
 import soup.movie.util.ImageUtil;
 import soup.movie.util.ListUtil;
+import soup.movie.util.MovieUtil;
 
-import static soup.movie.util.IntentUtil.createShareIntentWithText;
-
-class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
+class VerticalNowListAdapter extends RecyclerView.Adapter<VerticalNowListAdapter.ViewHolder> {
 
     private final Activity host;
 
@@ -48,7 +46,7 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
     @BindColor(R.color.red)
     int redColor;
 
-    PlanListAdapter(Activity host) {
+    VerticalNowListAdapter(Activity host) {
         this.host = host;
         ButterKnife.bind(this, host);
     }
@@ -57,7 +55,7 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_movie_horizontal, parent, false);
+                .inflate(R.layout.item_movie_vertical, parent, false);
         ViewHolder holder = new ViewHolder(view);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(host, DetailActivity.class);
@@ -66,17 +64,8 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
                     ActivityOptions.makeSceneTransitionAnimation(host,
                             Pair.create(holder.backgroundView, host.getString(R.string.transition_background)),
                             Pair.create(holder.posterView, host.getString(R.string.transition_poster)),
-                            Pair.create(holder.titleView, host.getString(R.string.transition_title)),
-                            Pair.create(holder.ageView, host.getString(R.string.transition_age)),
-                            Pair.create(holder.subTextView, host.getString(R.string.transition_egg)),
-//                            Pair.create(holder.favoriteButton, host.getString(R.string.transition_favorite)),
-                            Pair.create(holder.shareButton, host.getString(R.string.transition_share)));
+                            Pair.create(holder.ageBgView, host.getString(R.string.transition_age)));
             host.startActivity(intent, options.toBundle());
-        });
-        holder.shareButton.setOnClickListener(v -> {
-            Movie movie = items.get(holder.getAdapterPosition());
-            host.startActivity(createShareIntentWithText(
-                    "공유하기", MovieUtil.createShareDescription(movie)));
         });
         return holder;
     }
@@ -85,12 +74,10 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie item = items.get(position);
         ImageUtil.loadAsync(host, holder.posterView, item.getPosterUrl());
-        holder.titleView.setText(item.getTitle());
-        holder.subTextView.setText(item.getOpenDate());
-        updateAgeText(holder.ageBgView, holder.ageView, item.getAge());
+        updateAgeView(holder.ageBgView, item.getAge());
     }
 
-    private void updateAgeText(View ageBgView, TextView ageTextView, String ageText) {
+    private void updateAgeView(View ageBgView, String ageText) {
         int color = Color.TRANSPARENT;
         switch (ageText) {
             case "전체 관람가":
@@ -114,13 +101,9 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
         }
         if (TextUtils.isEmpty(ageText)) {
             ageBgView.setVisibility(View.GONE);
-            ageTextView.setVisibility(View.GONE);
         } else {
-            ageBgView.setBackgroundColor(color);
-            ageTextView.setText(ageText);
-            ageTextView.setTextColor(color);
+            ageBgView.setBackgroundTintList(ColorStateList.valueOf(color));
             ageBgView.setVisibility(View.VISIBLE);
-            ageTextView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -161,18 +144,8 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
         View backgroundView;
         @BindView(R.id.movie_poster)
         ImageView posterView;
-        @BindView(R.id.primary_text)
-        TextView titleView;
         @BindView(R.id.age_bg)
         View ageBgView;
-        @BindView(R.id.age_icon)
-        TextView ageView;
-        @BindView(R.id.sub_text2)
-        TextView subTextView;
-        @BindView(R.id.favorite_button)
-        View favoriteButton;
-        @BindView(R.id.share_button)
-        View shareButton;
 
         ViewHolder(View view) {
             super(view);

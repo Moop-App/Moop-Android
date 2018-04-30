@@ -7,6 +7,7 @@ import soup.movie.ui.BaseContract;
 public interface NowContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
+        void refresh();
     }
 
     interface View extends BaseContract.View {

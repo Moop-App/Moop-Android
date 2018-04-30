@@ -1,19 +1,16 @@
 package soup.movie.ui.main.settings;
 
 import com.jakewharton.rxrelay2.BehaviorRelay;
-import com.jakewharton.rxrelay2.PublishRelay;
-import com.jakewharton.rxrelay2.Relay;
-import com.jakewharton.rxrelay2.ReplayRelay;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.subjects.BehaviorSubject;
+import soup.movie.data.model.TheaterCode;
 import soup.movie.settings.HomeTypeSetting;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
@@ -46,7 +43,7 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.View>
     private Flowable<SettingsViewState> getViewStateObservable() {
         return Flowable.combineLatest(
                 getHomeTypeObservable(),
-                Flowable.fromCallable(theaterSetting::getFavoriteTheaters),
+                getFavoriteTheatersObservable(),
                 DoneState::new);
     }
 
@@ -55,13 +52,19 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.View>
                 .distinctUntilChanged();
     }
 
+    private Flowable<List<TheaterCode>> getFavoriteTheatersObservable() {
+        return Flowable.fromCallable(theaterSetting::getFavoriteTheaters);
+    }
+
     @Override
     public void onVerticalHomeTypeClicked() {
+        homeTypeSetting.setVerticalType();
         homeTypeSubject.accept(true);
     }
 
     @Override
     public void onHorizontalHomeTypeClicked() {
+        homeTypeSetting.setHorizontalType();
         homeTypeSubject.accept(false);
     }
 }

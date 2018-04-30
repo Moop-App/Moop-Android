@@ -55,7 +55,7 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_movie_for_home, parent, false);
+                .inflate(R.layout.item_movie_horizontal, parent, false);
         ViewHolder holder = new ViewHolder(view);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(host, DetailActivity.class);

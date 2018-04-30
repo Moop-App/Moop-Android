@@ -13,6 +13,10 @@ public abstract class NowModule {
     abstract NowFragment nowFragment();
 
     @FragmentScoped
+    @ContributesAndroidInjector
+    abstract VerticalNowFragment verticalNowFragment();
+
+    @FragmentScoped
     @Binds
     abstract NowContract.Presenter nowPresenter(NowPresenter presenter);
 }
