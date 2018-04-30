@@ -18,30 +18,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <soup.widget.CheckedImageView
+    <android.support.v7.widget.CardView
         android:id="@+id/icon_home_type_vertical"
         android:layout_width="100dp"
         android:layout_height="64dp"
         android:layout_marginTop="@dimen/settings_margin_in_category"
-        android:src="@drawable/ic_home_type_vertical"
-        android:scaleType="centerInside"
-        android:background="@drawable/selector_bg_home_type"
-        app:checked="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/selector_bg_home_type"
+        app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toStartOf="@+id/icon_home_type_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_home_type" />
+        app:layout_constraintTop_toBottomOf="@+id/category_home_type">
 
-    <soup.widget.CheckedImageView
+        <soup.widget.CheckedImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_home_type_vertical" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
         android:id="@+id/icon_home_type_horizontal"
         android:layout_width="100dp"
         android:layout_height="64dp"
         android:layout_marginTop="@dimen/settings_margin_in_category"
-        android:src="@drawable/ic_home_type_horizontal"
-        android:scaleType="centerInside"
-        android:background="@drawable/selector_bg_home_type"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/selector_bg_home_type"
+        app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon_home_type_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/category_home_type" />
+        app:layout_constraintTop_toBottomOf="@+id/category_home_type">
+
+        <soup.widget.CheckedImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_home_type_horizontal" />
+
+    </android.support.v7.widget.CardView>
 
     <View
         android:id="@+id/divider_home_type"
@@ -141,7 +156,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="@dimen/settings_margin_in_category"
-        android:background="@drawable/settings_option_bg"
+        android:background="@drawable/bg_card"
         android:backgroundTint="@color/grey_200"
         android:gravity="center"
         android:text="준비중입니다"
