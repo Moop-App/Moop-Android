@@ -19,6 +19,7 @@ import soup.movie.ui.main.MainViewState.SettingsState;
 import soup.movie.ui.main.now.NowFragment;
 import soup.movie.ui.main.now.VerticalNowFragment;
 import soup.movie.ui.main.plan.PlanFragment;
+import soup.movie.ui.main.plan.VerticalPlanFragment;
 import soup.movie.ui.main.settings.SettingsFragment;
 import timber.log.Timber;
 
@@ -79,7 +80,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void renderInternal(@NonNull PlanState viewState) {
-        commit(R.id.container_tab, PlanFragment.newInstance());
+        commit(R.id.container_tab, viewState.isVerticalType()
+                ? VerticalPlanFragment.newInstance()
+                : PlanFragment.newInstance());
     }
 
     private void renderInternal(@NonNull SettingsState viewState) {

@@ -1,14 +1,11 @@
 package soup.movie.ui.main.now;
 
 import com.jakewharton.rxrelay2.BehaviorRelay;
-import com.jakewharton.rxrelay2.PublishRelay;
 
 import javax.inject.Inject;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MovieRepository;

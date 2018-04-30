@@ -13,6 +13,10 @@ public abstract class PlanModule {
     abstract PlanFragment planFragment();
 
     @FragmentScoped
+    @ContributesAndroidInjector
+    abstract VerticalPlanFragment verticalPlanFragment();
+
+    @FragmentScoped
     @Binds
     abstract PlanContract.Presenter planPresenter(PlanPresenter presenter);
 }

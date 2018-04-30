@@ -1,4 +1,4 @@
-package soup.movie.ui.main.now;
+package soup.movie.ui.main.plan;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,19 +20,19 @@ import soup.movie.R;
 import soup.movie.data.model.Movie;
 import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
-import soup.movie.ui.main.now.NowViewState.DoneState;
-import soup.movie.ui.main.now.NowViewState.LoadingState;
+import soup.movie.ui.main.plan.PlanViewState.DoneState;
+import soup.movie.ui.main.plan.PlanViewState.LoadingState;
 import timber.log.Timber;
 
 import static soup.movie.util.RecyclerViewUtil.createGridLayoutManager;
 
 @FragmentScoped
-public class VerticalNowFragment extends MainTabFragment implements NowContract.View {
+public class VerticalPlanFragment extends MainTabFragment implements PlanContract.View {
 
     @Inject
-    NowContract.Presenter presenter;
+    PlanContract.Presenter presenter;
 
-    private VerticalNowListAdapter adapterView;
+    private VerticalPlanListAdapter adapterView;
 
     @BindView(R.id.swipe_layout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -40,11 +40,11 @@ public class VerticalNowFragment extends MainTabFragment implements NowContract.
     @BindView(R.id.list)
     RecyclerView listView;
 
-    public VerticalNowFragment() {
+    public VerticalPlanFragment() {
     }
 
-    public static VerticalNowFragment newInstance() {
-        return new VerticalNowFragment();
+    public static VerticalPlanFragment newInstance() {
+        return new VerticalPlanFragment();
     }
 
     @Override
@@ -63,7 +63,7 @@ public class VerticalNowFragment extends MainTabFragment implements NowContract.
         super.onViewCreated(view, savedInstanceState);
         Context context = view.getContext();
 
-        adapterView = new VerticalNowListAdapter(getActivity());
+        adapterView = new VerticalPlanListAdapter(getActivity());
         RecyclerView recyclerView = listView;
         recyclerView.setLayoutManager(createGridLayoutManager(context, 3));
         recyclerView.setAdapter(adapterView);
@@ -83,7 +83,7 @@ public class VerticalNowFragment extends MainTabFragment implements NowContract.
     }
 
     @Override
-    public void render(@NonNull NowViewState viewState) {
+    public void render(@NonNull PlanViewState viewState) {
         Timber.i("render: %s", viewState);
         if (viewState instanceof LoadingState) {
             renderInternal((LoadingState) viewState);
@@ -105,7 +105,7 @@ public class VerticalNowFragment extends MainTabFragment implements NowContract.
     }
 
     private void updateMovieList(@Nullable List<Movie> movieList) {
-        VerticalNowListAdapter adapterView = this.adapterView;
+        VerticalPlanListAdapter adapterView = this.adapterView;
         if (adapterView != null) {
             adapterView.updateList(movieList);
         }

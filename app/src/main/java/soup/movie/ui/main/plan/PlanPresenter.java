@@ -1,8 +1,11 @@
 package soup.movie.ui.main.plan;
 
+import com.jakewharton.rxrelay2.BehaviorRelay;
+
 import javax.inject.Inject;
 
-import io.reactivex.Single;
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MovieRepository;
@@ -16,6 +19,8 @@ public class PlanPresenter extends BasePresenter<PlanContract.View> implements P
 
     private final MovieRepository movieRepository;
 
+    private BehaviorRelay<Boolean> refreshRelay = BehaviorRelay.createDefault(true);
+
     @Inject
     PlanPresenter(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
@@ -28,9 +33,16 @@ public class PlanPresenter extends BasePresenter<PlanContract.View> implements P
                 .subscribe(view::render));
     }
 
-    private Single<PlanViewState> getViewStateObservable() {
-        return movieRepository.getPlanList(new PlanMovieRequest())
-                .map(PlanMovieResponse::getList)
-                .map(PlanViewState.DoneState::new);
+    private Flowable<PlanViewState> getViewStateObservable() {
+        return refreshRelay.toFlowable(BackpressureStrategy.LATEST)
+                .flatMap(ignore -> movieRepository.getPlanList(new PlanMovieRequest())
+                        .map(PlanMovieResponse::getList)
+                        .map(PlanViewState.DoneState::new)
+                        .toFlowable());
+    }
+
+    @Override
+    public void refresh() {
+        refreshRelay.accept(true);
     }
 }
