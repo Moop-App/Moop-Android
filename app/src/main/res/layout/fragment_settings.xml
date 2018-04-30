@@ -89,7 +89,7 @@
         android:layout_marginTop="@dimen/settings_margin_in_category"
         android:text="선택된 극장이 없습니다."
         android:textColor="@color/grey_600"
-        android:transitionName="@string/transition_title"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_theater"
@@ -108,20 +108,9 @@
 
         <!-- for preview -->
 
-        <android.support.design.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:chipText="CGV 서울" />
-
-        <android.support.design.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:chipText="롯데 서울" />
-
-        <android.support.design.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:chipText="메가박스 서울" />
+        <include layout="@layout/chip_cgv" />
+        <include layout="@layout/chip_lotte" />
+        <include layout="@layout/chip_megabox" />
 
     </android.support.design.chip.ChipGroup>
 

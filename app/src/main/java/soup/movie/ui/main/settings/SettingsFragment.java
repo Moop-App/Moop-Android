@@ -86,8 +86,10 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
             theaterEmpty.setVisibility(View.GONE);
             theaterGroup.removeAllViews();
             theaterGroup.setVisibility(View.VISIBLE);
+
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             for (TheaterCode theater : theaters) {
-                Chip theaterChip = new Chip(getContext());
+                Chip theaterChip = (Chip) inflater.inflate(R.layout.chip_cgv, theaterGroup);
                 theaterChip.setText(theater.getName());
                 theaterGroup.addView(theaterChip);
             }

@@ -38,4 +38,22 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
+    <!-- TextAppearance -->
+
+    <style name="TextAppearance.Chip" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Chip.Cgv">
+        <item name="android:textColor">@color/textCgv</item>
+    </style>
+
+    <style name="TextAppearance.Chip.Lotte">
+        <item name="android:textColor">@color/textLotte</item>
+    </style>
+
+    <style name="TextAppearance.Chip.Megabox">
+        <item name="android:textColor">@color/textMegabox</item>
+    </style>
+
 </resources>

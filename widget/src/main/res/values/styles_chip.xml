@@ -117,6 +117,8 @@
         <item name="closeIconEnabled">false</item>
     </style>
 
+    <style name="TextAppearance" />
+
     <style name="TextAppearance.MaterialComponents.Chip" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/mtrl_chip_text_color</item>
         <item name="android:textSize">@dimen/mtrl_chip_text_size</item>
