@@ -1,6 +1,7 @@
 package soup.movie.ui.detail;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
@@ -21,17 +22,15 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.model.Day;
-import soup.movie.data.model.TheaterCode;
 import soup.movie.data.model.Thumbnail;
 import soup.movie.data.model.Thumbnails;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.Trailer;
+import soup.movie.ui.theater.TheaterEditActivity;
 import soup.movie.util.MovieAppUtil;
 import soup.movie.util.YouTubeUtil;
-import soup.movie.util.DialogUtil;
 import soup.movie.util.ImageUtil;
 import soup.movie.util.ListUtil;
-import soup.movie.util.function.Consumer;
 
 class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolder> {
 
@@ -40,48 +39,63 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
     private static final int TYPE_TRAILER = 2;
 
     private final Activity host;
-    private final Consumer<List<TheaterCode>> consumer;
 
     private TimeTable timeTable;
     private List<Trailer> items = new ArrayList<>();
 
-    DetailListAdapter(Activity host, Consumer<List<TheaterCode>> theaterCodeConsumer) {
+    DetailListAdapter(Activity host) {
         this.host = host;
-        consumer = theaterCodeConsumer;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
         ViewHolder holder;
         switch (viewType) {
             case TYPE_TIMETABLE_NONE:
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_timetable_none, parent, false);
-                holder = new NoneTimeTableViewHolder(view);
-                View.OnClickListener listener = v ->
-                        DialogUtil.startDialogToSelectTheaters(host, consumer::accept);
-                holder.itemView.setOnClickListener(listener);
-                ((NoneTimeTableViewHolder)holder).select.setOnClickListener(listener);
+                holder = createTimeTableNoneHolder(parent);
                 break;
             case TYPE_TIMETABLE:
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_timetable, parent, false);
-                holder = new TimeTableViewHolder(view);
-                holder.itemView.setOnClickListener(v -> {
-                    //TODO: show notification with selected date and time
-                    MovieAppUtil.executeCgvApp(host);
-                });
+                holder = createTimeTableHolder(parent);
+                break;
+            case TYPE_TRAILER:
+                holder = createTrailerHolder(parent);
                 break;
             default:
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_trailer, parent, false);
-                holder = new TrailerViewHolder(view);
-                holder.itemView.setOnClickListener(v -> YouTubeUtil.executeYoutubeApp(
-                        host, items.get(holder.getAdapterPosition()).getId()));
+                throw new IllegalStateException("The view type(" + viewType + ") is unknown.");
         }
         return holder;
+    }
+
+    private ViewHolder createTimeTableNoneHolder(@NonNull ViewGroup parent) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_timetable_none, parent, false);
+        NoneTimeTableViewHolder viewHolder = new NoneTimeTableViewHolder(view);
+        View.OnClickListener listener = v ->
+                host.startActivity(new Intent(host, TheaterEditActivity.class));
+        viewHolder.itemView.setOnClickListener(listener);
+        viewHolder.select.setOnClickListener(listener);
+        return viewHolder;
+    }
+
+    private ViewHolder createTimeTableHolder(@NonNull ViewGroup parent) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_timetable, parent, false);
+        TimeTableViewHolder viewHolder = new TimeTableViewHolder(view);
+        viewHolder.itemView.setOnClickListener(v -> {
+            //TODO: show notification with selected date and time
+            MovieAppUtil.executeCgvApp(host);
+        });
+        return viewHolder;
+    }
+
+    private ViewHolder createTrailerHolder(@NonNull ViewGroup parent) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_trailer, parent, false);
+        TrailerViewHolder viewHolder = new TrailerViewHolder(view);
+        viewHolder.itemView.setOnClickListener(v -> YouTubeUtil.executeYoutubeApp(
+                host, items.get(viewHolder.getAdapterPosition()).getId()));
+        return viewHolder;
     }
 
     @Override

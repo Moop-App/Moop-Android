@@ -2,8 +2,12 @@
 <android.support.design.chip.Chip
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:textAppearance="@style/TextAppearance.Chip.Megabox"
     app:chipBackgroundColor="@color/bgMegabox"
-    app:chipText="메가박스 서울" />
+    app:chipStrokeColor="@color/grey_200"
+    app:chipStrokeWidth="1dp"
+    tools:chipText="메가박스 서울" />

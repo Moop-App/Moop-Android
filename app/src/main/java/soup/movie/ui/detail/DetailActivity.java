@@ -124,8 +124,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
             }
         };
 
-        DetailListAdapter adapterView = new DetailListAdapter(this, theaters ->
-                presenter.requestData(theaters.get(0).getCode(), movie));
+        DetailListAdapter adapterView = new DetailListAdapter(this);
         RecyclerView recyclerView = movieContents;
         recyclerView.setLayoutManager(createLinearLayoutManager(this, true));
         recyclerView.setAdapter(adapterView);

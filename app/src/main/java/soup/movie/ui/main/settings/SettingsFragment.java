@@ -1,5 +1,6 @@
 package soup.movie.ui.main.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import soup.movie.data.model.TheaterCode;
 import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
+import soup.movie.ui.theater.TheaterEditActivity;
 import timber.log.Timber;
 
 @FragmentScoped
@@ -55,15 +57,15 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
         presenter.attach(this);
     }
 
     @Override
-    public void onDestroyView() {
+    public void onPause() {
         presenter.detach();
-        super.onDestroyView();
+        super.onPause();
     }
 
     @Override
@@ -87,9 +89,8 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
             theaterGroup.removeAllViews();
             theaterGroup.setVisibility(View.VISIBLE);
 
-            LayoutInflater inflater = LayoutInflater.from(getContext());
             for (TheaterCode theater : theaters) {
-                Chip theaterChip = (Chip) inflater.inflate(R.layout.chip_cgv, theaterGroup);
+                Chip theaterChip = (Chip) View.inflate(getContext(), R.layout.chip_cgv, null);
                 theaterChip.setText(theater.getName());
                 theaterGroup.addView(theaterChip);
             }
@@ -98,6 +99,6 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
 
     @OnClick(R.id.theater_edit)
     public void onTheaterEditClicked() {
-        //TODO
+        startActivity(new Intent(getContext(), TheaterEditActivity.class));
     }
 }

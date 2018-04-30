@@ -38,6 +38,9 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
+    <style name="AppTheme.TheaterEdit" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
     <!-- TextAppearance -->
 
     <style name="TextAppearance.Settings"/>

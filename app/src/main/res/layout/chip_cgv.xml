@@ -2,10 +2,14 @@
 <android.support.design.chip.Chip
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:gravity="center"
     android:textAppearance="@style/TextAppearance.Chip.Cgv"
     app:chipBackgroundColor="@color/bgCgv"
-    app:chipStrokeColor="@color/black"
+    app:chipStrokeColor="@color/grey_200"
     app:chipStrokeWidth="1dp"
-    app:chipText="CGV 서울" />
+    tools:chipText="CGV 서울" />
