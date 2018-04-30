@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Moob</string>
 
-    <string name="now">Now Playing</string>
-    <string name="plan">Plan</string>
-    <string name="settings">Settings</string>
+    <string name="tab_now">Now Playing</string>
+    <string name="tab_plan">Plan</string>
+    <string name="tab_settings">Settings</string>
+
+    <string name="settings_category_home_type">Home Type</string>
+    <string name="settings_category_theater">Favorite Theaters</string>
+    <string name="settings_theater_empty_description">There are no favorite theaters.</string>
+    <string name="settings_category_theme">Theme</string>
 
     <string name="theater_select_title">극장 선택</string>
     <string name="theater_select_description">선호하는 극장을 선택해주세요</string>

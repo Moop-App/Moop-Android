@@ -72,15 +72,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void renderInternal(@NonNull NowState viewState) {
-        commit(R.id.tab_container, NowFragment.newInstance());
+        commit(R.id.container_tab, NowFragment.newInstance());
     }
 
     private void renderInternal(@NonNull PlanState viewState) {
-        commit(R.id.tab_container, PlanFragment.newInstance());
+        commit(R.id.container_tab, PlanFragment.newInstance());
     }
 
     private void renderInternal(@NonNull SettingsState viewState) {
-        commit(R.id.tab_container, SettingsFragment.newInstance());
+        commit(R.id.container_tab, SettingsFragment.newInstance());
     }
 
     private static @MainContract.TabMode int parseToTabMode(@IdRes int itemId) {

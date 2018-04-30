@@ -8,7 +8,7 @@
     tools:context="soup.movie.ui.main.MainActivity" >
 
     <FrameLayout
-        android:id="@+id/tab_container"
+        android:id="@+id/container_tab"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"

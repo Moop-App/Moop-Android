@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/action_now"
-        android:title="@string/now"
+        android:title="@string/tab_now"
         android:icon="@drawable/ic_movie_now" />
 
     <item android:id="@+id/action_plan"
-        android:title="@string/plan"
+        android:title="@string/tab_plan"
         android:icon="@drawable/ic_movie_plan" />
 
     <item android:id="@+id/action_settings"
-        android:title="@string/settings"
+        android:title="@string/tab_settings"
         android:icon="@drawable/ic_settings" />
 
 </menu>

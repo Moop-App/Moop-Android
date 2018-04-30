@@ -10,6 +10,10 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        tools:layoutManager="android.support.v7.widget.GridLayoutManager"
+        tools:orientation="vertical"
         tools:listitem="@layout/item_movie_for_home" />
 
 </android.support.v4.widget.SwipeRefreshLayout>

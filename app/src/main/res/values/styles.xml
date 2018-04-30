@@ -40,6 +40,13 @@
 
     <!-- TextAppearance -->
 
+    <style name="TextAppearance.Settings"/>
+
+    <style name="TextAppearance.Settings.Category" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextAppearance.Chip" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textStyle">bold</item>
     </style>

@@ -9,6 +9,8 @@
 
     <color name="n_blue">#2D7AF6</color>
 
+    <color name="dividerColor">@color/grey_200</color>
+
     <color name="bgCgv">#FFFFFF</color>
     <color name="textCgv">#E51F20</color>
 
