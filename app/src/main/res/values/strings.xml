@@ -10,8 +10,10 @@
     <string name="settings_theater_empty_description">There are no favorite theaters.</string>
     <string name="settings_category_theme">Theme</string>
 
-    <string name="theater_select_title">극장 선택</string>
-    <string name="theater_select_description">선호하는 극장을 선택해주세요</string>
+    <string name="theater_select_limit_description">The favorite theaters\'s count is limited to %d.\nIf wants to add more, remove seleted items.</string>
+
+    <string name="theater_select_title">Select theater</string>
+    <string name="theater_select_description">Please select the favorite theaters</string>
     <string name="theater_select_action_confirm">Confirm</string>
     <string name="theater_select_action_cancel">Cancel</string>
 </resources>

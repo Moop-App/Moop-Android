@@ -1,11 +1,13 @@
 package soup.movie.ui.theater;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +15,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import soup.movie.R;
 import soup.movie.data.model.TheaterCode;
 import soup.movie.util.ListUtil;
 
 class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter.ViewHolder> {
+
+    private static final int MAX_ITEMS = 3;
 
     private final ArrayList<TheaterCode> allItems;
     private final HashMap<String, TheaterCode> selectedItemMap;
@@ -39,7 +44,8 @@ class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewHolder holder = new ViewHolder(LayoutInflater.from(parent.getContext())
+        Context ctx = parent.getContext();
+        ViewHolder holder = new ViewHolder(LayoutInflater.from(ctx)
                 .inflate(android.R.layout.simple_list_item_multiple_choice, parent, false));
         holder.checkedTextView.setOnClickListener(v -> {
             TheaterCode theaterItem = allItems.get(holder.getAdapterPosition());
@@ -47,9 +53,12 @@ class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter
             if (targetView.isChecked()) {
                 selectedItemMap.remove(theaterItem.getCode());
                 targetView.setChecked(false);
-            } else {
+            } else if (selectedItemMap.size() < MAX_ITEMS) {
                 selectedItemMap.put(theaterItem.getCode(), theaterItem);
                 targetView.setChecked(true);
+            } else {
+                String message = ctx.getString(R.string.theater_select_limit_description, MAX_ITEMS);
+                Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
             }
         });
         return holder;

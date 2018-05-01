@@ -10,6 +10,8 @@
     <string name="settings_theater_empty_description">선호하는 극장이 없습니다.</string>
     <string name="settings_category_theme">테마</string>
 
+    <string name="theater_select_limit_description">%d개까지 선택할 수 있습니다.\n더 추가하려면 선택된 항목을 지워주세요.</string>
+
     <string name="theater_select_title">극장 선택</string>
     <string name="theater_select_description">선호하는 극장을 선택해주세요</string>
     <string name="theater_select_action_confirm">완료</string>
