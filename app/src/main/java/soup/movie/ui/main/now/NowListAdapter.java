@@ -3,7 +3,7 @@ package soup.movie.ui.main.now;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -47,13 +47,17 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
     @BindColor(R.color.red)
     int redColor;
 
+    @BindColor(R.color.grey)
+    int greyColor;
+
     NowListAdapter(Activity host) {
         this.host = host;
         ButterKnife.bind(this, host);
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_movie_horizontal, parent, false);
         ViewHolder holder = new ViewHolder(view);
@@ -66,6 +70,7 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
                             Pair.create(holder.posterView, host.getString(R.string.transition_poster)),
                             Pair.create(holder.titleView, host.getString(R.string.transition_title)),
                             Pair.create(holder.ageView, host.getString(R.string.transition_age)),
+                            Pair.create(holder.ageBgView, host.getString(R.string.transition_age_bg)),
                             Pair.create(holder.subTextView, host.getString(R.string.transition_egg)),
 //                            Pair.create(holder.favoriteButton, host.getString(R.string.transition_favorite)),
                             Pair.create(holder.shareButton, host.getString(R.string.transition_share)));
@@ -80,7 +85,7 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie item = items.get(position);
         ImageUtil.loadAsync(host, holder.posterView, item.getPosterUrl());
         holder.titleView.setText(item.getTitle());
@@ -89,7 +94,7 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
     }
 
     private void updateAgeText(View ageBgView, TextView ageTextView, String ageText) {
-        int color = Color.TRANSPARENT;
+        int color;
         switch (ageText) {
             case "전체 관람가":
                 ageText = "전체";
@@ -108,7 +113,8 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
                 color = redColor;
                 break;
             default:
-                ageText = null;
+                ageText = "미정";
+                color = greyColor;
         }
         if (TextUtils.isEmpty(ageText)) {
             ageBgView.setVisibility(View.GONE);

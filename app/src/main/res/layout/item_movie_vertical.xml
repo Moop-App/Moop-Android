@@ -43,14 +43,24 @@
                 tools:src="@tools:sample/avatars" />
 
             <View
+                android:id="@+id/age_bg_outer"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="7dp"
+                android:background="@drawable/bg_age_outer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:backgroundTint="@color/white" />
+
+            <View
                 android:id="@+id/age_bg"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_age_inner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:background="@color/amber" />
+                tools:backgroundTint="@color/amber" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

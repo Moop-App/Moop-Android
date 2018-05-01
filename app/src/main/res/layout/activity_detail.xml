@@ -24,7 +24,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        tools:background="@color/debug_background">
 
         <ImageView
             android:id="@+id/movie_poster"
@@ -64,32 +65,15 @@
             tools:text="Movie Title" />
 
         <TextView
-            android:id="@+id/sub_text1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="#8A000000"
-            android:transitionName="@string/transition_age"
-            app:layout_constraintEnd_toStartOf="@+id/sub_text2"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster"
-            app:layout_constraintTop_toBottomOf="@+id/primary_text"
-            tools:text="15세 관람가" />
-
-        <TextView
             android:id="@+id/sub_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="#8A000000"
             android:transitionName="@string/transition_egg"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sub_text1"
             app:layout_constraintTop_toBottomOf="@+id/primary_text"
             tools:text="90%" />
 
@@ -117,6 +101,46 @@
             app:layout_constraintBottom_toBottomOf="@+id/movie_poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_share" />
+
+        <View
+            android:id="@+id/age_bg_outer"
+            android:layout_width="38dp"
+            android:layout_height="26dp"
+            android:layout_margin="7dp"
+            android:background="@drawable/bg_age_outer"
+            android:transitionName="@string/transition_age_bg_outer"
+            app:layout_constraintBottom_toBottomOf="@+id/age_bg"
+            app:layout_constraintStart_toStartOf="@+id/age_bg"
+            app:layout_constraintEnd_toEndOf="@+id/age_bg"
+            app:layout_constraintTop_toTopOf="@+id/age_bg"
+            tools:backgroundTint="@color/white" />
+
+        <View
+            android:id="@+id/age_bg"
+            android:layout_width="36dp"
+            android:layout_height="24dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_age_inner"
+            android:transitionName="@string/transition_age_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movie_poster"
+            tools:backgroundTint="@color/amber" />
+
+        <TextView
+            android:id="@+id/sub_text1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:transitionName="@string/transition_age"
+            app:layout_constraintBottom_toBottomOf="@+id/age_bg"
+            app:layout_constraintStart_toStartOf="@+id/age_bg"
+            app:layout_constraintEnd_toEndOf="@+id/age_bg"
+            app:layout_constraintTop_toTopOf="@+id/age_bg"
+            tools:text="전체" />
 
     </android.support.constraint.ConstraintLayout>
 

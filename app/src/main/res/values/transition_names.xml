@@ -4,6 +4,8 @@
     <string name="transition_poster">poster</string>
     <string name="transition_title">title</string>
     <string name="transition_age">age</string>
+    <string name="transition_age_bg">age_bg</string>
+    <string name="transition_age_bg_outer">age_bg_outer</string>
     <string name="transition_egg">egg</string>
     <string name="transition_favorite">favorite</string>
     <string name="transition_share">share</string>

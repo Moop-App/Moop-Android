@@ -1,6 +1,7 @@
 package soup.movie.ui.detail;
 
 import android.animation.ValueAnimator;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -73,6 +75,9 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
     @BindView(R.id.sub_text1)
     TextView ageView;
 
+    @BindView(R.id.age_bg)
+    View ageBgView;
+
     @BindView(R.id.sub_text2)
     TextView eggView;
 
@@ -85,7 +90,20 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
     @BindView(R.id.movie_contents)
     RecyclerView movieContents;
 
-    private Movie movie;
+    @BindColor(R.color.green)
+    int greenColor;
+
+    @BindColor(R.color.blue)
+    int blueColor;
+
+    @BindColor(R.color.amber)
+    int amberColor;
+
+    @BindColor(R.color.red)
+    int redColor;
+
+    @BindColor(R.color.grey)
+    int greyColor;
 
     @Inject
     DetailContract.Presenter presenter;
@@ -93,6 +111,8 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
     private DetailListAdapter adapterView;
 
     private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
+
+    private Movie movie;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,7 +129,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
 
         ImageUtil.loadAsync(this, posterView, shotLoadListener, movie.getPosterUrl());
         titleView.setText(movie.getTitle());
-        ageView.setText(movie.getAge());
+        updateAgeView(movie.getAge());
         eggView.setText(movie.getEgg());
         favoriteButton.setOnClickListener(v -> {});
         shareButton.setOnClickListener(v ->
@@ -139,6 +159,33 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
         register(Observable.timer(150, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(unused -> presenter.requestData(movie)));
+    }
+
+    private void updateAgeView(String ageText) {
+        int color;
+        switch (ageText) {
+            case "전체 관람가":
+                ageText = "전체";
+                color = greenColor;
+                break;
+            case "12세 관람가":
+                ageText = "12";
+                color = blueColor;
+                break;
+            case "15세 관람가":
+                ageText = "15";
+                color = amberColor;
+                break;
+            case "청소년관람불가":
+                ageText = "청불";
+                color = redColor;
+                break;
+            default:
+                ageText = "미정";
+                color = greyColor;
+        }
+        ageView.setText(ageText);
+        ageBgView.setBackgroundTintList(ColorStateList.valueOf(color));
     }
 
     @Override
@@ -231,7 +278,6 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
                                 isDark ? R.color.white : R.color.dark_icon);
                         backButton.setColorFilter(adaptiveColor);
                         titleView.setTextColor(adaptiveColor);
-                        ageView.setTextColor(adaptiveColor);
                         eggView.setTextColor(adaptiveColor);
                         favoriteButton.setColorFilter(adaptiveColor);
                         shareButton.setColorFilter(adaptiveColor);

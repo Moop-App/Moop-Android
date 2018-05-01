@@ -3,7 +3,6 @@ package soup.movie.ui.main.plan;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -48,6 +47,9 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
     @BindColor(R.color.red)
     int redColor;
 
+    @BindColor(R.color.grey)
+    int greyColor;
+
     PlanListAdapter(Activity host) {
         this.host = host;
         ButterKnife.bind(this, host);
@@ -68,6 +70,7 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
                             Pair.create(holder.posterView, host.getString(R.string.transition_poster)),
                             Pair.create(holder.titleView, host.getString(R.string.transition_title)),
                             Pair.create(holder.ageView, host.getString(R.string.transition_age)),
+                            Pair.create(holder.ageBgView, host.getString(R.string.transition_age_bg)),
                             Pair.create(holder.subTextView, host.getString(R.string.transition_egg)),
 //                            Pair.create(holder.favoriteButton, host.getString(R.string.transition_favorite)),
                             Pair.create(holder.shareButton, host.getString(R.string.transition_share)));
@@ -91,7 +94,7 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
     }
 
     private void updateAgeText(View ageBgView, TextView ageTextView, String ageText) {
-        int color = Color.TRANSPARENT;
+        int color;
         switch (ageText) {
             case "전체 관람가":
                 ageText = "전체";
@@ -110,7 +113,8 @@ class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHolder> {
                 color = redColor;
                 break;
             default:
-                ageText = null;
+                ageText = "미정";
+                color = greyColor;
         }
         if (TextUtils.isEmpty(ageText)) {
             ageBgView.setVisibility(View.GONE);

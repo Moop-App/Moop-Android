@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -46,6 +45,9 @@ class VerticalNowListAdapter extends RecyclerView.Adapter<VerticalNowListAdapter
     @BindColor(R.color.red)
     int redColor;
 
+    @BindColor(R.color.grey)
+    int greyColor;
+
     VerticalNowListAdapter(Activity host) {
         this.host = host;
         ButterKnife.bind(this, host);
@@ -64,7 +66,8 @@ class VerticalNowListAdapter extends RecyclerView.Adapter<VerticalNowListAdapter
                     ActivityOptions.makeSceneTransitionAnimation(host,
                             Pair.create(holder.backgroundView, host.getString(R.string.transition_background)),
                             Pair.create(holder.posterView, host.getString(R.string.transition_poster)),
-                            Pair.create(holder.ageBgView, host.getString(R.string.transition_age)));
+                            Pair.create(holder.ageBgView, host.getString(R.string.transition_age_bg)),
+                            Pair.create(holder.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)));
             host.startActivity(intent, options.toBundle());
         });
         return holder;
@@ -78,7 +81,7 @@ class VerticalNowListAdapter extends RecyclerView.Adapter<VerticalNowListAdapter
     }
 
     private void updateAgeView(View ageBgView, String ageText) {
-        int color = Color.TRANSPARENT;
+        int color;
         switch (ageText) {
             case "전체 관람가":
                 ageText = "전체";
@@ -97,7 +100,8 @@ class VerticalNowListAdapter extends RecyclerView.Adapter<VerticalNowListAdapter
                 color = redColor;
                 break;
             default:
-                ageText = null;
+                ageText = "미정";
+                color = greyColor;
         }
         if (TextUtils.isEmpty(ageText)) {
             ageBgView.setVisibility(View.GONE);
@@ -146,6 +150,8 @@ class VerticalNowListAdapter extends RecyclerView.Adapter<VerticalNowListAdapter
         ImageView posterView;
         @BindView(R.id.age_bg)
         View ageBgView;
+        @BindView(R.id.age_bg_outer)
+        View ageBgOuterView;
 
         ViewHolder(View view) {
             super(view);
