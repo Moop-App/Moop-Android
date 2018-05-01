@@ -13,7 +13,7 @@ public interface SoupApiService {
     String API_BASE_URL = "https://soup-movie.firebaseio.com/";
 
     // 현재상영작
-    @GET("v1/cgv/now/asTicketRate/all.json")
+    @GET("v1/cgv/now/asTicketRate/nowOnly.json")
     Single<NowMovieResponse> getNowList();
 
     // 개봉예정작
