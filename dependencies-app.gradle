@@ -33,6 +33,10 @@ rootProject.allprojects {
                 }
             }
 
+            lintOptions {
+                checkReleaseBuilds false
+            }
+
             dependencies {
                 implementation fileTree(dir: 'libs', include: ['*.jar'])
 
