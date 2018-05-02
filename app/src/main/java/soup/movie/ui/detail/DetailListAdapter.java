@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.chip.Chip;
+import android.support.design.chip.ChipGroup;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +112,13 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                         Day day = days.get(i);
                         holder1.dates[i].setText(day.getDate());
                         holder1.dates[i].setVisibility(View.VISIBLE);
-                        holder1.times[i].setText(StringUtils.join(day.getTimeList(), ", "));
+                        if (holder1.times[i].getChildCount() == 0) {
+                            for (String time : day.getTimeList()) {
+                                Chip timeChip = (Chip) View.inflate(host, R.layout.chip_time, null);
+                                timeChip.setText(time);
+                                holder1.times[i].addView(timeChip);
+                            }
+                        }
                         holder1.times[i].setVisibility(View.VISIBLE);
                     }
                 }
@@ -210,7 +216,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
 
         @BindViews({
                 R.id.time1, R.id.time2, R.id.time3})
-        TextView[] times;
+        ChipGroup[] times;
         @BindViews({
                 R.id.date1, R.id.date2, R.id.date3})
         TextView[] dates;

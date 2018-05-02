@@ -35,7 +35,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/red"
-            android:text="선호하는 극장 선택"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -43,22 +42,20 @@
             tools:text="2018.03.31"
             android:visibility="gone"
             tools:visibility="visible" />
-        <TextView
+
+        <include layout="@layout/chip_group_timetable"
             android:id="@+id/time1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#DE000000"
-            android:text="12:00, 13:00, 14:00, 15:00, 17:00"
             android:visibility="gone"
             tools:visibility="visible" />
+
         <Button
             android:id="@+id/date2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/red"
-            android:text="선호하는 극장 선택"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -66,22 +63,20 @@
             tools:text="2018.03.31"
             android:visibility="gone"
             tools:visibility="visible" />
-        <TextView
+
+        <include layout="@layout/chip_group_timetable"
             android:id="@+id/time2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#DE000000"
-            android:text="12:00, 13:00, 14:00, 15:00, 17:00"
             android:visibility="gone"
             tools:visibility="visible" />
+
         <Button
             android:id="@+id/date3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/red"
-            android:text="선호하는 극장 선택"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -89,15 +84,14 @@
             android:visibility="gone"
             tools:text="2018.03.31"
             tools:visibility="visible" />
-        <TextView
+
+        <include layout="@layout/chip_group_timetable"
             android:id="@+id/time3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#DE000000"
-            android:text="12:00, 13:00, 14:00, 15:00, 17:00"
             android:visibility="gone"
             tools:visibility="visible" />
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

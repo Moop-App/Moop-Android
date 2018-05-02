@@ -36,7 +36,6 @@
             app:layout_constraintDimensionRatio="H,27:40"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:foreground="@color/debug_foreground"
             tools:src="@tools:sample/avatars" />
 
         <ImageView
@@ -45,8 +44,7 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_back"
             android:scaleType="centerInside"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            />
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <TextView
             android:id="@+id/primary_text"
@@ -57,6 +55,8 @@
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="#DE000000"
+            android:minLines="1"
+            android:maxLines="2"
             android:transitionName="@string/transition_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -68,13 +68,13 @@
             android:id="@+id/sub_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="#8A000000"
             android:transitionName="@string/transition_egg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/primary_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sub_text1"
             tools:text="90%" />
 
         <ImageButton
@@ -160,6 +160,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_poster"
         app:layout_constraintVertical_bias="0.0"
-        tools:background="@color/debug_background" />
+        tools:foreground="@color/debug_foreground" />
 
 </soup.widget.elastic.ElasticDragDismissFrameLayout>
