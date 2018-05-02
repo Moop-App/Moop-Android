@@ -14,53 +14,63 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp" >
+        android:layout_height="90dp">
 
         <ImageView
             android:id="@+id/trailer_thumbnail"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="0dp"
+            android:layout_marginTop="-5dp"
             android:background="@color/grey_200"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rounded_background_gradient" />
+            android:id="@+id/icon_play"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_play"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/trailer_thumbnail"
+            app:layout_constraintEnd_toEndOf="@+id/trailer_thumbnail"
+            app:layout_constraintStart_toStartOf="@+id/trailer_thumbnail"
+            app:layout_constraintTop_toTopOf="@+id/trailer_thumbnail" />
 
         <TextView
             android:id="@+id/primary_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/white"
-            android:maxLines="1"
-            app:layout_constraintHorizontal_bias="0"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/sub_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trailer_thumbnail"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Movie Title" />
+            tools:text="Movie Title\nLine2\nLine3" />
 
         <TextView
             android:id="@+id/sub_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/white"
             android:maxLines="1"
-            app:layout_constraintHorizontal_bias="0"
+            android:minLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trailer_thumbnail"
             app:layout_constraintTop_toBottomOf="@+id/primary_text"
             tools:text="Subtitle here" />
 
