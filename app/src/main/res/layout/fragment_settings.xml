@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_home_type">
 
-        <soup.widget.CheckedImageView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toEndOf="@+id/icon_home_type_vertical"
         app:layout_constraintTop_toBottomOf="@+id/category_home_type">
 
-        <soup.widget.CheckedImageView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

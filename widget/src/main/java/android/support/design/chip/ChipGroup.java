@@ -64,7 +64,7 @@ public class ChipGroup extends FlexboxLayout {
          * @param group the group in which the checked chip has changed
          * @param checkedId the unique identifier of the newly checked chip
          */
-        public void onCheckedChanged(ChipGroup group, @IdRes int checkedId);
+        void onCheckedChanged(ChipGroup group, @IdRes int checkedId);
     }
 
     private final SpacingDrawable spacingDrawable = new SpacingDrawable();
@@ -263,7 +263,7 @@ public class ChipGroup extends FlexboxLayout {
      *
      * @param listener the callback to call on checked state change
      */
-    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
+    public void setOnCheckedChangeListener(@Nullable OnCheckedChangeListener listener) {
         onCheckedChangeListener = listener;
     }
 

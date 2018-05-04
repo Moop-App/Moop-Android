@@ -82,7 +82,7 @@ public class CheckedImageView extends ImageView implements Checkable {
         mOnCheckedChangeListener = listener;
     }
 
-    public static interface OnCheckedChangeListener {
+    public interface OnCheckedChangeListener {
         void onCheckedChanged(CheckedImageView buttonView, boolean isChecked);
     }
 

@@ -16,9 +16,6 @@ android {
 
         // API Keys
         buildConfigField 'String', 'KOBIS_API_KEY', "\"" + getKobisApiKey() + "\""
-        buildConfigField 'String', 'MOVIST_API_KEY', "\"" + getMovistApiKey() + "\""
-        buildConfigField 'String', 'NAVER_CLIENT_ID', "\"" + getNaverClientID() + "\""
-        buildConfigField 'String', 'NAVER_CLIENT_SECRET', "\"" + getNaverClientSecret() + "\""
     }
     buildTypes {
         release {
@@ -31,26 +28,11 @@ android {
 def getKeyProperties() {
     def properties = new Properties()
     properties.load(project.rootProject.file('key.properties').newDataInputStream())
-    return properties;
+    return properties
 }
 
 def getKobisApiKey() {
-    return getKeyProperties().getProperty("KobisApiKey");
-}
-
-def getMovistApiKey() {
-    return getKeyProperties().getProperty("MovistApiKey");
-}
-
-def getNaverClientID() {
-    return getKeyProperties().getProperty("NaverClientID");
-}
-
-def getNaverClientSecret() {
-    return getKeyProperties().getProperty("NaverClientSecret");
-}
-
-ext {
+    return getKeyProperties().getProperty("KobisApiKey")
 }
 
 dependencies {

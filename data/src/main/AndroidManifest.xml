@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="soup.movie.data" />
+<manifest package="soup.movie.data" />

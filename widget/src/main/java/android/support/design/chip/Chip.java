@@ -240,12 +240,12 @@ public class Chip extends AppCompatCheckBox implements Delegate {
      * Register a callback to be invoked when the checked state of this chip changes. This callback is
      * used for internal purpose only.
      */
-    void setOnCheckedChangeListenerInternal(OnCheckedChangeListener listener) {
+    void setOnCheckedChangeListenerInternal(@Nullable OnCheckedChangeListener listener) {
         onCheckedChangeListenerInternal = listener;
     }
 
     /** Register a callback to be invoked when the close icon is clicked. */
-    public void setOnCloseIconClickListener(OnClickListener listener) {
+    public void setOnCloseIconClickListener(@Nullable OnClickListener listener) {
         this.onCloseIconClickListener = listener;
     }
 
@@ -582,7 +582,7 @@ public class Chip extends AppCompatCheckBox implements Delegate {
 
         @Override
         protected void onPopulateNodeForVirtualView(
-                int virtualViewId, AccessibilityNodeInfoCompat node) {
+                int virtualViewId, @NonNull AccessibilityNodeInfoCompat node) {
             if (hasCloseIcon()) {
                 CharSequence chipText = getChipText();
                 node.setContentDescription(
@@ -601,7 +601,7 @@ public class Chip extends AppCompatCheckBox implements Delegate {
         }
 
         @Override
-        protected void onPopulateNodeForHost(AccessibilityNodeInfoCompat node) {
+        protected void onPopulateNodeForHost(@NonNull AccessibilityNodeInfoCompat node) {
             node.setCheckable(chipDrawable != null && chipDrawable.isCheckable());
             node.setClassName(Chip.class.getName());
             node.setContentDescription(chipDrawable != null ? chipDrawable.getChipText() : "");
