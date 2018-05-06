@@ -8,9 +8,9 @@ import soup.movie.data.model.NowMovieResponse;
 import soup.movie.data.model.PlanMovieResponse;
 import soup.movie.data.model.TimeTableResponse;
 
-public interface SoupApiService {
+public interface MoobApiService {
 
-    String API_BASE_URL = "https://soup-movie.firebaseio.com/";
+    String API_BASE_URL = "https://moob-api.firebaseio.com/";
 
     // 현재상영작
     @GET("v1/cgv/now/asTicketRate/nowOnly.json")

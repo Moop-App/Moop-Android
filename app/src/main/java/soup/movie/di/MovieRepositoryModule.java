@@ -10,31 +10,31 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import soup.movie.BuildType;
-import soup.movie.data.ISoupDataSource;
-import soup.movie.data.SoupDataSource;
-import soup.movie.data.service.SoupApiService;
+import soup.movie.data.IMoobDataSource;
+import soup.movie.data.MoobDataSource;
+import soup.movie.data.service.MoobApiService;
 
 @Module
 public class MovieRepositoryModule {
 
     @Singleton
     @Provides
-    ISoupDataSource provideSoupDataSource(SoupApiService soupApiService) {
-        return new SoupDataSource(soupApiService);
+    IMoobDataSource provideMoobDataSource(MoobApiService moobApiService) {
+        return new MoobDataSource(moobApiService);
     }
 
     @Singleton
     @Provides
-    SoupApiService provideSoupApiService(GsonConverterFactory gsonConverterFactory,
+    MoobApiService provideMoobApiService(GsonConverterFactory gsonConverterFactory,
                                          RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
                                          OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(SoupApiService.API_BASE_URL)
+                .baseUrl(MoobApiService.API_BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .client(okHttpClient)
                 .build();
-        return retrofit.create(SoupApiService.class);
+        return retrofit.create(MoobApiService.class);
     }
 
     @Singleton

@@ -10,7 +10,7 @@ import soup.movie.data.model.PlanMovieResponse;
 import soup.movie.data.model.TimeTableRequest;
 import soup.movie.data.model.TimeTableResponse;
 
-public interface ISoupDataSource {
+public interface IMoobDataSource {
 
     Single<NowMovieResponse> getNowList(NowMovieRequest request);
     Single<PlanMovieResponse> getPlanList(PlanMovieRequest request);

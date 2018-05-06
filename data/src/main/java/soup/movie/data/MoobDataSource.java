@@ -10,37 +10,37 @@ import soup.movie.data.model.PlanMovieRequest;
 import soup.movie.data.model.PlanMovieResponse;
 import soup.movie.data.model.TimeTableRequest;
 import soup.movie.data.model.TimeTableResponse;
-import soup.movie.data.service.SoupApiService;
+import soup.movie.data.service.MoobApiService;
 
-public class SoupDataSource implements ISoupDataSource {
+public class MoobDataSource implements IMoobDataSource {
 
-    private SoupApiService soupApiService;
+    private MoobApiService moobApiService;
 
-    public SoupDataSource(SoupApiService soupApi) {
-        soupApiService = soupApi;
+    public MoobDataSource(MoobApiService moobApi) {
+        moobApiService = moobApi;
     }
 
     @Override
     public Single<NowMovieResponse> getNowList(NowMovieRequest request) {
-        return soupApiService.getNowList()
+        return moobApiService.getNowList()
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Single<PlanMovieResponse> getPlanList(PlanMovieRequest request) {
-        return soupApiService.getPlanList()
+        return moobApiService.getPlanList()
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Single<CodeResponse> getCodeList(CodeRequest request) {
-        return soupApiService.getCodeList()
+        return moobApiService.getCodeList()
                 .subscribeOn(Schedulers.io());
     }
 
     @Override
     public Single<TimeTableResponse> getTimeTableList(TimeTableRequest request) {
-        return soupApiService.getTimeTableList(request.getTheaterCode(), request.getMovieCode())
+        return moobApiService.getTimeTableList(request.getTheaterCode(), request.getMovieCode())
                 .subscribeOn(Schedulers.io());
     }
 }

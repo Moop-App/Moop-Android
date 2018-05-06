@@ -14,15 +14,16 @@ import soup.movie.data.model.TimeTableRequest;
 import soup.movie.data.model.TimeTableResponse;
 
 @Singleton
-public class MovieRepository implements ISoupDataSource {
+public class MovieRepository implements IMoobDataSource {
 
-    private final ISoupDataSource remoteDataSource;
+    private final IMoobDataSource remoteDataSource;
 
     @Inject
-    public MovieRepository(ISoupDataSource soupDataSource) {
-        remoteDataSource = soupDataSource;
+    public MovieRepository(IMoobDataSource moobDataSource) {
+        remoteDataSource = moobDataSource;
     }
 
+    @Override
     public Single<NowMovieResponse> getNowList(NowMovieRequest request) {
         return remoteDataSource.getNowList(request);
     }
