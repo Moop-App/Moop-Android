@@ -1,5 +1,6 @@
 package soup.movie.ui.theater;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MovieRepository;
 import soup.movie.data.model.Area;
 import soup.movie.data.model.CodeRequest;
-import soup.movie.data.model.CodeResponse;
 import soup.movie.data.model.TheaterCode;
 import soup.movie.di.ActivityScoped;
 import soup.movie.settings.TheaterSetting;
@@ -46,7 +46,13 @@ public class TheaterEditPresenter extends BasePresenter<TheaterEditContract.View
     private Single<List<TheaterCode>> getAllTheatersObservable() {
         return movieRepository.getCodeList(new CodeRequest())
                 .toObservable()
-                .flatMapIterable(CodeResponse::getList)
+                .flatMapIterable(response -> {
+                    ArrayList<Area> areas = new ArrayList<>();
+                    areas.addAll(response.getCgvGroup().getList());
+                    areas.addAll(response.getLotteGroup().getList());
+                    areas.addAll(response.getMegaboxGroup().getList());
+                    return areas;
+                })
                 .flatMapIterable(Area::getTheaterList)
                 .toList();
     }

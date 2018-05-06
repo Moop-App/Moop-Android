@@ -2,24 +2,38 @@ package soup.movie.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class CodeResponse {
 
-    @SerializedName("list")
-    private List<Area> list;
+    @SerializedName("cgv")
+    private CodeGroup cgvGroup;
+
+    @SerializedName("lotte")
+    private CodeGroup lotteGroup;
+
+    @SerializedName("megabox")
+    private CodeGroup megaboxGroup;
 
     public CodeResponse() {
     }
 
-    public List<Area> getList() {
-        return list;
+    public CodeGroup getCgvGroup() {
+        return cgvGroup;
+    }
+
+    public CodeGroup getLotteGroup() {
+        return lotteGroup;
+    }
+
+    public CodeGroup getMegaboxGroup() {
+        return megaboxGroup;
     }
 
     @Override
     public String toString() {
         return "CodeResponse{" +
-                "list=" + list +
+                "cgvGroup=" + cgvGroup +
+                ", lotteGroup=" + lotteGroup +
+                ", megaboxGroup=" + megaboxGroup +
                 '}';
     }
 }

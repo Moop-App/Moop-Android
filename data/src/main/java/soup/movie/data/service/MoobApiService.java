@@ -21,7 +21,7 @@ public interface MoobApiService {
     Single<PlanMovieResponse> getPlanList();
 
     // 공통코드
-    @GET("v1/cgv/code.json")
+    @GET("v1/code.json")
     Single<CodeResponse> getCodeList();
 
     // 상영시간표
