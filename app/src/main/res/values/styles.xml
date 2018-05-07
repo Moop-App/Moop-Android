@@ -33,7 +33,7 @@
 
     <style name="AppTheme.Splash">
         <item name="android:windowBackground">@drawable/ic_splash</item>
-        <item name="android:statusBarColor">@color/n_blue</item>
+        <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
     </style>
