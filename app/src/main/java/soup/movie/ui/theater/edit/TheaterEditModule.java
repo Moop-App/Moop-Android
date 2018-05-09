@@ -1,4 +1,4 @@
-package soup.movie.ui.theater;
+package soup.movie.ui.theater.edit;
 
 import dagger.Binds;
 import dagger.Module;

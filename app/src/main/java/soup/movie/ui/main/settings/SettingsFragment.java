@@ -23,7 +23,7 @@ import soup.movie.data.model.TheaterCode;
 import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
-import soup.movie.ui.theater.TheaterEditActivity;
+import soup.movie.ui.theater.edit.TheaterEditActivity;
 import timber.log.Timber;
 
 @FragmentScoped

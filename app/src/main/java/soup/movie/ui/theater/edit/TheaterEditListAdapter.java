@@ -1,4 +1,4 @@
-package soup.movie.ui.theater;
+package soup.movie.ui.theater.edit;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

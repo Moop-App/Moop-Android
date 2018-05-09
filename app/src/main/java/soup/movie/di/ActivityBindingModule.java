@@ -9,8 +9,8 @@ import soup.movie.ui.main.MainModule;
 import soup.movie.ui.main.now.NowModule;
 import soup.movie.ui.main.plan.PlanModule;
 import soup.movie.ui.main.settings.SettingsModule;
-import soup.movie.ui.theater.TheaterEditActivity;
-import soup.movie.ui.theater.TheaterEditModule;
+import soup.movie.ui.theater.edit.TheaterEditActivity;
+import soup.movie.ui.theater.edit.TheaterEditModule;
 
 @Module
 public abstract class ActivityBindingModule {

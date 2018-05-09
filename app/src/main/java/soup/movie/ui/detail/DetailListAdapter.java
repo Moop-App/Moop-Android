@@ -26,7 +26,7 @@ import soup.movie.data.model.Thumbnail;
 import soup.movie.data.model.Thumbnails;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.Trailer;
-import soup.movie.ui.theater.TheaterEditActivity;
+import soup.movie.ui.theater.edit.TheaterEditActivity;
 import soup.movie.util.MovieAppUtil;
 import soup.movie.util.YouTubeUtil;
 import soup.movie.util.ImageUtil;
