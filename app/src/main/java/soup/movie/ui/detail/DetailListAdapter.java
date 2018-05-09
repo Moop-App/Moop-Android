@@ -115,7 +115,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                         if (holder1.times[i].getChildCount() == 0) {
                             for (String time : day.getTimeList()) {
                                 Chip timeChip = (Chip) View.inflate(host, R.layout.chip_time, null);
-                                timeChip.setText(time);
+                                timeChip.setChipText(time);
                                 holder1.times[i].addView(timeChip);
                             }
                         }

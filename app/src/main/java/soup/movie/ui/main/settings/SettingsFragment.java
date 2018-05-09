@@ -99,7 +99,7 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
 
             for (TheaterCode theater : theaters) {
                 Chip theaterChip = (Chip) View.inflate(getContext(), R.layout.chip_cgv, null);
-                theaterChip.setText(theater.getName());
+                theaterChip.setChipText(theater.getName());
                 theaterGroup.addView(theaterChip);
             }
         }
