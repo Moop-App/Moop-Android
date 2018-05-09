@@ -1,5 +1,6 @@
 package soup.movie.ui.main.settings;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.v7.widget.CardView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,7 @@ import soup.movie.data.model.TheaterCode;
 import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
-import soup.movie.ui.theater.edit.TheaterEditActivity;
+import soup.movie.ui.theater.sort.TheaterSortActivity;
 import timber.log.Timber;
 
 @FragmentScoped
@@ -100,6 +102,7 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
             for (TheaterCode theater : theaters) {
                 Chip theaterChip = (Chip) View.inflate(getContext(), R.layout.chip_cgv, null);
                 theaterChip.setChipText(theater.getName());
+                theaterChip.setTransitionName(theater.getCode());
                 theaterGroup.addView(theaterChip);
             }
         }
@@ -127,6 +130,19 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
 
     @OnClick(R.id.theater_edit)
     public void onTheaterEditClicked() {
-        startActivity(new Intent(getContext(), TheaterEditActivity.class));
+        Intent intent = new Intent(getContext(), TheaterSortActivity.class);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                getActivity(), createTheaterChipPairsForTransition());
+        startActivity(intent, options.toBundle());
+    }
+
+    private Pair<View,String>[] createTheaterChipPairsForTransition() {
+        int childCount = theaterGroup.getChildCount();
+        Pair<View, String>[] pairs = new Pair[childCount];
+        for (int i = 0; i < childCount; i++) {
+            View v = theaterGroup.getChildAt(i);
+            pairs[i] = Pair.create(v, v.getTransitionName());
+        }
+        return pairs;
     }
 }
