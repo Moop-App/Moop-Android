@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,7 @@ import soup.movie.R;
 import soup.movie.di.ActivityScoped;
 import soup.movie.ui.BaseActivity;
 import soup.movie.util.RecyclerViewUtil;
+import soup.widget.drag.SimpleItemTouchHelperCallback;
 
 @ActivityScoped
 public class TheaterSortActivity extends BaseActivity implements TheaterSortContract.View {
@@ -25,6 +27,8 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
     RecyclerView recyclerView;
 
     private TheaterSortListAdapter adapter;
+
+    private ItemTouchHelper itemTouchHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +50,11 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
     @Override
     public void render(@NonNull TheaterSortViewState viewState) {
         adapter = new TheaterSortListAdapter(
-                viewState.getSelectedTheaters());
+                viewState.getSelectedTheaters(), itemTouchHelper::startDrag);
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
     }
 
