@@ -21,7 +21,7 @@ import soup.movie.util.ListUtil;
 
 class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter.ViewHolder> {
 
-    private static final int MAX_ITEMS = 3;
+    private static final int MAX_ITEMS = 10;
 
     private final ArrayList<TheaterCode> allItems;
     private final HashMap<String, TheaterCode> selectedItemMap;
