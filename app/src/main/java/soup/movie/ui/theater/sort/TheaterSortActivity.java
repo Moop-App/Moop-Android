@@ -1,10 +1,13 @@
 package soup.movie.ui.theater.sort;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -14,7 +17,9 @@ import butterknife.OnClick;
 import soup.movie.R;
 import soup.movie.di.ActivityScoped;
 import soup.movie.ui.BaseActivity;
+import soup.movie.ui.theater.edit.TheaterEditActivity;
 import soup.movie.util.RecyclerViewUtil;
+import soup.widget.drag.ItemTouchHelperAdapter;
 import soup.widget.drag.SimpleItemTouchHelperCallback;
 
 @ActivityScoped
@@ -28,33 +33,62 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
 
     private TheaterSortListAdapter adapter;
 
-    private ItemTouchHelper itemTouchHelper;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theater_sort);
         ButterKnife.bind(this);
-
         recyclerView.setLayoutManager(RecyclerViewUtil.createLinearLayoutManager(this));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         presenter.attach(this);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         presenter.detach();
-        super.onDestroy();
+        super.onPause();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                startActivity(new Intent(this, TheaterEditActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
     public void render(@NonNull TheaterSortViewState viewState) {
+        ItemTouchHelperAdapter adapterDelegate = new ItemTouchHelperAdapter() {
+            @Override
+            public void onItemMove(int fromPosition, int toPosition) {
+                adapter.onItemMove(fromPosition, toPosition);
+            }
+
+            @Override
+            public void onItemDismiss(int position) {
+                adapter.onItemDismiss(position);
+            }
+        };
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapterDelegate);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         adapter = new TheaterSortListAdapter(
                 viewState.getSelectedTheaters(), itemTouchHelper::startDrag);
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
-        itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
     }
 
