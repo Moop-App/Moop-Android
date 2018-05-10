@@ -92,6 +92,7 @@ class TheaterSortListAdapter extends RecyclerView.Adapter<TheaterSortListAdapter
         void bindType(TheaterCode data) {
             theaterChip.setChipText(data.getName());
             theaterChip.setTransitionName(data.getCode());
+            theaterChip.setTag(data.getCode());
         }
     }
 }

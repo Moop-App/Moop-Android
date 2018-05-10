@@ -1,5 +1,6 @@
 package soup.movie.ui.theater.sort;
 
+import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -39,6 +44,17 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
         setContentView(R.layout.activity_theater_sort);
         ButterKnife.bind(this);
         recyclerView.setLayoutManager(RecyclerViewUtil.createLinearLayoutManager(this));
+
+        postponeEnterTransition();
+        setEnterSharedElementCallback(new SharedElementCallback() {
+            @Override
+            public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
+                for (String name : names) {
+                    View child = recyclerView.findViewWithTag(name);
+                    sharedElements.put(name, child);
+                }
+            }
+        });
     }
 
     @Override
@@ -90,6 +106,7 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
         adapter = new TheaterSortListAdapter(
                 viewState.getSelectedTheaters(), itemTouchHelper::startDrag);
         recyclerView.setAdapter(adapter);
+        startPostponedEnterTransition();
     }
 
     @OnClick(R.id.button_cancel)

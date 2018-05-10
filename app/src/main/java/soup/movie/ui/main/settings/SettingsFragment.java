@@ -7,7 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v7.widget.CardView;
+import android.transition.TransitionInflater;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -56,6 +59,18 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setExitTransition(TransitionInflater.from(getContext())
+                .inflateTransition(android.R.transition.explode));
+        setExitSharedElementCallback(new SharedElementCallback() {
+            @Override
+            public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
+                for (String name : names) {
+                    View child = theaterGroup.findViewWithTag(name);
+                    sharedElements.put(name, child);
+                }
+            }
+        });
+        postponeEnterTransition();
     }
 
     @Override
@@ -103,6 +118,7 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
                 Chip theaterChip = (Chip) View.inflate(getContext(), R.layout.chip_cgv, null);
                 theaterChip.setChipText(theater.getName());
                 theaterChip.setTransitionName(theater.getCode());
+                theaterChip.setTag(theater.getCode());
                 theaterGroup.addView(theaterChip);
             }
         }
