@@ -9,9 +9,9 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MovieRepository;
-import soup.movie.data.model.Area;
+import soup.movie.data.model.AreaGroup;
 import soup.movie.data.model.CodeRequest;
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 import soup.movie.di.ActivityScoped;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
@@ -43,26 +43,26 @@ public class TheaterEditPresenter extends BasePresenter<TheaterEditContract.View
                 TheaterEditViewState::new);
     }
 
-    private Single<List<TheaterCode>> getAllTheatersObservable() {
+    private Single<List<Theater>> getAllTheatersObservable() {
         return movieRepository.getCodeList(new CodeRequest())
                 .toObservable()
                 .flatMapIterable(response -> {
-                    ArrayList<Area> areas = new ArrayList<>();
-                    areas.addAll(response.getCgvGroup().getList());
-                    areas.addAll(response.getLotteGroup().getList());
-                    areas.addAll(response.getMegaboxGroup().getList());
+                    ArrayList<AreaGroup> areas = new ArrayList<>();
+                    areas.addAll(response.getCgv().getList());
+                    areas.addAll(response.getLotte().getList());
+                    areas.addAll(response.getMegabox().getList());
                     return areas;
                 })
-                .flatMapIterable(Area::getTheaterList)
+                .flatMapIterable(AreaGroup::getTheaterList)
                 .toList();
     }
 
-    private Single<List<TheaterCode>> getSelectedTheatersObservable() {
+    private Single<List<Theater>> getSelectedTheatersObservable() {
         return Single.just(theaterSetting.getFavoriteTheaters());
     }
 
     @Override
-    public void onConfirmClicked(List<TheaterCode> selectedTheaters) {
+    public void onConfirmClicked(List<Theater> selectedTheaters) {
         theaterSetting.setFavoriteTheaters(selectedTheaters);
     }
 }

@@ -10,7 +10,7 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 import soup.movie.settings.HomeTypeSetting;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
@@ -52,7 +52,7 @@ public class SettingsPresenter extends BasePresenter<SettingsContract.View>
                 .distinctUntilChanged();
     }
 
-    private Flowable<List<TheaterCode>> getFavoriteTheatersObservable() {
+    private Flowable<List<Theater>> getFavoriteTheatersObservable() {
         return Flowable.fromCallable(theaterSetting::getFavoriteTheaters);
     }
 

@@ -16,26 +16,26 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import soup.movie.R;
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 import soup.movie.util.ListUtil;
 
 class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter.ViewHolder> {
 
     private static final int MAX_ITEMS = 10;
 
-    private final ArrayList<TheaterCode> allItems;
-    private final HashMap<String, TheaterCode> selectedItemMap;
+    private final ArrayList<Theater> allItems;
+    private final HashMap<String, Theater> selectedItemMap;
 
-    TheaterEditListAdapter(@NonNull List<TheaterCode> allItems,
-                           @NonNull List<TheaterCode> selectedItems) {
+    TheaterEditListAdapter(@NonNull List<Theater> allItems,
+                           @NonNull List<Theater> selectedItems) {
         this.allItems = new ArrayList<>(allItems);
         this.selectedItemMap = createSelectedItemMapFrom(selectedItems);
     }
 
-    private static HashMap<String, TheaterCode> createSelectedItemMapFrom(
-            @NonNull List<TheaterCode> selectedItems) {
-        HashMap<String, TheaterCode> itemMap = new HashMap<>();
-        for (TheaterCode tc : selectedItems) {
+    private static HashMap<String, Theater> createSelectedItemMapFrom(
+            @NonNull List<Theater> selectedItems) {
+        HashMap<String, Theater> itemMap = new HashMap<>();
+        for (Theater tc : selectedItems) {
             itemMap.put(tc.getCode(), tc);
         }
         return itemMap;
@@ -48,7 +48,7 @@ class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter
         ViewHolder holder = new ViewHolder(LayoutInflater.from(ctx)
                 .inflate(android.R.layout.simple_list_item_multiple_choice, parent, false));
         holder.checkedTextView.setOnClickListener(v -> {
-            TheaterCode theaterItem = allItems.get(holder.getAdapterPosition());
+            Theater theaterItem = allItems.get(holder.getAdapterPosition());
             CheckedTextView targetView = holder.checkedTextView;
             if (targetView.isChecked()) {
                 selectedItemMap.remove(theaterItem.getCode());
@@ -66,7 +66,7 @@ class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TheaterCode theaterItem = allItems.get(position);
+        Theater theaterItem = allItems.get(position);
         holder.checkedTextView.setText(theaterItem.getName());
         holder.checkedTextView.setChecked(selectedItemMap.containsKey(theaterItem.getCode()));
     }
@@ -76,7 +76,7 @@ class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter
         return ListUtil.size(allItems);
     }
 
-    public List<TheaterCode> getSelectedTheaters() {
+    public List<Theater> getSelectedTheaters() {
         return new ArrayList<>(selectedItemMap.values());
     }
 

@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import soup.movie.R;
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 import soup.movie.util.ListUtil;
 import soup.widget.drag.ItemTouchHelperAdapter;
 import soup.widget.drag.OnStartDragListener;
@@ -25,11 +25,11 @@ import soup.widget.drag.OnStartDragListener;
 class TheaterSortListAdapter extends RecyclerView.Adapter<TheaterSortListAdapter.ViewHolder>
         implements ItemTouchHelperAdapter {
 
-    private final ArrayList<TheaterCode> selectedItems;
+    private final ArrayList<Theater> selectedItems;
 
     private OnStartDragListener dragStartListener;
 
-    TheaterSortListAdapter(@NonNull List<TheaterCode> selectedItems,
+    TheaterSortListAdapter(@NonNull List<Theater> selectedItems,
                            OnStartDragListener dragListener) {
         this.selectedItems = new ArrayList<>(selectedItems);
         dragStartListener = dragListener;
@@ -46,7 +46,7 @@ class TheaterSortListAdapter extends RecyclerView.Adapter<TheaterSortListAdapter
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TheaterCode theaterItem = selectedItems.get(position);
+        Theater theaterItem = selectedItems.get(position);
         holder.bindType(theaterItem);
 
         holder.dragHandle.setOnTouchListener((v, event) -> {
@@ -62,7 +62,7 @@ class TheaterSortListAdapter extends RecyclerView.Adapter<TheaterSortListAdapter
         return ListUtil.size(selectedItems);
     }
 
-    public List<TheaterCode> getSelectedTheaters() {
+    public List<Theater> getSelectedTheaters() {
         return new ArrayList<>(selectedItems);
     }
 
@@ -89,7 +89,7 @@ class TheaterSortListAdapter extends RecyclerView.Adapter<TheaterSortListAdapter
             ButterKnife.bind(this, view);
         }
 
-        void bindType(TheaterCode data) {
+        void bindType(Theater data) {
             theaterChip.setChipText(data.getName());
             theaterChip.setTransitionName(data.getCode());
             theaterChip.setTag(data.getCode());

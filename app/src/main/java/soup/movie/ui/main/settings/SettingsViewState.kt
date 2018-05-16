@@ -1,10 +1,10 @@
 package soup.movie.ui.main.settings
 
-import soup.movie.data.model.TheaterCode
+import soup.movie.data.model.Theater
 
 sealed class SettingsViewState {
 
     data class DoneState(
             val isHomeTypeVertical: Boolean,
-            val theaterList: List<TheaterCode>) : SettingsViewState()
+            val theaterList: List<Theater>) : SettingsViewState()
 }

@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 
 public class TheaterSetting {
 
@@ -24,20 +24,20 @@ public class TheaterSetting {
         this.preferences = preferences;
     }
 
-    public List<TheaterCode> getFavoriteTheaters() {
+    public List<Theater> getFavoriteTheaters() {
         return ListUtils.emptyIfNull(fromJson(preferences.getString(KEY, DEFAULT_VALUE)));
     }
 
-    public void setFavoriteTheaters(List<TheaterCode> theaters) {
+    public void setFavoriteTheaters(List<Theater> theaters) {
         preferences.edit().putString(KEY, toJson(theaters)).apply();
     }
 
-    private static String toJson(List<TheaterCode> theaterCodeList) {
+    private static String toJson(List<Theater> theaterCodeList) {
         return new Gson().toJson(theaterCodeList);
     }
 
-    private static List<TheaterCode> fromJson(String jsonStr) {
-        Type theaterListType = new TypeToken<ArrayList<TheaterCode>>(){}.getType();
+    private static List<Theater> fromJson(String jsonStr) {
+        Type theaterListType = new TypeToken<ArrayList<Theater>>(){}.getType();
         return new Gson().fromJson(jsonStr, theaterListType);
     }
 }

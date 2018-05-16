@@ -1,6 +1,5 @@
 package soup.movie.ui.main.settings;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import soup.movie.ui.BaseContract;

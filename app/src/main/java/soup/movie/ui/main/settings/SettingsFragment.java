@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import soup.movie.R;
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 import soup.movie.di.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
@@ -104,7 +104,7 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
 
     private void renderInternal(DoneState viewState) {
         updateHomeTypeCards(viewState.isHomeTypeVertical());
-        List<TheaterCode> theaters = viewState.getTheaterList();
+        List<Theater> theaters = viewState.getTheaterList();
         if (theaters.isEmpty()) {
             theaterEmpty.setVisibility(View.VISIBLE);
             theaterGroup.removeAllViews();
@@ -114,7 +114,7 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
             theaterGroup.removeAllViews();
             theaterGroup.setVisibility(View.VISIBLE);
 
-            for (TheaterCode theater : theaters) {
+            for (Theater theater : theaters) {
                 Chip theaterChip = (Chip) View.inflate(getContext(), R.layout.chip_cgv, null);
                 theaterChip.setChipText(theater.getName());
                 theaterChip.setTransitionName(theater.getCode());

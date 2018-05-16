@@ -12,7 +12,7 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import soup.movie.data.MovieRepository;
 import soup.movie.data.model.Movie;
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.TimeTableRequest;
 import soup.movie.data.model.TimeTableResponse;
@@ -38,7 +38,7 @@ public class DetailPresenter extends BasePresenter<DetailContract.View>
 
     @Override
     public void requestData(@NonNull Movie movie) {
-        List<TheaterCode> theaters = theaterSetting.getFavoriteTheaters();
+        List<Theater> theaters = theaterSetting.getFavoriteTheaters();
         //view.render(new DetailViewState.LoadingState(!theaters.isEmpty()));
         if (theaters.isEmpty()) {
             register(getTrailerListObservable(movie)

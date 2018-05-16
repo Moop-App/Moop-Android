@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import soup.movie.data.model.TheaterCode;
+import soup.movie.data.model.Theater;
 import soup.movie.di.ActivityScoped;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
@@ -27,7 +27,7 @@ public class TheaterSortPresenter extends BasePresenter<TheaterSortContract.View
     }
 
     @Override
-    public void onConfirmClicked(List<TheaterCode> selectedTheaters) {
+    public void onConfirmClicked(List<Theater> selectedTheaters) {
         theaterSetting.setFavoriteTheaters(selectedTheaters);
     }
 }
