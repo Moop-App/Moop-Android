@@ -6,5 +6,5 @@ sealed class MainViewState {
 
     data class PlanState(val isVerticalType: Boolean) : MainViewState()
 
-    class SettingsState : MainViewState()
+    object SettingsState : MainViewState()
 }

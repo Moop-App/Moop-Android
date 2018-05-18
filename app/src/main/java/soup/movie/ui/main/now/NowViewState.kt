@@ -4,7 +4,7 @@ import soup.movie.data.model.Movie
 
 sealed class NowViewState {
 
-    class LoadingState : NowViewState()
+    object LoadingState : NowViewState()
 
     data class DoneState(val movies: List<Movie>) : NowViewState()
 }
