@@ -44,7 +44,8 @@ public class DetailPresenter extends BasePresenter<DetailContract.View>
             register(getTrailerListObservable(movie)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            trailers -> view.render(new DetailViewState.DoneState(new TimeTable(null), trailers)),
+                            trailers -> view.render(new DetailViewState.DoneState(
+                                    new TimeTable(Collections.emptyList()), trailers)),
                             Timber::e));
         } else {
             register(Single.zip(
@@ -73,11 +74,7 @@ public class DetailPresenter extends BasePresenter<DetailContract.View>
     private Single<TimeTable> getTimeTableObservable(@NonNull String theaterId, @NonNull String movieId) {
         return movieRepository
                 .getTimeTableList(new TimeTableRequest(theaterId, movieId))
-                .onErrorReturn(throwable -> {
-                    TimeTableResponse response = new TimeTableResponse();
-                    response.setTimeTable(new TimeTable(Collections.emptyList()));
-                    return response;
-                })
+                .onErrorReturn(throwable -> new TimeTableResponse(new TimeTable(Collections.emptyList())))
                 .map(TimeTableResponse::getTimeTable);
     }
 

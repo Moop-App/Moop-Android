@@ -127,7 +127,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
         }
         Timber.d("onCreate: movie=%s", movie);
 
-        ImageUtil.loadAsync(this, posterView, shotLoadListener, movie.getPosterUrl());
+        ImageUtil.loadAsync(this, posterView, shotLoadListener, movie.getPoster());
         titleView.setText(movie.getTitle());
         updateAgeView(movie.getAge());
         eggView.setText(movie.getEgg());

@@ -94,7 +94,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                 .inflate(R.layout.item_trailer, parent, false);
         TrailerViewHolder viewHolder = new TrailerViewHolder(view);
         viewHolder.itemView.setOnClickListener(v -> YouTubeUtil.executeYoutubeApp(
-                host, items.get(viewHolder.getAdapterPosition()).getId()));
+                host, items.get(viewHolder.getAdapterPosition()).getYoutubeId()));
         return viewHolder;
     }
 
@@ -143,12 +143,12 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
             if (medium != null && medium.getUrl() != null) {
                 return medium.getUrl();
             }
-            Thumbnail low = thumbnails.getLow();
+            Thumbnail low = thumbnails.getDefault();
             if (low != null && low.getUrl() != null) {
                 return low.getUrl();
             }
         }
-        return YouTubeUtil.getThumbnailUrl(trailer.getId());
+        return YouTubeUtil.getThumbnailUrl(trailer.getYoutubeId());
     }
 
     @Override

@@ -76,7 +76,7 @@ class VerticalNowListAdapter extends RecyclerView.Adapter<VerticalNowListAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie item = items.get(position);
-        ImageUtil.loadAsync(host, holder.posterView, item.getPosterUrl());
+        ImageUtil.loadAsync(host, holder.posterView, item.getPoster());
         updateAgeView(holder.ageBgView, item.getAge());
     }
 

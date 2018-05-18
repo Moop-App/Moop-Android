@@ -25,8 +25,6 @@ public class TimeTableResponseDeserializer implements JsonDeserializer<TimeTable
         days.add(gson.fromJson(jsonElement, Day.class));
       }
     }
-    TimeTableResponse response = new TimeTableResponse();
-    response.setTimeTable(new TimeTable(days));
-    return response;
+    return new TimeTableResponse(new TimeTable(days));
   }
 }

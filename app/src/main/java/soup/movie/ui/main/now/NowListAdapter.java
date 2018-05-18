@@ -87,7 +87,7 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie item = items.get(position);
-        ImageUtil.loadAsync(host, holder.posterView, item.getPosterUrl());
+        ImageUtil.loadAsync(host, holder.posterView, item.getPoster());
         holder.titleView.setText(item.getTitle());
         holder.subTextView.setText(item.getOpenDate());
         updateAgeText(holder.ageBgView, holder.ageView, item.getAge());
