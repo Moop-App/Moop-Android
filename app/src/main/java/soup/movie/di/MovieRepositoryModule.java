@@ -29,7 +29,7 @@ public class MovieRepositoryModule {
                                          RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
                                          OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MoobApiService.API_BASE_URL)
+                .baseUrl(MoobApiService.Companion.getAPI_BASE_URL())
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .client(okHttpClient)

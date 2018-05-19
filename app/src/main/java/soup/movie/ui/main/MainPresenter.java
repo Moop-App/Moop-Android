@@ -32,7 +32,7 @@ public class MainPresenter extends BasePresenter<MainContract.View>
                 viewState = new MainViewState.PlanState(homeTypeSetting.isVerticalType());
                 break;
             case TAB_MODE_SETTINGS:
-                viewState = new MainViewState.SettingsState();
+                viewState = MainViewState.SettingsState.INSTANCE;
                 break;
             default:
                 throw new IllegalStateException("Unknown tab mode");
