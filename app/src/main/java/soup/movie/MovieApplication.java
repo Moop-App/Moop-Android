@@ -1,7 +1,7 @@
 package soup.movie;
 
 import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
+import dagger.android.support.DaggerApplication;
 import soup.movie.di.DaggerApplicationComponent;
 
 public class MovieApplication extends DaggerApplication {
