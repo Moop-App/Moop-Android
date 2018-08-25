@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.v4.app.SharedElementCallback;
-import android.support.v7.widget.CardView;
 import android.transition.TransitionInflater;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -34,11 +33,9 @@ import timber.log.Timber;
 @FragmentScoped
 public class SettingsFragment extends MainTabFragment implements SettingsContract.View {
 
-    @BindView(R.id.icon_home_type_vertical)
-    CardView homeTypeVerticalCard;
-
-    @BindView(R.id.icon_home_type_horizontal)
-    CardView homeTypeHorizontalCard;
+    public static SettingsFragment newInstance() {
+        return new SettingsFragment();
+    }
 
     @BindView(R.id.theater_empty)
     TextView theaterEmpty;
@@ -50,10 +47,6 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     SettingsContract.Presenter presenter;
 
     public SettingsFragment() {
-    }
-
-    public static SettingsFragment newInstance() {
-        return new SettingsFragment();
     }
 
     @Override
@@ -102,9 +95,8 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
         }
     }
 
-    private void renderInternal(DoneState viewState) {
-        updateHomeTypeCards(viewState.isHomeTypeVertical());
-        List<Theater> theaters = viewState.getTheaterList();
+    private void renderInternal(DoneState state) {
+        List<Theater> theaters = state.getTheaterList();
         if (theaters.isEmpty()) {
             theaterEmpty.setVisibility(View.VISIBLE);
             theaterGroup.removeAllViews();
@@ -122,26 +114,6 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
                 theaterGroup.addView(theaterChip);
             }
         }
-    }
-
-    private void updateHomeTypeCards(boolean verticalIsSelected) {
-        if (verticalIsSelected) {
-            homeTypeVerticalCard.setSelected(true);
-            homeTypeHorizontalCard.setSelected(false);
-        } else {
-            homeTypeVerticalCard.setSelected(false);
-            homeTypeHorizontalCard.setSelected(true);
-        }
-    }
-
-    @OnClick(R.id.icon_home_type_vertical)
-    public void onVerticalHomeTypeClicked() {
-        presenter.onVerticalHomeTypeClicked();
-    }
-
-    @OnClick(R.id.icon_home_type_horizontal)
-    public void onHorizontalHomeTypeClicked() {
-        presenter.onHorizontalHomeTypeClicked();
     }
 
     @OnClick(R.id.theater_edit)

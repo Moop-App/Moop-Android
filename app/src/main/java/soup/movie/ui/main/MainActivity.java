@@ -16,9 +16,7 @@ import soup.movie.ui.main.MainViewState.NowState;
 import soup.movie.ui.main.MainViewState.PlanState;
 import soup.movie.ui.main.MainViewState.SettingsState;
 import soup.movie.ui.main.now.NowFragment;
-import soup.movie.ui.main.now.VerticalNowFragment;
 import soup.movie.ui.main.plan.PlanFragment;
-import soup.movie.ui.main.plan.VerticalPlanFragment;
 import soup.movie.ui.main.settings.SettingsFragment;
 import timber.log.Timber;
 
@@ -63,31 +61,28 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public void render(@NonNull MainViewState viewState) {
         Timber.i("render: %s", viewState);
         if (viewState instanceof NowState) {
-            renderInternal((NowState) viewState);
+            renderNowState();
         } else if (viewState instanceof PlanState) {
-            renderInternal((PlanState) viewState);
+            renderPlanState();
         } else if (viewState instanceof SettingsState) {
-            renderInternal((SettingsState) viewState);
+            renderSettingsState();
         }
     }
 
-    private void renderInternal(@NonNull NowState viewState) {
-        commit(R.id.container_tab, viewState.isVerticalType()
-                ? VerticalNowFragment.newInstance()
-                : NowFragment.newInstance());
+    private void renderNowState() {
+        commit(R.id.container_tab, NowFragment.newInstance());
     }
 
-    private void renderInternal(@NonNull PlanState viewState) {
-        commit(R.id.container_tab, viewState.isVerticalType()
-                ? VerticalPlanFragment.newInstance()
-                : PlanFragment.newInstance());
+    private void renderPlanState() {
+        commit(R.id.container_tab, PlanFragment.newInstance());
     }
 
-    private void renderInternal(@NonNull SettingsState viewState) {
+    private void renderSettingsState() {
         commit(R.id.container_tab, SettingsFragment.newInstance());
     }
 
-    private static @MainContract.TabMode int parseToTabMode(@IdRes int itemId) {
+    @MainContract.TabMode
+    private static int parseToTabMode(@IdRes int itemId) {
         switch (itemId) {
             case R.id.action_now:
                 return MainContract.TAB_MODE_NOW;

@@ -7,7 +7,6 @@ import soup.movie.di.scope.FragmentScoped;
 import soup.movie.ui.main.plan.PlanContract;
 import soup.movie.ui.main.plan.PlanFragment;
 import soup.movie.ui.main.plan.PlanPresenter;
-import soup.movie.ui.main.plan.VerticalPlanFragment;
 
 @Module
 public abstract class PlanModule {
@@ -15,10 +14,6 @@ public abstract class PlanModule {
     @FragmentScoped
     @ContributesAndroidInjector
     abstract PlanFragment planFragment();
-
-    @FragmentScoped
-    @ContributesAndroidInjector
-    abstract VerticalPlanFragment verticalPlanFragment();
 
     @FragmentScoped
     @Binds
