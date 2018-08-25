@@ -8,23 +8,23 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import soup.movie.data.MovieRepository;
+import soup.movie.data.MoobRepository;
 import soup.movie.data.model.NowMovieRequest;
 import soup.movie.data.model.NowMovieResponse;
-import soup.movie.di.FragmentScoped;
+import soup.movie.di.scope.FragmentScoped;
 import soup.movie.ui.BasePresenter;
 
 @FragmentScoped
 public class NowPresenter extends BasePresenter<NowContract.View>
         implements NowContract.Presenter {
 
-    private final MovieRepository movieRepository;
+    private final MoobRepository moobRepository;
 
     private BehaviorRelay<Boolean> refreshRelay = BehaviorRelay.createDefault(true);
 
     @Inject
-    NowPresenter(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    NowPresenter(MoobRepository moobRepository) {
+        this.moobRepository = moobRepository;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class NowPresenter extends BasePresenter<NowContract.View>
 
     private Flowable<NowViewState> getViewStateObservable() {
         return refreshRelay.toFlowable(BackpressureStrategy.LATEST)
-                .flatMap(ignore -> movieRepository.getNowList(new NowMovieRequest())
+                .flatMap(ignore -> moobRepository.getNowList(NowMovieRequest.INSTANCE)
                         .map(NowMovieResponse::getList)
                         .map(NowViewState.DoneState::new)
                         .toFlowable());

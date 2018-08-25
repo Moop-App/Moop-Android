@@ -2,14 +2,7 @@ package soup.movie.data
 
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import soup.movie.data.model.CodeRequest
-import soup.movie.data.model.CodeResponse
-import soup.movie.data.model.NowMovieRequest
-import soup.movie.data.model.NowMovieResponse
-import soup.movie.data.model.PlanMovieRequest
-import soup.movie.data.model.PlanMovieResponse
-import soup.movie.data.model.TimeTableRequest
-import soup.movie.data.model.TimeTableResponse
+import soup.movie.data.model.*
 import soup.movie.data.service.MoobApiService
 
 class MoobDataSource(private val moobApiService: MoobApiService) : IMoobDataSource {

@@ -22,10 +22,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.model.Movie;
-import soup.movie.util.MovieUtil;
 import soup.movie.ui.detail.DetailActivity;
 import soup.movie.util.ImageUtil;
 import soup.movie.util.ListUtil;
+import soup.movie.util.MovieUtil;
 
 import static soup.movie.util.IntentUtil.createShareIntentWithText;
 

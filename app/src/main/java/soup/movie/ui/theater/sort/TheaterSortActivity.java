@@ -20,14 +20,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import soup.movie.R;
-import soup.movie.di.ActivityScoped;
 import soup.movie.ui.BaseActivity;
 import soup.movie.ui.theater.edit.TheaterEditActivity;
 import soup.movie.util.RecyclerViewUtil;
 import soup.widget.drag.ItemTouchHelperAdapter;
 import soup.widget.drag.SimpleItemTouchHelperCallback;
 
-@ActivityScoped
 public class TheaterSortActivity extends BaseActivity implements TheaterSortContract.View {
 
     @Inject

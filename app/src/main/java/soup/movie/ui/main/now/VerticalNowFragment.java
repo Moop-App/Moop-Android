@@ -18,7 +18,7 @@ import butterknife.BindView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
 import soup.movie.data.model.Movie;
-import soup.movie.di.FragmentScoped;
+import soup.movie.di.scope.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.now.NowViewState.DoneState;
 import soup.movie.ui.main.now.NowViewState.LoadingState;

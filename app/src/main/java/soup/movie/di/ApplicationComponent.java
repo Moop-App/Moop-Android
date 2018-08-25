@@ -9,7 +9,7 @@ import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import soup.movie.MovieApplication;
-import soup.movie.data.MovieRepository;
+import soup.movie.data.MoobRepository;
 
 @Singleton
 @Component(modules = {
@@ -21,7 +21,7 @@ import soup.movie.data.MovieRepository;
 })
 public interface ApplicationComponent extends AndroidInjector<MovieApplication> {
 
-    MovieRepository getMovieRepository();
+    MoobRepository getMovieRepository();
 
     @Component.Builder
     interface Builder {

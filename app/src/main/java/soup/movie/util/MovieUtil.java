@@ -2,7 +2,9 @@ package soup.movie.util;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.google.gson.Gson;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 import soup.movie.data.model.Movie;

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import soup.movie.data.model.Theater;
-import soup.movie.di.ActivityScoped;
+import soup.movie.di.scope.ActivityScoped;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
 

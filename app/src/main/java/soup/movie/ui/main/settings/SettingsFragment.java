@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import soup.movie.R;
 import soup.movie.data.model.Theater;
-import soup.movie.di.FragmentScoped;
+import soup.movie.di.scope.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
 import soup.movie.ui.theater.sort.TheaterSortActivity;

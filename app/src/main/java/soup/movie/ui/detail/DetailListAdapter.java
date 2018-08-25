@@ -27,10 +27,10 @@ import soup.movie.data.model.Thumbnails;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.Trailer;
 import soup.movie.ui.theater.edit.TheaterEditActivity;
-import soup.movie.util.MovieAppUtil;
-import soup.movie.util.YouTubeUtil;
 import soup.movie.util.ImageUtil;
 import soup.movie.util.ListUtil;
+import soup.movie.util.MovieAppUtil;
+import soup.movie.util.YouTubeUtil;
 
 class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolder> {
 

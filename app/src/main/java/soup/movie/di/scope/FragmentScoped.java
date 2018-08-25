@@ -1,4 +1,4 @@
-package soup.movie.di;
+package soup.movie.di.scope;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -8,11 +8,11 @@ import javax.inject.Inject;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import soup.movie.data.MovieRepository;
+import soup.movie.data.MoobRepository;
 import soup.movie.data.model.AreaGroup;
 import soup.movie.data.model.CodeRequest;
 import soup.movie.data.model.Theater;
-import soup.movie.di.ActivityScoped;
+import soup.movie.di.scope.ActivityScoped;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
 
@@ -20,12 +20,12 @@ import soup.movie.ui.BasePresenter;
 public class TheaterEditPresenter extends BasePresenter<TheaterEditContract.View>
         implements TheaterEditContract.Presenter {
 
-    private final MovieRepository movieRepository;
+    private final MoobRepository moobRepository;
     private final TheaterSetting theaterSetting;
 
     @Inject
-    TheaterEditPresenter(MovieRepository movieRepository, TheaterSetting theaterSetting) {
-        this.movieRepository = movieRepository;
+    TheaterEditPresenter(MoobRepository moobRepository, TheaterSetting theaterSetting) {
+        this.moobRepository = moobRepository;
         this.theaterSetting = theaterSetting;
     }
 
@@ -44,7 +44,7 @@ public class TheaterEditPresenter extends BasePresenter<TheaterEditContract.View
     }
 
     private Single<List<Theater>> getAllTheatersObservable() {
-        return movieRepository.getCodeList(new CodeRequest())
+        return moobRepository.getCodeList(CodeRequest.INSTANCE)
                 .toObservable()
                 .flatMapIterable(response -> {
                     ArrayList<AreaGroup> areas = new ArrayList<>();

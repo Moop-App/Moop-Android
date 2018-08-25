@@ -12,10 +12,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import soup.movie.BuildType;
 import soup.movie.data.IMoobDataSource;
 import soup.movie.data.MoobDataSource;
+import soup.movie.data.MoobRepository;
 import soup.movie.data.service.MoobApiService;
 
 @Module
 public class MovieRepositoryModule {
+
+    @Singleton
+    @Provides
+    MoobRepository provideMoobRepository(IMoobDataSource remoteDataSource) {
+        return new MoobRepository(remoteDataSource);
+    }
 
     @Singleton
     @Provides

@@ -7,7 +7,7 @@ import java.util.List;
 import soup.movie.data.model.Theater;
 import soup.movie.ui.BaseContract;
 
-class TheaterSortContract {
+public interface TheaterSortContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
         void onConfirmClicked(List<Theater> selectedTheaters);

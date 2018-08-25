@@ -13,7 +13,10 @@ import soup.movie.data.model.TimeTableResponse
 interface IMoobDataSource {
 
     fun getNowList(request: NowMovieRequest): Single<NowMovieResponse>
+
     fun getPlanList(request: PlanMovieRequest): Single<PlanMovieResponse>
+
     fun getCodeList(request: CodeRequest): Single<CodeResponse>
+
     fun getTimeTableList(request: TimeTableRequest): Single<TimeTableResponse>
 }

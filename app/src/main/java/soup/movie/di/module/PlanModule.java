@@ -1,9 +1,13 @@
-package soup.movie.ui.main.plan;
+package soup.movie.di.module;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import soup.movie.di.FragmentScoped;
+import soup.movie.di.scope.FragmentScoped;
+import soup.movie.ui.main.plan.PlanContract;
+import soup.movie.ui.main.plan.PlanFragment;
+import soup.movie.ui.main.plan.PlanPresenter;
+import soup.movie.ui.main.plan.VerticalPlanFragment;
 
 @Module
 public abstract class PlanModule {

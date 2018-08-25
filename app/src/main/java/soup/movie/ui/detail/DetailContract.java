@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import soup.movie.data.model.Movie;
 import soup.movie.ui.BaseContract;
 
-class DetailContract {
+public interface DetailContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
         void requestData(@NonNull Movie movie);

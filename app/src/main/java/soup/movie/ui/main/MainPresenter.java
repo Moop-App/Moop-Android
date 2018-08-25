@@ -2,7 +2,7 @@ package soup.movie.ui.main;
 
 import javax.inject.Inject;
 
-import soup.movie.di.ActivityScoped;
+import soup.movie.di.scope.ActivityScoped;
 import soup.movie.settings.HomeTypeSetting;
 import soup.movie.ui.BasePresenter;
 

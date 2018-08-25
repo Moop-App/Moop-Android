@@ -1,14 +1,9 @@
 package soup.movie.data.model
 
-import java.util.HashMap
-
 import soup.movie.data.base.QueryMapProvider
+import java.util.*
 
-class NowMovieRequest : QueryMapProvider {
-
-    override fun toString(): String {
-        return "NowMovieRequest{}"
-    }
+object NowMovieRequest : QueryMapProvider {
 
     override fun toQueryMap(): Map<String, String> {
         return HashMap()

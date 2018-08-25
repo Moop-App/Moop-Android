@@ -11,11 +11,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import soup.movie.R;
-import soup.movie.di.ActivityScoped;
 import soup.movie.ui.BaseActivity;
 import soup.movie.util.RecyclerViewUtil;
 
-@ActivityScoped
 public class TheaterEditActivity extends BaseActivity implements TheaterEditContract.View {
 
     @Inject

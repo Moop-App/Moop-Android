@@ -26,6 +26,7 @@ public class SharedPreferencesModule {
         return new TheaterSetting(preferences);
     }
 
+    @Singleton
     @Provides
     SharedPreferences provideSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);

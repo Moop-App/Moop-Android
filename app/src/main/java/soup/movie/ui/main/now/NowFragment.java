@@ -16,12 +16,12 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
-import soup.movie.di.FragmentScoped;
-import soup.widget.snappy.SnappyLinearLayoutManager;
 import soup.movie.data.model.Movie;
+import soup.movie.di.scope.FragmentScoped;
 import soup.movie.ui.main.MainTabFragment;
 import soup.movie.ui.main.now.NowViewState.DoneState;
 import soup.movie.ui.main.now.NowViewState.LoadingState;
+import soup.widget.snappy.SnappyLinearLayoutManager;
 import timber.log.Timber;
 
 @FragmentScoped

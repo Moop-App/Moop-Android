@@ -10,14 +10,14 @@ import javax.inject.Inject;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import soup.movie.data.MovieRepository;
+import soup.movie.data.MoobRepository;
 import soup.movie.data.model.Movie;
 import soup.movie.data.model.Theater;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.TimeTableRequest;
 import soup.movie.data.model.TimeTableResponse;
 import soup.movie.data.model.Trailer;
-import soup.movie.di.ActivityScoped;
+import soup.movie.di.scope.ActivityScoped;
 import soup.movie.settings.TheaterSetting;
 import soup.movie.ui.BasePresenter;
 import timber.log.Timber;
@@ -26,13 +26,13 @@ import timber.log.Timber;
 public class DetailPresenter extends BasePresenter<DetailContract.View>
         implements DetailContract.Presenter {
 
-    private final MovieRepository movieRepository;
+    private final MoobRepository moobRepository;
     private final TheaterSetting theaterSetting;
 
     @Inject
-    DetailPresenter(MovieRepository movieRepository,
+    DetailPresenter(MoobRepository moobRepository,
                     TheaterSetting theaterSetting) {
-        this.movieRepository = movieRepository;
+        this.moobRepository = moobRepository;
         this.theaterSetting = theaterSetting;
     }
 
@@ -72,7 +72,7 @@ public class DetailPresenter extends BasePresenter<DetailContract.View>
     }
 
     private Single<TimeTable> getTimeTableObservable(@NonNull String theaterId, @NonNull String movieId) {
-        return movieRepository
+        return moobRepository
                 .getTimeTableList(new TimeTableRequest(theaterId, movieId))
                 .onErrorReturn(throwable -> new TimeTableResponse(new TimeTable(Collections.emptyList())))
                 .map(TimeTableResponse::getTimeTable);

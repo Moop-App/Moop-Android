@@ -36,13 +36,12 @@ import soup.movie.R;
 import soup.movie.data.model.Movie;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.Trailer;
-import soup.movie.di.ActivityScoped;
-import soup.movie.util.MovieUtil;
 import soup.movie.ui.BaseActivity;
-import soup.movie.util.DrawableUtils;
-import soup.movie.util.ImageUtil;
 import soup.movie.ui.detail.DetailViewState.DoneState;
 import soup.movie.ui.detail.DetailViewState.LoadingState;
+import soup.movie.util.DrawableUtils;
+import soup.movie.util.ImageUtil;
+import soup.movie.util.MovieUtil;
 import soup.widget.elastic.ElasticDragDismissFrameLayout;
 import soup.widget.util.ColorUtils;
 import soup.widget.util.ViewUtils;
@@ -52,7 +51,6 @@ import static soup.movie.util.IntentUtil.createShareIntentWithText;
 import static soup.movie.util.RecyclerViewUtil.createLinearLayoutManager;
 import static soup.widget.util.AnimUtils.getFastOutSlowInInterpolator;
 
-@ActivityScoped
 public class DetailActivity extends BaseActivity implements DetailContract.View {
 
     private static final float SCRIM_ADJUSTMENT = 0.075f;

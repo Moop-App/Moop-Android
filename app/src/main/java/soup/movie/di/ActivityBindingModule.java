@@ -2,17 +2,18 @@ package soup.movie.di;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import soup.movie.di.module.DetailModule;
+import soup.movie.di.module.MainModule;
+import soup.movie.di.module.NowModule;
+import soup.movie.di.module.PlanModule;
+import soup.movie.di.module.SettingsModule;
+import soup.movie.di.module.TheaterEditModule;
+import soup.movie.di.module.TheaterSortModule;
+import soup.movie.di.scope.ActivityScoped;
 import soup.movie.ui.detail.DetailActivity;
-import soup.movie.ui.detail.DetailModule;
 import soup.movie.ui.main.MainActivity;
-import soup.movie.ui.main.MainModule;
-import soup.movie.ui.main.now.NowModule;
-import soup.movie.ui.main.plan.PlanModule;
-import soup.movie.ui.main.settings.SettingsModule;
 import soup.movie.ui.theater.edit.TheaterEditActivity;
-import soup.movie.ui.theater.edit.TheaterEditModule;
 import soup.movie.ui.theater.sort.TheaterSortActivity;
-import soup.movie.ui.theater.sort.TheaterSortModule;
 
 @Module
 public abstract class ActivityBindingModule {
