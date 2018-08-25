@@ -4,15 +4,12 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.v4.app.SharedElementCallback;
 import android.transition.TransitionInflater;
 import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
@@ -24,14 +21,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import soup.movie.R;
 import soup.movie.data.model.Theater;
-import soup.movie.di.scope.FragmentScoped;
-import soup.movie.ui.main.MainTabFragment;
+import soup.movie.ui.main.BaseTabFragment;
 import soup.movie.ui.main.settings.SettingsViewState.DoneState;
 import soup.movie.ui.theater.sort.TheaterSortActivity;
 import timber.log.Timber;
 
-@FragmentScoped
-public class SettingsFragment extends MainTabFragment implements SettingsContract.View {
+public class SettingsFragment extends BaseTabFragment<SettingsContract.View, SettingsContract.Presenter>
+        implements SettingsContract.View {
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -67,22 +63,14 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+    protected int getLayoutRes() {
+        return R.layout.fragment_settings;
     }
 
+    @NonNull
     @Override
-    public void onResume() {
-        super.onResume();
-        presenter.attach(this);
-    }
-
-    @Override
-    public void onPause() {
-        presenter.detach();
-        super.onPause();
+    protected SettingsContract.Presenter getPresenter() {
+        return presenter;
     }
 
     @Override
@@ -119,9 +107,9 @@ public class SettingsFragment extends MainTabFragment implements SettingsContrac
     @OnClick(R.id.theater_edit)
     public void onTheaterEditClicked() {
         Intent intent = new Intent(getContext(), TheaterSortActivity.class);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
-                getActivity(), createTheaterChipPairsForTransition());
-        startActivity(intent, options.toBundle());
+        startActivity(intent, ActivityOptions
+                .makeSceneTransitionAnimation(getActivity(), createTheaterChipPairsForTransition())
+                .toBundle());
     }
 
     private Pair<View,String>[] createTheaterChipPairsForTransition() {

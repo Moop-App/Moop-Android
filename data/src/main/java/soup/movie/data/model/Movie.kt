@@ -13,4 +13,13 @@ data class Movie(
         val egg: String,
         @SerializedName("special_types")
         val specialTypes: List<String>,
-        val trailers: List<Trailer>)
+        val trailers: List<Trailer>) {
+
+        fun getSimpleAgeLabel() : String = when (age) {
+                "전체 관람가" -> "전체"
+                "12세 관람가" -> "12"
+                "15세 관람가" -> "15"
+                "청소년관람불가" -> "청불"
+                else -> "미정"
+        }
+}

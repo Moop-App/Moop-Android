@@ -1,38 +1,38 @@
 package soup.movie.ui.main.now;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import soup.movie.R;
-import soup.movie.data.model.Movie;
-import soup.movie.di.scope.FragmentScoped;
-import soup.movie.ui.main.MainTabFragment;
+import soup.movie.ui.detail.DetailActivity;
+import soup.movie.ui.main.BaseTabFragment;
+import soup.movie.ui.main.now.NowContract.Presenter;
+import soup.movie.ui.main.now.NowContract.View;
 import soup.movie.ui.main.now.NowViewState.DoneState;
 import soup.movie.ui.main.now.NowViewState.LoadingState;
+import soup.movie.util.MovieUtil;
+import soup.movie.util.ViewUtil;
 import timber.log.Timber;
 
-import static soup.movie.util.RecyclerViewUtil.createGridLayoutManager;
+import static soup.movie.util.RecyclerViewUtil.gridLayoutManager;
 
-@FragmentScoped
-public class NowFragment extends MainTabFragment implements NowContract.View {
+public class NowFragment extends BaseTabFragment<View, Presenter> implements View {
+
+    public static NowFragment newInstance() {
+        return new NowFragment();
+    }
 
     @Inject
     NowContract.Presenter presenter;
-
-    private NowListAdapter adapterView;
 
     @BindView(R.id.swipe_layout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -40,74 +40,61 @@ public class NowFragment extends MainTabFragment implements NowContract.View {
     @BindView(R.id.list)
     RecyclerView listView;
 
+    private NowListAdapter listAdapter;
+
     public NowFragment() {
     }
 
-    public static NowFragment newInstance() {
-        return new NowFragment();
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.fragment_vertical_list;
+    }
+
+    @NonNull
+    @Override
+    protected NowContract.Presenter getPresenter() {
+        return presenter;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_vertical_list, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Context context = view.getContext();
-
-        adapterView = new NowListAdapter(getActivity());
-        RecyclerView recyclerView = listView;
-        recyclerView.setLayoutManager(createGridLayoutManager(context, 3));
-        recyclerView.setAdapter(adapterView);
-        recyclerView.setItemAnimator(new SlideInUpAnimator());
-        recyclerView.getItemAnimator().setAddDuration(200);
-        recyclerView.getItemAnimator().setRemoveDuration(200);
-
+    protected void initViewState(@NonNull Context ctx) {
+        super.initViewState(ctx);
+        listAdapter = new NowListAdapter((movie, sharedElements) -> {
+            Activity activity = getActivity();
+            Intent intent = new Intent(activity, DetailActivity.class);
+            MovieUtil.saveTo(intent, movie);
+            activity.startActivity(intent, ActivityOptions
+                    .makeSceneTransitionAnimation(activity, sharedElements)
+                    .toBundle());
+        });
+        listView.setLayoutManager(gridLayoutManager(ctx, 3));
+        listView.setAdapter(listAdapter);
+        listView.setItemAnimator(new SlideInUpAnimator());
+        listView.getItemAnimator().setAddDuration(200);
+        listView.getItemAnimator().setRemoveDuration(200);
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.refresh());
-
-        presenter.attach(this);
-    }
-
-    @Override
-    public void onDestroyView() {
-        presenter.detach();
-        super.onDestroyView();
     }
 
     @Override
     public void render(@NonNull NowViewState viewState) {
         Timber.i("render: %s", viewState);
         if (viewState instanceof LoadingState) {
-            renderInternal((LoadingState) viewState);
+            renderLoadingState();
         } else if (viewState instanceof DoneState) {
-            renderInternal((DoneState)viewState);
+            renderDoneState((DoneState)viewState);
         } else {
-            throw new IllegalStateException("Unknown UI Model");
+            throw new IllegalStateException("Unknown view state(" + viewState + ")");
         }
     }
 
-    private void renderInternal(@NonNull LoadingState viewState) {
+    private void renderLoadingState() {
         swipeRefreshLayout.setRefreshing(true);
-        updateMovieList(null);
+        ViewUtil.hide(listView);
     }
 
-    private void renderInternal(@NonNull DoneState viewState) {
+    private void renderDoneState(@NonNull DoneState state) {
         swipeRefreshLayout.setRefreshing(false);
-        updateMovieList(viewState.getMovies());
-    }
-
-    private void updateMovieList(@Nullable List<Movie> movieList) {
-        NowListAdapter adapterView = this.adapterView;
-        if (adapterView != null) {
-            adapterView.updateList(movieList);
-        }
+        listAdapter.submitList(state.getMovies());
+        ViewUtil.show(listView);
     }
 }

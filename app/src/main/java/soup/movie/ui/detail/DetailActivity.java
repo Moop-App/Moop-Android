@@ -1,6 +1,7 @@
 package soup.movie.ui.detail;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -21,21 +22,13 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 
 import butterknife.BindColor;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 import soup.movie.R;
 import soup.movie.data.model.Movie;
-import soup.movie.data.model.TimeTable;
-import soup.movie.data.model.Trailer;
 import soup.movie.ui.BaseActivity;
 import soup.movie.ui.detail.DetailViewState.DoneState;
 import soup.movie.ui.detail.DetailViewState.LoadingState;
@@ -48,10 +41,11 @@ import soup.widget.util.ViewUtils;
 import timber.log.Timber;
 
 import static soup.movie.util.IntentUtil.createShareIntentWithText;
-import static soup.movie.util.RecyclerViewUtil.createLinearLayoutManager;
+import static soup.movie.util.RecyclerViewUtil.verticalLinearLayoutManager;
 import static soup.widget.util.AnimUtils.getFastOutSlowInInterpolator;
 
-public class DetailActivity extends BaseActivity implements DetailContract.View {
+public class DetailActivity extends BaseActivity<DetailContract.View, DetailContract.Presenter>
+        implements DetailContract.View {
 
     private static final float SCRIM_ADJUSTMENT = 0.075f;
 
@@ -86,7 +80,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
     ImageView shareButton;
 
     @BindView(R.id.movie_contents)
-    RecyclerView movieContents;
+    RecyclerView listView;
 
     @BindColor(R.color.green)
     int greenColor;
@@ -106,33 +100,45 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
     @Inject
     DetailContract.Presenter presenter;
 
-    private DetailListAdapter adapterView;
+    private DetailListAdapter listAdapter;
 
     private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
 
     private Movie movie;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        ButterKnife.bind(this);
+    protected int getLayoutRes() {
+        return R.layout.activity_detail;
+    }
 
+    @NonNull
+    @Override
+    protected DetailContract.Presenter getPresenter() {
+        return presenter;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             movie = MovieUtil.restoreFrom(getIntent());
         } else {
             movie = MovieUtil.restoreFrom(savedInstanceState);
         }
         Timber.d("onCreate: movie=%s", movie);
+        super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    protected void initViewState(@NonNull Context ctx) {
+        super.initViewState(ctx);
         ImageUtil.loadAsync(this, posterView, shotLoadListener, movie.getPoster());
         titleView.setText(movie.getTitle());
         updateAgeView(movie.getAge());
         eggView.setText(movie.getEgg());
         favoriteButton.setOnClickListener(v -> {});
         shareButton.setOnClickListener(v ->
-            startActivity(createShareIntentWithText(
-                    "공유하기", MovieUtil.createShareDescription(movie))));
+                startActivity(createShareIntentWithText(
+                        "공유하기", MovieUtil.createShareDescription(movie))));
 
         backButton.setOnClickListener(v -> setResultAndFinish());
         chromeFader = new ElasticDragDismissFrameLayout.SystemChromeFader(this) {
@@ -141,22 +147,18 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
                 setResultAndFinish();
             }
         };
+        listAdapter = new DetailListAdapter(this);
+        listView.setLayoutManager(verticalLinearLayoutManager(ctx));
+        listView.setAdapter(listAdapter);
+        listView.setItemAnimator(new SlideInRightAnimator());
+        listView.getItemAnimator().setAddDuration(200);
+        listView.getItemAnimator().setRemoveDuration(200);
+    }
 
-        DetailListAdapter adapterView = new DetailListAdapter(this);
-        RecyclerView recyclerView = movieContents;
-        recyclerView.setLayoutManager(createLinearLayoutManager(this, true));
-        recyclerView.setAdapter(adapterView);
-        recyclerView.setItemAnimator(new SlideInRightAnimator());
-        recyclerView.getItemAnimator().setAddDuration(200);
-        recyclerView.getItemAnimator().setRemoveDuration(200);
-        this.adapterView = adapterView;
-
-        presenter.attach(this);
-
-        //TODO: call requestData() after transition animation is ended
-        register(Observable.timer(150, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(unused -> presenter.requestData(movie)));
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.requestData(movie);
     }
 
     private void updateAgeView(String ageText) {
@@ -205,33 +207,21 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
     }
 
     @Override
-    protected void onDestroy() {
-        presenter = null;
-        super.onDestroy();
-    }
-
-    @Override
     public void render(@NonNull DetailViewState viewState) {
+        Timber.d("render: %s", viewState);
         if (viewState instanceof LoadingState) {
-            renderInternal((LoadingState) viewState);
+            renderLoadingState();
         } else if (viewState instanceof DoneState) {
-            renderInternal((DoneState) viewState);
+            renderDoneState((DoneState) viewState);
         }
     }
 
-    private void renderInternal(@NonNull LoadingState viewState) {
+    private void renderLoadingState() {
         //TODO: show loading state
     }
 
-    private void renderInternal(@NonNull DoneState viewState) {
-        updateTrailerList(viewState.getTimeTable(), viewState.getTrailers());
-    }
-
-    private void updateTrailerList(@Nullable TimeTable timeTable, @Nullable List<Trailer> trailerList) {
-        DetailListAdapter adapterView = this.adapterView;
-        if (adapterView != null) {
-            adapterView.updateList(timeTable, trailerList);
-        }
+    private void renderDoneState(@NonNull DoneState state) {
+        listAdapter.updateList(state.getTimeTable(), state.getTrailers());
     }
 
     @Override

@@ -9,7 +9,7 @@ public class MovieApplication extends DaggerApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        BuildType.init(this);
+        BuildType.INSTANCE.init(this);
     }
 
     @Override

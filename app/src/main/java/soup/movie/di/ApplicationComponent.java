@@ -9,19 +9,16 @@ import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import soup.movie.MovieApplication;
-import soup.movie.data.MoobRepository;
 
 @Singleton
 @Component(modules = {
         AndroidSupportInjectionModule.class,
         ApplicationModule.class,
         ActivityBindingModule.class,
-        MovieRepositoryModule.class,
+        MoobRepositoryModule.class,
         SharedPreferencesModule.class
 })
 public interface ApplicationComponent extends AndroidInjector<MovieApplication> {
-
-    MoobRepository getMovieRepository();
 
     @Component.Builder
     interface Builder {

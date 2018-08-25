@@ -1,5 +1,6 @@
 package soup.movie.ui.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -9,7 +10,6 @@ import android.support.design.widget.BottomNavigationView;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.ui.BaseActivity;
 import soup.movie.ui.main.MainViewState.NowState;
@@ -20,7 +20,8 @@ import soup.movie.ui.main.plan.PlanFragment;
 import soup.movie.ui.main.settings.SettingsFragment;
 import timber.log.Timber;
 
-public class MainActivity extends BaseActivity implements MainContract.View {
+public class MainActivity extends BaseActivity<MainContract.View, MainContract.Presenter>
+        implements MainContract.View {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView navigationView;
@@ -29,32 +30,32 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     MainContract.Presenter presenter;
 
     @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_main;
+    }
+
+    @NonNull
+    @Override
+    protected MainContract.Presenter getPresenter() {
+        return presenter;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        initBottomNavigationView();
-
-        presenter.attach(this);
-
-        navigationView.setSelectedItemId(R.id.action_now); //default
     }
 
-    private void initBottomNavigationView() {
+    @Override
+    protected void initViewState(@NonNull Context ctx) {
+        super.initViewState(ctx);
         BottomNavigationViewHelper.disableShiftMode(navigationView);
         navigationView.setOnNavigationItemSelectedListener(item -> {
             setTitle(item.getTitle());
             presenter.setTabMode(parseToTabMode(item.getItemId()));
             return true;
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        presenter.detach();
-        super.onDestroy();
+        navigationView.setSelectedItemId(R.id.action_now);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package soup.movie.data.service
 
-import io.reactivex.Single
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import soup.movie.data.response.CodeResponse
@@ -12,20 +12,21 @@ interface MoobApiService {
 
     // 현재상영작
     @GET("v1/cgv/now/asTicketRate/nowOnly.json")
-    fun getNowList(): Single<NowMovieResponse>
+    fun getNowList(): Observable<NowMovieResponse>
 
     // 개봉예정작
     @GET("v1/cgv/plan/asOpenDate.json")
-    fun getPlanList(): Single<PlanMovieResponse>
+    fun getPlanList(): Observable<PlanMovieResponse>
 
     // 공통코드
     @GET("v1/code.json")
-    fun getCodeList(): Single<CodeResponse>
+    fun getCodeList(): Observable<CodeResponse>
 
     // 상영시간표
     @GET("v1/cgv/timetable/asMovie/{tc}/{mc}.json")
-    fun getTimeTableList(@Path("tc") theater: String,
-                         @Path("mc") movie: String): Single<TimeTableResponse>
+    fun getTimeTableList(
+            @Path("tc") theater: String,
+            @Path("mc") movie: String): Observable<TimeTableResponse>
 
     companion object {
 

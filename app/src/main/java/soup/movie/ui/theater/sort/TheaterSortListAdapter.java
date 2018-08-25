@@ -1,7 +1,6 @@
 package soup.movie.ui.theater.sort;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.chip.Chip;
 import android.support.v7.widget.RecyclerView;
@@ -38,8 +37,7 @@ class TheaterSortListAdapter extends RecyclerView.Adapter<TheaterSortListAdapter
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context ctx = parent.getContext();
-        return new ViewHolder(LayoutInflater.from(ctx)
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_theater, parent, false));
     }
 
@@ -76,7 +74,7 @@ class TheaterSortListAdapter extends RecyclerView.Adapter<TheaterSortListAdapter
     public void onItemDismiss(int position) {
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.chip_theater)
         Chip theaterChip;

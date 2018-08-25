@@ -105,7 +105,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
                 TimeTableViewHolder holder1 = (TimeTableViewHolder) holder;
                 TimeTable item = timeTable;
                 List<Day> days = item.getDayList();
-                if (days != null && !days.isEmpty()) {
+                if (!days.isEmpty()) {
                     holder1.empty.setVisibility(View.GONE);
                     int size = Math.min(3, days.size());
                     for (int i = 0; i < size; i++) {
@@ -134,26 +134,24 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
 
     private static String getThumbnailUrl(@NonNull Trailer trailer) {
         ThumbnailGroup thumbnails = trailer.getThumbnails();
-        if (thumbnails != null) {
-            Thumbnail high = thumbnails.getHigh();
-            if (high != null && high.getUrl() != null) {
-                return high.getUrl();
-            }
-            Thumbnail medium = thumbnails.getMedium();
-            if (medium != null && medium.getUrl() != null) {
-                return medium.getUrl();
-            }
-            Thumbnail low = thumbnails.getDefault();
-            if (low != null && low.getUrl() != null) {
-                return low.getUrl();
-            }
+        Thumbnail high = thumbnails.getHigh();
+        if (high != null && high.getUrl() != null) {
+            return high.getUrl();
+        }
+        Thumbnail medium = thumbnails.getMedium();
+        if (medium != null && medium.getUrl() != null) {
+            return medium.getUrl();
+        }
+        Thumbnail low = thumbnails.getDefault();
+        if (low != null && low.getUrl() != null) {
+            return low.getUrl();
         }
         return YouTubeUtil.getThumbnailUrl(trailer.getYoutubeId());
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position != 0 ? TYPE_TRAILER : timeTable.getDayList() == null ? TYPE_TIMETABLE_NONE : TYPE_TIMETABLE;
+        return position != 0 ? TYPE_TRAILER : timeTable.getDayList().isEmpty() ? TYPE_TIMETABLE_NONE : TYPE_TIMETABLE;
     }
 
     @Override

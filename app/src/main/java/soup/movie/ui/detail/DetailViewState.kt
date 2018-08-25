@@ -5,8 +5,10 @@ import soup.movie.data.model.Trailer
 
 sealed class DetailViewState {
 
-    data class LoadingState(
-            val isTheaterNotExists: Boolean = true) : DetailViewState()
+    object LoadingState : DetailViewState() {
+
+        override fun toString(): String = javaClass.simpleName
+    }
 
     data class DoneState(
             val timeTable: TimeTable,

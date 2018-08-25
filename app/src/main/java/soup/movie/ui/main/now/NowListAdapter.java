@@ -1,11 +1,10 @@
 package soup.movie.ui.main.now;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.content.res.ColorStateList;
+import android.content.Context;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -14,132 +13,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.model.Movie;
-import soup.movie.ui.detail.DetailActivity;
+import soup.movie.ui.main.OnInternalClickListener;
+import soup.movie.ui.main.OnMovieClickListener;
+import soup.movie.util.AlwaysDiffCallback;
 import soup.movie.util.ImageUtil;
-import soup.movie.util.ListUtil;
-import soup.movie.util.MovieUtil;
 
-class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
+class NowListAdapter extends ListAdapter<Movie, NowListAdapter.ViewHolder> {
 
-    private final Activity host;
+    private final OnMovieClickListener clickListener;
 
-    private List<Movie> items = new ArrayList<>();
-
-    @BindColor(R.color.green)
-    int greenColor;
-
-    @BindColor(R.color.blue)
-    int blueColor;
-
-    @BindColor(R.color.amber)
-    int amberColor;
-
-    @BindColor(R.color.red)
-    int redColor;
-
-    @BindColor(R.color.grey)
-    int greyColor;
-
-    NowListAdapter(Activity host) {
-        this.host = host;
-        ButterKnife.bind(this, host);
+    NowListAdapter(OnMovieClickListener clickListener) {
+        super(new AlwaysDiffCallback<>());
+        this.clickListener = clickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_movie_vertical, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(host, DetailActivity.class);
-            MovieUtil.saveTo(intent, items.get(holder.getAdapterPosition()));
-            ActivityOptions options =
-                    ActivityOptions.makeSceneTransitionAnimation(host,
-                            Pair.create(holder.backgroundView, host.getString(R.string.transition_background)),
-                            Pair.create(holder.posterView, host.getString(R.string.transition_poster)),
-                            Pair.create(holder.ageBgView, host.getString(R.string.transition_age_bg)),
-                            Pair.create(holder.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)));
-            host.startActivity(intent, options.toBundle());
-        });
-        return holder;
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_movie_vertical, parent, false),
+                (position, sharedElements) ->
+                        clickListener.onMovieClick(getItem(position), sharedElements));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Movie item = items.get(position);
-        ImageUtil.loadAsync(host, holder.posterView, item.getPoster());
-        updateAgeView(holder.ageBgView, item.getAge());
-    }
-
-    private void updateAgeView(View ageBgView, String ageText) {
-        int color;
-        switch (ageText) {
-            case "전체 관람가":
-                ageText = "전체";
-                color = greenColor;
-                break;
-            case "12세 관람가":
-                ageText = "12";
-                color = blueColor;
-                break;
-            case "15세 관람가":
-                ageText = "15";
-                color = amberColor;
-                break;
-            case "청소년관람불가":
-                ageText = "청불";
-                color = redColor;
-                break;
-            default:
-                ageText = "미정";
-                color = greyColor;
-        }
-        if (TextUtils.isEmpty(ageText)) {
-            ageBgView.setVisibility(View.GONE);
-        } else {
-            ageBgView.setBackgroundTintList(ColorStateList.valueOf(color));
-            ageBgView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return ListUtil.size(items);
-    }
-
-    void updateList(List<Movie> newItems) {
-        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
-            @Override
-            public int getOldListSize() {
-                return ListUtil.size(items);
-            }
-
-            @Override
-            public int getNewListSize() {
-                return ListUtil.size(newItems);
-            }
-
-            @Override
-            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                return false;
-            }
-
-            @Override
-            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                return false;
-            }
-        }, false);
-        items = newItems;
-        result.dispatchUpdatesTo(this);
+        holder.bindItem(getItem(position));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -153,9 +56,48 @@ class NowListAdapter extends RecyclerView.Adapter<NowListAdapter.ViewHolder> {
         @BindView(R.id.age_bg_outer)
         View ageBgOuterView;
 
-        ViewHolder(View view) {
+        ViewHolder(View view, OnInternalClickListener clickListener) {
             super(view);
             ButterKnife.bind(this, view);
+            Context ctx = view.getContext();
+            view.setOnClickListener(v -> clickListener.onItemClick(
+                    getAdapterPosition(),
+                    Pair.create(backgroundView, ctx.getString(R.string.transition_background)),
+                    Pair.create(posterView, ctx.getString(R.string.transition_poster)),
+                    Pair.create(ageBgView, ctx.getString(R.string.transition_age_bg)),
+                    Pair.create(ageBgOuterView, ctx.getString(R.string.transition_age_bg_outer))));
+        }
+
+        void bindItem(@NonNull Movie movie) {
+            Context ctx = itemView.getContext();
+            ImageUtil.loadAsync(ctx, posterView, movie.getPoster());
+            updateAgeText(ageBgView, movie.getAge());
+        }
+
+        private void updateAgeText(View ageBgView, String ageText) {
+            if (TextUtils.isEmpty(ageText)) {
+                ageBgView.setVisibility(View.GONE);
+            } else {
+                ageBgView.setBackgroundTintList(
+                        ContextCompat.getColorStateList(ageBgView.getContext(), getColorAsAge(ageText)));
+                ageBgView.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @ColorRes
+        private int getColorAsAge(String age) {
+            switch (age) {
+                case "전체 관람가":
+                    return R.color.green;
+                case "12세 관람가":
+                    return R.color.blue;
+                case "15세 관람가":
+                    return R.color.amber;
+                case "청소년관람불가":
+                    return R.color.red;
+                default:
+                    return R.color.grey;
+            }
         }
     }
 }

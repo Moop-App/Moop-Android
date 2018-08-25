@@ -1,6 +1,7 @@
 package soup.movie.ui.theater.sort;
 
 import android.app.SharedElementCallback;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,38 +18,46 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import soup.movie.R;
 import soup.movie.ui.BaseActivity;
 import soup.movie.ui.theater.edit.TheaterEditActivity;
-import soup.movie.util.RecyclerViewUtil;
 import soup.widget.drag.ItemTouchHelperAdapter;
 import soup.widget.drag.SimpleItemTouchHelperCallback;
 
-public class TheaterSortActivity extends BaseActivity implements TheaterSortContract.View {
+import static soup.movie.util.RecyclerViewUtil.verticalLinearLayoutManager;
+
+public class TheaterSortActivity extends BaseActivity<TheaterSortContract.View, TheaterSortContract.Presenter>
+        implements TheaterSortContract.View {
 
     @Inject
     TheaterSortContract.Presenter presenter;
 
     @BindView(R.id.list)
-    RecyclerView recyclerView;
+    RecyclerView listView;
 
-    private TheaterSortListAdapter adapter;
+    private TheaterSortListAdapter listAdapter;
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_theater_sort;
+    }
+
+    @NonNull
+    @Override
+    protected TheaterSortContract.Presenter getPresenter() {
+        return presenter;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theater_sort);
-        ButterKnife.bind(this);
-        recyclerView.setLayoutManager(RecyclerViewUtil.createLinearLayoutManager(this));
-
         postponeEnterTransition();
         setEnterSharedElementCallback(new SharedElementCallback() {
             @Override
             public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
                 for (String name : names) {
-                    View child = recyclerView.findViewWithTag(name);
+                    View child = listView.findViewWithTag(name);
                     sharedElements.put(name, child);
                 }
             }
@@ -56,15 +65,9 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.attach(this);
-    }
-
-    @Override
-    protected void onPause() {
-        presenter.detach();
-        super.onPause();
+    protected void initViewState(@NonNull Context ctx) {
+        super.initViewState(ctx);
+        listView.setLayoutManager(verticalLinearLayoutManager(this));
     }
 
     @Override
@@ -89,21 +92,21 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
         ItemTouchHelperAdapter adapterDelegate = new ItemTouchHelperAdapter() {
             @Override
             public void onItemMove(int fromPosition, int toPosition) {
-                adapter.onItemMove(fromPosition, toPosition);
+                listAdapter.onItemMove(fromPosition, toPosition);
             }
 
             @Override
             public void onItemDismiss(int position) {
-                adapter.onItemDismiss(position);
+                listAdapter.onItemDismiss(position);
             }
         };
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapterDelegate);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        itemTouchHelper.attachToRecyclerView(listView);
 
-        adapter = new TheaterSortListAdapter(
+        listAdapter = new TheaterSortListAdapter(
                 viewState.getSelectedTheaters(), itemTouchHelper::startDrag);
-        recyclerView.setAdapter(adapter);
+        listView.setAdapter(listAdapter);
         startPostponedEnterTransition();
     }
 
@@ -114,7 +117,7 @@ public class TheaterSortActivity extends BaseActivity implements TheaterSortCont
 
     @OnClick(R.id.button_confirm)
     public void onConfirmClicked() {
-        presenter.onConfirmClicked(adapter.getSelectedTheaters());
+        presenter.onConfirmClicked(listAdapter.getSelectedTheaters());
         onBackPressed();
     }
 }

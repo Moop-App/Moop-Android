@@ -66,9 +66,7 @@ class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Theater theaterItem = allItems.get(position);
-        holder.checkedTextView.setText(theaterItem.getName());
-        holder.checkedTextView.setChecked(selectedItemMap.containsKey(theaterItem.getCode()));
+        holder.bindItem(allItems.get(position));
     }
 
     @Override
@@ -88,6 +86,11 @@ class TheaterEditListAdapter extends RecyclerView.Adapter<TheaterEditListAdapter
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+        }
+
+        void bindItem(Theater theater) {
+            checkedTextView.setText(theater.getName());
+            checkedTextView.setChecked(selectedItemMap.containsKey(theater.getCode()));
         }
     }
 }
