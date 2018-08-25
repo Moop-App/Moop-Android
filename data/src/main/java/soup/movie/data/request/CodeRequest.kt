@@ -1,8 +1,7 @@
-package soup.movie.data.model
-
-import java.util.HashMap
+package soup.movie.data.request
 
 import soup.movie.data.base.QueryMapProvider
+import java.util.*
 
 object CodeRequest : QueryMapProvider {
 

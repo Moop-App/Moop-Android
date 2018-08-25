@@ -9,8 +9,8 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MoobRepository;
-import soup.movie.data.model.PlanMovieRequest;
-import soup.movie.data.model.PlanMovieResponse;
+import soup.movie.data.request.PlanMovieRequest;
+import soup.movie.data.response.PlanMovieResponse;
 import soup.movie.di.scope.FragmentScoped;
 import soup.movie.ui.BasePresenter;
 
@@ -35,7 +35,7 @@ public class PlanPresenter extends BasePresenter<PlanContract.View> implements P
 
     private Flowable<PlanViewState> getViewStateObservable() {
         return refreshRelay.toFlowable(BackpressureStrategy.LATEST)
-                .flatMap(ignore -> moobRepository.getPlanList(new PlanMovieRequest())
+                .flatMap(ignore -> moobRepository.getPlanList(PlanMovieRequest.INSTANCE)
                         .map(PlanMovieResponse::getList)
                         .map(PlanViewState.DoneState::new)
                         .toFlowable());

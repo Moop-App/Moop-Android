@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -36,7 +37,7 @@ public class MovieRepositoryModule {
                                          RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
                                          OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MoobApiService.Companion.getAPI_BASE_URL())
+                .baseUrl(MoobApiService.API_BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .client(okHttpClient)
@@ -53,7 +54,7 @@ public class MovieRepositoryModule {
     @Singleton
     @Provides
     RxJava2CallAdapterFactory provideRxJava2CallAdapterFactory() {
-        return RxJava2CallAdapterFactory.create();
+        return RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io());
     }
 
     @Singleton

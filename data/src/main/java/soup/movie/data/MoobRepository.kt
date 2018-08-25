@@ -1,7 +1,14 @@
 package soup.movie.data
 
 import io.reactivex.Single
-import soup.movie.data.model.*
+import soup.movie.data.request.CodeRequest
+import soup.movie.data.request.NowMovieRequest
+import soup.movie.data.request.PlanMovieRequest
+import soup.movie.data.request.TimeTableRequest
+import soup.movie.data.response.CodeResponse
+import soup.movie.data.response.NowMovieResponse
+import soup.movie.data.response.PlanMovieResponse
+import soup.movie.data.response.TimeTableResponse
 
 class MoobRepository(
         private val remoteDataSource: IMoobDataSource) : IMoobDataSource {

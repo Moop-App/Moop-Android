@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MoobRepository;
 import soup.movie.data.model.AreaGroup;
-import soup.movie.data.model.CodeRequest;
+import soup.movie.data.request.CodeRequest;
 import soup.movie.data.model.Theater;
 import soup.movie.di.scope.ActivityScoped;
 import soup.movie.settings.TheaterSetting;

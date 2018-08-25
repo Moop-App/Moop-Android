@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import soup.movie.R;
 import soup.movie.data.model.Day;
 import soup.movie.data.model.Thumbnail;
-import soup.movie.data.model.Thumbnails;
+import soup.movie.data.model.ThumbnailGroup;
 import soup.movie.data.model.TimeTable;
 import soup.movie.data.model.Trailer;
 import soup.movie.ui.theater.edit.TheaterEditActivity;
@@ -133,7 +133,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
     }
 
     private static String getThumbnailUrl(@NonNull Trailer trailer) {
-        Thumbnails thumbnails = trailer.getThumbnails();
+        ThumbnailGroup thumbnails = trailer.getThumbnails();
         if (thumbnails != null) {
             Thumbnail high = thumbnails.getHigh();
             if (high != null && high.getUrl() != null) {

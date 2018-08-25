@@ -1,7 +1,6 @@
-package soup.movie.data.model
+package soup.movie.data.request
 
 import soup.movie.data.base.QueryMapProvider
-import java.util.*
 
 object NowMovieRequest : QueryMapProvider {
 

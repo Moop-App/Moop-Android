@@ -3,24 +3,24 @@ package soup.movie.data.service
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
-import soup.movie.data.model.CodeResponse
-import soup.movie.data.model.NowMovieResponse
-import soup.movie.data.model.PlanMovieResponse
-import soup.movie.data.model.TimeTableResponse
+import soup.movie.data.response.CodeResponse
+import soup.movie.data.response.NowMovieResponse
+import soup.movie.data.response.PlanMovieResponse
+import soup.movie.data.response.TimeTableResponse
 
 interface MoobApiService {
 
     // 현재상영작
-    @get:GET("v1/cgv/now/asTicketRate/nowOnly.json")
-    val nowList: Single<NowMovieResponse>
+    @GET("v1/cgv/now/asTicketRate/nowOnly.json")
+    fun getNowList(): Single<NowMovieResponse>
 
     // 개봉예정작
-    @get:GET("v1/cgv/plan/asOpenDate.json")
-    val planList: Single<PlanMovieResponse>
+    @GET("v1/cgv/plan/asOpenDate.json")
+    fun getPlanList(): Single<PlanMovieResponse>
 
     // 공통코드
-    @get:GET("v1/code.json")
-    val codeList: Single<CodeResponse>
+    @GET("v1/code.json")
+    fun getCodeList(): Single<CodeResponse>
 
     // 상영시간표
     @GET("v1/cgv/timetable/asMovie/{tc}/{mc}.json")
@@ -28,6 +28,7 @@ interface MoobApiService {
                          @Path("mc") movie: String): Single<TimeTableResponse>
 
     companion object {
-        val API_BASE_URL = "https://moob-api.firebaseio.com/"
+
+        const val API_BASE_URL = "https://moob-api.firebaseio.com/"
     }
 }

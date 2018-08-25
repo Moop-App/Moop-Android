@@ -9,8 +9,8 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import soup.movie.data.MoobRepository;
-import soup.movie.data.model.NowMovieRequest;
-import soup.movie.data.model.NowMovieResponse;
+import soup.movie.data.request.NowMovieRequest;
+import soup.movie.data.response.NowMovieResponse;
 import soup.movie.di.scope.FragmentScoped;
 import soup.movie.ui.BasePresenter;
 

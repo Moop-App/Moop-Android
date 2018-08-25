@@ -1,14 +1,14 @@
 package soup.movie.data
 
 import io.reactivex.Single
-import soup.movie.data.model.CodeRequest
-import soup.movie.data.model.CodeResponse
-import soup.movie.data.model.NowMovieRequest
-import soup.movie.data.model.NowMovieResponse
-import soup.movie.data.model.PlanMovieRequest
-import soup.movie.data.model.PlanMovieResponse
-import soup.movie.data.model.TimeTableRequest
-import soup.movie.data.model.TimeTableResponse
+import soup.movie.data.request.CodeRequest
+import soup.movie.data.request.NowMovieRequest
+import soup.movie.data.request.PlanMovieRequest
+import soup.movie.data.request.TimeTableRequest
+import soup.movie.data.response.CodeResponse
+import soup.movie.data.response.NowMovieResponse
+import soup.movie.data.response.PlanMovieResponse
+import soup.movie.data.response.TimeTableResponse
 
 interface IMoobDataSource {
 

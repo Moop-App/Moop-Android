@@ -1,17 +1,11 @@
 package soup.movie.data.converter
 
-import com.google.gson.Gson
-import com.google.gson.JsonDeserializationContext
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonElement
-import com.google.gson.JsonParseException
-
-import java.lang.reflect.Type
-import java.util.ArrayList
-
+import com.google.gson.*
 import soup.movie.data.model.Day
 import soup.movie.data.model.TimeTable
-import soup.movie.data.model.TimeTableResponse
+import soup.movie.data.response.TimeTableResponse
+import java.lang.reflect.Type
+import java.util.*
 
 class TimeTableResponseDeserializer : JsonDeserializer<TimeTableResponse> {
 
