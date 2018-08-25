@@ -11,7 +11,6 @@ versions.junit = "4.12"
 versions.espresso = "3.0.1"
 versions.retrofit = "2.3.0"
 versions.okhttp_logging_interceptor = "3.9.0"
-versions.apache_commons = "4.1"
 versions.mockito = "2.7.19"
 versions.mockito_all = "1.10.19"
 versions.constraint_layout = "1.1.0"
@@ -87,10 +86,6 @@ def butterknife = [:]
 butterknife.runtime = "com.jakewharton:butterknife:$versions.butterknife"
 butterknife.compiler = "com.jakewharton:butterknife-compiler:$versions.butterknife"
 deps.butterknife = butterknife
-
-def apache = [:]
-apache.collections = "org.apache.commons:commons-collections4:$versions.apache_commons"
-deps.apache = apache
 
 deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"

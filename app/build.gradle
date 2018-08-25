@@ -66,7 +66,6 @@ dependencies {
     implementation deps.support.transition
     implementation deps.constraint_layout
 
-    implementation deps.apache.collections
     implementation deps.timber
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.compiler
