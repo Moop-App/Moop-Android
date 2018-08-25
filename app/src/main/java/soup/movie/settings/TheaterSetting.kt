@@ -4,12 +4,11 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import soup.movie.data.model.Theater
-import java.util.*
 
 class TheaterSetting(private val preferences: SharedPreferences) {
 
     var favoriteTheaters: List<Theater>
-        get() = fromJson(preferences.getString(KEY, DEFAULT_VALUE)).orEmpty()
+        get() = fromJson(preferences.getString(KEY, DEFAULT_VALUE))
         set(theaters) = preferences.edit().putString(KEY, toJson(theaters)).apply()
 
     companion object {
@@ -23,8 +22,8 @@ class TheaterSetting(private val preferences: SharedPreferences) {
             return Gson().toJson(theaterCodeList)
         }
 
-        private fun fromJson(jsonStr: String): List<Theater>? {
-            return Gson().fromJson<List<Theater>>(jsonStr, type)
+        private fun fromJson(jsonStr: String): List<Theater> {
+            return Gson().fromJson<List<Theater>>(jsonStr, type).orEmpty()
         }
     }
 }
