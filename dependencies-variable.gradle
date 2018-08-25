@@ -7,7 +7,7 @@ ext {
     compileSdkVersion = 27
     targetSdkVersion = 27
 
-    kotlin_version = '1.2.41'
+    kotlin_version = '1.2.61'
     butterknifeVersion = '8.8.1'
     daggerVersion = '2.13'
     daggerAndroidVersion = '2.13'
