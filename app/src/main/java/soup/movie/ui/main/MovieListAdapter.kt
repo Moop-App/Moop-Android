@@ -52,9 +52,9 @@ class MovieListAdapter(
 
         @BindView(R.id.background)
         lateinit var backgroundView: View
-        @BindView(R.id.movie_poster)
+        @BindView(R.id.posterView)
         lateinit var posterView: ImageView
-        @BindView(R.id.age_bg)
+        @BindView(R.id.ageBgView)
         lateinit var ageBgView: View
         @BindView(R.id.age_bg_outer)
         lateinit var ageBgOuterView: View

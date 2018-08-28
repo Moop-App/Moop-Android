@@ -1,12 +1,10 @@
 package soup.movie.ui.main.plan
 
 import android.content.Context
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.RecyclerView
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import butterknife.BindView
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.android.synthetic.main.fragment_vertical_list.*
 import soup.movie.R
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.MovieListAdapter
@@ -23,12 +21,6 @@ class PlanFragment : BaseTabFragment<View, Presenter>(), View {
     @Inject
     override lateinit var presenter: PlanContract.Presenter
 
-    @BindView(R.id.swipe_layout)
-    internal lateinit var swipeRefreshLayout: SwipeRefreshLayout
-
-    @BindView(R.id.list)
-    internal lateinit var listView: RecyclerView
-
     private lateinit var listAdapter: MovieListAdapter
 
     override val layoutRes: Int
@@ -37,12 +29,16 @@ class PlanFragment : BaseTabFragment<View, Presenter>(), View {
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         listAdapter = MovieListAdapter(activity!!)
-        listView.layoutManager = gridLayoutManager(ctx, 3)
-        listView.adapter = listAdapter
-        listView.itemAnimator = SlideInUpAnimator()
-        listView.itemAnimator.addDuration = 200
-        listView.itemAnimator.removeDuration = 200
-        swipeRefreshLayout.setOnRefreshListener { presenter.refresh() }
+        list_view.let {
+            it.layoutManager = gridLayoutManager(ctx, 3)
+            it.adapter = listAdapter
+            it.itemAnimator = SlideInUpAnimator()
+            it.itemAnimator.addDuration = 200
+            it.itemAnimator.removeDuration = 200
+        }
+        swipe_refresh_layout.setOnRefreshListener {
+            presenter.refresh()
+        }
     }
 
     override fun render(viewState: PlanViewState) {
@@ -54,14 +50,14 @@ class PlanFragment : BaseTabFragment<View, Presenter>(), View {
     }
 
     private fun renderLoadingState() {
-        swipeRefreshLayout.isRefreshing = true
-        listView.visibility = GONE
+        swipe_refresh_layout.isRefreshing = true
+        list_view.visibility = GONE
     }
 
     private fun renderDoneState(viewState: DoneState) {
-        swipeRefreshLayout.isRefreshing = false
+        swipe_refresh_layout.isRefreshing = false
+        list_view.visibility = VISIBLE
         listAdapter.submitList(viewState.movies)
-        listView.visibility = VISIBLE
     }
 
     companion object {

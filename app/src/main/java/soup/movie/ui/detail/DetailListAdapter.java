@@ -200,7 +200,7 @@ class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.ViewHolde
 
         @BindView(R.id.trailer_thumbnail)
         ImageView thumbnailView;
-        @BindView(R.id.primary_text)
+        @BindView(R.id.titleView)
         TextView titleView;
         @BindView(R.id.sub_text)
         TextView authorView;

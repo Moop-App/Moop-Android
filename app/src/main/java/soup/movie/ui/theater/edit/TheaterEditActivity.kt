@@ -1,9 +1,8 @@
 package soup.movie.ui.theater.edit
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
-import butterknife.BindView
 import butterknife.OnClick
+import kotlinx.android.synthetic.main.activity_theater_edit.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
@@ -17,9 +16,6 @@ class TheaterEditActivity : BaseActivity<View, Presenter>(), View {
     @Inject
     override lateinit var presenter: Presenter
 
-    @BindView(R.id.list)
-    lateinit var listView: RecyclerView
-
     private lateinit var listAdapter: TheaterEditListAdapter
 
     override val layoutRes: Int
@@ -27,7 +23,7 @@ class TheaterEditActivity : BaseActivity<View, Presenter>(), View {
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        listView.layoutManager = verticalLinearLayoutManager(this)
+        list_view.layoutManager = verticalLinearLayoutManager(this)
     }
 
     override fun render(viewState: TheaterEditViewState) {
@@ -35,7 +31,7 @@ class TheaterEditActivity : BaseActivity<View, Presenter>(), View {
         listAdapter = TheaterEditListAdapter(
                 viewState.allTheaters,
                 viewState.selectedTheaters)
-        listView.adapter = listAdapter
+        list_view.adapter = listAdapter
     }
 
     @OnClick(R.id.button_cancel)

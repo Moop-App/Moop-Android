@@ -4,13 +4,12 @@ import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import butterknife.BindView
 import butterknife.OnClick
+import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
@@ -28,9 +27,6 @@ class TheaterSortActivity
     @Inject
     override lateinit var presenter: TheaterSortContract.Presenter
 
-    @BindView(R.id.list)
-    internal lateinit var listView: RecyclerView
-
     private lateinit var listAdapter: TheaterSortListAdapter
 
     override val layoutRes: Int
@@ -42,7 +38,7 @@ class TheaterSortActivity
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
                 for (name in names) {
-                    val child = listView.findViewWithTag<View>(name)
+                    val child = list_view.findViewWithTag<View>(name)
                     sharedElements[name] = child
                 }
             }
@@ -51,7 +47,7 @@ class TheaterSortActivity
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        listView.layoutManager = verticalLinearLayoutManager(this)
+        list_view.layoutManager = verticalLinearLayoutManager(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,12 +78,12 @@ class TheaterSortActivity
         }
         val callback = SimpleItemTouchHelperCallback(adapterDelegate)
         val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(listView)
+        itemTouchHelper.attachToRecyclerView(list_view)
 
         listAdapter = TheaterSortListAdapter(
                 viewState.selectedTheaters,
                 OnStartDragListener { itemTouchHelper.startDrag(it) })
-        listView.adapter = listAdapter
+        list_view.adapter = listAdapter
         startPostponedEnterTransition()
     }
 

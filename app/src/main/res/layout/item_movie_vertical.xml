@@ -24,13 +24,13 @@
                 android:id="@+id/background"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/movie_poster"
-                app:layout_constraintEnd_toEndOf="@+id/movie_poster"
-                app:layout_constraintStart_toStartOf="@+id/movie_poster"
-                app:layout_constraintTop_toTopOf="@+id/movie_poster" />
+                app:layout_constraintBottom_toBottomOf="@+id/posterView"
+                app:layout_constraintEnd_toEndOf="@+id/posterView"
+                app:layout_constraintStart_toStartOf="@+id/posterView"
+                app:layout_constraintTop_toTopOf="@+id/posterView" />
 
             <ImageView
-                android:id="@+id/movie_poster"
+                android:id="@+id/posterView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/grey_200"

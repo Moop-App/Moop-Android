@@ -4,8 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.design.internal.BottomNavigationViewHelper
-import android.support.design.widget.BottomNavigationView
-import butterknife.BindView
+import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.main.MainViewState.*
@@ -16,9 +15,6 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
-
-    @BindView(R.id.bottom_navigation)
-    internal lateinit var navigationView: BottomNavigationView
 
     @Inject
     override lateinit var presenter: MainContract.Presenter
@@ -33,13 +29,13 @@ class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), 
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        BottomNavigationViewHelper.disableShiftMode(navigationView)
-        navigationView.setOnNavigationItemSelectedListener {
+        BottomNavigationViewHelper.disableShiftMode(bottom_navigation)
+        bottom_navigation.setOnNavigationItemSelectedListener {
             title = it.title
             presenter.setTabMode(parseToTabMode(it.itemId))
             true
         }
-        navigationView.selectedItemId = R.id.action_now
+        bottom_navigation.selectedItemId = R.id.action_now
     }
 
     override fun render(viewState: MainViewState) {

@@ -4,14 +4,12 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.chip.Chip
-import android.support.design.chip.ChipGroup
 import android.support.v4.app.SharedElementCallback
 import android.transition.TransitionInflater
 import android.util.Pair
 import android.view.View
-import android.widget.TextView
-import butterknife.BindView
 import butterknife.OnClick
+import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.R
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
@@ -21,12 +19,6 @@ import javax.inject.Inject
 class SettingsFragment
     : BaseTabFragment<SettingsContract.View, SettingsContract.Presenter>(),
         SettingsContract.View {
-
-    @BindView(R.id.theater_empty)
-    internal lateinit var theaterEmpty: TextView
-
-    @BindView(R.id.theater_group)
-    internal lateinit var theaterGroup: ChipGroup
 
     @Inject
     override lateinit var presenter: SettingsContract.Presenter
@@ -42,7 +34,7 @@ class SettingsFragment
             override fun onMapSharedElements(names: List<String>?,
                                              sharedElements: MutableMap<String, View>?) {
                 for (name in names!!) {
-                    val child = theaterGroup.findViewWithTag<View>(name)
+                    val child = theater_group.findViewWithTag<View>(name)
                     sharedElements!![name] = child
                 }
             }
@@ -54,20 +46,20 @@ class SettingsFragment
         Timber.d("render: %s", viewState)
         val theaters = viewState.theaterList
         if (theaters.isEmpty()) {
-            theaterEmpty.visibility = View.VISIBLE
-            theaterGroup.removeAllViews()
-            theaterGroup.visibility = View.GONE
+            theater_empty.visibility = View.VISIBLE
+            theater_group.removeAllViews()
+            theater_group.visibility = View.GONE
         } else {
-            theaterEmpty.visibility = View.GONE
-            theaterGroup.removeAllViews()
-            theaterGroup.visibility = View.VISIBLE
+            theater_empty.visibility = View.GONE
+            theater_group.removeAllViews()
+            theater_group.visibility = View.VISIBLE
 
             for ((code, name) in theaters) {
                 val theaterChip = View.inflate(context, R.layout.chip_cgv, null) as Chip
                 theaterChip.chipText = name
                 theaterChip.transitionName = code
                 theaterChip.tag = code
-                theaterGroup.addView(theaterChip)
+                theater_group.addView(theaterChip)
             }
         }
     }
@@ -81,7 +73,7 @@ class SettingsFragment
     }
 
     private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> {
-        theaterGroup.let {
+        theater_group.let {
             val childCount = it.childCount
             val pairs = arrayOf<Pair<View, String>>()
             for (i in 0 until childCount) {

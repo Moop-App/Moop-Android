@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/draggable_frame"
+    android:id="@+id/draggableFrame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:transitionGroup="false"
@@ -28,7 +28,7 @@
         tools:background="@color/debug_background">
 
         <ImageView
-            android:id="@+id/movie_poster"
+            android:id="@+id/posterView"
             android:layout_width="135dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -39,15 +39,15 @@
             tools:src="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/back"
+            android:id="@+id/backButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_back"
             android:scaleType="centerInside"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
 
         <TextView
-            android:id="@+id/primary_text"
+            android:id="@+id/titleView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -60,12 +60,12 @@
             android:transitionName="@string/transition_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster"
+            app:layout_constraintStart_toEndOf="@+id/posterView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Movie Title" />
 
         <TextView
-            android:id="@+id/sub_text2"
+            android:id="@+id/eggView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -74,31 +74,31 @@
             android:textColor="#8A000000"
             android:transitionName="@string/transition_egg"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sub_text1"
+            app:layout_constraintStart_toEndOf="@+id/ageView"
             tools:text="90%" />
 
         <ImageButton
-            android:id="@+id/favorite_button"
+            android:id="@+id/favoriteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
             android:transitionName="@string/transition_favorite"
             android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/share_button"
-            app:layout_constraintTop_toTopOf="@+id/share_button"
+            app:layout_constraintEnd_toStartOf="@+id/shareButton"
+            app:layout_constraintTop_toTopOf="@+id/shareButton"
             app:srcCompat="@drawable/ic_favorite" />
 
         <ImageButton
-            android:id="@+id/share_button"
+            android:id="@+id/shareButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
             android:transitionName="@string/transition_share"
-            app:layout_constraintBottom_toBottomOf="@+id/movie_poster"
+            app:layout_constraintBottom_toBottomOf="@+id/posterView"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_share" />
 
@@ -109,25 +109,25 @@
             android:layout_margin="7dp"
             android:background="@drawable/bg_age_outer"
             android:transitionName="@string/transition_age_bg_outer"
-            app:layout_constraintBottom_toBottomOf="@+id/age_bg"
-            app:layout_constraintStart_toStartOf="@+id/age_bg"
-            app:layout_constraintEnd_toEndOf="@+id/age_bg"
-            app:layout_constraintTop_toTopOf="@+id/age_bg"
+            app:layout_constraintBottom_toBottomOf="@+id/ageBgView"
+            app:layout_constraintStart_toStartOf="@+id/ageBgView"
+            app:layout_constraintEnd_toEndOf="@+id/ageBgView"
+            app:layout_constraintTop_toTopOf="@+id/ageBgView"
             tools:backgroundTint="@color/white" />
 
         <View
-            android:id="@+id/age_bg"
+            android:id="@+id/ageBgView"
             android:layout_width="36dp"
             android:layout_height="24dp"
             android:layout_margin="8dp"
             android:background="@drawable/bg_age_inner"
             android:transitionName="@string/transition_age_bg"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster"
+            app:layout_constraintStart_toEndOf="@+id/posterView"
             tools:backgroundTint="@color/amber" />
 
         <TextView
-            android:id="@+id/sub_text1"
+            android:id="@+id/ageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -136,10 +136,10 @@
             android:textStyle="bold"
             android:maxLines="1"
             android:transitionName="@string/transition_age"
-            app:layout_constraintBottom_toBottomOf="@+id/age_bg"
-            app:layout_constraintStart_toStartOf="@+id/age_bg"
-            app:layout_constraintEnd_toEndOf="@+id/age_bg"
-            app:layout_constraintTop_toTopOf="@+id/age_bg"
+            app:layout_constraintBottom_toBottomOf="@+id/ageBgView"
+            app:layout_constraintStart_toStartOf="@+id/ageBgView"
+            app:layout_constraintEnd_toEndOf="@+id/ageBgView"
+            app:layout_constraintTop_toTopOf="@+id/ageBgView"
             tools:text="전체" />
 
     </android.support.constraint.ConstraintLayout>
@@ -158,7 +158,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_poster"
+        app:layout_constraintTop_toBottomOf="@+id/posterView"
         app:layout_constraintVertical_bias="0.0"
         tools:foreground="@color/debug_foreground" />
 
