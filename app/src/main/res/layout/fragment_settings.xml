@@ -27,7 +27,6 @@
         android:src="@drawable/ic_edit"
         android:scaleType="centerInside"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:onClick="onTheaterEditClicked"
         app:layout_constraintStart_toEndOf="@+id/category_theater"
         app:layout_constraintBottom_toBottomOf="@+id/category_theater"
         app:layout_constraintEnd_toEndOf="parent"

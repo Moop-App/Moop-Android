@@ -9,6 +9,7 @@ import android.transition.TransitionInflater
 import android.util.Pair
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.view.*
 import soup.movie.R
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
@@ -41,6 +42,11 @@ class SettingsFragment
         postponeEnterTransition()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.theater_edit.setOnClickListener { onTheaterEditClicked() }
+    }
+
     override fun render(viewState: SettingsViewState) {
         Timber.d("render: %s", viewState)
         val theaters = viewState.theaterList
@@ -63,7 +69,7 @@ class SettingsFragment
         }
     }
 
-    fun onTheaterEditClicked(view: View) {
+    private fun onTheaterEditClicked() {
         val intent = Intent(context, TheaterSortActivity::class.java)
         startActivity(intent, ActivityOptions
                 .makeSceneTransitionAnimation(activity, *createTheaterChipPairsForTransition())
