@@ -144,7 +144,7 @@ internal class DetailListAdapter(private val host: Activity)
                     .inflate(R.layout.item_trailer, parent, false))
 
     //TODO:
-    private class TimeTableViewHolder(view: View) : ViewHolder(view) {
+    internal class TimeTableViewHolder(view: View) : ViewHolder(view) {
 
         @BindViews(R.id.time1, R.id.time2, R.id.time3)
         lateinit var times: Array<ChipGroup>
