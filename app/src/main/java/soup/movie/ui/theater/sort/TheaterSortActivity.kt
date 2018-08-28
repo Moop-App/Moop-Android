@@ -36,9 +36,9 @@ class TheaterSortActivity
         postponeEnterTransition()
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
-                for (name in names) {
-                    val child = listView.findViewWithTag<View>(name)
-                    sharedElements[name] = child
+                names.forEach { name ->
+                    listView.findViewWithTag<View>(name)
+                            ?.let { sharedElements[name] = it }
                 }
             }
         })

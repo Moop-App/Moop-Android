@@ -18,6 +18,13 @@ class TheaterEditPresenter(
         private val theaterSetting: TheaterSetting)
     : BasePresenter<View>(), Presenter {
 
+    override fun initObservable(disposable: DisposableContainer) {
+        super.initObservable(disposable)
+        disposable.add(viewStateObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { view?.render(it) })
+    }
+
     private val viewStateObservable: Observable<TheaterEditViewState>
         get() = Observable.combineLatest(
                 allTheatersObservable,
@@ -28,22 +35,14 @@ class TheaterEditPresenter(
         get() = moobRepository.getCodeList(CodeRequest)
                 .flatMapIterable {
                     (cgv, lotte, megabox) ->
-                    val areas = ArrayList<AreaGroup>()
+                    val areas = mutableListOf<AreaGroup>()
                     areas.addAll(cgv.list)
-                    areas.addAll(lotte.list)
-                    areas.addAll(megabox.list)
-                    areas
+//                    areas.addAll(lotte.list)
+//                    areas.addAll(megabox.list)
+                    areas.flatMap { it.theaterList }.toList()
                 }
-                .flatMapIterable { it.theaterList }
                 .toList()
                 .toObservable()
-
-    override fun initObservable(disposable: DisposableContainer) {
-        super.initObservable(disposable)
-        disposable.add(viewStateObservable
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { view?.render(it) })
-    }
 
     override fun onConfirmClicked(selectedTheaters: List<Theater>) {
         theaterSetting.set(selectedTheaters)

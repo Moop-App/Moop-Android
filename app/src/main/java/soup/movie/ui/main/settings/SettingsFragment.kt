@@ -28,14 +28,15 @@ class SettingsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        exitTransition = TransitionInflater.from(context)
-                .inflateTransition(android.R.transition.explode)
+//        exitTransition = TransitionInflater.from(context)
+//                .inflateTransition(android.R.transition.explode)
         setExitSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: List<String>?,
-                                             sharedElements: MutableMap<String, View>?) {
-                for (name in names!!) {
-                    val child = theater_group.findViewWithTag<View>(name)
-                    sharedElements!![name] = child
+            override fun onMapSharedElements(names: List<String>,
+                                             sharedElements: MutableMap<String, View>) {
+                names.forEach { name ->
+                    theater_group.findViewWithTag<View>(name)?.let {
+                        sharedElements[name] = it
+                    }
                 }
             }
         })
@@ -77,15 +78,14 @@ class SettingsFragment
     }
 
     private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> {
-        theater_group.let {
-            val childCount = it.childCount
-            val pairs = arrayOf<Pair<View, String>>()
-            for (i in 0 until childCount) {
+        view?.theater_group?.let {
+            val pairs = mutableListOf<Pair<View, String>>()
+            (0 until it.childCount).forEach { i ->
                 val v = it.getChildAt(i)
-                pairs[i] = Pair.create(v, v.transitionName)
+                pairs.add(Pair.create(v, v.transitionName))
             }
-            return pairs
-        }
+            return pairs.toTypedArray()
+        } ?: return emptyArray()
     }
 
     companion object {
