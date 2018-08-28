@@ -6,7 +6,6 @@ import soup.movie.settings.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.settings.SettingsContract.Presenter
 import soup.movie.ui.main.settings.SettingsContract.View
-import soup.movie.ui.main.settings.SettingsViewState.DoneState
 
 class SettingsPresenter(
         private val theaterSetting: TheaterSetting)
@@ -15,7 +14,7 @@ class SettingsPresenter(
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         disposable.add(theaterSetting.asObservable()
-                .map { DoneState(it) }
+                .map { SettingsViewState(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
     }

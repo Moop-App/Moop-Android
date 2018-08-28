@@ -22,7 +22,7 @@ class TheaterEditPresenter(
         get() = Observable.combineLatest(
                 allTheatersObservable,
                 theaterSetting.asObservable(),
-                BiFunction { allTheaters, selectedTheaters -> TheaterEditViewState(allTheaters, selectedTheaters) })
+                BiFunction(::TheaterEditViewState))
 
     private val allTheatersObservable: Observable<List<Theater>>
         get() = moobRepository.getCodeList(CodeRequest)
