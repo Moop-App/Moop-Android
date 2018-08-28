@@ -7,7 +7,7 @@
     android:layout_height="48dp"
     android:paddingStart="12dp"
     android:paddingEnd="12dp"
-    android:foreground="?attr/selectableItemBackground"
+    android:foreground="?android:attr/selectableItemBackground"
     tools:background="@color/debug_background" >
 
     <android.support.design.chip.Chip

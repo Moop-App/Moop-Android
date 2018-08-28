@@ -8,7 +8,6 @@ import android.support.v4.app.SharedElementCallback
 import android.transition.TransitionInflater
 import android.util.Pair
 import android.view.View
-import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.R
 import soup.movie.ui.main.BaseTabFragment
@@ -64,8 +63,7 @@ class SettingsFragment
         }
     }
 
-    @OnClick(R.id.theater_edit)
-    fun onTheaterEditClicked() {
+    fun onTheaterEditClicked(view: View) {
         val intent = Intent(context, TheaterSortActivity::class.java)
         startActivity(intent, ActivityOptions
                 .makeSceneTransitionAnimation(activity, *createTheaterChipPairsForTransition())

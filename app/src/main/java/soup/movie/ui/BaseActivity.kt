@@ -6,7 +6,6 @@ import android.support.annotation.CallSuper
 import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
-import butterknife.ButterKnife
 import dagger.android.support.DaggerAppCompatActivity
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>>
@@ -20,7 +19,6 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
-        ButterKnife.bind(this)
         initViewState(this)
     }
 

@@ -16,7 +16,7 @@
          resized for the shared element transition, many views are considered 'off-screen' so
          visibility transitions are not run. -->
     <View
-        android:id="@+id/background"
+        android:id="@+id/backgroundView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey_50"
@@ -103,7 +103,7 @@
             app:srcCompat="@drawable/ic_share" />
 
         <View
-            android:id="@+id/age_bg_outer"
+            android:id="@+id/ageBgOuterView"
             android:layout_width="38dp"
             android:layout_height="26dp"
             android:layout_margin="7dp"
@@ -145,7 +145,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/movie_contents"
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

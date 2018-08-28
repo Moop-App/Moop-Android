@@ -33,7 +33,8 @@ import soup.widget.util.ViewUtils
 import timber.log.Timber
 import javax.inject.Inject
 
-class DetailActivity : BaseActivity<DetailContract.View, DetailContract.Presenter>(), DetailContract.View {
+class DetailActivity
+    : BaseActivity<DetailContract.View, DetailContract.Presenter>(), DetailContract.View {
 
     @Inject
     override lateinit var presenter: DetailContract.Presenter
@@ -48,24 +49,25 @@ class DetailActivity : BaseActivity<DetailContract.View, DetailContract.Presente
         get() = R.layout.activity_detail
 
     private val shotLoadListener = object : RequestListener<Drawable> {
-        override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>,
-                                     dataSource: DataSource, isFirstResource: Boolean): Boolean {
+        override fun onResourceReady(resource: Drawable,
+                                     model: Any,
+                                     target: Target<Drawable>,
+                                     dataSource: DataSource,
+                                     isFirstResource: Boolean): Boolean {
             val bitmap = resource.getBitmap() ?: return false
             val twentyFourDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                     24f, this@DetailActivity.resources.displayMetrics).toInt()
             Palette.from(bitmap)
                     .maximumColorCount(3)
-                    .clearFilters() /* by default palette ignore certain hues
-                        (e.g. pure black/white) but we don't want this. */
-                    .setRegion(0, 0, bitmap.width - 1, twentyFourDip) /* - 1 to work around
-                        https://code.google.com/p/android/issues/detail?id=191013 */
+                    .clearFilters()
+                    .setRegion(0, 0, bitmap.width - 1, twentyFourDip)
                     .generate { palette ->
-                        val isDark: Boolean
-                        @ColorUtils.Lightness val lightness = ColorUtils.isDark(palette)
-                        if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
-                            isDark = ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
+                        @ColorUtils.Lightness
+                        val lightness = ColorUtils.isDark(palette)
+                        val isDark: Boolean = if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
+                            ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
                         } else {
-                            isDark = lightness == ColorUtils.IS_DARK
+                            lightness == ColorUtils.IS_DARK
                         }
 
                         val adaptiveColor = ContextCompat.getColor(this@DetailActivity,
@@ -79,26 +81,26 @@ class DetailActivity : BaseActivity<DetailContract.View, DetailContract.Presente
                         // color the status bar. Set a complementary dark color on L,
                         // light or dark color on M (with matching status bar icons)
                         var statusBarColor = window.statusBarColor
-                        val topColor = ColorUtils.getMostPopulousSwatch(palette)
-                        if (topColor != null && (isDark || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)) {
-                            statusBarColor = ColorUtils.scrimify(topColor.rgb,
-                                    isDark, SCRIM_ADJUSTMENT)
-                            // set a light status bar on M+
-                            if (!isDark) {
-                                ViewUtils.setLightStatusBar(posterView)
+                        ColorUtils.getMostPopulousSwatch(palette)?.apply {
+                            if (isDark || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                statusBarColor = ColorUtils.scrimify(this.rgb, isDark, SCRIM_ADJUSTMENT)
+                                // set a light status bar on M+
+                                if (!isDark) {
+                                    ViewUtils.setLightStatusBar(posterView)
+                                }
                             }
                         }
 
                         if (statusBarColor != window.statusBarColor) {
-                            background.setBackgroundColor(statusBarColor)
-                            val statusBarColorAnim = ValueAnimator.ofArgb(
-                                    window.statusBarColor, statusBarColor)
-                            statusBarColorAnim.addUpdateListener { animation ->
-                                window.statusBarColor = animation.animatedValue as Int
+                            backgroundView.setBackgroundColor(statusBarColor)
+                            ValueAnimator.ofArgb(window.statusBarColor, statusBarColor)?.let { it ->
+                                it.addUpdateListener {
+                                    window.statusBarColor = it.animatedValue as Int
+                                }
+                                it.duration = 500L
+                                it.interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
+                                it.start()
                             }
-                            statusBarColorAnim.duration = 500L
-                            statusBarColorAnim.interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
-                            statusBarColorAnim.start()
                         }
                     }
             return false
@@ -111,10 +113,10 @@ class DetailActivity : BaseActivity<DetailContract.View, DetailContract.Presente
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            movie = MovieUtil.restoreFrom(intent)!!
+        movie = if (savedInstanceState == null) {
+            MovieUtil.restoreFrom(intent)!!
         } else {
-            movie = MovieUtil.restoreFrom(savedInstanceState)!!
+            MovieUtil.restoreFrom(savedInstanceState)!!
         }
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
@@ -125,20 +127,20 @@ class DetailActivity : BaseActivity<DetailContract.View, DetailContract.Presente
         ImageUtil.loadAsync(this, posterView, shotLoadListener, movie.poster)
         titleView.text = movie.title
         ageView.text = movie.getSimpleAgeLabel()
-        ageBgView.backgroundTintList = ContextCompat.getColorStateList(this, movie.getColorAsAge())
+        ageBgView.backgroundTintList = ContextCompat.getColorStateList(ctx, movie.getColorAsAge())
         eggView.text = movie.egg
-        favoriteButton.setOnClickListener { v -> }
+        favoriteButton.setOnClickListener { }
         shareButton.setOnClickListener {
             startActivity(createShareIntentWithText(
                     "공유하기", MovieUtil.createShareDescription(movie)))
         }
 
-        backButton.setOnClickListener { v -> setResultAndFinish() }
+        backButton.setOnClickListener { setResultAndFinish() }
         chromeFader = object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
             override fun onDragDismissed() = setResultAndFinish()
         }
         listAdapter = DetailListAdapter(this)
-        movie_contents.let {
+        listView.let {
             it.layoutManager = verticalLinearLayoutManager(ctx)
             it.adapter = listAdapter
             it.itemAnimator = SlideInRightAnimator()

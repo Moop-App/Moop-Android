@@ -7,20 +7,6 @@ import android.net.Uri
 
 object YouTubeUtil {
 
-    enum class Quality(val key: String) {
-        LOW("default"),
-        MEDIUM("mqdefault"),
-        HIGH("hqdefault"),
-        STANDARD("sddefault"),
-        MAX("maxresdefault");
-    }
-
-    @JvmStatic
-    @JvmOverloads
-    fun getThumbnailUrl(id: String, quality: Quality = Quality.STANDARD): String {
-        return String.format("https://img.youtube.com/vi/%s/%s.jpg", id, quality.key)
-    }
-
     @JvmStatic
     fun executeYoutubeApp(context: Context, id: String) {
         try {

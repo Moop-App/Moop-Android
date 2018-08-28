@@ -10,14 +10,14 @@
     android:layout_marginBottom="8dp"
     android:layout_marginStart="12dp"
     android:layout_marginEnd="12dp"
-    android:foreground="?attr/selectableItemBackground" >
+    android:foreground="?android:attr/selectableItemBackground" >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="90dp">
 
         <ImageView
-            android:id="@+id/trailer_thumbnail"
+            android:id="@+id/trailerThumbnailView"
             android:layout_width="150dp"
             android:layout_height="0dp"
             android:layout_marginTop="-5dp"
@@ -29,15 +29,15 @@
             tools:src="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/icon_play"
+            android:id="@+id/playIcon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_play"
             android:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/trailer_thumbnail"
-            app:layout_constraintEnd_toEndOf="@+id/trailer_thumbnail"
-            app:layout_constraintStart_toStartOf="@+id/trailer_thumbnail"
-            app:layout_constraintTop_toTopOf="@+id/trailer_thumbnail" />
+            app:layout_constraintBottom_toBottomOf="@+id/trailerThumbnailView"
+            app:layout_constraintEnd_toEndOf="@+id/trailerThumbnailView"
+            app:layout_constraintStart_toStartOf="@+id/trailerThumbnailView"
+            app:layout_constraintTop_toTopOf="@+id/trailerThumbnailView" />
 
         <TextView
             android:id="@+id/titleView"
@@ -51,14 +51,14 @@
             android:minLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/sub_text"
+            app:layout_constraintBottom_toTopOf="@+id/authorView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/trailer_thumbnail"
+            app:layout_constraintStart_toEndOf="@+id/trailerThumbnailView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Movie Title\nLine2\nLine3" />
 
         <TextView
-            android:id="@+id/sub_text"
+            android:id="@+id/authorView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -70,7 +70,7 @@
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/trailer_thumbnail"
+            app:layout_constraintStart_toEndOf="@+id/trailerThumbnailView"
             app:layout_constraintTop_toBottomOf="@+id/titleView"
             tools:text="Subtitle here" />
 

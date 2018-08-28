@@ -8,15 +8,15 @@ import kotlinx.android.synthetic.main.fragment_vertical_list.*
 import soup.movie.R
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.MovieListAdapter
-import soup.movie.ui.main.plan.PlanContract.Presenter
-import soup.movie.ui.main.plan.PlanContract.View
 import soup.movie.ui.main.plan.PlanViewState.DoneState
 import soup.movie.ui.main.plan.PlanViewState.LoadingState
 import soup.movie.util.RecyclerViewUtil.gridLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
-class PlanFragment : BaseTabFragment<View, Presenter>(), View {
+class PlanFragment
+    : BaseTabFragment<PlanContract.View, PlanContract.Presenter>(),
+        PlanContract.View {
 
     @Inject
     override lateinit var presenter: PlanContract.Presenter
@@ -29,14 +29,14 @@ class PlanFragment : BaseTabFragment<View, Presenter>(), View {
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         listAdapter = MovieListAdapter(activity!!)
-        list_view.let {
+        listView.let {
             it.layoutManager = gridLayoutManager(ctx, 3)
             it.adapter = listAdapter
             it.itemAnimator = SlideInUpAnimator()
             it.itemAnimator.addDuration = 200
             it.itemAnimator.removeDuration = 200
         }
-        swipe_refresh_layout.setOnRefreshListener {
+        swipeRefreshLayout.setOnRefreshListener {
             presenter.refresh()
         }
     }
@@ -50,13 +50,13 @@ class PlanFragment : BaseTabFragment<View, Presenter>(), View {
     }
 
     private fun renderLoadingState() {
-        swipe_refresh_layout.isRefreshing = true
-        list_view.visibility = GONE
+        swipeRefreshLayout.isRefreshing = true
+        listView.visibility = GONE
     }
 
     private fun renderDoneState(viewState: DoneState) {
-        swipe_refresh_layout.isRefreshing = false
-        list_view.visibility = VISIBLE
+        swipeRefreshLayout.isRefreshing = false
+        listView.visibility = VISIBLE
         listAdapter.submitList(viewState.movies)
     }
 

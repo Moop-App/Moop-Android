@@ -29,13 +29,13 @@ class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), 
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        BottomNavigationViewHelper.disableShiftMode(bottom_navigation)
-        bottom_navigation.setOnNavigationItemSelectedListener {
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigation)
+        bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
             presenter.setTabMode(parseToTabMode(it.itemId))
             true
         }
-        bottom_navigation.selectedItemId = R.id.action_now
+        bottomNavigation.selectedItemId = R.id.action_now
     }
 
     override fun render(viewState: MainViewState) {
@@ -48,15 +48,15 @@ class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), 
     }
 
     private fun renderNowState() {
-        commit(R.id.container_tab, NowFragment.newInstance())
+        commit(R.id.container, NowFragment.newInstance())
     }
 
     private fun renderPlanState() {
-        commit(R.id.container_tab, PlanFragment.newInstance())
+        commit(R.id.container, PlanFragment.newInstance())
     }
 
     private fun renderSettingsState() {
-        commit(R.id.container_tab, SettingsFragment.newInstance())
+        commit(R.id.container, SettingsFragment.newInstance())
     }
 
     @MainContract.TabMode

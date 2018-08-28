@@ -7,7 +7,7 @@ import soup.movie.data.model.Movie
 
 object MovieUtil {
 
-    private val KEY_JSON = "json"
+    private const val KEY_JSON = "json"
 
     @JvmStatic
     fun restoreFrom(bundle: Bundle): Movie?

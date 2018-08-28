@@ -1,14 +1,12 @@
 package soup.movie.ui.theater.sort
 
 import android.annotation.SuppressLint
-import android.support.design.chip.Chip
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import butterknife.BindView
-import butterknife.ButterKnife
+import kotlinx.android.synthetic.main.item_theater.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.widget.drag.ItemTouchHelperAdapter
@@ -31,9 +29,8 @@ internal class TheaterSortListAdapter(
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val theaterItem = selectedTheaters[position]
-        holder.bindType(theaterItem)
-
-        holder.dragHandle.setOnTouchListener { _, event ->
+        holder.bindItem(theaterItem)
+        holder.itemView.drag_handle.setOnTouchListener { _, event ->
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
                 dragStartListener.onStartDrag(holder)
             }
@@ -54,20 +51,12 @@ internal class TheaterSortListAdapter(
 
     internal class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        @BindView(R.id.chip_theater)
-        lateinit var theaterChip: Chip
-
-        @BindView(R.id.drag_handle)
-        lateinit var dragHandle: View
-
-        init {
-            ButterKnife.bind(this, view)
-        }
-
-        fun bindType(data: Theater) {
-            theaterChip.chipText = data.name
-            theaterChip.transitionName = data.code
-            theaterChip.tag = data.code
+        fun bindItem(data: Theater) {
+            itemView.chip_theater.let {
+                it.chipText = data.name
+                it.transitionName = data.code
+                it.tag = data.code
+            }
         }
     }
 }

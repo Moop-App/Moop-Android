@@ -8,14 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import dagger.android.support.DaggerFragment
 
 abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>>
     : DaggerFragment(), BaseContract.View {
-
-    private var unbinder: Unbinder? = null
 
     @get:LayoutRes
     protected abstract val layoutRes: Int
@@ -31,7 +27,6 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        unbinder = ButterKnife.bind(this, view)
         initViewState(view.context)
         presenter.onAttach(this as V)
     }
@@ -43,8 +38,6 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     override fun onDestroy() {
         presenter.onDetach()
-        unbinder?.unbind()
-        unbinder = null
         super.onDestroy()
     }
 }

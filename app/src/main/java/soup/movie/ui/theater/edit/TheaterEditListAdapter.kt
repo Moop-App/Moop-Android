@@ -4,33 +4,29 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckedTextView
 import android.widget.Toast
-import butterknife.BindView
-import butterknife.ButterKnife
+import kotlinx.android.synthetic.main.item_multiple_choice.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 
 internal class TheaterEditListAdapter(
-        private val allItems: List<Theater>, selectedItems: List<Theater>)
+        private val allItems: List<Theater>,
+        selectedItems: List<Theater>)
     : RecyclerView.Adapter<TheaterEditListAdapter.ViewHolder>() {
 
     private val selectedItemMap: HashMap<String, Theater>
+            = createSelectedItemMapFrom(selectedItems)
 
     val selectedTheaters: List<Theater>
         get() = ArrayList(selectedItemMap.values)
 
-    init {
-        this.selectedItemMap = createSelectedItemMapFrom(selectedItems)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val ctx = parent.context
         val holder = ViewHolder(LayoutInflater.from(ctx)
-                .inflate(android.R.layout.simple_list_item_multiple_choice, parent, false))
-        holder.checkedTextView.setOnClickListener { _ ->
-            val theaterItem = allItems[holder.adapterPosition]
-            holder.checkedTextView.let {
+                .inflate(R.layout.item_multiple_choice, parent, false))
+        holder.itemView.text1.let {
+            it.setOnClickListener { _ ->
+                val theaterItem = allItems[holder.adapterPosition]
                 when {
                     it.isChecked -> {
                         selectedItemMap.remove(theaterItem.code)
@@ -46,8 +42,8 @@ internal class TheaterEditListAdapter(
                     }
                 }
             }
+            return holder
         }
-        return holder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -60,16 +56,11 @@ internal class TheaterEditListAdapter(
 
     internal inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        @BindView(android.R.id.text1)
-        internal lateinit var checkedTextView: CheckedTextView
-
-        init {
-            ButterKnife.bind(this, view)
-        }
-
         fun bindItem(theater: Theater) {
-            checkedTextView.text = theater.name
-            checkedTextView.isChecked = selectedItemMap.containsKey(theater.code)
+            itemView.text1.let {
+                it.text = theater.name
+                it.isChecked = selectedItemMap.containsKey(theater.code)
+            }
         }
     }
 

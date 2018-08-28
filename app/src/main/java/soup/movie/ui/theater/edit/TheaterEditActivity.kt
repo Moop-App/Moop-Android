@@ -1,20 +1,20 @@
 package soup.movie.ui.theater.edit
 
 import android.content.Context
-import butterknife.OnClick
+import android.view.View
 import kotlinx.android.synthetic.main.activity_theater_edit.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
-import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
-import soup.movie.ui.theater.edit.TheaterEditContract.View
 import soup.movie.util.RecyclerViewUtil.verticalLinearLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
-class TheaterEditActivity : BaseActivity<View, Presenter>(), View {
+class TheaterEditActivity
+    : BaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
+        TheaterEditContract.View {
 
     @Inject
-    override lateinit var presenter: Presenter
+    override lateinit var presenter: TheaterEditContract.Presenter
 
     private lateinit var listAdapter: TheaterEditListAdapter
 
@@ -23,7 +23,7 @@ class TheaterEditActivity : BaseActivity<View, Presenter>(), View {
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        list_view.layoutManager = verticalLinearLayoutManager(this)
+        listView.layoutManager = verticalLinearLayoutManager(this)
     }
 
     override fun render(viewState: TheaterEditViewState) {
@@ -31,16 +31,14 @@ class TheaterEditActivity : BaseActivity<View, Presenter>(), View {
         listAdapter = TheaterEditListAdapter(
                 viewState.allTheaters,
                 viewState.selectedTheaters)
-        list_view.adapter = listAdapter
+        listView.adapter = listAdapter
     }
 
-    @OnClick(R.id.button_cancel)
-    fun onCancelClicked() {
+    fun onCancelClicked(view: View) {
         finish()
     }
 
-    @OnClick(R.id.button_confirm)
-    fun onConfirmClicked() {
+    fun onConfirmClicked(view: View) {
         presenter.onConfirmClicked(listAdapter.selectedTheaters)
         finish()
     }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    tools:context="soup.movie.ui.main.settings.SettingsFragment" >
 
     <TextView
         android:id="@+id/category_theater"
@@ -25,6 +27,7 @@
         android:src="@drawable/ic_edit"
         android:scaleType="centerInside"
         android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:onClick="onTheaterEditClicked"
         app:layout_constraintStart_toEndOf="@+id/category_theater"
         app:layout_constraintBottom_toBottomOf="@+id/category_theater"
         app:layout_constraintEnd_toEndOf="parent"

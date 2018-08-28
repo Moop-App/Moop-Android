@@ -1,9 +1,7 @@
 package soup.movie.ui
 
 import android.support.annotation.CallSuper
-
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.ui.BaseContract.Presenter
 import soup.movie.ui.BaseContract.View
@@ -29,9 +27,5 @@ abstract class BasePresenter<V : View> : Presenter<V> {
     @CallSuper
     protected open fun initObservable(disposable: DisposableContainer) {
         //stub implementation
-    }
-
-    protected fun register(disposable: Disposable) {
-        subscriptions?.add(disposable)
     }
 }

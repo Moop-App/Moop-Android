@@ -8,7 +8,6 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import butterknife.OnClick
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
@@ -38,7 +37,7 @@ class TheaterSortActivity
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
                 for (name in names) {
-                    val child = list_view.findViewWithTag<View>(name)
+                    val child = listView.findViewWithTag<View>(name)
                     sharedElements[name] = child
                 }
             }
@@ -47,7 +46,7 @@ class TheaterSortActivity
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        list_view.layoutManager = verticalLinearLayoutManager(this)
+        listView.layoutManager = verticalLinearLayoutManager(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,12 +55,12 @@ class TheaterSortActivity
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.action_edit -> {
                 startActivity(Intent(this, TheaterEditActivity::class.java))
-                return true
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -78,22 +77,20 @@ class TheaterSortActivity
         }
         val callback = SimpleItemTouchHelperCallback(adapterDelegate)
         val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(list_view)
+        itemTouchHelper.attachToRecyclerView(listView)
 
         listAdapter = TheaterSortListAdapter(
                 viewState.selectedTheaters,
                 OnStartDragListener { itemTouchHelper.startDrag(it) })
-        list_view.adapter = listAdapter
+        listView.adapter = listAdapter
         startPostponedEnterTransition()
     }
 
-    @OnClick(R.id.button_cancel)
-    fun onCancelClicked() {
+    fun onCancelClicked(view: View) {
         onBackPressed()
     }
 
-    @OnClick(R.id.button_confirm)
-    fun onConfirmClicked() {
+    fun onConfirmClicked(view: View) {
         presenter.onConfirmClicked(listAdapter.selectedTheaters)
         onBackPressed()
     }

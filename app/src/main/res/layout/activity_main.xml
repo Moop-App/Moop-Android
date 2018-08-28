@@ -8,16 +8,16 @@
     tools:context="soup.movie.ui.main.MainActivity" >
 
     <FrameLayout
-        android:id="@+id/container_tab"
+        android:id="@+id/container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_navigation_height"
         android:background="#ffffff"

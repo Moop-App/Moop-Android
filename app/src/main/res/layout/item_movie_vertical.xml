@@ -14,14 +14,14 @@
         android:layout_marginBottom="4dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:foreground="?attr/selectableItemBackground" >
+        android:foreground="?android:attr/selectableItemBackground" >
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Space
-                android:id="@+id/background"
+                android:id="@+id/backgroundView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/posterView"
@@ -43,7 +43,7 @@
                 tools:src="@tools:sample/avatars" />
 
             <View
-                android:id="@+id/age_bg_outer"
+                android:id="@+id/ageBgOuterView"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_margin="7dp"
@@ -53,7 +53,7 @@
                 tools:backgroundTint="@color/white" />
 
             <View
-                android:id="@+id/age_bg"
+                android:id="@+id/ageBgView"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:layout_margin="8dp"
