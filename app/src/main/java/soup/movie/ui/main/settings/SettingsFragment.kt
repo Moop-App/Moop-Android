@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.chip.Chip
 import android.support.v4.app.SharedElementCallback
-import android.transition.TransitionInflater
 import android.util.Pair
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_settings.*
