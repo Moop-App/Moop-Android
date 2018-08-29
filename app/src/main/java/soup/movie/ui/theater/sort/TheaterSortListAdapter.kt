@@ -2,13 +2,13 @@ package soup.movie.ui.theater.sort
 
 import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_theater.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
+import soup.movie.util.inflate
 import soup.widget.drag.ItemTouchHelperAdapter
 import soup.widget.drag.OnStartDragListener
 import java.util.*
@@ -21,10 +21,8 @@ internal class TheaterSortListAdapter(
     val selectedTheaters: List<Theater>
         get() = _selectedItems.toMutableList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_theater, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+            ViewHolder(parent.inflate(R.layout.item_theater))
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

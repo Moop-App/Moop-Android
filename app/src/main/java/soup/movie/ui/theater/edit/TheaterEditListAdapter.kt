@@ -8,6 +8,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.item_multiple_choice.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
+import soup.movie.util.inflate
 
 internal class TheaterEditListAdapter(
         private val allItems: List<Theater>,
@@ -22,9 +23,8 @@ internal class TheaterEditListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val ctx = parent.context
-        val holder = ViewHolder(LayoutInflater.from(ctx)
-                .inflate(R.layout.item_multiple_choice, parent, false))
-        holder.itemView.text1.let {
+        val holder = ViewHolder(parent.inflate(R.layout.item_multiple_choice))
+        holder.itemView.checkedTextView.let {
             it.setOnClickListener { _ ->
                 val theaterItem = allItems[holder.adapterPosition]
                 when {
@@ -57,7 +57,7 @@ internal class TheaterEditListAdapter(
     internal inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindItem(theater: Theater) {
-            itemView.text1.let {
+            itemView.checkedTextView.let {
                 it.text = theater.name
                 it.isChecked = selectedItemMap.containsKey(theater.code)
             }

@@ -18,14 +18,14 @@ import soup.movie.ui.detail.DetailActivity
 import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.ImageUtil
 import soup.movie.util.MovieUtil
+import soup.movie.util.inflate
 
 class MovieListAdapter(
         private val host: FragmentActivity)
     : ListAdapter<Movie, MovieListAdapter.ViewHolder>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_movie_vertical, parent, false)
+        val view = parent.inflate(R.layout.item_movie_vertical)
         val holder = ViewHolder(view)
         holder.itemView.setOnClickListener {
             val intent = Intent(host, DetailActivity::class.java)

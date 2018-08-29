@@ -4,7 +4,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.subjects.BehaviorSubject
 import soup.movie.data.model.Movie
-import soup.movie.data.model.TimeTable
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.DetailContract.Presenter
 import soup.movie.ui.detail.DetailContract.View
@@ -18,7 +17,7 @@ class DetailPresenter : BasePresenter<View>(), Presenter {
         super.initObservable(disposable)
         disposable.add(movieSubject
                 .map { it.trailers }
-                .map { DoneState(TimeTable(), it) }
+                .map { DoneState(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) }
         )

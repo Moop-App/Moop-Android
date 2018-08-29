@@ -6,10 +6,10 @@ import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.subjects.BehaviorSubject
 import soup.movie.data.MoobRepository
 import soup.movie.data.model.Movie
-import soup.movie.data.model.TimeTable
 import soup.movie.data.request.TimeTableRequest
 import soup.movie.settings.TheaterSetting
 import soup.movie.ui.BasePresenter
+import soup.movie.ui.detail.timetable.TimeTableViewState.*
 
 class TimeTablePresenter(
         private val moobRepository: MoobRepository,
@@ -20,15 +20,14 @@ class TimeTablePresenter(
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
-        disposable.add(theaterSetting
-                .asObservable()
+        disposable.add(movieSubject
                 .flatMap {
+                    val theaters = theaterSetting.get()
                     when {
-                        it.isEmpty() -> Observable.just(TimeTable())
-                        else -> getTimeTableBy(it[0].code, movieSubject.value!!.id)
+                        theaters.isEmpty() -> Observable.just(NoTheaterState)
+                        else -> getTimeTableBy(theaters[0].code, it.id)
                     }
                 }
-                .map { TimeTableViewState.DoneState(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
     }
@@ -37,9 +36,9 @@ class TimeTablePresenter(
         movieSubject.onNext(movie)
     }
 
-    private fun getTimeTableBy(theaterId: String, movieId: String): Observable<TimeTable> {
+    private fun getTimeTableBy(theaterId: String, movieId: String): Observable<TimeTableViewState> {
         return moobRepository.getTimeTableList(TimeTableRequest(theaterId, movieId))
-                .map { it.timeTable }
-                .onErrorReturnItem(TimeTable())
+                .map<TimeTableViewState> { DataState(it.timeTable) }
+                .onErrorReturnItem(NoResultState)
     }
 }

@@ -4,11 +4,16 @@ import soup.movie.data.model.TimeTable
 
 sealed class TimeTableViewState {
 
-    object LoadingState : TimeTableViewState() {
+    object NoTheaterState : TimeTableViewState() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
-    data class DoneState(
+    object NoResultState : TimeTableViewState() {
+
+        override fun toString(): String = javaClass.simpleName
+    }
+
+    data class DataState(
             val timeTable: TimeTable) : TimeTableViewState()
 }
