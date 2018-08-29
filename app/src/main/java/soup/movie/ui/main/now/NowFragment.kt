@@ -42,20 +42,16 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
     override fun render(viewState: NowViewState) {
         Timber.d("render: %s", viewState)
         when (viewState) {
-            is LoadingState -> renderLoadingState()
-            is DoneState -> renderDoneState(viewState)
+            is LoadingState -> {
+                swipeRefreshLayout.isRefreshing = true
+                listView.visibility = GONE
+            }
+            is DoneState -> {
+                swipeRefreshLayout.isRefreshing = false
+                listView.visibility = VISIBLE
+                listAdapter.submitList(viewState.movies)
+            }
         }
-    }
-
-    private fun renderLoadingState() {
-        swipeRefreshLayout.isRefreshing = true
-        listView.visibility = GONE
-    }
-
-    private fun renderDoneState(state: DoneState) {
-        swipeRefreshLayout.isRefreshing = false
-        listView.visibility = VISIBLE
-        listAdapter.submitList(state.movies)
     }
 
     companion object {

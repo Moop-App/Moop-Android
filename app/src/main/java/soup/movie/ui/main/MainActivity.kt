@@ -41,22 +41,10 @@ class MainActivity : BaseActivity<MainContract.View, MainContract.Presenter>(), 
     override fun render(viewState: MainViewState) {
         Timber.d("render: %s", viewState)
         when (viewState) {
-            is NowState -> renderNowState()
-            is PlanState -> renderPlanState()
-            is SettingsState -> renderSettingsState()
+            is NowState -> commit(R.id.container, NowFragment.newInstance())
+            is PlanState -> commit(R.id.container, PlanFragment.newInstance())
+            is SettingsState -> commit(R.id.container, SettingsFragment.newInstance())
         }
-    }
-
-    private fun renderNowState() {
-        commit(R.id.container, NowFragment.newInstance())
-    }
-
-    private fun renderPlanState() {
-        commit(R.id.container, PlanFragment.newInstance())
-    }
-
-    private fun renderSettingsState() {
-        commit(R.id.container, SettingsFragment.newInstance())
     }
 
     @MainContract.TabMode

@@ -44,20 +44,16 @@ class PlanFragment
     override fun render(viewState: PlanViewState) {
         Timber.d("render: %s", viewState)
         when (viewState) {
-            is LoadingState -> renderLoadingState()
-            is DoneState -> renderDoneState(viewState)
+            is LoadingState -> {
+                swipeRefreshLayout.isRefreshing = true
+                listView.visibility = GONE
+            }
+            is DoneState -> {
+                swipeRefreshLayout.isRefreshing = false
+                listView.visibility = VISIBLE
+                listAdapter.submitList(viewState.movies)
+            }
         }
-    }
-
-    private fun renderLoadingState() {
-        swipeRefreshLayout.isRefreshing = true
-        listView.visibility = GONE
-    }
-
-    private fun renderDoneState(viewState: DoneState) {
-        swipeRefreshLayout.isRefreshing = false
-        listView.visibility = VISIBLE
-        listAdapter.submitList(viewState.movies)
     }
 
     companion object {
