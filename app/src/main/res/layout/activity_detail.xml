@@ -22,6 +22,24 @@
         android:background="@color/grey_50"
         android:transitionName="@string/transition_background" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        android:paddingTop="200dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/posterView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_trailer" />
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -143,23 +161,5 @@
             tools:text="전체" />
 
     </android.support.constraint.ConstraintLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:scrollbarStyle="insideOverlay"
-        android:scrollbars="vertical"
-        android:layout_marginTop="200dp"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/posterView"
-        app:layout_constraintVertical_bias="0.0"
-        tools:foreground="@color/debug_foreground" />
 
 </soup.widget.elastic.ElasticDragDismissFrameLayout>
