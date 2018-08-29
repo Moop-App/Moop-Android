@@ -2,24 +2,18 @@ package soup.movie.ui.detail
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
 import android.util.TypedValue
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.item_timetable.view.*
 import soup.movie.R
 import soup.movie.data.getColorAsAge
 import soup.movie.data.getSimpleAgeLabel
@@ -27,17 +21,11 @@ import soup.movie.data.model.Movie
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
-import soup.movie.ui.detail.timetable.TimeTableAdapter
-import soup.movie.ui.detail.timetable.TimeTableContract
-import soup.movie.ui.detail.timetable.TimeTableViewState
-import soup.movie.ui.detail.timetable.TimeTableViewState.*
-import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.ImageUtil
 import soup.movie.util.IntentUtil.createShareIntentWithText
 import soup.movie.util.MovieUtil
 import soup.movie.util.RecyclerViewUtil.verticalLinearLayoutManager
 import soup.movie.util.getBitmap
-import soup.movie.util.inflate
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -47,19 +35,12 @@ import javax.inject.Inject
 
 class DetailActivity
     : BaseActivity<DetailContract.View, DetailContract.Presenter>(),
-        DetailContract.View, TimeTableContract.View {
+        DetailContract.View {
 
     @Inject
     override lateinit var presenter: DetailContract.Presenter
 
-    @Inject
-    lateinit var timeTablePresenter: TimeTableContract.Presenter
-
     private lateinit var listAdapter: DetailListAdapter
-
-    private lateinit var timeTableView: View
-
-    private lateinit var timetableAdapter: TimeTableAdapter
 
     private lateinit var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader
 
@@ -159,14 +140,7 @@ class DetailActivity
         chromeFader = object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
             override fun onDragDismissed() = setResultAndFinish()
         }
-        timetableAdapter = TimeTableAdapter(this)
-        timeTableView = listView.inflate(R.layout.item_timetable)
-        timeTableView.listView.let {
-            it.layoutManager = verticalLinearLayoutManager(ctx)
-            it.listView.adapter = timetableAdapter
-            it.itemAnimator = FadeInAnimator()
-        }
-        listAdapter = DetailListAdapter(this, timeTableView)
+        listAdapter = DetailListAdapter(this)
         listView.let {
             it.layoutManager = verticalLinearLayoutManager(ctx)
             it.adapter = listAdapter
@@ -179,10 +153,6 @@ class DetailActivity
     override fun onStart() {
         super.onStart()
         presenter.requestData(movie)
-        timeTablePresenter.let {
-            it.onAttach(this)
-            it.requestData(movie)
-        }
     }
 
     override fun onResume() {
@@ -193,11 +163,6 @@ class DetailActivity
     override fun onPause() {
         draggableFrame.removeListener(chromeFader)
         super.onPause()
-    }
-
-    override fun onStop() {
-        timeTablePresenter.onDetach()
-        super.onStop()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -230,36 +195,36 @@ class DetailActivity
         finishAfterTransition()
     }
 
-    override fun render(viewState: TimeTableViewState) {
-        Timber.d("render: %s", viewState)
-        return when (viewState) {
-            is NoTheaterState -> {
-                with(timeTableView) {
-                    this.noTheaterView.visibility = VISIBLE
-                    this.noTheaterView.setOnClickListener{
-                        startActivity(Intent(context, TheaterEditActivity::class.java))
-                    }
-                    this.noResultView.visibility = GONE
-                    this.listView.visibility = GONE
-                }
-            }
-            is NoResultState -> {
-                with(timeTableView) {
-                    this.noTheaterView.visibility = GONE
-                    this.noResultView.visibility = VISIBLE
-                    this.listView.visibility = GONE
-                }
-            }
-            is DataState -> {
-                with(timeTableView) {
-                    this.noTheaterView.visibility = GONE
-                    this.noResultView.visibility = GONE
-                    this.listView.visibility = VISIBLE
-                }
-                timetableAdapter.submitList(viewState.timeTable.dayList.toMutableList())
-            }
-        }
-    }
+//    override fun render(viewState: TimeTableViewState) {
+//        Timber.d("render: %s", viewState)
+//        return when (viewState) {
+//            is NoTheaterState -> {
+//                with(timeTableView) {
+//                    this.noTheaterView.visibility = VISIBLE
+//                    this.noTheaterView.setOnClickListener{
+//                        startActivity(Intent(context, TheaterEditActivity::class.java))
+//                    }
+//                    this.noResultView.visibility = GONE
+//                    this.listView.visibility = GONE
+//                }
+//            }
+//            is NoResultState -> {
+//                with(timeTableView) {
+//                    this.noTheaterView.visibility = GONE
+//                    this.noResultView.visibility = VISIBLE
+//                    this.listView.visibility = GONE
+//                }
+//            }
+//            is DataState -> {
+//                with(timeTableView) {
+//                    this.noTheaterView.visibility = GONE
+//                    this.noResultView.visibility = GONE
+//                    this.listView.visibility = VISIBLE
+//                }
+//                timetableAdapter.submitList(viewState.timeTable.dayList.toMutableList())
+//            }
+//        }
+//    }
 
     companion object {
 
