@@ -8,26 +8,26 @@ import kotlinx.android.synthetic.main.item_trailer.view.*
 import soup.movie.R
 import soup.movie.data.model.Trailer
 import soup.movie.util.AlwaysDiffCallback
-import soup.movie.util.ImageUtil
-import soup.movie.util.YouTubeUtil
+import soup.movie.util.executeYoutube
 import soup.movie.util.inflate
+import soup.movie.util.loadAsync
 
 internal class DetailListAdapter(private val ctx: Context)
     : ListAdapter<Trailer, ViewHolder>(AlwaysDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return TrailerViewHolder(parent).also {
-            it.itemView.setOnClickListener { _ ->
-                YouTubeUtil.executeYoutubeApp(ctx, getItem(it.adapterPosition).youtubeId)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+            TrailerViewHolder(parent).also {
+                it.itemView.setOnClickListener { _ ->
+                    ctx.executeYoutube(getItem(it.adapterPosition).youtubeId)
+                }
             }
-        }
-    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position - 1)?.let {
-            ImageUtil.loadAsync(ctx, holder.itemView.trailerThumbnailView, it.getThumbnailUrl())
-            holder.itemView.titleView.text = it.title
-            holder.itemView.authorView.text = it.author
+        val trailer = getItem(position)
+        holder.itemView.let {
+            it.trailerThumbnailView.loadAsync(trailer.getThumbnailUrl())
+            it.titleView.text = trailer.title
+            it.authorView.text = trailer.author
         }
     }
 

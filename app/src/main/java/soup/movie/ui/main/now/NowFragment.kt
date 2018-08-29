@@ -10,7 +10,7 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.MovieListAdapter
 import soup.movie.ui.main.now.NowViewState.DoneState
 import soup.movie.ui.main.now.NowViewState.LoadingState
-import soup.movie.util.RecyclerViewUtil.gridLayoutManager
+import soup.movie.util.gridLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,7 +28,7 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
         super.initViewState(ctx)
         listAdapter = MovieListAdapter(activity!!)
         listView.let {
-            it.layoutManager = gridLayoutManager(ctx, 3)
+            it.layoutManager = ctx.gridLayoutManager(3)
             it.adapter = listAdapter
             it.itemAnimator = SlideInUpAnimator()
             it.itemAnimator.addDuration = 200
@@ -60,7 +60,6 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
 
     companion object {
 
-        @JvmStatic
         fun newInstance(): NowFragment {
             return NowFragment()
         }

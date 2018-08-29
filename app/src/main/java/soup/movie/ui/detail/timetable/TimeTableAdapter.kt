@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_timetable_day.view.*
 import soup.movie.R
 import soup.movie.data.model.Day
 import soup.movie.util.AlwaysDiffCallback
-import soup.movie.util.MovieAppUtil
+import soup.movie.util.executeCgvApp
 import soup.movie.util.inflate
 
 internal class TimeTableAdapter(
@@ -21,7 +21,7 @@ internal class TimeTableAdapter(
             DayViewHolder(parent).also { it ->
                 it.itemView.setOnClickListener { _ ->
                     //TODO: show notification with selected date and time
-                    MovieAppUtil.executeCgvApp(ctx)
+                    ctx.executeCgvApp()
                 }
             }
 

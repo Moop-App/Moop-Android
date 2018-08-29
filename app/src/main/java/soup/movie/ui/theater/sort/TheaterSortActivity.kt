@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
-import soup.movie.util.RecyclerViewUtil.verticalLinearLayoutManager
+import soup.movie.util.verticalLayoutManager
 import soup.widget.drag.ItemTouchHelperAdapter
 import soup.widget.drag.OnStartDragListener
 import soup.widget.drag.SimpleItemTouchHelperCallback
@@ -46,7 +46,7 @@ class TheaterSortActivity
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        listView.layoutManager = verticalLinearLayoutManager(this)
+        listView.layoutManager = ctx.verticalLayoutManager()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

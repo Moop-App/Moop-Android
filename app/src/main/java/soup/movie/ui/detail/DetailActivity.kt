@@ -21,11 +21,8 @@ import soup.movie.data.model.Movie
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
-import soup.movie.util.ImageUtil
+import soup.movie.util.*
 import soup.movie.util.IntentUtil.createShareIntentWithText
-import soup.movie.util.MovieUtil
-import soup.movie.util.RecyclerViewUtil.verticalLinearLayoutManager
-import soup.movie.util.getBitmap
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -115,9 +112,9 @@ class DetailActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         movie = if (savedInstanceState == null) {
-            MovieUtil.restoreFrom(intent)!!
+            intent.restoreFrom()!!
         } else {
-            MovieUtil.restoreFrom(savedInstanceState)!!
+            savedInstanceState.restoreFrom()!!
         }
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
@@ -125,15 +122,14 @@ class DetailActivity
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        ImageUtil.loadAsync(this, posterView, shotLoadListener, movie.poster)
+        posterView.loadAsync(movie.poster, shotLoadListener)
         titleView.text = movie.title
         ageView.text = movie.getSimpleAgeLabel()
         ageBgView.backgroundTintList = ContextCompat.getColorStateList(ctx, movie.getColorAsAge())
         eggView.text = movie.egg
         favoriteButton.setOnClickListener { }
         shareButton.setOnClickListener {
-            startActivity(createShareIntentWithText(
-                    "공유하기", MovieUtil.createShareDescription(movie)))
+            startActivity(createShareIntentWithText("공유하기", movie.toShareDescription()))
         }
 
         backButton.setOnClickListener { setResultAndFinish() }
@@ -142,7 +138,7 @@ class DetailActivity
         }
         listAdapter = DetailListAdapter(this)
         listView.let {
-            it.layoutManager = verticalLinearLayoutManager(ctx)
+            it.layoutManager = ctx.verticalLayoutManager()
             it.adapter = listAdapter
             it.itemAnimator = SlideInRightAnimator()
             it.itemAnimator.addDuration = 200
@@ -167,7 +163,7 @@ class DetailActivity
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        MovieUtil.saveTo(outState, movie)
+        movie.saveTo(outState)
     }
 
     override fun render(viewState: DetailViewState) {

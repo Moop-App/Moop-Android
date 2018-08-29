@@ -5,7 +5,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_theater_edit.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
-import soup.movie.util.RecyclerViewUtil.verticalLinearLayoutManager
+import soup.movie.util.verticalLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class TheaterEditActivity
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        listView.layoutManager = verticalLinearLayoutManager(this)
+        listView.layoutManager = ctx.verticalLayoutManager()
     }
 
     override fun render(viewState: TheaterEditViewState) {
