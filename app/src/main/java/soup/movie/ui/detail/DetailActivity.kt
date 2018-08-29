@@ -16,6 +16,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.item_timetable.view.*
@@ -160,8 +161,11 @@ class DetailActivity
         }
         timetableAdapter = TimeTableAdapter(this)
         timeTableView = listView.inflate(R.layout.item_timetable)
-        timeTableView.listView.layoutManager = verticalLinearLayoutManager(ctx)
-        timeTableView.listView.adapter = timetableAdapter
+        timeTableView.listView.let {
+            it.layoutManager = verticalLinearLayoutManager(ctx)
+            it.listView.adapter = timetableAdapter
+            it.itemAnimator = FadeInAnimator()
+        }
         listAdapter = DetailListAdapter(this, timeTableView)
         listView.let {
             it.layoutManager = verticalLinearLayoutManager(ctx)
