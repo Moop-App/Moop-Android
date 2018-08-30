@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Pair
 import android.view.View
 import androidx.core.app.SharedElementCallback
+import androidx.transition.TransitionInflater
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.R
@@ -26,8 +27,8 @@ class SettingsFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        exitTransition = TransitionInflater.from(context)
-//                .inflateTransition(android.R.transition.explode)
+        exitTransition = TransitionInflater.from(context)
+                .inflateTransition(android.R.transition.explode)
         setExitSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: List<String>,
                                              sharedElements: MutableMap<String, View>) {
@@ -38,7 +39,6 @@ class SettingsFragment :
                 }
             }
         })
-        postponeEnterTransition()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,16 +75,19 @@ class SettingsFragment :
                 .toBundle())
     }
 
-    private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> {
-        theater_group?.run {
-            val pairs = mutableListOf<Pair<View, String>>()
-            repeat(childCount) {
-                val v = getChildAt(it)
-                pairs.add(Pair.create(v, v.transitionName))
+    private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> =
+            when (theater_group) {
+                null -> emptyArray()
+                else -> mutableListOf<Pair<View, String>>().also { pair ->
+                    theater_group.run {
+                        repeat(childCount) {
+                            getChildAt(it)?.run {
+                                pair.add(Pair.create(this, transitionName))
+                            }
+                        }
+                    }
+                }.toTypedArray()
             }
-            return pairs.toTypedArray()
-        } ?: return emptyArray()
-    }
 
     companion object {
 

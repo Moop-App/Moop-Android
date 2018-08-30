@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.postOnAnimationDelayed
 import androidx.recyclerview.widget.ItemTouchHelper
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
@@ -35,18 +36,24 @@ class TheaterSortActivity :
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
         setEnterSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
-                names.forEach { name ->
-                    listView.findViewWithTag<View>(name)
-                            ?.let { sharedElements[name] = it }
-                }
-            }
+            override fun onMapSharedElements(names: List<String>,
+                                             sharedElements: MutableMap<String, View>) =
+                    names.forEach { name ->
+                        listView.findViewWithTag<View>(name)?.run {
+                            sharedElements[name] = this
+                        }
+                    }
         })
     }
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         listView.layoutManager = ctx.verticalLayoutManager()
+
+        //FixMe: find a timing to call startPostponedEnterTransition()
+        listView.postOnAnimationDelayed(100) {
+            startPostponedEnterTransition()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -81,7 +88,8 @@ class TheaterSortActivity :
                 viewState.selectedTheaters,
                 OnStartDragListener { itemTouchHelper.startDrag(it) })
         listView.adapter = listAdapter
-        startPostponedEnterTransition()
+        //FixMe: find a timing to call startPostponedEnterTransition()
+        //startPostponedEnterTransition()
     }
 
     fun onCancelClicked(view: View) {
@@ -89,7 +97,7 @@ class TheaterSortActivity :
     }
 
     fun onConfirmClicked(view: View) {
-        presenter.onConfirmClicked(listAdapter.selectedTheaters)
+        presenter.onConfirmClicked(listAdapter.theaters)
         onBackPressed()
     }
 }

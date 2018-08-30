@@ -14,6 +14,7 @@ class SettingsPresenter(private val theaterSetting: TheaterSetting) :
         super.initObservable(disposable)
         disposable.add(theaterSetting.asObservable()
                 .map { SettingsViewState(it) }
+                .distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
     }

@@ -2,7 +2,6 @@ package soup.movie.ui.theater.sort
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_theater.view.*
@@ -13,20 +12,17 @@ import soup.widget.drag.ItemTouchHelperAdapter
 import soup.widget.drag.OnStartDragListener
 import java.util.*
 
-internal class TheaterSortListAdapter(
-        private val _selectedItems: List<Theater>,
-        private val dragStartListener: OnStartDragListener)
+internal class TheaterSortListAdapter(_theaters: List<Theater>,
+                                      private val dragStartListener: OnStartDragListener)
     : RecyclerView.Adapter<TheaterSortListAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
-    val selectedTheaters: List<Theater>
-        get() = _selectedItems.toMutableList()
+    val theaters: MutableList<Theater> = _theaters.toMutableList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(parent.inflate(R.layout.item_theater))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val theaterItem = selectedTheaters[position]
+        val theaterItem = theaters[position]
         holder.bindItem(theaterItem)
         holder.itemView.drag_handle.setOnTouchListener { _, event ->
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
@@ -37,17 +33,18 @@ internal class TheaterSortListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return selectedTheaters.size
+        return theaters.size
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        Collections.swap(selectedTheaters, fromPosition, toPosition)
+        Collections.swap(theaters, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
     }
 
     override fun onItemDismiss(position: Int) {}
 
-    internal class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    internal class ViewHolder(parent: ViewGroup) :
+            RecyclerView.ViewHolder(parent.inflate(R.layout.item_theater)) {
 
         fun bindItem(data: Theater) {
             itemView.chip_theater.apply {
