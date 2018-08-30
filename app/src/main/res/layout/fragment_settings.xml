@@ -10,30 +10,30 @@
     tools:context="soup.movie.ui.main.settings.SettingsFragment" >
 
     <TextView
-        android:id="@+id/category_theater"
+        android:id="@+id/theaterCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/settings_margin_between_category"
         android:text="@string/settings_category_theater"
         android:textAppearance="@style/TextAppearance.Settings.Category"
-        app:layout_constraintEnd_toStartOf="@+id/theater_edit"
+        app:layout_constraintEnd_toStartOf="@+id/editTheaterButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/theater_edit"
+        android:id="@+id/editTheaterButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@drawable/ic_edit"
         android:scaleType="centerInside"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        app:layout_constraintStart_toEndOf="@+id/category_theater"
-        app:layout_constraintBottom_toBottomOf="@+id/category_theater"
+        app:layout_constraintStart_toEndOf="@+id/theaterCategory"
+        app:layout_constraintBottom_toBottomOf="@+id/theaterCategory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/category_theater" />
+        app:layout_constraintTop_toTopOf="@+id/theaterCategory" />
 
     <TextView
-        android:id="@+id/theater_empty"
+        android:id="@+id/noTheaterView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/settings_margin_in_category"
@@ -42,18 +42,18 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_theater"
+        app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
         tools:visibility="gone" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/theater_group"
+        android:id="@+id/theaterGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/settings_margin_in_category"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_theater"
+        app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
         tools:visibility="visible" >
 
         <!-- for preview -->
@@ -65,24 +65,24 @@
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier_theater_category"
+        android:id="@+id/dividerBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="theater_empty,theater_group" />
+        app:constraint_referenced_ids="noTheaterView,theaterGroup" />
 
     <View
-        android:id="@+id/divider_theater"
+        android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/settings_margin_between_category"
         android:background="@color/dividerColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier_theater_category"/>
+        app:layout_constraintTop_toBottomOf="@+id/dividerBarrier"/>
 
     <TextView
-        android:id="@+id/category_theme"
+        android:id="@+id/themeCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/settings_margin_between_category"
@@ -90,7 +90,7 @@
         android:textAppearance="@style/TextAppearance.Settings.Category"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider_theater" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/theme"
@@ -104,6 +104,6 @@
         android:textColor="@color/grey_600"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_theme" />
+        app:layout_constraintTop_toBottomOf="@+id/themeCategory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

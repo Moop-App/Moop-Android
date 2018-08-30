@@ -33,7 +33,7 @@ class SettingsFragment :
             override fun onMapSharedElements(names: List<String>,
                                              sharedElements: MutableMap<String, View>) {
                 names.forEach { name ->
-                    theater_group.findViewWithTag<View>(name)?.let {
+                    theaterGroup.findViewWithTag<View>(name)?.let {
                         sharedElements[name] = it
                     }
                 }
@@ -43,27 +43,27 @@ class SettingsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        theater_edit.setOnClickListener { onTheaterEditClicked() }
+        editTheaterButton.setOnClickListener { onTheaterEditClicked() }
     }
 
     override fun render(viewState: SettingsViewState) {
         Timber.d("render: %s", viewState)
         val theaters = viewState.theaterList
         if (theaters.isEmpty()) {
-            theater_empty.visibility = View.VISIBLE
-            theater_group.removeAllViews()
-            theater_group.visibility = View.GONE
+            noTheaterView.visibility = View.VISIBLE
+            theaterGroup.removeAllViews()
+            theaterGroup.visibility = View.GONE
         } else {
-            theater_empty.visibility = View.GONE
-            theater_group.removeAllViews()
-            theater_group.visibility = View.VISIBLE
+            noTheaterView.visibility = View.GONE
+            theaterGroup.removeAllViews()
+            theaterGroup.visibility = View.VISIBLE
 
             for ((code, name) in theaters) {
                 val theaterChip = View.inflate(context, R.layout.chip_cgv, null) as Chip
                 theaterChip.text = name
                 theaterChip.transitionName = code
                 theaterChip.tag = code
-                theater_group.addView(theaterChip)
+                theaterGroup.addView(theaterChip)
             }
         }
     }
@@ -76,10 +76,10 @@ class SettingsFragment :
     }
 
     private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> =
-            when (theater_group) {
+            when (theaterGroup) {
                 null -> emptyArray()
                 else -> mutableListOf<Pair<View, String>>().also { pair ->
-                    theater_group.run {
+                    theaterGroup.run {
                         repeat(childCount) {
                             getChildAt(it)?.run {
                                 pair.add(Pair.create(this, transitionName))

@@ -24,7 +24,7 @@ internal class TheaterSortListAdapter(_theaters: List<Theater>,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val theaterItem = theaters[position]
         holder.bindItem(theaterItem)
-        holder.itemView.drag_handle.setOnTouchListener { _, event ->
+        holder.itemView.dragHandle.setOnTouchListener { _, event ->
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
                 dragStartListener.onStartDrag(holder)
             }
@@ -47,7 +47,7 @@ internal class TheaterSortListAdapter(_theaters: List<Theater>,
             RecyclerView.ViewHolder(parent.inflate(R.layout.item_theater)) {
 
         fun bindItem(data: Theater) {
-            itemView.chip_theater.apply {
+            itemView.theaterChip.apply {
                 text = data.name
                 transitionName = data.code
                 tag = data.code

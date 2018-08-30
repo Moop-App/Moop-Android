@@ -11,7 +11,7 @@
         android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/action_barrier"
+        app:layout_constraintBottom_toTopOf="@+id/actionBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         tools:listitem="@android:layout/simple_list_item_multiple_choice" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/action_barrier"
+        android:id="@+id/actionBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
