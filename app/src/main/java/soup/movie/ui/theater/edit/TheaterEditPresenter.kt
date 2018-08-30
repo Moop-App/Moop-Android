@@ -13,10 +13,9 @@ import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
 import soup.movie.ui.theater.edit.TheaterEditContract.View
 
-class TheaterEditPresenter(
-        private val moobRepository: MoobRepository,
-        private val theaterSetting: TheaterSetting)
-    : BasePresenter<View>(), Presenter {
+class TheaterEditPresenter(private val moobRepository: MoobRepository,
+                           private val theaterSetting: TheaterSetting) :
+        BasePresenter<View>(), Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)

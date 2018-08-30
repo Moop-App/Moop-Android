@@ -3,14 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
-    </style>
-
-    <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/white</item>
     </style>
 
     <style name="AppTheme.Translucent" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -38,13 +33,11 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
-    <style name="AppTheme.TimeTable" parent="Theme.MaterialComponents.Light" />
+    <style name="AppTheme.TimeTable" />
 
-    <style name="AppTheme.TheaterSort" parent="Theme.MaterialComponents.Light">
-    </style>
+    <style name="AppTheme.TheaterSort" />
 
-    <style name="AppTheme.TheaterEdit" parent="Theme.MaterialComponents.Light.NoActionBar">
-    </style>
+    <style name="AppTheme.TheaterEdit" parent="Theme.MaterialComponents.Light.NoActionBar"/>
 
     <!-- TextAppearance -->
 

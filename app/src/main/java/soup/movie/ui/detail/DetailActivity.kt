@@ -31,8 +31,8 @@ import soup.widget.util.ViewUtils
 import timber.log.Timber
 import javax.inject.Inject
 
-class DetailActivity
-    : BaseActivity<DetailContract.View, DetailContract.Presenter>(),
+class DetailActivity :
+        BaseActivity<DetailContract.View, DetailContract.Presenter>(),
         DetailContract.View {
 
     @Inject

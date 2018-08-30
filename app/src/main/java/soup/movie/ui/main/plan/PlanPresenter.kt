@@ -10,9 +10,8 @@ import soup.movie.ui.main.plan.PlanContract.Presenter
 import soup.movie.ui.main.plan.PlanContract.View
 import soup.movie.ui.main.plan.PlanViewState.DoneState
 
-class PlanPresenter(
-        private val moobRepository: MoobRepository)
-    : BasePresenter<View>(), Presenter {
+class PlanPresenter(private val moobRepository: MoobRepository) :
+        BasePresenter<View>(), Presenter {
 
     private val refreshRelay = BehaviorRelay.createDefault(Unit)
 

@@ -15,9 +15,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_theater"
-        tools:orientation="vertical" />
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:orientation="vertical"
+        tools:listitem="@layout/item_theater" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/action_barrier"

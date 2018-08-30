@@ -9,7 +9,8 @@ import soup.movie.ui.detail.DetailContract.Presenter
 import soup.movie.ui.detail.DetailContract.View
 import soup.movie.ui.detail.DetailViewState.DoneState
 
-class DetailPresenter : BasePresenter<View>(), Presenter {
+class DetailPresenter :
+        BasePresenter<View>(), Presenter {
 
     private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
 

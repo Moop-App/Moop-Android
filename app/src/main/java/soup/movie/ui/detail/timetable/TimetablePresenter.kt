@@ -11,10 +11,9 @@ import soup.movie.settings.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.timetable.TimetableViewState.*
 
-class TimetablePresenter(
-        private val moobRepository: MoobRepository,
-        private val theaterSetting: TheaterSetting)
-    : BasePresenter<TimetableContract.View>(), TimetableContract.Presenter {
+class TimetablePresenter(private val moobRepository: MoobRepository,
+                         private val theaterSetting: TheaterSetting) :
+        BasePresenter<TimetableContract.View>(), TimetableContract.Presenter {
 
     private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
 

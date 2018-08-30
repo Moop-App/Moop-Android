@@ -8,15 +8,14 @@ import android.view.View
 import androidx.core.app.SharedElementCallback
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.fragment_settings.view.*
 import soup.movie.R
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import timber.log.Timber
 import javax.inject.Inject
 
-class SettingsFragment
-    : BaseTabFragment<SettingsContract.View, SettingsContract.Presenter>(),
+class SettingsFragment :
+        BaseTabFragment<SettingsContract.View, SettingsContract.Presenter>(),
         SettingsContract.View {
 
     @Inject
@@ -44,7 +43,7 @@ class SettingsFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.theater_edit.setOnClickListener { onTheaterEditClicked() }
+        theater_edit.setOnClickListener { onTheaterEditClicked() }
     }
 
     override fun render(viewState: SettingsViewState) {
@@ -77,7 +76,7 @@ class SettingsFragment
     }
 
     private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> {
-        view?.theater_group?.run {
+        theater_group?.run {
             val pairs = mutableListOf<Pair<View, String>>()
             repeat(childCount) {
                 val v = getChildAt(it)

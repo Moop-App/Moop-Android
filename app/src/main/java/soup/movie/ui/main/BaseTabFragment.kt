@@ -9,8 +9,8 @@ import soup.movie.ui.BaseContract.Presenter
 import soup.movie.ui.BaseContract.View
 import soup.movie.ui.BaseFragment
 
-abstract class BaseTabFragment<V: View, P: Presenter<V>>
-    : BaseFragment<V, P>() {
+abstract class BaseTabFragment<V: View, P: Presenter<V>> :
+        BaseFragment<V, P>() {
 
     protected val menuResource: Int
         @MenuRes

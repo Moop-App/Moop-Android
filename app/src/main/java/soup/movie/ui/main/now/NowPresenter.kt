@@ -10,9 +10,8 @@ import soup.movie.ui.main.now.NowContract.Presenter
 import soup.movie.ui.main.now.NowContract.View
 import soup.movie.ui.main.now.NowViewState.DoneState
 
-class NowPresenter(
-        private val moobRepository: MoobRepository)
-    : BasePresenter<View>(), Presenter {
+class NowPresenter(private val moobRepository: MoobRepository) :
+        BasePresenter<View>(), Presenter {
 
     private val refreshRelay = BehaviorRelay.createDefault(Unit)
 

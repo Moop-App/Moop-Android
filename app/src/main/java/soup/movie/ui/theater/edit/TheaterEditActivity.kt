@@ -9,8 +9,8 @@ import soup.movie.util.verticalLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
-class TheaterEditActivity
-    : BaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
+class TheaterEditActivity :
+        BaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
         TheaterEditContract.View {
 
     @Inject

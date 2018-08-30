@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
     android:padding="8dp"
     android:clipToPadding="false"
-    tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
+    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:orientation="horizontal"
     tools:listitem="@layout/item_movie_horizontal" />

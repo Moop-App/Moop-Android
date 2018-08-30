@@ -19,8 +19,8 @@ import soup.widget.drag.SimpleItemTouchHelperCallback
 import timber.log.Timber
 import javax.inject.Inject
 
-class TheaterSortActivity
-    : BaseActivity<TheaterSortContract.View, TheaterSortContract.Presenter>(),
+class TheaterSortActivity :
+        BaseActivity<TheaterSortContract.View, TheaterSortContract.Presenter>(),
         TheaterSortContract.View {
 
     @Inject
@@ -55,13 +55,11 @@ class TheaterSortActivity
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_edit -> {
-                startActivity(Intent(this, TheaterEditActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        if (item.itemId == R.id.action_edit) {
+            startActivity(Intent(this, TheaterEditActivity::class.java))
+            return true
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun render(viewState: TheaterSortViewState) {

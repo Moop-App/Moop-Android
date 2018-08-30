@@ -15,9 +15,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@android:layout/simple_list_item_multiple_choice"
-        tools:orientation="vertical" />
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:orientation="vertical"
+        tools:listitem="@android:layout/simple_list_item_multiple_choice" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/action_barrier"
