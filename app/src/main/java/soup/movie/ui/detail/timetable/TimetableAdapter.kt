@@ -6,16 +6,16 @@ import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.item_timetable_day.view.*
+import kotlinx.android.synthetic.main.item_timetable.view.*
 import soup.movie.R
 import soup.movie.data.model.Day
 import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.executeCgvApp
 import soup.movie.util.inflate
 
-internal class TimeTableAdapter(
+internal class TimetableAdapter(
         private val ctx: Context)
-    : ListAdapter<Day, TimeTableAdapter.DayViewHolder>(AlwaysDiffCallback()) {
+    : ListAdapter<Day, TimetableAdapter.DayViewHolder>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder =
             DayViewHolder(parent).also { it ->
@@ -40,5 +40,5 @@ internal class TimeTableAdapter(
     }
 
     internal class DayViewHolder(parent: ViewGroup) :
-            ViewHolder(parent.inflate(R.layout.item_timetable_day))
+            ViewHolder(parent.inflate(R.layout.item_timetable))
 }

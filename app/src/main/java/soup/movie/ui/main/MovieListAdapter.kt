@@ -3,7 +3,6 @@ package soup.movie.ui.main
 import android.app.ActivityOptions
 import android.content.Intent
 import android.support.v4.app.FragmentActivity
-import android.support.v4.content.ContextCompat
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
 import android.util.Pair
@@ -13,10 +12,7 @@ import soup.movie.R
 import soup.movie.data.getColorAsAge
 import soup.movie.data.model.Movie
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.util.AlwaysDiffCallback
-import soup.movie.util.inflate
-import soup.movie.util.loadAsync
-import soup.movie.util.saveTo
+import soup.movie.util.*
 
 class MovieListAdapter(
         private val host: FragmentActivity)
@@ -47,8 +43,7 @@ class MovieListAdapter(
         fun bindItem(movie: Movie) {
             val ctx = itemView.context
             itemView.posterView.loadAsync(movie.poster)
-            itemView.ageBgView.backgroundTintList =
-                    ContextCompat.getColorStateList(ctx, movie.getColorAsAge())
+            itemView.ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
         }
     }
 }

@@ -4,6 +4,8 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 
@@ -76,3 +78,11 @@ fun Context.horizontalLinearLayoutManager(): LinearLayoutManager =
 
 fun Context.gridLayoutManager(spanCount: Int): GridLayoutManager =
         GridLayoutManager(this, spanCount)
+
+/** Color */
+
+fun Context.getColorCompat(@ColorRes colorResId: Int) =
+        ContextCompat.getColor(this, colorResId)
+
+fun Context.getColorStateListCompat(@ColorRes colorResId: Int) =
+        ContextCompat.getColorStateList(this, colorResId)

@@ -2,10 +2,10 @@ package soup.movie.ui.detail
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
 import android.util.TypedValue
 import com.bumptech.glide.load.DataSource
@@ -21,6 +21,7 @@ import soup.movie.data.model.Movie
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
+import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.util.*
 import soup.movie.util.IntentUtil.createShareIntentWithText
 import soup.widget.elastic.ElasticDragDismissFrameLayout
@@ -68,12 +69,13 @@ class DetailActivity
                             lightness == ColorUtils.IS_DARK
                         }
 
-                        val adaptiveColor = ContextCompat.getColor(this@DetailActivity,
+                        val adaptiveColor = this@DetailActivity.getColorCompat(
                                 if (isDark) R.color.white else R.color.dark_icon)
                         backButton.setColorFilter(adaptiveColor)
                         titleView.setTextColor(adaptiveColor)
                         eggView.setTextColor(adaptiveColor)
                         favoriteButton.setColorFilter(adaptiveColor)
+                        timetableButton.setColorFilter(adaptiveColor)
                         shareButton.setColorFilter(adaptiveColor)
 
                         // color the status bar. Set a complementary dark color on L,
@@ -125,9 +127,13 @@ class DetailActivity
         posterView.loadAsync(movie.poster, shotLoadListener)
         titleView.text = movie.title
         ageView.text = movie.getSimpleAgeLabel()
-        ageBgView.backgroundTintList = ContextCompat.getColorStateList(ctx, movie.getColorAsAge())
+        ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
         eggView.text = movie.egg
-        favoriteButton.setOnClickListener { }
+
+        timetableButton.setOnClickListener { _ ->
+            startActivity(Intent(this, TimetableActivity::class.java)
+                    .also { movie.saveTo(it) })
+        }
         shareButton.setOnClickListener {
             startActivity(createShareIntentWithText("공유하기", movie.toShareDescription()))
         }
@@ -190,37 +196,6 @@ class DetailActivity
     private fun setResultAndFinish() {
         finishAfterTransition()
     }
-
-//    override fun render(viewState: TimeTableViewState) {
-//        Timber.d("render: %s", viewState)
-//        return when (viewState) {
-//            is NoTheaterState -> {
-//                with(timeTableView) {
-//                    this.noTheaterView.visibility = VISIBLE
-//                    this.noTheaterView.setOnClickListener{
-//                        startActivity(Intent(context, TheaterEditActivity::class.java))
-//                    }
-//                    this.noResultView.visibility = GONE
-//                    this.listView.visibility = GONE
-//                }
-//            }
-//            is NoResultState -> {
-//                with(timeTableView) {
-//                    this.noTheaterView.visibility = GONE
-//                    this.noResultView.visibility = VISIBLE
-//                    this.listView.visibility = GONE
-//                }
-//            }
-//            is DataState -> {
-//                with(timeTableView) {
-//                    this.noTheaterView.visibility = GONE
-//                    this.noResultView.visibility = GONE
-//                    this.listView.visibility = VISIBLE
-//                }
-//                timetableAdapter.submitList(viewState.timeTable.dayList.toMutableList())
-//            }
-//        }
-//    }
 
     companion object {
 

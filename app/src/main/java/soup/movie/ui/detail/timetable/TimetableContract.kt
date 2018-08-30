@@ -3,7 +3,7 @@ package soup.movie.ui.detail.timetable
 import soup.movie.data.model.Movie
 import soup.movie.ui.BaseContract
 
-interface TimeTableContract {
+interface TimetableContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
@@ -12,6 +12,6 @@ interface TimeTableContract {
 
     interface View : BaseContract.View {
 
-        fun render(viewState: TimeTableViewState)
+        fun render(viewState: TimetableViewState)
     }
 }

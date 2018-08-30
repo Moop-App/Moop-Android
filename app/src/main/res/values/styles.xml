@@ -38,6 +38,8 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
+    <style name="AppTheme.TimeTable" parent="Theme.AppCompat.Light" />
+
     <style name="AppTheme.TheaterSort" parent="Theme.AppCompat.Light">
     </style>
 

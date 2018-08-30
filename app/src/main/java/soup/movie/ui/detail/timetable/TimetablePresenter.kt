@@ -9,12 +9,12 @@ import soup.movie.data.model.Movie
 import soup.movie.data.request.TimeTableRequest
 import soup.movie.settings.TheaterSetting
 import soup.movie.ui.BasePresenter
-import soup.movie.ui.detail.timetable.TimeTableViewState.*
+import soup.movie.ui.detail.timetable.TimetableViewState.*
 
-class TimeTablePresenter(
+class TimetablePresenter(
         private val moobRepository: MoobRepository,
         private val theaterSetting: TheaterSetting)
-    : BasePresenter<TimeTableContract.View>(), TimeTableContract.Presenter {
+    : BasePresenter<TimetableContract.View>(), TimetableContract.Presenter {
 
     private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
 
@@ -36,9 +36,9 @@ class TimeTablePresenter(
         movieSubject.onNext(movie)
     }
 
-    private fun getTimeTableBy(theaterId: String, movieId: String): Observable<TimeTableViewState> {
+    private fun getTimeTableBy(theaterId: String, movieId: String): Observable<TimetableViewState> {
         return moobRepository.getTimeTableList(TimeTableRequest(theaterId, movieId))
-                .map<TimeTableViewState> { DataState(it.timeTable) }
+                .map<TimetableViewState> { DataState(it.timeTable) }
                 .onErrorReturnItem(NoResultState)
     }
 }

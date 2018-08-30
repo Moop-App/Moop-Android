@@ -2,18 +2,18 @@ package soup.movie.ui.detail.timetable
 
 import soup.movie.data.model.TimeTable
 
-sealed class TimeTableViewState {
+sealed class TimetableViewState {
 
-    object NoTheaterState : TimeTableViewState() {
+    object NoTheaterState : TimetableViewState() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
-    object NoResultState : TimeTableViewState() {
+    object NoResultState : TimetableViewState() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
     data class DataState(
-            val timeTable: TimeTable) : TimeTableViewState()
+            val timeTable: TimeTable) : TimetableViewState()
 }
