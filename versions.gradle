@@ -23,7 +23,6 @@ versions.rx_relay = "2.0.0"
 versions.atsl_runner = "1.0.1"
 versions.atsl_rules = "1.0.1"
 versions.kotlin = "1.2.61"
-versions.butterknife = "8.8.1"
 def deps = [:]
 
 def support = [:]
@@ -81,11 +80,6 @@ def glide = [:]
 glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
 glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
-
-def butterknife = [:]
-butterknife.runtime = "com.jakewharton:butterknife:$versions.butterknife"
-butterknife.compiler = "com.jakewharton:butterknife-compiler:$versions.butterknife"
-deps.butterknife = butterknife
 
 deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"

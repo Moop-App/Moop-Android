@@ -72,8 +72,6 @@ dependencies {
     implementation deps.constraint_layout
 
     implementation deps.timber
-    implementation deps.butterknife.runtime
-    kapt deps.butterknife.compiler
 
     implementation deps.dagger.runtime
     implementation deps.dagger.android
