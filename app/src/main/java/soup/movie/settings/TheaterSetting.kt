@@ -5,8 +5,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import soup.movie.data.model.Theater
 
-class TheaterSetting(preferences: SharedPreferences)
-    : PrefSetting<List<Theater>>(preferences) {
+class TheaterSetting(preferences: SharedPreferences) :
+        PrefSetting<List<Theater>>(preferences) {
 
     override fun getDefaultValue(preferences: SharedPreferences): List<Theater> {
         return fromJson(preferences.getString(KEY, DEFAULT_VALUE))

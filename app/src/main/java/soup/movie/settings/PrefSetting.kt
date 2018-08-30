@@ -10,7 +10,7 @@ abstract class PrefSetting<T>(
 ) : Setting<T> {
 
     private val settingSubject: BehaviorSubject<T> =
-            BehaviorSubject.createDefault(getDefaultValue(preferences))
+            BehaviorSubject.createDefault(this.getDefaultValue(preferences))
 
     internal abstract fun getDefaultValue(preferences: SharedPreferences): T
 
