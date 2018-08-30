@@ -67,13 +67,13 @@ private fun Context.executeWebPage(url: String) {
 /** RecyclerView */
 
 fun Context.verticalLayoutManager(): LinearLayoutManager =
-        LinearLayoutManager(this).also {
-            it.orientation = LinearLayoutManager.VERTICAL
+        LinearLayoutManager(this).apply {
+            orientation = LinearLayoutManager.VERTICAL
         }
 
 fun Context.horizontalLinearLayoutManager(): LinearLayoutManager =
-        LinearLayoutManager(this).also {
-            it.orientation = LinearLayoutManager.HORIZONTAL
+        LinearLayoutManager(this).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
         }
 
 fun Context.gridLayoutManager(spanCount: Int): GridLayoutManager =

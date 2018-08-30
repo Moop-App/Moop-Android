@@ -1,8 +1,6 @@
 package soup.movie.ui.theater.edit
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.item_multiple_choice.view.*
@@ -11,9 +9,8 @@ import soup.movie.data.model.Theater
 import soup.movie.util.inflate
 
 internal class TheaterEditListAdapter(
-        private val allItems: List<Theater>,
-        selectedItems: List<Theater>)
-    : RecyclerView.Adapter<TheaterEditListAdapter.ViewHolder>() {
+        private val allItems: List<Theater>, selectedItems: List<Theater>) :
+        RecyclerView.Adapter<TheaterEditListAdapter.ViewHolder>() {
 
     private val selectedItemMap: HashMap<String, Theater>
             = createSelectedItemMapFrom(selectedItems)
@@ -21,30 +18,28 @@ internal class TheaterEditListAdapter(
     val selectedTheaters: List<Theater>
         get() = ArrayList(selectedItemMap.values)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val ctx = parent.context
-        val holder = ViewHolder(parent.inflate(R.layout.item_multiple_choice))
-        holder.itemView.checkedTextView.let {
-            it.setOnClickListener { _ ->
-                val theaterItem = allItems[holder.adapterPosition]
-                when {
-                    it.isChecked -> {
-                        selectedItemMap.remove(theaterItem.code)
-                        it.isChecked = false
-                    }
-                    selectedItemMap.size < MAX_ITEMS -> {
-                        selectedItemMap[theaterItem.code] = theaterItem
-                        it.isChecked = true
-                    }
-                    else -> {
-                        val message = ctx.getString(R.string.theater_select_limit_description, MAX_ITEMS)
-                        Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+            ViewHolder(parent).also {
+                it.itemView.checkedTextView.apply {
+                    setOnClickListener { _ ->
+                        val theaterItem = allItems[it.adapterPosition]
+                        when {
+                            isChecked -> {
+                                selectedItemMap.remove(theaterItem.code)
+                                isChecked = false
+                            }
+                            selectedItemMap.size < MAX_ITEMS -> {
+                                selectedItemMap[theaterItem.code] = theaterItem
+                                isChecked = true
+                            }
+                            else -> {
+                                val message = parent.context.getString(R.string.theater_select_limit_description, MAX_ITEMS)
+                                Toast.makeText(parent.context, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
                 }
             }
-            return holder
-        }
-    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(allItems[position])
@@ -54,12 +49,13 @@ internal class TheaterEditListAdapter(
         return allItems.size
     }
 
-    internal inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    internal inner class ViewHolder(parent: ViewGroup) :
+            RecyclerView.ViewHolder(parent.inflate(R.layout.item_multiple_choice)) {
 
         fun bindItem(theater: Theater) {
-            itemView.checkedTextView.let {
-                it.text = theater.name
-                it.isChecked = selectedItemMap.containsKey(theater.code)
+            itemView.checkedTextView?.apply {
+                text = theater.name
+                isChecked = selectedItemMap.containsKey(theater.code)
             }
         }
     }

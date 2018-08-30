@@ -16,18 +16,18 @@ internal class DetailListAdapter(private val ctx: Context)
     : ListAdapter<Trailer, ViewHolder>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            TrailerViewHolder(parent).also {
-                it.itemView.setOnClickListener { _ ->
-                    ctx.executeYoutube(getItem(it.adapterPosition).youtubeId)
+            TrailerViewHolder(parent).apply {
+                itemView.setOnClickListener {
+                    ctx.executeYoutube(getItem(adapterPosition).youtubeId)
                 }
             }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val trailer = getItem(position)
-        holder.itemView.let {
-            it.trailerThumbnailView.loadAsync(trailer.getThumbnailUrl())
-            it.titleView.text = trailer.title
-            it.authorView.text = trailer.author
+        holder.itemView?.apply {
+            trailerThumbnailView.loadAsync(trailer.getThumbnailUrl())
+            titleView.text = trailer.title
+            authorView.text = trailer.author
         }
     }
 

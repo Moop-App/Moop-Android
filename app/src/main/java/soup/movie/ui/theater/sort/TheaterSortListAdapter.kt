@@ -50,10 +50,10 @@ internal class TheaterSortListAdapter(
     internal class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindItem(data: Theater) {
-            itemView.chip_theater.let {
-                it.chipText = data.name
-                it.transitionName = data.code
-                it.tag = data.code
+            itemView.chip_theater.apply {
+                chipText = data.name
+                transitionName = data.code
+                tag = data.code
             }
         }
     }

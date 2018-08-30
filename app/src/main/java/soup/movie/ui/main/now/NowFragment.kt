@@ -27,12 +27,12 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         listAdapter = MovieListAdapter(activity!!)
-        listView.let {
-            it.layoutManager = ctx.gridLayoutManager(3)
-            it.adapter = listAdapter
-            it.itemAnimator = SlideInUpAnimator()
-            it.itemAnimator.addDuration = 200
-            it.itemAnimator.removeDuration = 200
+        listView.apply {
+            layoutManager = ctx.gridLayoutManager(3)
+            adapter = listAdapter
+            itemAnimator = SlideInUpAnimator()
+            itemAnimator.addDuration = 200
+            itemAnimator.removeDuration = 200
         }
         swipeRefreshLayout.setOnRefreshListener {
             presenter.refresh()

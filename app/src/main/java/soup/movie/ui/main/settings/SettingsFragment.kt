@@ -77,10 +77,10 @@ class SettingsFragment
     }
 
     private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> {
-        view?.theater_group?.let {
+        view?.theater_group?.run {
             val pairs = mutableListOf<Pair<View, String>>()
-            (0 until it.childCount).forEach { i ->
-                val v = it.getChildAt(i)
+            repeat(childCount) {
+                val v = getChildAt(it)
                 pairs.add(Pair.create(v, v.transitionName))
             }
             return pairs.toTypedArray()

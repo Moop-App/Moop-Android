@@ -14,6 +14,7 @@ import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.timetable.TimetableViewState.*
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.restoreFrom
+import soup.movie.util.saveTo
 import soup.movie.util.verticalLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
@@ -40,6 +41,11 @@ class TimetableActivity :
         }
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        movie.saveTo(outState)
     }
 
     override fun initViewState(ctx: Context) {

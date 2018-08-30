@@ -83,7 +83,7 @@ class DetailActivity
                         var statusBarColor = window.statusBarColor
                         ColorUtils.getMostPopulousSwatch(palette)?.apply {
                             if (isDark || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                statusBarColor = ColorUtils.scrimify(this.rgb, isDark, SCRIM_ADJUSTMENT)
+                                statusBarColor = ColorUtils.scrimify(rgb, isDark, SCRIM_ADJUSTMENT)
                                 // set a light status bar on M+
                                 if (!isDark) {
                                     ViewUtils.setLightStatusBar(posterView)
@@ -93,13 +93,13 @@ class DetailActivity
 
                         if (statusBarColor != window.statusBarColor) {
                             backgroundView.setBackgroundColor(statusBarColor)
-                            ValueAnimator.ofArgb(window.statusBarColor, statusBarColor)?.let { it ->
-                                it.addUpdateListener {
-                                    window.statusBarColor = it.animatedValue as Int
+                            ValueAnimator.ofArgb(window.statusBarColor, statusBarColor)?.apply {
+                                addUpdateListener {
+                                    window.statusBarColor = animatedValue as Int
                                 }
-                                it.duration = 500L
-                                it.interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
-                                it.start()
+                                duration = 500L
+                                interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
+                                start()
                             }
                         }
                     }
@@ -143,12 +143,12 @@ class DetailActivity
             override fun onDragDismissed() = setResultAndFinish()
         }
         listAdapter = DetailListAdapter(this)
-        listView.let {
-            it.layoutManager = ctx.verticalLayoutManager()
-            it.adapter = listAdapter
-            it.itemAnimator = SlideInRightAnimator()
-            it.itemAnimator.addDuration = 200
-            it.itemAnimator.removeDuration = 200
+        listView.apply {
+            layoutManager = ctx.verticalLayoutManager()
+            adapter = listAdapter
+            itemAnimator = SlideInRightAnimator()
+            itemAnimator.addDuration = 200
+            itemAnimator.removeDuration = 200
         }
     }
 

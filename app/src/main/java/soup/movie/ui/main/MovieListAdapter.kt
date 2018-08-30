@@ -19,16 +19,16 @@ class MovieListAdapter(
     : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
-            MovieViewHolder(parent).also { it ->
-                it.itemView.setOnClickListener { _ ->
-                    val intent = Intent(host, DetailActivity::class.java).also { intent ->
-                        getItem(it.adapterPosition).saveTo(intent)
+            MovieViewHolder(parent).apply {
+                itemView.setOnClickListener { _ ->
+                    val intent = Intent(host, DetailActivity::class.java).also {
+                        getItem(adapterPosition).saveTo(it)
                     }
                     val options = ActivityOptions.makeSceneTransitionAnimation(host,
-                            Pair.create(it.itemView.backgroundView, host.getString(R.string.transition_background)),
-                            Pair.create(it.itemView.posterView, host.getString(R.string.transition_poster)),
-                            Pair.create(it.itemView.ageBgView, host.getString(R.string.transition_age_bg)),
-                            Pair.create(it.itemView.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)))
+                            Pair.create(itemView.backgroundView, host.getString(R.string.transition_background)),
+                            Pair.create(itemView.posterView, host.getString(R.string.transition_poster)),
+                            Pair.create(itemView.ageBgView, host.getString(R.string.transition_age_bg)),
+                            Pair.create(itemView.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)))
                     host.startActivity(intent, options.toBundle())
                 }
             }

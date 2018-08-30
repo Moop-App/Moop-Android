@@ -13,19 +13,19 @@ import com.bumptech.glide.request.RequestListener
 /** ViewGroup */
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View =
-        LayoutInflater.from(this.context).inflate(layoutRes, this, attachToRoot)
+        LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 
 /** ImageView */
 
 fun ImageView.loadAsync(url: String) {
-    Glide.with(this.context)
+    Glide.with(context)
             .load(url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }
 
 fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>) {
-    Glide.with(this.context)
+    Glide.with(context)
             .load(url)
             .listener(requestListener)
             .transition(DrawableTransitionOptions.withCrossFade())
