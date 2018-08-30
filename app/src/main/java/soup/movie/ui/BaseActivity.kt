@@ -16,10 +16,12 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     protected abstract val presenter: P
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
         initViewState(this)
+        presenter.onAttach(this as V)
     }
 
     @CallSuper
@@ -27,15 +29,9 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
         // stub implementation
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun onStart() {
-        super.onStart()
-        presenter.onAttach(this as V)
-    }
-
-    override fun onStop() {
+    override fun onDestroy() {
         presenter.onDetach()
-        super.onStop()
+        super.onDestroy()
     }
 
     protected fun commit(@IdRes containerId: Int, fragment: Fragment) {
