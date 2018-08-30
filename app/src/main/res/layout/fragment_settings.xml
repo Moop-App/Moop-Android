@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/category_theater"
         tools:visibility="gone" />
 
-    <android.support.design.chip.ChipGroup
+    <com.google.android.material.chip.ChipGroup
         android:id="@+id/theater_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,9 +62,9 @@
         <include layout="@layout/chip_lotte" />
         <include layout="@layout/chip_megabox" />
 
-    </android.support.design.chip.ChipGroup>
+    </com.google.android.material.chip.ChipGroup>
 
-    <android.support.constraint.Barrier
+    <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_theater_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,4 +106,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_theme" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

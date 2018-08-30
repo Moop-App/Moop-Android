@@ -27,10 +27,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
-import android.support.v7.graphics.Palette;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.Property;
@@ -39,6 +35,11 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
+import androidx.palette.graphics.Palette;
 
 /**
  * Utility methods for working with Views.

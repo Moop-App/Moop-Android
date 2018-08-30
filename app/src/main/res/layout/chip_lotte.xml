@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.chip.Chip
+<com.google.android.material.chip.Chip
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,4 +9,4 @@
     app:chipBackgroundColor="@color/bgLotte"
     app:chipStrokeColor="@color/grey_200"
     app:chipStrokeWidth="1dp"
-    tools:chipText="롯데 서울" />
+    tools:text="롯데 서울" />

@@ -1,11 +1,11 @@
 package soup.movie.util
 
 import android.graphics.drawable.Drawable
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener

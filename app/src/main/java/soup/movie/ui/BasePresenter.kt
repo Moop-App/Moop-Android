@@ -1,6 +1,6 @@
 package soup.movie.ui
 
-import android.support.annotation.CallSuper
+import androidx.annotation.CallSuper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.ui.BaseContract.Presenter

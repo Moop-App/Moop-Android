@@ -3,10 +3,10 @@ package soup.movie.ui.main.settings
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.chip.Chip
-import android.support.v4.app.SharedElementCallback
 import android.util.Pair
 import android.view.View
+import androidx.core.app.SharedElementCallback
+import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 import soup.movie.R
@@ -61,7 +61,7 @@ class SettingsFragment
 
             for ((code, name) in theaters) {
                 val theaterChip = View.inflate(context, R.layout.chip_cgv, null) as Chip
-                theaterChip.chipText = name
+                theaterChip.text = name
                 theaterChip.transitionName = code
                 theaterChip.tag = code
                 theater_group.addView(theaterChip)

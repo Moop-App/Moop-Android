@@ -6,8 +6,8 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.graphics.Palette
 import android.util.TypedValue
+import androidx.palette.graphics.Palette
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -146,9 +146,10 @@ class DetailActivity
         listView.apply {
             layoutManager = ctx.verticalLayoutManager()
             adapter = listAdapter
-            itemAnimator = SlideInRightAnimator()
-            itemAnimator.addDuration = 200
-            itemAnimator.removeDuration = 200
+            //TODO: use animator for androidx
+            //itemAnimator = SlideInRightAnimator()
+            //itemAnimator.addDuration = 200
+            //itemAnimator.removeDuration = 200
         }
     }
 

@@ -1,8 +1,8 @@
 package soup.movie.ui.theater.edit
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_multiple_choice.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater

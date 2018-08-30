@@ -4,10 +4,11 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 /** YouTube */
 
@@ -68,12 +69,12 @@ private fun Context.executeWebPage(url: String) {
 
 fun Context.verticalLayoutManager(): LinearLayoutManager =
         LinearLayoutManager(this).apply {
-            orientation = LinearLayoutManager.VERTICAL
+            orientation = RecyclerView.VERTICAL
         }
 
 fun Context.horizontalLinearLayoutManager(): LinearLayoutManager =
         LinearLayoutManager(this).apply {
-            orientation = LinearLayoutManager.HORIZONTAL
+            orientation = RecyclerView.HORIZONTAL
         }
 
 fun Context.gridLayoutManager(spanCount: Int): GridLayoutManager =

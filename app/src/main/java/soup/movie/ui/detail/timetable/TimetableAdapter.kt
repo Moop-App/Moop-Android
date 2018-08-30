@@ -1,11 +1,12 @@
 package soup.movie.ui.detail.timetable
 
 import android.content.Context
-import android.support.design.chip.Chip
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.widget.RecyclerView.ViewHolder
+
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_timetable.view.*
 import soup.movie.R
 import soup.movie.data.model.Day
@@ -31,7 +32,7 @@ internal class TimetableAdapter(private val ctx: Context) :
                 timeListView.removeAllViews()
                 timeList?.forEach {
                     val timeChip = View.inflate(ctx, R.layout.chip_time, null) as Chip
-                    timeChip.chipText = it
+                    timeChip.text = it
                     timeListView.addView(timeChip)
                 }
             }

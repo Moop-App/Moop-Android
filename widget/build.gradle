@@ -42,13 +42,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin.stdlib
 
-    implementation deps.support.app_compat
-    implementation deps.support.recyclerview
-    implementation deps.support.cardview
-    implementation deps.support.design
-    implementation deps.support.palette
-    implementation deps.support.transition
-    implementation deps.constraint_layout
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.cardview
+    implementation deps.androidx.palette
+    implementation deps.androidx.transition
+    implementation deps.androidx.constraint_layout
+    implementation deps.androidx.material
 
     implementation deps.timber
 

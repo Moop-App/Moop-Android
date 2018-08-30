@@ -30,9 +30,10 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
         listView.apply {
             layoutManager = ctx.gridLayoutManager(3)
             adapter = listAdapter
-            itemAnimator = SlideInUpAnimator()
-            itemAnimator.addDuration = 200
-            itemAnimator.removeDuration = 200
+            //TODO: use animator for androidx
+            //itemAnimator = SlideInUpAnimator()
+            //itemAnimator.addDuration = 200
+            //itemAnimator.removeDuration = 200
         }
         swipeRefreshLayout.setOnRefreshListener {
             presenter.refresh()

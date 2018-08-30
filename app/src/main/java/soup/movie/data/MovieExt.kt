@@ -1,6 +1,6 @@
 package soup.movie.data
 
-import android.support.annotation.ColorRes
+import androidx.annotation.ColorRes
 import soup.movie.R
 import soup.movie.data.model.Movie
 

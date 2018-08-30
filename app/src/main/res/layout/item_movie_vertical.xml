@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:gravity="center">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -16,7 +16,7 @@
         android:layout_marginEnd="4dp"
         android:foreground="?android:attr/selectableItemBackground" >
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -62,6 +62,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:backgroundTint="@color/amber" />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

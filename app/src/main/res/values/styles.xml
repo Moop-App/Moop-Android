@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <!--<item name="colorPrimary">@color/colorPrimary</item>-->
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
@@ -13,7 +13,7 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="AppTheme.Translucent" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Translucent" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- using a semi-transparent window background for the drag-back gesture -->
         <item name="android:windowBackground">@color/scrim</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -38,17 +38,15 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
-    <style name="AppTheme.TimeTable" parent="Theme.AppCompat.Light" />
+    <style name="AppTheme.TimeTable" parent="Theme.MaterialComponents.Light" />
 
-    <style name="AppTheme.TheaterSort" parent="Theme.AppCompat.Light">
+    <style name="AppTheme.TheaterSort" parent="Theme.MaterialComponents.Light">
     </style>
 
-    <style name="AppTheme.TheaterEdit" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.TheaterEdit" parent="Theme.MaterialComponents.Light.NoActionBar">
     </style>
 
     <!-- TextAppearance -->
-
-    <style name="TextAppearance.Settings"/>
 
     <style name="TextAppearance.Settings.Category" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/black</item>

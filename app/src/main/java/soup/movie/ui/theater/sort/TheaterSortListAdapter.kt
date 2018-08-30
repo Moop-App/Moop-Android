@@ -1,10 +1,10 @@
 package soup.movie.ui.theater.sort
 
 import android.annotation.SuppressLint
-import android.support.v7.widget.RecyclerView
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_theater.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
@@ -51,7 +51,7 @@ internal class TheaterSortListAdapter(
 
         fun bindItem(data: Theater) {
             itemView.chip_theater.apply {
-                chipText = data.name
+                text = data.name
                 transitionName = data.code
                 tag = data.code
             }

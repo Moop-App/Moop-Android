@@ -25,22 +25,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     testOptions {
         unitTests {
             includeAndroidResources = true
         }
     }
-
     lintOptions {
         checkReleaseBuilds false
     }
-
     dataBinding {
         enabled = true
     }
@@ -60,16 +56,16 @@ dependencies {
     implementation project(':data')
     implementation project(':widget')
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
 
-    implementation deps.support.app_compat
-    implementation deps.support.recyclerview
-    implementation deps.support.cardview
-    implementation deps.support.design
-    implementation deps.support.palette
-    implementation deps.support.transition
-    implementation deps.constraint_layout
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.cardview
+    implementation deps.androidx.palette
+    implementation deps.androidx.transition
+    implementation deps.androidx.constraint_layout
+    implementation deps.androidx.material
 
     implementation deps.timber
 
@@ -88,7 +84,7 @@ dependencies {
     implementation deps.rx_relay
 
     // UI
-    implementation "com.hannesdorfmann.mosby3:mvi:3.1.0"
+    implementation 'com.hannesdorfmann.mosby3:mvi:3.1.0'
     implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation deps.glide.runtime
 

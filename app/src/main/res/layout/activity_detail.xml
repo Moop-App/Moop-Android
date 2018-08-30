@@ -22,7 +22,7 @@
         android:background="@color/grey_50"
         android:transitionName="@string/transition_background" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_trailer" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         tools:background="@color/debug_background">
@@ -170,6 +170,6 @@
             app:layout_constraintTop_toTopOf="@+id/ageBgView"
             tools:text="전체" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </soup.widget.elastic.ElasticDragDismissFrameLayout>

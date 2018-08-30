@@ -2,11 +2,11 @@ package soup.movie.ui.main
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.support.v4.app.FragmentActivity
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.widget.RecyclerView
 import android.util.Pair
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_movie_vertical.view.*
 import soup.movie.R
 import soup.movie.data.getColorAsAge

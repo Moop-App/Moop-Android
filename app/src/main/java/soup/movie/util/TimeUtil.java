@@ -1,8 +1,8 @@
 package soup.movie.util;
 
-import android.support.annotation.NonNull;
-
 import java.util.Calendar;
+
+import androidx.annotation.NonNull;
 
 public class TimeUtil {
 

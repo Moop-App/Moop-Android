@@ -4,10 +4,10 @@ import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.recyclerview.widget.ItemTouchHelper
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity

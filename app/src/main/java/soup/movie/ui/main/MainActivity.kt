@@ -2,8 +2,8 @@ package soup.movie.ui.main
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.design.internal.BottomNavigationViewHelper
+import androidx.annotation.IdRes
+import com.google.android.material.bottomnavigation.BottomNavigationViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.settings.ui.MainTabSetting

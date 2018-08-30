@@ -1,9 +1,9 @@
 package soup.movie.ui.main
 
 import android.os.Bundle
-import android.support.annotation.MenuRes
 import android.view.Menu
 import android.view.MenuInflater
+import androidx.annotation.MenuRes
 
 import soup.movie.ui.BaseContract.Presenter
 import soup.movie.ui.BaseContract.View
