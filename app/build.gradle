@@ -64,6 +64,7 @@ dependencies {
     implementation deps.androidx.cardview
     implementation deps.androidx.palette
     implementation deps.androidx.transition
+    implementation deps.androidx.core_ktx
     implementation deps.androidx.constraint_layout
     implementation deps.androidx.material
 

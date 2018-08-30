@@ -32,6 +32,7 @@ androidx.recyclerview = "androidx.recyclerview:recyclerview:$versions.androidx"
 androidx.cardview = "androidx.cardview:cardview:$versions.androidx"
 androidx.palette = "androidx.palette:palette:$versions.androidx"
 androidx.transition = "androidx.transition:transition:$versions.androidx"
+androidx.core_ktx = "androidx.core:core-ktx:$versions.androidx"
 androidx.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
 androidx.material = "com.google.android.material:material:$versions.material"
 deps.androidx = androidx
