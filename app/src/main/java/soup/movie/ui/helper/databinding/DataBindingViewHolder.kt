@@ -1,4 +1,4 @@
-package soup.movie.ui.databinding
+package soup.movie.ui.helper.databinding
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

@@ -1,4 +1,4 @@
-package soup.movie.ui.databinding
+package soup.movie.ui.helper.databinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

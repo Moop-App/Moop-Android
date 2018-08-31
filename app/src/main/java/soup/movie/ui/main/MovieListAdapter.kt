@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.item_movie_vertical.view.*
 import soup.movie.R
 import soup.movie.data.getColorAsAge
 import soup.movie.data.model.Movie
-import soup.movie.ui.databinding.DataBindingAdapter
-import soup.movie.ui.databinding.DataBindingViewHolder
+import soup.movie.ui.helper.databinding.DataBindingAdapter
+import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.getColorStateListCompat
