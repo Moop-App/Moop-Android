@@ -40,6 +40,9 @@ android {
     dataBinding {
         enabled = true
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 def getKeyProperties() {
