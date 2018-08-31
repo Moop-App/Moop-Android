@@ -14,9 +14,9 @@ import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.verticalLayoutManager
-import soup.widget.drag.ItemTouchHelperAdapter
-import soup.widget.drag.OnStartDragListener
-import soup.widget.drag.SimpleItemTouchHelperCallback
+import soup.widget.recyclerview.util.ItemTouchHelperAdapter
+import soup.widget.recyclerview.listener.OnStartDragListener
+import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
 import timber.log.Timber
 import javax.inject.Inject
 

@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.item_theater.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.util.inflate
-import soup.widget.drag.ItemTouchHelperAdapter
-import soup.widget.drag.OnStartDragListener
+import soup.widget.recyclerview.util.ItemTouchHelperAdapter
+import soup.widget.recyclerview.listener.OnStartDragListener
 import java.util.*
 
 internal class TheaterSortListAdapter(_theaters: List<Theater>,
