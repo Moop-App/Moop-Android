@@ -14,8 +14,8 @@ import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.verticalLayoutManager
-import soup.widget.recyclerview.util.ItemTouchHelperAdapter
 import soup.widget.recyclerview.listener.OnStartDragListener
+import soup.widget.recyclerview.util.ItemTouchHelperAdapter
 import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
 import timber.log.Timber
 import javax.inject.Inject
@@ -84,9 +84,9 @@ class TheaterSortActivity :
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(listView)
 
-        listAdapter = TheaterSortListAdapter(
-                viewState.selectedTheaters,
-                OnStartDragListener { itemTouchHelper.startDrag(it) })
+        listAdapter = TheaterSortListAdapter(viewState.selectedTheaters) {
+            itemTouchHelper.startDrag(it)
+        }
         listView.adapter = listAdapter
         //FixMe: find a timing to call startPostponedEnterTransition()
         //startPostponedEnterTransition()

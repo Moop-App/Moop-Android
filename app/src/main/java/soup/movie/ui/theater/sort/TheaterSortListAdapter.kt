@@ -26,7 +26,7 @@ internal class TheaterSortListAdapter(_theaters: List<Theater>,
         holder.bindItem(theaterItem)
         holder.itemView.dragHandle.setOnTouchListener { _, event ->
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
-                dragStartListener.onStartDrag(holder)
+                dragStartListener.invoke(holder)
             }
             false
         }
