@@ -1,67 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center">
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <androidx.cardview.widget.CardView
+    <data>
+        <variable name="item" type="soup.movie.data.model.Movie" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:foreground="?android:attr/selectableItemBackground" >
+        android:gravity="center">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:foreground="?android:attr/selectableItemBackground" >
 
-            <Space
-                android:id="@+id/backgroundView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/posterView"
-                app:layout_constraintEnd_toEndOf="@+id/posterView"
-                app:layout_constraintStart_toStartOf="@+id/posterView"
-                app:layout_constraintTop_toTopOf="@+id/posterView" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/posterView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@color/grey_200"
-                android:scaleType="centerCrop"
-                app:layout_constraintDimensionRatio="H,27:40"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                <Space
+                    android:id="@+id/backgroundView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/posterView"
+                    app:layout_constraintEnd_toEndOf="@+id/posterView"
+                    app:layout_constraintStart_toStartOf="@+id/posterView"
+                    app:layout_constraintTop_toTopOf="@+id/posterView" />
 
-            <View
-                android:id="@+id/ageBgOuterView"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_margin="7dp"
-                android:background="@drawable/bg_age_outer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:backgroundTint="@color/white" />
+                <ImageView
+                    android:id="@+id/posterView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/grey_200"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="H,27:40"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/avatars" />
 
-            <View
-                android:id="@+id/ageBgView"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/bg_age_inner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:backgroundTint="@color/amber" />
+                <View
+                    android:id="@+id/ageBgOuterView"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/bg_age_outer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:backgroundTint="@color/white" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+                <View
+                    android:id="@+id/ageBgView"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/bg_age_inner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:backgroundTint="@color/amber" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
