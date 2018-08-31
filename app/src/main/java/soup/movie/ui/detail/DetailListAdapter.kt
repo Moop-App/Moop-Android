@@ -2,35 +2,32 @@ package soup.movie.ui.detail
 
 import android.content.Context
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import kotlinx.android.synthetic.main.item_trailer.view.*
 import soup.movie.R
 import soup.movie.data.model.Trailer
+import soup.movie.ui.helper.databinding.DataBindingAdapter
+import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.executeYoutube
-import soup.movie.util.inflate
 import soup.movie.util.loadAsync
 
 internal class DetailListAdapter(private val ctx: Context) :
-        ListAdapter<Trailer, ViewHolder>(AlwaysDiffCallback()) {
+        DataBindingAdapter<Trailer>(AlwaysDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            TrailerViewHolder(parent).apply {
-                itemView.setOnClickListener {
-                    ctx.executeYoutube(getItem(adapterPosition).youtubeId)
-                }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Trailer> {
+        return super.onCreateViewHolder(parent, viewType).apply {
+            itemView.setOnClickListener {
+                ctx.executeYoutube(getItem(adapterPosition).youtubeId)
             }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val trailer = getItem(position)
-        holder.itemView.apply {
-            trailerThumbnailView.loadAsync(trailer.getThumbnailUrl())
-            titleView.text = trailer.title
-            authorView.text = trailer.author
         }
     }
 
-    private class TrailerViewHolder(parent: ViewGroup) :
-            ViewHolder(parent.inflate(R.layout.item_trailer))
+    override fun onBindViewHolder(holder: DataBindingViewHolder<Trailer>, position: Int) {
+        val trailer = getItem(position)
+        holder.itemView.apply {
+            trailerThumbnailView.loadAsync(trailer.getThumbnailUrl())
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int = R.layout.item_trailer
 }
