@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class DataBindingAdapter<T> :
         RecyclerView.Adapter<DataBindingViewHolder<T>>() {
 
-    private var list: List<T> = emptyList()
+    protected var list: MutableList<T> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<T> {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -20,8 +20,8 @@ abstract class DataBindingAdapter<T> :
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) =
             holder.bind(getItem(position))
 
-    fun submitList(list: List<T>) {
-        this.list = list
+    open fun submitList(list: List<T>) {
+        this.list = list.toMutableList()
         notifyDataSetChanged()
     }
 

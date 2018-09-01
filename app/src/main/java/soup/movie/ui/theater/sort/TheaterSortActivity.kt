@@ -9,13 +9,14 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.postOnAnimationDelayed
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.verticalLayoutManager
-import soup.widget.recyclerview.listener.OnStartDragListener
-import soup.widget.recyclerview.util.ItemTouchHelperAdapter
+import soup.widget.recyclerview.listener.OnDragStartListener
+import soup.widget.recyclerview.listener.OnItemMoveListener
 import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
 import timber.log.Timber
 import javax.inject.Inject
@@ -48,7 +49,23 @@ class TheaterSortActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
+
+        val callback = SimpleItemTouchHelperCallback(object : OnItemMoveListener {
+            override fun onItemMove(fromPosition: Int, toPosition: Int) {
+                listAdapter.onItemMove(fromPosition, toPosition)
+                presenter.onItemMove(fromPosition, toPosition)
+            }
+        })
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(listView)
+
+        listAdapter = TheaterSortListAdapter(object : OnDragStartListener {
+            override fun onDragStart(viewHolder: RecyclerView.ViewHolder) {
+                itemTouchHelper.startDrag(viewHolder)
+            }
+        })
         listView.layoutManager = ctx.verticalLayoutManager()
+        listView.adapter = listAdapter
 
         //FixMe: find a timing to call startPostponedEnterTransition()
         listView.postOnAnimationDelayed(100) {
@@ -71,23 +88,8 @@ class TheaterSortActivity :
 
     override fun render(viewState: TheaterSortViewState) {
         Timber.d("render: %s", viewState)
-        val adapterDelegate = object : ItemTouchHelperAdapter {
-            override fun onItemMove(fromPosition: Int, toPosition: Int) {
-                listAdapter.onItemMove(fromPosition, toPosition)
-            }
+        listAdapter.submitList(viewState.selectedTheaters)
 
-            override fun onItemDismiss(position: Int) {
-                listAdapter.onItemDismiss(position)
-            }
-        }
-        val callback = SimpleItemTouchHelperCallback(adapterDelegate)
-        val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(listView)
-
-        listAdapter = TheaterSortListAdapter(viewState.selectedTheaters) {
-            itemTouchHelper.startDrag(it)
-        }
-        listView.adapter = listAdapter
         //FixMe: find a timing to call startPostponedEnterTransition()
         //startPostponedEnterTransition()
     }
@@ -97,7 +99,7 @@ class TheaterSortActivity :
     }
 
     fun onConfirmClicked(view: View) {
-        presenter.onConfirmClicked(listAdapter.theaters)
+        presenter.onConfirmClicked()
         onBackPressed()
     }
 }

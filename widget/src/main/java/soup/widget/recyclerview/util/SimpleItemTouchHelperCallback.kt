@@ -2,9 +2,12 @@ package soup.widget.recyclerview.util
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import soup.widget.recyclerview.listener.OnItemDismissListener
+import soup.widget.recyclerview.listener.OnItemMoveListener
 
-class SimpleItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter) :
-        ItemTouchHelper.Callback() {
+class SimpleItemTouchHelperCallback(
+        private val moveListener: OnItemMoveListener? = null,
+        private val dismissListener: OnItemDismissListener? = null) : ItemTouchHelper.Callback() {
 
     override fun isLongPressDragEnabled(): Boolean = true
 
@@ -20,11 +23,11 @@ class SimpleItemTouchHelperCallback(private val adapter: ItemTouchHelperAdapter)
     override fun onMove(recyclerView: RecyclerView,
                         source: RecyclerView.ViewHolder,
                         target: RecyclerView.ViewHolder): Boolean {
-        adapter.onItemMove(source.adapterPosition, target.adapterPosition)
+        moveListener?.onItemMove(source.adapterPosition, target.adapterPosition)
         return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
-        adapter.onItemDismiss(viewHolder.adapterPosition)
+        dismissListener?.onItemDismiss(viewHolder.adapterPosition)
     }
 }

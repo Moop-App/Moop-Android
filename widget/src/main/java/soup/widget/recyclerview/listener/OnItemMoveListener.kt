@@ -1,6 +1,7 @@
-package soup.widget.recyclerview.util
+package soup.widget.recyclerview.listener
 
-interface ItemTouchHelperAdapter {
+interface OnItemMoveListener {
+
     /**
      * Called when an item has been dragged far enough to trigger a move. This is called every time
      * an item is shifted, and not at the end of a "drop" event.
@@ -9,11 +10,4 @@ interface ItemTouchHelperAdapter {
      * @param toPosition   Then end position of the moved item.
      */
     fun onItemMove(fromPosition: Int, toPosition: Int)
-
-    /**
-     * Called when an item has been dismissed by a swipe.
-     *
-     * @param position The position of the item dismissed.
-     */
-    fun onItemDismiss(position: Int)
 }
