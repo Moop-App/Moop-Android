@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 
-abstract class DataBindingAdapter<T> :
-        RecyclerView.Adapter<DataBindingViewHolder<T>>() {
-
-    private var list: List<T> = emptyList()
+abstract class DataBindingListAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
+        ListAdapter<T, DataBindingViewHolder<T>>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<T> {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -19,13 +18,4 @@ abstract class DataBindingAdapter<T> :
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) =
             holder.bind(getItem(position))
-
-    fun submitList(list: List<T>) {
-        this.list = list
-        notifyDataSetChanged()
-    }
-
-    private fun getItem(position: Int): T = list[position]
-
-    final override fun getItemCount(): Int = list.size
 }

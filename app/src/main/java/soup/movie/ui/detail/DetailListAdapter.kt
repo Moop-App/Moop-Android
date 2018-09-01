@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_trailer.view.*
 import soup.movie.R
 import soup.movie.data.model.Trailer
-import soup.movie.ui.helper.databinding.DataBindingAdapter
+import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.executeYoutube
 import soup.movie.util.loadAsync
 
 internal class DetailListAdapter(private val ctx: Context) :
-        DataBindingAdapter<Trailer>(AlwaysDiffCallback()) {
+        DataBindingListAdapter<Trailer>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Trailer> {
         return super.onCreateViewHolder(parent, viewType).apply {
