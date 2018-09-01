@@ -1,11 +1,9 @@
 package soup.movie.ui.theater.edit
 
-import android.content.Context
 import android.view.View
 import kotlinx.android.synthetic.main.activity_theater_edit.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
-import soup.movie.util.verticalLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,11 +18,6 @@ class TheaterEditActivity :
 
     override val layoutRes: Int
         get() = R.layout.activity_theater_edit
-
-    override fun initViewState(ctx: Context) {
-        super.initViewState(ctx)
-        listView.layoutManager = ctx.verticalLayoutManager()
-    }
 
     override fun render(viewState: TheaterEditViewState) {
         Timber.d("render: %s", viewState)

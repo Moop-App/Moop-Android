@@ -144,7 +144,6 @@ class DetailActivity :
         }
         listAdapter = DetailListAdapter(this)
         listView.apply {
-            layoutManager = ctx.verticalLayoutManager()
             adapter = listAdapter
             //TODO: use animator for androidx
             //itemAnimator = SlideInRightAnimator()

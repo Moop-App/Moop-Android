@@ -10,7 +10,6 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.MovieListAdapter
 import soup.movie.ui.main.plan.PlanViewState.DoneState
 import soup.movie.ui.main.plan.PlanViewState.LoadingState
-import soup.movie.util.gridLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,7 +29,6 @@ class PlanFragment
         super.initViewState(ctx)
         listAdapter = MovieListAdapter(activity!!)
         listView.apply {
-            layoutManager = ctx.gridLayoutManager(3)
             adapter = listAdapter
             //TODO: use animator for androidx
             //itemAnimator = SlideInUpAnimator()
@@ -59,8 +57,6 @@ class PlanFragment
 
     companion object {
 
-        fun newInstance(): PlanFragment {
-            return PlanFragment()
-        }
+        fun newInstance(): PlanFragment = PlanFragment()
     }
 }

@@ -65,21 +65,6 @@ private fun Context.executeWebPage(url: String) {
     startActivity(webIntent)
 }
 
-/** RecyclerView */
-
-fun Context.verticalLayoutManager(): LinearLayoutManager =
-        LinearLayoutManager(this).apply {
-            orientation = RecyclerView.VERTICAL
-        }
-
-fun Context.horizontalLinearLayoutManager(): LinearLayoutManager =
-        LinearLayoutManager(this).apply {
-            orientation = RecyclerView.HORIZONTAL
-        }
-
-fun Context.gridLayoutManager(spanCount: Int): GridLayoutManager =
-        GridLayoutManager(this, spanCount)
-
 /** Color */
 
 fun Context.getColorCompat(@ColorRes colorResId: Int) =

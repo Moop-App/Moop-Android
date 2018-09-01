@@ -30,14 +30,14 @@
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical"
         android:paddingTop="200dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/posterView"
         app:layout_constraintVertical_bias="0.0"
-        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:orientation="vertical"
         tools:listitem="@layout/item_trailer" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

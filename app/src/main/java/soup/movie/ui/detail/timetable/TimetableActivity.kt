@@ -15,7 +15,6 @@ import soup.movie.ui.detail.timetable.TimetableViewState.*
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.restoreFrom
 import soup.movie.util.saveTo
-import soup.movie.util.verticalLayoutManager
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -52,7 +51,6 @@ class TimetableActivity :
         super.initViewState(ctx)
         listAdapter = TimetableAdapter(ctx)
         listView.apply {
-            layoutManager = ctx.verticalLayoutManager()
             adapter = listAdapter
         }
         val listener = View.OnClickListener {

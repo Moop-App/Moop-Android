@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
-import soup.movie.util.verticalLayoutManager
 import soup.widget.recyclerview.listener.OnDragStartListener
 import soup.widget.recyclerview.listener.OnItemMoveListener
 import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
@@ -64,7 +63,6 @@ class TheaterSortActivity :
                 itemTouchHelper.startDrag(viewHolder)
             }
         })
-        listView.layoutManager = ctx.verticalLayoutManager()
         listView.adapter = listAdapter
 
         //FixMe: find a timing to call startPostponedEnterTransition()

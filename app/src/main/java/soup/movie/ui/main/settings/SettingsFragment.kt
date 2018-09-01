@@ -91,8 +91,6 @@ class SettingsFragment :
 
     companion object {
 
-        fun newInstance(): SettingsFragment {
-            return SettingsFragment()
-        }
+        fun newInstance(): SettingsFragment = SettingsFragment()
     }
 }
