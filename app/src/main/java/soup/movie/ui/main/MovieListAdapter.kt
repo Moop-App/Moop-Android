@@ -9,12 +9,11 @@ import kotlinx.android.synthetic.main.item_movie_vertical.view.*
 import soup.movie.R
 import soup.movie.data.getColorAsAge
 import soup.movie.data.model.Movie
+import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
-import soup.movie.ui.detail.DetailActivity
 import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.getColorStateListCompat
-import soup.movie.util.loadAsync
 import soup.movie.util.saveTo
 
 class MovieListAdapter(private val host: FragmentActivity) :
@@ -39,7 +38,6 @@ class MovieListAdapter(private val host: FragmentActivity) :
         super.onBindViewHolder(holder, position)
         holder.itemView.run {
             val item = getItem(position)
-            posterView.loadAsync(item.poster)
             ageBgView.backgroundTintList = context.getColorStateListCompat(item.getColorAsAge())
         }
     }
