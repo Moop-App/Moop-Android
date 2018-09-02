@@ -15,6 +15,7 @@
          shared element. Otherwise it interferes with the window enter transition i.e. as it is
          resized for the shared element transition, many views are considered 'off-screen' so
          visibility transitions are not run. -->
+
     <View
         android:id="@+id/backgroundView"
         android:layout_width="match_parent"
@@ -55,14 +56,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
-
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_back"
-            android:scaleType="centerInside"
-            android:background="?android:attr/selectableItemBackgroundBorderless" />
 
         <TextView
             android:id="@+id/titleView"

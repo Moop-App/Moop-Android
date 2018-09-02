@@ -7,11 +7,13 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
+import androidx.core.view.postDelayed
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import soup.movie.R
@@ -77,7 +79,6 @@ class DetailActivity :
 
                         val adaptiveColor = this@DetailActivity.getColorCompat(
                                 if (isDark) R.color.white else R.color.dark_icon)
-                        backButton.setColorFilter(adaptiveColor)
                         titleView.setTextColor(adaptiveColor)
                         eggView.setTextColor(adaptiveColor)
                         favoriteButton.setColorFilter(adaptiveColor)
@@ -109,11 +110,13 @@ class DetailActivity :
                             }
                         }
                     }
+            doStartPostponedEnterTransition()
             return false
         }
 
         override fun onLoadFailed(e: GlideException?, model: Any,
                                   target: Target<Drawable>, isFirstResource: Boolean): Boolean {
+            doStartPostponedEnterTransition()
             return false
         }
     }
@@ -126,6 +129,14 @@ class DetailActivity :
         }
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
+        postponeEnterTransition()
+    }
+
+    private fun doStartPostponedEnterTransition() {
+        startPostponedEnterTransition()
+        window.decorView.postDelayed(300) {
+            presenter.requestData(movie)
+        }
     }
 
     override fun initViewState(ctx: Context) {
@@ -144,19 +155,13 @@ class DetailActivity :
             startActivity(createShareIntentWithText("공유하기", movie.toShareDescription()))
         }
 
-        backButton.setOnClickListener { setResultAndFinish() }
         listView.apply {
             adapter = listAdapter
-            itemAnimator = SlideInRightAnimator().apply {
+            itemAnimator = FadeInUpAnimator().apply {
                 addDuration = 200
                 removeDuration = 200
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.requestData(movie)
     }
 
     override fun onResume() {
@@ -188,11 +193,6 @@ class DetailActivity :
 
     override fun onBackPressed() {
         setResultAndFinish()
-    }
-
-    override fun onNavigateUp(): Boolean {
-        setResultAndFinish()
-        return true
     }
 
     private fun setResultAndFinish() {
