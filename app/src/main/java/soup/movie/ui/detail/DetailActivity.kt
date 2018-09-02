@@ -145,10 +145,10 @@ class DetailActivity :
         listAdapter = DetailListAdapter(this)
         listView.apply {
             adapter = listAdapter
-            //TODO: use animator for androidx
-            //itemAnimator = SlideInRightAnimator()
-            //itemAnimator.addDuration = 200
-            //itemAnimator.removeDuration = 200
+            itemAnimator = SlideInRightAnimator().apply {
+                addDuration = 200
+                removeDuration = 200
+            }
         }
     }
 

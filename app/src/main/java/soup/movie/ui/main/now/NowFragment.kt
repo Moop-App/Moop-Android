@@ -28,10 +28,10 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
         listAdapter = MovieListAdapter(activity!!)
         listView.apply {
             adapter = listAdapter
-            //TODO: use animator for androidx
-            //itemAnimator = SlideInUpAnimator()
-            //itemAnimator.addDuration = 200
-            //itemAnimator.removeDuration = 200
+            itemAnimator = SlideInUpAnimator().apply {
+                addDuration = 200
+                removeDuration = 200
+            }
         }
         swipeRefreshLayout.setOnRefreshListener {
             presenter.refresh()
