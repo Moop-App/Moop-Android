@@ -6,7 +6,7 @@
 ext.deps = [:]
 def versions = [:]
 versions.androidx = "1.0.0-rc02"
-versions.constraint_layout = "1.1.0"
+versions.constraint_layout = "2.0.0-alpha2"
 versions.material = "1.0.0-beta01"
 versions.dagger = "2.16"
 versions.junit = "4.12"
