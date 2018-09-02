@@ -58,6 +58,7 @@ def getKobisApiKey() {
 dependencies {
     implementation project(':data')
     implementation project(':widget')
+    implementation project(':animators')
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
@@ -89,7 +90,7 @@ dependencies {
 
     // UI
     implementation 'com.hannesdorfmann.mosby3:mvi:3.1.0'
-    implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
+    //implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation deps.glide.runtime
 
     // logging

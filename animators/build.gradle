@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode build_versions.versionCode
+        versionName build_versions.versionName
+    }
+}
+
+dependencies {
+    implementation deps.androidx.core
+    implementation deps.androidx.legacy_support_core_ui
+    implementation deps.androidx.recyclerview
+}
