@@ -7,7 +7,7 @@ import soup.movie.data.model.Movie
 
 private const val KEY_JSON = "json"
 
-fun Bundle.restoreFrom(): Movie? = getString(KEY_JSON).fromJson()
+fun Bundle.restoreFrom(): Movie? = getString(KEY_JSON)?.fromJson()
 
 fun Intent.restoreFrom(): Movie? = getStringExtra(KEY_JSON).fromJson()
 

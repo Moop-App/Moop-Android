@@ -9,7 +9,7 @@ class TheaterSetting(preferences: SharedPreferences) :
         PrefSetting<List<Theater>>(preferences) {
 
     override fun getDefaultValue(preferences: SharedPreferences): List<Theater> {
-        return fromJson(preferences.getString(KEY, DEFAULT_VALUE))
+        return fromJson(preferences.getString(KEY, DEFAULT_VALUE) ?: DEFAULT_VALUE)
     }
 
     override fun saveValue(preferences: SharedPreferences, value: List<Theater>) {
