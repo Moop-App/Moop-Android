@@ -3,8 +3,8 @@ package soup.movie.ui.detail
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import androidx.core.view.postDelayed
@@ -56,60 +56,26 @@ class DetailActivity :
         get() = R.layout.activity_detail
 
     private val shotLoadListener = object : RequestListener<Drawable> {
-        override fun onResourceReady(resource: Drawable,
-                                     model: Any,
-                                     target: Target<Drawable>,
-                                     dataSource: DataSource,
-                                     isFirstResource: Boolean): Boolean {
+        override fun onResourceReady(
+            resource: Drawable,
+            model: Any,
+            target: Target<Drawable>,
+            dataSource: DataSource,
+            isFirstResource: Boolean
+        ): Boolean {
             val bitmap = resource.getBitmap() ?: return false
-            val twentyFourDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    24f, this@DetailActivity.resources.displayMetrics).toInt()
+
+            val twentyFourDip = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    24f,
+                    this@DetailActivity.resources.displayMetrics
+            ).toInt()
             Palette.from(bitmap)
                     .maximumColorCount(3)
                     .clearFilters()
-                    .setRegion(0, 0, bitmap.width - 1, twentyFourDip)
-                    .generate { palette ->
-                        @ColorUtils.Lightness
-                        val lightness = ColorUtils.isDark(palette)
-                        val isDark: Boolean = if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
-                            ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
-                        } else {
-                            lightness == ColorUtils.IS_DARK
-                        }
-
-                        val adaptiveColor = this@DetailActivity.getColorCompat(
-                                if (isDark) R.color.light_icon else R.color.dark_icon)
-                        titleView.setTextColor(adaptiveColor)
-                        eggView.setTextColor(adaptiveColor)
-                        favoriteButton.setColorFilter(adaptiveColor)
-                        timetableButton.setColorFilter(adaptiveColor)
-                        shareButton.setColorFilter(adaptiveColor)
-
-                        // color the status bar. Set a complementary dark color on L,
-                        // light or dark color on M (with matching status bar icons)
-                        var statusBarColor = window.statusBarColor
-                        ColorUtils.getMostPopulousSwatch(palette)?.apply {
-                            if (isDark || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                statusBarColor = ColorUtils.scrimify(rgb, isDark, SCRIM_ADJUSTMENT)
-                                // set a light status bar on M+
-                                if (!isDark) {
-                                    ViewUtils.setLightStatusBar(posterView)
-                                }
-                            }
-                        }
-
-                        if (statusBarColor != window.statusBarColor) {
-                            backgroundView.setBackgroundColor(statusBarColor)
-                            ValueAnimator.ofArgb(window.statusBarColor, statusBarColor)?.apply {
-                                addUpdateListener {
-                                    window.statusBarColor = animatedValue as Int
-                                }
-                                duration = 500L
-                                interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
-                                start()
-                            }
-                        }
-                    }
+                    .setRegion(0, 0, bitmap.width - 1, twentyFourDip) /* - 1 to work around
+                        https://code.google.com/p/android/issues/detail?id=191013 */
+                    .generate { palette -> applyTopPalette(bitmap, palette) }
             doStartPostponedEnterTransition()
             return false
         }
@@ -193,6 +159,45 @@ class DetailActivity :
 
     override fun onBackPressed() {
         setResultAndFinish()
+    }
+
+    internal fun applyTopPalette(bitmap: Bitmap, palette: Palette?) {
+        val lightness = ColorUtils.isDark(palette)
+        val isDark = if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
+            ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
+        } else {
+            lightness == ColorUtils.IS_DARK
+        }
+
+        if (!isDark) { // make back icon dark on light images
+            val darkColor = this@DetailActivity.getColorCompat(R.color.dark_icon)
+            titleView.setTextColor(darkColor)
+            eggView.setTextColor(darkColor)
+            favoriteButton.setColorFilter(darkColor)
+            timetableButton.setColorFilter(darkColor)
+            shareButton.setColorFilter(darkColor)
+        }
+
+        // color the status bar.
+        var statusBarColor = window.statusBarColor
+        ColorUtils.getMostPopulousSwatch(palette)?.let {
+            statusBarColor = ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
+            // set a light status bar
+            if (!isDark) {
+                ViewUtils.setLightStatusBar(window.decorView)
+            }
+        }
+
+        if (statusBarColor != window.statusBarColor) {
+            backgroundView.setBackgroundColor(statusBarColor)
+            ValueAnimator.ofArgb(window.statusBarColor, statusBarColor).apply {
+                addUpdateListener { animation ->
+                    window.statusBarColor = animation.animatedValue as Int
+                }
+                duration = 500L
+                interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
+            }.start()
+        }
     }
 
     private fun setResultAndFinish() {
