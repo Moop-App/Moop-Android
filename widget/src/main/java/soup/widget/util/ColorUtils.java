@@ -16,18 +16,24 @@
 
 package soup.widget.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.TypedValue;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.CheckResult;
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.math.MathUtils;
 import androidx.palette.graphics.Palette;
 
 /**
@@ -44,20 +50,16 @@ public class ColorUtils {
     /**
      * Set the alpha component of {@code color} to be {@code alpha}.
      */
-    @CheckResult
-    @ColorInt
-    public static int modifyAlpha(@ColorInt int color,
-                                  @IntRange(from = 0, to = 255) int alpha) {
+    public static @CheckResult @ColorInt int modifyAlpha(@ColorInt int color,
+                                                         @IntRange(from = 0, to = 255) int alpha) {
         return (color & 0x00ffffff) | (alpha << 24);
     }
 
     /**
      * Set the alpha component of {@code color} to be {@code alpha}.
      */
-    @CheckResult
-    @ColorInt
-    public static int modifyAlpha(@ColorInt int color,
-                                  @FloatRange(from = 0f, to = 1f) float alpha) {
+    public static @CheckResult @ColorInt int modifyAlpha(@ColorInt int color,
+                                                         @FloatRange(from = 0f, to = 1f) float alpha) {
         return modifyAlpha(color, (int) (255f * alpha));
     }
 
@@ -67,15 +69,13 @@ public class ColorUtils {
      * Annoyingly we have to return this Lightness 'enum' rather than a boolean as palette isn't
      * guaranteed to find the most populous color.
      */
-    @Lightness
-    public static int isDark(Palette palette) {
+    public static @Lightness int isDark(Palette palette) {
         Palette.Swatch mostPopulous = getMostPopulousSwatch(palette);
         if (mostPopulous == null) return LIGHTNESS_UNKNOWN;
-        return isDark(mostPopulous.getHsl()) ? IS_DARK : IS_LIGHT;
+        return isDark(mostPopulous.getRgb()) ? IS_DARK : IS_LIGHT;
     }
 
-    @Nullable
-    public static Palette.Swatch getMostPopulousSwatch(Palette palette) {
+    public static @Nullable Palette.Swatch getMostPopulousSwatch(Palette palette) {
         Palette.Swatch mostPopulous = null;
         if (palette != null) {
             for (Palette.Swatch swatch : palette.getSwatches()) {
@@ -104,7 +104,7 @@ public class ColorUtils {
     public static boolean isDark(@NonNull Bitmap bitmap, int backupPixelX, int backupPixelY) {
         // first try palette with a small color quant size
         Palette palette = Palette.from(bitmap).maximumColorCount(3).generate();
-        if (palette.getSwatches().size() > 0) {
+        if (palette != null && palette.getSwatches().size() > 0) {
             return isDark(palette) == IS_DARK;
         } else {
             // if palette failed, then check the color of the specified pixel
@@ -113,19 +113,10 @@ public class ColorUtils {
     }
 
     /**
-     * Check that the lightness value (0–1)
-     */
-    public static boolean isDark(float[] hsl) { // @Size(3)
-        return hsl[2] < 0.5f;
-    }
-
-    /**
-     * Convert to HSL & check that the lightness value
+     * Check if a color is dark (convert to XYZ & check Y component)
      */
     public static boolean isDark(@ColorInt int color) {
-        float[] hsl = new float[3];
-        androidx.core.graphics.ColorUtils.colorToHSL(color, hsl);
-        return isDark(hsl);
+        return androidx.core.graphics.ColorUtils.calculateLuminance(color) < 0.5;
     }
 
     /**
@@ -149,13 +140,32 @@ public class ColorUtils {
             lightnessMultiplier = 1f - lightnessMultiplier;
         }
 
-        hsl[2] = MathUtils.constrain(0f, 1f, hsl[2] * lightnessMultiplier);
+        hsl[2] = MathUtils.clamp(hsl[2] * lightnessMultiplier,0f, 1f);
         return androidx.core.graphics.ColorUtils.HSLToColor(hsl);
     }
 
     public static @ColorInt int scrimify(@ColorInt int color,
                                          @FloatRange(from = 0f, to = 1f) float lightnessMultiplier) {
         return scrimify(color, isDark(color), lightnessMultiplier);
+    }
+
+    /**
+     * Queries the theme of the given {@code context} for a theme color.
+     *
+     * @param context            the context holding the current theme.
+     * @param attrResId          the theme color attribute to resolve.
+     * @param fallbackColorResId a color resource id tto fallback to if the theme color cannot be
+     *                           resolved.
+     * @return the theme color or the fallback color.
+     */
+    @ColorInt
+    public static int getThemeColor(@NonNull Context context, @AttrRes int attrResId,
+                                    @ColorRes int fallbackColorResId) {
+        final TypedValue tv = new TypedValue();
+        if (context.getTheme().resolveAttribute(attrResId, tv, true)) {
+            return tv.data;
+        }
+        return ContextCompat.getColor(context, fallbackColorResId);
     }
 
     @Retention(RetentionPolicy.SOURCE)

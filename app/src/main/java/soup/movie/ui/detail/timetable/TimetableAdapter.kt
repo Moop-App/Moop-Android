@@ -1,7 +1,6 @@
 package soup.movie.ui.detail.timetable
 
 import android.content.Context
-
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -10,9 +9,9 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_timetable.view.*
 import soup.movie.R
 import soup.movie.data.model.Day
-import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.executeCgvApp
 import soup.movie.util.inflate
+import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 internal class TimetableAdapter(private val ctx: Context) :
         ListAdapter<Day, TimetableAdapter.DayViewHolder>(AlwaysDiffCallback()) {

@@ -12,9 +12,9 @@ import soup.movie.data.model.Movie
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
-import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.getColorStateListCompat
 import soup.movie.util.saveTo
+import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 class MovieListAdapter(private val host: FragmentActivity) :
         DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {

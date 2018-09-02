@@ -14,7 +14,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import soup.movie.R
 import soup.movie.data.getColorAsAge
@@ -30,6 +29,7 @@ import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
 import soup.widget.util.ViewUtils
+import soup.widget.util.getBitmap
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -78,7 +78,7 @@ class DetailActivity :
                         }
 
                         val adaptiveColor = this@DetailActivity.getColorCompat(
-                                if (isDark) R.color.white else R.color.dark_icon)
+                                if (isDark) R.color.light_icon else R.color.dark_icon)
                         titleView.setTextColor(adaptiveColor)
                         eggView.setTextColor(adaptiveColor)
                         favoriteButton.setColorFilter(adaptiveColor)

@@ -6,8 +6,8 @@ import soup.movie.R
 import soup.movie.data.model.Trailer
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
-import soup.movie.util.AlwaysDiffCallback
 import soup.movie.util.executeYoutube
+import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 internal class DetailListAdapter(private val ctx: Context) :
         DataBindingListAdapter<Trailer>(AlwaysDiffCallback()) {

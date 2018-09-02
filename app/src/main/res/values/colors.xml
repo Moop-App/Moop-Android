@@ -2,12 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/grey</color>
-    <color name="colorAccent">@color/n_blue</color>
-
-    <color name="debug_foreground">#660000FF</color>
-    <color name="debug_background">#66FF0000</color>
-
-    <color name="n_blue">#2D7AF6</color>
+    <color name="colorAccent">#2D7AF6</color>
 
     <color name="dividerColor">@color/grey_200</color>
 
