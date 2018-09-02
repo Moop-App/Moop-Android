@@ -2,6 +2,8 @@
 <resources>
     <dimen name="bottom_navigation_height">56dp</dimen>
 
+    <integer name="grid_span_count">3</integer>
+
     <dimen name="drag_dismiss_distance">112dp</dimen> <!-- 2 * ?android:actionBarSize -->
 
     <dimen name="settings_margin_between_category">24dp</dimen>

@@ -15,7 +15,7 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
+        app:spanCount="@integer/grid_span_count"
         tools:listitem="@layout/item_movie_vertical" />
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
