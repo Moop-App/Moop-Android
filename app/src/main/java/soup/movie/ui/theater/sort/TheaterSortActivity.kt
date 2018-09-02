@@ -72,7 +72,7 @@ class TheaterSortActivity :
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.sort_menu, menu)
+        menuInflater.inflate(R.menu.activity_theater_sort, menu)
         return true
     }
 
