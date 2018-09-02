@@ -3,6 +3,7 @@ package soup.movie.ui.main
 import android.content.Context
 import android.os.Bundle
 import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
@@ -45,17 +46,24 @@ class MainActivity :
         when (viewState) {
             is NowState -> {
                 bottomNavigation.selectedItemId = R.id.action_now
-                commit(R.id.container, NowFragment.newInstance())
+                commit(NowFragment.newInstance())
             }
             is PlanState -> {
                 bottomNavigation.selectedItemId = R.id.action_plan
-                commit(R.id.container, PlanFragment.newInstance())
+                commit(PlanFragment.newInstance())
             }
             is SettingsState -> {
                 bottomNavigation.selectedItemId = R.id.action_settings
-                commit(R.id.container, SettingsFragment.newInstance())
+                commit(SettingsFragment.newInstance())
             }
         }
+    }
+
+    private fun commit(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().disallowAddToBackStack()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
     }
 
     private fun parseToTabMode(@IdRes itemId: Int): MainTabSetting.Tab =

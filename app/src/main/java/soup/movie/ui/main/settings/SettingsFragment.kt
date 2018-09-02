@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Pair
 import android.view.View
 import androidx.core.app.SharedElementCallback
-import androidx.transition.TransitionInflater
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.R
@@ -27,8 +26,6 @@ class SettingsFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        exitTransition = TransitionInflater.from(context)
-                .inflateTransition(android.R.transition.explode)
         setExitSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: List<String>,
                                              sharedElements: MutableMap<String, View>) {
