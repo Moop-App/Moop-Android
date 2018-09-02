@@ -38,9 +38,15 @@ class DetailActivity :
     @Inject
     override lateinit var presenter: DetailContract.Presenter
 
-    private lateinit var listAdapter: DetailListAdapter
+    private val listAdapter by lazy {
+        DetailListAdapter(this@DetailActivity)
+    }
 
-    private lateinit var chromeFader: ElasticDragDismissFrameLayout.SystemChromeFader
+    private val chromeFader by lazy {
+        object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
+            override fun onDragDismissed() = setResultAndFinish()
+        }
+    }
 
     private lateinit var movie: Movie
 
@@ -139,10 +145,6 @@ class DetailActivity :
         }
 
         backButton.setOnClickListener { setResultAndFinish() }
-        chromeFader = object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
-            override fun onDragDismissed() = setResultAndFinish()
-        }
-        listAdapter = DetailListAdapter(this)
         listView.apply {
             adapter = listAdapter
             itemAnimator = SlideInRightAnimator().apply {

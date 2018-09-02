@@ -18,14 +18,15 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
     @Inject
     override lateinit var presenter: NowContract.Presenter
 
-    private lateinit var listAdapter: MovieListAdapter
+    private val listAdapter by lazy {
+        MovieListAdapter(activity!!)
+    }
 
     override val layoutRes: Int
         get() = R.layout.fragment_vertical_list
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        listAdapter = MovieListAdapter(activity!!)
         listView.apply {
             adapter = listAdapter
             itemAnimator = SlideInUpAnimator().apply {
