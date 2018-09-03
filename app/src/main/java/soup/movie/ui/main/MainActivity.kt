@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.settings.impl.MainTabSetting
@@ -33,7 +32,6 @@ class MainActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigation)
         bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
             presenter.setCurrentTab(parseToTabMode(it.itemId))

@@ -22,6 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_navigation_height"
         android:background="#ffffff"
+        app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/bottom_navigation_colors"
         app:itemTextColor="@color/bottom_navigation_colors"
         app:layout_constraintBottom_toBottomOf="parent"
