@@ -4,9 +4,11 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.TypedValue
+import androidx.annotation.ColorInt
 import androidx.core.view.postDelayed
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.load.DataSource
@@ -161,36 +163,42 @@ class DetailActivity :
         setResultAndFinish()
     }
 
-    internal fun applyTopPalette(bitmap: Bitmap, palette: Palette?) {
-        val lightness = ColorUtils.isDark(palette)
-        val isDark = if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
-            ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
-        } else {
-            lightness == ColorUtils.IS_DARK
-        }
+    private fun applyTopPalette(bitmap: Bitmap, palette: Palette?) {
+        if (presenter.usePaletteTheme()) {
+            val lightness = ColorUtils.isDark(palette)
+            val isDark = if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
+                ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
+            } else {
+                lightness == ColorUtils.IS_DARK
+            }
 
-        if (!isDark) { // make back icon dark on light images
+            // color the status bar.
+            var statusBarColor = window.statusBarColor
+            ColorUtils.getMostPopulousSwatch(palette)?.let {
+                statusBarColor = ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
+            }
+            applyTheme(ThemeData(statusBarColor, isDark))
+        } else {
+            applyTheme(ThemeData(Color.WHITE, isDark = false))
+        }
+    }
+
+    private fun applyTheme(theme: ThemeData) {
+        if (theme.isDark.not()) { // make back icon dark on light images
             val darkColor = this@DetailActivity.getColorCompat(R.color.dark_icon)
             titleView.setTextColor(darkColor)
             eggView.setTextColor(darkColor)
             favoriteButton.setColorFilter(darkColor)
             timetableButton.setColorFilter(darkColor)
             shareButton.setColorFilter(darkColor)
-        }
 
-        // color the status bar.
-        var statusBarColor = window.statusBarColor
-        ColorUtils.getMostPopulousSwatch(palette)?.let {
-            statusBarColor = ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
             // set a light status bar
-            if (!isDark) {
-                ViewUtils.setLightStatusBar(window.decorView)
-            }
+            ViewUtils.setLightStatusBar(window.decorView)
         }
 
-        if (statusBarColor != window.statusBarColor) {
-            backgroundView.setBackgroundColor(statusBarColor)
-            ValueAnimator.ofArgb(window.statusBarColor, statusBarColor).apply {
+        if (theme.bgColor != window.statusBarColor) {
+            backgroundView.setBackgroundColor(theme.bgColor)
+            ValueAnimator.ofArgb(window.statusBarColor, theme.bgColor).apply {
                 addUpdateListener { animation ->
                     window.statusBarColor = animation.animatedValue as Int
                 }
@@ -208,4 +216,9 @@ class DetailActivity :
 
         private const val SCRIM_ADJUSTMENT = 0.075f
     }
+
+    data class ThemeData(
+            @ColorInt
+            val bgColor: Int,
+            val isDark: Boolean)
 }

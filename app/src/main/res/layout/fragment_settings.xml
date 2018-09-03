@@ -100,10 +100,21 @@
         android:background="@drawable/bg_card"
         android:backgroundTint="@color/grey_200"
         android:gravity="center"
-        android:text="준비중입니다"
+        android:text="준비 중입니다"
         android:textColor="@color/grey_600"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/themeCategory" />
+
+    <Switch
+        android:id="@+id/paletteThemeSwitch"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/settings_margin_in_category"
+        android:checked="true"
+        android:text="영화 세부정보 화면에 포스터 색상으로 배경설정"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/theme" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

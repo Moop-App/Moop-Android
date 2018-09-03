@@ -4,7 +4,10 @@ import soup.movie.ui.BaseContract
 
 interface SettingsContract {
 
-    interface Presenter : BaseContract.Presenter<View>
+    interface Presenter : BaseContract.Presenter<View> {
+
+        fun setPaletteThemeSwitch(checked: Boolean)
+    }
 
     interface View : BaseContract.View {
 

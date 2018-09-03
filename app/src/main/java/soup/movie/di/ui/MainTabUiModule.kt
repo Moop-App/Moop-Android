@@ -6,6 +6,7 @@ import dagger.android.ContributesAndroidInjector
 import soup.movie.data.MoobRepository
 import soup.movie.di.scope.FragmentScope
 import soup.movie.settings.impl.TheaterSetting
+import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.ui.main.now.NowContract
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.now.NowPresenter
@@ -68,8 +69,9 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(theaterSetting: TheaterSetting): SettingsContract.Presenter {
-            return SettingsPresenter(theaterSetting)
+        fun presenter(theaterSetting: TheaterSetting,
+                      usePaletteThemeSetting: UsePaletteThemeSetting): SettingsContract.Presenter {
+            return SettingsPresenter(theaterSetting, usePaletteThemeSetting)
         }
     }
 }

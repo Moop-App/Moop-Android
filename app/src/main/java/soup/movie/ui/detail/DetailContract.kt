@@ -8,6 +8,8 @@ interface DetailContract {
     interface Presenter : BaseContract.Presenter<View> {
 
         fun requestData(movie: Movie)
+
+        fun usePaletteTheme(): Boolean
     }
 
     interface View : BaseContract.View {

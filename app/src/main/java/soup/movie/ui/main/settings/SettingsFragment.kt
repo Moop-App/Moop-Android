@@ -1,6 +1,7 @@
 package soup.movie.ui.main.settings
 
 import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Pair
@@ -38,9 +39,14 @@ class SettingsFragment :
         })
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        editTheaterButton.setOnClickListener { onTheaterEditClicked() }
+    override fun initViewState(ctx: Context) {
+        super.initViewState(ctx)
+        editTheaterButton.setOnClickListener {
+            onTheaterEditClicked()
+        }
+        paletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            presenter.setPaletteThemeSwitch(isChecked)
+        }
     }
 
     override fun render(viewState: SettingsViewState) {
@@ -63,6 +69,7 @@ class SettingsFragment :
                 theaterGroup.addView(theaterChip)
             }
         }
+        paletteThemeSwitch.isChecked = viewState.usePaletteTheme
     }
 
     private fun onTheaterEditClicked() {
