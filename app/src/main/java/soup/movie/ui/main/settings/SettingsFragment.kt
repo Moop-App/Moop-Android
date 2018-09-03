@@ -5,11 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Pair
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.R
+import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import timber.log.Timber
@@ -21,9 +24,6 @@ class SettingsFragment :
 
     @Inject
     override lateinit var presenter: SettingsContract.Presenter
-
-    override val layoutRes: Int
-        get() = R.layout.fragment_settings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,11 @@ class SettingsFragment :
             }
         })
     }
+
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? =
+            FragmentSettingsBinding.inflate(inflater, container, false).root
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)

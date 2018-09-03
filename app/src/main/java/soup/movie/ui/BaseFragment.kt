@@ -2,26 +2,14 @@ package soup.movie.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import androidx.annotation.LayoutRes
-
 import dagger.android.support.DaggerFragment
 
 abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> :
         DaggerFragment(), BaseContract.View {
 
-    @get:LayoutRes
-    protected abstract val layoutRes: Int
-
     protected abstract val presenter: P
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutRes, container, false)
-    }
 
     @Suppress("UNCHECKED_CAST")
     @CallSuper
