@@ -30,10 +30,6 @@ class TheaterEditActivity :
         listView.adapter = listAdapter
     }
 
-    fun onCancelClicked(view: View) {
-        finish()
-    }
-
     fun onConfirmClicked(view: View) {
         presenter.onConfirmClicked(listAdapter.selectedTheaters)
         finish()
