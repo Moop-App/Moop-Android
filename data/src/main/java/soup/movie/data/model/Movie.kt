@@ -8,5 +8,5 @@ data class Movie(
         val age: String,
         val openDate: String,
         val egg: String,
-        val specialTypes: List<String>,
-        val trailers: List<Trailer>)
+        val specialTypes: List<String>?,
+        val trailers: List<Trailer>?)

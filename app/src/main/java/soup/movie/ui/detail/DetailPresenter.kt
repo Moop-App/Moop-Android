@@ -18,7 +18,7 @@ class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         disposable.add(movieSubject
-                .map { it.trailers }
+                .map { it.trailers.orEmpty() }
                 .map { DoneState(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) }
