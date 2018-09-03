@@ -33,7 +33,22 @@ class TheaterSortActivity :
     @Inject
     override lateinit var presenter: TheaterSortContract.Presenter
 
-    private lateinit var listAdapter: TheaterSortListAdapter
+    private val listAdapter: TheaterSortListAdapter by lazy {
+        val callback = SimpleItemTouchHelperCallback(object : OnItemMoveListener {
+            override fun onItemMove(fromPosition: Int, toPosition: Int) {
+                listAdapter.onItemMove(fromPosition, toPosition)
+                presenter.onItemMove(fromPosition, toPosition)
+            }
+        })
+        val itemTouchHelper = ItemTouchHelper(callback).apply {
+            attachToRecyclerView(listView)
+        }
+        TheaterSortListAdapter(object : OnDragStartListener {
+            override fun onDragStart(viewHolder: RecyclerView.ViewHolder) {
+                itemTouchHelper.startDrag(viewHolder)
+            }
+        })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,21 +66,6 @@ class TheaterSortActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-
-        val callback = SimpleItemTouchHelperCallback(object : OnItemMoveListener {
-            override fun onItemMove(fromPosition: Int, toPosition: Int) {
-                listAdapter.onItemMove(fromPosition, toPosition)
-                presenter.onItemMove(fromPosition, toPosition)
-            }
-        })
-        val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(listView)
-
-        listAdapter = TheaterSortListAdapter(object : OnDragStartListener {
-            override fun onDragStart(viewHolder: RecyclerView.ViewHolder) {
-                itemTouchHelper.startDrag(viewHolder)
-            }
-        })
         listView.adapter = listAdapter
 
         //FixMe: find a timing to call startPostponedEnterTransition()
@@ -90,17 +90,10 @@ class TheaterSortActivity :
     override fun render(viewState: TheaterSortViewState) {
         Timber.d("render: %s", viewState)
         listAdapter.submitList(viewState.selectedTheaters)
-
-        //FixMe: find a timing to call startPostponedEnterTransition()
-        //startPostponedEnterTransition()
-    }
-
-    fun onCancelClicked(view: View) {
-        onBackPressed()
     }
 
     fun onConfirmClicked(view: View) {
         presenter.onConfirmClicked()
-        onBackPressed()
+        finish()
     }
 }
