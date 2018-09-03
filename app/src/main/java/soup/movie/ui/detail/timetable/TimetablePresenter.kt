@@ -7,7 +7,7 @@ import io.reactivex.subjects.BehaviorSubject
 import soup.movie.data.MoobRepository
 import soup.movie.data.model.Movie
 import soup.movie.data.request.TimeTableRequest
-import soup.movie.settings.TheaterSetting
+import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.timetable.TimetableViewState.*
 

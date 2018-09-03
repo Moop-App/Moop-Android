@@ -1,15 +1,17 @@
-package soup.movie.settings
+package soup.movie.settings.impl
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import soup.movie.data.model.Theater
+import soup.movie.settings.PrefSetting
 
 class TheaterSetting(preferences: SharedPreferences) :
         PrefSetting<List<Theater>>(preferences) {
 
     override fun getDefaultValue(preferences: SharedPreferences): List<Theater> {
-        return fromJson(preferences.getString(KEY, DEFAULT_VALUE) ?: DEFAULT_VALUE)
+        return fromJson(preferences.getString(KEY, DEFAULT_VALUE)
+                ?: DEFAULT_VALUE)
     }
 
     override fun saveValue(preferences: SharedPreferences, value: List<Theater>) {

@@ -2,7 +2,7 @@ package soup.movie.ui.main.settings
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
-import soup.movie.settings.TheaterSetting
+import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.settings.SettingsContract.Presenter
 import soup.movie.ui.main.settings.SettingsContract.View

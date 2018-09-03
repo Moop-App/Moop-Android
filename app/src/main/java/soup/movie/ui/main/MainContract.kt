@@ -1,6 +1,6 @@
 package soup.movie.ui.main
 
-import soup.movie.settings.ui.MainTabSetting
+import soup.movie.settings.impl.MainTabSetting
 import soup.movie.ui.BaseContract
 
 interface MainContract {

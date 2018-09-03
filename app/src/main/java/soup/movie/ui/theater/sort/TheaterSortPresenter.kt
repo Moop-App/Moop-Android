@@ -4,7 +4,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.model.Theater
-import soup.movie.settings.TheaterSetting
+import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.sort.TheaterSortContract.Presenter
 import soup.movie.ui.theater.sort.TheaterSortContract.View

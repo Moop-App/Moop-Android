@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import soup.movie.data.MoobRepository
 import soup.movie.di.scope.ActivityScope
-import soup.movie.settings.TheaterSetting
+import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.theater.edit.TheaterEditContract
 import soup.movie.ui.theater.edit.TheaterEditPresenter
 

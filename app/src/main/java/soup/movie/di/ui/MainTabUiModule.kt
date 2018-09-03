@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import soup.movie.data.MoobRepository
 import soup.movie.di.scope.FragmentScope
-import soup.movie.settings.TheaterSetting
+import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.main.now.NowContract
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.now.NowPresenter

@@ -1,8 +1,8 @@
-package soup.movie.settings.ui
+package soup.movie.settings.impl
 
 import android.content.SharedPreferences
 import soup.movie.settings.PrefSetting
-import soup.movie.settings.ui.MainTabSetting.Tab
+import soup.movie.settings.impl.MainTabSetting.Tab
 
 class MainTabSetting(preferences: SharedPreferences) :
         PrefSetting<Tab>(preferences) {

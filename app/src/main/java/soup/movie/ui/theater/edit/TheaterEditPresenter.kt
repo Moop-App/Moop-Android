@@ -8,7 +8,7 @@ import soup.movie.data.MoobRepository
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
 import soup.movie.data.request.CodeRequest
-import soup.movie.settings.TheaterSetting
+import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
 import soup.movie.ui.theater.edit.TheaterEditContract.View
