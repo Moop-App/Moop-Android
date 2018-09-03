@@ -18,6 +18,7 @@ import com.bumptech.glide.request.target.Target
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import soup.movie.R
+import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.data.getColorAsAge
 import soup.movie.data.getSimpleAgeLabel
 import soup.movie.data.model.Movie
@@ -27,6 +28,7 @@ import soup.movie.ui.detail.DetailViewState.LoadingState
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.util.*
 import soup.movie.util.IntentUtil.createShareIntentWithText
+import soup.movie.util.delegates.contentView
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -38,6 +40,10 @@ import javax.inject.Inject
 class DetailActivity :
         BaseActivity<DetailContract.View, DetailContract.Presenter>(),
         DetailContract.View {
+
+    override val binding by contentView<DetailActivity, ActivityDetailBinding>(
+            R.layout.activity_detail
+    )
 
     @Inject
     override lateinit var presenter: DetailContract.Presenter
@@ -53,9 +59,6 @@ class DetailActivity :
     }
 
     private lateinit var movie: Movie
-
-    override val layoutRes: Int
-        get() = R.layout.activity_detail
 
     private val shotLoadListener = object : RequestListener<Drawable> {
         override fun onResourceReady(

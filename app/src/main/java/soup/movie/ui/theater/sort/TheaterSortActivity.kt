@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
+import soup.movie.databinding.ActivityTheaterSortBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
+import soup.movie.util.delegates.contentView
 import soup.widget.recyclerview.listener.OnDragStartListener
 import soup.widget.recyclerview.listener.OnItemMoveListener
 import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
@@ -24,13 +26,14 @@ class TheaterSortActivity :
         BaseActivity<TheaterSortContract.View, TheaterSortContract.Presenter>(),
         TheaterSortContract.View {
 
+    override val binding by contentView<TheaterSortActivity, ActivityTheaterSortBinding>(
+            R.layout.activity_theater_sort
+    )
+
     @Inject
     override lateinit var presenter: TheaterSortContract.Presenter
 
     private lateinit var listAdapter: TheaterSortListAdapter
-
-    override val layoutRes: Int
-        get() = R.layout.activity_theater_sort
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

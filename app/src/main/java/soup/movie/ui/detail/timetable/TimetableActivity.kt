@@ -10,9 +10,11 @@ import kotlinx.android.synthetic.main.activity_timetable.*
 import kotlinx.android.synthetic.main.activity_timetable.view.*
 import soup.movie.R
 import soup.movie.data.model.Movie
+import soup.movie.databinding.ActivityTimetableBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.timetable.TimetableViewState.*
 import soup.movie.ui.theater.edit.TheaterEditActivity
+import soup.movie.util.delegates.contentView
 import soup.movie.util.restoreFrom
 import soup.movie.util.saveTo
 import timber.log.Timber
@@ -22,15 +24,16 @@ class TimetableActivity :
         BaseActivity<TimetableContract.View, TimetableContract.Presenter>(),
         TimetableContract.View {
 
+    override val binding by contentView<TimetableActivity, ActivityTimetableBinding>(
+            R.layout.activity_timetable
+    )
+
     @Inject
     override lateinit var presenter: TimetableContract.Presenter
 
     private lateinit var listAdapter: TimetableAdapter
 
     private lateinit var movie: Movie
-
-    override val layoutRes: Int
-        get() = R.layout.activity_timetable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         movie = if (savedInstanceState == null) {

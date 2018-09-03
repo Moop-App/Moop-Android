@@ -6,12 +6,14 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
+import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.MainTabSetting
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.main.MainViewState.*
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
+import soup.movie.util.delegates.contentView
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -19,11 +21,12 @@ class MainActivity :
         BaseActivity<MainContract.View, MainContract.Presenter>(),
         MainContract.View {
 
+    override val binding by contentView<MainActivity, ActivityMainBinding>(
+            R.layout.activity_main
+    )
+
     @Inject
     override lateinit var presenter: MainContract.Presenter
-
-    override val layoutRes: Int
-        get() = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
