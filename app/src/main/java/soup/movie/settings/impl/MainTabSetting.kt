@@ -12,7 +12,9 @@ class MainTabSetting(preferences: SharedPreferences) :
     }
 
     override fun getDefaultValue(preferences: SharedPreferences): Tab {
-        return Tab.valueOf(preferences.getString(KEY, DEFAULT_VALUE.toString()))
+        return preferences.getString(KEY, DEFAULT_VALUE.toString())
+                ?.let { Tab.valueOf(it) }
+                ?: DEFAULT_VALUE
     }
 
     override fun saveValue(preferences: SharedPreferences, value: Tab) {
