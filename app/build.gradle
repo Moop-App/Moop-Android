@@ -18,6 +18,10 @@ android {
 
         // API Keys
         buildConfigField 'String', 'KOBIS_API_KEY', "\"" + getKobisApiKey() + "\""
+
+        def filesAuthorityValue = applicationId + '.shareprovider'
+        buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
+        manifestPlaceholders = [filesAuthority: filesAuthorityValue]
     }
     buildTypes {
         release {

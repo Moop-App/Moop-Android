@@ -12,7 +12,8 @@ import javax.inject.Singleton
     ApplicationModule::class,
     ActivityBindingModule::class,
     MoobRepositoryModule::class,
-    SharedPreferencesModule::class
+    SharedPreferencesModule::class,
+    UtilsModule::class
 ])
 interface ApplicationComponent : AndroidInjector<MovieApplication> {
 
