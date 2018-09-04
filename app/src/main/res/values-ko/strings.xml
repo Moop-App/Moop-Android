@@ -6,6 +6,7 @@
     <string name="tab_settings">설정</string>
 
     <string name="action_share">공유하기</string>
+    <string name="action_share_poster">포스터 공유하기</string>
 
     <string name="settings_category_home_type">홈 타입</string>
     <string name="settings_category_theater">선호하는 극장</string>

@@ -6,9 +6,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import androidx.annotation.ColorInt
+import androidx.core.app.ShareCompat
 import androidx.core.view.postDelayed
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.load.DataSource
@@ -18,10 +20,10 @@ import com.bumptech.glide.request.target.Target
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import soup.movie.R
-import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.data.getColorAsAge
 import soup.movie.data.getSimpleAgeLabel
 import soup.movie.data.model.Movie
+import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
@@ -113,6 +115,9 @@ class DetailActivity :
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         posterView.loadAsync(movie.poster, shotLoadListener)
+        posterView.setOnClickListener {
+            presenter.requestShareImage(movie.poster)
+        }
         titleView.text = movie.title
         ageView.text = movie.getSimpleAgeLabel()
         ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
@@ -213,6 +218,15 @@ class DetailActivity :
 
     private fun setResultAndFinish() {
         finishAfterTransition()
+    }
+
+    override fun doShareImage(imageUri: Uri, mimeType: String) {
+        ShareCompat.IntentBuilder.from(this@DetailActivity)
+                .setChooserTitle(R.string.action_share_poster)
+                .setSubject(movie.title)
+                .setStream(imageUri)
+                .setType(mimeType)
+                .startChooser()
     }
 
     companion object {
