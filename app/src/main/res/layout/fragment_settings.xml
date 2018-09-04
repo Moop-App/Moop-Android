@@ -6,120 +6,125 @@
 
     <data/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        tools:context="soup.movie.ui.main.settings.SettingsFragment" >
+        tools:context="soup.movie.ui.main.settings.SettingsFragment">
 
-        <TextView
-            android:id="@+id/theaterCategory"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/settings_margin_between_category"
-            android:text="@string/settings_category_theater"
-            android:textAppearance="@style/TextAppearance.Settings.Category"
-            app:layout_constraintEnd_toStartOf="@+id/editTheaterButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" >
 
-        <ImageView
-            android:id="@+id/editTheaterButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_edit"
-            android:scaleType="centerInside"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toEndOf="@+id/theaterCategory"
-            app:layout_constraintBottom_toBottomOf="@+id/theaterCategory"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/theaterCategory" />
+            <TextView
+                android:id="@+id/theaterCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/settings_margin_between_category"
+                android:text="@string/settings_category_theater"
+                android:textAppearance="@style/TextAppearance.Settings.Category"
+                app:layout_constraintEnd_toStartOf="@+id/editTheaterButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/noTheaterView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/settings_margin_in_category"
-            android:text="@string/settings_theater_empty_description"
-            android:textColor="@color/grey_600"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
-            tools:visibility="gone" />
+            <ImageView
+                android:id="@+id/editTheaterButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_edit"
+                android:scaleType="centerInside"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toEndOf="@+id/theaterCategory"
+                app:layout_constraintBottom_toBottomOf="@+id/theaterCategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/theaterCategory" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/theaterGroup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/settings_margin_in_category"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
-            tools:visibility="visible" >
+            <TextView
+                android:id="@+id/noTheaterView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/settings_margin_in_category"
+                android:text="@string/settings_theater_empty_description"
+                android:textColor="@color/grey_600"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
+                tools:visibility="gone" />
 
-            <!-- for preview -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/theaterGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/settings_margin_in_category"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
+                tools:visibility="visible" >
 
-            <include layout="@layout/chip_cgv" />
-            <include layout="@layout/chip_lotte" />
-            <include layout="@layout/chip_megabox" />
+                <!-- for preview -->
 
-        </com.google.android.material.chip.ChipGroup>
+                <include layout="@layout/chip_cgv" />
+                <include layout="@layout/chip_lotte" />
+                <include layout="@layout/chip_megabox" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/dividerBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="noTheaterView,theaterGroup" />
+            </com.google.android.material.chip.ChipGroup>
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/settings_margin_between_category"
-            android:background="@color/dividerColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dividerBarrier"/>
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/dividerBarrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="noTheaterView,theaterGroup" />
 
-        <TextView
-            android:id="@+id/themeCategory"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/settings_margin_between_category"
-            android:text="@string/settings_category_theme"
-            android:textAppearance="@style/TextAppearance.Settings.Category"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider" />
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/settings_margin_between_category"
+                android:background="@color/dividerColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dividerBarrier"/>
 
-        <TextView
-            android:id="@+id/theme"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/settings_margin_in_category"
-            android:background="@drawable/bg_card"
-            android:backgroundTint="@color/grey_200"
-            android:gravity="center"
-            android:text="준비 중입니다"
-            android:textColor="@color/grey_600"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/themeCategory" />
+            <TextView
+                android:id="@+id/themeCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/settings_margin_between_category"
+                android:text="@string/settings_category_theme"
+                android:textAppearance="@style/TextAppearance.Settings.Category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-        <Switch
-            android:id="@+id/paletteThemeSwitch"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/settings_margin_in_category"
-            android:checked="true"
-            android:text="영화 세부정보 화면에 포스터 색상으로 배경설정"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/theme" />
+            <TextView
+                android:id="@+id/theme"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/settings_margin_in_category"
+                android:background="@drawable/bg_card"
+                android:backgroundTint="@color/grey_200"
+                android:gravity="center"
+                android:text="준비 중입니다"
+                android:textColor="@color/grey_600"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/themeCategory" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Switch
+                android:id="@+id/paletteThemeSwitch"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/settings_margin_in_category"
+                android:checked="true"
+                android:text="영화 세부정보 화면에 포스터 색상으로 배경설정"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
