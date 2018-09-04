@@ -34,7 +34,7 @@
         android:clipToPadding="false"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical"
-        android:paddingTop="200dp"
+        android:paddingTop="208dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
