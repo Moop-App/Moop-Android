@@ -5,6 +5,8 @@
     <string name="tab_plan">개봉예정</string>
     <string name="tab_settings">설정</string>
 
+    <string name="action_share">공유하기</string>
+
     <string name="settings_category_home_type">홈 타입</string>
     <string name="settings_category_theater">선호하는 극장</string>
     <string name="settings_theater_empty_description">선호하는 극장이 없습니다.</string>

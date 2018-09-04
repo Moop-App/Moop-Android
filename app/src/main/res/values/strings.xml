@@ -5,6 +5,8 @@
     <string name="tab_plan">Plan</string>
     <string name="tab_settings">Settings</string>
 
+    <string name="action_share">Share</string>
+
     <string name="settings_category_home_type">Home Type</string>
     <string name="settings_category_theater">Favorite Theaters</string>
     <string name="settings_theater_empty_description">There are no favorite theaters.</string>
