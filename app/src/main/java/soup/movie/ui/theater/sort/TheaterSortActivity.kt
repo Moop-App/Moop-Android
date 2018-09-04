@@ -16,10 +16,10 @@ import soup.movie.databinding.ActivityTheaterSortBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
+import soup.movie.util.log.printRenderLog
 import soup.widget.recyclerview.listener.OnDragStartListener
 import soup.widget.recyclerview.listener.OnItemMoveListener
 import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
-import timber.log.Timber
 import javax.inject.Inject
 
 class TheaterSortActivity :
@@ -88,7 +88,7 @@ class TheaterSortActivity :
     }
 
     override fun render(viewState: TheaterSortViewState) {
-        Timber.d("render: %s", viewState)
+        viewState.printRenderLog()
         listAdapter.submitList(viewState.selectedTheaters)
     }
 

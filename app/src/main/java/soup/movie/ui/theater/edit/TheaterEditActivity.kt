@@ -6,7 +6,7 @@ import soup.movie.R
 import soup.movie.databinding.ActivityTheaterEditBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.util.delegates.contentView
-import timber.log.Timber
+import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
 
 class TheaterEditActivity :
@@ -23,7 +23,7 @@ class TheaterEditActivity :
     private lateinit var listAdapter: TheaterEditListAdapter
 
     override fun render(viewState: TheaterEditViewState) {
-        Timber.d("render: %s", viewState)
+        viewState.printRenderLog()
         listAdapter = TheaterEditListAdapter(
                 viewState.allTheaters,
                 viewState.selectedTheaters)

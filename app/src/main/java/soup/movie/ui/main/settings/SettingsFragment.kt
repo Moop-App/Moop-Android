@@ -15,7 +15,7 @@ import soup.movie.R
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
-import timber.log.Timber
+import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
 
 class SettingsFragment :
@@ -55,7 +55,7 @@ class SettingsFragment :
     }
 
     override fun render(viewState: SettingsViewState) {
-        Timber.d("render: %s", viewState)
+        viewState.printRenderLog()
         val theaters = viewState.theaterList
         if (theaters.isEmpty()) {
             noTheaterView.visibility = View.VISIBLE

@@ -31,6 +31,7 @@ import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.util.*
 import soup.movie.util.IntentUtil.createShareIntentWithText
 import soup.movie.util.delegates.contentView
+import soup.movie.util.log.printRenderLog
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -156,7 +157,7 @@ class DetailActivity :
     }
 
     override fun render(viewState: DetailViewState) {
-        Timber.d("render: %s", viewState)
+        viewState.printRenderLog()
         when (viewState) {
             is LoadingState -> {
                 //TODO: show loading state

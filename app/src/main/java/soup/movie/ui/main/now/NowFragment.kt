@@ -14,7 +14,7 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.MovieListAdapter
 import soup.movie.ui.main.now.NowViewState.DoneState
 import soup.movie.ui.main.now.NowViewState.LoadingState
-import timber.log.Timber
+import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
 
 class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), NowContract.View {
@@ -46,7 +46,7 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
     }
 
     override fun render(viewState: NowViewState) {
-        Timber.d("render: %s", viewState)
+        viewState.printRenderLog()
         when (viewState) {
             is LoadingState -> {
                 swipeRefreshLayout.isRefreshing = true

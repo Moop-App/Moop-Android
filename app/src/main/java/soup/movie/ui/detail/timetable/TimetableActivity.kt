@@ -15,6 +15,7 @@ import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.timetable.TimetableViewState.*
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
+import soup.movie.util.log.printRenderLog
 import soup.movie.util.restoreFrom
 import soup.movie.util.saveTo
 import timber.log.Timber
@@ -69,7 +70,7 @@ class TimetableActivity :
     }
 
     override fun render(viewState: TimetableViewState) {
-        Timber.d("render: %s", viewState)
+        viewState.printRenderLog()
         return when (viewState) {
             is NoTheaterState -> {
                 noTheaterView.visibility = VISIBLE

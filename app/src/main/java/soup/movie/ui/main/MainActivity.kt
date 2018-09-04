@@ -14,7 +14,7 @@ import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.util.delegates.contentView
-import timber.log.Timber
+import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
 
 class MainActivity :
@@ -43,7 +43,7 @@ class MainActivity :
     }
 
     override fun render(viewState: MainViewState) {
-        Timber.d("render: %s", viewState)
+        viewState.printRenderLog()
         when (viewState) {
             is NowState -> {
                 bottomNavigation.selectedItemId = R.id.action_now
