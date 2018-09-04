@@ -5,7 +5,7 @@ import android.content.Intent
 import android.util.Pair
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import kotlinx.android.synthetic.main.item_movie_vertical.view.*
+import kotlinx.android.synthetic.main.item_movie.view.*
 import soup.movie.R
 import soup.movie.data.getColorAsAge
 import soup.movie.data.model.Movie
@@ -42,5 +42,5 @@ class MovieListAdapter(private val host: FragmentActivity) :
         }
     }
 
-    override fun getItemViewType(position: Int) = R.layout.item_movie_vertical
+    override fun getItemViewType(position: Int) = R.layout.item_movie
 }
