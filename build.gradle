@@ -2,15 +2,17 @@
 
 buildscript {
     apply from: 'versions.gradle'
-    addRepos(repositories)
+    addProjectRepositories(repositories)
     dependencies {
         classpath deps.android_gradle_plugin
         classpath deps.kotlin.plugin
+        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'io.fabric.tools:gradle:1.25.4'
     }
 }
 
 allprojects {
-    addRepos(repositories)
+    addAppRepositories(repositories)
 }
 
 task clean(type: Delete) {

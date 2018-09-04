@@ -100,11 +100,22 @@ build_versions.versionCode = 1
 build_versions.versionName = '0.1.0'
 ext.build_versions = build_versions
 
-def addRepos(RepositoryHandler handler) {
+def addProjectRepositories(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.mavenCentral()
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     handler.maven { url "https://jitpack.io" }
+    handler.maven { url 'https://maven.fabric.io/public' }
 }
-ext.addRepos = this.&addRepos
+ext.addProjectRepositories = this.&addProjectRepositories
+
+def addAppRepositories(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url "https://jitpack.io" }
+    handler.maven { url 'https://maven.google.com/' }
+}
+ext.addAppRepositories = this.&addAppRepositories
