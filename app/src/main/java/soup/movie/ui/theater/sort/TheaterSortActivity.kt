@@ -94,6 +94,6 @@ class TheaterSortActivity :
 
     fun onConfirmClicked(view: View) {
         presenter.onConfirmClicked()
-        finish()
+        onBackPressed()
     }
 }
