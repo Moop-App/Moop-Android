@@ -1,11 +1,11 @@
-package soup.movie.ui.main
+package soup.movie.ui.main.now
 
 import android.app.ActivityOptions
 import android.content.Intent
 import android.util.Pair
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
-import kotlinx.android.synthetic.main.item_movie.view.*
+import kotlinx.android.synthetic.main.item_movie_now.view.*
 import soup.movie.R
 import soup.movie.data.getColorAsAge
 import soup.movie.data.model.Movie
@@ -16,7 +16,7 @@ import soup.movie.util.getColorStateListCompat
 import soup.movie.util.saveTo
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
-class MovieListAdapter(private val host: FragmentActivity) :
+class NowListAdapter(private val host: FragmentActivity) :
         DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> =
@@ -42,5 +42,5 @@ class MovieListAdapter(private val host: FragmentActivity) :
         }
     }
 
-    override fun getItemViewType(position: Int) = R.layout.item_movie
+    override fun getItemViewType(position: Int) = R.layout.item_movie_now
 }

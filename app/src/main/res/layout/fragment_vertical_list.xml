@@ -20,7 +20,7 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="@integer/grid_span_count"
-            tools:listitem="@layout/item_movie" />
+            tools:listitem="@layout/item_movie_now" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

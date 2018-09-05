@@ -11,7 +11,6 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
 import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.ui.main.BaseTabFragment
-import soup.movie.ui.main.MovieListAdapter
 import soup.movie.ui.main.now.NowViewState.DoneState
 import soup.movie.ui.main.now.NowViewState.LoadingState
 import soup.movie.util.log.printRenderLog
@@ -23,7 +22,7 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
     override lateinit var presenter: NowContract.Presenter
 
     private val listAdapter by lazy {
-        MovieListAdapter(activity!!)
+        NowListAdapter(activity!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater,
