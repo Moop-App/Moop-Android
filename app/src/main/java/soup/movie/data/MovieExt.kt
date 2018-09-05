@@ -24,16 +24,22 @@ fun Movie.getSimpleAgeLabel(): String = when (age) {
     else -> "미정"
 }
 
-fun Movie.getRemainDayLabel(): String = openDate()?.let {
+fun Movie.getDDayLabel(): String = openDate()?.let {
     val dDay = between(today(), it).days
     return when (dDay) {
-        0 -> "NEW"
+        0 -> "NOW"
         in 1..7 -> "D-$dDay"
         else -> ""
     }
 } ?: ""
 
+fun Movie.hasUnknownEgg(): Boolean = egg == "?"
+
+fun Movie.isNew(): Boolean = isInTheThreeDays() or isInThePastWeek() and hasUnknownEgg()
+
 fun Movie.isInThePastWeek(): Boolean = isIn(-7..0)
+
+fun Movie.isInTheThreeDays(): Boolean = isIn(-2..0)
 
 fun Movie.isInTheNextWeek(): Boolean = isIn(0..7)
 

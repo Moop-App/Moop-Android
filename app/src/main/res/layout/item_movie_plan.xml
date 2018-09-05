@@ -85,7 +85,7 @@
                     android:textStyle="bold"
                     android:background="@drawable/bg_d_day"
                     android:backgroundTint="@color/grey"
-                    android:text="@{MovieExtKt.getRemainDayLabel(item)}"
+                    android:text="@{MovieExtKt.getDDayLabel(item)}"
                     android:visibility="@{MovieExtKt.isInTheNextWeek(item) ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
