@@ -86,7 +86,7 @@
                     android:background="@drawable/bg_d_day"
                     android:backgroundTint="@color/grey"
                     android:text="@{MovieExtKt.getRemainDayLabel(item)}"
-                    android:visibility="@{MovieExtKt.isInOneWeek(item) ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{MovieExtKt.isInTheNextWeek(item) ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="D-7"

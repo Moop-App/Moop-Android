@@ -1,9 +1,11 @@
 package soup.movie.data
 
 import androidx.annotation.ColorRes
+import org.threeten.bp.LocalDate
+import org.threeten.bp.Period.between
+import org.threeten.bp.ZoneId
 import soup.movie.R
 import soup.movie.data.model.Movie
-import soup.movie.util.TimeUtil
 
 @ColorRes
 fun Movie.getColorAsAge(): Int = when (age) {
@@ -22,19 +24,30 @@ fun Movie.getSimpleAgeLabel(): String = when (age) {
     else -> "미정"
 }
 
-fun Movie.getRemainDayLabel(): String = when (getRemainDay()) {
-    UNKNOWN_REMAIN_DAY -> ""
-    else -> "D-$this"
-}
+fun Movie.getRemainDayLabel(): String = openDate()?.let {
+    val dDay = between(today(), it).days
+    return when (dDay) {
+        0 -> "NEW"
+        in 1..7 -> "D-$dDay"
+        else -> ""
+    }
+} ?: ""
 
-fun Movie.isInOneWeek(): Boolean = getRemainDay() <= 7
+fun Movie.isInThePastWeek(): Boolean = isIn(-7..0)
 
-private fun Movie.getRemainDay(): Int {
-    val date = openDate.split(".")
-    return when {
-        date.size != 3 -> UNKNOWN_REMAIN_DAY
-        else -> TimeUtil.remainDayTo(date[0].toInt(), date[1].toInt(), date[2].toInt())
+fun Movie.isInTheNextWeek(): Boolean = isIn(0..7)
+
+fun Movie.isIn(dayRange: IntRange): Boolean = openDate()?.let {
+    between(today(), it)
+            .run { (years == 0) and (months == 0) and (days in dayRange) }
+} ?: false
+
+private fun today(): LocalDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
+
+private fun Movie.openDate(): LocalDate? = openDate.split(".").let {
+    return if (it.size == 3) {
+        LocalDate.of(it[0].toInt(), it[1].toInt(), it[2].toInt())
+    } else {
+        null
     }
 }
-
-private const val UNKNOWN_REMAIN_DAY = 9999
