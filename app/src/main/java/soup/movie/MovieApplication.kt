@@ -2,6 +2,7 @@ package soup.movie
 
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import io.fabric.sdk.android.Fabric
@@ -13,6 +14,7 @@ class MovieApplication : DaggerApplication() {
         super.onCreate()
         BuildType.init(this)
         initCrashlytics()
+        AndroidThreeTen.init(this)
     }
 
     private fun initCrashlytics() {
