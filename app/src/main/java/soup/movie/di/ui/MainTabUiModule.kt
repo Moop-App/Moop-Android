@@ -16,6 +16,9 @@ import soup.movie.ui.main.plan.PlanPresenter
 import soup.movie.ui.main.settings.SettingsContract
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.ui.main.settings.SettingsPresenter
+import soup.movie.ui.main.theaters.TheatersContract
+import soup.movie.ui.main.theaters.TheatersFragment
+import soup.movie.ui.main.theaters.TheatersPresenter
 
 @Module
 abstract class MainTabUiModule {
@@ -53,6 +56,24 @@ abstract class MainTabUiModule {
         @Provides
         fun presenter(moobRepository: MoobRepository): PlanContract.Presenter {
             return PlanPresenter(moobRepository)
+        }
+    }
+
+    @FragmentScope
+    @ContributesAndroidInjector(
+            modules = [
+                TheatersModule::class
+            ]
+    )
+    internal abstract fun provideTheatersFragment(): TheatersFragment
+
+    @Module
+    class TheatersModule {
+
+        @FragmentScope
+        @Provides
+        fun presenter(theaterSetting: TheaterSetting): TheatersContract.Presenter {
+            return TheatersPresenter(theaterSetting)
         }
     }
 

@@ -13,6 +13,7 @@ import soup.movie.ui.main.MainViewState.*
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
+import soup.movie.ui.main.theaters.TheatersFragment
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
@@ -53,6 +54,10 @@ class MainActivity :
                 bottomNavigation.selectedItemId = R.id.action_plan
                 commit(PlanFragment.newInstance())
             }
+            is TheatersState -> {
+                bottomNavigation.selectedItemId = R.id.action_theaters
+                commit(TheatersFragment.newInstance())
+            }
             is SettingsState -> {
                 bottomNavigation.selectedItemId = R.id.action_settings
                 commit(SettingsFragment.newInstance())
@@ -71,6 +76,7 @@ class MainActivity :
             when (itemId) {
                 R.id.action_now -> MainTabSetting.Tab.Now
                 R.id.action_plan -> MainTabSetting.Tab.Plan
+                R.id.action_theaters -> MainTabSetting.Tab.Theaters
                 R.id.action_settings -> MainTabSetting.Tab.Settings
                 else -> throw IllegalStateException("Unknown resource ID")
             }

@@ -12,6 +12,11 @@ sealed class MainViewState {
         override fun toString(): String = javaClass.simpleName
     }
 
+    object TheatersState : MainViewState() {
+
+        override fun toString(): String = javaClass.simpleName
+    }
+
     object SettingsState : MainViewState() {
 
         override fun toString(): String = javaClass.simpleName

@@ -3,6 +3,7 @@
 
     <string name="tab_now">Now Playing</string>
     <string name="tab_plan">Plan</string>
+    <string name="tab_theaters">Theaters</string>
     <string name="tab_settings">Settings</string>
 
     <string name="action_share">Share</string>

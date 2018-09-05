@@ -26,6 +26,7 @@ class MainPresenter(private val mainTabSetting: MainTabSetting) :
             when (tabMode) {
                 Now -> NowState
                 Plan -> PlanState
+                Theaters -> TheatersState
                 Settings -> SettingsState
             }
 

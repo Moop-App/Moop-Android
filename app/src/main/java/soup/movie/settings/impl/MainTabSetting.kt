@@ -8,7 +8,7 @@ class MainTabSetting(preferences: SharedPreferences) :
         PrefSetting<Tab>(preferences) {
 
     enum class Tab {
-        Now, Plan, Settings
+        Now, Plan, Theaters, Settings
     }
 
     override fun getDefaultValue(preferences: SharedPreferences): Tab {
