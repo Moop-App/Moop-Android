@@ -12,7 +12,6 @@ class MainUiModule {
 
     @ActivityScope
     @Provides
-    internal fun presenter(mainTabSetting: MainTabSetting): MainContract.Presenter {
-        return MainPresenter(mainTabSetting)
-    }
+    internal fun presenter(mainTabSetting: MainTabSetting): MainContract.Presenter =
+            MainPresenter(mainTabSetting)
 }

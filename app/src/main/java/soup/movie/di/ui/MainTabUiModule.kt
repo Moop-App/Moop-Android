@@ -24,11 +24,9 @@ import soup.movie.ui.main.theaters.TheatersPresenter
 abstract class MainTabUiModule {
 
     @FragmentScope
-    @ContributesAndroidInjector(
-            modules = [
-                NowModule::class
-            ]
-    )
+    @ContributesAndroidInjector(modules = [
+        NowModule::class
+    ])
     internal abstract fun provideNowFragment(): NowFragment
 
     @Module
@@ -42,11 +40,9 @@ abstract class MainTabUiModule {
     }
 
     @FragmentScope
-    @ContributesAndroidInjector(
-            modules = [
-                PlanModule::class
-            ]
-    )
+    @ContributesAndroidInjector(modules = [
+        PlanModule::class
+    ])
     internal abstract fun providePlanFragment(): PlanFragment
 
     @Module
@@ -54,17 +50,15 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(moobRepository: MoobRepository): PlanContract.Presenter {
-            return PlanPresenter(moobRepository)
-        }
+        fun presenter(moobRepository: MoobRepository):
+                PlanContract.Presenter =
+                PlanPresenter(moobRepository)
     }
 
     @FragmentScope
-    @ContributesAndroidInjector(
-            modules = [
-                TheatersModule::class
-            ]
-    )
+    @ContributesAndroidInjector(modules = [
+        TheatersModule::class
+    ])
     internal abstract fun provideTheatersFragment(): TheatersFragment
 
     @Module
@@ -72,17 +66,15 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(theaterSetting: TheaterSetting): TheatersContract.Presenter {
-            return TheatersPresenter(theaterSetting)
-        }
+        fun presenter(theaterSetting: TheaterSetting):
+                TheatersContract.Presenter =
+                TheatersPresenter(theaterSetting)
     }
 
     @FragmentScope
-    @ContributesAndroidInjector(
-            modules = [
-                SettingsModule::class
-            ]
-    )
+    @ContributesAndroidInjector(modules = [
+        SettingsModule::class
+    ])
     internal abstract fun provideSettingsFragment(): SettingsFragment
 
     @Module
@@ -91,8 +83,8 @@ abstract class MainTabUiModule {
         @FragmentScope
         @Provides
         fun presenter(theaterSetting: TheaterSetting,
-                      usePaletteThemeSetting: UsePaletteThemeSetting): SettingsContract.Presenter {
-            return SettingsPresenter(theaterSetting, usePaletteThemeSetting)
-        }
+                      usePaletteThemeSetting: UsePaletteThemeSetting):
+                SettingsContract.Presenter =
+                SettingsPresenter(theaterSetting, usePaletteThemeSetting)
     }
 }

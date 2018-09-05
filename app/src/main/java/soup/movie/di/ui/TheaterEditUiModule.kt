@@ -13,9 +13,8 @@ class TheaterEditUiModule {
 
     @ActivityScope
     @Provides
-    internal fun presenter(
-            moobRepository: MoobRepository,
-            theaterSetting: TheaterSetting): TheaterEditContract.Presenter {
-        return TheaterEditPresenter(moobRepository, theaterSetting)
-    }
+    internal fun presenter(moobRepository: MoobRepository,
+                           theaterSetting: TheaterSetting):
+            TheaterEditContract.Presenter =
+            TheaterEditPresenter(moobRepository, theaterSetting)
 }

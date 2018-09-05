@@ -5,9 +5,9 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
-import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.settings.impl.MainTabSetting
 import soup.movie.settings.impl.TheaterSetting
+import soup.movie.settings.impl.UsePaletteThemeSetting
 import javax.inject.Singleton
 
 @Module

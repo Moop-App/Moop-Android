@@ -13,9 +13,8 @@ class TimeTableUiModule {
 
     @ActivityScope
     @Provides
-    fun timeTablePresenter(
-            moobRepository: MoobRepository,
-            theaterSetting: TheaterSetting): TimetableContract.Presenter {
-        return TimetablePresenter(moobRepository, theaterSetting)
-    }
+    fun timeTablePresenter(moobRepository: MoobRepository,
+                           theaterSetting: TheaterSetting):
+            TimetableContract.Presenter =
+            TimetablePresenter(moobRepository, theaterSetting)
 }

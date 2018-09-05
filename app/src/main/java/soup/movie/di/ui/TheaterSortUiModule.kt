@@ -12,7 +12,7 @@ class TheaterSortUiModule {
 
     @ActivityScope
     @Provides
-    internal fun presenter(theaterSetting: TheaterSetting): TheaterSortContract.Presenter {
-        return TheaterSortPresenter(theaterSetting)
-    }
+    internal fun presenter(theaterSetting: TheaterSetting):
+            TheaterSortContract.Presenter =
+            TheaterSortPresenter(theaterSetting)
 }
