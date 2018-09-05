@@ -96,6 +96,7 @@ dependencies {
     // UI
     //implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation deps.glide.runtime
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
 
     // logging
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'
