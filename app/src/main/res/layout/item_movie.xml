@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <data>
+        <import type="android.view.View"/>
+        <import type="soup.movie.data.MovieExtKt" />
         <variable name="item" type="soup.movie.data.model.Movie" />
     </data>
 
@@ -83,7 +85,8 @@
                     android:textStyle="bold"
                     android:background="@drawable/bg_d_day"
                     android:backgroundTint="@color/grey"
-                    android:visibility="gone"
+                    android:text="@{MovieExtKt.getRemainDayLabel(item)}"
+                    android:visibility="@{MovieExtKt.isInOneWeek(item) ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="D-7"
