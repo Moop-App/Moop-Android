@@ -94,7 +94,6 @@ dependencies {
     implementation deps.rx_relay
 
     // UI
-    implementation 'com.hannesdorfmann.mosby3:mvi:3.1.0'
     //implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation deps.glide.runtime
 
