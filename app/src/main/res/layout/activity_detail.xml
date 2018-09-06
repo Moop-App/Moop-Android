@@ -106,12 +106,23 @@
             app:srcCompat="@drawable/ic_favorite" />
 
         <ImageButton
+            android:id="@+id/ticketButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:tint="@color/light_icon"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/timetableButton"
+            app:layout_constraintTop_toTopOf="@+id/timetableButton"
+            app:srcCompat="@drawable/ic_ticket" />
+
+        <ImageButton
             android:id="@+id/timetableButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:tint="@color/light_icon"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:transitionName="@string/transition_favorite"
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:layout_constraintTop_toTopOf="@+id/shareButton"

@@ -6,9 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import soup.movie.data.model.Movie
 
 /** YouTube */
 
@@ -37,6 +35,10 @@ fun Context.executeCgvApp() {
     if (executeApp(pkgName).not()) {
         executePlayStoreForApp(pkgName)
     }
+}
+
+fun Context.executeCgvWebPage(movie: Movie) {
+    executeWebPage("http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${movie.id}")
 }
 
 private fun Context.executeApp(pkgName: String): Boolean {

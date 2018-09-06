@@ -24,6 +24,7 @@ import soup.movie.data.getColorAsAge
 import soup.movie.data.getSimpleAgeLabel
 import soup.movie.data.model.Movie
 import soup.movie.databinding.ActivityDetailBinding
+import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
@@ -50,6 +51,9 @@ class DetailActivity :
 
     @Inject
     override lateinit var presenter: DetailContract.Presenter
+
+    @Inject
+    lateinit var useWebLinkSetting: UseWebLinkSetting
 
     private val listAdapter by lazy {
         DetailListAdapter(this@DetailActivity)
@@ -124,9 +128,16 @@ class DetailActivity :
         ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
         eggView.text = movie.egg
 
-        timetableButton.setOnClickListener { _ ->
+        ticketButton.setOnClickListener {
+            if (useWebLinkSetting.get()) {
+                executeCgvWebPage(movie)
+            } else {
+                executeCgvApp()
+            }
+        }
+        timetableButton.setOnClickListener {
             startActivity(Intent(this, TimetableActivity::class.java)
-                    .also { movie.saveTo(it) })
+                    .apply { movie.saveTo(this) })
         }
         shareButton.setOnClickListener {
             startActivity(createShareIntentWithText("공유하기", movie.toShareDescription()))
@@ -198,6 +209,7 @@ class DetailActivity :
             titleView.setTextColor(darkColor)
             eggView.setTextColor(darkColor)
             favoriteButton.setColorFilter(darkColor)
+            ticketButton.setColorFilter(darkColor)
             timetableButton.setColorFilter(darkColor)
             shareButton.setColorFilter(darkColor)
 
