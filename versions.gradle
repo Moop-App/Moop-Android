@@ -37,6 +37,7 @@ androidx.constraint_layout = "androidx.constraintlayout:constraintlayout:$versio
 androidx.material = "com.google.android.material:material:$versions.material"
 androidx.core = "androidx.core:core:$versions.androidx"
 androidx.legacy_support_core_ui = "androidx.legacy:legacy-support-core-ui:$versions.androidx"
+androidx.browser = "androidx.browser:browser:$versions.androidx"
 deps.androidx = androidx
 
 def retrofit = [:]
