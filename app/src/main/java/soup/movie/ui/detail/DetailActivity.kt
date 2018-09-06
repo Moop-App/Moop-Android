@@ -10,7 +10,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import androidx.annotation.ColorInt
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.ShareCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.postDelayed
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.load.DataSource
@@ -130,7 +132,8 @@ class DetailActivity :
 
         ticketButton.setOnClickListener {
             if (useWebLinkSetting.get()) {
-                executeCgvWebPage(movie)
+                //executeCgvWebPage(movie)
+                startCgvWebPageUsingCustomTab()
             } else {
                 executeCgvApp()
             }
@@ -240,6 +243,18 @@ class DetailActivity :
                 .setStream(imageUri)
                 .setType(mimeType)
                 .startChooser()
+    }
+
+    private fun startCgvWebPageUsingCustomTab() {
+        CustomTabsIntent.Builder()
+                .addDefaultShareMenuItem()
+                .setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent))
+                .setSecondaryToolbarColor(Color.BLACK)
+                .setShowTitle(true)
+                .setStartAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
+                .setExitAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
+                .build()
+                .launchUrl(this, Uri.parse("http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${movie.id}"))
     }
 
     companion object {
