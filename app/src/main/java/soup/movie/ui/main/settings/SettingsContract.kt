@@ -6,7 +6,7 @@ interface SettingsContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun setPaletteThemeSwitch(checked: Boolean)
+        fun setUsePaletteTheme(enabled: Boolean)
     }
 
     interface View : BaseContract.View {

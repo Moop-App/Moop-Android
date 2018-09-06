@@ -25,7 +25,7 @@ class SettingsPresenter(private val theaterSetting: TheaterSetting,
                 .subscribe { view?.render(it) })
     }
 
-    override fun setPaletteThemeSwitch(checked: Boolean) {
-        usePaletteThemeSetting.set(checked)
+    override fun setUsePaletteTheme(enabled: Boolean) {
+        usePaletteThemeSetting.set(enabled)
     }
 }

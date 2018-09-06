@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
-import soup.movie.settings.impl.MainTabSetting
+import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import javax.inject.Singleton
@@ -15,8 +15,8 @@ class SharedPreferencesModule {
 
     @Singleton
     @Provides
-    fun provideMainTabSetting(preferences: SharedPreferences): MainTabSetting =
-            MainTabSetting(preferences)
+    fun provideLastMainTabSetting(preferences: SharedPreferences): LastMainTabSetting =
+            LastMainTabSetting(preferences)
 
     @Singleton
     @Provides

@@ -2,9 +2,9 @@ package soup.movie.settings.impl
 
 import android.content.SharedPreferences
 import soup.movie.settings.PrefSetting
-import soup.movie.settings.impl.MainTabSetting.Tab
+import soup.movie.settings.impl.LastMainTabSetting.Tab
 
-class MainTabSetting(preferences: SharedPreferences) :
+class LastMainTabSetting(preferences: SharedPreferences) :
         PrefSetting<Tab>(preferences) {
 
     enum class Tab {
@@ -23,7 +23,7 @@ class MainTabSetting(preferences: SharedPreferences) :
 
     companion object {
 
-        private const val KEY = "main_tab"
+        private const val KEY = "last_main_tab"
         private val DEFAULT_VALUE = Tab.Now
     }
 }

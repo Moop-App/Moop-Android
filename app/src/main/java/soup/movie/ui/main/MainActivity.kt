@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.databinding.ActivityMainBinding
-import soup.movie.settings.impl.MainTabSetting
+import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.main.MainViewState.*
 import soup.movie.ui.main.now.NowFragment
@@ -72,12 +72,12 @@ class MainActivity :
                 .commit()
     }
 
-    private fun parseToTabMode(@IdRes itemId: Int): MainTabSetting.Tab =
+    private fun parseToTabMode(@IdRes itemId: Int): LastMainTabSetting.Tab =
             when (itemId) {
-                R.id.action_now -> MainTabSetting.Tab.Now
-                R.id.action_plan -> MainTabSetting.Tab.Plan
-                R.id.action_theaters -> MainTabSetting.Tab.Theaters
-                R.id.action_settings -> MainTabSetting.Tab.Settings
+                R.id.action_now -> LastMainTabSetting.Tab.Now
+                R.id.action_plan -> LastMainTabSetting.Tab.Plan
+                R.id.action_theaters -> LastMainTabSetting.Tab.Theaters
+                R.id.action_settings -> LastMainTabSetting.Tab.Settings
                 else -> throw IllegalStateException("Unknown resource ID")
             }
 }

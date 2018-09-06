@@ -49,8 +49,8 @@ class SettingsFragment :
         editTheaterButton.setOnClickListener {
             onTheaterEditClicked()
         }
-        paletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            presenter.setPaletteThemeSwitch(isChecked)
+        usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            presenter.setUsePaletteTheme(isChecked)
         }
     }
 
@@ -74,7 +74,7 @@ class SettingsFragment :
                 theaterGroup.addView(theaterChip)
             }
         }
-        paletteThemeSwitch.isChecked = viewState.usePaletteTheme
+        usePaletteThemeSwitch.isChecked = viewState.usePaletteTheme
     }
 
     private fun onTheaterEditClicked() {

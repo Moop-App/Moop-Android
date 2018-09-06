@@ -2,19 +2,19 @@ package soup.movie.ui.main
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
-import soup.movie.settings.impl.MainTabSetting
-import soup.movie.settings.impl.MainTabSetting.Tab
-import soup.movie.settings.impl.MainTabSetting.Tab.*
+import soup.movie.settings.impl.LastMainTabSetting
+import soup.movie.settings.impl.LastMainTabSetting.Tab
+import soup.movie.settings.impl.LastMainTabSetting.Tab.*
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.MainViewState.*
 
-class MainPresenter(private val mainTabSetting: MainTabSetting) :
+class MainPresenter(private val lastMainTabSetting: LastMainTabSetting) :
         BasePresenter<MainContract.View>(),
         MainContract.Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
-        disposable.add(mainTabSetting
+        disposable.add(lastMainTabSetting
                 .asObservable()
                 .distinctUntilChanged()
                 .map { mapToViewState(it) }
@@ -31,6 +31,6 @@ class MainPresenter(private val mainTabSetting: MainTabSetting) :
             }
 
     override fun setCurrentTab(mode: Tab) {
-        mainTabSetting.set(mode)
+        lastMainTabSetting.set(mode)
     }
 }
