@@ -8,6 +8,7 @@ import dagger.Provides
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
+import soup.movie.settings.impl.UseWebLinkSetting
 import javax.inject.Singleton
 
 @Module
@@ -27,6 +28,11 @@ class SharedPreferencesModule {
     @Provides
     fun provideUsePaletteThemeSetting(preferences: SharedPreferences): UsePaletteThemeSetting =
             UsePaletteThemeSetting(preferences)
+
+    @Singleton
+    @Provides
+    fun provideUseWebLinkSetting(preferences: SharedPreferences): UseWebLinkSetting =
+            UseWebLinkSetting(preferences)
 
     @Singleton
     @Provides

@@ -114,6 +114,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/themeCategory" />
 
+            <View
+                android:id="@+id/labDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/settings_margin_between_category"
+                android:background="@color/dividerColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme"/>
+
+            <TextView
+                android:id="@+id/labCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/settings_margin_between_category"
+                android:text="@string/settings_category_lab"
+                android:textAppearance="@style/TextAppearance.Settings.Category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labDivider" />
+
             <Switch
                 android:id="@+id/usePaletteThemeSwitch"
                 android:layout_width="0dp"
@@ -123,7 +144,18 @@
                 android:text="영화 세부정보 화면에 포스터 색상으로 배경설정"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/theme" />
+                app:layout_constraintTop_toBottomOf="@+id/labCategory" />
+
+            <Switch
+                android:id="@+id/useWebLinkSwitch"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/settings_margin_in_category"
+                android:checked="true"
+                android:text="링크를 눌렀을 때 영화관 웹 페이지로 이동"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usePaletteThemeSwitch" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

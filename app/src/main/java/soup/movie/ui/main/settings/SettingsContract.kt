@@ -7,6 +7,8 @@ interface SettingsContract {
     interface Presenter : BaseContract.Presenter<View> {
 
         fun setUsePaletteTheme(enabled: Boolean)
+
+        fun setUseWebLink(enabled: Boolean)
     }
 
     interface View : BaseContract.View {

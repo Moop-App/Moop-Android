@@ -4,4 +4,5 @@ import soup.movie.data.model.Theater
 
 data class SettingsViewState(
         val theaterList: List<Theater>,
-        val usePaletteTheme: Boolean)
+        val usePaletteTheme: Boolean,
+        val useWebLink: Boolean)

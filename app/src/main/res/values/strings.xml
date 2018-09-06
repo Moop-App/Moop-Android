@@ -13,6 +13,7 @@
     <string name="settings_category_theater">Favorite Theaters</string>
     <string name="settings_theater_empty_description">There are no favorite theaters.</string>
     <string name="settings_category_theme">Theme</string>
+    <string name="settings_category_lab">Lab</string>
 
     <string name="theater_sort_title">Theater Order Setting</string>
     <string name="action_edit">Edit</string>

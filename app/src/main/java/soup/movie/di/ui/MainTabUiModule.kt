@@ -7,6 +7,7 @@ import soup.movie.data.MoobRepository
 import soup.movie.di.scope.FragmentScope
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
+import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.main.now.NowContract
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.now.NowPresenter
@@ -83,8 +84,9 @@ abstract class MainTabUiModule {
         @FragmentScope
         @Provides
         fun presenter(theaterSetting: TheaterSetting,
-                      usePaletteThemeSetting: UsePaletteThemeSetting):
+                      usePaletteThemeSetting: UsePaletteThemeSetting,
+                      useWebLinkSetting: UseWebLinkSetting):
                 SettingsContract.Presenter =
-                SettingsPresenter(theaterSetting, usePaletteThemeSetting)
+                SettingsPresenter(theaterSetting, usePaletteThemeSetting, useWebLinkSetting)
     }
 }

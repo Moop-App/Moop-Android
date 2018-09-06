@@ -52,6 +52,9 @@ class SettingsFragment :
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUsePaletteTheme(isChecked)
         }
+        useWebLinkSwitch.setOnCheckedChangeListener { _, isChecked ->
+            presenter.setUseWebLink(isChecked)
+        }
     }
 
     override fun render(viewState: SettingsViewState) {
@@ -75,6 +78,7 @@ class SettingsFragment :
             }
         }
         usePaletteThemeSwitch.isChecked = viewState.usePaletteTheme
+        useWebLinkSwitch.isChecked = viewState.useWebLink
     }
 
     private fun onTheaterEditClicked() {
