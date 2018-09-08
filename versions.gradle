@@ -101,7 +101,7 @@ build_versions.versionCode = 2
 build_versions.versionName = '0.1.1'
 ext.build_versions = build_versions
 
-def addProjectRepositories(RepositoryHandler handler) {
+static def addProjectRepositories(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.mavenCentral()
@@ -111,7 +111,7 @@ def addProjectRepositories(RepositoryHandler handler) {
 }
 ext.addProjectRepositories = this.&addProjectRepositories
 
-def addAppRepositories(RepositoryHandler handler) {
+static def addAppRepositories(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.mavenCentral()
