@@ -18,11 +18,11 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/theaterChip"
+            style="@style/Widget.Chip.Cgv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{item.name}"
-            android:textAppearance="@style/TextAppearance.Chip.Cgv"
             android:tag="@{item.code}"
             android:transitionName="@{item.code}"
             app:chipBackgroundColor="@color/bgCgv"

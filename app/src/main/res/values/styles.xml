@@ -49,16 +49,47 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.Chip.Cgv">
+    <style name="Widget.Chip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:textAppearance">@style/TextAppearance.Chip</item>
+    </style>
+
+    <style name="Widget.Chip.Cgv">
         <item name="android:textColor">@color/textCgv</item>
+        <item name="chipBackgroundColor">@color/bgCgv</item>
+        <item name="chipStrokeColor">@color/grey_200</item>
+        <item name="chipStrokeWidth">1dp</item>
     </style>
 
-    <style name="TextAppearance.Chip.Lotte">
+    <style name="Widget.Chip.Lotte">
         <item name="android:textColor">@color/textLotte</item>
+        <item name="chipBackgroundColor">@color/bgLotte</item>
     </style>
 
-    <style name="TextAppearance.Chip.Megabox">
+    <style name="Widget.Chip.Megabox">
         <item name="android:textColor">@color/textMegabox</item>
+        <item name="chipBackgroundColor">@color/bgMegabox</item>
+    </style>
+
+    <style name="Widget.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:textAppearance">@style/TextAppearance.Chip</item>
+    </style>
+
+    <style name="Widget.Chip.Filter.Cgv">
+        <item name="android:textColor">@color/textCgv</item>
+        <item name="chipBackgroundColor">@color/bgCgv</item>
+        <item name="chipStrokeColor">@color/grey_200</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipIcon">@drawable/ic_place</item>
+    </style>
+
+    <style name="Widget.Chip.Filter.Lotte">
+        <item name="android:textColor">@color/textLotte</item>
+        <item name="chipBackgroundColor">@color/bgLotte</item>
+    </style>
+
+    <style name="Widget.Chip.Filter.Megabox">
+        <item name="android:textColor">@color/textMegabox</item>
+        <item name="chipBackgroundColor">@color/bgMegabox</item>
     </style>
 
 </resources>

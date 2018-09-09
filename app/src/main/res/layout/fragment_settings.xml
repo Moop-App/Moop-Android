@@ -66,9 +66,9 @@
 
                 <!-- for preview -->
 
-                <include layout="@layout/chip_cgv" />
-                <include layout="@layout/chip_lotte" />
-                <include layout="@layout/chip_megabox" />
+                <include layout="@layout/chip_action_cgv" />
+                <include layout="@layout/chip_action_lotte" />
+                <include layout="@layout/chip_action_megabox" />
 
             </com.google.android.material.chip.ChipGroup>
 
