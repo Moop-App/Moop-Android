@@ -25,16 +25,21 @@ internal class TheaterEditListAdapter(selectedItems: List<Theater>) :
                 inflate<Chip>(context, R.layout.chip_filter_cgv).apply {
                     text = it.name
                     isChecked = selectedItemSet.contains(it)
+                    isChipIconEnabled = !selectedItemSet.contains(it)
                     setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
                             if (selectedItemSet.size < MAX_ITEMS) {
                                 selectedItemSet.add(it)
+                                isChipIconEnabled = false
                             } else {
+                                this.isChecked = false
                                 val message = context.getString(R.string.theater_select_limit_description, MAX_ITEMS)
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                             }
+                        } else {
+                            selectedItemSet.remove(it)
+                            isChipIconEnabled = true
                         }
-                        else selectedItemSet.remove(it)
                     }
                 }
             }.forEach { addView(it) }
