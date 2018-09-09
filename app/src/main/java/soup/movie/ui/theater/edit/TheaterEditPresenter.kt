@@ -30,15 +30,13 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
                 theaterSetting.asObservable(),
                 BiFunction(::TheaterEditViewState))
 
-    private val allTheatersObservable: Observable<List<Theater>>
+    private val allTheatersObservable: Observable<List<AreaGroup>>
         get() = moobRepository.getCodeList(CodeRequest)
                 .flatMapIterable {
                     (cgv, _, _) ->
-                    val areas = mutableListOf<AreaGroup>()
-                    areas.addAll(cgv.list)
+                    cgv.list.toMutableList()
 //                    areas.addAll(lotte.list)
 //                    areas.addAll(megabox.list)
-                    areas.flatMap { it.theaterList }.toList()
                 }
                 .toList()
                 .toObservable()

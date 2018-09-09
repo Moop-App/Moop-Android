@@ -1,76 +1,50 @@
 package soup.movie.ui.theater.edit
 
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_multiple_choice.view.*
+import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.item_area_group.view.*
 import soup.movie.R
+import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
+import soup.movie.ui.helper.databinding.DataBindingAdapter
+import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.inflate
 
-internal class TheaterEditListAdapter(
-        private val allItems: List<Theater>, selectedItems: List<Theater>) :
-        RecyclerView.Adapter<TheaterEditListAdapter.ViewHolder>() {
+internal class TheaterEditListAdapter(selectedItems: List<Theater>) :
+        DataBindingAdapter<AreaGroup>() {
 
-    private val selectedItemMap: HashMap<String, Theater>
-            = createSelectedItemMapFrom(selectedItems)
+    private val selectedItemSet: MutableSet<Theater> = selectedItems.toHashSet()
 
-    val selectedTheaters: List<Theater>
-        get() = ArrayList(selectedItemMap.values)
+    fun getSelectedTheaters(): List<Theater> = selectedItemSet.toList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(parent).also {
-                it.itemView.checkedTextView.apply {
-                    setOnClickListener { _ ->
-                        val theaterItem = allItems[it.adapterPosition]
-                        when {
-                            isChecked -> {
-                                selectedItemMap.remove(theaterItem.code)
-                                isChecked = false
-                            }
-                            selectedItemMap.size < MAX_ITEMS -> {
-                                selectedItemMap[theaterItem.code] = theaterItem
-                                isChecked = true
-                            }
-                            else -> {
-                                val message = parent.context.getString(R.string.theater_select_limit_description, MAX_ITEMS)
-                                Toast.makeText(parent.context, message, Toast.LENGTH_SHORT).show()
+    override fun onBindViewHolder(holder: DataBindingViewHolder<AreaGroup>, position: Int) {
+        super.onBindViewHolder(holder, position)
+        holder.itemView.theaterListView.apply {
+            removeAllViews()
+            getItem(position).theaterList.map {
+                inflate<Chip>(context, R.layout.chip_filter_cgv).apply {
+                    text = it.name
+                    isChecked = selectedItemSet.contains(it)
+                    setOnCheckedChangeListener { _, isChecked ->
+                        if (isChecked) {
+                            if (selectedItemSet.size < MAX_ITEMS) {
+                                selectedItemSet.add(it)
+                            } else {
+                                val message = context.getString(R.string.theater_select_limit_description, MAX_ITEMS)
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                             }
                         }
+                        else selectedItemSet.remove(it)
                     }
                 }
-            }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(allItems[position])
-    }
-
-    override fun getItemCount(): Int {
-        return allItems.size
-    }
-
-    internal inner class ViewHolder(parent: ViewGroup) :
-            RecyclerView.ViewHolder(parent.inflate(R.layout.item_multiple_choice)) {
-
-        fun bindItem(theater: Theater) {
-            itemView.checkedTextView?.apply {
-                text = theater.name
-                isChecked = selectedItemMap.containsKey(theater.code)
-            }
+            }.forEach { addView(it) }
         }
     }
+
+    override fun getItemViewType(position: Int): Int = R.layout.item_area_group
 
     companion object {
 
         private const val MAX_ITEMS = 10
-
-        private fun createSelectedItemMapFrom(
-                selectedItems: List<Theater>): HashMap<String, Theater> {
-            val itemMap = HashMap<String, Theater>()
-            for (tc in selectedItems) {
-                itemMap[tc.code] = tc
-            }
-            return itemMap
-        }
     }
 }

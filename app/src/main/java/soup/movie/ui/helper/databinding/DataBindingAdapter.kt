@@ -25,7 +25,7 @@ abstract class DataBindingAdapter<T> :
         notifyDataSetChanged()
     }
 
-    private fun getItem(position: Int): T = list[position]
+    fun getItem(position: Int): T = list[position]
 
     final override fun getItemCount(): Int = list.size
 }

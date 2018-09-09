@@ -24,14 +24,13 @@ class TheaterEditActivity :
 
     override fun render(viewState: TheaterEditViewState) {
         viewState.printRenderLog()
-        listAdapter = TheaterEditListAdapter(
-                viewState.allTheaters,
-                viewState.selectedTheaters)
+        listAdapter = TheaterEditListAdapter(viewState.selectedTheaters)
+        listAdapter.submitList(viewState.areaGroups)
         listView.adapter = listAdapter
     }
 
     fun onConfirmClicked(view: View) {
-        presenter.onConfirmClicked(listAdapter.selectedTheaters)
+        presenter.onConfirmClicked(listAdapter.getSelectedTheaters())
         finish()
     }
 }
