@@ -1,5 +1,6 @@
 package soup.movie.util
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -34,3 +35,10 @@ fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>)
             .into(this)
 }
 
+@Suppress("UNCHECKED_CAST")
+fun <T : View> inflate(context: Context, @LayoutRes resource: Int): T =
+        View.inflate(context, resource, null) as T
+
+@Suppress("UNCHECKED_CAST")
+fun <T : View> inflate(context: Context, @LayoutRes resource: Int, root: ViewGroup): T =
+        View.inflate(context, resource, root) as T

@@ -15,6 +15,7 @@ import soup.movie.R
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
+import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
 
@@ -70,11 +71,12 @@ class SettingsFragment :
             theaterGroup.visibility = View.VISIBLE
 
             for ((code, name) in theaters) {
-                val theaterChip = View.inflate(context, R.layout.chip_cgv, null) as Chip
-                theaterChip.text = name
-                theaterChip.transitionName = code
-                theaterChip.tag = code
-                theaterGroup.addView(theaterChip)
+                inflate<Chip>(context!!, R.layout.chip_action_cgv).apply {
+                    text = name
+                    transitionName = code
+                    tag = code
+                    theaterGroup.addView(this)
+                }
             }
         }
         usePaletteThemeSwitch.isChecked = viewState.usePaletteTheme
