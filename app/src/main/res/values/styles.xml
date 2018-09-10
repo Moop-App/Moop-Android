@@ -75,12 +75,13 @@
     </style>
 
     <style name="Widget.Chip.Filter.Cgv">
-        <item name="android:textColor">@color/textCgv</item>
+        <item name="android:textColor">@color/selector_chip_filter_cgv</item>
         <item name="checkedIcon">@drawable/ic_check_cgv</item>
         <item name="chipBackgroundColor">@color/bgCgv</item>
         <item name="chipIcon">@drawable/ic_logo_cgv</item>
         <item name="chipStrokeColor">@color/grey_200</item>
         <item name="chipStrokeWidth">1dp</item>
+        <item name="rippleColor">@color/red_200</item>
     </style>
 
     <style name="Widget.Chip.Filter.Lotte">
