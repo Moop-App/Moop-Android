@@ -12,18 +12,18 @@ import soup.movie.ui.main.now.NowViewState.DoneState
 class NowPresenter(private val moobRepository: MoobRepository) :
         BasePresenter<View>(), Presenter {
 
-    private val refreshRelay = BehaviorRelay.createDefault(Unit)
+    private val refreshRelay = BehaviorRelay.createDefault(false)
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         disposable.add(refreshRelay
-                .switchMap { moobRepository.getNowList() }
+                .switchMap { moobRepository.getNowList(it) }
                 .map { DoneState(it.list) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
     }
 
     override fun refresh() {
-        refreshRelay.accept(Unit)
+        refreshRelay.accept(true)
     }
 }
