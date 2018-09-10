@@ -86,6 +86,10 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.dagger.android_support_compiler
 
+    implementation deps.room.runtime
+    implementation deps.room.rxjava2
+    kapt deps.room.compiler
+
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
     implementation deps.retrofit.rxjava2
