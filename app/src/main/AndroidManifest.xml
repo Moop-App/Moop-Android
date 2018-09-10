@@ -42,7 +42,8 @@
             android:label="@string/theater_sort_title" />
         <activity
             android:name=".ui.theater.edit.TheaterEditActivity"
-            android:theme="@style/AppTheme.TheaterEdit" />
+            android:theme="@style/AppTheme.TheaterEdit"
+            android:label="@string/theater_edit_title" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

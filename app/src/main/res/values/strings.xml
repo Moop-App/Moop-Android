@@ -18,6 +18,8 @@
     <string name="theater_sort_title">Theater Order Setting</string>
     <string name="action_edit">Edit</string>
 
+    <string name="theater_edit_title">Edit Favorite Theaters</string>
+
     <string name="theater_select_limit_description">The favorite theaters\'s count is limited to %d.\nIf wants to add more, remove seleted items.</string>
 
     <string name="theater_select_title">Select theater</string>

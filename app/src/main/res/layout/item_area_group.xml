@@ -11,6 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         tools:background="@color/debug_background" >
 
@@ -40,11 +42,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:visibility="visible" >
 
-            <!-- for preview -->
+            <!-- for preview
 
             <include layout="@layout/chip_filter_cgv" />
             <include layout="@layout/chip_filter_lotte" />
             <include layout="@layout/chip_filter_megabox" />
+             -->
 
         </com.google.android.material.chip.ChipGroup>
 
