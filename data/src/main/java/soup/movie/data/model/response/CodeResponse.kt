@@ -1,4 +1,4 @@
-package soup.movie.data.response
+package soup.movie.data.model.response
 
 import soup.movie.data.model.CodeGroup
 

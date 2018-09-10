@@ -1,9 +1,9 @@
-package soup.movie.data.converter
+package soup.movie.data.model.converter
 
 import com.google.gson.*
 import soup.movie.data.model.Day
 import soup.movie.data.model.TimeTable
-import soup.movie.data.response.TimeTableResponse
+import soup.movie.data.model.response.TimeTableResponse
 import java.lang.reflect.Type
 
 class TimeTableResponseDeserializer : JsonDeserializer<TimeTableResponse> {

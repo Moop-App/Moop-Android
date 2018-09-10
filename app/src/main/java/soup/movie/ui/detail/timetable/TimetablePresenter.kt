@@ -4,9 +4,9 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.subjects.BehaviorSubject
-import soup.movie.data.MoobRepository
 import soup.movie.data.model.Movie
-import soup.movie.data.request.TimeTableRequest
+import soup.movie.data.model.request.TimeTableRequest
+import soup.movie.data.source.MoobRepository
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.timetable.TimetableViewState.*

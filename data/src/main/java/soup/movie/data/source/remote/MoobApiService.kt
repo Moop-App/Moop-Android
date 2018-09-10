@@ -1,22 +1,21 @@
-package soup.movie.data.service
+package soup.movie.data.source.remote
 
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
-import soup.movie.data.response.CodeResponse
-import soup.movie.data.response.NowMovieResponse
-import soup.movie.data.response.PlanMovieResponse
-import soup.movie.data.response.TimeTableResponse
+import soup.movie.data.model.response.CodeResponse
+import soup.movie.data.model.response.MovieListResponse
+import soup.movie.data.model.response.TimeTableResponse
 
 interface MoobApiService {
 
     // 현재상영작
     @GET("v1/cgv/now/asTicketRate/nowOnly.json")
-    fun getNowList(): Observable<NowMovieResponse>
+    fun getNowMovieList(): Observable<MovieListResponse>
 
     // 개봉예정작
     @GET("v1/cgv/plan/asOpenDate.json")
-    fun getPlanList(): Observable<PlanMovieResponse>
+    fun getPlanMovieList(): Observable<MovieListResponse>
 
     // 공통코드
     @GET("v1/code.json")

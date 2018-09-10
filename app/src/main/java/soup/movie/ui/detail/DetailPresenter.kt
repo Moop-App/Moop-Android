@@ -5,13 +5,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
-import soup.movie.util.ImageUriProvider
 import soup.movie.data.model.Movie
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.DetailContract.Presenter
 import soup.movie.ui.detail.DetailContract.View
 import soup.movie.ui.detail.DetailViewState.DoneState
+import soup.movie.util.ImageUriProvider
 
 class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting,
                       private var imageUriProvider: ImageUriProvider) :
