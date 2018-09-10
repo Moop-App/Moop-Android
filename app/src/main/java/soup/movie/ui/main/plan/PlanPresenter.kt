@@ -8,6 +8,7 @@ import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.plan.PlanContract.Presenter
 import soup.movie.ui.main.plan.PlanContract.View
 import soup.movie.ui.main.plan.PlanViewState.DoneState
+import soup.movie.ui.main.plan.PlanViewState.LoadingState
 
 class PlanPresenter(private val moobRepository: MoobRepository) :
         BasePresenter<View>(), Presenter {
@@ -19,6 +20,8 @@ class PlanPresenter(private val moobRepository: MoobRepository) :
         disposable.add(refreshRelay
                 .switchMap { moobRepository.getPlanList(it) }
                 .map { DoneState(it.list) }
+                .cast(PlanViewState::class.java)
+                .startWith(LoadingState)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
     }
