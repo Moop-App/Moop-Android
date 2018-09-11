@@ -19,6 +19,13 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.kakao.kakaolink.v2.KakaoLinkResponse
+import com.kakao.kakaolink.v2.KakaoLinkService
+import com.kakao.message.template.ContentObject
+import com.kakao.message.template.FeedTemplate
+import com.kakao.message.template.LinkObject
+import com.kakao.network.ErrorResult
+import com.kakao.network.callback.ResponseCallback
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import soup.movie.R
@@ -32,7 +39,6 @@ import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.util.*
-import soup.movie.util.IntentUtil.createShareIntentWithText
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
 import soup.widget.elastic.ElasticDragDismissFrameLayout
@@ -143,9 +149,7 @@ class DetailActivity :
             startActivity(Intent(this, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
         }
-        shareButton.setOnClickListener {
-            startActivity(createShareIntentWithText("공유하기", movie.toShareDescription()))
-        }
+        shareButton.setOnClickListener { share(movie) }
 
         listView.apply {
             adapter = listAdapter
@@ -257,6 +261,26 @@ class DetailActivity :
                 .setExitAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
                 .build()
                 .launchUrl(this, Uri.parse("http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${movie.id}"))
+    }
+
+    private fun share(movie: Movie) {
+        //startActivity(createShareIntentWithText("공유하기", movie.toShareDescription()))
+        val params = FeedTemplate.newBuilder(
+                ContentObject.newBuilder("영화 포스터", movie.poster,
+                        LinkObject.newBuilder()
+                                .setWebUrl("http://www.cgv.co.kr/movies/detail-view/?midx=${movie.id}")
+                                .setMobileWebUrl("http://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=${movie.id}")
+                                .build())
+                        .setDescrption(movie.title)
+                        .build())
+                .build()
+        KakaoLinkService.getInstance().sendDefault(this, params,
+                object : ResponseCallback<KakaoLinkResponse>() {
+            override fun onFailure(errorResult: ErrorResult) {
+                Timber.e(errorResult.toString())
+            }
+            override fun onSuccess(result: KakaoLinkResponse) {}
+        })
     }
 
     companion object {
