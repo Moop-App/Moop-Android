@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.databinding.ActivityMainBinding
-import soup.movie.settings.impl.LastMainTabSetting
+import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.main.MainViewState.*
 import soup.movie.ui.main.now.NowFragment
@@ -36,6 +36,12 @@ class MainActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
+        //TODO: refactor this
+        when (intent.action) {
+            "soup.movie.action.Nearby" -> {
+                presenter.setCurrentTab(Tab.Theaters)
+            }
+        }
         bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
             presenter.setCurrentTab(parseToTabMode(it.itemId))
@@ -47,21 +53,27 @@ class MainActivity :
         viewState.printRenderLog()
         when (viewState) {
             is NowState -> {
-                bottomNavigation.selectedItemId = R.id.action_now
+                updateSelectedItem(R.id.action_now)
                 commit(NowFragment.newInstance())
             }
             is PlanState -> {
-                bottomNavigation.selectedItemId = R.id.action_plan
+                updateSelectedItem(R.id.action_plan)
                 commit(PlanFragment.newInstance())
             }
             is TheatersState -> {
-                bottomNavigation.selectedItemId = R.id.action_theaters
+                updateSelectedItem(R.id.action_theaters)
                 commit(TheatersFragment.newInstance())
             }
             is SettingsState -> {
-                bottomNavigation.selectedItemId = R.id.action_settings
+                updateSelectedItem(R.id.action_settings)
                 commit(SettingsFragment.newInstance())
             }
+        }
+    }
+
+    private fun updateSelectedItem(@IdRes itemId: Int) {
+        if (bottomNavigation.selectedItemId != itemId) {
+            bottomNavigation.selectedItemId = itemId
         }
     }
 
@@ -72,12 +84,12 @@ class MainActivity :
                 .commit()
     }
 
-    private fun parseToTabMode(@IdRes itemId: Int): LastMainTabSetting.Tab =
+    private fun parseToTabMode(@IdRes itemId: Int): Tab =
             when (itemId) {
-                R.id.action_now -> LastMainTabSetting.Tab.Now
-                R.id.action_plan -> LastMainTabSetting.Tab.Plan
-                R.id.action_theaters -> LastMainTabSetting.Tab.Theaters
-                R.id.action_settings -> LastMainTabSetting.Tab.Settings
+                R.id.action_now -> Tab.Now
+                R.id.action_plan -> Tab.Plan
+                R.id.action_theaters -> Tab.Theaters
+                R.id.action_settings -> Tab.Settings
                 else -> throw IllegalStateException("Unknown resource ID")
             }
 }

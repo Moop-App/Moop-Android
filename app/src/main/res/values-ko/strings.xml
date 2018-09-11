@@ -3,7 +3,7 @@
 
     <string name="tab_now">현재상영</string>
     <string name="tab_plan">개봉예정</string>
-    <string name="tab_theaters">극장</string>
+    <string name="tab_theaters">주변극장</string>
     <string name="tab_settings">설정</string>
 
     <string name="action_share">공유하기</string>
@@ -26,4 +26,8 @@
     <string name="theater_select_description">선호하는 극장을 선택해주세요</string>
     <string name="theater_select_action_confirm">완료</string>
     <string name="theater_select_action_cancel">취소</string>
+
+    <string name="shortcut_search_short_label">주변극장</string>
+    <string name="shortcut_search_long_label">주변극장</string>
+    <string name="shortcut_search_disabled">주변극장</string>
 </resources>

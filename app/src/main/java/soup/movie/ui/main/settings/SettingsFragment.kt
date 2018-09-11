@@ -62,20 +62,20 @@ class SettingsFragment :
         viewState.printRenderLog()
         val theaters = viewState.theaterList
         if (theaters.isEmpty()) {
-            noTheaterView.visibility = View.VISIBLE
-            theaterGroup.removeAllViews()
-            theaterGroup.visibility = View.GONE
+            noTheaterView?.visibility = View.VISIBLE
+            theaterGroup?.removeAllViews()
+            theaterGroup?.visibility = View.GONE
         } else {
-            noTheaterView.visibility = View.GONE
-            theaterGroup.removeAllViews()
-            theaterGroup.visibility = View.VISIBLE
+            noTheaterView?.visibility = View.GONE
+            theaterGroup?.removeAllViews()
+            theaterGroup?.visibility = View.VISIBLE
 
             for ((code, name) in theaters) {
                 inflate<Chip>(context!!, R.layout.chip_action_cgv).apply {
                     text = name
                     transitionName = code
                     tag = code
-                    theaterGroup.addView(this)
+                    theaterGroup?.addView(this)
                 }
             }
         }

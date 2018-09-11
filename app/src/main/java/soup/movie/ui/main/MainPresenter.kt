@@ -7,6 +7,7 @@ import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.settings.impl.LastMainTabSetting.Tab.*
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.MainViewState.*
+import timber.log.Timber
 
 class MainPresenter(private val lastMainTabSetting: LastMainTabSetting) :
         BasePresenter<MainContract.View>(),
@@ -31,6 +32,7 @@ class MainPresenter(private val lastMainTabSetting: LastMainTabSetting) :
             }
 
     override fun setCurrentTab(mode: Tab) {
+        Timber.d("setCurrentTab: %s", mode)
         lastMainTabSetting.set(mode)
     }
 }

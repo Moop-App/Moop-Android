@@ -50,12 +50,12 @@ class PlanFragment
         viewState.printRenderLog()
         when (viewState) {
             is LoadingState -> {
-                swipeRefreshLayout.isRefreshing = true
-                listView.visibility = GONE
+                swipeRefreshLayout?.isRefreshing = true
+                listView?.visibility = GONE
             }
             is DoneState -> {
-                swipeRefreshLayout.isRefreshing = false
-                listView.visibility = VISIBLE
+                swipeRefreshLayout?.isRefreshing = false
+                listView?.visibility = VISIBLE
                 listAdapter.submitList(viewState.movies)
             }
         }

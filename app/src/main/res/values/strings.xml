@@ -26,4 +26,8 @@
     <string name="theater_select_description">Please select the favorite theaters</string>
     <string name="theater_select_action_confirm">Confirm</string>
     <string name="theater_select_action_cancel">Cancel</string>
+
+    <string name="shortcut_search_short_label">Theater</string>
+    <string name="shortcut_search_long_label">Theater</string>
+    <string name="shortcut_search_disabled">Theater</string>
 </resources>
