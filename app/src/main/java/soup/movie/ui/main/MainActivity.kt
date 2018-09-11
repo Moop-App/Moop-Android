@@ -81,7 +81,7 @@ class MainActivity :
         supportFragmentManager.beginTransaction().disallowAddToBackStack()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .replace(R.id.container, fragment, fragment.javaClass.simpleName)
-                .commit()
+                .commitAllowingStateLoss()
     }
 
     private fun parseToTabMode(@IdRes itemId: Int): Tab =
