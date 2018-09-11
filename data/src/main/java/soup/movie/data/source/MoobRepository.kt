@@ -27,7 +27,7 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
                     .doOnNext { localDataSource.saveNowList(it) }
 
     fun getPlanList(clearCache: Boolean): Observable<MovieListResponse> = when {
-        clearCache -> getNowListFromNetwork()
+        clearCache -> getPlanListFromNetwork()
         else -> Observable.concat(
                 getPlanListFromDB(),
                 getPlanListFromNetwork())
