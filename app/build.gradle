@@ -18,7 +18,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // API Keys
-        buildConfigField 'String', 'KOBIS_API_KEY', "\"" + getKobisApiKey() + "\""
+        buildConfigField 'String', 'K_KEY', "\"" + getKey("kkey") + "\""
 
         def filesAuthorityValue = applicationId + '.shareprovider'
         buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
@@ -56,8 +56,8 @@ def getKeyProperties() {
     return properties
 }
 
-def getKobisApiKey() {
-    return getKeyProperties().getProperty("KobisApiKey")
+def getKey(propertyName) {
+    return getKeyProperties().getProperty(propertyName)
 }
 
 dependencies {
