@@ -33,7 +33,11 @@ fun Movie.getDDayLabel(): String = openDate()?.let {
     }
 } ?: ""
 
+fun Movie.eggIsOver95(): Boolean = (egg != "?") and (egg >= "95")
+
 fun Movie.hasUnknownEgg(): Boolean = egg == "?"
+
+fun Movie.isHot(): Boolean = eggIsOver95()
 
 fun Movie.isNew(): Boolean = isInTheThreeDays() or isInThePastWeek() and hasUnknownEgg()
 

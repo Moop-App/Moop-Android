@@ -22,7 +22,8 @@
             android:layout_marginBottom="4dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
-            android:foreground="?android:attr/selectableItemBackground" >
+            android:foreground="?android:attr/selectableItemBackground"
+            tools:layout_width="120dp" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -92,6 +93,19 @@
                     tools:text="NEW"
                     tools:visibility="visible"
                     tools:ignore="SpUsage" />
+
+                <!--
+                <ImageView
+                    android:id="@+id/hotView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_star"
+                    android:scaleType="centerCrop"
+                    android:visibility="@{MovieExtKt.isHot(item) ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+                 -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
