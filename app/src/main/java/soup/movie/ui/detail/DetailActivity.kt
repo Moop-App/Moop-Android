@@ -126,6 +126,7 @@ class DetailActivity :
             presenter.requestShareImage(movie.poster)
         }
         titleView.text = movie.title
+        openDateView.text = movie.openDate
         ageView.text = movie.getSimpleAgeLabel()
         ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
         eggView.text = movie.egg
@@ -210,6 +211,7 @@ class DetailActivity :
         if (theme.isDark.not()) { // make back icon dark on light images
             val darkColor = this@DetailActivity.getColorCompat(R.color.dark_icon)
             titleView.setTextColor(darkColor)
+            openDateView.setTextColor(darkColor)
             eggView.setTextColor(darkColor)
             favoriteButton.setColorFilter(darkColor)
             ticketButton.setColorFilter(darkColor)
