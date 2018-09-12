@@ -35,6 +35,7 @@ import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
 import soup.movie.ui.detail.timetable.TimetableActivity
+import soup.movie.util.IntentUtil.createShareIntent
 import soup.movie.util.delegates.contentView
 import soup.movie.util.getColorCompat
 import soup.movie.util.getColorStateListCompat
@@ -252,23 +253,27 @@ class DetailActivity :
     }
 
     private fun share(movie: Movie) {
-        //startActivity(createShareIntentWithText("공유하기", movie.toShareDescription()))
-        val params = FeedTemplate.newBuilder(
-                ContentObject.newBuilder("영화 포스터", movie.poster,
-                        LinkObject.newBuilder()
-                                .setWebUrl(Cgv.detailWebUrl(movie))
-                                .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))
-                                .build())
-                        .setDescrption(movie.title)
-                        .build())
-                .build()
-        KakaoLinkService.getInstance().sendDefault(this, params,
-                object : ResponseCallback<KakaoLinkResponse>() {
-            override fun onFailure(errorResult: ErrorResult) {
-                Timber.e(errorResult.toString())
-            }
-            override fun onSuccess(result: KakaoLinkResponse) {}
-        })
+        if (isInstalledApp(Kakao.PACKAGE_NAME)) {
+            val params = FeedTemplate.newBuilder(
+                    ContentObject.newBuilder("영화 포스터", movie.poster,
+                            LinkObject.newBuilder()
+                                    .setWebUrl(Cgv.detailWebUrl(movie))
+                                    .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))
+                                    .build())
+                            .setDescrption(movie.title)
+                            .build())
+                    .build()
+            KakaoLinkService.getInstance().sendDefault(this, params,
+                    object : ResponseCallback<KakaoLinkResponse>() {
+                        override fun onFailure(errorResult: ErrorResult) {
+                            Timber.e(errorResult.toString())
+                        }
+
+                        override fun onSuccess(result: KakaoLinkResponse) {}
+                    })
+        } else {
+            startActivity(createShareIntent("공유하기", movie.toShareDescription()))
+        }
     }
 
     companion object {

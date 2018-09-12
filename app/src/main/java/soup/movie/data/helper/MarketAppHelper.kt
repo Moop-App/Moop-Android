@@ -9,6 +9,12 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import soup.movie.R
 import soup.movie.data.model.Movie
+import android.content.pm.PackageManager
+
+fun Context.isInstalledApp(pkgName: String): Boolean {
+    return packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
+            .find { it?.packageName == pkgName } != null
+}
 
 fun Context.executeMarketApp(pkgName: String) {
     if (executeApp(pkgName).not()) {
