@@ -12,6 +12,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 
+/** View */
+
+@Suppress("UNCHECKED_CAST")
+fun <T : View> inflate(context: Context, @LayoutRes resource: Int): T =
+        View.inflate(context, resource, null) as T
+
+@Suppress("UNCHECKED_CAST")
+fun <T : View> inflate(context: Context, @LayoutRes resource: Int, root: ViewGroup): T =
+        View.inflate(context, resource, root) as T
+
 /** ViewGroup */
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View =
@@ -34,11 +44,3 @@ fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }
-
-@Suppress("UNCHECKED_CAST")
-fun <T : View> inflate(context: Context, @LayoutRes resource: Int): T =
-        View.inflate(context, resource, null) as T
-
-@Suppress("UNCHECKED_CAST")
-fun <T : View> inflate(context: Context, @LayoutRes resource: Int, root: ViewGroup): T =
-        View.inflate(context, resource, root) as T

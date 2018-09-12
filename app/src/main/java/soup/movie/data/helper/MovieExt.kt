@@ -1,11 +1,30 @@
-package soup.movie.data
+package soup.movie.data.helper
 
+import android.content.Intent
+import android.os.Bundle
 import androidx.annotation.ColorRes
+import com.google.gson.Gson
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period.between
 import org.threeten.bp.ZoneId
 import soup.movie.R
 import soup.movie.data.model.Movie
+
+private const val KEY_JSON = "json"
+
+fun Bundle.restoreFrom(): Movie? = getString(KEY_JSON)?.fromJson()
+
+fun Intent.restoreFrom(): Movie? = getStringExtra(KEY_JSON).fromJson()
+
+fun Movie.saveTo(bundle: Bundle) = bundle.putString(KEY_JSON, toJson())
+
+fun Movie.saveTo(intent: Intent): Intent = intent.putExtra(KEY_JSON, toJson())
+
+private fun Movie.toJson(): String = Gson().toJson(this)
+
+private fun String.fromJson(): Movie? = Gson().fromJson(this, Movie::class.java)
+
+fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n연령제한: $age"
 
 @ColorRes
 fun Movie.getColorAsAge(): Int = when (age) {

@@ -9,6 +9,8 @@ import android.view.View.VISIBLE
 import kotlinx.android.synthetic.main.activity_timetable.*
 import kotlinx.android.synthetic.main.activity_timetable.view.*
 import soup.movie.R
+import soup.movie.data.helper.restoreFrom
+import soup.movie.data.helper.saveTo
 import soup.movie.data.model.Movie
 import soup.movie.databinding.ActivityTimetableBinding
 import soup.movie.ui.BaseActivity
@@ -16,8 +18,6 @@ import soup.movie.ui.detail.timetable.TimetableViewState.*
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.restoreFrom
-import soup.movie.util.saveTo
 import timber.log.Timber
 import javax.inject.Inject
 

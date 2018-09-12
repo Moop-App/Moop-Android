@@ -6,7 +6,7 @@
 
     <data>
         <import type="android.view.View"/>
-        <import type="soup.movie.data.MovieExtKt" />
+        <import type="soup.movie.data.helper.MovieExtKt" />
         <variable name="item" type="soup.movie.data.model.Movie" />
     </data>
 

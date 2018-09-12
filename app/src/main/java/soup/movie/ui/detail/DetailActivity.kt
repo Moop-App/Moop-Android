@@ -10,9 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import androidx.annotation.ColorInt
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.ShareCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.postDelayed
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.load.DataSource
@@ -29,8 +27,7 @@ import com.kakao.network.callback.ResponseCallback
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import soup.movie.R
-import soup.movie.data.getColorAsAge
-import soup.movie.data.getSimpleAgeLabel
+import soup.movie.data.helper.*
 import soup.movie.data.model.Movie
 import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.settings.impl.UseWebLinkSetting
@@ -38,8 +35,10 @@ import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
 import soup.movie.ui.detail.timetable.TimetableActivity
-import soup.movie.util.*
 import soup.movie.util.delegates.contentView
+import soup.movie.util.getColorCompat
+import soup.movie.util.getColorStateListCompat
+import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
@@ -137,14 +136,7 @@ class DetailActivity :
         ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
         eggView.text = movie.egg
 
-        ticketButton.setOnClickListener {
-            if (useWebLinkSetting.get()) {
-                //executeCgvWebPage(movie)
-                startCgvWebPageUsingCustomTab()
-            } else {
-                executeCgvApp()
-            }
-        }
+        ticketButton.setOnClickListener { executeTicketLink() }
         timetableButton.setOnClickListener {
             startActivity(Intent(this, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
@@ -243,7 +235,7 @@ class DetailActivity :
     }
 
     override fun doShareImage(imageUri: Uri, mimeType: String) {
-        ShareCompat.IntentBuilder.from(this@DetailActivity)
+        ShareCompat.IntentBuilder.from(this)
                 .setChooserTitle(R.string.action_share_poster)
                 .setSubject(movie.title)
                 .setStream(imageUri)
@@ -251,16 +243,12 @@ class DetailActivity :
                 .startChooser()
     }
 
-    private fun startCgvWebPageUsingCustomTab() {
-        CustomTabsIntent.Builder()
-                .addDefaultShareMenuItem()
-                .setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent))
-                .setSecondaryToolbarColor(Color.BLACK)
-                .setShowTitle(true)
-                .setStartAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
-                .setExitAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
-                .build()
-                .launchUrl(this, Uri.parse("http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${movie.id}"))
+    private fun executeTicketLink() {
+        if (useWebLinkSetting.get()) {
+            executeWebPage(Cgv.reservationUrl(movie))
+        } else {
+            executeMarketApp(Cgv.PACKAGE_NAME)
+        }
     }
 
     private fun share(movie: Movie) {
@@ -268,8 +256,8 @@ class DetailActivity :
         val params = FeedTemplate.newBuilder(
                 ContentObject.newBuilder("영화 포스터", movie.poster,
                         LinkObject.newBuilder()
-                                .setWebUrl("http://www.cgv.co.kr/movies/detail-view/?midx=${movie.id}")
-                                .setMobileWebUrl("http://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=${movie.id}")
+                                .setWebUrl(Cgv.detailWebUrl(movie))
+                                .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))
                                 .build())
                         .setDescrption(movie.title)
                         .build())

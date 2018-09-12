@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.item_movie_now.view.*
 import soup.movie.R
-import soup.movie.data.getColorAsAge
+import soup.movie.data.helper.getColorAsAge
+import soup.movie.data.helper.saveTo
 import soup.movie.data.model.Movie
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.getColorStateListCompat
-import soup.movie.util.saveTo
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 class NowListAdapter(private val host: FragmentActivity) :
