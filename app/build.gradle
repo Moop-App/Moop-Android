@@ -103,7 +103,7 @@ dependencies {
     implementation deps.glide.runtime
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
 
-    implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.13.0'
+    implementation 'com.kakao.sdk:kakaolink:1.13.0'
 
     // logging
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'
