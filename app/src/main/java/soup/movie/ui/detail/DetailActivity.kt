@@ -127,9 +127,9 @@ class DetailActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        posterView.loadAsync(movie.poster, shotLoadListener)
+        posterView.loadAsync(movie.posterUrl, shotLoadListener)
         posterView.setOnClickListener {
-            presenter.requestShareImage(movie.poster)
+            presenter.requestShareImage(movie.posterUrl)
         }
         titleView.text = movie.title
         openDateView.text = movie.openDate
@@ -255,7 +255,7 @@ class DetailActivity :
     private fun share(movie: Movie) {
         if (isInstalledApp(Kakao.PACKAGE_NAME)) {
             val params = FeedTemplate.newBuilder(
-                    ContentObject.newBuilder("영화 포스터", movie.poster,
+                    ContentObject.newBuilder("영화 포스터", movie.posterUrl,
                             LinkObject.newBuilder()
                                     .setWebUrl(Cgv.detailWebUrl(movie))
                                     .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))

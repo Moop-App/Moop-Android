@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import soup.movie.data.model.converter.MovieListTypeConverter
 import soup.movie.data.model.response.CachedMovieList
 
-@Database(entities = [CachedMovieList::class], version = 1, exportSchema = false)
+@Database(entities = [CachedMovieList::class], version = 2, exportSchema = false)
 @TypeConverters(MovieListTypeConverter::class)
 abstract class MoobDatabase : RoomDatabase() {
 

@@ -44,6 +44,7 @@ class MoobRepositoryModule {
     internal fun provideDatabase(context: Context): MoobDatabase =
             Room.databaseBuilder(context.applicationContext,
                     MoobDatabase::class.java, "moob.db")
+                    .fallbackToDestructiveMigration()
                     .build()
 
     /* Remote */
