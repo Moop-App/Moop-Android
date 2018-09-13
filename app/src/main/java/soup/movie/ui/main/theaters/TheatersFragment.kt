@@ -22,7 +22,7 @@ class TheatersFragment :
             FragmentTheatersBinding.inflate(inflater, container, false).root
 
     override fun render(viewState: TheatersViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
     }
 
     companion object {

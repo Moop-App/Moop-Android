@@ -30,7 +30,7 @@ class TheaterEditActivity :
     }
 
     override fun render(viewState: TheaterEditViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         listAdapter.submitList(viewState.areaGroups, viewState.selectedTheaters)
     }
 

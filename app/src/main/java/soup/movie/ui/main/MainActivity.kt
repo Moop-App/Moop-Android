@@ -50,7 +50,7 @@ class MainActivity :
     }
 
     override fun render(viewState: MainViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         when (viewState) {
             is NowState -> {
                 updateSelectedItem(R.id.action_now)

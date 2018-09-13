@@ -45,7 +45,7 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
     }
 
     override fun render(viewState: NowViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         when (viewState) {
             is LoadingState -> {
                 swipeRefreshLayout?.isRefreshing = true

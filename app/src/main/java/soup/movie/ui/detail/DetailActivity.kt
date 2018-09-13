@@ -169,7 +169,7 @@ class DetailActivity :
     }
 
     override fun render(viewState: DetailViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         when (viewState) {
             is LoadingState -> {
                 //TODO: show loading state

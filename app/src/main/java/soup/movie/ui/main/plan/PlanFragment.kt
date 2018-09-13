@@ -47,7 +47,7 @@ class PlanFragment
     }
 
     override fun render(viewState: PlanViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         when (viewState) {
             is LoadingState -> {
                 swipeRefreshLayout?.isRefreshing = true

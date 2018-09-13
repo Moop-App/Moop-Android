@@ -70,7 +70,7 @@ class TimetableActivity :
     }
 
     override fun render(viewState: TimetableViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         return when (viewState) {
             is NoTheaterState -> {
                 noTheaterView.visibility = VISIBLE

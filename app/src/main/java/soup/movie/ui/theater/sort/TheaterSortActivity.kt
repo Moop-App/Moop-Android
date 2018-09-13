@@ -88,7 +88,7 @@ class TheaterSortActivity :
     }
 
     override fun render(viewState: TheaterSortViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         listAdapter.submitList(viewState.selectedTheaters)
     }
 

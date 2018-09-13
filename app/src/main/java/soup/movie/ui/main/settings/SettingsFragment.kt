@@ -60,7 +60,7 @@ class SettingsFragment :
     }
 
     override fun render(viewState: SettingsViewState) {
-        viewState.printRenderLog()
+        printRenderLog { viewState }
         val theaters = viewState.theaterList
         if (theaters.isEmpty()) {
             noTheaterView?.visibility = View.VISIBLE
