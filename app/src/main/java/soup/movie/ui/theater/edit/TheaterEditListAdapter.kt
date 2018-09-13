@@ -16,7 +16,7 @@ internal class TheaterEditListAdapter(selectedItems: List<Theater>) :
 
     private val selectedItemSet: MutableSet<Theater> = selectedItems.toHashSet()
 
-    fun getSelectedTheaters(): List<Theater> = selectedItemSet.toList()
+    fun getSelectedTheaters(): List<Theater> = selectedItemSet.toList().sortedBy { it.type }
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<AreaGroup>, position: Int) {
         super.onBindViewHolder(holder, position)
