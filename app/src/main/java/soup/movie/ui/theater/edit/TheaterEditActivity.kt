@@ -1,5 +1,6 @@
 package soup.movie.ui.theater.edit
 
+import android.content.Context
 import android.view.View
 import kotlinx.android.synthetic.main.activity_theater_edit.*
 import soup.movie.R
@@ -22,11 +23,15 @@ class TheaterEditActivity :
 
     private lateinit var listAdapter: TheaterEditListAdapter
 
+    override fun initViewState(ctx: Context) {
+        super.initViewState(ctx)
+        listAdapter = TheaterEditListAdapter()
+        listView.adapter = listAdapter
+    }
+
     override fun render(viewState: TheaterEditViewState) {
         viewState.printRenderLog()
-        listAdapter = TheaterEditListAdapter(viewState.selectedTheaters)
-        listAdapter.submitList(viewState.areaGroups)
-        listView.adapter = listAdapter
+        listAdapter.submitList(viewState.areaGroups, viewState.selectedTheaters)
     }
 
     fun onConfirmClicked(view: View) {

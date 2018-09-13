@@ -26,7 +26,7 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
     private val viewStateObservable: Observable<TheaterEditViewState>
         get() = Observable.combineLatest(
                 allTheatersObservable,
-                theaterSetting.asObservable(),
+                Observable.just(theaterSetting.get()),
                 BiFunction(::TheaterEditViewState))
 
     private val allTheatersObservable: Observable<List<AreaGroup>>

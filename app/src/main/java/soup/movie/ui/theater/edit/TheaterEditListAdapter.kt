@@ -11,10 +11,10 @@ import soup.movie.ui.helper.databinding.DataBindingAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.inflate
 
-internal class TheaterEditListAdapter(selectedItems: List<Theater>) :
+internal class TheaterEditListAdapter() :
         DataBindingAdapter<AreaGroup>() {
 
-    private val selectedItemSet: MutableSet<Theater> = selectedItems.toHashSet()
+    private var selectedItemSet: MutableSet<Theater> = hashSetOf()
 
     fun getSelectedTheaters(): List<Theater> = selectedItemSet.toList().sortedBy { it.type }
 
@@ -48,6 +48,11 @@ internal class TheaterEditListAdapter(selectedItems: List<Theater>) :
     }
 
     override fun getItemViewType(position: Int): Int = R.layout.item_area_group
+
+    fun submitList(list: List<AreaGroup>, selectedItems: List<Theater>) {
+        selectedItemSet = selectedItems.toHashSet()
+        submitList(list)
+    }
 
     companion object {
 
