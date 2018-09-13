@@ -12,6 +12,7 @@ import androidx.core.app.SharedElementCallback
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.R
+import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
@@ -70,14 +71,13 @@ class SettingsFragment :
             theaterGroup?.removeAllViews()
             theaterGroup?.visibility = View.VISIBLE
 
-            for ((code, name) in theaters) {
-                inflate<Chip>(context!!, R.layout.chip_action_cgv).apply {
-                    text = name
-                    transitionName = code
-                    tag = code
-                    theaterGroup?.addView(this)
+            theaters.map {
+                inflate<Chip>(context!!, it.getChipLayout()).apply {
+                    text = it.name
+                    transitionName = it.code
+                    tag = it.code
                 }
-            }
+            }.forEach { theaterGroup?.addView(it) }
         }
         usePaletteThemeSwitch.isChecked = viewState.usePaletteTheme
         useWebLinkSwitch.isChecked = viewState.useWebLink

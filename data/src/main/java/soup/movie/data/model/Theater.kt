@@ -10,7 +10,10 @@ data class Theater(
         val lng: String?,
         val lat: String?) {
 
-    val isCgv: Boolean = type == "C"
-    val isLotteCinema: Boolean = type == "L"
-    val isMegabox: Boolean = type == "M"
+    companion object {
+
+        const val TYPE_CGV = "C"
+        const val TYPE_LOTTE = "L"
+        const val TYPE_MEGABOX = "M"
+    }
 }

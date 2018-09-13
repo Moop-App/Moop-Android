@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="@color/bgMegabox" />
+    <!--<item android:color="#33352263" />-->
+    <item android:color="#cdc8d8" />
+</selector>

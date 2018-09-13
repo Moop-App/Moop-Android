@@ -36,6 +36,8 @@
             android:id="@+id/theaterListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@+id/areaView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

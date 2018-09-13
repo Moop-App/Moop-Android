@@ -4,6 +4,7 @@ import android.widget.Toast
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_area_group.view.*
 import soup.movie.R
+import soup.movie.data.helper.getFilterChipLayout
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
 import soup.movie.ui.helper.databinding.DataBindingAdapter
@@ -22,7 +23,7 @@ internal class TheaterEditListAdapter(selectedItems: List<Theater>) :
         holder.itemView.theaterListView.apply {
             removeAllViews()
             getItem(position).theaterList.map {
-                inflate<Chip>(context, R.layout.chip_filter_cgv).apply {
+                inflate<Chip>(context, it.getFilterChipLayout()).apply {
                     text = it.name
                     isChecked = selectedItemSet.contains(it)
                     isChipIconEnabled = !selectedItemSet.contains(it)

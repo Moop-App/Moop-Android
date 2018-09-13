@@ -75,9 +75,9 @@
     </style>
 
     <style name="Widget.Chip.Filter.Cgv">
-        <item name="android:textColor">@color/selector_chip_filter_cgv</item>
+        <item name="android:textColor">@color/selector_chip_cgv_text</item>
         <item name="checkedIcon">@drawable/ic_check_cgv</item>
-        <item name="chipBackgroundColor">@color/bgCgv</item>
+        <item name="chipBackgroundColor">@color/selector_chip_cgv_bg</item>
         <item name="chipIcon">@drawable/ic_logo_cgv</item>
         <item name="chipStrokeColor">@color/grey_200</item>
         <item name="chipStrokeWidth">1dp</item>
@@ -86,12 +86,18 @@
 
     <style name="Widget.Chip.Filter.Lotte">
         <item name="android:textColor">@color/textLotte</item>
-        <item name="chipBackgroundColor">@color/bgLotte</item>
+        <item name="checkedIcon">@drawable/ic_check_lotte</item>
+        <item name="chipBackgroundColor">@color/selector_chip_lotte_bg</item>
+        <item name="chipIcon">@drawable/ic_logo_lotte</item>
+        <item name="rippleColor">@color/white</item>
     </style>
 
     <style name="Widget.Chip.Filter.Megabox">
         <item name="android:textColor">@color/textMegabox</item>
-        <item name="chipBackgroundColor">@color/bgMegabox</item>
+        <item name="checkedIcon">@drawable/ic_check_megabox</item>
+        <item name="chipBackgroundColor">@color/selector_chip_megabox_bg</item>
+        <item name="chipIcon">@drawable/ic_logo_megabox</item>
+        <item name="rippleColor">@color/white</item>
     </style>
 
 </resources>

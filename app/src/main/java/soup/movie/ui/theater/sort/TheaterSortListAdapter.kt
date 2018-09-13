@@ -1,8 +1,8 @@
 package soup.movie.ui.theater.sort
 
 import android.view.MotionEvent
-import kotlinx.android.synthetic.main.item_theater.view.*
-import soup.movie.R
+import kotlinx.android.synthetic.main.item_theater_cgv.view.*
+import soup.movie.data.helper.getSortChipLayout
 import soup.movie.data.model.Theater
 import soup.movie.ui.helper.databinding.DataBindingAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
@@ -23,7 +23,8 @@ internal class TheaterSortListAdapter(private val dragStartListener: OnDragStart
         }
     }
 
-    override fun getItemViewType(position: Int): Int = R.layout.item_theater
+    override fun getItemViewType(position: Int): Int =
+            getItem(position).getSortChipLayout()
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         Collections.swap(list, fromPosition, toPosition)

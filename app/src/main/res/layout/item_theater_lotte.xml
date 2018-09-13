@@ -18,19 +18,15 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/theaterChip"
-            style="@style/Widget.Chip.Cgv"
+            style="@style/Widget.Chip.Lotte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@{item.name}"
             android:tag="@{item.code}"
             android:transitionName="@{item.code}"
-            app:chipBackgroundColor="@color/bgCgv"
-            app:chipStrokeColor="@color/grey_200"
-            app:chipStrokeWidth="1dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="CGV 서울" />
+            tools:text="서울" />
 
         <ImageView
             android:id="@+id/dragHandle"
