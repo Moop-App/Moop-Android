@@ -6,9 +6,8 @@ data class Theater(
         val type: TheaterId,
         val code: String,
         val name: String,
-        //TODO: Change to Double
-        val lng: String?,
-        val lat: String?) {
+        val lng: Double?,
+        val lat: Double?) {
 
     companion object {
 

@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import soup.movie.data.model.Theater
 import soup.movie.settings.PrefSetting
+import timber.log.Timber
 
 class TheaterSetting(preferences: SharedPreferences) :
         PrefSetting<List<Theater>>(preferences) {
@@ -30,7 +31,12 @@ class TheaterSetting(preferences: SharedPreferences) :
         }
 
         private fun fromJson(jsonStr: String): List<Theater> {
-            return Gson().fromJson<List<Theater>>(jsonStr, type).orEmpty()
+            return try {
+                Gson().fromJson<List<Theater>>(jsonStr, type).orEmpty()
+            } catch (t: Throwable) {
+                Timber.e(t)
+                emptyList()
+            }
         }
     }
 }
