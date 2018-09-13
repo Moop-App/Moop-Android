@@ -26,6 +26,8 @@ private fun String.fromJson(): Movie? = Gson().fromJson(this, Movie::class.java)
 
 fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n연령제한: $age"
 
+fun Movie.toDescription(): String = "$openDate / $age / 선호도: $egg"
+
 @ColorRes
 fun Movie.getColorAsAge(): Int = when (age) {
     "전체 관람가" -> R.color.green

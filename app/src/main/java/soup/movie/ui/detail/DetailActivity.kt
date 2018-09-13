@@ -255,12 +255,12 @@ class DetailActivity :
     private fun share(movie: Movie) {
         if (isInstalledApp(Kakao.PACKAGE_NAME)) {
             val params = FeedTemplate.newBuilder(
-                    ContentObject.newBuilder("영화 포스터", movie.posterUrl,
+                    ContentObject.newBuilder(movie.title, movie.posterUrl,
                             LinkObject.newBuilder()
                                     .setWebUrl(Cgv.detailWebUrl(movie))
                                     .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))
                                     .build())
-                            .setDescrption(movie.title)
+                            .setDescrption(movie.toDescription())
                             .build())
                     .build()
             KakaoLinkService.getInstance().sendDefault(this, params,
