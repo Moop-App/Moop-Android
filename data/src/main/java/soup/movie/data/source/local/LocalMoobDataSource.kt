@@ -14,25 +14,28 @@ import soup.movie.data.source.MoobDataSource
 class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
 
     fun saveNowList(response: MovieListResponse) {
-        moobDao.insert(CachedMovieList(TYPE_NOW, System.currentTimeMillis(), response.list))
+        saveMovieListAs(TYPE_NOW, response)
     }
 
     override fun getNowList(): Observable<MovieListResponse> {
-        return moobDao.findByType(TYPE_NOW)
-                .onErrorReturn { CachedMovieList.empty(TYPE_NOW) }
-                .toObservable()
-                .filter { it.isUpToDate() }
-                .map { MovieListResponse(it.lastUpdateTime, it.list) }
-                .subscribeOn(Schedulers.io())
+        return getMovieListAs(TYPE_NOW)
     }
 
     fun savePlanList(response: MovieListResponse) {
-        moobDao.insert(CachedMovieList(TYPE_PLAN, System.currentTimeMillis(), response.list))
+        saveMovieListAs(TYPE_PLAN, response)
     }
 
     override fun getPlanList(): Observable<MovieListResponse> {
-        return moobDao.findByType(TYPE_PLAN)
-                .onErrorReturn { CachedMovieList.empty(TYPE_PLAN) }
+        return getMovieListAs(TYPE_PLAN)
+    }
+
+    private fun saveMovieListAs(type: String, response: MovieListResponse) {
+        moobDao.insert(CachedMovieList(type, System.currentTimeMillis(), response.list))
+    }
+
+    private fun getMovieListAs(type: String): Observable<MovieListResponse> {
+        return moobDao.findByType(type)
+                .onErrorReturn { CachedMovieList.empty(type) }
                 .toObservable()
                 .filter { it.isUpToDate() }
                 .map { MovieListResponse(it.lastUpdateTime, it.list) }
