@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
@@ -14,6 +12,7 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.plan.PlanViewState.DoneState
 import soup.movie.ui.main.plan.PlanViewState.LoadingState
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
 class PlanFragment
@@ -48,16 +47,10 @@ class PlanFragment
 
     override fun render(viewState: PlanViewState) {
         printRenderLog { viewState }
-        when (viewState) {
-            is LoadingState -> {
-                swipeRefreshLayout?.isRefreshing = true
-                listView?.visibility = GONE
-            }
-            is DoneState -> {
-                swipeRefreshLayout?.isRefreshing = false
-                listView?.visibility = VISIBLE
-                listAdapter.submitList(viewState.movies)
-            }
+        swipeRefreshLayout?.isRefreshing = viewState is LoadingState
+        listView?.setVisibleIf { viewState is DoneState }
+        if (viewState is DoneState) {
+            listAdapter.submitList(viewState.movies)
         }
     }
 

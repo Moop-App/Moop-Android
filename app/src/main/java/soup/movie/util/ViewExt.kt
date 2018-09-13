@@ -22,6 +22,14 @@ fun <T : View> inflate(context: Context, @LayoutRes resource: Int): T =
 fun <T : View> inflate(context: Context, @LayoutRes resource: Int, root: ViewGroup): T =
         View.inflate(context, resource, root) as T
 
+inline fun <T : View> T.setVisibleIf(predicate: () -> Boolean) {
+    visibility = if (predicate()) View.VISIBLE else View.GONE
+}
+
+inline fun <T : View> T.setGoneIf(predicate: () -> Boolean) {
+    visibility = if (predicate()) View.GONE else View.VISIBLE
+}
+
 /** ViewGroup */
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View =
