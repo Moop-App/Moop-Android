@@ -11,7 +11,8 @@ data class CachedMovieList(
         val lastUpdateTime: Long,
         val list: List<Movie>) {
 
-    fun isUpToDate(): Boolean = System.currentTimeMillis() - lastUpdateTime < STALE_MS
+    fun isUpToDate(): Boolean = list.isEmpty()
+            || System.currentTimeMillis() - lastUpdateTime < STALE_MS
 
     companion object {
 
@@ -19,5 +20,7 @@ data class CachedMovieList(
         const val TYPE_PLAN = "type_plan"
 
         private const val STALE_MS = (60 * 60 * 1000).toLong() // 1 hour
+
+        fun empty(type: String): CachedMovieList = CachedMovieList(type, 0, emptyList())
     }
 }

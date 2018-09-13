@@ -19,6 +19,7 @@ class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
 
     override fun getNowList(): Observable<MovieListResponse> {
         return moobDao.findByType(TYPE_NOW)
+                .onErrorReturn { CachedMovieList.empty(TYPE_NOW) }
                 .toObservable()
                 .filter { it.isUpToDate() }
                 .map { MovieListResponse(it.lastUpdateTime, it.list) }
@@ -31,6 +32,7 @@ class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
 
     override fun getPlanList(): Observable<MovieListResponse> {
         return moobDao.findByType(TYPE_PLAN)
+                .onErrorReturn { CachedMovieList.empty(TYPE_PLAN) }
                 .toObservable()
                 .filter { it.isUpToDate() }
                 .map { MovieListResponse(it.lastUpdateTime, it.list) }
