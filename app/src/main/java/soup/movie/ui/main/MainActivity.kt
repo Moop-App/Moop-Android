@@ -3,12 +3,13 @@ package soup.movie.ui.main
 import android.content.Context
 import android.os.Bundle
 import androidx.annotation.IdRes
-import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.ui.BaseActivity
+import soup.movie.ui.helper.FragmentSceneRouter
+import soup.movie.ui.helper.FragmentSceneRouter.SceneData
 import soup.movie.ui.main.MainViewState.*
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
@@ -29,6 +30,10 @@ class MainActivity :
     @Inject
     override lateinit var presenter: MainContract.Presenter
 
+    private val fragmentSceneRouter by lazy {
+        FragmentSceneRouter(supportFragmentManager, R.id.container)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -44,31 +49,15 @@ class MainActivity :
         }
         bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
-            presenter.setCurrentTab(parseToTabMode(it.itemId))
+            presenter.setCurrentTab(it.itemId.parseToTabMode())
             true
         }
     }
 
     override fun render(viewState: MainViewState) {
         printRenderLog { viewState }
-        when (viewState) {
-            is NowState -> {
-                updateSelectedItem(R.id.action_now)
-                commit(NowFragment.newInstance())
-            }
-            is PlanState -> {
-                updateSelectedItem(R.id.action_plan)
-                commit(PlanFragment.newInstance())
-            }
-            is TheatersState -> {
-                updateSelectedItem(R.id.action_theaters)
-                commit(TheatersFragment.newInstance())
-            }
-            is SettingsState -> {
-                updateSelectedItem(R.id.action_settings)
-                commit(SettingsFragment.newInstance())
-            }
-        }
+        updateSelectedItem(viewState.toItemId())
+        fragmentSceneRouter.goTo(viewState.asScene())
     }
 
     private fun updateSelectedItem(@IdRes itemId: Int) {
@@ -77,19 +66,26 @@ class MainActivity :
         }
     }
 
-    private fun commit(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().disallowAddToBackStack()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
-                .commitAllowingStateLoss()
+    @IdRes
+    private fun MainViewState.toItemId(): Int = when (this) {
+        is NowState -> R.id.action_now
+        is PlanState -> (R.id.action_plan)
+        is TheatersState -> (R.id.action_theaters)
+        is SettingsState -> (R.id.action_settings)
     }
 
-    private fun parseToTabMode(@IdRes itemId: Int): Tab =
-            when (itemId) {
-                R.id.action_now -> Tab.Now
-                R.id.action_plan -> Tab.Plan
-                R.id.action_theaters -> Tab.Theaters
-                R.id.action_settings -> Tab.Settings
-                else -> throw IllegalStateException("Unknown resource ID")
-            }
+    private fun Int.parseToTabMode(): Tab = when (this) {
+        R.id.action_now -> Tab.Now
+        R.id.action_plan -> Tab.Plan
+        R.id.action_theaters -> Tab.Theaters
+        R.id.action_settings -> Tab.Settings
+        else -> throw IllegalStateException("0x${toString(16)} is invalid ID")
+    }
+
+    private fun MainViewState.asScene(): SceneData = when (this) {
+        is NowState -> SceneData(toString()) { NowFragment.newInstance() }
+        is PlanState -> SceneData(toString()) { PlanFragment.newInstance() }
+        is TheatersState -> SceneData(toString()) { TheatersFragment.newInstance() }
+        is SettingsState -> SceneData(toString()) { SettingsFragment.newInstance() }
+    }
 }
