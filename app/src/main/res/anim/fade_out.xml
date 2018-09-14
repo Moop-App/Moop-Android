@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="@android:integer/config_shortAnimTime"
+    android:duration="250"
     android:shareInterpolator="@android:interpolator/accelerate_quad">
+    <!--android:duration="@android:integer/config_shortAnimTime"-->
 
     <alpha
         android:fromAlpha="1.0"
@@ -12,7 +13,7 @@
         android:fromYScale="1"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:toXScale="0.95"
-        android:toYScale="0.95" />
+        android:toXScale="0.90"
+        android:toYScale="0.90" />
 
 </set>
