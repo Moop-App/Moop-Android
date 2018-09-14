@@ -3,6 +3,7 @@ package soup.movie
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.mapbox.mapboxsdk.Mapbox
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import io.fabric.sdk.android.Fabric
@@ -15,6 +16,7 @@ class MovieApplication : DaggerApplication() {
         BuildType.init(this)
         initCrashlytics()
         AndroidThreeTen.init(this)
+        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
     }
 
     private fun initCrashlytics() {
