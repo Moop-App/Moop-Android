@@ -11,6 +11,8 @@ import soup.movie.data.source.remote.RemoteMoobDataSource
 class MoobRepository(private val localDataSource: LocalMoobDataSource,
                      private val remoteDataSource: RemoteMoobDataSource) {
 
+    private var codeResponse: CodeResponse? = null
+
     fun getNowList(clearCache: Boolean): Observable<MovieListResponse> = when {
         clearCache -> getNowListFromNetwork()
         else -> Observable.concat(
@@ -42,7 +44,11 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
                     .doOnNext { localDataSource.savePlanList(it) }
 
     fun getCodeList(): Observable<CodeResponse> {
-        return remoteDataSource.getCodeList()
+        return codeResponse
+                ?.let { Observable.just(it) }
+                ?: run { remoteDataSource.getCodeList()
+                        .doOnNext { codeResponse = it }
+                }
     }
 
     fun getTimeTableList(request: TimeTableRequest): Observable<TimeTableResponse> {
