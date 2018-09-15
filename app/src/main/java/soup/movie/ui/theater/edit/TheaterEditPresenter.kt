@@ -31,12 +31,7 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
 
     private val allTheatersObservable: Observable<List<AreaGroup>>
         get() = moobRepository.getCodeList()
-                .flatMapIterable {
-                    (cgv, lotte, megabox) ->
-                    cgv.list.toMutableList() + lotte.list.toMutableList() + megabox.list.toMutableList()
-                }
-                .toList()
-                .toObservable()
+                .map { it.toAreaGroupList() }
 
     override fun onConfirmClicked(selectedTheaters: List<Theater>) {
         theaterSetting.set(selectedTheaters)
