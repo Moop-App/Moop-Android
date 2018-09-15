@@ -8,6 +8,7 @@ import com.mapbox.mapboxsdk.annotations.IconFactory
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import kotlinx.android.synthetic.main.fragment_theaters.*
+import soup.movie.data.helper.fullName
 import soup.movie.data.helper.position
 import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
@@ -83,8 +84,9 @@ class TheatersFragment :
     }
 
     private fun Theater.toMarker(): MarkerOptions = MarkerOptions()
+            .setTitle(fullName())
             .setPosition(position())
-            .setIcon(IconFactory.getInstance(context!!).defaultMarkerView())
+            .setIcon(IconFactory.getInstance(context!!).defaultMarker())
 
     companion object {
 
