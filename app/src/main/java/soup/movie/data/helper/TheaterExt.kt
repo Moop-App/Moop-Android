@@ -1,6 +1,7 @@
 package soup.movie.data.helper
 
 import androidx.annotation.LayoutRes
+import com.mapbox.mapboxsdk.geometry.LatLng
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.data.model.Theater.Companion.TYPE_CGV
@@ -36,3 +37,5 @@ fun Theater.getFilterChipLayout(): Int {
         else -> throw IllegalArgumentException("$type is not valid")
     }
 }
+
+fun Theater.position(): LatLng = LatLng(lat, lng)

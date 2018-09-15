@@ -4,7 +4,10 @@ import soup.movie.ui.BaseContract
 
 interface TheatersContract {
 
-    interface Presenter : BaseContract.Presenter<View>
+    interface Presenter : BaseContract.Presenter<View> {
+
+        fun onMapReady()
+    }
 
     interface View : BaseContract.View {
 

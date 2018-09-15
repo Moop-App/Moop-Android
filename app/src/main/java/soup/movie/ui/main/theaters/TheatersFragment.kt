@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.mapbox.mapboxsdk.annotations.IconFactory
+import com.mapbox.mapboxsdk.annotations.MarkerOptions
+import com.mapbox.mapboxsdk.maps.MapboxMap
 import kotlinx.android.synthetic.main.fragment_theaters.*
+import soup.movie.data.helper.position
+import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.util.log.printRenderLog
@@ -17,6 +22,8 @@ class TheatersFragment :
     @Inject
     override lateinit var presenter: TheatersContract.Presenter
 
+    private lateinit var mapboxMap: MapboxMap
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -26,7 +33,8 @@ class TheatersFragment :
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
-            // Customize map with markers, polylines, etc.
+            mapboxMap = it
+            presenter.onMapReady()
         }
     }
 
@@ -71,7 +79,12 @@ class TheatersFragment :
 
     override fun render(viewState: TheatersViewState) {
         printRenderLog { viewState }
+        mapboxMap.addMarkers(viewState.myTheaters.map { it.toMarker() })
     }
+
+    private fun Theater.toMarker(): MarkerOptions = MarkerOptions()
+            .setPosition(position())
+            .setIcon(IconFactory.getInstance(context!!).defaultMarkerView())
 
     companion object {
 
