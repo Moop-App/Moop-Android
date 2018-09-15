@@ -3,10 +3,12 @@ package soup.movie.ui.main.theaters
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
+import soup.movie.data.source.MoobRepository
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 
-class TheatersPresenter(private val theaterSetting: TheaterSetting) :
+class TheatersPresenter(private val repository: MoobRepository,
+                        private val theaterSetting: TheaterSetting) :
         BasePresenter<TheatersContract.View>(), TheatersContract.Presenter {
 
     private val mapReadyRelay: PublishRelay<Unit> = PublishRelay.create()
@@ -14,7 +16,8 @@ class TheatersPresenter(private val theaterSetting: TheaterSetting) :
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         disposable.add(mapReadyRelay
-                .switchMap { _ -> theaterSetting.asObservable()
+                .switchMap { _ -> repository.getCodeList()
+                        .map { it.toTheaterList() }
                         .map { TheatersViewState(it) }
                         .distinctUntilChanged()
                 }
