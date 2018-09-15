@@ -15,7 +15,16 @@
             android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:mapbox_styleUrl="@string/mapbox_style_moob" />
+            app:mapbox_styleUrl="@string/mapbox_style_moob"
+            app:mapbox_uiAttribution="false"
+            app:mapbox_uiCompass="false"
+            app:mapbox_uiLogo="false"
+            app:mapbox_uiRotateGestures="false"
+            app:mapbox_uiTiltGestures="false"
+            app:mapbox_cameraTargetLat="37.566535"
+            app:mapbox_cameraTargetLng="126.9779692"
+            app:mapbox_foregroundLoadColor="@color/grey_200" />
+        <!-- Google Map: 서울특별시 -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
