@@ -9,9 +9,12 @@
         android:shortcutLongLabel="@string/shortcut_search_long_label"
         android:shortcutDisabledMessage="@string/shortcut_search_disabled">
         <intent
-            android:action="soup.movie.action.Nearby"
+            android:action="soup.movie.action.SHOW_TAB"
             android:targetClass="soup.movie.ui.main.MainActivity"
-            android:targetPackage="soup.movie" />
+            android:targetPackage="soup.movie">
+
+            <extra android:name="tab" android:value="theaters" />
+        </intent>
     </shortcut>
 
 </shortcuts>

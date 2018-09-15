@@ -41,16 +41,22 @@ class MainActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        //TODO: refactor this
-        when (intent.action) {
-            "soup.movie.action.Nearby" -> {
-                presenter.setCurrentTab(Tab.Theaters)
-            }
-        }
+        handleDeepLink()
         bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
             presenter.setCurrentTab(it.itemId.parseToTabMode())
             true
+        }
+    }
+
+    private fun handleDeepLink() {
+        when (intent.action) {
+            ACTION_SHOW_TAB -> {
+                when (intent.getStringExtra(EXTRA_TAB)) {
+                    EXTRA_TAB_THEATERS -> presenter.setCurrentTab(Tab.Theaters)
+                }
+                intent.removeExtra(EXTRA_TAB)
+            }
         }
     }
 
@@ -87,5 +93,12 @@ class MainActivity :
         is PlanState -> SceneData(toString(), isPersist = false) { PlanFragment.newInstance() }
         is TheatersState -> SceneData(toString()) { TheatersFragment.newInstance() }
         is SettingsState -> SceneData(toString()) { SettingsFragment.newInstance() }
+    }
+
+    companion object {
+
+        private const val ACTION_SHOW_TAB = "soup.movie.action.SHOW_TAB"
+        private const val EXTRA_TAB = "tab"
+        private const val EXTRA_TAB_THEATERS = "theaters"
     }
 }
