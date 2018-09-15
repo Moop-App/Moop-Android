@@ -76,7 +76,7 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
             android:visibility="gone"
-            app:srcCompat="@drawable/ic_favorite"
+            app:srcCompat="@drawable/ic_round_favorite"
             app:layout_constraintTop_toTopOf="@+id/shareButton"
             app:layout_constraintEnd_toStartOf="@+id/shareButton" />
 
@@ -88,7 +88,7 @@
             android:layout_marginBottom="8dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="12dp"
-            app:srcCompat="@drawable/ic_share"
+            app:srcCompat="@drawable/ic_round_share"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -111,7 +111,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/sub_text2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/sub_text2"
-            app:srcCompat="@drawable/ic_share"
+            app:srcCompat="@drawable/ic_round_share"
             tools:text="15"
             tools:textColor="@color/amber" />
 

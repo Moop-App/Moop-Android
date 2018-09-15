@@ -36,7 +36,7 @@
                 android:id="@+id/playIcon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_play"
+                android:src="@drawable/ic_round_play"
                 android:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/trailerThumbnailView"
                 app:layout_constraintEnd_toEndOf="@+id/trailerThumbnailView"

@@ -99,7 +99,7 @@
                     android:id="@+id/hotView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star"
+                    android:src="@drawable/ic_round_star"
                     android:scaleType="centerCrop"
                     android:visibility="@{MovieExtKt.isHot(item) ? View.VISIBLE : View.GONE}"
                     app:layout_constraintStart_toStartOf="parent"

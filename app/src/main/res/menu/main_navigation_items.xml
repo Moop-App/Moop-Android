@@ -3,18 +3,18 @@
 
     <item android:id="@+id/action_now"
         android:title="@string/tab_now"
-        android:icon="@drawable/ic_movie_now" />
+        android:icon="@drawable/ic_round_movie" />
 
     <item android:id="@+id/action_plan"
         android:title="@string/tab_plan"
-        android:icon="@drawable/ic_movie_plan" />
+        android:icon="@drawable/ic_round_plan" />
 
     <item android:id="@+id/action_theaters"
         android:title="@string/tab_theaters"
-        android:icon="@drawable/ic_place" />
+        android:icon="@drawable/ic_round_place" />
 
     <item android:id="@+id/action_settings"
         android:title="@string/tab_settings"
-        android:icon="@drawable/ic_settings" />
+        android:icon="@drawable/ic_round_more" />
 
 </menu>

@@ -155,7 +155,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/timetableButton"
             app:layout_constraintTop_toTopOf="@+id/timetableButton"
-            app:srcCompat="@drawable/ic_favorite" />
+            app:srcCompat="@drawable/ic_round_favorite" />
 
         <ImageButton
             android:id="@+id/ticketButton"
@@ -167,7 +167,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/timetableButton"
             app:layout_constraintTop_toTopOf="@+id/timetableButton"
-            app:srcCompat="@drawable/ic_ticket" />
+            app:srcCompat="@drawable/ic_round_ticket" />
 
         <ImageButton
             android:id="@+id/timetableButton"
@@ -178,7 +178,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:layout_constraintTop_toTopOf="@+id/shareButton"
-            app:srcCompat="@drawable/ic_timetable" />
+            app:srcCompat="@drawable/ic_round_date_range" />
 
         <ImageButton
             android:id="@+id/shareButton"
@@ -191,7 +191,7 @@
             android:transitionName="@string/transition_share"
             app:layout_constraintBottom_toBottomOf="@+id/posterView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_share" />
+            app:srcCompat="@drawable/ic_round_share" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

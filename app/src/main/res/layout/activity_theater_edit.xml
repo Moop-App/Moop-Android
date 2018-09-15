@@ -31,7 +31,7 @@
             android:onClick="onConfirmClicked"
             app:layout_anchor="@id/listView"
             app:layout_anchorGravity="bottom|end"
-            app:srcCompat="@drawable/ic_check"
+            app:srcCompat="@drawable/ic_round_check"
             app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
