@@ -84,6 +84,12 @@ class MainActivity :
         }
     }
 
+    override fun onBackPressed() {
+        if (fragmentSceneRouter.goBack().not()) {
+            super.onBackPressed()
+        }
+    }
+
     override fun render(viewState: MainViewState) {
         printRenderLog { viewState }
         updateSelectedItem(viewState.toItemId())

@@ -3,6 +3,7 @@ package soup.movie.ui.helper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import soup.movie.R
+import soup.movie.ui.BaseFragment.OnBackListener
 
 class FragmentSceneRouter(private val fragmentManager: FragmentManager,
                           private val containerId: Int) {
@@ -40,5 +41,10 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
         lastState = now
 
         fragmentTransaction.commitNow()
+    }
+
+    fun goBack(): Boolean {
+        return (fragmentManager.findFragmentById(containerId) as? OnBackListener)?.onBackPressed()
+                ?: false
     }
 }

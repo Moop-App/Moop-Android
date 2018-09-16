@@ -28,4 +28,9 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         presenter.onDetach()
         super.onDestroy()
     }
+
+    interface OnBackListener {
+
+        fun onBackPressed(): Boolean = false
+    }
 }
