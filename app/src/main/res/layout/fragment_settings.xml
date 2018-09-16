@@ -14,14 +14,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" >
+            android:padding="16dp" >
 
             <TextView
                 android:id="@+id/theaterCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/settings_margin_between_category"
+                android:layout_marginTop="8dp"
                 android:text="@string/settings_category_theater"
                 android:textAppearance="@style/TextAppearance.Settings.Category"
                 app:layout_constraintEnd_toStartOf="@+id/editTheaterButton"
@@ -157,6 +156,51 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usePaletteThemeSwitch" />
+
+            <View
+                android:id="@+id/bugReportDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/settings_margin_between_category"
+                android:background="@color/dividerColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/useWebLinkSwitch"/>
+
+            <View
+                android:id="@+id/bugReportButton"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bugReportDivider"
+                tools:background="@color/debug_background" />
+
+            <ImageView
+                android:id="@+id/bugReportIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_round_bug_report"
+                android:scaleType="centerInside"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:layout_constraintTop_toTopOf="@+id/bugReportButton"
+                app:layout_constraintBottom_toBottomOf="@+id/bugReportButton"
+                app:layout_constraintStart_toStartOf="@+id/bugReportButton" />
+
+            <TextView
+                android:id="@+id/bugReportLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:text="개발자에게 버그 신고하기"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="@+id/bugReportButton"
+                app:layout_constraintBottom_toBottomOf="@+id/bugReportButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

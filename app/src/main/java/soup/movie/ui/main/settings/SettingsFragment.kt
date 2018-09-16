@@ -3,6 +3,7 @@ package soup.movie.ui.main.settings
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Pair
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
+import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
@@ -69,6 +71,15 @@ class SettingsFragment :
         }
         useWebLinkSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUseWebLink(isChecked)
+        }
+        bugReportButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data = Uri.parse("mailto:")
+            intent.putExtra(Intent.EXTRA_EMAIL, "soupyong@gmail.com")
+            intent.putExtra(Intent.EXTRA_SUBJECT, "[뭅 v{${BuildConfig.VERSION_NAME}] 버그리포트")
+            if (intent.resolveActivity(activity!!.packageManager) != null) {
+                startActivity(intent)
+            }
         }
     }
 
