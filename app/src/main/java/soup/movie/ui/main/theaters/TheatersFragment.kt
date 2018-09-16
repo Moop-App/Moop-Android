@@ -1,18 +1,20 @@
 package soup.movie.ui.main.theaters
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mapbox.mapboxsdk.annotations.IconFactory
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import kotlinx.android.synthetic.main.fragment_theaters.*
 import soup.movie.data.helper.fullName
+import soup.movie.data.helper.getMarkerIcon
 import soup.movie.data.helper.position
 import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.main.BaseTabFragment
+import soup.movie.util.loadIconOrDefault
 import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
 
@@ -80,13 +82,13 @@ class TheatersFragment :
 
     override fun render(viewState: TheatersViewState) {
         printRenderLog { viewState }
-        mapboxMap.addMarkers(viewState.myTheaters.map { it.toMarker() })
+        mapboxMap.addMarkers(viewState.myTheaters.map { it.toMarker(mapView.context) })
     }
 
-    private fun Theater.toMarker(): MarkerOptions = MarkerOptions()
+    private fun Theater.toMarker(context: Context): MarkerOptions = MarkerOptions()
             .setTitle(fullName())
             .setPosition(position())
-            .setIcon(IconFactory.getInstance(context!!).defaultMarker())
+            .setIcon(context.loadIconOrDefault(getMarkerIcon()))
 
     companion object {
 

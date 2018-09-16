@@ -1,5 +1,6 @@
 package soup.movie.data.helper
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import com.mapbox.mapboxsdk.geometry.LatLng
 import soup.movie.R
@@ -34,6 +35,16 @@ fun Theater.getFilterChipLayout(): Int {
         TYPE_CGV -> R.layout.chip_filter_cgv
         TYPE_LOTTE -> R.layout.chip_filter_lotte
         TYPE_MEGABOX -> R.layout.chip_filter_megabox
+        else -> throw IllegalArgumentException("$type is not valid type.")
+    }
+}
+
+@DrawableRes
+fun Theater.getMarkerIcon(): Int {
+    return when(type) {
+        TYPE_CGV -> R.drawable.ic_marker_cgv
+        TYPE_LOTTE -> R.drawable.ic_marker_lotte
+        TYPE_MEGABOX -> R.drawable.ic_marker_megabox
         else -> throw IllegalArgumentException("$type is not valid type.")
     }
 }
