@@ -31,11 +31,11 @@ class TheaterEditActivity :
 
     override fun render(viewState: TheaterEditViewState) {
         printRenderLog { viewState }
-        listAdapter.submitList(viewState.areaGroups, viewState.selectedTheaters)
+        listAdapter.submitList(viewState.areaGroupList, viewState.selectedTheaterIdSet)
     }
 
     fun onConfirmClicked(view: View) {
-        presenter.onConfirmClicked(listAdapter.getSelectedTheaters())
+        presenter.onConfirmClicked(listAdapter.getSelectedIdSet())
         finish()
     }
 }

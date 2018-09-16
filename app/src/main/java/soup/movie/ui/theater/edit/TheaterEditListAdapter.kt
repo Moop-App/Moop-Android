@@ -6,31 +6,30 @@ import kotlinx.android.synthetic.main.item_area_group.view.*
 import soup.movie.R
 import soup.movie.data.helper.getFilterChipLayout
 import soup.movie.data.model.AreaGroup
-import soup.movie.data.model.Theater
 import soup.movie.ui.helper.databinding.DataBindingAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.inflate
 
-internal class TheaterEditListAdapter() :
+internal class TheaterEditListAdapter :
         DataBindingAdapter<AreaGroup>() {
 
-    private var selectedItemSet: MutableSet<Theater> = hashSetOf()
+    private var selectedIdSet: MutableSet<String> = hashSetOf()
 
-    fun getSelectedTheaters(): List<Theater> = selectedItemSet.toList().sortedBy { it.type }
+    fun getSelectedIdSet(): Set<String> = selectedIdSet
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<AreaGroup>, position: Int) {
         super.onBindViewHolder(holder, position)
         holder.itemView.theaterListView.apply {
             removeAllViews()
-            getItem(position).theaterList.map {
-                inflate<Chip>(context, it.getFilterChipLayout()).apply {
-                    text = it.name
-                    isChecked = selectedItemSet.contains(it)
-                    isChipIconEnabled = !selectedItemSet.contains(it)
+            getItem(position).theaterList.map { theater ->
+                inflate<Chip>(context, theater.getFilterChipLayout()).apply {
+                    text = theater.name
+                    isChecked = selectedIdSet.contains(theater.code)
+                    isChipIconEnabled = !selectedIdSet.contains(theater.code)
                     setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
-                            if (selectedItemSet.size < MAX_ITEMS) {
-                                selectedItemSet.add(it)
+                            if (selectedIdSet.size < MAX_ITEMS) {
+                                selectedIdSet.add(theater.code)
                                 isChipIconEnabled = false
                             } else {
                                 this.isChecked = false
@@ -38,7 +37,7 @@ internal class TheaterEditListAdapter() :
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            selectedItemSet.remove(it)
+                            selectedIdSet.remove(theater.code)
                             isChipIconEnabled = true
                         }
                     }
@@ -49,8 +48,8 @@ internal class TheaterEditListAdapter() :
 
     override fun getItemViewType(position: Int): Int = R.layout.item_area_group
 
-    fun submitList(list: List<AreaGroup>, selectedItems: List<Theater>) {
-        selectedItemSet = selectedItems.toHashSet()
+    fun submitList(list: List<AreaGroup>, selectedIdSet: Set<String>) {
+        this.selectedIdSet = selectedIdSet.toMutableSet()
         submitList(list)
     }
 

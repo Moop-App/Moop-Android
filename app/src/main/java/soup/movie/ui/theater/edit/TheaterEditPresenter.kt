@@ -11,10 +11,13 @@ import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
 import soup.movie.ui.theater.edit.TheaterEditContract.View
+import soup.movie.util.toObservable
 
 class TheaterEditPresenter(private val moobRepository: MoobRepository,
                            private val theaterSetting: TheaterSetting) :
         BasePresenter<View>(), Presenter {
+
+    private var theaterList: List<Theater> = emptyList()
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
@@ -26,14 +29,30 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
     private val viewStateObservable: Observable<TheaterEditViewState>
         get() = Observable.combineLatest(
                 allTheatersObservable,
-                Observable.just(theaterSetting.get()),
+                selectedIdSetObservable,
                 BiFunction(::TheaterEditViewState))
 
     private val allTheatersObservable: Observable<List<AreaGroup>>
         get() = moobRepository.getCodeList()
                 .map { it.toAreaGroupList() }
+                .doOnNext { saveTheaterList(it) }
 
-    override fun onConfirmClicked(selectedTheaters: List<Theater>) {
-        theaterSetting.set(selectedTheaters)
+    private val selectedIdSetObservable: Observable<Set<String>>
+        get() = theaterSetting.get()
+                .asSequence()
+                .map { it.code }
+                .toSet()
+                .toObservable()
+
+    private fun saveTheaterList(areaGroupList: List<AreaGroup>) {
+        theaterList = areaGroupList.flatMap { it.theaterList }
+    }
+
+    override fun onConfirmClicked(selectedIdSet: Set<String>) {
+        theaterSetting.set(theaterList
+                .asSequence()
+                .filter { selectedIdSet.contains(it.code) }
+                .sortedBy { it.type }
+                .toList())
     }
 }

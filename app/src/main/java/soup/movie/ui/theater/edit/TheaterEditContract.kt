@@ -1,13 +1,12 @@
 package soup.movie.ui.theater.edit
 
-import soup.movie.data.model.Theater
 import soup.movie.ui.BaseContract
 
 interface TheaterEditContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun onConfirmClicked(selectedTheaters: List<Theater>)
+        fun onConfirmClicked(selectedIdSet: Set<String>)
     }
 
     interface View : BaseContract.View {

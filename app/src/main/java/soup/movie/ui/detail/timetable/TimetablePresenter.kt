@@ -10,6 +10,7 @@ import soup.movie.data.source.MoobRepository
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.timetable.TimetableViewState.*
+import soup.movie.util.toObservable
 
 class TimetablePresenter(private val moobRepository: MoobRepository,
                          private val theaterSetting: TheaterSetting) :
@@ -23,7 +24,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                 .flatMap {
                     val theaters = theaterSetting.get()
                     when {
-                        theaters.isEmpty() -> Observable.just(NoTheaterState)
+                        theaters.isEmpty() -> NoTheaterState.toObservable()
                         else -> getTimeTableBy(theaters[0].code, it.id)
                     }
                 }
