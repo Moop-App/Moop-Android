@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Pair
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
@@ -15,6 +16,7 @@ import soup.movie.R
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.ui.main.BaseTabFragment
+import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
@@ -26,6 +28,17 @@ class SettingsFragment :
 
     @Inject
     override lateinit var presenter: SettingsContract.Presenter
+
+    override val menuResource: Int?
+        get() = R.menu.fragment_settings
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_help) {
+            showPanel(HelpFragment.toPanelData())
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

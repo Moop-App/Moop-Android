@@ -9,11 +9,13 @@
     <string name="action_share">공유하기</string>
     <string name="action_share_poster">포스터 공유하기</string>
 
-    <string name="settings_category_home_type">홈 타입</string>
-    <string name="settings_category_theater">선호하는 극장</string>
-    <string name="settings_theater_empty_description">선호하는 극장이 없습니다.</string>
+    <string name="action_help">도움말</string>
+    <string name="settings_category_theater">자주가는 극장</string>
+    <string name="settings_theater_empty_description">선택된 극장이 없습니다.</string>
     <string name="settings_category_theme">테마</string>
     <string name="settings_category_lab">실험실</string>
+
+    <string name="help_title">도움말</string>
 
     <string name="theater_sort_title">극장 순서 설정</string>
     <string name="action_edit">편집</string>

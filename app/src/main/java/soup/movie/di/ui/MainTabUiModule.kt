@@ -17,6 +17,9 @@ import soup.movie.ui.main.plan.PlanPresenter
 import soup.movie.ui.main.settings.SettingsContract
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.ui.main.settings.SettingsPresenter
+import soup.movie.ui.main.settings.help.HelpContract
+import soup.movie.ui.main.settings.help.HelpFragment
+import soup.movie.ui.main.settings.help.HelpPresenter
 import soup.movie.ui.main.theaters.TheatersContract
 import soup.movie.ui.main.theaters.TheatersFragment
 import soup.movie.ui.main.theaters.TheatersPresenter
@@ -89,5 +92,19 @@ abstract class MainTabUiModule {
                       useWebLinkSetting: UseWebLinkSetting):
                 SettingsContract.Presenter =
                 SettingsPresenter(theaterSetting, usePaletteThemeSetting, useWebLinkSetting)
+    }
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [
+        HelpModule::class
+    ])
+    internal abstract fun provideHelpFragment(): HelpFragment
+
+    @Module
+    class HelpModule {
+
+        @FragmentScope
+        @Provides
+        fun presenter(): HelpContract.Presenter = HelpPresenter()
     }
 }
