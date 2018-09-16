@@ -58,6 +58,9 @@ class MainActivity :
             presenter.setCurrentTab(it.itemId.parseToTabMode())
             true
         }
+        bottomNavigation.setOnNavigationItemReselectedListener {
+            fragmentSceneRouter.reselectTab()
+        }
     }
 
     private fun Intent.handleDeepLink() {

@@ -33,4 +33,9 @@ abstract class BaseTabFragment<V: View, P: Presenter<V>> :
 
         private const val INVALID = 0
     }
+
+    interface OnReselectListener {
+
+        fun onReselect()
+    }
 }

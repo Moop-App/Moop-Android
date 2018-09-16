@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import soup.movie.R
 import soup.movie.ui.BaseFragment.OnBackListener
+import soup.movie.ui.main.BaseTabFragment.OnReselectListener
 
 class FragmentSceneRouter(private val fragmentManager: FragmentManager,
                           private val containerId: Int) {
@@ -46,5 +47,9 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
     fun goBack(): Boolean {
         return (fragmentManager.findFragmentById(containerId) as? OnBackListener)?.onBackPressed()
                 ?: false
+    }
+
+    fun reselectTab() {
+        (fragmentManager.findFragmentById(containerId) as? OnReselectListener)?.onReselect()
     }
 }

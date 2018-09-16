@@ -15,7 +15,9 @@ import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
-class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), NowContract.View {
+class NowFragment :
+        BaseTabFragment<NowContract.View, NowContract.Presenter>(),
+        NowContract.View, BaseTabFragment.OnReselectListener {
 
     @Inject
     override lateinit var presenter: NowContract.Presenter
@@ -50,6 +52,10 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.movies)
         }
+    }
+
+    override fun onReselect() {
+        listView?.smoothScrollToPosition(0)
     }
 
     companion object {
