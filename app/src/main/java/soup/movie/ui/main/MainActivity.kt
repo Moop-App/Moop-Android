@@ -1,13 +1,18 @@
 package soup.movie.ui.main
 
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
 import androidx.annotation.IdRes
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
+import soup.movie.data.helper.saveTo
+import soup.movie.data.model.Movie
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.ui.BaseActivity
+import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData
 import soup.movie.ui.main.MainViewState.*
@@ -17,6 +22,7 @@ import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.ui.main.theaters.TheatersFragment
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity :
@@ -39,9 +45,14 @@ class MainActivity :
         super.onCreate(savedInstanceState)
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.handleDeepLink()
+    }
+
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        handleDeepLink()
+        intent?.handleDeepLink()
         bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
             presenter.setCurrentTab(it.itemId.parseToTabMode())
@@ -49,14 +60,27 @@ class MainActivity :
         }
     }
 
-    private fun handleDeepLink() {
-        when (intent.action) {
+    private fun Intent.handleDeepLink() {
+        Timber.d("SOUP %s", this)
+        when (action) {
             ACTION_SHOW_TAB -> {
-                when (intent.getStringExtra(EXTRA_TAB)) {
+                when (getStringExtra(EXTRA_TAB)) {
                     EXTRA_TAB_THEATERS -> presenter.setCurrentTab(Tab.Theaters)
                 }
-                intent.removeExtra(EXTRA_TAB)
+                removeExtra(EXTRA_TAB)
             }
+            ACTION_VIEW -> {
+                data?.getQueryParameter("id")?.let {
+                    presenter.requestMovie(it)
+                }
+            }
+        }
+    }
+
+    override fun showMovieDetail(movie: Movie) {
+        Intent(this, DetailActivity::class.java).also {
+            movie.saveTo(it)
+            startActivity(it)
         }
     }
 

@@ -45,8 +45,8 @@ class NowFragment : BaseTabFragment<NowContract.View, NowContract.Presenter>(), 
 
     override fun render(viewState: NowViewState) {
         printRenderLog { viewState }
-        swipeRefreshLayout.isRefreshing = viewState is LoadingState
-        listView.setVisibleIf { viewState is DoneState }
+        swipeRefreshLayout?.isRefreshing = viewState is LoadingState
+        listView?.setVisibleIf { viewState is DoneState }
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.movies)
         }

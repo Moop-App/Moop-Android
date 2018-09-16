@@ -1,6 +1,7 @@
 package soup.movie.data.source
 
 import io.reactivex.Observable
+import soup.movie.data.model.Movie
 import soup.movie.data.model.request.TimeTableRequest
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
@@ -42,6 +43,13 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
     private fun getPlanListFromNetwork() : Observable<MovieListResponse> =
             remoteDataSource.getPlanList()
                     .doOnNext { localDataSource.savePlanList(it) }
+
+    fun getMovie(movieId: String): Observable<Movie> =
+            Observable.merge(
+                    getNowList(false).map { it.list },
+                    getPlanList(false).map { it.list })
+                    .flatMapIterable { it -> it }
+                    .filter { it.id == movieId }
 
     fun getCodeList(): Observable<CodeResponse> {
         return codeResponse

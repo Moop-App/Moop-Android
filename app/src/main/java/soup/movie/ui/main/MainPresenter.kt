@@ -2,6 +2,7 @@ package soup.movie.ui.main
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
+import soup.movie.data.source.MoobRepository
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.settings.impl.LastMainTabSetting.Tab.*
@@ -9,7 +10,8 @@ import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.MainViewState.*
 import timber.log.Timber
 
-class MainPresenter(private val lastMainTabSetting: LastMainTabSetting) :
+class MainPresenter(private val lastMainTabSetting: LastMainTabSetting,
+                    private val repository: MoobRepository) :
         BasePresenter<MainContract.View>(),
         MainContract.Presenter {
 
@@ -34,5 +36,12 @@ class MainPresenter(private val lastMainTabSetting: LastMainTabSetting) :
     override fun setCurrentTab(mode: Tab) {
         Timber.d("setCurrentTab: %s", mode)
         lastMainTabSetting.set(mode)
+    }
+
+    override fun requestMovie(movieId: String) {
+        //TODO: connect with view lifecycle
+        repository.getMovie(movieId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { view?.showMovieDetail(it) }
     }
 }

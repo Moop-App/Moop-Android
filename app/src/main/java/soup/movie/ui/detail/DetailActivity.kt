@@ -259,6 +259,7 @@ class DetailActivity :
                             LinkObject.newBuilder()
                                     .setWebUrl(Cgv.detailWebUrl(movie))
                                     .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))
+                                    .setAndroidExecutionParams("id=${movie.id}")
                                     .build())
                             .setDescrption(movie.toDescription())
                             .build())
