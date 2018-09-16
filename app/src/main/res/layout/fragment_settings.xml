@@ -202,6 +202,50 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <View
+                android:id="@+id/appVersionDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/dividerColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bugReportButton"/>
+
+            <View
+                android:id="@+id/appVersionButton"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appVersionDivider"
+                tools:background="@color/debug_background" />
+
+            <ImageView
+                android:id="@+id/appVersionIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_round_system_update"
+                android:scaleType="centerInside"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:layout_constraintTop_toTopOf="@+id/appVersionButton"
+                app:layout_constraintBottom_toBottomOf="@+id/appVersionButton"
+                app:layout_constraintStart_toStartOf="@+id/appVersionButton" />
+
+            <TextView
+                android:id="@+id/appVersionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="@+id/appVersionButton"
+                app:layout_constraintBottom_toBottomOf="@+id/appVersionButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="현재 0.1.8 / 최신 0.1.8"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

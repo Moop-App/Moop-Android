@@ -3,7 +3,7 @@ package soup.movie.ui.main.theaters
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
-import soup.movie.data.source.MoobRepository
+import soup.movie.data.MoobRepository
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 

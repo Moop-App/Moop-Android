@@ -15,6 +15,7 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.BuildConfig
 import soup.movie.R
+import soup.movie.data.helper.executePlayStoreForApp
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.ui.main.BaseTabFragment
@@ -80,6 +81,10 @@ class SettingsFragment :
             if (intent.resolveActivity(activity!!.packageManager) != null) {
                 startActivity(intent)
             }
+        }
+        appVersionLabel.text = "현재 ${BuildConfig.VERSION_NAME}"
+        appVersionButton.setOnClickListener {
+            it.context.executePlayStoreForApp(BuildConfig.APPLICATION_ID)
         }
     }
 

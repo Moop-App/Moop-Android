@@ -6,7 +6,7 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
-import soup.movie.data.source.MoobRepository
+import soup.movie.data.MoobRepository
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter

@@ -2,7 +2,7 @@ package soup.movie.ui.main
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
-import soup.movie.data.source.MoobRepository
+import soup.movie.data.MoobRepository
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.settings.impl.LastMainTabSetting.Tab.*

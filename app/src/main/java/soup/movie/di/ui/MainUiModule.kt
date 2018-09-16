@@ -2,7 +2,7 @@ package soup.movie.di.ui
 
 import dagger.Module
 import dagger.Provides
-import soup.movie.data.source.MoobRepository
+import soup.movie.data.MoobRepository
 import soup.movie.di.scope.ActivityScope
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.main.MainContract

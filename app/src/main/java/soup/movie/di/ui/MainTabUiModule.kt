@@ -3,7 +3,7 @@ package soup.movie.di.ui
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import soup.movie.data.source.MoobRepository
+import soup.movie.data.MoobRepository
 import soup.movie.di.scope.FragmentScope
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting

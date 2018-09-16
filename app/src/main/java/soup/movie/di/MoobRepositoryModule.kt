@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import soup.movie.BuildType
-import soup.movie.data.source.MoobRepository
+import soup.movie.data.MoobRepository
 import soup.movie.data.source.local.LocalMoobDataSource
 import soup.movie.data.source.local.MoobDao
 import soup.movie.data.source.local.MoobDatabase
