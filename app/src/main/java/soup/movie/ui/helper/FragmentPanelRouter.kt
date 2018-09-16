@@ -1,0 +1,43 @@
+package soup.movie.ui.helper
+
+import androidx.fragment.app.FragmentManager
+import soup.movie.ui.main.BaseTabFragment.PanelData
+
+class FragmentPanelRouter(private val fragmentManager: FragmentManager,
+                          private val containerId: Int) {
+
+    private var lastState: PanelData? = null
+
+    fun show(state: PanelData) {
+        if (lastState == state) return
+
+        val fragmentTransaction = fragmentManager.beginTransaction()
+                .disallowAddToBackStack()
+
+        fragmentManager.findFragmentById(containerId)?.apply {
+            if (isDetached.not()) {
+                fragmentTransaction.detach(this)
+            }
+        }
+        fragmentManager.findFragmentByTag(state.tag)?.apply {
+            if (isDetached) {
+                fragmentTransaction.attach(this)
+            }
+        } ?: run {
+            fragmentTransaction.add(containerId, state.newFragment(), state.tag)
+        }
+
+        fragmentTransaction.commitNow()
+    }
+
+    fun hide() {
+        fragmentManager.findFragmentById(containerId)?.let {
+            if (it.isDetached.not()) {
+                fragmentManager.beginTransaction()
+                        .disallowAddToBackStack()
+                        .detach(it)
+                        .commitNow()
+            }
+        }
+    }
+}
