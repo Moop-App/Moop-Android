@@ -49,6 +49,16 @@ fun Theater.getMarkerIcon(): Int {
     }
 }
 
+@DrawableRes
+fun Theater.getSelectedMarkerIcon(): Int {
+    return when(type) {
+        TYPE_CGV -> R.drawable.ic_marker_cgv_selected
+        TYPE_LOTTE -> R.drawable.ic_marker_lotte_selected
+        TYPE_MEGABOX -> R.drawable.ic_marker_megabox_selected
+        else -> throw IllegalArgumentException("$type is not valid type.")
+    }
+}
+
 fun Theater.fullName(): String = when (type) {
     TYPE_CGV -> "CGV $name"
     TYPE_LOTTE -> "롯데시네마 $name"
