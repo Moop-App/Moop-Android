@@ -3,13 +3,12 @@ package soup.movie.data.helper
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import soup.movie.R
 import soup.movie.data.model.Movie
-import android.content.pm.PackageManager
+import soup.movie.util.getColorCompat
 
 fun Context.isInstalledApp(pkgName: String): Boolean {
     return packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
@@ -46,8 +45,8 @@ internal fun Context.executePlayStoreForApp(pkgName: String) {
 internal fun Context.executeWebPage(url: String) {
     CustomTabsIntent.Builder()
             .addDefaultShareMenuItem()
-            .setToolbarColor(ContextCompat.getColor(this, R.color.colorAccent))
-            .setSecondaryToolbarColor(Color.BLACK)
+            .setToolbarColor(getColorCompat(R.color.white))
+            .setSecondaryToolbarColor(getColorCompat(R.color.black))
             .setShowTitle(true)
             .setStartAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
             .setExitAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
