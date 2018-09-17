@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import soup.movie.R
 import soup.movie.data.model.Movie
+import soup.movie.data.model.Theater
 import soup.movie.util.getColorCompat
 
 fun Context.isInstalledApp(pkgName: String): Boolean {
@@ -70,16 +71,25 @@ object Cgv {
 
     fun reservationUrl(movie: Movie): String =
             "http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${movie.id}"
+
+    fun detailWebUrl(theater: Theater): String =
+            "http://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=${theater.code}"
 }
 
 object LotteCinema {
 
     const val PACKAGE_NAME = "TODO"
+
+    fun detailWebUrl(theater: Theater): String =
+            "http://www.lottecinema.co.kr/LCMW/Contents/Cinema/cinema-detail.aspx?cinemaID=${theater.code}"
 }
 
 object Megabox {
 
     const val PACKAGE_NAME = "TODO"
+
+    fun detailWebUrl(theater: Theater): String =
+            "http://m.megabox.co.kr/?menuId=theater-detail&cinema=${theater.code}"
 }
 
 object Kakao {
