@@ -105,6 +105,7 @@ dependencies {
 
     implementation 'com.kakao.sdk:kakaolink:1.13.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.5.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.8.2'
 
     // logging
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'

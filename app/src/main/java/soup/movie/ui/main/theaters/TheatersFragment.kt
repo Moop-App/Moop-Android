@@ -5,9 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.mapbox.android.core.permissions.PermissionsListener
+import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
+import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
+import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode
 import kotlinx.android.synthetic.main.fragment_theaters.*
 import soup.movie.data.helper.fullName
 import soup.movie.data.helper.getSelectedMarkerIcon
@@ -23,12 +28,15 @@ import kotlin.math.max
 
 class TheatersFragment :
         BaseTabFragment<TheatersContract.View, TheatersContract.Presenter>(),
-        TheatersContract.View {
+        TheatersContract.View, PermissionsListener {
 
     @Inject
     override lateinit var presenter: TheatersContract.Presenter
 
     private lateinit var mapboxMap: MapboxMap
+    
+    private var locationLayerPlugin: LocationLayerPlugin? = null
+    private lateinit var permissionsManager: PermissionsManager
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -50,6 +58,7 @@ class TheatersFragment :
                 }
                 true
             }
+            enableLocationPlugin()
             presenter.onMapReady()
         }
     }
@@ -62,6 +71,12 @@ class TheatersFragment :
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+
+        if (!PermissionsManager.areLocationPermissionsGranted(context)) {
+            locationLayerPlugin?.run{
+                lifecycle.removeObserver(this)
+            }
+        }
     }
 
     override fun onPause() {
@@ -102,6 +117,35 @@ class TheatersFragment :
             .setTitle(fullName())
             .setPosition(position())
             .setIcon(context.loadIconOrDefault(getSelectedMarkerIcon()))
+
+    private fun enableLocationPlugin() {
+        if (PermissionsManager.areLocationPermissionsGranted(context)) {
+            locationLayerPlugin = LocationLayerPlugin(mapView, mapboxMap).apply {
+                cameraMode = CameraMode.TRACKING
+                renderMode = RenderMode.NORMAL
+                lifecycle.addObserver(this)
+            }
+        } else {
+            permissionsManager = PermissionsManager(this)
+            permissionsManager.requestLocationPermissions(activity)
+        }
+        locationLayerPlugin?.run {
+            lifecycle.addObserver(this)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>) {
+    }
+
+    override fun onPermissionResult(granted: Boolean) {
+        if (granted) {
+            enableLocationPlugin()
+        }
+    }
 
     companion object {
 
