@@ -17,6 +17,7 @@ import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.util.loadIconOrDefault
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.showToast
 import javax.inject.Inject
 import kotlin.math.max
 
@@ -40,6 +41,7 @@ class TheatersFragment :
         mapView.getMapAsync { it ->
             mapboxMap = it
             mapboxMap.setOnMarkerClickListener { marker ->
+                context?.showToast(marker.title)
                 mapboxMap.animateCamera {
                     CameraPosition.Builder()
                             .target(marker.position)
