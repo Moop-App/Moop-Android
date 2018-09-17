@@ -18,7 +18,7 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.util.loadIconOrDefault
 import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
-import kotlin.math.min
+import kotlin.math.max
 
 class TheatersFragment :
         BaseTabFragment<TheatersContract.View, TheatersContract.Presenter>(),
@@ -43,7 +43,7 @@ class TheatersFragment :
                 mapboxMap.animateCamera {
                     CameraPosition.Builder()
                             .target(marker.position)
-                            .zoom(min(it.cameraPosition.zoom, 16.0))
+                            .zoom(max(it.cameraPosition.zoom, 16.0))
                             .build()
                 }
                 true
