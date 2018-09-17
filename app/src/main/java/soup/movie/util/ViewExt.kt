@@ -54,6 +54,7 @@ fun View.animateShow(animate: Boolean) {
         alpha = 1f
         return
     }
+    alpha = 0f
     animate()
             .alpha(1f)
             .setDuration(320)
