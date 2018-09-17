@@ -21,9 +21,9 @@
             app:mapbox_uiLogo="false"
             app:mapbox_uiRotateGestures="false"
             app:mapbox_uiTiltGestures="false"
-            app:mapbox_cameraTargetLat="36.51004128035664"
-            app:mapbox_cameraTargetLng="127.81947555561169"
-            app:mapbox_cameraZoom="5.8"
+            app:mapbox_cameraTargetLat="37.5307357"
+            app:mapbox_cameraTargetLng="126.965348"
+            app:mapbox_cameraZoom="12"
             app:mapbox_foregroundLoadColor="@color/grey_200" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
