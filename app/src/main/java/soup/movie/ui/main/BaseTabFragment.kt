@@ -28,11 +28,6 @@ abstract class BaseTabFragment<V: View, P: Presenter<V>> :
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onDestroy() {
-        panelProvider.hidePanel()
-        super.onDestroy()
-    }
-
     protected fun showPanel(panelState: PanelData) {
         panelProvider.showPanel(panelState)
     }
