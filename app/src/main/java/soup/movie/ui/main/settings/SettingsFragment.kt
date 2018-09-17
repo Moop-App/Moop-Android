@@ -110,6 +110,7 @@ class SettingsFragment :
         }
         usePaletteThemeSwitch.isChecked = viewState.usePaletteTheme
         useWebLinkSwitch.isChecked = viewState.useWebLink
+        appVersionLabel.text = "현재 ${BuildConfig.VERSION_NAME} / 최신 ${viewState.version.code}"
     }
 
     private fun onTheaterEditClicked() {

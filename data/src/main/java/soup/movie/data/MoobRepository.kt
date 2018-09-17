@@ -1,7 +1,8 @@
-package soup.movie.data.source
+package soup.movie.data
 
 import io.reactivex.Observable
 import soup.movie.data.model.Movie
+import soup.movie.data.model.Version
 import soup.movie.data.model.request.TimeTableRequest
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
@@ -13,6 +14,7 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
                      private val remoteDataSource: RemoteMoobDataSource) {
 
     private var codeResponse: CodeResponse? = null
+    private var version: Version? = null
 
     fun getNowList(clearCache: Boolean): Observable<MovieListResponse> = when {
         clearCache -> getNowListFromNetwork()
@@ -61,5 +63,14 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
 
     fun getTimeTableList(request: TimeTableRequest): Observable<TimeTableResponse> {
         return remoteDataSource.getTimeTableList(request)
+    }
+
+    fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> {
+        return version
+                ?.let { Observable.just(it) }
+                ?: run { remoteDataSource.getVersion(pkgName, defaultVersion)
+                        .startWith(Version(defaultVersion))
+                        .doOnNext { version = it }
+                }
     }
 }

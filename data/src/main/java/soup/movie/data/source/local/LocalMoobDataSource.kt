@@ -2,6 +2,7 @@ package soup.movie.data.source.local
 
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+import soup.movie.data.model.Version
 import soup.movie.data.model.request.TimeTableRequest
 import soup.movie.data.model.response.CachedMovieList
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_NOW
@@ -45,4 +46,6 @@ class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
     override fun getCodeList(): Observable<CodeResponse> = TODO()
 
     override fun getTimeTableList(request: TimeTableRequest): Observable<TimeTableResponse> = TODO()
+
+    override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> = TODO()
 }

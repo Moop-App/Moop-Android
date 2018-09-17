@@ -89,9 +89,10 @@ abstract class MainTabUiModule {
         @Provides
         fun presenter(theaterSetting: TheaterSetting,
                       usePaletteThemeSetting: UsePaletteThemeSetting,
-                      useWebLinkSetting: UseWebLinkSetting):
+                      useWebLinkSetting: UseWebLinkSetting,
+                      repository: MoobRepository):
                 SettingsContract.Presenter =
-                SettingsPresenter(theaterSetting, usePaletteThemeSetting, useWebLinkSetting)
+                SettingsPresenter(theaterSetting, usePaletteThemeSetting, useWebLinkSetting, repository)
     }
 
     @FragmentScope
