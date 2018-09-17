@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
+import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import kotlinx.android.synthetic.main.fragment_theaters.*
 import soup.movie.data.helper.fullName
@@ -17,6 +18,7 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.util.loadIconOrDefault
 import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
+import kotlin.math.min
 
 class TheatersFragment :
         BaseTabFragment<TheatersContract.View, TheatersContract.Presenter>(),
@@ -35,8 +37,17 @@ class TheatersFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync {
+        mapView.getMapAsync { it ->
             mapboxMap = it
+            mapboxMap.setOnMarkerClickListener { marker ->
+                mapboxMap.animateCamera {
+                    CameraPosition.Builder()
+                            .target(marker.position)
+                            .zoom(min(it.cameraPosition.zoom, 16.0))
+                            .build()
+                }
+                true
+            }
             presenter.onMapReady()
         }
     }
