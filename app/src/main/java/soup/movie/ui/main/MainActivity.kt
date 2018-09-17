@@ -157,6 +157,11 @@ class MainActivity :
         fragmentPanelRouter.hide()
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        fragmentSceneRouter.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
     companion object {
 
         private const val ACTION_SHOW_TAB = "soup.movie.action.SHOW_TAB"

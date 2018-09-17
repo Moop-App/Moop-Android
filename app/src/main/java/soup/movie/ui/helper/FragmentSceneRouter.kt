@@ -52,4 +52,10 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
     fun reselectTab() {
         (fragmentManager.findFragmentById(containerId) as? OnReselectListener)?.onReselect()
     }
+
+    fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        fragmentManager.findFragmentById(containerId)?.run {
+            onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+    }
 }
