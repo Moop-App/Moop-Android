@@ -6,24 +6,22 @@ import soup.movie.ui.main.BaseTabFragment.PanelData
 class FragmentPanelRouter(private val fragmentManager: FragmentManager,
                           private val containerId: Int) {
 
-    private var lastState: PanelData? = null
-
     fun show(state: PanelData) {
-        if (lastState == state) return
-
         val fragmentTransaction = fragmentManager.beginTransaction()
                 .disallowAddToBackStack()
 
-        fragmentManager.findFragmentById(containerId)?.apply {
-            if (isDetached.not()) {
-                fragmentTransaction.detach(this)
-            }
-        }
         fragmentManager.findFragmentByTag(state.tag)?.apply {
             if (isDetached) {
                 fragmentTransaction.attach(this)
+            } else {
+                return
             }
         } ?: run {
+            fragmentManager.findFragmentById(containerId)?.apply {
+                if (isDetached.not()) {
+                    fragmentTransaction.detach(this)
+                }
+            }
             fragmentTransaction.add(containerId, state.newFragment(), state.tag)
         }
 
