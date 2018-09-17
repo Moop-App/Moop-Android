@@ -145,17 +145,16 @@
             tools:text="90%" />
 
         <ImageButton
-            android:id="@+id/favoriteButton"
+            android:id="@+id/infoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:tint="@color/light_icon"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:transitionName="@string/transition_favorite"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/timetableButton"
-            app:layout_constraintTop_toTopOf="@+id/timetableButton"
-            app:srcCompat="@drawable/ic_round_favorite" />
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+            app:layout_constraintTop_toTopOf="@+id/ticketButton"
+            app:srcCompat="@drawable/ic_round_info" />
 
         <ImageButton
             android:id="@+id/ticketButton"

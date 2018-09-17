@@ -137,7 +137,12 @@ class DetailActivity :
         ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
         eggView.text = movie.egg
 
-        ticketButton.setOnClickListener { executeTicketLink() }
+        infoButton.setOnClickListener {
+            executeWebPage(Cgv.detailMobileWebUrl(movie))
+        }
+        ticketButton.setOnClickListener {
+            executeTicketLink()
+        }
         timetableButton.setOnClickListener {
             startActivity(Intent(this, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
@@ -210,7 +215,7 @@ class DetailActivity :
             titleView.setTextColor(darkColor)
             openDateView.setTextColor(darkColor)
             eggView.setTextColor(darkColor)
-            favoriteButton.setColorFilter(darkColor)
+            infoButton.setColorFilter(darkColor)
             ticketButton.setColorFilter(darkColor)
             timetableButton.setColorFilter(darkColor)
             shareButton.setColorFilter(darkColor)

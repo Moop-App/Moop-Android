@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="transition_background">background</string>
-    <string name="transition_poster">poster</string>
-    <string name="transition_title">title</string>
-    <string name="transition_age">age</string>
-    <string name="transition_age_bg">age_bg</string>
-    <string name="transition_age_bg_outer">age_bg_outer</string>
-    <string name="transition_egg">egg</string>
-    <string name="transition_favorite">favorite</string>
-    <string name="transition_share">share</string>
+    <string name="transition_background" translatable="false">background</string>
+    <string name="transition_poster" translatable="false">poster</string>
+    <string name="transition_title" translatable="false">title</string>
+    <string name="transition_age" translatable="false">age</string>
+    <string name="transition_age_bg" translatable="false">age_bg</string>
+    <string name="transition_age_bg_outer" translatable="false">age_bg_outer</string>
+    <string name="transition_egg" translatable="false">egg</string>
+    <string name="transition_share" translatable="false">share</string>
 </resources>
