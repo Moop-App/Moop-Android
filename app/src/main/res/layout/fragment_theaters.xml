@@ -63,23 +63,21 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/black"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/titleView"
-                app:layout_constraintStart_toStartOf="@+id/titleView"
                 tools:text="18m" />
 
             <ImageButton
-                android:id="@+id/timetableButton"
+                android:id="@+id/navigationButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:tint="@color/dark_icon"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/shareButton"
-                app:layout_constraintTop_toTopOf="@+id/shareButton"
-                app:srcCompat="@drawable/ic_round_info" />
+                app:layout_constraintEnd_toStartOf="@+id/infoButton"
+                app:layout_constraintTop_toTopOf="@+id/infoButton"
+                app:srcCompat="@drawable/ic_round_directions_car" />
 
             <ImageButton
-                android:id="@+id/shareButton"
+                android:id="@+id/infoButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
@@ -88,7 +86,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_round_share" />
+                app:srcCompat="@drawable/ic_round_info" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

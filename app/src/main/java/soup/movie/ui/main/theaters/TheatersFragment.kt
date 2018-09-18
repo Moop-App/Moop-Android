@@ -17,9 +17,7 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode
 import kotlinx.android.synthetic.main.fragment_theaters.*
-import soup.movie.data.helper.fullName
-import soup.movie.data.helper.getSelectedMarkerIcon
-import soup.movie.data.helper.position
+import soup.movie.data.helper.*
 import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.main.BaseTabFragment
@@ -44,6 +42,8 @@ class TheatersFragment :
     private var locationLayerPlugin: LocationLayerPlugin? = null
     private lateinit var permissionsManager: PermissionsManager
 
+    private var selectedTheater: Theater? = null
+
     private val infoPanel by lazy {
         BottomSheetBehavior.from(infoView).apply {
             infoView.setOnClickListener { hideInfoPanel() }
@@ -58,6 +58,18 @@ class TheatersFragment :
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         infoPanel.state = STATE_HIDDEN
+        navigationButton.setOnClickListener {
+            selectedTheater?.toMapIntent()?.run {
+                if (resolveActivity(context!!.packageManager) != null) {
+                    startActivity(this)
+                }
+            }
+        }
+        infoButton.setOnClickListener {
+            selectedTheater?.toDetailWebUrl()?.run {
+                context?.executeWebPage(this)
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,16 +100,16 @@ class TheatersFragment :
     private fun showInfoPanel(theater: Theater) {
         infoPanel.state = BottomSheetBehavior.STATE_COLLAPSED
         nameView.text = theater.fullName()
-
+        selectedTheater = theater
     }
 
     private fun hideInfoPanel() {
         infoPanel.state = BottomSheetBehavior.STATE_HIDDEN
-
         mapboxMap.animateCamera { CameraUpdateFactory
                 .zoomTo(min(it.cameraPosition.zoom, 12.0))
                 .getCameraPosition(mapboxMap)
         }
+        selectedTheater = null
     }
 
     override fun onHiddenChanged(hidden: Boolean) {

@@ -1,5 +1,7 @@
 package soup.movie.data.helper
 
+import android.content.Intent
+import android.net.Uri
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -67,3 +69,16 @@ fun Theater.fullName(): String = when (type) {
 }
 
 fun Theater.position(): LatLng = LatLng(lat, lng)
+
+fun Theater.toMapIntent(): Intent = Intent(
+        Intent.ACTION_VIEW,
+        Uri.parse("geo:0,0?q=$lat,$lng(${fullName()})"))
+
+fun Theater.toDetailWebUrl(): String {
+    return when (type) {
+        TYPE_CGV -> Cgv.detailWebUrl(this)
+        TYPE_LOTTE -> LotteCinema.detailWebUrl(this)
+        TYPE_MEGABOX -> Megabox.detailWebUrl(this)
+        else -> throw IllegalArgumentException("$type is not valid type.")
+    }
+}
