@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
@@ -21,11 +24,13 @@ import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.util.Interpolators
+import soup.movie.util.fromJson
 import soup.movie.util.loadIconOrDefault
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.showToast
+import soup.movie.util.toJson
 import javax.inject.Inject
 import kotlin.math.max
+import kotlin.math.min
 
 class TheatersFragment :
         BaseTabFragment<TheatersContract.View, TheatersContract.Presenter>(),
@@ -39,10 +44,21 @@ class TheatersFragment :
     private var locationLayerPlugin: LocationLayerPlugin? = null
     private lateinit var permissionsManager: PermissionsManager
 
+    private val infoPanel by lazy {
+        BottomSheetBehavior.from(infoView).apply {
+            infoView.setOnClickListener { hideInfoPanel() }
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
             FragmentTheatersBinding.inflate(inflater, container, false).root
+
+    override fun initViewState(ctx: Context) {
+        super.initViewState(ctx)
+        infoPanel.state = STATE_HIDDEN
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,17 +69,34 @@ class TheatersFragment :
 
             mapboxMap = it
             mapboxMap.setOnMarkerClickListener { marker ->
-                context?.showToast(marker.title)
                 mapboxMap.animateCamera {
                     CameraPosition.Builder()
                             .target(marker.position)
                             .zoom(max(it.cameraPosition.zoom, 16.0))
                             .build()
                 }
+                marker.snippet.fromJson<Theater>()?.run { showInfoPanel(this) }
                 true
             }
+            mapboxMap.addOnMapClickListener { hideInfoPanel() }
+//            mapboxMap.addOnCameraMoveStartedListener { hideInfoPanel() }
             enableLocationPlugin()
             presenter.onMapReady()
+        }
+    }
+
+    private fun showInfoPanel(theater: Theater) {
+        infoPanel.state = BottomSheetBehavior.STATE_COLLAPSED
+        nameView.text = theater.fullName()
+
+    }
+
+    private fun hideInfoPanel() {
+        infoPanel.state = BottomSheetBehavior.STATE_HIDDEN
+
+        mapboxMap.animateCamera { CameraUpdateFactory
+                .zoomTo(min(it.cameraPosition.zoom, 12.0))
+                .getCameraPosition(mapboxMap)
         }
     }
 
@@ -156,6 +189,7 @@ class TheatersFragment :
             .setTitle(fullName())
             .setPosition(position())
             .setIcon(context.loadIconOrDefault(getSelectedMarkerIcon()))
+            .setSnippet(toJson())
 
     private fun enableLocationPlugin() {
         if (PermissionsManager.areLocationPermissionsGranted(context)) {

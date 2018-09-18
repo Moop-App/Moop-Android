@@ -6,9 +6,10 @@
 
     <data/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:background="@color/debug_background"
         tools:context="soup.movie.ui.main.settings.SettingsFragment" >
 
         <com.mapbox.mapboxsdk.maps.MapView
@@ -27,11 +28,76 @@
             app:mapbox_cameraZoomMin="10"
             app:mapbox_foregroundLoadColor="@color/white" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/infoView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="80dp">
+
+            <TextView
+                android:id="@+id/nameView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Movie Title" />
+
+            <TextView
+                android:id="@+id/distanceView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/titleView"
+                app:layout_constraintStart_toStartOf="@+id/titleView"
+                tools:text="18m" />
+
+            <ImageButton
+                android:id="@+id/timetableButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:tint="@color/dark_icon"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/shareButton"
+                app:layout_constraintTop_toTopOf="@+id/shareButton"
+                app:srcCompat="@drawable/ic_round_info" />
+
+            <ImageButton
+                android:id="@+id/shareButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:tint="@color/dark_icon"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_round_share" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <View
             android:id="@+id/dim"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:background="@color/white"
+            tools:visibility="gone" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
