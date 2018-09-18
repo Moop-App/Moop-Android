@@ -7,6 +7,7 @@ import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
@@ -137,6 +138,7 @@ class MainActivity :
 
     override fun render(viewState: MainViewState) {
         printRenderLog { viewState }
+        setTitle(viewState.toTitleId())
         updateSelectedItem(viewState.toItemId())
         fragmentSceneRouter.goTo(viewState.asScene())
     }
@@ -171,9 +173,17 @@ class MainActivity :
         @IdRes
         private fun MainViewState.toItemId(): Int = when (this) {
             is NowState -> R.id.action_now
-            is PlanState -> (R.id.action_plan)
-            is TheatersState -> (R.id.action_theaters)
-            is SettingsState -> (R.id.action_settings)
+            is PlanState -> R.id.action_plan
+            is TheatersState -> R.id.action_theaters
+            is SettingsState -> R.id.action_settings
+        }
+
+        @StringRes
+        private fun MainViewState.toTitleId(): Int = when (this) {
+            is NowState -> R.string.tab_now
+            is PlanState -> R.string.tab_plan
+            is TheatersState -> R.string.tab_theaters
+            is SettingsState -> R.string.tab_settings
         }
 
         private fun Int.parseToTabMode(): Tab = when (this) {
@@ -181,7 +191,7 @@ class MainActivity :
             R.id.action_plan -> Tab.Plan
             R.id.action_theaters -> Tab.Theaters
             R.id.action_settings -> Tab.Settings
-            else -> throw IllegalStateException("0x${toString(16)} is invalid ID")
+            else -> throw IllegalArgumentException("0x${toString(16)} is invalid ID")
         }
 
         private fun MainViewState.asScene(): SceneData = when (this) {
