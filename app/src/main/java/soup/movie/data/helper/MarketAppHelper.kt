@@ -49,8 +49,8 @@ internal fun Context.executeWebPage(url: String) {
             .setToolbarColor(getColorCompat(R.color.white))
             .setSecondaryToolbarColor(getColorCompat(R.color.black))
             .setShowTitle(true)
-            .setStartAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
-            .setExitAnimations(this, android.R.anim.fade_in, android.R.anim.fade_out)
+            .setStartAnimations(this, R.anim.fade_in, R.anim.fade_out)
+            .setExitAnimations(this, R.anim.fade_in, R.anim.fade_out)
             .build()
             .launchUrl(this, Uri.parse(url))
 
