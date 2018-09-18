@@ -12,12 +12,9 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
 
     data class SceneData(val tag: String,
                          val isPersist: Boolean = true,
-                         val animate: Boolean = true,
-                         val newFragment: () -> Fragment) {
-
-        @AnimRes val enter: Int = if (animate) R.anim.fade_in else 0
-        @AnimRes val exit: Int = if (animate) R.anim.fade_out else 0
-    }
+                         @AnimRes val enter: Int = R.anim.fade_in,
+                         @AnimRes val exit: Int = R.anim.fade_out,
+                         val newFragment: () -> Fragment)
 
     private var lastState: SceneData? = null
 

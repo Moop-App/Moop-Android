@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
@@ -20,6 +21,7 @@ import soup.movie.data.helper.position
 import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.main.BaseTabFragment
+import soup.movie.util.Interpolators
 import soup.movie.util.loadIconOrDefault
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.showToast
@@ -47,6 +49,9 @@ class TheatersFragment :
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { it ->
+            // Trick: Fake scene animation
+            dim.animateHide()
+
             mapboxMap = it
             mapboxMap.setOnMarkerClickListener { marker ->
                 context?.showToast(marker.title)
@@ -61,6 +66,41 @@ class TheatersFragment :
             enableLocationPlugin()
             presenter.onMapReady()
         }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) {
+            dim.animateShow()
+        } else {
+            dim.animateHide()
+        }
+    }
+
+    private fun View.animateHide() {
+        animate().cancel()
+        alpha = 1f
+        animate()
+                .alpha(0f)
+                .setDuration(300)
+                .setInterpolator(Interpolators.ALPHA_OUT)
+                .setStartDelay(200)
+                .withEndAction { visibility = View.INVISIBLE }
+    }
+
+    private fun View.animateShow() {
+        animate().cancel()
+        alpha = 0f
+        visibility = View.VISIBLE
+        animate()
+                .alpha(1f)
+                .setDuration(200)
+                .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                .setStartDelay(0)
+                // We need to clean up any pending end action from animateHide if we call
+                // both hide and show in the same frame before the animation actually gets started.
+                // cancel() doesn't really remove the end action.
+                .withEndAction(null)
     }
 
     override fun onStart() {
