@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import soup.movie.data.model.Theater
 import soup.movie.settings.PrefSetting
+import soup.movie.util.toJson
 import timber.log.Timber
 
 class TheaterSetting(preferences: SharedPreferences) :
@@ -16,7 +17,7 @@ class TheaterSetting(preferences: SharedPreferences) :
     }
 
     override fun saveValue(preferences: SharedPreferences, value: List<Theater>) {
-        return preferences.edit().putString(KEY, toJson(value)).apply()
+        return preferences.edit().putString(KEY, value.toJson()).apply()
     }
 
     companion object {
@@ -25,10 +26,6 @@ class TheaterSetting(preferences: SharedPreferences) :
         private const val DEFAULT_VALUE = ""
 
         private val type = object : TypeToken<ArrayList<Theater>>() {}.type
-
-        private fun toJson(theaterCodeList: List<Theater>): String {
-            return Gson().toJson(theaterCodeList)
-        }
 
         private fun fromJson(jsonStr: String): List<Theater> {
             return try {

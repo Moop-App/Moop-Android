@@ -9,6 +9,8 @@ import org.threeten.bp.Period.between
 import org.threeten.bp.ZoneId
 import soup.movie.R
 import soup.movie.data.model.Movie
+import soup.movie.util.fromJson
+import soup.movie.util.toJson
 
 private const val KEY_JSON = "json"
 
@@ -19,10 +21,6 @@ fun Intent.restoreFrom(): Movie? = getStringExtra(KEY_JSON).fromJson()
 fun Movie.saveTo(bundle: Bundle) = bundle.putString(KEY_JSON, toJson())
 
 fun Movie.saveTo(intent: Intent): Intent = intent.putExtra(KEY_JSON, toJson())
-
-private fun Movie.toJson(): String = Gson().toJson(this)
-
-private fun String.fromJson(): Movie? = Gson().fromJson(this, Movie::class.java)
 
 fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n연령제한: $age"
 
