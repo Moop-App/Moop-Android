@@ -197,7 +197,7 @@ class MainActivity :
         private fun MainViewState.asScene(): SceneData = when (this) {
             is NowState -> SceneData(toString(), isPersist = false) { NowFragment.newInstance() }
             is PlanState -> SceneData(toString(), isPersist = false) { PlanFragment.newInstance() }
-            is TheatersState -> SceneData(toString()) { TheatersFragment.newInstance() }
+            is TheatersState -> SceneData(toString(), animate = false) { TheatersFragment.newInstance() }
             is SettingsState -> SceneData(toString()) { SettingsFragment.newInstance() }
         }
     }

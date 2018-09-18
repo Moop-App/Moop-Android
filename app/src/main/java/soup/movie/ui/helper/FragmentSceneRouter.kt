@@ -1,5 +1,6 @@
 package soup.movie.ui.helper
 
+import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import soup.movie.R
@@ -11,17 +12,23 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
 
     data class SceneData(val tag: String,
                          val isPersist: Boolean = true,
-                         val newFragment: () -> Fragment)
+                         val animate: Boolean = true,
+                         val newFragment: () -> Fragment) {
+
+        @AnimRes val enter: Int = if (animate) R.anim.fade_in else 0
+        @AnimRes val exit: Int = if (animate) R.anim.fade_out else 0
+    }
 
     private var lastState: SceneData? = null
 
     fun goTo(now: SceneData) {
+        val previous: SceneData? = lastState
+
         val fragmentTransaction = fragmentManager.beginTransaction()
                 .disallowAddToBackStack()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .setCustomAnimations(now.enter, previous?.exit ?: 0)
                 .setReorderingAllowed(true)
 
-        val previous: SceneData? = lastState
         if (previous != null) {
             fragmentManager.findFragmentByTag(previous.tag)?.apply {
                 if (!previous.isPersist) {
