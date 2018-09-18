@@ -2,11 +2,11 @@ package soup.movie.ui.theater.edit
 
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.BiFunction
 import io.reactivex.internal.disposables.DisposableContainer
+import io.reactivex.rxkotlin.Observables
+import soup.movie.data.MoobRepository
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
-import soup.movie.data.MoobRepository
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
@@ -27,10 +27,10 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
     }
 
     private val viewStateObservable: Observable<TheaterEditViewState>
-        get() = Observable.combineLatest(
+        get() = Observables.combineLatest(
                 allTheatersObservable,
                 selectedIdSetObservable,
-                BiFunction(::TheaterEditViewState))
+                ::TheaterEditViewState)
 
     private val allTheatersObservable: Observable<List<AreaGroup>>
         get() = moobRepository.getCodeList()
