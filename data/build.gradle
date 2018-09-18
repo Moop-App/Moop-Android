@@ -36,7 +36,8 @@ dependencies {
     implementation deps.retrofit.gson
     implementation deps.retrofit.rxjava2
 
-    implementation deps.rxjava2
+    implementation deps.rx.java2
+    implementation deps.rx.kotlin
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner

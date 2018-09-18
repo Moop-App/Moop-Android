@@ -94,9 +94,10 @@ dependencies {
     implementation deps.retrofit.gson
     implementation deps.retrofit.rxjava2
 
-    implementation deps.rxjava2
-    implementation deps.rx_android
-    implementation deps.rx_relay
+    implementation deps.rx.java2
+    implementation deps.rx.kotlin
+    implementation deps.rx.android
+    implementation deps.rx.relay
 
     // UI
     //implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
