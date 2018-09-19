@@ -9,8 +9,7 @@ import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.data.helper.saveTo
@@ -27,8 +26,7 @@ import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.ui.main.theaters.TheatersFragment
-import soup.movie.util.animateHide
-import soup.movie.util.animateShow
+import soup.movie.util.Interpolators
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
 import timber.log.Timber
@@ -57,16 +55,25 @@ class MainActivity :
         BottomSheetBehavior.from(bottomSheet).apply {
             setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
+                private var lastState: Int = STATE_HIDDEN
+
                 @SuppressLint("SwitchIntDef")
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when (newState) {
                         STATE_HIDDEN -> {
                             fragmentPanelRouter.hide()
-                            dim.animateHide(true)
+                            dim.animateHide()
                         }
-                        STATE_COLLAPSED -> {
-                            dim.animateShow(true)
+                        STATE_SETTLING -> {
+                            if (lastState == STATE_HIDDEN) {
+                                dim.animateShow()
+                            }
                         }
+                    }
+                    when (newState) {
+                        STATE_HIDDEN,
+                        STATE_COLLAPSED,
+                        STATE_EXPANDED -> lastState = newState
                     }
                 }
 
@@ -76,6 +83,29 @@ class MainActivity :
             })
             dim.setOnClickListener { state = STATE_HIDDEN }
         }
+    }
+
+    private fun View.animateHide() {
+        animate().cancel()
+        alpha = 1f
+        animate()
+                .alpha(0f)
+                .setDuration(200)
+                .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                .setStartDelay(0)
+                .withEndAction { visibility = View.INVISIBLE }
+    }
+
+    private fun View.animateShow() {
+        animate().cancel()
+        alpha = 0f
+        visibility = View.VISIBLE
+        animate()
+                .alpha(1f)
+                .setDuration(200)
+                .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                .setStartDelay(0)
+                .withEndAction(null)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
