@@ -88,11 +88,10 @@
                     android:background="@drawable/bg_d_day"
                     android:backgroundTint="@color/red"
                     android:visibility="@{MovieExtKt.isNew(item) ? View.VISIBLE : View.GONE}"
+                    android:transitionName="@string/transition_new"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="NEW"
-                    tools:visibility="visible"
-                    tools:ignore="SpUsage" />
+                    tools:visibility="visible" />
 
                 <!--
                 <ImageView

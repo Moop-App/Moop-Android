@@ -29,7 +29,8 @@ class NowListAdapter(private val host: FragmentActivity) :
                             Pair.create(itemView.backgroundView, host.getString(R.string.transition_background)),
                             Pair.create(itemView.posterView, host.getString(R.string.transition_poster)),
                             Pair.create(itemView.ageBgView, host.getString(R.string.transition_age_bg)),
-                            Pair.create(itemView.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)))
+                            Pair.create(itemView.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)),
+                            Pair.create(itemView.newView, host.getString(R.string.transition_new)))
                     host.startActivity(intent, options.toBundle())
                 }
             }

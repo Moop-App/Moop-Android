@@ -116,6 +116,7 @@ class DetailActivity :
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
+        binding.item = movie
     }
 
     private fun doStartPostponedEnterTransition() {

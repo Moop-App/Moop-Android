@@ -8,4 +8,5 @@
     <string name="transition_age_bg_outer" translatable="false">age_bg_outer</string>
     <string name="transition_egg" translatable="false">egg</string>
     <string name="transition_share" translatable="false">share</string>
+    <string name="transition_new" translatable="false">new</string>
 </resources>
