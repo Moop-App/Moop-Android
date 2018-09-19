@@ -12,6 +12,8 @@ import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
@@ -80,6 +82,7 @@ class TheatersFragment :
             dim.animateHide()
 
             mapboxMap = it
+            mapboxMap.setLatLngBoundsForCameraTarget(KOREA_BOUNDS)
             mapboxMap.setOnMarkerClickListener { marker ->
                 mapboxMap.animateCamera {
                     CameraPosition.Builder()
@@ -233,6 +236,11 @@ class TheatersFragment :
     }
 
     companion object {
+
+        private val KOREA_BOUNDS = LatLngBounds.Builder()
+                .include(LatLng(31.43, 122.37))
+                .include(LatLng(44.35, 132.0))
+                .build()
 
         fun newInstance(): TheatersFragment = TheatersFragment()
     }
