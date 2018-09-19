@@ -85,6 +85,7 @@ class TheatersFragment :
             mapboxMap.setLatLngBoundsForCameraTarget(KOREA_BOUNDS)
             mapboxMap.setOnMarkerClickListener { marker ->
                 mapboxMap.animateCamera {
+                    setCameraTracking(false)
                     CameraPosition.Builder()
                             .target(marker.position)
                             .zoom(max(it.cameraPosition.zoom, 16.0))
@@ -94,7 +95,6 @@ class TheatersFragment :
                 true
             }
             mapboxMap.addOnMapClickListener { hideInfoPanel() }
-//            mapboxMap.addOnCameraMoveStartedListener { hideInfoPanel() }
             enableLocationPlugin()
             presenter.onMapReady()
         }
@@ -219,6 +219,13 @@ class TheatersFragment :
         }
         locationLayerPlugin?.run {
             lifecycle.addObserver(this)
+        }
+    }
+
+    private fun setCameraTracking(enabled: Boolean) {
+        locationLayerPlugin?.cameraMode = when (enabled) {
+            true -> CameraMode.TRACKING
+            false -> CameraMode.NONE
         }
     }
 
