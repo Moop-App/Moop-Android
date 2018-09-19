@@ -9,9 +9,9 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
 import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.ui.main.BaseTabFragment
-import soup.movie.ui.main.now.NowViewState.DoneState
-import soup.movie.ui.main.now.NowViewState.LoadingState
+import soup.movie.ui.main.now.NowViewState.*
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setGoneIf
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class NowFragment :
     override lateinit var presenter: NowContract.Presenter
 
     private val listAdapter by lazy {
-        NowListAdapter(activity!!)
+        NowListAdapter(requireActivity())
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -43,12 +43,16 @@ class NowFragment :
         swipeRefreshLayout.setOnRefreshListener {
             presenter.refresh()
         }
+        errorView.setOnClickListener {
+            presenter.refresh()
+        }
     }
 
     override fun render(viewState: NowViewState) {
         printRenderLog { viewState }
         swipeRefreshLayout?.isRefreshing = viewState is LoadingState
-        listView?.setVisibleIf { viewState is DoneState }
+        errorView?.setVisibleIf { viewState is ErrorState }
+        listView?.setGoneIf { viewState is LoadingState }
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.movies)
         }

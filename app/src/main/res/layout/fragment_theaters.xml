@@ -90,6 +90,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            layout="@layout/item_error_state"
+            android:id="@+id/errorView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
         <View
             android:id="@+id/dim"
             android:layout_width="match_parent"

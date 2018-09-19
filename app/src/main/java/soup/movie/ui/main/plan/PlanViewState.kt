@@ -9,5 +9,10 @@ sealed class PlanViewState {
         override fun toString(): String = javaClass.simpleName
     }
 
+    object ErrorState : PlanViewState() {
+
+        override fun toString(): String = javaClass.simpleName
+    }
+
     data class DoneState(val movies: List<Movie>) : PlanViewState()
 }

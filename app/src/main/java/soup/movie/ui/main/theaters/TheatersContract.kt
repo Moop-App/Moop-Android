@@ -6,7 +6,7 @@ interface TheatersContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun onMapReady()
+        fun refresh()
     }
 
     interface View : BaseContract.View {

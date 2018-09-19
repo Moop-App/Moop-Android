@@ -23,11 +23,10 @@ import soup.movie.data.helper.*
 import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.main.BaseTabFragment
-import soup.movie.util.Interpolators
-import soup.movie.util.fromJson
-import soup.movie.util.loadIconOrDefault
+import soup.movie.ui.main.theaters.TheatersViewState.DoneState
+import soup.movie.ui.main.theaters.TheatersViewState.ErrorState
+import soup.movie.util.*
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.toJson
 import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
@@ -72,6 +71,9 @@ class TheatersFragment :
                 context?.executeWebPage(this)
             }
         }
+        errorView.setOnClickListener {
+            presenter.refresh()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,7 +98,7 @@ class TheatersFragment :
             }
             mapboxMap.addOnMapClickListener { hideInfoPanel() }
             enableLocationPlugin()
-            presenter.onMapReady()
+            presenter.refresh()
         }
     }
 
@@ -197,7 +199,11 @@ class TheatersFragment :
 
     override fun render(viewState: TheatersViewState) {
         printRenderLog { viewState }
-        mapboxMap.addMarkers(viewState.myTheaters.map { it.toMarker(mapView.context) })
+        errorView?.setVisibleIf { viewState is ErrorState }
+        if (viewState is DoneState) {
+            mapboxMap.addMarkers(viewState.myTheaters
+                    .map { it.toMarker(mapView.context) })
+        }
     }
 
     private fun Theater.toMarker(context: Context): MarkerOptions = MarkerOptions()
