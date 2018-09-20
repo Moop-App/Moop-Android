@@ -26,6 +26,7 @@ import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.activity_detail_header.*
 import soup.movie.R
 import soup.movie.data.helper.*
 import soup.movie.data.model.Movie
