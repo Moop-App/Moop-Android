@@ -18,16 +18,28 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // API Keys
-        buildConfigField 'String', 'K_KEY', "\"" + getKey("kkey") + "\""
+        buildConfigField 'String', 'K_KEY', "\"" + get("kkey") + "\""
 
         def filesAuthorityValue = applicationId + '.shareprovider'
         buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
         manifestPlaceholders = [filesAuthority: filesAuthorityValue]
     }
+    signingConfigs {
+        config {
+            storeFile file(get("storeFile"))
+            storePassword get("storePassword")
+            keyAlias get("keyAlias")
+            keyPassword get("keyPassword")
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -56,7 +68,7 @@ def getKeyProperties() {
     return properties
 }
 
-def getKey(propertyName) {
+def get(propertyName) {
     return getKeyProperties().getProperty(propertyName)
 }
 
