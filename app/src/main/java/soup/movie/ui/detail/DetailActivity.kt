@@ -133,11 +133,8 @@ class DetailActivity :
         posterView.setOnClickListener {
             presenter.requestShareImage(movie.posterUrl)
         }
-        titleView.text = movie.title
-        openDateView.text = movie.openDate
         ageView.text = movie.getSimpleAgeLabel()
         ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
-        eggView.text = movie.egg
 
         infoButton.setOnClickListener {
             executeWebPage(Cgv.detailMobileWebUrl(movie))
@@ -193,21 +190,26 @@ class DetailActivity :
 
     private fun applyTopPalette(bitmap: Bitmap, palette: Palette?) {
         if (presenter.usePaletteTheme()) {
-            val lightness = ColorUtils.isDark(palette)
-            val isDark = if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
-                ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
-            } else {
-                lightness == ColorUtils.IS_DARK
-            }
+            val isDark = isDark(bitmap, palette)
 
             // color the status bar.
-            var statusBarColor = window.statusBarColor
-            ColorUtils.getMostPopulousSwatch(palette)?.let {
-                statusBarColor = ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
+            val statusBarColor = ColorUtils.getMostPopulousSwatch(palette)?.let {
+                ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
+            } ?: run {
+                window.statusBarColor
             }
             applyTheme(ThemeData(statusBarColor, isDark))
         } else {
             applyTheme(ThemeData(Color.WHITE, isDark = false))
+        }
+    }
+
+    private fun isDark(bitmap: Bitmap, palette: Palette?): Boolean {
+        val lightness = ColorUtils.isDark(palette)
+        return if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
+            ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
+        } else {
+            lightness == ColorUtils.IS_DARK
         }
     }
 
