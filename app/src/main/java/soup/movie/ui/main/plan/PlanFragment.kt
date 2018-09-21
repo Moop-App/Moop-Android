@@ -11,7 +11,6 @@ import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.plan.PlanViewState.*
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.setGoneIf
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
@@ -52,7 +51,6 @@ class PlanFragment :
         printRenderLog { viewState }
         swipeRefreshLayout?.isRefreshing = viewState is LoadingState
         errorView?.setVisibleIf { viewState is ErrorState }
-        listView?.setGoneIf { viewState is LoadingState }
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.movies)
         }
