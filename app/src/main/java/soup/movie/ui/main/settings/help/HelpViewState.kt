@@ -1,6 +1,7 @@
 package soup.movie.ui.main.settings.help
 
-import soup.movie.data.model.Theater
+import androidx.annotation.Keep
 
+@Keep
 data class HelpViewState(
         val useWebLink: Boolean)
