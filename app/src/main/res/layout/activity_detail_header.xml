@@ -64,7 +64,6 @@
             android:maxLines="2"
             android:transitionName="@string/transition_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/posterView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="극장판 요괴워치 섀도사이드-도깨비왕의 부활" />
