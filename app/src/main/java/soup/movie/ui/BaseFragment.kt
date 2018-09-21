@@ -31,6 +31,6 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     interface OnBackListener {
 
-        fun onBackPressed(): Boolean = false
+        fun onBackPressed(): Boolean
     }
 }

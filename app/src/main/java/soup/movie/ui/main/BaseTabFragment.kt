@@ -36,6 +36,10 @@ abstract class BaseTabFragment<V: View, P: Presenter<V>> :
         panelProvider.hidePanel()
     }
 
+    protected fun panelIsShown(): Boolean {
+        return panelProvider.panelIsShown()
+    }
+
     interface OnReselectListener {
 
         fun onReselect()
@@ -46,6 +50,8 @@ abstract class BaseTabFragment<V: View, P: Presenter<V>> :
         fun showPanel(panelState: PanelData)
 
         fun hidePanel()
+
+        fun panelIsShown(): Boolean
     }
 
     data class PanelData(val tag: String,

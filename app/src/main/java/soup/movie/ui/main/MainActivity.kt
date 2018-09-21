@@ -189,6 +189,10 @@ class MainActivity :
         fragmentPanelRouter.hide()
     }
 
+    override fun panelIsShown(): Boolean {
+        return bottomSheetPanel.state != BottomSheetBehavior.STATE_HIDDEN
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         fragmentSceneRouter.onRequestPermissionsResult(requestCode, permissions, grantResults)

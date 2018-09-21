@@ -37,7 +37,11 @@ class SettingsFragment :
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_help) {
-            showPanel(HelpFragment.toPanelData())
+            if (panelIsShown()) {
+                hidePanel()
+            } else {
+                showPanel(HelpFragment.toPanelData())
+            }
             return true
         }
         return super.onOptionsItemSelected(item)

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_theaters.*
 import soup.movie.data.helper.*
 import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
+import soup.movie.ui.BaseFragment
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.theaters.TheatersViewState.DoneState
 import soup.movie.ui.main.theaters.TheatersViewState.ErrorState
@@ -33,6 +35,8 @@ import kotlin.math.min
 
 class TheatersFragment :
         BaseTabFragment<TheatersContract.View, TheatersContract.Presenter>(),
+        BaseFragment.OnBackListener,
+        BaseTabFragment.OnReselectListener,
         TheatersContract.View, PermissionsListener {
 
     @Inject
@@ -102,19 +106,28 @@ class TheatersFragment :
         }
     }
 
-    private fun showInfoPanel(theater: Theater) {
-        infoPanel.state = BottomSheetBehavior.STATE_COLLAPSED
-        nameView.text = theater.fullName()
-        selectedTheater = theater
+    private fun showInfoPanel(theater: Theater): Boolean {
+        if (infoPanel.state == STATE_HIDDEN) {
+            infoPanel.state = STATE_COLLAPSED
+            nameView.text = theater.fullName()
+            selectedTheater = theater
+            return true
+        }
+        return false
     }
 
-    private fun hideInfoPanel() {
-        infoPanel.state = BottomSheetBehavior.STATE_HIDDEN
-        mapboxMap.animateCamera { CameraUpdateFactory
-                .zoomTo(min(it.cameraPosition.zoom, 12.0))
-                .getCameraPosition(mapboxMap)
+    private fun hideInfoPanel(): Boolean {
+        if (infoPanel.state != STATE_HIDDEN) {
+            infoPanel.state = STATE_HIDDEN
+            mapboxMap.animateCamera {
+                CameraUpdateFactory
+                        .zoomTo(min(it.cameraPosition.zoom, 12.0))
+                        .getCameraPosition(mapboxMap)
+            }
+            selectedTheater = null
+            return true
         }
-        selectedTheater = null
+        return false
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
@@ -245,6 +258,14 @@ class TheatersFragment :
     override fun onPermissionResult(granted: Boolean) {
         if (granted) {
             enableLocationPlugin()
+        }
+    }
+
+    override fun onBackPressed(): Boolean = hideInfoPanel()
+
+    override fun onReselect() {
+        if (!hideInfoPanel()) {
+            setCameraTracking(true)
         }
     }
 
