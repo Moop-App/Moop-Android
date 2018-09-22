@@ -17,8 +17,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        // API Keys
-        buildConfigField 'String', 'K_KEY', "\"" + get("kkey") + "\""
+        buildConfigField 'String', 'HELP_E_MAIL', get('HELP_E_MAIL')
 
         def filesAuthorityValue = applicationId + '.shareprovider'
         buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
