@@ -2,6 +2,7 @@ package soup.movie.ui.main.theaters
 
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
@@ -58,10 +59,19 @@ abstract class LocationMapFragment<V: BaseContract.View, P: BaseContract.Present
         }
     }
 
-    protected fun setCameraTracking(enabled: Boolean) {
+    private fun setCameraTracking(enabled: Boolean) {
         locationLayerPlugin?.cameraMode = when (enabled) {
             true -> CameraMode.TRACKING
             false -> CameraMode.NONE
         }
+    }
+
+    protected fun trackMyLocation() {
+        setCameraTracking(true)
+    }
+
+    protected fun moveCamera(update: (MapboxMap) -> CameraPosition?) {
+        setCameraTracking(false)
+        mapboxMap.animateCamera(update)
     }
 }

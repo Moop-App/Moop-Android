@@ -78,8 +78,7 @@ class TheatersFragment :
 
         this.mapboxMap = mapboxMap
         mapboxMap.setOnMarkerClickListener { marker ->
-            mapboxMap.animateCamera {
-                setCameraTracking(false)
+            moveCamera {
                 CameraPosition.Builder()
                         .target(marker.position)
                         .zoom(max(it.cameraPosition.zoom, 16.0))
@@ -104,10 +103,10 @@ class TheatersFragment :
     private fun hideInfoPanel(): Boolean {
         if (infoPanel.state != STATE_HIDDEN) {
             infoPanel.state = STATE_HIDDEN
-            mapboxMap.animateCamera {
+            moveCamera {
                 CameraUpdateFactory
                         .zoomTo(min(it.cameraPosition.zoom, 12.0))
-                        .getCameraPosition(mapboxMap)
+                        .getCameraPosition(it)
             }
             selectedTheater = null
             return true
@@ -169,7 +168,7 @@ class TheatersFragment :
 
     override fun onReselect() {
         if (!hideInfoPanel()) {
-            setCameraTracking(true)
+            trackMyLocation()
         }
     }
 
