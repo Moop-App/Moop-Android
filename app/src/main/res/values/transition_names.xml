@@ -9,4 +9,5 @@
     <string name="transition_egg" translatable="false">egg</string>
     <string name="transition_share" translatable="false">share</string>
     <string name="transition_new" translatable="false">new</string>
+    <string name="transition_d_day" translatable="false">d_day</string>
 </resources>

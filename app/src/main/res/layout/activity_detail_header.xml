@@ -27,6 +27,29 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
+            android:id="@+id/dDayView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_d_day"
+            android:backgroundTint="@color/grey"
+            android:text="@{MovieExtKt.getDDayLabel(item)}"
+            android:visibility="@{MovieExtKt.hasOpenDate(item) ? View.VISIBLE : View.GONE}"
+            android:transitionName="@string/transition_d_day"
+            app:layout_constraintTop_toTopOf="@+id/titleView"
+            app:layout_constraintEnd_toStartOf="@+id/titleView"
+            tools:text="D-7"
+            tools:visibility="gone" />
+
+        <TextView
             android:id="@+id/newView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

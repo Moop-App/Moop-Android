@@ -3,10 +3,9 @@ package soup.movie.data.helper
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.ColorRes
-import com.google.gson.Gson
 import org.threeten.bp.LocalDate
-import org.threeten.bp.Period.between
 import org.threeten.bp.ZoneId
+import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
 import soup.movie.data.model.Movie
 import soup.movie.util.fromJson
@@ -43,14 +42,15 @@ fun Movie.getSimpleAgeLabel(): String = when (age) {
     else -> "미정"
 }
 
-fun Movie.getDDayLabel(): String = openDate()?.let {
-    val dDay = between(today(), it).days
-    return when (dDay) {
-        0 -> "NOW"
-        in 1..7 -> "D-$dDay"
-        else -> ""
+fun Movie.getDDayLabel(): String? = openDate()?.let {
+    val dDay = ChronoUnit.DAYS.between(today(), it)
+    return when {
+        dDay <= 0 -> "NOW"
+        else -> "D-$dDay"
     }
-} ?: ""
+}
+
+fun Movie.hasOpenDate(): Boolean = openDate()?.let { true } ?: false
 
 fun Movie.eggIsOver95(): Boolean = (egg != "?") and (egg >= "95")
 
@@ -67,8 +67,7 @@ fun Movie.isInTheThreeDays(): Boolean = isIn(-2..0)
 fun Movie.isInTheNextWeek(): Boolean = isIn(0..7)
 
 fun Movie.isIn(dayRange: IntRange): Boolean = openDate()?.let {
-    between(today(), it)
-            .run { (years == 0) and (months == 0) and (days in dayRange) }
+    ChronoUnit.DAYS.between(today(), it) in dayRange
 } ?: false
 
 private fun today(): LocalDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
