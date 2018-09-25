@@ -5,7 +5,7 @@
 
 ext.deps = [:]
 def versions = [:]
-versions.androidx = "1.0.0-rc02"
+versions.androidx = "1.0.0"
 versions.constraint_layout = "2.0.0-alpha2"
 versions.material = "1.0.0-beta01"
 versions.room_version = "2.0.0-beta01"
@@ -18,13 +18,13 @@ versions.mockito = "2.7.19"
 versions.mockito_all = "1.10.19"
 versions.glide = "4.7.1"
 versions.timber = "4.6.0"
-versions.android_gradle_plugin = '3.2.0-rc03'
+versions.android_gradle_plugin = '3.2.0'
 versions.rx_java2 = "2.1.11"
 versions.rx_kotlin = "2.3.0"
 versions.rx_android = "2.0.2"
 versions.rx_relay = "2.0.0"
 versions.test = "1.1.0-alpha1"
-versions.kotlin = "1.2.70"
+versions.kotlin = "1.2.71"
 def deps = [:]
 
 def androidx = [:]
