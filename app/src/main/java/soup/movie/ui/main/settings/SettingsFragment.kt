@@ -23,6 +23,7 @@ import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.startActivitySafely
 import javax.inject.Inject
 
 class SettingsFragment :
@@ -83,9 +84,7 @@ class SettingsFragment :
             intent.putExtra(Intent.EXTRA_EMAIL, BuildConfig.HELP_E_MAIL)
             intent.putExtra(Intent.EXTRA_SUBJECT, "뭅 v${BuildConfig.VERSION_NAME} 버그리포트")
             intent.putExtra(Intent.EXTRA_TEXT, "") //TODO
-            if (intent.resolveActivity(activity!!.packageManager) != null) {
-                startActivity(intent)
-            }
+            it.context.startActivitySafely(intent)
         }
         appVersionLabel.text = "현재 ${BuildConfig.VERSION_NAME}"
         appVersionButton.setOnClickListener {

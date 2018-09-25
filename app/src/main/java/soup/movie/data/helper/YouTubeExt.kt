@@ -5,12 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import soup.movie.data.model.Trailer
+import soup.movie.util.startActivitySafely
 
 fun Context.executeYoutube(trailer: Trailer) {
     try {
         startActivity(createAppIntent(trailer.youtubeId))
     } catch (e: ActivityNotFoundException) {
-        startActivity(createWebIntent(trailer.youtubeId))
+        startActivitySafely(createWebIntent(trailer.youtubeId))
     }
 }
 

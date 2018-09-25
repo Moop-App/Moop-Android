@@ -42,6 +42,7 @@ import soup.movie.util.getColorCompat
 import soup.movie.util.getColorStateListCompat
 import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.startActivitySafely
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -282,7 +283,7 @@ class DetailActivity :
                         override fun onSuccess(result: KakaoLinkResponse) {}
                     })
         } else {
-            startActivity(createShareIntent("공유하기", movie.toShareDescription()))
+            startActivitySafely(createShareIntent("공유하기", movie.toShareDescription()))
         }
     }
 

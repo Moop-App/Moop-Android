@@ -65,9 +65,7 @@ class TheatersFragment :
         infoPanel.state = STATE_HIDDEN
         navigationButton.setOnClickListener {
             selectedTheater?.toMapIntent()?.run {
-                if (resolveActivity(context!!.packageManager) != null) {
-                    startActivity(this)
-                }
+                it.context.startActivitySafely(this)
             }
         }
         infoButton.setOnClickListener {
