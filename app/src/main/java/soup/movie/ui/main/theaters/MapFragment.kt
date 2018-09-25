@@ -3,6 +3,8 @@ package soup.movie.ui.main.theaters
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
+import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
@@ -25,6 +27,7 @@ abstract class MapFragment<V: BaseContract.View, P: BaseContract.Presenter<V>> :
     @CallSuper
     override fun onMapReady(mapboxMap: MapboxMap) {
         this.mapboxMap = mapboxMap
+        mapboxMap.setLatLngBoundsForCameraTarget(KOREA_BOUNDS)
     }
 
     override fun onStart() {
@@ -64,5 +67,13 @@ abstract class MapFragment<V: BaseContract.View, P: BaseContract.Presenter<V>> :
     override fun onDestroyView() {
         super.onDestroyView()
         mapView.onDestroy()
+    }
+
+    companion object {
+
+        private val KOREA_BOUNDS = LatLngBounds.Builder()
+                .include(LatLng(31.43, 122.37))
+                .include(LatLng(44.35, 132.0))
+                .build()
     }
 }
