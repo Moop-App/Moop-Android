@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.geometry.LatLngBounds
+import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
@@ -34,7 +35,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 class TheatersFragment :
-        BaseTabFragment<TheatersContract.View, TheatersContract.Presenter>(),
+        MapFragment<TheatersContract.View, TheatersContract.Presenter>(),
         BaseFragment.OnBackListener,
         BaseTabFragment.OnReselectListener,
         TheatersContract.View, PermissionsListener {
@@ -48,6 +49,9 @@ class TheatersFragment :
     private lateinit var permissionsManager: PermissionsManager
 
     private var selectedTheater: Theater? = null
+
+    override val mapView: MapView
+        get() = theaterMapView
 
     private val infoPanel by lazy {
         BottomSheetBehavior.from(infoView).apply {
@@ -78,30 +82,26 @@ class TheatersFragment :
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync { it ->
-            // Trick: Fake scene animation
-            dim.animateHide()
+    override fun onMapReady(mapboxMap: MapboxMap) {
+        // Trick: Fake scene animation
+        dim.animateHide()
 
-            mapboxMap = it
-            mapboxMap.setLatLngBoundsForCameraTarget(KOREA_BOUNDS)
-            mapboxMap.setOnMarkerClickListener { marker ->
-                mapboxMap.animateCamera {
-                    setCameraTracking(false)
-                    CameraPosition.Builder()
-                            .target(marker.position)
-                            .zoom(max(it.cameraPosition.zoom, 16.0))
-                            .build()
-                }
-                marker.snippet.fromJson<Theater>()?.run { showInfoPanel(this) }
-                true
+        this.mapboxMap = mapboxMap
+        mapboxMap.setLatLngBoundsForCameraTarget(KOREA_BOUNDS)
+        mapboxMap.setOnMarkerClickListener { marker ->
+            mapboxMap.animateCamera {
+                setCameraTracking(false)
+                CameraPosition.Builder()
+                        .target(marker.position)
+                        .zoom(max(it.cameraPosition.zoom, 16.0))
+                        .build()
             }
-            mapboxMap.addOnMapClickListener { hideInfoPanel() }
-            enableLocationPlugin()
-            presenter.refresh()
+            marker.snippet.fromJson<Theater>()?.run { showInfoPanel(this) }
+            true
         }
+        mapboxMap.addOnMapClickListener { hideInfoPanel() }
+        enableLocationPlugin()
+        presenter.refresh()
     }
 
     private fun showInfoPanel(theater: Theater): Boolean {
@@ -162,15 +162,8 @@ class TheatersFragment :
                 .withEndAction(null)
     }
 
-    override fun onStart() {
-        super.onStart()
-        mapView.onStart()
-    }
-
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
-
         if (!PermissionsManager.areLocationPermissionsGranted(context)) {
             locationLayerPlugin?.run{
                 lifecycle.removeObserver(this)
@@ -178,41 +171,12 @@ class TheatersFragment :
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        if (!mapView.isDestroyed) {
-            mapView.onSaveInstanceState(outState)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mapView.onStop()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        if (mapView != null && !mapView.isDestroyed) {
-            mapView.onLowMemory()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mapView.onDestroy()
-    }
-
     override fun render(viewState: TheatersViewState) {
         printRenderLog { viewState }
         errorView?.setVisibleIf { viewState is ErrorState }
         if (viewState is DoneState) {
             mapboxMap.addMarkers(viewState.myTheaters
-                    .map { it.toMarker(mapView.context) })
+                    .map { it.toMarker(theaterMapView.context) })
         }
     }
 
@@ -224,7 +188,7 @@ class TheatersFragment :
 
     private fun enableLocationPlugin() {
         if (PermissionsManager.areLocationPermissionsGranted(context)) {
-            locationLayerPlugin = LocationLayerPlugin(mapView, mapboxMap).apply {
+            locationLayerPlugin = LocationLayerPlugin(theaterMapView, mapboxMap).apply {
                 cameraMode = CameraMode.TRACKING
                 renderMode = RenderMode.NORMAL
                 lifecycle.addObserver(this)
