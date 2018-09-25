@@ -42,7 +42,7 @@
             android:background="@drawable/bg_d_day"
             android:backgroundTint="@color/grey"
             android:text="@{MovieExtKt.getDDayLabel(item)}"
-            android:visibility="@{MovieExtKt.hasOpenDate(item) ? View.VISIBLE : View.GONE}"
+            android:visibility="@{MovieExtKt.isPlan(item) ? View.VISIBLE : View.GONE}"
             android:transitionName="@string/transition_d_day"
             app:layout_constraintTop_toTopOf="@+id/titleView"
             app:layout_constraintEnd_toStartOf="@+id/titleView"
