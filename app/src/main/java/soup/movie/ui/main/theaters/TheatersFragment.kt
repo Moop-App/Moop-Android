@@ -107,11 +107,10 @@ class TheatersFragment :
     private fun showInfoPanel(theater: Theater): Boolean {
         if (infoPanel.state == STATE_HIDDEN) {
             infoPanel.state = STATE_COLLAPSED
-            nameView.text = theater.fullName()
-            selectedTheater = theater
-            return true
         }
-        return false
+        nameView.text = theater.fullName()
+        selectedTheater = theater
+        return true
     }
 
     private fun hideInfoPanel(): Boolean {
