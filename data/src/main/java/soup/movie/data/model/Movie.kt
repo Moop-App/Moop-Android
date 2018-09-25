@@ -8,4 +8,5 @@ data class Movie(
         val openDate: String,
         val egg: String,
         val specialTypes: List<String>?,
-        val trailers: List<Trailer>?)
+        val trailers: List<Trailer>?,
+        val isNow: Boolean)
