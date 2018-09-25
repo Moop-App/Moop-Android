@@ -2,7 +2,9 @@ package soup.movie.ui.main.theaters
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.CallSuper
 import com.mapbox.mapboxsdk.maps.MapView
+import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import soup.movie.ui.BaseContract
 import soup.movie.ui.BaseFragment
@@ -12,10 +14,17 @@ abstract class MapFragment<V: BaseContract.View, P: BaseContract.Presenter<V>> :
 
     protected abstract val mapView: MapView
 
+    protected lateinit var mapboxMap: MapboxMap
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+    }
+
+    @CallSuper
+    override fun onMapReady(mapboxMap: MapboxMap) {
+        this.mapboxMap = mapboxMap
     }
 
     override fun onStart() {

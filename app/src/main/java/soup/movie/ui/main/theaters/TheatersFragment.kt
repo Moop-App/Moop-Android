@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
-import com.mapbox.android.core.permissions.PermissionsListener
-import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
@@ -17,9 +15,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode
 import kotlinx.android.synthetic.main.fragment_theaters.*
 import soup.movie.data.helper.*
 import soup.movie.data.model.Theater
@@ -35,18 +30,13 @@ import kotlin.math.max
 import kotlin.math.min
 
 class TheatersFragment :
-        MapFragment<TheatersContract.View, TheatersContract.Presenter>(),
+        LocationMapFragment<TheatersContract.View, TheatersContract.Presenter>(),
         BaseFragment.OnBackListener,
         BaseTabFragment.OnReselectListener,
-        TheatersContract.View, PermissionsListener {
+        TheatersContract.View {
 
     @Inject
     override lateinit var presenter: TheatersContract.Presenter
-
-    private lateinit var mapboxMap: MapboxMap
-    
-    private var locationLayerPlugin: LocationLayerPlugin? = null
-    private lateinit var permissionsManager: PermissionsManager
 
     private var selectedTheater: Theater? = null
 
@@ -83,6 +73,8 @@ class TheatersFragment :
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
+        super.onMapReady(mapboxMap)
+
         // Trick: Fake scene animation
         dim.animateHide()
 
@@ -100,7 +92,6 @@ class TheatersFragment :
             true
         }
         mapboxMap.addOnMapClickListener { hideInfoPanel() }
-        enableLocationPlugin()
         presenter.refresh()
     }
 
@@ -162,15 +153,6 @@ class TheatersFragment :
                 .withEndAction(null)
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (!PermissionsManager.areLocationPermissionsGranted(context)) {
-            locationLayerPlugin?.run{
-                lifecycle.removeObserver(this)
-            }
-        }
-    }
-
     override fun render(viewState: TheatersViewState) {
         printRenderLog { viewState }
         errorView?.setVisibleIf { viewState is ErrorState }
@@ -185,42 +167,6 @@ class TheatersFragment :
             .setPosition(position())
             .setIcon(context.loadIconOrDefault(getSelectedMarkerIcon()))
             .setSnippet(toJson())
-
-    private fun enableLocationPlugin() {
-        if (PermissionsManager.areLocationPermissionsGranted(context)) {
-            locationLayerPlugin = LocationLayerPlugin(theaterMapView, mapboxMap).apply {
-                cameraMode = CameraMode.TRACKING
-                renderMode = RenderMode.NORMAL
-                lifecycle.addObserver(this)
-            }
-        } else {
-            permissionsManager = PermissionsManager(this)
-            permissionsManager.requestLocationPermissions(activity)
-        }
-        locationLayerPlugin?.run {
-            lifecycle.addObserver(this)
-        }
-    }
-
-    private fun setCameraTracking(enabled: Boolean) {
-        locationLayerPlugin?.cameraMode = when (enabled) {
-            true -> CameraMode.TRACKING
-            false -> CameraMode.NONE
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>) {
-    }
-
-    override fun onPermissionResult(granted: Boolean) {
-        if (granted) {
-            enableLocationPlugin()
-        }
-    }
 
     override fun onBackPressed(): Boolean = hideInfoPanel()
 
