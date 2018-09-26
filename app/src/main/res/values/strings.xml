@@ -32,4 +32,6 @@
     <string name="shortcut_search_short_label">Theater</string>
     <string name="shortcut_search_long_label">Theater</string>
     <string name="shortcut_search_disabled">Theater</string>
+
+    <string name="trailer_search_result">\'%s 예고편\' 검색 결과</string>
 </resources>

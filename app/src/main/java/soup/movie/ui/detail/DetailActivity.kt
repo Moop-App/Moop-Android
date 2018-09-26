@@ -65,7 +65,7 @@ class DetailActivity :
     lateinit var useWebLinkSetting: UseWebLinkSetting
 
     private val listAdapter by lazy {
-        DetailListAdapter(this@DetailActivity)
+        DetailListAdapter()
     }
 
     private val chromeFader by lazy {
@@ -176,7 +176,7 @@ class DetailActivity :
                 //TODO: show loading state
             }
             is DoneState -> {
-                listAdapter.submitList(viewState.trailers)
+                listAdapter.submitList(viewState.items)
             }
         }
     }

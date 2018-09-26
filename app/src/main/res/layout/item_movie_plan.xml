@@ -45,6 +45,7 @@
                     android:background="@color/grey_200"
                     android:scaleType="centerCrop"
                     android:srcUrl="@{item.posterUrl}"
+                    android:contentDescription="@{item.title}"
                     app:layout_constraintDimensionRatio="H,27:40"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

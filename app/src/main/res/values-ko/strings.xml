@@ -32,4 +32,6 @@
     <string name="shortcut_search_short_label">주변극장</string>
     <string name="shortcut_search_long_label">주변극장</string>
     <string name="shortcut_search_disabled">주변극장</string>
+
+    <string name="trailer_search_result">\'%s 예고편\' 검색 결과</string>
 </resources>

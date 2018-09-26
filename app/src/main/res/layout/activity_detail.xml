@@ -22,33 +22,39 @@
              resized for the shared element transition, many views are considered 'off-screen' so
              visibility transitions are not run. -->
 
-        <View
-            android:id="@+id/backgroundView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey_50"
-            android:transitionName="@string/transition_background" />
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="208dp"
-            android:clipToPadding="false"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="vertical"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/posterView"
-            app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/item_trailer" />
+            <View
+                android:id="@+id/backgroundView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey_50"
+                android:transitionName="@string/transition_background" />
 
-        <include layout="@layout/activity_detail_header"
-            app:item="@{item}"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingTop="12dp"
+                android:clipToPadding="false"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/headerView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/item_trailer" />
+
+            <include
+                android:id="@+id/headerView"
+                layout="@layout/activity_detail_header"
+                app:item="@{item}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </soup.widget.elastic.ElasticDragDismissFrameLayout>
 </layout>

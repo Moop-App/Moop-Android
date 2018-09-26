@@ -8,77 +8,58 @@
         <variable name="item" type="soup.movie.data.model.Trailer" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:foreground="?android:attr/selectableItemBackground" >
+        android:layout_height="80dp"
+        android:layout_marginTop="4dp"
+        android:foreground="?android:attr/selectableItemBackground">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp">
+        <ImageView
+            android:id="@+id/trailerThumbnailView"
+            android:layout_width="160dp"
+            android:layout_height="0dp"
+            android:background="@color/grey_200"
+            android:scaleType="centerCrop"
+            android:srcUrl="@{item.thumbnailUrl}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-            <ImageView
-                android:id="@+id/trailerThumbnailView"
-                android:layout_width="160dp"
-                android:layout_height="0dp"
-                android:background="@color/grey_200"
-                android:scaleType="centerCrop"
-                android:srcUrl="@{item.thumbnailUrl}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="1"
+            android:text="@{item.title}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/authorView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trailerThumbnailView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Movie Title\nLine2\nLine3" />
 
-            <ImageView
-                android:id="@+id/playIcon"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_round_play"
-                android:tint="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/trailerThumbnailView"
-                app:layout_constraintEnd_toEndOf="@+id/trailerThumbnailView"
-                app:layout_constraintStart_toStartOf="@+id/trailerThumbnailView"
-                app:layout_constraintTop_toTopOf="@+id/trailerThumbnailView" />
+        <TextView
+            android:id="@+id/authorView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:minLines="1"
+            android:text="@{item.author}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="@color/grey_700"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/titleView"
+            app:layout_constraintStart_toStartOf="@+id/titleView"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            tools:text="Subtitle here" />
 
-            <TextView
-                android:id="@+id/titleView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="16dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:minLines="1"
-                android:text="@{item.title}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/authorView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/trailerThumbnailView"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Movie Title\nLine2\nLine3" />
-
-            <TextView
-                android:id="@+id/authorView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:minLines="1"
-                android:text="@{item.author}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:textColor="@color/grey_700"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/titleView"
-                app:layout_constraintStart_toStartOf="@+id/titleView"
-                app:layout_constraintTop_toBottomOf="@+id/titleView"
-                tools:text="Subtitle here" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

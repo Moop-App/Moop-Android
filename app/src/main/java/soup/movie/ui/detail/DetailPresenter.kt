@@ -5,12 +5,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
+import soup.movie.R
 import soup.movie.data.model.Movie
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.DetailContract.Presenter
 import soup.movie.ui.detail.DetailContract.View
 import soup.movie.ui.detail.DetailViewState.DoneState
+import soup.movie.ui.detail.DetailViewState.ListItem
 import soup.movie.util.ImageUriProvider
 
 class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting,
@@ -22,8 +24,7 @@ class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         disposable.add(movieSubject
-                .map { it.trailers.orEmpty() }
-                .map { DoneState(it) }
+                .map { DoneState(it.toItems()) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) }
         )
@@ -47,4 +48,10 @@ class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting
     }
 
     override fun usePaletteTheme(): Boolean = usePaletteThemeSetting.get()
+
+    private fun Movie.toItems(): List<ListItem> = arrayListOf(
+            ListItem(R.layout.item_detail_cgv, this),
+            ListItem(R.layout.item_detail_lotte, this),
+            ListItem(R.layout.item_detail_megabox, this),
+            ListItem(R.layout.item_detail_trailers, this, trailers.orEmpty()))
 }
