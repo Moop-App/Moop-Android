@@ -11,5 +11,6 @@ data class Movie(
         val trailers: List<Trailer>?,
         val isNow: Boolean) {
 
-    val isPlan: Boolean = isNow.not()
+    val isPlan: Boolean
+            get() = !isNow
 }

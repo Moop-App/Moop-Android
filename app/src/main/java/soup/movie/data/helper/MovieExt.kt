@@ -50,7 +50,7 @@ fun Movie.getDDayLabel(): String? = openDate()?.let {
     }
 }
 
-fun Movie.hasOpenDate(): Boolean = openDate()?.let { true } ?: false
+fun Movie.hasOpenDate(): Boolean = openDate() != null
 
 fun Movie.showDDay(): Boolean = isPlan and hasOpenDate()
 
