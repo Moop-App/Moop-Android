@@ -52,7 +52,7 @@ fun Movie.getDDayLabel(): String? = openDate()?.let {
 
 fun Movie.hasOpenDate(): Boolean = openDate()?.let { true } ?: false
 
-fun Movie.isPlan(): Boolean = isNow.not() and hasOpenDate()
+fun Movie.showDDay(): Boolean = isPlan and hasOpenDate()
 
 fun Movie.eggIsOver95(): Boolean = (egg != "?") and (egg >= "95")
 

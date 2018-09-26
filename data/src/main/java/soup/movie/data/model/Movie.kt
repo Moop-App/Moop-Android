@@ -9,4 +9,7 @@ data class Movie(
         val egg: String,
         val specialTypes: List<String>?,
         val trailers: List<Trailer>?,
-        val isNow: Boolean)
+        val isNow: Boolean) {
+
+    val isPlan: Boolean = isNow.not()
+}
