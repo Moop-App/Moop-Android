@@ -2,7 +2,7 @@ package soup.movie.data.helper
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
 import org.threeten.bp.temporal.ChronoUnit
@@ -25,13 +25,13 @@ fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n
 
 fun Movie.toDescription(): String = "$openDate / $age / 선호도: $egg"
 
-@ColorRes
-fun Movie.getColorAsAge(): Int = when (age) {
-    "전체 관람가" -> R.color.green
-    "12세 관람가" -> R.color.blue
-    "15세 관람가" -> R.color.amber
-    "청소년관람불가" -> R.color.red
-    else -> R.color.grey
+@DrawableRes
+fun Movie.getAgeBackground(): Int = when (age) {
+    "전체 관람가" -> R.drawable.bg_age_all
+    "12세 관람가" -> R.drawable.bg_age_12
+    "15세 관람가" -> R.drawable.bg_age_15
+    "청소년관람불가" -> R.drawable.bg_age_19
+    else -> R.drawable.bg_age_unknown
 }
 
 fun Movie.getSimpleAgeLabel(): String = when (age) {

@@ -22,7 +22,8 @@
             android:layout_marginBottom="4dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
-            android:foreground="?android:attr/selectableItemBackground" >
+            android:foreground="?android:attr/selectableItemBackground"
+            tools:layout_width="120dp" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -52,24 +53,14 @@
                     tools:src="@tools:sample/avatars" />
 
                 <View
-                    android:id="@+id/ageBgOuterView"
+                    android:id="@+id/ageBgView"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_margin="7dp"
-                    android:background="@drawable/bg_age_outer"
+                    android:backgroundRes="@{MovieExtKt.getAgeBackground(item)}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:backgroundTint="@color/white" />
-
-                <View
-                    android:id="@+id/ageBgView"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/bg_age_inner"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:backgroundTint="@color/amber" />
+                    tools:background="@drawable/bg_age_15" />
 
                 <TextView
                     android:id="@+id/dDayView"

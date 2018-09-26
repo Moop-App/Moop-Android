@@ -52,24 +52,14 @@
                     tools:src="@tools:sample/avatars" />
 
                 <View
-                    android:id="@+id/ageBgOuterView"
+                    android:id="@+id/ageBgView"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_margin="7dp"
-                    android:background="@drawable/bg_age_outer"
+                    android:background="@drawable/bg_age_15"
                     app:layout_constraintStart_toStartOf="@+id/posterView"
                     app:layout_constraintBottom_toBottomOf="@+id/posterView"
                     tools:backgroundTint="@color/white" />
-
-                <View
-                    android:id="@+id/ageBgView"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/bg_age_inner"
-                    app:layout_constraintStart_toStartOf="@+id/posterView"
-                    app:layout_constraintBottom_toBottomOf="@+id/posterView"
-                    tools:backgroundTint="@color/amber" />
 
                 <TextView
                     android:id="@+id/titleView"

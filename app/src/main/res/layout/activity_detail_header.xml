@@ -10,7 +10,7 @@
         <variable name="item" type="soup.movie.data.model.Movie" />
     </data>
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         tools:background="@color/debug_background">
@@ -71,6 +71,42 @@
             app:layout_constraintEnd_toStartOf="@+id/titleView"
             tools:visibility="visible" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/tagBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="dDayView,newView"
+            app:barrierDirection="bottom"/>
+
+        <View
+            android:id="@+id/ageBgView"
+            android:layout_width="38dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="6dp"
+            android:backgroundRes="@{MovieExtKt.getAgeBackground(item)}"
+            android:transitionName="@string/transition_age_bg"
+            app:layout_goneMarginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/newView"
+            app:layout_constraintTop_toBottomOf="@+id/tagBarrier"
+            tools:background="@drawable/bg_age_15" />
+
+        <TextView
+            android:id="@+id/ageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@{MovieExtKt.getSimpleAgeLabel(item)}"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:transitionName="@string/transition_age"
+            app:layout_constraintBottom_toBottomOf="@+id/ageBgView"
+            app:layout_constraintStart_toStartOf="@+id/ageBgView"
+            app:layout_constraintEnd_toEndOf="@+id/ageBgView"
+            app:layout_constraintTop_toTopOf="@+id/ageBgView"
+            tools:text="전체" />
+
         <TextView
             android:id="@+id/titleView"
             android:layout_width="0dp"
@@ -103,46 +139,6 @@
             app:layout_constraintTop_toBottomOf="@+id/titleView"
             app:layout_constraintStart_toStartOf="@+id/titleView"
             tools:text="18.10.19" />
-
-        <View
-            android:id="@+id/ageBgOuterView"
-            android:layout_width="38dp"
-            android:layout_height="26dp"
-            android:layout_margin="7dp"
-            android:background="@drawable/bg_age_outer"
-            android:transitionName="@string/transition_age_bg_outer"
-            app:layout_constraintBottom_toBottomOf="@+id/ageBgView"
-            app:layout_constraintStart_toStartOf="@+id/ageBgView"
-            app:layout_constraintEnd_toEndOf="@+id/ageBgView"
-            app:layout_constraintTop_toTopOf="@+id/ageBgView"
-            tools:backgroundTint="@color/white" />
-
-        <View
-            android:id="@+id/ageBgView"
-            android:layout_width="36dp"
-            android:layout_height="24dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_age_inner"
-            android:transitionName="@string/transition_age_bg"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/posterView"
-            tools:backgroundTint="@color/amber" />
-
-        <TextView
-            android:id="@+id/ageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:textSize="15dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:transitionName="@string/transition_age"
-            app:layout_constraintBottom_toBottomOf="@+id/ageBgView"
-            app:layout_constraintStart_toStartOf="@+id/ageBgView"
-            app:layout_constraintEnd_toEndOf="@+id/ageBgView"
-            app:layout_constraintTop_toTopOf="@+id/ageBgView"
-            tools:text="전체" />
 
         <TextView
             android:id="@+id/eggView"
@@ -206,5 +202,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_round_share" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

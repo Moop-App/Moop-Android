@@ -66,6 +66,11 @@ fun View.animateShow(animate: Boolean) {
             .withEndAction(null)
 }
 
+@BindingAdapter("android:backgroundRes")
+fun View.setBackgroundRes(resId: Int) {
+    setBackgroundResource(resId)
+}
+
 /** ViewGroup */
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View =

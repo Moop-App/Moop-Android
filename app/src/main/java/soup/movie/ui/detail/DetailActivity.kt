@@ -39,7 +39,6 @@ import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.util.IntentUtil.createShareIntent
 import soup.movie.util.delegates.contentView
 import soup.movie.util.getColorCompat
-import soup.movie.util.getColorStateListCompat
 import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.startActivitySafely
@@ -134,9 +133,6 @@ class DetailActivity :
         posterView.setOnClickListener {
             presenter.requestShareImage(movie.posterUrl)
         }
-        ageView.text = movie.getSimpleAgeLabel()
-        ageBgView.backgroundTintList = ctx.getColorStateListCompat(movie.getColorAsAge())
-
         infoButton.setOnClickListener {
             executeWebPage(Cgv.detailMobileWebUrl(movie))
         }

@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.item_movie_now.view.*
 import soup.movie.R
-import soup.movie.data.helper.getColorAsAge
 import soup.movie.data.helper.isNew
 import soup.movie.data.helper.saveTo
 import soup.movie.data.model.Movie
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
-import soup.movie.util.getColorStateListCompat
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 class NowListAdapter(private val host: FragmentActivity) :
@@ -37,22 +35,12 @@ class NowListAdapter(private val host: FragmentActivity) :
                     Pair.create(itemView.backgroundView, host.getString(R.string.transition_background)),
                     Pair.create(itemView.posterView, host.getString(R.string.transition_poster)),
                     Pair.create(itemView.ageBgView, host.getString(R.string.transition_age_bg)),
-                    Pair.create(itemView.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)),
                     Pair.create(itemView.newView, host.getString(R.string.transition_new)))
         } else {
             ActivityOptions.makeSceneTransitionAnimation(host,
                     Pair.create(itemView.backgroundView, host.getString(R.string.transition_background)),
                     Pair.create(itemView.posterView, host.getString(R.string.transition_poster)),
-                    Pair.create(itemView.ageBgView, host.getString(R.string.transition_age_bg)),
-                    Pair.create(itemView.ageBgOuterView, host.getString(R.string.transition_age_bg_outer)))
-        }
-    }
-
-    override fun onBindViewHolder(holder: DataBindingViewHolder<Movie>, position: Int) {
-        super.onBindViewHolder(holder, position)
-        holder.itemView.run {
-            val item = getItem(position)
-            ageBgView.backgroundTintList = context.getColorStateListCompat(item.getColorAsAge())
+                    Pair.create(itemView.ageBgView, host.getString(R.string.transition_age_bg)))
         }
     }
 
