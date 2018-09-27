@@ -64,22 +64,20 @@ class DetailActivity :
     @Inject
     lateinit var useWebLinkSetting: UseWebLinkSetting
 
-    private val listAdapter by lazy {
-        DetailListAdapter(object : DetailListItemListener {
+    private val listAdapter = DetailListAdapter(object : DetailListItemListener {
 
-            override fun onInfoClick(item: Movie) {
-                executeWebPage(Cgv.detailMobileWebUrl(item))
-            }
+        override fun onInfoClick(item: Movie) {
+            executeWebPage(Cgv.detailMobileWebUrl(item))
+        }
 
-            override fun onTicketClick(item: Movie) {
-                executeTicketLink(item)
-            }
+        override fun onTicketClick(item: Movie) {
+            executeTicketLink(item)
+        }
 
-            override fun onMoreTrailersClick(item: Movie) {
-                executeYouTube(item)
-            }
-        })
-    }
+        override fun onMoreTrailersClick(item: Movie) {
+            executeYouTube(item)
+        }
+    })
 
     private val chromeFader by lazy {
         object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
