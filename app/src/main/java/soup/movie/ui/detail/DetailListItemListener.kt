@@ -7,4 +7,6 @@ abstract class DetailListItemListener {
     abstract fun onInfoClick(item: Movie)
 
     abstract fun onTicketClick(item: Movie)
+
+    abstract fun onMoreTrailersClick(item: Movie)
 }

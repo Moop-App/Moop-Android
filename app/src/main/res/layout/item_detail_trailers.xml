@@ -74,11 +74,12 @@
                     android:text="더보기"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:background="?android:attr/selectableItemBackground"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_round_ticket" />
+                    app:srcCompat="@drawable/ic_round_ticket"
+                    android:onClick="@{() -> listener.onMoreTrailersClick(item)}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

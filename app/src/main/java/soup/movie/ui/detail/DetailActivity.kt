@@ -74,6 +74,10 @@ class DetailActivity :
             override fun onTicketClick(item: Movie) {
                 executeTicketLink(item)
             }
+
+            override fun onMoreTrailersClick(item: Movie) {
+                executeYouTube(item)
+            }
         })
     }
 

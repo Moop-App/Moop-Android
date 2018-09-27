@@ -2,7 +2,7 @@ package soup.movie.ui.detail
 
 import android.view.ViewGroup
 import soup.movie.R
-import soup.movie.data.helper.executeYoutube
+import soup.movie.data.helper.executeYouTube
 import soup.movie.data.model.Trailer
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
@@ -14,7 +14,7 @@ internal class DetailTrailerListAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Trailer> {
         return super.onCreateViewHolder(parent, viewType).apply {
             itemView.setOnClickListener {
-                it.context.executeYoutube(getItem(adapterPosition))
+                it.context.executeYouTube(getItem(adapterPosition))
             }
         }
     }

@@ -96,3 +96,8 @@ object Kakao {
 
     const val PACKAGE_NAME = "com.kakao.talk"
 }
+
+object YouTube {
+
+    const val PACKAGE_NAME = "com.google.android.youtube"
+}
