@@ -10,6 +10,7 @@ import soup.movie.BR
 import soup.movie.databinding.ItemDetailTrailersBinding
 import soup.movie.ui.detail.DetailListAdapter.DataBindingViewHolder
 import soup.movie.ui.detail.DetailViewState.ListItem
+import soup.widget.recyclerview.FixedLinearLayoutManager
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 internal class DetailListAdapter(private val listener: DetailListItemListener) :
@@ -47,11 +48,16 @@ internal class DetailListAdapter(private val listener: DetailListItemListener) :
     class TrailersViewHolder(private val binding: ItemDetailTrailersBinding) :
             DataBindingViewHolder(binding) {
 
+        private val adapter: DetailTrailerListAdapter = DetailTrailerListAdapter()
+
+        init {
+            binding.listView.layoutManager = FixedLinearLayoutManager(itemView.context)
+            binding.listView.adapter = adapter
+        }
+
         override fun bind(item: ListItem, listener: DetailListItemListener) {
             super.bind(item, listener)
-            binding.listView.adapter = DetailTrailerListAdapter().apply {
-                submitList(item.trailers)
-            }
+            adapter.submitList(item.trailers)
         }
     }
 }
