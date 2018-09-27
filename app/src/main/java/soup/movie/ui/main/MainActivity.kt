@@ -133,7 +133,6 @@ class MainActivity :
     }
 
     private fun Intent.handleDeepLink() {
-        Timber.d("SOUP %s", this)
         when (action) {
             ACTION_SHOW_TAB -> {
                 when (getStringExtra(EXTRA_TAB)) {
