@@ -17,6 +17,7 @@ import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setVisibleIf
 import soup.widget.recyclerview.listener.OnDragStartListener
 import soup.widget.recyclerview.listener.OnItemMoveListener
 import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
@@ -90,6 +91,7 @@ class TheaterSortActivity :
     override fun render(viewState: TheaterSortViewState) {
         printRenderLog { viewState }
         listAdapter.submitList(viewState.selectedTheaters)
+        noItemsView.setVisibleIf { viewState.selectedTheaters.isEmpty() }
     }
 
     fun onConfirmClicked(view: View) {
