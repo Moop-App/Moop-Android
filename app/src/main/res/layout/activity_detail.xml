@@ -42,6 +42,7 @@
                 android:orientation="vertical"
                 android:requiresFadingEdge="none"
                 android:scrollbars="none"
+                android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/headerView"
                 app:layout_constraintBottom_toBottomOf="parent"
