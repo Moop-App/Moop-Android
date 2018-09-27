@@ -2,11 +2,11 @@ package soup.movie.ui.detail
 
 import soup.movie.data.model.Movie
 
-abstract class DetailListItemListener {
+interface DetailListItemListener {
 
-    abstract fun onInfoClick(item: Movie)
+    fun onInfoClick(item: Movie)
 
-    abstract fun onTicketClick(item: Movie)
+    fun onTicketClick(item: Movie)
 
-    abstract fun onMoreTrailersClick(item: Movie)
+    fun onMoreTrailersClick(item: Movie)
 }

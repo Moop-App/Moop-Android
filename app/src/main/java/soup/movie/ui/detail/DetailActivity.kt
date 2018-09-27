@@ -65,7 +65,7 @@ class DetailActivity :
     lateinit var useWebLinkSetting: UseWebLinkSetting
 
     private val listAdapter by lazy {
-        DetailListAdapter(object : DetailListItemListener() {
+        DetailListAdapter(object : DetailListItemListener {
 
             override fun onInfoClick(item: Movie) {
                 executeWebPage(Cgv.detailMobileWebUrl(item))
