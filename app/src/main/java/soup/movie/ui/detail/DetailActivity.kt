@@ -65,7 +65,16 @@ class DetailActivity :
     lateinit var useWebLinkSetting: UseWebLinkSetting
 
     private val listAdapter by lazy {
-        DetailListAdapter()
+        DetailListAdapter(object : DetailListItemListener() {
+
+            override fun onInfoClick(item: Movie) {
+                executeWebPage(Cgv.detailMobileWebUrl(item))
+            }
+
+            override fun onTicketClick(item: Movie) {
+                executeTicketLink(item)
+            }
+        })
     }
 
     private val chromeFader by lazy {
@@ -241,9 +250,9 @@ class DetailActivity :
                 .startChooser()
     }
 
-    private fun executeTicketLink() {
+    private fun executeTicketLink(item: Movie) {
         if (useWebLinkSetting.get()) {
-            executeWebPage(Cgv.reservationUrl(movie))
+            executeWebPage(Cgv.reservationUrl(item))
         } else {
             executeMarketApp(Cgv.PACKAGE_NAME)
         }

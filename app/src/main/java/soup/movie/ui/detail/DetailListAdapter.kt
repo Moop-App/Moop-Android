@@ -12,7 +12,7 @@ import soup.movie.ui.detail.DetailListAdapter.DataBindingViewHolder
 import soup.movie.ui.detail.DetailViewState.ListItem
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
-internal class DetailListAdapter :
+internal class DetailListAdapter(private val listener: DetailListItemListener) :
         ListAdapter<ListItem, DataBindingViewHolder>(AlwaysDiffCallback()) {
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -29,7 +29,7 @@ internal class DetailListAdapter :
     }
 
     override fun onBindViewHolder(holder: DataBindingViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 
     override fun getItemViewType(position: Int): Int = getItem(position).layoutRes
@@ -37,18 +37,21 @@ internal class DetailListAdapter :
     open class DataBindingViewHolder(private val binding: ViewDataBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
-        open fun bind(item: ListItem) {
+        open fun bind(item: ListItem, listener: DetailListItemListener) {
             binding.setVariable(BR.item, item.item)
+            binding.setVariable(BR.listener, listener)
             binding.executePendingBindings()
         }
     }
 
-    class TrailersViewHolder(val binding: ItemDetailTrailersBinding) : DataBindingViewHolder(binding) {
+    class TrailersViewHolder(private val binding: ItemDetailTrailersBinding) :
+            DataBindingViewHolder(binding) {
 
-        override fun bind(item: ListItem) {
-            super.bind(item)
-            binding.listView.adapter = DetailTrailerListAdapter()
-                    .apply { submitList(item.trailers) }
+        override fun bind(item: ListItem, listener: DetailListItemListener) {
+            super.bind(item, listener)
+            binding.listView.adapter = DetailTrailerListAdapter().apply {
+                submitList(item.trailers)
+            }
         }
     }
 }

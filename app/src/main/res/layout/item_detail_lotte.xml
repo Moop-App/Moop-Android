@@ -8,6 +8,7 @@
         <import type="android.view.View"/>
         <import type="soup.movie.data.helper.MovieExtKt" />
         <variable name="item" type="soup.movie.data.model.Movie" />
+        <variable name="listener" type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
     <androidx.cardview.widget.CardView

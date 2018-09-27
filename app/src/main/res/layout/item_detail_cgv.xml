@@ -8,6 +8,7 @@
         <import type="android.view.View"/>
         <import type="soup.movie.data.helper.MovieExtKt" />
         <variable name="item" type="soup.movie.data.model.Movie" />
+        <variable name="listener" type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -81,7 +82,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ticketButton"
-                app:srcCompat="@drawable/ic_round_info" />
+                app:srcCompat="@drawable/ic_round_info"
+                android:onClick="@{() -> listener.onInfoClick(item)}" />
 
             <ImageView
                 android:id="@+id/ticketButton"
@@ -94,7 +96,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_round_ticket" />
+                app:srcCompat="@drawable/ic_round_ticket"
+                android:onClick="@{() -> listener.onTicketClick(item)}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
