@@ -61,8 +61,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/theater_select_action_confirm"
-            android:onClick="onConfirmClicked"
-            app:srcCompat="@drawable/ic_round_check"
+            android:onClick="onAddItemClick"
+            app:srcCompat="@drawable/ic_round_add"
             app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

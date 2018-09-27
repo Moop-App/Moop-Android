@@ -8,7 +8,7 @@ import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.sort.TheaterSortContract.Presenter
 import soup.movie.ui.theater.sort.TheaterSortContract.View
-import java.util.*
+import java.util.Collections.swap
 
 class TheaterSortPresenter(private val theaterSetting: TheaterSetting) :
         BasePresenter<View>(), Presenter {
@@ -33,11 +33,11 @@ class TheaterSortPresenter(private val theaterSetting: TheaterSetting) :
                 .subscribe { theatersObservable.accept(it) })
     }
 
-    override fun onConfirmClicked() {
-        theaterSetting.set(listSnapshot.toList())
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        swap(listSnapshot, fromPosition, toPosition)
     }
 
-    override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        Collections.swap(listSnapshot, fromPosition, toPosition)
+    override fun saveSnapshot() {
+        theaterSetting.set(listSnapshot.toList())
     }
 }

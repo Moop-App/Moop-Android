@@ -6,9 +6,9 @@ interface TheaterSortContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun onConfirmClicked()
-
         fun onItemMove(fromPosition: Int, toPosition: Int)
+
+        fun saveSnapshot()
     }
 
     interface View : BaseContract.View {

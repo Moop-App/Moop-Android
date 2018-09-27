@@ -4,8 +4,6 @@ import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.core.view.postOnAnimationDelayed
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -75,27 +73,18 @@ class TheaterSortActivity :
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.activity_theater_sort, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_edit) {
-            startActivity(Intent(this, TheaterEditActivity::class.java))
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun render(viewState: TheaterSortViewState) {
         printRenderLog { viewState }
         listAdapter.submitList(viewState.selectedTheaters)
         noItemsView.setVisibleIf { viewState.selectedTheaters.isEmpty() }
     }
 
-    fun onConfirmClicked(view: View) {
-        presenter.onConfirmClicked()
-        onBackPressed()
+    override fun onBackPressed() {
+        presenter.saveSnapshot()
+        super.onBackPressed()
+    }
+
+    fun onAddItemClick(view: View) {
+        startActivity(Intent(this, TheaterEditActivity::class.java))
     }
 }
