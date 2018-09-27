@@ -133,12 +133,6 @@ class DetailActivity :
         posterView.setOnClickListener {
             presenter.requestShareImage(movie.posterUrl)
         }
-        infoButton.setOnClickListener {
-            executeWebPage(Cgv.detailMobileWebUrl(movie))
-        }
-        ticketButton.setOnClickListener {
-            executeTicketLink()
-        }
         timetableButton.setOnClickListener {
             startActivity(Intent(this, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
@@ -215,9 +209,6 @@ class DetailActivity :
             val darkColor = this@DetailActivity.getColorCompat(R.color.dark_icon)
             titleView.setTextColor(darkColor)
             openDateView.setTextColor(darkColor)
-            eggView.setTextColor(darkColor)
-            infoButton.setColorFilter(darkColor)
-            ticketButton.setColorFilter(darkColor)
             timetableButton.setColorFilter(darkColor)
             shareButton.setColorFilter(darkColor)
 

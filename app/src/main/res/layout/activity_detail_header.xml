@@ -140,44 +140,6 @@
             app:layout_constraintStart_toStartOf="@+id/titleView"
             tools:text="18.10.19" />
 
-        <TextView
-            android:id="@+id/eggView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:text="@{item.egg}"
-            android:textColor="@color/light_icon"
-            android:transitionName="@string/transition_egg"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ageView"
-            tools:text="90%" />
-
-        <ImageButton
-            android:id="@+id/infoButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:tint="@color/light_icon"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/ticketButton"
-            app:layout_constraintTop_toTopOf="@+id/ticketButton"
-            app:srcCompat="@drawable/ic_round_info" />
-
-        <ImageButton
-            android:id="@+id/ticketButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:tint="@color/light_icon"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/timetableButton"
-            app:layout_constraintTop_toTopOf="@+id/timetableButton"
-            app:srcCompat="@drawable/ic_round_ticket" />
-
         <ImageButton
             android:id="@+id/timetableButton"
             android:layout_width="48dp"
