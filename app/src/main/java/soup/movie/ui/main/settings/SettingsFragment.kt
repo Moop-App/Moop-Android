@@ -18,6 +18,7 @@ import soup.movie.R
 import soup.movie.data.helper.executePlayStoreForApp
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
+import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
@@ -33,6 +34,9 @@ class SettingsFragment :
     @Inject
     override lateinit var presenter: SettingsContract.Presenter
 
+    @Inject
+    lateinit var analytics: EventAnalytics
+
     override val menuResource: Int?
         get() = R.menu.fragment_settings
 
@@ -41,6 +45,7 @@ class SettingsFragment :
             if (panelIsShown()) {
                 hidePanel()
             } else {
+                analytics.clickMenuHelp()
                 showPanel(HelpFragment.toPanelData())
             }
             return true

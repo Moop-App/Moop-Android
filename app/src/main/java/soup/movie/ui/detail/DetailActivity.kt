@@ -36,6 +36,7 @@ import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
 import soup.movie.ui.detail.timetable.TimetableActivity
+import soup.movie.ui.helper.EventAnalytics
 import soup.movie.util.IntentUtil.createShareIntent
 import soup.movie.util.delegates.contentView
 import soup.movie.util.getColorCompat
@@ -64,20 +65,28 @@ class DetailActivity :
     @Inject
     lateinit var useWebLinkSetting: UseWebLinkSetting
 
-    private val listAdapter = DetailListAdapter(object : DetailListItemListener {
+    @Inject
+    lateinit var analytics: EventAnalytics
 
-        override fun onInfoClick(item: Movie) {
-            executeWebPage(Cgv.detailMobileWebUrl(item))
-        }
+    private val listAdapter by lazy {
+        DetailListAdapter(object : DetailListItemListener {
 
-        override fun onTicketClick(item: Movie) {
-            executeTicketLink(item)
-        }
+            override fun onInfoClick(item: Movie) {
+                analytics.clickCgvInfo(item)
+                executeWebPage(Cgv.detailMobileWebUrl(item))
+            }
 
-        override fun onMoreTrailersClick(item: Movie) {
-            executeYouTube(item)
-        }
-    })
+            override fun onTicketClick(item: Movie) {
+                analytics.clickCgvTicket(item)
+                executeTicketLink(item)
+            }
+
+            override fun onMoreTrailersClick(item: Movie) {
+                analytics.clickMoreTrailers("${item.title} 예고편")
+                executeYouTube(item)
+            }
+        }, analytics)
+    }
 
     private val chromeFader by lazy {
         object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
@@ -142,13 +151,18 @@ class DetailActivity :
         super.initViewState(ctx)
         posterView.loadAsync(movie.posterUrl, shotLoadListener)
         posterView.setOnClickListener {
+            analytics.clickPoster(movie)
             presenter.requestShareImage(movie.posterUrl)
         }
         timetableButton.setOnClickListener {
+            analytics.clickTimeTable(movie)
             startActivity(Intent(this, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
         }
-        shareButton.setOnClickListener { share(movie) }
+        shareButton.setOnClickListener {
+            analytics.clickShare(movie)
+            share(movie)
+        }
 
         listView.apply {
             adapter = listAdapter

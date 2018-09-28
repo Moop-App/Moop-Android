@@ -18,6 +18,7 @@ import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
+import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData
@@ -29,7 +30,6 @@ import soup.movie.ui.main.theaters.TheatersFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity :
@@ -42,6 +42,9 @@ class MainActivity :
 
     @Inject
     override lateinit var presenter: MainContract.Presenter
+
+    @Inject
+    lateinit var analytics: EventAnalytics
 
     private val fragmentSceneRouter by lazy {
         FragmentSceneRouter(supportFragmentManager, R.id.container)
@@ -167,6 +170,7 @@ class MainActivity :
 
     override fun render(viewState: MainViewState) {
         printRenderLog { viewState }
+        analytics.screen(this, viewState.toString())
         setTitle(viewState.toTitleId())
         updateSelectedItem(viewState.toItemId())
         fragmentSceneRouter.goTo(viewState.asScene())

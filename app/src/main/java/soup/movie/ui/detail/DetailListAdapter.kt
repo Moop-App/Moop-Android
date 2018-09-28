@@ -10,10 +10,12 @@ import soup.movie.BR
 import soup.movie.databinding.ItemDetailTrailersBinding
 import soup.movie.ui.detail.DetailListAdapter.DataBindingViewHolder
 import soup.movie.ui.detail.DetailViewState.ListItem
+import soup.movie.ui.helper.EventAnalytics
 import soup.widget.recyclerview.FixedLinearLayoutManager
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
-internal class DetailListAdapter(private val listener: DetailListItemListener) :
+internal class DetailListAdapter(private val listener: DetailListItemListener,
+                                 private val analytics: EventAnalytics) :
         ListAdapter<ListItem, DataBindingViewHolder>(AlwaysDiffCallback()) {
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -22,7 +24,7 @@ internal class DetailListAdapter(private val listener: DetailListItemListener) :
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
         return when(binding) {
-            is ItemDetailTrailersBinding -> TrailersViewHolder(binding).apply {
+            is ItemDetailTrailersBinding -> TrailersViewHolder(binding, analytics).apply {
                 binding.listView.setRecycledViewPool(viewPool)
             }
             else -> DataBindingViewHolder(binding)
@@ -45,19 +47,20 @@ internal class DetailListAdapter(private val listener: DetailListItemListener) :
         }
     }
 
-    class TrailersViewHolder(private val binding: ItemDetailTrailersBinding) :
+    class TrailersViewHolder(binding: ItemDetailTrailersBinding,
+                             analytics: EventAnalytics) :
             DataBindingViewHolder(binding) {
 
-        private val adapter: DetailTrailerListAdapter = DetailTrailerListAdapter()
+        private val listAdapter = DetailTrailerListAdapter(analytics)
 
         init {
             binding.listView.layoutManager = FixedLinearLayoutManager(itemView.context)
-            binding.listView.adapter = adapter
+            binding.listView.adapter = listAdapter
         }
 
         override fun bind(item: ListItem, listener: DetailListItemListener) {
             super.bind(item, listener)
-            adapter.submitList(item.trailers)
+            listAdapter.submitList(item.trailers)
         }
     }
 }

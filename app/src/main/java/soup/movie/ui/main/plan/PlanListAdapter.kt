@@ -11,23 +11,27 @@ import soup.movie.data.helper.saveTo
 import soup.movie.data.helper.showDDay
 import soup.movie.data.model.Movie
 import soup.movie.ui.detail.DetailActivity
+import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
-class PlanListAdapter(private val host: FragmentActivity) :
+class PlanListAdapter(private val host: FragmentActivity,
+                      private val analytics: EventAnalytics) :
         DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> =
-            super.onCreateViewHolder(parent, viewType).apply {
-                itemView.setOnClickListener { _ ->
-                    val intent = Intent(host, DetailActivity::class.java)
-                    val movie: Movie = getItem(adapterPosition).apply {
-                        saveTo(intent)
-                    }
-                    host.startActivity(intent, options(movie).toBundle())
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> {
+        return super.onCreateViewHolder(parent, viewType).apply {
+            itemView.setOnClickListener { _ ->
+                val intent = Intent(host, DetailActivity::class.java)
+                val movie: Movie = getItem(adapterPosition).apply {
+                    saveTo(intent)
                 }
+                analytics.clickItem(adapterPosition, movie)
+                host.startActivity(intent, options(movie).toBundle())
             }
+        }
+    }
 
     private fun DataBindingViewHolder<Movie>.options(movie: Movie): ActivityOptions {
         return if (movie.showDDay()) {

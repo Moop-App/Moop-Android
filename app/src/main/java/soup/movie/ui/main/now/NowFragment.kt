@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
 import soup.movie.databinding.FragmentVerticalListBinding
+import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.now.NowViewState.*
 import soup.movie.util.log.printRenderLog
@@ -21,8 +22,11 @@ class NowFragment :
     @Inject
     override lateinit var presenter: NowContract.Presenter
 
+    @Inject
+    lateinit var analytics: EventAnalytics
+
     private val listAdapter by lazy {
-        NowListAdapter(requireActivity())
+        NowListAdapter(requireActivity(), analytics)
     }
 
     override fun onCreateView(inflater: LayoutInflater,
