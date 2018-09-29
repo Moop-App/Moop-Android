@@ -73,7 +73,7 @@ class DetailActivity :
 
             override fun onInfoClick(item: Movie) {
                 analytics.clickCgvInfo(item)
-                Cgv.executeMobileWeb(baseContext, item)
+                Cgv.executeMobileWeb(this@DetailActivity, item)
             }
 
             override fun onTicketClick(item: Movie) {
@@ -83,15 +83,15 @@ class DetailActivity :
 
             private fun executeTicketLink(item: Movie) {
                 if (useWebLinkSetting.get()) {
-                    Cgv.executeWebForSchedule(baseContext, item)
+                    Cgv.executeWebForSchedule(this@DetailActivity, item)
                 } else {
-                    Cgv.executeAppForSchedule(baseContext)
+                    Cgv.executeAppForSchedule(this@DetailActivity)
                 }
             }
 
             override fun onMoreTrailersClick(item: Movie) {
                 analytics.clickMoreTrailers("${item.title} 예고편")
-                YouTube.executeAppWithQuery(baseContext, item)
+                YouTube.executeAppWithQuery(this@DetailActivity, item)
             }
         }, analytics)
     }
@@ -163,7 +163,7 @@ class DetailActivity :
         }
         timetableButton.setOnClickListener {
             analytics.clickTimeTable(movie)
-            startActivity(Intent(baseContext, TimetableActivity::class.java)
+            startActivity(Intent(this@DetailActivity, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
         }
         shareButton.setOnClickListener {
@@ -255,7 +255,7 @@ class DetailActivity :
                     window.statusBarColor = animation.animatedValue as Int
                 }
                 duration = 500L
-                interpolator = getFastOutSlowInInterpolator(baseContext)
+                interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
             }.start()
         }
     }
@@ -274,7 +274,7 @@ class DetailActivity :
     }
 
     private fun share(movie: Movie) {
-        if (Kakao.isInstalled(baseContext)) {
+        if (Kakao.isInstalled(this@DetailActivity)) {
             val params = FeedTemplate.newBuilder(
                     ContentObject.newBuilder(movie.title, movie.posterUrl,
                             LinkObject.newBuilder()
@@ -285,7 +285,7 @@ class DetailActivity :
                             .setDescrption(movie.toDescription())
                             .build())
                     .build()
-            KakaoLinkService.getInstance().sendDefault(baseContext, params,
+            KakaoLinkService.getInstance().sendDefault(this@DetailActivity, params,
                     object : ResponseCallback<KakaoLinkResponse>() {
                         override fun onFailure(errorResult: ErrorResult) {
                             Timber.e(errorResult.toString())
