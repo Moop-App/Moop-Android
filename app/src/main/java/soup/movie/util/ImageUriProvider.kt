@@ -19,9 +19,9 @@ package soup.movie.util
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.FileProvider
-import com.bumptech.glide.Glide
 import io.reactivex.Observable
 import soup.movie.BuildConfig
+import soup.movie.util.glide.GlideApp
 import java.io.File
 
 /**
@@ -34,7 +34,7 @@ class ImageUriProvider(context: Context) {
 
     operator fun invoke(url: String): Observable<Uri> = Observable.fromCallable {
         // Retrieve the image from Glide (hopefully cached) as a File
-        val file = Glide.with(appContext)
+        val file = GlideApp.with(appContext)
                 .asFile()
                 .load(url)
                 .submit()
