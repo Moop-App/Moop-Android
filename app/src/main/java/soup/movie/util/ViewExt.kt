@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import soup.movie.util.Interpolators.ALPHA_IN
 import soup.movie.util.Interpolators.ALPHA_OUT
+import soup.movie.util.glide.GlideApp
 
 /** View */
 
@@ -80,16 +82,20 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 
 @BindingAdapter("android:srcUrl")
 fun ImageView.loadAsync(url: String) {
-    Glide.with(context)
+    GlideApp.with(context)
             .load(url)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .priority(Priority.IMMEDIATE)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }
 
 fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>) {
-    Glide.with(context)
+    GlideApp.with(context)
             .load(url)
             .listener(requestListener)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .priority(Priority.IMMEDIATE)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }

@@ -113,6 +113,8 @@ dependencies {
     // UI
     //implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation deps.glide.runtime
+    kapt deps.glide.compiler
+
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
 
     implementation 'com.kakao.sdk:kakaolink:1.13.0'
