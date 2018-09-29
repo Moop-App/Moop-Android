@@ -2,7 +2,7 @@ package soup.movie.ui.detail
 
 import android.view.ViewGroup
 import soup.movie.R
-import soup.movie.data.helper.executeYouTube
+import soup.movie.data.helper.YouTube
 import soup.movie.data.model.Trailer
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
@@ -17,7 +17,7 @@ internal class DetailTrailerListAdapter(private val analytics: EventAnalytics) :
             itemView.setOnClickListener {
                 val trailer = getItem(adapterPosition)
                 analytics.clickItem(trailer)
-                it.context.executeYouTube(trailer)
+                YouTube.executeApp(it.context, trailer)
             }
         }
     }

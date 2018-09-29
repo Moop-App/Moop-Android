@@ -65,8 +65,8 @@ class TheatersFragment :
             }
         }
         infoButton.setOnClickListener {
-            selectedTheater?.toDetailWebUrl()?.run {
-                context?.executeWebPage(this)
+            selectedTheater?.run {
+                executeWeb(requireContext())
             }
         }
         errorView.setOnClickListener {

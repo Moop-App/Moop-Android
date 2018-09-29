@@ -73,7 +73,7 @@ class DetailActivity :
 
             override fun onInfoClick(item: Movie) {
                 analytics.clickCgvInfo(item)
-                executeWebPage(Cgv.detailMobileWebUrl(item))
+                Cgv.executeMobileWeb(baseContext, item)
             }
 
             override fun onTicketClick(item: Movie) {
@@ -81,9 +81,17 @@ class DetailActivity :
                 executeTicketLink(item)
             }
 
+            private fun executeTicketLink(item: Movie) {
+                if (useWebLinkSetting.get()) {
+                    Cgv.executeWebForSchedule(baseContext, item)
+                } else {
+                    Cgv.executeAppForSchedule(baseContext)
+                }
+            }
+
             override fun onMoreTrailersClick(item: Movie) {
                 analytics.clickMoreTrailers("${item.title} 예고편")
-                executeYouTube(item)
+                YouTube.executeAppWithQuery(baseContext, item)
             }
         }, analytics)
     }
@@ -105,11 +113,10 @@ class DetailActivity :
             isFirstResource: Boolean
         ): Boolean {
             val bitmap = resource.getBitmap() ?: return false
-
             val twentyFourDip = TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
                     24f,
-                    this@DetailActivity.resources.displayMetrics
+                    resources.displayMetrics
             ).toInt()
             Palette.from(bitmap)
                     .maximumColorCount(3)
@@ -156,7 +163,7 @@ class DetailActivity :
         }
         timetableButton.setOnClickListener {
             analytics.clickTimeTable(movie)
-            startActivity(Intent(this, TimetableActivity::class.java)
+            startActivity(Intent(baseContext, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
         }
         shareButton.setOnClickListener {
@@ -231,7 +238,7 @@ class DetailActivity :
 
     private fun applyTheme(theme: ThemeData) {
         if (theme.isDark.not()) { // make back icon dark on light images
-            val darkColor = this@DetailActivity.getColorCompat(R.color.dark_icon)
+            val darkColor = getColorCompat(R.color.dark_icon)
             titleView.setTextColor(darkColor)
             openDateView.setTextColor(darkColor)
             timetableButton.setColorFilter(darkColor)
@@ -248,7 +255,7 @@ class DetailActivity :
                     window.statusBarColor = animation.animatedValue as Int
                 }
                 duration = 500L
-                interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
+                interpolator = getFastOutSlowInInterpolator(baseContext)
             }.start()
         }
     }
@@ -266,16 +273,8 @@ class DetailActivity :
                 .startChooser()
     }
 
-    private fun executeTicketLink(item: Movie) {
-        if (useWebLinkSetting.get()) {
-            executeWebPage(Cgv.reservationUrl(item))
-        } else {
-            executeMarketApp(Cgv.PACKAGE_NAME)
-        }
-    }
-
     private fun share(movie: Movie) {
-        if (isInstalledApp(Kakao.PACKAGE_NAME)) {
+        if (Kakao.isInstalled(baseContext)) {
             val params = FeedTemplate.newBuilder(
                     ContentObject.newBuilder(movie.title, movie.posterUrl,
                             LinkObject.newBuilder()
@@ -286,7 +285,7 @@ class DetailActivity :
                             .setDescrption(movie.toDescription())
                             .build())
                     .build()
-            KakaoLinkService.getInstance().sendDefault(this, params,
+            KakaoLinkService.getInstance().sendDefault(baseContext, params,
                     object : ResponseCallback<KakaoLinkResponse>() {
                         override fun onFailure(errorResult: ErrorResult) {
                             Timber.e(errorResult.toString())

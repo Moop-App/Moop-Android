@@ -9,7 +9,6 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_timetable.view.*
 import soup.movie.R
 import soup.movie.data.helper.Cgv
-import soup.movie.data.helper.executeMarketApp
 import soup.movie.data.model.Day
 import soup.movie.util.inflate
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
@@ -21,7 +20,7 @@ internal class TimetableAdapter(private val ctx: Context) :
             DayViewHolder(parent).apply {
                 itemView.setOnClickListener { _ ->
                     //TODO: show notification with selected date and time
-                    ctx.executeMarketApp(Cgv.PACKAGE_NAME)
+                    Cgv.executeAppForSchedule(ctx)
                 }
             }
 

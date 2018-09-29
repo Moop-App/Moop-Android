@@ -1,5 +1,6 @@
 package soup.movie.data.helper
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.annotation.DrawableRes
@@ -74,11 +75,11 @@ fun Theater.toMapIntent(): Intent = Intent(
         Intent.ACTION_VIEW,
         Uri.parse("geo:0,0?q=$lat,$lng(${fullName()})"))
 
-fun Theater.toDetailWebUrl(): String {
+fun Theater.executeWeb(ctx: Context) {
     return when (type) {
-        TYPE_CGV -> Cgv.detailWebUrl(this)
-        TYPE_LOTTE -> LotteCinema.detailWebUrl(this)
-        TYPE_MEGABOX -> Megabox.detailWebUrl(this)
+        TYPE_CGV -> Cgv.executeWeb(ctx, this)
+        TYPE_LOTTE -> LotteCinema.executeWeb(ctx, this)
+        TYPE_MEGABOX -> Megabox.executeWeb(ctx, this)
         else -> throw IllegalArgumentException("$type is not valid type.")
     }
 }
