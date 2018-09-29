@@ -7,23 +7,23 @@ ext.deps = [:]
 def versions = [:]
 versions.androidx = "1.0.0"
 versions.constraint_layout = "2.0.0-alpha2"
-versions.material = "1.0.0-beta01"
-versions.room_version = "2.0.0-beta01"
+versions.material = "1.0.0-rc01"
+versions.androidx_test = "1.1.0-alpha3"
+versions.espresso = "3.1.0-alpha3"
+versions.room = "2.0.0-rc01"
 versions.dagger = "2.16"
 versions.junit = "4.12"
-versions.espresso = "3.1.0-alpha1"
-versions.retrofit = "2.3.0"
-versions.okhttp_logging_interceptor = "3.9.0"
+versions.retrofit = "2.4.0"
+versions.okhttp_logging_interceptor = "3.11.0"
 versions.mockito = "2.7.19"
 versions.mockito_all = "1.10.19"
-versions.glide = "4.7.1"
-versions.timber = "4.6.0"
+versions.glide = "4.8.0"
+versions.timber = "4.7.1"
 versions.android_gradle_plugin = '3.2.0'
-versions.rx_java2 = "2.1.11"
+versions.rx_java2 = "2.2.2"
 versions.rx_kotlin = "2.3.0"
-versions.rx_android = "2.0.2"
-versions.rx_relay = "2.0.0"
-versions.test = "1.1.0-alpha1"
+versions.rx_android = "2.1.0"
+versions.rx_relay = "2.1.0"
 versions.kotlin = "1.2.71"
 def deps = [:]
 
@@ -42,10 +42,21 @@ androidx.constraint_layout = "androidx.constraintlayout:constraintlayout:$versio
 androidx.material = "com.google.android.material:material:$versions.material"
 deps.androidx = androidx
 
+def atsl = [:]
+atsl.runner = "androidx.test:runner:$versions.androidx_test"
+atsl.rules = "androidx.test:rules:$versions.androidx_test"
+deps.atsl = atsl
+
+def espresso = [:]
+espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
+espresso.contrib = "androidx.test.espresso:espresso-contrib:$versions.espresso"
+espresso.intents = "androidx.test.espresso:espresso-intents:$versions.espresso"
+deps.espresso = espresso
+
 def room = [:]
-room.runtime = "androidx.room:room-runtime:$versions.room_version"
-room.compiler = "androidx.room:room-compiler:$versions.room_version"
-room.rxjava2 = "androidx.room:room-rxjava2:$versions.room_version"
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
 deps.room = room
 
 def retrofit = [:]
@@ -63,17 +74,6 @@ dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dag
 dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
 dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
 deps.dagger = dagger
-
-def espresso = [:]
-espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
-espresso.contrib = "androidx.test.espresso:espresso-contrib:$versions.espresso"
-espresso.intents = "androidx.test.espresso:espresso-intents:$versions.espresso"
-deps.espresso = espresso
-
-def atsl = [:]
-atsl.runner = "androidx.test:runner:$versions.test"
-atsl.rules = "androidx.test:rules:$versions.test"
-deps.atsl = atsl
 
 def mockito = [:]
 mockito.core = "org.mockito:mockito-core:$versions.mockito"
