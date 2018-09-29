@@ -3,7 +3,6 @@ package soup.movie.ui.detail.timetable
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import kotlinx.android.synthetic.main.activity_timetable.*
 import kotlinx.android.synthetic.main.activity_timetable.view.*
 import soup.movie.R
@@ -56,11 +55,9 @@ class TimetableActivity :
         listView.apply {
             adapter = listAdapter
         }
-        val listener = View.OnClickListener {
+        noTheaterView.select.setOnClickListener {
             startActivity(Intent(this, TheaterEditActivity::class.java))
         }
-        noTheaterView.setOnClickListener(listener)
-        noTheaterView.select.setOnClickListener(listener)
     }
 
     override fun onStart() {
