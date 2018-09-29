@@ -24,6 +24,7 @@ import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setVisibleIf
 import soup.movie.util.startActivitySafely
 import javax.inject.Inject
 
@@ -100,26 +101,21 @@ class SettingsFragment :
     override fun render(viewState: SettingsViewState) {
         printRenderLog { viewState }
         val theaters = viewState.theaterList
-        if (theaters.isEmpty()) {
-            noTheaterView?.visibility = View.VISIBLE
-            theaterGroup?.removeAllViews()
-            theaterGroup?.visibility = View.GONE
-        } else {
-            noTheaterView?.visibility = View.GONE
-            theaterGroup?.removeAllViews()
-            theaterGroup?.visibility = View.VISIBLE
-
+        noTheaterView?.setVisibleIf { theaters.isEmpty() }
+        theaterGroup?.setVisibleIf { theaters.isNotEmpty() }
+        theaterGroup?.run {
+            removeAllViews()
             theaters.map {
-                inflate<Chip>(context!!, it.getChipLayout()).apply {
+                inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
                     transitionName = it.code
                     tag = it.code
                 }
-            }.forEach { theaterGroup?.addView(it) }
+            }.forEach { addView(it) }
         }
-        usePaletteThemeSwitch.isChecked = viewState.usePaletteTheme
-        useWebLinkSwitch.isChecked = viewState.useWebLink
-        appVersionLabel.text = "현재 ${BuildConfig.VERSION_NAME} / 최신 ${viewState.version.code}"
+        usePaletteThemeSwitch?.isChecked = viewState.usePaletteTheme
+        useWebLinkSwitch?.isChecked = viewState.useWebLink
+        appVersionLabel?.text = "현재 ${BuildConfig.VERSION_NAME} / 최신 ${viewState.version.code}"
     }
 
     private fun onTheaterEditClicked() {
