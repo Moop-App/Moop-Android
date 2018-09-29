@@ -41,6 +41,12 @@ class EventAnalytics(context: Context) {
         delegate.logEvent(var1, Bundle().apply { params() })
     }
 
+    private fun logButtonEvent(buttonName: String) {
+        logEvent(Event.SELECT_CONTENT) {
+            putString(Param.CONTENT_TYPE, "${buttonName}Button")
+        }
+    }
+
     private inline fun logButtonEvent(buttonName: String, moreParams: Bundle.() -> Unit) {
         logEvent(Event.SELECT_CONTENT) {
             putString(Param.CONTENT_TYPE, "${buttonName}Button")
@@ -80,7 +86,7 @@ class EventAnalytics(context: Context) {
     /* Main: Settings */
 
     fun clickMenuHelp() {
-        //TODO
+        logButtonEvent("MenuHelp")
     }
 
     /* Detail */
