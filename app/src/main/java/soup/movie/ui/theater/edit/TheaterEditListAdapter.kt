@@ -25,12 +25,12 @@ internal class TheaterEditListAdapter :
                 inflate<Chip>(context, theater.getFilterChipLayout()).apply {
                     text = theater.name
                     isChecked = selectedIdSet.contains(theater.code)
-                    isChipIconEnabled = !selectedIdSet.contains(theater.code)
+                    isChipIconVisible = !selectedIdSet.contains(theater.code)
                     setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
                             if (selectedIdSet.size < MAX_ITEMS) {
                                 selectedIdSet.add(theater.code)
-                                isChipIconEnabled = false
+                                isChipIconVisible = false
                             } else {
                                 this.isChecked = false
                                 val message = context.getString(R.string.theater_select_limit_description, MAX_ITEMS)
@@ -38,7 +38,7 @@ internal class TheaterEditListAdapter :
                             }
                         } else {
                             selectedIdSet.remove(theater.code)
-                            isChipIconEnabled = true
+                            isChipIconVisible = true
                         }
                     }
                 }
