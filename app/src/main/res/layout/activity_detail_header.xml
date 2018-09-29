@@ -82,7 +82,7 @@
             android:id="@+id/ageBgView"
             android:layout_width="38dp"
             android:layout_height="26dp"
-            android:backgroundRes="@{MovieExtKt.getAgeBackground(item)}"
+            android:backgroundResource="@{MovieExtKt.getAgeBackground(item)}"
             android:transitionName="@string/transition_age_bg"
             app:layout_goneMarginEnd="8dp"
             app:layout_goneMarginTop="4dp"

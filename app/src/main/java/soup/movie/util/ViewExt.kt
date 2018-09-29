@@ -68,9 +68,14 @@ fun View.animateShow(animate: Boolean) {
             .withEndAction(null)
 }
 
-@BindingAdapter("android:backgroundRes")
-fun View.setBackgroundRes(resId: Int) {
+@BindingAdapter("android:backgroundResource")
+fun View.setBackgroundResourceInXml(resId: Int) {
     setBackgroundResource(resId)
+}
+
+@BindingAdapter("android:selected")
+fun View.setSelectedInXml(selected: Boolean) {
+    isSelected = selected
 }
 
 /** ViewGroup */

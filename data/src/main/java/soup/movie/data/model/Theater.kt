@@ -14,5 +14,7 @@ data class Theater(
         const val TYPE_CGV = "C"
         const val TYPE_LOTTE = "L"
         const val TYPE_MEGABOX = "M"
+
+        const val NO_ID: String = "0"
     }
 }

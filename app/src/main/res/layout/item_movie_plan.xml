@@ -58,7 +58,7 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_margin="7dp"
-                    android:backgroundRes="@{MovieExtKt.getAgeBackground(item)}"
+                    android:backgroundResource="@{MovieExtKt.getAgeBackground(item)}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:background="@drawable/bg_age_15" />

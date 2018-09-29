@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.DrawableRes
 import org.threeten.bp.LocalDate
-import org.threeten.bp.ZoneId
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
 import soup.movie.data.model.Movie
@@ -68,11 +67,13 @@ fun Movie.isInTheThreeDays(): Boolean = isIn(-2..0)
 
 fun Movie.isInTheNextWeek(): Boolean = isIn(0..7)
 
-fun Movie.isIn(dayRange: IntRange): Boolean = openDate()?.let {
-    ChronoUnit.DAYS.between(today(), it) in dayRange
-} ?: false
-
-private fun today(): LocalDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
+fun Movie.isIn(dayRange: IntRange): Boolean {
+    val openDate = openDate()
+    if (openDate != null) {
+        return ChronoUnit.DAYS.between(today(), openDate) in dayRange
+    }
+    return false
+}
 
 private fun Movie.openDate(): LocalDate? = openDate.split(".").let {
     return if (it.size == 3) {

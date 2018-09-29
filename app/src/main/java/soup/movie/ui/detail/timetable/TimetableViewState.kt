@@ -1,23 +1,10 @@
 package soup.movie.ui.detail.timetable
 
 import androidx.annotation.Keep
-import soup.movie.data.model.TimeTable
+import soup.movie.data.model.ScreeningDate
+import soup.movie.data.model.TheaterWithTimetable
 
-sealed class TimetableViewState {
-
-    @Keep
-    object NoTheaterState : TimetableViewState() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
-
-    @Keep
-    object NoResultState : TimetableViewState() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
-
-    @Keep
-    data class DataState(
-            val timeTable: TimeTable) : TimetableViewState()
-}
+@Keep
+data class TimetableViewState(
+        val screeningDateList: List<ScreeningDate>,
+        val theaters: List<TheaterWithTimetable>)

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <variable name="item" type="soup.movie.data.model.ScreeningDate" />
+    </data>
+
+    <TextView
+        android:id="@+id/dateView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:textColor="@color/selector_item_timetable_date"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="@{item.day}"
+        android:enabled="@{item.enabled}"
+        android:selected="@{item.selected}"
+        android:background="@drawable/bg_timetable_date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="31"
+        tools:textColor="@color/white"
+        tools:background="@drawable/bg_circle"
+        tools:visibility="visible" />
+</layout>

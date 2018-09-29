@@ -1,7 +1,7 @@
 package soup.movie.data.model.converter
 
 import com.google.gson.*
-import soup.movie.data.model.Day
+import soup.movie.data.model.Date
 import soup.movie.data.model.TimeTable
 import soup.movie.data.model.response.TimeTableResponse
 import java.lang.reflect.Type
@@ -11,12 +11,12 @@ class TimeTableResponseDeserializer : JsonDeserializer<TimeTableResponse> {
     @Throws(JsonParseException::class)
     override fun deserialize(json: JsonElement, typeOfT: Type,
                              context: JsonDeserializationContext): TimeTableResponse {
-        val days = mutableListOf<Day>()
+        val dateList = mutableListOf<Date>()
         if (json.isJsonArray) {
             json.asJsonArray.forEach {
-                days.add(Gson().fromJson(it, Day::class.java))
+                dateList.add(Gson().fromJson(it, Date::class.java))
             }
         }
-        return TimeTableResponse(TimeTable(days))
+        return TimeTableResponse(TimeTable(dateList))
     }
 }

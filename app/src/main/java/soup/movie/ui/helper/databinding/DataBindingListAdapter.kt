@@ -2,6 +2,7 @@ package soup.movie.ui.helper.databinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -16,6 +17,7 @@ abstract class DataBindingListAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>)
         return DataBindingViewHolder(binding)
     }
 
+    @CallSuper
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) =
             holder.bind(getItem(position))
 }
