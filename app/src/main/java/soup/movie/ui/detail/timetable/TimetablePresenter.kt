@@ -20,44 +20,23 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
 
     private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
     private val dateSubject = BehaviorSubject.createDefault(ScreeningDate(today()))
-    private val timetableSubject: BehaviorSubject<TimeTable> = BehaviorSubject.create()
     private val theaterIdSubject: BehaviorSubject<String> = BehaviorSubject.create()
-    private val theaterListSubject: BehaviorSubject<List<TheaterWithTimetable>> =
-            BehaviorSubject.create()
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         with(disposable) {
             add(theaterSetting.asObservable()
-                    .doOnNext {
-                        theaterIdSubject.onNext(it.firstOrNull()?.code ?: Theater.NO_ID)
-                    }
-                    .subscribe())
+                    .map { it.firstOrNull()?.code ?: Theater.NO_ID }
+                    .subscribe { theaterIdSubject.onNext(it) })
 
             add(Observables.combineLatest(
-                    theaterIdSubject.distinctUntilChanged(),
-                    movieSubject.distinctUntilChanged())
-                    .flatMap { getTimetable(it.second, it.first) }
-                    .subscribe { timetableSubject.onNext(it) })
-
-            add(Observables.combineLatest(
-                    theaterSetting.asObservable(),
-                    theaterIdSubject.distinctUntilChanged())
-                    .map { (theaters, selectedId) ->
-                        theaters.map { TheaterWithTimetable(it, selected = it.code == selectedId) }
-                    }
-                    .onErrorReturnItem(emptyList())
-                    .subscribe { theaterListSubject.onNext(it) })
-
-            add(Observables.combineLatest(
-                    dateSubject.distinctUntilChanged(),
-                    theaterListSubject,
-                    timetableSubject)
-                    .flatMap { (date, theaters, timetable) ->
-                        if (theaters.isEmpty()) {
+                    getScreeningDateListObservable(),
+                    getTheaterListObservable())
+                    .flatMap { (dateList, theaterList) ->
+                        if (theaterList.isEmpty()) {
                             getEmptyViewState()
                         } else {
-                            getViewState(date, theaters, timetable)
+                            getViewState(dateList, theaterList)
                         }
                     }
                     .observeOn(AndroidSchedulers.mainThread())
@@ -83,38 +62,76 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                 .toObservable()
     }
 
+    private fun getTimeTableObservable(): Observable<TimeTable> {
+        return Observables.combineLatest(
+                theaterIdSubject.distinctUntilChanged(),
+                movieSubject.distinctUntilChanged())
+                .flatMap { getTimetable(it.second, it.first) }
+    }
+
     private fun getTimetable(movie: Movie, theaterId: String): Observable<TimeTable> {
         return moobRepository.getTimeTableList(TimeTableRequest(theaterId, movie.id))
                 .map { it.timeTable }
                 .onErrorReturnItem(TimeTable())
     }
 
-    private fun getViewState(date: ScreeningDate,
-                             theaters: List<TheaterWithTimetable>,
-                             timeTable: TimeTable): Observable<TimetableViewState> {
-        return Observable.just(TimetableViewState(
-                timeTable.toScreeningDateList(date),
-                theaters.injectTimeList(date, timeTable)))
+    private fun getScreeningDateListObservable(): Observable<List<ScreeningDate>> {
+        return Observables.combineLatest(
+                getTimeTableObservable(),
+                dateSubject.distinctUntilChanged(),
+                ::mapToScreeningDateList)
     }
 
-    private fun TimeTable.toScreeningDateList(date: ScreeningDate): List<ScreeningDate> {
-        return dateList.map {
+    private fun mapToScreeningDateList(timeTable: TimeTable, date: ScreeningDate): List<ScreeningDate> {
+        return timeTable.dateList.map {
             ScreeningDate(it.localDate(), enabled = true, selected = it.localDate() == date.date)
         }
     }
 
-    private fun List<TheaterWithTimetable>.injectTimeList(
-            date: ScreeningDate, timeTable: TimeTable): List<TheaterWithTimetable> {
-        val timeList = timeTable.dateList
-                .find { it.localDate() == date.date }
-                ?.timeList
-                ?: emptyList()
-        return map {
+    private fun getTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
+        return Observables.combineLatest(
+                getOriginTheaterListObservable(),
+                getTimeListObservable(),
+                ::mapToTheaterList)
+    }
+
+    private fun getOriginTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
+        return Observables.combineLatest(
+                theaterSetting.asObservable(),
+                theaterIdSubject.distinctUntilChanged())
+                .map { (theaters, selectedId) ->
+                    theaters.map { TheaterWithTimetable(it, selected = it.code == selectedId) }
+                }
+                .onErrorReturnItem(emptyList())
+    }
+
+    private fun getTimeListObservable(): Observable<List<String>> {
+        return Observables.combineLatest(
+                getTimeTableObservable(),
+                dateSubject.distinctUntilChanged())
+                .map { (timeTable, date) ->
+                    timeTable.dateList
+                            .find { it.localDate() == date.date }
+                            ?.timeList
+                            ?: emptyList()
+                }
+    }
+
+    private fun mapToTheaterList(theaters: List<TheaterWithTimetable>,
+                                 timeList: List<String>): List<TheaterWithTimetable> {
+        return theaters.map {
             if (it.selected) {
                 it.copy(timeList = timeList)
             } else {
                 it
             }
         }
+    }
+
+    private fun getViewState(
+            screeningDateList: List<ScreeningDate>,
+            theaterList: List<TheaterWithTimetable>): Observable<TimetableViewState> {
+        return TimetableViewState(screeningDateList, theaterList)
+                .toObservable()
     }
 }

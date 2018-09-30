@@ -7,4 +7,4 @@ import soup.movie.data.model.TheaterWithTimetable
 @Keep
 data class TimetableViewState(
         val screeningDateList: List<ScreeningDate>,
-        val theaters: List<TheaterWithTimetable>)
+        val theaterList: List<TheaterWithTimetable>)

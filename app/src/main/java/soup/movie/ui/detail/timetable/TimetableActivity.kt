@@ -93,8 +93,8 @@ class TimetableActivity :
 
     override fun render(viewState: TimetableViewState) {
         printRenderLog { viewState }
-        noTheaterView.setVisibleIf { viewState.theaters.isEmpty() }
+        noTheaterView.setVisibleIf { viewState.theaterList.isEmpty() }
         dateListAdapter.submitList(viewState.screeningDateList)
-        theaterListAdapter.submitList(viewState.theaters)
+        theaterListAdapter.submitList(viewState.theaterList)
     }
 }
