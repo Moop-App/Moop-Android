@@ -46,6 +46,7 @@ class TimetableActivity :
         }
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
+        setSupportActionBar(toolbar)
         title = "상영시간표: ${movie.title}"
     }
 
