@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="CGV"
                 android:layout_marginStart="16dp"
+                android:onClick="@{() -> listener.onInfoClick(item)}"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,9 +50,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_round_star"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/brandGuideline" />
+                app:layout_constraintStart_toEndOf="@+id/brandGuideline"
+                app:layout_constraintEnd_toStartOf="@+id/eggLabel" />
 
             <TextView
                 android:id="@+id/eggLabel"
@@ -70,20 +73,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/eggIcon"
-                tools:text="95%" />
-
-            <ImageButton
-                android:id="@+id/infoButton"
-                android:layout_width="48dp"
-                android:layout_height="0dp"
-                android:scaleType="centerInside"
-                android:tint="@color/dark_icon"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ticketButton"
-                app:srcCompat="@drawable/ic_round_info"
-                android:onClick="@{() -> listener.onInfoClick(item)}" />
+                tools:text="95%" />
 
             <ImageView
                 android:id="@+id/ticketButton"
