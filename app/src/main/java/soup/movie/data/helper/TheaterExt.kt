@@ -25,9 +25,9 @@ fun Theater.getChipLayout(): Int {
 @LayoutRes
 fun Theater.getSortChipLayout(): Int {
     return when(type) {
-        TYPE_CGV -> R.layout.item_theater_cgv
-        TYPE_LOTTE -> R.layout.item_theater_lotte
-        TYPE_MEGABOX -> R.layout.item_theater_megabox
+        TYPE_CGV -> R.layout.item_sort_theater_cgv
+        TYPE_LOTTE -> R.layout.item_sort_theater_lotte
+        TYPE_MEGABOX -> R.layout.item_sort_theater_megabox
         else -> throw IllegalArgumentException("$type is not valid type.")
     }
 }

@@ -1,7 +1,7 @@
 package soup.movie.ui.theater.sort
 
 import android.view.MotionEvent
-import kotlinx.android.synthetic.main.item_theater_cgv.view.*
+import kotlinx.android.synthetic.main.item_sort_theater_cgv.view.*
 import soup.movie.data.helper.getSortChipLayout
 import soup.movie.data.model.Theater
 import soup.movie.ui.helper.databinding.DataBindingAdapter

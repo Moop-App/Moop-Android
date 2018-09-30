@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_theater_cgv"
+            tools:listitem="@layout/item_sort_theater_cgv"
             tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
