@@ -105,14 +105,15 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
 
     private fun List<TheaterWithTimetable>.injectTimeList(
             date: ScreeningDate, timeTable: TimeTable): List<TheaterWithTimetable> {
-        val timeList: List<String>? = timeTable.dateList
+        val timeList = timeTable.dateList
                 .find { it.localDate() == date.date }
                 ?.timeList
+                ?: emptyList()
         return map {
             if (it.selected) {
                 it.copy(timeList = timeList)
             } else {
-                it.copy()
+                it
             }
         }
     }

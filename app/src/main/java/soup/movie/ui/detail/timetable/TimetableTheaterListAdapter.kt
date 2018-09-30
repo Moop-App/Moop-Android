@@ -38,14 +38,14 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
         getItem(position)?.run {
             holder.itemView.timeListView?.run {
                 removeAllViews()
-                timeList?.map { time ->
+                timeList.map { time ->
                     inflate<Chip>(context, R.layout.chip_time).apply {
                         text = time
                         setOnClickListener {
                             listener.onItemClick(time)
                         }
                     }
-                }?.forEach { addView(it) }
+                }.forEach { addView(it) }
             }
         }
     }
