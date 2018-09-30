@@ -9,6 +9,7 @@ import soup.movie.data.model.TheaterWithTimetable
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.inflate
+import soup.movie.util.setVisibleIf
 import soup.widget.recyclerview.callback.IdBasedDiffCallback
 
 internal class TimetableTheaterListAdapter(private val listener: Listener) :
@@ -38,6 +39,7 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
         getItem(position)?.run {
             holder.itemView.timeListView?.run {
                 removeAllViews()
+                setVisibleIf { selected and timeList.isNotEmpty() }
                 timeList.map { time ->
                     inflate<Chip>(context, R.layout.chip_time).apply {
                         text = time
@@ -47,6 +49,7 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
                     }
                 }.forEach { addView(it) }
             }
+            holder.itemView.noResultView?.setVisibleIf { selected and timeList.isEmpty() }
         }
     }
 
