@@ -13,6 +13,7 @@ import soup.movie.data.model.request.TimeTableRequest
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.util.toObservable
+import java.util.concurrent.TimeUnit
 
 class TimetablePresenter(private val moobRepository: MoobRepository,
                          private val theaterSetting: TheaterSetting) :
@@ -32,6 +33,8 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
             add(Observables.combineLatest(
                     getScreeningDateListObservable(),
                     getTheaterListObservable())
+                    //TODO: Instead of debounce(), update if theater is changed.
+                    .debounce(300, TimeUnit.MILLISECONDS)
                     .flatMap { (dateList, theaterList) ->
                         if (theaterList.isEmpty()) {
                             getEmptyViewState()
