@@ -2,8 +2,9 @@ package soup.movie.ui.detail.timetable
 
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.item_timetable_theater.view.*
+import kotlinx.android.synthetic.main.item_timetable_theater_cgv.view.*
 import soup.movie.R
+import soup.movie.data.helper.getTimetableLayout
 import soup.movie.data.model.Theater
 import soup.movie.data.model.TheaterWithTimetable
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
@@ -53,5 +54,5 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
         }
     }
 
-    override fun getItemViewType(position: Int): Int = R.layout.item_timetable_theater
+    override fun getItemViewType(position: Int): Int = getItem(position).theater.getTimetableLayout()
 }

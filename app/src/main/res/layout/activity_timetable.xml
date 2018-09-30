@@ -57,7 +57,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/item_timetable_theater"
+            tools:listitem="@layout/item_timetable_theater_cgv"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

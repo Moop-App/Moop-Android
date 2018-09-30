@@ -13,6 +13,16 @@ import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 
 @LayoutRes
+fun Theater.getTimetableLayout(): Int {
+    return when(type) {
+        TYPE_CGV -> R.layout.item_timetable_theater_cgv
+        TYPE_LOTTE -> R.layout.item_timetable_theater_lotte
+        TYPE_MEGABOX -> R.layout.item_timetable_theater_megabox
+        else -> throw IllegalArgumentException("$type is not valid type.")
+    }
+}
+
+@LayoutRes
 fun Theater.getChipLayout(): Int {
     return when(type) {
         TYPE_CGV -> R.layout.chip_action_cgv
