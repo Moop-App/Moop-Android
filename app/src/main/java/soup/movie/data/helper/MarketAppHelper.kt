@@ -13,6 +13,7 @@ import soup.movie.data.model.Theater
 import soup.movie.data.model.Trailer
 import soup.movie.util.getColorCompat
 import soup.movie.util.startActivitySafely
+import timber.log.Timber
 
 private fun Context.isInstalledApp(pkgName: String): Boolean {
     return packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
@@ -31,9 +32,11 @@ private fun Context.executeApp(pkgName: String, className: String? = null): Bool
             setClassName(pkgName, className)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
-        if (launchIntent.resolveActivity(packageManager) != null) {
+        try {
             startActivity(launchIntent)
             return true
+        } catch (e: ActivityNotFoundException) {
+            Timber.w(e)
         }
     }
     val launchIntent = packageManager.getLaunchIntentForPackage(pkgName)
