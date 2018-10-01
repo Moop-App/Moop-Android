@@ -8,23 +8,47 @@
         <variable name="item" type="soup.movie.data.model.ScreeningDate" />
     </data>
 
-    <TextView
-        android:id="@+id/dateView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:gravity="center"
-        android:textColor="@color/selector_item_timetable_date_text"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:text="@{item.day}"
+        android:layout_height="64dp"
         android:enabled="@{item.enabled}"
-        android:selected="@{item.selected}"
-        android:background="@drawable/bg_timetable_date"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="31"
-        tools:background="@color/debug_background"
-        tools:visibility="visible" />
+        tools:background="@color/debug_foreground">
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:textColor="@color/selector_item_timetable_date_text"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:text="@{item.day}"
+            android:enabled="@{item.enabled}"
+            android:selected="@{item.selected}"
+            android:background="@drawable/bg_timetable_date"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/dayOfTheWeekView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="31"
+            tools:background="@color/debug_background" />
+
+        <TextView
+            android:id="@+id/dayOfTheWeekView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/selector_item_timetable_dayoftheweek_text"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:text="@{item.dayOfTheWeek}"
+            android:enabled="@{item.enabled}"
+            app:layout_constraintTop_toBottomOf="@+id/dateView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="월" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
