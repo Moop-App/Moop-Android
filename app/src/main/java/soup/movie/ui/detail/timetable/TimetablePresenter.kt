@@ -9,11 +9,11 @@ import soup.movie.data.MoobRepository
 import soup.movie.data.helper.localDate
 import soup.movie.data.helper.toWeek
 import soup.movie.data.helper.today
+import soup.movie.data.helper.until
 import soup.movie.data.model.*
 import soup.movie.data.model.request.TimeTableRequest
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
-import soup.movie.util.toObservable
 import java.util.concurrent.TimeUnit
 
 class TimetablePresenter(private val moobRepository: MoobRepository,
@@ -36,7 +36,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                     getTheaterListObservable())
                     //TODO: Instead of debounce(), update if theater is changed.
                     .debounce(300, TimeUnit.MILLISECONDS)
-                    .flatMap { getViewState(it.first, it.second) }
+                    .map { TimetableViewState(it.first, it.second) }
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { view?.render(it) })
         }
@@ -75,30 +75,35 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
     }
 
     private fun mapToScreeningDateList(timeTable: TimeTable, date: ScreeningDate): List<ScreeningDate> {
-        return timeTable.dateList.run {
-            if (isEmpty()) {
-                today().toWeek().map {
-                    ScreeningDate(
-                            date = it,
-                            enabled = false,
-                            selected = it == date.date)
+        return timeTable.dateList
+                .map { it.localDate() }
+                .run {
+                    if (isEmpty()) {
+                        today().toWeek()
+                    } else {
+                        first().until(last(), atLeast = 7)
+                    }.map {
+                        ScreeningDate(
+                                date = it,
+                                enabled = contains(it),
+                                selected = it == date.date)
+                    }
                 }
-            } else {
-                map {
-                    ScreeningDate(
-                            date = it.localDate(),
-                            enabled = true,
-                            selected = it.localDate() == date.date)
-                }
-            }
-        }
     }
 
     private fun getTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
         return Observables.combineLatest(
                 getOriginTheaterListObservable(),
-                getTimeListObservable(),
-                ::mapToTheaterList)
+                getTimeListObservable())
+                .map { (theaters, timeList) ->
+                    theaters.map {
+                        if (it.selected) {
+                            it.copy(timeList = timeList)
+                        } else {
+                            it
+                        }
+                    }
+                }
     }
 
     private fun getOriginTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
@@ -121,23 +126,5 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                             ?.timeList
                             ?: emptyList()
                 }
-    }
-
-    private fun mapToTheaterList(theaters: List<TheaterWithTimetable>,
-                                 timeList: List<String>): List<TheaterWithTimetable> {
-        return theaters.map {
-            if (it.selected) {
-                it.copy(timeList = timeList)
-            } else {
-                it
-            }
-        }
-    }
-
-    private fun getViewState(
-            screeningDateList: List<ScreeningDate>,
-            theaterList: List<TheaterWithTimetable>): Observable<TimetableViewState> {
-        return TimetableViewState(screeningDateList, theaterList)
-                .toObservable()
     }
 }

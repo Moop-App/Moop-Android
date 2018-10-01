@@ -4,12 +4,12 @@ data class Date(
     val date: String,
     val timeList: List<String>? = emptyList()) {
 
-    val year: String
-        get() = date.substring(0..3)
+    val year: Int
+        get() = date.substring(0..3).toInt()
 
-    val month: String
-        get() = date.substring(4..5)
+    val month: Int
+        get() = date.substring(4..5).toInt()
 
-    val day: String
-        get() = date.substring(6..7)
+    val day: Int
+        get() = date.substring(6..7).toInt()
 }
