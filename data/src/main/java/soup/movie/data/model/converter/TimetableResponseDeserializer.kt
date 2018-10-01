@@ -11,12 +11,12 @@ class TimetableResponseDeserializer : JsonDeserializer<TimetableResponse> {
     @Throws(JsonParseException::class)
     override fun deserialize(json: JsonElement, typeOfT: Type,
                              context: JsonDeserializationContext): TimetableResponse {
-        val dateList = mutableListOf<Date>()
-        if (json.isJsonArray) {
-            json.asJsonArray.forEach {
-                dateList.add(Gson().fromJson(it, Date::class.java))
-            }
-        }
-        return TimetableResponse(Timetable(dateList = dateList))
+        return TimetableResponse(Timetable(
+                dateList = json.takeIf { it.isJsonArray }
+                        ?.asJsonArray
+                        ?.toList()
+                        ?.map { Gson().fromJson(it, Date::class.java) }
+                        ?.filter { it?.timeList?.isNotEmpty() ?: false }
+                        ?: emptyList()))
     }
 }
