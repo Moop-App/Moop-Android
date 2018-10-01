@@ -1,9 +1,7 @@
 package soup.movie.data.model
 
-typealias TheaterId = String
-
 data class Theater(
-        val type: TheaterId,
+        val type: String,
         val code: String,
         val name: String,
         val lng: Double,
@@ -15,6 +13,6 @@ data class Theater(
         const val TYPE_LOTTE = "L"
         const val TYPE_MEGABOX = "M"
 
-        const val NO_ID: String = "0"
+        val NONE: Theater = Theater("", "", "", 0.0, 0.0)
     }
 }

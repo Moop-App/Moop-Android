@@ -11,7 +11,7 @@ import soup.movie.data.helper.toWeek
 import soup.movie.data.helper.today
 import soup.movie.data.helper.until
 import soup.movie.data.model.*
-import soup.movie.data.model.request.TimetableRequest
+import soup.movie.data.util.firstOr
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import java.util.concurrent.TimeUnit
@@ -22,14 +22,14 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
 
     private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
     private val dateSubject = BehaviorSubject.createDefault(ScreeningDate(today()))
-    private val theaterIdSubject: BehaviorSubject<String> = BehaviorSubject.create()
+    private val theaterSubject: BehaviorSubject<Theater> = BehaviorSubject.create()
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         with(disposable) {
             add(theaterSetting.asObservable()
-                    .map { it.firstOrNull()?.code ?: Theater.NO_ID }
-                    .subscribe { theaterIdSubject.onNext(it) })
+                    .map { it.firstOr(Theater.NONE) }
+                    .subscribe { theaterSubject.onNext(it) })
 
             add(Observables.combineLatest(
                     getScreeningDateListObservable(),
@@ -51,19 +51,18 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
     }
 
     override fun onItemClick(item: TheaterWithTimetable) {
-        theaterIdSubject.onNext(item.theater.code)
+        theaterSubject.onNext(item.theater)
     }
 
     private fun getTimetableObservable(): Observable<Timetable> {
         return Observables.combineLatest(
-                theaterIdSubject.distinctUntilChanged(),
+                theaterSubject.distinctUntilChanged(),
                 movieSubject.distinctUntilChanged())
-                .flatMap { getTimetable(it.second, it.first) }
+                .flatMap { getTimetable(it.first, it.second) }
     }
 
-    private fun getTimetable(movie: Movie, theaterId: String): Observable<Timetable> {
-        return moobRepository.getTimetable(TimetableRequest(theaterId, movie.id))
-                .map { it.timetable }
+    private fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> {
+        return moobRepository.getTimetable(theater, movie)
                 .onErrorReturnItem(Timetable())
     }
 
@@ -109,9 +108,13 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
     private fun getOriginTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
         return Observables.combineLatest(
                 theaterSetting.asObservable(),
-                theaterIdSubject.distinctUntilChanged())
-                .map { (theaters, selectedId) ->
-                    theaters.map { TheaterWithTimetable(it, selected = it.code == selectedId) }
+                theaterSubject.map { it.code }.distinctUntilChanged())
+                .map { (theaterList, selectedId) ->
+                    theaterList.map {
+                        TheaterWithTimetable(
+                                theater = it,
+                                selected = it.code == selectedId)
+                    }
                 }
                 .onErrorReturnItem(emptyList())
     }

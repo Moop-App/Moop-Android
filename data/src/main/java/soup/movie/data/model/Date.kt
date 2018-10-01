@@ -1,8 +1,8 @@
 package soup.movie.data.model
 
 data class Date(
-    val date: String,
-    val timeList: List<String>? = emptyList()) {
+        val date: String,
+        val timeList: List<String> = emptyList()) {
 
     val year: Int
         get() = date.substring(0..3).toInt()

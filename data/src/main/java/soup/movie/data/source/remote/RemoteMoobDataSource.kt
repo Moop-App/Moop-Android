@@ -3,8 +3,9 @@ package soup.movie.data.source.remote
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import org.jsoup.Jsoup
+import soup.movie.data.model.Movie
+import soup.movie.data.model.Theater
 import soup.movie.data.model.Version
-import soup.movie.data.model.request.TimetableRequest
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.model.response.TimetableResponse
@@ -21,8 +22,8 @@ class RemoteMoobDataSource(private val moobApiService: MoobApiService) : MoobDat
     override fun getCodeList(): Observable<CodeResponse> =
             moobApiService.getCodeList()
 
-    override fun getTimetable(request: TimetableRequest): Observable<TimetableResponse> =
-            moobApiService.getTimetable(request.theaterCode, request.movieCode)
+    override fun getTimetable(theater: Theater, movie: Movie): Observable<TimetableResponse> =
+            moobApiService.getTimetable(theater.code, movie.id)
 
     override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> =
             Observable.fromCallable {

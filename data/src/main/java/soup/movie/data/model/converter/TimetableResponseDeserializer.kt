@@ -17,6 +17,6 @@ class TimetableResponseDeserializer : JsonDeserializer<TimetableResponse> {
                 dateList.add(Gson().fromJson(it, Date::class.java))
             }
         }
-        return TimetableResponse(Timetable(dateList))
+        return TimetableResponse(Timetable(dateList = dateList))
     }
 }

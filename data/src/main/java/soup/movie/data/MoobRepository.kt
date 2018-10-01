@@ -2,11 +2,11 @@ package soup.movie.data
 
 import io.reactivex.Observable
 import soup.movie.data.model.Movie
+import soup.movie.data.model.Theater
+import soup.movie.data.model.Timetable
 import soup.movie.data.model.Version
-import soup.movie.data.model.request.TimetableRequest
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.model.response.TimetableResponse
 import soup.movie.data.source.local.LocalMoobDataSource
 import soup.movie.data.source.remote.RemoteMoobDataSource
 
@@ -61,8 +61,9 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
                 }
     }
 
-    fun getTimetable(request: TimetableRequest): Observable<TimetableResponse> {
-        return remoteDataSource.getTimetable(request)
+    fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> {
+        return remoteDataSource.getTimetable(theater, movie)
+                .map { it.timetable.copy(theater = theater) }
     }
 
     fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> {
