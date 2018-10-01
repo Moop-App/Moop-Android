@@ -6,7 +6,7 @@ import soup.widget.recyclerview.callback.HasId
 @Keep
 data class TheaterWithTimetable(
         val theater: Theater,
-        var timeList: List<String> = emptyList(),
+        val timeList: List<String> = emptyList(),
         val selected: Boolean = false) : HasId {
 
     override val id: String

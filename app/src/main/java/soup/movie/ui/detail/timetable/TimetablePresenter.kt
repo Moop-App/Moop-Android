@@ -22,7 +22,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
 
     private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
     private val dateSubject = BehaviorSubject.createDefault(ScreeningDate(today()))
-    private val theaterSubject: BehaviorSubject<Theater> = BehaviorSubject.create()
+    private val theaterSubject: BehaviorSubject<Theater> = BehaviorSubject.createDefault(Theater.NONE)
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
@@ -31,12 +31,8 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                     .map { it.firstOr(Theater.NONE) }
                     .subscribe { theaterSubject.onNext(it) })
 
-            add(Observables.combineLatest(
-                    getScreeningDateListObservable(),
-                    getTheaterListObservable())
-                    //TODO: Instead of debounce(), update if theater is changed.
-                    .debounce(300, TimeUnit.MILLISECONDS)
-                    .map { TimetableViewState(it.first, it.second) }
+            add(getTimetableViewState()
+                    .startWith(TimetableViewState(emptyList(), emptyList()))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { view?.render(it) })
         }
@@ -54,80 +50,64 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
         theaterSubject.onNext(item.theater)
     }
 
-    private fun getTimetableObservable(): Observable<Timetable> {
-        return Observables.combineLatest(
-                theaterSubject.distinctUntilChanged(),
-                movieSubject.distinctUntilChanged())
-                .flatMap { getTimetable(it.first, it.second) }
-    }
-
-    private fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> {
-        return moobRepository.getTimetable(theater, movie)
-                .onErrorReturnItem(Timetable())
-    }
-
-    private fun getScreeningDateListObservable(): Observable<List<ScreeningDate>> {
-        return Observables.combineLatest(
-                getTimetableObservable(),
-                dateSubject.distinctUntilChanged(),
-                ::mapToScreeningDateList)
-    }
-
-    private fun mapToScreeningDateList(timetable: Timetable, date: ScreeningDate): List<ScreeningDate> {
-        return timetable.dateList
-                .map { it.localDate() }
-                .run {
-                    if (isEmpty()) {
-                        today().toWeek()
-                    } else {
-                        first().until(last(), atLeast = 7)
-                    }.map {
-                        ScreeningDate(
-                                date = it,
-                                enabled = contains(it),
-                                selected = it == date.date)
-                    }
-                }
-    }
-
-    private fun getTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
+    private fun getTimetableViewState(): Observable<TimetableViewState> {
         return Observables.combineLatest(
                 getOriginTheaterListObservable(),
-                getTimeListObservable())
-                .map { (theaters, timeList) ->
-                    theaters.map {
-                        if (it.selected) {
-                            it.copy(timeList = timeList)
-                        } else {
-                            it
-                        }
-                    }
+                getTimetableObservable(),
+                dateSubject.distinctUntilChanged())
+                //TODO: Instead of debounce(), update if theater is changed.
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .map { (originTheaterList, timetable, screeningDate) ->
+                    val screeningDateList = timetable.dateList
+                            .map { it.localDate() }
+                            .run {
+                                if (isEmpty()) {
+                                    today().toWeek()
+                                } else {
+                                    first().until(last(), atLeast = 7)
+                                }.map {
+                                    ScreeningDate(
+                                            date = it,
+                                            enabled = contains(it),
+                                            selected = it == screeningDate.date)
+                                }
+                            }
+                    val timeList = timetable.dateList
+                            .find { it.localDate() == screeningDate.date }
+                            ?.timeList ?: emptyList()
+                    val theaterList = originTheaterList
+                            .map {
+                                if (it.selected and (it.theater == timetable.theater)) {
+                                    it.copy(timeList = timeList)
+                                } else {
+                                    it
+                                }
+                            }
+                    Pair(screeningDateList, theaterList)
                 }
+                .map { TimetableViewState(it.first, it.second) }
     }
 
     private fun getOriginTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
         return Observables.combineLatest(
                 theaterSetting.asObservable(),
-                theaterSubject.map { it.code }.distinctUntilChanged())
-                .map { (theaterList, selectedId) ->
+                theaterSubject.distinctUntilChanged())
+                .map { (theaterList, selectedTheater) ->
                     theaterList.map {
                         TheaterWithTimetable(
                                 theater = it,
-                                selected = it.code == selectedId)
+                                selected = it == selectedTheater)
                     }
                 }
                 .onErrorReturnItem(emptyList())
     }
 
-    private fun getTimeListObservable(): Observable<List<String>> {
+    private fun getTimetableObservable(): Observable<Timetable> {
         return Observables.combineLatest(
-                getTimetableObservable(),
-                dateSubject.distinctUntilChanged())
-                .map { (timeTable, date) ->
-                    timeTable.dateList
-                            .find { it.localDate() == date.date }
-                            ?.timeList
-                            ?: emptyList()
+                theaterSubject.distinctUntilChanged(),
+                movieSubject.distinctUntilChanged())
+                .flatMap { (theater, movie) ->
+                    moobRepository.getTimetable(theater, movie)
                 }
     }
 }
