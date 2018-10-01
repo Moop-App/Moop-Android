@@ -11,7 +11,7 @@ import soup.movie.data.helper.toWeek
 import soup.movie.data.helper.today
 import soup.movie.data.helper.until
 import soup.movie.data.model.*
-import soup.movie.data.model.request.TimeTableRequest
+import soup.movie.data.model.request.TimetableRequest
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import java.util.concurrent.TimeUnit
@@ -54,28 +54,28 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
         theaterIdSubject.onNext(item.theater.code)
     }
 
-    private fun getTimeTableObservable(): Observable<TimeTable> {
+    private fun getTimetableObservable(): Observable<Timetable> {
         return Observables.combineLatest(
                 theaterIdSubject.distinctUntilChanged(),
                 movieSubject.distinctUntilChanged())
                 .flatMap { getTimetable(it.second, it.first) }
     }
 
-    private fun getTimetable(movie: Movie, theaterId: String): Observable<TimeTable> {
-        return moobRepository.getTimeTableList(TimeTableRequest(theaterId, movie.id))
-                .map { it.timeTable }
-                .onErrorReturnItem(TimeTable())
+    private fun getTimetable(movie: Movie, theaterId: String): Observable<Timetable> {
+        return moobRepository.getTimetable(TimetableRequest(theaterId, movie.id))
+                .map { it.timetable }
+                .onErrorReturnItem(Timetable())
     }
 
     private fun getScreeningDateListObservable(): Observable<List<ScreeningDate>> {
         return Observables.combineLatest(
-                getTimeTableObservable(),
+                getTimetableObservable(),
                 dateSubject.distinctUntilChanged(),
                 ::mapToScreeningDateList)
     }
 
-    private fun mapToScreeningDateList(timeTable: TimeTable, date: ScreeningDate): List<ScreeningDate> {
-        return timeTable.dateList
+    private fun mapToScreeningDateList(timetable: Timetable, date: ScreeningDate): List<ScreeningDate> {
+        return timetable.dateList
                 .map { it.localDate() }
                 .run {
                     if (isEmpty()) {
@@ -118,7 +118,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
 
     private fun getTimeListObservable(): Observable<List<String>> {
         return Observables.combineLatest(
-                getTimeTableObservable(),
+                getTimetableObservable(),
                 dateSubject.distinctUntilChanged())
                 .map { (timeTable, date) ->
                     timeTable.dateList

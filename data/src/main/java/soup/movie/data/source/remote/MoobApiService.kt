@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.model.response.TimeTableResponse
+import soup.movie.data.model.response.TimetableResponse
 
 interface MoobApiService {
 
@@ -23,9 +23,9 @@ interface MoobApiService {
 
     // 상영시간표
     @GET("cgv/timetable/asMovie/{tc}/{mc}.json")
-    fun getTimeTableList(
+    fun getTimetable(
             @Path("tc") theater: String,
-            @Path("mc") movie: String): Observable<TimeTableResponse>
+            @Path("mc") movie: String): Observable<TimetableResponse>
 
     companion object {
 

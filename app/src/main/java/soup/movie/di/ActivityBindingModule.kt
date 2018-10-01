@@ -28,7 +28,7 @@ abstract class ActivityBindingModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [
-        TimeTableUiModule::class
+        TimetableUiModule::class
     ])
     internal abstract fun timetableActivity(): TimetableActivity
 

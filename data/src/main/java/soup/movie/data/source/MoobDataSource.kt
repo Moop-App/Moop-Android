@@ -2,10 +2,10 @@ package soup.movie.data.source
 
 import io.reactivex.Observable
 import soup.movie.data.model.Version
-import soup.movie.data.model.request.TimeTableRequest
+import soup.movie.data.model.request.TimetableRequest
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.model.response.TimeTableResponse
+import soup.movie.data.model.response.TimetableResponse
 
 interface MoobDataSource {
 
@@ -15,7 +15,7 @@ interface MoobDataSource {
 
     fun getCodeList(): Observable<CodeResponse>
 
-    fun getTimeTableList(request: TimeTableRequest): Observable<TimeTableResponse>
+    fun getTimetable(request: TimetableRequest): Observable<TimetableResponse>
 
     fun getVersion(pkgName: String, defaultVersion: String): Observable<Version>
 }

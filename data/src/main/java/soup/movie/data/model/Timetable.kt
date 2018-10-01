@@ -1,4 +1,4 @@
 package soup.movie.data.model
 
-data class TimeTable(
+data class Timetable(
         val dateList: List<Date> = emptyList())

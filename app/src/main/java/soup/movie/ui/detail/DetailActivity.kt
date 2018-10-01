@@ -162,7 +162,7 @@ class DetailActivity :
             presenter.requestShareImage(movie.posterUrl)
         }
         timetableButton.setOnClickListener {
-            analytics.clickTimeTable(movie)
+            analytics.clickTimetable(movie)
             startActivity(Intent(this@DetailActivity, TimetableActivity::class.java)
                     .apply { movie.saveTo(this) })
         }

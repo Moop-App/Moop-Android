@@ -37,7 +37,7 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
-    <style name="AppTheme.TimeTable" parent="AppTheme.NoActionBar" />
+    <style name="AppTheme.Timetable" parent="AppTheme.NoActionBar" />
 
     <style name="AppTheme.TheaterSort" />
 

@@ -54,7 +54,7 @@
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".ui.detail.timetable.TimetableActivity"
-            android:theme="@style/AppTheme.TimeTable" />
+            android:theme="@style/AppTheme.Timetable" />
         <activity
             android:name=".ui.theater.sort.TheaterSortActivity"
             android:theme="@style/AppTheme.TheaterSort"

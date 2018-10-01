@@ -98,8 +98,8 @@ class EventAnalytics(context: Context) {
         }
     }
 
-    fun clickTimeTable(movie: Movie) {
-        logButtonEvent("TimeTable") {
+    fun clickTimetable(movie: Movie) {
+        logButtonEvent("Timetable") {
             putString(Param.ITEM_ID, movie.id)
             putString(Param.ITEM_NAME, movie.title)
             putString(Param.ITEM_CATEGORY, movie.category())

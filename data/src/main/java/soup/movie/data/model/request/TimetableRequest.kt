@@ -1,5 +1,5 @@
 package soup.movie.data.model.request
 
-data class TimeTableRequest(
+data class TimetableRequest(
         val theaterCode: String,
         val movieCode: String)

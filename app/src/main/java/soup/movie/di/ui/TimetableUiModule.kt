@@ -9,7 +9,7 @@ import soup.movie.ui.detail.timetable.TimetableContract
 import soup.movie.ui.detail.timetable.TimetablePresenter
 
 @Module
-class TimeTableUiModule {
+class TimetableUiModule {
 
     @ActivityScope
     @Provides
