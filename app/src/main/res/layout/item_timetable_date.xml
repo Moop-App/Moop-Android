@@ -13,7 +13,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:gravity="center"
-        android:textColor="@color/selector_item_timetable_date"
+        android:textColor="@color/selector_item_timetable_date_text"
         android:textSize="18dp"
         android:textStyle="bold"
         android:text="@{item.day}"
@@ -25,7 +25,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="31"
-        tools:textColor="@color/white"
-        tools:background="@drawable/bg_circle"
+        tools:background="@color/debug_background"
         tools:visibility="visible" />
 </layout>

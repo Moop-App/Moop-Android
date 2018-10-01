@@ -7,6 +7,7 @@ import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
 import soup.movie.data.MoobRepository
 import soup.movie.data.helper.localDate
+import soup.movie.data.helper.toWeek
 import soup.movie.data.helper.today
 import soup.movie.data.model.*
 import soup.movie.data.model.request.TimeTableRequest
@@ -53,12 +54,6 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
         theaterIdSubject.onNext(item.theater.code)
     }
 
-    private fun getEmptyViewState(): Observable<TimetableViewState> {
-        //TODO: Please inject disabled Date list
-        return TimetableViewState(emptyList(), emptyList())
-                .toObservable()
-    }
-
     private fun getTimeTableObservable(): Observable<TimeTable> {
         return Observables.combineLatest(
                 theaterIdSubject.distinctUntilChanged(),
@@ -80,8 +75,22 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
     }
 
     private fun mapToScreeningDateList(timeTable: TimeTable, date: ScreeningDate): List<ScreeningDate> {
-        return timeTable.dateList.map {
-            ScreeningDate(it.localDate(), enabled = true, selected = it.localDate() == date.date)
+        return timeTable.dateList.run {
+            if (isEmpty()) {
+                today().toWeek().map {
+                    ScreeningDate(
+                            date = it,
+                            enabled = false,
+                            selected = it == date.date)
+                }
+            } else {
+                map {
+                    ScreeningDate(
+                            date = it.localDate(),
+                            enabled = true,
+                            selected = it.localDate() == date.date)
+                }
+            }
         }
     }
 

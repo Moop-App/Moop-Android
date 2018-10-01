@@ -8,7 +8,7 @@ import soup.movie.ui.helper.databinding.DataBindingAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.widget.recyclerview.listener.OnDragStartListener
 import soup.widget.recyclerview.listener.OnItemMoveListener
-import java.util.*
+import java.util.Collections.swap
 
 internal class TheaterSortListAdapter(private val dragStartListener: OnDragStartListener) :
         DataBindingAdapter<Theater>(), OnItemMoveListener {
@@ -27,7 +27,7 @@ internal class TheaterSortListAdapter(private val dragStartListener: OnDragStart
             getItem(position).getSortChipLayout()
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        Collections.swap(list, fromPosition, toPosition)
+        swap(list, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
     }
 }

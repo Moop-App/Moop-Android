@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33000000">
 
-    <item
-        android:state_selected="true"
-        android:drawable="@drawable/bg_timetable_date_selected" />
+    <item android:drawable="@drawable/bg_circle"
+        android:id="@android:id/mask"/>
 
-    <item
-        android:drawable="@drawable/bg_timetable_date_normal" />
-
-</selector>
+    <item android:drawable="@drawable/bg_timetable_date_inner" />
+</ripple>
