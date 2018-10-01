@@ -35,13 +35,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                     getTheaterListObservable())
                     //TODO: Instead of debounce(), update if theater is changed.
                     .debounce(300, TimeUnit.MILLISECONDS)
-                    .flatMap { (dateList, theaterList) ->
-                        if (theaterList.isEmpty()) {
-                            getEmptyViewState()
-                        } else {
-                            getViewState(dateList, theaterList)
-                        }
-                    }
+                    .flatMap { getViewState(it.first, it.second) }
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { view?.render(it) })
         }
