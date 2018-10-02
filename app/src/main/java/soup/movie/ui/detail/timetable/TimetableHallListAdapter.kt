@@ -23,6 +23,7 @@ internal class TimetableHallListAdapter :
         }
 
         init {
+            binding.timeListView.itemAnimator = null
             binding.timeListView.adapter = listAdapter
         }
 

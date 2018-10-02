@@ -69,14 +69,17 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
                 //TODO: Please refactor this
                 is ItemTimetableTheaterCgvBinding -> {
                     binding.hallListView.layoutManager = FixedLinearLayoutManager(itemView.context)
+                    binding.hallListView.itemAnimator = null
                     binding.hallListView.adapter = listAdapter
                 }
                 is ItemTimetableTheaterLotteBinding -> {
                     binding.hallListView.layoutManager = FixedLinearLayoutManager(itemView.context)
+                    binding.hallListView.itemAnimator = null
                     binding.hallListView.adapter = listAdapter
                 }
                 is ItemTimetableTheaterMegaboxBinding -> {
                     binding.hallListView.layoutManager = FixedLinearLayoutManager(itemView.context)
+                    binding.hallListView.itemAnimator = null
                     binding.hallListView.adapter = listAdapter
                 }
             }
