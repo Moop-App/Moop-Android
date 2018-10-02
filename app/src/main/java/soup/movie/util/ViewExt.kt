@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -103,4 +104,10 @@ fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>)
             .priority(Priority.IMMEDIATE)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
+}
+
+/* ContentLoadingProgressBar */
+
+inline fun ContentLoadingProgressBar.showIf(predicate: () -> Boolean) {
+    if (predicate()) show() else hide()
 }

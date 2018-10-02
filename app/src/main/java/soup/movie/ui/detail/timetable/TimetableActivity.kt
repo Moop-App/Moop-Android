@@ -14,10 +14,13 @@ import soup.movie.data.model.Theater
 import soup.movie.data.model.TheaterWithTimetable
 import soup.movie.databinding.ActivityTimetableBinding
 import soup.movie.ui.BaseActivity
+import soup.movie.ui.detail.timetable.TimetableViewState.DoneState
+import soup.movie.ui.detail.timetable.TimetableViewState.LoadingState
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
+import soup.movie.util.showIf
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -93,8 +96,11 @@ class TimetableActivity :
 
     override fun render(viewState: TimetableViewState) {
         printRenderLog { viewState }
-        noTheaterView.setVisibleIf { viewState.theaterList.isEmpty() }
-        dateListAdapter.submitList(viewState.screeningDateList)
-        theaterListAdapter.submitList(viewState.theaterList)
+        loadingView.showIf { viewState is LoadingState }
+        noTheaterView.setVisibleIf { viewState.hasNoTheaters() }
+        if (viewState is DoneState) {
+            dateListAdapter.submitList(viewState.screeningDateList)
+            theaterListAdapter.submitList(viewState.theaterList)
+        }
     }
 }

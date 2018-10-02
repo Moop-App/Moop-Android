@@ -14,6 +14,8 @@ import soup.movie.data.model.*
 import soup.movie.data.util.firstOr
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
+import soup.movie.ui.detail.timetable.TimetableViewState.DoneState
+import soup.movie.ui.detail.timetable.TimetableViewState.LoadingState
 import java.util.concurrent.TimeUnit
 
 class TimetablePresenter(private val moobRepository: MoobRepository,
@@ -32,7 +34,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                     .subscribe { theaterSubject.onNext(it) })
 
             add(getTimetableViewState()
-                    .startWith(TimetableViewState(emptyList(), emptyList()))
+                    .startWith(LoadingState)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { view?.render(it) })
         }
@@ -85,7 +87,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                             }
                     Pair(screeningDateList, theaterList)
                 }
-                .map { TimetableViewState(it.first, it.second) }
+                .map { DoneState(it.first, it.second) }
     }
 
     private fun getOriginTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
