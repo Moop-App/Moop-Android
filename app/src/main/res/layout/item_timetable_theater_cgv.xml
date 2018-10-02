@@ -13,8 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:clickable="@{!item.selected}"
         android:background="?android:attr/selectableItemBackground"
-        tools:background="@color/debug_background" >
+        tools:background="@color/debug_foreground" >
 
         <com.google.android.material.chip.Chip
             android:id="@+id/theaterView"
@@ -35,20 +40,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="top"
-            app:constraint_referenced_ids="timeListView,noResultView" />
+            app:constraint_referenced_ids="hallListView,noResultView" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/timeListView"
-            android:layout_width="match_parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hallListView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:clipChildren="false"
             android:visibility="gone"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/theaterView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_height="100dp"
-            tools:visibility="gone" />
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_timetable_hall"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/noResultView"
@@ -64,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <View
             android:layout_width="0dp"
