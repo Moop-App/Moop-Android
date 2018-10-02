@@ -72,13 +72,13 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                                             selected = it == screeningDate.date)
                                 }
                             }
-                    val timeList = timetable.dateList
+                    val hallList = timetable.dateList
                             .find { it.localDate() == screeningDate.date }
-                            ?.timeList ?: emptyList()
+                            ?.hallList ?: emptyList()
                     val theaterList = originTheaterList
                             .map {
                                 if (it.selected and (it.theater == timetable.theater)) {
-                                    it.copy(timeList = timeList)
+                                    it.copy(hallList = hallList)
                                 } else {
                                     it
                                 }

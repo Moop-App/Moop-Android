@@ -40,17 +40,17 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
         getItem(position)?.run {
             holder.itemView.timeListView?.run {
                 removeAllViews()
-                setVisibleIf { selected and timeList.isNotEmpty() }
-                timeList.map { time ->
+                setVisibleIf { selected and hallList.isNotEmpty() }
+                hallList.map { hall ->
                     inflate<Chip>(context, R.layout.chip_time).apply {
-                        text = time
+                        text = hall.name
                         setOnClickListener {
-                            listener.onItemClick(time)
+                            //listener.onItemClick(hall)
                         }
                     }
                 }.forEach { addView(it) }
             }
-            holder.itemView.noResultView?.setVisibleIf { selected and timeList.isEmpty() }
+            holder.itemView.noResultView?.setVisibleIf { selected and hallList.isEmpty() }
         }
     }
 

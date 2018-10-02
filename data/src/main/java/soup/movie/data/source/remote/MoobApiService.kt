@@ -29,6 +29,6 @@ interface MoobApiService {
 
     companion object {
 
-        const val API_BASE_URL = "https://moob-api.firebaseio.com/v2/"
+        const val API_BASE_URL = "https://moob-api.firebaseio.com/v1/"
     }
 }

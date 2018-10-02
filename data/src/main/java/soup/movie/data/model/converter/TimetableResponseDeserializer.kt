@@ -16,7 +16,7 @@ class TimetableResponseDeserializer : JsonDeserializer<TimetableResponse> {
                         ?.asJsonArray
                         ?.toList()
                         ?.map { Gson().fromJson(it, Date::class.java) }
-                        ?.filter { it?.timeList?.isNotEmpty() ?: false }
+                        ?.filter { it?.hallList?.isNotEmpty() ?: false }
                         ?: emptyList()))
     }
 }
