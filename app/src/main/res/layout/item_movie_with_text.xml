@@ -56,7 +56,7 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_margin="7dp"
-                    android:background="@drawable/bg_age_15"
+                    android:background="@drawable/bg_tag_age_15"
                     app:layout_constraintStart_toStartOf="@+id/posterView"
                     app:layout_constraintBottom_toBottomOf="@+id/posterView"
                     tools:backgroundTint="@color/white" />

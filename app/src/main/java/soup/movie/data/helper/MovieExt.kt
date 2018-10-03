@@ -26,11 +26,11 @@ fun Movie.toDescription(): String = "$openDate / $age / 선호도: $egg"
 
 @DrawableRes
 fun Movie.getAgeBackground(): Int = when (age) {
-    "전체 관람가" -> R.drawable.bg_age_all
-    "12세 관람가" -> R.drawable.bg_age_12
-    "15세 관람가" -> R.drawable.bg_age_15
-    "청소년관람불가" -> R.drawable.bg_age_19
-    else -> R.drawable.bg_age_unknown
+    "전체 관람가" -> R.drawable.bg_tag_age_all
+    "12세 관람가" -> R.drawable.bg_tag_age_12
+    "15세 관람가" -> R.drawable.bg_tag_age_15
+    "청소년관람불가" -> R.drawable.bg_tag_age_19
+    else -> R.drawable.bg_tag_age_unknown
 }
 
 fun Movie.getSimpleAgeLabel(): String = when (age) {

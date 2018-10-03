@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/bg_age_outer" />
+    <item android:drawable="@drawable/bg_tag_outer" />
 
     <item
         android:left="1dp"
@@ -11,7 +11,7 @@
 
         <shape android:shape="rectangle">
             <corners android:radius="4dp" />
-            <solid android:color="@color/blue" />
+            <solid android:color="@color/green" />
         </shape>
     </item>
 </layer-list>
