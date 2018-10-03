@@ -28,13 +28,10 @@
 
         <TextView
             android:id="@+id/dDayView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="20dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:paddingBottom="1dp"
             android:gravity="center"
             android:maxLines="1"
             android:textColor="@color/white"
@@ -51,13 +48,10 @@
 
         <TextView
             android:id="@+id/newView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="20dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:paddingBottom="1dp"
             android:gravity="center"
             android:maxLines="1"
             android:text="NEW"
@@ -80,31 +74,32 @@
 
         <View
             android:id="@+id/ageBgView"
-            android:layout_width="38dp"
-            android:layout_height="26dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:backgroundResource="@{MovieExtKt.getAgeBackground(item)}"
             android:transitionName="@string/transition_age_bg"
-            app:layout_goneMarginEnd="8dp"
-            app:layout_goneMarginTop="4dp"
-            app:layout_constraintEnd_toEndOf="@+id/newView"
-            app:layout_constraintTop_toBottomOf="@+id/tagBarrier"
+            app:layout_constraintTop_toTopOf="@+id/ageView"
+            app:layout_constraintBottom_toBottomOf="@+id/ageView"
+            app:layout_constraintStart_toStartOf="@+id/ageView"
+            app:layout_constraintEnd_toEndOf="@+id/ageView"
             tools:background="@drawable/bg_tag_age_15" />
 
         <TextView
             android:id="@+id/ageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="36dp"
+            android:layout_height="20dp"
             android:gravity="center"
             android:text="@{MovieExtKt.getSimpleAgeLabel(item)}"
-            android:textSize="15dp"
             android:textColor="@color/white"
+            android:textSize="12dp"
             android:textStyle="bold"
             android:maxLines="1"
             android:transitionName="@string/transition_age"
-            app:layout_constraintBottom_toBottomOf="@+id/ageBgView"
-            app:layout_constraintStart_toStartOf="@+id/ageBgView"
-            app:layout_constraintEnd_toEndOf="@+id/ageBgView"
-            app:layout_constraintTop_toTopOf="@+id/ageBgView"
+            app:layout_goneMarginEnd="8dp"
+            app:layout_goneMarginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/newView"
+            app:layout_constraintTop_toBottomOf="@+id/tagBarrier"
+            tools:background="@drawable/bg_tag_age_15"
             tools:text="전체" />
 
         <TextView
