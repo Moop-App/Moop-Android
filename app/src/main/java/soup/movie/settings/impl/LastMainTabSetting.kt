@@ -11,15 +11,13 @@ class LastMainTabSetting(preferences: SharedPreferences) :
         Now, Plan, Theaters, Settings
     }
 
-    override fun getDefaultValue(preferences: SharedPreferences): Tab {
-        return preferences.getString(KEY, DEFAULT_VALUE.toString())
-                ?.let { Tab.valueOf(it) }
-                ?: DEFAULT_VALUE
-    }
+    override fun getDefaultValue(preferences: SharedPreferences): Tab =
+            preferences.getString(KEY, DEFAULT_VALUE.toString())
+                    ?.let { Tab.valueOf(it) }
+                    ?: DEFAULT_VALUE
 
-    override fun saveValue(preferences: SharedPreferences, value: Tab) {
-        return preferences.edit().putString(KEY, value.toString()).apply()
-    }
+    override fun saveValue(preferences: SharedPreferences, value: Tab) =
+            preferences.edit().putString(KEY, value.toString()).apply()
 
     companion object {
 

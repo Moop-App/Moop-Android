@@ -11,14 +11,11 @@ import timber.log.Timber
 class TheaterSetting(preferences: SharedPreferences) :
         PrefSetting<List<Theater>>(preferences) {
 
-    override fun getDefaultValue(preferences: SharedPreferences): List<Theater> {
-        return fromJson(preferences.getString(KEY, DEFAULT_VALUE)
-                ?: DEFAULT_VALUE)
-    }
+    override fun getDefaultValue(preferences: SharedPreferences): List<Theater> =
+            fromJson(preferences.getString(KEY, DEFAULT_VALUE) ?: DEFAULT_VALUE)
 
-    override fun saveValue(preferences: SharedPreferences, value: List<Theater>) {
-        return preferences.edit().putString(KEY, value.toJson()).apply()
-    }
+    override fun saveValue(preferences: SharedPreferences, value: List<Theater>) =
+            preferences.edit().putString(KEY, value.toJson()).apply()
 
     companion object {
 
@@ -27,13 +24,12 @@ class TheaterSetting(preferences: SharedPreferences) :
 
         private val type = object : TypeToken<ArrayList<Theater>>() {}.type
 
-        private fun fromJson(jsonStr: String): List<Theater> {
-            return try {
-                Gson().fromJson<List<Theater>>(jsonStr, type).orEmpty()
-            } catch (t: Throwable) {
-                Timber.e(t)
-                emptyList()
-            }
-        }
+        private fun fromJson(jsonStr: String): List<Theater> =
+                try {
+                    Gson().fromJson<List<Theater>>(jsonStr, type).orEmpty()
+                } catch (t: Throwable) {
+                    Timber.w(t)
+                    emptyList()
+                }
     }
 }
