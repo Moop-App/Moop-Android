@@ -63,7 +63,7 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
 
     fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> {
         return remoteDataSource.getTimetable(theater, movie)
-                .map { it.timetable.copy(theater = theater) }
+                .map { it.copy(theater = theater) }
                 .onErrorReturnItem(Timetable(theater = theater))
     }
 

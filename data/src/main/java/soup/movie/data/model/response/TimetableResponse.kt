@@ -5,4 +5,4 @@ import soup.movie.data.model.Timetable
 import soup.movie.data.model.converter.TimetableResponseDeserializer
 
 @JsonAdapter(TimetableResponseDeserializer::class)
-data class TimetableResponse(var timetable: Timetable)
+data class TimetableResponse(val timetable: Timetable)

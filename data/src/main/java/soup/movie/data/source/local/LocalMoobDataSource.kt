@@ -4,13 +4,13 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
+import soup.movie.data.model.Timetable
 import soup.movie.data.model.Version
 import soup.movie.data.model.response.CachedMovieList
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_NOW
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.model.response.TimetableResponse
 import soup.movie.data.source.MoobDataSource
 
 class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
@@ -46,7 +46,7 @@ class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
 
     override fun getCodeList(): Observable<CodeResponse> = TODO()
 
-    override fun getTimetable(theater: Theater, movie: Movie): Observable<TimetableResponse> = TODO()
+    override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> = TODO()
 
     override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> = TODO()
 }
