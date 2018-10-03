@@ -13,6 +13,7 @@ import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
 import androidx.core.view.postDelayed
 import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -42,6 +43,7 @@ import soup.movie.util.delegates.contentView
 import soup.movie.util.getColorCompat
 import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setBackgroundColorResource
 import soup.movie.util.startActivitySafely
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
@@ -50,6 +52,7 @@ import soup.widget.util.ViewUtils
 import soup.widget.util.getBitmap
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.math.max
 
 class DetailActivity :
         BaseActivity<DetailContract.View, DetailContract.Presenter>(),
@@ -58,6 +61,8 @@ class DetailActivity :
     override val binding by contentView<DetailActivity, ActivityDetailBinding>(
             R.layout.activity_detail
     )
+
+    private var windowBackground: Int = Color.WHITE
 
     @Inject
     override lateinit var presenter: DetailContract.Presenter
@@ -118,12 +123,18 @@ class DetailActivity :
                     24f,
                     resources.displayMetrics
             ).toInt()
-            Palette.from(bitmap)
-                    .maximumColorCount(3)
-                    .clearFilters()
-                    .setRegion(0, 0, bitmap.width - 1, twentyFourDip) /* - 1 to work around
+
+            if (presenter.usePaletteTheme()) {
+                Palette.from(bitmap)
+                        .maximumColorCount(3)
+                        .clearFilters()
+                        .setRegion(0, 0, bitmap.width - 1, twentyFourDip) /* - 1 to work around
                         https://code.google.com/p/android/issues/detail?id=191013 */
-                    .generate { palette -> applyTopPalette(bitmap, palette) }
+                        .generate { palette -> applyTopPalette(bitmap, palette) }
+            } else {
+
+                applyTheme(ThemeData(windowBackground, isDark = false))
+            }
             doStartPostponedEnterTransition()
             return false
         }
@@ -156,6 +167,9 @@ class DetailActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
+
+        windowBackground = ctx.getColorCompat(R.color.windowBackground)
+
         posterView.loadAsync(movie.posterUrl, shotLoadListener)
         posterView.setOnClickListener {
             analytics.clickPoster(movie)
@@ -183,10 +197,34 @@ class DetailActivity :
     override fun onResume() {
         super.onResume()
         draggableFrame.addListener(chromeFader)
+        listView.addOnScrollListener(scrollListener)
+    }
+
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+
+        private var wasScrolled: Boolean = false
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            val offset: Int = recyclerView.computeVerticalScrollOffset()
+            detailHeaderView.translationZ = max(3f, offset / 800f)
+            Timber.d("onScrolled: offset=$offset")
+
+            val isScrolled: Boolean = offset != 0
+            if (wasScrolled != isScrolled) {
+                wasScrolled = isScrolled
+                detailHeaderView.setBackgroundColorResource(
+                        if (isScrolled) {
+                            R.color.windowBackground
+                        } else {
+                            android.R.color.transparent
+                        })
+            }
+        }
     }
 
     override fun onPause() {
         draggableFrame.removeListener(chromeFader)
+        listView.removeOnScrollListener(scrollListener)
         super.onPause()
     }
 
@@ -212,19 +250,15 @@ class DetailActivity :
     }
 
     private fun applyTopPalette(bitmap: Bitmap, palette: Palette?) {
-        if (presenter.usePaletteTheme()) {
-            val isDark = isDark(bitmap, palette)
+        val isDark = isDark(bitmap, palette)
 
-            // color the status bar.
-            val statusBarColor = ColorUtils.getMostPopulousSwatch(palette)?.let {
-                ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
-            } ?: run {
-                window.statusBarColor
-            }
-            applyTheme(ThemeData(statusBarColor, isDark))
-        } else {
-            applyTheme(ThemeData(Color.WHITE, isDark = false))
+        // color the status bar.
+        val statusBarColor = ColorUtils.getMostPopulousSwatch(palette)?.let {
+            ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
+        } ?: run {
+            window.statusBarColor
         }
+        applyTheme(ThemeData(statusBarColor, isDark))
     }
 
     private fun isDark(bitmap: Bitmap, palette: Palette?): Boolean {

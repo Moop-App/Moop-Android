@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
@@ -67,6 +68,10 @@ fun View.animateShow(animate: Boolean) {
             // both hide and show in the same frame before the animation actually gets started.
             // cancel() doesn't really remove the end action.
             .withEndAction(null)
+}
+
+fun View.setBackgroundColorResource(@ColorRes resId: Int) {
+    setBackgroundColor(context.getColorCompat(resId))
 }
 
 @BindingAdapter("android:backgroundResource")

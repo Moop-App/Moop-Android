@@ -19,16 +19,26 @@
         android:paddingEnd="16dp"
         tools:background="@color/debug_background">
 
-        <ImageView
-            android:id="@+id/posterView"
-            android:layout_width="135dp"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:transitionName="@string/transition_poster"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/posterCard"
+            android:layout_width="124.2dp"
+            android:layout_height="0dp"
+            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintDimensionRatio="H,27:40"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/posterView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:transitionName="@string/transition_poster"
+                tools:src="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/dDayView"
@@ -122,7 +132,7 @@
             android:maxLines="2"
             android:transitionName="@string/transition_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/posterView"
+            app:layout_constraintStart_toEndOf="@+id/posterCard"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="극장판 요괴워치 섀도사이드-도깨비왕의 부활" />
 
@@ -159,7 +169,7 @@
             android:tint="@color/light_icon"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:transitionName="@string/transition_share"
-            app:layout_constraintBottom_toBottomOf="@+id/posterView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_round_share" />
 

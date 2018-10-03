@@ -5,6 +5,8 @@
     <color name="colorAccent">#2D7AF6</color>
     <color name="colorAccentHalf">#662D7AF6</color>
 
+    <color name="windowBackground">#FAFAFA</color>
+
     <color name="dividerColor">@color/grey_200</color>
 
     <color name="bgCgv">#FFFFFF</color>
