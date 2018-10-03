@@ -9,6 +9,7 @@ import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.local.LocalMoobDataSource
 import soup.movie.data.source.remote.RemoteMoobDataSource
+import soup.movie.data.util.toAnObservable
 
 class MoobRepository(private val localDataSource: LocalMoobDataSource,
                      private val remoteDataSource: RemoteMoobDataSource) {
@@ -72,11 +73,11 @@ class MoobRepository(private val localDataSource: LocalMoobDataSource,
     }
 
     fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> {
-        return version
-                ?.let { Observable.just(it) }
-                ?: run { remoteDataSource.getVersion(pkgName, defaultVersion)
-                        .startWith(Version(defaultVersion))
-                        .doOnNext { version = it }
+        return version?.toAnObservable()
+                ?: run {
+                    remoteDataSource.getVersion(pkgName, defaultVersion)
+                            .startWith(Version(defaultVersion))
+                            .doOnNext { version = it }
                 }
     }
 }

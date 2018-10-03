@@ -12,6 +12,7 @@ import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoobDataSource
+import soup.movie.data.util.toAnObservable
 
 class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
 
@@ -51,7 +52,7 @@ class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
     }
 
     override fun getCodeList(): Observable<CodeResponse> {
-        return codeResponse?.let { Observable.just(it) }
+        return codeResponse?.toAnObservable()
                 ?: Observable.empty()
     }
 

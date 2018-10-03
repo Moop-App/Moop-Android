@@ -7,11 +7,11 @@ import io.reactivex.rxkotlin.Observables
 import soup.movie.data.MoobRepository
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
+import soup.movie.data.util.toAnObservable
 import soup.movie.settings.impl.TheaterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
 import soup.movie.ui.theater.edit.TheaterEditContract.View
-import soup.movie.util.toObservable
 
 class TheaterEditPresenter(private val moobRepository: MoobRepository,
                            private val theaterSetting: TheaterSetting) :
@@ -42,7 +42,7 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
                 .asSequence()
                 .map { it.code }
                 .toSet()
-                .toObservable()
+                .toAnObservable()
 
     private fun saveTheaterList(areaGroupList: List<AreaGroup>) {
         theaterList = areaGroupList.flatMap { it.theaterList }

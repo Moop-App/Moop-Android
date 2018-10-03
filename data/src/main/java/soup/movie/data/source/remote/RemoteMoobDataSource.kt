@@ -9,6 +9,7 @@ import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoobDataSource
+import soup.movie.data.util.toAnObservable
 
 class RemoteMoobDataSource(private val moobApiService: MoobApiService) : MoobDataSource {
 
@@ -26,6 +27,7 @@ class RemoteMoobDataSource(private val moobApiService: MoobApiService) : MoobDat
                     .map { it.timetable }
 
     override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> =
-            Observable.just(Version(defaultVersion))
+            Version(defaultVersion)
+                    .toAnObservable()
                     .subscribeOn(Schedulers.io())
 }
