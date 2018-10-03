@@ -6,14 +6,14 @@ import io.reactivex.rxkotlin.Observables
 import soup.movie.BuildConfig.APPLICATION_ID
 import soup.movie.BuildConfig.VERSION_NAME
 import soup.movie.data.MoobRepository
-import soup.movie.settings.impl.TheaterSetting
+import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.settings.SettingsContract.Presenter
 import soup.movie.ui.main.settings.SettingsContract.View
 
-class SettingsPresenter(private val theaterSetting: TheaterSetting,
+class SettingsPresenter(private val theatersSetting: TheatersSetting,
                         private val usePaletteThemeSetting: UsePaletteThemeSetting,
                         private val useWebLinkSetting: UseWebLinkSetting,
                         private val repository: MoobRepository) :
@@ -22,7 +22,7 @@ class SettingsPresenter(private val theaterSetting: TheaterSetting,
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         disposable.add(Observables.combineLatest(
-                theaterSetting.asObservable(),
+                theatersSetting.asObservable(),
                 usePaletteThemeSetting.asObservable(),
                 useWebLinkSetting.asObservable(),
                 repository.getVersion(APPLICATION_ID, VERSION_NAME),

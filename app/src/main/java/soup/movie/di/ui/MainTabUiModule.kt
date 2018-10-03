@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import soup.movie.data.MoobRepository
 import soup.movie.di.scope.FragmentScope
-import soup.movie.settings.impl.TheaterSetting
+import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.main.now.NowContract
@@ -71,9 +71,9 @@ abstract class MainTabUiModule {
         @FragmentScope
         @Provides
         fun presenter(repository: MoobRepository,
-                      theaterSetting: TheaterSetting):
+                      theatersSetting: TheatersSetting):
                 TheatersContract.Presenter =
-                TheatersPresenter(repository, theaterSetting)
+                TheatersPresenter(repository, theatersSetting)
     }
 
     @FragmentScope
@@ -87,12 +87,12 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(theaterSetting: TheaterSetting,
+        fun presenter(theatersSetting: TheatersSetting,
                       usePaletteThemeSetting: UsePaletteThemeSetting,
                       useWebLinkSetting: UseWebLinkSetting,
                       repository: MoobRepository):
                 SettingsContract.Presenter =
-                SettingsPresenter(theaterSetting, usePaletteThemeSetting, useWebLinkSetting, repository)
+                SettingsPresenter(theatersSetting, usePaletteThemeSetting, useWebLinkSetting, repository)
     }
 
     @FragmentScope

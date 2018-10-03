@@ -8,13 +8,13 @@ import soup.movie.data.MoobRepository
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
 import soup.movie.data.util.toAnObservable
-import soup.movie.settings.impl.TheaterSetting
+import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
 import soup.movie.ui.theater.edit.TheaterEditContract.View
 
 class TheaterEditPresenter(private val moobRepository: MoobRepository,
-                           private val theaterSetting: TheaterSetting) :
+                           private val theatersSetting: TheatersSetting) :
         BasePresenter<View>(), Presenter {
 
     private var theaterList: List<Theater> = emptyList()
@@ -38,7 +38,7 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
                 .doOnNext { saveTheaterList(it) }
 
     private val selectedIdSetObservable: Observable<Set<String>>
-        get() = theaterSetting.get()
+        get() = theatersSetting.get()
                 .asSequence()
                 .map { it.code }
                 .toSet()
@@ -49,7 +49,7 @@ class TheaterEditPresenter(private val moobRepository: MoobRepository,
     }
 
     override fun onConfirmClicked(selectedIdSet: Set<String>) {
-        theaterSetting.set(theaterList
+        theatersSetting.set(theaterList
                 .asSequence()
                 .filter { selectedIdSet.contains(it.code) }
                 .sortedBy { it.type }

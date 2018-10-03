@@ -8,7 +8,7 @@ import soup.movie.settings.PrefSetting
 import soup.movie.util.toJson
 import timber.log.Timber
 
-class TheaterSetting(preferences: SharedPreferences) :
+class TheatersSetting(preferences: SharedPreferences) :
         PrefSetting<List<Theater>>(preferences) {
 
     override fun getDefaultValue(preferences: SharedPreferences): List<Theater> =

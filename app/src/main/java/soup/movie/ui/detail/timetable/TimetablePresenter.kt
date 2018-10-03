@@ -12,14 +12,14 @@ import soup.movie.data.helper.today
 import soup.movie.data.helper.until
 import soup.movie.data.model.*
 import soup.movie.data.util.firstOr
-import soup.movie.settings.impl.TheaterSetting
+import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.timetable.TimetableViewState.DoneState
 import soup.movie.ui.detail.timetable.TimetableViewState.LoadingState
 import java.util.concurrent.TimeUnit
 
 class TimetablePresenter(private val moobRepository: MoobRepository,
-                         private val theaterSetting: TheaterSetting) :
+                         private val theatersSetting: TheatersSetting) :
         BasePresenter<TimetableContract.View>(), TimetableContract.Presenter {
 
     private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
@@ -29,7 +29,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         with(disposable) {
-            add(theaterSetting.asObservable()
+            add(theatersSetting.asObservable()
                     .map { it.firstOr(Theater.NONE) }
                     .subscribe { theaterSubject.onNext(it) })
 
@@ -92,7 +92,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
 
     private fun getOriginTheaterListObservable(): Observable<List<TheaterWithTimetable>> {
         return Observables.combineLatest(
-                theaterSetting.asObservable(),
+                theatersSetting.asObservable(),
                 theaterSubject.distinctUntilChanged())
                 .map { (theaterList, selectedTheater) ->
                     theaterList.map {

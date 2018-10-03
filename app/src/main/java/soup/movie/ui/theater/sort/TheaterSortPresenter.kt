@@ -4,13 +4,13 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.model.Theater
-import soup.movie.settings.impl.TheaterSetting
+import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.sort.TheaterSortContract.Presenter
 import soup.movie.ui.theater.sort.TheaterSortContract.View
 import java.util.Collections.swap
 
-class TheaterSortPresenter(private val theaterSetting: TheaterSetting) :
+class TheaterSortPresenter(private val theatersSetting: TheatersSetting) :
         BasePresenter<View>(), Presenter {
 
     private lateinit var theatersObservable: BehaviorRelay<List<Theater>>
@@ -28,7 +28,7 @@ class TheaterSortPresenter(private val theaterSetting: TheaterSetting) :
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
 
-        disposable.add(theaterSetting.asObservable()
+        disposable.add(theatersSetting.asObservable()
                 .distinctUntilChanged()
                 .subscribe { theatersObservable.accept(it) })
     }
@@ -38,6 +38,6 @@ class TheaterSortPresenter(private val theaterSetting: TheaterSetting) :
     }
 
     override fun saveSnapshot() {
-        theaterSetting.set(listSnapshot.toList())
+        theatersSetting.set(listSnapshot.toList())
     }
 }
