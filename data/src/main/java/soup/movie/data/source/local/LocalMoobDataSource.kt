@@ -15,6 +15,8 @@ import soup.movie.data.source.MoobDataSource
 
 class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
 
+    private var codeResponse: CodeResponse? = null
+
     fun saveNowList(response: MovieListResponse) {
         saveMovieListAs(TYPE_NOW, response)
     }
@@ -44,7 +46,14 @@ class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun getCodeList(): Observable<CodeResponse> = TODO()
+    fun saveCodeList(response: CodeResponse) {
+        codeResponse = response
+    }
+
+    override fun getCodeList(): Observable<CodeResponse> {
+        return codeResponse?.let { Observable.just(it) }
+                ?: Observable.empty()
+    }
 
     override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> = TODO()
 
