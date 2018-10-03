@@ -48,7 +48,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:listitem="@layout/item_trailer" />
+                tools:itemCount="1"
+                tools:listitem="@layout/item_detail_trailers" />
 
             <include
                 android:id="@+id/headerView"

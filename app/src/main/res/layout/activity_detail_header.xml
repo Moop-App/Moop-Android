@@ -13,6 +13,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         tools:background="@color/debug_background">
 
         <ImageView
@@ -139,6 +143,7 @@
             android:id="@+id/timetableButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
             android:tint="@color/light_icon"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:visibility="visible"
@@ -151,7 +156,6 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:tint="@color/light_icon"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:transitionName="@string/transition_share"

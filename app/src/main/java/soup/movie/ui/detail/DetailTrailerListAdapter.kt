@@ -22,5 +22,5 @@ internal class DetailTrailerListAdapter(private val analytics: EventAnalytics) :
         }
     }
 
-    override fun getItemViewType(position: Int): Int = R.layout.item_trailer
+    override fun getItemViewType(position: Int): Int = R.layout.item_detail_trailer
 }
