@@ -74,7 +74,7 @@ def get(propertyName) {
 dependencies {
     implementation project(':data')
     implementation project(':widget')
-    implementation project(':animators')
+    //implementation project(':animators')
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
@@ -111,7 +111,7 @@ dependencies {
     implementation deps.rx.relay
 
     // UI
-    //implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
+    implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
     implementation deps.glide.runtime
     kapt deps.glide.compiler
 
