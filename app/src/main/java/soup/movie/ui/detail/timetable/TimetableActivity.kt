@@ -50,7 +50,6 @@ class TimetableActivity :
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
-        titleView.text = movie.title
         binding.item = movie
     }
 
