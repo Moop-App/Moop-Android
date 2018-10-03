@@ -4,4 +4,4 @@ import android.content.SharedPreferences
 import soup.movie.settings.PrefBooleanSetting
 
 class UsePaletteThemeSetting(preferences: SharedPreferences) :
-        PrefBooleanSetting(preferences, "use_palette_theme", true)
+        PrefBooleanSetting(preferences, "use_palette_theme", false)
