@@ -51,6 +51,7 @@ class TimetableActivity :
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
         titleView.text = movie.title
+        binding.item = movie
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
