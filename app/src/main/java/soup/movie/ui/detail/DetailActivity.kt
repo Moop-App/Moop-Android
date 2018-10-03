@@ -120,12 +120,11 @@ class DetailActivity :
             val isScrolled: Boolean = offset != 0
             if (wasScrolled != isScrolled) {
                 wasScrolled = isScrolled
-                detailHeaderView.setBackgroundColorResource(
-                        if (isScrolled) {
-                            R.color.windowBackground
-                        } else {
-                            android.R.color.transparent
-                        })
+                if (isScrolled) {
+                    detailHeaderView.setBackgroundColor(windowBackground)
+                } else {
+                    detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
+                }
             }
         }
     }
@@ -153,7 +152,6 @@ class DetailActivity :
                         https://code.google.com/p/android/issues/detail?id=191013 */
                         .generate { palette -> applyTopPalette(bitmap, palette) }
             } else {
-
                 applyTheme(ThemeData(windowBackground, isDark = false))
             }
             doStartPostponedEnterTransition()
@@ -259,12 +257,12 @@ class DetailActivity :
         val isDark = isDark(bitmap, palette)
 
         // color the status bar.
-        val statusBarColor = ColorUtils.getMostPopulousSwatch(palette)?.let {
+        windowBackground = ColorUtils.getMostPopulousSwatch(palette)?.let {
             ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
         } ?: run {
             window.statusBarColor
         }
-        applyTheme(ThemeData(statusBarColor, isDark))
+        applyTheme(ThemeData(windowBackground, isDark))
     }
 
     private fun isDark(bitmap: Bitmap, palette: Palette?): Boolean {
