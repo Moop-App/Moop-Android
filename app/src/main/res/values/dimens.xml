@@ -8,4 +8,7 @@
 
     <dimen name="settings_margin_between_category">24dp</dimen>
     <dimen name="settings_margin_in_category">12dp</dimen>
+
+    <dimen name="tag_width">36dp</dimen>
+    <dimen name="tag_height">18dp</dimen>
 </resources>
