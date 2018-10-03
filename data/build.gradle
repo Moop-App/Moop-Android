@@ -44,6 +44,4 @@ dependencies {
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.espresso.core
-
-    implementation 'org.jsoup:jsoup:1.10.2'
 }
