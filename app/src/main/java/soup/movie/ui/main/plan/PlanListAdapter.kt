@@ -3,10 +3,12 @@ package soup.movie.ui.main.plan
 import android.app.ActivityOptions
 import android.content.Intent
 import android.util.Pair
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.item_movie_plan.view.*
 import soup.movie.R
+import soup.movie.R.string.*
 import soup.movie.data.helper.saveTo
 import soup.movie.data.helper.showDDay
 import soup.movie.data.model.Movie
@@ -14,6 +16,7 @@ import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
+import soup.movie.util.with
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 class PlanListAdapter(private val host: FragmentActivity,
@@ -28,23 +31,25 @@ class PlanListAdapter(private val host: FragmentActivity,
                     saveTo(intent)
                 }
                 analytics.clickItem(adapterPosition, movie)
-                host.startActivity(intent, options(movie).toBundle())
+                host.startActivity(intent, ActivityOptions
+                        .makeSceneTransitionAnimation(host, *createSharedElements(movie))
+                        .toBundle())
             }
         }
     }
 
-    private fun DataBindingViewHolder<Movie>.options(movie: Movie): ActivityOptions {
-        return if (movie.showDDay()) {
-            ActivityOptions.makeSceneTransitionAnimation(host,
-                    Pair.create(itemView.backgroundView, host.getString(R.string.transition_background)),
-                    Pair.create(itemView.posterView, host.getString(R.string.transition_poster)),
-                    Pair.create(itemView.ageBgView, host.getString(R.string.transition_age_bg)),
-                    Pair.create(itemView.dDayView, host.getString(R.string.transition_d_day)))
-        } else {
-            ActivityOptions.makeSceneTransitionAnimation(host,
-                    Pair.create(itemView.backgroundView, host.getString(R.string.transition_background)),
-                    Pair.create(itemView.posterView, host.getString(R.string.transition_poster)),
-                    Pair.create(itemView.ageBgView, host.getString(R.string.transition_age_bg)))
+    private fun DataBindingViewHolder<Movie>.createSharedElements(movie: Movie): Array<Pair<View, String>> {
+        return if (movie.showDDay()) itemView.run {
+            arrayOf(
+                    backgroundView with transition_background,
+                    posterView with transition_poster,
+                    ageBgView with transition_age_bg,
+                    dDayView with transition_d_day)
+        } else itemView.run {
+            arrayOf(
+                    backgroundView with transition_background,
+                    posterView with transition_poster,
+                    ageBgView with transition_age_bg)
         }
     }
 

@@ -1,6 +1,7 @@
 package soup.movie.ui.detail
 
 import android.animation.ValueAnimator
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -8,7 +9,9 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Pair
 import android.util.TypedValue
+import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
 import androidx.core.view.postDelayed
@@ -38,13 +41,10 @@ import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.LoadingState
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.helper.EventAnalytics
+import soup.movie.util.*
 import soup.movie.util.IntentUtil.createShareIntent
 import soup.movie.util.delegates.contentView
-import soup.movie.util.getColorCompat
-import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.setBackgroundColorResource
-import soup.movie.util.startActivitySafely
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -63,6 +63,8 @@ class DetailActivity :
     )
 
     private var windowBackground: Int = Color.WHITE
+
+    private lateinit var movie: Movie
 
     @Inject
     override lateinit var presenter: DetailContract.Presenter
@@ -107,7 +109,26 @@ class DetailActivity :
         }
     }
 
-    private lateinit var movie: Movie
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+
+        private var wasScrolled: Boolean = false
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            val offset: Int = recyclerView.computeVerticalScrollOffset()
+            detailHeaderView.translationZ = max(3f, offset / 800f)
+
+            val isScrolled: Boolean = offset != 0
+            if (wasScrolled != isScrolled) {
+                wasScrolled = isScrolled
+                detailHeaderView.setBackgroundColorResource(
+                        if (isScrolled) {
+                            R.color.windowBackground
+                        } else {
+                            android.R.color.transparent
+                        })
+            }
+        }
+    }
 
     private val shotLoadListener = object : RequestListener<Drawable> {
         override fun onResourceReady(
@@ -177,8 +198,11 @@ class DetailActivity :
         }
         timetableButton.setOnClickListener {
             analytics.clickTimetable(movie)
-            startActivity(Intent(this@DetailActivity, TimetableActivity::class.java)
-                    .apply { movie.saveTo(this) })
+            val intent = Intent(this@DetailActivity, TimetableActivity::class.java)
+            movie.saveTo(intent)
+            startActivity(intent, ActivityOptions
+                    .makeSceneTransitionAnimation(this, *createSharedElements())
+                    .toBundle())
         }
         shareButton.setOnClickListener {
             analytics.clickShare(movie)
@@ -194,32 +218,14 @@ class DetailActivity :
         }
     }
 
+    private fun createSharedElements(): Array<Pair<View, String>> = arrayOf(
+            ageBgView with R.string.transition_age_bg,
+            ageView with R.string.transition_age)
+
     override fun onResume() {
         super.onResume()
         draggableFrame.addListener(chromeFader)
         listView.addOnScrollListener(scrollListener)
-    }
-
-    private val scrollListener = object : RecyclerView.OnScrollListener() {
-
-        private var wasScrolled: Boolean = false
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            val offset: Int = recyclerView.computeVerticalScrollOffset()
-            detailHeaderView.translationZ = max(3f, offset / 800f)
-            Timber.d("onScrolled: offset=$offset")
-
-            val isScrolled: Boolean = offset != 0
-            if (wasScrolled != isScrolled) {
-                wasScrolled = isScrolled
-                detailHeaderView.setBackgroundColorResource(
-                        if (isScrolled) {
-                            R.color.windowBackground
-                        } else {
-                            android.R.color.transparent
-                        })
-            }
-        }
     }
 
     override fun onPause() {

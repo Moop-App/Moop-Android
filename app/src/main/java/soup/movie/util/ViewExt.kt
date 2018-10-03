@@ -2,12 +2,14 @@ package soup.movie.util
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Priority
@@ -82,6 +84,14 @@ fun View.setBackgroundResourceInXml(resId: Int) {
 @BindingAdapter("android:selected")
 fun View.setSelectedInXml(selected: Boolean) {
     isSelected = selected
+}
+
+infix fun View.with(tag: String): Pair<View, String> {
+    return Pair.create(this, tag)
+}
+
+infix fun View.with(@StringRes tagId: Int): Pair<View, String> {
+    return Pair.create(this, context.getString(tagId))
 }
 
 /** ViewGroup */

@@ -26,6 +26,7 @@ import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
 import soup.movie.util.startActivitySafely
+import soup.movie.util.with
 import javax.inject.Inject
 
 class SettingsFragment :
@@ -126,18 +127,12 @@ class SettingsFragment :
     }
 
     private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> =
-            when (theaterGroup) {
-                null -> emptyArray()
-                else -> mutableListOf<Pair<View, String>>().also { pair ->
-                    theaterGroup.run {
-                        repeat(childCount) {
-                            getChildAt(it)?.run {
-                                pair.add(Pair.create(this, transitionName))
-                            }
-                        }
-                    }
-                }.toTypedArray()
-            }
+            theaterGroup?.run {
+                (0 until childCount)
+                        .mapNotNull { getChildAt(it) }
+                        .map { it with it.transitionName }
+                        .toTypedArray()
+            } ?: emptyArray()
 
     companion object {
 
