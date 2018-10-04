@@ -72,7 +72,7 @@
                     android:maxLines="1"
                     android:text="NEW"
                     android:textColor="@color/white"
-                    android:textSize="12dp"
+                    android:textSize="11dp"
                     android:textStyle="bold"
                     android:background="@drawable/bg_tag_new"
                     android:visibility="@{MovieExtKt.isNew(item) ? View.VISIBLE : View.GONE}"
