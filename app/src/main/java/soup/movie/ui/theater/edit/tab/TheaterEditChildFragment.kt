@@ -17,6 +17,8 @@ abstract class TheaterEditChildFragment :
 
     private lateinit var listAdapter: TheaterEditChildListAdapter
 
+    abstract val title: String
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =

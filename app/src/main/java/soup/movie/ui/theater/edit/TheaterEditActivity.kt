@@ -27,6 +27,7 @@ class TheaterEditActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
+        tabLayout.setupWithViewPager(viewPager, true)
         pageAdapter = TheaterEditPageAdapter(supportFragmentManager)
         viewPager.offscreenPageLimit = pageAdapter.count
         viewPager.adapter = pageAdapter

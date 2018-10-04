@@ -9,6 +9,8 @@ class CgvEditFragment : TheaterEditChildFragment() {
     @Inject
     override lateinit var presenter: TheaterEditChildContract.Presenter
 
+    override val title: String = "CGV"
+
     companion object {
 
         fun newInstance() = CgvEditFragment()

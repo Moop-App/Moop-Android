@@ -9,6 +9,8 @@ class MegaboxEditFragment : TheaterEditChildFragment() {
     @Inject
     override lateinit var presenter: TheaterEditChildContract.Presenter
 
+    override val title: String = "메가박스"
+
     companion object {
 
         fun newInstance() = MegaboxEditFragment()

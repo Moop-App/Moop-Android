@@ -9,6 +9,8 @@ class LotteEditFragment : TheaterEditChildFragment() {
     @Inject
     override lateinit var presenter: TheaterEditChildContract.Presenter
 
+    override val title: String = "롯데시네마"
+
     companion object {
 
         fun newInstance() = LotteEditFragment()

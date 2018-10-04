@@ -13,6 +13,8 @@ internal class TheaterEditPageAdapter(fm: FragmentManager): FragmentPagerAdapter
 
     override fun getCount(): Int = items.size
 
+    override fun getPageTitle(position: Int): CharSequence = items[position].title
+
     companion object {
 
         private val items by lazy {
