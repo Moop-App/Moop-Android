@@ -77,13 +77,32 @@
             android:transitionName="@string/transition_new"
             app:layout_constraintTop_toTopOf="@+id/titleView"
             app:layout_constraintEnd_toStartOf="@+id/titleView"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/bestView"
+            android:layout_width="@dimen/tag_width"
+            android:layout_height="@dimen/tag_height"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="BEST"
+            android:textColor="@color/white"
+            android:textSize="11dp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_tag_best"
+            android:visibility="@{MovieExtKt.isBest(item) ? View.VISIBLE : View.GONE}"
+            android:transitionName="@string/transition_best"
+            app:layout_constraintTop_toTopOf="@+id/titleView"
+            app:layout_constraintEnd_toStartOf="@+id/titleView"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/tagBarrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="dDayView,newView"
+            app:constraint_referenced_ids="dDayView,newView,bestView"
             app:barrierDirection="bottom"/>
 
         <View

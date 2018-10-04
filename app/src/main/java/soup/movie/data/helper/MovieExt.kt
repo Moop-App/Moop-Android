@@ -57,9 +57,9 @@ fun Movie.eggIsOver95(): Boolean = (egg != "?") and (egg >= "95")
 
 fun Movie.hasUnknownEgg(): Boolean = egg == "?"
 
-fun Movie.isHot(): Boolean = eggIsOver95()
+fun Movie.isBest(): Boolean = isNow and eggIsOver95()
 
-fun Movie.isNew(): Boolean = isNow and (isInTheThreeDays() or (isInThePastWeek() and hasUnknownEgg()))
+fun Movie.isNew(): Boolean = isNow and isBest().not() and (isInTheThreeDays() or (isInThePastWeek() and hasUnknownEgg()))
 
 fun Movie.isInThePastWeek(): Boolean = isIn(-7..0)
 
