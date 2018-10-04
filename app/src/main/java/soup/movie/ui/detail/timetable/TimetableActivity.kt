@@ -1,5 +1,6 @@
 package soup.movie.ui.detail.timetable
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -85,7 +86,10 @@ class TimetableActivity :
             adapter = theaterListAdapter
         }
         noTheaterView.selectView.setOnClickListener {
-            startActivity(Intent(this, TheaterEditActivity::class.java))
+            val intent = Intent(this, TheaterEditActivity::class.java)
+            startActivity(intent, ActivityOptions
+                    .makeSceneTransitionAnimation(this)
+                    .toBundle())
         }
     }
 

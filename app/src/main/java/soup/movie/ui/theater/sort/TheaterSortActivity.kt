@@ -1,5 +1,6 @@
 package soup.movie.ui.theater.sort
 
+import android.app.ActivityOptions
 import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
@@ -85,6 +86,9 @@ class TheaterSortActivity :
     }
 
     fun onAddItemClick(view: View) {
-        startActivity(Intent(this, TheaterEditActivity::class.java))
+        val intent = Intent(this, TheaterEditActivity::class.java)
+        startActivity(intent, ActivityOptions
+                .makeSceneTransitionAnimation(this)
+                .toBundle())
     }
 }

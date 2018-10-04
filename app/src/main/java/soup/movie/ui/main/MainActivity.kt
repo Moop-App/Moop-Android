@@ -1,6 +1,7 @@
 package soup.movie.ui.main
 
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
@@ -152,10 +153,11 @@ class MainActivity :
     }
 
     override fun showMovieDetail(movie: Movie) {
-        Intent(this, DetailActivity::class.java).also {
-            movie.saveTo(it)
-            startActivity(it)
-        }
+        val intent = Intent(this, DetailActivity::class.java)
+        movie.saveTo(intent)
+        startActivity(intent, ActivityOptions
+                .makeSceneTransitionAnimation(this)
+                .toBundle())
     }
 
     override fun onBackPressed() {
