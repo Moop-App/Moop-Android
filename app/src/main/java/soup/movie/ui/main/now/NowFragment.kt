@@ -1,13 +1,17 @@
 package soup.movie.ui.main.now
 
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
+import soup.movie.data.helper.saveTo
 import soup.movie.databinding.FragmentVerticalListBinding
+import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.now.NowViewState.*
@@ -26,7 +30,14 @@ class NowFragment :
     lateinit var analytics: EventAnalytics
 
     private val listAdapter by lazy {
-        NowListAdapter(requireActivity(), analytics)
+        NowListAdapter { index, movie, sharedElements ->
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
+            movie.saveTo(intent)
+            analytics.clickItem(index, movie)
+            startActivity(intent, ActivityOptions
+                    .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
+                    .toBundle())
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater,
