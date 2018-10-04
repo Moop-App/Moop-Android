@@ -40,7 +40,8 @@ abstract class ActivityBindingModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [
-        TheaterEditUiModule::class
+        TheaterEditUiModule::class,
+        TheaterEditTabUiModule::class
     ])
     internal abstract fun theaterEditActivity(): TheaterEditActivity
 }

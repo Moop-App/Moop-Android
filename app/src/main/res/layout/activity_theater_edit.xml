@@ -6,20 +6,16 @@
 
     <data/>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="soup.movie.ui.theater.edit.TheaterEditActivity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listView"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_area_group" />
+            tools:background="@color/debug_background" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/confirmButton"
@@ -29,10 +25,10 @@
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/theater_select_action_confirm"
             android:onClick="onConfirmClicked"
-            app:layout_anchor="@id/listView"
-            app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_round_check"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

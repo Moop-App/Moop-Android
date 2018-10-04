@@ -3,6 +3,7 @@ package soup.movie.di.ui
 import dagger.Module
 import dagger.Provides
 import soup.movie.data.MoobRepository
+import soup.movie.data.TheaterEditManager
 import soup.movie.di.scope.ActivityScope
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.theater.edit.TheaterEditContract
@@ -13,8 +14,14 @@ class TheaterEditUiModule {
 
     @ActivityScope
     @Provides
-    internal fun presenter(moobRepository: MoobRepository,
-                           theatersSetting: TheatersSetting):
+    internal fun presenter(manager: TheaterEditManager):
             TheaterEditContract.Presenter =
-            TheaterEditPresenter(moobRepository, theatersSetting)
+            TheaterEditPresenter(manager)
+
+    @ActivityScope
+    @Provides
+    internal fun manager(moobRepository: MoobRepository,
+                         theatersSetting: TheatersSetting):
+            TheaterEditManager =
+            TheaterEditManager(moobRepository, theatersSetting)
 }

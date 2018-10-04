@@ -1,9 +1,24 @@
 package soup.movie.ui.theater.edit
 
 import androidx.annotation.Keep
-import soup.movie.data.model.AreaGroup
 
-@Keep
-data class TheaterEditViewState(
-        val areaGroupList: List<AreaGroup>,
-        val selectedTheaterIdSet: Set<String>)
+sealed class TheaterEditViewState {
+
+    @Keep
+    object LoadingState : TheaterEditViewState() {
+
+        override fun toString(): String = javaClass.simpleName
+    }
+
+    @Keep
+    object DoneState : TheaterEditViewState() {
+
+        override fun toString(): String = javaClass.simpleName
+    }
+
+    @Keep
+    object ErrorState : TheaterEditViewState() {
+
+        override fun toString(): String = javaClass.simpleName
+    }
+}

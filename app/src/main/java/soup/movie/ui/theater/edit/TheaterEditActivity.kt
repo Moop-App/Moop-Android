@@ -21,21 +21,21 @@ class TheaterEditActivity :
     @Inject
     override lateinit var presenter: TheaterEditContract.Presenter
 
-    private lateinit var listAdapter: TheaterEditListAdapter
+    private lateinit var pageAdapter: TheaterEditPageAdapter
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        listAdapter = TheaterEditListAdapter()
-        listView.adapter = listAdapter
+        pageAdapter = TheaterEditPageAdapter(supportFragmentManager)
+        viewPager.offscreenPageLimit = pageAdapter.count
+        viewPager.adapter = pageAdapter
     }
 
     override fun render(viewState: TheaterEditViewState) {
         printRenderLog { viewState }
-        listAdapter.submitList(viewState.areaGroupList, viewState.selectedTheaterIdSet)
     }
 
     fun onConfirmClicked(view: View) {
-        presenter.onConfirmClicked(listAdapter.getSelectedIdSet())
+        presenter.onConfirmClicked()
         finish()
     }
 }

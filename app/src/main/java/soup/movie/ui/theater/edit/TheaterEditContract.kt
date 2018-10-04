@@ -6,7 +6,7 @@ interface TheaterEditContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
-        fun onConfirmClicked(selectedIdSet: Set<String>)
+        fun onConfirmClicked()
     }
 
     interface View : BaseContract.View {
