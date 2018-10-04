@@ -6,8 +6,10 @@ import kotlinx.android.synthetic.main.activity_theater_edit.*
 import soup.movie.R
 import soup.movie.databinding.ActivityTheaterEditBinding
 import soup.movie.ui.BaseActivity
+import soup.movie.ui.theater.edit.TheaterEditViewState.LoadingState
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
 class TheaterEditActivity :
@@ -32,6 +34,7 @@ class TheaterEditActivity :
 
     override fun render(viewState: TheaterEditViewState) {
         printRenderLog { viewState }
+        loadingView.setVisibleIf { viewState is LoadingState }
     }
 
     fun onConfirmClicked(view: View) {

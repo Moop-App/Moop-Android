@@ -1,5 +1,6 @@
 package soup.movie.ui.theater.edit
 
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.TheaterEditManager
 import soup.movie.ui.BasePresenter
@@ -17,6 +18,7 @@ class TheaterEditPresenter(private val manager: TheaterEditManager) :
                 .cast(TheaterEditViewState::class.java)
                 .startWith(LoadingState)
                 .onErrorReturnItem(ErrorState)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
     }
 
