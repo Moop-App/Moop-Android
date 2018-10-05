@@ -11,6 +11,8 @@ interface TheaterEditContract {
 
     interface View : BaseContract.View {
 
-        fun render(viewState: TheaterEditViewState)
+        fun render(viewState: TheaterEditContentViewState)
+
+        fun render(viewState: TheaterEditFooterViewState)
     }
 }

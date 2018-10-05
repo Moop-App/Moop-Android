@@ -19,7 +19,7 @@ class TheaterEditManager(private val repository: MoobRepository,
             BehaviorSubject.createDefault(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
-    private var selectedIdSet: MutableSet<String> = mutableSetOf()
+    private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
 
     fun asCgvObservable(): Observable<CodeGroup> = cgvSubject
 
@@ -31,49 +31,63 @@ class TheaterEditManager(private val repository: MoobRepository,
 
     fun loadAsync(): Observable<CodeResponse> {
         return repository.getCodeList()
+                .doOnSubscribe { setupSelectedList() }
                 .doOnNext {
-                    setup(it.toAreaGroupList())
+                    setupTotalList(it.toAreaGroupList())
                     cgvSubject.onNext(it.cgv)
                     lotteSubject.onNext(it.lotte)
                     megaboxSubject.onNext(it.megabox)
                 }
     }
 
-    private fun setup(areaGroupList: List<AreaGroup>) {
+    private fun setupTotalList(areaGroupList: List<AreaGroup>) {
         theaterList = areaGroupList.flatMap { it.theaterList }
-        selectedIdSet = theatersSetting.get()
+    }
+
+    private fun setupSelectedList() {
+        selectedItemSet = theatersSetting.get()
                 .asSequence()
-                .map { it.code }
                 .toMutableSet()
-        updateSelectedItemCount()
+        selectedTheatersSubject.onNext(
+                selectedItemSet.asSequence()
+                        .sortedBy { it.type }
+                        .toList())
     }
 
     private fun updateSelectedItemCount() {
         selectedTheatersSubject.onNext(
                 theaterList.asSequence()
-                        .filter { selectedIdSet.contains(it.code) }
+                        .filter {
+                            selectedItemSet.any { selectedItem ->
+                                selectedItem == it
+                            }
+                        }
                         .sortedBy { it.type }
                         .toList())
     }
 
     fun add(theater: Theater): Boolean {
-        val isUnderLimit = selectedIdSet.size < MAX_ITEMS
+        val isUnderLimit = selectedItemSet.size < MAX_ITEMS
         if (isUnderLimit) {
-            selectedIdSet.add(theater.code)
+            selectedItemSet.add(theater)
             updateSelectedItemCount()
         }
         return isUnderLimit
     }
 
     fun remove(theater: Theater) {
-        selectedIdSet.remove(theater.code)
+        selectedItemSet.remove(theater)
         updateSelectedItemCount()
     }
 
     fun save() {
         theatersSetting.set(theaterList
             .asSequence()
-            .filter { selectedIdSet.contains(it.code) }
+            .filter {
+                selectedItemSet.any { selectedItem ->
+                    selectedItem.code == it.code
+                }
+            }
             .sortedBy { it.type }
             .toList())
     }

@@ -17,7 +17,7 @@ import soup.movie.R
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.ActivityTheaterEditBinding
 import soup.movie.ui.BaseActivity
-import soup.movie.ui.theater.edit.TheaterEditViewState.LoadingState
+import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
 import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
@@ -72,10 +72,15 @@ class TheaterEditActivity :
         currentCountView.setCharacterLists(TickerUtils.provideNumberList())
     }
 
-    override fun render(viewState: TheaterEditViewState) {
+    override fun render(viewState: TheaterEditContentViewState) {
         printRenderLog { viewState }
         loadingView.setVisibleIf { viewState is LoadingState }
-        currentCountView.text = viewState.getCurrentCount().toString()
+    }
+
+    override fun render(viewState: TheaterEditFooterViewState) {
+        printRenderLog { viewState }
+        val theaters = viewState.theaterList
+        currentCountView.text = theaters.size.toString()
         confirmButton.setBackgroundResource(
                 if (viewState.isFull()) {
                     R.drawable.bg_button_confirm_full
@@ -83,7 +88,6 @@ class TheaterEditActivity :
                     R.drawable.bg_button_confirm
                 }
         )
-        val theaters = viewState.getTheaterList()
         noTheaterView.setVisibleIf { theaters.isEmpty() }
         selectedTheaterGroup.run {
             TransitionManager.beginDelayedTransition(this)
