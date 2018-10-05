@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.postOnAnimationDelayed
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
@@ -113,8 +114,22 @@ class TheaterEditActivity :
         }
     }
 
+    override fun onEnterAnimationComplete() {
+        super.onEnterAnimationComplete()
+        footerView.postOnAnimationDelayed(300) {
+            footerPanel.state = STATE_COLLAPSED
+        }
+    }
+
     fun onConfirmClicked(view: View) {
         presenter.onConfirmClicked()
         onBackPressed()
+    }
+
+    override fun onBackPressed() {
+        footerPanel.state = STATE_EXPANDED
+        footerView.postOnAnimationDelayed(80) {
+            super.onBackPressed()
+        }
     }
 }
