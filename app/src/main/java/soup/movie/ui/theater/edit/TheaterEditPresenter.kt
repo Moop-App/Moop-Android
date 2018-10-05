@@ -2,6 +2,7 @@ package soup.movie.ui.theater.edit
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
+import io.reactivex.rxkotlin.Observables
 import soup.movie.data.TheaterEditManager
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
@@ -13,8 +14,10 @@ class TheaterEditPresenter(private val manager: TheaterEditManager) :
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
-        disposable.add(manager.loadAsync()
-                .map { DoneState }
+        disposable.add(Observables.combineLatest(
+                manager.loadAsync(),
+                manager.asSelectedItemCountSubject())
+                .map { DoneState(it.second) }
                 .cast(TheaterEditViewState::class.java)
                 .startWith(LoadingState)
                 .onErrorReturnItem(ErrorState)

@@ -11,14 +11,18 @@ sealed class TheaterEditViewState {
     }
 
     @Keep
-    object DoneState : TheaterEditViewState() {
+    object ErrorState : TheaterEditViewState() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
     @Keep
-    object ErrorState : TheaterEditViewState() {
+    data class DoneState(
+            val selectedItemCount: Int) : TheaterEditViewState()
 
-        override fun toString(): String = javaClass.simpleName
-    }
+    fun getCurrentCount(): String =
+            when (this) {
+                is DoneState -> selectedItemCount
+                else -> 0
+            }.toString()
 }
