@@ -112,6 +112,7 @@ dependencies {
 
     // UI
     implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
+    implementation 'com.robinhood.ticker:ticker:2.0.0'
     implementation deps.glide.runtime
     kapt deps.glide.compiler
 
@@ -124,7 +125,7 @@ dependencies {
     // logging
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'
     debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation deps.okhttp_logging_interceptor
     implementation 'com.google.firebase:firebase-core:16.0.3'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 
