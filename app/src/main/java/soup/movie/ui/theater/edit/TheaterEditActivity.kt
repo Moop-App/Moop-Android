@@ -59,6 +59,10 @@ class TheaterEditActivity :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
+        contentView.setOnInterceptTouchListener { _, _ ->
+            footerPanel.takeIf { it.state == STATE_EXPANDED }
+                    ?.run { state = STATE_COLLAPSED }
+        }
         tabLayout.setupWithViewPager(viewPager, true)
         pageAdapter = TheaterEditPageAdapter(supportFragmentManager)
         viewPager.offscreenPageLimit = pageAdapter.count

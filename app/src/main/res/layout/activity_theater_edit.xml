@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         tools:context="soup.movie.ui.theater.edit.TheaterEditActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <soup.widget.ConstraintLayoutEx
             android:id="@+id/contentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -65,7 +65,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:visibility="gone" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </soup.widget.ConstraintLayoutEx>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/footerView"
