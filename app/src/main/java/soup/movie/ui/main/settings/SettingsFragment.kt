@@ -122,11 +122,11 @@ class SettingsFragment :
     private fun onTheaterEditClicked() {
         val intent = Intent(context, TheaterSortActivity::class.java)
         startActivity(intent, ActivityOptions
-                .makeSceneTransitionAnimation(activity, *createTheaterChipPairsForTransition())
+                .makeSceneTransitionAnimation(activity, *createSharedElements())
                 .toBundle())
     }
 
-    private fun createTheaterChipPairsForTransition(): Array<Pair<View, String>> =
+    private fun createSharedElements(): Array<Pair<View, String>> =
             theaterGroup?.run {
                 (0 until childCount)
                         .mapNotNull { getChildAt(it) }

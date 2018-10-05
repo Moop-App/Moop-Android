@@ -5,10 +5,12 @@ import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Pair
 import android.view.View
 import androidx.core.view.postOnAnimationDelayed
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.databinding.ActivityTheaterSortBinding
@@ -17,6 +19,7 @@ import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
+import soup.movie.util.with
 import soup.widget.recyclerview.listener.OnDragStartListener
 import soup.widget.recyclerview.listener.OnItemMoveListener
 import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
@@ -88,7 +91,16 @@ class TheaterSortActivity :
     fun onAddItemClick(view: View) {
         val intent = Intent(this, TheaterEditActivity::class.java)
         startActivity(intent, ActivityOptions
-                .makeSceneTransitionAnimation(this)
+                .makeSceneTransitionAnimation(this, *createSharedElements())
                 .toBundle())
     }
+
+    private fun createSharedElements(): Array<Pair<View, String>> =
+            listView?.run {
+                (0 until childCount)
+                        .mapNotNull { getChildAt(it) }
+                        .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
+                        .map { it with it.transitionName }
+                        .toTypedArray()
+            } ?: emptyArray()
 }

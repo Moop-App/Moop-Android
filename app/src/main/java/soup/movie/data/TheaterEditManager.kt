@@ -15,8 +15,8 @@ class TheaterEditManager(private val repository: MoobRepository,
     private val cgvSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
     private val lotteSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
     private val megaboxSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
-    private val selectedItemCountSubject: BehaviorSubject<Int> =
-            BehaviorSubject.createDefault(0)
+    private val selectedTheatersSubject: BehaviorSubject<List<Theater>> =
+            BehaviorSubject.createDefault(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
     private var selectedIdSet: MutableSet<String> = mutableSetOf()
@@ -27,7 +27,7 @@ class TheaterEditManager(private val repository: MoobRepository,
 
     fun asMegaboxObservable(): Observable<CodeGroup> = megaboxSubject
 
-    fun asSelectedItemCountSubject(): Observable<Int> = selectedItemCountSubject
+    fun asSelectedTheatersSubject(): Observable<List<Theater>> = selectedTheatersSubject
 
     fun loadAsync(): Observable<CodeResponse> {
         return repository.getCodeList()
@@ -49,7 +49,11 @@ class TheaterEditManager(private val repository: MoobRepository,
     }
 
     private fun updateSelectedItemCount() {
-        selectedItemCountSubject.onNext(selectedIdSet.size)
+        selectedTheatersSubject.onNext(
+                theaterList.asSequence()
+                        .filter { selectedIdSet.contains(it.code) }
+                        .sortedBy { it.type }
+                        .toList())
     }
 
     fun add(theater: Theater): Boolean {

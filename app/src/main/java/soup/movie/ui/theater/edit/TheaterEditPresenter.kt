@@ -16,7 +16,7 @@ class TheaterEditPresenter(private val manager: TheaterEditManager) :
         super.initObservable(disposable)
         disposable.add(Observables.combineLatest(
                 manager.loadAsync(),
-                manager.asSelectedItemCountSubject())
+                manager.asSelectedTheatersSubject())
                 .map { DoneState(it.second) }
                 .cast(TheaterEditViewState::class.java)
                 .startWith(LoadingState)
