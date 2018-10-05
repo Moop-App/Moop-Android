@@ -22,6 +22,8 @@ import soup.movie.util.glide.GlideApp
 
 /** View */
 
+fun View.blockExtraTouchEvents() = setOnTouchListener { _, _ ->  true }
+
 @Suppress("UNCHECKED_CAST")
 fun <T : View> inflate(context: Context, @LayoutRes resource: Int): T =
         View.inflate(context, resource, null) as T

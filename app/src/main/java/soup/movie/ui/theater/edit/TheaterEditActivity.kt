@@ -18,6 +18,7 @@ import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.ActivityTheaterEditBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
+import soup.movie.util.blockExtraTouchEvents
 import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
@@ -62,6 +63,7 @@ class TheaterEditActivity :
         pageAdapter = TheaterEditPageAdapter(supportFragmentManager)
         viewPager.offscreenPageLimit = pageAdapter.count
         viewPager.adapter = pageAdapter
+        footerView.blockExtraTouchEvents()
         footerPanel.state = STATE_EXPANDED
         peekView.setOnClickListener {
             footerPanel.state = when (footerPanel.state) {
