@@ -14,7 +14,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
-import androidx.core.view.postDelayed
+import androidx.core.view.postOnAnimationDelayed
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.DataSource
@@ -179,7 +179,7 @@ class DetailActivity :
 
     private fun doStartPostponedEnterTransition() {
         startPostponedEnterTransition()
-        window.decorView.postDelayed(300) {
+        window.decorView.postOnAnimationDelayed(300) {
             presenter.requestData(movie)
         }
     }
