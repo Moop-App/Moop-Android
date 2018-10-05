@@ -46,12 +46,24 @@ class TheaterEditActivity :
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
         setEnterSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: List<String>,
+            override fun onMapSharedElements(names: MutableList<String>,
                                              sharedElements: MutableMap<String, View>) {
                 names.forEach {
                     selectedTheaterGroup.findViewWithTag<View>(it)?.run {
                         sharedElements[it] = this
                     }
+                }
+            }
+        })
+        setExitSharedElementCallback(object : SharedElementCallback() {
+            override fun onMapSharedElements(names: MutableList<String>,
+                                             sharedElements: MutableMap<String, View>) {
+                sharedElements.clear()
+                selectedTheaterGroup?.run {
+                    (0 until childCount)
+                            .mapNotNull { getChildAt(it) }
+                            .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
+                            .forEach { sharedElements[it.transitionName] = it }
                 }
             }
         })
