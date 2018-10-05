@@ -1,6 +1,7 @@
 package soup.movie.ui.theater.edit
 
 import androidx.annotation.Keep
+import soup.movie.data.TheaterEditManager.Companion.MAX_ITEMS
 
 sealed class TheaterEditViewState {
 
@@ -20,9 +21,11 @@ sealed class TheaterEditViewState {
     data class DoneState(
             val selectedItemCount: Int) : TheaterEditViewState()
 
-    fun getCurrentCount(): String =
+    fun getCurrentCount(): Int =
             when (this) {
                 is DoneState -> selectedItemCount
                 else -> 0
-            }.toString()
+            }
+
+    fun isFull(): Boolean = getCurrentCount() >= MAX_ITEMS
 }

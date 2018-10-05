@@ -39,7 +39,14 @@ class TheaterEditActivity :
     override fun render(viewState: TheaterEditViewState) {
         printRenderLog { viewState }
         loadingView.setVisibleIf { viewState is LoadingState }
-        currentCountView.text = viewState.getCurrentCount()
+        currentCountView.text = viewState.getCurrentCount().toString()
+        confirmButton.setBackgroundResource(
+                if (viewState.isFull()) {
+                    R.drawable.bg_button_confirm_full
+                } else {
+                    R.drawable.bg_button_confirm
+                }
+        )
     }
 
     fun onConfirmClicked(view: View) {
