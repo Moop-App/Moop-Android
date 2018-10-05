@@ -1,12 +1,12 @@
 package soup.movie.ui.theater.sort
 
 import android.app.ActivityOptions
-import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Pair
 import android.view.View
+import androidx.core.app.SharedElementCallback
 import androidx.core.view.postOnAnimationDelayed
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

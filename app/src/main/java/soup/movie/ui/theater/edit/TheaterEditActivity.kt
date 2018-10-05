@@ -1,9 +1,9 @@
 package soup.movie.ui.theater.edit
 
-import android.app.SharedElementCallback
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.postOnAnimationDelayed
 import androidx.transition.TransitionManager
