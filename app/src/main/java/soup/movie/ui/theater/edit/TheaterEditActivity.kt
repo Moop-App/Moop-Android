@@ -11,7 +11,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
-import com.robinhood.ticker.TickerUtils
 import kotlinx.android.synthetic.main.activity_theater_edit.*
 import kotlinx.android.synthetic.main.activity_theater_edit_footer.*
 import soup.movie.R
@@ -76,7 +75,6 @@ class TheaterEditActivity :
                 else -> STATE_COLLAPSED
             }
         }
-        currentCountView.setCharacterLists(TickerUtils.provideNumberList())
     }
 
     override fun render(viewState: TheaterEditContentViewState) {
