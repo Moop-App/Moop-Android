@@ -27,27 +27,18 @@ class NowListAdapter(private val listener: (Int, Movie, Array<Pair<View, String>
     }
 
     private fun DataBindingViewHolder<Movie>.createSharedElements(movie: Movie): Array<Pair<View, String>> {
-        return when {
-            movie.isNew() -> itemView.run {
-                arrayOf(
-                        backgroundView with transition_background,
-                        posterView with transition_poster,
-                        ageBgView with transition_age_bg,
-                        newView with transition_new)
+        itemView.run {
+            val sharedElements = mutableListOf(
+                    backgroundView with transition_background,
+                    posterView with transition_poster,
+                    ageBgView with transition_age_bg)
+            if (movie.isNew()) {
+                sharedElements.add(newView with transition_new)
             }
-            movie.isBest() -> itemView.run {
-                arrayOf(
-                        backgroundView with transition_background,
-                        posterView with transition_poster,
-                        ageBgView with transition_age_bg,
-                        bestView with transition_best)
+            if (movie.isBest()) {
+                sharedElements.add(bestView with transition_best)
             }
-            else -> itemView.run {
-                arrayOf(
-                        backgroundView with transition_background,
-                        posterView with transition_poster,
-                        ageBgView with transition_age_bg)
-            }
+            return sharedElements.toTypedArray()
         }
     }
 

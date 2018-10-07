@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_movie_plan.view.*
 import soup.movie.R
 import soup.movie.R.string.*
-import soup.movie.data.helper.showDDay
+import soup.movie.data.helper.isBest
+import soup.movie.data.helper.isDDay
 import soup.movie.data.model.Movie
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
@@ -26,17 +27,18 @@ class PlanListAdapter(private val listener: (Int, Movie, Array<Pair<View, String
     }
 
     private fun DataBindingViewHolder<Movie>.createSharedElements(movie: Movie): Array<Pair<View, String>> {
-        return if (movie.showDDay()) itemView.run {
-            arrayOf(
-                    backgroundView with transition_background,
-                    posterView with transition_poster,
-                    ageBgView with transition_age_bg,
-                    dDayView with transition_d_day)
-        } else itemView.run {
-            arrayOf(
+        itemView.run {
+            val sharedElements = mutableListOf(
                     backgroundView with transition_background,
                     posterView with transition_poster,
                     ageBgView with transition_age_bg)
+            if (movie.isBest()) {
+                sharedElements.add(bestView with transition_best)
+            }
+            if (movie.isDDay()) {
+                sharedElements.add(dDayView with transition_d_day)
+            }
+            return sharedElements.toTypedArray()
         }
     }
 
