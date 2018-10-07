@@ -31,6 +31,7 @@ import soup.movie.ui.main.theaters.TheatersFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.showToast
 import javax.inject.Inject
 
 class MainActivity :
@@ -147,7 +148,7 @@ class MainActivity :
             ACTION_VIEW -> {
                 data?.getQueryParameter("id")?.let {
                     presenter.requestMovie(it)
-                }
+                } ?: showToast(R.string.action_detail_unknown)
             }
         }
     }
