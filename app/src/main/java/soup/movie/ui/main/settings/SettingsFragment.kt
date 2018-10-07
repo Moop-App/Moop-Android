@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.data.helper.Moob
+import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.ui.helper.EventAnalytics
@@ -111,6 +112,7 @@ class SettingsFragment :
                     text = it.name
                     transitionName = it.code
                     tag = it.code
+                    setOnClickListener { _ -> it.executeWeb(requireContext()) }
                 }
             }.forEach { addView(it) }
         }
