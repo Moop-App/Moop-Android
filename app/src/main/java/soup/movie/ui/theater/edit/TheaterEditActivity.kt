@@ -48,16 +48,6 @@ class TheaterEditActivity :
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: MutableList<String>,
                                              sharedElements: MutableMap<String, View>) {
-                names.forEach {
-                    selectedTheaterGroup.findViewWithTag<View>(it)?.run {
-                        sharedElements[it] = this
-                    }
-                }
-            }
-        })
-        setExitSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: MutableList<String>,
-                                             sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
                 selectedTheaterGroup?.run {
                     (0 until childCount)
@@ -134,13 +124,16 @@ class TheaterEditActivity :
 
     fun onConfirmClicked(view: View) {
         presenter.onConfirmClicked()
-        onBackPressed()
+        setResultAndFinish()
     }
 
     override fun onBackPressed() {
+        setResultAndFinish()
+    }
+
+    private fun setResultAndFinish() {
+        setResult(RESULT_OK)
         footerPanel.state = STATE_EXPANDED
-        footerView.postOnAnimationDelayed(80) {
-            super.onBackPressed()
-        }
+        finishAfterTransition()
     }
 }

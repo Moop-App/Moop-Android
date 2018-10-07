@@ -58,13 +58,36 @@ class TheaterSortActivity :
         postponeEnterTransition()
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: List<String>,
-                                             sharedElements: MutableMap<String, View>) =
-                    names.forEach { name ->
-                        listView.findViewWithTag<View>(name)?.run {
-                            sharedElements[name] = this
-                        }
+                                             sharedElements: MutableMap<String, View>) {
+                names.forEach { name ->
+                    listView.findViewWithTag<View>(name)?.run {
+                        sharedElements[name] = this
                     }
+                }
+            }
         })
+        setExitSharedElementCallback(object : SharedElementCallback() {
+            override fun onMapSharedElements(names: List<String>,
+                                             sharedElements: MutableMap<String, View>) {
+                sharedElements.clear()
+                listView?.run {
+                    (0 until childCount)
+                            .mapNotNull { getChildAt(it) }
+                            .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
+                            .forEach { sharedElements[it.transitionName] = it }
+                }
+            }
+        })
+    }
+
+    override fun onActivityReenter(resultCode: Int, data: Intent?) {
+        super.onActivityReenter(resultCode, data)
+        postponeEnterTransition()
+
+        //FixMe: find a timing to call startPostponedEnterTransition()
+        listView.postOnAnimationDelayed(100) {
+            startPostponedEnterTransition()
+        }
     }
 
     override fun initViewState(ctx: Context) {
@@ -90,7 +113,7 @@ class TheaterSortActivity :
 
     fun onAddItemClick(view: View) {
         val intent = Intent(this, TheaterEditActivity::class.java)
-        startActivity(intent, ActivityOptions
+        startActivityForResult(intent, 0, ActivityOptions
                 .makeSceneTransitionAnimation(this, *createSharedElements())
                 .toBundle())
     }
