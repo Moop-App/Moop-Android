@@ -196,7 +196,7 @@ class DetailActivity :
         }
         timetableButton.setOnClickListener {
             analytics.clickTimetable(movie)
-            val intent = Intent(this@DetailActivity, TimetableActivity::class.java)
+            val intent = Intent(this, TimetableActivity::class.java)
             movie.saveTo(intent)
             startActivity(intent, ActivityOptions
                     .makeSceneTransitionAnimation(this, *createSharedElements())
@@ -312,7 +312,7 @@ class DetailActivity :
     }
 
     private fun share(movie: Movie) {
-        if (Kakao.isInstalled(this@DetailActivity)) {
+        if (Kakao.isInstalled(this)) {
             val params = FeedTemplate.newBuilder(
                     ContentObject.newBuilder(movie.title, movie.posterUrl,
                             LinkObject.newBuilder()
@@ -323,7 +323,7 @@ class DetailActivity :
                             .setDescrption(movie.toDescription())
                             .build())
                     .build()
-            KakaoLinkService.getInstance().sendDefault(this@DetailActivity, params,
+            KakaoLinkService.getInstance().sendDefault(this, params,
                     object : ResponseCallback<KakaoLinkResponse>() {
                         override fun onFailure(errorResult: ErrorResult) {
                             Timber.e(errorResult.toString())
