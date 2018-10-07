@@ -24,6 +24,7 @@
             android:layout_width="124.2dp"
             android:layout_height="0dp"
             android:foreground="?android:attr/selectableItemBackground"
+            android:transitionName="@string/transition_poster"
             app:layout_constraintDimensionRatio="H,27:40"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -35,67 +36,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:transitionName="@string/transition_poster"
                 tools:src="@tools:sample/avatars" />
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
+        <include
             android:id="@+id/dDayView"
+            layout="@layout/tag_movie_d_day"
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            android:background="@drawable/bg_tag_d_day"
-            android:text="@{MovieExtKt.getDDayLabel(item)}"
-            android:visibility="@{MovieExtKt.showDDay(item) ? View.VISIBLE : View.GONE}"
-            android:transitionName="@string/transition_d_day"
             app:layout_constraintTop_toTopOf="@+id/titleView"
             app:layout_constraintEnd_toStartOf="@+id/titleView"
-            tools:text="D-7"
+            app:item="@{item}"
             tools:visibility="gone" />
 
-        <TextView
+        <include
             android:id="@+id/newView"
+            layout="@layout/tag_movie_new"
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="NEW"
-            android:textColor="@color/white"
-            android:textSize="11dp"
-            android:textStyle="bold"
-            android:background="@drawable/bg_tag_new"
-            android:visibility="@{MovieExtKt.isNew(item) ? View.VISIBLE : View.GONE}"
-            android:transitionName="@string/transition_new"
             app:layout_constraintTop_toTopOf="@+id/titleView"
             app:layout_constraintEnd_toStartOf="@+id/titleView"
+            app:item="@{item}"
             tools:visibility="gone" />
 
-        <TextView
+        <include
             android:id="@+id/bestView"
+            layout="@layout/tag_movie_best"
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="BEST"
-            android:textColor="@color/white"
-            android:textSize="11dp"
-            android:textStyle="bold"
-            android:background="@drawable/bg_tag_best"
-            android:visibility="@{MovieExtKt.isBest(item) ? View.VISIBLE : View.GONE}"
-            android:transitionName="@string/transition_best"
             app:layout_constraintTop_toTopOf="@+id/titleView"
             app:layout_constraintEnd_toStartOf="@+id/titleView"
+            app:item="@{item}"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -105,35 +83,27 @@
             app:constraint_referenced_ids="dDayView,newView,bestView"
             app:barrierDirection="bottom"/>
 
-        <View
+        <include
             android:id="@+id/ageBgView"
+            layout="@layout/tag_movie_age_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:backgroundResource="@{MovieExtKt.getAgeBackground(item)}"
-            android:transitionName="@string/transition_age_bg"
             app:layout_constraintTop_toTopOf="@+id/ageView"
             app:layout_constraintBottom_toBottomOf="@+id/ageView"
             app:layout_constraintStart_toStartOf="@+id/ageView"
             app:layout_constraintEnd_toEndOf="@+id/ageView"
-            tools:background="@drawable/bg_tag_age_15" />
+            app:item="@{item}" />
 
-        <TextView
+        <include
             android:id="@+id/ageView"
+            layout="@layout/tag_movie_age"
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"
-            android:gravity="center"
-            android:text="@{MovieExtKt.getSimpleAgeLabel(item)}"
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:transitionName="@string/transition_age"
             app:layout_goneMarginEnd="8dp"
             app:layout_goneMarginTop="4dp"
             app:layout_constraintEnd_toEndOf="@+id/newView"
             app:layout_constraintTop_toBottomOf="@+id/tagBarrier"
-            tools:background="@drawable/bg_tag_age_15"
-            tools:text="전체" />
+            app:item="@{item}" />
 
         <TextView
             android:id="@+id/titleView"

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="soup.movie.data.helper.MovieExtKt" />
+        <variable name="item" type="soup.movie.data.model.Movie" />
+    </data>
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:backgroundResource="@{MovieExtKt.getAgeBackground(item)}"
+        android:transitionName="@string/transition_age_bg"
+        tools:background="@drawable/bg_tag_age_19" />
+</layout>

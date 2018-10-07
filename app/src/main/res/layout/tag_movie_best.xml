@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="soup.movie.data.helper.MovieExtKt" />
+        <variable name="item" type="soup.movie.data.model.Movie" />
+    </data>
+
+    <TextView
+        android:layout_width="@dimen/tag_width"
+        android:layout_height="@dimen/tag_height"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="BEST"
+        android:textColor="@color/white"
+        android:textSize="11dp"
+        android:textStyle="bold"
+        android:background="@drawable/bg_tag_best"
+        android:visibility="@{MovieExtKt.isBest(item) ? View.VISIBLE : View.GONE}"
+        android:transitionName="@string/transition_best" />
+</layout>

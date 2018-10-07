@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <data>
-        <import type="android.view.View"/>
-        <import type="soup.movie.data.helper.MovieExtKt" />
         <variable name="item" type="soup.movie.data.model.Movie" />
     </data>
 
@@ -53,34 +51,26 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@tools:sample/avatars" />
 
-                <View
+                <include
                     android:id="@+id/ageBgView"
+                    layout="@layout/tag_movie_age_bg"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_margin="7dp"
-                    android:backgroundResource="@{MovieExtKt.getAgeBackground(item)}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:background="@drawable/bg_tag_age_15" />
+                    app:item="@{item}" />
 
-                <TextView
+                <include
                     android:id="@+id/dDayView"
+                    layout="@layout/tag_movie_d_day"
                     android:layout_width="@dimen/tag_width"
                     android:layout_height="@dimen/tag_height"
                     android:layout_margin="4dp"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:textColor="@color/white"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:background="@drawable/bg_tag_d_day"
-                    android:text="@{MovieExtKt.getDDayLabel(item)}"
-                    android:visibility="@{MovieExtKt.showDDay(item) ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="D-7"
-                    tools:visibility="visible"
-                    tools:ignore="SpUsage" />
+                    app:item="@{item}"
+                    tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

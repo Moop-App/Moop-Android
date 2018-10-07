@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="soup.movie.data.helper.MovieExtKt" />
+        <variable name="item" type="soup.movie.data.model.Movie" />
+    </data>
+
+    <TextView
+        android:id="@+id/dDayView"
+        android:layout_width="@dimen/tag_width"
+        android:layout_height="@dimen/tag_height"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:background="@drawable/bg_tag_d_day"
+        android:text="@{MovieExtKt.getDDayLabel(item)}"
+        android:visibility="@{MovieExtKt.showDDay(item) ? View.VISIBLE : View.GONE}"
+        android:transitionName="@string/transition_d_day"
+        tools:text="D-7" />
+</layout>
