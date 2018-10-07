@@ -36,7 +36,7 @@ abstract class TheaterEditChildPresenter(private val manager: TheaterEditManager
     private val selectedIdSetObservable: Observable<Set<String>>
         get() = theatersSetting.get()
                 .asSequence()
-                .map { it.code }
+                .map { it.id }
                 .toSet()
                 .toAnObservable()
 

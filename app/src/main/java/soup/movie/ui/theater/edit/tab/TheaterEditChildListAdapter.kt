@@ -31,13 +31,13 @@ class TheaterEditChildListAdapter(private val listener: Listener) :
             getItem(position).theaterList.map { theater ->
                 inflate<Chip>(context, theater.getFilterChipLayout()).apply {
                     text = theater.name
-                    val isSelected = selectedIdSet.contains(theater.code)
+                    val isSelected = selectedIdSet.contains(theater.id)
                     isChecked = isSelected
                     isChipIconVisible = isSelected.not()
                     setOnCheckedChangeListener { _, checked ->
                         if (checked) {
                             if (listener.add(theater)) {
-                                selectedIdSet.add(theater.code)
+                                selectedIdSet.add(theater.id)
                                 isChipIconVisible = false
                             } else {
                                 isChecked = false
@@ -45,7 +45,7 @@ class TheaterEditChildListAdapter(private val listener: Listener) :
                             }
                         } else {
                             listener.remove(theater)
-                            selectedIdSet.remove(theater.code)
+                            selectedIdSet.remove(theater.id)
                             isChipIconVisible = true
                         }
                     }

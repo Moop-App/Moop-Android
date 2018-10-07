@@ -10,5 +10,5 @@ data class TheaterWithTimetable(
         val selected: Boolean = false) : HasId {
 
     override val id: String
-        get() = theater.code
+        get() = theater.id
 }

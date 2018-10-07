@@ -22,8 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{item.name}"
-            android:tag="@{item.code}"
-            android:transitionName="@{item.code}"
+            android:tag="@{item.id}"
+            android:transitionName="@{item.id}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="서울" />

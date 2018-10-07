@@ -85,7 +85,7 @@ class TheaterEditManager(private val repository: MoobRepository,
             .asSequence()
             .filter {
                 selectedItemSet.any { selectedItem ->
-                    selectedItem.code == it.code
+                    selectedItem.id == it.id
                 }
             }
             .sortedBy { it.type }

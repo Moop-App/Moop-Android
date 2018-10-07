@@ -7,6 +7,9 @@ data class Theater(
         val lng: Double,
         val lat: Double) {
 
+    val id: String
+        get() = "$type:$code"
+
     companion object {
 
         const val TYPE_CGV = "C"

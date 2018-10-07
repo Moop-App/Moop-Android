@@ -110,8 +110,8 @@ class SettingsFragment :
             theaters.map {
                 inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
-                    transitionName = it.code
-                    tag = it.code
+                    transitionName = it.id
+                    tag = it.id
                     setOnClickListener { _ -> it.executeWeb(requireContext()) }
                 }
             }.forEach { addView(it) }
