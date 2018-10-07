@@ -11,6 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         tools:background="@color/debug_foreground">
 
         <com.google.android.material.chip.Chip
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:text="@{item.start()}"
+            android:clickable="false"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.item_timetable_theater_cgv.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.data.model.TheaterWithTimetable
+import soup.movie.data.model.Time
 import soup.movie.databinding.ItemTimetableTheaterCgvBinding
 import soup.movie.databinding.ItemTimetableTheaterLotteBinding
 import soup.movie.databinding.ItemTimetableTheaterMegaboxBinding
@@ -27,11 +28,13 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
 
         fun onItemClick(item: Theater)
 
-        fun onItemClick(item: String)
+        fun onItemClick(item: Time)
     }
 
     override fun createViewHolder(binding: ViewDataBinding): ViewHolder {
-        return ViewHolder(binding).apply {
+        return ViewHolder(binding) {
+            listener.onItemClick(it)
+        }.apply {
             itemView.setOnClickListener {
                 listener.onItemClick(getItem(adapterPosition))
             }
@@ -59,10 +62,10 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
         else -> throw IllegalArgumentException("$this is not valid type.")
     }
 
-    class ViewHolder(binding: ViewDataBinding) :
+    class ViewHolder(binding: ViewDataBinding, listener: (Time) -> Unit) :
             DataBindingViewHolder<TheaterWithTimetable>(binding) {
 
-        private val listAdapter = TimetableHallListAdapter()
+        private val listAdapter = TimetableHallListAdapter(listener)
 
         init {
             when (binding) {

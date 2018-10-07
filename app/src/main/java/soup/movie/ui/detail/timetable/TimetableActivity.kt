@@ -13,6 +13,7 @@ import soup.movie.data.helper.saveTo
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
 import soup.movie.data.model.TheaterWithTimetable
+import soup.movie.data.model.Time
 import soup.movie.databinding.ActivityTimetableBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.timetable.TimetableViewState.DoneState
@@ -77,7 +78,7 @@ class TimetableActivity :
                 Cgv.executeAppForSchedule(ctx)
             }
 
-            override fun onItemClick(item: String) {
+            override fun onItemClick(item: Time) {
                 //TODO: show notification with selected date and time
                 Cgv.executeAppForSchedule(ctx)
             }
