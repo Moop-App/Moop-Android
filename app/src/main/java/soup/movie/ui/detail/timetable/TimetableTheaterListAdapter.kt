@@ -36,7 +36,7 @@ internal class TimetableTheaterListAdapter(private val listener: Listener) :
                 listener.onItemClick(getItem(adapterPosition))
             }
             itemView.theaterView.setOnClickListener { _ ->
-                listener.onItemClick(getItem(adapterPosition).theater)
+                listener.onItemClick(getItem(adapterPosition))
             }
             itemView.hallListView.setRecycledViewPool(viewPool)
         }
