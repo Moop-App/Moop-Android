@@ -299,6 +299,7 @@ class DetailActivity :
     }
 
     private fun setResultAndFinish() {
+        detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
         finishAfterTransition()
     }
 
