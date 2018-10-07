@@ -3,6 +3,7 @@ package soup.movie.ui.theater.edit
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.TheaterEditManager
+import soup.movie.data.model.Theater
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContentViewState.*
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
@@ -30,5 +31,9 @@ class TheaterEditPresenter(private val manager: TheaterEditManager) :
 
     override fun onConfirmClicked() {
         manager.save()
+    }
+
+    override fun remove(theater: Theater) {
+        manager.remove(theater)
     }
 }

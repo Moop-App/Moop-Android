@@ -114,6 +114,7 @@ class TheaterEditActivity :
                     text = it.name
                     transitionName = it.code
                     tag = it.code
+                    setOnClickListener { _ -> presenter.remove(it) }
                 }
             }.forEach { addView(it) }
         }
