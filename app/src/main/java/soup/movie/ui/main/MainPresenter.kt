@@ -2,7 +2,7 @@ package soup.movie.ui.main
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
-import soup.movie.data.MoobRepository
+import soup.movie.data.MoopRepository
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.settings.impl.LastMainTabSetting.Tab.*
@@ -11,7 +11,7 @@ import soup.movie.ui.main.MainViewState.*
 import timber.log.Timber
 
 class MainPresenter(private val lastMainTabSetting: LastMainTabSetting,
-                    private val repository: MoobRepository) :
+                    private val repository: MoopRepository) :
         BasePresenter<MainContract.View>(),
         MainContract.Presenter {
 

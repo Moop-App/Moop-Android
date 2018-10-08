@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
-import soup.movie.data.MoobRepository
+import soup.movie.data.MoopRepository
 import soup.movie.data.helper.localDate
 import soup.movie.data.helper.toWeek
 import soup.movie.data.helper.today
@@ -18,7 +18,7 @@ import soup.movie.ui.detail.timetable.TimetableViewState.DoneState
 import soup.movie.ui.detail.timetable.TimetableViewState.LoadingState
 import java.util.concurrent.TimeUnit
 
-class TimetablePresenter(private val moobRepository: MoobRepository,
+class TimetablePresenter(private val repository: MoopRepository,
                          private val theatersSetting: TheatersSetting) :
         BasePresenter<TimetableContract.View>(), TimetableContract.Presenter {
 
@@ -109,7 +109,7 @@ class TimetablePresenter(private val moobRepository: MoobRepository,
                 theaterSubject.distinctUntilChanged(),
                 movieSubject.distinctUntilChanged())
                 .flatMap { (theater, movie) ->
-                    moobRepository.getTimetable(theater, movie)
+                    repository.getTimetable(theater, movie)
                 }
     }
 }

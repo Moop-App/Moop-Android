@@ -7,12 +7,12 @@ import soup.movie.data.model.Timetable
 import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.source.local.LocalMoobDataSource
-import soup.movie.data.source.remote.RemoteMoobDataSource
+import soup.movie.data.source.local.LocalMoopDataSource
+import soup.movie.data.source.remote.RemoteMoopDataSource
 import soup.movie.data.util.toAnObservable
 
-class MoobRepository(private val localDataSource: LocalMoobDataSource,
-                     private val remoteDataSource: RemoteMoobDataSource) {
+class MoopRepository(private val localDataSource: LocalMoopDataSource,
+                     private val remoteDataSource: RemoteMoopDataSource) {
 
     private var version: Version? = null
 

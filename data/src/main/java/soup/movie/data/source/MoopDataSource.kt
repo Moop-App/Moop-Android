@@ -8,7 +8,7 @@ import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 
-interface MoobDataSource {
+interface MoopDataSource {
 
     fun getNowList(): Observable<MovieListResponse>
 

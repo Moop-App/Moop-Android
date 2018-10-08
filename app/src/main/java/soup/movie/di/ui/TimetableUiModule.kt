@@ -2,7 +2,7 @@ package soup.movie.di.ui
 
 import dagger.Module
 import dagger.Provides
-import soup.movie.data.MoobRepository
+import soup.movie.data.MoopRepository
 import soup.movie.di.scope.ActivityScope
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.detail.timetable.TimetableContract
@@ -13,8 +13,8 @@ class TimetableUiModule {
 
     @ActivityScope
     @Provides
-    fun timetablePresenter(moobRepository: MoobRepository,
+    fun timetablePresenter(repository: MoopRepository,
                            theatersSetting: TheatersSetting):
             TimetableContract.Presenter =
-            TimetablePresenter(moobRepository, theatersSetting)
+            TimetablePresenter(repository, theatersSetting)
 }

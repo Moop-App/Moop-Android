@@ -11,7 +11,7 @@ import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
 
 @GlideModule
-class MoobGlideModule : AppGlideModule() {
+class MoopGlideModule : AppGlideModule() {
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         val defaultOptions = RequestOptions()

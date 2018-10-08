@@ -92,7 +92,7 @@ sealed class MarketApp {
     }
 }
 
-object Moob : MarketApp() {
+object Moop : MarketApp() {
 
     override val PACKAGE_NAME = BuildConfig.APPLICATION_ID
 }

@@ -11,39 +11,39 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import soup.movie.BuildType
-import soup.movie.data.MoobRepository
-import soup.movie.data.source.local.LocalMoobDataSource
-import soup.movie.data.source.local.MoobDao
-import soup.movie.data.source.local.MoobDatabase
-import soup.movie.data.source.remote.MoobApiService
-import soup.movie.data.source.remote.RemoteMoobDataSource
+import soup.movie.data.MoopRepository
+import soup.movie.data.source.local.LocalMoopDataSource
+import soup.movie.data.source.local.MoopDao
+import soup.movie.data.source.local.MoopDatabase
+import soup.movie.data.source.remote.MoopApiService
+import soup.movie.data.source.remote.RemoteMoopDataSource
 import javax.inject.Singleton
 
 @Module
-class MoobRepositoryModule {
+class MoopRepositoryModule {
 
     @Singleton
     @Provides
-    internal fun provideMoobRepository(localDataSource: LocalMoobDataSource,
-                                       remoteDataSource: RemoteMoobDataSource): MoobRepository =
-            MoobRepository(localDataSource, remoteDataSource)
+    internal fun provideMoopRepository(localDataSource: LocalMoopDataSource,
+                                       remoteDataSource: RemoteMoopDataSource): MoopRepository =
+            MoopRepository(localDataSource, remoteDataSource)
 
     /* Local */
 
     @Singleton
     @Provides
-    internal fun provideLocalDataSource(moobDao: MoobDao): LocalMoobDataSource =
-            LocalMoobDataSource(moobDao)
+    internal fun provideLocalDataSource(moopDao: MoopDao): LocalMoopDataSource =
+            LocalMoopDataSource(moopDao)
 
     @Singleton
     @Provides
-    internal fun provideMoobDao(moobDatabase: MoobDatabase): MoobDao = moobDatabase.moobDao()
+    internal fun provideMoopDao(moopDatabase: MoopDatabase): MoopDao = moopDatabase.moopDao()
 
     @Singleton
     @Provides
-    internal fun provideDatabase(context: Context): MoobDatabase =
+    internal fun provideDatabase(context: Context): MoopDatabase =
             Room.databaseBuilder(context.applicationContext,
-                    MoobDatabase::class.java, "moob.db")
+                    MoopDatabase::class.java, "moop.db")
                     .fallbackToDestructiveMigration()
                     .build()
 
@@ -51,20 +51,20 @@ class MoobRepositoryModule {
 
     @Singleton
     @Provides
-    internal fun provideRemoteDataSource(moobApiService: MoobApiService): RemoteMoobDataSource =
-            RemoteMoobDataSource(moobApiService)
+    internal fun provideRemoteDataSource(moopApiService: MoopApiService): RemoteMoopDataSource =
+            RemoteMoopDataSource(moopApiService)
 
     @Singleton
     @Provides
-    internal fun provideMoobApiService(rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
-                                       okHttpClient: OkHttpClient): MoobApiService =
+    internal fun provideMoopApiService(rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
+                                       okHttpClient: OkHttpClient): MoopApiService =
             Retrofit.Builder()
-                    .baseUrl(MoobApiService.API_BASE_URL)
+                    .baseUrl(MoopApiService.API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(rxJava2CallAdapterFactory)
                     .client(okHttpClient)
                     .build()
-                    .create(MoobApiService::class.java)
+                    .create(MoopApiService::class.java)
 
     @Singleton
     @Provides

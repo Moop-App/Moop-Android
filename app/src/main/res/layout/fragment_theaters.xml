@@ -16,7 +16,7 @@
             android:id="@+id/theaterMapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:mapbox_styleUrl="@string/mapbox_style_moob"
+            app:mapbox_styleUrl="@string/mapbox_style_moop"
             app:mapbox_uiAttribution="false"
             app:mapbox_uiCompass="false"
             app:mapbox_uiLogo="false"

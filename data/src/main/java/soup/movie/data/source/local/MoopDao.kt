@@ -9,7 +9,7 @@ import io.reactivex.Maybe
 import soup.movie.data.model.response.CachedMovieList
 
 @Dao
-interface MoobDao {
+interface MoopDao {
 
     @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
     fun findByType(type: String): Maybe<CachedMovieList>

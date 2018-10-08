@@ -3,7 +3,7 @@ package soup.movie.di.ui
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import soup.movie.data.MoobRepository
+import soup.movie.data.MoopRepository
 import soup.movie.di.scope.FragmentScope
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
@@ -38,8 +38,8 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(moobRepository: MoobRepository): NowContract.Presenter {
-            return NowPresenter(moobRepository)
+        fun presenter(repository: MoopRepository): NowContract.Presenter {
+            return NowPresenter(repository)
         }
     }
 
@@ -54,8 +54,8 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(moobRepository: MoobRepository): PlanContract.Presenter {
-            return PlanPresenter(moobRepository)
+        fun presenter(repository: MoopRepository): PlanContract.Presenter {
+            return PlanPresenter(repository)
         }
     }
 
@@ -70,7 +70,7 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(repository: MoobRepository,
+        fun presenter(repository: MoopRepository,
                       theatersSetting: TheatersSetting):
                 TheatersContract.Presenter =
                 TheatersPresenter(repository, theatersSetting)
@@ -90,7 +90,7 @@ abstract class MainTabUiModule {
         fun presenter(theatersSetting: TheatersSetting,
                       usePaletteThemeSetting: UsePaletteThemeSetting,
                       useWebLinkSetting: UseWebLinkSetting,
-                      repository: MoobRepository):
+                      repository: MoopRepository):
                 SettingsContract.Presenter =
                 SettingsPresenter(theatersSetting, usePaletteThemeSetting, useWebLinkSetting, repository)
     }

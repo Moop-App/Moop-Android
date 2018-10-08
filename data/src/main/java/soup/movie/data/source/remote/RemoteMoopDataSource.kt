@@ -8,22 +8,22 @@ import soup.movie.data.model.Timetable
 import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.source.MoobDataSource
+import soup.movie.data.source.MoopDataSource
 import soup.movie.data.util.toAnObservable
 
-class RemoteMoobDataSource(private val moobApiService: MoobApiService) : MoobDataSource {
+class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDataSource {
 
     override fun getNowList(): Observable<MovieListResponse> =
-            moobApiService.getNowMovieList()
+            moopApiService.getNowMovieList()
 
     override fun getPlanList(): Observable<MovieListResponse> =
-            moobApiService.getPlanMovieList()
+            moopApiService.getPlanMovieList()
 
     override fun getCodeList(): Observable<CodeResponse> =
-            moobApiService.getCodeList()
+            moopApiService.getCodeList()
 
     override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> =
-            moobApiService.getTimetable(theater.code, movie.id)
+            moopApiService.getTimetable(theater.code, movie.id)
                     .map { it.timetable }
 
     override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> =

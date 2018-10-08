@@ -8,7 +8,7 @@ import soup.movie.data.model.response.CachedMovieList
 
 @Database(entities = [CachedMovieList::class], version = 2, exportSchema = false)
 @TypeConverters(MovieListTypeConverter::class)
-abstract class MoobDatabase : RoomDatabase() {
+abstract class MoopDatabase : RoomDatabase() {
 
-    abstract fun moobDao(): MoobDao
+    abstract fun moopDao(): MoopDao
 }

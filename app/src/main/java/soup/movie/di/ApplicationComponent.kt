@@ -11,7 +11,7 @@ import javax.inject.Singleton
     AndroidSupportInjectionModule::class,
     ApplicationModule::class,
     ActivityBindingModule::class,
-    MoobRepositoryModule::class,
+    MoopRepositoryModule::class,
     SharedPreferencesModule::class,
     UtilsModule::class
 ])

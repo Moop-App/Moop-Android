@@ -7,7 +7,7 @@ import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.model.response.TimetableResponse
 
-interface MoobApiService {
+interface MoopApiService {
 
     // 현재상영작
     @GET("cgv/now/asTicketRate/nowOnly.json")

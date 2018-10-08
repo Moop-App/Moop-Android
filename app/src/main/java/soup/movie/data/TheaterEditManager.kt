@@ -9,7 +9,7 @@ import soup.movie.data.model.Theater
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.settings.impl.TheatersSetting
 
-class TheaterEditManager(private val repository: MoobRepository,
+class TheaterEditManager(private val repository: MoopRepository,
                          private val theatersSetting: TheatersSetting) {
 
     private val cgvSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()

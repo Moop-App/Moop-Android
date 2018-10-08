@@ -15,7 +15,7 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.BuildConfig
 import soup.movie.R
-import soup.movie.data.helper.Moob
+import soup.movie.data.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
@@ -96,7 +96,7 @@ class SettingsFragment :
         }
         appVersionLabel.text = "현재 ${BuildConfig.VERSION_NAME}"
         appVersionButton.setOnClickListener {
-            Moob.executePlayStore(requireContext())
+            Moop.executePlayStore(requireContext())
         }
     }
 

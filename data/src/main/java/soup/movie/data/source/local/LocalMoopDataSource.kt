@@ -11,10 +11,10 @@ import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_NOW
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.source.MoobDataSource
+import soup.movie.data.source.MoopDataSource
 import soup.movie.data.util.toAnObservable
 
-class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
+class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
 
     private var codeResponse: CodeResponse? = null
 
@@ -35,11 +35,11 @@ class LocalMoobDataSource(private val moobDao: MoobDao) : MoobDataSource {
     }
 
     private fun saveMovieListAs(type: String, response: MovieListResponse) {
-        moobDao.insert(CachedMovieList(type, System.currentTimeMillis(), response.list))
+        moopDao.insert(CachedMovieList(type, System.currentTimeMillis(), response.list))
     }
 
     private fun getMovieListAs(type: String): Observable<MovieListResponse> {
-        return moobDao.findByType(type)
+        return moopDao.findByType(type)
                 .onErrorReturn { CachedMovieList.empty(type) }
                 .toObservable()
                 .filter { it.isUpToDate() }
