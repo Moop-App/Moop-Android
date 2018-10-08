@@ -20,8 +20,11 @@ class PlanListAdapter(private val listener: (Int, Movie, Array<Pair<View, String
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> {
         return super.onCreateViewHolder(parent, viewType).apply {
             itemView.setOnClickListener {
-                val movie: Movie = getItem(adapterPosition)
-                listener(adapterPosition, movie, createSharedElements(movie))
+                val index = adapterPosition
+                if (index in 0..itemCount) {
+                    val movie: Movie = getItem(index)
+                    listener(index, movie, createSharedElements(movie))
+                }
             }
         }
     }
