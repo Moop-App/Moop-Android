@@ -29,6 +29,8 @@ class TheaterEditActivity :
         BaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
         TheaterEditContract.View {
 
+    private var pendingFinish: Boolean = false
+
     override val binding by contentView<TheaterEditActivity, ActivityTheaterEditBinding>(
             R.layout.activity_theater_edit
     )
@@ -39,7 +41,18 @@ class TheaterEditActivity :
     private lateinit var pageAdapter: TheaterEditPageAdapter
 
     private val footerPanel by lazy {
-        BottomSheetBehavior.from(footerView)
+        BottomSheetBehavior.from(footerView).apply {
+            setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+
+                override fun onSlide(v: View, offset: Float) {}
+
+                override fun onStateChanged(v: View, state: Int) {
+                    if (state == STATE_EXPANDED && pendingFinish) {
+                        finishAfterTransition()
+                    }
+                }
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,8 +145,8 @@ class TheaterEditActivity :
     }
 
     private fun setResultAndFinish() {
+        pendingFinish = true
         setResult(RESULT_OK)
         footerPanel.state = STATE_EXPANDED
-        finishAfterTransition()
     }
 }
