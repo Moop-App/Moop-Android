@@ -6,9 +6,11 @@
         android:drawable="@drawable/ic_splash_launcher"
         android:gravity="center" />
 
+    <!--
     <item
         android:drawable="@drawable/ic_splash_text"
         android:gravity="center_horizontal|bottom"
         android:bottom="100dp" />
+     -->
 
 </layer-list>
