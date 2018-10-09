@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isNotEmpty
 import androidx.core.view.postOnAnimationDelayed
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -112,14 +113,14 @@ class TheaterEditActivity :
         selectedTheaterGroup.run {
             TransitionManager.beginDelayedTransition(this)
             removeAllViews()
-            theaters.map {
+            theaters.takeIf { it.isNotEmpty() }?.map {
                 inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
                     transitionName = it.id
                     tag = it.id
                     setOnClickListener { _ -> presenter.remove(it) }
                 }
-            }.forEach { addView(it) }
+            }?.forEach { addView(it) }
         }
 
         //FixMe: find a timing to call startPostponedEnterTransition()

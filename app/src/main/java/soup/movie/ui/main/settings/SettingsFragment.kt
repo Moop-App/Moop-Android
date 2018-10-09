@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.isNotEmpty
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.BuildConfig
@@ -107,14 +108,14 @@ class SettingsFragment :
         theaterGroup?.setVisibleIf { theaters.isNotEmpty() }
         theaterGroup?.run {
             removeAllViews()
-            theaters.map {
+            theaters.takeIf { isNotEmpty() }?.map {
                 inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
                     transitionName = it.id
                     tag = it.id
                     setOnClickListener { _ -> it.executeWeb(requireContext()) }
                 }
-            }.forEach { addView(it) }
+            }?.forEach { addView(it) }
         }
         usePaletteThemeSwitch?.isChecked = viewState.usePaletteTheme
         useWebLinkSwitch?.isChecked = viewState.useWebLink
