@@ -15,9 +15,11 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
+import soup.movie.data.helper.today
 import soup.movie.util.Interpolators.ALPHA_IN
 import soup.movie.util.Interpolators.ALPHA_OUT
 import soup.movie.util.glide.GlideApp
+import soup.movie.util.glide.IntegerVersionSignature
 
 /** View */
 
@@ -116,6 +118,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 fun ImageView.loadAsync(url: String) {
     GlideApp.with(context)
             .load(url)
+            .signature(IntegerVersionSignature(today().run { year * 100 + monthValue }))
             .priority(Priority.IMMEDIATE)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
@@ -124,6 +127,7 @@ fun ImageView.loadAsync(url: String) {
 fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>) {
     GlideApp.with(context)
             .load(url)
+            .signature(IntegerVersionSignature(today().run { year * 100 + monthValue }))
             .listener(requestListener)
             .priority(Priority.IMMEDIATE)
             .transition(DrawableTransitionOptions.withCrossFade())
