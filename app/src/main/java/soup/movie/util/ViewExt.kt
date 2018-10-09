@@ -130,7 +130,6 @@ fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>)
             .signature(IntegerVersionSignature(today().run { year * 100 + monthValue }))
             .listener(requestListener)
             .priority(Priority.IMMEDIATE)
-            .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }
 
