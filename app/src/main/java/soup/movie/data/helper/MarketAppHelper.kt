@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import androidx.browser.customtabs.CustomTabsIntent
 import soup.movie.BuildConfig
 import soup.movie.R
@@ -179,7 +180,15 @@ object YouTube : MarketApp() {
 
     private fun createTrailerAppIntent(id: String): Intent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("vnd.youtube:$id"))
+            Uri.parse("vnd.youtube:$id")).apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
+                            Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
+                } else {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+            }
 
     private fun createTrailerWebIntent(id: String): Intent = Intent(
             Intent.ACTION_VIEW,
@@ -194,11 +203,18 @@ object YouTube : MarketApp() {
         }
     }
 
-    private fun createSearchAppIntent(query: String): Intent =
-            Intent(Intent.ACTION_SEARCH)
-                    .setPackage(PACKAGE_NAME)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtra("query", query)
+    private fun createSearchAppIntent(query: String): Intent = Intent(
+            Intent.ACTION_SEARCH)
+            .setPackage(PACKAGE_NAME)
+            .putExtra("query", query).apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
+                            Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
+                } else {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+            }
 
     private fun createSearchWebIntent(query: String): Intent = Intent(
             Intent.ACTION_VIEW,
