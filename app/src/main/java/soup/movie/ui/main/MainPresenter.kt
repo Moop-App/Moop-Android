@@ -7,6 +7,8 @@ import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.settings.impl.LastMainTabSetting.Tab.*
 import soup.movie.ui.BasePresenter
+import soup.movie.ui.main.MainActionState.NotFoundAction
+import soup.movie.ui.main.MainActionState.ShowDetailAction
 import soup.movie.ui.main.MainViewState.*
 import timber.log.Timber
 
@@ -42,6 +44,8 @@ class MainPresenter(private val lastMainTabSetting: LastMainTabSetting,
         //TODO: connect with view lifecycle
         repository.getMovie(movieId)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { view?.showMovieDetail(it) }
+                .map<MainActionState> { ShowDetailAction(it) }
+                .defaultIfEmpty(NotFoundAction)
+                .subscribe { view?.execute(it) }
     }
 }

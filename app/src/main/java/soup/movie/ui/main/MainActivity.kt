@@ -14,7 +14,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.data.helper.saveTo
-import soup.movie.data.model.Movie
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.ui.BaseActivity
@@ -23,6 +22,8 @@ import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData
+import soup.movie.ui.main.MainActionState.NotFoundAction
+import soup.movie.ui.main.MainActionState.ShowDetailAction
 import soup.movie.ui.main.MainViewState.*
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
@@ -148,17 +149,9 @@ class MainActivity :
             ACTION_VIEW -> {
                 data?.getQueryParameter("id")?.let {
                     presenter.requestMovie(it)
-                } ?: showToast(R.string.action_detail_unknown)
+                }
             }
         }
-    }
-
-    override fun showMovieDetail(movie: Movie) {
-        val intent = Intent(this, DetailActivity::class.java)
-        movie.saveTo(intent)
-        startActivity(intent, ActivityOptions
-                .makeSceneTransitionAnimation(this)
-                .toBundle())
     }
 
     override fun onBackPressed() {
@@ -182,6 +175,22 @@ class MainActivity :
     private fun updateSelectedItem(@IdRes itemId: Int) {
         if (bottomNavigation.selectedItemId != itemId) {
             bottomNavigation.selectedItemId = itemId
+        }
+    }
+
+    override fun execute(action: MainActionState) {
+        printRenderLog { action }
+        when (action) {
+            is NotFoundAction -> {
+                showToast(R.string.action_detail_unknown)
+            }
+            is ShowDetailAction -> {
+                val intent = Intent(this, DetailActivity::class.java)
+                action.movie.saveTo(intent)
+                startActivity(intent, ActivityOptions
+                        .makeSceneTransitionAnimation(this)
+                        .toBundle())
+            }
         }
     }
 

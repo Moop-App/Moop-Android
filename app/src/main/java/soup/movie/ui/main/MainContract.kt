@@ -1,6 +1,5 @@
 package soup.movie.ui.main
 
-import soup.movie.data.model.Movie
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.BaseContract
 
@@ -17,6 +16,6 @@ interface MainContract {
 
         fun render(viewState: MainViewState)
 
-        fun showMovieDetail(movie: Movie)
+        fun execute(action: MainActionState)
     }
 }
