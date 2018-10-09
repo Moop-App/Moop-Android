@@ -45,13 +45,9 @@ class TheaterEditActivity :
         BottomSheetBehavior.from(footerView).apply {
             setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
-                override fun onSlide(v: View, offset: Float) {}
+                override fun onSlide(v: View, offset: Float) = Unit
 
-                override fun onStateChanged(v: View, state: Int) {
-                    if (state == STATE_EXPANDED && pendingFinish) {
-                        finishAfterTransition()
-                    }
-                }
+                override fun onStateChanged(v: View, state: Int) = tryToFinish()
             })
         }
     }
@@ -146,8 +142,16 @@ class TheaterEditActivity :
     }
 
     private fun setResultAndFinish() {
-        pendingFinish = true
         setResult(RESULT_OK)
+        pendingFinish = true
         footerPanel.state = STATE_EXPANDED
+        tryToFinish()
+    }
+
+    private fun tryToFinish() {
+        if (footerPanel.state == STATE_EXPANDED && pendingFinish) {
+            pendingFinish = false
+            finishAfterTransition()
+        }
     }
 }
