@@ -179,7 +179,7 @@ class DetailActivity :
 
     private fun doStartPostponedEnterTransition() {
         startPostponedEnterTransition()
-        window.decorView.postOnAnimationDelayed(300) {
+        window.decorView.postOnAnimationDelayed(350) {
             presenter.requestData(movie)
         }
     }
