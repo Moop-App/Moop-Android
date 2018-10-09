@@ -15,52 +15,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:foreground="?android:attr/selectableItemBackground" >
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        tools:layout_width="110dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Chip.Lotte"
                 android:id="@+id/brandView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LOTTE CINEMA"
-                android:layout_marginStart="16dp"
-                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginTop="8dp"
+                android:text="롯데시네마"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/brandGuideline" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/brandGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="150dp" />
+            <ImageView
+                android:id="@+id/eggIcon"
+                android:layout_width="24dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_round_star"
+                android:tint="@color/grey"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toBottomOf="@+id/brandView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/eggLabel" />
 
             <TextView
-                android:id="@+id/dummyLabel"
+                android:id="@+id/eggLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="준비 중입니다"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
+                android:text="0.0"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="@+id/eggIcon"
+                app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
+                app:layout_constraintStart_toEndOf="@+id/eggIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="0.0" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/dividerColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ticketButton" />
+
+            <TextView
+                android:id="@+id/ticketButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="준비중"
+                android:textColor="@color/grey"
+                android:textSize="12dp"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintTop_toBottomOf="@+id/eggIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/brandGuideline"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

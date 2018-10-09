@@ -16,6 +16,7 @@ import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
 import androidx.core.view.postOnAnimationDelayed
 import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -208,6 +209,16 @@ class DetailActivity :
         }
 
         listView.apply {
+            //TODO: VERY VERY VERY ugly. Please refactor this
+            layoutManager = GridLayoutManager(this@DetailActivity, 3).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int =
+                            when (listAdapter.getItemViewType(position)) {
+                                R.layout.item_detail_trailers -> 3
+                                else -> 1
+                            }
+                }
+            }
             adapter = listAdapter
             itemAnimator = FadeInUpAnimator().apply {
                 addDuration = 200

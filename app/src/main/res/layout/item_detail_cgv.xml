@@ -15,45 +15,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:foreground="?android:attr/selectableItemBackground" >
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        tools:layout_width="110dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Chip.Cgv"
                 android:id="@+id/brandView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="CGV"
-                android:layout_marginStart="16dp"
                 android:onClick="@{() -> listener.onInfoClick(item)}"
-                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/brandGuideline" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/brandGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="150dp" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
                 android:id="@+id/eggIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_width="24dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
                 android:src="@drawable/ic_round_star"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/brandGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/brandView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/eggLabel" />
 
             <TextView
@@ -61,34 +51,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="@{item.egg}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/eggIcon"
+                app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
                 app:layout_constraintStart_toEndOf="@+id/eggIcon"
-                app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:text="95%" />
 
-            <ImageView
-                android:id="@+id/ticketButton"
-                android:layout_width="48dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="12dp"
-                android:scaleType="centerInside"
-                android:tint="@color/dark_icon"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/dividerColor"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_round_ticket"
-                android:onClick="@{() -> listener.onTicketClick(item)}" />
+                app:layout_constraintTop_toTopOf="@+id/ticketButton" />
+
+            <TextView
+                android:id="@+id/ticketButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="예매"
+                android:textColor="@color/colorAccent"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{() -> listener.onTicketClick(item)}"
+                app:layout_constraintTop_toBottomOf="@+id/eggIcon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
