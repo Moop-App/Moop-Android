@@ -59,13 +59,13 @@ fun Movie.hasUnknownEgg(): Boolean = egg == "?"
 
 fun Movie.isBest(): Boolean = eggIsOver95()
 
-fun Movie.isNew(): Boolean = isNow and (isInTheThreeDays() or (isInThePastWeek() and hasUnknownEgg()))
+fun Movie.isNew(): Boolean = isNow and isInThePastWeek()
 
-fun Movie.isInThePastWeek(): Boolean = isIn(-7..0)
+fun Movie.isInThePastWeek(): Boolean = isIn(-6..0)
 
 fun Movie.isInTheThreeDays(): Boolean = isIn(-2..0)
 
-fun Movie.isInTheNextWeek(): Boolean = isIn(0..7)
+fun Movie.isInTheNextWeek(): Boolean = isIn(0..6)
 
 fun Movie.isIn(dayRange: IntRange): Boolean {
     val openDate = openDate()
