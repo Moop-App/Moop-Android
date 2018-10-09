@@ -13,7 +13,6 @@ import androidx.annotation.StringRes
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Priority
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import soup.movie.util.Interpolators.ALPHA_IN
@@ -117,7 +116,6 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 fun ImageView.loadAsync(url: String) {
     GlideApp.with(context)
             .load(url)
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
             .priority(Priority.IMMEDIATE)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
@@ -127,7 +125,6 @@ fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>)
     GlideApp.with(context)
             .load(url)
             .listener(requestListener)
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
             .priority(Priority.IMMEDIATE)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
