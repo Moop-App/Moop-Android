@@ -38,9 +38,9 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(repository: MoopRepository): NowContract.Presenter {
-            return NowPresenter(repository)
-        }
+        fun presenter(repository: MoopRepository):
+                NowContract.Presenter =
+                NowPresenter(repository)
     }
 
     @FragmentScope
@@ -54,9 +54,9 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(repository: MoopRepository): PlanContract.Presenter {
-            return PlanPresenter(repository)
-        }
+        fun presenter(repository: MoopRepository):
+                PlanContract.Presenter =
+                PlanPresenter(repository)
     }
 
     @FragmentScope

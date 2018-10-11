@@ -12,11 +12,13 @@ class UtilsModule {
 
     @Singleton
     @Provides
-    fun provideImageUriProvider(context: Context): ImageUriProvider =
+    fun provideImageUriProvider(context: Context):
+            ImageUriProvider =
             ImageUriProvider(context)
 
     @Singleton
     @Provides
-    fun provideEventAnalytics(context: Context): EventAnalytics =
+    fun provideEventAnalytics(context: Context):
+            EventAnalytics =
             EventAnalytics(context)
 }

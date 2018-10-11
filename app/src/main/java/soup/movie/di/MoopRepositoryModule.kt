@@ -25,23 +25,28 @@ class MoopRepositoryModule {
     @Singleton
     @Provides
     internal fun provideMoopRepository(localDataSource: LocalMoopDataSource,
-                                       remoteDataSource: RemoteMoopDataSource): MoopRepository =
+                                       remoteDataSource: RemoteMoopDataSource):
+            MoopRepository =
             MoopRepository(localDataSource, remoteDataSource)
 
     /* Local */
 
     @Singleton
     @Provides
-    internal fun provideLocalDataSource(moopDao: MoopDao): LocalMoopDataSource =
+    internal fun provideLocalDataSource(moopDao: MoopDao):
+            LocalMoopDataSource =
             LocalMoopDataSource(moopDao)
 
     @Singleton
     @Provides
-    internal fun provideMoopDao(moopDatabase: MoopDatabase): MoopDao = moopDatabase.moopDao()
+    internal fun provideMoopDao(moopDatabase: MoopDatabase):
+            MoopDao =
+            moopDatabase.moopDao()
 
     @Singleton
     @Provides
-    internal fun provideDatabase(context: Context): MoopDatabase =
+    internal fun provideDatabase(context: Context):
+            MoopDatabase =
             Room.databaseBuilder(context.applicationContext,
                     MoopDatabase::class.java, "moop.db")
                     .fallbackToDestructiveMigration()
@@ -51,13 +56,15 @@ class MoopRepositoryModule {
 
     @Singleton
     @Provides
-    internal fun provideRemoteDataSource(moopApiService: MoopApiService): RemoteMoopDataSource =
+    internal fun provideRemoteDataSource(moopApiService: MoopApiService):
+            RemoteMoopDataSource =
             RemoteMoopDataSource(moopApiService)
 
     @Singleton
     @Provides
     internal fun provideMoopApiService(rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
-                                       okHttpClient: OkHttpClient): MoopApiService =
+                                       okHttpClient: OkHttpClient):
+            MoopApiService =
             Retrofit.Builder()
                     .baseUrl(MoopApiService.API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -68,18 +75,21 @@ class MoopRepositoryModule {
 
     @Singleton
     @Provides
-    internal fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory =
+    internal fun provideRxJava2CallAdapterFactory():
+            RxJava2CallAdapterFactory =
             RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
 
     @Singleton
     @Provides
-    internal fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient =
+    internal fun provideOkHttpClient(interceptor: Interceptor):
+            OkHttpClient =
             BuildType.addNetworkInterceptor(OkHttpClient.Builder())
                     .addInterceptor(interceptor)
                     .build()
 
     @Singleton
     @Provides
-    internal fun provideOkHttpInterceptor(): Interceptor =
+    internal fun provideOkHttpInterceptor():
+            Interceptor =
             Interceptor { it.proceed(it.request().newBuilder().build()) }
 }

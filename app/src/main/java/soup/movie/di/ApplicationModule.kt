@@ -9,6 +9,7 @@ import soup.movie.MovieApplication
 class ApplicationModule {
 
     @Provides
-    fun provideContext(application: MovieApplication): Context =
+    fun provideContext(application: MovieApplication):
+            Context =
             application.applicationContext
 }

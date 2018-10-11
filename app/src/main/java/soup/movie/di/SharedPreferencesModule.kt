@@ -16,26 +16,31 @@ class SharedPreferencesModule {
 
     @Singleton
     @Provides
-    fun provideLastMainTabSetting(preferences: SharedPreferences): LastMainTabSetting =
+    fun provideLastMainTabSetting(preferences: SharedPreferences):
+            LastMainTabSetting =
             LastMainTabSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideTheatersSetting(preferences: SharedPreferences): TheatersSetting =
+    fun provideTheatersSetting(preferences: SharedPreferences):
+            TheatersSetting =
             TheatersSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideUsePaletteThemeSetting(preferences: SharedPreferences): UsePaletteThemeSetting =
+    fun provideUsePaletteThemeSetting(preferences: SharedPreferences):
+            UsePaletteThemeSetting =
             UsePaletteThemeSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideUseWebLinkSetting(preferences: SharedPreferences): UseWebLinkSetting =
+    fun provideUseWebLinkSetting(preferences: SharedPreferences):
+            UseWebLinkSetting =
             UseWebLinkSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideSharedPreferences(context: Context): SharedPreferences =
+    fun provideSharedPreferences(context: Context):
+            SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 }
