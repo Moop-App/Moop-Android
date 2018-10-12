@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
 import soup.movie.R
+import soup.movie.data.MovieSelectManager
 import soup.movie.data.model.Movie
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.ui.BasePresenter
@@ -14,24 +14,22 @@ import soup.movie.ui.detail.DetailContract.View
 import soup.movie.ui.detail.DetailViewState.DoneState
 import soup.movie.ui.detail.DetailViewState.ListItem
 import soup.movie.util.ImageUriProvider
+import java.util.concurrent.TimeUnit
 
 class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting,
                       private var imageUriProvider: ImageUriProvider) :
         BasePresenter<View>(), Presenter {
 
-    private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
-
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
-        disposable.add(movieSubject
+        disposable.add(MovieSelectManager
+                .asObservable()
+                .subscribeOn(Schedulers.io())
+                .delay(500, TimeUnit.MILLISECONDS)
                 .map { DoneState(it.toItems()) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) }
         )
-    }
-
-    override fun requestData(movie: Movie) {
-        movieSubject.onNext(movie)
     }
 
     @SuppressLint("CheckResult")

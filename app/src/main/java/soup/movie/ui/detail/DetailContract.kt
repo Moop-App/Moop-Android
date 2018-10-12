@@ -1,14 +1,11 @@
 package soup.movie.ui.detail
 
 import android.net.Uri
-import soup.movie.data.model.Movie
 import soup.movie.ui.BaseContract
 
 interface DetailContract {
 
     interface Presenter : BaseContract.Presenter<View> {
-
-        fun requestData(movie: Movie)
 
         fun requestShareImage(url: String)
 

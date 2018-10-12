@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
-import soup.movie.data.helper.saveTo
+import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.EventAnalytics
@@ -31,9 +31,9 @@ class PlanFragment :
 
     private val listAdapter by lazy {
         PlanListAdapter { index, movie, sharedElements ->
-            val intent = Intent(requireActivity(), DetailActivity::class.java)
-            movie.saveTo(intent)
+            MovieSelectManager.select(movie)
             analytics.clickItem(index, movie)
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
             startActivity(intent, ActivityOptions
                     .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
                     .toBundle())

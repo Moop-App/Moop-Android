@@ -14,7 +14,6 @@ import android.util.TypedValue
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
-import androidx.core.view.postOnAnimationDelayed
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +32,7 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail_header.*
 import soup.movie.R
+import soup.movie.data.MovieSelectManager
 import soup.movie.data.helper.*
 import soup.movie.data.model.Movie
 import soup.movie.databinding.ActivityDetailBinding
@@ -167,11 +167,7 @@ class DetailActivity :
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        movie = if (savedInstanceState == null) {
-            intent.restoreFrom()!!
-        } else {
-            savedInstanceState.restoreFrom()!!
-        }
+        movie = MovieSelectManager.getSelectedItem()!!
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
@@ -180,9 +176,6 @@ class DetailActivity :
 
     private fun doStartPostponedEnterTransition() {
         startPostponedEnterTransition()
-        window.decorView.postOnAnimationDelayed(350) {
-            presenter.requestData(movie)
-        }
     }
 
     override fun initViewState(ctx: Context) {
@@ -198,7 +191,6 @@ class DetailActivity :
         timetableButton.setOnClickListener {
             analytics.clickTimetable(movie)
             val intent = Intent(this, TimetableActivity::class.java)
-            movie.saveTo(intent)
             startActivity(intent, ActivityOptions
                     .makeSceneTransitionAnimation(this, *createSharedElements())
                     .toBundle())
@@ -241,11 +233,6 @@ class DetailActivity :
         draggableFrame.removeListener(chromeFader)
         listView.removeOnScrollListener(scrollListener)
         super.onPause()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        movie.saveTo(outState)
     }
 
     override fun render(viewState: DetailViewState) {

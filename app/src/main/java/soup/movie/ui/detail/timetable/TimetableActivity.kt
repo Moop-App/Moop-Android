@@ -7,9 +7,8 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_timetable.*
 import kotlinx.android.synthetic.main.activity_timetable.view.*
 import soup.movie.R
+import soup.movie.data.MovieSelectManager
 import soup.movie.data.helper.Cgv
-import soup.movie.data.helper.restoreFrom
-import soup.movie.data.helper.saveTo
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
 import soup.movie.data.model.TheaterWithTimetable
@@ -44,20 +43,11 @@ class TimetableActivity :
     private lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        movie = if (savedInstanceState == null) {
-            intent.restoreFrom()!!
-        } else {
-            savedInstanceState.restoreFrom()!!
-        }
+        movie = MovieSelectManager.getSelectedItem()!!
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
         binding.item = movie
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        movie.saveTo(outState)
     }
 
     override fun initViewState(ctx: Context) {
@@ -92,11 +82,6 @@ class TimetableActivity :
                     .makeSceneTransitionAnimation(this)
                     .toBundle())
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.requestData(movie)
     }
 
     override fun render(viewState: TimetableViewState) {

@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
-import soup.movie.data.helper.saveTo
+import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.ui.BaseActivity
@@ -185,8 +185,8 @@ class MainActivity :
                 showToast(R.string.action_detail_unknown)
             }
             is ShowDetailAction -> {
+                MovieSelectManager.select(action.movie)
                 val intent = Intent(this, DetailActivity::class.java)
-                action.movie.saveTo(intent)
                 startActivity(intent, ActivityOptions
                         .makeSceneTransitionAnimation(this)
                         .toBundle())

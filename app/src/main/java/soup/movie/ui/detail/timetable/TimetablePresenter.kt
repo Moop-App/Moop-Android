@@ -6,11 +6,15 @@ import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
 import soup.movie.data.MoopRepository
+import soup.movie.data.MovieSelectManager
 import soup.movie.data.helper.localDate
 import soup.movie.data.helper.toWeek
 import soup.movie.data.helper.today
 import soup.movie.data.helper.until
-import soup.movie.data.model.*
+import soup.movie.data.model.ScreeningDate
+import soup.movie.data.model.Theater
+import soup.movie.data.model.TheaterWithTimetable
+import soup.movie.data.model.Timetable
 import soup.movie.data.util.firstOr
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.BasePresenter
@@ -22,7 +26,6 @@ class TimetablePresenter(private val repository: MoopRepository,
                          private val theatersSetting: TheatersSetting) :
         BasePresenter<TimetableContract.View>(), TimetableContract.Presenter {
 
-    private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
     private val dateSubject = BehaviorSubject.createDefault(ScreeningDate(today()))
     private val theaterSubject: BehaviorSubject<Theater> = BehaviorSubject.createDefault(Theater.NONE)
 
@@ -38,10 +41,6 @@ class TimetablePresenter(private val repository: MoopRepository,
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { view?.render(it) })
         }
-    }
-
-    override fun requestData(movie: Movie) {
-        movieSubject.onNext(movie)
     }
 
     override fun onItemClick(item: ScreeningDate) {
@@ -107,7 +106,7 @@ class TimetablePresenter(private val repository: MoopRepository,
     private fun getTimetableObservable(): Observable<Timetable> {
         return Observables.combineLatest(
                 theaterSubject.distinctUntilChanged(),
-                movieSubject.distinctUntilChanged())
+                MovieSelectManager.asObservable().distinctUntilChanged())
                 .flatMap { (theater, movie) ->
                     repository.getTimetable(theater, movie)
                 }
