@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.SharedElementCallback
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
 import soup.movie.BuildConfig
@@ -54,20 +53,6 @@ class SettingsFragment :
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setExitSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: List<String>,
-                                             sharedElements: MutableMap<String, View>) {
-                names.forEach { name ->
-                    theaterGroup.findViewWithTag<View>(name)?.let {
-                        sharedElements[name] = it
-                    }
-                }
-            }
-        })
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -125,7 +110,7 @@ class SettingsFragment :
 
     private fun onTheaterEditClicked() {
         val intent = Intent(context, TheaterSortActivity::class.java)
-        startActivity(intent, ActivityOptions
+        startActivityForResult(intent, 0, ActivityOptions
                 .makeSceneTransitionAnimation(activity, *createSharedElements())
                 .toBundle())
     }

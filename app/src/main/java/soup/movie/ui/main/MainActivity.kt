@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.core.app.SharedElementCallback
+import androidx.core.view.doOnPreDraw
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -118,6 +120,19 @@ class MainActivity :
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         bottomSheetPanel.state = STATE_HIDDEN
+        scheduleStartPostponedTransition()
+    }
+
+    override fun onActivityReenter(resultCode: Int, data: Intent?) {
+        super.onActivityReenter(resultCode, data)
+        scheduleStartPostponedTransition()
+    }
+
+    private fun scheduleStartPostponedTransition() {
+        postponeEnterTransition()
+        bottomNavigation.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -187,7 +202,7 @@ class MainActivity :
             is ShowDetailAction -> {
                 MovieSelectManager.select(action.movie)
                 val intent = Intent(this, DetailActivity::class.java)
-                startActivity(intent, ActivityOptions
+                startActivityForResult(intent, 0, ActivityOptions
                         .makeSceneTransitionAnimation(this)
                         .toBundle())
             }

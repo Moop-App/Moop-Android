@@ -34,7 +34,7 @@ class PlanFragment :
             MovieSelectManager.select(movie)
             analytics.clickItem(index, movie)
             val intent = Intent(requireActivity(), DetailActivity::class.java)
-            startActivity(intent, ActivityOptions
+            startActivityForResult(intent, 0, ActivityOptions
                     .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
                     .toBundle())
         }

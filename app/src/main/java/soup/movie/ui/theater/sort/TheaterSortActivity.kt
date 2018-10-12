@@ -59,10 +59,12 @@ class TheaterSortActivity :
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: List<String>,
                                              sharedElements: MutableMap<String, View>) {
-                names.forEach { name ->
-                    listView.findViewWithTag<View>(name)?.run {
-                        sharedElements[name] = this
-                    }
+                sharedElements.clear()
+                listView?.run {
+                    (0 until childCount)
+                            .mapNotNull { getChildAt(it) }
+                            .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
+                            .forEach { sharedElements[it.transitionName] = it }
                 }
             }
         })
@@ -70,11 +72,10 @@ class TheaterSortActivity :
             override fun onMapSharedElements(names: List<String>,
                                              sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
-                listView?.run {
-                    (0 until childCount)
-                            .mapNotNull { getChildAt(it) }
-                            .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
-                            .forEach { sharedElements[it.transitionName] = it }
+                names.forEach { name ->
+                    listView.findViewWithTag<View>(name)?.run {
+                        sharedElements[name] = this
+                    }
                 }
             }
         })
@@ -108,6 +109,7 @@ class TheaterSortActivity :
 
     override fun onBackPressed() {
         presenter.saveSnapshot()
+        setResult(RESULT_OK)
         super.onBackPressed()
     }
 
