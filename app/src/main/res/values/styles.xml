@@ -30,6 +30,8 @@
         <item name="android:statusBarColor">@color/dribbble_super_dark</item>
         <item name="android:colorControlActivated">?android:colorAccent</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
     </style>
 
     <style name="AppTheme.Splash">
