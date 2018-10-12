@@ -128,7 +128,7 @@ class TheaterEditActivity :
 
     override fun onEnterAnimationComplete() {
         super.onEnterAnimationComplete()
-        footerView.postOnAnimationDelayed(300) {
+        footerView.postOnAnimationDelayed(350) {
             footerPanel.state = STATE_COLLAPSED
         }
     }

@@ -43,9 +43,15 @@
 
     <style name="AppTheme.Timetable" parent="AppTheme.NoActionBar" />
 
-    <style name="AppTheme.TheaterSort" />
+    <style name="AppTheme.TheaterSort">
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+    </style>
 
-    <style name="AppTheme.TheaterEdit" parent="AppTheme.NoActionBar" />
+    <style name="AppTheme.TheaterEdit" parent="AppTheme.NoActionBar">
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+    </style>
 
     <!-- TextAppearance -->
 
