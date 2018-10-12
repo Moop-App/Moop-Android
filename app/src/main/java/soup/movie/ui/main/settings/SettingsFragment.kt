@@ -55,6 +55,16 @@ class SettingsFragment :
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onMapSharedElements(names: List<String>,
+                                     sharedElements: MutableMap<String, View>) {
+        sharedElements.clear()
+        names.forEach { name ->
+            theaterGroup.findViewWithTag<View>(name)?.let {
+                sharedElements[name] = it
+            }
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =

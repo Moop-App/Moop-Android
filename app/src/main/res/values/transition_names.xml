@@ -2,12 +2,9 @@
 <resources>
     <string name="transition_background" translatable="false">background</string>
     <string name="transition_poster" translatable="false">poster</string>
-    <string name="transition_title" translatable="false">title</string>
     <string name="transition_age" translatable="false">age</string>
     <string name="transition_age_bg" translatable="false">age_bg</string>
-    <string name="transition_age_bg_outer" translatable="false">age_bg_outer</string>
     <string name="transition_egg" translatable="false">egg</string>
-    <string name="transition_share" translatable="false">share</string>
     <string name="transition_new" translatable="false">new</string>
     <string name="transition_best" translatable="false">best</string>
     <string name="transition_d_day" translatable="false">d_day</string>

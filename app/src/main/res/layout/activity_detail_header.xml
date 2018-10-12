@@ -116,7 +116,6 @@
             android:ellipsize="end"
             android:minLines="1"
             android:maxLines="3"
-            android:transitionName="@string/transition_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/posterCard"
             app:layout_constraintTop_toTopOf="parent"
@@ -154,7 +153,6 @@
             android:layout_marginBottom="8dp"
             android:tint="@color/light_icon"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:transitionName="@string/transition_share"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_round_share" />

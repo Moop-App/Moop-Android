@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
+import soup.movie.R
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.ui.detail.DetailActivity
@@ -37,6 +38,29 @@ class PlanFragment :
             startActivityForResult(intent, 0, ActivityOptions
                     .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
                     .toBundle())
+        }
+    }
+
+    override fun onMapSharedElements(names: List<String>,
+                                     sharedElements: MutableMap<String, View>) {
+        sharedElements.clear()
+        MovieSelectManager.getSelectedItem()?.run {
+            listView.findViewWithTag<View>(id)?.let { movieView ->
+                names.forEach { name ->
+                    val id: Int = when (name) {
+                        "background" -> R.id.backgroundView
+                        "poster" -> R.id.posterView
+                        "age_bg" -> R.id.ageBgView
+                        "new" -> R.id.newView
+                        "best" -> R.id.bestView
+                        "d_day" -> R.id.dDayView
+                        else -> View.NO_ID
+                    }
+                    movieView.findViewById<View>(id)?.let {
+                        sharedElements[name] = it
+                    }
+                }
+            }
         }
     }
 

@@ -1,10 +1,12 @@
 package soup.movie.ui.helper
 
+import android.view.View
 import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import soup.movie.R
 import soup.movie.ui.BaseFragment.OnBackListener
+import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.BaseTabFragment.OnReselectListener
 
 class FragmentSceneRouter(private val fragmentManager: FragmentManager,
@@ -61,5 +63,10 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
         fragmentManager.findFragmentById(containerId)?.run {
             onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
+    }
+
+    fun onInterceptMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
+        (fragmentManager.findFragmentById(containerId) as? BaseTabFragment<*, *>)
+                ?.onMapSharedElements(names, sharedElements)
     }
 }

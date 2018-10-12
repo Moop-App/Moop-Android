@@ -10,7 +10,7 @@ import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.doOnPreDraw
+import androidx.core.view.postOnAnimationDelayed
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -121,6 +121,13 @@ class MainActivity :
         super.onCreate(savedInstanceState)
         bottomSheetPanel.state = STATE_HIDDEN
         scheduleStartPostponedTransition()
+
+        setExitSharedElementCallback(object : SharedElementCallback() {
+            override fun onMapSharedElements(names: List<String>,
+                                             sharedElements: MutableMap<String, View>) {
+                fragmentSceneRouter.onInterceptMapSharedElements(names, sharedElements)
+            }
+        })
     }
 
     override fun onActivityReenter(resultCode: Int, data: Intent?) {
@@ -130,7 +137,9 @@ class MainActivity :
 
     private fun scheduleStartPostponedTransition() {
         postponeEnterTransition()
-        bottomNavigation.doOnPreDraw {
+
+        //FixMe: find a timing to call startPostponedEnterTransition()
+        bottomNavigation.postOnAnimationDelayed(100) {
             startPostponedEnterTransition()
         }
     }
