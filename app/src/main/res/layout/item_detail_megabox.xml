@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <data>
-        <import type="android.view.View"/>
-        <import type="soup.movie.data.helper.MovieExtKt" />
-        <variable name="item" type="soup.movie.data.model.Movie" />
+        <variable name="item" type="soup.movie.ui.detail.DetailViewState.ListItem" />
         <variable name="listener" type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
@@ -30,6 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="메가박스"
+                android:onClick="@{() -> listener.onInfoClick(item)}"
+                android:enabled="false"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -82,6 +82,8 @@
                 android:textColor="@color/grey"
                 android:textSize="12dp"
                 android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{() -> listener.onTicketClick(item)}"
+                android:enabled="false"
                 app:layout_constraintTop_toBottomOf="@+id/eggIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

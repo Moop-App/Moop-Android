@@ -3,6 +3,7 @@ package soup.movie.ui.detail
 import androidx.annotation.Keep
 import androidx.annotation.LayoutRes
 import soup.movie.data.model.Movie
+import soup.movie.data.model.TheaterType
 import soup.movie.data.model.Trailer
 
 sealed class DetailViewState {
@@ -19,8 +20,9 @@ sealed class DetailViewState {
 
     @Keep
     data class ListItem(
+            val type: TheaterType,
             @LayoutRes
             val layoutRes: Int,
-            val item: Movie,
+            val movie: Movie,
             val trailers: List<Trailer> = emptyList())
 }

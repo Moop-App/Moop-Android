@@ -7,6 +7,10 @@ import io.reactivex.schedulers.Schedulers
 import soup.movie.R
 import soup.movie.data.MovieSelectManager
 import soup.movie.data.model.Movie
+import soup.movie.data.model.Theater.Companion.TYPE_CGV
+import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
+import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
+import soup.movie.data.model.Theater.Companion.TYPE_NONE
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.DetailContract.Presenter
@@ -48,8 +52,8 @@ class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting
     override fun usePaletteTheme(): Boolean = usePaletteThemeSetting.get()
 
     private fun Movie.toItems(): List<ListItem> = arrayListOf(
-            ListItem(R.layout.item_detail_cgv, this),
-            ListItem(R.layout.item_detail_lotte, this),
-            ListItem(R.layout.item_detail_megabox, this),
-            ListItem(R.layout.item_detail_trailers, this, trailers.orEmpty()))
+            ListItem(TYPE_CGV, R.layout.item_detail_cgv, this),
+            ListItem(TYPE_LOTTE, R.layout.item_detail_lotte, this),
+            ListItem(TYPE_MEGABOX, R.layout.item_detail_megabox, this),
+            ListItem(TYPE_NONE, R.layout.item_detail_trailers, this, trailers.orEmpty()))
 }

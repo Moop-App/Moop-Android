@@ -1,7 +1,9 @@
 package soup.movie.data.model
 
+typealias TheaterType = String
+
 data class Theater(
-        val type: String,
+        val type: TheaterType,
         val code: String,
         val name: String,
         val lng: Double,
@@ -12,10 +14,11 @@ data class Theater(
 
     companion object {
 
-        const val TYPE_CGV = "C"
-        const val TYPE_LOTTE = "L"
-        const val TYPE_MEGABOX = "M"
+        const val TYPE_CGV: TheaterType = "C"
+        const val TYPE_LOTTE: TheaterType = "L"
+        const val TYPE_MEGABOX: TheaterType = "M"
+        const val TYPE_NONE: TheaterType = ""
 
-        val NONE: Theater = Theater("", "", "", 0.0, 0.0)
+        val NONE: Theater = Theater(TYPE_NONE, "", "", 0.0, 0.0)
     }
 }

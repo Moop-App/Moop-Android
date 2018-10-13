@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <data>
-        <import type="android.view.View"/>
-        <import type="soup.movie.data.helper.MovieExtKt" />
-        <variable name="item" type="soup.movie.data.model.Movie" />
+        <variable name="item" type="soup.movie.ui.detail.DetailViewState.ListItem" />
         <variable name="listener" type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
@@ -54,7 +52,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="@{item.egg}"
+                android:text="@{item.movie.egg}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"

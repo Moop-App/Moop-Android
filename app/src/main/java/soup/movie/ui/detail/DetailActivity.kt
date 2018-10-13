@@ -35,11 +35,13 @@ import soup.movie.R
 import soup.movie.data.MovieSelectManager
 import soup.movie.data.helper.*
 import soup.movie.data.model.Movie
+import soup.movie.data.model.Theater.Companion.TYPE_CGV
+import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
+import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.BaseActivity
-import soup.movie.ui.detail.DetailViewState.DoneState
-import soup.movie.ui.detail.DetailViewState.LoadingState
+import soup.movie.ui.detail.DetailViewState.*
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.util.*
@@ -79,21 +81,56 @@ class DetailActivity :
     private val listAdapter by lazy {
         DetailListAdapter(object : DetailListItemListener {
 
-            override fun onInfoClick(item: Movie) {
-                analytics.clickCgvInfo(item)
-                Cgv.executeMobileWeb(this@DetailActivity, item)
+            override fun onInfoClick(item: ListItem) {
+                val ctx: Context = this@DetailActivity
+                when (item.type) {
+                    TYPE_CGV -> {
+                        analytics.clickCgvInfo(item.movie)
+                        Cgv.executeMobileWeb(ctx, item.movie)
+                    }
+                    TYPE_LOTTE -> {
+                        analytics.clickLotteInfo(item.movie)
+                        LotteCinema.executeMobileWeb(ctx, item.movie)
+                    }
+                    TYPE_MEGABOX -> {
+                        analytics.clickMegaboxInfo(item.movie)
+                        Megabox.executeMobileWeb(ctx, item.movie)
+                    }
+                }
             }
 
-            override fun onTicketClick(item: Movie) {
-                analytics.clickCgvTicket(item)
-                executeTicketLink(item)
-            }
-
-            private fun executeTicketLink(item: Movie) {
+            override fun onTicketClick(item: ListItem) {
+                val ctx: Context = this@DetailActivity
                 if (useWebLinkSetting.get()) {
-                    Cgv.executeWebForSchedule(this@DetailActivity, item)
+                    when (item.type) {
+                        TYPE_CGV -> {
+                            analytics.clickCgvTicket(item.movie)
+                            Cgv.executeWebForSchedule(ctx, item.movie)
+                        }
+                        TYPE_LOTTE -> {
+                            analytics.clickLotteTicket(item.movie)
+                            LotteCinema.executeWebForSchedule(ctx, item.movie)
+                        }
+                        TYPE_MEGABOX -> {
+                            analytics.clickMegaboxTicket(item.movie)
+                            Megabox.executeWebForSchedule(ctx, item.movie)
+                        }
+                    }
                 } else {
-                    Cgv.executeAppForSchedule(this@DetailActivity)
+                    when (item.type) {
+                        TYPE_CGV -> {
+                            analytics.clickCgvTicket(item.movie)
+                            Cgv.executeAppForSchedule(ctx)
+                        }
+                        TYPE_LOTTE -> {
+                            analytics.clickLotteTicket(item.movie)
+                            LotteCinema.executeAppForSchedule(ctx)
+                        }
+                        TYPE_MEGABOX -> {
+                            analytics.clickMegaboxTicket(item.movie)
+                            Megabox.executeAppForSchedule(ctx)
+                        }
+                    }
                 }
             }
 

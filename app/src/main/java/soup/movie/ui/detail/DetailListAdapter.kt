@@ -41,7 +41,7 @@ internal class DetailListAdapter(private val listener: DetailListItemListener,
             RecyclerView.ViewHolder(binding.root) {
 
         open fun bind(item: ListItem, listener: DetailListItemListener) {
-            binding.setVariable(BR.item, item.item)
+            binding.setVariable(BR.item, item)
             binding.setVariable(BR.listener, listener)
             binding.executePendingBindings()
         }
