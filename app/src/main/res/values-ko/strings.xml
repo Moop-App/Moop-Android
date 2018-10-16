@@ -14,6 +14,7 @@
     <string name="settings_category_theater">자주가는 극장</string>
     <string name="settings_theater_empty_description">선택된 극장이 없습니다</string>
     <string name="settings_category_theme">테마</string>
+    <string name="settings_category_theater_mode">영화관 모드</string>
     <string name="settings_category_lab">실험실</string>
 
     <string name="help_title">도움말</string>
