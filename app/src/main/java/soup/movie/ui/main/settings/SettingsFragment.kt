@@ -18,6 +18,7 @@ import soup.movie.data.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
+import soup.movie.theme.ThemeBook
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.settings.help.HelpFragment
@@ -69,14 +70,16 @@ class SettingsFragment :
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
-            FragmentSettingsBinding.inflate(inflater, container, false).root
+            FragmentSettingsBinding.inflate(inflater, container, false)
+                    .apply { item = ThemeBook.getBookmarkPage() }
+                    .root
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         editTheaterButton.setOnClickListener {
             onTheaterEditClicked()
         }
-        theme.setOnClickListener {
+        editThemeButton.setOnClickListener {
             ThemeBookmarkActivity.execute(ctx)
         }
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->

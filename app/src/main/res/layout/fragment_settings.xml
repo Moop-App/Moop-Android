@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
 
-    <data/>
+    <data>
+        <variable name="item" type="soup.movie.theme.ThemePage" />
+    </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -96,23 +98,32 @@
                 android:layout_marginTop="@dimen/settings_margin_between_category"
                 android:text="@string/settings_category_theme"
                 android:textAppearance="@style/TextAppearance.Settings.Category"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:layout_constraintEnd_toStartOf="@+id/editTheaterButton" />
 
-            <TextView
-                android:id="@+id/theme"
+            <ImageView
+                android:id="@+id/editThemeButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_round_palette"
+                android:scaleType="centerInside"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toEndOf="@+id/themeCategory"
+                app:layout_constraintBottom_toBottomOf="@+id/themeCategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/themeCategory" />
+
+            <include
+                android:id="@+id/themeGroup"
+                layout="@layout/item_theme_page"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="@dimen/settings_margin_in_category"
-                android:background="@drawable/bg_card"
-                android:backgroundTint="@color/grey_200"
-                android:gravity="center"
-                android:text="준비 중입니다"
-                android:textColor="@color/grey_600"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/themeCategory" />
+                app:layout_constraintTop_toBottomOf="@+id/themeCategory"
+                app:item="@{item}" />
 
             <View
                 android:id="@+id/labDivider"
@@ -122,7 +133,7 @@
                 android:background="@color/dividerColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/theme"/>
+                app:layout_constraintTop_toBottomOf="@+id/themeGroup"/>
 
             <TextView
                 android:id="@+id/labCategory"
