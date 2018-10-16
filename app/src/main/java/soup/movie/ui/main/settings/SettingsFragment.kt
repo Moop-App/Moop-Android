@@ -18,6 +18,7 @@ import soup.movie.data.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
+import soup.movie.theme.ThemeBook
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.settings.help.HelpFragment
@@ -74,6 +75,9 @@ class SettingsFragment :
         super.initViewState(ctx)
         editTheaterButton.setOnClickListener {
             onTheaterEditClicked()
+        }
+        theme.setOnClickListener {
+            ThemeBook.executeBookmark(ctx)
         }
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUsePaletteTheme(isChecked)

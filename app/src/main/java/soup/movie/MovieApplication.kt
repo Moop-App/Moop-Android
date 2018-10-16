@@ -8,6 +8,8 @@ import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import io.fabric.sdk.android.Fabric
 import soup.movie.di.DaggerApplicationComponent
+import soup.movie.spec.ThemeSpecs
+import soup.movie.theme.ThemeBook
 
 class MovieApplication : DaggerApplication() {
 
@@ -16,7 +18,8 @@ class MovieApplication : DaggerApplication() {
         BuildType.init(this)
         initCrashlytics()
         AndroidThreeTen.init(this)
-        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+        ThemeBook.initialize(this, ThemeSpecs.DEFAULT, ThemeSpecs.BLACK)
+        Mapbox.getInstance(this, getString(R.string.mapbox_access_token))
     }
 
     private fun initCrashlytics() {

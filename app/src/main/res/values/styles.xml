@@ -1,58 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
-    </style>
-
-    <style name="AppTheme.Translucent" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- using a semi-transparent window background for the drag-back gesture -->
-        <item name="android:windowBackground">@color/scrim</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
-
-    <style name="AppTheme.Translucent.Detail">
-        <item name="android:statusBarColor">@color/dribbble_super_dark</item>
-        <item name="android:colorControlActivated">?android:colorAccent</item>
-        <item name="android:windowAllowReturnTransitionOverlap">false</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
-    </style>
-
-    <style name="AppTheme.Splash">
-        <item name="android:windowBackground">@drawable/ic_splash</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowTranslucentStatus">false</item>
-    </style>
-
-    <style name="AppTheme.Timetable" parent="AppTheme.NoActionBar" />
-
-    <style name="AppTheme.TheaterSort">
-        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
-    </style>
-
-    <style name="AppTheme.TheaterEdit" parent="AppTheme.NoActionBar">
-        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
-    </style>
-
     <!-- TextAppearance -->
 
     <style name="TextAppearance.Settings.Category" parent="TextAppearance.AppCompat.Title">

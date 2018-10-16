@@ -22,15 +22,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.kotlin.stdlib
+    implementation project(':widget')
 
+    implementation deps.kotlin.stdlib
     implementation deps.androidx.appcompat
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.constraint_layout
     implementation deps.timber
-    implementation 'com.github.Daio-io:dresscode:v0.1.0'
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner

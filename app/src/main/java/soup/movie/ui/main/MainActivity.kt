@@ -117,7 +117,6 @@ class MainActivity :
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         bottomSheetPanel.state = STATE_HIDDEN
         scheduleStartPostponedTransition()

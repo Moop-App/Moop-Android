@@ -50,7 +50,7 @@
         </activity>
         <activity
             android:name=".ui.detail.DetailActivity"
-            android:theme="@style/AppTheme.Translucent.Detail"
+            android:theme="@style/AppTheme.Detail"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".ui.detail.timetable.TimetableActivity"

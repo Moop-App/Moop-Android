@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import dagger.android.support.DaggerAppCompatActivity
+import soup.movie.theme.ThemeBook
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>> :
         DaggerAppCompatActivity() {
@@ -15,6 +16,7 @@ abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeBook.open(this)
         super.onCreate(savedInstanceState)
         binding.setLifecycleOwner(this)
         initViewState(this)
