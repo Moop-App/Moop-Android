@@ -118,7 +118,7 @@
                 android:id="@+id/themeGroup"
                 layout="@layout/item_theme_page"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="@dimen/settings_margin_in_category"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
