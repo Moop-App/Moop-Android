@@ -22,7 +22,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_check"
+            android:src="@drawable/ic_round_check"
             android:visibility="invisible"
             android:visibleIf="@{item.isBookmarked()}"
             app:layout_constraintBottom_toBottomOf="parent"

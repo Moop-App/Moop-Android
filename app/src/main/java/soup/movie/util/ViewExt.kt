@@ -1,12 +1,14 @@
 package soup.movie.util
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
@@ -107,12 +109,22 @@ infix fun View.with(@StringRes tagId: Int): Pair<View, String> {
     return Pair.create(this, context.getString(tagId))
 }
 
+@BindingAdapter("android:backgroundTint")
+fun View.setBackgroundTint(@ColorInt color: Int) {
+    backgroundTintList = ColorStateList.valueOf(color)
+}
+
 /** ViewGroup */
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View =
         LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 
 /** ImageView */
+
+@BindingAdapter("android:tint")
+fun ImageView.setImageTint(@ColorInt color: Int) {
+    imageTintList = ColorStateList.valueOf(color)
+}
 
 @BindingAdapter("android:srcUrl")
 fun ImageView.loadAsync(url: String) {

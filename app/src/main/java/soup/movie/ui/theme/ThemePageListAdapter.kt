@@ -1,10 +1,10 @@
-package soup.movie.theme.bookmark
+package soup.movie.ui.theme
 
 import android.view.ViewGroup
-import soup.movie.theme.R
+import soup.movie.R
 import soup.movie.theme.ThemePage
-import soup.movie.theme.bookmark.temp.DataBindingAdapter
-import soup.movie.theme.bookmark.temp.DataBindingViewHolder
+import soup.movie.ui.helper.databinding.DataBindingAdapter
+import soup.movie.ui.helper.databinding.DataBindingViewHolder
 
 internal class ThemePageListAdapter(private val listener: (ThemePage) -> Unit) :
         DataBindingAdapter<ThemePage>() {

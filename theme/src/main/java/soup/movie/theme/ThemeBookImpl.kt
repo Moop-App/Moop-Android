@@ -5,7 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.collection.ArrayMap
+import android.util.ArrayMap
 import kotlin.reflect.KClass
 
 internal object ThemeBookImpl {
@@ -41,12 +41,12 @@ internal object ThemeBookImpl {
         return availablePages
     }
 
-    internal fun turnOver(activity: Activity, page: ThemePage) {
+    internal fun turnOver(page: ThemePage, recreateAction: () -> Unit) {
         if (availablePages.all { it.id != page.id }) {
             throw ThemePagesNotRegisteredException("Theme page '$page.id' does not exists.")
         }
         if (currentPagePref.set(page)) {
-            activity.recreate()
+            recreateAction()
         }
     }
 

@@ -2,9 +2,6 @@ package soup.movie.theme
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
-import android.content.Intent
-import soup.movie.theme.bookmark.ThemeBookmarkActivity
 
 object ThemeBook {
 
@@ -16,8 +13,8 @@ object ThemeBook {
         ThemeBookImpl.open(activity)
     }
 
-    fun turnOver(activity: Activity, page: ThemePage) {
-        ThemeBookImpl.turnOver(activity, page)
+    fun turnOver(page: ThemePage, recreateAction: () -> Unit) {
+        ThemeBookImpl.turnOver(page, recreateAction)
     }
 
     fun getAvailablePages(): List<ThemePage> {
@@ -26,9 +23,5 @@ object ThemeBook {
 
     fun getBookmarkPage(): ThemePage {
         return ThemeBookImpl.getBookmarkPage()
-    }
-
-    fun executeBookmark(ctx: Context) {
-        ctx.startActivity(Intent(ctx, ThemeBookmarkActivity::class.java))
     }
 }

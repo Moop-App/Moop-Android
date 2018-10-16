@@ -18,11 +18,11 @@ import soup.movie.data.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
-import soup.movie.theme.ThemeBook
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
+import soup.movie.ui.theme.ThemeBookmarkActivity
 import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
@@ -77,7 +77,7 @@ class SettingsFragment :
             onTheaterEditClicked()
         }
         theme.setOnClickListener {
-            ThemeBook.executeBookmark(ctx)
+            ThemeBookmarkActivity.execute(ctx)
         }
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUsePaletteTheme(isChecked)

@@ -1,9 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="soup.movie.theme" >
-
-    <application>
-        <activity
-            android:name=".bookmark.ThemeBookmarkActivity"
-            android:exported="false" />
-    </application>
-</manifest>
+<manifest package="soup.movie.theme" />
