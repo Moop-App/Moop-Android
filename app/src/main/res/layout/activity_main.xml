@@ -39,7 +39,7 @@
                 android:id="@+id/bottomSheetContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white" />
+                android:background="?attr/moop_bgColor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_navigation_height"
             android:layout_gravity="bottom"
-            android:background="#ffffff"
+            android:background="?attr/colorPrimary"
             app:labelVisibilityMode="labeled"
             app:itemIconTint="@color/bottom_navigation_colors"
             app:itemTextColor="@color/bottom_navigation_colors"

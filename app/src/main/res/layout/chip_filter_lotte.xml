@@ -5,5 +5,5 @@
     style="@style/Widget.Chip.Filter.Lotte"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:checked="true"
+    tools:checked="false"
     tools:text="롯데 서울" />

@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_checked="true"
-        android:color="@color/chip_cgv_text" />
+        android:color="@color/chip_lotte_text" />
     <item
-        android:color="@color/chip_cgv_text_unchecked" />
+        android:color="@color/chip_lotte_text_unchecked" />
 </selector>

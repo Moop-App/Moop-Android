@@ -4,12 +4,12 @@
     <item
         android:state_selected="true"
         android:state_enabled="true"
-        android:color="@color/colorAccent" />
+        android:color="?attr/colorAccent" />
 
     <item
         android:state_selected="true"
         android:state_enabled="false"
-        android:color="@color/colorAccentHalf" />
+        android:color="?attr/colorAccentHalf" />
 
     <item
         android:color="@android:color/transparent" />

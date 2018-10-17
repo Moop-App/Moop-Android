@@ -69,7 +69,7 @@
             android:layout_margin="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:text="준비 중입니다"
-            android:textColor="@color/dark_icon"
+            android:textColor="?attr/moop_textColorDark"
             android:gravity="center"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/theaterView"
@@ -81,7 +81,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/dividerColor"
+            android:background="?attr/moop_dividerColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

@@ -10,14 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foreground="?android:attr/selectableItemBackground"
-        tools:background="@color/debug_background"
-        tools:layout_height="280dp">
+        tools:layout_height="280dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/peekView"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/white" >
+            android:layout_height="60dp" >
 
             <TextView
                 android:id="@+id/description"
@@ -27,7 +25,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:text="자주가는 극장은 최대 10개까지\n선택할 수 있습니다."
-                android:textColor="@color/dark_icon"
+                android:textColor="?attr/moop_textColorDark"
                 android:textSize="14dp"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -86,17 +84,16 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@color/dividerColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?attr/moop_dividerColor"
+            app:layout_constraintTop_toBottomOf="@+id/peekView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/noTheaterView"
@@ -104,7 +101,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/settings_theater_empty_description"
-            android:textColor="@color/grey_600"
+            android:textColor="?attr/moop_textColorDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/peekView"

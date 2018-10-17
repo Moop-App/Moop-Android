@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/white</color>
-    <color name="colorPrimaryDark">@color/grey</color>
-    <color name="colorAccent">#2D7AF6</color>
-    <color name="colorAccentHalf">#662D7AF6</color>
 
-    <color name="windowBackground">#FAFAFA</color>
+    <color name="chip_cgv_bg">#FFFFFF</color>
+    <color name="chip_cgv_bg_unchecked">#55FFFFFF</color>
+    <color name="chip_cgv_text">#E51F20</color>
+    <color name="chip_cgv_text_unchecked">#66000000</color>
 
-    <color name="dividerColor">@color/grey_200</color>
+    <color name="chip_lotte_bg">#EB212E</color>
+    <color name="chip_lotte_bg_unchecked">#66EB212E</color>
+    <color name="chip_lotte_text">#FFFFFF</color>
+    <color name="chip_lotte_text_unchecked">#77FFFFFF</color>
 
-    <color name="bgCgv">#FFFFFF</color>
-    <color name="textCgv">#E51F20</color>
-
-    <color name="bgLotte">#EB212E</color>
-    <color name="textLotte">#FFFFFF</color>
-
-    <color name="bgMegabox">#352263</color>
-    <color name="textMegabox">#FFFFFF</color>
+    <color name="chip_megabox_bg">#352263</color>
+    <color name="chip_megabox_bg_unchecked">#77352263</color>
+    <color name="chip_megabox_text">#FFFFFF</color>
+    <color name="chip_megabox_text_unchecked">#77FFFFFF</color>
 
     <!-- the following colors is from plaid app -->
 
     <color name="scrim">#99323232</color>
-    <color name="mid_grey">#40808080</color>
     <color name="light_grey">#fff5f5f5</color>
-    <color name="content_placeholder">#ffe0e0e0</color>
     <color name="dark_icon">#99000000</color> <!-- 60% black-->
     <color name="dark_icon_half_alpha">#4d000000</color> <!-- 30% black-->
     <color name="dark_icon_on_primary">#ff2a6046</color> <!-- 60% black on @color/primary -->
-    <color name="inline_action_icon">#ff757575</color> <!-- grey 600 -->
     <color name="light_icon">#ffffffff</color>
     <color name="dribbble_super_dark">#ff33292d</color>
 </resources>

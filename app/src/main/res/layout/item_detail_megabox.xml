@@ -15,6 +15,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
+        app:cardBackgroundColor="?attr/moop_cardBgColorDark"
         tools:layout_width="110dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +41,8 @@
                 android:layout_height="36dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_round_star"
-                android:tint="@color/grey"
+                android:tint="?attr/moop_textColorLight"
+                android:tintMode="src_in"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toBottomOf="@+id/brandView"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +57,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="0.0"
-                android:textColor="@color/grey"
+                android:textColor="?attr/moop_textColorLight"
                 android:textSize="14sp"
                 app:layout_constraintTop_toTopOf="@+id/eggIcon"
                 app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
@@ -67,7 +69,7 @@
                 android:id="@+id/divider"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/dividerColor"
+                android:background="?attr/moop_dividerColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/ticketButton" />
@@ -79,7 +81,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="준비중"
-                android:textColor="@color/grey"
+                android:textColor="?attr/moop_textColorLight"
                 android:textSize="12dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:onClick="@{() -> listener.onTicketClick(item)}"

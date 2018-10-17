@@ -16,19 +16,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:overScrollMode="never"
             android:requiresFadingEdge="none"
             android:scrollbars="none"
-            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_sort_theater_cgv"
             tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/noItemsView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:visibility="gone"
-            tools:visibility="visible" >
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
 
             <ImageView
                 android:id="@+id/icon"
@@ -36,12 +44,12 @@
                 android:layout_height="68dp"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_round_no_theaters"
-                android:tint="@color/grey"
-                app:layout_constraintVertical_chainStyle="packed"
+                android:tint="?attr/moop_iconColorLight"
+                app:layout_constraintBottom_toTopOf="@+id/description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/description"/>
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/description"
@@ -49,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/settings_theater_empty_description"
+                android:textColor="?attr/moop_textColorLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,10 +73,10 @@
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/theater_select_action_confirm"
             android:onClick="onAddItemClick"
-            app:srcCompat="@drawable/ic_round_add"
-            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_round_add"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -32,7 +32,7 @@
             android:id="@+id/infoView"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@color/white"
+            android:background="?attr/moop_bgColor"
             app:layout_behavior="@string/bottom_sheet_behavior"
             app:behavior_hideable="true"
             app:behavior_peekHeight="80dp">
@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/black"
+                android:textColor="?attr/moop_textColorDark"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -61,32 +61,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/black"
+                android:textColor="?attr/moop_textColorDark"
                 android:visibility="gone"
                 tools:text="18m" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/navigationButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:tint="@color/dark_icon"
+                android:src="@drawable/ic_round_directions_car"
+                android:scaleType="centerInside"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/infoButton"
-                app:layout_constraintTop_toTopOf="@+id/infoButton"
-                app:srcCompat="@drawable/ic_round_directions_car" />
+                app:layout_constraintTop_toTopOf="@+id/infoButton" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/infoButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
-                android:tint="@color/dark_icon"
+                android:src="@drawable/ic_round_info"
+                android:scaleType="centerInside"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_round_info" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -97,13 +96,13 @@
             android:layout_height="40dp"
             android:layout_gravity="bottom"
             android:visibility="gone"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <View
             android:id="@+id/dim"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="?attr/moop_bgColor"
             tools:visibility="gone" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

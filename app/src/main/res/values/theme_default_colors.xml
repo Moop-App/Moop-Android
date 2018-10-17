@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/grey</color>
+    <color name="colorAccent">#2D7AF6</color>
+    <color name="colorAccentHalf">#662D7AF6</color>
+
+    <color name="default_errorColor">@color/red_500</color>
+    <color name="default_dividerColor">@color/grey_200</color>
+    <color name="default_bgColor">#FAFAFA</color>
+    <color name="default_textColorDark">@color/dark_icon</color>
+    <color name="default_textColorLight">@color/dark_icon_half_alpha</color>
+    <color name="default_iconColorDark">@color/dark_icon</color>
+    <color name="default_iconColorLight">@color/grey</color>
+    <color name="default_cardBgColorDark">@color/white</color>
+    <color name="default_cardBgColorLight">@color/grey_200</color>
+    <color name="default_tagOutlineColor">@color/default_bgColor</color>
+</resources>

@@ -15,7 +15,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:foreground="?android:attr/selectableItemBackground" >
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="?attr/moop_cardBgColorDark" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -50,7 +51,7 @@
                     android:singleLine="true"
                     android:text="@{@string/trailer_search_result(item.movie.title)}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/moop_textColorDark"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +71,7 @@
                     android:paddingEnd="8dp"
                     android:gravity="center_vertical"
                     android:text="더보기"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:textStyle="bold"
                     android:background="?android:attr/selectableItemBackground"
                     app:layout_constraintTop_toTopOf="parent"

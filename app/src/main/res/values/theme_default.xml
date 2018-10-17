@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="colorAccentHalf">@color/colorAccentHalf</item>
+        <item name="android:windowBackground">?attr/moop_bgColor</item>
 
-        <item name="wallpaperTextColor">@color/orange</item>
+        <item name="moop_errorColor">@color/default_errorColor</item>
+        <item name="moop_dividerColor">@color/default_dividerColor</item>
+        <item name="moop_bgColor">@color/default_bgColor</item>
+        <item name="moop_textColorDark">@color/default_textColorDark</item>
+        <item name="moop_textColorLight">@color/default_textColorLight</item>
+        <item name="moop_iconColorDark">@color/default_iconColorDark</item>
+        <item name="moop_iconColorLight">@color/default_iconColorLight</item>
+        <item name="moop_cardBgColorDark">@color/default_cardBgColorDark</item>
+        <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
+        <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="colorAccentHalf">@color/colorAccentHalf</item>
+        <item name="android:windowBackground">?attr/moop_bgColor</item>
+
+        <item name="moop_errorColor">@color/default_errorColor</item>
+        <item name="moop_dividerColor">@color/default_dividerColor</item>
+        <item name="moop_bgColor">@color/default_bgColor</item>
+        <item name="moop_textColorDark">@color/default_textColorDark</item>
+        <item name="moop_textColorLight">@color/default_textColorLight</item>
+        <item name="moop_iconColorDark">@color/default_iconColorDark</item>
+        <item name="moop_iconColorLight">@color/default_iconColorLight</item>
+        <item name="moop_cardBgColorDark">@color/default_cardBgColorDark</item>
+        <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
+        <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
     </style>
 
-    <style name="AppTheme.Translucent" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme.Translucent" parent="AppTheme.NoActionBar">
         <!-- using a semi-transparent window background for the drag-back gesture -->
         <item name="android:windowBackground">@color/scrim</item>
         <item name="android:colorBackgroundCacheHint">@null</item>

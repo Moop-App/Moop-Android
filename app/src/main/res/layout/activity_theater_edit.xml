@@ -38,52 +38,70 @@
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    app:tabBackground="?attr/colorPrimary"
+                    app:tabSelectedTextColor="?attr/colorAccent"
+                    app:tabIndicatorColor="?attr/colorAccent"
                     app:tabMode="fixed" >
 
-                </com.google.android.material.tabs.TabLayout>
+                    <!-- for preview
 
-            </androidx.appcompat.widget.Toolbar>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CGV"/>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lotte"/>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Megabox"/>
+                    -->
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:background="@color/debug_background" />
+                    </com.google.android.material.tabs.TabLayout>
 
-            <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/loadingView"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:visibility="gone" />
+                </androidx.appcompat.widget.Toolbar>
 
-        </soup.widget.ConstraintLayoutEx>
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:background="@color/debug_background" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/footerView"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:elevation="16dp"
-            android:background="@color/white"
-            android:foreground="?android:attr/selectableItemBackground"
-            tools:background="@color/debug_background"
-            app:behavior_hideable="false"
-            app:behavior_peekHeight="60dp"
-            app:layout_behavior="@string/bottom_sheet_behavior" >
+                <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/loadingView"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:visibility="gone" />
 
-            <include
-                layout="@layout/activity_theater_edit_footer"
+            </soup.widget.ConstraintLayoutEx>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/footerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="280dp"
+                android:elevation="16dp"
+                android:background="?attr/moop_bgColor"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:behavior_hideable="false"
+                app:behavior_peekHeight="60dp"
+                app:layout_behavior="@string/bottom_sheet_behavior" >
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+                <include
+                    layout="@layout/activity_theater_edit_footer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </layout>

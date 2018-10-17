@@ -77,7 +77,7 @@
                     android:layout_marginEnd="24dp"
                     android:gravity="center_horizontal"
                     android:text="@{item.title}"
-                    android:textColor="@color/dark_icon"
+                    android:textColor="?attr/moop_textColorDark"
                     android:textSize="14dp"
                     android:textStyle="bold"
                     android:ellipsize="end"
@@ -125,7 +125,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:listitem="@layout/item_timetable_theater_cgv"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/noTheaterView"
@@ -136,7 +136,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:visibility="gone" >
+            tools:visibility="visible" >
 
             <TextView
                 android:id="@+id/description"
@@ -146,7 +146,8 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="극장을 선택해서 상영시간표를 한눈에 확인하세요!"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="?attr/moop_textColorDark"
+                android:textSize="16sp"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintBottom_toTopOf="@+id/selectView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -158,8 +159,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="선호하는 극장 선택"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                android:textColor="@color/white"
                 android:textStyle="bold"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

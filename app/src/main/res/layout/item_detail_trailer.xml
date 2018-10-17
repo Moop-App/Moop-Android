@@ -12,13 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="4dp"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:foreground="?android:attr/selectableItemBackground"
+        tools:background="?attr/moop_cardBgColorDark">
 
         <ImageView
             android:id="@+id/trailerThumbnailView"
             android:layout_width="140dp"
             android:layout_height="0dp"
-            android:background="@color/grey_200"
+            android:background="?attr/moop_cardBgColorLight"
             android:scaleType="centerCrop"
             android:srcUrl="@{item.thumbnailUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +38,7 @@
             android:maxLines="3"
             android:minLines="1"
             android:text="@{item.title}"
-            android:textColor="@color/black"
+            android:textColor="?attr/moop_textColorDark"
             android:textSize="13dp"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintVertical_bias="0"
@@ -55,7 +56,7 @@
             android:maxLines="1"
             android:minLines="1"
             android:text="@{item.author}"
-            android:textColor="@color/grey_700"
+            android:textColor="?attr/moop_textColorLight"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/titleView"

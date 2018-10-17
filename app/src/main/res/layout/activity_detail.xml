@@ -30,7 +30,7 @@
                 android:id="@+id/backgroundView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/grey_50"
+                android:background="?attr/moop_bgColor"
                 android:transitionName="@string/transition_background" />
 
             <androidx.recyclerview.widget.RecyclerView

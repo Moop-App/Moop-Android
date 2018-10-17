@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:color="@color/bgLotte" />
-    <!--<item android:color="#33EB212E" />-->
-    <item android:color="#fac8cb" />
+    <item
+        android:state_checked="true"
+        android:color="@color/chip_lotte_bg" />
+    <item
+        android:color="@color/chip_lotte_bg_unchecked" />
 </selector>

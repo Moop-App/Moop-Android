@@ -40,14 +40,18 @@ import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.settings.impl.UseWebLinkSetting
+import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.*
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.helper.EventAnalytics
-import soup.movie.util.*
 import soup.movie.util.IntentUtil.createShareIntent
 import soup.movie.util.delegates.contentView
+import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setBackgroundColorResource
+import soup.movie.util.startActivitySafely
+import soup.movie.util.with
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -218,7 +222,7 @@ class DetailActivity :
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
 
-        windowBackground = ctx.getColorCompat(R.color.windowBackground)
+        windowBackground = getColorAttr(R.attr.moop_bgColor)
 
         posterView.loadAsync(movie.posterUrl, shotLoadListener)
         posterView.setOnClickListener {
@@ -311,7 +315,7 @@ class DetailActivity :
 
     private fun applyTheme(theme: ThemeData) {
         if (theme.isDark.not()) { // make back icon dark on light images
-            val darkColor = getColorCompat(R.color.dark_icon)
+            val darkColor = getColorAttr(R.attr.moop_iconColorDark)
             titleView.setTextColor(darkColor)
             openDateView.setTextColor(darkColor)
             timetableButton.setColorFilter(darkColor)

@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@{item.area.name}"
+            android:textColor="?attr/moop_textColorDark"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/theaterListView"
