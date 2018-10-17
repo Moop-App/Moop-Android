@@ -18,7 +18,10 @@ class MovieApplication : DaggerApplication() {
         BuildType.init(this)
         initCrashlytics()
         AndroidThreeTen.init(this)
-        ThemeBook.initialize(this, ThemeSpecs.DEFAULT, ThemeSpecs.BLACK)
+        ThemeBook.initialize(this,
+                ThemeSpecs.DEFAULT,
+                ThemeSpecs.BLACK,
+                ThemeSpecs.WA_TGBH)
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token))
     }
 

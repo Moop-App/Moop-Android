@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:background="#66000000"
             android:visibility="gone"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomSheet"
@@ -32,8 +32,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/bottom_sheet_behavior"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="400dp"
-            tools:foreground="@color/debug_background">
+            app:behavior_peekHeight="400dp">
 
             <FrameLayout
                 android:id="@+id/bottomSheetContainer"

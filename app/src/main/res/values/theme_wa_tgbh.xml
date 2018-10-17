@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="wa_tgbh_colorPrimary">#F4C2CE</color>
+    <color name="wa_tgbh_colorPrimaryDark">#E35970</color>
+    <color name="wa_tgbh_colorAccent">#6E3C66</color>
+    <color name="wa_tgbh_colorAccentHalf">#666E3C66</color>
+
+    <color name="wa_tgbh_errorColor">#ED2644</color>
+    <color name="wa_tgbh_dividerColor">#AA97A9DB</color>
+    <color name="wa_tgbh_bgColor">#F7D4DD</color>
+    <color name="wa_tgbh_textColorDark">#5888DB</color>
+    <color name="wa_tgbh_textColorLight">#97A9DB</color>
+    <color name="wa_tgbh_iconColorDark">#5888DB</color>
+    <color name="wa_tgbh_iconColorLight">#97A9DB</color>
+    <color name="wa_tgbh_cardBgColorDark">#CDD4F9</color>
+    <color name="wa_tgbh_cardBgColorLight">#CDD4F9</color>
+    <color name="wa_tgbh_tagOutlineColor">@color/wa_tgbh_bgColor</color>
+    <color name="wa_tgbh_stageColor">#C6CEF7</color>
+    <color name="wa_tgbh_stageLightColor">#5888DB</color>
+
+    <style name="WaTgbhTheme" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/wa_tgbh_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/wa_tgbh_colorPrimaryDark</item>
+        <item name="colorAccent">@color/wa_tgbh_colorAccent</item>
+        <item name="colorAccentHalf">@color/wa_tgbh_colorAccentHalf</item>
+        <item name="android:windowBackground">?attr/moop_bgColor</item>
+        <item name="android:textColorPrimary">#E35970</item>
+
+        <item name="moop_errorColor">@color/wa_tgbh_errorColor</item>
+        <item name="moop_dividerColor">@color/wa_tgbh_dividerColor</item>
+        <item name="moop_bgColor">@color/wa_tgbh_bgColor</item>
+        <item name="moop_textColorDark">@color/wa_tgbh_textColorDark</item>
+        <item name="moop_textColorLight">@color/wa_tgbh_textColorLight</item>
+        <item name="moop_iconColorDark">@color/wa_tgbh_iconColorDark</item>
+        <item name="moop_iconColorLight">@color/wa_tgbh_iconColorLight</item>
+        <item name="moop_cardBgColorDark">@color/wa_tgbh_cardBgColorDark</item>
+        <item name="moop_cardBgColorLight">@color/wa_tgbh_cardBgColorLight</item>
+        <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
+        <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
+        <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>
+    </style>
+
+    <style name="WaTgbhTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/wa_tgbh_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/wa_tgbh_colorPrimaryDark</item>
+        <item name="colorAccent">@color/wa_tgbh_colorAccent</item>
+        <item name="colorAccentHalf">@color/wa_tgbh_colorAccentHalf</item>
+        <item name="android:windowBackground">?attr/moop_bgColor</item>
+
+        <item name="moop_errorColor">@color/wa_tgbh_errorColor</item>
+        <item name="moop_dividerColor">@color/wa_tgbh_dividerColor</item>
+        <item name="moop_bgColor">@color/wa_tgbh_bgColor</item>
+        <item name="moop_textColorDark">@color/wa_tgbh_textColorDark</item>
+        <item name="moop_textColorLight">@color/wa_tgbh_textColorLight</item>
+        <item name="moop_iconColorDark">@color/wa_tgbh_iconColorDark</item>
+        <item name="moop_iconColorLight">@color/wa_tgbh_iconColorLight</item>
+        <item name="moop_cardBgColorDark">@color/wa_tgbh_cardBgColorDark</item>
+        <item name="moop_cardBgColorLight">@color/wa_tgbh_cardBgColorLight</item>
+        <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
+        <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
+        <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>
+    </style>
+
+    <style name="WaTgbhTheme.Translucent" parent="WaTgbhTheme.NoActionBar">
+        <!-- using a semi-transparent window background for the drag-back gesture -->
+        <item name="android:windowBackground">@color/scrim</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="WaTgbhTheme.Detail" parent="WaTgbhTheme.Translucent">
+        <item name="android:statusBarColor">@color/dribbble_super_dark</item>
+        <item name="android:colorControlActivated">?android:colorAccent</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+    </style>
+
+    <style name="WaTgbhTheme.Splash">
+        <item name="android:windowBackground">@drawable/ic_splash</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <style name="WaTgbhTheme.Timetable" parent="WaTgbhTheme.NoActionBar" />
+
+    <style name="WaTgbhTheme.TheaterSort">
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+    </style>
+
+    <style name="WaTgbhTheme.TheaterEdit" parent="WaTgbhTheme.NoActionBar">
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+    </style>
+
+</resources>

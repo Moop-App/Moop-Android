@@ -16,6 +16,7 @@ object ThemeSpecs {
      */
     private const val ID_DEFAULT = "THEME_DEFAULT"
     private const val ID_BLACK = "THEME_BLACK"
+    private const val ID_WA_TGBH = "THEME_WA_TGBH"
 
     internal val DEFAULT = object : ThemePage(ID_DEFAULT, "Default") {
 
@@ -38,6 +39,18 @@ object ThemeSpecs {
             is TheaterSortActivity -> R.style.BlackTheme_TheaterSort
             is TheaterEditActivity -> R.style.BlackTheme_TheaterEdit
             else -> R.style.BlackTheme
+        }
+    }
+
+    internal val WA_TGBH = object : ThemePage(ID_WA_TGBH, "T.G.B.H.") {
+
+        override fun extractThemeOf(activity: Activity?): Int = when (activity) {
+            is MainActivity -> R.style.WaTgbhTheme
+            is DetailActivity -> R.style.WaTgbhTheme_Detail
+            is TimetableActivity -> R.style.WaTgbhTheme_Timetable
+            is TheaterSortActivity -> R.style.WaTgbhTheme_TheaterSort
+            is TheaterEditActivity -> R.style.WaTgbhTheme_TheaterEdit
+            else -> R.style.WaTgbhTheme
         }
     }
 }
