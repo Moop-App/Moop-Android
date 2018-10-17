@@ -11,4 +11,6 @@
     <attr name="moop_cardBgColorDark" format="reference|color" />
     <attr name="moop_cardBgColorLight" format="reference|color" />
     <attr name="moop_tagOutlineColor" format="reference|color" />
+    <attr name="moop_stageColor" format="reference|color" />
+    <attr name="moop_stageLightColor" format="reference|color" />
 </resources>

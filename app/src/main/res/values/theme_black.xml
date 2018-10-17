@@ -16,6 +16,8 @@
     <color name="black_cardBgColorDark">@color/grey_900</color>
     <color name="black_cardBgColorLight">@color/grey_700</color>
     <color name="black_tagOutlineColor">@color/black_bgColor</color>
+    <color name="black_stageColor">@color/black</color>
+    <color name="black_stageLightColor">@color/black_colorAccent</color>
 
     <style name="BlackTheme" parent="Theme.MaterialComponents">
         <item name="colorPrimary">@color/black_colorPrimary</item>
@@ -34,6 +36,8 @@
         <item name="moop_cardBgColorDark">@color/black_cardBgColorDark</item>
         <item name="moop_cardBgColorLight">@color/black_cardBgColorLight</item>
         <item name="moop_tagOutlineColor">@color/black_tagOutlineColor</item>
+        <item name="moop_stageColor">@color/black_stageColor</item>
+        <item name="moop_stageLightColor">@color/black_stageLightColor</item>
     </style>
 
     <style name="BlackTheme.NoActionBar" parent="Theme.MaterialComponents.NoActionBar">
@@ -53,6 +57,8 @@
         <item name="moop_cardBgColorDark">@color/black_cardBgColorDark</item>
         <item name="moop_cardBgColorLight">@color/black_cardBgColorLight</item>
         <item name="moop_tagOutlineColor">@color/black_tagOutlineColor</item>
+        <item name="moop_stageColor">@color/black_stageColor</item>
+        <item name="moop_stageLightColor">@color/black_stageLightColor</item>
     </style>
 
     <style name="BlackTheme.Translucent" parent="BlackTheme.NoActionBar">

@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_vertical_list.*
 import soup.movie.R
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.FragmentVerticalListBinding
+import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
@@ -78,8 +79,12 @@ class PlanFragment :
                 removeDuration = 200
             }
         }
-        swipeRefreshLayout.setOnRefreshListener {
-            presenter.refresh()
+        swipeRefreshLayout.apply {
+            setProgressBackgroundColorSchemeColor(ctx.getColorAttr(R.attr.moop_stageColor))
+            setColorSchemeColors(ctx.getColorAttr(R.attr.moop_stageLightColor))
+            setOnRefreshListener {
+                presenter.refresh()
+            }
         }
         errorView.setOnClickListener {
             presenter.refresh()
