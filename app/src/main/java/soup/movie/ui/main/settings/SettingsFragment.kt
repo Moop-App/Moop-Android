@@ -82,6 +82,9 @@ class SettingsFragment :
         editThemeButton.setOnClickListener {
             ThemeBookmarkActivity.execute(ctx)
         }
+        themeGroup.setOnClickListener {
+            ThemeBookmarkActivity.execute(ctx)
+        }
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUsePaletteTheme(isChecked)
         }
