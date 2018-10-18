@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import soup.movie.BuildConfig.API_BASE_URL
 import soup.movie.BuildType
 import soup.movie.data.MoopRepository
 import soup.movie.data.source.local.LocalMoopDataSource
@@ -66,7 +67,7 @@ class MoopRepositoryModule {
                                        okHttpClient: OkHttpClient):
             MoopApiService =
             Retrofit.Builder()
-                    .baseUrl(MoopApiService.API_BASE_URL)
+                    .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(rxJava2CallAdapterFactory)
                     .client(okHttpClient)

@@ -18,6 +18,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField 'String', 'HELP_E_MAIL', get('HELP_E_MAIL')
+        buildConfigField 'String', 'API_BASE_URL', get('API_BASE_URL')
 
         def filesAuthorityValue = applicationId + '.shareprovider'
         buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""

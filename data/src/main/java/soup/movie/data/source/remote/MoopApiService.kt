@@ -26,9 +26,4 @@ interface MoopApiService {
     fun getTimetable(
             @Path("tc") theater: String,
             @Path("mc") movie: String): Observable<TimetableResponse>
-
-    companion object {
-
-        const val API_BASE_URL = "https://moob-api.firebaseio.com/v1/"
-    }
 }
