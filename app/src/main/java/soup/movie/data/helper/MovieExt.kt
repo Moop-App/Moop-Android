@@ -39,11 +39,11 @@ fun Movie.hasOpenDate(): Boolean = openDate() != null
 
 fun Movie.isDDay(): Boolean = isPlan and hasOpenDate()
 
-fun Movie.eggIsOver95(): Boolean = (egg != "?") and (egg >= "95")
+fun Movie.eggIsOver(target: Int): Boolean = (egg != "?") and (egg >= target.toString())
 
 fun Movie.hasUnknownEgg(): Boolean = egg == "?"
 
-fun Movie.isBest(): Boolean = eggIsOver95()
+fun Movie.isBest(): Boolean = eggIsOver(96)
 
 fun Movie.isNew(): Boolean = isNow and isInThePastWeek()
 
