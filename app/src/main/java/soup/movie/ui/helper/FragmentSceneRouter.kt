@@ -39,8 +39,9 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
         }
 
         fragmentManager.findFragmentByTag(now.tag)?.apply {
-            if (isHidden) {
-                fragmentTransaction.show(this)
+            when {
+                isHidden -> fragmentTransaction.show(this)
+                isRemoving -> fragmentTransaction.add(containerId, now.newFragment(), now.tag)
             }
         } ?: run {
             fragmentTransaction.add(containerId, now.newFragment(), now.tag)
