@@ -112,9 +112,7 @@ class SettingsFragment :
         theaterGroup?.setVisibleIf { theaters.isNotEmpty() }
         theaterGroup?.run {
             removeAllViews()
-            theaters.asSequence()
-                    .filter { it != null }
-                    .map {
+            theaters.map {
                 inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
                     transitionName = it.id

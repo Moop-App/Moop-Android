@@ -108,9 +108,7 @@ class TheaterEditActivity :
         selectedTheaterGroup.run {
             TransitionManager.beginDelayedTransition(this)
             removeAllViews()
-            theaters.asSequence()
-                    .filter { it != null }
-                    .map {
+            theaters.map {
                 inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
                     transitionName = it.id
