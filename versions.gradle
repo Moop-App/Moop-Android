@@ -99,6 +99,12 @@ rx.android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
 rx.relay = "com.jakewharton.rxrelay2:rxrelay:$versions.rx_relay"
 deps.rx = rx
 
+def firebase = [:]
+firebase.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.5"
+firebase.performance = "com.google.firebase:firebase-perf:16.1.2"
+firebase.plugin = 'com.google.firebase:firebase-plugins:1.1.5'
+deps.firebase = firebase
+
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.junit = "junit:junit:$versions.junit"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"

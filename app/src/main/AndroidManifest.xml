@@ -22,6 +22,10 @@
             android:value="true" />
 
         <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="false" />
+
+        <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
