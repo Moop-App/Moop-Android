@@ -51,6 +51,8 @@ class MainActivity :
     @Inject
     lateinit var analytics: EventAnalytics
 
+    private var backPressedTime: Long = 0
+
     private val fragmentSceneRouter by lazy {
         FragmentSceneRouter(supportFragmentManager, R.id.container)
     }
@@ -182,9 +184,16 @@ class MainActivity :
             bottomSheetPanel.state = STATE_HIDDEN
             return
         }
-        if (fragmentSceneRouter.goBack().not()) {
-            super.onBackPressed()
+        if (fragmentSceneRouter.goBack()) {
+            return
         }
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - backPressedTime !in 0..BACK_INTERVAL_TIME) {
+            backPressedTime = currentTime
+            showToast(R.string.press_back_key_one_more)
+            return
+        }
+        super.onBackPressed()
     }
 
     override fun render(viewState: MainViewState) {
@@ -237,6 +246,8 @@ class MainActivity :
     }
 
     companion object {
+
+        private const val BACK_INTERVAL_TIME: Long = 2000
 
         private const val ACTION_SHOW_TAB = "soup.movie.action.SHOW_TAB"
         private const val EXTRA_TAB = "tab"
