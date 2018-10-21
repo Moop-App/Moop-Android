@@ -4,6 +4,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
+import soup.movie.data.model.Theater.Companion.TYPE_CGV
 import soup.movie.data.model.Timetable
 import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
@@ -22,9 +23,15 @@ class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDat
     override fun getCodeList(): Observable<CodeResponse> =
             moopApiService.getCodeList()
 
-    override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> =
-            moopApiService.getTimetable(theater.code, movie.id)
-                    .map { it.timetable }
+    override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> {
+        when (theater.type) {
+            TYPE_CGV -> {
+                return moopApiService.getCgvTimetable(theater.code, movie.id)
+                        .map { it.timetable }
+            }
+        }
+        return Timetable().toAnObservable()
+    }
 
     override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> =
             Version(defaultVersion)
