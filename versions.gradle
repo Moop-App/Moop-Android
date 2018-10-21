@@ -115,8 +115,8 @@ build_versions.appId = 'soup.movie'
 build_versions.min_sdk = 21
 build_versions.target_sdk = 28
 build_versions.build_tools = "28.0.3"
-build_versions.versionCode = 31
-build_versions.versionName = '0.3.9'
+build_versions.versionCode = 32
+build_versions.versionName = '0.4.0'
 ext.build_versions = build_versions
 
 static def addProjectRepositories(RepositoryHandler handler) {
