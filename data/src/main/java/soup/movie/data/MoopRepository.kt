@@ -9,12 +9,9 @@ import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.local.LocalMoopDataSource
 import soup.movie.data.source.remote.RemoteMoopDataSource
-import soup.movie.data.util.toAnObservable
 
 class MoopRepository(private val localDataSource: LocalMoopDataSource,
                      private val remoteDataSource: RemoteMoopDataSource) {
-
-    private var version: Version? = null
 
     fun getNowList(clearCache: Boolean): Observable<MovieListResponse> = when {
         clearCache -> getNowListFromNetwork()
@@ -72,12 +69,16 @@ class MoopRepository(private val localDataSource: LocalMoopDataSource,
                 .onErrorReturnItem(Timetable(theater = theater))
     }
 
-    fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> {
-        return version?.toAnObservable()
-                ?: run {
-                    remoteDataSource.getVersion(pkgName, defaultVersion)
-                            .startWith(Version(defaultVersion))
-                            .doOnNext { version = it }
-                }
-    }
+    fun getVersion(): Observable<Version> =
+            Observable.concat(
+                    getVersionInMemory(),
+                    getVersionFromNetwork())
+                    .take(1)
+
+    private fun getVersionInMemory(): Observable<Version> =
+            localDataSource.getVersion()
+
+    private fun getVersionFromNetwork() : Observable<Version> =
+            remoteDataSource.getVersion()
+                    .doOnNext { localDataSource.saveVersion(it) }
 }

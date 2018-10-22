@@ -6,6 +6,7 @@ import retrofit2.http.Path
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.model.response.TimetableResponse
+import soup.movie.data.model.response.VersionResponse
 
 interface MoopApiService {
 
@@ -26,4 +27,8 @@ interface MoopApiService {
     fun getCgvTimetable(
             @Path("tc") theater: String,
             @Path("mc") movie: String): Observable<TimetableResponse>
+
+    // 버전정보
+    @GET("version.json")
+    fun getVersion(): Observable<VersionResponse>
 }

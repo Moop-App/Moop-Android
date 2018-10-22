@@ -18,5 +18,5 @@ interface MoopDataSource {
 
     fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable>
 
-    fun getVersion(pkgName: String, defaultVersion: String): Observable<Version>
+    fun getVersion(): Observable<Version>
 }

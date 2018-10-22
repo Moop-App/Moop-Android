@@ -3,9 +3,10 @@ package soup.movie.ui.main.settings
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.rxkotlin.Observables
-import soup.movie.BuildConfig.APPLICATION_ID
+import soup.movie.BuildConfig.VERSION_CODE
 import soup.movie.BuildConfig.VERSION_NAME
 import soup.movie.data.MoopRepository
+import soup.movie.data.model.Version
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.settings.impl.UseWebLinkSetting
@@ -25,7 +26,10 @@ class SettingsPresenter(private val theatersSetting: TheatersSetting,
                 theatersSetting.asObservable(),
                 usePaletteThemeSetting.asObservable(),
                 useWebLinkSetting.asObservable(),
-                repository.getVersion(APPLICATION_ID, VERSION_NAME),
+                repository.getVersion()
+                        .onErrorReturnItem(Version(
+                                versionCode = VERSION_CODE,
+                                versionName = VERSION_NAME)),
                 ::SettingsViewState)
                 .distinctUntilChanged()
                 .observeOn(AndroidSchedulers.mainThread())

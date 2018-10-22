@@ -17,6 +17,7 @@ import soup.movie.data.util.toAnObservable
 class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
 
     private var codeResponse: CodeResponse? = null
+    private var version: Version? = null
 
     fun saveNowList(response: MovieListResponse) {
         saveMovieListAs(TYPE_NOW, response)
@@ -58,5 +59,12 @@ class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
 
     override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> = TODO()
 
-    override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> = TODO()
+    fun saveVersion(version: Version) {
+        this.version = version
+    }
+
+    override fun getVersion(): Observable<Version> {
+        return version?.toAnObservable()
+                ?: Observable.empty()
+    }
 }

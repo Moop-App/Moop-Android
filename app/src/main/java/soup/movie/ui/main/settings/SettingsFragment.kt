@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.item_theme_page.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.data.helper.Moop
@@ -124,7 +123,7 @@ class SettingsFragment :
         }
         usePaletteThemeSwitch?.isChecked = viewState.usePaletteTheme
         useWebLinkSwitch?.isChecked = viewState.useWebLink
-        appVersionLabel?.text = "현재 ${BuildConfig.VERSION_NAME} / 최신 ${viewState.version.code}"
+        appVersionLabel?.text = "현재 ${BuildConfig.VERSION_NAME} / 최신 ${viewState.version.versionName}"
     }
 
     private fun onTheaterEditClicked() {

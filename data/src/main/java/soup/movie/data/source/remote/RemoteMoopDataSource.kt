@@ -1,7 +1,6 @@
 package soup.movie.data.source.remote
 
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
 import soup.movie.data.model.Theater.Companion.TYPE_CGV
@@ -33,8 +32,6 @@ class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDat
         return Timetable().toAnObservable()
     }
 
-    override fun getVersion(pkgName: String, defaultVersion: String): Observable<Version> =
-            Version(defaultVersion)
-                    .toAnObservable()
-                    .subscribeOn(Schedulers.io())
+    override fun getVersion(): Observable<Version> =
+            moopApiService.getVersion().map { it.android }
 }
