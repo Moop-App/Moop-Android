@@ -6,8 +6,8 @@
 
     <dimen name="drag_dismiss_distance">112dp</dimen> <!-- 2 * ?android:actionBarSize -->
 
-    <dimen name="settings_margin_between_category">24dp</dimen>
-    <dimen name="settings_margin_in_category">12dp</dimen>
+    <dimen name="settings_category_margin_vertical">24dp</dimen>
+    <dimen name="settings_item_margin_vertical">12dp</dimen>
 
     <dimen name="tag_width">36dp</dimen>
     <dimen name="tag_height">18dp</dimen>

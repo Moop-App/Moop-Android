@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <data>
+        <variable name="item" type="soup.movie.theme.ThemePage" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingBottom="@dimen/settings_category_margin_vertical" >
+
+        <TextView
+            android:id="@+id/themeCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_category_theme"
+            android:textAppearance="@style/TextAppearance.Settings.Category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/editThemeButton" />
+
+        <ImageView
+            android:id="@+id/editThemeButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_round_palette"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            app:layout_constraintStart_toEndOf="@+id/themeCategory"
+            app:layout_constraintBottom_toBottomOf="@+id/themeCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/themeCategory" />
+
+        <include
+            android:id="@+id/themeGroup"
+            layout="@layout/item_theme_page"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/themeCategory"
+            app:item="@{item}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

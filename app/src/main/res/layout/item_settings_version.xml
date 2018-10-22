@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <!--android:paddingTop="@dimen/settings_category_margin_vertical"-->
+        <!--android:paddingBottom="@dimen/settings_category_margin_vertical"-->
+
+        <View
+            android:id="@+id/versionButton"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/debug_background" />
+
+        <ImageView
+            android:id="@+id/versionIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_round_system_update"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            app:layout_constraintTop_toTopOf="@+id/versionButton"
+            app:layout_constraintBottom_toBottomOf="@+id/versionButton"
+            app:layout_constraintStart_toStartOf="@+id/versionButton" />
+
+        <TextView
+            android:id="@+id/versionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:textColor="?attr/moop_textColorDark"
+            app:layout_constraintTop_toTopOf="@+id/versionButton"
+            app:layout_constraintBottom_toBottomOf="@+id/versionButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="현재 0.1.8 / 최신 0.1.8"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

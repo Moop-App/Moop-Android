@@ -12,6 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.item_settings_experimental.*
+import kotlinx.android.synthetic.main.item_settings_feedback.*
+import kotlinx.android.synthetic.main.item_settings_theater.*
+import kotlinx.android.synthetic.main.item_settings_theme.*
+import kotlinx.android.synthetic.main.item_settings_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.data.helper.Moop
@@ -99,8 +104,8 @@ class SettingsFragment :
             intent.putExtra(Intent.EXTRA_TEXT, "") //TODO
             it.context.startActivitySafely(intent)
         }
-        appVersionLabel.text = "현재 ${BuildConfig.VERSION_NAME}"
-        appVersionButton.setOnClickListener {
+        versionLabel.text = "현재 ${BuildConfig.VERSION_NAME}"
+        versionButton.setOnClickListener {
             Moop.executePlayStore(requireContext())
         }
     }
@@ -131,7 +136,7 @@ class SettingsFragment :
 
     override fun render(viewState: SettingsViewState.VersionViewState) {
         printRenderLog { viewState }
-        appVersionLabel?.text = "현재 ${viewState.current.versionName} / 최신 ${viewState.latest.versionName}"
+        versionLabel?.text = "현재 ${viewState.current.versionName} / 최신 ${viewState.latest.versionName}"
     }
 
     private fun onTheaterEditClicked() {

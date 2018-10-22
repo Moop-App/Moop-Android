@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingBottom="@dimen/settings_category_margin_vertical" >
+
+        <TextView
+            android:id="@+id/theaterCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_category_theater"
+            android:textAppearance="@style/TextAppearance.Settings.Category"
+            app:layout_constraintEnd_toStartOf="@+id/editTheaterButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/editTheaterButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_round_edit"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            app:layout_constraintStart_toEndOf="@+id/theaterCategory"
+            app:layout_constraintBottom_toBottomOf="@+id/theaterCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/theaterCategory" />
+
+        <TextView
+            android:id="@+id/noTheaterView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:text="@string/settings_theater_empty_description"
+            android:textColor="?attr/moop_textColorDark"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
+            tools:visibility="visible" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/theaterGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
+            tools:visibility="visible" >
+
+            <!-- for preview
+
+            <include layout="@layout/chip_action_cgv" />
+            <include layout="@layout/chip_action_lotte" />
+            <include layout="@layout/chip_action_megabox" />
+             -->
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
