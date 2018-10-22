@@ -26,6 +26,7 @@
     <string name="settings_version_update_message">새 버전(%s)이 출시되었습니다.\n업데이트를 진행 하시겠습니까?</string>
     <string name="settings_version_update_button_positive">지금 업데이트</string>
     <string name="settings_version_update_button_negative">다음에</string>
+    <string name="settings_category_feedback">피드백</string>
 
     <string name="help_title">도움말</string>
 

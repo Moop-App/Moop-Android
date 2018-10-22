@@ -26,6 +26,7 @@
     <string name="settings_version_update_message">New version(%s) has been released.\nDo you want to proceed with the update?</string>
     <string name="settings_version_update_button_positive">Update now</string>
     <string name="settings_version_update_button_negative">Try later</string>
+    <string name="settings_category_feedback">Feedback</string>
 
     <string name="help_title">Help</string>
 
