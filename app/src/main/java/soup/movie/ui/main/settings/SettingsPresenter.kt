@@ -11,6 +11,7 @@ import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.settings.SettingsContract.Presenter
 import soup.movie.ui.main.settings.SettingsContract.View
+import soup.movie.ui.main.settings.SettingsViewState.*
 
 class SettingsPresenter(private val theatersSetting: TheatersSetting,
                         private val usePaletteThemeSetting: UsePaletteThemeSetting,
@@ -21,17 +22,24 @@ class SettingsPresenter(private val theatersSetting: TheatersSetting,
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)
         disposable.add(repository.refreshVersion().subscribe())
+        disposable.add(theatersSetting.asObservable()
+                .map { TheaterListViewState(it) }
+                .distinctUntilChanged()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { view?.render(it) })
         disposable.add(Observables.combineLatest(
-                theatersSetting.asObservable(),
                 usePaletteThemeSetting.asObservable(),
                 useWebLinkSetting.asObservable(),
-                repository.getVersion()
-                        .startWith(currentVersion())
-                        .defaultIfEmpty(currentVersion())
-                        .onErrorReturnItem(currentVersion())
-                        .distinctUntilChanged(),
-                ::SettingsViewState)
+                ::ExperimentalViewState)
                 .distinctUntilChanged()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { view?.render(it) })
+        disposable.add(repository.getVersion()
+                .startWith(currentVersion())
+                .defaultIfEmpty(currentVersion())
+                .onErrorReturnItem(currentVersion())
+                .distinctUntilChanged()
+                .map { VersionViewState(currentVersion(), it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { view?.render(it) })
     }

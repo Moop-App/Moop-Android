@@ -4,9 +4,19 @@ import androidx.annotation.Keep
 import soup.movie.data.model.Theater
 import soup.movie.data.model.Version
 
-@Keep
-data class SettingsViewState(
-        val theaterList: List<Theater>,
-        val usePaletteTheme: Boolean,
-        val useWebLink: Boolean,
-        val version: Version)
+sealed class SettingsViewState {
+
+    @Keep
+    data class TheaterListViewState(
+            val theaterList: List<Theater>)
+
+    @Keep
+    data class ExperimentalViewState(
+            val usePaletteTheme: Boolean,
+            val useWebLink: Boolean)
+
+    @Keep
+    data class VersionViewState(
+            val current: Version,
+            val latest: Version)
+}

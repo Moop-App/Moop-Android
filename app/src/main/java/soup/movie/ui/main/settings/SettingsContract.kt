@@ -13,6 +13,10 @@ interface SettingsContract {
 
     interface View : BaseContract.View {
 
-        fun render(viewState: SettingsViewState)
+        fun render(viewState: SettingsViewState.TheaterListViewState)
+
+        fun render(viewState: SettingsViewState.ExperimentalViewState)
+
+        fun render(viewState: SettingsViewState.VersionViewState)
     }
 }

@@ -105,7 +105,7 @@ class SettingsFragment :
         }
     }
 
-    override fun render(viewState: SettingsViewState) {
+    override fun render(viewState: SettingsViewState.TheaterListViewState) {
         printRenderLog { viewState }
         val theaters = viewState.theaterList
         noTheaterView?.setVisibleIf { theaters.isEmpty() }
@@ -121,9 +121,17 @@ class SettingsFragment :
                 }
             }.forEach { addView(it) }
         }
+    }
+
+    override fun render(viewState: SettingsViewState.ExperimentalViewState) {
+        printRenderLog { viewState }
         usePaletteThemeSwitch?.isChecked = viewState.usePaletteTheme
         useWebLinkSwitch?.isChecked = viewState.useWebLink
-        appVersionLabel?.text = "현재 ${BuildConfig.VERSION_NAME} / 최신 ${viewState.version.versionName}"
+    }
+
+    override fun render(viewState: SettingsViewState.VersionViewState) {
+        printRenderLog { viewState }
+        appVersionLabel?.text = "현재 ${viewState.current.versionName} / 최신 ${viewState.latest.versionName}"
     }
 
     private fun onTheaterEditClicked() {
