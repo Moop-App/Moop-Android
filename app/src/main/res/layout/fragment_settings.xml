@@ -8,7 +8,7 @@
         <variable name="item" type="soup.movie.theme.ThemePage" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollViewEx
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="soup.movie.ui.main.settings.SettingsFragment">
@@ -115,5 +115,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/versionItem" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollViewEx>
 </layout>
