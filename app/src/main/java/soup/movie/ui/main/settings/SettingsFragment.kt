@@ -80,13 +80,13 @@ class SettingsFragment :
 
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
-        editTheaterButton.setOnClickListener {
+        editTheaterButton.setOnDebounceClickListener {
             onTheaterEditClicked()
         }
-        editThemeButton.setOnClickListener {
+        editThemeButton.setOnDebounceClickListener {
             onThemeEditClicked()
         }
-        themeGroup.setOnClickListener {
+        themeGroup.setOnDebounceClickListener {
             onThemeEditClicked()
         }
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -95,7 +95,7 @@ class SettingsFragment :
         useWebLinkSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUseWebLink(isChecked)
         }
-        bugReportButton.setOnClickListener {
+        bugReportButton.setOnDebounceClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse("mailto:")
             intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(BuildConfig.HELP_E_MAIL))
@@ -103,7 +103,7 @@ class SettingsFragment :
             intent.putExtra(Intent.EXTRA_TEXT, "") //TODO
             it.context.startActivitySafely(intent)
         }
-        versionButton.setOnClickListener {
+        versionButton.setOnDebounceClickListener {
             onVersionClicked()
         }
     }
@@ -120,7 +120,7 @@ class SettingsFragment :
                     text = it.name
                     transitionName = it.id
                     tag = it.id
-                    setOnClickListener { _ -> it.executeWeb(requireContext()) }
+                    setOnDebounceClickListener { _ -> it.executeWeb(requireContext()) }
                 }
             }.forEach { addView(it) }
         }

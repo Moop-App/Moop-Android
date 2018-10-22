@@ -5,6 +5,7 @@ import soup.movie.R
 import soup.movie.data.model.ScreeningDate
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
+import soup.movie.util.setOnDebounceClickListener
 import soup.widget.recyclerview.callback.IdBasedDiffCallback
 
 internal class TimetableDateListAdapter(val listener: (ScreeningDate) -> Unit) :
@@ -12,7 +13,7 @@ internal class TimetableDateListAdapter(val listener: (ScreeningDate) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<ScreeningDate> {
         return super.onCreateViewHolder(parent, viewType).apply {
-            itemView.setOnClickListener {
+            itemView.setOnDebounceClickListener {
                 listener(getItem(adapterPosition))
             }
         }

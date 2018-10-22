@@ -45,13 +45,10 @@ import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.*
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.helper.EventAnalytics
+import soup.movie.util.*
 import soup.movie.util.IntentUtil.createShareIntent
 import soup.movie.util.delegates.contentView
-import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.setBackgroundColorResource
-import soup.movie.util.startActivitySafely
-import soup.movie.util.with
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -225,18 +222,18 @@ class DetailActivity :
         windowBackground = getColorAttr(R.attr.moop_bgColor)
 
         posterView.loadAsync(movie.posterUrl, shotLoadListener)
-        posterView.setOnClickListener {
+        posterView.setOnDebounceClickListener {
             analytics.clickPoster(movie)
             presenter.requestShareImage(movie.posterUrl)
         }
-        timetableButton.setOnClickListener {
+        timetableButton.setOnDebounceClickListener {
             analytics.clickTimetable(movie)
             val intent = Intent(this, TimetableActivity::class.java)
             startActivity(intent, ActivityOptions
                     .makeSceneTransitionAnimation(this, *createSharedElements())
                     .toBundle())
         }
-        shareButton.setOnClickListener {
+        shareButton.setOnDebounceClickListener {
             analytics.clickShare(movie)
             share(movie)
         }

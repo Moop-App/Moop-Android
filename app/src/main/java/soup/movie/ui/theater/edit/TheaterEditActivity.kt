@@ -22,6 +22,7 @@ import soup.movie.util.blockExtraTouchEvents
 import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
@@ -80,7 +81,7 @@ class TheaterEditActivity :
         viewPager.adapter = pageAdapter
         footerView.blockExtraTouchEvents()
         footerPanel.state = STATE_EXPANDED
-        peekView.setOnClickListener {
+        peekView.setOnDebounceClickListener {
             footerPanel.state = when (footerPanel.state) {
                 STATE_COLLAPSED -> STATE_EXPANDED
                 else -> STATE_COLLAPSED

@@ -59,12 +59,12 @@ class TheatersFragment :
     override fun initViewState(ctx: Context) {
         super.initViewState(ctx)
         infoPanel.state = STATE_HIDDEN
-        navigationButton.setOnClickListener {
+        navigationButton.setOnDebounceClickListener {
             selectedTheater?.toMapIntent()?.run {
                 it.context.startActivitySafely(this)
             }
         }
-        infoButton.setOnClickListener {
+        infoButton.setOnDebounceClickListener {
             selectedTheater?.run {
                 executeWeb(requireContext())
             }

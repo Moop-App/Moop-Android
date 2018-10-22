@@ -11,6 +11,7 @@ import soup.movie.data.helper.isNew
 import soup.movie.data.model.Movie
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
+import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.with
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
@@ -19,7 +20,7 @@ class NowListAdapter(private val listener: (Int, Movie, Array<Pair<View, String>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> {
         return super.onCreateViewHolder(parent, viewType).apply {
-            itemView.setOnClickListener {
+            itemView.setOnDebounceClickListener {
                 val index = adapterPosition
                 if (index in 0..itemCount) {
                     val movie: Movie = getItem(index)

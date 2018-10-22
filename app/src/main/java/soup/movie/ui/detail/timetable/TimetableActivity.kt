@@ -20,6 +20,7 @@ import soup.movie.ui.detail.timetable.TimetableViewState.LoadingState
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.setVisibleIf
 import soup.movie.util.showIf
 import timber.log.Timber
@@ -76,7 +77,7 @@ class TimetableActivity :
         theaterListView.apply {
             adapter = theaterListAdapter
         }
-        noTheaterView.selectView.setOnClickListener {
+        noTheaterView.selectView.setOnDebounceClickListener {
             val intent = Intent(this, TheaterEditActivity::class.java)
             startActivity(intent, ActivityOptions
                     .makeSceneTransitionAnimation(this)

@@ -7,6 +7,7 @@ import soup.movie.data.model.Trailer
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
+import soup.movie.util.setOnDebounceClickListener
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
 internal class DetailTrailerListAdapter(private val analytics: EventAnalytics) :
@@ -14,7 +15,7 @@ internal class DetailTrailerListAdapter(private val analytics: EventAnalytics) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Trailer> {
         return super.onCreateViewHolder(parent, viewType).apply {
-            itemView.setOnClickListener {
+            itemView.setOnDebounceClickListener {
                 val trailer = getItem(adapterPosition)
                 analytics.clickItem(trailer)
                 YouTube.executeApp(it.context, trailer)
