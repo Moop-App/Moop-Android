@@ -1,5 +1,6 @@
 package soup.movie.data
 
+import io.reactivex.Completable
 import io.reactivex.Observable
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
@@ -47,7 +48,7 @@ class MoopRepository(private val localDataSource: LocalMoopDataSource,
             Observable.merge(
                     getNowList(false).map { it.list },
                     getPlanList(false).map { it.list })
-                    .flatMapIterable { it -> it }
+                    .flatMapIterable { it }
                     .filter { it.id == movieId }
 
     fun getCodeList(): Observable<CodeResponse> =
@@ -69,11 +70,11 @@ class MoopRepository(private val localDataSource: LocalMoopDataSource,
                 .onErrorReturnItem(Timetable(theater = theater))
     }
 
-    fun getVersion(): Observable<Version> =
-            Observable.concat(
-                    getVersionInMemory(),
-                    getVersionFromNetwork())
-                    .take(1)
+    fun getVersion(): Observable<Version> = getVersionInMemory()
+
+    fun refreshVersion(): Completable = getVersionFromNetwork()
+            .ignoreElements()
+            .onErrorComplete()
 
     private fun getVersionInMemory(): Observable<Version> =
             localDataSource.getVersion()

@@ -2,6 +2,7 @@ package soup.movie.data.source.local
 
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
 import soup.movie.data.model.Timetable
@@ -17,7 +18,7 @@ import soup.movie.data.util.toAnObservable
 class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
 
     private var codeResponse: CodeResponse? = null
-    private var version: Version? = null
+    private val versionSubject: BehaviorSubject<Version> = BehaviorSubject.create()
 
     fun saveNowList(response: MovieListResponse) {
         saveMovieListAs(TYPE_NOW, response)
@@ -60,11 +61,10 @@ class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
     override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> = TODO()
 
     fun saveVersion(version: Version) {
-        this.version = version
+        versionSubject.onNext(version)
     }
 
     override fun getVersion(): Observable<Version> {
-        return version?.toAnObservable()
-                ?: Observable.empty()
+        return versionSubject
     }
 }
