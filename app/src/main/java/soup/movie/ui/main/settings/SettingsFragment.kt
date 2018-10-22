@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_settings_experimental.*
 import kotlinx.android.synthetic.main.item_settings_feedback.*
@@ -137,6 +138,19 @@ class SettingsFragment :
         currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
         latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
         newReleaseIcon?.setGoneIf { viewState.isLatest() }
+        if (viewState.isLatest().not()) {
+            AlertDialog.Builder(requireContext())
+                    .setIcon(R.drawable.ic_round_new_releases)
+                    .setTitle(R.string.settings_version_update_title)
+                    .setMessage(getString(R.string.settings_version_update_message, viewState.latest.versionName))
+                    .setPositiveButton(R.string.settings_version_update_button_positive) {
+                        _, _ -> Moop.executePlayStore(requireContext())
+                    }
+                    .setNegativeButton(R.string.settings_version_update_button_negative) {
+                        dialog, _ -> dialog.dismiss()
+                    }
+                    .show()
+        }
     }
 
     private fun onTheaterEditClicked() {
