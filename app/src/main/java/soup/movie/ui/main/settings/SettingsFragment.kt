@@ -80,10 +80,10 @@ class SettingsFragment :
             onTheaterEditClicked()
         }
         editThemeButton.setOnClickListener {
-            val intent = Intent(requireActivity(), ThemeBookmarkActivity::class.java)
-            startActivityForResult(intent, 0, ActivityOptions
-                    .makeSceneTransitionAnimation(requireActivity())
-                    .toBundle())
+            onThemeEditClicked()
+        }
+        themeGroup.setOnClickListener {
+            onThemeEditClicked()
         }
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUsePaletteTheme(isChecked)
@@ -137,17 +137,24 @@ class SettingsFragment :
     private fun onTheaterEditClicked() {
         val intent = Intent(context, TheaterSortActivity::class.java)
         startActivityForResult(intent, 0, ActivityOptions
-                .makeSceneTransitionAnimation(activity, *createSharedElements())
+                .makeSceneTransitionAnimation(activity, *createSharedElementsForTheaters())
                 .toBundle())
     }
 
-    private fun createSharedElements(): Array<Pair<View, String>> =
+    private fun createSharedElementsForTheaters(): Array<Pair<View, String>> =
             theaterGroup?.run {
                 (0 until childCount)
                         .mapNotNull { getChildAt(it) }
                         .map { it with it.transitionName }
                         .toTypedArray()
             } ?: emptyArray()
+
+    private fun onThemeEditClicked() {
+        val intent = Intent(requireActivity(), ThemeBookmarkActivity::class.java)
+        startActivityForResult(intent, 0, ActivityOptions
+                .makeSceneTransitionAnimation(requireActivity())
+                .toBundle())
+    }
 
     companion object {
 
