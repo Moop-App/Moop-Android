@@ -18,5 +18,8 @@ sealed class SettingsViewState {
     @Keep
     data class VersionViewState(
             val current: Version,
-            val latest: Version)
+            val latest: Version) {
+
+        fun isLatest(): Boolean = current.versionCode >= latest.versionCode
+    }
 }

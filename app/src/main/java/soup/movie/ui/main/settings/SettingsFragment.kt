@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.item_settings_experimental.*
 import kotlinx.android.synthetic.main.item_settings_feedback.*
 import kotlinx.android.synthetic.main.item_settings_theater.*
@@ -29,11 +28,8 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeBookmarkActivity
-import soup.movie.util.inflate
+import soup.movie.util.*
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.setVisibleIf
-import soup.movie.util.startActivitySafely
-import soup.movie.util.with
 import javax.inject.Inject
 
 class SettingsFragment :
@@ -45,6 +41,8 @@ class SettingsFragment :
 
     @Inject
     lateinit var analytics: EventAnalytics
+
+    private var versionViewState: SettingsViewState.VersionViewState? = null
 
     override val menuResource: Int?
         get() = R.menu.fragment_settings
@@ -104,9 +102,8 @@ class SettingsFragment :
             intent.putExtra(Intent.EXTRA_TEXT, "") //TODO
             it.context.startActivitySafely(intent)
         }
-        versionLabel.text = "현재 ${BuildConfig.VERSION_NAME}"
         versionButton.setOnClickListener {
-            Moop.executePlayStore(requireContext())
+            onVersionClicked()
         }
     }
 
@@ -136,7 +133,10 @@ class SettingsFragment :
 
     override fun render(viewState: SettingsViewState.VersionViewState) {
         printRenderLog { viewState }
-        versionLabel?.text = "현재 ${viewState.current.versionName} / 최신 ${viewState.latest.versionName}"
+        versionViewState = viewState
+        currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
+        latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
+        newReleaseIcon?.setGoneIf { viewState.isLatest() }
     }
 
     private fun onTheaterEditClicked() {
@@ -159,6 +159,16 @@ class SettingsFragment :
         startActivityForResult(intent, 0, ActivityOptions
                 .makeSceneTransitionAnimation(requireActivity())
                 .toBundle())
+    }
+
+    private fun onVersionClicked() {
+        versionViewState?.run {
+            if (isLatest()) {
+                context?.showToast(R.string.settings_version_toast)
+            } else {
+                Moop.executePlayStore(requireContext())
+            }
+        }
     }
 
     companion object {

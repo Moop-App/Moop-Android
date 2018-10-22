@@ -18,6 +18,10 @@
     <string name="settings_category_theme">Theme</string>
     <string name="settings_category_theater_mode">Theater Mode</string>
     <string name="settings_category_lab">Lab</string>
+    <string name="settings_category_version">Version</string>
+    <string name="settings_version_current">Current %s</string>
+    <string name="settings_version_latest">Latest %s</string>
+    <string name="settings_version_toast">The current version is latest.</string>
 
     <string name="help_title">Help</string>
 
