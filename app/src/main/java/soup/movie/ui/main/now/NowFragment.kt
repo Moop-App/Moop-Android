@@ -81,7 +81,7 @@ class NowFragment :
         }
         swipeRefreshLayout.apply {
             setProgressBackgroundColorSchemeColor(ctx.getColorAttr(R.attr.moop_stageColor))
-            setColorSchemeColors(ctx.getColorAttr(R.attr.moop_stageLightColor))
+            setColorSchemeColors(ctx.getColorAttr(R.attr.moop_stageStarColor))
             setOnRefreshListener {
                 presenter.refresh()
             }

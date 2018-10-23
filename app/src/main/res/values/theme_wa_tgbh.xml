@@ -29,7 +29,8 @@
     <color name="wa_tgbh_cardContentColorLight">@color/wa_tgbh_blue_2</color>
     <color name="wa_tgbh_tagOutlineColor">@color/wa_tgbh_bgColor</color>
     <color name="wa_tgbh_stageColor">@color/wa_tgbh_blue_3</color>
-    <color name="wa_tgbh_stageLightColor">@color/wa_tgbh_blue_1</color>
+    <color name="wa_tgbh_stageStarColor">@color/wa_tgbh_blue_1</color>
+    <color name="wa_tgbh_stageBrightColor">@color/wa_tgbh_blue_1</color>
     <color name="wa_tgbh_stageDimColor">@color/wa_tgbh_blue_2</color>
 
     <style name="WaTgbhTheme" parent="Theme.MaterialComponents.Light">
@@ -54,7 +55,8 @@
         <item name="moop_cardContentColorLight">@color/wa_tgbh_cardContentColorLight</item>
         <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
         <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
-        <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>
+        <item name="moop_stageStarColor">@color/wa_tgbh_stageStarColor</item>
+        <item name="moop_stageBrightColor">@color/wa_tgbh_stageBrightColor</item>
         <item name="moop_stageDimColor">@color/wa_tgbh_stageDimColor</item>
     </style>
 
@@ -80,7 +82,8 @@
         <item name="moop_cardContentColorLight">@color/wa_tgbh_cardContentColorLight</item>
         <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
         <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
-        <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>
+        <item name="moop_stageStarColor">@color/wa_tgbh_stageStarColor</item>
+        <item name="moop_stageBrightColor">@color/wa_tgbh_stageBrightColor</item>
         <item name="moop_stageDimColor">@color/wa_tgbh_stageDimColor</item>
     </style>
 

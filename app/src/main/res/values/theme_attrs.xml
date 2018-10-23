@@ -15,6 +15,7 @@
     <attr name="moop_cardContentColorLight" format="reference|color" />
     <attr name="moop_tagOutlineColor" format="reference|color" />
     <attr name="moop_stageColor" format="reference|color" />
-    <attr name="moop_stageLightColor" format="reference|color" />
+    <attr name="moop_stageStarColor" format="reference|color" />
+    <attr name="moop_stageBrightColor" format="reference|color" />
     <attr name="moop_stageDimColor" format="reference|color" />
 </resources>

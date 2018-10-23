@@ -17,7 +17,8 @@
     <color name="black_cardBgColorLight">@color/grey_700</color>
     <color name="black_tagOutlineColor">@color/black_bgColor</color>
     <color name="black_stageColor">@color/black</color>
-    <color name="black_stageLightColor">@color/black_colorAccent</color>
+    <color name="black_stageStarColor">@color/black_colorAccent</color>
+    <color name="black_stageBrightColor">@color/light_icon</color>
     <color name="black_stageDimColor">@color/grey_700</color>
 
     <style name="BlackTheme" parent="Theme.MaterialComponents">
@@ -41,7 +42,8 @@
         <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
         <item name="moop_tagOutlineColor">@color/black_tagOutlineColor</item>
         <item name="moop_stageColor">@color/black_stageColor</item>
-        <item name="moop_stageLightColor">@color/black_stageLightColor</item>
+        <item name="moop_stageStarColor">@color/black_stageStarColor</item>
+        <item name="moop_stageBrightColor">@color/black_stageBrightColor</item>
         <item name="moop_stageDimColor">@color/black_stageDimColor</item>
     </style>
 
@@ -66,7 +68,8 @@
         <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
         <item name="moop_tagOutlineColor">@color/black_tagOutlineColor</item>
         <item name="moop_stageColor">@color/black_stageColor</item>
-        <item name="moop_stageLightColor">@color/black_stageLightColor</item>
+        <item name="moop_stageStarColor">@color/black_stageStarColor</item>
+        <item name="moop_stageBrightColor">@color/black_stageBrightColor</item>
         <item name="moop_stageDimColor">@color/black_stageDimColor</item>
     </style>
 

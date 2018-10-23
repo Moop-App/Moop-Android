@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foreground="?android:attr/selectableItemBackground"
+        tools:background="?attr/moop_stageColor"
         tools:layout_height="280dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +26,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:text="자주가는 극장은 최대 10개까지\n선택할 수 있습니다."
-                android:textColor="?attr/moop_textColorDark"
+                android:textColor="?attr/moop_stageBrightColor"
                 android:textSize="14dp"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -90,7 +91,7 @@
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="?attr/moop_dividerColor"
+            android:background="?attr/moop_cardDividerColor"
             app:layout_constraintTop_toBottomOf="@+id/peekView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -101,12 +102,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/settings_theater_empty_description"
-            android:textColor="?attr/moop_textColorDark"
+            android:textColor="?attr/moop_stageBrightColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/peekView"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/selectedTheaterGroup"

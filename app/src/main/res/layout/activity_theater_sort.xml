@@ -44,7 +44,6 @@
                 android:layout_height="68dp"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_round_no_theaters"
-                android:tint="?attr/moop_iconColorLight"
                 app:layout_constraintBottom_toTopOf="@+id/description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
