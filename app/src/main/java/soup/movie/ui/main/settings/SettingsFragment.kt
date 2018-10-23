@@ -48,18 +48,19 @@ class SettingsFragment :
     override val menuResource: Int?
         get() = R.menu.fragment_settings
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_help) {
-            if (panelIsShown()) {
-                hidePanel()
-            } else {
-                analytics.clickMenuHelp()
-                showPanel(HelpFragment.toPanelData())
-            }
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
+    //TODO: Re-apply help button
+    //override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    //    if (item.itemId == R.id.action_help) {
+    //        if (panelIsShown()) {
+    //            hidePanel()
+    //        } else {
+    //            analytics.clickMenuHelp()
+    //            showPanel(HelpFragment.toPanelData())
+    //        }
+    //        return true
+    //    }
+    //    return super.onOptionsItemSelected(item)
+    //}
 
     override fun onMapSharedElements(names: List<String>,
                                      sharedElements: MutableMap<String, View>) {
