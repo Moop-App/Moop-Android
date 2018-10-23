@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.transition.TransitionManager
-import kotlinx.android.synthetic.main.fragment_vertical_list.*
+import kotlinx.android.synthetic.main.fragment_theater_edit.*
 import soup.movie.databinding.FragmentTheaterEditBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.theater.edit.tab.TheaterEditChildViewState.DoneState
