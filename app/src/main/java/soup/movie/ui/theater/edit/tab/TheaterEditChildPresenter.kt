@@ -7,15 +7,12 @@ import io.reactivex.rxkotlin.Observables
 import soup.movie.data.TheaterEditManager
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
-import soup.movie.data.util.toAnObservable
-import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.theater.edit.tab.TheaterEditChildContract.Presenter
 import soup.movie.ui.theater.edit.tab.TheaterEditChildContract.View
 import soup.movie.ui.theater.edit.tab.TheaterEditChildViewState.DoneState
 
-abstract class TheaterEditChildPresenter(private val manager: TheaterEditManager,
-                                         private val theatersSetting: TheatersSetting) :
+abstract class TheaterEditChildPresenter(private val manager: TheaterEditManager) :
         BasePresenter<View>(), Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {
@@ -33,12 +30,8 @@ abstract class TheaterEditChildPresenter(private val manager: TheaterEditManager
 
     abstract fun getAllTheatersObservable(): Observable<List<AreaGroup>>
 
-    private val selectedIdSetObservable: Observable<Set<String>>
-        get() = theatersSetting.get()
-                .asSequence()
-                .map { it.id }
-                .toSet()
-                .toAnObservable()
+    private val selectedIdSetObservable: Observable<List<Theater>>
+        get() = manager.asSelectedTheatersSubject()
 
     override fun add(theater: Theater): Boolean {
         return manager.add(theater)

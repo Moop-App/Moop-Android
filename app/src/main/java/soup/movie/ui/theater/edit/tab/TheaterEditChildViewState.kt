@@ -2,6 +2,7 @@ package soup.movie.ui.theater.edit.tab
 
 import androidx.annotation.Keep
 import soup.movie.data.model.AreaGroup
+import soup.movie.data.model.Theater
 
 sealed class TheaterEditChildViewState {
 
@@ -20,5 +21,5 @@ sealed class TheaterEditChildViewState {
     @Keep
     data class DoneState(
             val areaGroupList: List<AreaGroup>,
-            val selectedTheaterIdSet: Set<String>) : TheaterEditChildViewState()
+            val selectedTheaterIdSet: List<Theater>) : TheaterEditChildViewState()
 }

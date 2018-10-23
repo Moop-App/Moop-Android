@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.fragment_theater_edit.*
 import soup.movie.databinding.FragmentTheaterEditBinding
 import soup.movie.ui.BaseFragment
@@ -34,7 +33,6 @@ abstract class TheaterEditChildFragment :
     override fun render(viewState: TheaterEditChildViewState) {
         printRenderLog { viewState }
         if (viewState is DoneState) {
-            TransitionManager.beginDelayedTransition(listView)
             listAdapter.submitList(viewState.areaGroupList, viewState.selectedTheaterIdSet)
         }
     }

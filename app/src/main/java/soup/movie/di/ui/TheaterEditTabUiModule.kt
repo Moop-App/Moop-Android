@@ -28,10 +28,9 @@ abstract class TheaterEditTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(manager: TheaterEditManager,
-                      theatersSetting: TheatersSetting):
+        fun presenter(manager: TheaterEditManager):
                 TheaterEditChildContract.Presenter =
-                CgvEditPresenter(manager, theatersSetting)
+                CgvEditPresenter(manager)
     }
 
     @FragmentScope
@@ -45,10 +44,9 @@ abstract class TheaterEditTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(manager: TheaterEditManager,
-                      theatersSetting: TheatersSetting):
+        fun presenter(manager: TheaterEditManager):
                 TheaterEditChildContract.Presenter =
-                LotteEditPresenter(manager, theatersSetting)
+                LotteEditPresenter(manager)
     }
 
     @FragmentScope
@@ -62,9 +60,8 @@ abstract class TheaterEditTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(manager: TheaterEditManager,
-                      theatersSetting: TheatersSetting):
+        fun presenter(manager: TheaterEditManager):
                 TheaterEditChildContract.Presenter =
-                MegaboxEditPresenter(manager, theatersSetting)
+                MegaboxEditPresenter(manager)
     }
 }

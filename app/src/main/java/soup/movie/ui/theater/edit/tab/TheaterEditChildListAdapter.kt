@@ -22,7 +22,7 @@ class TheaterEditChildListAdapter(private val listener: Listener) :
         fun remove(theater: Theater)
     }
 
-    private var selectedIdSet: MutableSet<String> = hashSetOf()
+    private var selectedIdSet: MutableList<Theater> = arrayListOf()
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<AreaGroup>, position: Int) {
         super.onBindViewHolder(holder, position)
@@ -31,13 +31,13 @@ class TheaterEditChildListAdapter(private val listener: Listener) :
             getItem(position).theaterList.map { theater ->
                 inflate<Chip>(context, theater.getFilterChipLayout()).apply {
                     text = theater.name
-                    val isSelected = selectedIdSet.contains(theater.id)
+                    val isSelected = selectedIdSet.any { it.id == theater.id }
                     isChecked = isSelected
                     isChipIconVisible = isSelected.not()
                     setOnCheckedChangeListener { _, checked ->
                         if (checked) {
                             if (listener.add(theater)) {
-                                selectedIdSet.add(theater.id)
+                                selectedIdSet.add(theater)
                                 isChipIconVisible = false
                             } else {
                                 isChecked = false
@@ -45,7 +45,7 @@ class TheaterEditChildListAdapter(private val listener: Listener) :
                             }
                         } else {
                             listener.remove(theater)
-                            selectedIdSet.remove(theater.id)
+                            selectedIdSet.removeAll { it.id == theater.id }
                             isChipIconVisible = true
                         }
                     }
@@ -56,8 +56,8 @@ class TheaterEditChildListAdapter(private val listener: Listener) :
 
     override fun getItemViewType(position: Int): Int = R.layout.item_area_group
 
-    fun submitList(list: List<AreaGroup>, selectedIdSet: Set<String>) {
-        this.selectedIdSet = selectedIdSet.toMutableSet()
+    fun submitList(list: List<AreaGroup>, selectedIdSet: List<Theater>) {
+        this.selectedIdSet = selectedIdSet.toMutableList()
         submitList(list)
     }
 }
