@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="ic_launcher_background">#FFFFFF</color>
 
     <color name="chip_cgv_bg">#FFFFFF</color>
     <color name="chip_cgv_bg_unchecked">#55FFFFFF</color>
