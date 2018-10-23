@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
             android:gravity="center"
             android:text="준비 중입니다"
-            android:textColor="?attr/moop_textColorLight"
+            android:textColor="?attr/moop_cardContentColorLight"
             android:background="@drawable/bg_card"
             android:backgroundTint="?attr/moop_cardBgColorLight"
             app:layout_constraintEnd_toEndOf="parent"

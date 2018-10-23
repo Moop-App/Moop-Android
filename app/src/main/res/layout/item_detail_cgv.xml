@@ -56,7 +56,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="@{item.movie.egg}"
-                android:textColor="?attr/moop_textColorDark"
+                android:textColor="?attr/moop_cardContentColorDark"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="@+id/eggIcon"
@@ -69,7 +69,7 @@
                 android:id="@+id/divider"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="?attr/moop_dividerColor"
+                android:background="?attr/moop_cardDividerColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/ticketButton" />

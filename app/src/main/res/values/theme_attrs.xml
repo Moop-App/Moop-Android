@@ -8,8 +8,11 @@
     <attr name="moop_textColorLight" format="reference|color" />
     <attr name="moop_iconColorDark" format="reference|color" />
     <attr name="moop_iconColorLight" format="reference|color" />
+    <attr name="moop_cardDividerColor" format="reference|color" />
     <attr name="moop_cardBgColorDark" format="reference|color" />
     <attr name="moop_cardBgColorLight" format="reference|color" />
+    <attr name="moop_cardContentColorDark" format="reference|color" />
+    <attr name="moop_cardContentColorLight" format="reference|color" />
     <attr name="moop_tagOutlineColor" format="reference|color" />
     <attr name="moop_stageColor" format="reference|color" />
     <attr name="moop_stageLightColor" format="reference|color" />

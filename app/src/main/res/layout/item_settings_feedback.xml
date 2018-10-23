@@ -41,7 +41,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:text="개발자에게 버그 신고하기"
-            android:textColor="?attr/moop_textColorDark"
+            android:textColor="?attr/moop_cardContentColorDark"
             app:layout_constraintTop_toTopOf="@+id/bugReportButton"
             app:layout_constraintBottom_toBottomOf="@+id/bugReportButton"
             app:layout_constraintEnd_toEndOf="parent"

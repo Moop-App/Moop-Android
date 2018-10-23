@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="wa_tgbh_pink_1">#E35970</color>
-    <color name="wa_tgbh_pink_2">#F4C2CE</color>
-    <color name="wa_tgbh_pink_3">#F7DFE5</color>
+    <color name="wa_tgbh_pink_1">#DD4040</color>
+    <color name="wa_tgbh_pink_1A">#66DD4040</color>
+    <color name="wa_tgbh_pink_2">#EBBFC7</color>
+    <color name="wa_tgbh_pink_3">#F2D7DC</color>
     <color name="wa_tgbh_blue_1">#447AD3</color>
-    <color name="wa_tgbh_blue_2">#AA447AD3</color>
+    <color name="wa_tgbh_blue_1A">#66447AD3</color>
+    <color name="wa_tgbh_blue_2">#88447AD3</color>
     <color name="wa_tgbh_blue_3">#E0E5F8</color>
 
     <color name="wa_tgbh_colorPrimary">@color/wa_tgbh_pink_2</color>
@@ -14,14 +16,17 @@
     <color name="wa_tgbh_colorAccentHalf">#666E3C66</color>
 
     <color name="wa_tgbh_errorColor">#D2133D</color>
-    <color name="wa_tgbh_dividerColor">@color/wa_tgbh_blue_2</color>
+    <color name="wa_tgbh_dividerColor">@color/wa_tgbh_pink_1A</color>
     <color name="wa_tgbh_bgColor">@color/wa_tgbh_pink_3</color>
-    <color name="wa_tgbh_textColorDark">@color/wa_tgbh_blue_1</color>
-    <color name="wa_tgbh_textColorLight">@color/wa_tgbh_blue_2</color>
-    <color name="wa_tgbh_iconColorDark">@color/wa_tgbh_blue_1</color>
-    <color name="wa_tgbh_iconColorLight">@color/wa_tgbh_blue_2</color>
+    <color name="wa_tgbh_textColorDark">@color/wa_tgbh_pink_1</color>
+    <color name="wa_tgbh_textColorLight">@color/wa_tgbh_pink_1A</color>
+    <color name="wa_tgbh_iconColorDark">@color/wa_tgbh_pink_1</color>
+    <color name="wa_tgbh_iconColorLight">@color/wa_tgbh_pink_2</color>
+    <color name="wa_tgbh_cardDividerColor">@color/wa_tgbh_blue_1A</color>
     <color name="wa_tgbh_cardBgColorDark">@color/wa_tgbh_blue_3</color>
     <color name="wa_tgbh_cardBgColorLight">@color/wa_tgbh_blue_3</color>
+    <color name="wa_tgbh_cardContentColorDark">@color/wa_tgbh_blue_1</color>
+    <color name="wa_tgbh_cardContentColorLight">@color/wa_tgbh_blue_2</color>
     <color name="wa_tgbh_tagOutlineColor">@color/wa_tgbh_bgColor</color>
     <color name="wa_tgbh_stageColor">@color/wa_tgbh_blue_3</color>
     <color name="wa_tgbh_stageLightColor">@color/wa_tgbh_blue_1</color>
@@ -33,7 +38,7 @@
         <item name="colorAccent">@color/wa_tgbh_colorAccent</item>
         <item name="colorAccentHalf">@color/wa_tgbh_colorAccentHalf</item>
         <item name="android:windowBackground">?attr/moop_bgColor</item>
-        <item name="android:textColorPrimary">#E35970</item>
+        <item name="android:textColorPrimary">@color/wa_tgbh_pink_1</item>
 
         <item name="moop_errorColor">@color/wa_tgbh_errorColor</item>
         <item name="moop_dividerColor">@color/wa_tgbh_dividerColor</item>
@@ -42,8 +47,11 @@
         <item name="moop_textColorLight">@color/wa_tgbh_textColorLight</item>
         <item name="moop_iconColorDark">@color/wa_tgbh_iconColorDark</item>
         <item name="moop_iconColorLight">@color/wa_tgbh_iconColorLight</item>
+        <item name="moop_cardDividerColor">@color/wa_tgbh_cardDividerColor</item>
         <item name="moop_cardBgColorDark">@color/wa_tgbh_cardBgColorDark</item>
         <item name="moop_cardBgColorLight">@color/wa_tgbh_cardBgColorLight</item>
+        <item name="moop_cardContentColorDark">@color/wa_tgbh_cardContentColorDark</item>
+        <item name="moop_cardContentColorLight">@color/wa_tgbh_cardContentColorLight</item>
         <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
         <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
         <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>
@@ -56,6 +64,7 @@
         <item name="colorAccent">@color/wa_tgbh_colorAccent</item>
         <item name="colorAccentHalf">@color/wa_tgbh_colorAccentHalf</item>
         <item name="android:windowBackground">?attr/moop_bgColor</item>
+        <item name="android:textColorPrimary">@color/wa_tgbh_pink_1</item>
 
         <item name="moop_errorColor">@color/wa_tgbh_errorColor</item>
         <item name="moop_dividerColor">@color/wa_tgbh_dividerColor</item>
@@ -64,8 +73,11 @@
         <item name="moop_textColorLight">@color/wa_tgbh_textColorLight</item>
         <item name="moop_iconColorDark">@color/wa_tgbh_iconColorDark</item>
         <item name="moop_iconColorLight">@color/wa_tgbh_iconColorLight</item>
+        <item name="moop_cardDividerColor">@color/wa_tgbh_cardDividerColor</item>
         <item name="moop_cardBgColorDark">@color/wa_tgbh_cardBgColorDark</item>
         <item name="moop_cardBgColorLight">@color/wa_tgbh_cardBgColorLight</item>
+        <item name="moop_cardContentColorDark">@color/wa_tgbh_cardContentColorDark</item>
+        <item name="moop_cardContentColorLight">@color/wa_tgbh_cardContentColorLight</item>
         <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
         <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
         <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>

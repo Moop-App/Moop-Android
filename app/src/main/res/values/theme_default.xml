@@ -34,8 +34,11 @@
         <item name="moop_textColorLight">@color/default_textColorLight</item>
         <item name="moop_iconColorDark">@color/default_iconColorDark</item>
         <item name="moop_iconColorLight">@color/default_iconColorLight</item>
+        <item name="moop_cardDividerColor">?attr/moop_dividerColor</item>
         <item name="moop_cardBgColorDark">@color/default_cardBgColorDark</item>
         <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
+        <item name="moop_cardContentColorDark">?attr/moop_iconColorDark</item>
+        <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
         <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
         <item name="moop_stageColor">@color/default_stageColor</item>
         <item name="moop_stageLightColor">@color/default_stageLightColor</item>
@@ -56,8 +59,11 @@
         <item name="moop_textColorLight">@color/default_textColorLight</item>
         <item name="moop_iconColorDark">@color/default_iconColorDark</item>
         <item name="moop_iconColorLight">@color/default_iconColorLight</item>
+        <item name="moop_cardDividerColor">?attr/moop_dividerColor</item>
         <item name="moop_cardBgColorDark">@color/default_cardBgColorDark</item>
         <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
+        <item name="moop_cardContentColorDark">?attr/moop_iconColorDark</item>
+        <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
         <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
         <item name="moop_stageColor">@color/default_stageColor</item>
         <item name="moop_stageLightColor">@color/default_stageLightColor</item>
