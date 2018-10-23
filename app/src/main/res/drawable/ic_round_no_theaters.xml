@@ -3,7 +3,7 @@
     android:height="34dp"
     android:viewportWidth="24"
     android:viewportHeight="34"
-    android:tint="?attr/moop_iconColorDark">
+    android:tint="?attr/moop_iconColorLight">
 
     <group android:translateY="-6">
 
