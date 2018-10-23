@@ -12,12 +12,13 @@
     <color name="default_textColorDark">@color/dark_icon</color>
     <color name="default_textColorLight">@color/dark_icon_half_alpha</color>
     <color name="default_iconColorDark">@color/dark_icon</color>
-    <color name="default_iconColorLight">@color/grey</color>
+    <color name="default_iconColorLight">@color/dark_icon_half_alpha</color>
     <color name="default_cardBgColorDark">@color/white</color>
     <color name="default_cardBgColorLight">@color/grey_200</color>
     <color name="default_tagOutlineColor">@color/default_bgColor</color>
     <color name="default_stageColor">@color/white</color>
     <color name="default_stageLightColor">@color/colorAccent</color>
+    <color name="default_stageDimColor">@color/dark_icon_half_alpha</color>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -38,6 +39,7 @@
         <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
         <item name="moop_stageColor">@color/default_stageColor</item>
         <item name="moop_stageLightColor">@color/default_stageLightColor</item>
+        <item name="moop_stageDimColor">@color/default_stageDimColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -59,6 +61,7 @@
         <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
         <item name="moop_stageColor">@color/default_stageColor</item>
         <item name="moop_stageLightColor">@color/default_stageLightColor</item>
+        <item name="moop_stageDimColor">@color/default_stageDimColor</item>
     </style>
 
     <style name="AppTheme.Translucent" parent="AppTheme.NoActionBar">

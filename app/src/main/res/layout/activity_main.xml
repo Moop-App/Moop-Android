@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_navigation_height"
             android:layout_gravity="bottom"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/moop_stageColor"
             app:labelVisibilityMode="labeled"
             app:itemIconTint="@color/bottom_navigation_colors"
             app:itemTextColor="@color/bottom_navigation_colors"

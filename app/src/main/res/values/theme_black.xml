@@ -18,6 +18,7 @@
     <color name="black_tagOutlineColor">@color/black_bgColor</color>
     <color name="black_stageColor">@color/black</color>
     <color name="black_stageLightColor">@color/black_colorAccent</color>
+    <color name="black_stageDimColor">@color/grey_700</color>
 
     <style name="BlackTheme" parent="Theme.MaterialComponents">
         <item name="colorPrimary">@color/black_colorPrimary</item>
@@ -38,6 +39,7 @@
         <item name="moop_tagOutlineColor">@color/black_tagOutlineColor</item>
         <item name="moop_stageColor">@color/black_stageColor</item>
         <item name="moop_stageLightColor">@color/black_stageLightColor</item>
+        <item name="moop_stageDimColor">@color/black_stageDimColor</item>
     </style>
 
     <style name="BlackTheme.NoActionBar" parent="Theme.MaterialComponents.NoActionBar">
@@ -59,6 +61,7 @@
         <item name="moop_tagOutlineColor">@color/black_tagOutlineColor</item>
         <item name="moop_stageColor">@color/black_stageColor</item>
         <item name="moop_stageLightColor">@color/black_stageLightColor</item>
+        <item name="moop_stageDimColor">@color/black_stageDimColor</item>
     </style>
 
     <style name="BlackTheme.Translucent" parent="BlackTheme.NoActionBar">

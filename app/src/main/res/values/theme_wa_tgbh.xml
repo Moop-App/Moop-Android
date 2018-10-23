@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="wa_tgbh_colorPrimary">#F4C2CE</color>
-    <color name="wa_tgbh_colorPrimaryDark">#E35970</color>
+    <color name="wa_tgbh_pink_1">#E35970</color>
+    <color name="wa_tgbh_pink_2">#F4C2CE</color>
+    <color name="wa_tgbh_pink_3">#F7DFE5</color>
+    <color name="wa_tgbh_blue_1">#447AD3</color>
+    <color name="wa_tgbh_blue_2">#AA447AD3</color>
+    <color name="wa_tgbh_blue_3">#E0E5F8</color>
+
+    <color name="wa_tgbh_colorPrimary">@color/wa_tgbh_pink_2</color>
+    <color name="wa_tgbh_colorPrimaryDark">@color/wa_tgbh_pink_1</color>
     <color name="wa_tgbh_colorAccent">#6E3C66</color>
     <color name="wa_tgbh_colorAccentHalf">#666E3C66</color>
 
-    <color name="wa_tgbh_errorColor">#ED2644</color>
-    <color name="wa_tgbh_dividerColor">#AA97A9DB</color>
-    <color name="wa_tgbh_bgColor">#F7D4DD</color>
-    <color name="wa_tgbh_textColorDark">#5888DB</color>
-    <color name="wa_tgbh_textColorLight">#97A9DB</color>
-    <color name="wa_tgbh_iconColorDark">#5888DB</color>
-    <color name="wa_tgbh_iconColorLight">#97A9DB</color>
-    <color name="wa_tgbh_cardBgColorDark">#CDD4F9</color>
-    <color name="wa_tgbh_cardBgColorLight">#CDD4F9</color>
+    <color name="wa_tgbh_errorColor">#D2133D</color>
+    <color name="wa_tgbh_dividerColor">@color/wa_tgbh_blue_2</color>
+    <color name="wa_tgbh_bgColor">@color/wa_tgbh_pink_3</color>
+    <color name="wa_tgbh_textColorDark">@color/wa_tgbh_blue_1</color>
+    <color name="wa_tgbh_textColorLight">@color/wa_tgbh_blue_2</color>
+    <color name="wa_tgbh_iconColorDark">@color/wa_tgbh_blue_1</color>
+    <color name="wa_tgbh_iconColorLight">@color/wa_tgbh_blue_2</color>
+    <color name="wa_tgbh_cardBgColorDark">@color/wa_tgbh_blue_3</color>
+    <color name="wa_tgbh_cardBgColorLight">@color/wa_tgbh_blue_3</color>
     <color name="wa_tgbh_tagOutlineColor">@color/wa_tgbh_bgColor</color>
-    <color name="wa_tgbh_stageColor">#C6CEF7</color>
-    <color name="wa_tgbh_stageLightColor">#5888DB</color>
+    <color name="wa_tgbh_stageColor">@color/wa_tgbh_blue_3</color>
+    <color name="wa_tgbh_stageLightColor">@color/wa_tgbh_blue_1</color>
+    <color name="wa_tgbh_stageDimColor">@color/wa_tgbh_blue_2</color>
 
     <style name="WaTgbhTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/wa_tgbh_colorPrimary</item>
@@ -39,6 +47,7 @@
         <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
         <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
         <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>
+        <item name="moop_stageDimColor">@color/wa_tgbh_stageDimColor</item>
     </style>
 
     <style name="WaTgbhTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -60,6 +69,7 @@
         <item name="moop_tagOutlineColor">@color/wa_tgbh_tagOutlineColor</item>
         <item name="moop_stageColor">@color/wa_tgbh_stageColor</item>
         <item name="moop_stageLightColor">@color/wa_tgbh_stageLightColor</item>
+        <item name="moop_stageDimColor">@color/wa_tgbh_stageDimColor</item>
     </style>
 
     <style name="WaTgbhTheme.Translucent" parent="WaTgbhTheme.NoActionBar">
