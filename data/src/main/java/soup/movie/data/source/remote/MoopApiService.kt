@@ -28,6 +28,18 @@ interface MoopApiService {
             @Path("tc") theater: String,
             @Path("mc") movie: String): Observable<TimetableResponse>
 
+    // 상영시간표
+    @GET("timetable/lotte/asMovie/{tc}/{mc}.json")
+    fun getLotteTimetable(
+            @Path("tc") theater: String,
+            @Path("mc") movie: String): Observable<TimetableResponse>
+
+    // 상영시간표
+    @GET("timetable/megabox/asMovie/{tc}/{mc}.json")
+    fun getMegaboxTimetable(
+            @Path("tc") theater: String,
+            @Path("mc") movie: String): Observable<TimetableResponse>
+
     // 버전정보
     @GET("version.json")
     fun getVersion(): Observable<VersionResponse>

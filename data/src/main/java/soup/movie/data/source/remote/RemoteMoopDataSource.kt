@@ -4,6 +4,8 @@ import io.reactivex.Observable
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater
 import soup.movie.data.model.Theater.Companion.TYPE_CGV
+import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
+import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.data.model.Timetable
 import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
@@ -25,8 +27,28 @@ class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDat
     override fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> {
         when (theater.type) {
             TYPE_CGV -> {
-                return moopApiService.getCgvTimetable(theater.code, movie.id)
-                        .map { it.timetable }
+                val cgv = movie.cgv
+                if (cgv != null) {
+                    return moopApiService
+                            .getCgvTimetable(theater.code, cgv.id)
+                            .map { it.timetable }
+                }
+            }
+            TYPE_LOTTE -> {
+                val lotte = movie.lotte
+                if (lotte != null) {
+                    return moopApiService
+                            .getLotteTimetable(theater.code, lotte.id)
+                            .map { it.timetable }
+                }
+            }
+            TYPE_MEGABOX -> {
+                val megabox = movie.megabox
+                if (megabox != null) {
+                    return moopApiService
+                            .getMegaboxTimetable(theater.code, megabox.id)
+                            .map { it.timetable }
+                }
             }
         }
         return Timetable().toAnObservable()
