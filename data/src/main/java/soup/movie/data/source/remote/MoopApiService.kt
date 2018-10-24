@@ -11,11 +11,11 @@ import soup.movie.data.model.response.VersionResponse
 interface MoopApiService {
 
     // 현재상영작
-    @GET("cgv/now.json")
+    @GET("now.json")
     fun getNowMovieList(): Observable<MovieListResponse>
 
     // 개봉예정작
-    @GET("cgv/plan.json")
+    @GET("plan.json")
     fun getPlanMovieList(): Observable<MovieListResponse>
 
     // 공통코드

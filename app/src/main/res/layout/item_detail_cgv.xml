@@ -55,7 +55,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="@{item.movie.egg}"
+                android:text="@{item.movie.cgvEgg}"
                 android:textColor="?attr/moop_cardContentColorDark"
                 android:textSize="14sp"
                 android:textStyle="bold"

@@ -4,11 +4,14 @@ import androidx.annotation.DrawableRes
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
+import soup.movie.data.model.CgvInfo
+import soup.movie.data.model.LotteInfo
+import soup.movie.data.model.MegaboxInfo
 import soup.movie.data.model.Movie
 
 fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n연령제한: $age"
 
-fun Movie.toDescription(): String = "$openDate / $age / 선호도: $egg"
+fun Movie.toDescription(): String = "$openDate / $age"
 
 @DrawableRes
 fun Movie.getAgeBackground(): Int = when (age) {
@@ -39,11 +42,10 @@ fun Movie.hasOpenDate(): Boolean = openDate() != null
 
 fun Movie.isDDay(): Boolean = isPlan and hasOpenDate()
 
-fun Movie.eggIsOver(target: Int): Boolean = (egg != "?") and (egg >= target.toString())
-
-fun Movie.hasUnknownEgg(): Boolean = egg == "?"
-
-fun Movie.isBest(): Boolean = eggIsOver(96)
+fun Movie.isBest(): Boolean =
+        cgv.eggIsOver(96) or
+        lotte.starIsOver(8.8) or
+        megabox.starIsOver(8.5)
 
 fun Movie.isNew(): Boolean = isNow and isInThePastWeek()
 
@@ -66,5 +68,29 @@ private fun Movie.openDate(): LocalDate? = openDate.split(".").let {
         LocalDate.of(it[0].toInt(), it[1].toInt(), it[2].toInt())
     } else {
         null
+    }
+}
+
+private fun CgvInfo?.eggIsOver(target: Int): Boolean {
+    return if (this == null || egg.isBlank() || egg == "?") {
+        false
+    } else {
+        egg >= target.toString()
+    }
+}
+
+private fun LotteInfo?.starIsOver(target: Double): Boolean {
+    return if (this == null || star.isBlank()) {
+        false
+    } else {
+        star >= target.toString()
+    }
+}
+
+private fun MegaboxInfo?.starIsOver(target: Double): Boolean {
+    return if (this == null || star.isBlank()) {
+        false
+    } else {
+        star >= target.toString()
     }
 }

@@ -6,11 +6,21 @@ data class Movie(
         val posterUrl: String,
         val age: String,
         val openDate: String,
-        val egg: String,
-        val specialTypes: List<String>?,
+        val cgv: CgvInfo?,
+        val lotte: LotteInfo?,
+        val megabox: MegaboxInfo?,
         val trailers: List<Trailer>?,
         val isNow: Boolean) {
 
     val isPlan: Boolean
             get() = !isNow
+
+    val cgvEgg: String
+        get() = cgv?.egg ?: "-"
+
+    val lotteStar: String
+        get() = lotte?.star ?: "-"
+
+    val megaboxStar: String
+        get() = megabox?.star ?: "-"
 }
