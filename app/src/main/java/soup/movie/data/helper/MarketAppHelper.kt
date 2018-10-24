@@ -9,9 +9,7 @@ import android.os.Build
 import androidx.browser.customtabs.CustomTabsIntent
 import soup.movie.BuildConfig
 import soup.movie.R
-import soup.movie.data.model.Movie
-import soup.movie.data.model.Theater
-import soup.movie.data.model.Trailer
+import soup.movie.data.model.*
 import soup.movie.util.getColorCompat
 import soup.movie.util.startActivitySafely
 import timber.log.Timber
@@ -108,29 +106,35 @@ object Cgv : MarketApp() {
     }
 
     fun executeWeb(ctx: Context, movie: Movie) {
-        ctx.executeWeb(detailWebUrl(movie))
+        movie.cgv?.let {
+            ctx.executeWeb(detailWebUrl(it))
+        }
     }
 
     fun executeMobileWeb(ctx: Context, movie: Movie) {
-        ctx.executeWeb(detailMobileWebUrl(movie))
+        movie.cgv?.let {
+            ctx.executeWeb(detailMobileWebUrl(it))
+        }
     }
 
     fun executeWebForSchedule(ctx: Context, movie: Movie) {
-        ctx.executeWeb(reservationUrl(movie))
+        movie.cgv?.let {
+            ctx.executeWeb(reservationUrl(it))
+        }
     }
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater))
     }
 
-    fun detailWebUrl(movie: Movie): String =
-            "http://www.cgv.co.kr/movies/detail-view/?midx=${movie.id}"
+    private fun detailWebUrl(cgv: CgvInfo): String =
+            "http://www.cgv.co.kr/movies/detail-view/?midx=${cgv.id}"
 
-    fun detailMobileWebUrl(movie: Movie): String =
-            "http://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=${movie.id}"
+    private fun detailMobileWebUrl(cgv: CgvInfo): String =
+            "http://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=${cgv.id}"
 
-    private fun reservationUrl(movie: Movie): String =
-            "http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${movie.id}"
+    private fun reservationUrl(cgv: CgvInfo): String =
+            "http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${cgv.id}"
 
     private fun detailWebUrl(theater: Theater): String =
             "http://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=${theater.code}"
@@ -145,28 +149,34 @@ object LotteCinema : MarketApp() {
     }
 
     fun executeWeb(ctx: Context, movie: Movie) {
-        ctx.executeWeb(detailWebUrl(movie))
+        movie.lotte?.let {
+            ctx.executeWeb(detailWebUrl(it))
+        }
     }
 
     fun executeMobileWeb(ctx: Context, movie: Movie) {
-        ctx.executeWeb(detailMobileWebUrl(movie))
+        movie.lotte?.let {
+            ctx.executeWeb(detailMobileWebUrl(it))
+        }
     }
 
     fun executeWebForSchedule(ctx: Context, movie: Movie) {
-        ctx.executeWeb(reservationUrl(movie))
+        movie.lotte?.let {
+            ctx.executeWeb(reservationUrl(it))
+        }
     }
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater))
     }
 
-    private fun detailWebUrl(movie: Movie): String =
-            "http://www.lottecinema.co.kr/LCHS/Contents/Movie/Movie-Detail-View.aspx?movie=${movie.id}"
+    private fun detailWebUrl(lotte: LotteInfo): String =
+            "http://www.lottecinema.co.kr/LCHS/Contents/Movie/Movie-Detail-View.aspx?movie=${lotte.id}"
 
-    private fun detailMobileWebUrl(movie: Movie): String =
-            "http://www.lottecinema.co.kr/LCMW/Contents/Movie/Movie-Detail-View.aspx?movie=${movie.id}"
+    private fun detailMobileWebUrl(lotte: LotteInfo): String =
+            "http://www.lottecinema.co.kr/LCMW/Contents/Movie/Movie-Detail-View.aspx?movie=${lotte.id}"
 
-    private fun reservationUrl(movie: Movie): String =
+    private fun reservationUrl(lotte: LotteInfo): String =
             "http://www.lottecinema.co.kr/LCMW/Contents/Ticketing/ticketing.aspx"
 
     private fun detailWebUrl(theater: Theater): String =
@@ -182,28 +192,34 @@ object Megabox : MarketApp() {
     }
 
     fun executeWeb(ctx: Context, movie: Movie) {
-        ctx.executeWeb(detailWebUrl(movie))
+        movie.megabox?.let {
+            ctx.executeWeb(detailWebUrl(it))
+        }
     }
 
     fun executeMobileWeb(ctx: Context, movie: Movie) {
-        ctx.executeWeb(detailMobileWebUrl(movie))
+        movie.megabox?.let {
+            ctx.executeWeb(detailMobileWebUrl(it))
+        }
     }
 
     fun executeWebForSchedule(ctx: Context, movie: Movie) {
-        ctx.executeWeb(reservationUrl(movie))
+        movie.megabox?.let {
+            ctx.executeWeb(reservationUrl(it))
+        }
     }
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater))
     }
 
-    private fun detailWebUrl(movie: Movie): String =
-            "http://www.megabox.co.kr/?show=detail&rtnShowMovieCode=${movie.id}"
+    private fun detailWebUrl(megabox: MegaboxInfo): String =
+            "http://www.megabox.co.kr/?show=detail&rtnShowMovieCode=${megabox.id}"
 
-    private fun detailMobileWebUrl(movie: Movie): String =
-            "http://m.megabox.co.kr/?menuId=movie-detail&movieCode=${movie.id}"
+    private fun detailMobileWebUrl(megabox: MegaboxInfo): String =
+            "http://m.megabox.co.kr/?menuId=movie-detail&movieCode=${megabox.id}"
 
-    private fun reservationUrl(movie: Movie): String =
+    private fun reservationUrl(megabox: MegaboxInfo): String =
             "http://m.megabox.co.kr/?menuId=booking&mBookingType=1"
 
     private fun detailWebUrl(theater: Theater): String =
