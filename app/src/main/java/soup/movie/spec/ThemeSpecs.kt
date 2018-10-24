@@ -18,7 +18,7 @@ object ThemeSpecs {
     private const val ID_BLACK = "THEME_BLACK"
     private const val ID_WA_TGBH = "THEME_WA_TGBH"
 
-    internal val DEFAULT = object : ThemePage(ID_DEFAULT, "Default") {
+    internal val DEFAULT = object : ThemePage(ID_DEFAULT, R.string.theme_default) {
 
         override fun extractThemeOf(activity: Activity?): Int = when (activity) {
             is MainActivity -> R.style.AppTheme
@@ -30,7 +30,7 @@ object ThemeSpecs {
         }
     }
 
-    internal val BLACK = object : ThemePage(ID_BLACK, "Black") {
+    internal val BLACK = object : ThemePage(ID_BLACK, R.string.theme_black) {
 
         override fun extractThemeOf(activity: Activity?): Int = when (activity) {
             is MainActivity -> R.style.BlackTheme
@@ -42,7 +42,7 @@ object ThemeSpecs {
         }
     }
 
-    internal val WA_TGBH = object : ThemePage(ID_WA_TGBH, "T.G.B.H.") {
+    internal val WA_TGBH = object : ThemePage(ID_WA_TGBH, R.string.theme_wa_tgbh) {
 
         override fun extractThemeOf(activity: Activity?): Int = when (activity) {
             is MainActivity -> R.style.WaTgbhTheme

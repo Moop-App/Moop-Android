@@ -3,12 +3,13 @@ package soup.movie.theme
 import android.app.Activity
 import android.content.Context
 import androidx.annotation.ColorInt
+import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import soup.movie.theme.util.getColorAccent
 import soup.movie.theme.util.getColorPrimary
 import soup.movie.theme.util.getColorPrimaryDark
 
-abstract class ThemePage(val id: String, val name: String) {
+abstract class ThemePage(val id: String, @StringRes val name: Int) {
 
     @StyleRes
     abstract fun extractThemeOf(activity: Activity?): Int
