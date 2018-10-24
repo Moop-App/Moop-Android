@@ -9,7 +9,6 @@ import com.kakao.message.template.FeedTemplate
 import com.kakao.message.template.LinkObject
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
-import soup.movie.data.helper.Cgv
 import soup.movie.data.helper.Kakao
 import soup.movie.data.helper.toDescription
 import soup.movie.data.helper.toShareDescription
@@ -21,36 +20,38 @@ import soup.movie.util.startActivitySafely
 import soup.movie.util.toJson
 import timber.log.Timber
 
-object ShareSpecs {
+object KakaoLink {
 
-    internal const val MOVIE_ID = "movieId"
+    private const val MOVIE_ID = "movieId"
 
     fun extractMovieId(intent: Intent): MovieId? {
         return intent.data?.getQueryParameter(MOVIE_ID)?.fromJson()
+    }
+
+    fun share(context: Context, movie: Movie) {
+        val movieLink = LinkObject.newBuilder()
+                .setAndroidExecutionParams("${KakaoLink.MOVIE_ID}=${movie.toMovieId().toJson()}")
+                .build()
+        val params = FeedTemplate.newBuilder(
+                ContentObject.newBuilder(movie.title, movie.posterUrl, movieLink)
+                        .setDescrption(movie.toDescription())
+                        .build())
+                .build()
+        KakaoLinkService.getInstance().sendDefault(context, params, NoResponseCallback)
+    }
+
+    private val NoResponseCallback = object : ResponseCallback<KakaoLinkResponse>() {
+        override fun onSuccess(result: KakaoLinkResponse) {}
+        override fun onFailure(errorResult: ErrorResult) {
+            Timber.e(errorResult.toString())
+        }
     }
 }
 
 fun Context.share(movie: Movie) {
     if (Kakao.isInstalled(this)) {
-        val params = FeedTemplate.newBuilder(
-                ContentObject.newBuilder(movie.title, movie.posterUrl,
-                        LinkObject.newBuilder()
-                                .setWebUrl(Cgv.detailWebUrl(movie))
-                                .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))
-                                .setAndroidExecutionParams("${ShareSpecs.MOVIE_ID}=${movie.toMovieId().toJson()}")
-                                .build())
-                        .setDescrption(movie.toDescription())
-                        .build())
-                .build()
-        KakaoLinkService.getInstance().sendDefault(this, params,
-                object : ResponseCallback<KakaoLinkResponse>() {
-                    override fun onFailure(errorResult: ErrorResult) {
-                        Timber.e(errorResult.toString())
-                    }
-
-                    override fun onSuccess(result: KakaoLinkResponse) {}
-                })
+        KakaoLink.share(this, movie)
     } else {
-        startActivitySafely(IntentUtil.createShareIntent("공유하기", movie.toShareDescription()))
+        startActivitySafely(IntentUtil.createShareIntent("영화 공유하기", movie.toShareDescription()))
     }
 }
