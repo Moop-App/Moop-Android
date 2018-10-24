@@ -3,6 +3,7 @@ package soup.movie.ui.main
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.MoopRepository
+import soup.movie.data.model.MovieId
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.settings.impl.LastMainTabSetting.Tab.*
@@ -40,12 +41,16 @@ class MainPresenter(private val lastMainTabSetting: LastMainTabSetting,
         lastMainTabSetting.set(mode)
     }
 
-    override fun requestMovie(movieId: String) {
+    override fun requestMovie(movieId: MovieId?) {
         //TODO: connect with view lifecycle
-        repository.getMovie(movieId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .map<MainActionState> { ShowDetailAction(it) }
-                .defaultIfEmpty(NotFoundAction)
-                .subscribe { view?.execute(it) }
+        if (movieId == null) {
+            view?.execute(NotFoundAction)
+        } else {
+            repository.getMovie(movieId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .map<MainActionState> { ShowDetailAction(it) }
+                    .defaultIfEmpty(NotFoundAction)
+                    .subscribe { view?.execute(it) }
+        }
     }
 }

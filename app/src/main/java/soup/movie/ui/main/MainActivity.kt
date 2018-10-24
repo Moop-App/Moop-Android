@@ -18,6 +18,7 @@ import soup.movie.R
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
+import soup.movie.spec.ShareSpecs
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.EventAnalytics
@@ -172,7 +173,7 @@ class MainActivity :
                 removeExtra(EXTRA_TAB)
             }
             ACTION_VIEW -> {
-                data?.getQueryParameter("id")?.let {
+                ShareSpecs.extractMovieId(this).let {
                     presenter.requestMovie(it)
                 }
             }

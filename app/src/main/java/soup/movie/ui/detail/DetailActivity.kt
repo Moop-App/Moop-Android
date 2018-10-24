@@ -21,34 +21,33 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.kakao.kakaolink.v2.KakaoLinkResponse
-import com.kakao.kakaolink.v2.KakaoLinkService
-import com.kakao.message.template.ContentObject
-import com.kakao.message.template.FeedTemplate
-import com.kakao.message.template.LinkObject
-import com.kakao.network.ErrorResult
-import com.kakao.network.callback.ResponseCallback
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail_header.*
 import soup.movie.R
 import soup.movie.data.MovieSelectManager
-import soup.movie.data.helper.*
+import soup.movie.data.helper.Cgv
+import soup.movie.data.helper.LotteCinema
+import soup.movie.data.helper.Megabox
+import soup.movie.data.helper.YouTube
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater.Companion.TYPE_CGV
 import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.settings.impl.UseWebLinkSetting
+import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.*
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.helper.EventAnalytics
-import soup.movie.util.*
-import soup.movie.util.IntentUtil.createShareIntent
 import soup.movie.util.delegates.contentView
+import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
+import soup.movie.util.setBackgroundColorResource
+import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.with
 import soup.widget.elastic.ElasticDragDismissFrameLayout
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -346,31 +345,6 @@ class DetailActivity :
                 .setStream(imageUri)
                 .setType(mimeType)
                 .startChooser()
-    }
-
-    private fun share(movie: Movie) {
-        if (Kakao.isInstalled(this)) {
-            val params = FeedTemplate.newBuilder(
-                    ContentObject.newBuilder(movie.title, movie.posterUrl,
-                            LinkObject.newBuilder()
-                                    .setWebUrl(Cgv.detailWebUrl(movie))
-                                    .setMobileWebUrl(Cgv.detailMobileWebUrl(movie))
-                                    .setAndroidExecutionParams("id=${movie.id}")
-                                    .build())
-                            .setDescrption(movie.toDescription())
-                            .build())
-                    .build()
-            KakaoLinkService.getInstance().sendDefault(this, params,
-                    object : ResponseCallback<KakaoLinkResponse>() {
-                        override fun onFailure(errorResult: ErrorResult) {
-                            Timber.e(errorResult.toString())
-                        }
-
-                        override fun onSuccess(result: KakaoLinkResponse) {}
-                    })
-        } else {
-            startActivitySafely(createShareIntent("공유하기", movie.toShareDescription()))
-        }
     }
 
     companion object {

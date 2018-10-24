@@ -2,10 +2,7 @@ package soup.movie.data
 
 import io.reactivex.Completable
 import io.reactivex.Observable
-import soup.movie.data.model.Movie
-import soup.movie.data.model.Theater
-import soup.movie.data.model.Timetable
-import soup.movie.data.model.Version
+import soup.movie.data.model.*
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.local.LocalMoopDataSource
@@ -44,12 +41,13 @@ class MoopRepository(private val localDataSource: LocalMoopDataSource,
             remoteDataSource.getPlanList()
                     .doOnNext { localDataSource.savePlanList(it) }
 
-    fun getMovie(movieId: String): Observable<Movie> =
+    fun getMovie(movieId: MovieId): Observable<Movie> =
             Observable.merge(
                     getNowList(false).map { it.list },
                     getPlanList(false).map { it.list })
                     .flatMapIterable { it }
-                    .filter { it.id == movieId }
+                    .filter { it.isMatchedWith(movieId) }
+                    .take(1)
 
     fun getCodeList(): Observable<CodeResponse> =
             Observable.concat(

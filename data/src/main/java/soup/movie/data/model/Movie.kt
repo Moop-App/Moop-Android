@@ -23,4 +23,24 @@ data class Movie(
 
     val megaboxStar: String
         get() = megabox?.star ?: "-"
+
+    fun toMovieId() = MovieId(
+            id = id,
+            title = title,
+            cgvId = cgv?.id,
+            lotteId = lotte?.id,
+            megaboxId = megabox?.id)
+
+    fun isMatchedWith(movieId: MovieId): Boolean {
+        return id == movieId.id
+            || title == movieId.title
+            || cgv?.id.isMatched(movieId.cgvId)
+            || lotte?.id.isMatched(movieId.lotteId)
+            || megabox?.id.isMatched(movieId.megaboxId)
+    }
+
+    private fun String?.isMatched(id: String?): Boolean {
+        if (this == null || id == null) return false
+        return this == id
+    }
 }
