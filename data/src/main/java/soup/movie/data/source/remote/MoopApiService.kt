@@ -3,20 +3,20 @@ package soup.movie.data.source.remote
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import soup.movie.data.model.Movie
 import soup.movie.data.model.response.CodeResponse
-import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.model.response.TimetableResponse
 import soup.movie.data.model.response.VersionResponse
 
 interface MoopApiService {
 
     // 현재상영작
-    @GET("now.json")
-    fun getNowMovieList(): Observable<MovieListResponse>
+    @GET("now/list.json")
+    fun getNowMovieList(): Observable<List<Movie>>
 
     // 개봉예정작
-    @GET("plan.json")
-    fun getPlanMovieList(): Observable<MovieListResponse>
+    @GET("plan/list.json")
+    fun getPlanMovieList(): Observable<List<Movie>>
 
     // 공통코드
     @GET("code.json")

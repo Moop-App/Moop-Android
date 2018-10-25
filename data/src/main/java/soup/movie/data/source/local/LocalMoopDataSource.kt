@@ -37,7 +37,7 @@ class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
     }
 
     private fun saveMovieListAs(type: String, response: MovieListResponse) {
-        moopDao.insert(CachedMovieList(type, System.currentTimeMillis(), response.list))
+        moopDao.insert(CachedMovieList(type, response.lastUpdateTime, response.list))
     }
 
     private fun getMovieListAs(type: String): Observable<MovieListResponse> {

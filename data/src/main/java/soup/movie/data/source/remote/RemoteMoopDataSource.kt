@@ -17,9 +17,14 @@ class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDat
 
     override fun getNowList(): Observable<MovieListResponse> =
             moopApiService.getNowMovieList()
+                    .map { it.withTimestamp() }
 
     override fun getPlanList(): Observable<MovieListResponse> =
             moopApiService.getPlanMovieList()
+                    .map { it.withTimestamp() }
+
+    private fun List<Movie>.withTimestamp(): MovieListResponse =
+            MovieListResponse(System.currentTimeMillis(), this)
 
     override fun getCodeList(): Observable<CodeResponse> =
             moopApiService.getCodeList()
