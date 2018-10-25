@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Pair
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
@@ -26,7 +25,6 @@ import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.theme.ThemeBook
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
-import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeBookmarkActivity
 import soup.movie.util.*
@@ -107,6 +105,9 @@ class SettingsFragment :
         versionButton.setOnDebounceClickListener {
             onVersionClicked()
         }
+        marketIcon.setOnDebounceClickListener {
+            Moop.executePlayStore(requireContext())
+        }
     }
 
     override fun render(viewState: SettingsViewState.TheaterListViewState) {
@@ -138,7 +139,11 @@ class SettingsFragment :
         versionViewState = viewState
         currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
         latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
-        newReleaseIcon?.setGoneIf { viewState.isLatest() }
+        if (viewState.isLatest()) {
+            marketIcon?.setImageResource(R.drawable.ic_round_shop)
+        } else {
+            marketIcon?.setImageResource(R.drawable.ic_round_new_releases)
+        }
         if (viewState.isLatest().not()) {
             AlertDialog.Builder(requireContext())
                     .setIcon(R.drawable.ic_round_new_releases)

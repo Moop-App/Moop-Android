@@ -78,16 +78,17 @@
             tools:text="최신 0.1.8"/>
 
         <ImageView
-            android:id="@+id/newReleaseIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_round_new_releases"
-            android:tint="?attr/moop_errorColor"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="@+id/versionSeparator"
-            app:layout_constraintBottom_toBottomOf="@+id/versionSeparator"
+            android:id="@+id/marketIcon"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_round_shop"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:layout_constraintTop_toTopOf="@+id/versionButton"
+            app:layout_constraintBottom_toBottomOf="@+id/versionButton"
             app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_round_new_releases"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
