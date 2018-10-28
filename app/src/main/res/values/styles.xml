@@ -45,7 +45,7 @@
         <item name="checkedIcon">@drawable/ic_check_cgv</item>
         <item name="chipBackgroundColor">@color/selector_chip_cgv_bg</item>
         <item name="chipIcon">@drawable/ic_logo_cgv</item>
-        <item name="chipStrokeColor">@color/grey_200</item>
+        <item name="chipStrokeColor">#229E9E9E</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="rippleColor">@color/grey_400</item>
     </style>
