@@ -24,6 +24,10 @@ data class Movie(
     val megaboxStar: String
         get() = megabox?.star ?: "-"
 
+    fun isScreeningAtCgv(): Boolean = cgv != null
+    fun isScreeningAtLotteCinema(): Boolean = lotte != null
+    fun isScreeningAtMegabox(): Boolean = megabox != null
+
     fun toMovieId() = MovieId(
             id = id,
             title = title,

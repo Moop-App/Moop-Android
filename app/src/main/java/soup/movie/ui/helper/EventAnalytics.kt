@@ -72,6 +72,10 @@ class EventAnalytics(context: Context) {
         }
     }
 
+    fun clickMenuFilter() {
+        logButtonEvent("MenuFilter")
+    }
+
     /* Main: Theaters */
 
     fun clickItem(theater: Theater) {

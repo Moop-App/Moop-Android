@@ -12,6 +12,9 @@
     <string name="action_share_poster">포스터 공유하기</string>
     <string name="action_detail_unknown">"현재 극장에서 상영되지 않는 영화입니다. 다른 서비스를 통해 영화를 감상해주세요."</string>
 
+    <string name="action_filter">필터</string>
+    <string name="filter_category_theater">극장 필터</string>
+
     <string name="action_help">도움말</string>
     <string name="settings_category_theater">자주가는 극장</string>
     <string name="settings_theater_empty_description">선택된 극장이 없습니다</string>

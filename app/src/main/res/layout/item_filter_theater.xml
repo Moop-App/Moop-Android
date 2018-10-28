@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingBottom="@dimen/settings_category_margin_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" >
+
+        <TextView
+            android:id="@+id/theaterCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_category_theater"
+            android:textAppearance="@style/TextAppearance.Settings.Category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/cgvView"
+            style="@style/Widget.Chip.Filter.Cgv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="CGV"
+            app:chipIconVisible="true"
+            app:layout_constraintEnd_toStartOf="@+id/lotteView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/lotteView"
+            style="@style/Widget.Chip.Filter.Lotte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:text="롯데시네마"
+            app:chipIconVisible="true"
+            app:layout_constraintEnd_toStartOf="@+id/megaboxView"
+            app:layout_constraintStart_toEndOf="@+id/cgvView"
+            app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/megaboxView"
+            style="@style/Widget.Chip.Filter.Megabox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:text="메가박스"
+            app:chipIconVisible="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lotteView"
+            app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

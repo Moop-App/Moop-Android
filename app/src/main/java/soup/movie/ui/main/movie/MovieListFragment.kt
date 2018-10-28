@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
@@ -17,6 +18,7 @@ import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.movie.MovieListViewState.*
+import soup.movie.ui.main.movie.filter.MovieFilterFragment
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
@@ -37,6 +39,22 @@ abstract class MovieListFragment :
                     .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
                     .toBundle())
         }
+    }
+
+    override val menuResource: Int?
+        get() = R.menu.fragment_movie_list
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_filter) {
+            if (panelIsShown()) {
+                hidePanel()
+            } else {
+                analytics.clickMenuFilter()
+                showPanel(MovieFilterFragment.toPanelData())
+            }
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onMapSharedElements(names: List<String>,

@@ -30,7 +30,7 @@
                 android:layout_marginTop="8dp"
                 android:text="롯데시네마"
                 android:onClick="@{() -> listener.onInfoClick(item)}"
-                android:enabled="@{item.movie.lotte != null}"
+                android:enabled="@{item.movie.screeningAtLotteCinema}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -88,7 +88,7 @@
                 android:textStyle="bold"
                 android:background="?android:attr/selectableItemBackground"
                 android:onClick="@{() -> listener.onTicketClick(item)}"
-                android:enabled="@{item.movie.lotte != null}"
+                android:enabled="@{item.movie.screeningAtLotteCinema}"
                 app:layout_constraintTop_toBottomOf="@+id/eggIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

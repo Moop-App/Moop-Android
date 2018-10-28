@@ -5,10 +5,14 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import soup.movie.data.MoopRepository
 import soup.movie.di.scope.FragmentScope
+import soup.movie.settings.impl.MovieFilterSetting
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.main.movie.MovieListContract
+import soup.movie.ui.main.movie.filter.MovieFilterContract
+import soup.movie.ui.main.movie.filter.MovieFilterFragment
+import soup.movie.ui.main.movie.filter.MovieFilterPresenter
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.now.NowPresenter
 import soup.movie.ui.main.plan.PlanFragment
@@ -37,9 +41,10 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(repository: MoopRepository):
+        fun presenter(filterSetting: MovieFilterSetting,
+                      repository: MoopRepository):
                 MovieListContract.Presenter =
-                NowPresenter(repository)
+                NowPresenter(filterSetting, repository)
     }
 
     @FragmentScope
@@ -53,9 +58,26 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(repository: MoopRepository):
+        fun presenter(filterSetting: MovieFilterSetting,
+                      repository: MoopRepository):
                 MovieListContract.Presenter =
-                PlanPresenter(repository)
+                PlanPresenter(filterSetting, repository)
+    }
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [
+        MovieFilterModule::class
+    ])
+    internal abstract fun provideMovieFilterFragment(): MovieFilterFragment
+
+    @Module
+    class MovieFilterModule {
+
+        @FragmentScope
+        @Provides
+        fun presenter(filterSetting: MovieFilterSetting):
+                MovieFilterContract.Presenter =
+                MovieFilterPresenter(filterSetting)
     }
 
     @FragmentScope
