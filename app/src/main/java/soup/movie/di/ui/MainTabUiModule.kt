@@ -8,10 +8,9 @@ import soup.movie.di.scope.FragmentScope
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.settings.impl.UseWebLinkSetting
-import soup.movie.ui.main.now.NowContract
+import soup.movie.ui.main.movie.MovieListContract
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.now.NowPresenter
-import soup.movie.ui.main.plan.PlanContract
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.plan.PlanPresenter
 import soup.movie.ui.main.settings.SettingsContract
@@ -39,7 +38,7 @@ abstract class MainTabUiModule {
         @FragmentScope
         @Provides
         fun presenter(repository: MoopRepository):
-                NowContract.Presenter =
+                MovieListContract.Presenter =
                 NowPresenter(repository)
     }
 
@@ -55,7 +54,7 @@ abstract class MainTabUiModule {
         @FragmentScope
         @Provides
         fun presenter(repository: MoopRepository):
-                PlanContract.Presenter =
+                MovieListContract.Presenter =
                 PlanPresenter(repository)
     }
 

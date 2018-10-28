@@ -1,12 +1,13 @@
-package soup.movie.ui.main.now
+package soup.movie.ui.main.movie
 
 import android.util.Pair
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.item_movie_now.view.*
+import kotlinx.android.synthetic.main.item_movie.view.*
 import soup.movie.R
 import soup.movie.R.string.*
 import soup.movie.data.helper.isBest
+import soup.movie.data.helper.isDDay
 import soup.movie.data.helper.isNew
 import soup.movie.data.model.Movie
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
@@ -15,7 +16,7 @@ import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.with
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
-class NowListAdapter(private val listener: (Int, Movie, Array<Pair<View, String>>) -> Unit) :
+class MovieListAdapter(private val listener: (Int, Movie, Array<Pair<View, String>>) -> Unit) :
         DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> {
@@ -42,9 +43,12 @@ class NowListAdapter(private val listener: (Int, Movie, Array<Pair<View, String>
             if (movie.isBest()) {
                 sharedElements.add(bestView with transition_best)
             }
+            if (movie.isDDay()) {
+                sharedElements.add(dDayView with transition_d_day)
+            }
             return sharedElements.toTypedArray()
         }
     }
 
-    override fun getItemViewType(position: Int) = R.layout.item_movie_now
+    override fun getItemViewType(position: Int) = R.layout.item_movie
 }

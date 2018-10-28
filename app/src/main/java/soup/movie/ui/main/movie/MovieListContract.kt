@@ -1,8 +1,8 @@
-package soup.movie.ui.main.now
+package soup.movie.ui.main.movie
 
 import soup.movie.ui.BaseContract
 
-interface NowContract {
+interface MovieListContract {
 
     interface Presenter : BaseContract.Presenter<View> {
 
@@ -11,6 +11,6 @@ interface NowContract {
 
     interface View : BaseContract.View {
 
-        fun render(viewState: NowViewState)
+        fun render(viewState: MovieListViewState)
     }
 }

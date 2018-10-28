@@ -1,32 +1,12 @@
 package soup.movie.ui.main.now
 
-import com.jakewharton.rxrelay2.BehaviorRelay
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.disposables.DisposableContainer
+import io.reactivex.Observable
 import soup.movie.data.MoopRepository
-import soup.movie.ui.BasePresenter
-import soup.movie.ui.main.now.NowContract.Presenter
-import soup.movie.ui.main.now.NowContract.View
-import soup.movie.ui.main.now.NowViewState.*
+import soup.movie.data.model.Movie
+import soup.movie.ui.main.movie.MovieListPresenter
 
-class NowPresenter(private val repository: MoopRepository) :
-        BasePresenter<View>(), Presenter {
+class NowPresenter(private val repository: MoopRepository) : MovieListPresenter() {
 
-    private val refreshRelay = BehaviorRelay.createDefault(false)
-
-    override fun initObservable(disposable: DisposableContainer) {
-        super.initObservable(disposable)
-        disposable.add(refreshRelay
-                .switchMap { it -> repository.getNowList(it)
-                        .map { DoneState(it.list) }
-                        .cast(NowViewState::class.java)
-                        .startWith(LoadingState)
-                        .onErrorReturnItem(ErrorState) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { view?.render(it) })
-    }
-
-    override fun refresh() {
-        refreshRelay.accept(true)
-    }
+    override fun getMovieList(clearCache: Boolean): Observable<List<Movie>> =
+            repository.getNowList(clearCache).map { it.list }
 }

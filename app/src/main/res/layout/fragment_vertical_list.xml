@@ -24,7 +24,7 @@
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="@integer/grid_span_count"
-                tools:listitem="@layout/item_movie_now" />
+                tools:listitem="@layout/item_movie" />
 
             <include
                 layout="@layout/item_error_state"

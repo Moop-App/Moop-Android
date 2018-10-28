@@ -1,32 +1,12 @@
 package soup.movie.ui.main.plan
 
-import com.jakewharton.rxrelay2.BehaviorRelay
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.disposables.DisposableContainer
+import io.reactivex.Observable
 import soup.movie.data.MoopRepository
-import soup.movie.ui.BasePresenter
-import soup.movie.ui.main.plan.PlanContract.Presenter
-import soup.movie.ui.main.plan.PlanContract.View
-import soup.movie.ui.main.plan.PlanViewState.*
+import soup.movie.data.model.Movie
+import soup.movie.ui.main.movie.MovieListPresenter
 
-class PlanPresenter(private val repository: MoopRepository) :
-        BasePresenter<View>(), Presenter {
+class PlanPresenter(private val repository: MoopRepository) : MovieListPresenter() {
 
-    private val refreshRelay = BehaviorRelay.createDefault(false)
-
-    override fun initObservable(disposable: DisposableContainer) {
-        super.initObservable(disposable)
-        disposable.add(refreshRelay
-                .switchMap { it -> repository.getPlanList(it)
-                        .map { DoneState(it.list) }
-                        .cast(PlanViewState::class.java)
-                        .startWith(LoadingState)
-                        .onErrorReturnItem(ErrorState) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { view?.render(it) })
-    }
-
-    override fun refresh() {
-        refreshRelay.accept(true)
-    }
+    override fun getMovieList(clearCache: Boolean): Observable<List<Movie>> =
+            repository.getPlanList(clearCache).map { it.list }
 }

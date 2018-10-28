@@ -84,6 +84,17 @@
                     app:item="@{item}"
                     tools:visibility="visible" />
 
+                <include
+                    android:id="@+id/dDayView"
+                    layout="@layout/tag_movie_d_day"
+                    android:layout_width="@dimen/tag_width"
+                    android:layout_height="@dimen/tag_height"
+                    android:layout_margin="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:item="@{item}"
+                    tools:visibility="gone" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

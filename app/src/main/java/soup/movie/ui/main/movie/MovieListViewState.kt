@@ -1,22 +1,22 @@
-package soup.movie.ui.main.plan
+package soup.movie.ui.main.movie
 
 import androidx.annotation.Keep
 import soup.movie.data.model.Movie
 
-sealed class PlanViewState {
+sealed class MovieListViewState {
 
     @Keep
-    object LoadingState : PlanViewState() {
+    object LoadingState : MovieListViewState() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
     @Keep
-    object ErrorState : PlanViewState() {
+    object ErrorState : MovieListViewState() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
     @Keep
-    data class DoneState(val movies: List<Movie>) : PlanViewState()
+    data class DoneState(val movies: List<Movie>) : MovieListViewState()
 }
