@@ -13,6 +13,7 @@ import soup.movie.data.model.Movie
 import soup.movie.ui.helper.databinding.DataBindingListAdapter
 import soup.movie.ui.helper.databinding.DataBindingViewHolder
 import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.showToast
 import soup.movie.util.with
 import soup.widget.recyclerview.callback.AlwaysDiffCallback
 
@@ -27,6 +28,14 @@ class MovieListAdapter(private val listener: (Int, Movie, Array<Pair<View, Strin
                     val movie: Movie = getItem(index)
                     listener(index, movie, createSharedElements(movie))
                 }
+            }
+            itemView.setOnLongClickListener {
+                val index = adapterPosition
+                if (index in 0..itemCount) {
+                    val movie: Movie = getItem(index)
+                    it?.context?.showToast(movie.title)
+                }
+                true
             }
         }
     }
