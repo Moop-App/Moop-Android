@@ -20,7 +20,6 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.movie.MovieListViewState.*
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
 import soup.movie.util.log.printRenderLog
-import soup.movie.util.setGoneIf
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
@@ -111,7 +110,7 @@ abstract class MovieListFragment :
         printRenderLog { viewState }
         swipeRefreshLayout?.isRefreshing = viewState is LoadingState
         errorView?.setVisibleIf { viewState is ErrorState }
-        noItemsView?.setGoneIf { viewState.hasItems() }
+        noItemsView?.setVisibleIf { viewState.hasNoItems() }
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.movies)
         }

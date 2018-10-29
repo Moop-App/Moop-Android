@@ -20,9 +20,9 @@ sealed class MovieListViewState {
     @Keep
     data class DoneState(val movies: List<Movie>) : MovieListViewState()
 
-    fun hasItems(): Boolean {
+    fun hasNoItems(): Boolean {
         if (this is DoneState) {
-            return movies.isNotEmpty()
+            return movies.isEmpty()
         }
         return false
     }
