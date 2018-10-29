@@ -9,25 +9,33 @@ import soup.movie.data.model.LotteInfo
 import soup.movie.data.model.MegaboxInfo
 import soup.movie.data.model.Movie
 
-fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n연령제한: $age"
+fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n${getAgeLabel()}"
 
-fun Movie.toDescription(): String = "$openDate / $age"
+fun Movie.toDescription(): String = "$openDate / ${getAgeLabel()}"
 
 @DrawableRes
-fun Movie.getAgeBackground(): Int = when (age) {
-    "전체 관람가" -> R.drawable.bg_tag_age_all
-    "12세 관람가" -> R.drawable.bg_tag_age_12
-    "15세 관람가" -> R.drawable.bg_tag_age_15
-    "청소년관람불가" -> R.drawable.bg_tag_age_19
+fun Movie.getAgeBackground(): Int = when {
+    ageValue >= 19 -> R.drawable.bg_tag_age_19
+    ageValue >= 15 -> R.drawable.bg_tag_age_15
+    ageValue >= 12 -> R.drawable.bg_tag_age_12
+    ageValue >= 0 -> R.drawable.bg_tag_age_all
     else -> R.drawable.bg_tag_age_unknown
 }
 
-fun Movie.getSimpleAgeLabel(): String = when (age) {
-    "전체 관람가" -> "전체"
-    "12세 관람가" -> "12"
-    "15세 관람가" -> "15"
-    "청소년관람불가" -> "청불"
+fun Movie.getSimpleAgeLabel(): String = when {
+    ageValue >= 19 -> "청불"
+    ageValue >= 15 -> "15"
+    ageValue >= 12 -> "12"
+    ageValue >= 0 -> "전체"
     else -> "미정"
+}
+
+fun Movie.getAgeLabel(): String = when {
+    ageValue >= 19 -> "청소년관람불가"
+    ageValue >= 15 -> "15세관람가"
+    ageValue >= 12 -> "12세관람가"
+    ageValue >= 0 -> "전체관람가"
+    else -> "등급 미지정"
 }
 
 fun Movie.getDDayLabel(): String? = openDate()?.let {
