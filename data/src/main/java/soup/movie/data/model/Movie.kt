@@ -10,6 +10,7 @@ data class Movie(
         val cgv: CgvInfo?,
         val lotte: LotteInfo?,
         val megabox: MegaboxInfo?,
+        val naver: NaverInfo?,
         val trailers: List<Trailer>?,
         val isNow: Boolean) {
 
@@ -44,9 +45,13 @@ data class Movie(
     val megaboxStar: String
         get() = megabox?.star ?: "-"
 
+    val naverUserRating: String
+        get() = naver?.userRating ?: "-"
+
     fun isScreeningAtCgv(): Boolean = cgv != null
     fun isScreeningAtLotteCinema(): Boolean = lotte != null
     fun isScreeningAtMegabox(): Boolean = megabox != null
+    fun hasNaverInfo(): Boolean = naver != null
 
     fun toMovieId() = MovieId(
             id = id,
