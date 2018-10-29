@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/bottom_sheet_behavior"
             app:behavior_hideable="true"
-            app:behavior_peekHeight="400dp">
+            app:behavior_peekHeight="250dp">
 
             <FrameLayout
                 android:id="@+id/bottomSheetContainer"
