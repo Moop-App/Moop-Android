@@ -38,6 +38,10 @@ fun Movie.getAgeLabel(): String = when {
     else -> "등급 미지정"
 }
 
+fun Movie.getDDay(): Long = openDate()?.let {
+    ChronoUnit.DAYS.between(today(), it)
+} ?: 999
+
 fun Movie.getDDayLabel(): String? = openDate()?.let {
     val dDay = ChronoUnit.DAYS.between(today(), it)
     return when {
