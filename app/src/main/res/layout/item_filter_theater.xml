@@ -34,6 +34,7 @@
             android:layout_marginEnd="8dp"
             android:text="CGV"
             app:chipIconVisible="true"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintEnd_toStartOf="@+id/lotteView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
@@ -44,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_marginEnd="8dp"
             android:text="롯데시네마"
             app:chipIconVisible="true"
             app:layout_constraintEnd_toStartOf="@+id/megaboxView"
@@ -56,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_marginEnd="8dp"
             android:text="메가박스"
             app:chipIconVisible="true"
             app:layout_constraintEnd_toEndOf="parent"
