@@ -226,6 +226,19 @@ object Megabox : MarketApp() {
             "http://m.megabox.co.kr/?menuId=theater-detail&cinema=${theater.code}"
 }
 
+object Naver : MarketApp() {
+
+    override val packageName = "TODO"
+
+    fun executeWeb(ctx: Context, movie: Movie) {
+        movie.naver?.let {
+            ctx.executeWeb(detailWebUrl(it))
+        }
+    }
+
+    private fun detailWebUrl(naver: NaverInfo): String = naver.link
+}
+
 object Kakao : MarketApp() {
 
     override val packageName = "com.kakao.talk"

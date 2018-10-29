@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <variable name="item" type="soup.movie.ui.detail.DetailViewState.ListItem" />
+        <variable name="listener" type="soup.movie.ui.detail.DetailListItemListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        app:cardBackgroundColor="?attr/moop_cardBgColorDark" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Chip.Naver"
+                android:id="@+id/brandView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="네이버"
+                android:onClick="@{() -> listener.onInfoClick(item)}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/eggIcon"
+                android:layout_width="24dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_round_star"
+                android:tint="@color/amber"
+                android:tintMode="src_in"
+                app:layout_constraintEnd_toStartOf="@+id/eggLabel"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/brandView"
+                app:layout_constraintTop_toTopOf="@+id/brandView" />
+
+            <TextView
+                android:id="@+id/eggLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{item.movie.naverUserRating}"
+                android:textColor="?attr/moop_cardContentColorDark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
+                app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+                app:layout_constraintStart_toEndOf="@+id/eggIcon"
+                app:layout_constraintTop_toTopOf="@+id/eggIcon"
+                tools:text="0.0" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="?attr/moop_cardDividerColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ticketButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:onClick="@{() -> listener.onInfoClick(item)}"
+                android:text="자세히보기"
+                android:textColor="@color/selector_item_detail_ticket"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

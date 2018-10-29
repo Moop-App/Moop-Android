@@ -36,6 +36,12 @@
         <item name="rippleColor">@color/white</item>
     </style>
 
+    <style name="Widget.Chip.Naver">
+        <item name="android:textColor">@color/chip_naver_text</item>
+        <item name="chipBackgroundColor">@color/chip_naver_bg</item>
+        <item name="rippleColor">@color/white</item>
+    </style>
+
     <style name="Widget.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="android:textAppearance">@style/TextAppearance.Chip</item>
     </style>

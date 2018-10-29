@@ -26,14 +26,12 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail_header.*
 import soup.movie.R
 import soup.movie.data.MovieSelectManager
-import soup.movie.data.helper.Cgv
-import soup.movie.data.helper.LotteCinema
-import soup.movie.data.helper.Megabox
-import soup.movie.data.helper.YouTube
+import soup.movie.data.helper.*
 import soup.movie.data.model.Movie
 import soup.movie.data.model.Theater.Companion.TYPE_CGV
 import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
+import soup.movie.data.model.Theater.Companion.TYPE_NONE
 import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.spec.share
@@ -95,6 +93,9 @@ class DetailActivity :
                     TYPE_MEGABOX -> {
                         analytics.clickMegaboxInfo(item.movie)
                         Megabox.executeMobileWeb(ctx, item.movie)
+                    }
+                    TYPE_NONE -> {
+                        Naver.executeWeb(ctx, item.movie)
                     }
                 }
             }
@@ -244,6 +245,7 @@ class DetailActivity :
                     override fun getSpanSize(position: Int): Int =
                             when (listAdapter.getItemViewType(position)) {
                                 R.layout.item_detail_trailers -> 3
+                                R.layout.item_detail_naver -> 3
                                 else -> 1
                             }
                 }

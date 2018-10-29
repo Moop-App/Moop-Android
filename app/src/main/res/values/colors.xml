@@ -17,6 +17,9 @@
     <color name="chip_megabox_text">#FFFFFF</color>
     <color name="chip_megabox_text_unchecked">#77FFFFFF</color>
 
+    <color name="chip_naver_bg">#1EC800</color>
+    <color name="chip_naver_text">#FFFFFF</color>
+
     <!-- the following colors is from plaid app -->
 
     <color name="scrim">#99323232</color>

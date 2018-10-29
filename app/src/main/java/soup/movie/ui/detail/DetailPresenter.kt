@@ -51,9 +51,15 @@ class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting
 
     override fun usePaletteTheme(): Boolean = usePaletteThemeSetting.get()
 
-    private fun Movie.toItems(): List<ListItem> = arrayListOf(
-            ListItem(TYPE_CGV, R.layout.item_detail_cgv, this),
-            ListItem(TYPE_LOTTE, R.layout.item_detail_lotte, this),
-            ListItem(TYPE_MEGABOX, R.layout.item_detail_megabox, this),
-            ListItem(TYPE_NONE, R.layout.item_detail_trailers, this, trailers.orEmpty()))
+    private fun Movie.toItems(): List<ListItem> {
+        val list = mutableListOf(
+                ListItem(TYPE_CGV, R.layout.item_detail_cgv, this),
+                ListItem(TYPE_LOTTE, R.layout.item_detail_lotte, this),
+                ListItem(TYPE_MEGABOX, R.layout.item_detail_megabox, this))
+        if (hasNaverInfo()) {
+            list.add(ListItem(TYPE_NONE, R.layout.item_detail_naver, this))
+        }
+        list.add(ListItem(TYPE_NONE, R.layout.item_detail_trailers, this, trailers.orEmpty()))
+        return list
+    }
 }
