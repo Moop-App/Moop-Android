@@ -1,6 +1,6 @@
 package soup.movie.data.model
 
-data class MovieFilter(private var flags: Int) {
+data class TheaterFilter(private var flags: Int) {
 
     fun hasAllTheaters(): Boolean = has(FLAG_THEATER_ALL)
     fun hasNoTheaters(): Boolean = has(FLAG_THEATER_NONE)
@@ -48,6 +48,6 @@ data class MovieFilter(private var flags: Int) {
         const val FLAG_THEATER_LOTTE: Int = 1 shl 1
         const val FLAG_THEATER_MEGABOX: Int = 1 shl 2
         const val FLAG_THEATER_ALL: Int =
-                FLAG_THEATER_CGV and FLAG_THEATER_LOTTE and FLAG_THEATER_MEGABOX
+                FLAG_THEATER_CGV or FLAG_THEATER_LOTTE or FLAG_THEATER_MEGABOX
     }
 }

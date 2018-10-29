@@ -19,9 +19,15 @@ class SharedPreferencesModule {
 
     @Singleton
     @Provides
-    fun provideMovieFilterSetting(preferences: SharedPreferences):
-            MovieFilterSetting =
-            MovieFilterSetting(preferences)
+    fun provideAgeFilterSetting(preferences: SharedPreferences):
+            AgeFilterSetting =
+            AgeFilterSetting(preferences)
+
+    @Singleton
+    @Provides
+    fun provideTheaterFilterSetting(preferences: SharedPreferences):
+            TheaterFilterSetting =
+            TheaterFilterSetting(preferences)
 
     @Singleton
     @Provides

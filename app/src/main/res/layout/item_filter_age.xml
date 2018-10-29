@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingBottom="@dimen/settings_category_margin_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" >
+
+        <TextView
+            android:id="@+id/ageCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_category_age"
+            android:textAppearance="@style/TextAppearance.Settings.Category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+
+        <TextView
+            android:id="@+id/ageAllView"
+            android:layout_width="72dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_marginEnd="2dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:text="전체"
+            android:textColor="@color/selector_filter_age_text"
+            android:textStyle="bold"
+            android:background="@drawable/bg_filter_age_all"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@+id/age12View"
+            app:layout_constraintStart_toStartOf="@id/content"
+            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+
+        <TextView
+            android:id="@+id/age12View"
+            android:layout_width="72dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_marginEnd="2dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:text="12"
+            android:textColor="@color/selector_filter_age_text"
+            android:textStyle="bold"
+            android:background="@drawable/bg_filter_age_12"
+            app:layout_constraintEnd_toStartOf="@+id/age15View"
+            app:layout_constraintStart_toEndOf="@+id/ageAllView"
+            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+
+        <TextView
+            android:id="@+id/age15View"
+            android:layout_width="72dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_marginEnd="2dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:text="15"
+            android:textColor="@color/selector_filter_age_text"
+            android:textStyle="bold"
+            android:background="@drawable/bg_filter_age_15"
+            app:layout_constraintEnd_toStartOf="@+id/age19View"
+            app:layout_constraintStart_toEndOf="@+id/age12View"
+            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+
+        <TextView
+            android:id="@+id/age19View"
+            android:layout_width="72dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:text="청불"
+            android:textColor="@color/selector_filter_age_text"
+            android:textStyle="bold"
+            android:background="@drawable/bg_filter_age_19"
+            app:layout_constraintEnd_toEndOf="@id/content"
+            app:layout_constraintStart_toEndOf="@+id/age15View"
+            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -7,13 +7,15 @@ import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
-import soup.movie.settings.impl.MovieFilterSetting
+import soup.movie.settings.impl.AgeFilterSetting
+import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.main.movie.MovieListContract.Presenter
 import soup.movie.ui.main.movie.MovieListContract.View
 import soup.movie.ui.main.movie.MovieListViewState.*
 
-abstract class MovieListPresenter(private val filterSetting: MovieFilterSetting) :
+abstract class MovieListPresenter(private val theaterFilterSetting: TheaterFilterSetting,
+                                  private val ageFilterSetting: AgeFilterSetting) :
         BasePresenter<View>(), Presenter {
 
     private val refreshRelay = BehaviorRelay.createDefault(false)
@@ -22,15 +24,22 @@ abstract class MovieListPresenter(private val filterSetting: MovieFilterSetting)
         super.initObservable(disposable)
         disposable.add(Observables.combineLatest(
                 refreshRelay,
-                filterSetting.asObservable())
+                theaterFilterSetting.asObservable(),
+                ageFilterSetting.asObservable().distinctUntilChanged())
                 .subscribeOn(Schedulers.io())
-                .switchMap { (clearCache, movieFilter) -> getMovieList(clearCache)
+                .switchMap { (clearCache, theaterFilter, ageFilter) -> getMovieList(clearCache)
                         .map { it -> it
                                 .asSequence()
                                 .filter {
-                                    (movieFilter.hasCgv() and it.isScreeningAtCgv()) or
-                                    (movieFilter.hasLotteCinema() and it.isScreeningAtLotteCinema()) or
-                                    (movieFilter.hasMegabox() and it.isScreeningAtMegabox())
+                                    (theaterFilter.hasCgv() and it.isScreeningAtCgv()) or
+                                    (theaterFilter.hasLotteCinema() and it.isScreeningAtLotteCinema()) or
+                                    (theaterFilter.hasMegabox() and it.isScreeningAtMegabox())
+                                }
+                                .filter {
+                                    (ageFilter.hasAll() and it.isScreeningForAgeAll()) or
+                                    (ageFilter.has12() and it.isScreeningOverAge12()) or
+                                    (ageFilter.has15() and it.isScreeningOverAge15()) or
+                                    (ageFilter.has19() and it.isScreeningOverAge19())
                                 }
                                 .toList()
                         }

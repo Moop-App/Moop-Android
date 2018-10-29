@@ -5,10 +5,7 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import soup.movie.data.MoopRepository
 import soup.movie.di.scope.FragmentScope
-import soup.movie.settings.impl.MovieFilterSetting
-import soup.movie.settings.impl.TheatersSetting
-import soup.movie.settings.impl.UsePaletteThemeSetting
-import soup.movie.settings.impl.UseWebLinkSetting
+import soup.movie.settings.impl.*
 import soup.movie.ui.main.movie.MovieListContract
 import soup.movie.ui.main.movie.filter.MovieFilterContract
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
@@ -41,10 +38,11 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(filterSetting: MovieFilterSetting,
+        fun presenter(theaterFilterSetting: TheaterFilterSetting,
+                      ageFilterSetting: AgeFilterSetting,
                       repository: MoopRepository):
                 MovieListContract.Presenter =
-                NowPresenter(filterSetting, repository)
+                NowPresenter(theaterFilterSetting, ageFilterSetting, repository)
     }
 
     @FragmentScope
@@ -58,10 +56,11 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(filterSetting: MovieFilterSetting,
+        fun presenter(theaterFilterSetting: TheaterFilterSetting,
+                      ageFilterSetting: AgeFilterSetting,
                       repository: MoopRepository):
                 MovieListContract.Presenter =
-                PlanPresenter(filterSetting, repository)
+                PlanPresenter(theaterFilterSetting, ageFilterSetting, repository)
     }
 
     @FragmentScope
@@ -75,9 +74,10 @@ abstract class MainTabUiModule {
 
         @FragmentScope
         @Provides
-        fun presenter(filterSetting: MovieFilterSetting):
+        fun presenter(theaterFilterSetting: TheaterFilterSetting,
+                      ageFilterSetting: AgeFilterSetting):
                 MovieFilterContract.Presenter =
-                MovieFilterPresenter(filterSetting)
+                MovieFilterPresenter(theaterFilterSetting, ageFilterSetting)
     }
 
     @FragmentScope

@@ -53,6 +53,11 @@ data class Movie(
     fun isScreeningAtMegabox(): Boolean = megabox != null
     fun hasNaverInfo(): Boolean = naver != null
 
+    fun isScreeningForAgeAll(): Boolean = ageValue < 12
+    fun isScreeningOverAge12(): Boolean = (12 <= ageValue) and (ageValue < 15)
+    fun isScreeningOverAge15(): Boolean = (15 <= ageValue) and (ageValue < 19)
+    fun isScreeningOverAge19(): Boolean = 19 <= ageValue
+
     fun toMovieId() = MovieId(
             id = id,
             title = title,
