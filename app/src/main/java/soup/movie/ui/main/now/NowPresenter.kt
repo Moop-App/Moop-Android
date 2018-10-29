@@ -10,6 +10,10 @@ class NowPresenter(filterSetting: MovieFilterSetting,
                    private val repository: MoopRepository) :
         MovieListPresenter(filterSetting) {
 
-    override fun getMovieList(clearCache: Boolean): Observable<List<Movie>> =
-            repository.getNowList(clearCache).map { it.list }
+    override fun getMovieList(clearCache: Boolean): Observable<List<Movie>> {
+        return repository.getNowList(clearCache)
+                .map { it ->
+                    it.list.sortedBy { it.rank }
+                }
+    }
 }

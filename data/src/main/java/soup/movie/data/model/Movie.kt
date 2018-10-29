@@ -13,8 +13,27 @@ data class Movie(
         val trailers: List<Trailer>?,
         val isNow: Boolean) {
 
+    val rank: Float
+        get() {
+            var rank = 0
+            var count = 0
+            if (cgv != null) {
+                rank += cgv.rank
+                count += 1
+            }
+            if (lotte != null) {
+                rank += lotte.rank
+                count += 1
+            }
+            if (megabox != null) {
+                rank += megabox.rank
+                count += 1
+            }
+            return rank.toFloat() / count
+        }
+
     val isPlan: Boolean
-            get() = !isNow
+        get() = !isNow
 
     val cgvEgg: String
         get() = cgv?.egg ?: "-"
