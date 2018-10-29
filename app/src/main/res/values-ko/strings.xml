@@ -14,6 +14,7 @@
 
     <string name="action_filter">필터</string>
     <string name="filter_category_theater">극장 필터</string>
+    <string name="no_movies_description">해당되는 영화가 없습니다</string>
 
     <string name="action_help">도움말</string>
     <string name="settings_category_theater">자주가는 극장</string>
