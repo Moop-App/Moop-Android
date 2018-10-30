@@ -15,18 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <soup.widget.recyclerview.RecyclerViewEx
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="@integer/grid_span_count"
-                tools:visibility="invisible"
-                tools:listitem="@layout/item_movie" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/noItemsView"
                 android:layout_width="0dp"
@@ -61,6 +49,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <soup.widget.recyclerview.RecyclerViewEx
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="@integer/grid_span_count"
+                tools:visibility="invisible"
+                tools:listitem="@layout/item_movie" />
 
             <include
                 layout="@layout/item_error_state"
