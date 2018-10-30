@@ -7,6 +7,7 @@ import soup.movie.di.ui.*
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.main.MainActivity
+import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.ui.theater.sort.TheaterSortActivity
 
@@ -19,6 +20,12 @@ abstract class ActivityBindingModule {
         MainTabUiModule::class
     ])
     internal abstract fun mainActivity(): MainActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [
+        SearchUiModule::class
+    ])
+    internal abstract fun searchActivity(): SearchActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [

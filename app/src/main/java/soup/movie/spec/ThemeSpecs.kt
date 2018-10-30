@@ -6,6 +6,7 @@ import soup.movie.theme.ThemePage
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.main.MainActivity
+import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.ui.theater.sort.TheaterSortActivity
 
@@ -22,6 +23,7 @@ object ThemeSpecs {
 
         override fun extractThemeOf(activity: Activity?): Int = when (activity) {
             is MainActivity -> R.style.AppTheme
+            is SearchActivity -> R.style.AppTheme_Search
             is DetailActivity -> R.style.AppTheme_Detail
             is TimetableActivity -> R.style.AppTheme_Timetable
             is TheaterSortActivity -> R.style.AppTheme_TheaterSort
@@ -34,6 +36,7 @@ object ThemeSpecs {
 
         override fun extractThemeOf(activity: Activity?): Int = when (activity) {
             is MainActivity -> R.style.BlackTheme
+            is SearchActivity -> R.style.BlackTheme_Search
             is DetailActivity -> R.style.BlackTheme_Detail
             is TimetableActivity -> R.style.BlackTheme_Timetable
             is TheaterSortActivity -> R.style.BlackTheme_TheaterSort
@@ -46,6 +49,7 @@ object ThemeSpecs {
 
         override fun extractThemeOf(activity: Activity?): Int = when (activity) {
             is MainActivity -> R.style.WaTgbhTheme
+            is SearchActivity -> R.style.WaTgbhTheme_Search
             is DetailActivity -> R.style.WaTgbhTheme_Detail
             is TimetableActivity -> R.style.WaTgbhTheme_Timetable
             is TheaterSortActivity -> R.style.WaTgbhTheme_TheaterSort

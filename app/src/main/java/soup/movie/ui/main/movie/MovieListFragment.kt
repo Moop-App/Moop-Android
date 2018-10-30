@@ -19,6 +19,7 @@ import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.movie.MovieListViewState.*
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
+import soup.movie.ui.search.SearchActivity
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
@@ -46,6 +47,11 @@ abstract class MovieListFragment :
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_search -> {
+                val intent = Intent(requireActivity(), SearchActivity::class.java)
+                startActivity(intent)
+                return true
+            }
             R.id.action_filter -> {
                 if (panelIsShown()) {
                     hidePanel()

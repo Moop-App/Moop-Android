@@ -84,6 +84,9 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
+    <style name="BlackTheme.Search" parent="BlackTheme.NoActionBar">
+    </style>
+
     <style name="BlackTheme.Detail" parent="BlackTheme.Translucent">
         <item name="android:statusBarColor">@color/dribbble_super_dark</item>
         <item name="android:colorControlActivated">?android:colorAccent</item>

@@ -72,4 +72,21 @@
         <item name="rippleColor">@color/white</item>
     </style>
 
+    <!-- Search -->
+
+    <style name="SearchViewTheme" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+        <item name="colorControlActivated">?android:colorAccent</item>
+        <item name="android:searchViewStyle">@style/Widget.Moop.SearchView</item>
+        <item name="android:textColorHint">?attr/moop_textColorDark</item>
+        <item name="android:editTextColor">?attr/moop_textColorDark</item>
+    </style>
+
+    <style name="Widget.Moop.SearchView" parent="android:style/Widget.Material.SearchView">
+        <item name="android:searchIcon">@android:color/transparent</item>
+        <item name="android:searchHintIcon">@android:color/transparent</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="android:submitBackground">@android:color/transparent</item>
+        <item name="android:closeIcon">@drawable/ic_round_close</item>
+    </style>
+
 </resources>
