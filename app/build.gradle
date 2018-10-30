@@ -129,10 +129,11 @@ dependencies {
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'
     debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     implementation deps.okhttp_logging_interceptor
-    implementation 'com.google.firebase:firebase-core:16.0.4'
 
+    implementation deps.firebase.core
     implementation deps.firebase.crashlytics
     implementation deps.firebase.performance
+    implementation deps.firebase.messaging
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner
