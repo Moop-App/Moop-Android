@@ -27,7 +27,7 @@
         <View
             android:id="@+id/content"
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_height="32dp"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,7 @@
         <TextView
             android:id="@+id/ageAllView"
             android:layout_width="72dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_height="0dp"
             android:layout_marginEnd="2dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -49,13 +48,13 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintEnd_toStartOf="@+id/age12View"
             app:layout_constraintStart_toStartOf="@id/content"
-            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+            app:layout_constraintTop_toTopOf="@+id/content"
+            app:layout_constraintBottom_toBottomOf="@+id/content" />
 
         <TextView
             android:id="@+id/age12View"
             android:layout_width="72dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_height="0dp"
             android:layout_marginEnd="2dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -66,13 +65,13 @@
             android:background="@drawable/bg_filter_age_12"
             app:layout_constraintEnd_toStartOf="@+id/age15View"
             app:layout_constraintStart_toEndOf="@+id/ageAllView"
-            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+            app:layout_constraintTop_toTopOf="@+id/content"
+            app:layout_constraintBottom_toBottomOf="@+id/content" />
 
         <TextView
             android:id="@+id/age15View"
             android:layout_width="72dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_height="0dp"
             android:layout_marginEnd="2dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -83,13 +82,13 @@
             android:background="@drawable/bg_filter_age_15"
             app:layout_constraintEnd_toStartOf="@+id/age19View"
             app:layout_constraintStart_toEndOf="@+id/age12View"
-            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+            app:layout_constraintTop_toTopOf="@+id/content"
+            app:layout_constraintBottom_toBottomOf="@+id/content" />
 
         <TextView
             android:id="@+id/age19View"
             android:layout_width="72dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:layout_height="0dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:gravity="center"
@@ -99,7 +98,8 @@
             android:background="@drawable/bg_filter_age_19"
             app:layout_constraintEnd_toEndOf="@id/content"
             app:layout_constraintStart_toEndOf="@+id/age15View"
-            app:layout_constraintTop_toBottomOf="@+id/ageCategory" />
+            app:layout_constraintTop_toTopOf="@+id/content"
+            app:layout_constraintBottom_toBottomOf="@+id/content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
