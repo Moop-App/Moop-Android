@@ -45,14 +45,16 @@ abstract class MovieListFragment :
         get() = R.menu.fragment_movie_list
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_filter) {
-            if (panelIsShown()) {
-                hidePanel()
-            } else {
-                analytics.clickMenuFilter()
-                showPanel(MovieFilterFragment.toPanelData())
+        when (item.itemId) {
+            R.id.action_filter -> {
+                if (panelIsShown()) {
+                    hidePanel()
+                } else {
+                    analytics.clickMenuFilter()
+                    showPanel(MovieFilterFragment.toPanelData())
+                }
+                return true
             }
-            return true
         }
         return super.onOptionsItemSelected(item)
     }
