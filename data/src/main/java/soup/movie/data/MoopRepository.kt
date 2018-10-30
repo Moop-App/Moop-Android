@@ -49,6 +49,17 @@ class MoopRepository(private val localDataSource: LocalMoopDataSource,
                     .filter { it.isMatchedWith(movieId) }
                     .take(1)
 
+    fun searchMovie(query: String): Observable<List<Movie>> =
+            Observable.merge(
+                    getNowList(false).map { it.list },
+                    getPlanList(false).map { it.list })
+                    .map { it -> it
+                            .asSequence()
+                            .filter { it.isMatchedWith(query) }
+                            .take(10)
+                            .toList()
+                    }
+
     fun getCodeList(): Observable<CodeResponse> =
             Observable.concat(
                     getCodeListInMemory(),

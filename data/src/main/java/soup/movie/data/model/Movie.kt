@@ -73,6 +73,11 @@ data class Movie(
             || megabox?.id.isMatched(movieId.megaboxId)
     }
 
+    //TODO: Improve this
+    fun isMatchedWith(query: String): Boolean {
+        return title.contains(query, ignoreCase = true)
+    }
+
     private fun String?.isMatched(id: String?): Boolean {
         if (this == null || id == null) return false
         return this == id
