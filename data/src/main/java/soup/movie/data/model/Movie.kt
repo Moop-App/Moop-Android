@@ -1,5 +1,7 @@
 package soup.movie.data.model
 
+import soup.movie.data.util.SearchHelper
+
 data class Movie(
         val id: String,
         val title: String,
@@ -73,9 +75,8 @@ data class Movie(
             || megabox?.id.isMatched(movieId.megaboxId)
     }
 
-    //TODO: Improve this
     fun isMatchedWith(query: String): Boolean {
-        return title.contains(query, ignoreCase = true)
+        return SearchHelper.matched(title, query)
     }
 
     private fun String?.isMatched(id: String?): Boolean {

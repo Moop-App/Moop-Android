@@ -53,12 +53,10 @@ class MoopRepository(private val localDataSource: LocalMoopDataSource,
             Observable.merge(
                     getNowList(false).map { it.list },
                     getPlanList(false).map { it.list })
-                    .map { it -> it
-                            .asSequence()
-                            .filter { it.isMatchedWith(query) }
-                            .take(10)
-                            .toList()
-                    }
+                    .flatMapIterable { it }
+                    .filter { it.isMatchedWith(query) }
+                    .toList()
+                    .toObservable()
 
     fun getCodeList(): Observable<CodeResponse> =
             Observable.concat(
