@@ -46,7 +46,7 @@ import soup.movie.util.log.printRenderLog
 import soup.movie.util.setBackgroundColorResource
 import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.with
-import soup.widget.elastic.ElasticDragDismissFrameLayout
+import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
 import soup.widget.util.ViewUtils
@@ -142,12 +142,6 @@ class DetailActivity :
         }, analytics)
     }
 
-    private val chromeFader by lazy {
-        object : ElasticDragDismissFrameLayout.SystemChromeFader(this) {
-            override fun onDragDismissed() = setResultAndFinish()
-        }
-    }
-
     private val scrollListener = object : RecyclerView.OnScrollListener() {
 
         private var wasScrolled: Boolean = false
@@ -204,12 +198,18 @@ class DetailActivity :
         }
     }
 
+    private lateinit var chromeFader: SystemChromeFader
+
     override fun onCreate(savedInstanceState: Bundle?) {
         movie = MovieSelectManager.getSelectedItem()!!
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
         binding.item = movie
+
+        chromeFader = object : SystemChromeFader(this) {
+            override fun onDragDismissed() = setResultAndFinish()
+        }
     }
 
     private fun doStartPostponedEnterTransition() {

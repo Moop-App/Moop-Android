@@ -24,7 +24,7 @@ versions.rx_java2 = "2.2.2"
 versions.rx_kotlin = "2.3.0"
 versions.rx_android = "2.1.0"
 versions.rx_relay = "2.1.0"
-versions.kotlin = "1.2.71"
+versions.kotlin = "1.3.0"
 def deps = [:]
 
 def androidx = [:]
