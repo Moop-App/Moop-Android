@@ -5,6 +5,7 @@ import com.mapbox.mapboxsdk.Mapbox
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import soup.movie.di.DaggerApplicationComponent
+import soup.movie.notification.NotificationSpecs
 import soup.movie.spec.ThemeSpecs
 import soup.movie.theme.ThemeBook
 
@@ -19,6 +20,7 @@ class MovieApplication : DaggerApplication() {
                 ThemeSpecs.BLACK,
                 ThemeSpecs.WA_TGBH)
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token))
+        NotificationSpecs.initialize(this)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

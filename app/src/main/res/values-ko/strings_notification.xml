@@ -1,0 +1,4 @@
+<resources>
+    <string name="notification_channel_notice">공지사항</string>
+    <string name="notification_channel_event">이벤트</string>
+</resources>
