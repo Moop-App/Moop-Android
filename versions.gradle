@@ -102,8 +102,8 @@ deps.rx = rx
 def firebase = [:]
 firebase.core = 'com.google.firebase:firebase-core:16.0.4'
 firebase.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.5"
-firebase.performance = "com.google.firebase:firebase-perf:16.1.2"
-firebase.messaging = 'com.google.firebase:firebase-messaging:12.0.1'
+firebase.performance = "com.google.firebase:firebase-perf:16.2.0"
+firebase.messaging = 'com.google.firebase:firebase-messaging:17.3.4'
 firebase.plugin = 'com.google.firebase:firebase-plugins:1.1.5'
 deps.firebase = firebase
 
