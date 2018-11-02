@@ -3,4 +3,5 @@
 
     <string name="notification_channel_notice">Notice</string>
     <string name="notification_channel_event">Event</string>
+    <string name="notification_channel_theater_mode">Theater Mode</string>
 </resources>

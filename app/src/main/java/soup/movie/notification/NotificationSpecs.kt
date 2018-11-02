@@ -37,28 +37,37 @@ object NotificationSpecs {
         }
     }
 
-    private fun Context.getNotificationManager(): NotificationManager? {
-        return getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+    fun createNotificationForTheaterMode(ctx: Context): Builder {
+        return Builder(ctx, NotificationChannels.THEATER_MODE)
     }
+}
 
-    private object NotificationChannels {
+private fun Context.getNotificationManager(): NotificationManager? {
+    return getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+}
 
-        const val NOTICE = "NTC"
-        const val EVENT = "EVT" // Default
+object NotificationChannels {
 
-        fun initialize(application: Application) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                application.getNotificationManager()?.run {
-                    val notice = NotificationChannel(
-                            NOTICE,
-                            application.getString(R.string.notification_channel_notice),
-                            NotificationManager.IMPORTANCE_HIGH)
-                    val event = NotificationChannel(
-                            EVENT,
-                            application.getString(R.string.notification_channel_event),
-                            NotificationManager.IMPORTANCE_HIGH)
-                    createNotificationChannels(listOf(notice, event))
-                }
+    const val NOTICE = "NTC"
+    const val EVENT = "EVT" // Default
+    const val THEATER_MODE = "THM"
+
+    internal fun initialize(application: Application) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            application.getNotificationManager()?.run {
+                val notice = NotificationChannel(
+                        NOTICE,
+                        application.getString(R.string.notification_channel_notice),
+                        NotificationManager.IMPORTANCE_HIGH)
+                val event = NotificationChannel(
+                        EVENT,
+                        application.getString(R.string.notification_channel_event),
+                        NotificationManager.IMPORTANCE_HIGH)
+                val theaterMode = NotificationChannel(
+                        THEATER_MODE,
+                        application.getString(R.string.notification_channel_theater_mode),
+                        NotificationManager.IMPORTANCE_HIGH)
+                createNotificationChannels(listOf(notice, event, theaterMode))
             }
         }
     }

@@ -1,7 +1,5 @@
 package soup.movie.data.util
 
-import android.text.TextUtils
-
 /**
  * 초성 검색 알고리즘을 위한 클래스
  *
@@ -54,7 +52,7 @@ object SearchHelper {
     }
 
     fun matchedLegacy(sentence: String, query: String): Boolean =
-            if (TextUtils.isEmpty(query)) { false }
+            if (query.isEmpty()) { false }
             else matchedIndex(sentence, query) != NO_MATCHED
 
     fun matched(sentence: String, query: String): Boolean =
