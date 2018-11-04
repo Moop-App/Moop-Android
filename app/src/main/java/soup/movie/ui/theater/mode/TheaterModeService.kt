@@ -6,13 +6,20 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.IBinder
-import androidx.core.app.NotificationCompat
 import soup.movie.R
 import soup.movie.notification.NotificationSpecs
+import soup.movie.ui.theater.mode.brightness.BrightnessModule
+import soup.movie.ui.theater.mode.dnd.DndModule
 import soup.movie.util.toHexString
 import timber.log.Timber
 
 class TheaterModeService : Service() {
+
+    private val dndModule: DndModule = DndModule(this)
+
+    private val brightnessModule: BrightnessModule = BrightnessModule(this) { enabled ->
+        Timber.d("BrightnessModule is %s", if (enabled) "enabled" else "disabled")
+    }
 
     override fun onBind(intent: Intent?): IBinder? {
         throw UnsupportedOperationException("Service binding is NOT Supported");
@@ -21,10 +28,14 @@ class TheaterModeService : Service() {
     override fun onCreate() {
         super.onCreate()
         Timber.d("onCreate: 0x{${hashCode().toHexString()}}")
+        dndModule.enable()
+        brightnessModule.enable()
     }
 
     override fun onDestroy() {
         Timber.d("onDestroy: 0x{${hashCode().toHexString()}}")
+        dndModule.disable()
+        brightnessModule.disable()
         super.onDestroy()
     }
 
@@ -45,8 +56,8 @@ class TheaterModeService : Service() {
                 .setColor(Color.BLUE)
                 .setOngoing(true)
                 .setContentIntent(getSettingIntent())
-//                .addAction(NotificationCompat.Action(
-//                        R.drawable.ic_round_close, "Quit", getQuitIntent()))
+                //.addAction(NotificationCompat.Action(
+                //        R.drawable.ic_round_close, "Quit", getQuitIntent()))
                 .build()
         startForeground(ID_SAMPLE, notification)
     }
@@ -74,10 +85,12 @@ class TheaterModeService : Service() {
         private const val ACTION_QUIT = "ACTION_QUIT"
 
         fun start(ctx: Context) {
+            Timber.d("start")
             ctx.startService(ctx.createIntent(ACTION_START_FOREGROUND))
         }
 
         fun stop(ctx: Context) {
+            Timber.d("stop")
             ctx.startService(ctx.createIntent(ACTION_STOP_FOREGROUND))
         }
 

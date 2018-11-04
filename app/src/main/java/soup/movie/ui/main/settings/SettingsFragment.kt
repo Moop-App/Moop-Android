@@ -14,6 +14,7 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_settings_experimental.*
 import kotlinx.android.synthetic.main.item_settings_feedback.*
 import kotlinx.android.synthetic.main.item_settings_theater.*
+import kotlinx.android.synthetic.main.item_settings_theater_mode.*
 import kotlinx.android.synthetic.main.item_settings_theme.*
 import kotlinx.android.synthetic.main.item_settings_version.*
 import soup.movie.BuildConfig
@@ -25,6 +26,7 @@ import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.theme.ThemeBook
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
+import soup.movie.ui.theater.mode.TheaterModeTileActivity
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeBookmarkActivity
 import soup.movie.util.*
@@ -87,6 +89,9 @@ class SettingsFragment :
         }
         themeGroup.setOnDebounceClickListener {
             onThemeEditClicked()
+        }
+        tmPrepare.setOnClickListener {
+            startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
         }
         usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUsePaletteTheme(isChecked)

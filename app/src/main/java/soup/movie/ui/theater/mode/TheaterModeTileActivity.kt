@@ -22,9 +22,6 @@ class TheaterModeTileActivity : AppCompatActivity() {
         inactiveButton.setOnClickListener {
             updateState(TileState.Inactive)
         }
-        unavailableButton.setOnClickListener {
-            updateState(TileState.Unavailable)
-        }
     }
 
     private fun updateState(newState: TileState) {
@@ -36,7 +33,6 @@ class TheaterModeTileActivity : AppCompatActivity() {
         stateView.text = when (tileManager.tileState) {
             TileState.Active -> "Active"
             TileState.Inactive -> "Inactive"
-            TileState.Unavailable -> "Unavailable"
         }
     }
 }

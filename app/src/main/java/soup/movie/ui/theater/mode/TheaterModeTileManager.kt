@@ -5,7 +5,7 @@ typealias Listener = (TheaterModeTileManager.TileState) -> Unit
 object TheaterModeTileManager {
 
     enum class TileState {
-        Active, Inactive, Unavailable
+        Active, Inactive
     }
 
     private var listener: Listener? = null

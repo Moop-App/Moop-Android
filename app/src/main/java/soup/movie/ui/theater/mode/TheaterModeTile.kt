@@ -40,7 +40,6 @@ class TheaterModeTile : TileService() {
         tileManager.tileState = when (tileManager.tileState) {
             Active -> Inactive
             Inactive -> Active
-            Unavailable -> Unavailable
         }
     }
 
@@ -58,11 +57,6 @@ class TheaterModeTile : TileService() {
                     icon = Icon.createWithResource(applicationContext, R.drawable.ic_tile_inactive)
                     label = "Inactive"
                     TheaterModeService.stop(this@TheaterModeTile)
-                }
-                Unavailable -> {
-                    state = Tile.STATE_UNAVAILABLE
-                    icon = Icon.createWithResource(applicationContext, R.drawable.ic_tile_unavailable)
-                    label = "Unavailable"
                 }
             }
             updateTile()

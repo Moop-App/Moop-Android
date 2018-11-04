@@ -30,18 +30,10 @@
         android:id="@+id/inactiveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Inactive"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/unavailableButton"
-        app:layout_constraintStart_toEndOf="@id/activeButton" />
-
-    <Button
-        android:id="@+id/unavailableButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Unavailable"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/inactiveButton" />
+        app:layout_constraintStart_toEndOf="@id/activeButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
