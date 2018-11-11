@@ -8,8 +8,6 @@ interface DetailContract {
     interface Presenter : BaseContract.Presenter<View> {
 
         fun requestShareImage(url: String)
-
-        fun usePaletteTheme(): Boolean
     }
 
     interface View : BaseContract.View {

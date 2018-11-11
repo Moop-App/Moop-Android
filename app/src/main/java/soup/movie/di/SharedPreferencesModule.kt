@@ -37,12 +37,6 @@ class SharedPreferencesModule {
 
     @Singleton
     @Provides
-    fun provideUsePaletteThemeSetting(preferences: SharedPreferences):
-            UsePaletteThemeSetting =
-            UsePaletteThemeSetting(preferences)
-
-    @Singleton
-    @Provides
     fun provideUseWebLinkSetting(preferences: SharedPreferences):
             UseWebLinkSetting =
             UseWebLinkSetting(preferences)

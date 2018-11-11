@@ -12,7 +12,6 @@ sealed class SettingsViewState {
 
     @Keep
     data class ExperimentalViewState(
-            val usePaletteTheme: Boolean,
             val useWebLink: Boolean)
 
     @Keep

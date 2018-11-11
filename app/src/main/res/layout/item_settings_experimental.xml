@@ -22,18 +22,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Switch
-            android:id="@+id/usePaletteThemeSwitch"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/settings_item_margin_vertical"
-            android:checked="true"
-            android:text="영화 세부정보 화면에 포스터 색상으로 배경설정"
-            android:textColor="?attr/moop_textColorDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/experimentalCategory" />
-
-        <Switch
             android:id="@+id/useWebLinkSwitch"
             android:layout_width="0dp"
             android:layout_height="40dp"
@@ -43,7 +31,7 @@
             android:textColor="?attr/moop_textColorDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usePaletteThemeSwitch" />
+            app:layout_constraintTop_toBottomOf="@+id/experimentalCategory" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

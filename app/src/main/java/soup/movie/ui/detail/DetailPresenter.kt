@@ -11,7 +11,6 @@ import soup.movie.data.model.Theater.Companion.TYPE_CGV
 import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.data.model.Theater.Companion.TYPE_NONE
-import soup.movie.settings.impl.UsePaletteThemeSetting
 import soup.movie.ui.BasePresenter
 import soup.movie.ui.detail.DetailContract.Presenter
 import soup.movie.ui.detail.DetailContract.View
@@ -20,8 +19,7 @@ import soup.movie.ui.detail.DetailViewState.ListItem
 import soup.movie.util.ImageUriProvider
 import java.util.concurrent.TimeUnit
 
-class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting,
-                      private var imageUriProvider: ImageUriProvider) :
+class DetailPresenter(private var imageUriProvider: ImageUriProvider) :
         BasePresenter<View>(), Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {
@@ -48,8 +46,6 @@ class DetailPresenter(private var usePaletteThemeSetting: UsePaletteThemeSetting
         fileName.endsWith(".gif") -> "image/gif"
         else -> "image/jpeg"
     }
-
-    override fun usePaletteTheme(): Boolean = usePaletteThemeSetting.get()
 
     private fun Movie.toItems(): List<ListItem> {
         val list = mutableListOf(

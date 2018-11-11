@@ -4,17 +4,14 @@ import android.animation.ValueAnimator
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Pair
-import android.util.TypedValue
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
-import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.DataSource
@@ -50,7 +47,6 @@ import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
 import soup.widget.util.ViewUtils
-import soup.widget.util.getBitmap
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.max
@@ -170,23 +166,7 @@ class DetailActivity :
             dataSource: DataSource,
             isFirstResource: Boolean
         ): Boolean {
-            val bitmap = resource.getBitmap() ?: return false
-            val twentyFourDip = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    24f,
-                    resources.displayMetrics
-            ).toInt()
-
-            if (presenter.usePaletteTheme()) {
-                Palette.from(bitmap)
-                        .maximumColorCount(3)
-                        .clearFilters()
-                        .setRegion(0, 0, bitmap.width - 1, twentyFourDip) /* - 1 to work around
-                        https://code.google.com/p/android/issues/detail?id=191013 */
-                        .generate { palette -> applyTopPalette(bitmap, palette) }
-            } else {
-                applyTheme(ThemeData(windowBackground, isDark = false))
-            }
+            applyTheme(windowBackground)
             doStartPostponedEnterTransition()
             return false
         }
@@ -290,29 +270,9 @@ class DetailActivity :
         setResultAndFinish()
     }
 
-    private fun applyTopPalette(bitmap: Bitmap, palette: Palette?) {
-        val isDark = isDark(bitmap, palette)
-
-        // color the status bar.
-        windowBackground = ColorUtils.getMostPopulousSwatch(palette)?.let {
-            ColorUtils.scrimify(it.rgb, isDark, SCRIM_ADJUSTMENT)
-        } ?: run {
-            window.statusBarColor
-        }
-        applyTheme(ThemeData(windowBackground, isDark))
-    }
-
-    private fun isDark(bitmap: Bitmap, palette: Palette?): Boolean {
-        val lightness = ColorUtils.isDark(palette)
-        return if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
-            ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
-        } else {
-            lightness == ColorUtils.IS_DARK
-        }
-    }
-
-    private fun applyTheme(theme: ThemeData) {
-        if (theme.isDark.not()) { // make back icon dark on light images
+    private fun applyTheme(@ColorInt themeBgColor: Int) {
+        val isDark: Boolean = ColorUtils.isDark(themeBgColor)
+        if (isDark.not()) { // make back icon dark on light images
             val darkColor = getColorAttr(R.attr.moop_iconColorDark)
             titleView.setTextColor(darkColor)
             openDateView.setTextColor(darkColor)
@@ -323,9 +283,9 @@ class DetailActivity :
             ViewUtils.setLightStatusBar(window.decorView)
         }
 
-        if (theme.bgColor != window.statusBarColor) {
-            backgroundView.setBackgroundColor(theme.bgColor)
-            ValueAnimator.ofArgb(window.statusBarColor, theme.bgColor).apply {
+        if (themeBgColor != window.statusBarColor) {
+            backgroundView.setBackgroundColor(themeBgColor)
+            ValueAnimator.ofArgb(window.statusBarColor, themeBgColor).apply {
                 addUpdateListener { animation ->
                     window.statusBarColor = animation.animatedValue as Int
                 }
@@ -348,14 +308,4 @@ class DetailActivity :
                 .setType(mimeType)
                 .startChooser()
     }
-
-    companion object {
-
-        private const val SCRIM_ADJUSTMENT = 0.075f
-    }
-
-    data class ThemeData(
-            @ColorInt
-            val bgColor: Int,
-            val isDark: Boolean)
 }

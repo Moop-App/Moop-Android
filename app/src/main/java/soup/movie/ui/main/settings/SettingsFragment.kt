@@ -93,9 +93,6 @@ class SettingsFragment :
         tmPrepare.setOnClickListener {
             startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
         }
-        usePaletteThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            presenter.setUsePaletteTheme(isChecked)
-        }
         useWebLinkSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUseWebLink(isChecked)
         }
@@ -135,7 +132,6 @@ class SettingsFragment :
 
     override fun render(viewState: SettingsViewState.ExperimentalViewState) {
         printRenderLog { viewState }
-        usePaletteThemeSwitch?.isChecked = viewState.usePaletteTheme
         useWebLinkSwitch?.isChecked = viewState.useWebLink
     }
 
