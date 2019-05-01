@@ -30,7 +30,7 @@ import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.*
-import soup.movie.ui.helper.EventAnalytics
+import soup.movie.analytics.EventAnalytics
 import soup.movie.util.delegates.contentView
 import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog

@@ -23,7 +23,7 @@ import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.theme.ThemeBook
-import soup.movie.ui.helper.EventAnalytics
+import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeBookmarkActivity

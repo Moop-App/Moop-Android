@@ -15,7 +15,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.helper.EventAnalytics
+import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.movie.MovieListViewState.*
 import soup.movie.ui.main.movie.filter.MovieFilterFragment

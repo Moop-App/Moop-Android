@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import soup.movie.R
 import soup.movie.data.helper.YouTube
 import soup.movie.data.model.Trailer
-import soup.movie.ui.helper.EventAnalytics
+import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.databinding.DataBindingListAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.setOnDebounceClickListener

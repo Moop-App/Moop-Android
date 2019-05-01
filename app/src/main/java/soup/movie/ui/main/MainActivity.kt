@@ -21,7 +21,7 @@ import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.helper.EventAnalytics
+import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData

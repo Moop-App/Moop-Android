@@ -1,4 +1,4 @@
-package soup.movie.ui.helper
+package soup.movie.analytics
 
 import android.app.Activity
 import android.content.Context

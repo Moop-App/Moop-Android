@@ -15,7 +15,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivitySearchBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.helper.EventAnalytics
+import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.search.SearchViewState.DoneState
 import soup.movie.ui.search.SearchViewState.LoadingState
 import soup.movie.util.ImeUtil
