@@ -5,7 +5,6 @@ import dagger.android.ContributesAndroidInjector
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.main.MainActivity
 import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
@@ -32,12 +31,6 @@ abstract class ActivityBindingModule {
         DetailUiModule::class
     ])
     internal abstract fun detailActivity(): DetailActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        TimetableUiModule::class
-    ])
-    internal abstract fun timetableActivity(): TimetableActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [

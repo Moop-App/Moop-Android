@@ -102,8 +102,6 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
-    <style name="AppTheme.Timetable" parent="AppTheme.NoActionBar" />
-
     <style name="AppTheme.TheaterSort">
         <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
         <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>

@@ -18,7 +18,6 @@ class EventAnalytics(context: Context) {
 
         // Specific Type
         private const val CONTENT_TYPE_MOVIE = "Movie"
-        private const val CONTENT_TYPE_THEATER = "Theater"
         private const val CONTENT_TYPE_TRAILER = "Trailer"
 
         private const val BRAND_CGV = "CGV"
@@ -87,15 +86,6 @@ class EventAnalytics(context: Context) {
         logEvent(Event.SHARE) {
             putString(Param.ITEM_ID, movie.posterUrl)
             putString(Param.CONTENT_TYPE, CONTENT_TYPE_IMAGE)
-        }
-    }
-
-    fun clickTimetable(movie: Movie) {
-        logButtonEvent("Timetable") {
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
-            putString(Param.ITEM_BRAND, BRAND_CGV)
         }
     }
 

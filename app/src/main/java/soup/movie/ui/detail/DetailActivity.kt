@@ -1,15 +1,11 @@
 package soup.movie.ui.detail
 
 import android.animation.ValueAnimator
-import android.app.ActivityOptions
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Pair
-import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -35,14 +31,12 @@ import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.*
-import soup.movie.ui.detail.timetable.TimetableActivity
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.util.delegates.contentView
 import soup.movie.util.loadAsync
 import soup.movie.util.log.printRenderLog
 import soup.movie.util.setBackgroundColorResource
 import soup.movie.util.setOnDebounceClickListener
-import soup.movie.util.with
 import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
@@ -206,13 +200,6 @@ class DetailActivity :
             analytics.clickPoster(movie)
             presenter.requestShareImage(movie.posterUrl)
         }
-        timetableButton.setOnDebounceClickListener {
-            analytics.clickTimetable(movie)
-            val intent = Intent(this, TimetableActivity::class.java)
-            startActivity(intent, ActivityOptions
-                    .makeSceneTransitionAnimation(this, *createSharedElements())
-                    .toBundle())
-        }
         shareButton.setOnDebounceClickListener {
             analytics.clickShare(movie)
             share(movie)
@@ -237,10 +224,6 @@ class DetailActivity :
             }
         }
     }
-
-    private fun createSharedElements(): Array<Pair<View, String>> = arrayOf(
-            ageBgView with R.string.transition_age_bg,
-            ageView with R.string.transition_age)
 
     override fun onResume() {
         super.onResume()
@@ -276,7 +259,6 @@ class DetailActivity :
             val darkColor = getColorAttr(R.attr.moop_iconColorDark)
             titleView.setTextColor(darkColor)
             openDateView.setTextColor(darkColor)
-            timetableButton.setColorFilter(darkColor)
             shareButton.setColorFilter(darkColor)
 
             // set a light status bar
