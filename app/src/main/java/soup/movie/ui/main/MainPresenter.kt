@@ -32,7 +32,6 @@ class MainPresenter(private val lastMainTabSetting: LastMainTabSetting,
             when (tabMode) {
                 Now -> NowState
                 Plan -> PlanState
-                Theaters -> TheatersState
                 Settings -> SettingsState
             }
 

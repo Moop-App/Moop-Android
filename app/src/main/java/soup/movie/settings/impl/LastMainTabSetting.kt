@@ -4,11 +4,10 @@ import android.content.SharedPreferences
 import soup.movie.settings.PrefSetting
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 
-class LastMainTabSetting(preferences: SharedPreferences) :
-        PrefSetting<Tab>(preferences) {
+class LastMainTabSetting(preferences: SharedPreferences) : PrefSetting<Tab>(preferences) {
 
     enum class Tab {
-        Now, Plan, Theaters, Settings
+        Now, Plan, Settings
     }
 
     override fun getDefaultValue(preferences: SharedPreferences): Tab =

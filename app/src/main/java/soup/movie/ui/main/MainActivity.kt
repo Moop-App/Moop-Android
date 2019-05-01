@@ -31,7 +31,6 @@ import soup.movie.ui.main.MainViewState.*
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
-import soup.movie.ui.main.theaters.TheatersFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.delegates.contentView
 import soup.movie.util.log.printRenderLog
@@ -248,7 +247,6 @@ class MainActivity :
         private fun MainViewState.toItemId(): Int = when (this) {
             is NowState -> R.id.action_now
             is PlanState -> R.id.action_plan
-            is TheatersState -> R.id.action_theaters
             is SettingsState -> R.id.action_settings
         }
 
@@ -256,14 +254,12 @@ class MainActivity :
         private fun MainViewState.toTitleId(): Int = when (this) {
             is NowState -> R.string.tab_now
             is PlanState -> R.string.tab_plan
-            is TheatersState -> R.string.tab_theaters
             is SettingsState -> R.string.tab_settings
         }
 
         private fun Int.parseToTabMode(): Tab = when (this) {
             R.id.action_now -> Tab.Now
             R.id.action_plan -> Tab.Plan
-            R.id.action_theaters -> Tab.Theaters
             R.id.action_settings -> Tab.Settings
             else -> throw IllegalArgumentException("0x${toString(16)} is invalid ID")
         }
@@ -271,7 +267,6 @@ class MainActivity :
         private fun MainViewState.asScene(): SceneData = when (this) {
             is NowState -> SceneData(toString(), isPersist = false) { NowFragment.newInstance() }
             is PlanState -> SceneData(toString(), isPersist = false) { PlanFragment.newInstance() }
-            is TheatersState -> SceneData(toString(), enter = 0, exit = R.anim.persist) { TheatersFragment.newInstance() }
             is SettingsState -> SceneData(toString()) { SettingsFragment.newInstance() }
         }
     }
