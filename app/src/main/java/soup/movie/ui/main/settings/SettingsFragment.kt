@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.item_settings_experimental.*
 import kotlinx.android.synthetic.main.item_settings_feedback.*
 import kotlinx.android.synthetic.main.item_settings_theater.*
 import kotlinx.android.synthetic.main.item_settings_theater_mode.*
@@ -93,9 +92,6 @@ class SettingsFragment :
             //TODO: Apply theater mode
             //startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
         }
-        useWebLinkSwitch.setOnCheckedChangeListener { _, isChecked ->
-            presenter.setUseWebLink(isChecked)
-        }
         bugReportButton.setOnDebounceClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse("mailto:")
@@ -128,11 +124,6 @@ class SettingsFragment :
                 }
             }.forEach { addView(it) }
         }
-    }
-
-    override fun render(viewState: SettingsViewState.ExperimentalViewState) {
-        printRenderLog { viewState }
-        useWebLinkSwitch?.isChecked = viewState.useWebLink
     }
 
     override fun render(viewState: SettingsViewState.VersionViewState) {

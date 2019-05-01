@@ -72,30 +72,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
 
             <include
-                android:id="@+id/experimentalItem"
-                layout="@layout/item_settings_experimental"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="?attr/moop_dividerColor"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/experimentalItem"/>
-
-            <include
                 android:id="@+id/versionItem"
                 layout="@layout/item_settings_version"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/experimentalItem" />
+                app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
 
             <View
                 android:layout_width="0dp"

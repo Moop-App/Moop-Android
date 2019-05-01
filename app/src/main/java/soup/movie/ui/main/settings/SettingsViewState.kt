@@ -8,16 +8,12 @@ sealed class SettingsViewState {
 
     @Keep
     data class TheaterListViewState(
-            val theaterList: List<Theater>)
-
-    @Keep
-    data class ExperimentalViewState(
-            val useWebLink: Boolean)
+        val theaterList: List<Theater>)
 
     @Keep
     data class VersionViewState(
-            val current: Version,
-            val latest: Version) {
+        val current: Version,
+        val latest: Version) {
 
         fun isLatest(): Boolean = current.versionCode >= latest.versionCode
     }
