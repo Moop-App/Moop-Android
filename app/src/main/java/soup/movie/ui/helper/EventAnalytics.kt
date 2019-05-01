@@ -7,7 +7,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics.Event
 import com.google.firebase.analytics.FirebaseAnalytics.Param
 import soup.movie.data.model.Movie
-import soup.movie.data.model.Theater
 import soup.movie.data.model.Trailer
 
 class EventAnalytics(context: Context) {
@@ -74,17 +73,6 @@ class EventAnalytics(context: Context) {
 
     fun clickMenuFilter() {
         logButtonEvent("MenuFilter")
-    }
-
-    /* Main: Theaters */
-
-    fun clickItem(theater: Theater) {
-        logEvent(Event.SELECT_CONTENT) {
-            putString(Param.ITEM_ID, theater.code)
-            putString(Param.ITEM_NAME, theater.name)
-            putString(Param.ITEM_BRAND, theater.type)
-            putString(Param.CONTENT_TYPE, CONTENT_TYPE_THEATER)
-        }
     }
 
     /* Main: Settings */

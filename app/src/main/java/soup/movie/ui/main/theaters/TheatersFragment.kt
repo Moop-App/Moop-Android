@@ -18,7 +18,6 @@ import soup.movie.data.helper.*
 import soup.movie.data.model.Theater
 import soup.movie.databinding.FragmentTheatersBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.theaters.TheatersViewState.DoneState
 import soup.movie.ui.main.theaters.TheatersViewState.ErrorState
@@ -36,9 +35,6 @@ class TheatersFragment :
 
     @Inject
     override lateinit var presenter: TheatersContract.Presenter
-
-    @Inject
-    lateinit var analytics: EventAnalytics
 
     private var selectedTheater: Theater? = null
 
@@ -90,7 +86,6 @@ class TheatersFragment :
             }
             marker.snippet.fromJson<Theater>()?.run {
                 showInfoPanel(this)
-                analytics.clickItem(this)
             }
             true
         }
