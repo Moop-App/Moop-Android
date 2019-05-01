@@ -8,7 +8,6 @@ import soup.movie.di.scope.FragmentScope
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.settings.impl.TheatersSetting
-import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.ui.main.movie.MovieListContract
 import soup.movie.ui.main.movie.filter.MovieFilterContract
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
@@ -92,10 +91,9 @@ abstract class MainTabUiModule {
         @FragmentScope
         @Provides
         fun presenter(theatersSetting: TheatersSetting,
-                      useWebLinkSetting: UseWebLinkSetting,
                       repository: MoopRepository):
                 SettingsContract.Presenter =
-                SettingsPresenter(theatersSetting, useWebLinkSetting, repository)
+                SettingsPresenter(theatersSetting, repository)
     }
 
     @FragmentScope

@@ -99,17 +99,6 @@ object Moop : MarketApp() {
 object Cgv : MarketApp() {
 
     override val packageName = "com.cgv.android.movieapp"
-    private val scheduleClass = "$packageName.reservation.movieschedule.MovieScheduleActivity"
-
-    fun executeAppForSchedule(ctx: Context) {
-        ctx.executeMarketApp(packageName, scheduleClass)
-    }
-
-    fun executeWeb(ctx: Context, movie: Movie) {
-        movie.cgv?.let {
-            ctx.executeWeb(detailWebUrl(it))
-        }
-    }
 
     fun executeMobileWeb(ctx: Context, movie: Movie) {
         movie.cgv?.let {
@@ -117,24 +106,12 @@ object Cgv : MarketApp() {
         }
     }
 
-    fun executeWebForSchedule(ctx: Context, movie: Movie) {
-        movie.cgv?.let {
-            ctx.executeWeb(reservationUrl(it))
-        }
-    }
-
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater))
     }
 
-    private fun detailWebUrl(cgv: CgvInfo): String =
-            "http://www.cgv.co.kr/movies/detail-view/?midx=${cgv.id}"
-
     private fun detailMobileWebUrl(cgv: CgvInfo): String =
             "http://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=${cgv.id}"
-
-    private fun reservationUrl(cgv: CgvInfo): String =
-            "http://m.cgv.co.kr/quickReservation/Default.aspx?MovieIdx=${cgv.id}"
 
     private fun detailWebUrl(theater: Theater): String =
             "http://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=${theater.code}"
@@ -144,25 +121,9 @@ object LotteCinema : MarketApp() {
 
     override val packageName = "kr.co.lottecinema.lcm"
 
-    fun executeAppForSchedule(ctx: Context) {
-        executeApp(ctx)
-    }
-
-    fun executeWeb(ctx: Context, movie: Movie) {
-        movie.lotte?.let {
-            ctx.executeWeb(detailWebUrl(it))
-        }
-    }
-
     fun executeMobileWeb(ctx: Context, movie: Movie) {
         movie.lotte?.let {
             ctx.executeWeb(detailMobileWebUrl(it))
-        }
-    }
-
-    fun executeWebForSchedule(ctx: Context, movie: Movie) {
-        movie.lotte?.let {
-            ctx.executeWeb(reservationUrl(it))
         }
     }
 
@@ -170,14 +131,8 @@ object LotteCinema : MarketApp() {
         ctx.executeWeb(detailWebUrl(theater))
     }
 
-    private fun detailWebUrl(lotte: LotteInfo): String =
-            "http://www.lottecinema.co.kr/LCHS/Contents/Movie/Movie-Detail-View.aspx?movie=${lotte.id}"
-
     private fun detailMobileWebUrl(lotte: LotteInfo): String =
             "http://www.lottecinema.co.kr/LCMW/Contents/Movie/Movie-Detail-View.aspx?movie=${lotte.id}"
-
-    private fun reservationUrl(lotte: LotteInfo): String =
-            "http://www.lottecinema.co.kr/LCMW/Contents/Ticketing/ticketing.aspx"
 
     private fun detailWebUrl(theater: Theater): String =
             "http://www.lottecinema.co.kr/LCMW/Contents/Cinema/cinema-detail.aspx?cinemaID=${theater.code}"
@@ -187,25 +142,9 @@ object Megabox : MarketApp() {
 
     override val packageName = "com.megabox.mop"
 
-    fun executeAppForSchedule(ctx: Context) {
-        executeApp(ctx)
-    }
-
-    fun executeWeb(ctx: Context, movie: Movie) {
-        movie.megabox?.let {
-            ctx.executeWeb(detailWebUrl(it))
-        }
-    }
-
     fun executeMobileWeb(ctx: Context, movie: Movie) {
         movie.megabox?.let {
             ctx.executeWeb(detailMobileWebUrl(it))
-        }
-    }
-
-    fun executeWebForSchedule(ctx: Context, movie: Movie) {
-        movie.megabox?.let {
-            ctx.executeWeb(reservationUrl(it))
         }
     }
 
@@ -213,14 +152,8 @@ object Megabox : MarketApp() {
         ctx.executeWeb(detailWebUrl(theater))
     }
 
-    private fun detailWebUrl(megabox: MegaboxInfo): String =
-            "http://www.megabox.co.kr/?show=detail&rtnShowMovieCode=${megabox.id}"
-
     private fun detailMobileWebUrl(megabox: MegaboxInfo): String =
             "http://m.megabox.co.kr/?menuId=movie-detail&movieCode=${megabox.id}"
-
-    private fun reservationUrl(megabox: MegaboxInfo): String =
-            "http://m.megabox.co.kr/?menuId=booking&mBookingType=1"
 
     private fun detailWebUrl(theater: Theater): String =
             "http://m.megabox.co.kr/?menuId=theater-detail&cinema=${theater.code}"

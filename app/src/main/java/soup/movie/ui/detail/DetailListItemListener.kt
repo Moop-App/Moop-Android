@@ -7,7 +7,5 @@ interface DetailListItemListener {
 
     fun onInfoClick(item: ListItem)
 
-    fun onTicketClick(item: ListItem)
-
     fun onMoreTrailersClick(item: Movie)
 }

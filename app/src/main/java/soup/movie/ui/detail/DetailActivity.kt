@@ -26,7 +26,6 @@ import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.data.model.Theater.Companion.TYPE_NONE
 import soup.movie.databinding.ActivityDetailBinding
-import soup.movie.settings.impl.UseWebLinkSetting
 import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.BaseActivity
@@ -61,9 +60,6 @@ class DetailActivity :
     override lateinit var presenter: DetailContract.Presenter
 
     @Inject
-    lateinit var useWebLinkSetting: UseWebLinkSetting
-
-    @Inject
     lateinit var analytics: EventAnalytics
 
     private val listAdapter by lazy {
@@ -86,41 +82,6 @@ class DetailActivity :
                     }
                     TYPE_NONE -> {
                         Naver.executeWeb(ctx, item.movie)
-                    }
-                }
-            }
-
-            override fun onTicketClick(item: ListItem) {
-                val ctx: Context = this@DetailActivity
-                if (useWebLinkSetting.get()) {
-                    when (item.type) {
-                        TYPE_CGV -> {
-                            analytics.clickCgvTicket(item.movie)
-                            Cgv.executeWebForSchedule(ctx, item.movie)
-                        }
-                        TYPE_LOTTE -> {
-                            analytics.clickLotteTicket(item.movie)
-                            LotteCinema.executeWebForSchedule(ctx, item.movie)
-                        }
-                        TYPE_MEGABOX -> {
-                            analytics.clickMegaboxTicket(item.movie)
-                            Megabox.executeWebForSchedule(ctx, item.movie)
-                        }
-                    }
-                } else {
-                    when (item.type) {
-                        TYPE_CGV -> {
-                            analytics.clickCgvTicket(item.movie)
-                            Cgv.executeAppForSchedule(ctx)
-                        }
-                        TYPE_LOTTE -> {
-                            analytics.clickLotteTicket(item.movie)
-                            LotteCinema.executeAppForSchedule(ctx)
-                        }
-                        TYPE_MEGABOX -> {
-                            analytics.clickMegaboxTicket(item.movie)
-                            Megabox.executeAppForSchedule(ctx)
-                        }
                     }
                 }
             }

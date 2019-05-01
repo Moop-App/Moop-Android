@@ -5,7 +5,10 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
-import soup.movie.settings.impl.*
+import soup.movie.settings.impl.AgeFilterSetting
+import soup.movie.settings.impl.LastMainTabSetting
+import soup.movie.settings.impl.TheaterFilterSetting
+import soup.movie.settings.impl.TheatersSetting
 import javax.inject.Singleton
 
 @Module
@@ -34,12 +37,6 @@ class SharedPreferencesModule {
     fun provideTheatersSetting(preferences: SharedPreferences):
             TheatersSetting =
             TheatersSetting(preferences)
-
-    @Singleton
-    @Provides
-    fun provideUseWebLinkSetting(preferences: SharedPreferences):
-            UseWebLinkSetting =
-            UseWebLinkSetting(preferences)
 
     @Singleton
     @Provides

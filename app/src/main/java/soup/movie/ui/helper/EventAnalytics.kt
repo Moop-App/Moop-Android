@@ -98,15 +98,6 @@ class EventAnalytics(context: Context) {
 
     /* Detail: CGV */
 
-    fun clickCgvTicket(movie: Movie) {
-        logButtonEvent("Ticket") {
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
-            putString(Param.ITEM_BRAND, BRAND_CGV)
-        }
-    }
-
     fun clickCgvInfo(movie: Movie) {
         logButtonEvent("Info") {
             putString(Param.ITEM_ID, movie.id)
@@ -118,15 +109,6 @@ class EventAnalytics(context: Context) {
 
     /* Detail: Lotte Cinema */
 
-    fun clickLotteTicket(movie: Movie) {
-        logButtonEvent("Ticket") {
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
-            putString(Param.ITEM_BRAND, BRAND_LOTTE)
-        }
-    }
-
     fun clickLotteInfo(movie: Movie) {
         logButtonEvent("Info") {
             putString(Param.ITEM_ID, movie.id)
@@ -137,15 +119,6 @@ class EventAnalytics(context: Context) {
     }
 
     /* Detail: Megabox */
-
-    fun clickMegaboxTicket(movie: Movie) {
-        logButtonEvent("Ticket") {
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
-            putString(Param.ITEM_BRAND, BRAND_MEGABOX)
-        }
-    }
 
     fun clickMegaboxInfo(movie: Movie) {
         logButtonEvent("Info") {
