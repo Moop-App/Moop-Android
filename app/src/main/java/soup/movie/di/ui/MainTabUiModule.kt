@@ -19,9 +19,6 @@ import soup.movie.ui.main.plan.PlanPresenter
 import soup.movie.ui.main.settings.SettingsContract
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.ui.main.settings.SettingsPresenter
-import soup.movie.ui.main.settings.help.HelpContract
-import soup.movie.ui.main.settings.help.HelpFragment
-import soup.movie.ui.main.settings.help.HelpPresenter
 
 @Module
 abstract class MainTabUiModule {
@@ -94,19 +91,5 @@ abstract class MainTabUiModule {
                       repository: MoopRepository):
                 SettingsContract.Presenter =
                 SettingsPresenter(theatersSetting, repository)
-    }
-
-    @FragmentScope
-    @ContributesAndroidInjector(modules = [
-        HelpModule::class
-    ])
-    internal abstract fun provideHelpFragment(): HelpFragment
-
-    @Module
-    class HelpModule {
-
-        @FragmentScope
-        @Provides
-        fun presenter(): HelpContract.Presenter = HelpPresenter()
     }
 }

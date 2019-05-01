@@ -74,12 +74,6 @@ class EventAnalytics(context: Context) {
         logButtonEvent("MenuFilter")
     }
 
-    /* Main: Settings */
-
-    fun clickMenuHelp() {
-        logButtonEvent("MenuHelp")
-    }
-
     /* Detail */
 
     fun clickPoster(movie: Movie) {
