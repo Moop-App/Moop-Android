@@ -33,7 +33,6 @@ import soup.movie.ui.detail.DetailViewState.*
 import soup.movie.analytics.EventAnalytics
 import soup.movie.util.delegates.contentView
 import soup.movie.util.loadAsync
-import soup.movie.util.log.printRenderLog
 import soup.movie.util.setBackgroundColorResource
 import soup.movie.util.setOnDebounceClickListener
 import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
@@ -199,7 +198,6 @@ class DetailActivity :
     }
 
     override fun render(viewState: DetailViewState) {
-        printRenderLog { viewState }
         when (viewState) {
             is LoadingState -> {
                 //TODO: show loading state

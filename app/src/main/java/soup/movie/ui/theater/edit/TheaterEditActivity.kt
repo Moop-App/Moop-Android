@@ -21,7 +21,6 @@ import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
 import soup.movie.util.blockExtraTouchEvents
 import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
-import soup.movie.util.log.printRenderLog
 import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
@@ -90,12 +89,10 @@ class TheaterEditActivity :
     }
 
     override fun render(viewState: TheaterEditContentViewState) {
-        printRenderLog { viewState }
         loadingView.setVisibleIf { viewState is LoadingState }
     }
 
     override fun render(viewState: TheaterEditFooterViewState) {
-        printRenderLog { viewState }
         val theaters = viewState.theaterList
         currentCountView.text = theaters.size.toString()
         confirmButton.setBackgroundResource(

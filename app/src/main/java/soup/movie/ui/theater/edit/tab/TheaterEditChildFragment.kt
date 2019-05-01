@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.fragment_theater_edit.*
 import soup.movie.databinding.FragmentTheaterEditBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.theater.edit.tab.TheaterEditChildViewState.DoneState
-import soup.movie.util.log.printRenderLog
 
 abstract class TheaterEditChildFragment :
         BaseFragment<TheaterEditChildContract.View, TheaterEditChildContract.Presenter>(),
@@ -31,7 +30,6 @@ abstract class TheaterEditChildFragment :
     }
 
     override fun render(viewState: TheaterEditChildViewState) {
-        printRenderLog { viewState }
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.areaGroupList, viewState.selectedTheaterIdSet)
         }

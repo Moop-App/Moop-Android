@@ -20,7 +20,6 @@ import soup.movie.ui.search.SearchViewState.DoneState
 import soup.movie.ui.search.SearchViewState.LoadingState
 import soup.movie.util.ImeUtil
 import soup.movie.util.delegates.contentView
-import soup.movie.util.log.printRenderLog
 import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
@@ -84,7 +83,6 @@ class SearchActivity :
     }
 
     override fun render(viewState: SearchViewState) {
-        printRenderLog { viewState }
         loadingView.setVisibleIf { viewState is LoadingState }
         noItemsView.setVisibleIf { viewState.hasNoItems() }
         if (viewState is DoneState) {

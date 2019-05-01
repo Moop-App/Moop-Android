@@ -33,7 +33,6 @@ import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.delegates.contentView
-import soup.movie.util.log.printRenderLog
 import soup.movie.util.showToast
 import javax.inject.Inject
 
@@ -191,7 +190,6 @@ class MainActivity :
     }
 
     override fun render(viewState: MainViewState) {
-        printRenderLog { viewState }
         analytics.screen(this, viewState.toString())
         setTitle(viewState.toTitleId())
         updateSelectedItem(viewState.toItemId())
@@ -205,7 +203,6 @@ class MainActivity :
     }
 
     override fun execute(action: MainActionState) {
-        printRenderLog { action }
         when (action) {
             is NotFoundAction -> {
                 showToast(R.string.action_detail_unknown)

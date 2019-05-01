@@ -28,7 +28,6 @@ import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeBookmarkActivity
 import soup.movie.util.*
-import soup.movie.util.log.printRenderLog
 import javax.inject.Inject
 
 class SettingsFragment :
@@ -92,7 +91,6 @@ class SettingsFragment :
     }
 
     override fun render(viewState: SettingsViewState.TheaterListViewState) {
-        printRenderLog { viewState }
         val theaters = viewState.theaterList
         noTheaterView?.setVisibleIf { theaters.isEmpty() }
         theaterGroup?.setVisibleIf { theaters.isNotEmpty() }
@@ -110,7 +108,6 @@ class SettingsFragment :
     }
 
     override fun render(viewState: SettingsViewState.VersionViewState) {
-        printRenderLog { viewState }
         versionViewState = viewState
         currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
         latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
