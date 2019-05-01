@@ -53,10 +53,6 @@
                     android:scheme="@string/kakao_scheme"
                     android:host="@string/kakaolink_host" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".ui.search.SearchActivity"

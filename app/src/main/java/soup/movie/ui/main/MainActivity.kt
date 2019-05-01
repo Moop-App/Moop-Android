@@ -166,12 +166,6 @@ class MainActivity :
 
     private fun Intent.handleDeepLink() {
         when (action) {
-            ACTION_SHOW_TAB -> {
-                when (getStringExtra(EXTRA_TAB)) {
-                    EXTRA_TAB_THEATERS -> presenter.setCurrentTab(Tab.Theaters)
-                }
-                removeExtra(EXTRA_TAB)
-            }
             ACTION_VIEW -> {
                 KakaoLink.extractMovieId(this).let {
                     presenter.requestMovie(it)
@@ -249,10 +243,6 @@ class MainActivity :
     companion object {
 
         private const val BACK_INTERVAL_TIME: Long = 2000
-
-        private const val ACTION_SHOW_TAB = "soup.movie.action.SHOW_TAB"
-        private const val EXTRA_TAB = "tab"
-        private const val EXTRA_TAB_THEATERS = "theaters"
 
         @IdRes
         private fun MainViewState.toItemId(): Int = when (this) {
