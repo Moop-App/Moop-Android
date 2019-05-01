@@ -7,8 +7,8 @@ import soup.movie.data.TheaterEditManager.Companion.MAX_ITEMS
 import soup.movie.data.helper.getFilterChipLayout
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
-import soup.movie.ui.helper.databinding.DataBindingAdapter
-import soup.movie.ui.helper.databinding.DataBindingViewHolder
+import soup.movie.ui.databinding.DataBindingAdapter
+import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.inflate
 import soup.movie.util.showToast
 

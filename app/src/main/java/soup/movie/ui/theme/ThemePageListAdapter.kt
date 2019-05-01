@@ -3,8 +3,8 @@ package soup.movie.ui.theme
 import android.view.ViewGroup
 import soup.movie.R
 import soup.movie.theme.ThemePage
-import soup.movie.ui.helper.databinding.DataBindingAdapter
-import soup.movie.ui.helper.databinding.DataBindingViewHolder
+import soup.movie.ui.databinding.DataBindingAdapter
+import soup.movie.ui.databinding.DataBindingViewHolder
 
 internal class ThemePageListAdapter(private val listener: (ThemePage) -> Unit) :
         DataBindingAdapter<ThemePage>() {

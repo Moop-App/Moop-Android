@@ -1,4 +1,4 @@
-package soup.movie.ui.helper.databinding
+package soup.movie.ui.databinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class DataBindingAdapter<T> :
-        RecyclerView.Adapter<DataBindingViewHolder<T>>() {
+abstract class DataBindingAdapter<T> : RecyclerView.Adapter<DataBindingViewHolder<T>>() {
 
     protected var list: MutableList<T> = mutableListOf()
 
@@ -17,10 +16,11 @@ abstract class DataBindingAdapter<T> :
         return DataBindingViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) =
-            holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) {
+        holder.bind(getItem(position))
+    }
 
-    open fun submitList(list: List<T>) {
+    fun submitList(list: List<T>) {
         this.list = list.toMutableList()
         notifyDataSetChanged()
     }

@@ -10,8 +10,8 @@ import soup.movie.data.helper.isBest
 import soup.movie.data.helper.isDDay
 import soup.movie.data.helper.isNew
 import soup.movie.data.model.Movie
-import soup.movie.ui.helper.databinding.DataBindingListAdapter
-import soup.movie.ui.helper.databinding.DataBindingViewHolder
+import soup.movie.ui.databinding.DataBindingListAdapter
+import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.showToast
 import soup.movie.util.with
