@@ -26,7 +26,6 @@ import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.theme.ThemeBook
 import soup.movie.ui.helper.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
-import soup.movie.ui.theater.mode.TheaterModeTileActivity
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeBookmarkActivity
 import soup.movie.util.*
@@ -91,7 +90,8 @@ class SettingsFragment :
             onThemeEditClicked()
         }
         tmPrepare.setOnClickListener {
-            startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
+            //TODO: Apply theater mode
+            //startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
         }
         useWebLinkSwitch.setOnCheckedChangeListener { _, isChecked ->
             presenter.setUseWebLink(isChecked)
