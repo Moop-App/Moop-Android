@@ -1,11 +1,7 @@
 package soup.movie.data.helper
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
-import com.mapbox.mapboxsdk.geometry.LatLng
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.data.model.Theater.Companion.TYPE_CGV
@@ -42,38 +38,12 @@ fun Theater.getFilterChipLayout(): Int {
     }
 }
 
-@DrawableRes
-fun Theater.getMarkerIcon(): Int {
-    return when(type) {
-        TYPE_CGV -> R.drawable.ic_marker_cgv
-        TYPE_LOTTE -> R.drawable.ic_marker_lotte
-        TYPE_MEGABOX -> R.drawable.ic_marker_megabox
-        else -> throw IllegalArgumentException("$type is not valid type.")
-    }
-}
-
-@DrawableRes
-fun Theater.getSelectedMarkerIcon(): Int {
-    return when(type) {
-        TYPE_CGV -> R.drawable.ic_marker_cgv_selected
-        TYPE_LOTTE -> R.drawable.ic_marker_lotte_selected
-        TYPE_MEGABOX -> R.drawable.ic_marker_megabox_selected
-        else -> throw IllegalArgumentException("$type is not valid type.")
-    }
-}
-
 fun Theater.fullName(): String = when (type) {
     TYPE_CGV -> "CGV $name"
     TYPE_LOTTE -> "롯데시네마 $name"
     TYPE_MEGABOX -> "메가박스 $name"
     else -> throw IllegalArgumentException("$type is not valid type.")
 }
-
-fun Theater.position(): LatLng = LatLng(lat, lng)
-
-fun Theater.toMapIntent(): Intent = Intent(
-        Intent.ACTION_VIEW,
-        Uri.parse("geo:0,0?q=$lat,$lng(${fullName()})"))
 
 fun Theater.executeWeb(ctx: Context) {
     return when (type) {

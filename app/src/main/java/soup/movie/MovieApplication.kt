@@ -1,7 +1,6 @@
 package soup.movie
 
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.mapbox.mapboxsdk.Mapbox
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import soup.movie.di.DaggerApplicationComponent
@@ -19,7 +18,6 @@ class MovieApplication : DaggerApplication() {
                 ThemeSpecs.DEFAULT,
                 ThemeSpecs.BLACK,
                 ThemeSpecs.WA_TGBH)
-        Mapbox.getInstance(this, getString(R.string.mapbox_access_token))
         NotificationSpecs.initialize(this)
     }
 

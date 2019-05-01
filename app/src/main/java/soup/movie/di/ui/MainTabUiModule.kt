@@ -23,9 +23,6 @@ import soup.movie.ui.main.settings.SettingsPresenter
 import soup.movie.ui.main.settings.help.HelpContract
 import soup.movie.ui.main.settings.help.HelpFragment
 import soup.movie.ui.main.settings.help.HelpPresenter
-import soup.movie.ui.main.theaters.TheatersContract
-import soup.movie.ui.main.theaters.TheatersFragment
-import soup.movie.ui.main.theaters.TheatersPresenter
 
 @Module
 abstract class MainTabUiModule {
@@ -81,23 +78,6 @@ abstract class MainTabUiModule {
                       ageFilterSetting: AgeFilterSetting):
                 MovieFilterContract.Presenter =
                 MovieFilterPresenter(theaterFilterSetting, ageFilterSetting)
-    }
-
-    @FragmentScope
-    @ContributesAndroidInjector(modules = [
-        TheatersModule::class
-    ])
-    internal abstract fun provideTheatersFragment(): TheatersFragment
-
-    @Module
-    class TheatersModule {
-
-        @FragmentScope
-        @Provides
-        fun presenter(repository: MoopRepository,
-                      theatersSetting: TheatersSetting):
-                TheatersContract.Presenter =
-                TheatersPresenter(repository, theatersSetting)
     }
 
     @FragmentScope
