@@ -77,7 +77,6 @@ dependencies {
     implementation project(':data')
     implementation project(':widget')
     implementation project(':theme')
-    //implementation project(':animators')
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
