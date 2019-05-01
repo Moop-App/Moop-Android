@@ -2,7 +2,9 @@ package soup.movie.data
 
 import io.reactivex.Completable
 import io.reactivex.Observable
-import soup.movie.data.model.*
+import soup.movie.data.model.Movie
+import soup.movie.data.model.MovieId
+import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.local.LocalMoopDataSource
@@ -70,12 +72,6 @@ class MoopRepository(private val localDataSource: LocalMoopDataSource,
     private fun getCodeListFromNetwork() : Observable<CodeResponse> =
             remoteDataSource.getCodeList()
                     .doOnNext { localDataSource.saveCodeList(it) }
-
-    fun getTimetable(theater: Theater, movie: Movie): Observable<Timetable> {
-        return remoteDataSource.getTimetable(theater, movie)
-                .map { it.copy(theater = theater) }
-                .onErrorReturnItem(Timetable(theater = theater))
-    }
 
     fun getVersion(): Observable<Version> = getVersionInMemory()
 
