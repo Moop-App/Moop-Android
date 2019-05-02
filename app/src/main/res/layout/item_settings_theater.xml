@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingTop="12dp"
         android:paddingBottom="@dimen/settings_category_margin_vertical">
 
         <TextView
@@ -17,9 +17,10 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_category_theater"
             android:textAppearance="@style/TextAppearance.Settings.Category"
+            app:layout_constraintBottom_toBottomOf="@+id/editTheaterButton"
             app:layout_constraintEnd_toStartOf="@+id/editTheaterButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/editTheaterButton" />
 
         <ImageView
             android:id="@+id/editTheaterButton"
@@ -28,9 +29,9 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_round_edit"
-            app:layout_constraintBottom_toBottomOf="@+id/theaterCategory"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/theaterCategory" />
+            app:layout_constraintStart_toEndOf="@+id/theaterCategory"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/noTheaterView"
@@ -42,7 +43,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
+            app:layout_constraintTop_toBottomOf="@+id/editTheaterButton"
             tools:visibility="visible" />
 
         <com.google.android.material.chip.ChipGroup
@@ -53,7 +54,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/theaterCategory"
+            app:layout_constraintTop_toBottomOf="@+id/editTheaterButton"
             tools:visibility="visible">
 
             <!-- for preview
