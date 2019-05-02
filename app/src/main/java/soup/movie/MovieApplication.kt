@@ -17,8 +17,7 @@ class MovieApplication : DaggerApplication() {
         AndroidThreeTen.init(this)
         ThemeBook.initialize(this,
                 ThemeSpecs.DEFAULT,
-                ThemeSpecs.BLACK,
-                ThemeSpecs.WA_TGBH)
+                ThemeSpecs.BLACK)
         NotificationSpecs.initialize(this)
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
     }

@@ -95,7 +95,7 @@ internal object ThemeBookImpl {
 
         companion object {
 
-            private const val PREFS_NAME = "soup.movie.theme.prefs"
+            private const val PREFS_NAME = "soup.movie.theme"
             private const val PREFS_KEY = "soup.movie.theme.current"
         }
     }
