@@ -22,21 +22,8 @@ import soup.movie.util.Interpolators.ALPHA_IN
 import soup.movie.util.Interpolators.ALPHA_OUT
 import soup.movie.util.glide.GlideApp
 import soup.movie.util.glide.IntegerVersionSignature
-import soup.widget.util.OnDebounceClickListener
 
 /** View */
-
-typealias OnClickListener = (View) -> Unit
-
-fun View.setOnDebounceClickListener(listener: OnClickListener?) {
-    if (listener == null) {
-        setOnClickListener(null)
-    } else {
-        setOnClickListener(OnDebounceClickListener {
-            if (it != null) listener.invoke(it)
-        })
-    }
-}
 
 fun View.blockExtraTouchEvents() = setOnTouchListener { _, _ ->  true }
 
