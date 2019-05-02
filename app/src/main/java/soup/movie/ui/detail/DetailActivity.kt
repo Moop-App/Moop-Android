@@ -18,6 +18,7 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail_header.*
 import soup.movie.R
+import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.data.helper.*
 import soup.movie.data.model.Movie
@@ -26,11 +27,11 @@ import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.data.model.Theater.Companion.TYPE_NONE
 import soup.movie.databinding.ActivityDetailBinding
+import soup.movie.spec.KakaoLink
 import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.*
-import soup.movie.analytics.EventAnalytics
 import soup.movie.util.delegates.contentView
 import soup.movie.util.loadAsync
 import soup.movie.util.setBackgroundColorResource
@@ -159,6 +160,10 @@ class DetailActivity :
         posterView.setOnDebounceClickListener {
             analytics.clickPoster(movie)
             presenter.requestShareImage(movie.posterUrl)
+        }
+        kakaoTalkButton.setOnDebounceClickListener {
+            analytics.clickShare(movie)
+            KakaoLink.share(this, movie)
         }
         shareButton.setOnDebounceClickListener {
             analytics.clickShare(movie)

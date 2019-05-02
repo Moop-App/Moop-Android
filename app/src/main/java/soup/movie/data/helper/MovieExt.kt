@@ -9,10 +9,6 @@ import soup.movie.data.model.LotteInfo
 import soup.movie.data.model.MegaboxInfo
 import soup.movie.data.model.Movie
 
-fun Movie.toShareDescription(): String = "제목: $title\n개봉일: $openDate\n${getAgeLabel()}"
-
-fun Movie.toDescription(): String = "$openDate / ${getAgeLabel()}"
-
 @DrawableRes
 fun Movie.getAgeBackground(): Int = when {
     ageValue >= 19 -> R.drawable.bg_tag_age_19

@@ -9,9 +9,7 @@ import com.kakao.message.template.FeedTemplate
 import com.kakao.message.template.LinkObject
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
-import soup.movie.data.helper.Kakao
-import soup.movie.data.helper.toDescription
-import soup.movie.data.helper.toShareDescription
+import soup.movie.data.helper.getAgeLabel
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieId
 import soup.movie.util.IntentUtil
@@ -24,34 +22,36 @@ object KakaoLink {
 
     private const val MOVIE_ID = "movieId"
 
-    fun extractMovieId(intent: Intent): MovieId? {
-        return intent.data?.getQueryParameter(MOVIE_ID)?.fromJson()
-    }
-
-    fun share(context: Context, movie: Movie) {
-        val movieLink = LinkObject.newBuilder()
-                .setAndroidExecutionParams("${KakaoLink.MOVIE_ID}=${movie.toMovieId().toJson()}")
-                .build()
-        val params = FeedTemplate.newBuilder(
-                ContentObject.newBuilder(movie.title, movie.posterUrl, movieLink)
-                        .setDescrption(movie.toDescription())
-                        .build())
-                .build()
-        KakaoLinkService.getInstance().sendDefault(context, params, NoResponseCallback)
-    }
-
     private val NoResponseCallback = object : ResponseCallback<KakaoLinkResponse>() {
         override fun onSuccess(result: KakaoLinkResponse) {}
         override fun onFailure(errorResult: ErrorResult) {
             Timber.e(errorResult.toString())
         }
     }
+
+    fun extractMovieId(intent: Intent): MovieId? {
+        return intent.data?.getQueryParameter(MOVIE_ID)?.fromJson()
+    }
+
+    fun share(context: Context, movie: Movie) {
+        val movieLink = LinkObject.newBuilder()
+            .setAndroidExecutionParams("$MOVIE_ID=${movie.toMovieId().toJson()}")
+            .build()
+        val params = FeedTemplate.newBuilder(
+            ContentObject.newBuilder(movie.title, movie.posterUrl, movieLink)
+                .setDescrption(movie.description)
+                .build())
+            .build()
+        KakaoLinkService.getInstance().sendDefault(context, params, NoResponseCallback)
+    }
+
+    private val Movie.description: String
+        get() = "$openDate / ${getAgeLabel()}"
 }
 
 fun Context.share(movie: Movie) {
-    if (Kakao.isInstalled(this)) {
-        KakaoLink.share(this, movie)
-    } else {
-        startActivitySafely(IntentUtil.createShareIntent("영화 공유하기", movie.toShareDescription()))
-    }
+    startActivitySafely(IntentUtil.createShareIntent("영화 공유하기", movie.shareDescription))
 }
+
+private val Movie.shareDescription: String
+    get() = "제목: $title\n개봉일: $openDate\n${getAgeLabel()}"
