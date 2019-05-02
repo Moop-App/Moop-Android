@@ -23,8 +23,8 @@ abstract class BaseTabFragment<V: BaseContract.View, P: BaseContract.Presenter<V
         setHasOptionsMenu(menuResource != null)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        menuResource?.let { inflater?.inflate(it, menu) }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menuResource?.let { inflater.inflate(it, menu) }
         super.onCreateOptionsMenu(menu, inflater)
     }
 

@@ -46,6 +46,7 @@
                 android:src="@drawable/ic_round_star"
                 android:tint="@color/amber"
                 android:tintMode="src_in"
+                app:layout_constraintBottom_toBottomOf="@+id/brandView"
                 app:layout_constraintEnd_toStartOf="@+id/eggLabel"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@+id/brandView"
