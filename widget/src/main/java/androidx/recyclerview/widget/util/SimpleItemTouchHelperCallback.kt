@@ -1,28 +1,33 @@
-package soup.widget.recyclerview.util
+package androidx.recyclerview.widget.util
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import soup.widget.recyclerview.listener.OnItemDismissListener
-import soup.widget.recyclerview.listener.OnItemMoveListener
+import androidx.recyclerview.widget.listener.OnItemDismissListener
+import androidx.recyclerview.widget.listener.OnItemMoveListener
 
 class SimpleItemTouchHelperCallback(
-        private val moveListener: OnItemMoveListener? = null,
-        private val dismissListener: OnItemDismissListener? = null) : ItemTouchHelper.Callback() {
+    private val moveListener: OnItemMoveListener? = null,
+    private val dismissListener: OnItemDismissListener? = null
+) : ItemTouchHelper.Callback() {
 
     override fun isLongPressDragEnabled(): Boolean = true
 
     override fun isItemViewSwipeEnabled(): Boolean = false
 
-    override fun getMovementFlags(recyclerView: RecyclerView,
-                                  viewHolder: RecyclerView.ViewHolder): Int {
+    override fun getMovementFlags(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder
+    ): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
         return ItemTouchHelper.Callback.makeMovementFlags(dragFlags, swipeFlags)
     }
 
-    override fun onMove(recyclerView: RecyclerView,
-                        source: RecyclerView.ViewHolder,
-                        target: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(
+        recyclerView: RecyclerView,
+        source: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
+    ): Boolean {
         moveListener?.onItemMove(source.adapterPosition, target.adapterPosition)
         return true
     }

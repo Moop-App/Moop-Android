@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RecyclerViewEx">
+        <attr name="layoutManagerType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="linear" value="1" />
+            <enum name="grid" value="2" />
+            <enum name="fixed" value="3" />
+        </attr>
+    </declare-styleable>
+
+</resources>

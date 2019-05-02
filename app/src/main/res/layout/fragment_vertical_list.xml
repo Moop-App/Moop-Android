@@ -50,7 +50,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <soup.widget.recyclerview.RecyclerViewEx
+            <androidx.recyclerview.widget.RecyclerViewEx
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

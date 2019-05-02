@@ -11,8 +11,8 @@ import soup.movie.databinding.ItemDetailTrailersBinding
 import soup.movie.ui.detail.DetailListAdapter.DataBindingViewHolder
 import soup.movie.ui.detail.DetailViewState.ListItem
 import soup.movie.analytics.EventAnalytics
-import soup.widget.recyclerview.FixedLinearLayoutManager
-import soup.widget.recyclerview.callback.AlwaysDiffCallback
+import androidx.recyclerview.widget.ext.FixedLayoutManager
+import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 
 internal class DetailListAdapter(private val listener: DetailListItemListener,
                                  private val analytics: EventAnalytics) :
@@ -54,7 +54,7 @@ internal class DetailListAdapter(private val listener: DetailListItemListener,
         private val listAdapter = DetailTrailerListAdapter(analytics)
 
         init {
-            binding.listView.layoutManager = FixedLinearLayoutManager(itemView.context)
+            binding.listView.layoutManager = FixedLayoutManager(itemView.context)
             binding.listView.adapter = listAdapter
         }
 

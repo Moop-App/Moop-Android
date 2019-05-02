@@ -8,7 +8,7 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.databinding.DataBindingListAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.setOnDebounceClickListener
-import soup.widget.recyclerview.callback.AlwaysDiffCallback
+import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 
 internal class DetailTrailerListAdapter(private val analytics: EventAnalytics) :
         DataBindingListAdapter<Trailer>(AlwaysDiffCallback()) {

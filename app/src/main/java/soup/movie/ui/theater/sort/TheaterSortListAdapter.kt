@@ -6,8 +6,8 @@ import soup.movie.data.helper.getSortChipLayout
 import soup.movie.data.model.Theater
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
-import soup.widget.recyclerview.listener.OnDragStartListener
-import soup.widget.recyclerview.listener.OnItemMoveListener
+import androidx.recyclerview.widget.listener.OnDragStartListener
+import androidx.recyclerview.widget.listener.OnItemMoveListener
 import java.util.Collections.swap
 
 internal class TheaterSortListAdapter(private val dragStartListener: OnDragStartListener) :

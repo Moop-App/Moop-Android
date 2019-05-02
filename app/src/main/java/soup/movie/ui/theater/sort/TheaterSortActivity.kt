@@ -19,9 +19,9 @@ import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
 import soup.movie.util.setVisibleIf
 import soup.movie.util.with
-import soup.widget.recyclerview.listener.OnDragStartListener
-import soup.widget.recyclerview.listener.OnItemMoveListener
-import soup.widget.recyclerview.util.SimpleItemTouchHelperCallback
+import androidx.recyclerview.widget.listener.OnDragStartListener
+import androidx.recyclerview.widget.listener.OnItemMoveListener
+import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import javax.inject.Inject
 
 class TheaterSortActivity :

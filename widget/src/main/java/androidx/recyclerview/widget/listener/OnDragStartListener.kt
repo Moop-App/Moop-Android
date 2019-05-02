@@ -1,4 +1,4 @@
-package soup.widget.recyclerview.listener
+package androidx.recyclerview.widget.listener
 
 import androidx.recyclerview.widget.RecyclerView
 

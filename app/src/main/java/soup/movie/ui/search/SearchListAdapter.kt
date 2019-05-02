@@ -15,7 +15,7 @@ import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.showToast
 import soup.movie.util.with
-import soup.widget.recyclerview.callback.AlwaysDiffCallback
+import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 
 class SearchListAdapter(private val listener: (Int, Movie, Array<Pair<View, String>>) -> Unit) :
         DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {

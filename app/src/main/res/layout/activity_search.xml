@@ -95,7 +95,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <soup.widget.recyclerview.RecyclerViewEx
+            <androidx.recyclerview.widget.RecyclerViewEx
                 android:id="@+id/listView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

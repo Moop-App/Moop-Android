@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package soup.widget.recyclerview.util;
+package androidx.recyclerview.widget.util;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
