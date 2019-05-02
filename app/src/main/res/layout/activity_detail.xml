@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="item" type="soup.movie.data.model.Movie" />
+
+        <variable
+            name="item"
+            type="soup.movie.data.model.Movie" />
     </data>
 
     <soup.widget.elastic.ElasticDragDismissFrameLayout
@@ -33,33 +35,32 @@
                 android:background="?attr/moop_bgColor"
                 android:transitionName="@string/transition_background" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerViewEx
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:paddingTop="212dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 android:clipToPadding="false"
                 android:orientation="vertical"
+                android:overScrollMode="never"
+                android:paddingStart="8dp"
+                android:paddingTop="212dp"
+                android:paddingEnd="8dp"
                 android:requiresFadingEdge="none"
                 android:scrollbars="none"
-                android:overScrollMode="never"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="1"
                 tools:listitem="@layout/item_detail_trailers" />
 
             <include
                 android:id="@+id/detailHeaderView"
                 layout="@layout/activity_detail_header"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:item="@{item}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:item="@{item}"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
