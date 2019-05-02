@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -21,17 +22,16 @@ import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
 import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
 import soup.movie.util.setOnDebounceClickListener
-import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
 class TheaterEditActivity :
-        BaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
-        TheaterEditContract.View {
+    BaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
+    TheaterEditContract.View {
 
     private var pendingFinish: Boolean = false
 
     override val binding by contentView<TheaterEditActivity, ActivityTheaterEditBinding>(
-            R.layout.activity_theater_edit
+        R.layout.activity_theater_edit
     )
 
     @Inject
@@ -59,9 +59,9 @@ class TheaterEditActivity :
                 sharedElements.clear()
                 selectedTheaterGroup?.run {
                     (0 until childCount)
-                            .mapNotNull { getChildAt(it) }
-                            .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
-                            .forEach { sharedElements[it.transitionName] = it }
+                        .mapNotNull { getChildAt(it) }
+                        .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
+                        .forEach { sharedElements[it.transitionName] = it }
                 }
             }
         })
@@ -71,7 +71,7 @@ class TheaterEditActivity :
         super.initViewState(ctx)
         contentView.setOnInterceptTouchListener { _, _ ->
             footerPanel.takeIf { it.state == STATE_EXPANDED }
-                    ?.run { state = STATE_COLLAPSED }
+                ?.run { state = STATE_COLLAPSED }
         }
         tabLayout.setupWithViewPager(viewPager, true)
         pageAdapter = TheaterEditPageAdapter(supportFragmentManager)
@@ -90,20 +90,20 @@ class TheaterEditActivity :
     private fun View.blockExtraTouchEvents() = setOnTouchListener { _, _ -> true }
 
     override fun render(viewState: TheaterEditContentViewState) {
-        loadingView.setVisibleIf { viewState is LoadingState }
+        loadingView.isVisible = viewState is LoadingState
     }
 
     override fun render(viewState: TheaterEditFooterViewState) {
         val theaters = viewState.theaterList
         currentCountView.text = theaters.size.toString()
         confirmButton.setBackgroundResource(
-                if (viewState.isFull()) {
-                    R.drawable.bg_button_confirm_full
-                } else {
-                    R.drawable.bg_button_confirm
-                }
+            if (viewState.isFull()) {
+                R.drawable.bg_button_confirm_full
+            } else {
+                R.drawable.bg_button_confirm
+            }
         )
-        noTheaterView.setVisibleIf { theaters.isEmpty() }
+        noTheaterView.isVisible = theaters.isEmpty()
         selectedTheaterGroup.run {
             TransitionManager.beginDelayedTransition(this)
             removeAllViews()

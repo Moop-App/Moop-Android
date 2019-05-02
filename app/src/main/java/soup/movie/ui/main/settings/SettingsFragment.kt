@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_settings_feedback.*
 import kotlinx.android.synthetic.main.item_settings_theater.*
@@ -18,12 +19,12 @@ import kotlinx.android.synthetic.main.item_settings_theme.*
 import kotlinx.android.synthetic.main.item_settings_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
+import soup.movie.analytics.EventAnalytics
 import soup.movie.data.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.theme.ThemeBook
-import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeBookmarkActivity
@@ -92,8 +93,8 @@ class SettingsFragment :
 
     override fun render(viewState: SettingsViewState.TheaterListViewState) {
         val theaters = viewState.theaterList
-        noTheaterView?.setVisibleIf { theaters.isEmpty() }
-        theaterGroup?.setVisibleIf { theaters.isNotEmpty() }
+        noTheaterView?.isVisible = theaters.isEmpty()
+        theaterGroup?.isVisible = theaters.isNotEmpty()
         theaterGroup?.run {
             removeAllViews()
             theaters.map {

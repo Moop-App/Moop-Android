@@ -8,19 +8,19 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
+import androidx.core.view.isVisible
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import kotlinx.android.synthetic.main.activity_search.*
 import soup.movie.R
+import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivitySearchBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.search.SearchViewState.DoneState
 import soup.movie.ui.search.SearchViewState.LoadingState
 import soup.movie.util.ImeUtil
 import soup.movie.util.delegates.contentView
-import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
 class SearchActivity :
@@ -83,8 +83,8 @@ class SearchActivity :
     }
 
     override fun render(viewState: SearchViewState) {
-        loadingView.setVisibleIf { viewState is LoadingState }
-        noItemsView.setVisibleIf { viewState.hasNoItems() }
+        loadingView.isVisible = viewState is LoadingState
+        noItemsView.isVisible = viewState.hasNoItems()
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.items)
         }

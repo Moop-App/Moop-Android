@@ -8,19 +8,19 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
 import soup.movie.R
+import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.movie.MovieListViewState.*
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
 import soup.movie.ui.search.SearchActivity
-import soup.movie.util.setVisibleIf
 import javax.inject.Inject
 
 abstract class MovieListFragment :
@@ -115,8 +115,8 @@ abstract class MovieListFragment :
 
     override fun render(viewState: MovieListViewState) {
         swipeRefreshLayout?.isRefreshing = viewState is LoadingState
-        errorView?.setVisibleIf { viewState is ErrorState }
-        noItemsView?.setVisibleIf { viewState.hasNoItems() }
+        errorView?.isVisible = viewState is ErrorState
+        noItemsView?.isVisible = viewState.hasNoItems()
         if (viewState is DoneState) {
             listAdapter.submitList(viewState.movies)
         }

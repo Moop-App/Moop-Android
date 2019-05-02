@@ -7,9 +7,13 @@ import android.os.Bundle
 import android.util.Pair
 import android.view.View
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.listener.OnDragStartListener
+import androidx.recyclerview.widget.listener.OnItemMoveListener
+import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
@@ -17,11 +21,7 @@ import soup.movie.databinding.ActivityTheaterSortBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
-import soup.movie.util.setVisibleIf
 import soup.movie.util.with
-import androidx.recyclerview.widget.listener.OnDragStartListener
-import androidx.recyclerview.widget.listener.OnItemMoveListener
-import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import javax.inject.Inject
 
 class TheaterSortActivity :
@@ -102,7 +102,7 @@ class TheaterSortActivity :
 
     override fun render(viewState: TheaterSortViewState) {
         listAdapter.submitList(viewState.selectedTheaters)
-        noItemsView.setVisibleIf { viewState.selectedTheaters.isEmpty() }
+        noItemsView.isVisible = viewState.selectedTheaters.isEmpty()
     }
 
     override fun onBackPressed() {
