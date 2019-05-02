@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="item" type="soup.movie.ui.detail.DetailViewState.ListItem" />
-        <variable name="listener" type="soup.movie.ui.detail.DetailListItemListener" />
+
+        <variable
+            name="item"
+            type="soup.movie.ui.detail.DetailViewState.ListItem" />
+
+        <variable
+            name="listener"
+            type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="?attr/moop_cardBgColorDark" >
+        app:cardBackgroundColor="?attr/moop_cardBgColorDark">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,14 +37,14 @@
                     android:layout_width="48dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
+                    android:contentDescription="YouTube"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_round_subscriptions"
                     android:tint="?attr/moop_errorColor"
                     android:tintMode="src_in"
-                    android:scaleType="centerInside"
-                    android:contentDescription="YouTube"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/searchLabel"
@@ -55,10 +60,10 @@
                     android:textColor="?attr/moop_cardContentColorDark"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/brandView"
                     app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+                    app:layout_constraintStart_toEndOf="@+id/brandView"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="\'죠스 예고편\' 검색 결과" />
 
                 <TextView
@@ -66,20 +71,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
                     android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center_vertical"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:gravity="center_vertical"
                     android:text="더보기"
                     android:textColor="?attr/colorAccent"
                     android:textStyle="bold"
-                    android:background="?android:attr/selectableItemBackground"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_round_ticket"
-                    android:onClick="@{() -> listener.onMoreTrailersClick(item.movie)}"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:onDebounceClick="@{() -> listener.onMoreTrailersClick(item.movie)}"
+                    app:srcCompat="@drawable/ic_round_ticket" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -87,20 +92,20 @@
                 android:id="@+id/listView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
                 android:orientation="vertical"
+                android:overScrollMode="never"
                 android:requiresFadingEdge="none"
                 android:scrollbars="none"
-                android:overScrollMode="never"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/headerView"
                 app:layout_constraintVertical_bias="0.0"
-                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="3"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_detail_trailer" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

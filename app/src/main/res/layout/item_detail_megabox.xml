@@ -35,11 +35,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="@{item.movie.screeningAtMegabox}"
-                android:onClick="@{() -> listener.onInfoClick(item)}"
                 android:text="메가박스"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
 
             <ImageView
                 android:id="@+id/eggIcon"
