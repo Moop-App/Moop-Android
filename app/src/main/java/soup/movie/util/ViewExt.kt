@@ -12,7 +12,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
-import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -20,8 +19,6 @@ import com.bumptech.glide.request.RequestListener
 import soup.movie.util.glide.GlideApp
 
 /** View */
-
-fun View.blockExtraTouchEvents() = setOnTouchListener { _, _ -> true }
 
 @Suppress("UNCHECKED_CAST")
 fun <T : View> inflate(context: Context, @LayoutRes resource: Int): T =
@@ -78,11 +75,6 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 
 /** ImageView */
 
-@BindingAdapter("android:tint")
-fun ImageView.setImageTint(@ColorInt color: Int) {
-    imageTintList = ColorStateList.valueOf(color)
-}
-
 @BindingAdapter("android:srcUrl")
 fun ImageView.loadAsync(url: String) {
     GlideApp.with(context)
@@ -98,10 +90,4 @@ fun ImageView.loadAsync(url: String, requestListener: RequestListener<Drawable>)
         .listener(requestListener)
         .priority(Priority.IMMEDIATE)
         .into(this)
-}
-
-/* ContentLoadingProgressBar */
-
-inline fun ContentLoadingProgressBar.showIf(predicate: () -> Boolean) {
-    if (predicate()) show() else hide()
 }

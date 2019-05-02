@@ -18,7 +18,6 @@ import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.ActivityTheaterEditBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
-import soup.movie.util.blockExtraTouchEvents
 import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
 import soup.movie.util.setOnDebounceClickListener
@@ -87,6 +86,8 @@ class TheaterEditActivity :
             }
         }
     }
+
+    private fun View.blockExtraTouchEvents() = setOnTouchListener { _, _ -> true }
 
     override fun render(viewState: TheaterEditContentViewState) {
         loadingView.setVisibleIf { viewState is LoadingState }
