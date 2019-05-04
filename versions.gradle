@@ -6,6 +6,7 @@
 ext.deps = [:]
 def versions = [:]
 versions.androidx = "1.0.0"
+versions.lifecycle = "2.0.0"
 versions.constraint_layout = "2.0.0-alpha5"
 versions.material = "1.0.0"
 versions.androidx_test = "1.2.0-alpha03"
@@ -50,6 +51,11 @@ room.runtime = "androidx.room:room-runtime:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
 room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
 deps.room = room
+
+def lifecycle = [:]
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+deps.lifecycle = lifecycle
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"

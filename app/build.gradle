@@ -90,6 +90,9 @@ dependencies {
     implementation deps.androidx.material
     implementation deps.androidx.browser
 
+    implementation deps.lifecycle.extensions
+    kapt deps.lifecycle.compiler
+
     implementation deps.timber
 
     implementation deps.dagger.runtime
