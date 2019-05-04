@@ -19,7 +19,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.spec.KakaoLink
-import soup.movie.ui.BaseActivity
+import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.helper.FragmentPanelRouter
@@ -37,7 +37,7 @@ import soup.movie.util.showToast
 import javax.inject.Inject
 
 class MainActivity :
-        BaseActivity<MainContract.View, MainContract.Presenter>(),
+        LegacyBaseActivity<MainContract.View, MainContract.Presenter>(),
         MainContract.View, BaseTabFragment.PanelProvider {
 
     override val binding by contentView<MainActivity, ActivityMainBinding>(

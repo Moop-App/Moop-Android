@@ -18,14 +18,14 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_theater_sort.*
 import soup.movie.R
 import soup.movie.databinding.ActivityTheaterSortBinding
-import soup.movie.ui.BaseActivity
+import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.delegates.contentView
 import soup.movie.util.with
 import javax.inject.Inject
 
 class TheaterSortActivity :
-        BaseActivity<TheaterSortContract.View, TheaterSortContract.Presenter>(),
+        LegacyBaseActivity<TheaterSortContract.View, TheaterSortContract.Presenter>(),
         TheaterSortContract.View {
 
     override val binding by contentView<TheaterSortActivity, ActivityTheaterSortBinding>(

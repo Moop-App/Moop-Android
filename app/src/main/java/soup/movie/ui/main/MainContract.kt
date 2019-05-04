@@ -2,18 +2,18 @@ package soup.movie.ui.main
 
 import soup.movie.data.model.MovieId
 import soup.movie.settings.impl.LastMainTabSetting
-import soup.movie.ui.BaseContract
+import soup.movie.ui.LegacyBaseContract
 
 interface MainContract {
 
-    interface Presenter : BaseContract.Presenter<View> {
+    interface Presenter : LegacyBaseContract.Presenter<View> {
 
         fun setCurrentTab(mode: LastMainTabSetting.Tab)
 
         fun requestMovie(movieId: MovieId?)
     }
 
-    interface View : BaseContract.View {
+    interface View : LegacyBaseContract.View {
 
         fun render(viewState: MainViewState)
 

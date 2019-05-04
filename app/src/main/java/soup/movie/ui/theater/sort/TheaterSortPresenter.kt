@@ -5,13 +5,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.model.Theater
 import soup.movie.settings.impl.TheatersSetting
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.theater.sort.TheaterSortContract.Presenter
 import soup.movie.ui.theater.sort.TheaterSortContract.View
 import java.util.Collections.swap
 
 class TheaterSortPresenter(private val theatersSetting: TheatersSetting) :
-        BasePresenter<View>(), Presenter {
+        LegacyBasePresenter<View>(), Presenter {
 
     private lateinit var theatersObservable: BehaviorRelay<List<Theater>>
 

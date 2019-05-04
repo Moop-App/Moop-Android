@@ -9,14 +9,14 @@ import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.main.movie.MovieListContract.Presenter
 import soup.movie.ui.main.movie.MovieListContract.View
 import soup.movie.ui.main.movie.MovieListViewState.*
 
 abstract class MovieListPresenter(private val theaterFilterSetting: TheaterFilterSetting,
                                   private val ageFilterSetting: AgeFilterSetting) :
-        BasePresenter<View>(), Presenter {
+        LegacyBasePresenter<View>(), Presenter {
 
     private val refreshRelay = BehaviorRelay.createDefault(false)
 

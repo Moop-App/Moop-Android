@@ -14,13 +14,13 @@ import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.main.movie.filter.MovieFilterViewState.AgeFilterViewState
 import soup.movie.ui.main.movie.filter.MovieFilterViewState.TheaterFilterViewState
 
 class MovieFilterPresenter(private val theaterFilterSetting: TheaterFilterSetting,
                            private val ageFilterSetting: AgeFilterSetting) :
-        BasePresenter<MovieFilterContract.View>(),
+        LegacyBasePresenter<MovieFilterContract.View>(),
         MovieFilterContract.Presenter {
 
     private var theaterFilter: TheaterFilter? = null

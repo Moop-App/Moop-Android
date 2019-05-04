@@ -1,18 +1,18 @@
 package soup.movie.ui.theater.edit
 
 import soup.movie.data.model.Theater
-import soup.movie.ui.BaseContract
+import soup.movie.ui.LegacyBaseContract
 
 interface TheaterEditContract {
 
-    interface Presenter : BaseContract.Presenter<View> {
+    interface Presenter : LegacyBaseContract.Presenter<View> {
 
         fun onConfirmClicked()
 
         fun remove(theater: Theater)
     }
 
-    interface View : BaseContract.View {
+    interface View : LegacyBaseContract.View {
 
         fun render(viewState: TheaterEditContentViewState)
 

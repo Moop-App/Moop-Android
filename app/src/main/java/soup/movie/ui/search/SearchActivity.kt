@@ -15,7 +15,7 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivitySearchBinding
-import soup.movie.ui.BaseActivity
+import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.search.SearchViewState.DoneState
 import soup.movie.ui.search.SearchViewState.LoadingState
@@ -24,7 +24,7 @@ import soup.movie.util.delegates.contentView
 import javax.inject.Inject
 
 class SearchActivity :
-        BaseActivity<SearchContract.View, SearchContract.Presenter>(),
+        LegacyBaseActivity<SearchContract.View, SearchContract.Presenter>(),
         SearchContract.View {
 
     override val binding by contentView<SearchActivity, ActivitySearchBinding>(

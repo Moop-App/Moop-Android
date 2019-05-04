@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_theater_edit_footer.*
 import soup.movie.R
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.ActivityTheaterEditBinding
-import soup.movie.ui.BaseActivity
+import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
 import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
@@ -25,7 +25,7 @@ import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
 class TheaterEditActivity :
-    BaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
+    LegacyBaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
     TheaterEditContract.View {
 
     private var pendingFinish: Boolean = false

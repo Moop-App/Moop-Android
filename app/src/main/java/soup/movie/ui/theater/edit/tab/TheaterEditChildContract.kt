@@ -1,12 +1,12 @@
 package soup.movie.ui.theater.edit.tab
 
-import soup.movie.ui.BaseContract
+import soup.movie.ui.LegacyBaseContract
 
 interface TheaterEditChildContract {
 
-    interface Presenter : BaseContract.Presenter<View>, TheaterEditChildListAdapter.Listener
+    interface Presenter : LegacyBaseContract.Presenter<View>, TheaterEditChildListAdapter.Listener
 
-    interface View : BaseContract.View {
+    interface View : LegacyBaseContract.View {
 
         fun render(viewState: TheaterEditChildViewState)
     }

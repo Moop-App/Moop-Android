@@ -7,7 +7,7 @@ import soup.movie.data.model.MovieId
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.settings.impl.LastMainTabSetting.Tab.*
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.main.MainActionState.NotFoundAction
 import soup.movie.ui.main.MainActionState.ShowDetailAction
 import soup.movie.ui.main.MainViewState.*
@@ -15,7 +15,7 @@ import timber.log.Timber
 
 class MainPresenter(private val lastMainTabSetting: LastMainTabSetting,
                     private val repository: MoopRepository) :
-        BasePresenter<MainContract.View>(),
+        LegacyBasePresenter<MainContract.View>(),
         MainContract.Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {

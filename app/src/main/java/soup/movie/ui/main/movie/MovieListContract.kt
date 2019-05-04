@@ -1,15 +1,15 @@
 package soup.movie.ui.main.movie
 
-import soup.movie.ui.BaseContract
+import soup.movie.ui.LegacyBaseContract
 
 interface MovieListContract {
 
-    interface Presenter : BaseContract.Presenter<View> {
+    interface Presenter : LegacyBaseContract.Presenter<View> {
 
         fun refresh()
     }
 
-    interface View : BaseContract.View {
+    interface View : LegacyBaseContract.View {
 
         fun render(viewState: MovieListViewState)
     }

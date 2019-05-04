@@ -30,7 +30,7 @@ import soup.movie.databinding.ActivityDetailBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
-import soup.movie.ui.BaseActivity
+import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.detail.DetailViewState.*
 import soup.movie.util.delegates.contentView
 import soup.movie.util.loadAsync
@@ -45,7 +45,7 @@ import javax.inject.Inject
 import kotlin.math.max
 
 class DetailActivity :
-        BaseActivity<DetailContract.View, DetailContract.Presenter>(),
+        LegacyBaseActivity<DetailContract.View, DetailContract.Presenter>(),
         DetailContract.View {
 
     override val binding by contentView<DetailActivity, ActivityDetailBinding>(

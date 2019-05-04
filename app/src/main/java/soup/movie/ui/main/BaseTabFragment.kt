@@ -6,11 +6,11 @@ import android.view.MenuInflater
 import android.view.View
 import androidx.annotation.MenuRes
 import androidx.fragment.app.Fragment
-import soup.movie.ui.BaseContract
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.LegacyBaseContract
+import soup.movie.ui.LegacyBaseFragment
 
-abstract class BaseTabFragment<V: BaseContract.View, P: BaseContract.Presenter<V>> :
-        BaseFragment<V, P>() {
+abstract class BaseTabFragment<V: LegacyBaseContract.View, P: LegacyBaseContract.Presenter<V>> :
+        LegacyBaseFragment<V, P>() {
 
     private lateinit var panelProvider: PanelProvider
 

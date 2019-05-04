@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_filter_age.*
 import kotlinx.android.synthetic.main.item_filter_theater.*
 import soup.movie.databinding.FragmentMovieFilterBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.LegacyBaseFragment
 import soup.movie.ui.main.BaseTabFragment.PanelData
 import soup.movie.ui.main.movie.filter.MovieFilterViewState.AgeFilterViewState
 import soup.movie.ui.main.movie.filter.MovieFilterViewState.TheaterFilterViewState
 import javax.inject.Inject
 
 class MovieFilterFragment :
-        BaseFragment<MovieFilterContract.View, MovieFilterContract.Presenter>(),
+        LegacyBaseFragment<MovieFilterContract.View, MovieFilterContract.Presenter>(),
         MovieFilterContract.View {
 
     @Inject

@@ -5,7 +5,7 @@ import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.MoopRepository
 import soup.movie.data.helper.VersionHelper.currentVersion
 import soup.movie.settings.impl.TheatersSetting
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.main.settings.SettingsContract.Presenter
 import soup.movie.ui.main.settings.SettingsContract.View
 import soup.movie.ui.main.settings.SettingsViewState.TheaterListViewState
@@ -14,7 +14,7 @@ import soup.movie.ui.main.settings.SettingsViewState.VersionViewState
 class SettingsPresenter(
     private val theatersSetting: TheatersSetting,
     private val repository: MoopRepository
-) : BasePresenter<View>(), Presenter {
+) : LegacyBasePresenter<View>(), Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)

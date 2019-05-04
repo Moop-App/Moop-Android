@@ -1,12 +1,12 @@
 package soup.movie.ui.main.settings
 
-import soup.movie.ui.BaseContract
+import soup.movie.ui.LegacyBaseContract
 
 interface SettingsContract {
 
-    interface Presenter : BaseContract.Presenter<View>
+    interface Presenter : LegacyBaseContract.Presenter<View>
 
-    interface View : BaseContract.View {
+    interface View : LegacyBaseContract.View {
 
         fun render(viewState: SettingsViewState.TheaterListViewState)
 

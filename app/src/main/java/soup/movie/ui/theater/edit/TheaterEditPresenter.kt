@@ -4,13 +4,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.TheaterEditManager
 import soup.movie.data.model.Theater
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.theater.edit.TheaterEditContentViewState.*
 import soup.movie.ui.theater.edit.TheaterEditContract.Presenter
 import soup.movie.ui.theater.edit.TheaterEditContract.View
 
 class TheaterEditPresenter(private val manager: TheaterEditManager) :
-        BasePresenter<View>(), Presenter {
+        LegacyBasePresenter<View>(), Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)

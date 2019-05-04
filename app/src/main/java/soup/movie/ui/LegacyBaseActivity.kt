@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import dagger.android.support.DaggerAppCompatActivity
 import soup.movie.theme.ThemeBook
 
-abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>> :
+abstract class LegacyBaseActivity<V : LegacyBaseContract.View, P : LegacyBaseContract.Presenter<V>> :
         DaggerAppCompatActivity() {
 
     protected abstract val binding: ViewDataBinding

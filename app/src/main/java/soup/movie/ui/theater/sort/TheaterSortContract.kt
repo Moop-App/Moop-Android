@@ -1,17 +1,17 @@
 package soup.movie.ui.theater.sort
 
-import soup.movie.ui.BaseContract
+import soup.movie.ui.LegacyBaseContract
 
 interface TheaterSortContract {
 
-    interface Presenter : BaseContract.Presenter<View> {
+    interface Presenter : LegacyBaseContract.Presenter<View> {
 
         fun onItemMove(fromPosition: Int, toPosition: Int)
 
         fun saveSnapshot()
     }
 
-    interface View : BaseContract.View {
+    interface View : LegacyBaseContract.View {
 
         fun render(viewState: TheaterSortViewState)
     }

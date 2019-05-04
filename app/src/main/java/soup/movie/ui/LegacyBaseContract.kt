@@ -1,8 +1,8 @@
 package soup.movie.ui
 
-interface BaseContract {
+interface LegacyBaseContract {
 
-    interface Presenter<V : BaseContract.View> {
+    interface Presenter<V : View> {
 
         fun onAttach(view: V)
         fun onDetach()

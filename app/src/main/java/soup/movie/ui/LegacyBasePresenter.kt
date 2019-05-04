@@ -3,10 +3,10 @@ package soup.movie.ui
 import androidx.annotation.CallSuper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.internal.disposables.DisposableContainer
-import soup.movie.ui.BaseContract.Presenter
-import soup.movie.ui.BaseContract.View
+import soup.movie.ui.LegacyBaseContract.Presenter
+import soup.movie.ui.LegacyBaseContract.View
 
-abstract class BasePresenter<V : View> : Presenter<V> {
+abstract class LegacyBasePresenter<V : View> : Presenter<V> {
 
     protected var view: V? = null
 

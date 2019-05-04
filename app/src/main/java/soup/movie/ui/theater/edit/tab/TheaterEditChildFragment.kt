@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_theater_edit.*
 import soup.movie.databinding.FragmentTheaterEditBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.LegacyBaseFragment
 import soup.movie.ui.theater.edit.tab.TheaterEditChildViewState.DoneState
 
 abstract class TheaterEditChildFragment :
-        BaseFragment<TheaterEditChildContract.View, TheaterEditChildContract.Presenter>(),
+        LegacyBaseFragment<TheaterEditChildContract.View, TheaterEditChildContract.Presenter>(),
         TheaterEditChildContract.View {
 
     private lateinit var listAdapter: TheaterEditChildListAdapter

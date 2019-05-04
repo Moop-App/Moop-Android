@@ -7,13 +7,13 @@ import io.reactivex.rxkotlin.Observables
 import soup.movie.data.TheaterEditManager
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.theater.edit.tab.TheaterEditChildContract.Presenter
 import soup.movie.ui.theater.edit.tab.TheaterEditChildContract.View
 import soup.movie.ui.theater.edit.tab.TheaterEditChildViewState.DoneState
 
 abstract class TheaterEditChildPresenter(private val manager: TheaterEditManager) :
-        BasePresenter<View>(), Presenter {
+        LegacyBasePresenter<View>(), Presenter {
 
     override fun initObservable(disposable: DisposableContainer) {
         super.initObservable(disposable)

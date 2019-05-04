@@ -5,7 +5,7 @@ import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import soup.movie.R
-import soup.movie.ui.BaseFragment.OnBackListener
+import soup.movie.ui.LegacyBaseFragment.OnBackListener
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.main.BaseTabFragment.OnReselectListener
 

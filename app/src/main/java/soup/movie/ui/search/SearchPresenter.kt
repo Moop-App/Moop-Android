@@ -4,13 +4,13 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.disposables.DisposableContainer
 import soup.movie.data.MoopRepository
-import soup.movie.ui.BasePresenter
+import soup.movie.ui.LegacyBasePresenter
 import soup.movie.ui.search.SearchViewState.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class SearchPresenter(private val repository: MoopRepository) :
-        BasePresenter<SearchContract.View>(), SearchContract.Presenter {
+        LegacyBasePresenter<SearchContract.View>(), SearchContract.Presenter {
 
     private val querySubject = BehaviorRelay.create<String>()
 

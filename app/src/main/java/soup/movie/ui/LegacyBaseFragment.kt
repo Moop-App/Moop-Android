@@ -6,8 +6,8 @@ import android.view.View
 import androidx.annotation.CallSuper
 import dagger.android.support.DaggerFragment
 
-abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> :
-        DaggerFragment(), BaseContract.View {
+abstract class LegacyBaseFragment<V : LegacyBaseContract.View, P : LegacyBaseContract.Presenter<V>> :
+        DaggerFragment(), LegacyBaseContract.View {
 
     protected abstract val presenter: P
 
