@@ -28,7 +28,6 @@
             android:layout_width="124.2dp"
             android:layout_height="0dp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:transitionName="@string/transition_poster"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,27:40"
@@ -40,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                android:transitionName="@string/transition_poster"
                 tools:src="@tools:sample/avatars" />
 
         </androidx.cardview.widget.CardView>
@@ -134,7 +134,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/light_icon"
             android:textSize="14dp"
-            android:transitionName="@string/transition_egg"
             app:layout_constraintStart_toStartOf="@+id/titleView"
             app:layout_constraintTop_toBottomOf="@+id/titleView"
             tools:text="18.10.19" />

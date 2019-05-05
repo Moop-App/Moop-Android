@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="0">
+
+    <targets>
+        <target android:excludeId="@android:id/navigationBarBackground" />
+        <target android:excludeId="@id/backgroundView" />
+        <target android:excludeId="@id/posterView" />
+        <target android:excludeId="@id/ageBgView" />
+        <target android:excludeId="@id/newView" />
+        <target android:excludeId="@id/bestView" />
+        <target android:excludeId="@id/dDayView" />
+    </targets>
+    <fade android:fadingMode="fade_out" />
+
+</transitionSet>

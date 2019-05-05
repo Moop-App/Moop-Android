@@ -93,6 +93,8 @@
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
         <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
         <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+        <item name="android:windowEnterTransition">@transition/detail_enter</item>
+        <item name="android:windowReturnTransition">@transition/detail_return</item>
     </style>
 
     <style name="AppTheme.Splash">
@@ -103,13 +105,13 @@
     </style>
 
     <style name="AppTheme.TheaterSort">
-        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/shared_return</item>
     </style>
 
     <style name="AppTheme.TheaterEdit" parent="AppTheme.NoActionBar">
-        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/shared_return</item>
     </style>
 
 </resources>

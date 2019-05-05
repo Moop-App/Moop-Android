@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="250"
-    android:transitionOrdering="together">
+    android:duration="250">
 
     <transitionSet>
+        <targets>
+            <target android:targetId="@id/backgroundView" />
+            <target android:targetId="@id/posterView" />
+            <target android:targetId="@id/ageBgView" />
+            <target android:targetId="@id/newView" />
+            <target android:targetId="@id/bestView" />
+            <target android:targetId="@id/dDayView" />
+        </targets>
         <changeBounds android:interpolator="@android:interpolator/fast_out_slow_in" />
     </transitionSet>
 
