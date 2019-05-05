@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +15,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.stfalcon.imageviewer.StfalconImageViewer
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail_header.*
@@ -159,7 +161,7 @@ class DetailActivity :
         posterView.loadAsync(movie.posterUrl, shotLoadListener)
         posterView.setOnDebounceClickListener {
             analytics.clickPoster(movie)
-            presenter.requestShareImage(movie.posterUrl)
+            showPosterViewerFrom(posterView)
         }
         kakaoTalkButton.setOnDebounceClickListener {
             analytics.clickShare(movie)
@@ -244,6 +246,17 @@ class DetailActivity :
     private fun setResultAndFinish() {
         detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
         finishAfterTransition()
+    }
+
+    //TODO: Re-implements this
+    private fun showPosterViewerFrom(posterView: ImageView) {
+        StfalconImageViewer
+            .Builder<String>(posterView.context, listOf(movie.posterUrl)) { view, imageUrl ->
+                view.loadAsync(imageUrl)
+            }
+            .withTransitionFrom(posterView)
+            .withHiddenStatusBar(false)
+            .show()
     }
 
     override fun doShareImage(imageUri: Uri, mimeType: String) {

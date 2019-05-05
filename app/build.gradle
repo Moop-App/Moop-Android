@@ -117,6 +117,8 @@ dependencies {
     // UI
     implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
     implementation 'com.robinhood.ticker:ticker:2.0.0'
+    implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
+
     implementation deps.glide.runtime
     kapt deps.glide.compiler
 
