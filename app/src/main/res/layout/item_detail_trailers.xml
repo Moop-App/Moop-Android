@@ -30,18 +30,18 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/headerView"
                 android:layout_width="match_parent"
-                android:layout_height="48dp">
+                android:layout_height="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/brandView"
                     android:layout_width="48dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:contentDescription="YouTube"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_round_subscriptions"
-                    android:tint="?attr/moop_errorColor"
-                    android:tintMode="src_in"
+                    android:src="@drawable/ic_logo_youtube"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
