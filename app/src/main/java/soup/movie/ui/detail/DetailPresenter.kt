@@ -55,7 +55,10 @@ class DetailPresenter(private var imageUriProvider: ImageUriProvider) :
         if (hasNaverInfo()) {
             list.add(ListItem(TYPE_NONE, R.layout.item_detail_naver, this))
         }
-        list.add(ListItem(TYPE_NONE, R.layout.item_detail_trailers, this, trailers.orEmpty()))
+        val trailers = trailers.orEmpty()
+        if (trailers.isNotEmpty()) {
+            list.add(ListItem(TYPE_NONE, R.layout.item_detail_trailers, this, trailers))
+        }
         return list
     }
 }
