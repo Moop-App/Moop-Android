@@ -49,7 +49,7 @@ dependencies {
     implementation deps.androidx.constraint_layout
     implementation deps.androidx.material
 
-    implementation deps.timber
+    implementation deps.util.timber
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner

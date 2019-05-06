@@ -97,8 +97,6 @@ dependencies {
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.ui_ktx
 
-    implementation deps.timber
-
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
@@ -118,27 +116,24 @@ dependencies {
     implementation deps.rx.android
     implementation deps.rx.relay
 
-    // UI
-    implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
-    implementation 'com.robinhood.ticker:ticker:2.0.0'
-    implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
-
     implementation deps.glide.runtime
     kapt deps.glide.compiler
-
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
-
-    implementation 'com.kakao.sdk:kakaolink:1.14.0'
-
-    // logging
-    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
-    debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    implementation deps.okhttp_logging_interceptor
 
     implementation deps.firebase.core
     implementation deps.firebase.crashlytics
     implementation deps.firebase.performance
     implementation deps.firebase.messaging
+
+    debugImplementation deps.stetho.core
+    debugImplementation deps.stetho.okhttp3
+    implementation deps.util.okhttp_interceptor
+    implementation deps.util.timber
+    implementation deps.util.threetenabp
+
+    implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
+    implementation 'com.robinhood.ticker:ticker:2.0.0'
+    implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
+    implementation 'com.kakao.sdk:kakaolink:1.14.0'
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner

@@ -39,7 +39,7 @@ dependencies {
     implementation deps.rx.java2
     implementation deps.rx.kotlin
 
-    implementation deps.timber
+    implementation deps.util.timber
 
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner
