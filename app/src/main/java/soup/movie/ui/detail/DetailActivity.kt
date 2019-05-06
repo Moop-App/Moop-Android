@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.DataSource
@@ -34,7 +35,6 @@ import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.detail.DetailViewState.*
-import soup.movie.util.delegates.contentView
 import soup.movie.util.loadAsync
 import soup.movie.util.setBackgroundColorResource
 import soup.movie.util.setOnDebounceClickListener
@@ -49,10 +49,6 @@ import kotlin.math.max
 class DetailActivity :
         LegacyBaseActivity<DetailContract.View, DetailContract.Presenter>(),
         DetailContract.View {
-
-    override val binding by contentView<DetailActivity, DetailActivityBinding>(
-            R.layout.detail_activity
-    )
 
     private var windowBackground: Int = Color.WHITE
 
@@ -142,10 +138,16 @@ class DetailActivity :
         Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
-        binding.item = movie
 
         chromeFader = object : SystemChromeFader(this) {
             override fun onDragDismissed() = setResultAndFinish()
+        }
+    }
+
+    override fun setupContentView() {
+        DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity).apply {
+            item = movie
+            lifecycleOwner = this@DetailActivity
         }
     }
 

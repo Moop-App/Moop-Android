@@ -9,6 +9,7 @@ import android.view.View
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.listener.OnDragStartListener
@@ -20,17 +21,12 @@ import soup.movie.R
 import soup.movie.databinding.ActivityTheaterSortBinding
 import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
-import soup.movie.util.delegates.contentView
 import soup.movie.util.with
 import javax.inject.Inject
 
 class TheaterSortActivity :
         LegacyBaseActivity<TheaterSortContract.View, TheaterSortContract.Presenter>(),
         TheaterSortContract.View {
-
-    override val binding by contentView<TheaterSortActivity, ActivityTheaterSortBinding>(
-            R.layout.activity_theater_sort
-    )
 
     @Inject
     override lateinit var presenter: TheaterSortContract.Presenter
@@ -78,6 +74,12 @@ class TheaterSortActivity :
                 }
             }
         })
+    }
+
+    override fun setupContentView() {
+        DataBindingUtil.setContentView<ActivityTheaterSortBinding>(this, R.layout.activity_theater_sort).apply {
+            lifecycleOwner = this@TheaterSortActivity
+        }
     }
 
     override fun onActivityReenter(resultCode: Int, data: Intent?) {

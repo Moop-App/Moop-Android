@@ -8,6 +8,7 @@ import android.text.InputType
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import kotlinx.android.synthetic.main.activity_search.*
 import soup.movie.R
@@ -20,16 +21,11 @@ import soup.movie.ui.main.movie.MovieListAdapter
 import soup.movie.ui.search.SearchViewState.DoneState
 import soup.movie.ui.search.SearchViewState.LoadingState
 import soup.movie.util.ImeUtil
-import soup.movie.util.delegates.contentView
 import javax.inject.Inject
 
 class SearchActivity :
     LegacyBaseActivity<SearchContract.View, SearchContract.Presenter>(),
     SearchContract.View {
-
-    override val binding by contentView<SearchActivity, ActivitySearchBinding>(
-        R.layout.activity_search
-    )
 
     @Inject
     override lateinit var presenter: SearchContract.Presenter
@@ -47,6 +43,12 @@ class SearchActivity :
             startActivityForResult(intent, 0, ActivityOptions
                 .makeSceneTransitionAnimation(this, *sharedElements)
                 .toBundle())
+        }
+    }
+
+    override fun setupContentView() {
+        DataBindingUtil.setContentView<ActivitySearchBinding>(this, R.layout.activity_search).apply {
+            lifecycleOwner = this@SearchActivity
         }
     }
 

@@ -11,17 +11,18 @@ import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.postOnAnimationDelayed
+import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
+import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData
@@ -32,17 +33,12 @@ import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.util.Interpolators
-import soup.movie.util.delegates.contentView
 import soup.movie.util.showToast
 import javax.inject.Inject
 
 class MainActivity :
         LegacyBaseActivity<MainContract.View, MainContract.Presenter>(),
         MainContract.View, BaseTabFragment.PanelProvider {
-
-    override val binding by contentView<MainActivity, ActivityMainBinding>(
-            R.layout.activity_main
-    )
 
     @Inject
     override lateinit var presenter: MainContract.Presenter
@@ -128,6 +124,12 @@ class MainActivity :
                 fragmentSceneRouter.onInterceptMapSharedElements(names, sharedElements)
             }
         })
+    }
+
+    override fun setupContentView() {
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
+            lifecycleOwner = this@MainActivity
+        }
     }
 
     override fun onActivityReenter(resultCode: Int, data: Intent?) {

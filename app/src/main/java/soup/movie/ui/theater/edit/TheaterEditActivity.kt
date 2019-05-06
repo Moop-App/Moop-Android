@@ -7,6 +7,7 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
+import androidx.databinding.DataBindingUtil
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
@@ -19,7 +20,6 @@ import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.ActivityTheaterEditBinding
 import soup.movie.ui.LegacyBaseActivity
 import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
-import soup.movie.util.delegates.contentView
 import soup.movie.util.inflate
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
@@ -29,10 +29,6 @@ class TheaterEditActivity :
     TheaterEditContract.View {
 
     private var pendingFinish: Boolean = false
-
-    override val binding by contentView<TheaterEditActivity, ActivityTheaterEditBinding>(
-        R.layout.activity_theater_edit
-    )
 
     @Inject
     override lateinit var presenter: TheaterEditContract.Presenter
@@ -65,6 +61,12 @@ class TheaterEditActivity :
                 }
             }
         })
+    }
+
+    override fun setupContentView() {
+        DataBindingUtil.setContentView<ActivityTheaterEditBinding>(this, R.layout.activity_theater_edit).apply {
+            lifecycleOwner = this@TheaterEditActivity
+        }
     }
 
     override fun initViewState(ctx: Context) {
