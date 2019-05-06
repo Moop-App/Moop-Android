@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'io.fabric'
 apply plugin: 'com.google.firebase.firebase-perf'
 
@@ -92,6 +93,9 @@ dependencies {
 
     implementation deps.lifecycle.extensions
     kapt deps.lifecycle.compiler
+
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
 
     implementation deps.timber
 

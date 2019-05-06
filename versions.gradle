@@ -7,6 +7,7 @@ ext.deps = [:]
 def versions = [:]
 versions.androidx = "1.0.0"
 versions.lifecycle = "2.0.0"
+versions.navigation = "2.1.0-alpha02"
 versions.constraint_layout = "2.0.0-alpha5"
 versions.material = "1.0.0"
 versions.androidx_test = "1.2.0-alpha03"
@@ -56,6 +57,12 @@ def lifecycle = [:]
 lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
 lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 deps.lifecycle = lifecycle
+
+def navigation = [:]
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+deps.navigation = navigation
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
