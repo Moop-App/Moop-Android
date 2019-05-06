@@ -49,15 +49,15 @@ class DetailPresenter(private var imageUriProvider: ImageUriProvider) :
 
     private fun Movie.toItems(): List<ListItem> {
         val list = mutableListOf(
-                ListItem(TYPE_CGV, R.layout.item_detail_cgv, this),
-                ListItem(TYPE_LOTTE, R.layout.item_detail_lotte, this),
-                ListItem(TYPE_MEGABOX, R.layout.item_detail_megabox, this))
+                ListItem(TYPE_CGV, R.layout.detail_item_cgv, this),
+                ListItem(TYPE_LOTTE, R.layout.detail_item_lotte, this),
+                ListItem(TYPE_MEGABOX, R.layout.detail_item_megabox, this))
         if (hasNaverInfo()) {
-            list.add(ListItem(TYPE_NONE, R.layout.item_detail_naver, this))
+            list.add(ListItem(TYPE_NONE, R.layout.detail_item_naver, this))
         }
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
-            list.add(ListItem(TYPE_NONE, R.layout.item_detail_trailers, this, trailers))
+            list.add(ListItem(TYPE_NONE, R.layout.detail_item_trailers, this, trailers))
         }
         return list
     }

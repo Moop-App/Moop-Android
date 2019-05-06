@@ -17,8 +17,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.stfalcon.imageviewer.StfalconImageViewer
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
-import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.activity_detail_header.*
+import kotlinx.android.synthetic.main.detail_activity.*
+import kotlinx.android.synthetic.main.detail_header.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
@@ -28,7 +28,7 @@ import soup.movie.data.model.Theater.Companion.TYPE_CGV
 import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.data.model.Theater.Companion.TYPE_NONE
-import soup.movie.databinding.ActivityDetailBinding
+import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
@@ -50,8 +50,8 @@ class DetailActivity :
         LegacyBaseActivity<DetailContract.View, DetailContract.Presenter>(),
         DetailContract.View {
 
-    override val binding by contentView<DetailActivity, ActivityDetailBinding>(
-            R.layout.activity_detail
+    override val binding by contentView<DetailActivity, DetailActivityBinding>(
+            R.layout.detail_activity
     )
 
     private var windowBackground: Int = Color.WHITE
@@ -178,8 +178,8 @@ class DetailActivity :
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int =
                             when (listAdapter.getItemViewType(position)) {
-                                R.layout.item_detail_trailers -> 3
-                                R.layout.item_detail_naver -> 3
+                                R.layout.detail_item_trailers -> 3
+                                R.layout.detail_item_naver -> 3
                                 else -> 1
                             }
                 }

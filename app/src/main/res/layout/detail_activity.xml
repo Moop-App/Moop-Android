@@ -52,11 +52,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="1"
-                tools:listitem="@layout/item_detail_trailers" />
+                tools:listitem="@layout/detail_item_trailers" />
 
             <include
                 android:id="@+id/detailHeaderView"
-                layout="@layout/activity_detail_header"
+                layout="@layout/detail_header"
                 app:item="@{item}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
