@@ -15,6 +15,10 @@ abstract class DataBindingListAdapter<T>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<T> {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
+        return createViewHolder(binding)
+    }
+
+    protected open fun createViewHolder(binding: ViewDataBinding): DataBindingViewHolder<T> {
         return DataBindingViewHolder(binding)
     }
 

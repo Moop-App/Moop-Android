@@ -27,7 +27,7 @@ internal class TheaterSortListAdapter(private val dragStartListener: OnDragStart
             getItem(position).getSortChipLayout()
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        swap(list, fromPosition, toPosition)
+        swap(items, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
     }
 }
