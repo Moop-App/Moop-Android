@@ -101,12 +101,13 @@
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:padding="8dp"
-                app:layoutManagerType="linear"
+                app:layoutManagerType="grid"
+                app:spanCount="@integer/grid_span_count"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_search_movie"
+                tools:listitem="@layout/item_movie"
                 tools:visibility="visible" />
 
             <androidx.core.widget.ContentLoadingProgressBar

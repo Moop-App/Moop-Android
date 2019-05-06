@@ -17,8 +17,9 @@ import soup.movie.util.showToast
 import soup.movie.util.with
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 
-class MovieListAdapter(private val listener: (Int, Movie, Array<Pair<View, String>>) -> Unit) :
-        DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
+class MovieListAdapter(
+    private val listener: (Int, Movie, Array<Pair<View, String>>) -> Unit
+) : DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> {
         return super.onCreateViewHolder(parent, viewType).apply {
