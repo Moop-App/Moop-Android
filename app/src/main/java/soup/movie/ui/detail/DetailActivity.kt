@@ -2,9 +2,7 @@ package soup.movie.ui.detail
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.annotation.ColorInt
@@ -33,29 +31,27 @@ import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
-import soup.movie.ui.LegacyBaseActivity
+import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailViewState.*
-import soup.movie.util.loadAsync
-import soup.movie.util.setBackgroundColorResource
-import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.*
 import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
 import soup.widget.util.ViewUtils
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.max
 
-class DetailActivity :
-        LegacyBaseActivity<DetailContract.View, DetailContract.Presenter>(),
-        DetailContract.View {
+class DetailActivity : BaseActivity() {
 
-    private var windowBackground: Int = Color.WHITE
+    private val windowBackground: Int by lazyFast {
+        getColorAttr(R.attr.moop_bgColor)
+    }
 
-    private lateinit var movie: Movie
+    private val movie: Movie by lazyFast {
+        MovieSelectManager.getSelectedItem()!!
+    }
 
-    @Inject
-    override lateinit var presenter: DetailContract.Presenter
+    private val viewModel: DetailViewModel by viewModel()
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -129,14 +125,18 @@ class DetailActivity :
             doStartPostponedEnterTransition()
             return false
         }
+
+        private fun doStartPostponedEnterTransition() {
+            startPostponedEnterTransition()
+        }
     }
 
     private lateinit var chromeFader: SystemChromeFader
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        movie = MovieSelectManager.getSelectedItem()!!
-        Timber.d("onCreate: movie=%s", movie)
         super.onCreate(savedInstanceState)
+        setupContentView()
+        initViewState()
         postponeEnterTransition()
 
         chromeFader = object : SystemChromeFader(this) {
@@ -144,22 +144,21 @@ class DetailActivity :
         }
     }
 
-    override fun setupContentView() {
-        DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity).apply {
+    private fun setupContentView() {
+        val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
+        binding.apply {
             item = movie
             lifecycleOwner = this@DetailActivity
         }
+        viewModel.viewState.observe(this) {
+            render(it)
+        }
+        viewModel.shareAction.observeEvent(this) {
+            doShareImage(it)
+        }
     }
 
-    private fun doStartPostponedEnterTransition() {
-        startPostponedEnterTransition()
-    }
-
-    override fun initViewState(ctx: Context) {
-        super.initViewState(ctx)
-
-        windowBackground = getColorAttr(R.attr.moop_bgColor)
-
+    private fun initViewState() {
         posterView.loadAsync(movie.posterUrl, shotLoadListener)
         posterView.setOnDebounceClickListener {
             analytics.clickPoster(movie)
@@ -179,11 +178,11 @@ class DetailActivity :
             layoutManager = GridLayoutManager(this@DetailActivity, 3).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int =
-                            when (listAdapter.getItemViewType(position)) {
-                                R.layout.detail_item_trailers -> 3
-                                R.layout.detail_item_naver -> 3
-                                else -> 1
-                            }
+                        when (listAdapter.getItemViewType(position)) {
+                            R.layout.detail_item_trailers -> 3
+                            R.layout.detail_item_naver -> 3
+                            else -> 1
+                        }
                 }
             }
             adapter = listAdapter
@@ -206,7 +205,7 @@ class DetailActivity :
         super.onPause()
     }
 
-    override fun render(viewState: DetailViewState) {
+    private fun render(viewState: DetailViewState) {
         when (viewState) {
             is LoadingState -> {
                 //TODO: show loading state
@@ -261,12 +260,12 @@ class DetailActivity :
             .show()
     }
 
-    override fun doShareImage(imageUri: Uri, mimeType: String) {
+    private fun doShareImage(action: ShareAction) {
         ShareCompat.IntentBuilder.from(this)
-                .setChooserTitle(R.string.action_share_poster)
-                .setSubject(movie.title)
-                .setStream(imageUri)
-                .setType(mimeType)
-                .startChooser()
+            .setChooserTitle(R.string.action_share_poster)
+            .setSubject(movie.title)
+            .setStream(action.imageUri)
+            .setType(action.mimeType)
+            .startChooser()
     }
 }
