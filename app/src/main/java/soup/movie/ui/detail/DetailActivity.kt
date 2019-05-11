@@ -2,7 +2,6 @@ package soup.movie.ui.detail
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.annotation.ColorInt
@@ -11,10 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.spanSizeLookup
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.stfalcon.imageviewer.StfalconImageViewer
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.detail_activity.*
@@ -103,30 +98,6 @@ class DetailActivity : BaseActivity() {
         }
     }
 
-    private val shotLoadListener = object : RequestListener<Drawable> {
-        override fun onResourceReady(
-            resource: Drawable,
-            model: Any,
-            target: Target<Drawable>,
-            dataSource: DataSource,
-            isFirstResource: Boolean
-        ): Boolean {
-            applyTheme(windowBackground)
-            doStartPostponedEnterTransition()
-            return false
-        }
-
-        override fun onLoadFailed(e: GlideException?, model: Any,
-                                  target: Target<Drawable>, isFirstResource: Boolean): Boolean {
-            doStartPostponedEnterTransition()
-            return false
-        }
-
-        private fun doStartPostponedEnterTransition() {
-            startPostponedEnterTransition()
-        }
-    }
-
     private val chromeFader: SystemChromeFader by lazyFast {
         object : SystemChromeFader(this) {
             override fun onDragDismissed() {
@@ -154,7 +125,9 @@ class DetailActivity : BaseActivity() {
 
     private fun initViewState(binding: DetailActivityBinding) {
         binding.detailHeaderView.apply {
-            posterView.loadAsync(movie.posterUrl, shotLoadListener)
+            posterView.loadAsync(movie.posterUrl, endAction = {
+                startPostponedEnterTransition()
+            })
             posterView.setOnDebounceClickListener {
                 analytics.clickPoster()
                 showPosterViewer(from = posterView)
@@ -178,6 +151,8 @@ class DetailActivity : BaseActivity() {
                 removeDuration = 200
             }
         }
+        //TODO: Please improve this more
+        applyTheme(windowBackground)
     }
 
     override fun onResume() {
