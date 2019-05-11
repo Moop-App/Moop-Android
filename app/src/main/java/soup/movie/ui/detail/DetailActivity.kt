@@ -59,15 +59,15 @@ class DetailActivity : BaseActivity() {
                 val ctx: Context = this@DetailActivity
                 when (item) {
                     is CgvItemUiModel -> {
-                        analytics.clickCgvInfo(item.movie)
+                        analytics.clickCgvInfo()
                         Cgv.executeMobileWeb(ctx, item.movie)
                     }
                     is LotteItemUiModel -> {
-                        analytics.clickLotteInfo(item.movie)
+                        analytics.clickLotteInfo()
                         LotteCinema.executeMobileWeb(ctx, item.movie)
                     }
                     is MegaboxItemUiModel -> {
-                        analytics.clickMegaboxInfo(item.movie)
+                        analytics.clickMegaboxInfo()
                         Megabox.executeMobileWeb(ctx, item.movie)
                     }
                     is NaverItemUiModel -> {
@@ -77,7 +77,7 @@ class DetailActivity : BaseActivity() {
             }
 
             override fun onMoreTrailersClick(item: Movie) {
-                analytics.clickMoreTrailers("${item.title} 예고편")
+                analytics.clickMoreTrailers()
                 YouTube.executeAppWithQuery(this@DetailActivity, item)
             }
         }, analytics)
@@ -156,15 +156,15 @@ class DetailActivity : BaseActivity() {
         binding.detailHeaderView.apply {
             posterView.loadAsync(movie.posterUrl, shotLoadListener)
             posterView.setOnDebounceClickListener {
-                analytics.clickPoster(movie)
+                analytics.clickPoster()
                 showPosterViewer(from = posterView)
             }
             kakaoTalkButton.setOnDebounceClickListener {
-                analytics.clickShare(movie)
+                analytics.clickShare()
                 KakaoLink.share(it.context, movie)
             }
             shareButton.setOnDebounceClickListener {
-                analytics.clickShare(movie)
+                analytics.clickShare()
                 share(movie)
             }
         }

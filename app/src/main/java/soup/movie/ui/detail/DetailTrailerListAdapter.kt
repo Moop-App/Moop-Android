@@ -17,7 +17,7 @@ internal class DetailTrailerListAdapter(private val analytics: EventAnalytics) :
         return super.onCreateViewHolder(parent, viewType).apply {
             itemView.setOnDebounceClickListener {
                 val trailer = getItem(adapterPosition)
-                analytics.clickItem(trailer)
+                analytics.clickTrailer()
                 YouTube.executeApp(it.context, trailer)
             }
         }

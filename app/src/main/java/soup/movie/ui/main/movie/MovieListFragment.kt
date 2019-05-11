@@ -31,8 +31,8 @@ abstract class MovieListFragment :
     lateinit var analytics: EventAnalytics
 
     private val listAdapter by lazy {
-        MovieListAdapter { index, movie, sharedElements ->
-            analytics.clickItem(index, movie)
+        MovieListAdapter { movie, sharedElements ->
+            analytics.clickMovie(isNow = movie.isNow)
             MovieSelectManager.select(movie)
             val intent = Intent(requireActivity(), DetailActivity::class.java)
             startActivityForResult(intent, 0, ActivityOptions

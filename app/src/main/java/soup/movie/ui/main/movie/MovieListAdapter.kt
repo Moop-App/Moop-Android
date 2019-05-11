@@ -18,16 +18,16 @@ import soup.movie.util.with
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 
 class MovieListAdapter(
-    private val listener: (Int, Movie, Array<Pair<View, String>>) -> Unit
+    private val listener: (Movie, Array<Pair<View, String>>) -> Unit
 ) : DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> {
         return super.onCreateViewHolder(parent, viewType).apply {
             itemView.setOnDebounceClickListener {
                 val index = adapterPosition
-                if (index in 0..itemCount) {
+                if (adapterPosition in 0..itemCount) {
                     val movie: Movie = getItem(index)
-                    listener(index, movie, createSharedElements(movie))
+                    listener(movie, createSharedElements(movie))
                 }
             }
             itemView.setOnLongClickListener {

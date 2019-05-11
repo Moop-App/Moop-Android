@@ -6,137 +6,109 @@ import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics.Event
 import com.google.firebase.analytics.FirebaseAnalytics.Param
-import soup.movie.data.model.Movie
-import soup.movie.data.model.Trailer
+import soup.movie.util.lazyFast
+
+private typealias Params = Bundle.() -> Unit
 
 class EventAnalytics(context: Context) {
 
-    companion object {
-
-        // General Type
-        private const val CONTENT_TYPE_IMAGE = "Image"
-
-        // Specific Type
-        private const val CONTENT_TYPE_MOVIE = "Movie"
-        private const val CONTENT_TYPE_TRAILER = "Trailer"
-
-        private const val BRAND_CGV = "CGV"
-        private const val BRAND_LOTTE = "Lotte"
-        private const val BRAND_MEGABOX = "Megabox"
-
-        private fun Movie.category(): String = when {
-            isNow -> "Now"
-            isPlan -> "Plan"
-            else -> "Unknown"
-        }
-    }
-
-    private val delegate by lazy {
+    private val delegate by lazyFast {
         FirebaseAnalytics.getInstance(context)
     }
 
-    private inline fun logEvent(var1: String, params: Bundle.() -> Unit) {
+    private inline fun logEvent(var1: String, params: Params) {
         delegate.logEvent(var1, Bundle().apply { params() })
     }
 
-    private fun logButtonEvent(buttonName: String) {
-        logEvent(Event.SELECT_CONTENT) {
-            putString(Param.CONTENT_TYPE, "${buttonName}Button")
-        }
+    private inline fun logSelectEvent(params: Params) {
+        delegate.logEvent(Event.SELECT_CONTENT, Bundle().apply { params() })
     }
 
-    private inline fun logButtonEvent(buttonName: String, moreParams: Bundle.() -> Unit) {
-        logEvent(Event.SELECT_CONTENT) {
-            putString(Param.CONTENT_TYPE, "${buttonName}Button")
-            moreParams(this)
-        }
+    private inline fun logShareEvent(params: Params) {
+        delegate.logEvent(Event.SHARE, Bundle().apply { params() })
     }
 
-    /* Main */
+    /* Common */
 
     fun screen(activity: Activity, screenName: String) {
         delegate.setCurrentScreen(activity, screenName, null)
     }
 
-    /* Main: Now, Plan */
+    /* Main */
 
-    fun clickItem(index: Int, movie: Movie) {
-        logEvent(Event.SELECT_CONTENT) {
-            putInt(Param.INDEX, index)
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
+    fun clickMovie(isNow: Boolean) {
+        logSelectEvent {
             putString(Param.CONTENT_TYPE, CONTENT_TYPE_MOVIE)
+            putString(Param.ITEM_CATEGORY, if (isNow) "Now" else "Plan")
         }
     }
 
     fun clickMenuFilter() {
-        logButtonEvent("MenuFilter")
+        logSelectEvent {
+            putString(Param.CONTENT_TYPE, "MenuFilterButton")
+        }
     }
 
     /* Detail */
 
-    fun clickPoster(movie: Movie) {
-        logEvent(Event.SHARE) {
-            putString(Param.ITEM_ID, movie.posterUrl)
-            putString(Param.CONTENT_TYPE, CONTENT_TYPE_IMAGE)
+    fun clickPoster() {
+        logShareEvent {
+            putString(Param.CONTENT_TYPE, CONTENT_TYPE_POSTER)
         }
     }
 
-    fun clickShare(movie: Movie) {
-        logEvent(Event.SHARE) {
-            putString(Param.ITEM_ID, movie.id)
+    fun clickShare() {
+        logShareEvent {
             putString(Param.CONTENT_TYPE, CONTENT_TYPE_MOVIE)
         }
     }
 
-    /* Detail: CGV */
-
-    fun clickCgvInfo(movie: Movie) {
-        logButtonEvent("Info") {
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
+    fun clickCgvInfo() {
+        logSelectEvent {
+            putString(Param.CONTENT_TYPE, "InfoButton")
             putString(Param.ITEM_BRAND, BRAND_CGV)
         }
     }
 
-    /* Detail: Lotte Cinema */
-
-    fun clickLotteInfo(movie: Movie) {
-        logButtonEvent("Info") {
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
+    fun clickLotteInfo() {
+        logSelectEvent {
+            putString(Param.CONTENT_TYPE, "InfoButton")
             putString(Param.ITEM_BRAND, BRAND_LOTTE)
         }
     }
 
-    /* Detail: Megabox */
-
-    fun clickMegaboxInfo(movie: Movie) {
-        logButtonEvent("Info") {
-            putString(Param.ITEM_ID, movie.id)
-            putString(Param.ITEM_NAME, movie.title)
-            putString(Param.ITEM_CATEGORY, movie.category())
+    fun clickMegaboxInfo() {
+        logSelectEvent {
+            putString(Param.CONTENT_TYPE, "InfoButton")
             putString(Param.ITEM_BRAND, BRAND_MEGABOX)
         }
     }
 
     /* Detail: Trailers */
 
-    fun clickItem(trailer: Trailer) {
-        logEvent(Event.SELECT_CONTENT) {
-            putString(Param.ITEM_ID, trailer.youtubeId)
-            putString(Param.ITEM_NAME, trailer.title)
-            putString(Param.ITEM_BRAND, trailer.author)
+    fun clickTrailer() {
+        logSelectEvent {
             putString(Param.CONTENT_TYPE, CONTENT_TYPE_TRAILER)
+            putString(Param.ITEM_BRAND, BRAND_YOUTUBE)
         }
     }
 
-    fun clickMoreTrailers(query: String) {
+    fun clickMoreTrailers() {
         logEvent(Event.SEARCH) {
-            putString(Param.SEARCH_TERM, query)
+            putString(Param.CONTENT_TYPE, CONTENT_TYPE_TRAILER)
+            putString(Param.ITEM_BRAND, BRAND_YOUTUBE)
         }
+    }
+
+    companion object {
+
+        private const val CONTENT_TYPE_POSTER = "Image"
+        private const val CONTENT_TYPE_MOVIE = "Movie"
+        private const val CONTENT_TYPE_TRAILER = "Trailer"
+
+        private const val BRAND_CGV = "CGV"
+        private const val BRAND_LOTTE = "Lotte"
+        private const val BRAND_MEGABOX = "Megabox"
+        private const val BRAND_YOUTUBE = "YouTube"
     }
 }
