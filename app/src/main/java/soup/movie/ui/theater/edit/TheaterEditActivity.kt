@@ -113,7 +113,6 @@ class TheaterEditActivity :
                 inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
                     transitionName = it.id
-                    tag = it.id
                     setOnClickListener { _ -> presenter.remove(it) }
                 }
             }.forEach { addView(it) }

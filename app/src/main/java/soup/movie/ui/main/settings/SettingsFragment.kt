@@ -101,7 +101,6 @@ class SettingsFragment :
                 inflate<Chip>(context, it.getChipLayout()).apply {
                     text = it.name
                     transitionName = it.id
-                    tag = it.id
                     setOnDebounceClickListener { _ -> it.executeWeb(requireContext()) }
                 }
             }.forEach { addView(it) }
