@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="item"
-            type="soup.movie.data.model.Movie" />
+            name="uiModel"
+            type="soup.movie.ui.detail.HeaderUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +45,7 @@
             layout="@layout/tag_movie_age_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:item="@{item}"
+            app:item="@{uiModel.movie}"
             app:layout_constraintBottom_toBottomOf="@+id/ageView"
             app:layout_constraintEnd_toEndOf="@+id/ageView"
             app:layout_constraintStart_toStartOf="@+id/ageView"
@@ -57,7 +57,7 @@
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"
             android:layout_marginTop="12dp"
-            app:item="@{item}"
+            app:item="@{uiModel.movie}"
             app:layout_constraintEnd_toEndOf="@+id/posterCard"
             app:layout_constraintStart_toEndOf="@+id/posterCard"
             app:layout_constraintTop_toTopOf="@+id/posterCard" />
@@ -69,7 +69,7 @@
             android:layout_height="@dimen/tag_height"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            app:item="@{item}"
+            app:item="@{uiModel.movie}"
             app:layout_constraintEnd_toEndOf="@+id/posterCard"
             app:layout_constraintStart_toEndOf="@+id/posterCard"
             app:layout_constraintTop_toBottomOf="@+id/ageView"
@@ -82,7 +82,7 @@
             android:layout_height="@dimen/tag_height"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            app:item="@{item}"
+            app:item="@{uiModel.movie}"
             app:layout_constraintEnd_toEndOf="@+id/posterCard"
             app:layout_constraintStart_toEndOf="@+id/posterCard"
             app:layout_constraintTop_toBottomOf="@+id/newView"
@@ -95,7 +95,7 @@
             android:layout_height="@dimen/tag_height"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            app:item="@{item}"
+            app:item="@{uiModel.movie}"
             app:layout_constraintEnd_toEndOf="@+id/posterCard"
             app:layout_constraintStart_toEndOf="@+id/posterCard"
             app:layout_constraintTop_toBottomOf="@+id/bestView"
@@ -111,7 +111,7 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:minLines="1"
-            android:text="@{item.title}"
+            android:text="@{uiModel.movie.title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textColor="@color/light_icon"
             android:textSize="18dp"
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{item.openDate}"
+            android:text="@{uiModel.movie.openDate}"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/light_icon"
             android:textSize="14dp"

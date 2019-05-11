@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import soup.movie.R
 import soup.movie.data.MovieSelectManager
 import soup.movie.data.model.Movie
-import soup.movie.data.model.Theater
 import soup.movie.ui.BaseViewModel
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.EventMutableLiveData
@@ -16,25 +14,32 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
-    private var imageUriProvider: ImageUriProvider
-): BaseViewModel() {
+    private val imageUriProvider: ImageUriProvider
+) : BaseViewModel() {
 
-    private val _viewState = MutableLiveData<DetailViewState>()
-    val viewState: LiveData<DetailViewState>
-        get() = _viewState
+    private val _headerUiModel = MutableLiveData<HeaderUiModel>()
+    val headerUiModel: LiveData<HeaderUiModel>
+        get() = _headerUiModel
+
+    private val _contentUiModel = MutableLiveData<ContentUiModel>()
+    val contentUiModel: LiveData<ContentUiModel>
+        get() = _contentUiModel
 
     private val _shareAction = EventMutableLiveData<ShareAction>()
     val shareAction: EventLiveData<ShareAction>
         get() = _shareAction
 
     init {
+        _headerUiModel.value = HeaderUiModel(
+            movie = MovieSelectManager.getSelectedItem()!!
+        )
         MovieSelectManager
             .asObservable()
             .subscribeOn(Schedulers.io())
             .delay(500, TimeUnit.MILLISECONDS)
-            .map { DetailViewState.DoneState(it.toItems()) }
+            .map { it.toContentUiModel() }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _viewState.value = it }
+            .subscribe { _contentUiModel.value = it }
             .disposeOnCleared()
     }
 
@@ -53,18 +58,19 @@ class DetailViewModel @Inject constructor(
         else -> "image/jpeg"
     }
 
-    private fun Movie.toItems(): List<DetailViewState.ListItem> {
-        val list = mutableListOf(
-            DetailViewState.ListItem(Theater.TYPE_CGV, R.layout.detail_item_cgv, this),
-            DetailViewState.ListItem(Theater.TYPE_LOTTE, R.layout.detail_item_lotte, this),
-            DetailViewState.ListItem(Theater.TYPE_MEGABOX, R.layout.detail_item_megabox, this))
-        if (hasNaverInfo()) {
-            list.add(DetailViewState.ListItem(Theater.TYPE_NONE, R.layout.detail_item_naver, this))
+    private fun Movie.toContentUiModel(): ContentUiModel {
+        val movie: Movie = this
+        val items = mutableListOf(
+            CgvItemUiModel(movie),
+            LotteItemUiModel(movie),
+            MegaboxItemUiModel(movie))
+        if (movie.hasNaverInfo()) {
+            items.add(NaverItemUiModel(movie))
         }
-        val trailers = trailers.orEmpty()
+        val trailers = movie.trailers.orEmpty()
         if (trailers.isNotEmpty()) {
-            list.add(DetailViewState.ListItem(Theater.TYPE_NONE, R.layout.detail_item_trailers, this, trailers))
+            items.add(TrailersItemUiModel(movie, trailers))
         }
-        return list
+        return ContentUiModel(items)
     }
 }

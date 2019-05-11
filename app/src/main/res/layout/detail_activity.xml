@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="item"
-            type="soup.movie.data.model.Movie" />
+            name="viewModel"
+            type="soup.movie.ui.detail.DetailViewModel" />
     </data>
 
     <soup.widget.elastic.ElasticDragDismissFrameLayout
@@ -57,7 +57,7 @@
             <include
                 android:id="@+id/detailHeaderView"
                 layout="@layout/detail_header"
-                app:item="@{item}"
+                app:uiModel="@{viewModel.headerUiModel}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="soup.movie.data.helper.MovieExtKt" />
-        <variable name="item" type="soup.movie.data.model.Movie" />
+
+        <variable
+            name="item"
+            type="soup.movie.data.model.Movie" />
     </data>
 
     <TextView
@@ -12,11 +16,11 @@
         android:layout_width="@dimen/tag_width"
         android:layout_height="@dimen/tag_height"
         android:gravity="center"
+        android:maxLines="1"
         android:text="@{MovieExtKt.getSimpleAgeLabel(item)}"
         android:textColor="@color/white"
         android:textSize="12dp"
         android:textStyle="bold"
-        android:maxLines="1"
         android:transitionName="@string/transition_age"
         tools:background="@drawable/bg_tag_age_19"
         tools:text="청불" />

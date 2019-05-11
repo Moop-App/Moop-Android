@@ -1,57 +1,44 @@
 package soup.movie.ui.detail
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 import androidx.recyclerview.widget.ext.FixedLayoutManager
 import soup.movie.BR
+import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.DetailItemTrailersBinding
-import soup.movie.ui.detail.DetailListAdapter.DataBindingViewHolder
-import soup.movie.ui.detail.DetailViewState.ListItem
+import soup.movie.ui.databinding.DataBindingListAdapter
+import soup.movie.ui.databinding.DataBindingViewHolder
 
-internal class DetailListAdapter(private val listener: DetailListItemListener,
-                                 private val analytics: EventAnalytics) :
-    ListAdapter<ListItem, DataBindingViewHolder>(AlwaysDiffCallback()) {
+internal class DetailListAdapter(
+    private val listener: DetailListItemListener,
+    private val analytics: EventAnalytics
+) : DataBindingListAdapter<ContentItemUiModel>(AlwaysDiffCallback()) {
 
-    private val viewPool = RecyclerView.RecycledViewPool()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
+    override fun createViewHolder(binding: ViewDataBinding): DataBindingViewHolder<ContentItemUiModel> {
         return when (binding) {
-            is DetailItemTrailersBinding -> TrailersViewHolder(binding, analytics).apply {
-                binding.listView.setRecycledViewPool(viewPool)
-            }
+            is DetailItemTrailersBinding -> TrailersViewHolder(binding, analytics)
             else -> DataBindingViewHolder(binding)
         }
     }
 
-    override fun onBindViewHolder(holder: DataBindingViewHolder, position: Int) {
-        holder.bind(getItem(position), listener)
+    override fun onBindViewHolder(holder: DataBindingViewHolder<ContentItemUiModel>, position: Int) {
+        holder.binding.setVariable(BR.listener, listener)
+        super.onBindViewHolder(holder, position)
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position).layoutRes
-
-    open class DataBindingViewHolder(
-        private val binding: ViewDataBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        open fun bind(item: ListItem, listener: DetailListItemListener) {
-            binding.setVariable(BR.item, item)
-            binding.setVariable(BR.listener, listener)
-            binding.executePendingBindings()
-        }
+    override fun getItemViewType(position: Int): Int = when (getItem(position)) {
+        is CgvItemUiModel -> R.layout.detail_item_cgv
+        is LotteItemUiModel -> R.layout.detail_item_lotte
+        is MegaboxItemUiModel -> R.layout.detail_item_megabox
+        is NaverItemUiModel -> R.layout.detail_item_naver
+        is TrailersItemUiModel -> R.layout.detail_item_trailers
     }
 
     class TrailersViewHolder(
         binding: DetailItemTrailersBinding,
         analytics: EventAnalytics
-    ) : DataBindingViewHolder(binding) {
+    ) : DataBindingViewHolder<ContentItemUiModel>(binding) {
 
         private val listAdapter = DetailTrailerListAdapter(analytics)
 
@@ -60,9 +47,19 @@ internal class DetailListAdapter(private val listener: DetailListItemListener,
             binding.listView.adapter = listAdapter
         }
 
-        override fun bind(item: ListItem, listener: DetailListItemListener) {
-            super.bind(item, listener)
-            listAdapter.submitList(item.trailers)
+        override fun bind(item: ContentItemUiModel) {
+            super.bind(item)
+            if (item is TrailersItemUiModel) {
+                listAdapter.submitList(item.trailers)
+            }
         }
+    }
+
+    fun getSpanSize(position: Int): Int = when (getItem(position)) {
+        is CgvItemUiModel,
+        is LotteItemUiModel,
+        is MegaboxItemUiModel -> 1
+        is NaverItemUiModel,
+        is TrailersItemUiModel -> 3
     }
 }

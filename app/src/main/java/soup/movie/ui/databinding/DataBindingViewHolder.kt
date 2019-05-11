@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import soup.movie.BR
 
 open class DataBindingViewHolder<T>(
-    private val binding: ViewDataBinding
+    //TODO: Change to private access again
+    //private val binding: ViewDataBinding
+    val binding: ViewDataBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @CallSuper

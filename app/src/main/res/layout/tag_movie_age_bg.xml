@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="soup.movie.data.helper.MovieExtKt" />
-        <variable name="item" type="soup.movie.data.model.Movie" />
+
+        <variable
+            name="item"
+            type="soup.movie.data.model.Movie" />
     </data>
 
     <View

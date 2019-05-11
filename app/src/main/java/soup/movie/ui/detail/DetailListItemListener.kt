@@ -1,11 +1,11 @@
 package soup.movie.ui.detail
 
 import soup.movie.data.model.Movie
-import soup.movie.ui.detail.DetailViewState.ListItem
+import soup.movie.ui.detail.ContentItemUiModel
 
 interface DetailListItemListener {
 
-    fun onInfoClick(item: ListItem)
+    fun onInfoClick(item: ContentItemUiModel)
 
     fun onMoreTrailersClick(item: Movie)
 }

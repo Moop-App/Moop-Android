@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="soup.movie.ui.detail.DetailViewState.ListItem" />
+            type="soup.movie.ui.detail.ContentItemUiModel" />
 
         <variable
             name="listener"

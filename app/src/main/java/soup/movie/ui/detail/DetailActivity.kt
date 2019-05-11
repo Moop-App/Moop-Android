@@ -10,6 +10,7 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.spanSizeLookup
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -23,16 +24,11 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.data.helper.*
 import soup.movie.data.model.Movie
-import soup.movie.data.model.Theater.Companion.TYPE_CGV
-import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
-import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
-import soup.movie.data.model.Theater.Companion.TYPE_NONE
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.spec.share
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.BaseActivity
-import soup.movie.ui.detail.DetailViewState.*
 import soup.movie.util.*
 import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
 import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
@@ -59,22 +55,22 @@ class DetailActivity : BaseActivity() {
     private val listAdapter by lazy {
         DetailListAdapter(object : DetailListItemListener {
 
-            override fun onInfoClick(item: ListItem) {
+            override fun onInfoClick(item: ContentItemUiModel) {
                 val ctx: Context = this@DetailActivity
-                when (item.type) {
-                    TYPE_CGV -> {
+                when (item) {
+                    is CgvItemUiModel -> {
                         analytics.clickCgvInfo(item.movie)
                         Cgv.executeMobileWeb(ctx, item.movie)
                     }
-                    TYPE_LOTTE -> {
+                    is LotteItemUiModel -> {
                         analytics.clickLotteInfo(item.movie)
                         LotteCinema.executeMobileWeb(ctx, item.movie)
                     }
-                    TYPE_MEGABOX -> {
+                    is MegaboxItemUiModel -> {
                         analytics.clickMegaboxInfo(item.movie)
                         Megabox.executeMobileWeb(ctx, item.movie)
                     }
-                    TYPE_NONE -> {
+                    is NaverItemUiModel -> {
                         Naver.executeWeb(ctx, item.movie)
                     }
                 }
@@ -131,59 +127,50 @@ class DetailActivity : BaseActivity() {
         }
     }
 
-    private lateinit var chromeFader: SystemChromeFader
+    private val chromeFader: SystemChromeFader by lazyFast {
+        object : SystemChromeFader(this) {
+            override fun onDragDismissed() {
+                finishAfterTransition()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupContentView()
-        initViewState()
-        postponeEnterTransition()
-
-        chromeFader = object : SystemChromeFader(this) {
-            override fun onDragDismissed() = setResultAndFinish()
-        }
-    }
-
-    private fun setupContentView() {
         val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
-        binding.apply {
-            item = movie
-            lifecycleOwner = this@DetailActivity
-        }
-        viewModel.viewState.observe(this) {
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        postponeEnterTransition()
+        initViewState(binding)
+
+        viewModel.contentUiModel.observe(this) {
             render(it)
         }
         viewModel.shareAction.observeEvent(this) {
-            doShareImage(it)
+            executeShareAction(it)
         }
     }
 
-    private fun initViewState() {
-        posterView.loadAsync(movie.posterUrl, shotLoadListener)
-        posterView.setOnDebounceClickListener {
-            analytics.clickPoster(movie)
-            showPosterViewerFrom(posterView)
+    private fun initViewState(binding: DetailActivityBinding) {
+        binding.detailHeaderView.apply {
+            posterView.loadAsync(movie.posterUrl, shotLoadListener)
+            posterView.setOnDebounceClickListener {
+                analytics.clickPoster(movie)
+                showPosterViewer(from = posterView)
+            }
+            kakaoTalkButton.setOnDebounceClickListener {
+                analytics.clickShare(movie)
+                KakaoLink.share(it.context, movie)
+            }
+            shareButton.setOnDebounceClickListener {
+                analytics.clickShare(movie)
+                share(movie)
+            }
         }
-        kakaoTalkButton.setOnDebounceClickListener {
-            analytics.clickShare(movie)
-            KakaoLink.share(this, movie)
-        }
-        shareButton.setOnDebounceClickListener {
-            analytics.clickShare(movie)
-            share(movie)
-        }
-
-        listView.apply {
-            //TODO: VERY VERY VERY ugly. Please refactor this
+        binding.listView.apply {
             layoutManager = GridLayoutManager(this@DetailActivity, 3).apply {
-                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int): Int =
-                        when (listAdapter.getItemViewType(position)) {
-                            R.layout.detail_item_trailers -> 3
-                            R.layout.detail_item_naver -> 3
-                            else -> 1
-                        }
-                }
+                spanSizeLookup = spanSizeLookup(listAdapter::getSpanSize)
             }
             adapter = listAdapter
             itemAnimator = FadeInUpAnimator().apply {
@@ -205,19 +192,17 @@ class DetailActivity : BaseActivity() {
         super.onPause()
     }
 
-    private fun render(viewState: DetailViewState) {
-        when (viewState) {
-            is LoadingState -> {
-                //TODO: show loading state
-            }
-            is DoneState -> {
-                listAdapter.submitList(viewState.items)
-            }
-        }
+    override fun onBackPressed() {
+        finishAfterTransition()
     }
 
-    override fun onBackPressed() {
-        setResultAndFinish()
+    override fun finishAfterTransition() {
+        detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
+        super.finishAfterTransition()
+    }
+
+    private fun render(uiModel: ContentUiModel) {
+        listAdapter.submitList(uiModel.items)
     }
 
     private fun applyTheme(@ColorInt themeBgColor: Int) {
@@ -244,23 +229,18 @@ class DetailActivity : BaseActivity() {
         }
     }
 
-    private fun setResultAndFinish() {
-        detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
-        finishAfterTransition()
-    }
-
     //TODO: Re-implements this
-    private fun showPosterViewerFrom(posterView: ImageView) {
+    private fun showPosterViewer(from: ImageView) {
         StfalconImageViewer
-            .Builder<String>(posterView.context, listOf(movie.posterUrl)) { view, imageUrl ->
+            .Builder<String>(from.context, listOf(movie.posterUrl)) { view, imageUrl ->
                 view.loadAsync(imageUrl)
             }
-            .withTransitionFrom(posterView)
+            .withTransitionFrom(from)
             .withHiddenStatusBar(false)
             .show()
     }
 
-    private fun doShareImage(action: ShareAction) {
+    private fun executeShareAction(action: ShareAction) {
         ShareCompat.IntentBuilder.from(this)
             .setChooserTitle(R.string.action_share_poster)
             .setSubject(movie.title)
