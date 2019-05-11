@@ -10,9 +10,12 @@ import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
-import soup.movie.data.util.toAnObservable
+import soup.movie.data.util.orEmpty
+import soup.movie.data.util.toObservable
 
-class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
+class LocalMoopDataSource(
+    private val moopDao: MoopDao
+) : MoopDataSource {
 
     private var codeResponse: CodeResponse? = null
     private val versionSubject: BehaviorSubject<Version> = BehaviorSubject.create()
@@ -39,11 +42,11 @@ class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
 
     private fun getMovieListAs(type: String): Observable<MovieListResponse> {
         return moopDao.findByType(type)
-                .onErrorReturn { CachedMovieList.empty(type) }
-                .toObservable()
-                .filter { it.isUpToDate() }
-                .map { MovieListResponse(it.lastUpdateTime, it.list) }
-                .subscribeOn(Schedulers.io())
+            .onErrorReturn { CachedMovieList.empty(type) }
+            .toObservable()
+            .filter { it.isUpToDate() }
+            .map { MovieListResponse(it.lastUpdateTime, it.list) }
+            .subscribeOn(Schedulers.io())
     }
 
     fun saveCodeList(response: CodeResponse) {
@@ -51,8 +54,7 @@ class LocalMoopDataSource(private val moopDao: MoopDao) : MoopDataSource {
     }
 
     override fun getCodeList(): Observable<CodeResponse> {
-        return codeResponse?.toAnObservable()
-                ?: Observable.empty()
+        return codeResponse?.toObservable().orEmpty()
     }
 
     fun saveVersion(version: Version) {

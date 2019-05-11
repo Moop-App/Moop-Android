@@ -6,13 +6,15 @@ import soup.movie.data.model.Movie
 
 @Entity(tableName = "cached_movie_list")
 data class CachedMovieList(
-        @PrimaryKey
-        val type: String,
-        val lastUpdateTime: Long,
-        val list: List<Movie>) {
+    @PrimaryKey
+    val type: String,
+    val lastUpdateTime: Long,
+    val list: List<Movie>
+) {
 
-    fun isUpToDate(): Boolean = list.isEmpty()
-            || System.currentTimeMillis() - lastUpdateTime < STALE_MS
+    fun isUpToDate(): Boolean {
+        return (list.isEmpty() || System.currentTimeMillis() - lastUpdateTime < STALE_MS)
+    }
 
     companion object {
 

@@ -1,7 +1,10 @@
 package soup.movie.data.model
 
+import androidx.annotation.Keep
+
 typealias TheaterType = String
 
+@Keep
 data class Theater(
     val type: TheaterType,
     val code: String,

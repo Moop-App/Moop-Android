@@ -1,20 +1,22 @@
 package soup.movie.data.model
 
-import soup.movie.data.util.SearchHelper
+import androidx.annotation.Keep
 
+@Keep
 data class Movie(
-        val id: String,
-        val title: String,
-        val posterUrl: String,
-        private val age: String,
-        val ageValue: Int,
-        val openDate: String,
-        val cgv: CgvInfo?,
-        val lotte: LotteInfo?,
-        val megabox: MegaboxInfo?,
-        val naver: NaverInfo?,
-        val trailers: List<Trailer>?,
-        val isNow: Boolean) {
+    val id: String,
+    val title: String,
+    val posterUrl: String,
+    private val age: String,
+    val ageValue: Int,
+    val openDate: String,
+    val cgv: CgvInfo?,
+    val lotte: LotteInfo?,
+    val megabox: MegaboxInfo?,
+    val naver: NaverInfo?,
+    val trailers: List<Trailer>?,
+    val isNow: Boolean
+) {
 
     val rank: Float
         get() {
@@ -61,26 +63,9 @@ data class Movie(
     fun isScreeningOverAge19(): Boolean = 19 <= ageValue
 
     fun toMovieId() = MovieId(
-            id = id,
-            title = title,
-            cgvId = cgv?.id,
-            lotteId = lotte?.id,
-            megaboxId = megabox?.id)
-
-    fun isMatchedWith(movieId: MovieId): Boolean {
-        return id == movieId.id
-            || title == movieId.title
-            || cgv?.id.isMatched(movieId.cgvId)
-            || lotte?.id.isMatched(movieId.lotteId)
-            || megabox?.id.isMatched(movieId.megaboxId)
-    }
-
-    fun isMatchedWith(query: String): Boolean {
-        return SearchHelper.matched(title, query)
-    }
-
-    private fun String?.isMatched(id: String?): Boolean {
-        if (this == null || id == null) return false
-        return this == id
-    }
+        id = id,
+        title = title,
+        cgvId = cgv?.id,
+        lotteId = lotte?.id,
+        megaboxId = megabox?.id)
 }

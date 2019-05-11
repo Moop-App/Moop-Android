@@ -14,8 +14,8 @@ object SearchHelper {
 
     //자음
     private val INITIAL_SOUND = charArrayOf(
-            'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ',
-            'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ')
+        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ',
+        'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ')
 
     private const val NO_MATCHED = -1
 
@@ -52,12 +52,14 @@ object SearchHelper {
     }
 
     fun matchedLegacy(sentence: String, query: String): Boolean =
-            if (query.isEmpty()) { false }
-            else matchedIndex(sentence, query) != NO_MATCHED
+        if (query.isEmpty()) {
+            false
+        } else matchedIndex(sentence, query) != NO_MATCHED
 
     fun matched(sentence: String, query: String): Boolean =
-            if (query.isEmpty()) { false }
-            else matchedIndexInfo(sentence, query) != null
+        if (query.isEmpty()) {
+            false
+        } else matchedIndexInfo(sentence, query) != null
 
     private fun matchedIndex(sentence: String, query: String): Int {
         val seof = sentence.length - query.length
@@ -140,7 +142,7 @@ object SearchHelper {
     private fun isNotMatched(q: Char, v: Char): Boolean = !isMatched(q, v)
 
     private fun isMatched(q: Char, v: Char): Boolean =
-            v == q || isInitialSound(q) && isHangul(v) && getInitialSound(v) == q // korean
+        v == q || isInitialSound(q) && isHangul(v) && getInitialSound(v) == q // korean
 
     private fun indexOfIgnoreCase(sentence: String, word: String): Int {
         return sentence.toLowerCase().indexOf(word.toLowerCase())

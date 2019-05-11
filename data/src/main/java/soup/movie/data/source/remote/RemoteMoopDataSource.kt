@@ -10,19 +10,19 @@ import soup.movie.data.source.MoopDataSource
 class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDataSource {
 
     override fun getNowList(): Observable<MovieListResponse> =
-            moopApiService.getNowMovieList()
-                    .map { it.withTimestamp() }
+        moopApiService.getNowMovieList()
+            .map { it.withTimestamp() }
 
     override fun getPlanList(): Observable<MovieListResponse> =
-            moopApiService.getPlanMovieList()
-                    .map { it.withTimestamp() }
+        moopApiService.getPlanMovieList()
+            .map { it.withTimestamp() }
 
-    private fun List<Movie>.withTimestamp(): MovieListResponse =
-            MovieListResponse(System.currentTimeMillis(), this)
+    private inline fun List<Movie>.withTimestamp(): MovieListResponse =
+        MovieListResponse(System.currentTimeMillis(), this)
 
     override fun getCodeList(): Observable<CodeResponse> =
-            moopApiService.getCodeList()
+        moopApiService.getCodeList()
 
     override fun getVersion(): Observable<Version> =
-            moopApiService.getVersion().map { it.android }
+        moopApiService.getVersion().map { it.android }
 }
