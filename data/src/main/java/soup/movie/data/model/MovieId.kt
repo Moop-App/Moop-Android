@@ -6,7 +6,7 @@ import androidx.annotation.Keep
 data class MovieId(
     val id: String,
     val title: String,
-    val cgvId: String?,
-    val lotteId: String?,
-    val megaboxId: String?
+    val cgvId: CgvMovieId?,
+    val lotteId: LotteMovieId?,
+    val megaboxId: LotteMovieId?
 )

@@ -6,6 +6,6 @@ import androidx.annotation.Keep
 data class NaverInfo(
     val title: String,
     val subtitle: String,
-    val link: String,
+    val link: Url?,
     val userRating: String
 )

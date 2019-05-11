@@ -55,18 +55,18 @@ class DetailActivity : BaseActivity() {
                 when (item) {
                     is CgvItemUiModel -> {
                         analytics.clickCgvInfo()
-                        Cgv.executeMobileWeb(ctx, item.movie)
+                        Cgv.executeMobileWeb(ctx, item.movieId)
                     }
                     is LotteItemUiModel -> {
                         analytics.clickLotteInfo()
-                        LotteCinema.executeMobileWeb(ctx, item.movie)
+                        LotteCinema.executeMobileWeb(ctx, item.movieId)
                     }
                     is MegaboxItemUiModel -> {
                         analytics.clickMegaboxInfo()
-                        Megabox.executeMobileWeb(ctx, item.movie)
+                        Megabox.executeMobileWeb(ctx, item.movieId)
                     }
                     is NaverItemUiModel -> {
-                        Naver.executeWeb(ctx, item.movie)
+                        ctx.executeWeb(item.movie.naver?.link)
                     }
                 }
             }

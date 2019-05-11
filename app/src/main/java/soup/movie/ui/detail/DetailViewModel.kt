@@ -59,17 +59,28 @@ class DetailViewModel @Inject constructor(
     }
 
     private fun Movie.toContentUiModel(): ContentUiModel {
-        val movie: Movie = this
-        val items = mutableListOf(
-            CgvItemUiModel(movie),
-            LotteItemUiModel(movie),
-            MegaboxItemUiModel(movie))
-        if (movie.hasNaverInfo()) {
-            items.add(NaverItemUiModel(movie))
+        val items = mutableListOf<ContentItemUiModel>()
+        items.add(CgvItemUiModel(
+            movieId = cgv?.id.orEmpty(),
+            hasInfo = cgv != null,
+            rating = cgv?.egg ?: "-"
+        ))
+        items.add(LotteItemUiModel(
+            movieId = lotte?.id.orEmpty(),
+            hasInfo = lotte != null,
+            rating = lotte?.star ?: "-"
+        ))
+        items.add(MegaboxItemUiModel(
+            movieId = megabox?.id.orEmpty(),
+            hasInfo = megabox != null,
+            rating = megabox?.star ?: "-"
+        ))
+        if (hasNaverInfo()) {
+            items.add(NaverItemUiModel(this))
         }
-        val trailers = movie.trailers.orEmpty()
+        val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
-            items.add(TrailersItemUiModel(movie, trailers))
+            items.add(TrailersItemUiModel(this, trailers))
         }
         return ContentUiModel(items)
     }

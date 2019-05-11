@@ -3,11 +3,15 @@ package soup.movie.util
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import soup.movie.R
+import soup.movie.data.model.Url
 
 /** Color */
 
@@ -38,4 +42,21 @@ fun Context.startActivitySafely(intent: Intent) {
 private fun Intent.isValid(ctx: Context): Boolean {
     val activities = ctx.packageManager?.queryIntentActivities(this, PackageManager.MATCH_DEFAULT_ONLY)
     return activities != null && activities.size > 0
+}
+
+fun Context.executeWeb(url: Url?) {
+    if (url == null) return
+    CustomTabsIntent.Builder()
+        .addDefaultShareMenuItem()
+        .setToolbarColor(getColorCompat(R.color.white))
+        .setSecondaryToolbarColor(getColorCompat(R.color.black))
+        .setShowTitle(true)
+        .setStartAnimations(this, R.anim.fade_in, R.anim.fade_out)
+        .setExitAnimations(this, R.anim.fade_in, R.anim.fade_out)
+        .build()
+        .launchUrl(this, Uri.parse(url))
+
+    //TODO: Prepare Fallback UI
+    //val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    //startActivity(webIntent)
 }

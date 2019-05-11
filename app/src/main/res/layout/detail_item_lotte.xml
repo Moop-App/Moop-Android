@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="soup.movie.ui.detail.ContentItemUiModel" />
+            type="soup.movie.ui.detail.LotteItemUiModel" />
 
         <variable
             name="listener"
@@ -34,7 +34,7 @@
                 style="@style/Widget.Chip.Lotte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:enabled="@{item.movie.screeningAtLotteCinema}"
+                android:enabled="@{item.hasInfo}"
                 android:text="롯데시네마"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="@{item.movie.lotteStar}"
+                android:text="@{item.rating}"
                 android:textColor="?attr/moop_cardContentColorDark"
                 android:textSize="14sp"
                 android:textStyle="bold"

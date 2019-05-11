@@ -40,15 +40,6 @@ data class Movie(
     val isPlan: Boolean
         get() = !isNow
 
-    val cgvEgg: String
-        get() = cgv?.egg ?: "-"
-
-    val lotteStar: String
-        get() = lotte?.star ?: "-"
-
-    val megaboxStar: String
-        get() = megabox?.star ?: "-"
-
     val naverUserRating: String
         get() = naver?.userRating ?: "-"
 
@@ -67,5 +58,6 @@ data class Movie(
         title = title,
         cgvId = cgv?.id,
         lotteId = lotte?.id,
-        megaboxId = megabox?.id)
+        megaboxId = megabox?.id
+    )
 }
