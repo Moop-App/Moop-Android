@@ -169,8 +169,8 @@ object YouTube : MarketApp() {
             Intent.ACTION_VIEW,
             Uri.parse("http://www.youtube.com/watch?v=$id"))
 
-    fun executeAppWithQuery(ctx: Context, movie: Movie) {
-        val query = "${movie.title} 예고편"
+    fun executeAppWithQuery(ctx: Context, movieTitle: String) {
+        val query = "$movieTitle 예고편"
         try {
             ctx.startActivity(createSearchAppIntent(query))
         } catch (e: ActivityNotFoundException) {

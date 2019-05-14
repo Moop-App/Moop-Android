@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="soup.movie.ui.detail.ContentItemUiModel" />
+            type="soup.movie.ui.detail.TrailersItemUiModel" />
 
         <variable
             name="listener"
@@ -55,7 +55,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="@{@string/trailer_search_result(item.movie.title)}"
+                    android:text="@{@string/trailer_search_result(item.movieTitle)}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="?attr/moop_cardContentColorDark"
                     android:textSize="14sp"
@@ -83,7 +83,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:onDebounceClick="@{() -> listener.onMoreTrailersClick(item.movie)}"
+                    app:onDebounceClick="@{() -> listener.onInfoClick(item)}"
                     app:srcCompat="@drawable/ic_round_ticket" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

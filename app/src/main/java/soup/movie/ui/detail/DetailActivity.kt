@@ -66,14 +66,13 @@ class DetailActivity : BaseActivity() {
                         Megabox.executeMobileWeb(ctx, item.movieId)
                     }
                     is NaverItemUiModel -> {
-                        ctx.executeWeb(item.movie.naver?.link)
+                        ctx.executeWeb(item.webLink)
+                    }
+                    is TrailersItemUiModel -> {
+                        analytics.clickMoreTrailers()
+                        YouTube.executeAppWithQuery(ctx, item.movieTitle)
                     }
                 }
-            }
-
-            override fun onMoreTrailersClick(item: Movie) {
-                analytics.clickMoreTrailers()
-                YouTube.executeAppWithQuery(this@DetailActivity, item)
             }
         }, analytics)
     }

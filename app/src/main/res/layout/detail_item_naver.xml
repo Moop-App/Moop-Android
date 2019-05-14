@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="soup.movie.ui.detail.ContentItemUiModel" />
+            type="soup.movie.ui.detail.NaverItemUiModel" />
 
         <variable
             name="listener"
@@ -61,7 +61,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="@{item.movie.naverUserRating}"
+                android:text="@{item.rating}"
                 android:textColor="?attr/moop_cardContentColorDark"
                 android:textSize="14sp"
                 android:textStyle="bold"

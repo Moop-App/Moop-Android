@@ -40,12 +40,13 @@ class MegaboxItemUiModel(
 
 @Keep
 class NaverItemUiModel(
-    val movie: Movie
+    val rating: String,
+    val webLink: Url?
 ) : ContentItemUiModel()
 
 @Keep
 class TrailersItemUiModel(
-    val movie: Movie,
+    val movieTitle: String,
     val trailers: List<Trailer> = emptyList()
 ) : ContentItemUiModel()
 

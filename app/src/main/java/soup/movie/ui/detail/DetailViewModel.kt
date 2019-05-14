@@ -76,11 +76,17 @@ class DetailViewModel @Inject constructor(
             rating = megabox?.star ?: "-"
         ))
         if (hasNaverInfo()) {
-            items.add(NaverItemUiModel(this))
+            items.add(NaverItemUiModel(
+                rating = naver?.userRating ?: "-",
+                webLink = naver?.link
+            ))
         }
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
-            items.add(TrailersItemUiModel(this, trailers))
+            items.add(TrailersItemUiModel(
+                movieTitle = title,
+                trailers = trailers
+            ))
         }
         return ContentUiModel(items)
     }

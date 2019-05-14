@@ -40,9 +40,6 @@ data class Movie(
     val isPlan: Boolean
         get() = !isNow
 
-    val naverUserRating: String
-        get() = naver?.userRating ?: "-"
-
     fun isScreeningAtCgv(): Boolean = cgv != null
     fun isScreeningAtLotteCinema(): Boolean = lotte != null
     fun isScreeningAtMegabox(): Boolean = megabox != null
