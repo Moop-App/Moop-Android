@@ -45,9 +45,18 @@ class NaverItemUiModel(
 ) : ContentItemUiModel()
 
 @Keep
-class TrailersItemUiModel(
-    val movieTitle: String,
-    val trailers: List<Trailer> = emptyList()
+class TrailerHeaderItemUiModel(
+    val movieTitle: String
+) : ContentItemUiModel()
+
+@Keep
+class TrailerItemUiModel(
+    val trailer: Trailer
+) : ContentItemUiModel()
+
+@Keep
+class TrailerFooterItemUiModel(
+    val movieTitle: String
 ) : ContentItemUiModel()
 
 @Keep

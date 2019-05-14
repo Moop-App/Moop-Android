@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="item" type="soup.movie.data.model.Trailer" />
+
+        <variable
+            name="item"
+            type="soup.movie.ui.detail.TrailerItemUiModel" />
+
+        <variable
+            name="listener"
+            type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="4dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        tools:background="?attr/moop_cardBgColorDark">
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/ripple"
+        android:elevation="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:onDebounceClick="@{() -> listener.onInfoClick(item)}">
 
         <ImageView
-            android:id="@+id/trailerThumbnailView"
+            android:id="@+id/trailerImage"
             android:layout_width="140dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="?attr/moop_cardBgColorLight"
             android:scaleType="centerCrop"
-            android:srcUrl="@{item.thumbnailUrl}"
+            android:srcUrl="@{item.trailer.thumbnailUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,21 +43,20 @@
             android:id="@+id/titleView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="3"
             android:minLines="1"
-            android:text="@{item.title}"
+            android:text="@{item.trailer.title}"
             android:textColor="?attr/moop_cardContentColorDark"
-            android:textSize="13dp"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintBottom_toTopOf="@+id/authorView"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@id/authorView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/trailerThumbnailView"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/trailerImage"
+            app:layout_constraintTop_toTopOf="@id/trailerImage"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="Movie Title\nLine2\nLine3" />
 
         <TextView
@@ -55,10 +66,10 @@
             android:layout_marginTop="4dp"
             android:maxLines="1"
             android:minLines="1"
-            android:text="@{item.author}"
+            android:text="@{item.trailer.author}"
             android:textColor="?attr/moop_cardContentColorLight"
             android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/titleView"
             app:layout_constraintEnd_toEndOf="@+id/titleView"
             app:layout_constraintStart_toStartOf="@+id/titleView"
             app:layout_constraintTop_toBottomOf="@+id/titleView"

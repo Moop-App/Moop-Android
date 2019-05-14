@@ -83,10 +83,11 @@ class DetailViewModel @Inject constructor(
         }
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
-            items.add(TrailersItemUiModel(
-                movieTitle = title,
-                trailers = trailers
-            ))
+            items.add(TrailerHeaderItemUiModel(movieTitle = title))
+            items.addAll(trailers.map {
+                TrailerItemUiModel(trailer = it)
+            })
+            items.add(TrailerFooterItemUiModel(movieTitle = title))
         }
         return ContentUiModel(items)
     }

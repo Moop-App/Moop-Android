@@ -44,6 +44,7 @@
                 android:overScrollMode="never"
                 android:paddingStart="8dp"
                 android:paddingTop="212dp"
+                android:paddingBottom="8dp"
                 android:paddingEnd="8dp"
                 android:requiresFadingEdge="none"
                 android:scrollbars="none"
@@ -51,8 +52,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="1"
-                tools:listitem="@layout/detail_item_trailers" />
+                tools:listitem="@layout/detail_item_trailer" />
 
             <include
                 android:id="@+id/detailHeaderView"

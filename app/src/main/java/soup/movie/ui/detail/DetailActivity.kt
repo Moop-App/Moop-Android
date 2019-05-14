@@ -17,7 +17,10 @@ import kotlinx.android.synthetic.main.detail_header.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
-import soup.movie.data.helper.*
+import soup.movie.data.helper.Cgv
+import soup.movie.data.helper.LotteCinema
+import soup.movie.data.helper.Megabox
+import soup.movie.data.helper.YouTube
 import soup.movie.data.model.Movie
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
@@ -48,33 +51,34 @@ class DetailActivity : BaseActivity() {
     lateinit var analytics: EventAnalytics
 
     private val listAdapter by lazy {
-        DetailListAdapter(object : DetailListItemListener {
-
-            override fun onInfoClick(item: ContentItemUiModel) {
-                val ctx: Context = this@DetailActivity
-                when (item) {
-                    is CgvItemUiModel -> {
-                        analytics.clickCgvInfo()
-                        Cgv.executeMobileWeb(ctx, item.movieId)
-                    }
-                    is LotteItemUiModel -> {
-                        analytics.clickLotteInfo()
-                        LotteCinema.executeMobileWeb(ctx, item.movieId)
-                    }
-                    is MegaboxItemUiModel -> {
-                        analytics.clickMegaboxInfo()
-                        Megabox.executeMobileWeb(ctx, item.movieId)
-                    }
-                    is NaverItemUiModel -> {
-                        ctx.executeWeb(item.webLink)
-                    }
-                    is TrailersItemUiModel -> {
-                        analytics.clickMoreTrailers()
-                        YouTube.executeAppWithQuery(ctx, item.movieTitle)
-                    }
+        DetailListAdapter { item ->
+            val ctx: Context = this@DetailActivity
+            when (item) {
+                is CgvItemUiModel -> {
+                    analytics.clickCgvInfo()
+                    Cgv.executeMobileWeb(ctx, item.movieId)
+                }
+                is LotteItemUiModel -> {
+                    analytics.clickLotteInfo()
+                    LotteCinema.executeMobileWeb(ctx, item.movieId)
+                }
+                is MegaboxItemUiModel -> {
+                    analytics.clickMegaboxInfo()
+                    Megabox.executeMobileWeb(ctx, item.movieId)
+                }
+                is NaverItemUiModel -> {
+                    ctx.executeWeb(item.webLink)
+                }
+                is TrailerItemUiModel -> {
+                    analytics.clickTrailer()
+                    YouTube.executeApp(ctx, item.trailer)
+                }
+                is TrailerFooterItemUiModel -> {
+                    analytics.clickMoreTrailers()
+                    YouTube.executeAppWithQuery(ctx, item.movieTitle)
                 }
             }
-        }, analytics)
+        }
     }
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
