@@ -63,7 +63,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
-            app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+            app:layout_constraintEnd_toStartOf="@id/infoButton"
             app:layout_constraintStart_toEndOf="@+id/eggIcon"
             app:layout_constraintTop_toTopOf="@+id/eggIcon"
             tools:text="0.0" />
@@ -74,14 +74,14 @@
             android:layout_height="0dp"
             android:background="?attr/moop_cardDividerColor"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+            app:layout_constraintEnd_toStartOf="@id/infoButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/ticketButton"
+            android:id="@+id/infoButton"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/ripple_naver_info"
             android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"

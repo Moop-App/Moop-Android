@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?colorControlHighlight">
+    <item>
+        <shape android:shape="rectangle">
+            <corners
+                android:bottomRightRadius="16dp"
+                android:topRightRadius="16dp" />
+            <solid android:color="?moop_cardBgColorDark" />
+        </shape>
+    </item>
+</ripple>
