@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="준비 중입니다"
             android:textColor="?attr/moop_cardContentColorLight"
-            android:background="@drawable/bg_card"
+            android:background="@drawable/bg_round_rect"
             android:backgroundTint="?attr/moop_cardBgColorLight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
-            android:background="@drawable/bg_card"
+            android:background="@drawable/bg_round_rect"
             android:backgroundTint="?attr/moop_cardBgColorLight"
             android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"

@@ -16,7 +16,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:background="@drawable/bg_card"
+            android:background="@drawable/bg_round_rect"
             android:backgroundTint="@{item.getColorAccent(context)}"
             android:alpha="0.15"
             android:visibleIf="@{item.isBookmarked()}"
