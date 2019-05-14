@@ -14,99 +14,94 @@
             type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="?attr/moop_cardBgColorDark">
+        android:elevation="10dp"
+        android:background="@drawable/button_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/headerView"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
+            <ImageView
+                android:id="@+id/brandView"
+                android:layout_width="48dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_logo_youtube"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/brandView"
-                    android:layout_width="48dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_logo_youtube"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/searchLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="@{@string/trailer_search_result(item.movieTitle)}"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    android:textColor="?attr/moop_cardContentColorDark"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ticketButton"
-                    app:layout_constraintStart_toEndOf="@+id/brandView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="\'죠스 예고편\' 검색 결과" />
-
-                <TextView
-                    android:id="@+id/ticketButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="더보기"
-                    android:textColor="?attr/colorAccent"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:onDebounceClick="@{() -> listener.onInfoClick(item)}"
-                    app:srcCompat="@drawable/ic_round_ticket" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerViewEx
-                android:id="@+id/listView"
+            <TextView
+                android:id="@+id/searchLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{@string/trailer_search_result(item.movieTitle)}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:textColor="?attr/moop_cardContentColorDark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ticketButton"
+                app:layout_constraintStart_toEndOf="@+id/brandView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="\'죠스 예고편\' 검색 결과" />
+
+            <TextView
+                android:id="@+id/ticketButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:requiresFadingEdge="none"
-                android:scrollbars="none"
+                android:layout_marginBottom="4dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="더보기"
+                android:textColor="?attr/colorAccent"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/headerView"
-                app:layout_constraintVertical_bias="0.0"
-                tools:itemCount="3"
-                tools:listitem="@layout/detail_item_trailer" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:onDebounceClick="@{() -> listener.onInfoClick(item)}"
+                app:srcCompat="@drawable/ic_round_ticket" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerViewEx
+            android:id="@+id/listView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="none"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerView"
+            app:layout_constraintVertical_bias="0.0"
+            tools:itemCount="3"
+            tools:listitem="@layout/detail_item_trailer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

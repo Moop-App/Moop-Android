@@ -14,67 +14,62 @@
             type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="?attr/moop_cardBgColorDark"
+        android:background="@drawable/button_card"
+        android:elevation="10dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="6dp"
         tools:layout_width="110dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/brandView"
+            style="@style/Widget.Chip.Lotte"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="6dp">
+            android:enabled="@{item.hasInfo}"
+            android:text="롯데시네마"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/brandView"
-                style="@style/Widget.Chip.Lotte"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="@{item.hasInfo}"
-                android:text="롯데시네마"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
+        <ImageView
+            android:id="@+id/eggIcon"
+            android:layout_width="24dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_round_star"
+            android:tint="@color/amber"
+            android:tintMode="src_in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/eggLabel"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brandView" />
 
-            <ImageView
-                android:id="@+id/eggIcon"
-                android:layout_width="24dp"
-                android:layout_height="36dp"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_round_star"
-                android:tint="@color/amber"
-                android:tintMode="src_in"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/eggLabel"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/brandView" />
+        <TextView
+            android:id="@+id/eggLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@{item.rating}"
+            android:textColor="?attr/moop_cardContentColorDark"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/eggIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/eggIcon"
+            app:layout_constraintTop_toTopOf="@id/eggIcon"
+            tools:text="0.0" />
 
-            <TextView
-                android:id="@+id/eggLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="@{item.rating}"
-                android:textColor="?attr/moop_cardContentColorDark"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/eggIcon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/eggIcon"
-                app:layout_constraintTop_toTopOf="@id/eggIcon"
-                tools:text="0.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
