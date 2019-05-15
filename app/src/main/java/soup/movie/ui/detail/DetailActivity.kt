@@ -33,7 +33,7 @@ import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
 import soup.widget.util.ViewUtils
 import javax.inject.Inject
-import kotlin.math.max
+import kotlin.math.min
 
 class DetailActivity : BaseActivity() {
 
@@ -83,21 +83,13 @@ class DetailActivity : BaseActivity() {
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
 
-        private var wasScrolled: Boolean = false
-
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            val offset: Int = recyclerView.computeVerticalScrollOffset()
-            detailHeaderView.translationZ = max(3f, offset / 800f)
-
-            val isScrolled: Boolean = offset != 0
-            if (wasScrolled != isScrolled) {
-                wasScrolled = isScrolled
-                if (isScrolled) {
-                    detailHeaderView.setBackgroundColor(windowBackground)
-                } else {
-                    detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
-                }
-            }
+            //TODO: Improve this please
+            val maxOffset = min(200, detailHeaderView.height)
+            val offset = min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
+            detailHeaderView.translationZ = if (offset < 10f) 1f else 0f
+            detailHeaderView.translationY = -offset
+            detailHeaderView.alpha = 1f - offset / maxOffset
         }
     }
 

@@ -35,6 +35,14 @@
                 android:background="?attr/moop_bgColor"
                 android:transitionName="@string/transition_background" />
 
+            <include
+                android:id="@+id/detailHeaderView"
+                layout="@layout/detail_header"
+                app:uiModel="@{viewModel.headerUiModel}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerViewEx
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
@@ -53,14 +61,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/detail_item_trailer" />
-
-            <include
-                android:id="@+id/detailHeaderView"
-                layout="@layout/detail_header"
-                app:uiModel="@{viewModel.headerUiModel}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
