@@ -5,8 +5,6 @@ import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import soup.movie.di.DaggerApplicationComponent
 import soup.movie.notification.NotificationSpecs
-import soup.movie.spec.ThemeSpecs
-import soup.movie.theme.ThemeBook
 
 class MovieApplication : DaggerApplication() {
 
@@ -14,7 +12,6 @@ class MovieApplication : DaggerApplication() {
         super.onCreate()
         BuildType.init(this)
         AndroidThreeTen.init(this)
-        ThemeBook.initialize(this, ThemeSpecs.DEFAULT)
         NotificationSpecs.initialize(this)
     }
 
