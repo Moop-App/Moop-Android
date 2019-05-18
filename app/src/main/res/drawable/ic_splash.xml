@@ -1,6 +1,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="?android:attr/windowBackground" />
+    <item android:drawable="?android:attr/colorBackground" />
 
     <item
         android:drawable="@drawable/ic_splash_launcher"
