@@ -15,7 +15,6 @@ object ThemeSpecs {
      * WARNING: ID 값은 임의로 수정하지 마세요.
      */
     private const val ID_DEFAULT = "THEME_DEFAULT"
-    private const val ID_BLACK = "THEME_BLACK"
 
     internal val DEFAULT = object : ThemePage(ID_DEFAULT, R.string.theme_default) {
 
@@ -26,18 +25,6 @@ object ThemeSpecs {
             is TheaterSortActivity -> R.style.AppTheme_TheaterSort
             is TheaterEditActivity -> R.style.AppTheme_TheaterEdit
             else -> R.style.AppTheme
-        }
-    }
-
-    internal val BLACK = object : ThemePage(ID_BLACK, R.string.theme_black) {
-
-        override fun extractThemeOf(activity: Activity?): Int = when (activity) {
-            is MainActivity -> R.style.BlackTheme
-            is SearchActivity -> R.style.BlackTheme_Search
-            is DetailActivity -> R.style.BlackTheme_Detail
-            is TheaterSortActivity -> R.style.BlackTheme_TheaterSort
-            is TheaterEditActivity -> R.style.BlackTheme_TheaterEdit
-            else -> R.style.BlackTheme
         }
     }
 }

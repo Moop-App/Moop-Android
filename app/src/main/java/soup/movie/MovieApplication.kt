@@ -14,9 +14,7 @@ class MovieApplication : DaggerApplication() {
         super.onCreate()
         BuildType.init(this)
         AndroidThreeTen.init(this)
-        ThemeBook.initialize(this,
-                ThemeSpecs.DEFAULT,
-                ThemeSpecs.BLACK)
+        ThemeBook.initialize(this, ThemeSpecs.DEFAULT)
         NotificationSpecs.initialize(this)
     }
 
