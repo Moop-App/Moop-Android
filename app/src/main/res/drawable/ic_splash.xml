@@ -1,16 +1,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/white" />
+    <item android:drawable="?android:attr/windowBackground" />
 
     <item
         android:drawable="@drawable/ic_splash_launcher"
         android:gravity="center" />
-
-    <!--
-    <item
-        android:drawable="@drawable/ic_splash_text"
-        android:gravity="center_horizontal|bottom"
-        android:bottom="100dp" />
-     -->
 
 </layer-list>
