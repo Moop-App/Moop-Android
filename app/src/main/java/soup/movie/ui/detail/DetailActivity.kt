@@ -37,10 +37,6 @@ import kotlin.math.min
 
 class DetailActivity : BaseActivity() {
 
-    private val windowBackground: Int by lazyFast {
-        getColorAttr(R.attr.moop_bgColor)
-    }
-
     private val movie: Movie by lazyFast {
         MovieSelectManager.getSelectedItem()!!
     }
@@ -147,7 +143,7 @@ class DetailActivity : BaseActivity() {
             }
         }
         //TODO: Please improve this more
-        applyTheme(windowBackground)
+        applyTheme(themeBgColor = getColorAttr(R.attr.moop_bgColor))
     }
 
     override fun onResume() {
