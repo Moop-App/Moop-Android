@@ -1,84 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="item" type="soup.movie.theme.ThemePage" />
+
+        <variable
+            name="item"
+            type="soup.movie.theme.ThemePage" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/nameView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:foreground="?android:attr/selectableItemBackground" >
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_round_rect"
-            android:backgroundTint="@{item.getColorAccent(context)}"
-            android:alpha="0.15"
-            android:visibleIf="@{item.isBookmarked()}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/nameView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{item.name}"
-            android:textColor="?attr/moop_textColorDark"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/primaryView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="State" />
-
-        <ImageView
-            android:id="@+id/primaryView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/color_palette"
-            android:backgroundTint="@{item.getColorPrimary(context)}"
-            android:elevation="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/primaryDarkView"
-            app:layout_constraintEnd_toStartOf="@+id/primaryDarkView"
-            app:layout_constraintTop_toTopOf="@+id/primaryDarkView"
-            tools:backgroundTint="@android:color/holo_blue_bright" />
-
-        <View
-            android:id="@+id/primaryDarkView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/color_palette"
-            android:backgroundTint="@{item.getColorPrimaryDark(context)}"
-            android:elevation="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/accentView"
-            app:layout_constraintEnd_toStartOf="@+id/accentView"
-            app:layout_constraintTop_toTopOf="@+id/accentView"
-            tools:backgroundTint="@android:color/holo_blue_light" />
-
-        <ImageView
-            android:id="@+id/accentView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/color_palette"
-            android:backgroundTint="@{item.getColorAccent(context)}"
-            android:elevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:backgroundTint="@android:color/holo_blue_dark" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="?selectableItemBackground"
+        android:gravity="center_vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@{item.name}"
+        android:textColor="?attr/moop_textColorDark"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="State" />
 </layout>

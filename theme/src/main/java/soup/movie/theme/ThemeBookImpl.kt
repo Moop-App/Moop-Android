@@ -16,22 +16,6 @@ internal object ThemeBookImpl {
     private lateinit var availablePages: List<ThemePage>
     private lateinit var currentPagePref: CurrentPagePref
 
-    internal fun makeThemeBook(application: Application, default: ThemePage, vararg themes: ThemePage) {
-        if(::availablePages.isInitialized) {
-            throw ThemeBookAlreadyInitializedException("Theme book can be made a single copy only.")
-        }
-        defaultPage = default
-        availablePages = listOf(default, *themes)
-        currentPagePref = CurrentPagePref(application, default)
-        application.registerActivityLifecycleCallbacks(LifecycleListener())
-    }
-
-    internal fun open(activity: Activity) {
-        val page = getBookmarkPage()
-        activity.setTheme(page.extractThemeOf(activity))
-        pagePerActivity[activity::class] = page.id
-    }
-
     internal fun getBookmarkPage(): ThemePage {
         val pageId = currentPagePref.get()
         return availablePages.find { it.id == pageId } ?: defaultPage
@@ -51,7 +35,6 @@ internal object ThemeBookImpl {
     }
 
     class ThemePagesNotRegisteredException(message: String) : IllegalAccessException(message)
-    class ThemeBookAlreadyInitializedException(message: String) : IllegalAccessException(message)
 
     internal class LifecycleListener : Application.ActivityLifecycleCallbacks {
 

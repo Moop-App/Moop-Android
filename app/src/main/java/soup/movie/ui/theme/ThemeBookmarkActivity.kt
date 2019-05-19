@@ -16,7 +16,6 @@ class ThemeBookmarkActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeBook.open(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theme_bookmark)
         listView.adapter = listAdapter
