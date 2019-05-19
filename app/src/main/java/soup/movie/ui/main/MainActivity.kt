@@ -14,6 +14,7 @@ import androidx.core.view.postOnAnimationDelayed
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
@@ -115,6 +116,10 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //TODO: Improve this please
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
+
         bottomSheetPanel.state = STATE_HIDDEN
         scheduleStartPostponedTransition()
 

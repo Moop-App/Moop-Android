@@ -1,6 +1,5 @@
 package soup.movie
 
-import com.google.firebase.messaging.FirebaseMessaging
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
@@ -19,7 +18,6 @@ class MovieApplication : DaggerApplication() {
                 ThemeSpecs.DEFAULT,
                 ThemeSpecs.BLACK)
         NotificationSpecs.initialize(this)
-        FirebaseMessaging.getInstance().isAutoInitEnabled = true
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
