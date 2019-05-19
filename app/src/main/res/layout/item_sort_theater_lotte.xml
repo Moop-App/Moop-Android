@@ -23,6 +23,7 @@
             style="@style/Widget.Chip.Lotte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tag="@{item.id}"
             android:text="@{item.name}"
             android:transitionName="@{item.id}"
             app:layout_constraintBottom_toBottomOf="parent"
