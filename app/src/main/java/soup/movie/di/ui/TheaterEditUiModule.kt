@@ -14,12 +14,11 @@ import soup.movie.di.scope.ViewModelKey
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.theater.edit.TheaterEditViewModel
 import soup.movie.ui.theater.edit.cgv.CgvEditFragment
-import soup.movie.ui.theater.edit.cgv.CgvEditPresenter
+import soup.movie.ui.theater.edit.cgv.CgvEditViewModel
 import soup.movie.ui.theater.edit.lotte.LotteEditFragment
-import soup.movie.ui.theater.edit.lotte.LotteEditPresenter
+import soup.movie.ui.theater.edit.lotte.LotteEditViewModel
 import soup.movie.ui.theater.edit.megabox.MegaboxEditFragment
-import soup.movie.ui.theater.edit.megabox.MegaboxEditPresenter
-import soup.movie.ui.theater.edit.tab.TheaterEditChildContract
+import soup.movie.ui.theater.edit.megabox.MegaboxEditViewModel
 
 @Module
 abstract class TheaterEditUiModule {
@@ -35,7 +34,7 @@ class TheaterEditManagerUiModule {
 
     @ActivityScope
     @Provides
-    internal fun manager(
+    fun manager(
         repository: MoopRepository,
         theatersSetting: TheatersSetting
     ): TheaterEditManager = TheaterEditManager(repository, theatersSetting)
@@ -45,50 +44,29 @@ class TheaterEditManagerUiModule {
 abstract class TheaterEditTabUiModule {
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [
-        CgvModule::class
-    ])
-    internal abstract fun provideCgvFragment(): CgvEditFragment
+    @ContributesAndroidInjector
+    abstract fun provideCgvFragment(): CgvEditFragment
 
-    @Module
-    class CgvModule {
-
-        @FragmentScope
-        @Provides
-        fun presenter(
-            manager: TheaterEditManager
-        ): TheaterEditChildContract.Presenter = CgvEditPresenter(manager)
-    }
+    @Binds
+    @IntoMap
+    @ViewModelKey(CgvEditViewModel::class)
+    abstract fun bindCgvEditViewModel(viewModel: CgvEditViewModel): ViewModel
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [
-        LotteModule::class
-    ])
-    internal abstract fun provideLotteFragment(): LotteEditFragment
+    @ContributesAndroidInjector
+    abstract fun provideLotteFragment(): LotteEditFragment
 
-    @Module
-    class LotteModule {
-
-        @FragmentScope
-        @Provides
-        fun presenter(
-            manager: TheaterEditManager
-        ): TheaterEditChildContract.Presenter = LotteEditPresenter(manager)
-    }
+    @Binds
+    @IntoMap
+    @ViewModelKey(LotteEditViewModel::class)
+    abstract fun bindLotteEditViewModel(viewModel: LotteEditViewModel): ViewModel
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [
-        MegaboxModule::class
-    ])
-    internal abstract fun provideMegaboxFragment(): MegaboxEditFragment
+    @ContributesAndroidInjector
+    abstract fun provideMegaboxFragment(): MegaboxEditFragment
 
-    @Module
-    class MegaboxModule {
-
-        @FragmentScope
-        @Provides
-        fun presenter(
-            manager: TheaterEditManager
-        ): TheaterEditChildContract.Presenter = MegaboxEditPresenter(manager)
-    }
+    @Binds
+    @IntoMap
+    @ViewModelKey(MegaboxEditViewModel::class)
+    abstract fun bindMegaboxEditViewModel(viewModel: MegaboxEditViewModel): ViewModel
 }

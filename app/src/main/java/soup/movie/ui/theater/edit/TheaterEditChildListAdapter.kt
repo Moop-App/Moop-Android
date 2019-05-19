@@ -1,4 +1,4 @@
-package soup.movie.ui.theater.edit.tab
+package soup.movie.ui.theater.edit
 
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_area_group.view.*
@@ -12,8 +12,9 @@ import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.inflate
 import soup.movie.util.showToast
 
-class TheaterEditChildListAdapter(private val listener: Listener) :
-        DataBindingAdapter<AreaGroup>() {
+class TheaterEditChildListAdapter(
+    private val listener: Listener
+) : DataBindingAdapter<AreaGroup>() {
 
     interface Listener {
 
