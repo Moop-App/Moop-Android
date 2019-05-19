@@ -1,18 +1,17 @@
 package soup.movie.di.ui
 
+import androidx.lifecycle.ViewModel
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import soup.movie.di.scope.ActivityScope
-import soup.movie.settings.impl.TheatersSetting
-import soup.movie.ui.theater.sort.TheaterSortContract
-import soup.movie.ui.theater.sort.TheaterSortPresenter
+import dagger.multibindings.IntoMap
+import soup.movie.di.scope.ViewModelKey
+import soup.movie.ui.theater.sort.TheaterSortViewModel
 
 @Module
-class TheaterSortUiModule {
+abstract class TheaterSortUiModule {
 
-    @ActivityScope
-    @Provides
-    internal fun presenter(theatersSetting: TheatersSetting):
-            TheaterSortContract.Presenter =
-            TheaterSortPresenter(theatersSetting)
+    @Binds
+    @IntoMap
+    @ViewModelKey(TheaterSortViewModel::class)
+    abstract fun bindDetailViewModel(viewModel: TheaterSortViewModel): ViewModel
 }

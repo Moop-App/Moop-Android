@@ -4,5 +4,6 @@ import androidx.annotation.Keep
 import soup.movie.data.model.Theater
 
 @Keep
-data class TheaterSortViewState(
-        val selectedTheaters: List<Theater>)
+class TheaterSortUiModel(
+    val selectedTheaters: List<Theater>
+)
