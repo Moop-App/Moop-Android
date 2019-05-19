@@ -29,8 +29,4 @@ abstract class LegacyBaseFragment<V : LegacyBaseContract.View, P : LegacyBaseCon
         super.onDestroy()
     }
 
-    interface OnBackListener {
-
-        fun onBackPressed(): Boolean
-    }
 }

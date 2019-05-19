@@ -38,7 +38,7 @@ import soup.movie.util.observeEvent
 import soup.movie.util.showToast
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), BaseTabFragment.PanelProvider {
+class MainActivity : BaseActivity(), PanelProvider {
 
     private val viewModel: MainViewModel by viewModel()
 
@@ -225,7 +225,7 @@ class MainActivity : BaseActivity(), BaseTabFragment.PanelProvider {
         }
     }
 
-    override fun showPanel(panelState: BaseTabFragment.PanelData) {
+    override fun showPanel(panelState: PanelData) {
         bottomSheetPanel.state = BottomSheetBehavior.STATE_COLLAPSED
         fragmentPanelRouter.show(panelState)
     }

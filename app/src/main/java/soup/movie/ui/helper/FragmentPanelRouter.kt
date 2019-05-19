@@ -1,10 +1,12 @@
 package soup.movie.ui.helper
 
 import androidx.fragment.app.FragmentManager
-import soup.movie.ui.main.BaseTabFragment.PanelData
+import soup.movie.ui.main.PanelData
 
-class FragmentPanelRouter(private val fragmentManager: FragmentManager,
-                          private val containerId: Int) {
+class FragmentPanelRouter(
+    private val fragmentManager: FragmentManager,
+    private val containerId: Int
+) {
 
     fun show(state: PanelData) {
         val fragmentTransaction = fragmentManager.beginTransaction()

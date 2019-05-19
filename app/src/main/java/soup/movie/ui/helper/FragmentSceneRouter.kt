@@ -5,18 +5,22 @@ import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import soup.movie.R
-import soup.movie.ui.LegacyBaseFragment.OnBackListener
-import soup.movie.ui.main.BaseTabFragment
-import soup.movie.ui.main.BaseTabFragment.OnReselectListener
+import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.ui.base.OnReselectListener
+import soup.movie.ui.base.SharedElementsMapper
 
-class FragmentSceneRouter(private val fragmentManager: FragmentManager,
-                          private val containerId: Int) {
+class FragmentSceneRouter(
+    private val fragmentManager: FragmentManager,
+    private val containerId: Int
+) {
 
-    data class SceneData(val tag: String,
-                         val isPersist: Boolean = true,
-                         @AnimRes val enter: Int = R.anim.fade_in,
-                         @AnimRes val exit: Int = R.anim.fade_out,
-                         val newFragment: () -> Fragment)
+    data class SceneData(
+        val tag: String,
+        val isPersist: Boolean = true,
+        @AnimRes val enter: Int = R.anim.fade_in,
+        @AnimRes val exit: Int = R.anim.fade_out,
+        val newFragment: () -> Fragment
+    )
 
     private var lastState: SceneData? = null
 
@@ -52,7 +56,7 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
     }
 
     fun goBack(): Boolean {
-        return (fragmentManager.findFragmentById(containerId) as? OnBackListener)?.onBackPressed()
+        return (fragmentManager.findFragmentById(containerId) as? OnBackPressedListener)?.onBackPressed()
                 ?: false
     }
 
@@ -67,7 +71,7 @@ class FragmentSceneRouter(private val fragmentManager: FragmentManager,
     }
 
     fun onInterceptMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
-        (fragmentManager.findFragmentById(containerId) as? BaseTabFragment<*, *>)
+        (fragmentManager.findFragmentById(containerId) as? SharedElementsMapper)
                 ?.onMapSharedElements(names, sharedElements)
     }
 }

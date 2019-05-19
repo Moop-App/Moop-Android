@@ -18,6 +18,7 @@ import soup.movie.databinding.FragmentVerticalListBinding
 import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.BaseTabFragment
+import soup.movie.ui.base.OnReselectListener
 import soup.movie.ui.main.movie.MovieListViewState.*
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
 import soup.movie.ui.search.SearchActivity
@@ -25,7 +26,7 @@ import javax.inject.Inject
 
 abstract class MovieListFragment :
         BaseTabFragment<MovieListContract.View, MovieListContract.Presenter>(),
-        MovieListContract.View, BaseTabFragment.OnReselectListener {
+        MovieListContract.View, OnReselectListener {
 
     @Inject
     lateinit var analytics: EventAnalytics

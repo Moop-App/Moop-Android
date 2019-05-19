@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_filter_age.*
 import kotlinx.android.synthetic.main.item_filter_theater.*
 import soup.movie.databinding.FragmentMovieFilterBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.main.BaseTabFragment.PanelData
+import soup.movie.ui.main.PanelData
 import soup.movie.util.observe
 
 class MovieFilterFragment : BaseFragment() {
