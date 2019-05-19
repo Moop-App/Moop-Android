@@ -2,22 +2,22 @@ package soup.movie.ui.main
 
 import androidx.annotation.Keep
 
-sealed class MainViewState {
+sealed class MainUiModel {
 
     @Keep
-    object NowState : MainViewState() {
+    object NowState : MainUiModel() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
     @Keep
-    object PlanState : MainViewState() {
+    object PlanState : MainUiModel() {
 
         override fun toString(): String = javaClass.simpleName
     }
 
     @Keep
-    object SettingsState : MainViewState() {
+    object SettingsState : MainUiModel() {
 
         override fun toString(): String = javaClass.simpleName
     }

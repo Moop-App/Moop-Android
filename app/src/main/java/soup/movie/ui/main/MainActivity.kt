@@ -2,7 +2,6 @@ package soup.movie.ui.main
 
 import android.annotation.SuppressLint
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
@@ -22,27 +21,26 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivityMainBinding
 import soup.movie.settings.impl.LastMainTabSetting.Tab
 import soup.movie.spec.KakaoLink
-import soup.movie.ui.LegacyBaseActivity
+import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData
-import soup.movie.ui.main.MainActionState.NotFoundAction
-import soup.movie.ui.main.MainActionState.ShowDetailAction
-import soup.movie.ui.main.MainViewState.*
+import soup.movie.ui.main.MainUiEvent.NotFoundAction
+import soup.movie.ui.main.MainUiEvent.ShowDetailAction
+import soup.movie.ui.main.MainUiModel.*
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.util.Interpolators
+import soup.movie.util.observe
+import soup.movie.util.observeEvent
 import soup.movie.util.showToast
 import javax.inject.Inject
 
-class MainActivity :
-        LegacyBaseActivity<MainContract.View, MainContract.Presenter>(),
-        MainContract.View, BaseTabFragment.PanelProvider {
+class MainActivity : BaseActivity(), BaseTabFragment.PanelProvider {
 
-    @Inject
-    override lateinit var presenter: MainContract.Presenter
+    private val viewModel: MainViewModel by viewModel()
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -116,6 +114,10 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
+            lifecycleOwner = this@MainActivity
+        }
+        initViewState()
 
         //TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
@@ -129,11 +131,11 @@ class MainActivity :
                 fragmentSceneRouter.onInterceptMapSharedElements(names, sharedElements)
             }
         })
-    }
-
-    override fun setupContentView() {
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
-            lifecycleOwner = this@MainActivity
+        viewModel.uiModel.observe(this) {
+            render(it)
+        }
+        viewModel.uiEvent.observeEvent(this) {
+            execute(it)
         }
     }
 
@@ -156,12 +158,11 @@ class MainActivity :
         intent?.handleDeepLink()
     }
 
-    override fun initViewState(ctx: Context) {
-        super.initViewState(ctx)
+    private fun initViewState() {
         intent?.handleDeepLink()
         bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
-            presenter.setCurrentTab(it.itemId.parseToTabMode())
+            viewModel.setCurrentTab(it.itemId.parseToTabMode())
             true
         }
         bottomNavigation.setOnNavigationItemReselectedListener {
@@ -173,7 +174,7 @@ class MainActivity :
         when (action) {
             ACTION_VIEW -> {
                 KakaoLink.extractMovieId(this).let {
-                    presenter.requestMovie(it)
+                    viewModel.requestMovie(it)
                 }
             }
         }
@@ -196,7 +197,7 @@ class MainActivity :
         super.onBackPressed()
     }
 
-    override fun render(viewState: MainViewState) {
+    private fun render(viewState: MainUiModel) {
         analytics.screen(this, viewState.toString())
         setTitle(viewState.toTitleId())
         updateSelectedItem(viewState.toItemId())
@@ -209,7 +210,7 @@ class MainActivity :
         }
     }
 
-    override fun execute(action: MainActionState) {
+    private fun execute(action: MainUiEvent) {
         when (action) {
             is NotFoundAction -> {
                 showToast(R.string.action_detail_unknown)
@@ -248,14 +249,14 @@ class MainActivity :
         private const val BACK_INTERVAL_TIME: Long = 2000
 
         @IdRes
-        private fun MainViewState.toItemId(): Int = when (this) {
+        private fun MainUiModel.toItemId(): Int = when (this) {
             is NowState -> R.id.action_now
             is PlanState -> R.id.action_plan
             is SettingsState -> R.id.action_settings
         }
 
         @StringRes
-        private fun MainViewState.toTitleId(): Int = when (this) {
+        private fun MainUiModel.toTitleId(): Int = when (this) {
             is NowState -> R.string.tab_now
             is PlanState -> R.string.tab_plan
             is SettingsState -> R.string.tab_settings
@@ -268,7 +269,7 @@ class MainActivity :
             else -> throw IllegalArgumentException("0x${toString(16)} is invalid ID")
         }
 
-        private fun MainViewState.asScene(): SceneData = when (this) {
+        private fun MainUiModel.asScene(): SceneData = when (this) {
             is NowState -> SceneData(toString(), isPersist = false) { NowFragment.newInstance() }
             is PlanState -> SceneData(toString(), isPersist = false) { PlanFragment.newInstance() }
             is SettingsState -> SceneData(toString()) { SettingsFragment.newInstance() }
