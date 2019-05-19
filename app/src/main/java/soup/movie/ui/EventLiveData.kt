@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 
 typealias EventLiveData<T> = LiveData<Event<T>>
 
-class EventMutableLiveData<T> : MutableLiveData<Event<T>>() {
+class MutableEventLiveData<T> : MutableLiveData<Event<T>>() {
 
     var event: T?
         get() = value?.peekContent()

@@ -8,7 +8,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.data.model.Movie
 import soup.movie.ui.BaseViewModel
 import soup.movie.ui.EventLiveData
-import soup.movie.ui.EventMutableLiveData
+import soup.movie.ui.MutableEventLiveData
 import soup.movie.util.ImageUriProvider
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -25,7 +25,7 @@ class DetailViewModel @Inject constructor(
     val contentUiModel: LiveData<ContentUiModel>
         get() = _contentUiModel
 
-    private val _shareAction = EventMutableLiveData<ShareAction>()
+    private val _shareAction = MutableEventLiveData<ShareAction>()
     val shareAction: EventLiveData<ShareAction>
         get() = _shareAction
 
