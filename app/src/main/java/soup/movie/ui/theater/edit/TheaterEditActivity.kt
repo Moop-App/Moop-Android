@@ -1,6 +1,5 @@
 package soup.movie.ui.theater.edit
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.SharedElementCallback
@@ -18,20 +17,17 @@ import kotlinx.android.synthetic.main.activity_theater_edit_footer.*
 import soup.movie.R
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.ActivityTheaterEditBinding
-import soup.movie.ui.LegacyBaseActivity
-import soup.movie.ui.theater.edit.TheaterEditContentViewState.LoadingState
+import soup.movie.ui.BaseActivity
+import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.util.inflate
+import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
-import javax.inject.Inject
 
-class TheaterEditActivity :
-    LegacyBaseActivity<TheaterEditContract.View, TheaterEditContract.Presenter>(),
-    TheaterEditContract.View {
+class TheaterEditActivity : BaseActivity() {
 
     private var pendingFinish: Boolean = false
 
-    @Inject
-    override lateinit var presenter: TheaterEditContract.Presenter
+    private val viewModel: TheaterEditViewModel by viewModel()
 
     private lateinit var pageAdapter: TheaterEditPageAdapter
 
@@ -48,6 +44,8 @@ class TheaterEditActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupContentView()
+        initViewState()
         postponeEnterTransition()
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: MutableList<String>,
@@ -61,16 +59,21 @@ class TheaterEditActivity :
                 }
             }
         })
+        viewModel.contentUiModel.observe(this) {
+            render(it)
+        }
+        viewModel.footerUiModel.observe(this) {
+            render(it)
+        }
     }
 
-    override fun setupContentView() {
+    private fun setupContentView() {
         DataBindingUtil.setContentView<ActivityTheaterEditBinding>(this, R.layout.activity_theater_edit).apply {
             lifecycleOwner = this@TheaterEditActivity
         }
     }
 
-    override fun initViewState(ctx: Context) {
-        super.initViewState(ctx)
+    private fun initViewState() {
         contentView.setOnInterceptTouchListener { _, _ ->
             footerPanel.takeIf { it.state == STATE_EXPANDED }
                 ?.run { state = STATE_COLLAPSED }
@@ -91,15 +94,15 @@ class TheaterEditActivity :
 
     private fun View.blockExtraTouchEvents() = setOnTouchListener { _, _ -> true }
 
-    override fun render(viewState: TheaterEditContentViewState) {
+    private fun render(viewState: TheaterEditContentUiModel) {
         loadingView.isVisible = viewState is LoadingState
     }
 
-    override fun render(viewState: TheaterEditFooterViewState) {
-        val theaters = viewState.theaterList
+    private fun render(uiModel: TheaterEditFooterUiModel) {
+        val theaters = uiModel.theaterList
         currentCountView.text = theaters.size.toString()
         confirmButton.setBackgroundResource(
-            if (viewState.isFull()) {
+            if (uiModel.isFull()) {
                 R.drawable.bg_button_confirm_full
             } else {
                 R.drawable.bg_button_confirm
@@ -109,12 +112,12 @@ class TheaterEditActivity :
         selectedTheaterGroup.run {
             TransitionManager.beginDelayedTransition(this)
             removeAllViews()
-            theaters.map {
-                inflate<Chip>(context, it.getChipLayout()).apply {
-                    text = it.name
-                    transitionName = it.id
-                    tag = it.id
-                    setOnClickListener { _ -> presenter.remove(it) }
+            theaters.map { theater ->
+                inflate<Chip>(context, theater.getChipLayout()).apply {
+                    text = theater.name
+                    transitionName = theater.id
+                    tag = theater.id
+                    setOnClickListener { viewModel.remove(theater) }
                 }
             }.forEach { addView(it) }
         }
@@ -133,7 +136,7 @@ class TheaterEditActivity :
     }
 
     fun onConfirmClicked(view: View) {
-        presenter.onConfirmClicked()
+        viewModel.onConfirmClicked()
         setResultAndFinish()
     }
 
