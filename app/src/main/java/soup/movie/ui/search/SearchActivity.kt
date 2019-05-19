@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
@@ -15,20 +16,18 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivitySearchBinding
-import soup.movie.ui.LegacyBaseActivity
+import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.movie.MovieListAdapter
-import soup.movie.ui.search.SearchViewState.DoneState
-import soup.movie.ui.search.SearchViewState.LoadingState
+import soup.movie.ui.search.SearchUiModel.DoneState
+import soup.movie.ui.search.SearchUiModel.LoadingState
 import soup.movie.util.ImeUtil
+import soup.movie.util.observe
 import javax.inject.Inject
 
-class SearchActivity :
-    LegacyBaseActivity<SearchContract.View, SearchContract.Presenter>(),
-    SearchContract.View {
+class SearchActivity : BaseActivity() {
 
-    @Inject
-    override lateinit var presenter: SearchContract.Presenter
+    private val viewModel: SearchViewModel by viewModel()
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -46,14 +45,11 @@ class SearchActivity :
         }
     }
 
-    override fun setupContentView() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivitySearchBinding>(this, R.layout.activity_search).apply {
             lifecycleOwner = this@SearchActivity
         }
-    }
-
-    override fun initViewState(ctx: Context) {
-        super.initViewState(ctx)
         setupSearchView()
         listView.apply {
             adapter = listAdapter
@@ -61,6 +57,9 @@ class SearchActivity :
                 addDuration = 0
                 removeDuration = 0
             }
+        }
+        viewModel.uiModel.observe(this) {
+            render(it)
         }
     }
 
@@ -78,9 +77,10 @@ class SearchActivity :
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         focusQuery = false
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun render(viewState: SearchViewState) {
+    private fun render(viewState: SearchUiModel) {
         loadingView.isVisible = viewState is LoadingState
         noItemsView.isVisible = viewState.hasNoItems()
         if (viewState is DoneState) {
@@ -104,15 +104,11 @@ class SearchActivity :
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                searchFor(query)
+                viewModel.searchFor(query)
                 return true
             }
         })
         searchBack.setOnClickListener { dismiss() }
-    }
-
-    fun searchFor(query: String) {
-        presenter.searchFor(query)
     }
 
     private fun dismiss() {

@@ -1,18 +1,17 @@
 package soup.movie.di.ui
 
+import androidx.lifecycle.ViewModel
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import soup.movie.data.MoopRepository
-import soup.movie.di.scope.ActivityScope
-import soup.movie.ui.search.SearchContract
-import soup.movie.ui.search.SearchPresenter
+import dagger.multibindings.IntoMap
+import soup.movie.di.scope.ViewModelKey
+import soup.movie.ui.search.SearchViewModel
 
 @Module
-class SearchUiModule {
+abstract class SearchUiModule {
 
-    @ActivityScope
-    @Provides
-    fun presenter(repository: MoopRepository):
-            SearchContract.Presenter =
-            SearchPresenter(repository)
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel::class)
+    abstract fun bindSearchViewModel(viewModel: SearchViewModel): ViewModel
 }
