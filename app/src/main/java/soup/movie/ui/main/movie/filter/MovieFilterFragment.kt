@@ -1,6 +1,5 @@
 package soup.movie.ui.main.movie.filter
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,62 +7,62 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_filter_age.*
 import kotlinx.android.synthetic.main.item_filter_theater.*
 import soup.movie.databinding.FragmentMovieFilterBinding
-import soup.movie.ui.LegacyBaseFragment
+import soup.movie.ui.BaseFragment
 import soup.movie.ui.main.BaseTabFragment.PanelData
-import soup.movie.ui.main.movie.filter.MovieFilterViewState.AgeFilterViewState
-import soup.movie.ui.main.movie.filter.MovieFilterViewState.TheaterFilterViewState
-import javax.inject.Inject
+import soup.movie.util.observe
 
-class MovieFilterFragment :
-        LegacyBaseFragment<MovieFilterContract.View, MovieFilterContract.Presenter>(),
-        MovieFilterContract.View {
+class MovieFilterFragment : BaseFragment() {
 
-    @Inject
-    override lateinit var presenter: MovieFilterContract.Presenter
+    private val viewModel: MovieFilterViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? =
-            FragmentMovieFilterBinding.inflate(inflater, container, false).root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return FragmentMovieFilterBinding.inflate(inflater, container, false).root
+    }
 
-    override fun initViewState(ctx: Context) {
-        super.initViewState(ctx)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViewState()
+        viewModel.theaterUiModel.observe(this) {
+            val filter = it.filter
+            cgvView.isChecked = filter.hasCgv()
+            lotteView.isChecked = filter.hasLotteCinema()
+            megaboxView.isChecked = filter.hasMegabox()
+        }
+        viewModel.ageUiModel.observe(this) {
+            val filter = it.filter
+            ageAllView.isSelected = filter.hasAll()
+            age12View.isSelected = filter.has12()
+            age15View.isSelected = filter.has15()
+            age19View.isSelected = filter.has19()
+        }
+    }
+
+    private fun initViewState() {
         cgvView.setOnCheckedChangeListener { _, isChecked ->
-            presenter.onCgvFilterChanged(isChecked)
+            viewModel.onCgvFilterChanged(isChecked)
         }
         lotteView.setOnCheckedChangeListener { _, isChecked ->
-            presenter.onLotteFilterChanged(isChecked)
+            viewModel.onLotteFilterChanged(isChecked)
         }
         megaboxView.setOnCheckedChangeListener { _, isChecked ->
-            presenter.onMegaboxFilterChanged(isChecked)
+            viewModel.onMegaboxFilterChanged(isChecked)
         }
         ageAllView.setOnClickListener {
-            presenter.onAgeAllFilterClicked()
+            viewModel.onAgeAllFilterClicked()
         }
         age12View.setOnClickListener {
-            presenter.onAge12FilterClicked()
+            viewModel.onAge12FilterClicked()
         }
         age15View.setOnClickListener {
-            presenter.onAge15FilterClicked()
+            viewModel.onAge15FilterClicked()
         }
         age19View.setOnClickListener {
-            presenter.onAge19FilterClicked()
+            viewModel.onAge19FilterClicked()
         }
-    }
-
-    override fun render(viewState: TheaterFilterViewState) {
-        val filter = viewState.filter
-        cgvView.isChecked = filter.hasCgv()
-        lotteView.isChecked = filter.hasLotteCinema()
-        megaboxView.isChecked = filter.hasMegabox()
-    }
-
-    override fun render(viewState: AgeFilterViewState) {
-        val filter = viewState.filter
-        ageAllView.isSelected = filter.hasAll()
-        age12View.isSelected = filter.has12()
-        age15View.isSelected = filter.has15()
-        age19View.isSelected = filter.has19()
     }
 
     companion object {

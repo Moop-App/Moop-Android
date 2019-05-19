@@ -14,9 +14,8 @@ import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.main.MainViewModel
 import soup.movie.ui.main.movie.MovieListContract
-import soup.movie.ui.main.movie.filter.MovieFilterContract
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
-import soup.movie.ui.main.movie.filter.MovieFilterPresenter
+import soup.movie.ui.main.movie.filter.MovieFilterViewModel
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.now.NowPresenter
 import soup.movie.ui.main.plan.PlanFragment
@@ -75,23 +74,6 @@ abstract class MainTabUiModule {
 
     @FragmentScope
     @ContributesAndroidInjector(modules = [
-        MovieFilterModule::class
-    ])
-    abstract fun provideMovieFilterFragment(): MovieFilterFragment
-
-    @Module
-    class MovieFilterModule {
-
-        @FragmentScope
-        @Provides
-        fun presenter(
-            theaterFilterSetting: TheaterFilterSetting,
-            ageFilterSetting: AgeFilterSetting
-        ): MovieFilterContract.Presenter = MovieFilterPresenter(theaterFilterSetting, ageFilterSetting)
-    }
-
-    @FragmentScope
-    @ContributesAndroidInjector(modules = [
         SettingsModule::class
     ])
     abstract fun provideSettingsFragment(): SettingsFragment
@@ -106,4 +88,13 @@ abstract class MainTabUiModule {
             repository: MoopRepository
         ): SettingsContract.Presenter = SettingsPresenter(theatersSetting, repository)
     }
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideMovieFilterFragment(): MovieFilterFragment
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieFilterViewModel::class)
+    abstract fun bindMovieFilterViewModel(viewModel: MovieFilterViewModel): ViewModel
 }

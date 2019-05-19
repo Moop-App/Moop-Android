@@ -1,7 +1,8 @@
 package soup.movie.ui.main.movie.filter
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.AgeFilter
 import soup.movie.data.model.AgeFilter.Companion.FLAG_AGE_12
@@ -14,43 +15,54 @@ import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
-import soup.movie.ui.LegacyBasePresenter
-import soup.movie.ui.main.movie.filter.MovieFilterViewState.AgeFilterViewState
-import soup.movie.ui.main.movie.filter.MovieFilterViewState.TheaterFilterViewState
+import soup.movie.ui.BaseViewModel
+import soup.movie.ui.main.movie.filter.MovieFilterUiModel.AgeFilterUiModel
+import soup.movie.ui.main.movie.filter.MovieFilterUiModel.TheaterFilterUiModel
+import javax.inject.Inject
 
-class MovieFilterPresenter(private val theaterFilterSetting: TheaterFilterSetting,
-                           private val ageFilterSetting: AgeFilterSetting) :
-        LegacyBasePresenter<MovieFilterContract.View>(),
-        MovieFilterContract.Presenter {
+class MovieFilterViewModel @Inject constructor(
+    private val theaterFilterSetting: TheaterFilterSetting,
+    private val ageFilterSetting: AgeFilterSetting
+) : BaseViewModel() {
 
     private var theaterFilter: TheaterFilter? = null
 
-    override fun initObservable(disposable: DisposableContainer) {
-        super.initObservable(disposable)
-        disposable.add(theaterFilterSetting.asObservable()
-                .distinctUntilChanged()
-                .subscribeOn(Schedulers.io())
-                .doOnNext { theaterFilter = it }
-                .map { TheaterFilterViewState(it) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { view?.render(it) })
-        disposable.add(ageFilterSetting.asObservable()
-                .distinctUntilChanged()
-                .subscribeOn(Schedulers.io())
-                .map { AgeFilterViewState(it) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { view?.render(it) })
+    private val _theaterUiModel = MutableLiveData<TheaterFilterUiModel>()
+    val theaterUiModel: LiveData<TheaterFilterUiModel>
+        get() = _theaterUiModel
+
+    private val _ageUiModel = MutableLiveData<AgeFilterUiModel>()
+    val ageUiModel: LiveData<AgeFilterUiModel>
+        get() = _ageUiModel
+
+    init {
+        theaterFilterSetting.asObservable()
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .doOnNext { theaterFilter = it }
+            .map { TheaterFilterUiModel(it) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { _theaterUiModel.value = it }
+            .disposeOnCleared()
+
+        ageFilterSetting.asObservable()
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .map { AgeFilterUiModel(it) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { _ageUiModel.value = it }
+            .disposeOnCleared()
     }
 
-    override fun onCgvFilterChanged(isChecked: Boolean) {
+    fun onCgvFilterChanged(isChecked: Boolean) {
         updateTheaterFilter(isChecked, FLAG_THEATER_CGV)
     }
 
-    override fun onLotteFilterChanged(isChecked: Boolean) {
+    fun onLotteFilterChanged(isChecked: Boolean) {
         updateTheaterFilter(isChecked, FLAG_THEATER_LOTTE)
     }
 
-    override fun onMegaboxFilterChanged(isChecked: Boolean) {
+    fun onMegaboxFilterChanged(isChecked: Boolean) {
         updateTheaterFilter(isChecked, FLAG_THEATER_MEGABOX)
     }
 
@@ -67,19 +79,19 @@ class MovieFilterPresenter(private val theaterFilterSetting: TheaterFilterSettin
         }
     }
 
-    override fun onAgeAllFilterClicked() {
+    fun onAgeAllFilterClicked() {
         updateAgeFilter(FLAG_AGE_ALL)
     }
 
-    override fun onAge12FilterClicked() {
+    fun onAge12FilterClicked() {
         updateAgeFilter(FLAG_AGE_ALL or FLAG_AGE_12)
     }
 
-    override fun onAge15FilterClicked() {
+    fun onAge15FilterClicked() {
         updateAgeFilter(FLAG_AGE_ALL or FLAG_AGE_12 or FLAG_AGE_15)
     }
 
-    override fun onAge19FilterClicked() {
+    fun onAge19FilterClicked() {
         updateAgeFilter(FLAG_AGE_ALL or FLAG_AGE_12 or FLAG_AGE_15 or FLAG_AGE_19)
     }
 
