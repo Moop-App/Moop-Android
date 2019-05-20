@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import androidx.annotation.MenuRes
-import soup.movie.ui.LegacyBaseContract
-import soup.movie.ui.LegacyBaseFragment
+import soup.movie.ui.BaseFragment
 import soup.movie.ui.base.SharedElementsMapper
 
-abstract class BaseTabFragment<V: LegacyBaseContract.View, P: LegacyBaseContract.Presenter<V>> :
-    LegacyBaseFragment<V, P>(), SharedElementsMapper, PanelConsumer {
+abstract class BaseTabFragment : BaseFragment(), SharedElementsMapper, PanelConsumer {
 
     @MenuRes
     protected open val menuResource: Int? = null

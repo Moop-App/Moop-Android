@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 import kotlinx.android.synthetic.main.item_movie.view.*
 import soup.movie.R
-import soup.movie.R.string.*
 import soup.movie.data.helper.isBest
 import soup.movie.data.helper.isDDay
 import soup.movie.data.helper.isNew
@@ -46,17 +45,17 @@ class MovieListAdapter(
     private fun DataBindingViewHolder<Movie>.createSharedElements(movie: Movie): Array<Pair<View, String>> {
         itemView.run {
             val sharedElements = mutableListOf(
-                backgroundView with transition_background,
-                posterView with transition_poster,
-                ageBgView with transition_age_bg)
+                backgroundView with R.string.transition_background,
+                posterView with R.string.transition_poster,
+                ageBgView with R.string.transition_age_bg)
             if (movie.isNew()) {
-                sharedElements.add(newView with transition_new)
+                sharedElements.add(newView with R.string.transition_new)
             }
             if (movie.isBest()) {
-                sharedElements.add(bestView with transition_best)
+                sharedElements.add(bestView with R.string.transition_best)
             }
             if (movie.isDDay()) {
-                sharedElements.add(dDayView with transition_d_day)
+                sharedElements.add(dDayView with R.string.transition_d_day)
             }
             return sharedElements.toTypedArray()
         }

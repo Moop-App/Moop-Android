@@ -6,16 +6,10 @@ import soup.movie.data.model.Movie
 sealed class SearchUiModel {
 
     @Keep
-    object LoadingState : SearchUiModel() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
+    object LoadingState : SearchUiModel()
 
     @Keep
-    object ErrorState : SearchUiModel() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
+    object ErrorState : SearchUiModel()
 
     @Keep
     data class DoneState(val items: List<Movie>) : SearchUiModel()

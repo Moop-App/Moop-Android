@@ -1,7 +1,6 @@
 package soup.movie.ui.main.settings
 
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -31,20 +30,19 @@ import soup.movie.ui.theme.ThemeBookmarkActivity
 import soup.movie.util.*
 import javax.inject.Inject
 
-class SettingsFragment :
-        BaseTabFragment<SettingsContract.View, SettingsContract.Presenter>(),
-        SettingsContract.View {
+class SettingsFragment : BaseTabFragment() {
 
-    @Inject
-    override lateinit var presenter: SettingsContract.Presenter
+    private val viewModel: SettingsViewModel by viewModel()
 
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private var versionViewState: SettingsViewState.VersionViewState? = null
+    private var versionViewState: VersionSettingUiModel? = null
 
-    override fun onMapSharedElements(names: List<String>,
-                                     sharedElements: MutableMap<String, View>) {
+    override fun onMapSharedElements(
+        names: List<String>,
+        sharedElements: MutableMap<String, View>
+    ) {
         sharedElements.clear()
         names.forEach { name ->
             theaterGroup.findViewWithTag<View>(name)?.let {
@@ -53,15 +51,27 @@ class SettingsFragment :
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? =
-            FragmentSettingsBinding.inflate(inflater, container, false)
-                    .apply { item = ThemeBook.getBookmarkPage() }
-                    .root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+        return FragmentSettingsBinding.inflate(inflater, container, false)
+            .apply { item = ThemeBook.getBookmarkPage() }
+            .root
+    }
 
-    override fun initViewState(ctx: Context) {
-        super.initViewState(ctx)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViewState()
+        viewModel.theaterUiModel.observe(viewLifecycleOwner) {
+            render(it)
+        }
+        viewModel.versionUiModel.observe(viewLifecycleOwner) {
+            render(it)
+        }
+    }
+
+    private fun initViewState() {
         editTheaterButton.setOnDebounceClickListener {
             onTheaterEditClicked()
         }
@@ -91,7 +101,7 @@ class SettingsFragment :
         }
     }
 
-    override fun render(viewState: SettingsViewState.TheaterListViewState) {
+    private fun render(viewState: TheaterSettingUiModel) {
         val theaters = viewState.theaterList
         noTheaterView?.isVisible = theaters.isEmpty()
         theaterGroup?.isVisible = theaters.isNotEmpty()
@@ -108,7 +118,7 @@ class SettingsFragment :
         }
     }
 
-    override fun render(viewState: SettingsViewState.VersionViewState) {
+    private fun render(viewState: VersionSettingUiModel) {
         versionViewState = viewState
         currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
         latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
@@ -119,39 +129,39 @@ class SettingsFragment :
         }
         if (viewState.isLatest().not()) {
             AlertDialog.Builder(requireContext())
-                    .setIcon(R.drawable.ic_round_new_releases)
-                    .setTitle(R.string.settings_version_update_title)
-                    .setMessage(getString(R.string.settings_version_update_message, viewState.latest.versionName))
-                    .setPositiveButton(R.string.settings_version_update_button_positive) {
-                        _, _ -> Moop.executePlayStore(requireContext())
-                    }
-                    .setNegativeButton(R.string.settings_version_update_button_negative) {
-                        dialog, _ -> dialog.dismiss()
-                    }
-                    .show()
+                .setIcon(R.drawable.ic_round_new_releases)
+                .setTitle(R.string.settings_version_update_title)
+                .setMessage(getString(R.string.settings_version_update_message, viewState.latest.versionName))
+                .setPositiveButton(R.string.settings_version_update_button_positive) { _, _ ->
+                    Moop.executePlayStore(requireContext())
+                }
+                .setNegativeButton(R.string.settings_version_update_button_negative) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
     }
 
     private fun onTheaterEditClicked() {
         val intent = Intent(context, TheaterSortActivity::class.java)
         startActivityForResult(intent, 0, ActivityOptions
-                .makeSceneTransitionAnimation(activity, *createSharedElementsForTheaters())
-                .toBundle())
+            .makeSceneTransitionAnimation(activity, *createSharedElementsForTheaters())
+            .toBundle())
     }
 
     private fun createSharedElementsForTheaters(): Array<Pair<View, String>> =
-            theaterGroup?.run {
-                (0 until childCount)
-                        .mapNotNull { getChildAt(it) }
-                        .map { it with it.transitionName }
-                        .toTypedArray()
-            } ?: emptyArray()
+        theaterGroup?.run {
+            (0 until childCount)
+                .mapNotNull { getChildAt(it) }
+                .map { it with it.transitionName }
+                .toTypedArray()
+        } ?: emptyArray()
 
     private fun onThemeEditClicked() {
         val intent = Intent(requireActivity(), ThemeBookmarkActivity::class.java)
         startActivityForResult(intent, 0, ActivityOptions
-                .makeSceneTransitionAnimation(requireActivity())
-                .toBundle())
+            .makeSceneTransitionAnimation(requireActivity())
+            .toBundle())
     }
 
     private fun onVersionClicked() {

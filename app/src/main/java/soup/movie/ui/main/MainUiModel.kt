@@ -5,20 +5,11 @@ import androidx.annotation.Keep
 sealed class MainUiModel {
 
     @Keep
-    object NowState : MainUiModel() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
+    object NowState : MainUiModel()
 
     @Keep
-    object PlanState : MainUiModel() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
+    object PlanState : MainUiModel()
 
     @Keep
-    object SettingsState : MainUiModel() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
+    object SettingsState : MainUiModel()
 }

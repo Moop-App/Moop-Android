@@ -6,12 +6,10 @@ import soup.movie.data.model.Movie
 sealed class MainUiEvent {
 
     @Keep
-    object NotFoundAction : MainUiEvent() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
+    object NotFoundAction : MainUiEvent()
 
     @Keep
-    data class ShowDetailAction(
-            val movie: Movie) : MainUiEvent()
+    class ShowDetailAction(
+        val movie: Movie
+    ) : MainUiEvent()
 }
