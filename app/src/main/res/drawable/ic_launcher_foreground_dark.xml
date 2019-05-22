@@ -19,10 +19,10 @@ Copyright (C) 2015 The Android Open Source Project
     android:viewportWidth="48"
     android:viewportHeight="48">
     <path
-        android:fillColor="#FFFFFF"
+        android:fillColor="#666666"
         android:pathData="M0,0L48,0L0,48z" />
     <path
-        android:fillColor="#EEEEEE"
+        android:fillColor="#444444"
         android:pathData="M48,48L48,0L0,48z" />
     <group
         android:pivotX="24.0"
@@ -31,25 +31,25 @@ Copyright (C) 2015 The Android Open Source Project
         android:scaleY="0.8">
         <path
             android:fillAlpha="0.33"
-            android:fillColor="#FFFFFF"
+            android:fillColor="#555555"
             android:pathData="M58,58L58,39L34.0,14.0L14.0,34.0L39,58z" />
         <path
-            android:fillColor="#64B5F6"
+            android:fillColor="#90c9f9"
             android:pathData="M24.0,24.0c0.0,0.0 0.0,2.2 0.0,5.0s0.0,5.0 0.0,5.0l10.0,-10.0L34.0,14.0L24.0,24.0z" />
         <path
-            android:fillColor="#2196F3"
+            android:fillColor="#42a4f5"
             android:pathData="M24.0,24.0L14.0,14.0l0.0,10.0l10.0,10.0c0.0,0.0 0.0,-2.2 0.0,-5.0S24.0,24.0 24.0,24.0z" />
         <path
-            android:fillColor="#1976D2"
+            android:fillColor="#1e87e5"
             android:pathData="M14.0,34.0l10.0,0.0 -10.0,-10.0z" />
         <path
-            android:fillColor="#1976D2"
+            android:fillColor="#1e87e5"
             android:pathData="M34.0,34.0l0.0,-10.0 -10.0,10.0z" />
         <path
-            android:fillColor="#FFFFFF"
+            android:fillColor="#666666"
             android:pathData="M14,34m -4, 0a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0z" />
         <path
-            android:fillColor="#F44336"
+            android:fillColor="#ef5250"
             android:pathData="M14,34m -3, 0a 3,3 0 1,0 6,0 a 3,3 0 1,0 -6,0z" />
     </group>
 </vector>
