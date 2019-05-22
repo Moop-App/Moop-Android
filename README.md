@@ -2,9 +2,7 @@
 
 [![Platform](http://img.shields.io/badge/platform-android-green.svg?style=flat)](https://developer.android.com)
 [![CircleCI](https://circleci.com/gh/fornewid/Moop-Android.svg?style=svg)](https://circleci.com/gh/fornewid/Moop-Android)
-
-
-<a href='https://play.google.com/store/apps/details?id=soup.movie'><img width="135px" src='https://play.google.com/intl/ja/badges/images/generic/en_badge_web_generic.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=soup.movie'><img width="80px" src='https://play.google.com/intl/en/badges/images/generic/ko_badge_web_generic.png'/></a>
 
 한국 멀티플렉스 극장의 현재상영작, 개봉예정작 정보를 모아주는 안드로이드 앱입니다.
 
