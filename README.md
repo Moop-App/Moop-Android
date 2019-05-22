@@ -1,6 +1,8 @@
 # :movie_camera: 뭅 (Moop)
 
 [![Platform](http://img.shields.io/badge/platform-android-green.svg?style=flat)](https://developer.android.com)
+[![CircleCI](https://circleci.com/gh/fornewid/Moop-Android.svg?style=svg)](https://circleci.com/gh/fornewid/Moop-Android)
+
 
 <a href='https://play.google.com/store/apps/details?id=soup.movie'><img width="135px" src='https://play.google.com/intl/ja/badges/images/generic/en_badge_web_generic.png'/></a>
 
