@@ -11,5 +11,8 @@ jobs:
     steps:
       - checkout
       - run:
+          name: chmod permissions
+          command: chmod +x ./gradlew
+      - run:
           name: Download Dependencies
           command: ./gradlew dependencies
