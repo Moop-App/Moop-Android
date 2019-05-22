@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-28-alpha
+    working_directory: ~/app
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+      - run:
+          name: Download Dependencies
+          command: ./gradlew dependencies
