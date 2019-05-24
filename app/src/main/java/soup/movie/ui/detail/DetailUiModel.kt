@@ -45,6 +45,11 @@ class NaverItemUiModel(
 ) : ContentItemUiModel()
 
 @Keep
+class GenreItemUiModel(
+    val genreList: List<String>
+) : ContentItemUiModel()
+
+@Keep
 class TrailerHeaderItemUiModel(
     val movieTitle: String
 ) : ContentItemUiModel()

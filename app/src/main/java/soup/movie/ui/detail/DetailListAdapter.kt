@@ -18,6 +18,7 @@ internal class DetailListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
+        is GenreItemUiModel -> R.layout.detail_item_genre
         is CgvItemUiModel -> R.layout.detail_item_cgv
         is LotteItemUiModel -> R.layout.detail_item_lotte
         is MegaboxItemUiModel -> R.layout.detail_item_megabox
@@ -31,10 +32,7 @@ internal class DetailListAdapter(
         is CgvItemUiModel,
         is LotteItemUiModel,
         is MegaboxItemUiModel -> 1
-        is NaverItemUiModel,
-        is TrailerHeaderItemUiModel,
-        is TrailerItemUiModel,
-        is TrailerFooterItemUiModel -> 3
+        else -> 3
     }
 }
 

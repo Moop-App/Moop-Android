@@ -60,6 +60,12 @@ class DetailViewModel @Inject constructor(
 
     private fun Movie.toContentUiModel(): ContentUiModel {
         val items = mutableListOf<ContentItemUiModel>()
+        val genreList = genre.orEmpty()
+        if (genreList.isNotEmpty()) {
+            items.add(GenreItemUiModel(
+                genreList = genreList
+            ))
+        }
         items.add(CgvItemUiModel(
             movieId = cgv?.id.orEmpty(),
             hasInfo = cgv != null,
