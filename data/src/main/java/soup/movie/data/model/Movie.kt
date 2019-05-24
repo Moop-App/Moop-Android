@@ -15,6 +15,7 @@ data class Movie(
     val megabox: MegaboxInfo?,
     val naver: NaverInfo?,
     val trailers: List<Trailer>?,
+    val genre: List<String>?,
     val isNow: Boolean
 ) {
 
