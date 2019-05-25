@@ -16,31 +16,31 @@ class SharedPreferencesModule {
 
     @Singleton
     @Provides
-    fun provideLastMainTabSetting(preferences: SharedPreferences):
-            LastMainTabSetting =
-            LastMainTabSetting(preferences)
+    fun provideLastMainTabSetting(
+        preferences: SharedPreferences
+    ): LastMainTabSetting = LastMainTabSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideAgeFilterSetting(preferences: SharedPreferences):
-            AgeFilterSetting =
-            AgeFilterSetting(preferences)
+    fun provideAgeFilterSetting(
+        preferences: SharedPreferences
+    ): AgeFilterSetting = AgeFilterSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideTheaterFilterSetting(preferences: SharedPreferences):
-            TheaterFilterSetting =
-            TheaterFilterSetting(preferences)
+    fun provideTheaterFilterSetting(
+        preferences: SharedPreferences
+    ): TheaterFilterSetting = TheaterFilterSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideTheatersSetting(preferences: SharedPreferences):
-            TheatersSetting =
-            TheatersSetting(preferences)
+    fun provideTheatersSetting(
+        preferences: SharedPreferences
+    ): TheatersSetting = TheatersSetting(preferences)
 
     @Singleton
     @Provides
-    fun provideSharedPreferences(context: Context):
-            SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context)
+    fun provideSharedPreferences(
+        context: Context
+    ): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 }
