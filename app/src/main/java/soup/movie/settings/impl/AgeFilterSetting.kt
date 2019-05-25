@@ -4,14 +4,17 @@ import android.content.SharedPreferences
 import soup.movie.data.model.AgeFilter
 import soup.movie.settings.PrefSetting
 
-class AgeFilterSetting(preferences: SharedPreferences) :
-        PrefSetting<AgeFilter>(preferences) {
+class AgeFilterSetting(
+    preferences: SharedPreferences
+) : PrefSetting<AgeFilter>(preferences) {
 
-    override fun getDefaultValue(preferences: SharedPreferences): AgeFilter =
-            AgeFilter(preferences.getInt(KEY, DEFAULT_VALUE))
+    override fun getDefaultValue(preferences: SharedPreferences): AgeFilter {
+        return AgeFilter(preferences.getInt(KEY, DEFAULT_VALUE))
+    }
 
-    override fun saveValue(preferences: SharedPreferences, value: AgeFilter) =
-            preferences.edit().putInt(KEY, value.toFlags()).apply()
+    override fun saveValue(preferences: SharedPreferences, value: AgeFilter) {
+        preferences.edit().putInt(KEY, value.toFlags()).apply()
+    }
 
     companion object {
 

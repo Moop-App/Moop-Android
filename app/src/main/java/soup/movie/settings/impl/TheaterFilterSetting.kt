@@ -4,14 +4,17 @@ import android.content.SharedPreferences
 import soup.movie.data.model.TheaterFilter
 import soup.movie.settings.PrefSetting
 
-class TheaterFilterSetting(preferences: SharedPreferences) :
-        PrefSetting<TheaterFilter>(preferences) {
+class TheaterFilterSetting(
+    preferences: SharedPreferences
+) : PrefSetting<TheaterFilter>(preferences) {
 
-    override fun getDefaultValue(preferences: SharedPreferences): TheaterFilter =
-            TheaterFilter(preferences.getInt(KEY, DEFAULT_VALUE))
+    override fun getDefaultValue(preferences: SharedPreferences): TheaterFilter {
+        return TheaterFilter(preferences.getInt(KEY, DEFAULT_VALUE))
+    }
 
-    override fun saveValue(preferences: SharedPreferences, value: TheaterFilter) =
-            preferences.edit().putInt(KEY, value.toFlags()).apply()
+    override fun saveValue(preferences: SharedPreferences, value: TheaterFilter) {
+        preferences.edit().putInt(KEY, value.toFlags()).apply()
+    }
 
     companion object {
 
