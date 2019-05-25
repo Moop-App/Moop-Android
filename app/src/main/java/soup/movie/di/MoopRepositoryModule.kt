@@ -25,72 +25,73 @@ class MoopRepositoryModule {
 
     @Singleton
     @Provides
-    internal fun provideMoopRepository(localDataSource: LocalMoopDataSource,
-                                       remoteDataSource: RemoteMoopDataSource):
-            MoopRepository =
-            MoopRepository(localDataSource, remoteDataSource)
+    fun provideMoopRepository(
+        localDataSource: LocalMoopDataSource,
+        remoteDataSource: RemoteMoopDataSource
+    ): MoopRepository = MoopRepository(localDataSource, remoteDataSource)
 
     /* Local */
 
     @Singleton
     @Provides
-    internal fun provideLocalDataSource(moopDao: MoopDao):
-            LocalMoopDataSource =
-            LocalMoopDataSource(moopDao)
+    fun provideLocalDataSource(
+        moopDao: MoopDao
+    ): LocalMoopDataSource = LocalMoopDataSource(moopDao)
 
     @Singleton
     @Provides
-    internal fun provideMoopDao(moopDatabase: MoopDatabase):
-            MoopDao =
-            moopDatabase.moopDao()
+    fun provideMoopDao(
+        moopDatabase: MoopDatabase
+    ): MoopDao = moopDatabase.moopDao()
 
     @Singleton
     @Provides
-    internal fun provideDatabase(context: Context):
-            MoopDatabase =
-            Room.databaseBuilder(context.applicationContext,
-                    MoopDatabase::class.java, "moop.db")
-                    .fallbackToDestructiveMigration()
-                    .build()
+    fun provideDatabase(
+        context: Context
+    ): MoopDatabase = Room
+        .databaseBuilder(context.applicationContext, MoopDatabase::class.java, "moop.db")
+        .fallbackToDestructiveMigration()
+        .build()
 
     /* Remote */
 
     @Singleton
     @Provides
-    internal fun provideRemoteDataSource(moopApiService: MoopApiService):
-            RemoteMoopDataSource =
-            RemoteMoopDataSource(moopApiService)
+    fun provideRemoteDataSource(
+        moopApiService: MoopApiService
+    ): RemoteMoopDataSource = RemoteMoopDataSource(moopApiService)
 
     @Singleton
     @Provides
-    internal fun provideMoopApiService(rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
-                                       okHttpClient: OkHttpClient):
-            MoopApiService =
-            Retrofit.Builder()
-                    .baseUrl(API_BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(rxJava2CallAdapterFactory)
-                    .client(okHttpClient)
-                    .build()
-                    .create(MoopApiService::class.java)
+    fun provideMoopApiService(
+        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
+        okHttpClient: OkHttpClient
+    ): MoopApiService = Retrofit.Builder()
+        .baseUrl(API_BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(rxJava2CallAdapterFactory)
+        .client(okHttpClient)
+        .build()
+        .create(MoopApiService::class.java)
 
     @Singleton
     @Provides
-    internal fun provideRxJava2CallAdapterFactory():
-            RxJava2CallAdapterFactory =
-            RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
+    fun provideRxJava2CallAdapterFactory(
+    ): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory
+        .createWithScheduler(Schedulers.io())
 
     @Singleton
     @Provides
-    internal fun provideOkHttpClient(interceptor: Interceptor):
-            OkHttpClient =
-            BuildType.addNetworkInterceptor(OkHttpClient.Builder())
-                    .addInterceptor(interceptor)
-                    .build()
+    fun provideOkHttpClient(
+        interceptor: Interceptor
+    ): OkHttpClient = BuildType
+        .addNetworkInterceptor(OkHttpClient.Builder())
+        .addInterceptor(interceptor)
+        .build()
 
     @Singleton
     @Provides
-    internal fun provideOkHttpInterceptor():
-            Interceptor =
-            Interceptor { it.proceed(it.request().newBuilder().build()) }
+    fun provideOkHttpInterceptor(): Interceptor = Interceptor {
+        it.proceed(it.request().newBuilder().build())
+    }
 }

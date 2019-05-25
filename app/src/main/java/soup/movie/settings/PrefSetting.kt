@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
-abstract class PrefSetting<T>(private val preferences: SharedPreferences) : Setting<T> {
+abstract class PrefSetting<T>(
+    private val preferences: SharedPreferences
+) : Setting<T> {
 
     private val settingSubject: BehaviorSubject<T> by lazy {
         BehaviorSubject.createDefault(getDefaultValue(preferences))

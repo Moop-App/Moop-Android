@@ -2,6 +2,7 @@ package soup.movie.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import soup.movie.di.domain.MainDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
 import soup.movie.ui.detail.DetailActivity
@@ -16,27 +17,28 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [
         MainUiModule::class,
-        MainTabUiModule::class
+        MainTabUiModule::class,
+        MainDomainModule::class
     ])
-    internal abstract fun mainActivity(): MainActivity
+    abstract fun mainActivity(): MainActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [
         SearchUiModule::class
     ])
-    internal abstract fun searchActivity(): SearchActivity
+    abstract fun searchActivity(): SearchActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [
         DetailUiModule::class
     ])
-    internal abstract fun detailActivity(): DetailActivity
+    abstract fun detailActivity(): DetailActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [
         TheaterSortUiModule::class
     ])
-    internal abstract fun theaterSortActivity(): TheaterSortActivity
+    abstract fun theaterSortActivity(): TheaterSortActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [
@@ -44,5 +46,5 @@ abstract class ActivityBindingModule {
         TheaterEditUiModule::class,
         TheaterEditTabUiModule::class
     ])
-    internal abstract fun theaterEditActivity(): TheaterEditActivity
+    abstract fun theaterEditActivity(): TheaterEditActivity
 }

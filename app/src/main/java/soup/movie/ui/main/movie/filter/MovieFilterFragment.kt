@@ -4,11 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.item_filter_age.*
+import kotlinx.android.synthetic.main.item_filter_genre.*
 import kotlinx.android.synthetic.main.item_filter_theater.*
+import soup.movie.R
 import soup.movie.databinding.FragmentMovieFilterBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.main.PanelData
+import soup.movie.util.inflate
 import soup.movie.util.observe
 
 class MovieFilterFragment : BaseFragment() {
@@ -39,6 +44,9 @@ class MovieFilterFragment : BaseFragment() {
             age15View.isSelected = filter.has15()
             age19View.isSelected = filter.has19()
         }
+        viewModel.genreUiModel.observe(this) {
+            genreFilterGroup?.setGenreSet(it)
+        }
     }
 
     private fun initViewState() {
@@ -62,6 +70,19 @@ class MovieFilterFragment : BaseFragment() {
         }
         age19View.setOnClickListener {
             viewModel.onAge19FilterClicked()
+        }
+    }
+
+    private fun ChipGroup.setGenreSet(uiModel: MovieFilterUiModel.GenreFilterUiModel) {
+        removeAllViews()
+        uiModel.filterList.forEach {
+            val genreChip: Chip = inflate(context, R.layout.chip_filter_genre)
+            genreChip.text = it.name
+            genreChip.isChecked = it.isChecked
+            genreChip.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.onGenreFilterClick(it.name, isChecked)
+            }
+            addView(genreChip)
         }
     }
 
