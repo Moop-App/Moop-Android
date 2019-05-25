@@ -1,18 +1,22 @@
 package soup.movie.settings.impl
 
 import android.content.SharedPreferences
+import soup.movie.data.model.GenreFilter
 import soup.movie.settings.PrefSetting
 
 class GenreFilterSetting(
     preferences: SharedPreferences
-) : PrefSetting<Set<String>>(preferences) {
+) : PrefSetting<GenreFilter>(preferences) {
 
-    override fun getDefaultValue(preferences: SharedPreferences): Set<String> {
-        return (preferences.getString(KEY, DEFAULT_VALUE) ?: DEFAULT_VALUE).split(SEPARATOR).toSet()
+    override fun getDefaultValue(preferences: SharedPreferences): GenreFilter {
+        val genreString = preferences.getString(KEY, DEFAULT_VALUE) ?: DEFAULT_VALUE
+        return GenreFilter(genreString.split(SEPARATOR).toSet())
     }
 
-    override fun saveValue(preferences: SharedPreferences, value: Set<String>) {
-        preferences.edit().putString(KEY, value.joinToString(separator = SEPARATOR)).apply()
+    override fun saveValue(preferences: SharedPreferences, value: GenreFilter) {
+        preferences.edit()
+            .putString(KEY, value.blacklist.joinToString(separator = SEPARATOR))
+            .apply()
     }
 
     companion object {

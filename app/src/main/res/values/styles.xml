@@ -16,10 +16,16 @@
         <item name="android:textAppearance">@style/TextAppearance.Chip</item>
     </style>
 
+    <style name="Widget.Chip.Genre">
+        <item name="android:textColor">@color/chip_genre_text</item>
+        <item name="chipBackgroundColor">@color/chip_genre_bg</item>
+        <item name="rippleColor">@color/grey_400</item>
+    </style>
+
     <style name="Widget.Chip.Cgv">
         <item name="android:textColor">@color/chip_cgv_text</item>
         <item name="chipBackgroundColor">@color/chip_cgv_bg</item>
-        <item name="chipStrokeColor">@color/grey_200</item>
+        <item name="chipStrokeColor">#229E9E9E</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="rippleColor">@color/grey_400</item>
     </style>
@@ -44,6 +50,14 @@
 
     <style name="Widget.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="android:textAppearance">@style/TextAppearance.Chip</item>
+    </style>
+
+    <style name="Widget.Chip.Filter.Genre">
+        <item name="android:textColor">@color/selector_chip_genre_text</item>
+        <item name="checkedIcon">@drawable/ic_check_genre</item>
+        <item name="chipBackgroundColor">@color/selector_chip_genre_bg</item>
+        <item name="chipIcon">@drawable/ic_logo_genre</item>
+        <item name="rippleColor">@color/grey_400</item>
     </style>
 
     <style name="Widget.Chip.Filter.Cgv">

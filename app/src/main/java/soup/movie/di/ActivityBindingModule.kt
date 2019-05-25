@@ -2,6 +2,7 @@ package soup.movie.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import soup.movie.di.domain.MainDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
 import soup.movie.ui.detail.DetailActivity
@@ -16,7 +17,8 @@ abstract class ActivityBindingModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [
         MainUiModule::class,
-        MainTabUiModule::class
+        MainTabUiModule::class,
+        MainDomainModule::class
     ])
     abstract fun mainActivity(): MainActivity
 

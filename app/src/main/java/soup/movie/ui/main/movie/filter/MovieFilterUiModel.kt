@@ -15,4 +15,15 @@ sealed class MovieFilterUiModel {
     data class AgeFilterUiModel(
         val filter: AgeFilter
     ) : MovieFilterUiModel()
+
+    @Keep
+    data class GenreFilterUiModel(
+        val filterList: List<GenreFilterItem>
+    ) : MovieFilterUiModel()
 }
+
+@Keep
+class GenreFilterItem(
+    val name: String,
+    val isChecked: Boolean
+)
