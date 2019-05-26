@@ -96,10 +96,10 @@ rx.relay = "com.jakewharton.rxrelay2:rxrelay:$versions.rx_relay"
 deps.rx = rx
 
 def firebase = [:]
-firebase.core = 'com.google.firebase:firebase-core:16.0.4'
-firebase.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.5"
-firebase.performance = "com.google.firebase:firebase-perf:16.2.0"
-firebase.messaging = 'com.google.firebase:firebase-messaging:17.3.4'
+firebase.core = 'com.google.firebase:firebase-core:16.0.9'
+firebase.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.0"
+firebase.performance = "com.google.firebase:firebase-perf:17.0.0"
+firebase.messaging = 'com.google.firebase:firebase-messaging:18.0.0'
 firebase.plugin = 'com.google.firebase:firebase-plugins:1.1.5'
 deps.firebase = firebase
 

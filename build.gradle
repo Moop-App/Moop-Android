@@ -7,8 +7,8 @@ buildscript {
         classpath deps.android_gradle_plugin
         classpath deps.kotlin.plugin
         classpath deps.navigation.safe_args_plugin
-        classpath 'com.google.gms:google-services:4.0.1'
-        classpath 'io.fabric.tools:gradle:1.26.0'
+        classpath 'com.google.gms:google-services:4.2.0'
+        classpath 'io.fabric.tools:gradle:1.29.0'
         classpath deps.firebase.plugin
     }
 }
