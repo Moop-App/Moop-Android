@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data/>
+    <data>
+
+        <variable
+            name="item"
+            type="soup.movie.ui.main.movie.filter.TheaterFilterUiModel" />
+
+        <variable
+            name="viewModel"
+            type="soup.movie.ui.main.movie.filter.MovieFilterViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/settings_category_margin_vertical"
-        android:paddingBottom="@dimen/settings_category_margin_vertical"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp" >
+        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingEnd="16dp"
+        android:paddingBottom="@dimen/settings_category_margin_vertical">
 
         <TextView
             android:id="@+id/theaterCategory"
@@ -29,13 +36,15 @@
             style="@style/Widget.Chip.Filter.Cgv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/settings_item_margin_vertical"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
             android:layout_marginEnd="8dp"
+            android:checked="@{item.hasCgv}"
+            android:onCheckedChanged="@{(v,isChecked) -> viewModel.onCgvFilterChanged(isChecked)}"
             android:text="CGV"
             app:chipIconVisible="true"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintEnd_toStartOf="@+id/lotteView"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
 
@@ -46,6 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
             android:layout_marginEnd="8dp"
+            android:checked="@{item.hasLotteCinema}"
+            android:onCheckedChanged="@{(v,isChecked) -> viewModel.onLotteFilterChanged(isChecked)}"
             android:text="롯데시네마"
             app:chipIconVisible="true"
             app:layout_constraintEnd_toStartOf="@+id/megaboxView"
@@ -59,6 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
             android:layout_marginEnd="8dp"
+            android:checked="@{item.hasMegabox}"
+            android:onCheckedChanged="@{(v,isChecked) -> viewModel.onMegaboxFilterChanged(isChecked)}"
             android:text="메가박스"
             app:chipIconVisible="true"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,26 +1,28 @@
 package soup.movie.ui.main.movie.filter
 
 import androidx.annotation.Keep
-import soup.movie.data.model.AgeFilter
-import soup.movie.data.model.TheaterFilter
 
-sealed class MovieFilterUiModel {
+sealed class MovieFilterUiModel
 
-    @Keep
-    data class TheaterFilterUiModel(
-        val filter: TheaterFilter
-    ) : MovieFilterUiModel()
+@Keep
+data class TheaterFilterUiModel(
+    val hasCgv: Boolean,
+    val hasLotteCinema: Boolean,
+    val hasMegabox: Boolean
+) : MovieFilterUiModel()
 
-    @Keep
-    data class AgeFilterUiModel(
-        val filter: AgeFilter
-    ) : MovieFilterUiModel()
+@Keep
+data class AgeFilterUiModel(
+    val hasAll: Boolean,
+    val has12: Boolean,
+    val has15: Boolean,
+    val has19: Boolean
+) : MovieFilterUiModel()
 
-    @Keep
-    data class GenreFilterUiModel(
-        val filterList: List<GenreFilterItem>
-    ) : MovieFilterUiModel()
-}
+@Keep
+data class GenreFilterUiModel(
+    val items: List<GenreFilterItem>
+) : MovieFilterUiModel()
 
 @Keep
 class GenreFilterItem(

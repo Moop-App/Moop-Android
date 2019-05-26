@@ -32,6 +32,11 @@ fun View.setBackgroundColorResource(@ColorRes resId: Int) {
     setBackgroundColor(context.getColorCompat(resId))
 }
 
+@BindingAdapter("android:selected")
+fun setSelected(view: View, isSelected: Boolean) {
+    view.isSelected = isSelected
+}
+
 @BindingAdapter("android:backgroundResource")
 fun View.setBackgroundResourceInXml(resId: Int) {
     setBackgroundResource(resId)
