@@ -1,6 +1,6 @@
 /**
  * Refers to versions.gradle file in following repository.
- * @see <a href="android-architecture-components">https://github.com/googlesamples/android-architecture-components</a>
+ * @link https://github.com/googlesamples/android-architecture-components
  */
 
 ext.deps = [:]
