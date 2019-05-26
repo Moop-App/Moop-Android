@@ -11,27 +11,20 @@ import timber.log.Timber
 
 object NotificationSpecs {
 
+    const val TYPE_NOTICE = "Notice"
+    const val TYPE_EVENT = "Event"
+
     fun initialize(application: Application) {
         NotificationChannels.initialize(application)
     }
 
-    fun notifyAs(type: String,
-                 ctx: Context,
-                 intercept: (Builder) -> Builder) {
-        when (type) {
-            "Notice" -> notifyAsNotice(ctx, intercept)
-            "Event" -> notifyAsEvent(ctx, intercept)
-            else -> Timber.w("Try to notify as $type, but there is no consumer.")
-        }
-    }
-
-    private inline fun notifyAsNotice(ctx: Context, intercept: Builder.() -> Builder) {
+    inline fun notifyAsNotice(ctx: Context, intercept: Builder.() -> Builder) {
         ctx.getNotificationManager()?.run {
             notify(1, Builder(ctx, NotificationChannels.NOTICE).intercept().build())
         }
     }
 
-    private inline fun notifyAsEvent(ctx: Context, intercept: Builder.() -> Builder) {
+    inline fun notifyAsEvent(ctx: Context, intercept: Builder.() -> Builder) {
         ctx.getNotificationManager()?.run {
             notify(2, Builder(ctx, NotificationChannels.EVENT).intercept().build())
         }
@@ -42,7 +35,7 @@ object NotificationSpecs {
     }
 }
 
-private fun Context.getNotificationManager(): NotificationManager? {
+fun Context.getNotificationManager(): NotificationManager? {
     return getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
 }
 
