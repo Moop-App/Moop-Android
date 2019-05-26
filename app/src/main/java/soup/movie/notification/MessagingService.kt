@@ -2,7 +2,6 @@ package soup.movie.notification
 
 import android.app.PendingIntent
 import android.content.Intent
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import soup.movie.R
@@ -46,17 +45,5 @@ class MessagingService : FirebaseMessagingService() {
     private fun getMainScreenIntent(): PendingIntent {
         val intent = Intent(applicationContext, MainActivity::class.java)
         return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-    }
-
-    private fun printCurrentToken() {
-        FirebaseInstanceId.getInstance().instanceId
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Get new Instance ID token
-                        Timber.d("printCurrentToken: token=${task.result?.token}")
-                    } else {
-                        Timber.w(task.exception, "printCurrentToken: fail!!")
-                    }
-                }
     }
 }
