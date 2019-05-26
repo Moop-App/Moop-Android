@@ -31,20 +31,20 @@ class MovieFilterFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewState()
-        viewModel.theaterUiModel.observe(this) {
+        viewModel.theaterUiModel.observe(viewLifecycleOwner) {
             val filter = it.filter
             cgvView.isChecked = filter.hasCgv()
             lotteView.isChecked = filter.hasLotteCinema()
             megaboxView.isChecked = filter.hasMegabox()
         }
-        viewModel.ageUiModel.observe(this) {
+        viewModel.ageUiModel.observe(viewLifecycleOwner) {
             val filter = it.filter
             ageAllView.isSelected = filter.hasAll()
             age12View.isSelected = filter.has12()
             age15View.isSelected = filter.has15()
             age19View.isSelected = filter.has19()
         }
-        viewModel.genreUiModel.observe(this) {
+        viewModel.genreUiModel.observe(viewLifecycleOwner) {
             genreFilterGroup?.setGenreSet(it)
         }
     }
