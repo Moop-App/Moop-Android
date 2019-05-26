@@ -15,7 +15,6 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.FragmentVerticalListBinding
-import soup.movie.theme.util.getColorAttr
 import soup.movie.ui.base.OnReselectListener
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.BaseTabFragment
@@ -23,6 +22,7 @@ import soup.movie.ui.main.movie.MovieListAdapter
 import soup.movie.ui.main.movie.MovieListUiModel
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
 import soup.movie.ui.search.SearchActivity
+import soup.movie.util.getColorAttr
 import soup.movie.util.observe
 import javax.inject.Inject
 
