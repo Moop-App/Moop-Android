@@ -41,7 +41,7 @@ class MegaboxEditFragment : TheaterEditChildFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listView.adapter = listAdapter
-        viewModel.uiModel.observe(this) {
+        viewModel.uiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.areaGroupList, it.selectedTheaterIdSet)
         }
     }
