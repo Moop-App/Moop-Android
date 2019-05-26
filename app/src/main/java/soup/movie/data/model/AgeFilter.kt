@@ -1,6 +1,6 @@
 package soup.movie.data.model
 
-data class AgeFilter(private var flags: Int) {
+data class AgeFilter(private val flags: Int) {
 
     fun hasAll(): Boolean = has(FLAG_AGE_ALL)
     fun has12(): Boolean = has(FLAG_AGE_12)

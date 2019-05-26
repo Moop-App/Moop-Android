@@ -20,7 +20,6 @@ import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.ui.BaseViewModel
-import soup.movie.ui.main.movie.filter.MovieFilterUiModel.*
 import javax.inject.Inject
 
 class MovieFilterViewModel @Inject constructor(
@@ -50,7 +49,7 @@ class MovieFilterViewModel @Inject constructor(
             .distinctUntilChanged()
             .subscribeOn(Schedulers.io())
             .doOnNext { theaterFilter = it }
-            .map { TheaterFilterUiModel(it) }
+            .map { it.toUiModel() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _theaterUiModel.value = it }
             .disposeOnCleared()
@@ -58,7 +57,7 @@ class MovieFilterViewModel @Inject constructor(
         ageFilterSetting.asObservable()
             .distinctUntilChanged()
             .subscribeOn(Schedulers.io())
-            .map { AgeFilterUiModel(it) }
+            .map { it.toUiModel() }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _ageUiModel.value = it }
             .disposeOnCleared()
@@ -82,6 +81,23 @@ class MovieFilterViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _genreUiModel.value = it }
             .disposeOnCleared()
+    }
+
+    private fun TheaterFilter.toUiModel(): TheaterFilterUiModel {
+        return TheaterFilterUiModel(
+            hasCgv = hasCgv(),
+            hasLotteCinema = hasLotteCinema(),
+            hasMegabox = hasMegabox()
+        )
+    }
+
+    private fun AgeFilter.toUiModel(): AgeFilterUiModel {
+        return AgeFilterUiModel(
+            hasAll = hasAll(),
+            has12 = has12(),
+            has15 = has15(),
+            has19 = has19()
+        )
     }
 
     fun onCgvFilterChanged(isChecked: Boolean) {
