@@ -69,7 +69,7 @@
             android:theme="@style/AppTheme.TheaterEdit"
             android:label="@string/theater_edit_title" />
         <activity
-            android:name=".ui.theme.ThemeBookmarkActivity"
+            android:name=".ui.theme.ThemeOptionActivity"
             android:label="@string/theme_bookmark_title"
             android:exported="false" />
 

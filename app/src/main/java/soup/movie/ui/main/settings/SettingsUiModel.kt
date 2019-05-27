@@ -2,6 +2,7 @@ package soup.movie.ui.main.settings
 
 import androidx.annotation.Keep
 import soup.movie.data.model.Theater
+import soup.movie.theme.ThemeOption
 import soup.movie.data.model.Version
 
 sealed class SettingsUiModel
@@ -19,3 +20,8 @@ data class VersionSettingUiModel(
 
     fun isLatest(): Boolean = current.versionCode >= latest.versionCode
 }
+
+@Keep
+data class ThemeSettingUiModel(
+    val themeOption: ThemeOption
+)

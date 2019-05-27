@@ -1,4 +1,4 @@
-package soup.movie.theme.util
+package soup.movie.util
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -7,7 +7,7 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.annotation.StyleRes
-import soup.movie.theme.R
+import soup.movie.R
 
 /**
  * The methods to get resources from current theme

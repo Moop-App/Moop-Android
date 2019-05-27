@@ -43,6 +43,12 @@ class SharedPreferencesModule {
 
     @Singleton
     @Provides
+    fun provideThemeOptionSetting(
+        preferences: SharedPreferences
+    ): ThemeOptionSetting = ThemeOptionSetting(preferences)
+
+    @Singleton
+    @Provides
     fun provideSharedPreferences(
         context: Context
     ): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)

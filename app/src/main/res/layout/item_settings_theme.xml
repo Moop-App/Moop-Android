@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="item"
-            type="soup.movie.theme.ThemePage" />
+            type="soup.movie.ui.main.settings.ThemeSettingUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,16 +38,22 @@
             app:layout_constraintStart_toEndOf="@+id/themeCategory"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/themeGroup"
-            layout="@layout/item_theme_page"
+        <TextView
+            android:id="@+id/themeName"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
-            app:item="@{item}"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textColor="?attr/moop_textColorDark"
+            android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editThemeButton" />
+            app:layout_constraintTop_toBottomOf="@+id/editThemeButton"
+            app:themeOptionLabel="@{item.themeOption}"
+            tools:text="어둡게" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
