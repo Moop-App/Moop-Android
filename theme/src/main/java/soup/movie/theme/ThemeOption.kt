@@ -1,4 +1,4 @@
-package soup.movie.data.model
+package soup.movie.theme
 
 import androidx.annotation.Keep
 

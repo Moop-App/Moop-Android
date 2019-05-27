@@ -2,7 +2,7 @@ package soup.movie.ui.theme
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import soup.movie.data.ThemeOptionManager
+import soup.movie.theme.ThemeOptionManager
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 

@@ -1,20 +1,18 @@
-package soup.movie.data
+package soup.movie.theme
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.BuildCompat
-import soup.movie.data.model.ThemeOption
-import soup.movie.settings.impl.ThemeOptionSetting
 
 class ThemeOptionManager(
-    private val setting: ThemeOptionSetting
+    private val store: ThemeOptionStore
 ) {
 
     fun initialize() {
-        AppCompatDelegate.setDefaultNightMode(setting.get().nightMode)
+        AppCompatDelegate.setDefaultNightMode(store.restore().nightMode)
     }
 
     fun apply(themeOption: ThemeOption) {
-        setting.set(themeOption)
+        store.save(themeOption)
         AppCompatDelegate.setDefaultNightMode(themeOption.nightMode)
     }
 

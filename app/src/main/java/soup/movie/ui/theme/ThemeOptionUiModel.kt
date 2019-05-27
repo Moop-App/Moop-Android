@@ -1,7 +1,7 @@
 package soup.movie.ui.theme
 
 import androidx.annotation.Keep
-import soup.movie.data.model.ThemeOption
+import soup.movie.theme.ThemeOption
 
 @Keep
 class ThemeOptionUiModel(
