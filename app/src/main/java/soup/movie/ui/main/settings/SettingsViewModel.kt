@@ -6,13 +6,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import soup.movie.data.MoopRepository
 import soup.movie.data.helper.VersionHelper.currentVersion
 import soup.movie.settings.impl.TheatersSetting
+import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
+    themeOptionSetting: ThemeOptionSetting,
     theatersSetting: TheatersSetting,
     repository: MoopRepository
 ) : BaseViewModel() {
+
+    private val _themeUiModel = MutableLiveData<ThemeSettingUiModel>()
+    val themeUiModel: LiveData<ThemeSettingUiModel>
+        get() = _themeUiModel
 
     private val _theaterUiModel = MutableLiveData<TheaterSettingUiModel>()
     val theaterUiModel: LiveData<TheaterSettingUiModel>
@@ -26,6 +32,13 @@ class SettingsViewModel @Inject constructor(
         repository
             .refreshVersion()
             .subscribe()
+            .disposeOnCleared()
+
+        themeOptionSetting.asObservable()
+            .map { ThemeSettingUiModel(it) }
+            .distinctUntilChanged()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { _themeUiModel.value = it }
             .disposeOnCleared()
 
         theatersSetting.asObservable()

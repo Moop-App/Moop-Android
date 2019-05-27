@@ -23,7 +23,6 @@ import soup.movie.data.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.FragmentSettingsBinding
-import soup.movie.theme.ThemeBook
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeOptionActivity
@@ -56,7 +55,10 @@ class SettingsFragment : BaseTabFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         return FragmentSettingsBinding.inflate(inflater, container, false)
-            .apply { item = ThemeBook.getBookmarkPage() }
+            .apply {
+                lifecycleOwner = viewLifecycleOwner
+                viewModel = this@SettingsFragment.viewModel
+            }
             .root
     }
 
@@ -78,7 +80,7 @@ class SettingsFragment : BaseTabFragment() {
         editThemeButton.setOnDebounceClickListener {
             onThemeEditClicked()
         }
-        themeGroup.setOnDebounceClickListener {
+        themeName.setOnDebounceClickListener {
             onThemeEditClicked()
         }
         tmPrepare.setOnClickListener {

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="item" type="soup.movie.theme.ThemePage" />
+
+        <variable
+            name="viewModel"
+            type="soup.movie.ui.main.settings.SettingsViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollViewEx
@@ -17,24 +19,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp" >
+            android:paddingEnd="16dp">
 
             <include
                 android:id="@+id/themeItem"
                 layout="@layout/item_settings_theme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:item="@{viewModel.themeUiModel}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:item="@{item}" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="?attr/moop_dividerColor"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/themeItem" />
 
             <include
@@ -50,8 +52,8 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="?attr/moop_dividerColor"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/theaterItem" />
 
             <include
@@ -67,8 +69,8 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="?attr/moop_dividerColor"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
 
             <include
@@ -84,9 +86,9 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="?attr/moop_dividerColor"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/versionItem"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/versionItem" />
 
             <include
                 android:id="@+id/feedbackItem"
