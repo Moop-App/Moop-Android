@@ -5,6 +5,8 @@ import dagger.Module
 import dagger.Provides
 import soup.movie.MovieApplication
 import soup.movie.analytics.EventAnalytics
+import soup.movie.data.ThemeOptionManager
+import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.util.ImageUriProvider
 import javax.inject.Singleton
 
@@ -27,4 +29,10 @@ class ApplicationModule {
     fun provideEventAnalytics(
         context: Context
     ): EventAnalytics = EventAnalytics(context)
+
+    @Singleton
+    @Provides
+    fun provideThemeOptionManager(
+        themeOptionSetting: ThemeOptionSetting
+    ): ThemeOptionManager = ThemeOptionManager(themeOptionSetting)
 }
