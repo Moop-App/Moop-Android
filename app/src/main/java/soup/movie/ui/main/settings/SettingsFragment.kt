@@ -26,7 +26,7 @@ import soup.movie.databinding.FragmentSettingsBinding
 import soup.movie.theme.ThemeBook
 import soup.movie.ui.main.BaseTabFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
-import soup.movie.ui.theme.ThemeBookmarkActivity
+import soup.movie.ui.theme.ThemeOptionActivity
 import soup.movie.util.*
 import javax.inject.Inject
 
@@ -158,7 +158,7 @@ class SettingsFragment : BaseTabFragment() {
         } ?: emptyArray()
 
     private fun onThemeEditClicked() {
-        val intent = Intent(requireActivity(), ThemeBookmarkActivity::class.java)
+        val intent = Intent(requireActivity(), ThemeOptionActivity::class.java)
         startActivityForResult(intent, 0, ActivityOptions
             .makeSceneTransitionAnimation(requireActivity())
             .toBundle())

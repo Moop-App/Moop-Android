@@ -13,4 +13,4 @@
     android:scrollbars="none"
     android:overScrollMode="never"
     app:layoutManagerType="linear"
-    tools:listitem="@layout/item_theme_page" />
+    tools:listitem="@layout/item_theme_option" />
