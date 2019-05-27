@@ -1,16 +1,14 @@
 package soup.movie.ui.theme
 
 import androidx.annotation.Keep
+import soup.movie.data.model.ThemeOption
 
 @Keep
-data class ThemeOptionUiModel(
-    val name: String,
-    val nightMode: Int
+class ThemeOptionUiModel(
+    val items: List<ThemeOptionItemUiModel>
 )
 
 @Keep
-enum class ThemeState {
-    Light, // 밝게
-    Dark,  // 어둡게
-    System // 시스템 설정값 (Default)
-}
+class ThemeOptionItemUiModel(
+    val themeOption: ThemeOption
+)

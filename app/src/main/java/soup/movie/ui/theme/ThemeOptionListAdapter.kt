@@ -6,13 +6,13 @@ import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 
 class ThemeOptionListAdapter(
-    private val listener: (ThemeOptionUiModel) -> Unit
-) : DataBindingAdapter<ThemeOptionUiModel>() {
+    private val listener: (ThemeOptionItemUiModel) -> Unit
+) : DataBindingAdapter<ThemeOptionItemUiModel>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<ThemeOptionUiModel> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<ThemeOptionItemUiModel> {
         return super.onCreateViewHolder(parent, viewType).apply {
             itemView.setOnClickListener {
-                listener.invoke(getItem(adapterPosition))
+                getItem(adapterPosition).run(listener)
             }
         }
     }

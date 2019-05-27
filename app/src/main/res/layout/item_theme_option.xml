@@ -7,23 +7,22 @@
 
         <variable
             name="item"
-            type="soup.movie.ui.theme.ThemeOptionUiModel" />
+            type="soup.movie.ui.theme.ThemeOptionItemUiModel" />
     </data>
 
     <TextView
-        android:id="@+id/nameView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="?selectableItemBackground"
         android:gravity="center_vertical"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:text="@{item.name}"
         android:textColor="?attr/moop_textColorDark"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="State" />
+        app:themeOptionLabel="@{item.themeOption}"
+        tools:text="어둡게" />
 </layout>
