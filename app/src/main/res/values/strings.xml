@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Moop</string>
 
-    <string name="press_back_key_one_more">Press \'Back\' button one more time to exit.</string>
-
     <string name="tab_now">Now Playing</string>
     <string name="tab_plan">Plan</string>
     <string name="tab_settings">Settings</string>
