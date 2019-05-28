@@ -45,8 +45,6 @@ class MainActivity : BaseActivity(), PanelProvider {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private var backPressedTime: Long = 0
-
     private val fragmentSceneRouter by lazy {
         FragmentSceneRouter(supportFragmentManager, R.id.container)
     }
@@ -189,12 +187,6 @@ class MainActivity : BaseActivity(), PanelProvider {
         if (fragmentSceneRouter.goBack()) {
             return
         }
-        val currentTime = System.currentTimeMillis()
-        if (currentTime - backPressedTime !in 0..BACK_INTERVAL_TIME) {
-            backPressedTime = currentTime
-            showToast(R.string.press_back_key_one_more)
-            return
-        }
         super.onBackPressed()
     }
 
@@ -246,8 +238,6 @@ class MainActivity : BaseActivity(), PanelProvider {
     }
 
     companion object {
-
-        private const val BACK_INTERVAL_TIME: Long = 2000
 
         @IdRes
         private fun MainUiModel.toItemId(): Int = when (this) {
