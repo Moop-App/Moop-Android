@@ -31,7 +31,6 @@ import soup.movie.ui.main.MainUiEvent.ShowDetailAction
 import soup.movie.ui.main.MainUiModel.*
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
-import soup.movie.ui.main.settings.SettingsFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.observe
 import soup.movie.util.observeEvent
@@ -243,27 +242,23 @@ class MainActivity : BaseActivity(), PanelProvider {
         private fun MainUiModel.toItemId(): Int = when (this) {
             is NowState -> R.id.action_now
             is PlanState -> R.id.action_plan
-            is SettingsState -> R.id.action_settings
         }
 
         @StringRes
         private fun MainUiModel.toTitleId(): Int = when (this) {
             is NowState -> R.string.tab_now
             is PlanState -> R.string.tab_plan
-            is SettingsState -> R.string.tab_settings
         }
 
         private fun Int.parseToTabMode(): Tab = when (this) {
             R.id.action_now -> Tab.Now
             R.id.action_plan -> Tab.Plan
-            R.id.action_settings -> Tab.Settings
             else -> throw IllegalArgumentException("0x${toString(16)} is invalid ID")
         }
 
         private fun MainUiModel.asScene(): SceneData = when (this) {
             is NowState -> SceneData(toString(), isPersist = false) { NowFragment.newInstance() }
             is PlanState -> SceneData(toString(), isPersist = false) { PlanFragment.newInstance() }
-            is SettingsState -> SceneData(toString()) { SettingsFragment.newInstance() }
         }
     }
 }

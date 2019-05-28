@@ -9,7 +9,4 @@ sealed class MainUiModel {
 
     @Keep
     object PlanState : MainUiModel()
-
-    @Keep
-    object SettingsState : MainUiModel()
 }

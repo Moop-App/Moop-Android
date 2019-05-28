@@ -9,7 +9,7 @@ class LastMainTabSetting(
 ) : PrefSetting<Tab>(preferences) {
 
     enum class Tab {
-        Now, Plan, Settings
+        Now, Plan
     }
 
     override fun getDefaultValue(preferences: SharedPreferences): Tab = Tab.Now

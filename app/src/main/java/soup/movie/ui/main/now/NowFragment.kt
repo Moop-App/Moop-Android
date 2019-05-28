@@ -22,6 +22,7 @@ import soup.movie.ui.main.movie.MovieListAdapter
 import soup.movie.ui.main.movie.MovieListUiModel
 import soup.movie.ui.main.movie.filter.MovieFilterFragment
 import soup.movie.ui.search.SearchActivity
+import soup.movie.ui.settings.SettingsActivity
 import soup.movie.util.getColorAttr
 import soup.movie.util.observe
 import javax.inject.Inject
@@ -60,6 +61,11 @@ class NowFragment : BaseTabFragment(), OnReselectListener {
                     analytics.clickMenuFilter()
                     showPanel(MovieFilterFragment.toPanelData())
                 }
+                return true
+            }
+            R.id.action_settings -> {
+                val intent = Intent(requireActivity(), SettingsActivity::class.java)
+                startActivity(intent)
                 return true
             }
         }

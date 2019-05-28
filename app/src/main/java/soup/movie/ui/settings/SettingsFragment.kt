@@ -1,4 +1,4 @@
-package soup.movie.ui.main.settings
+package soup.movie.ui.settings
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_settings_feedback.*
@@ -22,14 +23,14 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.data.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
-import soup.movie.databinding.FragmentSettingsBinding
-import soup.movie.ui.main.BaseTabFragment
+import soup.movie.databinding.SettingsFragmentBinding
+import soup.movie.ui.BaseFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeOptionActivity
 import soup.movie.util.*
 import javax.inject.Inject
 
-class SettingsFragment : BaseTabFragment() {
+class SettingsFragment : BaseFragment() {
 
     private val viewModel: SettingsViewModel by viewModel()
 
@@ -38,23 +39,26 @@ class SettingsFragment : BaseTabFragment() {
 
     private var versionViewState: VersionSettingUiModel? = null
 
-    override fun onMapSharedElements(
-        names: List<String>,
-        sharedElements: MutableMap<String, View>
-    ) {
-        sharedElements.clear()
-        names.forEach { name ->
-            theaterGroup.findViewWithTag<View>(name)?.let {
-                sharedElements[name] = it
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setExitSharedElementCallback(object : SharedElementCallback() {
+            override fun onMapSharedElements(names: List<String>,
+                                             sharedElements: MutableMap<String, View>) {
+                sharedElements.clear()
+                names.forEach { name ->
+                    theaterGroup.findViewWithTag<View>(name)?.let {
+                        sharedElements[name] = it
+                    }
+                }
             }
-        }
+        })
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        return FragmentSettingsBinding.inflate(inflater, container, false)
+        return SettingsFragmentBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
                 viewModel = this@SettingsFragment.viewModel

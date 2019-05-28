@@ -14,8 +14,6 @@ import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.now.NowViewModel
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.ui.main.plan.PlanViewModel
-import soup.movie.ui.main.settings.SettingsFragment
-import soup.movie.ui.main.settings.SettingsViewModel
 
 @Module
 abstract class MainUiModule {
@@ -46,15 +44,6 @@ abstract class MainTabUiModule {
     @IntoMap
     @ViewModelKey(PlanViewModel::class)
     abstract fun bindPlanViewModel(viewModel: PlanViewModel): ViewModel
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract fun provideSettingsFragment(): SettingsFragment
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(SettingsViewModel::class)
-    abstract fun bindSettingsViewModel(viewModel: SettingsViewModel): ViewModel
 
     @FragmentScope
     @ContributesAndroidInjector
