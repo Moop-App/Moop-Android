@@ -1,10 +1,10 @@
-package soup.movie.domain.filter
+package soup.movie.domain.model
 
 import soup.movie.data.model.AgeFilter
 import soup.movie.data.model.GenreFilter
 import soup.movie.data.model.TheaterFilter
 
-data class FilterGroup(
+class MovieFilter(
     val theaterFilter: TheaterFilter,
     val ageFilter: AgeFilter,
     val genreFilter: GenreFilter

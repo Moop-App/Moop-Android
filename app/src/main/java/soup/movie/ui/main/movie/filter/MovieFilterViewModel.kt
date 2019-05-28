@@ -15,7 +15,7 @@ import soup.movie.data.model.TheaterFilter
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
-import soup.movie.domain.GetGenreUseCase
+import soup.movie.domain.filter.GetGenreUseCase
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting

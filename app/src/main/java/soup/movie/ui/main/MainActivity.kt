@@ -115,6 +115,7 @@ class MainActivity : BaseActivity(), PanelProvider {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
             lifecycleOwner = this@MainActivity
         }
+
         initViewState()
 
         //TODO: Improve this please
