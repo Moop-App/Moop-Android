@@ -17,6 +17,7 @@
         android:transitionGroup="false"
         app:dragDismissDistance="@dimen/drag_dismiss_distance"
         app:dragDismissScale="0.95"
+        app:dragDismissEnableBottomDrag="false"
         tools:context=".ui.detail.DetailActivity">
 
         <!-- Use a separate view for the background, rather than on the root view because it is a
