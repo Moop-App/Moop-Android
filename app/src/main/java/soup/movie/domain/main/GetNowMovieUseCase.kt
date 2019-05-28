@@ -18,9 +18,9 @@ class GetNowMovieUseCase(
         movieFilter: MovieFilter
     ): Observable<MovieListUiModel> {
         return repository.getNowList(clearCache)
-            .map { it.list.sortedBy(Movie::rank) }
             .map { it ->
-                it.asSequence()
+                it.list.asSequence()
+                    .sortedBy(Movie::rank)
                     .filter { it.isFilterBy(movieFilter.theaterFilter) }
                     .filter { it.isFilterBy(movieFilter.ageFilter) }
                     .filter { it.isFilterBy(movieFilter.genreFilter) }

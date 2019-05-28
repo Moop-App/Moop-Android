@@ -19,9 +19,9 @@ class GetPlanMovieUseCase(
         movieFilter: MovieFilter
     ): Observable<MovieListUiModel> {
         return repository.getPlanList(clearCache)
-            .map { it.list.sortedBy(Movie::getDDay) }
-            .map { it ->
-                it.asSequence()
+            .map { response ->
+                response.list.asSequence()
+                    .sortedBy(Movie::getDDay)
                     .filter { it.isFilterBy(movieFilter.theaterFilter) }
                     .filter { it.isFilterBy(movieFilter.ageFilter) }
                     .filter { it.isFilterBy(movieFilter.genreFilter) }
