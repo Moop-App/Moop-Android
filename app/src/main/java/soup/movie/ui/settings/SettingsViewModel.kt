@@ -1,4 +1,4 @@
-package soup.movie.ui.main.settings
+package soup.movie.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

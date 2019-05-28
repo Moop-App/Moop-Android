@@ -12,4 +12,9 @@
         android:icon="@drawable/ic_round_filter_list"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/action_settings"
+        android:title="@string/tab_settings"
+        android:icon="@drawable/ic_round_settings"
+        app:showAsAction="ifRoom" />
+
 </menu>

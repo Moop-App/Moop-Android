@@ -39,7 +39,6 @@ class MainViewModel @Inject constructor(
         when (tabMode) {
             LastMainTabSetting.Tab.Now -> MainUiModel.NowState
             LastMainTabSetting.Tab.Plan -> MainUiModel.PlanState
-            LastMainTabSetting.Tab.Settings -> MainUiModel.SettingsState
         }
 
     fun setCurrentTab(mode: LastMainTabSetting.Tab) {

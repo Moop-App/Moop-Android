@@ -9,8 +9,4 @@
         android:title="@string/tab_plan"
         android:icon="@drawable/ic_round_plan" />
 
-    <item android:id="@+id/action_settings"
-        android:title="@string/tab_settings"
-        android:icon="@drawable/ic_round_more" />
-
 </menu>
