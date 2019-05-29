@@ -18,23 +18,23 @@ class MovieFilter(
     }
 
     private fun Movie.isFilterBy(theaterFilter: TheaterFilter): Boolean {
-        fun isScreeningAtCgv(): Boolean = cgv != null
-        fun isScreeningAtLotteCinema(): Boolean = lotte != null
-        fun isScreeningAtMegabox(): Boolean = megabox != null
-        return theaterFilter.hasCgv() and isScreeningAtCgv()
-            || theaterFilter.hasLotteCinema() and isScreeningAtLotteCinema()
-            || theaterFilter.hasMegabox() and isScreeningAtMegabox()
+        val isScreeningAtCgv = cgv != null
+        val isScreeningAtLotteCinema = lotte != null
+        val isScreeningAtMegabox = megabox != null
+        return theaterFilter.hasCgv() && isScreeningAtCgv
+            || theaterFilter.hasLotteCinema() && isScreeningAtLotteCinema
+            || theaterFilter.hasMegabox() && isScreeningAtMegabox
     }
 
     private fun Movie.isFilterBy(ageFilter: AgeFilter): Boolean {
-        fun isScreeningForAgeAll(): Boolean = ageValue < 12
-        fun isScreeningOverAge12(): Boolean = (12 <= ageValue) and (ageValue < 15)
-        fun isScreeningOverAge15(): Boolean = (15 <= ageValue) and (ageValue < 19)
-        fun isScreeningOverAge19(): Boolean = 19 <= ageValue
-        return (ageFilter.hasAll() and isScreeningForAgeAll())
-            || (ageFilter.has12() and isScreeningOverAge12())
-            || (ageFilter.has15() and isScreeningOverAge15())
-            || (ageFilter.has19() and isScreeningOverAge19())
+        val isScreeningForAgeAll = ageValue < 12
+        val isScreeningOverAge12 = (12 <= ageValue) && (ageValue < 15)
+        val isScreeningOverAge15 = (15 <= ageValue) && (ageValue < 19)
+        val isScreeningOverAge19 = 19 <= ageValue
+        return (ageFilter.hasAll() && isScreeningForAgeAll)
+            || (ageFilter.has12() && isScreeningOverAge12)
+            || (ageFilter.has15() && isScreeningOverAge15)
+            || (ageFilter.has19() && isScreeningOverAge19)
     }
 
     private fun Movie.isFilterBy(genreFilter: GenreFilter): Boolean {
