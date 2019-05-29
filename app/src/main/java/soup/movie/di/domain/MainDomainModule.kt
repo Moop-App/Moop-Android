@@ -4,10 +4,10 @@ import dagger.Module
 import dagger.Provides
 import soup.movie.data.MoopRepository
 import soup.movie.di.scope.ActivityScope
-import soup.movie.domain.filter.GetGenreUseCase
+import soup.movie.domain.filter.GetGenreListUseCase
 import soup.movie.domain.main.GetMovieFilterUseCase
-import soup.movie.domain.main.GetNowMovieUseCase
-import soup.movie.domain.main.GetPlanMovieUseCase
+import soup.movie.domain.main.GetNowMovieListUseCase
+import soup.movie.domain.main.GetPlanMovieListUseCase
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
@@ -17,15 +17,15 @@ class MainDomainModule {
 
     @ActivityScope
     @Provides
-    fun provideGetNowMovieUseCase(
+    fun provideGetNowMovieListUseCase(
         repository: MoopRepository
-    ): GetNowMovieUseCase = GetNowMovieUseCase(repository)
+    ): GetNowMovieListUseCase = GetNowMovieListUseCase(repository)
 
     @ActivityScope
     @Provides
-    fun provideGetPlanMovieUseCase(
+    fun provideGetPlanMovieListUseCase(
         repository: MoopRepository
-    ): GetPlanMovieUseCase = GetPlanMovieUseCase(repository)
+    ): GetPlanMovieListUseCase = GetPlanMovieListUseCase(repository)
 
     @ActivityScope
     @Provides
@@ -41,7 +41,7 @@ class MainDomainModule {
 
     @ActivityScope
     @Provides
-    fun provideGetGenreUseCase(
+    fun provideGetGenreListUseCase(
         repository: MoopRepository
-    ): GetGenreUseCase = GetGenreUseCase(repository)
+    ): GetGenreListUseCase = GetGenreListUseCase(repository)
 }

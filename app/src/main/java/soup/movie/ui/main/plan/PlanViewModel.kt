@@ -7,13 +7,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.schedulers.Schedulers
 import soup.movie.domain.main.GetMovieFilterUseCase
-import soup.movie.domain.main.GetPlanMovieUseCase
+import soup.movie.domain.main.GetPlanMovieListUseCase
 import soup.movie.ui.BaseViewModel
 import soup.movie.ui.main.movie.MovieListUiModel
 import javax.inject.Inject
 
 class PlanViewModel @Inject constructor(
-    getPlanMovie: GetPlanMovieUseCase,
+    getPlanMovieList: GetPlanMovieListUseCase,
     getMovieFilter: GetMovieFilterUseCase
 ) : BaseViewModel() {
 
@@ -27,11 +27,11 @@ class PlanViewModel @Inject constructor(
         Observables
             .combineLatest(
                 refreshRelay,
-                getMovieFilter.asObservable()
+                getMovieFilter()
             )
             .subscribeOn(Schedulers.io())
             .switchMap { (clearCache, movieFilter) ->
-                getPlanMovie.asObservable(clearCache, movieFilter)
+                getPlanMovieList(clearCache, movieFilter)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _uiModel.value = it }

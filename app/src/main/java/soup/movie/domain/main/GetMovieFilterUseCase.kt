@@ -13,7 +13,7 @@ class GetMovieFilterUseCase(
     private val genreFilterSetting: GenreFilterSetting
 ) {
 
-    fun asObservable(): Observable<MovieFilter> {
+    operator fun invoke(): Observable<MovieFilter> {
         return Observables.combineLatest(
             theaterFilterSetting.asObservable(),
             ageFilterSetting.asObservable().distinctUntilChanged(),

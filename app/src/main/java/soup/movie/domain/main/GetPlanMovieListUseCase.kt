@@ -7,11 +7,11 @@ import soup.movie.data.model.Movie
 import soup.movie.domain.model.MovieFilter
 import soup.movie.ui.main.movie.MovieListUiModel
 
-class GetPlanMovieUseCase(
+class GetPlanMovieListUseCase(
     private val repository: MoopRepository
 ) {
 
-    fun asObservable(
+    operator fun invoke(
         clearCache: Boolean,
         movieFilter: MovieFilter
     ): Observable<MovieListUiModel> {

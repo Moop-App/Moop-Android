@@ -6,11 +6,11 @@ import soup.movie.data.MoopRepository
 import soup.movie.data.model.GenreFilter
 import soup.movie.data.model.response.MovieListResponse
 
-class GetGenreUseCase(
+class GetGenreListUseCase(
     private val repository: MoopRepository
 ) {
 
-    fun getGenreList(): Observable<List<String>> {
+    operator fun invoke(): Observable<List<String>> {
         return Observables
             .zip(
                 repository.getNowList(false).mapToGenreSet(),
