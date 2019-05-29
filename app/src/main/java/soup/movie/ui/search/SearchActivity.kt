@@ -18,7 +18,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivitySearchBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.movie.MovieListAdapter
+import soup.movie.ui.main.home.HomeListAdapter
 import soup.movie.ui.search.SearchUiModel.DoneState
 import soup.movie.ui.search.SearchUiModel.LoadingState
 import soup.movie.util.ImeUtil
@@ -35,7 +35,7 @@ class SearchActivity : BaseActivity() {
     private var focusQuery = true
 
     private val listAdapter by lazy {
-        MovieListAdapter { movie, sharedElements ->
+        HomeListAdapter { movie, sharedElements ->
             analytics.clickMovie(isNow = movie.isNow)
             MovieSelectManager.select(movie)
             val intent = Intent(this, DetailActivity::class.java)

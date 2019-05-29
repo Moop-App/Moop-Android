@@ -13,7 +13,7 @@ import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
 
 @Module
-class MainDomainModule {
+class HomeDomainModule {
 
     @ActivityScope
     @Provides

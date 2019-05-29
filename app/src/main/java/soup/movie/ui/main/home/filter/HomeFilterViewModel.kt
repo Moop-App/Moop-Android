@@ -1,4 +1,4 @@
-package soup.movie.ui.main.movie.filter
+package soup.movie.ui.main.home.filter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,7 +22,7 @@ import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 
-class MovieFilterViewModel @Inject constructor(
+class HomeFilterViewModel @Inject constructor(
     getGenreList: GetGenreListUseCase,
     private val theaterFilterSetting: TheaterFilterSetting,
     private val ageFilterSetting: AgeFilterSetting,

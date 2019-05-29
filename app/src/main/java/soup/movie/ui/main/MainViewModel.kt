@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor(
         if (movieId != null) {
             repository.getMovie(movieId)
                 .observeOn(AndroidSchedulers.mainThread())
-                .map<MainUiEvent> { MainUiEvent.ShowDetailAction(it) }
+                .map { ShowDetailUiEvent(it) }
                 .subscribe { _uiEvent.event = it }
                 .disposeOnCleared()
         }

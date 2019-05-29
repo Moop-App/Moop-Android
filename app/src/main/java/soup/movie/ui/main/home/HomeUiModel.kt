@@ -1,20 +1,20 @@
-package soup.movie.ui.main.movie
+package soup.movie.ui.main.home
 
 import androidx.annotation.Keep
 import soup.movie.data.model.Movie
 
-sealed class MovieListUiModel {
+sealed class HomeUiModel {
 
     @Keep
-    object LoadingState : MovieListUiModel()
+    object LoadingState : HomeUiModel()
 
     @Keep
-    object ErrorState : MovieListUiModel()
+    object ErrorState : HomeUiModel()
 
     @Keep
     data class DoneState(
         val movies: List<Movie>
-    ) : MovieListUiModel()
+    ) : HomeUiModel()
 
     fun hasNoItems(): Boolean {
         if (this is DoneState) {

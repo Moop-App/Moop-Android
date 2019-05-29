@@ -1,4 +1,4 @@
-package soup.movie.ui.main.movie.filter
+package soup.movie.ui.main.home.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,9 +14,9 @@ import soup.movie.ui.main.PanelData
 import soup.movie.util.inflate
 import soup.movie.util.observe
 
-class MovieFilterFragment : BaseFragment() {
+class HomeFilterFragment : BaseFragment() {
 
-    private val viewModel: MovieFilterViewModel by viewModel()
+    private val viewModel: HomeFilterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +26,7 @@ class MovieFilterFragment : BaseFragment() {
         return FragmentMovieFilterBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
-                viewModel = this@MovieFilterFragment.viewModel
+                viewModel = this@HomeFilterFragment.viewModel
             }
             .root
     }
@@ -53,7 +53,7 @@ class MovieFilterFragment : BaseFragment() {
 
     companion object {
 
-        private fun newInstance(): MovieFilterFragment = MovieFilterFragment()
+        private fun newInstance(): HomeFilterFragment = HomeFilterFragment()
 
         fun toPanelData() = PanelData(toString()) { newInstance() }
     }

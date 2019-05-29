@@ -1,4 +1,4 @@
-package soup.movie.ui.main.movie
+package soup.movie.ui.main.home
 
 import android.util.Pair
 import android.view.View
@@ -17,7 +17,7 @@ import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.showToast
 import soup.movie.util.with
 
-class MovieListAdapter(
+class HomeListAdapter(
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
 ) : DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
 

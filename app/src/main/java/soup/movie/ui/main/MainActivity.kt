@@ -26,11 +26,9 @@ import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData
-import soup.movie.ui.main.MainUiEvent.ShowDetailAction
 import soup.movie.ui.main.MainUiModel.NowState
 import soup.movie.ui.main.MainUiModel.PlanState
-import soup.movie.ui.main.now.NowFragment
-import soup.movie.ui.main.plan.PlanFragment
+import soup.movie.ui.main.home.HomeFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.observe
 import soup.movie.util.observeEvent
@@ -206,7 +204,7 @@ class MainActivity : BaseActivity(), PanelProvider {
 
     private fun execute(action: MainUiEvent) {
         when (action) {
-            is ShowDetailAction -> {
+            is ShowDetailUiEvent -> {
                 MovieSelectManager.select(action.movie)
                 val intent = Intent(this, DetailActivity::class.java)
                 startActivityForResult(intent, 0, ActivityOptions
@@ -230,11 +228,6 @@ class MainActivity : BaseActivity(), PanelProvider {
         return bottomSheetPanel.state != BottomSheetBehavior.STATE_HIDDEN
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        fragmentSceneRouter.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
     companion object {
 
         @IdRes
@@ -255,9 +248,8 @@ class MainActivity : BaseActivity(), PanelProvider {
             else -> throw IllegalArgumentException("0x${toString(16)} is invalid ID")
         }
 
-        private fun MainUiModel.asScene(): SceneData = when (this) {
-            is NowState -> SceneData(toString(), isPersist = false) { NowFragment.newInstance() }
-            is PlanState -> SceneData(toString(), isPersist = false) { PlanFragment.newInstance() }
+        private fun MainUiModel.asScene(): SceneData {
+            return SceneData(toString(), isPersist = false) { HomeFragment.newInstance() }
         }
     }
 }

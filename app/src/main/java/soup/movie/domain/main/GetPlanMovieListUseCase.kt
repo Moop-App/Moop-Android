@@ -5,7 +5,7 @@ import soup.movie.data.MoopRepository
 import soup.movie.data.helper.getDDay
 import soup.movie.data.model.Movie
 import soup.movie.domain.model.MovieFilter
-import soup.movie.ui.main.movie.MovieListUiModel
+import soup.movie.ui.main.home.HomeUiModel
 
 class GetPlanMovieListUseCase(
     private val repository: MoopRepository
@@ -14,7 +14,7 @@ class GetPlanMovieListUseCase(
     operator fun invoke(
         clearCache: Boolean,
         movieFilter: MovieFilter
-    ): Observable<MovieListUiModel> {
+    ): Observable<HomeUiModel> {
         return repository.getPlanList(clearCache)
             .map { response ->
                 response.list.asSequence()
@@ -22,8 +22,8 @@ class GetPlanMovieListUseCase(
                     .filter { movieFilter(it) }
                     .toList()
             }
-            .map { MovieListUiModel.DoneState(it) as MovieListUiModel }
-            .startWith(MovieListUiModel.LoadingState)
-            .onErrorReturnItem(MovieListUiModel.ErrorState)
+            .map { HomeUiModel.DoneState(it) as HomeUiModel }
+            .startWith(HomeUiModel.LoadingState)
+            .onErrorReturnItem(HomeUiModel.ErrorState)
     }
 }

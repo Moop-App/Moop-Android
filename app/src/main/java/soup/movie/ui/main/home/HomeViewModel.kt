@@ -1,4 +1,4 @@
-package soup.movie.ui.main.now
+package soup.movie.ui.main.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,17 +8,18 @@ import io.reactivex.rxkotlin.Observables
 import io.reactivex.schedulers.Schedulers
 import soup.movie.domain.main.GetMovieFilterUseCase
 import soup.movie.domain.main.GetNowMovieListUseCase
+import soup.movie.domain.main.GetPlanMovieListUseCase
 import soup.movie.ui.BaseViewModel
-import soup.movie.ui.main.movie.MovieListUiModel
 import javax.inject.Inject
 
-class NowViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     getNowMovieList: GetNowMovieListUseCase,
+    getPlanMovieList: GetPlanMovieListUseCase,
     getMovieFilter: GetMovieFilterUseCase
 ) : BaseViewModel() {
 
-    private val _uiModel = MutableLiveData<MovieListUiModel>()
-    val uiModel: LiveData<MovieListUiModel>
+    private val _uiModel = MutableLiveData<HomeUiModel>()
+    val uiModel: LiveData<HomeUiModel>
         get() = _uiModel
 
     private val refreshRelay = BehaviorRelay.createDefault(false)
@@ -31,7 +32,9 @@ class NowViewModel @Inject constructor(
             )
             .subscribeOn(Schedulers.io())
             .switchMap { (clearCache, movieFilter) ->
+                //TODO:
                 getNowMovieList(clearCache, movieFilter)
+                //getPlanMovieList(clearCache, movieFilter)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _uiModel.value = it }

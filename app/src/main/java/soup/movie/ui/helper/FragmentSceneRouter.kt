@@ -16,7 +16,7 @@ class FragmentSceneRouter(
 
     data class SceneData(
         val tag: String,
-        val isPersist: Boolean = true,
+        val isPersist: Boolean = false,
         @AnimRes val enter: Int = R.anim.fade_in,
         @AnimRes val exit: Int = R.anim.fade_out,
         val newFragment: () -> Fragment
@@ -62,12 +62,6 @@ class FragmentSceneRouter(
 
     fun reselectTab() {
         (fragmentManager.findFragmentById(containerId) as? OnReselectListener)?.onReselect()
-    }
-
-    fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        fragmentManager.findFragmentById(containerId)?.run {
-            onRequestPermissionsResult(requestCode, permissions, grantResults)
-        }
     }
 
     fun onInterceptMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {

@@ -1,13 +1,10 @@
-package soup.movie.ui.main.plan
+package soup.movie.ui.main.home
 
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_vertical_list.*
@@ -15,27 +12,27 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.FragmentVerticalListBinding
+import soup.movie.ui.BaseFragment
 import soup.movie.ui.base.OnReselectListener
+import soup.movie.ui.base.SharedElementsMapper
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.BaseTabFragment
-import soup.movie.ui.main.movie.MovieListAdapter
-import soup.movie.ui.main.movie.MovieListUiModel
-import soup.movie.ui.main.movie.filter.MovieFilterFragment
+import soup.movie.ui.main.PanelConsumer
+import soup.movie.ui.main.home.filter.HomeFilterFragment
 import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.settings.SettingsActivity
 import soup.movie.util.getColorAttr
 import soup.movie.util.observe
 import javax.inject.Inject
 
-class PlanFragment : BaseTabFragment(), OnReselectListener {
+class HomeFragment : BaseFragment(), SharedElementsMapper, PanelConsumer, OnReselectListener {
 
-    private val viewModel: PlanViewModel by viewModel()
+    private val viewModel: HomeViewModel by viewModel()
 
     @Inject
     lateinit var analytics: EventAnalytics
 
     private val listAdapter by lazy {
-        MovieListAdapter { movie, sharedElements ->
+        HomeListAdapter { movie, sharedElements ->
             analytics.clickMovie(isNow = movie.isNow)
             MovieSelectManager.select(movie)
             val intent = Intent(requireActivity(), DetailActivity::class.java)
@@ -45,7 +42,15 @@ class PlanFragment : BaseTabFragment(), OnReselectListener {
         }
     }
 
-    override val menuResource: Int = R.menu.fragment_movie_list
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_movie_list, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -59,7 +64,7 @@ class PlanFragment : BaseTabFragment(), OnReselectListener {
                     hidePanel()
                 } else {
                     analytics.clickMenuFilter()
-                    showPanel(MovieFilterFragment.toPanelData())
+                    showPanel(HomeFilterFragment.toPanelData())
                 }
                 return true
             }
@@ -133,11 +138,11 @@ class PlanFragment : BaseTabFragment(), OnReselectListener {
         }
     }
 
-    private fun render(viewState: MovieListUiModel) {
-        swipeRefreshLayout?.isRefreshing = viewState is MovieListUiModel.LoadingState
-        errorView?.isVisible = viewState is MovieListUiModel.ErrorState
+    private fun render(viewState: HomeUiModel) {
+        swipeRefreshLayout?.isRefreshing = viewState is HomeUiModel.LoadingState
+        errorView?.isVisible = viewState is HomeUiModel.ErrorState
         noItemsView?.isVisible = viewState.hasNoItems()
-        if (viewState is MovieListUiModel.DoneState) {
+        if (viewState is HomeUiModel.DoneState) {
             listAdapter.submitList(viewState.movies)
         }
     }
@@ -148,6 +153,6 @@ class PlanFragment : BaseTabFragment(), OnReselectListener {
 
     companion object {
 
-        fun newInstance(): PlanFragment = PlanFragment()
+        fun newInstance(): HomeFragment = HomeFragment()
     }
 }

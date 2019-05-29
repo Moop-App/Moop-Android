@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import soup.movie.data.MoopRepository
 import soup.movie.data.model.Movie
 import soup.movie.domain.model.MovieFilter
-import soup.movie.ui.main.movie.MovieListUiModel
+import soup.movie.ui.main.home.HomeUiModel
 
 class GetNowMovieListUseCase(
     private val repository: MoopRepository
@@ -13,7 +13,7 @@ class GetNowMovieListUseCase(
     operator fun invoke(
         clearCache: Boolean,
         movieFilter: MovieFilter
-    ): Observable<MovieListUiModel> {
+    ): Observable<HomeUiModel> {
         return repository.getNowList(clearCache)
             .map { it ->
                 it.list.asSequence()
@@ -21,8 +21,8 @@ class GetNowMovieListUseCase(
                     .filter { movieFilter(it) }
                     .toList()
             }
-            .map { MovieListUiModel.DoneState(it) as MovieListUiModel }
-            .startWith(MovieListUiModel.LoadingState)
-            .onErrorReturnItem(MovieListUiModel.ErrorState)
+            .map { HomeUiModel.DoneState(it) as HomeUiModel }
+            .startWith(HomeUiModel.LoadingState)
+            .onErrorReturnItem(HomeUiModel.ErrorState)
     }
 }
