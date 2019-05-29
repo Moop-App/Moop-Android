@@ -47,14 +47,10 @@ class MainViewModel @Inject constructor(
     }
 
     fun requestMovie(movieId: MovieId?) {
-        //TODO: connect with view lifecycle
-        if (movieId == null) {
-            _uiEvent.event = MainUiEvent.NotFoundAction
-        } else {
+        if (movieId != null) {
             repository.getMovie(movieId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map<MainUiEvent> { MainUiEvent.ShowDetailAction(it) }
-                .defaultIfEmpty(MainUiEvent.NotFoundAction)
                 .subscribe { _uiEvent.event = it }
                 .disposeOnCleared()
         }

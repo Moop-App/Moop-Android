@@ -26,15 +26,14 @@ import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.helper.FragmentSceneRouter
 import soup.movie.ui.helper.FragmentSceneRouter.SceneData
-import soup.movie.ui.main.MainUiEvent.NotFoundAction
 import soup.movie.ui.main.MainUiEvent.ShowDetailAction
-import soup.movie.ui.main.MainUiModel.*
+import soup.movie.ui.main.MainUiModel.NowState
+import soup.movie.ui.main.MainUiModel.PlanState
 import soup.movie.ui.main.now.NowFragment
 import soup.movie.ui.main.plan.PlanFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.observe
 import soup.movie.util.observeEvent
-import soup.movie.util.showToast
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), PanelProvider {
@@ -90,11 +89,11 @@ class MainActivity : BaseActivity(), PanelProvider {
         animate().cancel()
         alpha = 1f
         animate()
-                .alpha(0f)
-                .setDuration(200)
-                .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-                .setStartDelay(0)
-                .withEndAction { visibility = View.INVISIBLE }
+            .alpha(0f)
+            .setDuration(200)
+            .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+            .setStartDelay(0)
+            .withEndAction { visibility = View.INVISIBLE }
     }
 
     private fun View.animateShow() {
@@ -102,11 +101,11 @@ class MainActivity : BaseActivity(), PanelProvider {
         alpha = 0f
         visibility = View.VISIBLE
         animate()
-                .alpha(1f)
-                .setDuration(200)
-                .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-                .setStartDelay(0)
-                .withEndAction(null)
+            .alpha(1f)
+            .setDuration(200)
+            .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+            .setStartDelay(0)
+            .withEndAction(null)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,8 +124,10 @@ class MainActivity : BaseActivity(), PanelProvider {
         scheduleStartPostponedTransition()
 
         setExitSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: List<String>,
-                                             sharedElements: MutableMap<String, View>) {
+            override fun onMapSharedElements(
+                names: List<String>,
+                sharedElements: MutableMap<String, View>
+            ) {
                 fragmentSceneRouter.onInterceptMapSharedElements(names, sharedElements)
             }
         })
@@ -205,15 +206,12 @@ class MainActivity : BaseActivity(), PanelProvider {
 
     private fun execute(action: MainUiEvent) {
         when (action) {
-            is NotFoundAction -> {
-                showToast(R.string.action_detail_unknown)
-            }
             is ShowDetailAction -> {
                 MovieSelectManager.select(action.movie)
                 val intent = Intent(this, DetailActivity::class.java)
                 startActivityForResult(intent, 0, ActivityOptions
-                        .makeSceneTransitionAnimation(this)
-                        .toBundle())
+                    .makeSceneTransitionAnimation(this)
+                    .toBundle())
             }
         }
     }
