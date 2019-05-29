@@ -38,7 +38,6 @@ class MovieFilter(
     }
 
     private fun Movie.isFilterBy(genreFilter: GenreFilter): Boolean {
-        return genre?.any { it !in genreFilter.blacklist }
-            ?: genre.isNullOrEmpty() and genreFilter.isEtcIncluded()
+        return genre?.any { it !in genreFilter.blacklist } ?: false
     }
 }

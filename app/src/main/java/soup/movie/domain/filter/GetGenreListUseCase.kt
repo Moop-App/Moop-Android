@@ -3,7 +3,6 @@ package soup.movie.domain.filter
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables
 import soup.movie.data.MoopRepository
-import soup.movie.data.model.GenreFilter
 import soup.movie.data.model.response.MovieListResponse
 
 class GetGenreListUseCase(
@@ -33,9 +32,6 @@ class GetGenreListUseCase(
     }
 
     private fun merge(set1: Set<String>, set2: Set<String>): List<String> {
-        return mutableListOf<String>().apply {
-            addAll(set1 + set2)
-            add(GenreFilter.GENRE_ETC)
-        }
+        return (set1 + set2).toList()
     }
 }
