@@ -45,7 +45,7 @@
                     android:id="@+id/searchBack"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_arrow_back_padded"
                     android:transitionName="@string/transition_search_back" />
 
@@ -112,7 +112,7 @@
 
             <androidx.core.widget.ContentLoadingProgressBar
                 android:id="@+id/loadingView"
-                style="?android:attr/progressBarStyle"
+                style="?progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"

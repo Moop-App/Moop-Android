@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:background="?selectableItemBackground"
         tools:background="?attr/moop_stageColor"
         tools:layout_height="280dp" >
 
