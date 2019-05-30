@@ -81,14 +81,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:visibility="visible" />
 
-            <View
-                android:id="@+id/dim"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#66000000"
-                android:visibility="gone"
-                tools:visibility="gone" />
-
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigation"
                 style="@style/Widget.MaterialComponents.BottomNavigationView"
