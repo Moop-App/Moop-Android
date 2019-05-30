@@ -1,7 +1,7 @@
 package soup.movie.ui.helper
 
 import androidx.fragment.app.FragmentManager
-import soup.movie.ui.main.PanelData
+import soup.movie.ui.main.home.PanelData
 
 class FragmentPanelRouter(
     private val fragmentManager: FragmentManager,

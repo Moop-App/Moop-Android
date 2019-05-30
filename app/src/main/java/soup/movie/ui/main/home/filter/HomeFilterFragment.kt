@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.home_filter_item_genre.*
 import soup.movie.R
 import soup.movie.databinding.HomeFilterFragmentBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.main.PanelData
+import soup.movie.ui.main.home.PanelData
 import soup.movie.util.inflate
 import soup.movie.util.observe
 

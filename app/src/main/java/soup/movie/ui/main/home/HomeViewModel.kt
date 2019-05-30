@@ -9,10 +9,12 @@ import io.reactivex.schedulers.Schedulers
 import soup.movie.domain.main.GetMovieFilterUseCase
 import soup.movie.domain.main.GetNowMovieListUseCase
 import soup.movie.domain.main.GetPlanMovieListUseCase
+import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
+    private val lastMainTabSetting: LastMainTabSetting,
     getNowMovieList: GetNowMovieListUseCase,
     getPlanMovieList: GetPlanMovieListUseCase,
     getMovieFilter: GetMovieFilterUseCase
@@ -27,18 +29,25 @@ class HomeViewModel @Inject constructor(
     init {
         Observables
             .combineLatest(
+                lastMainTabSetting.asObservable().distinctUntilChanged(),
                 refreshRelay,
                 getMovieFilter()
             )
             .subscribeOn(Schedulers.io())
-            .switchMap { (clearCache, movieFilter) ->
-                //TODO:
-                getNowMovieList(clearCache, movieFilter)
-                //getPlanMovieList(clearCache, movieFilter)
+            .switchMap { (mainTab, clearCache, movieFilter) ->
+                if (mainTab == LastMainTabSetting.Tab.Now) {
+                    getNowMovieList(clearCache, movieFilter)
+                } else {
+                    getPlanMovieList(clearCache, movieFilter)
+                }
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _uiModel.value = it }
             .disposeOnCleared()
+    }
+
+    fun setCurrentTab(mode: LastMainTabSetting.Tab) {
+        lastMainTabSetting.set(mode)
     }
 
     fun refresh() {

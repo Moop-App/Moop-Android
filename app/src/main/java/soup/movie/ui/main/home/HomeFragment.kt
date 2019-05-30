@@ -1,5 +1,6 @@
 package soup.movie.ui.main.home
 
+import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
@@ -7,23 +8,26 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
+import androidx.core.view.postOnAnimationDelayed
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
+import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.PanelConsumer
+import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.main.home.filter.HomeFilterFragment
 import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.settings.SettingsActivity
-import soup.movie.util.getColorAttr
-import soup.movie.util.observe
+import soup.movie.util.*
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment(), PanelConsumer {
+class HomeFragment : BaseFragment(), OnBackPressedListener {
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -41,10 +45,69 @@ class HomeFragment : BaseFragment(), PanelConsumer {
         }
     }
 
+    private val fragmentPanelRouter by lazyFast {
+        FragmentPanelRouter(childFragmentManager, R.id.bottomSheetContainer)
+    }
+
+    private val bottomSheetPanel by lazyFast {
+        BottomSheetBehavior.from(bottomSheet).apply {
+            setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+
+                private var lastState: Int = BottomSheetBehavior.STATE_HIDDEN
+
+                @SuppressLint("SwitchIntDef")
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    when (newState) {
+                        BottomSheetBehavior.STATE_HIDDEN -> {
+                            fragmentPanelRouter.hide()
+                            dim.animateHide()
+                        }
+                        BottomSheetBehavior.STATE_SETTLING -> {
+                            if (lastState == BottomSheetBehavior.STATE_HIDDEN) {
+                                dim.animateShow()
+                            }
+                        }
+                    }
+                    when (newState) {
+                        BottomSheetBehavior.STATE_HIDDEN,
+                        BottomSheetBehavior.STATE_COLLAPSED,
+                        BottomSheetBehavior.STATE_EXPANDED -> lastState = newState
+                    }
+                }
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                }
+
+                private fun View.animateHide() {
+                    animate().cancel()
+                    alpha = 1f
+                    animate()
+                        .alpha(0f)
+                        .setDuration(200)
+                        .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                        .setStartDelay(0)
+                        .withEndAction { visibility = View.INVISIBLE }
+                }
+
+                private fun View.animateShow() {
+                    animate().cancel()
+                    alpha = 0f
+                    visibility = View.VISIBLE
+                    animate()
+                        .alpha(1f)
+                        .setDuration(200)
+                        .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                        .setStartDelay(0)
+                        .withEndAction(null)
+                }
+            })
+            dim.setOnClickListener { state = BottomSheetBehavior.STATE_HIDDEN }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
         setExitSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(
                 names: List<String>,
@@ -71,6 +134,15 @@ class HomeFragment : BaseFragment(), PanelConsumer {
                 }
             }
         })
+    }
+
+    private fun scheduleStartPostponedTransition() {
+        postponeEnterTransition()
+
+        //FixMe: find a timing to call startPostponedEnterTransition()
+        bottomNavigation.postOnAnimationDelayed(100) {
+            startPostponedEnterTransition()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -113,6 +185,7 @@ class HomeFragment : BaseFragment(), PanelConsumer {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        scheduleStartPostponedTransition()
         initViewState(view.context)
         viewModel.uiModel.observe(viewLifecycleOwner) {
             render(it)
@@ -120,6 +193,7 @@ class HomeFragment : BaseFragment(), PanelConsumer {
     }
 
     private fun initViewState(ctx: Context) {
+        bottomSheetPanel.state = BottomSheetBehavior.STATE_HIDDEN
         listView.apply {
             adapter = listAdapter
             itemAnimator = SlideInUpAnimator().apply {
@@ -137,6 +211,20 @@ class HomeFragment : BaseFragment(), PanelConsumer {
         errorView.setOnClickListener {
             viewModel.refresh()
         }
+        bottomNavigation.setOnNavigationItemSelectedListener {
+            consume {
+                when (it.itemId) {
+                    R.id.action_now -> {
+                        activity?.setTitle(R.string.tab_now)
+                        viewModel.setCurrentTab(LastMainTabSetting.Tab.Now)
+                    }
+                    R.id.action_plan -> {
+                        activity?.setTitle(R.string.tab_plan)
+                        viewModel.setCurrentTab(LastMainTabSetting.Tab.Plan)
+                    }
+                }
+            }
+        }
     }
 
     private fun render(viewState: HomeUiModel) {
@@ -146,6 +234,28 @@ class HomeFragment : BaseFragment(), PanelConsumer {
         if (viewState is HomeUiModel.DoneState) {
             listAdapter.submitList(viewState.movies)
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (bottomSheetPanel.state != BottomSheetBehavior.STATE_HIDDEN) {
+            bottomSheetPanel.state = BottomSheetBehavior.STATE_HIDDEN
+            return true
+        }
+        return false
+    }
+
+    private fun showPanel(panelState: PanelData) {
+        bottomSheetPanel.state = BottomSheetBehavior.STATE_COLLAPSED
+        fragmentPanelRouter.show(panelState)
+    }
+
+    private fun hidePanel() {
+        bottomSheetPanel.state = BottomSheetBehavior.STATE_HIDDEN
+        fragmentPanelRouter.hide()
+    }
+
+    private fun panelIsShown(): Boolean {
+        return bottomSheetPanel.state != BottomSheetBehavior.STATE_HIDDEN
     }
 
     companion object {
