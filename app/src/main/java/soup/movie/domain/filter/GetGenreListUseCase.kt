@@ -1,16 +1,15 @@
-package soup.movie.domain
+package soup.movie.domain.filter
 
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables
 import soup.movie.data.MoopRepository
-import soup.movie.data.model.GenreFilter
 import soup.movie.data.model.response.MovieListResponse
 
-class GetGenreUseCase(
+class GetGenreListUseCase(
     private val repository: MoopRepository
 ) {
 
-    fun getGenreList(): Observable<List<String>> {
+    operator fun invoke(): Observable<List<String>> {
         return Observables
             .zip(
                 repository.getNowList(false).mapToGenreSet(),
@@ -33,9 +32,6 @@ class GetGenreUseCase(
     }
 
     private fun merge(set1: Set<String>, set2: Set<String>): List<String> {
-        return mutableListOf<String>().apply {
-            addAll(set1 + set2)
-            add(GenreFilter.GENRE_ETC)
-        }
+        return (set1 + set2).toList()
     }
 }

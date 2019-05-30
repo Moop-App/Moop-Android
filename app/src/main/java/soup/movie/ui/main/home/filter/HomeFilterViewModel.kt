@@ -1,4 +1,4 @@
-package soup.movie.ui.main.movie.filter
+package soup.movie.ui.main.home.filter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,15 +15,15 @@ import soup.movie.data.model.TheaterFilter
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.data.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
-import soup.movie.domain.GetGenreUseCase
+import soup.movie.domain.filter.GetGenreListUseCase
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 
-class MovieFilterViewModel @Inject constructor(
-    genreUseCase: GetGenreUseCase,
+class HomeFilterViewModel @Inject constructor(
+    getGenreList: GetGenreListUseCase,
     private val theaterFilterSetting: TheaterFilterSetting,
     private val ageFilterSetting: AgeFilterSetting,
     private val genreFilterSetting: GenreFilterSetting
@@ -64,7 +64,7 @@ class MovieFilterViewModel @Inject constructor(
 
         Observables
             .combineLatest(
-                genreUseCase.getGenreList(),
+                getGenreList(),
                 genreFilterSetting.asObservable()
                     .doOnNext { lastGenreFilter = it }
             ) { allGenre, filter ->

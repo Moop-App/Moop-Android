@@ -20,7 +20,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
+                android:layout_height="?actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:elevation="4dp"
                 android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
@@ -75,7 +75,7 @@
 
                 <androidx.core.widget.ContentLoadingProgressBar
                     android:id="@+id/loadingView"
-                    style="?android:attr/progressBarStyle"
+                    style="?progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
@@ -92,7 +92,7 @@
                 android:layout_height="280dp"
                 android:elevation="16dp"
                 android:background="?attr/moop_stageColor"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:foreground="?selectableItemBackground"
                 app:behavior_hideable="false"
                 app:behavior_peekHeight="60dp"
                 app:layout_behavior="@string/bottom_sheet_behavior" >

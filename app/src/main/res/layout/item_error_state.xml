@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:background="?attr/moop_errorColor"
-    android:foreground="?android:attr/selectableItemBackground" >
+    android:foreground="?selectableItemBackground" >
 
     <ImageView
         android:id="@+id/infoIcon"

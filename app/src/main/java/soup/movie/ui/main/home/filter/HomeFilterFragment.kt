@@ -1,32 +1,32 @@
-package soup.movie.ui.main.movie.filter
+package soup.movie.ui.main.home.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.android.synthetic.main.item_filter_genre.*
+import kotlinx.android.synthetic.main.home_filter_item_genre.*
 import soup.movie.R
-import soup.movie.databinding.FragmentMovieFilterBinding
-import soup.movie.ui.BaseFragment
-import soup.movie.ui.main.PanelData
+import soup.movie.databinding.HomeFilterFragmentBinding
+import soup.movie.ui.BaseBottomSheetDialogFragment
 import soup.movie.util.inflate
 import soup.movie.util.observe
 
-class MovieFilterFragment : BaseFragment() {
+class HomeFilterFragment : BaseBottomSheetDialogFragment() {
 
-    private val viewModel: MovieFilterViewModel by viewModel()
+    private val viewModel: HomeFilterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentMovieFilterBinding.inflate(inflater, container, false)
+        return HomeFilterFragmentBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
-                viewModel = this@MovieFilterFragment.viewModel
+                viewModel = this@HomeFilterFragment.viewModel
             }
             .root
     }
@@ -53,8 +53,10 @@ class MovieFilterFragment : BaseFragment() {
 
     companion object {
 
-        private fun newInstance(): MovieFilterFragment = MovieFilterFragment()
-
-        fun toPanelData() = PanelData(toString()) { newInstance() }
+        fun show(hostFragment: Fragment) {
+            hostFragment.fragmentManager?.run {
+                HomeFilterFragment().show(this, "HomeFilter")
+            }
+        }
     }
 }

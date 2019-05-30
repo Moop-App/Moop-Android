@@ -23,7 +23,7 @@
             android:id="@+id/posterCard"
             android:layout_width="124.2dp"
             android:layout_height="0dp"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:background="?selectableItemBackground"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,27:40"

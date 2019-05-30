@@ -7,21 +7,22 @@
 
         <variable
             name="viewModel"
-            type="soup.movie.ui.main.movie.filter.MovieFilterViewModel" />
+            type="soup.movie.ui.main.home.filter.HomeFilterViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="soup.movie.ui.main.movie.filter.MovieFilterFragment">
+        tools:context="soup.movie.ui.main.home.filter.HomeFilterFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?attr/moop_bgColor">
 
             <include
                 android:id="@+id/theaterItem"
-                layout="@layout/item_filter_theater"
+                layout="@layout/home_filter_item_theater"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:item="@{viewModel.theaterUiModel}"
@@ -42,7 +43,7 @@
 
             <include
                 android:id="@+id/ageItem"
-                layout="@layout/item_filter_age"
+                layout="@layout/home_filter_item_age"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:item="@{viewModel.ageUiModel}"
@@ -63,7 +64,7 @@
 
             <include
                 android:id="@+id/genreItem"
-                layout="@layout/item_filter_genre"
+                layout="@layout/home_filter_item_genre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

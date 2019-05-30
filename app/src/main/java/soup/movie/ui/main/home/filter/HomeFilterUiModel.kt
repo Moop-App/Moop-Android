@@ -1,15 +1,15 @@
-package soup.movie.ui.main.movie.filter
+package soup.movie.ui.main.home.filter
 
 import androidx.annotation.Keep
 
-sealed class MovieFilterUiModel
+sealed class HomeFilterUiModel
 
 @Keep
 data class TheaterFilterUiModel(
     val hasCgv: Boolean,
     val hasLotteCinema: Boolean,
     val hasMegabox: Boolean
-) : MovieFilterUiModel()
+) : HomeFilterUiModel()
 
 @Keep
 data class AgeFilterUiModel(
@@ -17,12 +17,12 @@ data class AgeFilterUiModel(
     val has12: Boolean,
     val has15: Boolean,
     val has19: Boolean
-) : MovieFilterUiModel()
+) : HomeFilterUiModel()
 
 @Keep
 data class GenreFilterUiModel(
     val items: List<GenreFilterItem>
-) : MovieFilterUiModel()
+) : HomeFilterUiModel()
 
 @Keep
 class GenreFilterItem(

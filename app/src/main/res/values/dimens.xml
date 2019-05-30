@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bottom_navigation_height">56dp</dimen>
+    <dimen name="bottom_sheet_peek_height">250dp</dimen>
 
     <integer name="grid_span_count">3</integer>
 

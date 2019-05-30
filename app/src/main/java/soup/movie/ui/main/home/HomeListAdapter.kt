@@ -1,10 +1,10 @@
-package soup.movie.ui.main.movie
+package soup.movie.ui.main.home
 
 import android.util.Pair
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
-import kotlinx.android.synthetic.main.item_movie.view.*
+import kotlinx.android.synthetic.main.home_item_movie.view.*
 import soup.movie.R
 import soup.movie.data.helper.isBest
 import soup.movie.data.helper.isDDay
@@ -17,7 +17,7 @@ import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.showToast
 import soup.movie.util.with
 
-class MovieListAdapter(
+class HomeListAdapter(
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
 ) : DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
 
@@ -61,5 +61,5 @@ class MovieListAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int) = R.layout.item_movie
+    override fun getItemViewType(position: Int) = R.layout.home_item_movie
 }

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:background="?selectableItemBackground"
         tools:background="@color/debug_background" >
 
         <TextView

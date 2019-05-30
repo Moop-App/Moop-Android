@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data/>
+    <data />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/settings_category_margin_vertical"
-        android:paddingBottom="@dimen/settings_category_margin_vertical" >
+        android:paddingBottom="@dimen/settings_category_margin_vertical">
 
         <TextView
             android:id="@+id/versionCategory"
@@ -18,8 +17,8 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_category_version"
             android:textAppearance="@style/TextAppearance.Settings.Category"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -29,7 +28,7 @@
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
             android:background="@drawable/bg_round_rect"
             android:backgroundTint="?attr/moop_cardBgColorLight"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:foreground="?selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/versionCategory"
@@ -42,27 +41,27 @@
             android:textColor="?attr/moop_cardContentColorDark"
             android:textSize="15sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/versionSeparator"
+            app:layout_constraintEnd_toStartOf="@+id/versionSeparator"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/versionSeparator"
-            app:layout_constraintBottom_toBottomOf="@+id/versionSeparator"
-            app:layout_constraintEnd_toStartOf="@+id/versionSeparator"
             tools:text="현재 0.1.8" />
 
         <TextView
             android:id="@+id/versionSeparator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:gravity="center_vertical"
             android:text="/"
             android:textColor="?attr/moop_cardContentColorDark"
             android:textSize="15sp"
-            app:layout_constraintTop_toTopOf="@+id/versionButton"
             app:layout_constraintBottom_toBottomOf="@+id/versionButton"
+            app:layout_constraintEnd_toStartOf="@+id/latestVersionLabel"
             app:layout_constraintStart_toEndOf="@+id/currentVersionLabel"
-            app:layout_constraintEnd_toStartOf="@+id/latestVersionLabel" />
+            app:layout_constraintTop_toTopOf="@+id/versionButton" />
 
         <TextView
             android:id="@+id/latestVersionLabel"
@@ -71,23 +70,23 @@
             android:textColor="?attr/moop_cardContentColorDark"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@+id/versionSeparator"
             app:layout_constraintBottom_toBottomOf="@+id/versionSeparator"
-            app:layout_constraintStart_toEndOf="@+id/versionSeparator"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="최신 0.1.8"/>
+            app:layout_constraintStart_toEndOf="@+id/versionSeparator"
+            app:layout_constraintTop_toTopOf="@+id/versionSeparator"
+            tools:text="최신 0.1.8" />
 
         <ImageView
             android:id="@+id/marketIcon"
             android:layout_width="48dp"
             android:layout_height="0dp"
             android:layout_marginEnd="4dp"
+            android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_round_shop"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless"
-            app:layout_constraintTop_toTopOf="@+id/versionButton"
             app:layout_constraintBottom_toBottomOf="@+id/versionButton"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/versionButton"
             tools:src="@drawable/ic_round_new_releases"
             tools:visibility="visible" />
 
