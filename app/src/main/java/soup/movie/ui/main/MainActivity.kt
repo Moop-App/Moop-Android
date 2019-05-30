@@ -47,11 +47,6 @@ class MainActivity : BaseActivity() {
         intent?.handleDeepLink()
     }
 
-    override fun onBackPressed() {
-        //TODO: Custom Back 구현
-        super.onBackPressed()
-    }
-
     private fun Intent.handleDeepLink() {
         when (action) {
             ACTION_VIEW -> {

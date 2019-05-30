@@ -18,7 +18,6 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.main.home.filter.HomeFilterFragment
@@ -27,7 +26,7 @@ import soup.movie.ui.settings.SettingsActivity
 import soup.movie.util.*
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment(), OnBackPressedListener {
+class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -234,14 +233,6 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         if (viewState is HomeUiModel.DoneState) {
             listAdapter.submitList(viewState.movies)
         }
-    }
-
-    override fun onBackPressed(): Boolean {
-        if (bottomSheetPanel.state != BottomSheetBehavior.STATE_HIDDEN) {
-            bottomSheetPanel.state = BottomSheetBehavior.STATE_HIDDEN
-            return true
-        }
-        return false
     }
 
     private fun showPanel(panelState: PanelData) {
