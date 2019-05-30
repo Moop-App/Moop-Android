@@ -76,34 +76,33 @@ class MainActivity : BaseActivity(), PanelProvider {
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    bottomNavigation.translationY = bottomNavigation.height * (slideOffset + 1) / 1
+                }
+
+                private fun View.animateHide() {
+                    animate().cancel()
+                    alpha = 1f
+                    animate()
+                        .alpha(0f)
+                        .setDuration(200)
+                        .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                        .setStartDelay(0)
+                        .withEndAction { visibility = View.INVISIBLE }
+                }
+
+                private fun View.animateShow() {
+                    animate().cancel()
+                    alpha = 0f
+                    visibility = View.VISIBLE
+                    animate()
+                        .alpha(1f)
+                        .setDuration(200)
+                        .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                        .setStartDelay(0)
+                        .withEndAction(null)
                 }
             })
             dim.setOnClickListener { state = STATE_HIDDEN }
         }
-    }
-
-    private fun View.animateHide() {
-        animate().cancel()
-        alpha = 1f
-        animate()
-            .alpha(0f)
-            .setDuration(200)
-            .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-            .setStartDelay(0)
-            .withEndAction { visibility = View.INVISIBLE }
-    }
-
-    private fun View.animateShow() {
-        animate().cancel()
-        alpha = 0f
-        visibility = View.VISIBLE
-        animate()
-            .alpha(1f)
-            .setDuration(200)
-            .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-            .setStartDelay(0)
-            .withEndAction(null)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,10 +112,11 @@ class MainActivity : BaseActivity(), PanelProvider {
             lifecycleOwner = this@MainActivity
         }
 
-        initViewState()
-
         //TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
+
+        intent?.handleDeepLink()
+        initViewState()
 
         bottomSheetPanel.state = STATE_HIDDEN
         scheduleStartPostponedTransition()
@@ -157,7 +157,6 @@ class MainActivity : BaseActivity(), PanelProvider {
     }
 
     private fun initViewState() {
-        intent?.handleDeepLink()
         bottomNavigation.setOnNavigationItemSelectedListener {
             title = it.title
             viewModel.setCurrentTab(it.itemId.parseToTabMode())
@@ -171,7 +170,7 @@ class MainActivity : BaseActivity(), PanelProvider {
     private fun Intent.handleDeepLink() {
         when (action) {
             ACTION_VIEW -> {
-                KakaoLink.extractMovieId(this).let {
+                KakaoLink.extractMovieId(this)?.let {
                     viewModel.requestMovie(it)
                 }
             }

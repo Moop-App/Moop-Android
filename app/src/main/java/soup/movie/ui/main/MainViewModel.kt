@@ -46,13 +46,11 @@ class MainViewModel @Inject constructor(
         lastMainTabSetting.set(mode)
     }
 
-    fun requestMovie(movieId: MovieId?) {
-        if (movieId != null) {
-            repository.getMovie(movieId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { ShowDetailUiEvent(it) }
-                .subscribe { _uiEvent.event = it }
-                .disposeOnCleared()
-        }
+    fun requestMovie(movieId: MovieId) {
+        repository.getMovie(movieId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { ShowDetailUiEvent(it) }
+            .subscribe { _uiEvent.event = it }
+            .disposeOnCleared()
     }
 }
