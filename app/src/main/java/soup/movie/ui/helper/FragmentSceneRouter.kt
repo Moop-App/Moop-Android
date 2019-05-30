@@ -1,13 +1,11 @@
 package soup.movie.ui.helper
 
-import android.view.View
 import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import soup.movie.R
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.base.OnReselectListener
-import soup.movie.ui.base.SharedElementsMapper
 
 class FragmentSceneRouter(
     private val fragmentManager: FragmentManager,
@@ -62,10 +60,5 @@ class FragmentSceneRouter(
 
     fun reselectTab() {
         (fragmentManager.findFragmentById(containerId) as? OnReselectListener)?.onReselect()
-    }
-
-    fun onInterceptMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
-        (fragmentManager.findFragmentById(containerId) as? SharedElementsMapper)
-                ?.onMapSharedElements(names, sharedElements)
     }
 }

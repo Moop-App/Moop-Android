@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -14,7 +15,6 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.base.OnReselectListener
-import soup.movie.ui.base.SharedElementsMapper
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.PanelConsumer
 import soup.movie.ui.main.home.filter.HomeFilterFragment
@@ -24,7 +24,7 @@ import soup.movie.util.getColorAttr
 import soup.movie.util.observe
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment(), SharedElementsMapper, PanelConsumer, OnReselectListener {
+class HomeFragment : BaseFragment(), PanelConsumer, OnReselectListener {
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -45,6 +45,33 @@ class HomeFragment : BaseFragment(), SharedElementsMapper, PanelConsumer, OnRese
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        setExitSharedElementCallback(object : SharedElementCallback() {
+            override fun onMapSharedElements(
+                names: List<String>,
+                sharedElements: MutableMap<String, View>
+            ) {
+                sharedElements.clear()
+                MovieSelectManager.getSelectedItem()?.run {
+                    listView.findViewWithTag<View>(id)?.let { movieView ->
+                        names.forEach { name ->
+                            val id: Int = when (name) {
+                                "background" -> R.id.backgroundView
+                                "poster" -> R.id.posterView
+                                "age_bg" -> R.id.ageBgView
+                                "new" -> R.id.newView
+                                "best" -> R.id.bestView
+                                "d_day" -> R.id.dDayView
+                                else -> View.NO_ID
+                            }
+                            movieView.findViewById<View>(id)?.let {
+                                sharedElements[name] = it
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -75,31 +102,6 @@ class HomeFragment : BaseFragment(), SharedElementsMapper, PanelConsumer, OnRese
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onMapSharedElements(
-        names: List<String>,
-        sharedElements: MutableMap<String, View>
-    ) {
-        sharedElements.clear()
-        MovieSelectManager.getSelectedItem()?.run {
-            listView.findViewWithTag<View>(id)?.let { movieView ->
-                names.forEach { name ->
-                    val id: Int = when (name) {
-                        "background" -> R.id.backgroundView
-                        "poster" -> R.id.posterView
-                        "age_bg" -> R.id.ageBgView
-                        "new" -> R.id.newView
-                        "best" -> R.id.bestView
-                        "d_day" -> R.id.dDayView
-                        else -> View.NO_ID
-                    }
-                    movieView.findViewById<View>(id)?.let {
-                        sharedElements[name] = it
-                    }
-                }
-            }
-        }
     }
 
     override fun onCreateView(
