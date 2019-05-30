@@ -14,7 +14,6 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.base.OnReselectListener
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.PanelConsumer
 import soup.movie.ui.main.home.filter.HomeFilterFragment
@@ -24,7 +23,7 @@ import soup.movie.util.getColorAttr
 import soup.movie.util.observe
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment(), PanelConsumer, OnReselectListener {
+class HomeFragment : BaseFragment(), PanelConsumer {
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -147,10 +146,6 @@ class HomeFragment : BaseFragment(), PanelConsumer, OnReselectListener {
         if (viewState is HomeUiModel.DoneState) {
             listAdapter.submitList(viewState.movies)
         }
-    }
-
-    override fun onReselect() {
-        listView?.smoothScrollToPosition(0)
     }
 
     companion object {

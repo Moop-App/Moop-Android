@@ -154,7 +154,6 @@ class MainActivity : BaseActivity(), PanelProvider {
             true
         }
         bottomNavigation.setOnNavigationItemReselectedListener {
-            fragmentSceneRouter.reselectTab()
         }
     }
 
