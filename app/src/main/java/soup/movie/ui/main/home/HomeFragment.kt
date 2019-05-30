@@ -1,6 +1,5 @@
 package soup.movie.ui.main.home
 
-import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
@@ -9,7 +8,6 @@ import android.view.*
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
 import soup.movie.R
@@ -18,11 +16,12 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.helper.FragmentPanelRouter
 import soup.movie.ui.main.home.filter.HomeFilterFragment
 import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.settings.SettingsActivity
-import soup.movie.util.*
+import soup.movie.util.consume
+import soup.movie.util.getColorAttr
+import soup.movie.util.observe
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
@@ -40,66 +39,6 @@ class HomeFragment : BaseFragment() {
             startActivityForResult(intent, 0, ActivityOptions
                 .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
                 .toBundle())
-        }
-    }
-
-    private val fragmentPanelRouter by lazyFast {
-        FragmentPanelRouter(childFragmentManager, R.id.bottomSheetContainer)
-    }
-
-    private val bottomSheetPanel by lazyFast {
-        BottomSheetBehavior.from(bottomSheet).apply {
-            setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-
-                private var lastState: Int = BottomSheetBehavior.STATE_HIDDEN
-
-                @SuppressLint("SwitchIntDef")
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-                        BottomSheetBehavior.STATE_HIDDEN -> {
-                            fragmentPanelRouter.hide()
-                            dim.animateHide()
-                        }
-                        BottomSheetBehavior.STATE_SETTLING -> {
-                            if (lastState == BottomSheetBehavior.STATE_HIDDEN) {
-                                dim.animateShow()
-                            }
-                        }
-                    }
-                    when (newState) {
-                        BottomSheetBehavior.STATE_HIDDEN,
-                        BottomSheetBehavior.STATE_COLLAPSED,
-                        BottomSheetBehavior.STATE_EXPANDED -> lastState = newState
-                    }
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                }
-
-                private fun View.animateHide() {
-                    animate().cancel()
-                    alpha = 1f
-                    animate()
-                        .alpha(0f)
-                        .setDuration(200)
-                        .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-                        .setStartDelay(0)
-                        .withEndAction { visibility = View.INVISIBLE }
-                }
-
-                private fun View.animateShow() {
-                    animate().cancel()
-                    alpha = 0f
-                    visibility = View.VISIBLE
-                    animate()
-                        .alpha(1f)
-                        .setDuration(200)
-                        .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-                        .setStartDelay(0)
-                        .withEndAction(null)
-                }
-            })
-            dim.setOnClickListener { state = BottomSheetBehavior.STATE_HIDDEN }
         }
     }
 
@@ -156,12 +95,8 @@ class HomeFragment : BaseFragment() {
                 return true
             }
             R.id.action_filter -> {
-                if (panelIsShown()) {
-                    hidePanel()
-                } else {
-                    analytics.clickMenuFilter()
-                    showPanel(HomeFilterFragment.toPanelData())
-                }
+                analytics.clickMenuFilter()
+                HomeFilterFragment.show(this)
                 return true
             }
             R.id.action_settings -> {
@@ -191,7 +126,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initViewState(ctx: Context) {
-        bottomSheetPanel.state = BottomSheetBehavior.STATE_HIDDEN
         listView.apply {
             adapter = listAdapter
             itemAnimator = SlideInUpAnimator().apply {
@@ -232,20 +166,6 @@ class HomeFragment : BaseFragment() {
         if (viewState is HomeUiModel.DoneState) {
             listAdapter.submitList(viewState.movies)
         }
-    }
-
-    private fun showPanel(panelState: PanelData) {
-        bottomSheetPanel.state = BottomSheetBehavior.STATE_COLLAPSED
-        fragmentPanelRouter.show(panelState)
-    }
-
-    private fun hidePanel() {
-        bottomSheetPanel.state = BottomSheetBehavior.STATE_HIDDEN
-        fragmentPanelRouter.hide()
-    }
-
-    private fun panelIsShown(): Boolean {
-        return bottomSheetPanel.state != BottomSheetBehavior.STATE_HIDDEN
     }
 
     companion object {

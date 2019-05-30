@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.home_filter_item_genre.*
 import soup.movie.R
 import soup.movie.databinding.HomeFilterFragmentBinding
-import soup.movie.ui.BaseFragment
-import soup.movie.ui.main.home.PanelData
+import soup.movie.ui.BaseBottomSheetDialogFragment
 import soup.movie.util.inflate
 import soup.movie.util.observe
 
-class HomeFilterFragment : BaseFragment() {
+class HomeFilterFragment : BaseBottomSheetDialogFragment() {
 
     private val viewModel: HomeFilterViewModel by viewModel()
 
@@ -53,8 +53,10 @@ class HomeFilterFragment : BaseFragment() {
 
     companion object {
 
-        private fun newInstance(): HomeFilterFragment = HomeFilterFragment()
-
-        fun toPanelData() = PanelData(toString()) { newInstance() }
+        fun show(hostFragment: Fragment) {
+            hostFragment.fragmentManager?.run {
+                HomeFilterFragment().show(this, "HomeFilter")
+            }
+        }
     }
 }

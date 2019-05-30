@@ -104,29 +104,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:menu="@menu/main_navigation_items" />
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:visibility="gone">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/bottomSheet"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:behavior_hideable="true"
-                    app:behavior_peekHeight="250dp"
-                    app:layout_behavior="@string/bottom_sheet_behavior">
-
-                    <FrameLayout
-                        android:id="@+id/bottomSheetContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?attr/moop_bgColor" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
