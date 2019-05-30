@@ -7,11 +7,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.view.isVisible
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.fragment_vertical_list.*
+import kotlinx.android.synthetic.main.home_fragment.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
-import soup.movie.databinding.FragmentVerticalListBinding
+import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.base.OnReselectListener
 import soup.movie.ui.base.SharedElementsMapper
@@ -107,7 +107,7 @@ class HomeFragment : BaseFragment(), SharedElementsMapper, PanelConsumer, OnRese
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentVerticalListBinding.inflate(inflater, container, false).root
+        return HomeFragmentBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

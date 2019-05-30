@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.android.synthetic.main.item_filter_genre.*
+import kotlinx.android.synthetic.main.home_filter_item_genre.*
 import soup.movie.R
-import soup.movie.databinding.FragmentMovieFilterBinding
+import soup.movie.databinding.HomeFilterFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.main.PanelData
 import soup.movie.util.inflate
@@ -23,7 +23,7 @@ class HomeFilterFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentMovieFilterBinding.inflate(inflater, container, false)
+        return HomeFilterFragmentBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
                 viewModel = this@HomeFilterFragment.viewModel

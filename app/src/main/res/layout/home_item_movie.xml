@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="item" type="soup.movie.data.model.Movie" />
+
+        <variable
+            name="item"
+            type="soup.movie.data.model.Movie" />
     </data>
 
     <LinearLayout
@@ -16,17 +18,17 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:foreground="?android:attr/selectableItemBackground"
-            tools:layout_width="120dp" >
+            tools:layout_width="120dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tag="@{item.id}" >
+                android:tag="@{item.id}">
 
                 <Space
                     android:id="@+id/backgroundView"
@@ -42,11 +44,11 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="?attr/moop_cardBgColorLight"
+                    android:contentDescription="@{item.title}"
                     android:scaleType="centerCrop"
                     android:srcUrl="@{item.posterUrl}"
-                    android:contentDescription="@{item.title}"
-                    app:layout_constraintDimensionRatio="H,27:40"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="H,27:40"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,9 +60,9 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_margin="7dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:item="@{item}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:item="@{item}" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <include
                     android:id="@+id/newView"
@@ -68,9 +70,9 @@
                     android:layout_width="@dimen/tag_width"
                     android:layout_height="@dimen/tag_height"
                     android:layout_margin="4dp"
+                    app:item="@{item}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:item="@{item}"
                     tools:visibility="gone" />
 
                 <include
@@ -79,9 +81,9 @@
                     android:layout_width="@dimen/tag_width"
                     android:layout_height="@dimen/tag_height"
                     android:layout_margin="4dp"
+                    app:item="@{item}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:item="@{item}"
                     tools:visibility="visible" />
 
                 <include
@@ -90,9 +92,9 @@
                     android:layout_width="@dimen/tag_width"
                     android:layout_height="@dimen/tag_height"
                     android:layout_margin="4dp"
+                    app:item="@{item}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:item="@{item}"
                     tools:visibility="gone" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

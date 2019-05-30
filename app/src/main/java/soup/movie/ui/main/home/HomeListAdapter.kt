@@ -4,7 +4,7 @@ import android.util.Pair
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
-import kotlinx.android.synthetic.main.item_movie.view.*
+import kotlinx.android.synthetic.main.home_item_movie.view.*
 import soup.movie.R
 import soup.movie.data.helper.isBest
 import soup.movie.data.helper.isDDay
@@ -61,5 +61,5 @@ class HomeListAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int) = R.layout.item_movie
+    override fun getItemViewType(position: Int) = R.layout.home_item_movie
 }

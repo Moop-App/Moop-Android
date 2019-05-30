@@ -59,7 +59,7 @@
                 app:layoutManagerType="grid"
                 app:spanCount="@integer/grid_span_count"
                 tools:itemCount="20"
-                tools:listitem="@layout/item_movie"
+                tools:listitem="@layout/home_item_movie"
                 tools:visibility="visible" />
 
             <include
