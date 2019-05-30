@@ -4,7 +4,10 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
@@ -44,7 +47,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         setExitSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(
                 names: List<String>,
@@ -80,11 +82,6 @@ class HomeFragment : BaseFragment() {
         bottomNavigation.postOnAnimationDelayed(100) {
             startPostponedEnterTransition()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.fragment_movie_list, menu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -126,6 +123,10 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initViewState(ctx: Context) {
+        toolbar.inflateMenu(R.menu.fragment_movie_list)
+        toolbar.setOnMenuItemClickListener {
+            onOptionsItemSelected(it)
+        }
         listView.apply {
             adapter = listAdapter
             itemAnimator = SlideInUpAnimator().apply {
@@ -147,11 +148,11 @@ class HomeFragment : BaseFragment() {
             consume {
                 when (it.itemId) {
                     R.id.action_now -> {
-                        activity?.setTitle(R.string.tab_now)
+                        toolbar.setTitle(R.string.tab_now)
                         viewModel.onNowClick()
                     }
                     R.id.action_plan -> {
-                        activity?.setTitle(R.string.tab_plan)
+                        toolbar.setTitle(R.string.tab_plan)
                         viewModel.onPlanClick()
                     }
                 }
