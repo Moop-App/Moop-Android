@@ -9,33 +9,32 @@ import io.reactivex.schedulers.Schedulers
 import soup.movie.domain.main.GetMovieFilterUseCase
 import soup.movie.domain.main.GetNowMovieListUseCase
 import soup.movie.domain.main.GetPlanMovieListUseCase
-import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val lastMainTabSetting: LastMainTabSetting,
     getNowMovieList: GetNowMovieListUseCase,
     getPlanMovieList: GetPlanMovieListUseCase,
     getMovieFilter: GetMovieFilterUseCase
 ) : BaseViewModel() {
 
+    private val nowRelay = BehaviorRelay.createDefault(true)
+    private val refreshRelay = BehaviorRelay.createDefault(false)
+
     private val _uiModel = MutableLiveData<HomeUiModel>()
     val uiModel: LiveData<HomeUiModel>
         get() = _uiModel
 
-    private val refreshRelay = BehaviorRelay.createDefault(false)
-
     init {
         Observables
             .combineLatest(
-                lastMainTabSetting.asObservable().distinctUntilChanged(),
+                nowRelay.distinctUntilChanged(),
                 refreshRelay,
                 getMovieFilter()
             )
             .subscribeOn(Schedulers.io())
-            .switchMap { (mainTab, clearCache, movieFilter) ->
-                if (mainTab == LastMainTabSetting.Tab.Now) {
+            .switchMap { (isNow, clearCache, movieFilter) ->
+                if (isNow) {
                     getNowMovieList(clearCache, movieFilter)
                 } else {
                     getPlanMovieList(clearCache, movieFilter)
@@ -46,8 +45,12 @@ class HomeViewModel @Inject constructor(
             .disposeOnCleared()
     }
 
-    fun setCurrentTab(mode: LastMainTabSetting.Tab) {
-        lastMainTabSetting.set(mode)
+    fun onNowClick() {
+        nowRelay.accept(true)
+    }
+
+    fun onPlanClick() {
+        nowRelay.accept(false)
     }
 
     fun refresh() {

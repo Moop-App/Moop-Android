@@ -16,7 +16,6 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
-import soup.movie.settings.impl.LastMainTabSetting
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.helper.FragmentPanelRouter
@@ -215,11 +214,11 @@ class HomeFragment : BaseFragment() {
                 when (it.itemId) {
                     R.id.action_now -> {
                         activity?.setTitle(R.string.tab_now)
-                        viewModel.setCurrentTab(LastMainTabSetting.Tab.Now)
+                        viewModel.onNowClick()
                     }
                     R.id.action_plan -> {
                         activity?.setTitle(R.string.tab_plan)
-                        viewModel.setCurrentTab(LastMainTabSetting.Tab.Plan)
+                        viewModel.onPlanClick()
                     }
                 }
             }

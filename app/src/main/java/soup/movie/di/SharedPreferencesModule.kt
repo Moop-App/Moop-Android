@@ -13,12 +13,6 @@ class SharedPreferencesModule {
 
     @Singleton
     @Provides
-    fun provideLastMainTabSetting(
-        preferences: SharedPreferences
-    ): LastMainTabSetting = LastMainTabSetting(preferences)
-
-    @Singleton
-    @Provides
     fun provideAgeFilterSetting(
         preferences: SharedPreferences
     ): AgeFilterSetting = AgeFilterSetting(preferences)
