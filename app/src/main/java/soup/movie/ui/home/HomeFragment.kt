@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
+import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
 import soup.movie.R
@@ -19,7 +20,6 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.settings.SettingsActivity
 import soup.movie.util.consume
@@ -93,7 +93,7 @@ class HomeFragment : BaseFragment() {
             }
             R.id.action_filter -> {
                 analytics.clickMenuFilter()
-                HomeFilterFragment.show(this)
+                findNavController().navigate(HomeFragmentDirections.actionToFilter())
                 return true
             }
             R.id.action_settings -> {
