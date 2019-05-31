@@ -1,4 +1,4 @@
-package soup.movie.ui.main.home.filter
+package soup.movie.ui.home.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater

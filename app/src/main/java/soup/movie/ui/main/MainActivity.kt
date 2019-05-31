@@ -11,7 +11,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.home.HomeFragment
+import soup.movie.ui.home.HomeFragment
 import soup.movie.util.observeEvent
 import javax.inject.Inject
 

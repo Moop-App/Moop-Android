@@ -18,7 +18,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.ActivitySearchBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.home.HomeListAdapter
+import soup.movie.ui.home.HomeListAdapter
 import soup.movie.ui.search.SearchUiModel.DoneState
 import soup.movie.ui.search.SearchUiModel.LoadingState
 import soup.movie.util.ImeUtil

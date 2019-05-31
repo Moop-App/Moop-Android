@@ -6,11 +6,11 @@
 
         <variable
             name="item"
-            type="soup.movie.ui.main.home.filter.AgeFilterUiModel" />
+            type="soup.movie.ui.home.filter.AgeFilterUiModel" />
 
         <variable
             name="viewModel"
-            type="soup.movie.ui.main.home.filter.HomeFilterViewModel" />
+            type="soup.movie.ui.home.filter.HomeFilterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

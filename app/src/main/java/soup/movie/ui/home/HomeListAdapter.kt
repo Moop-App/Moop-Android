@@ -1,4 +1,4 @@
-package soup.movie.ui.main.home
+package soup.movie.ui.home
 
 import android.util.Pair
 import android.view.View

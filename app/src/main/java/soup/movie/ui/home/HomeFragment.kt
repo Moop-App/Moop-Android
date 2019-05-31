@@ -1,4 +1,4 @@
-package soup.movie.ui.main.home
+package soup.movie.ui.home
 
 import android.app.ActivityOptions
 import android.content.Context
@@ -19,7 +19,7 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.home.filter.HomeFilterFragment
+import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.search.SearchActivity
 import soup.movie.ui.settings.SettingsActivity
 import soup.movie.util.consume

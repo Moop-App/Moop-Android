@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import soup.movie.data.MoopRepository
 import soup.movie.data.model.Movie
 import soup.movie.domain.model.MovieFilter
-import soup.movie.ui.main.home.HomeUiModel
+import soup.movie.ui.home.HomeUiModel
 
 class GetNowMovieListUseCase(
     private val repository: MoopRepository
