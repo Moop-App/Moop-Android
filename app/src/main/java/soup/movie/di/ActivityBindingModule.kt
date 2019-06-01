@@ -9,7 +9,6 @@ import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.MainActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.ui.theater.sort.TheaterSortActivity
-import soup.movie.ui.theme.ThemeOptionActivity
 
 @Module
 abstract class ActivityBindingModule {
@@ -20,7 +19,8 @@ abstract class ActivityBindingModule {
         HomeUiModule::class,
         HomeDomainModule::class,
         SearchUiModule::class,
-        SettingsUiModule::class
+        SettingsUiModule::class,
+        ThemeOptionUiModule::class
     ])
     abstract fun mainActivity(): MainActivity
 
@@ -43,10 +43,4 @@ abstract class ActivityBindingModule {
         TheaterEditTabUiModule::class
     ])
     abstract fun theaterEditActivity(): TheaterEditActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        ThemeOptionUiModule::class
-    ])
-    abstract fun bindThemeOptionActivity(): ThemeOptionActivity
 }

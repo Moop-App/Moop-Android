@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_settings_feedback.*
 import kotlinx.android.synthetic.main.item_settings_theater.*
@@ -26,7 +27,6 @@ import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.theater.sort.TheaterSortActivity
-import soup.movie.ui.theme.ThemeOptionActivity
 import soup.movie.util.*
 import javax.inject.Inject
 
@@ -164,10 +164,8 @@ class SettingsFragment : BaseFragment() {
         } ?: emptyArray()
 
     private fun onThemeEditClicked() {
-        val intent = Intent(requireActivity(), ThemeOptionActivity::class.java)
-        startActivityForResult(intent, 0, ActivityOptions
-            .makeSceneTransitionAnimation(requireActivity())
-            .toBundle())
+        findNavController().navigate(
+            SettingsFragmentDirections.actionToThemeOption())
     }
 
     private fun onVersionClicked() {
