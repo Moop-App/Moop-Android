@@ -161,11 +161,6 @@ class DetailActivity : BaseActivity() {
         finishAfterTransition()
     }
 
-    override fun finishAfterTransition() {
-        detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
-        super.finishAfterTransition()
-    }
-
     private fun render(uiModel: ContentUiModel) {
         listAdapter.submitList(uiModel.items)
     }
