@@ -24,7 +24,7 @@ class MainActivity : BaseActivity() {
     lateinit var analytics: EventAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme_NoActionBar)
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
