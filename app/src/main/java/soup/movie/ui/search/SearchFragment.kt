@@ -37,7 +37,7 @@ class SearchFragment : BaseFragment() {
 
     private val listAdapter by lazy {
         HomeListAdapter { movie, sharedElements ->
-            analytics.clickMovie(isNow = movie.isNow)
+            analytics.clickMovie()
             MovieSelectManager.select(movie)
             val intent = Intent(requireContext(), DetailActivity::class.java)
             startActivityForResult(intent, 0, ActivityOptions

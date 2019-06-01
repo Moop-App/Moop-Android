@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment() {
 
     private val listAdapter by lazy {
         HomeListAdapter { movie, sharedElements ->
-            analytics.clickMovie(isNow = movie.isNow)
+            analytics.clickMovie()
             MovieSelectManager.select(movie)
             val intent = Intent(requireActivity(), DetailActivity::class.java)
             startActivityForResult(intent, 0, ActivityOptions

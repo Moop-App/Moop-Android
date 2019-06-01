@@ -36,10 +36,9 @@ class EventAnalytics(context: Context) {
 
     /* Main */
 
-    fun clickMovie(isNow: Boolean) {
+    fun clickMovie() {
         logSelectEvent {
             putString(Param.CONTENT_TYPE, CONTENT_TYPE_MOVIE)
-            putString(Param.ITEM_CATEGORY, if (isNow) "Now" else "Plan")
         }
     }
 
