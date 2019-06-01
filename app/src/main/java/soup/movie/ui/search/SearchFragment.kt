@@ -1,6 +1,5 @@
 package soup.movie.ui.search
 
-import android.app.ActivityOptions
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -11,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
+import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import kotlinx.android.synthetic.main.search_fragment.*
@@ -20,7 +21,6 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.SearchFragmentBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.home.HomeListAdapter
 import soup.movie.util.ImeUtil
 import soup.movie.util.observe
@@ -39,10 +39,13 @@ class SearchFragment : BaseFragment() {
         HomeListAdapter { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
-            val intent = Intent(requireContext(), DetailActivity::class.java)
-            startActivityForResult(intent, 0, ActivityOptions
-                .makeSceneTransitionAnimation(activity, *sharedElements)
-                .toBundle())
+            findNavController().navigate(
+                SearchFragmentDirections.actionToDetail(),
+                ActivityNavigatorExtras(
+                    activityOptions = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
+                )
+            )
         }
     }
 

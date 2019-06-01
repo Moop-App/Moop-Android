@@ -1,16 +1,16 @@
 package soup.movie.ui.home
 
-import android.app.ActivityOptions
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
+import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -20,7 +20,6 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.detail.DetailActivity
 import soup.movie.util.consume
 import soup.movie.util.getColorAttr
 import soup.movie.util.observe
@@ -37,10 +36,13 @@ class HomeFragment : BaseFragment() {
         HomeListAdapter { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
-            val intent = Intent(requireActivity(), DetailActivity::class.java)
-            startActivityForResult(intent, 0, ActivityOptions
-                .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
-                .toBundle())
+            findNavController().navigate(
+                HomeFragmentDirections.actionToDetail(),
+                ActivityNavigatorExtras(
+                    activityOptions = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
+                )
+            )
         }
     }
 

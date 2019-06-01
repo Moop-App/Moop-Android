@@ -20,6 +20,11 @@
         android:name="soup.movie.ui.home.filter.HomeFilterFragment"
         tools:layout="@layout/home_filter_fragment" />
 
+    <activity
+        android:id="@+id/detail"
+        android:name="soup.movie.ui.detail.DetailActivity"
+        tools:layout="@layout/detail_activity" />
+
     <fragment
         android:id="@+id/search"
         android:name="soup.movie.ui.search.SearchFragment"
@@ -29,6 +34,12 @@
         android:id="@+id/settings"
         android:name="soup.movie.ui.settings.SettingsFragment"
         tools:layout="@layout/settings_fragment" />
+
+    <!-- Global Actions -->
+
+    <action
+        android:id="@+id/action_to_detail"
+        app:destination="@id/detail" />
 
     <action
         android:id="@+id/action_to_search"

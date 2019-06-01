@@ -1,18 +1,18 @@
 package soup.movie.ui.main
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
+import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.ui.detail.DetailActivity
 import soup.movie.util.observeEvent
 import javax.inject.Inject
 
@@ -57,10 +57,9 @@ class MainActivity : BaseActivity() {
         when (action) {
             is ShowDetailUiEvent -> {
                 MovieSelectManager.select(action.movie)
-                val intent = Intent(this, DetailActivity::class.java)
-                startActivityForResult(intent, 0, ActivityOptions
-                    .makeSceneTransitionAnimation(this)
-                    .toBundle())
+                navHostFragment.findNavController().navigate(
+                    MainDirections.actionToDetail()
+                )
             }
         }
     }
