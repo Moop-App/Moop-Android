@@ -20,6 +20,7 @@ import soup.movie.databinding.TheaterEditActivityBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.util.inflate
+import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 
@@ -29,9 +30,11 @@ class TheaterEditActivity : BaseActivity() {
 
     private val viewModel: TheaterEditViewModel by viewModel()
 
-    private lateinit var pageAdapter: TheaterEditPageAdapter
+    private val pageAdapter by lazyFast {
+        TheaterEditPageAdapter(supportFragmentManager)
+    }
 
-    private val footerPanel by lazy {
+    private val footerPanel by lazyFast {
         BottomSheetBehavior.from(footerView).apply {
             setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
@@ -79,7 +82,6 @@ class TheaterEditActivity : BaseActivity() {
                 ?.run { state = STATE_COLLAPSED }
         }
         tabLayout.setupWithViewPager(viewPager, true)
-        pageAdapter = TheaterEditPageAdapter(supportFragmentManager)
         viewPager.offscreenPageLimit = pageAdapter.count
         viewPager.adapter = pageAdapter
         footerView.blockExtraTouchEvents()

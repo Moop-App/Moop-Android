@@ -23,6 +23,7 @@ import soup.movie.databinding.SearchFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.home.HomeListAdapter
 import soup.movie.util.ImeUtil
+import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import javax.inject.Inject
 
@@ -35,7 +36,7 @@ class SearchFragment : BaseFragment() {
 
     private var focusQuery = true
 
-    private val listAdapter by lazy {
+    private val listAdapter by lazyFast {
         HomeListAdapter { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)

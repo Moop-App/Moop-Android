@@ -9,6 +9,7 @@ import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterEditFragmentChildBinding
 import soup.movie.ui.theater.edit.TheaterEditChildFragment
 import soup.movie.ui.theater.edit.TheaterEditChildListAdapter
+import soup.movie.util.lazyFast
 import soup.movie.util.observe
 
 class MegaboxEditFragment : TheaterEditChildFragment() {
@@ -17,7 +18,7 @@ class MegaboxEditFragment : TheaterEditChildFragment() {
 
     private val viewModel: MegaboxEditViewModel by viewModel()
 
-    private val listAdapter: TheaterEditChildListAdapter by lazy {
+    private val listAdapter by lazyFast {
         TheaterEditChildListAdapter(object : TheaterEditChildListAdapter.Listener {
 
             override fun add(theater: Theater): Boolean {

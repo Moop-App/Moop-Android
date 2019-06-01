@@ -45,7 +45,7 @@ class DetailActivity : BaseActivity() {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private val listAdapter by lazy {
+    private val listAdapter by lazyFast {
         DetailListAdapter { item ->
             val ctx: Context = this@DetailActivity
             when (item) {

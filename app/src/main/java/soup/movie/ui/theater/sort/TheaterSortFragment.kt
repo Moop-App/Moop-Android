@@ -22,6 +22,7 @@ import soup.movie.R
 import soup.movie.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import java.util.concurrent.TimeUnit
@@ -30,7 +31,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
 
     private val viewModel: TheaterSortViewModel by viewModel()
 
-    private val listAdapter: TheaterSortListAdapter by lazy {
+    private val listAdapter: TheaterSortListAdapter by lazyFast {
         val callback = SimpleItemTouchHelperCallback(object : OnItemMoveListener {
             override fun onItemMove(fromPosition: Int, toPosition: Int) {
                 listAdapter.onItemMove(fromPosition, toPosition)

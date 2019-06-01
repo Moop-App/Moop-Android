@@ -22,6 +22,7 @@ import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.util.consume
 import soup.movie.util.getColorAttr
+import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import javax.inject.Inject
 
@@ -32,7 +33,7 @@ class HomeFragment : BaseFragment() {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private val listAdapter by lazy {
+    private val listAdapter by lazyFast {
         HomeListAdapter { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)

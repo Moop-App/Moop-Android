@@ -4,12 +4,13 @@ import android.content.SharedPreferences
 
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
+import soup.movie.util.lazyFast
 
 abstract class PrefSetting<T>(
     private val preferences: SharedPreferences
 ) : Setting<T> {
 
-    private val settingSubject: BehaviorSubject<T> by lazy {
+    private val settingSubject: BehaviorSubject<T> by lazyFast {
         BehaviorSubject.createDefault(getDefaultValue(preferences))
     }
 
