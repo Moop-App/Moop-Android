@@ -98,7 +98,7 @@
                 app:layout_behavior="@string/bottom_sheet_behavior" >
 
                 <include
-                    layout="@layout/activity_theater_edit_footer"
+                    layout="@layout/theater_edit_footer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 

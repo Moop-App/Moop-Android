@@ -1,14 +1,15 @@
 package soup.movie.ui.theater.sort
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.os.Bundle
-import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
+import androidx.core.util.Pair
 import androidx.core.view.isVisible
+import androidx.navigation.ActivityNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.listener.OnDragStartListener
@@ -21,10 +22,8 @@ import soup.movie.R
 import soup.movie.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
-import soup.movie.util.with
 import java.util.concurrent.TimeUnit
 
 class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
@@ -91,7 +90,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         confirmButton.setOnDebounceClickListener {
-            onAddItemClick(it)
+            onAddItemClick()
         }
         listView.adapter = listAdapter
         viewModel.uiModel.observe(this) {
@@ -111,19 +110,22 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
         return false
     }
 
-    private fun onAddItemClick(view: View) {
-        val intent = Intent(view.context, TheaterEditActivity::class.java)
-        startActivityForResult(intent, 0, ActivityOptions
-            .makeSceneTransitionAnimation(requireActivity(), *createSharedElements())
-            .toBundle())
+    private fun onAddItemClick() {
+        findNavController().navigate(
+            TheaterSortFragmentDirections.actionToTheaterEdit(),
+            ActivityNavigatorExtras(
+                activityOptions = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(requireActivity(), *createSharedElements())
+            )
+        )
     }
 
     private fun createSharedElements(): Array<Pair<View, String>> =
         listView?.run {
             (0 until childCount)
                 .mapNotNull { getChildAt(it) }
-                .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
-                .map { it with it.transitionName }
+                .mapNotNull { it.findViewById<View>(R.id.theaterChip) }
+                .map { Pair(it, it.transitionName) }
                 .toTypedArray()
         } ?: emptyArray()
 }

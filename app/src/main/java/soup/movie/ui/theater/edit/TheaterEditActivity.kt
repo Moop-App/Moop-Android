@@ -12,11 +12,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.activity_theater_edit.*
-import kotlinx.android.synthetic.main.activity_theater_edit_footer.*
+import kotlinx.android.synthetic.main.theater_edit_activity.*
+import kotlinx.android.synthetic.main.theater_edit_footer.*
 import soup.movie.R
 import soup.movie.data.helper.getChipLayout
-import soup.movie.databinding.ActivityTheaterEditBinding
+import soup.movie.databinding.TheaterEditActivityBinding
 import soup.movie.ui.BaseActivity
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.util.inflate
@@ -68,7 +68,7 @@ class TheaterEditActivity : BaseActivity() {
     }
 
     private fun setupContentView() {
-        DataBindingUtil.setContentView<ActivityTheaterEditBinding>(this, R.layout.activity_theater_edit).apply {
+        DataBindingUtil.setContentView<TheaterEditActivityBinding>(this, R.layout.theater_edit_activity).apply {
             lifecycleOwner = this@TheaterEditActivity
         }
     }

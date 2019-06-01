@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_theater_edit.*
+import kotlinx.android.synthetic.main.theater_edit_fragment_child.*
 import soup.movie.data.model.Theater
-import soup.movie.databinding.FragmentTheaterEditBinding
+import soup.movie.databinding.TheaterEditFragmentChildBinding
 import soup.movie.ui.theater.edit.TheaterEditChildFragment
 import soup.movie.ui.theater.edit.TheaterEditChildListAdapter
 import soup.movie.util.observe
@@ -35,7 +35,7 @@ class LotteEditFragment : TheaterEditChildFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentTheaterEditBinding.inflate(inflater, container, false).root
+        return TheaterEditFragmentChildBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
