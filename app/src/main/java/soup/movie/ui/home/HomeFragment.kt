@@ -146,14 +146,8 @@ class HomeFragment : BaseFragment() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             consume {
                 when (it.itemId) {
-                    R.id.action_now -> {
-                        toolbar.setTitle(R.string.tab_now)
-                        viewModel.onNowClick()
-                    }
-                    R.id.action_plan -> {
-                        toolbar.setTitle(R.string.tab_plan)
-                        viewModel.onPlanClick()
-                    }
+                    R.id.action_now -> viewModel.onNowClick()
+                    R.id.action_plan -> viewModel.onPlanClick()
                 }
             }
         }
@@ -166,10 +160,5 @@ class HomeFragment : BaseFragment() {
         if (viewState is HomeUiModel.DoneState) {
             listAdapter.submitList(viewState.movies)
         }
-    }
-
-    companion object {
-
-        fun newInstance(): HomeFragment = HomeFragment()
     }
 }
