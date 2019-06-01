@@ -58,10 +58,6 @@
             android:theme="@style/AppTheme.Detail"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
-            android:name=".ui.theater.sort.TheaterSortActivity"
-            android:theme="@style/AppTheme.TheaterSort"
-            android:label="@string/theater_sort_title" />
-        <activity
             android:name=".ui.theater.edit.TheaterEditActivity"
             android:theme="@style/AppTheme.TheaterEdit"
             android:label="@string/theater_edit_title" />

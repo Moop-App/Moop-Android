@@ -76,11 +76,6 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
-    <style name="AppTheme.TheaterSort">
-        <item name="android:windowSharedElementEnterTransition">@transition/shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/shared_return</item>
-    </style>
-
     <style name="AppTheme.TheaterEdit">
         <item name="android:windowSharedElementEnterTransition">@transition/shared_enter</item>
         <item name="android:windowSharedElementReturnTransition">@transition/shared_return</item>
