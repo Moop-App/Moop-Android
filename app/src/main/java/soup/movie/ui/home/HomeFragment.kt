@@ -21,7 +21,6 @@ import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.search.SearchActivity
 import soup.movie.util.consume
 import soup.movie.util.getColorAttr
 import soup.movie.util.observe
@@ -87,8 +86,7 @@ class HomeFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_search -> {
-                val intent = Intent(requireActivity(), SearchActivity::class.java)
-                startActivity(intent)
+                findNavController().navigate(MainDirections.actionToSearch())
                 return true
             }
             R.id.action_filter -> {

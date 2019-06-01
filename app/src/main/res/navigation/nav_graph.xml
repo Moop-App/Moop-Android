@@ -21,9 +21,18 @@
         tools:layout="@layout/home_filter_fragment" />
 
     <fragment
+        android:id="@+id/search"
+        android:name="soup.movie.ui.search.SearchFragment"
+        tools:layout="@layout/search_fragment" />
+
+    <fragment
         android:id="@+id/settings"
         android:name="soup.movie.ui.settings.SettingsFragment"
         tools:layout="@layout/settings_fragment" />
+
+    <action
+        android:id="@+id/action_to_search"
+        app:destination="@id/search" />
 
     <action
         android:id="@+id/action_to_settings"
