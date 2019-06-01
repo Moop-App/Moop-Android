@@ -8,7 +8,6 @@ import soup.movie.di.ui.*
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.MainActivity
 import soup.movie.ui.search.SearchActivity
-import soup.movie.ui.settings.SettingsActivity
 import soup.movie.ui.theater.edit.TheaterEditActivity
 import soup.movie.ui.theater.sort.TheaterSortActivity
 import soup.movie.ui.theme.ThemeOptionActivity
@@ -20,15 +19,10 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = [
         MainUiModule::class,
         HomeUiModule::class,
-        HomeDomainModule::class
-    ])
-    abstract fun mainActivity(): MainActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [
+        HomeDomainModule::class,
         SettingsUiModule::class
     ])
-    abstract fun bindSettingsActivity(): SettingsActivity
+    abstract fun mainActivity(): MainActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [

@@ -14,6 +14,7 @@ import androidx.core.view.postOnAnimationDelayed
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
+import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
@@ -21,7 +22,6 @@ import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.search.SearchActivity
-import soup.movie.ui.settings.SettingsActivity
 import soup.movie.util.consume
 import soup.movie.util.getColorAttr
 import soup.movie.util.observe
@@ -97,8 +97,7 @@ class HomeFragment : BaseFragment() {
                 return true
             }
             R.id.action_settings -> {
-                val intent = Intent(requireActivity(), SettingsActivity::class.java)
-                startActivity(intent)
+                findNavController().navigate(MainDirections.actionToSettings())
                 return true
             }
         }

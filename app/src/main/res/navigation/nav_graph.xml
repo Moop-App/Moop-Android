@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/main"
     app:startDestination="@+id/home">
 
     <fragment
@@ -19,5 +19,14 @@
         android:id="@+id/home_filter"
         android:name="soup.movie.ui.home.filter.HomeFilterFragment"
         tools:layout="@layout/home_filter_fragment" />
+
+    <fragment
+        android:id="@+id/settings"
+        android:name="soup.movie.ui.settings.SettingsFragment"
+        tools:layout="@layout/settings_fragment" />
+
+    <action
+        android:id="@+id/action_to_settings"
+        app:destination="@id/settings" />
 
 </navigation>

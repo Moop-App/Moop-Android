@@ -54,10 +54,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:label="@string/tab_settings"
-            android:exported="false" />
-        <activity
             android:name=".ui.search.SearchActivity"
             android:theme="@style/AppTheme.Search" />
         <activity
