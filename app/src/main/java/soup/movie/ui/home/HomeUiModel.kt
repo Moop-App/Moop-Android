@@ -1,25 +1,15 @@
 package soup.movie.ui.home
 
-import androidx.annotation.Keep
 import soup.movie.data.model.Movie
 
-sealed class HomeUiModel {
+class HomeHeaderUiModel(
+    val isNow: Boolean,
+    val isPlan: Boolean
+)
 
-    @Keep
-    object LoadingState : HomeUiModel()
-
-    @Keep
-    object ErrorState : HomeUiModel()
-
-    @Keep
-    data class DoneState(
-        val movies: List<Movie>
-    ) : HomeUiModel()
-
-    fun hasNoItems(): Boolean {
-        if (this is DoneState) {
-            return movies.isEmpty()
-        }
-        return false
-    }
-}
+class HomeContentsUiModel(
+    val isLoading: Boolean,
+    val movies: List<Movie>,
+    val hasNoItem: Boolean,
+    val isError: Boolean
+)

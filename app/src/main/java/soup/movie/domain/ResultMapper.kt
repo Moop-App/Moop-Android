@@ -1,4 +1,4 @@
-package soup.movie.ui
+package soup.movie.domain
 
 import io.reactivex.Observable
 

@@ -97,23 +97,19 @@ class HomeFragment : BaseFragment() {
                 }
             }
         }
-
-        actionNow.isChecked = true
         actionNow.setOnDebounceClickListener {
-            actionNow.isChecked = true
-            actionPlan.isChecked = false
             viewModel.onNowClick()
         }
         actionPlan.setOnDebounceClickListener {
-            actionNow.isChecked = false
-            actionPlan.isChecked = true
             viewModel.onPlanClick()
+        }
+        viewModel.headerUiModel.observe(viewLifecycleOwner) {
+            render(it)
         }
     }
 
-    private var View.isChecked: Boolean
-        get() = isEnabled.not()
-        set(checked) {
+    private fun HomeHeaderBinding.render(uiModel: HomeHeaderUiModel) {
+        fun View.isTabChecked(checked: Boolean) {
             isEnabled = checked.not()
             if (this is ViewGroup) {
                 children.forEach {
@@ -121,6 +117,10 @@ class HomeFragment : BaseFragment() {
                 }
             }
         }
+        actionNow.isTabChecked(uiModel.isNow)
+        actionPlan.isTabChecked(uiModel.isNow.not())
+    }
+
 
     private fun HomeContentsBinding.setup() {
         swipeRefreshLayout.apply {
@@ -140,17 +140,15 @@ class HomeFragment : BaseFragment() {
         errorView.setOnClickListener {
             viewModel.refresh()
         }
-        viewModel.uiModel.observe(viewLifecycleOwner) {
+        viewModel.contentsUiModel.observe(viewLifecycleOwner) {
             render(it)
         }
     }
 
-    private fun HomeContentsBinding.render(viewState: HomeUiModel) {
-        swipeRefreshLayout.isRefreshing = viewState is HomeUiModel.LoadingState
-        errorView.isVisible = viewState is HomeUiModel.ErrorState
-        noItemsView.isVisible = viewState.hasNoItems()
-        if (viewState is HomeUiModel.DoneState) {
-            listAdapter.submitList(viewState.movies)
-        }
+    private fun HomeContentsBinding.render(uiModel: HomeContentsUiModel) {
+        swipeRefreshLayout.isRefreshing = uiModel.isLoading
+        errorView.isVisible = uiModel.isError
+        listAdapter.submitList(uiModel.movies)
+        noItemsView.isVisible = uiModel.hasNoItem
     }
 }
