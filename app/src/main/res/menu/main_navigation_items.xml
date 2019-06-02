@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <group
         android:id="@+id/group_primary"
         android:checkableBehavior="single">
@@ -7,8 +8,9 @@
         <item
             android:id="@+id/home"
             android:checkable="true"
-            android:icon="@drawable/ic_round_movie"
-            android:title="@string/menu_home" />
+            android:icon="@drawable/ic_round_home"
+            android:title="@string/menu_home"
+            tools:checked="true" />
 
         <item
             android:id="@+id/search"

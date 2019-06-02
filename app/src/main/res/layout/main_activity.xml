@@ -28,6 +28,9 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/main_header"
+        app:itemBackground="@drawable/selector_bg_navigation_menu"
+        app:itemIconTint="@color/selector_navigation_menu"
+        app:itemTextColor="@color/selector_navigation_menu"
         app:menu="@menu/main_navigation_items" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
