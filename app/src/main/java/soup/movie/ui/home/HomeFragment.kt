@@ -14,7 +14,6 @@ import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
-import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeFragmentBinding
@@ -87,17 +86,9 @@ class HomeFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> {
-                findNavController().navigate(MainDirections.actionToSearch())
-                return true
-            }
             R.id.action_filter -> {
                 analytics.clickMenuFilter()
                 findNavController().navigate(HomeFragmentDirections.actionToFilter())
-                return true
-            }
-            R.id.action_settings -> {
-                findNavController().navigate(MainDirections.actionToSettings())
                 return true
             }
         }
