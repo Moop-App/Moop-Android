@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
@@ -17,7 +18,7 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.theater_edit_footer.*
 import kotlinx.android.synthetic.main.theater_edit_fragment.*
 import soup.movie.R
-import soup.movie.data.helper.getChipLayout
+import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterEditFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
@@ -168,6 +169,16 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
                     setOnClickListener { viewModel.remove(theater) }
                 }
             }.forEach { addView(it) }
+        }
+    }
+
+    @LayoutRes
+    private fun Theater.getChipLayout(): Int {
+        return when(type) {
+            Theater.TYPE_CGV -> R.layout.chip_action_cgv
+            Theater.TYPE_LOTTE -> R.layout.chip_action_lotte
+            Theater.TYPE_MEGABOX -> R.layout.chip_action_megabox
+            else -> throw IllegalArgumentException("$type is not valid type.")
         }
     }
 

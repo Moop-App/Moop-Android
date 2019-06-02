@@ -1,10 +1,10 @@
 package soup.movie.ui.theater.edit
 
+import androidx.annotation.LayoutRes
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_area_group.view.*
 import soup.movie.R
 import soup.movie.data.TheaterEditManager.Companion.MAX_ITEMS
-import soup.movie.data.helper.getFilterChipLayout
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
 import soup.movie.ui.databinding.DataBindingAdapter
@@ -60,5 +60,15 @@ class TheaterEditChildListAdapter(
     fun submitList(list: List<AreaGroup>, selectedIdSet: List<Theater>) {
         this.selectedIdSet = selectedIdSet.toMutableList()
         submitList(list)
+    }
+
+    @LayoutRes
+    private fun Theater.getFilterChipLayout(): Int {
+        return when (type) {
+            Theater.TYPE_CGV -> R.layout.chip_filter_cgv
+            Theater.TYPE_LOTTE -> R.layout.chip_filter_lotte
+            Theater.TYPE_MEGABOX -> R.layout.chip_filter_megabox
+            else -> throw IllegalArgumentException("$type is not valid type.")
+        }
     }
 }

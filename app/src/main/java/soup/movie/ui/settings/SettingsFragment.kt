@@ -1,11 +1,13 @@
 package soup.movie.ui.settings
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
@@ -20,11 +22,13 @@ import kotlinx.android.synthetic.main.item_settings_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.helper.executeWeb
-import soup.movie.data.helper.getChipLayout
+import soup.movie.data.model.Theater
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.util.*
+import soup.movie.util.helper.Cgv
+import soup.movie.util.helper.LotteCinema
+import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.Moop
 import javax.inject.Inject
 
@@ -120,6 +124,25 @@ class SettingsFragment : BaseFragment() {
                     setOnDebounceClickListener { _ -> it.executeWeb(requireContext()) }
                 }
             }.forEach { addView(it) }
+        }
+    }
+
+    @LayoutRes
+    private fun Theater.getChipLayout(): Int {
+        return when(type) {
+            Theater.TYPE_CGV -> R.layout.chip_action_cgv
+            Theater.TYPE_LOTTE -> R.layout.chip_action_lotte
+            Theater.TYPE_MEGABOX -> R.layout.chip_action_megabox
+            else -> throw IllegalArgumentException("$type is not valid type.")
+        }
+    }
+
+    private fun Theater.executeWeb(ctx: Context) {
+        return when (type) {
+            Theater.TYPE_CGV -> Cgv.executeWeb(ctx, this)
+            Theater.TYPE_LOTTE -> LotteCinema.executeWeb(ctx, this)
+            Theater.TYPE_MEGABOX -> Megabox.executeWeb(ctx, this)
+            else -> throw IllegalArgumentException("$type is not valid type.")
         }
     }
 
