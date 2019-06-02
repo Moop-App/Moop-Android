@@ -18,12 +18,14 @@ import soup.movie.databinding.HomeContentsBinding
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.databinding.HomeHeaderBinding
 import soup.movie.ui.base.BaseFragment
+import soup.movie.ui.main.MainViewModel
 import soup.movie.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
 
+    private val activityViewModel: MainViewModel by activityViewModel()
     private val viewModel: HomeViewModel by viewModel()
 
     @Inject
@@ -88,6 +90,10 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun HomeHeaderBinding.setup() {
+        toolbar.setNavigationIcon(R.drawable.ic_round_menu)
+        toolbar.setNavigationOnClickListener {
+            activityViewModel.openNavigationMenu()
+        }
         toolbar.inflateMenu(R.menu.fragment_movie_list)
         toolbar.setOnMenuItemClickListener {
             consume {

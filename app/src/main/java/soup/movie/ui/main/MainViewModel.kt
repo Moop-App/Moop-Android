@@ -23,4 +23,8 @@ class MainViewModel @Inject constructor(
             .subscribe { _uiEvent.event = it }
             .disposeOnCleared()
     }
+
+    fun openNavigationMenu() {
+        _uiEvent.event = OpenDrawerMenuUiEvent
+    }
 }
