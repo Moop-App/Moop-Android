@@ -1,7 +1,7 @@
 package soup.movie.settings.impl
 
 import android.content.SharedPreferences
-import soup.movie.data.model.AgeFilter
+import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.PrefSetting
 
 class AgeFilterSetting(

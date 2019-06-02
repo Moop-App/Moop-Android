@@ -1,7 +1,7 @@
 package soup.movie.settings.impl
 
 import android.content.SharedPreferences
-import soup.movie.data.model.GenreFilter
+import soup.movie.settings.model.GenreFilter
 import soup.movie.settings.PrefSetting
 
 class GenreFilterSetting(
