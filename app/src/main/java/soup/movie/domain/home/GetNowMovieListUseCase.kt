@@ -1,28 +1,32 @@
 package soup.movie.domain.home
 
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import soup.movie.data.MoopRepository
 import soup.movie.data.model.Movie
+import soup.movie.domain.Result
+import soup.movie.domain.ResultMapper
+import soup.movie.domain.home.model.HomeDomainModel
 import soup.movie.domain.model.MovieFilter
-import soup.movie.ui.home.HomeUiModel
 
 class GetNowMovieListUseCase(
     private val repository: MoopRepository
-) {
+) : ResultMapper {
 
     operator fun invoke(
         clearCache: Boolean,
         movieFilter: MovieFilter
-    ): Observable<HomeUiModel> {
+    ): Observable<Result<HomeDomainModel>> {
         return repository.getNowList(clearCache)
-            .map { it ->
-                it.list.asSequence()
-                    .sortedBy(Movie::rank)
-                    .filter { movieFilter(it) }
-                    .toList()
+            .observeOn(Schedulers.computation())
+            .map { response ->
+                HomeDomainModel(
+                    response.list.asSequence()
+                        .sortedBy(Movie::rank)
+                        .filter { movieFilter(it) }
+                        .toList()
+                )
             }
-            .map { HomeUiModel.DoneState(it) as HomeUiModel }
-            .startWith(HomeUiModel.LoadingState)
-            .onErrorReturnItem(HomeUiModel.ErrorState)
+            .mapResult()
     }
 }

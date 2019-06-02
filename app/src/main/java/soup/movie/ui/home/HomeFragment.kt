@@ -1,31 +1,31 @@
 package soup.movie.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.children
 import androidx.core.view.isVisible
-import androidx.core.view.postOnAnimationDelayed
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.home_contents.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
+import soup.movie.databinding.HomeContentsBinding
 import soup.movie.databinding.HomeFragmentBinding
+import soup.movie.databinding.HomeHeaderBinding
 import soup.movie.ui.base.BaseFragment
-import soup.movie.util.consume
-import soup.movie.util.getColorAttr
-import soup.movie.util.lazyFast
-import soup.movie.util.observe
+import soup.movie.ui.main.MainViewModel
+import soup.movie.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
 
+    private val activityViewModel: MainViewModel by activityViewModel()
     private val viewModel: HomeViewModel by viewModel()
 
     @Inject
@@ -75,47 +75,65 @@ class HomeFragment : BaseFragment() {
         })
     }
 
-    private fun scheduleStartPostponedTransition() {
-        postponeEnterTransition()
-
-        //FixMe: find a timing to call startPostponedEnterTransition()
-        bottomNavigation.postOnAnimationDelayed(100) {
-            startPostponedEnterTransition()
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_filter -> {
-                analytics.clickMenuFilter()
-                findNavController().navigate(HomeFragmentDirections.actionToFilter())
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return HomeFragmentBinding.inflate(inflater, container, false).root
+        postponeEnterTransition(400, TimeUnit.MILLISECONDS)
+        return HomeFragmentBinding.inflate(inflater, container, false)
+            .apply {
+                header.setup()
+                contents.setup()
+            }
+            .root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        scheduleStartPostponedTransition()
-        initViewState(view.context)
-        viewModel.uiModel.observe(viewLifecycleOwner) {
+    private fun HomeHeaderBinding.setup() {
+        toolbar.setNavigationOnClickListener {
+            activityViewModel.openNavigationMenu()
+        }
+        toolbar.inflateMenu(R.menu.fragment_movie_list)
+        toolbar.setOnMenuItemClickListener {
+            consume {
+                if (it.itemId == R.id.action_filter) {
+                    analytics.clickMenuFilter()
+                    findNavController().navigate(HomeFragmentDirections.actionToFilter())
+                }
+            }
+        }
+        actionNow.setOnDebounceClickListener {
+            viewModel.onNowClick()
+        }
+        actionPlan.setOnDebounceClickListener {
+            viewModel.onPlanClick()
+        }
+        viewModel.headerUiModel.observe(viewLifecycleOwner) {
             render(it)
         }
     }
 
-    private fun initViewState(ctx: Context) {
-        toolbar.inflateMenu(R.menu.fragment_movie_list)
-        toolbar.setOnMenuItemClickListener {
-            onOptionsItemSelected(it)
+    private fun HomeHeaderBinding.render(uiModel: HomeHeaderUiModel) {
+        fun View.isTabChecked(checked: Boolean) {
+            isEnabled = checked.not()
+            if (this is ViewGroup) {
+                children.forEach {
+                    it.isEnabled = checked.not()
+                }
+            }
+        }
+        actionNow.isTabChecked(uiModel.isNow)
+        actionPlan.isTabChecked(uiModel.isNow.not())
+    }
+
+
+    private fun HomeContentsBinding.setup() {
+        swipeRefreshLayout.apply {
+            setProgressBackgroundColorSchemeColor(context.getColorAttr(R.attr.moop_stageColor))
+            setColorSchemeColors(context.getColorAttr(R.attr.moop_stageStarColor))
+            setOnRefreshListener {
+                viewModel.refresh()
+            }
         }
         listView.apply {
             adapter = listAdapter
@@ -124,32 +142,18 @@ class HomeFragment : BaseFragment() {
                 removeDuration = 200
             }
         }
-        swipeRefreshLayout.apply {
-            setProgressBackgroundColorSchemeColor(ctx.getColorAttr(R.attr.moop_stageColor))
-            setColorSchemeColors(ctx.getColorAttr(R.attr.moop_stageStarColor))
-            setOnRefreshListener {
-                viewModel.refresh()
-            }
-        }
         errorView.setOnClickListener {
             viewModel.refresh()
         }
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            consume {
-                when (it.itemId) {
-                    R.id.action_now -> viewModel.onNowClick()
-                    R.id.action_plan -> viewModel.onPlanClick()
-                }
-            }
+        viewModel.contentsUiModel.observe(viewLifecycleOwner) {
+            render(it)
         }
     }
 
-    private fun render(viewState: HomeUiModel) {
-        swipeRefreshLayout?.isRefreshing = viewState is HomeUiModel.LoadingState
-        errorView?.isVisible = viewState is HomeUiModel.ErrorState
-        noItemsView?.isVisible = viewState.hasNoItems()
-        if (viewState is HomeUiModel.DoneState) {
-            listAdapter.submitList(viewState.movies)
-        }
+    private fun HomeContentsBinding.render(uiModel: HomeContentsUiModel) {
+        swipeRefreshLayout.isRefreshing = uiModel.isLoading
+        errorView.isVisible = uiModel.isError
+        listAdapter.submitList(uiModel.movies)
+        noItemsView.isVisible = uiModel.hasNoItem
     }
 }

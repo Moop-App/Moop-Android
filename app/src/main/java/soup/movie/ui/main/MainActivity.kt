@@ -84,6 +84,9 @@ class MainActivity : BaseActivity() {
 
     private fun execute(action: MainUiEvent) {
         when (action) {
+            is OpenDrawerMenuUiEvent -> {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
             is ShowDetailUiEvent -> {
                 MovieSelectManager.select(action.movie)
                 navHostFragment.findNavController().navigate(

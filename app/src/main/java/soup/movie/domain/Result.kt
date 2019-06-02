@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package soup.movie.ui
+package soup.movie.domain
 
 /**
  * A generic class that holds a data with its loading status.

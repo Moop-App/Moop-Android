@@ -2,7 +2,7 @@
     <string name="app_name">Moop</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_now">Now Playing</string>
+    <string name="menu_now">Now</string>
     <string name="menu_plan">Plan</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Movie Search</string>

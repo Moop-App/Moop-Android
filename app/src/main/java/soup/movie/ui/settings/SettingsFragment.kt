@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.settings_fragment.*
 import kotlinx.android.synthetic.main.settings_item_feedback.*
 import kotlinx.android.synthetic.main.settings_item_theater.*
 import kotlinx.android.synthetic.main.settings_item_theater_mode.*
@@ -25,6 +26,7 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.data.model.Theater
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.ui.base.BaseFragment
+import soup.movie.ui.main.MainViewModel
 import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
@@ -34,6 +36,7 @@ import javax.inject.Inject
 
 class SettingsFragment : BaseFragment() {
 
+    private val activityViewModel: MainViewModel by activityViewModel()
     private val viewModel: SettingsViewModel by viewModel()
 
     @Inject
@@ -81,6 +84,9 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun initViewState() {
+        toolbar.setNavigationOnClickListener {
+            activityViewModel.openNavigationMenu()
+        }
         editTheaterButton.setOnDebounceClickListener {
             onTheaterEditClicked()
         }
