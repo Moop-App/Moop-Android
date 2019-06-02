@@ -1,4 +1,4 @@
-package soup.movie.data.helper
+package soup.movie.util.helper
 
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate

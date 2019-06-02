@@ -1,4 +1,4 @@
-package soup.movie.data.helper
+package soup.movie.util.helper
 
 import android.content.ActivityNotFoundException
 import android.content.Context

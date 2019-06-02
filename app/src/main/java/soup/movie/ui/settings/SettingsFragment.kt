@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.item_settings_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.helper.Moop
+import soup.movie.util.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.SettingsFragmentBinding

@@ -8,6 +8,7 @@ import soup.movie.data.model.CgvInfo
 import soup.movie.data.model.LotteInfo
 import soup.movie.data.model.MegaboxInfo
 import soup.movie.data.model.Movie
+import soup.movie.util.helper.today
 
 @DrawableRes
 fun Movie.getAgeBackground(): Int = when {

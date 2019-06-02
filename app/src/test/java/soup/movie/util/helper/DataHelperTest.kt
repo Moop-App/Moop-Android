@@ -1,4 +1,4 @@
-package soup.movie.data.helper
+package soup.movie.util.helper
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -7,6 +7,9 @@ import soup.movie.data.model.Theater
 import soup.movie.data.model.Theater.Companion.TYPE_CGV
 import soup.movie.data.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.data.model.Theater.Companion.TYPE_MEGABOX
+import soup.movie.util.helper.Cgv
+import soup.movie.util.helper.LotteCinema
+import soup.movie.util.helper.Megabox
 
 @LayoutRes
 fun Theater.getChipLayout(): Int {

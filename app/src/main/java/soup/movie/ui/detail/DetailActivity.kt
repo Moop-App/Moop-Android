@@ -17,10 +17,10 @@ import kotlinx.android.synthetic.main.detail_header.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
-import soup.movie.data.helper.Cgv
-import soup.movie.data.helper.LotteCinema
-import soup.movie.data.helper.Megabox
-import soup.movie.data.helper.YouTube
+import soup.movie.util.helper.Cgv
+import soup.movie.util.helper.LotteCinema
+import soup.movie.util.helper.Megabox
+import soup.movie.util.helper.YouTube
 import soup.movie.data.model.Movie
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
