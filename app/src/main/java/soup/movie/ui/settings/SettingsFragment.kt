@@ -1,16 +1,16 @@
 package soup.movie.ui.settings
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.item_settings_feedback.*
 import kotlinx.android.synthetic.main.item_settings_theater.*
@@ -25,8 +25,6 @@ import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.theater.sort.TheaterSortActivity
-import soup.movie.ui.theme.ThemeOptionActivity
 import soup.movie.util.*
 import javax.inject.Inject
 
@@ -57,7 +55,8 @@ class SettingsFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         return SettingsFragmentBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
@@ -149,25 +148,23 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun onTheaterEditClicked() {
-        val intent = Intent(context, TheaterSortActivity::class.java)
-        startActivityForResult(intent, 0, ActivityOptions
-            .makeSceneTransitionAnimation(activity, *createSharedElementsForTheaters())
-            .toBundle())
+        findNavController().navigate(
+            SettingsFragmentDirections.actionToTheaterSort(),
+            FragmentNavigatorExtras(*createSharedElementsForTheaters())
+        )
     }
 
     private fun createSharedElementsForTheaters(): Array<Pair<View, String>> =
         theaterGroup?.run {
             (0 until childCount)
                 .mapNotNull { getChildAt(it) }
-                .map { it with it.transitionName }
+                .map { it to it.transitionName }
                 .toTypedArray()
         } ?: emptyArray()
 
     private fun onThemeEditClicked() {
-        val intent = Intent(requireActivity(), ThemeOptionActivity::class.java)
-        startActivityForResult(intent, 0, ActivityOptions
-            .makeSceneTransitionAnimation(requireActivity())
-            .toBundle())
+        findNavController().navigate(
+            SettingsFragmentDirections.actionToThemeOption())
     }
 
     private fun onVersionClicked() {
@@ -178,10 +175,5 @@ class SettingsFragment : BaseFragment() {
                 Moop.executePlayStore(requireContext())
             }
         }
-    }
-
-    companion object {
-
-        fun newInstance(): SettingsFragment = SettingsFragment()
     }
 }

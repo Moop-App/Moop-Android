@@ -10,95 +10,119 @@
             type="soup.movie.ui.settings.SettingsViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollViewEx
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.settings.SettingsFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/themeItem"
-                layout="@layout/item_settings_theme"
-                android:layout_width="0dp"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@string/tab_settings" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollViewEx
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:item="@{viewModel.themeUiModel}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="?attr/moop_dividerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/themeItem" />
+                <include
+                    android:id="@+id/themeItem"
+                    layout="@layout/item_settings_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:item="@{viewModel.themeUiModel}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                android:id="@+id/theaterItem"
-                layout="@layout/item_settings_theater"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/themeItem" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?attr/moop_dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/themeItem" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="?attr/moop_dividerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/theaterItem" />
+                <include
+                    android:id="@+id/theaterItem"
+                    layout="@layout/item_settings_theater"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/themeItem" />
 
-            <include
-                android:id="@+id/theaterModeItem"
-                layout="@layout/item_settings_theater_mode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/theaterItem" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?attr/moop_dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/theaterItem" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="?attr/moop_dividerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
+                <include
+                    android:id="@+id/theaterModeItem"
+                    layout="@layout/item_settings_theater_mode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/theaterItem" />
 
-            <include
-                android:id="@+id/versionItem"
-                layout="@layout/item_settings_version"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?attr/moop_dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="?attr/moop_dividerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/versionItem" />
+                <include
+                    android:id="@+id/versionItem"
+                    layout="@layout/item_settings_version"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/theaterModeItem" />
 
-            <include
-                android:id="@+id/feedbackItem"
-                layout="@layout/item_settings_feedback"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/versionItem" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?attr/moop_dividerColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/versionItem" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollViewEx>
+                <include
+                    android:id="@+id/feedbackItem"
+                    layout="@layout/item_settings_feedback"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/versionItem" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollViewEx>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

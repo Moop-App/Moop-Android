@@ -1,4 +1,4 @@
-package soup.movie.ui.main.home.filter
+package soup.movie.ui.home.filter
 
 import androidx.annotation.Keep
 

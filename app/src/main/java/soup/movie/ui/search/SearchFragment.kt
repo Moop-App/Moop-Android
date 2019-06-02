@@ -1,31 +1,33 @@
 package soup.movie.ui.search
 
-import android.app.ActivityOptions
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
+import androidx.navigation.ActivityNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
-import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.search_fragment.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
-import soup.movie.databinding.ActivitySearchBinding
-import soup.movie.ui.BaseActivity
-import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.home.HomeListAdapter
-import soup.movie.ui.search.SearchUiModel.DoneState
-import soup.movie.ui.search.SearchUiModel.LoadingState
+import soup.movie.databinding.SearchFragmentBinding
+import soup.movie.ui.BaseFragment
+import soup.movie.ui.home.HomeListAdapter
 import soup.movie.util.ImeUtil
+import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import javax.inject.Inject
 
-class SearchActivity : BaseActivity() {
+class SearchFragment : BaseFragment() {
 
     private val viewModel: SearchViewModel by viewModel()
 
@@ -34,23 +36,35 @@ class SearchActivity : BaseActivity() {
 
     private var focusQuery = true
 
-    private val listAdapter by lazy {
+    private val listAdapter by lazyFast {
         HomeListAdapter { movie, sharedElements ->
-            analytics.clickMovie(isNow = movie.isNow)
+            analytics.clickMovie()
             MovieSelectManager.select(movie)
-            val intent = Intent(this, DetailActivity::class.java)
-            startActivityForResult(intent, 0, ActivityOptions
-                .makeSceneTransitionAnimation(this, *sharedElements)
-                .toBundle())
+            findNavController().navigate(
+                SearchFragmentDirections.actionToDetail(),
+                ActivityNavigatorExtras(
+                    activityOptions = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
+                )
+            )
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<ActivitySearchBinding>(this, R.layout.activity_search).apply {
-            lifecycleOwner = this@SearchActivity
-        }
-        setupSearchView()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+        return SearchFragmentBinding.inflate(inflater, container, false)
+            .apply {
+                lifecycleOwner = viewLifecycleOwner
+                viewModel = this@SearchFragment.viewModel
+            }
+            .root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupSearchView(view.context)
         listView.apply {
             adapter = listAdapter
             itemAnimator = FadeInAnimator().apply {
@@ -58,21 +72,21 @@ class SearchActivity : BaseActivity() {
                 removeDuration = 0
             }
         }
-        viewModel.uiModel.observe(this) {
+        viewModel.uiModel.observe(viewLifecycleOwner) {
             render(it)
         }
     }
 
-    override fun onPause() {
-        overridePendingTransition(0, 0)
-        super.onPause()
-        ImeUtil.hideIme(searchView)
-    }
-
-    override fun onEnterAnimationComplete() {
+    override fun onResume() {
+        super.onResume()
         if (focusQuery) {
             ImeUtil.showIme(searchView)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ImeUtil.hideIme(searchView)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -81,16 +95,16 @@ class SearchActivity : BaseActivity() {
     }
 
     private fun render(viewState: SearchUiModel) {
-        loadingView.isVisible = viewState is LoadingState
+        loadingView.isVisible = viewState is SearchUiModel.LoadingState
         noItemsView.isVisible = viewState.hasNoItems()
-        if (viewState is DoneState) {
+        if (viewState is SearchUiModel.DoneState) {
             listAdapter.submitList(viewState.items)
         }
     }
 
-    private fun setupSearchView() {
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+    private fun setupSearchView(ctx: Context) {
+        val searchManager = ctx.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = getString(R.string.search_hint)
         searchView.inputType = InputType.TYPE_TEXT_FLAG_CAP_WORDS
         searchView.imeOptions = searchView.imeOptions or
@@ -108,15 +122,8 @@ class SearchActivity : BaseActivity() {
                 return true
             }
         })
-        searchBack.setOnClickListener { dismiss() }
-    }
-
-    private fun dismiss() {
-        searchBack.background = null
-        finishAfterTransition()
-    }
-
-    override fun onBackPressed() {
-        dismiss()
+        searchBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }

@@ -1,29 +1,28 @@
-package soup.movie.ui.main.home
+package soup.movie.ui.home
 
-import android.app.ActivityOptions
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
+import androidx.navigation.ActivityNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_fragment.*
+import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.BaseFragment
-import soup.movie.ui.detail.DetailActivity
-import soup.movie.ui.main.home.filter.HomeFilterFragment
-import soup.movie.ui.search.SearchActivity
-import soup.movie.ui.settings.SettingsActivity
 import soup.movie.util.consume
 import soup.movie.util.getColorAttr
+import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import javax.inject.Inject
 
@@ -34,14 +33,17 @@ class HomeFragment : BaseFragment() {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private val listAdapter by lazy {
+    private val listAdapter by lazyFast {
         HomeListAdapter { movie, sharedElements ->
-            analytics.clickMovie(isNow = movie.isNow)
+            analytics.clickMovie()
             MovieSelectManager.select(movie)
-            val intent = Intent(requireActivity(), DetailActivity::class.java)
-            startActivityForResult(intent, 0, ActivityOptions
-                .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
-                .toBundle())
+            findNavController().navigate(
+                HomeFragmentDirections.actionToDetail(),
+                ActivityNavigatorExtras(
+                    activityOptions = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
+                )
+            )
         }
     }
 
@@ -87,18 +89,16 @@ class HomeFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_search -> {
-                val intent = Intent(requireActivity(), SearchActivity::class.java)
-                startActivity(intent)
+                findNavController().navigate(MainDirections.actionToSearch())
                 return true
             }
             R.id.action_filter -> {
                 analytics.clickMenuFilter()
-                HomeFilterFragment.show(this)
+                findNavController().navigate(HomeFragmentDirections.actionToFilter())
                 return true
             }
             R.id.action_settings -> {
-                val intent = Intent(requireActivity(), SettingsActivity::class.java)
-                startActivity(intent)
+                findNavController().navigate(MainDirections.actionToSettings())
                 return true
             }
         }
@@ -147,14 +147,8 @@ class HomeFragment : BaseFragment() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             consume {
                 when (it.itemId) {
-                    R.id.action_now -> {
-                        toolbar.setTitle(R.string.tab_now)
-                        viewModel.onNowClick()
-                    }
-                    R.id.action_plan -> {
-                        toolbar.setTitle(R.string.tab_plan)
-                        viewModel.onPlanClick()
-                    }
+                    R.id.action_now -> viewModel.onNowClick()
+                    R.id.action_plan -> viewModel.onPlanClick()
                 }
             }
         }
@@ -167,10 +161,5 @@ class HomeFragment : BaseFragment() {
         if (viewState is HomeUiModel.DoneState) {
             listAdapter.submitList(viewState.movies)
         }
-    }
-
-    companion object {
-
-        fun newInstance(): HomeFragment = HomeFragment()
     }
 }

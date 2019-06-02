@@ -5,7 +5,7 @@ import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
 
 @Keep
-data class TheaterEditChildUiModel(
+class TheaterEditChildUiModel(
     val areaGroupList: List<AreaGroup>,
     val selectedTheaterIdSet: List<Theater>
 )

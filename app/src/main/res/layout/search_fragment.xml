@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data />
+    <data>
+
+        <variable
+            name="viewModel"
+            type="soup.movie.ui.search.SearchViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="soup.movie.ui.search.SearchActivity">
+        tools:context="soup.movie.ui.search.SearchFragment">
 
         <FrameLayout
             android:id="@+id/search_toolbar"
@@ -17,7 +22,10 @@
             android:elevation="4dp"
             android:outlineProvider="bounds"
             android:theme="@style/SearchViewTheme"
-            android:transitionGroup="false">
+            android:transitionGroup="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <View
                 android:id="@+id/searchBackground"
@@ -102,11 +110,11 @@
                 android:orientation="vertical"
                 android:padding="8dp"
                 app:layoutManagerType="grid"
-                app:spanCount="@integer/grid_span_count"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="@integer/grid_span_count"
                 tools:listitem="@layout/home_item_movie"
                 tools:visibility="visible" />
 

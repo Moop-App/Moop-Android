@@ -1,10 +1,9 @@
-package soup.movie.ui.main.home.filter
+package soup.movie.ui.home.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.home_filter_item_genre.*
@@ -48,15 +47,6 @@ class HomeFilterFragment : BaseBottomSheetDialogFragment() {
                 viewModel.onGenreFilterClick(it.name, isChecked)
             }
             addView(genreChip)
-        }
-    }
-
-    companion object {
-
-        fun show(hostFragment: Fragment) {
-            hostFragment.fragmentManager?.run {
-                HomeFilterFragment().show(this, "HomeFilter")
-            }
         }
     }
 }

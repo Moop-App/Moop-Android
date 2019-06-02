@@ -7,10 +7,10 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import soup.movie.di.scope.FragmentScope
 import soup.movie.di.scope.ViewModelKey
-import soup.movie.ui.main.home.HomeFragment
-import soup.movie.ui.main.home.HomeViewModel
-import soup.movie.ui.main.home.filter.HomeFilterFragment
-import soup.movie.ui.main.home.filter.HomeFilterViewModel
+import soup.movie.ui.home.HomeFragment
+import soup.movie.ui.home.HomeViewModel
+import soup.movie.ui.home.filter.HomeFilterFragment
+import soup.movie.ui.home.filter.HomeFilterViewModel
 
 @Module
 abstract class HomeUiModule {

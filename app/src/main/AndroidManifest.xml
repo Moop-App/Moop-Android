@@ -54,28 +54,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:label="@string/tab_settings"
-            android:exported="false" />
-        <activity
-            android:name=".ui.search.SearchActivity"
-            android:theme="@style/AppTheme.Search" />
-        <activity
             android:name=".ui.detail.DetailActivity"
             android:theme="@style/AppTheme.Detail"
             android:parentActivityName=".ui.main.MainActivity" />
-        <activity
-            android:name=".ui.theater.sort.TheaterSortActivity"
-            android:theme="@style/AppTheme.TheaterSort"
-            android:label="@string/theater_sort_title" />
-        <activity
-            android:name=".ui.theater.edit.TheaterEditActivity"
-            android:theme="@style/AppTheme.TheaterEdit"
-            android:label="@string/theater_edit_title" />
-        <activity
-            android:name=".ui.theme.ThemeOptionActivity"
-            android:label="@string/theme_bookmark_title"
-            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

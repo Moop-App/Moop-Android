@@ -21,7 +21,7 @@
     <color name="default_stageBrightColor">@color/dark_icon</color>
     <color name="default_stageDimColor">@color/dark_icon_half_alpha</color>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -47,33 +47,7 @@
         <item name="moop_stageDimColor">@color/default_stageDimColor</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorAccentHalf">@color/colorAccentHalf</item>
-        <item name="android:windowBackground">?attr/moop_bgColor</item>
-
-        <item name="moop_errorColor">@color/default_errorColor</item>
-        <item name="moop_dividerColor">@color/default_dividerColor</item>
-        <item name="moop_bgColor">@color/default_bgColor</item>
-        <item name="moop_textColorDark">@color/default_textColorDark</item>
-        <item name="moop_textColorLight">@color/default_textColorLight</item>
-        <item name="moop_iconColorDark">@color/default_iconColorDark</item>
-        <item name="moop_iconColorLight">@color/default_iconColorLight</item>
-        <item name="moop_cardDividerColor">?attr/moop_dividerColor</item>
-        <item name="moop_cardBgColorDark">@color/default_cardBgColorDark</item>
-        <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
-        <item name="moop_cardContentColorDark">?attr/moop_iconColorDark</item>
-        <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
-        <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
-        <item name="moop_stageColor">@color/default_stageColor</item>
-        <item name="moop_stageStarColor">@color/default_stageStarColor</item>
-        <item name="moop_stageBrightColor">@color/default_stageBrightColor</item>
-        <item name="moop_stageDimColor">@color/default_stageDimColor</item>
-    </style>
-
-    <style name="AppTheme.Translucent" parent="AppTheme.NoActionBar">
+    <style name="AppTheme.Translucent">
         <!-- using a semi-transparent window background for the drag-back gesture -->
         <item name="android:windowBackground">@color/scrim</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -82,9 +56,6 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
-
-    <style name="AppTheme.Search" parent="AppTheme.NoActionBar">
     </style>
 
     <style name="AppTheme.Detail" parent="AppTheme.Translucent">
@@ -105,12 +76,7 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
-    <style name="AppTheme.TheaterSort">
-        <item name="android:windowSharedElementEnterTransition">@transition/shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/shared_return</item>
-    </style>
-
-    <style name="AppTheme.TheaterEdit" parent="AppTheme.NoActionBar">
+    <style name="AppTheme.TheaterEdit">
         <item name="android:windowSharedElementEnterTransition">@transition/shared_enter</item>
         <item name="android:windowSharedElementReturnTransition">@transition/shared_return</item>
     </style>

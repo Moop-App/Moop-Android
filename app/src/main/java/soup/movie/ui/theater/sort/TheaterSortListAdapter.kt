@@ -4,7 +4,7 @@ import android.view.MotionEvent
 import androidx.recyclerview.widget.listener.OnDragStartListener
 import androidx.recyclerview.widget.listener.OnItemMoveListener
 import kotlinx.android.synthetic.main.item_sort_theater_cgv.view.*
-import soup.movie.data.helper.getSortChipLayout
+import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
@@ -24,8 +24,14 @@ internal class TheaterSortListAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int =
-        getItem(position).getSortChipLayout()
+    override fun getItemViewType(position: Int): Int {
+        return when(getItem(position).type) {
+            Theater.TYPE_CGV -> R.layout.item_sort_theater_cgv
+            Theater.TYPE_LOTTE -> R.layout.item_sort_theater_lotte
+            Theater.TYPE_MEGABOX -> R.layout.item_sort_theater_megabox
+            else -> throw IllegalArgumentException("This is not valid type.")
+        }
+    }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         items.swap(fromPosition, toPosition)

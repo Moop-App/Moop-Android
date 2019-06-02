@@ -5,7 +5,7 @@ import soup.movie.data.MoopRepository
 import soup.movie.data.helper.getDDay
 import soup.movie.data.model.Movie
 import soup.movie.domain.model.MovieFilter
-import soup.movie.ui.main.home.HomeUiModel
+import soup.movie.ui.home.HomeUiModel
 
 class GetPlanMovieListUseCase(
     private val repository: MoopRepository

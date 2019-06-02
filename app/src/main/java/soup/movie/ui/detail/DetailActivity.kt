@@ -45,7 +45,7 @@ class DetailActivity : BaseActivity() {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private val listAdapter by lazy {
+    private val listAdapter by lazyFast {
         DetailListAdapter { item ->
             val ctx: Context = this@DetailActivity
             when (item) {
@@ -159,11 +159,6 @@ class DetailActivity : BaseActivity() {
 
     override fun onBackPressed() {
         finishAfterTransition()
-    }
-
-    override fun finishAfterTransition() {
-        detailHeaderView.setBackgroundColorResource(android.R.color.transparent)
-        super.finishAfterTransition()
     }
 
     private fun render(uiModel: ContentUiModel) {
