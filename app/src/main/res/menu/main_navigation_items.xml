@@ -5,13 +5,13 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/action_to_home"
+            android:id="@+id/home"
             android:checkable="true"
             android:icon="@drawable/ic_round_movie"
             android:title="@string/menu_home" />
 
         <item
-            android:id="@+id/action_to_search"
+            android:id="@+id/search"
             android:checkable="true"
             android:icon="@drawable/ic_round_search"
             android:title="@string/menu_search" />
@@ -21,7 +21,7 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/action_to_settings"
+            android:id="@+id/settings"
             android:checkable="true"
             android:icon="@drawable/ic_round_settings"
             android:title="@string/menu_settings" />

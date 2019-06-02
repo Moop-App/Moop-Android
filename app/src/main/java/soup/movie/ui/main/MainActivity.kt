@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.main_activity.*
 import soup.movie.MainDirections
@@ -26,8 +27,9 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
-        //TODO: implements this
+    private val listener = NavController.OnDestinationChangedListener {
+        _, destination, _ ->
+        navigationView.setCheckedItem(destination.id)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,19 +47,11 @@ class MainActivity : BaseActivity() {
 
         navigationView.setNavigationItemSelectedListener {
             consume {
-                if (!it.isChecked) {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    when (it.itemId) {
-                        R.id.action_to_home ->
-                            navHostFragment.findNavController()
-                                .popBackStack(R.id.home, false)
-                        R.id.action_to_search ->
-                            navHostFragment.findNavController()
-                                .navigate(MainDirections.actionToSearch())
-                        R.id.action_to_settings ->
-                            navHostFragment.findNavController()
-                                .navigate(MainDirections.actionToSettings())
-                    }
+                drawerLayout.closeDrawer(GravityCompat.START)
+                val navController = navHostFragment.findNavController()
+                when (it.itemId) {
+                    R.id.home -> navController.popBackStack(R.id.home, false)
+                    else -> NavigationUI.onNavDestinationSelected(it, navController)
                 }
             }
         }
@@ -100,6 +94,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            return
+        }
         if (handleBackEventInChildFragment()) return
         super.onBackPressed()
     }
