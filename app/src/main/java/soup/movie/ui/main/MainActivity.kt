@@ -3,16 +3,19 @@ package soup.movie.ui.main
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
+import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.main_activity.*
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.ui.home.MovieSelectManager
+import soup.movie.util.consume
 import soup.movie.util.observeEvent
 import javax.inject.Inject
 
@@ -23,11 +26,14 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var analytics: EventAnalytics
 
+    private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
+        //TODO: implements this
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        setContentView(R.layout.main_activity)
         //TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
 
@@ -36,6 +42,35 @@ class MainActivity : BaseActivity() {
         viewModel.uiEvent.observeEvent(this) {
             execute(it)
         }
+
+        navigationView.setNavigationItemSelectedListener {
+            consume {
+                if (!it.isChecked) {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    when (it.itemId) {
+                        R.id.action_to_home ->
+                            navHostFragment.findNavController()
+                                .popBackStack(R.id.home, false)
+                        R.id.action_to_search ->
+                            navHostFragment.findNavController()
+                                .navigate(MainDirections.actionToSearch())
+                        R.id.action_to_settings ->
+                            navHostFragment.findNavController()
+                                .navigate(MainDirections.actionToSettings())
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navHostFragment.findNavController().addOnDestinationChangedListener(listener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        navHostFragment.findNavController().removeOnDestinationChangedListener(listener)
     }
 
     override fun onNewIntent(intent: Intent?) {

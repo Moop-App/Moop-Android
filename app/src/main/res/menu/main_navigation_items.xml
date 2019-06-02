@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_primary"
+        android:checkableBehavior="single">
 
-    <item android:id="@+id/action_now"
-        android:title="@string/tab_now"
-        android:icon="@drawable/ic_round_movie" />
+        <item
+            android:id="@+id/action_to_home"
+            android:checkable="true"
+            android:icon="@drawable/ic_round_movie"
+            android:title="@string/menu_home" />
 
-    <item android:id="@+id/action_plan"
-        android:title="@string/tab_plan"
-        android:icon="@drawable/ic_round_plan" />
+        <item
+            android:id="@+id/action_to_search"
+            android:checkable="true"
+            android:icon="@drawable/ic_round_search"
+            android:title="@string/menu_search" />
+    </group>
+    <group
+        android:id="@+id/group_secondary"
+        android:checkableBehavior="single">
 
+        <item
+            android:id="@+id/action_to_settings"
+            android:checkable="true"
+            android:icon="@drawable/ic_round_settings"
+            android:title="@string/menu_settings" />
+    </group>
 </menu>

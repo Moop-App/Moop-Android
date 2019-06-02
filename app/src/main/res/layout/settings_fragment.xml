@@ -27,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title="@string/tab_settings" />
+                app:title="@string/menu_settings" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
