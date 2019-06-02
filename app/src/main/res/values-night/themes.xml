@@ -4,7 +4,7 @@
     <color name="colorPrimary">@color/black</color>
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">#8EB5F0</color>
-    <color name="colorAccentHalf">#338EB5F0</color>
+    <color name="colorAccentHalf">#228EB5F0</color>
 
     <color name="default_errorColor">#E68282</color>
     <color name="default_dividerColor">@color/grey_700</color>
