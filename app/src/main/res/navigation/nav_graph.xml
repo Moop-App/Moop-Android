@@ -37,7 +37,11 @@
 
         <action
             android:id="@+id/action_to_theme_option"
-            app:destination="@id/theme_option" />
+            app:destination="@id/theme_option"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
 
         <action
             android:id="@+id/action_to_theater_sort"
@@ -72,10 +76,18 @@
 
     <action
         android:id="@+id/action_to_search"
-        app:destination="@id/search" />
+        app:destination="@id/search"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
 
     <action
         android:id="@+id/action_to_settings"
-        app:destination="@id/settings" />
+        app:destination="@id/settings"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
 
 </navigation>
