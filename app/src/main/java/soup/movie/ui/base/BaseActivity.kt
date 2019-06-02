@@ -1,4 +1,4 @@
-package soup.movie.ui
+package soup.movie.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

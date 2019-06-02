@@ -19,7 +19,7 @@ import soup.movie.settings.model.TheaterFilter
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
-import soup.movie.ui.BaseViewModel
+import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeFilterViewModel @Inject constructor(

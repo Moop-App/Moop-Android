@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import soup.movie.domain.home.GetMovieFilterUseCase
 import soup.movie.domain.home.GetNowMovieListUseCase
 import soup.movie.domain.home.GetPlanMovieListUseCase
-import soup.movie.ui.BaseViewModel
+import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(

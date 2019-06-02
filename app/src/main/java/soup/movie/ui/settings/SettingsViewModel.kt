@@ -8,7 +8,7 @@ import soup.movie.data.MoopRepository
 import soup.movie.data.model.Version
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.ThemeOptionSetting
-import soup.movie.ui.BaseViewModel
+import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(

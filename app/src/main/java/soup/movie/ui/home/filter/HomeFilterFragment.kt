@@ -9,7 +9,7 @@ import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.home_filter_genre.*
 import soup.movie.R
 import soup.movie.databinding.HomeFilterFragmentBinding
-import soup.movie.ui.BaseBottomSheetDialogFragment
+import soup.movie.ui.base.BaseBottomSheetDialogFragment
 import soup.movie.util.inflate
 import soup.movie.util.observe
 

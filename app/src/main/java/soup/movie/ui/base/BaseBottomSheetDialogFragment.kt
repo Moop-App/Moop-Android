@@ -1,4 +1,4 @@
-package soup.movie.ui
+package soup.movie.ui.base
 
 import android.app.Dialog
 import android.content.Context

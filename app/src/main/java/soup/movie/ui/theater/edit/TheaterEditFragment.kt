@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.theater_edit_fragment.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterEditFragmentBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.util.inflate

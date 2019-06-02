@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import soup.movie.data.model.Theater
 import soup.movie.domain.theater.edit.TheaterEditManager
-import soup.movie.ui.BaseViewModel
+import soup.movie.ui.base.BaseViewModel
 import soup.movie.ui.theater.edit.TheaterEditChildUiModel
 import javax.inject.Inject
 

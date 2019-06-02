@@ -6,7 +6,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import soup.movie.data.model.Theater
 import soup.movie.settings.impl.TheatersSetting
-import soup.movie.ui.BaseViewModel
+import soup.movie.ui.base.BaseViewModel
 import soup.movie.util.swap
 import javax.inject.Inject
 

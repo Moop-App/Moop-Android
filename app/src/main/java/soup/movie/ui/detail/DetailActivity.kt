@@ -21,7 +21,7 @@ import soup.movie.data.model.Movie
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.spec.share
-import soup.movie.ui.BaseActivity
+import soup.movie.ui.base.BaseActivity
 import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema

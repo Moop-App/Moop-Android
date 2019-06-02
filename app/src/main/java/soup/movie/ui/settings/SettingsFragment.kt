@@ -24,7 +24,7 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.model.Theater
 import soup.movie.databinding.SettingsFragmentBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema

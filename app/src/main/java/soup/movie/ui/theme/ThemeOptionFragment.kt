@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import soup.movie.databinding.ThemeOptionFragmentBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 import soup.movie.util.observe
 
 class ThemeOptionFragment : BaseFragment() {

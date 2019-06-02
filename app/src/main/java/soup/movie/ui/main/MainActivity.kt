@@ -11,7 +11,7 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.MovieSelectManager
 import soup.movie.spec.KakaoLink
-import soup.movie.ui.BaseActivity
+import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.observeEvent
 import javax.inject.Inject
