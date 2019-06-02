@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:background="?attr/moop_errorColor"
-    android:foreground="?selectableItemBackground" >
+    android:foreground="?selectableItemBackground">
 
     <ImageView
         android:id="@+id/infoIcon"
@@ -13,11 +12,11 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_round_info"
         android:tint="@color/white"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/description"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/description" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/description"
@@ -26,16 +25,16 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
-        android:singleLine="true"
         android:maxLines="1"
+        android:singleLine="true"
         android:text="네트워크 연결이 원활하지 않습니다."
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/infoIcon"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

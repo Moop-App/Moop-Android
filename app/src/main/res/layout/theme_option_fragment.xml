@@ -34,7 +34,7 @@
             android:scrollbars="none"
             app:layoutManagerType="linear"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/item_theme_option" />
+            tools:listitem="@layout/theme_option_item_option" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

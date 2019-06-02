@@ -16,8 +16,8 @@
         android:layout_height="match_parent"
         android:transitionGroup="false"
         app:dragDismissDistance="@dimen/drag_dismiss_distance"
-        app:dragDismissScale="0.95"
         app:dragDismissEnableBottomDrag="false"
+        app:dragDismissScale="0.95"
         tools:context=".ui.detail.DetailActivity">
 
         <!-- Use a separate view for the background, rather than on the root view because it is a
@@ -39,10 +39,10 @@
             <include
                 android:id="@+id/detailHeaderView"
                 layout="@layout/detail_header"
-                app:uiModel="@{viewModel.headerUiModel}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:uiModel="@{viewModel.headerUiModel}" />
 
             <androidx.recyclerview.widget.RecyclerViewEx
                 android:id="@+id/listView"
@@ -53,8 +53,8 @@
                 android:overScrollMode="never"
                 android:paddingStart="8dp"
                 android:paddingTop="212dp"
-                android:paddingBottom="8dp"
                 android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
                 android:requiresFadingEdge="none"
                 android:scrollbars="none"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.android.synthetic.main.home_filter_item_genre.*
+import kotlinx.android.synthetic.main.home_filter_genre.*
 import soup.movie.R
 import soup.movie.databinding.HomeFilterFragmentBinding
 import soup.movie.ui.BaseBottomSheetDialogFragment
@@ -40,7 +40,7 @@ class HomeFilterFragment : BaseBottomSheetDialogFragment() {
     private fun ChipGroup.setGenreSet(uiModel: GenreFilterUiModel) {
         removeAllViews()
         uiModel.items.forEach {
-            val genreChip: Chip = inflate(context, R.layout.chip_filter_genre)
+            val genreChip: Chip = inflate(context, R.layout.home_filter_item_genre)
             genreChip.text = it.name
             genreChip.isChecked = it.isChecked
             genreChip.setOnCheckedChangeListener { _, isChecked ->

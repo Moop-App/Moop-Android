@@ -14,11 +14,11 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.item_settings_feedback.*
-import kotlinx.android.synthetic.main.item_settings_theater.*
-import kotlinx.android.synthetic.main.item_settings_theater_mode.*
-import kotlinx.android.synthetic.main.item_settings_theme.*
-import kotlinx.android.synthetic.main.item_settings_version.*
+import kotlinx.android.synthetic.main.settings_item_feedback.*
+import kotlinx.android.synthetic.main.settings_item_theater.*
+import kotlinx.android.synthetic.main.settings_item_theater_mode.*
+import kotlinx.android.synthetic.main.settings_item_theme.*
+import kotlinx.android.synthetic.main.settings_item_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingEnd="16dp"
+        android:paddingBottom="@dimen/settings_category_margin_vertical">
+
+        <TextView
+            android:id="@+id/genreCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_category_genre"
+            android:textAppearance="@style/TextAppearance.Settings.Category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/genreFilterGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genreCategory"
+            tools:visibility="visible">
+
+            <!-- for preview
+            <include layout="@layout/home_filter_item_genre" />
+            <include layout="@layout/home_filter_item_genre" />
+            <include layout="@layout/home_filter_item_genre" />
+            <include layout="@layout/home_filter_item_genre" />
+            <include layout="@layout/home_filter_item_genre" />
+            <include layout="@layout/home_filter_item_genre" />
+             -->
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

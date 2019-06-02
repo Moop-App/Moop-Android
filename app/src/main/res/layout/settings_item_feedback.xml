@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data/>
+    <data />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/settings_category_margin_vertical"
-        android:paddingBottom="@dimen/settings_category_margin_vertical" >
+        android:paddingBottom="@dimen/settings_category_margin_vertical">
 
         <TextView
             android:id="@+id/feedbackCategory"
@@ -18,8 +16,8 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_category_feedback"
             android:textAppearance="@style/TextAppearance.Settings.Category"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -42,10 +40,10 @@
             android:layout_marginEnd="48dp"
             android:text="개발자에게 버그 신고하기"
             android:textColor="?attr/moop_cardContentColorDark"
-            app:layout_constraintTop_toTopOf="@+id/bugReportButton"
             app:layout_constraintBottom_toBottomOf="@+id/bugReportButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bugReportButton" />
 
         <ImageView
             android:id="@+id/bugReportIcon"
@@ -53,9 +51,9 @@
             android:layout_height="24dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_round_bug_report"
-            app:layout_constraintTop_toTopOf="@+id/bugReportButton"
             app:layout_constraintBottom_toBottomOf="@+id/bugReportButton"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bugReportButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
