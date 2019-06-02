@@ -18,9 +18,9 @@ import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import kotlinx.android.synthetic.main.search_fragment.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.MovieSelectManager
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.databinding.SearchFragmentBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.HomeListAdapter
 import soup.movie.util.ImeUtil
 import soup.movie.util.lazyFast

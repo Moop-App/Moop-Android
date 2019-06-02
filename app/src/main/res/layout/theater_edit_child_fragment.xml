@@ -14,5 +14,5 @@
         android:padding="8dp"
         app:layoutManagerType="linear"
         tools:itemCount="3"
-        tools:listitem="@layout/item_area_group" />
+        tools:listitem="@layout/theater_edit_item_area" />
 </layout>

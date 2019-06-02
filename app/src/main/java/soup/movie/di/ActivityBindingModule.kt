@@ -3,6 +3,7 @@ package soup.movie.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import soup.movie.di.domain.HomeDomainModule
+import soup.movie.di.domain.TheaterEditDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
 import soup.movie.ui.detail.DetailActivity
@@ -20,7 +21,8 @@ abstract class ActivityBindingModule {
         SettingsUiModule::class,
         ThemeOptionUiModule::class,
         TheaterSortUiModule::class,
-        TheaterEditUiModule::class
+        TheaterEditUiModule::class,
+        TheaterEditDomainModule::class
     ])
     abstract fun mainActivity(): MainActivity
 

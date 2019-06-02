@@ -1,15 +1,15 @@
 package soup.movie.ui.home
 
-import androidx.core.util.Pair
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 import kotlinx.android.synthetic.main.home_item_movie.view.*
 import soup.movie.R
-import soup.movie.data.helper.isBest
-import soup.movie.data.helper.isDDay
-import soup.movie.data.helper.isNew
+import soup.movie.domain.model.isBest
+import soup.movie.domain.model.isDDay
+import soup.movie.domain.model.isNew
 import soup.movie.data.model.Movie
 import soup.movie.ui.databinding.DataBindingListAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder

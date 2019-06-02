@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/settings_category_margin_vertical"
+        android:paddingBottom="@dimen/settings_category_margin_vertical">
+
+        <TextView
+            android:id="@+id/tmCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_category_theater_mode"
+            android:textAppearance="@style/TextAppearance.Settings.Category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tmPrepare"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/settings_item_margin_vertical"
+            android:background="@drawable/bg_round_rect"
+            android:backgroundTint="?attr/moop_cardBgColorLight"
+            android:gravity="center"
+            android:text="준비 중입니다"
+            android:textColor="?attr/moop_cardContentColorLight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmCategory" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

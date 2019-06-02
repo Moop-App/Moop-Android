@@ -3,9 +3,9 @@ package soup.movie.ui.main
 import io.reactivex.android.schedulers.AndroidSchedulers
 import soup.movie.data.MoopRepository
 import soup.movie.data.model.MovieId
-import soup.movie.ui.BaseViewModel
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
+import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(

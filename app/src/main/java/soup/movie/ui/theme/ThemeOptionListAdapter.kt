@@ -17,5 +17,5 @@ class ThemeOptionListAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int = R.layout.item_theme_option
+    override fun getItemViewType(position: Int): Int = R.layout.theme_option_item_option
 }

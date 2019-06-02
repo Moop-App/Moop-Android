@@ -18,7 +18,7 @@ import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.theater_sort_fragment.*
 import soup.movie.R
 import soup.movie.databinding.TheaterSortFragmentBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.lazyFast
 import soup.movie.util.observe

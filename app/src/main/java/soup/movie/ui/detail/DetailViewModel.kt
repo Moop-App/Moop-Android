@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import soup.movie.data.MovieSelectManager
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.data.model.Movie
-import soup.movie.ui.BaseViewModel
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
+import soup.movie.ui.base.BaseViewModel
 import soup.movie.util.ImageUriProvider
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

@@ -44,7 +44,7 @@
 
                 <include
                     android:id="@+id/themeItem"
-                    layout="@layout/item_settings_theme"
+                    layout="@layout/settings_item_theme"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:item="@{viewModel.themeUiModel}"
@@ -62,7 +62,7 @@
 
                 <include
                     android:id="@+id/theaterItem"
-                    layout="@layout/item_settings_theater"
+                    layout="@layout/settings_item_theater"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
 
                 <include
                     android:id="@+id/theaterModeItem"
-                    layout="@layout/item_settings_theater_mode"
+                    layout="@layout/settings_item_theater_mode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
 
                 <include
                     android:id="@+id/versionItem"
-                    layout="@layout/item_settings_version"
+                    layout="@layout/settings_item_version"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +113,7 @@
 
                 <include
                     android:id="@+id/feedbackItem"
-                    layout="@layout/item_settings_feedback"
+                    layout="@layout/settings_item_feedback"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"

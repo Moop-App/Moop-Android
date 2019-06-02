@@ -1,6 +1,6 @@
 package soup.movie.ui.theater.edit
 
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 
 abstract class TheaterEditChildFragment : BaseFragment() {
 

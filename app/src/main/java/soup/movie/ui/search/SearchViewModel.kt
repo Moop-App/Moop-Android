@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import soup.movie.data.MoopRepository
-import soup.movie.ui.BaseViewModel
+import soup.movie.ui.base.BaseViewModel
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

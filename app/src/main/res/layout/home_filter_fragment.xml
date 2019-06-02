@@ -22,7 +22,7 @@
 
             <include
                 android:id="@+id/theaterItem"
-                layout="@layout/home_filter_item_theater"
+                layout="@layout/home_filter_theater"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:item="@{viewModel.theaterUiModel}"
@@ -43,7 +43,7 @@
 
             <include
                 android:id="@+id/ageItem"
-                layout="@layout/home_filter_item_age"
+                layout="@layout/home_filter_age"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:item="@{viewModel.ageUiModel}"
@@ -64,7 +64,7 @@
 
             <include
                 android:id="@+id/genreItem"
-                layout="@layout/home_filter_item_genre"
+                layout="@layout/home_filter_genre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

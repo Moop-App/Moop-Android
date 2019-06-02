@@ -1,31 +1,35 @@
 package soup.movie.ui.settings
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.item_settings_feedback.*
-import kotlinx.android.synthetic.main.item_settings_theater.*
-import kotlinx.android.synthetic.main.item_settings_theater_mode.*
-import kotlinx.android.synthetic.main.item_settings_theme.*
-import kotlinx.android.synthetic.main.item_settings_version.*
+import kotlinx.android.synthetic.main.settings_item_feedback.*
+import kotlinx.android.synthetic.main.settings_item_theater.*
+import kotlinx.android.synthetic.main.settings_item_theater_mode.*
+import kotlinx.android.synthetic.main.settings_item_theme.*
+import kotlinx.android.synthetic.main.settings_item_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.helper.Moop
-import soup.movie.data.helper.executeWeb
-import soup.movie.data.helper.getChipLayout
+import soup.movie.data.model.Theater
 import soup.movie.databinding.SettingsFragmentBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 import soup.movie.util.*
+import soup.movie.util.helper.Cgv
+import soup.movie.util.helper.LotteCinema
+import soup.movie.util.helper.Megabox
+import soup.movie.util.helper.Moop
 import javax.inject.Inject
 
 class SettingsFragment : BaseFragment() {
@@ -123,16 +127,35 @@ class SettingsFragment : BaseFragment() {
         }
     }
 
+    @LayoutRes
+    private fun Theater.getChipLayout(): Int {
+        return when(type) {
+            Theater.TYPE_CGV -> R.layout.chip_action_cgv
+            Theater.TYPE_LOTTE -> R.layout.chip_action_lotte
+            Theater.TYPE_MEGABOX -> R.layout.chip_action_megabox
+            else -> throw IllegalArgumentException("$type is not valid type.")
+        }
+    }
+
+    private fun Theater.executeWeb(ctx: Context) {
+        return when (type) {
+            Theater.TYPE_CGV -> Cgv.executeWeb(ctx, this)
+            Theater.TYPE_LOTTE -> LotteCinema.executeWeb(ctx, this)
+            Theater.TYPE_MEGABOX -> Megabox.executeWeb(ctx, this)
+            else -> throw IllegalArgumentException("$type is not valid type.")
+        }
+    }
+
     private fun render(viewState: VersionSettingUiModel) {
         versionViewState = viewState
         currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
         latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
-        if (viewState.isLatest()) {
+        if (viewState.isLatest) {
             marketIcon?.setImageResource(R.drawable.ic_round_shop)
         } else {
             marketIcon?.setImageResource(R.drawable.ic_round_new_releases)
         }
-        if (viewState.isLatest().not()) {
+        if (viewState.isLatest.not()) {
             AlertDialog.Builder(requireContext())
                 .setIcon(R.drawable.ic_round_new_releases)
                 .setTitle(R.string.settings_version_update_title)
@@ -169,7 +192,7 @@ class SettingsFragment : BaseFragment() {
 
     private fun onVersionClicked() {
         versionViewState?.run {
-            if (isLatest()) {
+            if (isLatest) {
                 context?.showToast(R.string.settings_version_toast)
             } else {
                 Moop.executePlayStore(requireContext())

@@ -3,7 +3,7 @@ package soup.movie.ui.theater.sort
 import android.view.MotionEvent
 import androidx.recyclerview.widget.listener.OnDragStartListener
 import androidx.recyclerview.widget.listener.OnItemMoveListener
-import kotlinx.android.synthetic.main.item_sort_theater_cgv.view.*
+import kotlinx.android.synthetic.main.theater_sort_item_cgv.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.ui.databinding.DataBindingAdapter
@@ -26,9 +26,9 @@ internal class TheaterSortListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when(getItem(position).type) {
-            Theater.TYPE_CGV -> R.layout.item_sort_theater_cgv
-            Theater.TYPE_LOTTE -> R.layout.item_sort_theater_lotte
-            Theater.TYPE_MEGABOX -> R.layout.item_sort_theater_megabox
+            Theater.TYPE_CGV -> R.layout.theater_sort_item_cgv
+            Theater.TYPE_LOTTE -> R.layout.theater_sort_item_lotte
+            Theater.TYPE_MEGABOX -> R.layout.theater_sort_item_megabox
             else -> throw IllegalArgumentException("This is not valid type.")
         }
     }

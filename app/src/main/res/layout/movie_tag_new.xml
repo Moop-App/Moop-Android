@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="soup.movie.domain.model.MovieExtKt" />
+
+        <variable
+            name="item"
+            type="soup.movie.data.model.Movie" />
+    </data>
+
+    <TextView
+        android:layout_width="@dimen/tag_width"
+        android:layout_height="@dimen/tag_height"
+        android:background="@drawable/bg_tag_new"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="NEW"
+        android:textColor="@color/white"
+        android:textSize="11dp"
+        android:textStyle="bold"
+        android:transitionName="@string/transition_new"
+        android:visibleIf="@{MovieExtKt.isNew(item)}" />
+</layout>

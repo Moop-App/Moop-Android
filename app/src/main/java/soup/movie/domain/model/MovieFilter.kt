@@ -1,9 +1,9 @@
 package soup.movie.domain.model
 
-import soup.movie.data.model.AgeFilter
-import soup.movie.data.model.GenreFilter
 import soup.movie.data.model.Movie
-import soup.movie.data.model.TheaterFilter
+import soup.movie.settings.model.AgeFilter
+import soup.movie.settings.model.GenreFilter
+import soup.movie.settings.model.TheaterFilter
 
 class MovieFilter(
     private val theaterFilter: TheaterFilter,

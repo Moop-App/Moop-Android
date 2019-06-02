@@ -9,7 +9,7 @@ import com.kakao.message.template.FeedTemplate
 import com.kakao.message.template.LinkObject
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
-import soup.movie.data.helper.getAgeLabel
+import soup.movie.domain.model.getAgeLabel
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieId
 import soup.movie.util.IntentUtil

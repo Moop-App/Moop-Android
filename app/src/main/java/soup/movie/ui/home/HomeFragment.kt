@@ -17,9 +17,8 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.MovieSelectManager
 import soup.movie.databinding.HomeFragmentBinding
-import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.BaseFragment
 import soup.movie.util.consume
 import soup.movie.util.getColorAttr
 import soup.movie.util.lazyFast
