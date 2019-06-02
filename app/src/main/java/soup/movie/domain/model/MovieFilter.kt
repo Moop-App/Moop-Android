@@ -1,8 +1,8 @@
 package soup.movie.domain.model
 
+import soup.movie.data.model.Movie
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.GenreFilter
-import soup.movie.data.model.Movie
 import soup.movie.settings.model.TheaterFilter
 
 class MovieFilter(

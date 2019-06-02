@@ -1,9 +1,9 @@
 package soup.movie.ui.home
 
-import androidx.core.util.Pair
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 import kotlinx.android.synthetic.main.home_item_movie.view.*
 import soup.movie.R

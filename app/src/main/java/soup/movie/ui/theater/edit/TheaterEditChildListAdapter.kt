@@ -4,9 +4,9 @@ import androidx.annotation.LayoutRes
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.theater_edit_item_area.view.*
 import soup.movie.R
-import soup.movie.domain.theater.edit.TheaterEditManager.Companion.MAX_ITEMS
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
+import soup.movie.domain.theater.edit.TheaterEditManager.Companion.MAX_ITEMS
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.inflate

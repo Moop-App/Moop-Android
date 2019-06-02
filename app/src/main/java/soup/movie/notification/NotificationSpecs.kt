@@ -7,7 +7,6 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat.Builder
 import soup.movie.R
-import timber.log.Timber
 
 object NotificationSpecs {
 

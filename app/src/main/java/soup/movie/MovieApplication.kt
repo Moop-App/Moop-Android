@@ -3,9 +3,9 @@ package soup.movie
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
-import soup.movie.theme.ThemeOptionManager
 import soup.movie.di.DaggerApplicationComponent
 import soup.movie.notification.NotificationSpecs
+import soup.movie.theme.ThemeOptionManager
 import javax.inject.Inject
 
 class MovieApplication : DaggerApplication() {

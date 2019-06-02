@@ -5,6 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.schedulers.Schedulers
+import soup.movie.domain.filter.GetGenreListUseCase
+import soup.movie.settings.impl.AgeFilterSetting
+import soup.movie.settings.impl.GenreFilterSetting
+import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.AgeFilter.Companion.FLAG_AGE_12
 import soup.movie.settings.model.AgeFilter.Companion.FLAG_AGE_15
@@ -15,10 +19,6 @@ import soup.movie.settings.model.TheaterFilter
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
-import soup.movie.domain.filter.GetGenreListUseCase
-import soup.movie.settings.impl.AgeFilterSetting
-import soup.movie.settings.impl.GenreFilterSetting
-import soup.movie.settings.impl.TheaterFilterSetting
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 

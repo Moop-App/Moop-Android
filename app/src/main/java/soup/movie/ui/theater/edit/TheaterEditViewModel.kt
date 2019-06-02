@@ -3,8 +3,8 @@ package soup.movie.ui.theater.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.data.model.Theater
+import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 

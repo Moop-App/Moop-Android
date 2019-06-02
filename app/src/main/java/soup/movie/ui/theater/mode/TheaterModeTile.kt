@@ -7,7 +7,8 @@ import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
 import soup.movie.R
 import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState
-import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState.*
+import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState.Active
+import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState.Inactive
 import soup.movie.util.toHexString
 import timber.log.Timber
 

@@ -1,9 +1,9 @@
 package soup.movie.settings.impl
 
 import android.content.SharedPreferences
-import soup.movie.theme.ThemeOptionManager.Companion.defaultThemeOption
-import soup.movie.theme.ThemeOption
 import soup.movie.settings.PrefSetting
+import soup.movie.theme.ThemeOption
+import soup.movie.theme.ThemeOptionManager.Companion.defaultThemeOption
 
 class ThemeOptionSetting(
     preferences: SharedPreferences
