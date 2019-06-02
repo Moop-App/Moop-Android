@@ -3,8 +3,9 @@ package soup.movie.ui.settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
+import soup.movie.BuildConfig
 import soup.movie.data.MoopRepository
-import soup.movie.data.helper.VersionHelper.currentVersion
+import soup.movie.data.model.Version
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.ui.BaseViewModel
@@ -48,14 +49,28 @@ class SettingsViewModel @Inject constructor(
             .subscribe { _theaterUiModel.value = it }
             .disposeOnCleared()
 
+        val current = currentVersion()
         repository.getVersion()
-            .startWith(currentVersion())
-            .defaultIfEmpty(currentVersion())
-            .onErrorReturnItem(currentVersion())
+            .startWith(current)
+            .defaultIfEmpty(current)
+            .onErrorReturnItem(current)
             .distinctUntilChanged()
-            .map { VersionSettingUiModel(currentVersion(), it) }
+            .map { latest ->
+                VersionSettingUiModel(
+                    current,
+                    latest,
+                    isLatest = current.versionCode >= latest.versionCode
+                )
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _versionUiModel.value = it }
             .disposeOnCleared()
+    }
+
+    private fun currentVersion(): Version {
+        return Version(
+            BuildConfig.VERSION_CODE,
+            BuildConfig.VERSION_NAME
+        )
     }
 }

@@ -20,12 +20,12 @@ import kotlinx.android.synthetic.main.item_settings_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.util.helper.Moop
 import soup.movie.data.helper.executeWeb
 import soup.movie.data.helper.getChipLayout
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.ui.BaseFragment
 import soup.movie.util.*
+import soup.movie.util.helper.Moop
 import javax.inject.Inject
 
 class SettingsFragment : BaseFragment() {
@@ -127,12 +127,12 @@ class SettingsFragment : BaseFragment() {
         versionViewState = viewState
         currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
         latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
-        if (viewState.isLatest()) {
+        if (viewState.isLatest) {
             marketIcon?.setImageResource(R.drawable.ic_round_shop)
         } else {
             marketIcon?.setImageResource(R.drawable.ic_round_new_releases)
         }
-        if (viewState.isLatest().not()) {
+        if (viewState.isLatest.not()) {
             AlertDialog.Builder(requireContext())
                 .setIcon(R.drawable.ic_round_new_releases)
                 .setTitle(R.string.settings_version_update_title)
@@ -169,7 +169,7 @@ class SettingsFragment : BaseFragment() {
 
     private fun onVersionClicked() {
         versionViewState?.run {
-            if (isLatest()) {
+            if (isLatest) {
                 context?.showToast(R.string.settings_version_toast)
             } else {
                 Moop.executePlayStore(requireContext())
