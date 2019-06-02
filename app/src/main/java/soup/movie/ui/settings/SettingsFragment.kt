@@ -84,7 +84,6 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun initViewState() {
-        toolbar.setNavigationIcon(R.drawable.ic_round_menu)
         toolbar.setNavigationOnClickListener {
             activityViewModel.openNavigationMenu()
         }

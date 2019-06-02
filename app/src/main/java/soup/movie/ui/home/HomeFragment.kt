@@ -90,7 +90,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun HomeHeaderBinding.setup() {
-        toolbar.setNavigationIcon(R.drawable.ic_round_menu)
         toolbar.setNavigationOnClickListener {
             activityViewModel.openNavigationMenu()
         }

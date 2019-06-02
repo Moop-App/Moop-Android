@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data />
@@ -12,13 +13,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            app:contentInsetEndWithActions="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_round_menu"
             tools:menu="@menu/fragment_movie_list">
 
             <LinearLayout
                 android:id="@+id/action_now"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:enabled="false"
                 android:background="@drawable/selector_home_navigation_bg"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -35,7 +38,7 @@
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="3dp"
                     android:gravity="center"
                     android:text="@string/menu_now"
                     android:textColor="@color/selector_home_navigation_text"
@@ -62,7 +65,7 @@
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="3dp"
                     android:gravity="center"
                     android:text="@string/menu_plan"
                     android:textColor="@color/selector_home_navigation_text" />

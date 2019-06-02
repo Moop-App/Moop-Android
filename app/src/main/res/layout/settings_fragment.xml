@@ -24,9 +24,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_round_menu"
                 app:title="@string/menu_settings" />
 
         </com.google.android.material.appbar.AppBarLayout>
