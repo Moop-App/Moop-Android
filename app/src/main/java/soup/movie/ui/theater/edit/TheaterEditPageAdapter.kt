@@ -8,7 +8,7 @@ import soup.movie.ui.theater.edit.lotte.LotteEditFragment
 import soup.movie.ui.theater.edit.megabox.MegaboxEditFragment
 import soup.movie.util.lazyFast
 
-class TheaterEditPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class TheaterEditPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment = items[position]
 
@@ -20,9 +20,9 @@ class TheaterEditPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         private val items by lazyFast {
             arrayOf(
-                CgvEditFragment.newInstance(),
-                LotteEditFragment.newInstance(),
-                MegaboxEditFragment.newInstance()
+                CgvEditFragment(),
+                LotteEditFragment(),
+                MegaboxEditFragment()
             )
         }
     }

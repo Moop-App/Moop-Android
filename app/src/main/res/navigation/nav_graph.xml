@@ -59,10 +59,10 @@
             app:destination="@id/theater_edit" />
     </fragment>
 
-    <activity
+    <fragment
         android:id="@+id/theater_edit"
-        android:name="soup.movie.ui.theater.edit.TheaterEditActivity"
-        tools:layout="@layout/theater_edit_activity" />
+        android:name="soup.movie.ui.theater.edit.TheaterEditFragment"
+        tools:layout="@layout/theater_edit_fragment" />
 
     <!-- Global Actions -->
 

@@ -72,7 +72,7 @@ class SearchFragment : BaseFragment() {
                 removeDuration = 0
             }
         }
-        viewModel.uiModel.observe(this) {
+        viewModel.uiModel.observe(viewLifecycleOwner) {
             render(it)
         }
     }

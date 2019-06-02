@@ -57,10 +57,6 @@
             android:name=".ui.detail.DetailActivity"
             android:theme="@style/AppTheme.Detail"
             android:parentActivityName=".ui.main.MainActivity" />
-        <activity
-            android:name=".ui.theater.edit.TheaterEditActivity"
-            android:theme="@style/AppTheme.TheaterEdit"
-            android:label="@string/theater_edit_title" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

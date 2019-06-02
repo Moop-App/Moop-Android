@@ -40,7 +40,6 @@
                 android:layout_height="36dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_button_confirm"
-                android:onClick="onConfirmClicked"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" >

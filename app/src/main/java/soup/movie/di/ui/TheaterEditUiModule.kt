@@ -3,15 +3,12 @@ package soup.movie.di.ui
 import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import soup.movie.data.MoopRepository
-import soup.movie.data.TheaterEditManager
-import soup.movie.di.scope.ActivityScope
+import soup.movie.di.scope.ChildFragmentScope
 import soup.movie.di.scope.FragmentScope
 import soup.movie.di.scope.ViewModelKey
-import soup.movie.settings.impl.TheatersSetting
+import soup.movie.ui.theater.edit.TheaterEditFragment
 import soup.movie.ui.theater.edit.TheaterEditViewModel
 import soup.movie.ui.theater.edit.cgv.CgvEditFragment
 import soup.movie.ui.theater.edit.cgv.CgvEditViewModel
@@ -23,6 +20,12 @@ import soup.movie.ui.theater.edit.megabox.MegaboxEditViewModel
 @Module
 abstract class TheaterEditUiModule {
 
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [
+        TheaterEditTabUiModule::class
+    ])
+    abstract fun bindTheaterEditFragment(): TheaterEditFragment
+
     @Binds
     @IntoMap
     @ViewModelKey(TheaterEditViewModel::class)
@@ -30,20 +33,9 @@ abstract class TheaterEditUiModule {
 }
 
 @Module
-class TheaterEditManagerUiModule {
-
-    @ActivityScope
-    @Provides
-    fun manager(
-        repository: MoopRepository,
-        theatersSetting: TheatersSetting
-    ): TheaterEditManager = TheaterEditManager(repository, theatersSetting)
-}
-
-@Module
 abstract class TheaterEditTabUiModule {
 
-    @FragmentScope
+    @ChildFragmentScope
     @ContributesAndroidInjector
     abstract fun provideCgvFragment(): CgvEditFragment
 
@@ -52,7 +44,7 @@ abstract class TheaterEditTabUiModule {
     @ViewModelKey(CgvEditViewModel::class)
     abstract fun bindCgvEditViewModel(viewModel: CgvEditViewModel): ViewModel
 
-    @FragmentScope
+    @ChildFragmentScope
     @ContributesAndroidInjector
     abstract fun provideLotteFragment(): LotteEditFragment
 
@@ -61,7 +53,7 @@ abstract class TheaterEditTabUiModule {
     @ViewModelKey(LotteEditViewModel::class)
     abstract fun bindLotteEditViewModel(viewModel: LotteEditViewModel): ViewModel
 
-    @FragmentScope
+    @ChildFragmentScope
     @ContributesAndroidInjector
     abstract fun provideMegaboxFragment(): MegaboxEditFragment
 

@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
-import androidx.core.util.Pair
 import androidx.core.view.isVisible
-import androidx.navigation.ActivityNavigatorExtras
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +23,7 @@ import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
@@ -50,7 +49,6 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        postponeEnterTransition(500, TimeUnit.MILLISECONDS)
         sharedElementEnterTransition = TransitionInflater.from(context)
             .inflateTransition(android.R.transition.move)
         sharedElementReturnTransition = TransitionInflater.from(context)
@@ -65,6 +63,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
                         .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
                         .forEach { sharedElements[it.transitionName] = it }
                 }
+                Timber.d("setEnterSharedElementCallback: ${sharedElements.keys}")
             }
         })
         setExitSharedElementCallback(object : SharedElementCallback() {
@@ -76,6 +75,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
                         sharedElements[name] = this
                     }
                 }
+                Timber.d("setExitSharedElementCallback: ${sharedElements.keys}")
             }
         })
     }
@@ -85,6 +85,8 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Timber.d("onCreateView")
+        postponeEnterTransition(400, TimeUnit.MILLISECONDS)
         return TheaterSortFragmentBinding.inflate(inflater, container, false).root
     }
 
@@ -94,10 +96,8 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
             onAddItemClick()
         }
         listView.adapter = listAdapter
-        viewModel.uiModel.observe(this) {
+        viewModel.uiModel.observe(viewLifecycleOwner) {
             render(it)
-            //FixMe: find a timing to call startPostponedEnterTransition()
-            startPostponedEnterTransition()
         }
     }
 
@@ -114,10 +114,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
     private fun onAddItemClick() {
         findNavController().navigate(
             TheaterSortFragmentDirections.actionToTheaterEdit(),
-            ActivityNavigatorExtras(
-                activityOptions = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(requireActivity(), *createSharedElements())
-            )
+            FragmentNavigatorExtras(*createSharedElements())
         )
     }
 

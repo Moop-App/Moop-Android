@@ -1,55 +1,63 @@
 package soup.movie.ui.theater.edit
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
-import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionInflater
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.theater_edit_activity.*
 import kotlinx.android.synthetic.main.theater_edit_footer.*
+import kotlinx.android.synthetic.main.theater_edit_fragment.*
 import soup.movie.R
 import soup.movie.data.helper.getChipLayout
-import soup.movie.databinding.TheaterEditActivityBinding
-import soup.movie.ui.BaseActivity
+import soup.movie.databinding.TheaterEditFragmentBinding
+import soup.movie.ui.BaseFragment
+import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.util.inflate
 import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
-class TheaterEditActivity : BaseActivity() {
+class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
 
     private var pendingFinish: Boolean = false
 
     private val viewModel: TheaterEditViewModel by viewModel()
 
     private val pageAdapter by lazyFast {
-        TheaterEditPageAdapter(supportFragmentManager)
+        TheaterEditPageAdapter(childFragmentManager)
     }
 
     private val footerPanel by lazyFast {
         BottomSheetBehavior.from(footerView).apply {
             setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
-                override fun onSlide(v: View, offset: Float) = Unit
+                override fun onSlide(v: View, offset: Float) {}
 
-                override fun onStateChanged(v: View, state: Int) = tryToFinish()
+                override fun onStateChanged(v: View, state: Int) {
+                    tryToFinish()
+                }
             })
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupContentView()
-        initViewState()
-        postponeEnterTransition()
+        sharedElementEnterTransition = TransitionInflater.from(context)
+            .inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition = TransitionInflater.from(context)
+            .inflateTransition(android.R.transition.move)
         setEnterSharedElementCallback(object : SharedElementCallback() {
             override fun onMapSharedElements(names: MutableList<String>,
                                              sharedElements: MutableMap<String, View>) {
@@ -60,19 +68,50 @@ class TheaterEditActivity : BaseActivity() {
                         .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
                         .forEach { sharedElements[it.transitionName] = it }
                 }
+                Timber.d("setEnterSharedElementCallback: ${sharedElements.keys}")
             }
         })
-        viewModel.contentUiModel.observe(this) {
-            render(it)
-        }
-        viewModel.footerUiModel.observe(this) {
-            render(it)
-        }
+        setExitSharedElementCallback(object : SharedElementCallback() {
+            override fun onMapSharedElements(
+                names: List<String>,
+                sharedElements: MutableMap<String, View>
+            ) {
+                sharedElements.clear()
+                names.forEach { name ->
+                    selectedTheaterGroup.findViewWithTag<View>(name)?.let {
+                        sharedElements[name] = it
+                    }
+                }
+                Timber.d("setExitSharedElementCallback: ${sharedElements.keys}")
+            }
+        })
     }
 
-    private fun setupContentView() {
-        DataBindingUtil.setContentView<TheaterEditActivityBinding>(this, R.layout.theater_edit_activity).apply {
-            lifecycleOwner = this@TheaterEditActivity
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Timber.d("onCreateView")
+        postponeEnterTransition(500, TimeUnit.MILLISECONDS)
+        return TheaterEditFragmentBinding.inflate(inflater, container, false)
+            .apply {
+                lifecycleOwner = viewLifecycleOwner
+            }
+            .root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViewState()
+        viewModel.contentUiModel.observe(viewLifecycleOwner) {
+            render(it)
+        }
+        viewModel.footerUiModel.observe(viewLifecycleOwner) {
+            render(it)
+
+            //FixMe: find a timing to call startPostponedEnterTransition()
+            startPostponedEnterTransition()
         }
     }
 
@@ -85,12 +124,19 @@ class TheaterEditActivity : BaseActivity() {
         viewPager.offscreenPageLimit = pageAdapter.count
         viewPager.adapter = pageAdapter
         footerView.blockExtraTouchEvents()
-        footerPanel.state = STATE_EXPANDED
         peekView.setOnDebounceClickListener {
             footerPanel.state = when (footerPanel.state) {
                 STATE_COLLAPSED -> STATE_EXPANDED
                 else -> STATE_COLLAPSED
             }
+        }
+
+        footerPanel.state = STATE_EXPANDED
+        footerView.postOnAnimationDelayed(500) {
+            footerPanel.state = STATE_COLLAPSED
+        }
+        confirmButton.setOnDebounceClickListener {
+            onConfirmClicked()
         }
     }
 
@@ -123,31 +169,20 @@ class TheaterEditActivity : BaseActivity() {
                 }
             }.forEach { addView(it) }
         }
-
-        //FixMe: find a timing to call startPostponedEnterTransition()
-        selectedTheaterGroup.doOnPreDraw {
-            startPostponedEnterTransition()
-        }
     }
 
-    override fun onEnterAnimationComplete() {
-        super.onEnterAnimationComplete()
-        footerView.postOnAnimationDelayed(350) {
-            footerPanel.state = STATE_COLLAPSED
-        }
-    }
-
-    fun onConfirmClicked(view: View) {
+    private fun onConfirmClicked() {
         viewModel.onConfirmClicked()
         setResultAndFinish()
+        findNavController().navigateUp()
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed(): Boolean {
         setResultAndFinish()
+        return false
     }
 
     private fun setResultAndFinish() {
-        setResult(RESULT_OK)
         pendingFinish = true
         footerPanel.state = STATE_EXPANDED
         tryToFinish()
@@ -156,7 +191,6 @@ class TheaterEditActivity : BaseActivity() {
     private fun tryToFinish() {
         if (footerPanel.state == STATE_EXPANDED && pendingFinish) {
             pendingFinish = false
-            finishAfterTransition()
         }
     }
 }

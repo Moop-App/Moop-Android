@@ -5,9 +5,12 @@ import dagger.Module
 import dagger.Provides
 import soup.movie.MovieApplication
 import soup.movie.analytics.EventAnalytics
-import soup.movie.theme.ThemeOptionManager
+import soup.movie.data.MoopRepository
+import soup.movie.data.TheaterEditManager
+import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.theme.ThemeOption
+import soup.movie.theme.ThemeOptionManager
 import soup.movie.theme.ThemeOptionStore
 import soup.movie.util.ImageUriProvider
 import javax.inject.Singleton
@@ -46,4 +49,11 @@ class ApplicationModule {
             return themeOptionSetting.get()
         }
     })
+
+    @Singleton
+    @Provides
+    fun provideTheaterEditManager(
+        repository: MoopRepository,
+        theatersSetting: TheatersSetting
+    ): TheaterEditManager = TheaterEditManager(repository, theatersSetting)
 }
