@@ -11,7 +11,10 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:orientation="vertical"
+        android:overScrollMode="never"
         android:padding="8dp"
+        android:requiresFadingEdge="none"
+        android:scrollbars="none"
         app:layoutManagerType="linear"
         tools:itemCount="3"
         tools:listitem="@layout/theater_edit_item_area" />
