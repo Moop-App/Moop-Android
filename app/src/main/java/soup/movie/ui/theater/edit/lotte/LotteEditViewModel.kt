@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
-import soup.movie.data.TheaterEditManager
+import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.data.model.Theater
 import soup.movie.ui.BaseViewModel
 import soup.movie.ui.theater.edit.TheaterEditChildUiModel

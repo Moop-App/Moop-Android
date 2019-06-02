@@ -6,9 +6,9 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.schedulers.Schedulers
-import soup.movie.domain.main.GetMovieFilterUseCase
-import soup.movie.domain.main.GetNowMovieListUseCase
-import soup.movie.domain.main.GetPlanMovieListUseCase
+import soup.movie.domain.home.GetMovieFilterUseCase
+import soup.movie.domain.home.GetNowMovieListUseCase
+import soup.movie.domain.home.GetPlanMovieListUseCase
 import soup.movie.ui.BaseViewModel
 import javax.inject.Inject
 

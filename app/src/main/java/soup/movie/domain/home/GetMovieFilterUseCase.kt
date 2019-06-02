@@ -1,4 +1,4 @@
-package soup.movie.domain.main
+package soup.movie.domain.home
 
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables

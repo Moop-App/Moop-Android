@@ -1,22 +1,25 @@
-package soup.movie.data
+package soup.movie.domain.theater.edit
 
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.ReplaySubject
+import soup.movie.data.MoopRepository
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.CodeGroup
 import soup.movie.data.model.Theater
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.settings.impl.TheatersSetting
 
-class TheaterEditManager(private val repository: MoopRepository,
-                         private val theatersSetting: TheatersSetting) {
+class TheaterEditManager(
+    private val repository: MoopRepository,
+    private val theatersSetting: TheatersSetting
+) {
 
     private val cgvSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
     private val lotteSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
     private val megaboxSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
     private val selectedTheatersSubject: BehaviorSubject<List<Theater>> =
-            BehaviorSubject.createDefault(emptyList())
+        BehaviorSubject.createDefault(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
     private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
@@ -31,13 +34,13 @@ class TheaterEditManager(private val repository: MoopRepository,
 
     fun loadAsync(): Observable<CodeResponse> {
         return repository.getCodeList()
-                .doOnSubscribe { setupSelectedList() }
-                .doOnNext {
-                    setupTotalList(it.toAreaGroupList())
-                    cgvSubject.onNext(it.cgv)
-                    lotteSubject.onNext(it.lotte)
-                    megaboxSubject.onNext(it.megabox)
-                }
+            .doOnSubscribe { setupSelectedList() }
+            .doOnNext {
+                setupTotalList(it.toAreaGroupList())
+                cgvSubject.onNext(it.cgv)
+                lotteSubject.onNext(it.lotte)
+                megaboxSubject.onNext(it.megabox)
+            }
     }
 
     private fun setupTotalList(areaGroupList: List<AreaGroup>) {
@@ -46,24 +49,24 @@ class TheaterEditManager(private val repository: MoopRepository,
 
     private fun setupSelectedList() {
         selectedItemSet = theatersSetting.get()
-                .asSequence()
-                .toMutableSet()
+            .asSequence()
+            .toMutableSet()
         selectedTheatersSubject.onNext(
-                selectedItemSet.asSequence()
-                        .sortedBy { it.type }
-                        .toList())
+            selectedItemSet.asSequence()
+                .sortedBy { it.type }
+                .toList())
     }
 
     private fun updateSelectedItemCount() {
         selectedTheatersSubject.onNext(
-                theaterList.asSequence()
-                        .filter {
-                            selectedItemSet.any { selectedItem ->
-                                selectedItem == it
-                            }
-                        }
-                        .sortedBy { it.type }
-                        .toList())
+            theaterList.asSequence()
+                .filter {
+                    selectedItemSet.any { selectedItem ->
+                        selectedItem == it
+                    }
+                }
+                .sortedBy { it.type }
+                .toList())
     }
 
     fun add(theater: Theater): Boolean {
