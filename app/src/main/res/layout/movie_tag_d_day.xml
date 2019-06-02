@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="soup.movie.data.helper.MovieExtKt" />
+        <import type="soup.movie.domain.model.MovieExtKt" />
 
         <variable
             name="item"

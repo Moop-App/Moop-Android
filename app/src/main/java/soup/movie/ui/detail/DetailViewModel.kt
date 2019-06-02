@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import soup.movie.data.MovieSelectManager
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.data.model.Movie
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData

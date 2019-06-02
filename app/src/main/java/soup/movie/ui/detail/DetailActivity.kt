@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.detail_activity.*
 import kotlinx.android.synthetic.main.detail_header.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.MovieSelectManager
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.data.model.Movie
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink

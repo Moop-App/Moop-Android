@@ -1,4 +1,4 @@
-package soup.movie.data
+package soup.movie.ui.home
 
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject

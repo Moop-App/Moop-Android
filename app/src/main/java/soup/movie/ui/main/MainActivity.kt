@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.MovieSelectManager
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.OnBackPressedListener

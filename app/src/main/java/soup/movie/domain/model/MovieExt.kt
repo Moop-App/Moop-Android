@@ -1,4 +1,4 @@
-package soup.movie.data.helper
+package soup.movie.domain.model
 
 import androidx.annotation.DrawableRes
 import org.threeten.bp.LocalDate
