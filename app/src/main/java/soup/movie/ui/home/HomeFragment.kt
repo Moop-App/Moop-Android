@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -17,10 +18,7 @@ import soup.movie.databinding.HomeContentsBinding
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.databinding.HomeHeaderBinding
 import soup.movie.ui.base.BaseFragment
-import soup.movie.util.consume
-import soup.movie.util.getColorAttr
-import soup.movie.util.lazyFast
-import soup.movie.util.observe
+import soup.movie.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -99,15 +97,30 @@ class HomeFragment : BaseFragment() {
                 }
             }
         }
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            consume {
-                when (it.itemId) {
-                    R.id.action_now -> viewModel.onNowClick()
-                    R.id.action_plan -> viewModel.onPlanClick()
+
+        actionNow.isChecked = true
+        actionNow.setOnDebounceClickListener {
+            actionNow.isChecked = true
+            actionPlan.isChecked = false
+            viewModel.onNowClick()
+        }
+        actionPlan.setOnDebounceClickListener {
+            actionNow.isChecked = false
+            actionPlan.isChecked = true
+            viewModel.onPlanClick()
+        }
+    }
+
+    private var View.isChecked: Boolean
+        get() = isEnabled.not()
+        set(checked) {
+            isEnabled = checked.not()
+            if (this is ViewGroup) {
+                children.forEach {
+                    it.isEnabled = checked.not()
                 }
             }
         }
-    }
 
     private fun HomeContentsBinding.setup() {
         swipeRefreshLayout.apply {
