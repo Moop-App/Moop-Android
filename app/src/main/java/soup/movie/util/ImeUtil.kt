@@ -8,7 +8,8 @@ import android.view.inputmethod.InputMethodManager.SHOW_FORCED
 
 object ImeUtil {
 
-    fun showIme(view: View) {
+    fun showIme(view: View?) {
+        if (view == null) return
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         if (imm != null) {
             view.requestFocus()
@@ -17,7 +18,8 @@ object ImeUtil {
         }
     }
 
-    fun hideIme(view: View) {
+    fun hideIme(view: View?) {
+        if (view == null) return
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         if (imm != null) {
             view.clearFocus()

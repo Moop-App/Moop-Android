@@ -1,8 +1,5 @@
 package soup.movie.ui.search
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -15,16 +12,19 @@ import androidx.core.view.isVisible
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
-import kotlinx.android.synthetic.main.search_fragment.*
+import kotlinx.android.synthetic.main.search_header.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.ui.home.MovieSelectManager
+import soup.movie.databinding.SearchContentsBinding
 import soup.movie.databinding.SearchFragmentBinding
+import soup.movie.databinding.SearchHeaderBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.HomeListAdapter
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImeUtil
 import soup.movie.util.lazyFast
 import soup.movie.util.observe
+import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -33,8 +33,6 @@ class SearchFragment : BaseFragment() {
 
     @Inject
     lateinit var analytics: EventAnalytics
-
-    private var focusQuery = true
 
     private val listAdapter by lazyFast {
         HomeListAdapter { movie, sharedElements ->
@@ -57,31 +55,15 @@ class SearchFragment : BaseFragment() {
         return SearchFragmentBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
-                viewModel = this@SearchFragment.viewModel
+                header.setup()
+                contents.setup()
             }
             .root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupSearchView(view.context)
-        listView.apply {
-            adapter = listAdapter
-            itemAnimator = FadeInAnimator().apply {
-                addDuration = 0
-                removeDuration = 0
-            }
-        }
-        viewModel.uiModel.observe(viewLifecycleOwner) {
-            render(it)
-        }
-    }
-
     override fun onResume() {
         super.onResume()
-        if (focusQuery) {
-            ImeUtil.showIme(searchView)
-        }
+        ImeUtil.showIme(searchView)
     }
 
     override fun onPause() {
@@ -89,22 +71,7 @@ class SearchFragment : BaseFragment() {
         ImeUtil.hideIme(searchView)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        focusQuery = false
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun render(viewState: SearchUiModel) {
-        loadingView.isVisible = viewState is SearchUiModel.LoadingState
-        noItemsView.isVisible = viewState.hasNoItems()
-        if (viewState is SearchUiModel.DoneState) {
-            listAdapter.submitList(viewState.items)
-        }
-    }
-
-    private fun setupSearchView(ctx: Context) {
-        val searchManager = ctx.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        //searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+    private fun SearchHeaderBinding.setup() {
         searchView.queryHint = getString(R.string.search_hint)
         searchView.inputType = InputType.TYPE_TEXT_FLAG_CAP_WORDS
         searchView.imeOptions = searchView.imeOptions or
@@ -122,8 +89,28 @@ class SearchFragment : BaseFragment() {
                 return true
             }
         })
-        searchBack.setOnClickListener {
+        searchBack.setOnDebounceClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun SearchContentsBinding.setup() {
+        listView.apply {
+            adapter = listAdapter
+            itemAnimator = FadeInAnimator().apply {
+                addDuration = 0
+                removeDuration = 0
+            }
+        }
+        viewModel.uiModel.observe(viewLifecycleOwner) {
+            render(it)
+        }
+    }
+
+    private fun SearchContentsBinding.render(uiModel: SearchContentsUiModel) {
+        loadingView.isVisible = uiModel.isLoading
+        noItemsView.isVisible = uiModel.hasNoItem
+        listAdapter.submitList(uiModel.movies)
+        noItemsView.isVisible = uiModel.hasNoItem
     }
 }

@@ -1,139 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+    <data />
 
-        <variable
-            name="viewModel"
-            type="soup.movie.ui.search.SearchViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="soup.movie.ui.search.SearchFragment">
 
-        <FrameLayout
-            android:id="@+id/search_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:elevation="4dp"
-            android:outlineProvider="bounds"
-            android:theme="@style/SearchViewTheme"
-            android:transitionGroup="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <include
+            android:id="@+id/header"
+            layout="@layout/search_header" />
 
-            <View
-                android:id="@+id/searchBackground"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/colorPrimary" />
+        <include
+            android:id="@+id/contents"
+            layout="@layout/search_contents" />
 
-            <SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipChildren="false"
-                android:iconifiedByDefault="false"
-                android:queryHint="@string/search_hint"
-                android:transitionGroup="true" />
-
-            <FrameLayout
-                android:id="@+id/searchBackContainer"
-                android:layout_width="96dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:paddingStart="4dp">
-
-                <ImageButton
-                    android:id="@+id/searchBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_arrow_back_padded"
-                    android:transitionName="@string/transition_search_back" />
-
-            </FrameLayout>
-        </FrameLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_toolbar">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/noItemsView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible">
-
-                <ImageView
-                    android:id="@+id/icon"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:src="@drawable/ic_round_no_results"
-                    app:layout_constraintBottom_toTopOf="@+id/description"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/no_movies_description"
-                    android:textColor="?attr/moop_textColorDark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/icon" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerViewEx
-                android:id="@+id/listView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:padding="8dp"
-                android:requiresFadingEdge="none"
-                android:scrollbars="none"
-                app:layoutManagerType="grid"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:spanCount="@integer/grid_span_count"
-                tools:listitem="@layout/home_item_movie"
-                tools:visibility="visible" />
-
-            <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/loadingView"
-                style="?progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="gone" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
