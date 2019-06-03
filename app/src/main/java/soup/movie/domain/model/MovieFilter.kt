@@ -3,6 +3,7 @@ package soup.movie.domain.model
 import soup.movie.data.model.Movie
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.GenreFilter
+import soup.movie.settings.model.GenreFilter.Companion.GENRE_ETC
 import soup.movie.settings.model.TheaterFilter
 
 class MovieFilter(
@@ -38,6 +39,7 @@ class MovieFilter(
     }
 
     private fun Movie.isFilterBy(genreFilter: GenreFilter): Boolean {
-        return genre?.any { it !in genreFilter.blacklist } ?: false
+        return genre?.any { it !in genreFilter.blacklist }
+            ?: (genre.isNullOrEmpty() && GENRE_ETC !in genreFilter.blacklist)
     }
 }
