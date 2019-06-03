@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:elevation="4dp"
+            android:outlineProvider="bounds"
+            android:theme="@style/SearchViewTheme"
+            android:transitionGroup="false">
+
+            <View
+                android:id="@+id/searchBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimary" />
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:iconifiedByDefault="false"
+                android:queryHint="@string/search_hint"
+                android:transitionGroup="true" />
+
+            <FrameLayout
+                android:id="@+id/searchBackContainer"
+                android:layout_width="96dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:paddingStart="4dp">
+
+                <ImageButton
+                    android:id="@+id/searchBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_arrow_back_padded"
+                    android:transitionName="@string/transition_search_back" />
+
+            </FrameLayout>
+        </FrameLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+</layout>

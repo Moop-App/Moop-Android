@@ -4,19 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
-import soup.movie.data.MoopRepository
+import soup.movie.domain.search.SearchMovieUseCase
 import soup.movie.ui.base.BaseViewModel
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val repository: MoopRepository
-) : BaseViewModel() {
+    private val searchMovie: SearchMovieUseCase
+) : BaseViewModel(), SearchUiMapper {
 
     private val querySubject = BehaviorRelay.create<String>()
 
-    private val _uiModel = MutableLiveData<SearchUiModel>()
-    val uiModel: LiveData<SearchUiModel>
+    private val _uiModel = MutableLiveData<SearchContentsUiModel>()
+    val uiModel: LiveData<SearchContentsUiModel>
         get() = _uiModel
 
     init {
@@ -24,14 +24,10 @@ class SearchViewModel @Inject constructor(
             .distinctUntilChanged()
             .debounce(300, TimeUnit.MILLISECONDS)
             .switchMap { query ->
-                repository.searchMovie(query)
-                    .map { SearchUiModel.DoneState(it) }
-                    .cast(SearchUiModel::class.java)
-                    .startWith(SearchUiModel.LoadingState)
-                    .onErrorReturnItem(SearchUiModel.ErrorState)
+                searchMovie(query)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _uiModel.value = it }
+            .subscribe { _uiModel.value = it.toContentsUiModel() }
             .disposeOnCleared()
     }
 
