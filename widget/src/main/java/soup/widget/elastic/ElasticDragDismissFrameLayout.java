@@ -49,7 +49,6 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
     private float dragDismissScale = 1f;
     private boolean shouldScale = false;
     private float dragElacticity = 0.8f;
-    private boolean enableBottomDrag = false;
 
     // state
     private float totalDrag;
@@ -94,9 +93,6 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
         if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragElasticity)) {
             dragElacticity = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
                     dragElacticity);
-        }
-        if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissEnableBottomDrag)) {
-            enableBottomDrag = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_dragDismissEnableBottomDrag, true);
         }
         a.recycle();
     }
@@ -200,10 +196,8 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
 
     private void dragScale(int scroll) {
         if (scroll == 0) return;
-        boolean draggingUp = enableBottomDrag && this.draggingUp;
-        if (draggingUp || scroll < 0) {
-            totalDrag += scroll;
-        }
+
+        totalDrag += scroll;
 
         // track the direction & set the pivot point for scaling
         // don't double track i.e. if start dragging down and then reverse, keep tracking as

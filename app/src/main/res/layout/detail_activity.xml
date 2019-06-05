@@ -16,7 +16,6 @@
         android:layout_height="match_parent"
         android:transitionGroup="false"
         app:dragDismissDistance="@dimen/drag_dismiss_distance"
-        app:dragDismissEnableBottomDrag="false"
         app:dragDismissScale="0.95"
         tools:context=".ui.detail.DetailActivity">
 
