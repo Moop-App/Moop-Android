@@ -1,6 +1,5 @@
 package soup.movie.ui.detail
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -31,7 +30,6 @@ import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.YouTube
 import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
-import soup.widget.util.AnimUtils.getFastOutSlowInInterpolator
 import soup.widget.util.ColorUtils
 import soup.widget.util.ViewUtils
 import javax.inject.Inject
@@ -200,17 +198,7 @@ class DetailActivity : BaseActivity() {
             // set a light status bar
             ViewUtils.setLightStatusBar(window.decorView)
         }
-
-        if (themeBgColor != window.statusBarColor) {
-            backgroundView.setBackgroundColor(themeBgColor)
-            ValueAnimator.ofArgb(window.statusBarColor, themeBgColor).apply {
-                addUpdateListener { animation ->
-                    window.statusBarColor = animation.animatedValue as Int
-                }
-                duration = 500L
-                interpolator = getFastOutSlowInInterpolator(this@DetailActivity)
-            }.start()
-        }
+        backgroundView.setBackgroundColor(themeBgColor)
     }
 
     //TODO: Re-implements this
