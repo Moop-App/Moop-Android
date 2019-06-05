@@ -1,6 +1,7 @@
 package soup.movie.ui.detail
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -29,9 +30,7 @@ import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.YouTube
-import soup.widget.elastic.ElasticDragDismissFrameLayout.SystemChromeFader
-import soup.widget.util.ColorUtils
-import soup.widget.util.ViewUtils
+import soup.widget.elastic.ElasticDragDismissFrameLayout
 import javax.inject.Inject
 import kotlin.math.min
 
@@ -96,11 +95,10 @@ class DetailActivity : BaseActivity() {
         }
     }
 
-    private val chromeFader: SystemChromeFader by lazyFast {
-        object : SystemChromeFader(this) {
-            override fun onDragDismissed() {
-                finishAfterTransition()
-            }
+    private val chromeFader = object : ElasticDragDismissFrameLayout.ElasticDragDismissCallback() {
+
+        override fun onDragDismissed() {
+            finishAfterTransition()
         }
     }
 
@@ -188,7 +186,7 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun applyTheme(@ColorInt themeBgColor: Int) {
-        val isDark: Boolean = ColorUtils.isDark(themeBgColor)
+        val isDark: Boolean = isDark(themeBgColor)
         if (isDark.not()) { // make back icon dark on light images
             val darkColor = getColorAttr(R.attr.moop_iconColorDark)
             titleView.setTextColor(darkColor)
@@ -196,9 +194,22 @@ class DetailActivity : BaseActivity() {
             shareButton.setColorFilter(darkColor)
 
             // set a light status bar
-            ViewUtils.setLightStatusBar(window.decorView)
+            window.decorView.setLightStatusBar()
         }
         backgroundView.setBackgroundColor(themeBgColor)
+    }
+
+    private fun View.setLightStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+    }
+
+    /**
+     * Check if a color is dark (convert to XYZ & check Y component)
+     */
+    private fun isDark(@ColorInt color: Int): Boolean {
+        return androidx.core.graphics.ColorUtils.calculateLuminance(color) < 0.5
     }
 
     //TODO: Re-implements this
