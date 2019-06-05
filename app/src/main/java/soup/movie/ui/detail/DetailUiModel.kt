@@ -18,6 +18,9 @@ class ContentUiModel(
 sealed class ContentItemUiModel
 
 @Keep
+object HeaderItemUiModel : ContentItemUiModel()
+
+@Keep
 class CgvItemUiModel(
     val movieId: CgvMovieId,
     val hasInfo: Boolean,

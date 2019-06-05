@@ -37,7 +37,7 @@
                 android:transitionName="@string/transition_background" />
 
             <include
-                android:id="@+id/detailHeaderView"
+                android:id="@+id/header"
                 layout="@layout/detail_header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,6 @@
                 android:orientation="vertical"
                 android:overScrollMode="never"
                 android:paddingStart="8dp"
-                android:paddingTop="212dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
                 android:requiresFadingEdge="none"
@@ -61,7 +60,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/detail_item_trailer" />
+                tools:listitem="@layout/detail_item_trailer"
+                tools:paddingTop="@dimen/detail_header_height" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

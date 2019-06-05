@@ -3,11 +3,14 @@ package soup.movie.ui.detail
 import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
@@ -79,12 +82,19 @@ class DetailActivity : BaseActivity() {
     private val scrollListener = object : RecyclerView.OnScrollListener() {
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            //TODO: Improve this please
-            val maxOffset = min(200, detailHeaderView.height)
-            val offset = min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
-            detailHeaderView.translationZ = if (offset < 10f) 1f else 0f
-            detailHeaderView.translationY = -offset
-            detailHeaderView.alpha = 1f - offset / maxOffset
+            val maxOffset = min(
+                header.height,
+                recyclerView.resources.getDimensionPixelSize(R.dimen.detail_header_height)
+            )
+            val headerIsShown = (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
+            val offset = if (headerIsShown) {
+                min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
+            } else {
+                maxOffset.toFloat()
+            }
+            header.translationZ = if (offset < 10f) 1f else 0f
+            header.translationY = -offset
+            header.alpha = 1f - offset / maxOffset
         }
     }
 
@@ -98,9 +108,23 @@ class DetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
         val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
+            binding.header.root.updatePadding(
+                top = windowInsets.systemWindowInsetTop
+            )
+            binding.listView.updatePadding(
+                top = windowInsets.systemWindowInsetTop,
+                bottom = windowInsets.systemWindowInsetBottom
+            )
+            windowInsets
+        }
 
         postponeEnterTransition()
         initViewState(binding)
@@ -114,7 +138,7 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun initViewState(binding: DetailActivityBinding) {
-        binding.detailHeaderView.apply {
+        binding.header.apply {
             posterView.loadAsync(movie.posterUrl, endAction = {
                 startPostponedEnterTransition()
             })
