@@ -12,23 +12,32 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
+        android:layout_height="wrap_content"
         tools:background="@color/debug_background">
+
+        <Space
+            android:id="@+id/headerGroup"
+            android:layout_width="0dp"
+            android:layout_height="168dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/posterCard"
-            android:layout_width="124.2dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?selectableItemBackground"
             app:cardElevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,27:40"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="@id/headerGroup"
+            app:layout_constraintDimensionRatio="V,27:40"
+            app:layout_constraintStart_toStartOf="@id/headerGroup"
+            app:layout_constraintTop_toTopOf="@id/headerGroup">
 
             <ImageView
                 android:id="@+id/posterView"
@@ -116,9 +125,9 @@
             android:textColor="@color/light_icon"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/headerGroup"
             app:layout_constraintStart_toEndOf="@+id/posterCard"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/headerGroup"
             tools:text="극장판 요괴워치 섀도사이드-도깨비왕의 부활" />
 
         <TextView
@@ -141,7 +150,7 @@
             android:layout_marginBottom="8dp"
             android:background="?selectableItemBackgroundBorderless"
             android:elevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/headerGroup"
             app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:srcCompat="@drawable/ic_logo_kakao_talk" />
 
@@ -152,8 +161,8 @@
             android:layout_marginBottom="8dp"
             android:background="?selectableItemBackgroundBorderless"
             android:tint="@color/light_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/headerGroup"
+            app:layout_constraintEnd_toEndOf="@id/headerGroup"
             app:srcCompat="@drawable/ic_round_share" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
