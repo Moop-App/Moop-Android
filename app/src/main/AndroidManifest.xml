@@ -34,8 +34,8 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.Splash"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Splash">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,18 +45,18 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="@string/kakao_scheme"
-                    android:host="@string/kakaolink_host" />
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.detail.DetailActivity"
-            android:theme="@style/AppTheme.Detail"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:theme="@style/AppTheme.Detail" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -77,8 +77,8 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-        <service
-            android:name=".notification.MessagingService">
+
+        <service android:name=".notification.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
