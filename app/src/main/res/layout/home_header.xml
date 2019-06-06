@@ -7,72 +7,84 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:minHeight="0dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:contentInsetEndWithActions="0dp"
-            app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_round_menu"
-            tools:menu="@menu/fragment_movie_list">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <LinearLayout
-                android:id="@+id/action_now"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:background="@drawable/selector_home_navigation_bg"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <CheckedTextView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:checkMark="@drawable/ic_round_movie"
-                    android:checkMarkTint="@color/selector_home_navigation_text"
-                    tools:checked="true" />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    app:contentInsetEndWithActions="0dp"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:navigationIcon="@drawable/ic_round_menu"
+                    tools:menu="@menu/fragment_movie_list">
 
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="3dp"
-                    android:gravity="center"
-                    android:text="@string/menu_now"
-                    android:textColor="@color/selector_home_navigation_text"
-                    tools:checked="true" />
+                    <LinearLayout
+                        android:id="@+id/action_now"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/selector_home_navigation_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp">
 
-            </LinearLayout>
+                        <CheckedTextView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:checkMark="@drawable/ic_round_movie"
+                            android:checkMarkTint="@color/selector_home_navigation_text"
+                            tools:checked="true" />
 
-            <LinearLayout
-                android:id="@+id/action_plan"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:background="@drawable/selector_home_navigation_bg"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+                        <CheckedTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="3dp"
+                            android:gravity="center"
+                            android:text="@string/menu_now"
+                            android:textColor="@color/selector_home_navigation_text"
+                            tools:checked="true" />
 
-                <CheckedTextView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:checkMark="@drawable/ic_round_plan"
-                    android:checkMarkTint="@color/selector_home_navigation_text" />
+                    </LinearLayout>
 
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="3dp"
-                    android:gravity="center"
-                    android:text="@string/menu_plan"
-                    android:textColor="@color/selector_home_navigation_text" />
+                    <LinearLayout
+                        android:id="@+id/action_plan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/selector_home_navigation_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp">
 
-            </LinearLayout>
+                        <CheckedTextView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:checkMark="@drawable/ic_round_plan"
+                            android:checkMarkTint="@color/selector_home_navigation_text" />
 
-        </androidx.appcompat.widget.Toolbar>
+                        <CheckedTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="3dp"
+                            android:gravity="center"
+                            android:text="@string/menu_plan"
+                            android:textColor="@color/selector_home_navigation_text" />
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+            </FrameLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 </layout>
