@@ -4,16 +4,21 @@
     <data />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/homeScene"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/header"
-            layout="@layout/home_header" />
-
-        <include
             android:id="@+id/contents"
             layout="@layout/home_contents" />
+
+        <include
+            android:id="@+id/headerHint"
+            layout="@layout/home_header_hint" />
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/home_header" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

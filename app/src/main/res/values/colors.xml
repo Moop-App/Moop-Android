@@ -3,6 +3,8 @@
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="ic_launcher_background_dark">#000000</color>
 
+    <color name="home_header_hint_bg">#6000</color>
+
     <color name="chip_genre_bg">#EEDDDDDD</color>
     <color name="chip_genre_bg_unchecked">#33DDDDDD</color>
     <color name="chip_genre_text">#88000000</color>
