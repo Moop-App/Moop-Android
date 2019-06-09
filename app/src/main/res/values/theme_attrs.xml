@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorAccentHalf" format="reference|color" />
+    <attr name="colorSecondaryDim" format="reference|color" />
     <attr name="colorDivider" format="reference|color" />
     <attr name="moop_bgColor" format="reference|color" />
     <attr name="moop_textColorDark" format="reference|color" />

@@ -4,7 +4,7 @@
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/grey</color>
     <color name="colorSecondary">#2D7AF6</color>
-    <color name="colorAccentHalf">#222D7AF6</color>
+    <color name="colorSecondaryDim">#222D7AF6</color>
     <color name="colorSplash">@color/white</color>
 
     <color name="default_errorColor">@color/red_500</color>
@@ -26,7 +26,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorAccentHalf">@color/colorAccentHalf</item>
+        <item name="colorSecondaryDim">@color/colorSecondaryDim</item>
         <item name="android:windowBackground">@color/default_bgColor</item>
 
         <item name="colorDivider">@color/default_dividerColor</item>
