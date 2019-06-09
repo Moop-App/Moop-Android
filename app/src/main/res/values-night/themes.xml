@@ -9,14 +9,12 @@
 
     <color name="default_errorColor">#E68282</color>
     <color name="default_dividerColor">@color/grey_700</color>
-    <color name="default_bgColor">@color/grey_800</color>
     <color name="default_textColorDark">@color/light_icon</color>
     <color name="default_textColorLight">@color/grey_500</color>
     <color name="default_iconColorDark">@color/light_icon</color>
     <color name="default_iconColorLight">@color/grey_500</color>
     <color name="default_cardBgColorDark">@color/grey_900</color>
     <color name="default_cardBgColorLight">@color/grey_700</color>
-    <color name="default_tagOutlineColor">@color/default_bgColor</color>
     <color name="default_stageColor">@color/black</color>
     <color name="default_stageStarColor">@color/colorSecondary</color>
     <color name="default_stageBrightColor">@color/light_icon</color>
@@ -27,10 +25,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryDim">@color/colorSecondaryDim</item>
-        <item name="android:windowBackground">@color/default_bgColor</item>
 
         <item name="colorDivider">@color/default_dividerColor</item>
-        <item name="moop_bgColor">@color/default_bgColor</item>
         <item name="moop_textColorDark">@color/default_textColorDark</item>
         <item name="moop_textColorLight">@color/default_textColorLight</item>
         <item name="moop_iconColorDark">@color/default_iconColorDark</item>
@@ -39,7 +35,6 @@
         <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
         <item name="moop_cardContentColorDark">?attr/moop_iconColorDark</item>
         <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
-        <item name="moop_tagOutlineColor">@color/default_tagOutlineColor</item>
         <item name="moop_stageColor">@color/default_stageColor</item>
         <item name="moop_stageStarColor">@color/default_stageStarColor</item>
         <item name="moop_stageBrightColor">@color/default_stageBrightColor</item>

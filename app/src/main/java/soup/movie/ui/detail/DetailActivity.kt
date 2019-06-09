@@ -162,7 +162,7 @@ class DetailActivity : BaseActivity() {
             }
         }
         //TODO: Please improve this more
-        applyTheme(themeBgColor = getColorAttr(R.attr.moop_bgColor))
+        applyTheme(themeBgColor = getColorAttr(android.R.attr.colorBackground))
     }
 
     override fun onResume() {
