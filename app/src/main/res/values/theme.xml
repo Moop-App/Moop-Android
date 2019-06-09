@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">@color/white</color>
-    <color name="colorPrimaryDark">@color/grey</color>
-    <color name="colorSecondary">#2D7AF6</color>
-    <color name="colorSecondaryDim">#222D7AF6</color>
+    <attr name="colorSecondaryDim" format="reference|color" />
+    <attr name="colorSurfaceDim" format="reference|color" />
+    <attr name="colorOnSurfaceDim" format="reference|color" />
+    <attr name="colorDivider" format="reference|color" />
 
-    <color name="default_textColorLight">@color/grey_500</color>
-    <color name="default_iconColorLight">@color/grey_500</color>
-    <color name="default_cardBgColorLight">@color/grey_200</color>
-
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryDim">@color/colorSecondaryDim</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorOnBackground">@color/grey_700</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/grey_700</item>
-
-        <item name="colorDivider">@color/grey_100</item>
-        <item name="moop_textColorLight">@color/default_textColorLight</item>
-        <item name="moop_iconColorLight">@color/default_iconColorLight</item>
-        <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
-        <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSurfaceDim">@color/colorSurfaceDim</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnSurfaceDim">@color/colorOnSurfaceDim</item>
+        <item name="colorDivider">@color/colorDivider</item>
     </style>
 
     <style name="AppTheme.Detail" parent="AppTheme">

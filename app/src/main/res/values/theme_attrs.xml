@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <attr name="colorSecondaryDim" format="reference|color" />
-    <attr name="colorDivider" format="reference|color" />
-    <attr name="moop_textColorLight" format="reference|color" />
-    <attr name="moop_iconColorLight" format="reference|color" />
-    <attr name="moop_cardBgColorLight" format="reference|color" />
-    <attr name="moop_cardContentColorLight" format="reference|color" />
-</resources>
