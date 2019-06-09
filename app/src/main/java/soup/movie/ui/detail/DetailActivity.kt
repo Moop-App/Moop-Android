@@ -1,11 +1,11 @@
 package soup.movie.ui.detail
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.ColorInt
 import androidx.core.app.ShareCompat
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.detail_activity.*
-import kotlinx.android.synthetic.main.detail_header.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.home.MovieSelectManager
@@ -161,8 +160,7 @@ class DetailActivity : BaseActivity() {
                 removeDuration = 200
             }
         }
-        //TODO: Please improve this more
-        applyTheme(themeBgColor = getColorAttr(android.R.attr.colorBackground))
+        applyTheme(binding.root.context)
     }
 
     override fun onResume() {
@@ -185,18 +183,11 @@ class DetailActivity : BaseActivity() {
         listAdapter.submitList(uiModel.items)
     }
 
-    private fun applyTheme(@ColorInt themeBgColor: Int) {
-        val isDark: Boolean = isDark(themeBgColor)
-        if (isDark.not()) { // make back icon dark on light images
-            val darkColor = getColorAttr(R.attr.moop_iconColorDark)
-            titleView.setTextColor(darkColor)
-            openDateView.setTextColor(darkColor)
-            shareButton.setColorFilter(darkColor)
-
+    private fun applyTheme(ctx: Context) {
+        if (ctx.isLightTheme()) {
             // set a light status bar
             window.decorView.setLightStatusBar()
         }
-        backgroundView.setBackgroundColor(themeBgColor)
     }
 
     private fun View.setLightStatusBar() {
@@ -205,11 +196,10 @@ class DetailActivity : BaseActivity() {
         }
     }
 
-    /**
-     * Check if a color is dark (convert to XYZ & check Y component)
-     */
-    private fun isDark(@ColorInt color: Int): Boolean {
-        return androidx.core.graphics.ColorUtils.calculateLuminance(color) < 0.5
+    private fun Context.isLightTheme(): Boolean {
+        return resources.configuration.uiMode and
+            Configuration.UI_MODE_NIGHT_MASK ==
+            Configuration.UI_MODE_NIGHT_NO
     }
 
     //TODO: Re-implements this
