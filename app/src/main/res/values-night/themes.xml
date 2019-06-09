@@ -6,8 +6,6 @@
     <color name="colorSecondary">#8EB5F0</color>
     <color name="colorSecondaryDim">#448EB5F0</color>
 
-    <color name="default_errorColor">#E68282</color>
-    <color name="default_dividerColor">@color/grey_700</color>
     <color name="default_textColorDark">@color/light_icon</color>
     <color name="default_textColorLight">@color/grey_500</color>
     <color name="default_iconColorDark">@color/light_icon</color>
@@ -22,7 +20,7 @@
         <item name="colorSecondaryDim">@color/colorSecondaryDim</item>
         <item name="colorOnSecondary">@color/white</item>
 
-        <item name="colorDivider">@color/default_dividerColor</item>
+        <item name="colorDivider">@color/grey_900</item>
         <item name="moop_textColorDark">@color/default_textColorDark</item>
         <item name="moop_textColorLight">@color/default_textColorLight</item>
         <item name="moop_iconColorDark">@color/default_iconColorDark</item>
