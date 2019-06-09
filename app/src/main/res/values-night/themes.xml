@@ -29,7 +29,6 @@
         <item name="colorAccentHalf">@color/colorAccentHalf</item>
         <item name="android:windowBackground">@color/default_bgColor</item>
 
-        <item name="moop_errorColor">@color/default_errorColor</item>
         <item name="moop_dividerColor">@color/default_dividerColor</item>
         <item name="moop_bgColor">@color/default_bgColor</item>
         <item name="moop_textColorDark">@color/default_textColorDark</item>
