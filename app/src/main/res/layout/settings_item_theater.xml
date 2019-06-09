@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
             android:text="@string/settings_theater_empty_description"
-            android:textColor="?attr/moop_textColorDark"
+            android:textColor="?attr/colorOnBackground"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

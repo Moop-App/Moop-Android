@@ -42,7 +42,7 @@
                     app:tabIndicatorColor="?attr/colorSecondary"
                     app:tabMode="fixed"
                     app:tabSelectedTextColor="?attr/colorSecondary"
-                    app:tabTextColor="?attr/moop_textColorDark">
+                    app:tabTextColor="?attr/colorOnBackground">
 
                     <!-- for preview
 

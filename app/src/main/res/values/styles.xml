@@ -3,7 +3,7 @@
     <!-- TextAppearance -->
 
     <style name="TextAppearance.Settings.Category" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">?attr/moop_textColorDark</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -91,8 +91,8 @@
     <style name="SearchViewTheme" parent="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="colorControlActivated">?android:colorSecondary</item>
         <item name="android:searchViewStyle">@style/Widget.Moop.SearchView</item>
-        <item name="android:textColorHint">?attr/moop_textColorDark</item>
-        <item name="android:editTextColor">?attr/moop_textColorDark</item>
+        <item name="android:textColorHint">?attr/colorOnBackground</item>
+        <item name="android:editTextColor">?attr/colorOnBackground</item>
     </style>
 
     <style name="Widget.Moop.SearchView" parent="android:style/Widget.Material.SearchView">

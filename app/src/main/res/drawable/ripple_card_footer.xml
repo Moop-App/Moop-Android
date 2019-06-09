@@ -6,7 +6,7 @@
             <corners
                 android:bottomLeftRadius="16dp"
                 android:bottomRightRadius="16dp" />
-            <solid android:color="?moop_cardBgColorDark" />
+            <solid android:color="?attr/colorSurface" />
         </shape>
     </item>
 </ripple>

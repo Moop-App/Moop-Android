@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_checked="true"
-        android:color="@color/colorSecondary" />
+        android:color="?attr/colorSecondary" />
     <item
-        android:color="@color/default_textColorDark" />
+        android:color="?attr/colorOnSurface" />
 </selector>

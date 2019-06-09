@@ -49,7 +49,7 @@
             android:maxLines="3"
             android:minLines="1"
             android:text="@{item.trailer.title}"
-            android:textColor="?attr/moop_cardContentColorDark"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="13sp"
             app:layout_constraintBottom_toTopOf="@id/authorView"
             app:layout_constraintEnd_toEndOf="parent"

@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text="@string/settings_theater_empty_description"
-                    android:textColor="?attr/moop_textColorDark"
+                    android:textColor="?attr/colorOnBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

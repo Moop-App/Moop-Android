@@ -34,7 +34,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="장르"
-            android:textColor="?attr/moop_cardContentColorDark"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

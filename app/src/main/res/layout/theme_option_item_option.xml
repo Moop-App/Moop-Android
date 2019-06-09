@@ -17,7 +17,7 @@
         android:gravity="center_vertical"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:textColor="?attr/moop_textColorDark"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
