@@ -5,7 +5,6 @@
     <color name="colorPrimaryDark">@color/grey</color>
     <color name="colorSecondary">#2D7AF6</color>
     <color name="colorSecondaryDim">#222D7AF6</color>
-    <color name="colorSplash">@color/white</color>
 
     <color name="default_errorColor">@color/red_500</color>
     <color name="default_dividerColor">@color/grey_200</color>
@@ -61,9 +60,8 @@
     </style>
 
     <style name="AppTheme.Splash">
-        <item name="android:colorBackground">@color/colorSplash</item>
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:windowBackground">@drawable/ic_splash</item>
-        <item name="android:statusBarColor">@color/colorSplash</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
     </style>
