@@ -42,7 +42,7 @@ class MessagingService : FirebaseMessagingService() {
             setContentText(text)
             setAutoCancel(true)
             setContentIntent(getMainScreenIntent())
-            setColor(getColorCompat(R.color.colorAccent))
+            setColor(getColorCompat(R.color.colorSecondary))
         }
     }
 
@@ -53,7 +53,7 @@ class MessagingService : FirebaseMessagingService() {
             setContentText(text)
             setAutoCancel(true)
             setContentIntent(getMainScreenIntent())
-            setColor(getColorCompat(R.color.colorAccent))
+            setColor(getColorCompat(R.color.colorSecondary))
         }
     }
 

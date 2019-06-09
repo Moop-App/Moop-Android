@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/grey</color>
-    <color name="colorAccent">#2D7AF6</color>
+    <color name="colorSecondary">#2D7AF6</color>
     <color name="colorAccentHalf">#222D7AF6</color>
     <color name="colorSplash">@color/white</color>
 
@@ -18,14 +18,14 @@
     <color name="default_cardBgColorLight">@color/grey_200</color>
     <color name="default_tagOutlineColor">@color/default_bgColor</color>
     <color name="default_stageColor">@color/white</color>
-    <color name="default_stageStarColor">@color/colorAccent</color>
+    <color name="default_stageStarColor">@color/colorSecondary</color>
     <color name="default_stageBrightColor">@color/dark_icon</color>
     <color name="default_stageDimColor">@color/dark_icon_half_alpha</color>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorAccentHalf">@color/colorAccentHalf</item>
         <item name="android:windowBackground">@color/default_bgColor</item>
 
@@ -57,7 +57,7 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:colorControlActivated">?android:colorAccent</item>
+        <item name="android:colorControlActivated">?colorSecondary</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
         <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
         <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>

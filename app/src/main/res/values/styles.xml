@@ -88,8 +88,8 @@
 
     <!-- Search -->
 
-    <style name="SearchViewTheme" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
-        <item name="colorControlActivated">?android:colorAccent</item>
+    <style name="SearchViewTheme" parent="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="colorControlActivated">?android:colorSecondary</item>
         <item name="android:searchViewStyle">@style/Widget.Moop.SearchView</item>
         <item name="android:textColorHint">?attr/moop_textColorDark</item>
         <item name="android:editTextColor">?attr/moop_textColorDark</item>

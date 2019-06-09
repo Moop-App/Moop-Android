@@ -4,5 +4,5 @@
         android:state_enabled="false"
         android:color="?attr/moop_cardContentColorLight" />
     <item
-        android:color="?attr/colorAccent" />
+        android:color="?attr/colorSecondary" />
 </selector>

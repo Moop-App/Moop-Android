@@ -23,7 +23,7 @@
         android:elevation="10dp"
         android:gravity="center"
         android:text="더보기"
-        android:textColor="?attr/colorAccent"
+        android:textColor="?attr/colorSecondary"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

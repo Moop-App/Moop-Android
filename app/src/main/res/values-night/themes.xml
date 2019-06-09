@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">@color/black</color>
     <color name="colorPrimaryDark">@color/black</color>
-    <color name="colorAccent">#8EB5F0</color>
+    <color name="colorSecondary">#8EB5F0</color>
     <color name="colorAccentHalf">#448EB5F0</color>
     <color name="colorSplash">@color/grey_800</color>
 
@@ -18,14 +18,14 @@
     <color name="default_cardBgColorLight">@color/grey_700</color>
     <color name="default_tagOutlineColor">@color/default_bgColor</color>
     <color name="default_stageColor">@color/black</color>
-    <color name="default_stageStarColor">@color/colorAccent</color>
+    <color name="default_stageStarColor">@color/colorSecondary</color>
     <color name="default_stageBrightColor">@color/light_icon</color>
     <color name="default_stageDimColor">@color/grey_700</color>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorAccentHalf">@color/colorAccentHalf</item>
         <item name="android:windowBackground">@color/default_bgColor</item>
 

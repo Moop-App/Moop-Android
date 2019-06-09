@@ -39,9 +39,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:tabBackground="?attr/colorPrimary"
-                    app:tabIndicatorColor="?attr/colorAccent"
+                    app:tabIndicatorColor="?attr/colorSecondary"
                     app:tabMode="fixed"
-                    app:tabSelectedTextColor="?attr/colorAccent"
+                    app:tabSelectedTextColor="?attr/colorSecondary"
                     app:tabTextColor="?attr/moop_textColorDark">
 
                     <!-- for preview
