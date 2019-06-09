@@ -27,7 +27,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorAccentHalf">@color/colorAccentHalf</item>
-        <item name="android:windowBackground">?attr/moop_bgColor</item>
+        <item name="android:windowBackground">@color/default_bgColor</item>
 
         <item name="moop_errorColor">@color/default_errorColor</item>
         <item name="moop_dividerColor">@color/default_dividerColor</item>
@@ -46,25 +46,6 @@
         <item name="moop_stageStarColor">@color/default_stageStarColor</item>
         <item name="moop_stageBrightColor">@color/default_stageBrightColor</item>
         <item name="moop_stageDimColor">@color/default_stageDimColor</item>
-    </style>
-
-    <style name="AppTheme.Detail" parent="AppTheme">
-        <!-- using a semi-transparent window background for the drag-back gesture -->
-        <item name="android:windowBackground">@color/scrim</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:colorControlActivated">?android:colorAccent</item>
-        <item name="android:windowAllowReturnTransitionOverlap">false</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
-        <item name="android:windowEnterTransition">@transition/detail_enter</item>
-        <item name="android:windowReturnTransition">@transition/detail_return</item>
     </style>
 
 </resources>
