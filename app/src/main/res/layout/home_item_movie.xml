@@ -43,7 +43,7 @@
                     android:id="@+id/posterView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:background="?attr/moop_cardBgColorLight"
+                    android:background="?attr/colorSurface"
                     android:contentDescription="@{item.title}"
                     android:scaleType="centerCrop"
                     android:srcUrl="@{item.posterUrl}"

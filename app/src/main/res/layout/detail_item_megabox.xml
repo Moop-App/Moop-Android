@@ -62,7 +62,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:text="@{item.rating}"
-            android:textColor="?attr/moop_cardContentColorDark"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/eggIcon"

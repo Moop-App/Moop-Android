@@ -1,7 +1,7 @@
 package soup.movie.theme
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.BuildCompat
 
 class ThemeOptionManager(
     private val store: ThemeOptionStore
@@ -17,7 +17,7 @@ class ThemeOptionManager(
     }
 
     fun createOptions(): List<ThemeOption> {
-        return if (BuildCompat.isAtLeastQ()) {
+        return if (isAtLeastQ()) {
             createOptionsAtLeastQ()
         } else {
             createOptionsAtPreQ()
@@ -51,10 +51,14 @@ class ThemeOptionManager(
             }
 
         val defaultThemeOption: ThemeOption
-            get() = if (BuildCompat.isAtLeastQ()) {
+            get() = if (isAtLeastQ()) {
                 ThemeOption.System
             } else {
                 ThemeOption.Battery
             }
+
+        private fun isAtLeastQ(): Boolean {
+            return Build.VERSION.SDK_INT >= 29
+        }
     }
 }

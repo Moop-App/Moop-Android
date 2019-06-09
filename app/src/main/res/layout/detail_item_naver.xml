@@ -59,7 +59,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:text="@{item.rating}"
-            android:textColor="?attr/moop_cardContentColorDark"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
@@ -67,15 +67,6 @@
             app:layout_constraintStart_toEndOf="@+id/eggIcon"
             app:layout_constraintTop_toTopOf="@+id/eggIcon"
             tools:text="0.0" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="?attr/moop_cardDividerColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/infoButton"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/infoButton"
@@ -86,8 +77,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="자세히보기"
-            android:textColor="@color/selector_item_detail_ticket"
-            android:textSize="12dp"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

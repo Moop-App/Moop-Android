@@ -39,10 +39,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:tabBackground="?attr/colorPrimary"
-                    app:tabIndicatorColor="?attr/colorAccent"
+                    app:tabIndicatorColor="?attr/colorSecondary"
                     app:tabMode="fixed"
-                    app:tabSelectedTextColor="?attr/colorAccent"
-                    app:tabTextColor="?attr/moop_textColorDark">
+                    app:tabSelectedTextColor="?attr/colorSecondary"
+                    app:tabTextColor="?attr/colorOnBackground">
 
                     <!-- for preview
 
@@ -90,7 +90,7 @@
             android:id="@+id/footerView"
             android:layout_width="match_parent"
             android:layout_height="280dp"
-            android:background="?attr/moop_stageColor"
+            android:background="?attr/colorSurface"
             android:elevation="16dp"
             android:foreground="?selectableItemBackground"
             app:behavior_hideable="false"

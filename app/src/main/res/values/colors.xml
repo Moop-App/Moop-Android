@@ -27,14 +27,4 @@
 
     <color name="chip_naver_bg">#1EC800</color>
     <color name="chip_naver_text">#FFFFFF</color>
-
-    <!-- the following colors is from plaid app -->
-
-    <color name="scrim">#99323232</color>
-    <color name="light_grey">#fff5f5f5</color>
-    <color name="dark_icon">#99000000</color> <!-- 60% black-->
-    <color name="dark_icon_half_alpha">#4d000000</color> <!-- 30% black-->
-    <color name="dark_icon_on_primary">#ff2a6046</color> <!-- 60% black on @color/primary -->
-    <color name="light_icon">#ffffffff</color>
-    <color name="dribbble_super_dark">#ff33292d</color>
 </resources>

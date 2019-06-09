@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="colorSecondaryDim" format="reference|color" />
+    <attr name="colorSurfaceDim" format="reference|color" />
+    <attr name="colorOnSurfaceDim" format="reference|color" />
+    <attr name="colorDivider" format="reference|color" />
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryDim">@color/colorSecondaryDim</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSurfaceDim">@color/colorSurfaceDim</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnSurfaceDim">@color/colorOnSurfaceDim</item>
+        <item name="colorDivider">@color/colorDivider</item>
+    </style>
+
+    <style name="AppTheme.Detail" parent="AppTheme">
+        <!-- using a semi-transparent window background for the drag-back gesture -->
+        <item name="scrimBackground">#99323232</item>
+        <item name="android:windowBackground">?attr/scrimBackground</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:colorControlActivated">?colorSecondary</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>
+        <item name="android:windowEnterTransition">@transition/detail_enter</item>
+        <item name="android:windowReturnTransition">@transition/detail_return</item>
+    </style>
+
+    <style name="AppTheme.Splash">
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="android:windowBackground">@drawable/ic_splash</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+</resources>

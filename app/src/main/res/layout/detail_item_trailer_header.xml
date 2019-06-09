@@ -44,7 +44,7 @@
             android:singleLine="true"
             android:text="@{@string/trailer_search_result(item.movieTitle)}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:textColor="?attr/moop_cardContentColorDark"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
