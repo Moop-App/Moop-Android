@@ -25,17 +25,16 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
         <item name="colorAccentHalf">@color/colorAccentHalf</item>
         <item name="android:windowBackground">@color/default_bgColor</item>
 
-        <item name="moop_dividerColor">@color/default_dividerColor</item>
+        <item name="colorDivider">@color/default_dividerColor</item>
         <item name="moop_bgColor">@color/default_bgColor</item>
         <item name="moop_textColorDark">@color/default_textColorDark</item>
         <item name="moop_textColorLight">@color/default_textColorLight</item>
         <item name="moop_iconColorDark">@color/default_iconColorDark</item>
         <item name="moop_iconColorLight">@color/default_iconColorLight</item>
-        <item name="moop_cardDividerColor">?attr/moop_dividerColor</item>
         <item name="moop_cardBgColorDark">@color/default_cardBgColorDark</item>
         <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
         <item name="moop_cardContentColorDark">?attr/moop_iconColorDark</item>

@@ -72,7 +72,7 @@
             android:id="@+id/divider"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:background="?attr/moop_cardDividerColor"
+            android:background="?attr/colorDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/infoButton"
             app:layout_constraintTop_toTopOf="parent" />
