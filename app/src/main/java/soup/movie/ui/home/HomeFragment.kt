@@ -83,8 +83,8 @@ class HomeFragment : BaseFragment() {
         }
         contents.apply {
             swipeRefreshLayout.apply {
-                setProgressBackgroundColorSchemeColor(context.getColorAttr(R.attr.moop_stageColor))
-                setColorSchemeColors(context.getColorAttr(R.attr.moop_stageStarColor))
+                setProgressBackgroundColorSchemeColor(context.getColorAttr(R.attr.colorSurface))
+                setColorSchemeColors(context.getColorAttr(R.attr.colorSecondary))
                 setOnRefreshListener {
                     viewModel.refresh()
                 }

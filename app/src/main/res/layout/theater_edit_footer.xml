@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?selectableItemBackground"
-        tools:background="?attr/moop_stageColor"
+        tools:background="?attr/colorSurface"
         tools:layout_height="280dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:text="자주가는 극장은 최대 10개까지\n선택할 수 있습니다."
-                android:textColor="?attr/moop_stageBrightColor"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/confirmButton"
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:src="@drawable/ic_round_check"
-                    android:tint="@color/white"
+                    android:tint="?attr/colorOnSecondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
                     android:layout_marginEnd="6dp"
                     android:gravity="end"
                     android:text="0"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="14dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:text="/ 10"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/settings_theater_empty_description"
-            android:textColor="?attr/moop_stageBrightColor"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

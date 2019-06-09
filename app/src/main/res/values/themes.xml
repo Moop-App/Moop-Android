@@ -14,16 +14,13 @@
     <color name="default_iconColorLight">@color/dark_icon_half_alpha</color>
     <color name="default_cardBgColorDark">@color/white</color>
     <color name="default_cardBgColorLight">@color/grey_200</color>
-    <color name="default_stageColor">@color/white</color>
-    <color name="default_stageStarColor">@color/colorSecondary</color>
-    <color name="default_stageBrightColor">@color/dark_icon</color>
-    <color name="default_stageDimColor">@color/dark_icon_half_alpha</color>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryDim">@color/colorSecondaryDim</item>
+        <item name="colorOnSecondary">@color/white</item>
 
         <item name="colorDivider">@color/default_dividerColor</item>
         <item name="moop_textColorDark">@color/default_textColorDark</item>
@@ -34,10 +31,6 @@
         <item name="moop_cardBgColorLight">@color/default_cardBgColorLight</item>
         <item name="moop_cardContentColorDark">?attr/moop_iconColorDark</item>
         <item name="moop_cardContentColorLight">?attr/moop_iconColorLight</item>
-        <item name="moop_stageColor">@color/default_stageColor</item>
-        <item name="moop_stageStarColor">@color/default_stageStarColor</item>
-        <item name="moop_stageBrightColor">@color/default_stageBrightColor</item>
-        <item name="moop_stageDimColor">@color/default_stageDimColor</item>
     </style>
 
     <style name="AppTheme.Detail" parent="AppTheme">

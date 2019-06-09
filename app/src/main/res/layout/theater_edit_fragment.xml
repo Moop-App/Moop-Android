@@ -90,7 +90,7 @@
             android:id="@+id/footerView"
             android:layout_width="match_parent"
             android:layout_height="280dp"
-            android:background="?attr/moop_stageColor"
+            android:background="?attr/colorSurface"
             android:elevation="16dp"
             android:foreground="?selectableItemBackground"
             app:behavior_hideable="false"
