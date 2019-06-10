@@ -23,7 +23,10 @@ task clean(type: Delete) {
 
 Object propOrDef(String propertyName, Object defaultValue) {
     def properties = new Properties()
-    rootProject.file("signing/key.properties").withInputStream { stream -> properties.load(stream) }
+    def keyFile = rootProject.file("signing/key.properties")
+    if (keyFile.exists()) {
+        keyFile.withInputStream { stream -> properties.load(stream) }
+    }
     def propertyValue = properties[propertyName]
     return propertyValue != null ? propertyValue : defaultValue
 }
