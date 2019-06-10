@@ -103,7 +103,7 @@ class SettingsFragment : BaseFragment() {
         bugReportButton.setOnDebounceClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse("mailto:")
-            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(BuildConfig.HELP_E_MAIL))
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(HELP_EMAIL))
             intent.putExtra(Intent.EXTRA_SUBJECT, "뭅 v${BuildConfig.VERSION_NAME} 버그리포트")
             intent.putExtra(Intent.EXTRA_TEXT, "") //TODO
             it.context.startActivitySafely(intent)
@@ -204,5 +204,10 @@ class SettingsFragment : BaseFragment() {
                 Moop.executePlayStore(requireContext())
             }
         }
+    }
+
+    companion object {
+
+        private const val HELP_EMAIL = "help.moop@gmail.com"
     }
 }

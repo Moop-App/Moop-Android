@@ -20,3 +20,10 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+Object propOrDef(String propertyName, Object defaultValue) {
+    def properties = new Properties()
+    rootProject.file("signing/key.properties").withInputStream { stream -> properties.load(stream) }
+    def propertyValue = properties[propertyName]
+    return propertyValue != null ? propertyValue : defaultValue
+}
