@@ -14,6 +14,7 @@
 
     <style name="Widget.Chip" parent="Widget.MaterialComponents.Chip.Action">
         <item name="android:textAppearance">@style/TextAppearance.Chip</item>
+        <item name="chipMinTouchTargetSize">40dp</item>
     </style>
 
     <style name="Widget.Chip.Genre">
@@ -50,6 +51,7 @@
 
     <style name="Widget.Chip.Filter" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="android:textAppearance">@style/TextAppearance.Chip</item>
+        <item name="chipMinTouchTargetSize">40dp</item>
     </style>
 
     <style name="Widget.Chip.Filter.Genre">
