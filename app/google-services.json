@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "783959334963",
+    "firebase_url": "https://moop-api.firebaseio.com",
+    "project_id": "moop-api",
+    "storage_bucket": "moop-api.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783959334963:android:891d061a560fdc1c",
+        "android_client_info": {
+          "package_name": "soup.movie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783959334963-gdql2t6lteo8neid2ffreaje7p1eqjgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcpvtMuZqYfuuIFYUfUzNtdT30_cdY2pc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783959334963-hqd5i9l9nfp5mnb22dp4ptmv6pqqg7bp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "783959334963-8abdtk4182oaj19d7egeuemp9s6fvfm0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kor45cw.Moop",
+                "app_store_id": "1464896856"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783959334963:android:5649b04761cc05cc",
+        "android_client_info": {
+          "package_name": "soup.movie.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783959334963-gdql2t6lteo8neid2ffreaje7p1eqjgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcpvtMuZqYfuuIFYUfUzNtdT30_cdY2pc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783959334963-hqd5i9l9nfp5mnb22dp4ptmv6pqqg7bp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "783959334963-8abdtk4182oaj19d7egeuemp9s6fvfm0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kor45cw.Moop",
+                "app_store_id": "1464896856"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

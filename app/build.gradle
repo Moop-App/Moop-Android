@@ -3,9 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'io.fabric'
 apply plugin: 'com.google.firebase.firebase-perf'
-apply from: "signing.gradle"
+
+def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -23,16 +23,40 @@ android {
         def filesAuthorityValue = applicationId + '.shareprovider'
         buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
         manifestPlaceholders = [filesAuthority: filesAuthorityValue]
+
+        buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "")
+    }
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("signing/app-debug.jks")
+            storePassword "android"
+            keyAlias "android"
+            keyPassword "android"
+        }
+        release {
+            if (useReleaseKeystore) {
+                storeFile rootProject.file("signing/app-release.jks")
+                storePassword propOrDef('storePassword', "")
+                keyAlias propOrDef('keyAlias', "")
+                keyPassword propOrDef('keyPassword', "")
+            }
+        }
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [crashlytics_enabled: true]
-        }
         debug {
+            signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
             manifestPlaceholders = [crashlytics_enabled: false]
+        }
+        release {
+            if (useReleaseKeystore) {
+                signingConfig signingConfigs.release
+            } else {
+                signingConfig signingConfigs.debug
+            }
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+            manifestPlaceholders = [crashlytics_enabled: true]
         }
     }
     compileOptions {
@@ -121,4 +145,7 @@ dependencies {
     androidTestImplementation deps.espresso.core
 }
 
-apply plugin: 'com.google.gms.google-services'
+if (file("google-services.json").exists()) {
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'io.fabric'
+}
