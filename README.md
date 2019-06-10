@@ -1,5 +1,4 @@
-![Moop](https://github.com/fornewid/Moop-Android/blob/develop/app/src/main/ic_launcher-graphic.png)
-
+<img height="200" src='https://github.com/fornewid/Moop-Android/blob/develop/app/src/main/ic_launcher-graphic.png'/>
 
 # :movie_camera: 뭅 (Moop)
 
