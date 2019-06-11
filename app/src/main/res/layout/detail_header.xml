@@ -28,11 +28,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/posterCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="?selectableItemBackground"
+            app:rippleColor="@color/colorOnPoster"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="@id/headerGroup"
             app:layout_constraintDimensionRatio="V,27:40"
@@ -47,7 +47,7 @@
                 android:transitionName="@string/transition_poster"
                 tools:src="@tools:sample/avatars" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <include
             android:id="@+id/ageBgView"

@@ -137,7 +137,7 @@ class DetailActivity : BaseActivity() {
             posterView.loadAsync(movie.posterUrl, endAction = {
                 startPostponedEnterTransition()
             })
-            posterView.setOnDebounceClickListener {
+            posterCard.setOnDebounceClickListener(delay = 150L) {
                 analytics.clickPoster()
                 showPosterViewer(from = posterView)
             }

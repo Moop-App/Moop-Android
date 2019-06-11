@@ -1,27 +1,40 @@
 package soup.movie.util
 
 import android.view.View
+import androidx.core.view.postOnAnimationDelayed
 import androidx.databinding.BindingAdapter
 
 private typealias OnClickListener = (View) -> Unit
 
-@BindingAdapter("onDebounceClick")
-fun View.setOnDebounceClickListener(listener: View.OnClickListener?) {
+@BindingAdapter(value = ["onDebounceClick", "onDebounceClickDelay"], requireAll = false)
+fun setOnDebounceClickListener(view: View, listener: View.OnClickListener?, delay: Long = 0) {
     if (listener == null) {
-        setOnClickListener(null)
+        view.setOnClickListener(null)
     } else {
-        setOnClickListener(OnDebounceClickListener {
-            it.run(listener::onClick)
+        view.setOnClickListener(OnDebounceClickListener {
+            if (delay > 0) {
+                view.postOnAnimationDelayed(delay) {
+                    it.run(listener::onClick)
+                }
+            } else {
+                it.run(listener::onClick)
+            }
         })
     }
 }
 
-fun View.setOnDebounceClickListener(listener: OnClickListener?) {
+fun View.setOnDebounceClickListener(delay: Long = 0, listener: OnClickListener?) {
     if (listener == null) {
         setOnClickListener(null)
     } else {
         setOnClickListener(OnDebounceClickListener {
-            it.run(listener)
+            if (delay > 0) {
+                postOnAnimationDelayed(delay) {
+                    run(listener)
+                }
+            } else {
+                run(listener)
+            }
         })
     }
 }

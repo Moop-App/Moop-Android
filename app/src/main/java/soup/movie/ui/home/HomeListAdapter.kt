@@ -23,7 +23,7 @@ class HomeListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Movie> {
         return super.onCreateViewHolder(parent, viewType).apply {
-            itemView.setOnDebounceClickListener {
+            itemView.setOnDebounceClickListener(delay = 150L) {
                 val index = adapterPosition
                 if (adapterPosition in 0..itemCount) {
                     val movie: Movie = getItem(index)
