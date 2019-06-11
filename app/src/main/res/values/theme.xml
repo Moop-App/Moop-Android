@@ -22,8 +22,7 @@
 
     <style name="AppTheme.Detail" parent="AppTheme">
         <!-- using a semi-transparent window background for the drag-back gesture -->
-        <item name="scrimBackground">#99323232</item>
-        <item name="android:windowBackground">?attr/scrimBackground</item>
+        <item name="android:windowBackground">@color/colorScrim</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsFloating">false</item>

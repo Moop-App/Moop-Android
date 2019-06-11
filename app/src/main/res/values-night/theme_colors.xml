@@ -13,4 +13,6 @@
     <color name="colorOnSurfaceDim">@color/grey_500</color>
     <color name="colorDivider">@color/grey_900</color>
 
+    <color name="colorScrim">#99323232</color>
+
 </resources>
