@@ -32,12 +32,12 @@
             android:id="@+id/posterCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:rippleColor="@color/colorOnPoster"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="@id/headerGroup"
             app:layout_constraintDimensionRatio="V,27:40"
             app:layout_constraintStart_toStartOf="@id/headerGroup"
-            app:layout_constraintTop_toTopOf="@id/headerGroup">
+            app:layout_constraintTop_toTopOf="@id/headerGroup"
+            app:rippleColor="@color/colorOnPoster">
 
             <ImageView
                 android:id="@+id/posterView"
