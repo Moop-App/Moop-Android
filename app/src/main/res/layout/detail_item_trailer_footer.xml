@@ -13,21 +13,28 @@
             type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
-    <TextView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/ripple_card_footer"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:text="더보기"
-        android:textColor="?attr/colorSecondary"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardElevation="10dp"
+        app:onDebounceClick="@{() -> listener.onInfoClick(item)}"
+        app:shapeAppearance="@style/ShapeAppearance.Round.Bottom">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="더보기"
+            android:textColor="?attr/colorSecondary"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>

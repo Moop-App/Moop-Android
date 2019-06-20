@@ -14,66 +14,72 @@
             type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/ripple"
-        android:elevation="10dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="10dp"
         app:onDebounceClick="@{() -> listener.onInfoClick(item)}">
 
-        <ImageView
-            android:id="@+id/trailerImage"
-            android:layout_width="140dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="?attr/colorSurfaceDim"
-            android:scaleType="centerCrop"
-            android:srcUrl="@{item.trailer.thumbnailUrl}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-        <TextView
-            android:id="@+id/titleView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="2dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:minLines="1"
-            android:text="@{item.trailer.title}"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@id/authorView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/trailerImage"
-            app:layout_constraintTop_toTopOf="@id/trailerImage"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Movie Title\nLine2\nLine3" />
+            <ImageView
+                android:id="@+id/trailerImage"
+                android:layout_width="140dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="?attr/colorSurfaceDim"
+                android:scaleType="centerCrop"
+                android:srcUrl="@{item.trailer.thumbnailUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/authorView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:maxLines="1"
-            android:minLines="1"
-            android:text="@{item.trailer.author}"
-            android:textColor="?attr/colorOnSurfaceDim"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="@id/titleView"
-            app:layout_constraintEnd_toEndOf="@+id/titleView"
-            app:layout_constraintStart_toStartOf="@+id/titleView"
-            app:layout_constraintTop_toBottomOf="@+id/titleView"
-            tools:text="Subtitle here" />
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:minLines="1"
+                android:text="@{item.trailer.title}"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/authorView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/trailerImage"
+                app:layout_constraintTop_toTopOf="@id/trailerImage"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Movie Title\nLine2\nLine3" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/authorView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:text="@{item.trailer.author}"
+                android:textColor="?attr/colorOnSurfaceDim"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@id/titleView"
+                app:layout_constraintEnd_toEndOf="@+id/titleView"
+                app:layout_constraintStart_toStartOf="@+id/titleView"
+                app:layout_constraintTop_toBottomOf="@+id/titleView"
+                tools:text="Subtitle here" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
