@@ -5,10 +5,10 @@ import soup.movie.domain.home.model.HomeDomainModel
 
 interface HomeUiMapper {
 
-    fun Request.toHeaderUiModel(): HomeHeaderUiModel {
+    fun Boolean.toHeaderUiModel(): HomeHeaderUiModel {
         return HomeHeaderUiModel(
-            isNow = isNow,
-            isPlan = isNow.not()
+            isNow = this,
+            isPlan = this.not()
         )
     }
 
