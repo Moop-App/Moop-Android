@@ -10,35 +10,30 @@
         android:layout_height="match_parent"
         tools:context="soup.movie.ui.theater.edit.TheaterEditFragment">
 
-        <soup.widget.ConstraintLayoutEx
-            android:id="@+id/contentView"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="60dp">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:background="?attr/colorPrimary"
                 android:contentInsetStart="0dp"
                 android:contentInsetLeft="0dp"
                 android:contentInsetEnd="0dp"
                 android:contentInsetRight="0dp"
                 android:elevation="4dp"
-                android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
                 app:contentInsetStart="0dp"
-                app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
                 app:title="@string/theater_edit_title">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:tabBackground="?attr/colorPrimary"
                     app:tabIndicatorColor="?attr/colorSecondary"
                     app:tabMode="fixed"
                     app:tabSelectedTextColor="?attr/colorSecondary"
@@ -62,7 +57,16 @@
 
                 </com.google.android.material.tabs.TabLayout>
 
-            </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <soup.widget.ConstraintLayoutEx
+            android:id="@+id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingBottom="60dp">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
@@ -71,7 +75,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.core.widget.ContentLoadingProgressBar
                 android:id="@+id/loadingView"
