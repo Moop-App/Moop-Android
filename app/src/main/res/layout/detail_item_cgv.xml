@@ -22,7 +22,7 @@
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="16dp"
-        app:cardElevation="10dp"
+        app:cardElevation="@dimen/detail_card_elevation"
         tools:layout_width="110dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

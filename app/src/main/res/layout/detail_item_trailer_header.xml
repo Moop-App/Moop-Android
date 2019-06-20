@@ -20,7 +20,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         app:cardBackgroundColor="?attr/colorSurface"
-        app:cardElevation="10dp"
+        app:cardElevation="@dimen/detail_card_elevation"
         app:shapeAppearance="@style/ShapeAppearance.Round.Top">
 
         <androidx.constraintlayout.widget.ConstraintLayout

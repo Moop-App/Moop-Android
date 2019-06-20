@@ -149,7 +149,6 @@
             android:layout_height="48dp"
             android:layout_marginBottom="8dp"
             android:background="?selectableItemBackgroundBorderless"
-            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="@id/headerGroup"
             app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:srcCompat="@drawable/ic_logo_kakao_talk" />

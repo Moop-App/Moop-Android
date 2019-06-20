@@ -21,7 +21,7 @@
         android:layout_marginEnd="4dp"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="0dp"
-        app:cardElevation="10dp"
+        app:cardElevation="@dimen/detail_card_elevation"
         app:onDebounceClick="@{() -> listener.onInfoClick(item)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
