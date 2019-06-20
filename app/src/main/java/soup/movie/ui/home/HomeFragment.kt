@@ -121,7 +121,7 @@ class HomeFragment : BaseFragment() {
             }
         }
         actionNow.isTabChecked(uiModel.isNow)
-        actionPlan.isTabChecked(uiModel.isNow.not())
+        actionPlan.isTabChecked(uiModel.isPlan)
     }
 
     private fun HomeHeaderHintBinding.render(uiModel: HomeHeaderUiModel) {
