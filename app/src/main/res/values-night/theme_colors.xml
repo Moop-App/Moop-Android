@@ -4,7 +4,7 @@
     <color name="colorPrimary">@color/black</color>
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorSecondary">#8EB5F0</color>
-    <color name="colorOnSecondary">@color/white</color>
+    <color name="colorOnSecondary">@color/black</color>
     <color name="colorDivider">@color/grey_900</color>
     <color name="colorScrim">#99323232</color>
 

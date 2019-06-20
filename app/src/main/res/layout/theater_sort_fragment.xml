@@ -98,8 +98,7 @@
                 android:contentDescription="@string/theater_select_action_confirm"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_round_add"
-                app:tint="@color/white" />
+                app:srcCompat="@drawable/ic_round_add" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
