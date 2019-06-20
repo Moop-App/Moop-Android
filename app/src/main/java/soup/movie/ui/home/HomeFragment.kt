@@ -61,15 +61,6 @@ class HomeFragment : BaseFragment() {
             toolbar.setNavigationOnClickListener {
                 activityViewModel.openNavigationMenu()
             }
-            toolbar.inflateMenu(R.menu.fragment_movie_list)
-            toolbar.setOnMenuItemClickListener {
-                consume {
-                    if (it.itemId == R.id.action_filter) {
-                        analytics.clickMenuFilter()
-                        findNavController().navigate(HomeFragmentDirections.actionToFilter())
-                    }
-                }
-            }
             actionNow.setOnDebounceClickListener {
                 viewModel.onNowClick()
             }
@@ -99,6 +90,10 @@ class HomeFragment : BaseFragment() {
             errorView.setOnDebounceClickListener {
                 viewModel.refresh()
             }
+        }
+        filterButton.setOnDebounceClickListener {
+            analytics.clickMenuFilter()
+            findNavController().navigate(HomeFragmentDirections.actionToFilter())
         }
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
             header.render(it)

@@ -12,7 +12,7 @@
 
     <string name="search_hint">영화를 검색하세요</string>
 
-    <string name="menu_filter">필터</string>
+    <string name="menu_filter">영화 필터</string>
     <string name="filter_category_theater">극장 필터</string>
     <string name="filter_category_age">연령 필터</string>
     <string name="filter_category_genre">장르 필터</string>

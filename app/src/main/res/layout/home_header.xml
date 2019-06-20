@@ -27,8 +27,7 @@
                     android:layout_height="?actionBarSize"
                     app:contentInsetEndWithActions="0dp"
                     app:contentInsetStartWithNavigation="0dp"
-                    app:navigationIcon="@drawable/ic_round_menu"
-                    tools:menu="@menu/fragment_movie_list">
+                    app:navigationIcon="@drawable/ic_round_menu">
 
                     <LinearLayout
                         android:id="@+id/action_now"

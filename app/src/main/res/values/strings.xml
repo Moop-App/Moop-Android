@@ -12,7 +12,7 @@
 
     <string name="search_hint">Search Movie</string>
 
-    <string name="menu_filter">Filter</string>
+    <string name="menu_filter">Movie Filter</string>
     <string name="filter_category_theater">Theater Filter</string>
     <string name="filter_category_age">Age Filter</string>
     <string name="filter_category_genre">Genre Filter</string>
