@@ -15,11 +15,11 @@ class ThemeOptionViewModel @Inject constructor(
         get() = _uiModel
 
     init {
-        val options = themeOptionManager.createOptions()
+        val options = themeOptionManager.getOptions()
         _uiModel.value = ThemeOptionUiModel(
-            options.map {
-                ThemeOptionItemUiModel(it)
-            }
+            themeOptionManager
+                .getOptions()
+                .map { ThemeOptionItemUiModel(it) }
         )
     }
 

@@ -18,7 +18,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:title="@string/theme_bookmark_title" />
+                app:title="@string/theme_option_title" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

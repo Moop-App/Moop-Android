@@ -8,10 +8,12 @@ import soup.movie.data.MoopRepository
 import soup.movie.data.model.Version
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.ThemeOptionSetting
+import soup.movie.theme.ThemeOptionManager
 import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
+    themeOptionManager: ThemeOptionManager,
     themeOptionSetting: ThemeOptionSetting,
     theatersSetting: TheatersSetting,
     repository: MoopRepository
@@ -35,8 +37,9 @@ class SettingsViewModel @Inject constructor(
             .subscribe()
             .disposeOnCleared()
 
+        //TODO: Fix again later. This is so ugly...
         themeOptionSetting.asObservable()
-            .map { ThemeSettingUiModel(it) }
+            .map { ThemeSettingUiModel(themeOptionManager.getCurrentOption()) }
             .distinctUntilChanged()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _themeUiModel.value = it }

@@ -2,7 +2,7 @@ package soup.movie.theme
 
 interface ThemeOptionStore {
 
-    fun save(option: ThemeOption)
+    fun save(option: String)
 
-    fun restore(): ThemeOption
+    fun restore(): String
 }

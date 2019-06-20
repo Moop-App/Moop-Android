@@ -2,21 +2,17 @@ package soup.movie.settings.impl
 
 import android.content.SharedPreferences
 import soup.movie.settings.PrefSetting
-import soup.movie.theme.ThemeOption
-import soup.movie.theme.ThemeOptionManager.Companion.defaultThemeOption
 
 class ThemeOptionSetting(
     preferences: SharedPreferences
-) : PrefSetting<ThemeOption>(preferences) {
+) : PrefSetting<String>(preferences) {
 
-    override fun getDefaultValue(preferences: SharedPreferences): ThemeOption {
-        return ThemeOption.valueOf(
-            preferences.getString(KEY, defaultThemeOption.toString()) ?: defaultThemeOption.toString()
-        )
+    override fun getDefaultValue(preferences: SharedPreferences): String {
+        return preferences.getString(KEY, "") ?: ""
     }
 
-    override fun saveValue(preferences: SharedPreferences, value: ThemeOption) {
-        preferences.edit().putString(KEY, value.toString()).apply()
+    override fun saveValue(preferences: SharedPreferences, value: String) {
+        preferences.edit().putString(KEY, value).apply()
     }
 
     companion object {
