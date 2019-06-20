@@ -31,7 +31,6 @@ def androidx = [:]
 androidx.appcompat = "androidx.appcompat:appcompat:1.1.0-alpha05" /* TODO */
 androidx.annotation = "androidx.annotation:annotation:$versions.androidx"
 androidx.recyclerview = "androidx.recyclerview:recyclerview:$versions.androidx"
-androidx.cardview = "androidx.cardview:cardview:$versions.androidx"
 androidx.transition = "androidx.transition:transition:$versions.androidx"
 androidx.core_ktx = "androidx.core:core-ktx:$versions.androidx"
 androidx.browser = "androidx.browser:browser:$versions.androidx"

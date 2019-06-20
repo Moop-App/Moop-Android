@@ -89,7 +89,6 @@ dependencies {
 
     implementation deps.androidx.appcompat
     implementation deps.androidx.recyclerview
-    implementation deps.androidx.cardview
     implementation deps.androidx.transition
     implementation deps.androidx.core_ktx
     implementation deps.androidx.constraint_layout
