@@ -17,7 +17,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        app:rippleColor="@color/colorOnPoster"
+        app:rippleColor="@color/color_on_poster"
         tools:layout_width="120dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

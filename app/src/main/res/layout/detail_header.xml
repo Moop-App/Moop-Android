@@ -37,7 +37,7 @@
             app:layout_constraintDimensionRatio="V,27:40"
             app:layout_constraintStart_toStartOf="@id/headerGroup"
             app:layout_constraintTop_toTopOf="@id/headerGroup"
-            app:rippleColor="@color/colorOnPoster">
+            app:rippleColor="@color/color_on_poster">
 
             <ImageView
                 android:id="@+id/posterView"

@@ -96,10 +96,10 @@ class SettingsFragment : BaseFragment() {
         themeName.setOnDebounceClickListener {
             onThemeEditClicked()
         }
-        tmPrepare.setOnClickListener {
-            //TODO: Apply theater mode
-            //startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
-        }
+        //TODO: Apply theater mode
+        //tmPrepare.setOnClickListener {
+        //    startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
+        //}
         bugReportButton.setOnDebounceClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse("mailto:")

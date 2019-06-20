@@ -5,7 +5,7 @@
         <shape android:shape="rectangle">
             <corners android:radius="18dp" />
             <size android:height="36dp" />
-            <solid android:color="?attr/colorSecondaryDim" />
+            <solid android:color="@color/color_secondary_dim" />
         </shape>
     </item>
 

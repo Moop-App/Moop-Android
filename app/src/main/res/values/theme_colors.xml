@@ -4,15 +4,8 @@
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/grey</color>
     <color name="colorSecondary">#2D7AF6</color>
-    <color name="colorSecondaryDim">#222D7AF6</color>
     <color name="colorOnSecondary">@color/white</color>
-    <color name="colorOnBackground">@color/grey_700</color>
-    <color name="colorSurface">@color/white</color>
-    <color name="colorSurfaceDim">@color/grey_200</color>
-    <color name="colorOnSurface">@color/grey_700</color>
-    <color name="colorOnSurfaceDim">@color/grey_500</color>
     <color name="colorDivider">@color/grey_100</color>
     <color name="colorScrim">#99323232</color>
-    <color name="colorOnPoster">#33ffffff</color>
 
 </resources>

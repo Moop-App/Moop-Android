@@ -22,11 +22,14 @@
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="16dp"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+        tools:layout_width="110dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="12dp"
+            android:paddingBottom="6dp">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/brandView"
@@ -64,8 +67,8 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="@{item.rating}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/eggIcon"
                 app:layout_constraintEnd_toEndOf="parent"
