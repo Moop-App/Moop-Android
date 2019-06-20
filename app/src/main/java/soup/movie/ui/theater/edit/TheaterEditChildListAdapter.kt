@@ -29,7 +29,7 @@ class TheaterEditChildListAdapter(
         super.onBindViewHolder(holder, position)
         holder.itemView.theaterListView.apply {
             removeAllViews()
-            getItem(position).theaterList.map { theater ->
+            getItem(position)?.theaterList?.map { theater ->
                 inflate<Chip>(context, theater.getFilterChipLayout()).apply {
                     text = theater.name
                     val isSelected = selectedIdSet.any { it.id == theater.id }
@@ -51,7 +51,7 @@ class TheaterEditChildListAdapter(
                         }
                     }
                 }
-            }.forEach { addView(it) }
+            }?.forEach { addView(it) }
         }
     }
 

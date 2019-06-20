@@ -12,7 +12,7 @@ class ThemeOptionListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<ThemeOptionItemUiModel> {
         return super.onCreateViewHolder(parent, viewType).apply {
             itemView.setOnClickListener {
-                getItem(adapterPosition).run(listener)
+                getItem(adapterPosition)?.run(listener)
             }
         }
     }

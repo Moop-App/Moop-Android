@@ -25,7 +25,7 @@ internal class TheaterSortListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(getItem(position).type) {
+        return when(getItem(position)?.type) {
             Theater.TYPE_CGV -> R.layout.theater_sort_item_cgv
             Theater.TYPE_LOTTE -> R.layout.theater_sort_item_lotte
             Theater.TYPE_MEGABOX -> R.layout.theater_sort_item_megabox

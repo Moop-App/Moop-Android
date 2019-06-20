@@ -12,7 +12,7 @@ open class DataBindingViewHolder<T>(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @CallSuper
-    open fun bind(item: T) {
+    open fun bind(item: T?) {
         binding.setVariable(BR.item, item)
         binding.executePendingBindings()
     }

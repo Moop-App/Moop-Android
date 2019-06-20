@@ -20,7 +20,7 @@ abstract class DataBindingAdapter<T> : RecyclerView.Adapter<DataBindingViewHolde
         holder.bind(getItem(position))
     }
 
-    fun getItem(position: Int): T = items[position]
+    fun getItem(position: Int): T? = items.getOrNull(position)
 
     final override fun getItemCount(): Int = items.size
 
