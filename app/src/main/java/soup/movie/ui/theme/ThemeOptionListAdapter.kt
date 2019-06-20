@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import soup.movie.R
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
+import soup.movie.util.setOnDebounceClickListener
 
 class ThemeOptionListAdapter(
     private val listener: (ThemeOptionItemUiModel) -> Unit
@@ -11,7 +12,7 @@ class ThemeOptionListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<ThemeOptionItemUiModel> {
         return super.onCreateViewHolder(parent, viewType).apply {
-            itemView.setOnClickListener {
+            itemView.setOnDebounceClickListener(delay = 350L) {
                 getItem(adapterPosition)?.run(listener)
             }
         }
