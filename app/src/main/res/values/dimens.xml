@@ -8,6 +8,7 @@
 
     <dimen name="drag_dismiss_distance">112dp</dimen> <!-- 2 * ?android:actionBarSize -->
     <dimen name="detail_header_height">200dp</dimen>
+    <dimen name="detail_card_elevation">8dp</dimen>
 
     <dimen name="settings_category_margin_vertical">24dp</dimen>
     <dimen name="settings_item_margin_vertical">12dp</dimen>

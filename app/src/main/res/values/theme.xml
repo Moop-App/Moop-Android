@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="colorSecondaryDim" format="reference|color" />
-    <attr name="colorSurfaceDim" format="reference|color" />
-    <attr name="colorOnSurfaceDim" format="reference|color" />
     <attr name="colorDivider" format="reference|color" />
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorSecondaryDim">@color/colorSecondaryDim</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="colorOnBackground">@color/colorOnBackground</item>
-        <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorSurfaceDim">@color/colorSurfaceDim</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
-        <item name="colorOnSurfaceDim">@color/colorOnSurfaceDim</item>
         <item name="colorDivider">@color/colorDivider</item>
     </style>
 

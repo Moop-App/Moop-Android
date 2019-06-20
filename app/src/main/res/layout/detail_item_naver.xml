@@ -14,76 +14,82 @@
             type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_card"
-        android:elevation="10dp">
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="@dimen/detail_card_elevation">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/brandView"
-            style="@style/Widget.Chip.Naver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="네이버"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/eggIcon"
-            android:layout_width="24dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_round_star"
-            android:tint="@color/amber"
-            android:tintMode="src_in"
-            app:layout_constraintBottom_toBottomOf="@+id/brandView"
-            app:layout_constraintEnd_toStartOf="@+id/eggLabel"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/brandView"
-            app:layout_constraintTop_toTopOf="@+id/brandView" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/brandView"
+                style="@style/Widget.Chip.Naver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="네이버"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
 
-        <TextView
-            android:id="@+id/eggLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text="@{item.rating}"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
-            app:layout_constraintEnd_toStartOf="@id/infoButton"
-            app:layout_constraintStart_toEndOf="@+id/eggIcon"
-            app:layout_constraintTop_toTopOf="@+id/eggIcon"
-            tools:text="0.0" />
+            <ImageView
+                android:id="@+id/eggIcon"
+                android:layout_width="24dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_round_star"
+                android:tint="@color/amber"
+                android:tintMode="src_in"
+                app:layout_constraintBottom_toBottomOf="@+id/brandView"
+                app:layout_constraintEnd_toStartOf="@+id/eggLabel"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/brandView"
+                app:layout_constraintTop_toTopOf="@+id/brandView" />
 
-        <TextView
-            android:id="@+id/infoButton"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="@drawable/ripple_naver_info"
-            android:gravity="center"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="자세히보기"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
+            <TextView
+                android:id="@+id/eggLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{item.rating}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
+                app:layout_constraintEnd_toStartOf="@id/infoButton"
+                app:layout_constraintStart_toEndOf="@+id/eggIcon"
+                app:layout_constraintTop_toTopOf="@+id/eggIcon"
+                tools:text="0.0" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/infoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackground"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="자세히보기"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
