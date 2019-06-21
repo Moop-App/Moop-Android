@@ -36,7 +36,7 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/color_on_surface_dim"
+                android:background="@drawable/detail_trailer_placeholder"
                 android:scaleType="centerCrop"
                 android:srcUrl="@{item.trailer.thumbnailUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
