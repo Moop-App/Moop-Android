@@ -139,9 +139,9 @@ dependencies {
     implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
     implementation 'com.kakao.sdk:kakaolink:1.14.0'
 
-    testImplementation deps.junit
-    androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.espresso.core
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
 }
 
 if (file("google-services.json").exists()) {

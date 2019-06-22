@@ -3,95 +3,77 @@
  * @link https://github.com/googlesamples/android-architecture-components
  */
 
-ext.deps = [:]
-def versions = [:]
-versions.androidx = "1.0.0"
-versions.lifecycle = "2.0.0"
-versions.navigation = "2.1.0-alpha04"
-versions.constraint_layout = "2.0.0-alpha5"
-versions.material = "1.1.0-alpha07"
-versions.androidx_test = "1.2.0-alpha03"
-versions.espresso = "3.2.0-alpha03"
-versions.room = "2.1.0-alpha07"
-versions.dagger = "2.16"
-versions.junit = "4.12"
-versions.retrofit = "2.5.0"
-versions.glide = "4.8.0"
-versions.timber = "4.7.1"
-versions.stetho = "1.5.0"
-versions.android_gradle_plugin = '3.4.1'
-versions.rx_java2 = "2.2.8"
-versions.rx_kotlin = "2.3.0"
-versions.rx_android = "2.1.1"
-versions.rx_relay = "2.1.0"
-versions.kotlin = "1.3.31"
 def deps = [:]
 
 def androidx = [:]
-androidx.appcompat = "androidx.appcompat:appcompat:1.1.0-alpha05" /* TODO */
-androidx.annotation = "androidx.annotation:annotation:$versions.androidx"
-androidx.recyclerview = "androidx.recyclerview:recyclerview:$versions.androidx"
-androidx.transition = "androidx.transition:transition:$versions.androidx"
-androidx.core_ktx = "androidx.core:core-ktx:$versions.androidx"
-androidx.browser = "androidx.browser:browser:$versions.androidx"
-androidx.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
-androidx.material = "com.google.android.material:material:$versions.material"
+androidx.appcompat = "androidx.appcompat:appcompat:1.1.0-beta01"
+androidx.browser = "androidx.browser:browser:1.0.0"
+androidx.constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.0-beta2"
+androidx.core_ktx = "androidx.core:core-ktx:1.2.0-alpha02"
+androidx.recyclerview = "androidx.recyclerview:recyclerview:1.1.0-alpha06"
+androidx.transition = "androidx.transition:transition:1.2.0-alpha01"
+androidx.material = "com.google.android.material:material:1.1.0-alpha07"
 deps.androidx = androidx
 
-def atsl = [:]
-atsl.runner = "androidx.test:runner:$versions.androidx_test"
-deps.atsl = atsl
-
-def espresso = [:]
-espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
-deps.espresso = espresso
-
-def room = [:]
-room.runtime = "androidx.room:room-runtime:$versions.room"
-room.compiler = "androidx.room:room-compiler:$versions.room"
-room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
-deps.room = room
+def test = [:]
+test.junit = "junit:junit:4.12"
+test.runner = "androidx.test:runner:1.2.0"
+test.espresso = "androidx.test.espresso:espresso-core:3.2.0"
+deps.test = test
 
 def lifecycle = [:]
-lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
-lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+def lifecycleVersion = "2.2.0-alpha01"
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
 deps.lifecycle = lifecycle
 
+def room = [:]
+def roomVersion = "2.1.0-alpha07"
+room.runtime = "androidx.room:room-runtime:$roomVersion"
+room.compiler = "androidx.room:room-compiler:$roomVersion"
+room.rxjava2 = "androidx.room:room-rxjava2:$roomVersion"
+deps.room = room
+
 def navigation = [:]
-navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
-navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
-navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+def navigationVersion = "2.1.0-alpha05"
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
 deps.navigation = navigation
 
 def retrofit = [:]
-retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
-retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-retrofit.rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+def retrofitVersion = "2.6.0"
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+retrofit.rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 deps.retrofit = retrofit
 
 def dagger = [:]
-dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
-dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
-dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
-dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
-dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
+def daggerVersion = "2.16"
+dagger.runtime = "com.google.dagger:dagger:$daggerVersion"
+dagger.android = "com.google.dagger:dagger-android:$daggerVersion"
+dagger.android_support = "com.google.dagger:dagger-android-support:$daggerVersion"
+dagger.compiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$daggerVersion"
 deps.dagger = dagger
 
 def kotlin = [:]
-kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+def kotlinVersion = "1.3.40"
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 deps.kotlin = kotlin
 
 def glide = [:]
-glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
-glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+def glideVersion = "4.9.0"
+glide.runtime = "com.github.bumptech.glide:glide:$glideVersion"
+glide.compiler = "com.github.bumptech.glide:compiler:$glideVersion"
 deps.glide = glide
 
 def rx = [:]
-rx.java2 = "io.reactivex.rxjava2:rxjava:$versions.rx_java2"
-rx.kotlin = "io.reactivex.rxjava2:rxkotlin:$versions.rx_kotlin"
-rx.android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
-rx.relay = "com.jakewharton.rxrelay2:rxrelay:$versions.rx_relay"
+rx.java2 = "io.reactivex.rxjava2:rxjava:2.2.10"
+rx.kotlin = "io.reactivex.rxjava2:rxkotlin:2.3.0"
+rx.android = "io.reactivex.rxjava2:rxandroid:2.1.1"
+rx.relay = "com.jakewharton.rxrelay2:rxrelay:2.1.0"
 deps.rx = rx
 
 def firebase = [:]
@@ -103,18 +85,18 @@ firebase.plugin = 'com.google.firebase:firebase-plugins:1.1.5'
 deps.firebase = firebase
 
 def stetho = [:]
-stetho.core = "com.facebook.stetho:stetho:$versions.stetho"
-stetho.okhttp3 = "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+def stethoVersion = "1.5.0"
+stetho.core = "com.facebook.stetho:stetho:$stethoVersion"
+stetho.okhttp3 = "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
 deps.stetho = stetho
 
 def util = [:]
-util.okhttp_interceptor = "com.squareup.okhttp3:logging-interceptor:3.14.1"
-util.timber = "com.jakewharton.timber:timber:$versions.timber"
-util.threetenabp = 'com.jakewharton.threetenabp:threetenabp:1.1.0'
+util.okhttp_interceptor = "com.squareup.okhttp3:logging-interceptor:3.14.2"
+util.timber = "com.jakewharton.timber:timber:4.7.1"
+util.threetenabp = 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 deps.util = util
 
-deps.junit = "junit:junit:$versions.junit"
-deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:3.4.1"
 ext.deps = deps
 
 def build_versions = [:]

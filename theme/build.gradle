@@ -27,7 +27,7 @@ android {
 dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.androidx.appcompat
-    testImplementation deps.junit
-    androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.espresso.core
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
 }

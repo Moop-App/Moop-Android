@@ -44,13 +44,12 @@ dependencies {
 
     implementation deps.androidx.appcompat
     implementation deps.androidx.recyclerview
-    implementation deps.androidx.transition
     implementation deps.androidx.constraint_layout
     implementation deps.androidx.material
 
     implementation deps.util.timber
 
-    testImplementation deps.junit
-    androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.espresso.core
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
 }
