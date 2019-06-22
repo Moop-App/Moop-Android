@@ -17,6 +17,8 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:rippleColor="@color/color_on_poster"
         tools:layout_width="120dp">
 
@@ -38,7 +40,6 @@
                 android:id="@+id/posterView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="?attr/colorSurface"
                 android:contentDescription="@{item.title}"
                 android:scaleType="centerCrop"
                 android:srcUrl="@{item.posterUrl}"
