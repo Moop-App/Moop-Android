@@ -49,7 +49,7 @@ retrofit.rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 deps.retrofit = retrofit
 
 def dagger = [:]
-def daggerVersion = "2.16"
+def daggerVersion = "2.23.2"
 dagger.runtime = "com.google.dagger:dagger:$daggerVersion"
 dagger.android = "com.google.dagger:dagger-android:$daggerVersion"
 dagger.android_support = "com.google.dagger:dagger-android-support:$daggerVersion"
