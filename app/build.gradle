@@ -8,7 +8,7 @@ apply plugin: 'com.google.firebase.firebase-perf'
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
 android {
-    compileSdkVersion build_versions.target_sdk
+    compileSdkVersion build_versions.compile_sdk
     buildToolsVersion build_versions.build_tools
 
     defaultConfig {
@@ -138,6 +138,8 @@ dependencies {
     implementation 'com.robinhood.ticker:ticker:2.0.0'
     implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
     implementation 'com.kakao.sdk:kakaolink:1.14.0'
+
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.0-alpha02'
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner
