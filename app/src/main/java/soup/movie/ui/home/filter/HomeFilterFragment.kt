@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.android.synthetic.main.home_filter_genre.*
 import soup.movie.R
 import soup.movie.databinding.HomeFilterFragmentBinding
 import soup.movie.ui.base.BaseBottomSheetDialogFragment
@@ -22,18 +21,16 @@ class HomeFilterFragment : BaseBottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return HomeFilterFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                lifecycleOwner = viewLifecycleOwner
-                viewModel = this@HomeFilterFragment.viewModel
-            }
-            .root
+        val binding = HomeFilterFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        binding.initViewState(viewModel)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun HomeFilterFragmentBinding.initViewState(viewModel: HomeFilterViewModel) {
         viewModel.genreUiModel.observe(viewLifecycleOwner) {
-            genreFilterGroup?.setGenreSet(it)
+            genreItem.genreFilterGroup.setGenreSet(it)
         }
     }
 
