@@ -17,17 +17,23 @@ class ThemeOptionFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = ThemeOptionFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.initViewState(viewModel)
         binding.adaptSystemWindowInset()
+        return binding.root
+    }
+
+    private fun ThemeOptionFragmentBinding.initViewState(viewModel: ThemeOptionViewModel) {
         val listAdapter = ThemeOptionListAdapter {
             viewModel.onItemClick(it)
         }
-        binding.listView.adapter = listAdapter
+        listView.adapter = listAdapter
         viewModel.uiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.items)
         }
-        return binding.root
     }
 
     private fun ThemeOptionFragmentBinding.adaptSystemWindowInset() {
