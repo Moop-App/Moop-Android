@@ -7,15 +7,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?selectableItemBackground"
-        tools:background="?attr/colorSurface"
-        tools:layout_height="280dp">
+        android:layout_height="280dp"
+        android:background="?attr/colorSurface">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/peekView"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/description"

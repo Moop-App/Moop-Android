@@ -66,7 +66,7 @@
             android:id="@+id/contentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="60dp"
+            android:layout_marginBottom="60dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.viewpager.widget.ViewPager
@@ -92,21 +92,16 @@
 
         </soup.widget.ConstraintLayoutEx>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/footerView"
+        <include
+            android:id="@+id/footer"
+            layout="@layout/theater_edit_footer"
             android:layout_width="match_parent"
             android:layout_height="280dp"
             android:background="?attr/colorSurface"
             android:elevation="16dp"
             app:behavior_hideable="false"
             app:behavior_peekHeight="60dp"
-            app:layout_behavior="@string/bottom_sheet_behavior">
+            app:layout_behavior="@string/bottom_sheet_behavior" />
 
-            <include
-                layout="@layout/theater_edit_footer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

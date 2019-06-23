@@ -17,9 +17,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.theater_edit_footer.*
-import kotlinx.android.synthetic.main.theater_edit_fragment.*
 import soup.movie.R
 import soup.movie.data.model.Theater
+import soup.movie.databinding.TheaterEditFooterBinding
 import soup.movie.databinding.TheaterEditFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
@@ -38,18 +38,8 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
         TheaterEditPageAdapter(childFragmentManager)
     }
 
-    private val footerPanel by lazyFast {
-        BottomSheetBehavior.from(footerView).apply {
-            setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-
-                override fun onSlide(v: View, offset: Float) {}
-
-                override fun onStateChanged(v: View, state: Int) {
-                    tryToFinish()
-                }
-            })
-        }
-    }
+    private lateinit var footerPanel: BottomSheetBehavior<View>
+    private var originPeekHeight: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,12 +81,62 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Timber.d("onCreateView")
         postponeEnterTransition(500, TimeUnit.MILLISECONDS)
         val binding = TheaterEditFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.initViewState()
         binding.adaptSystemWindowInset()
+
+        viewModel.contentUiModel.observe(viewLifecycleOwner) {
+            binding.render(it)
+        }
+        viewModel.footerUiModel.observe(viewLifecycleOwner) {
+            binding.footer.render(it)
+
+            //FixMe: find a timing to call startPostponedEnterTransition()
+            startPostponedEnterTransition()
+        }
         return binding.root
+    }
+
+    private fun TheaterEditFragmentBinding.initViewState() {
+        contentView.setOnInterceptTouchListener { _, _ ->
+            footerPanel.takeIf { it.state == STATE_EXPANDED }
+                ?.run { state = STATE_COLLAPSED }
+        }
+        tabLayout.setupWithViewPager(viewPager, true)
+        viewPager.offscreenPageLimit = pageAdapter.count
+        viewPager.adapter = pageAdapter
+
+        // Footer
+
+        footerPanel = BottomSheetBehavior.from(footer.root).apply {
+            setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+
+                override fun onSlide(v: View, offset: Float) {}
+
+                override fun onStateChanged(v: View, state: Int) {
+                    tryToFinish()
+                }
+            })
+        }
+
+        originPeekHeight = footerPanel.peekHeight
+        footer.root.setOnTouchListener { _, _ -> true }
+        footer.peekView.setOnDebounceClickListener {
+            footerPanel.state = when (footerPanel.state) {
+                STATE_COLLAPSED -> STATE_EXPANDED
+                else -> STATE_COLLAPSED
+            }
+        }
+
+        footerPanel.state = STATE_EXPANDED
+        footer.root.postOnAnimationDelayed(500) {
+            footerPanel.state = STATE_COLLAPSED
+        }
+        footer.confirmButton.setOnDebounceClickListener {
+            onConfirmClicked()
+        }
     }
 
     private fun TheaterEditFragmentBinding.adaptSystemWindowInset() {
@@ -107,55 +147,15 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
             viewPager.updatePadding(
                 bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
             )
+            footerPanel.setPeekHeight(windowInsets.systemGestureInsets.bottom + originPeekHeight)
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViewState()
-        viewModel.contentUiModel.observe(viewLifecycleOwner) {
-            render(it)
-        }
-        viewModel.footerUiModel.observe(viewLifecycleOwner) {
-            render(it)
-
-            //FixMe: find a timing to call startPostponedEnterTransition()
-            startPostponedEnterTransition()
-        }
-    }
-
-    private fun initViewState() {
-        contentView.setOnInterceptTouchListener { _, _ ->
-            footerPanel.takeIf { it.state == STATE_EXPANDED }
-                ?.run { state = STATE_COLLAPSED }
-        }
-        tabLayout.setupWithViewPager(viewPager, true)
-        viewPager.offscreenPageLimit = pageAdapter.count
-        viewPager.adapter = pageAdapter
-        footerView.blockExtraTouchEvents()
-        peekView.setOnDebounceClickListener {
-            footerPanel.state = when (footerPanel.state) {
-                STATE_COLLAPSED -> STATE_EXPANDED
-                else -> STATE_COLLAPSED
-            }
-        }
-
-        footerPanel.state = STATE_EXPANDED
-        footerView.postOnAnimationDelayed(500) {
-            footerPanel.state = STATE_COLLAPSED
-        }
-        confirmButton.setOnDebounceClickListener {
-            onConfirmClicked()
-        }
-    }
-
-    private fun View.blockExtraTouchEvents() = setOnTouchListener { _, _ -> true }
-
-    private fun render(viewState: TheaterEditContentUiModel) {
+    private fun TheaterEditFragmentBinding.render(viewState: TheaterEditContentUiModel) {
         loadingView.isVisible = viewState is LoadingState
     }
 
-    private fun render(uiModel: TheaterEditFooterUiModel) {
+    private fun TheaterEditFooterBinding.render(uiModel: TheaterEditFooterUiModel) {
         val theaters = uiModel.theaterList
         currentCountView.text = theaters.size.toString()
         confirmButton.setBackgroundResource(
