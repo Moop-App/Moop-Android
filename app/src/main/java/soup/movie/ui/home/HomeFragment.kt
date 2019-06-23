@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.children
-import androidx.core.view.isVisible
+import androidx.core.view.*
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
@@ -50,9 +49,25 @@ class HomeFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return HomeFragmentBinding.inflate(inflater, container, false)
-            .apply { init(viewModel) }
-            .root
+        val binding = HomeFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.init(viewModel)
+        binding.adaptSystemWindowInset()
+        return binding.root
+    }
+
+    private fun HomeFragmentBinding.adaptSystemWindowInset() {
+        homeScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+            view.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
+            contents.listView.updatePadding(
+                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+            )
+            filterButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = windowInsets.systemWindowInsetBottom
+            }
+        }
     }
 
     private fun HomeFragmentBinding.init(viewModel: HomeViewModel) {

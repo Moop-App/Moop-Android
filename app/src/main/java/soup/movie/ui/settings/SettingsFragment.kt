@@ -11,13 +11,13 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.settings_fragment.*
 import kotlinx.android.synthetic.main.settings_item_feedback.*
 import kotlinx.android.synthetic.main.settings_item_theater.*
-import kotlinx.android.synthetic.main.settings_item_theater_mode.*
 import kotlinx.android.synthetic.main.settings_item_theme.*
 import kotlinx.android.synthetic.main.settings_item_version.*
 import soup.movie.BuildConfig
@@ -32,6 +32,7 @@ import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.Moop
+import timber.log.Timber
 import javax.inject.Inject
 
 class SettingsFragment : BaseFragment() {
@@ -64,12 +65,22 @@ class SettingsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return SettingsFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                lifecycleOwner = viewLifecycleOwner
-                viewModel = this@SettingsFragment.viewModel
-            }
-            .root
+        val binding = SettingsFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        binding.adaptSystemWindowInset()
+        return binding.root
+    }
+
+    private fun SettingsFragmentBinding.adaptSystemWindowInset() {
+        settingsScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+            view.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
+            listView.updatePadding(
+                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+            )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

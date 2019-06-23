@@ -8,8 +8,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
         tools:visibility="visible">
 
         <View

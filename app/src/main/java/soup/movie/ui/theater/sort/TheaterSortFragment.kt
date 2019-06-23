@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,6 +21,7 @@ import soup.movie.R
 import soup.movie.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
@@ -87,7 +89,22 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
     ): View? {
         Timber.d("onCreateView")
         postponeEnterTransition(400, TimeUnit.MILLISECONDS)
-        return TheaterSortFragmentBinding.inflate(inflater, container, false).root
+        val binding = TheaterSortFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        binding.adaptSystemWindowInset()
+        return binding.root
+    }
+
+    private fun TheaterSortFragmentBinding.adaptSystemWindowInset() {
+        theaterSortScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+            view.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
+            container.updatePadding(
+                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+            )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

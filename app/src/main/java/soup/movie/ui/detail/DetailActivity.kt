@@ -110,15 +110,14 @@ class DetailActivity : BaseActivity() {
         val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
+        binding.root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
             binding.header.root.updatePadding(
-                top = windowInsets.systemWindowInsetTop
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
             )
             binding.listView.updatePadding(
-                top = windowInsets.systemWindowInsetTop,
-                bottom = windowInsets.systemWindowInsetBottom
+                top = initialPadding.top + windowInsets.systemWindowInsetTop,
+                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
             )
-            windowInsets
         }
 
         postponeEnterTransition()
@@ -205,7 +204,7 @@ class DetailActivity : BaseActivity() {
     //TODO: Re-implements this
     private fun showPosterViewer(from: ImageView) {
         StfalconImageViewer
-            .Builder<String>(from.context, listOf(movie.posterUrl)) { view, imageUrl ->
+            .Builder(from.context, listOf(movie.posterUrl)) { view, imageUrl ->
                 view.loadAsync(imageUrl)
             }
             .withTransitionFrom(from)

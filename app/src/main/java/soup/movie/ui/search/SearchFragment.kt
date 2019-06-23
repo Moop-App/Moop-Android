@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
@@ -21,10 +22,7 @@ import soup.movie.databinding.SearchHeaderBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.HomeListAdapter
 import soup.movie.ui.home.MovieSelectManager
-import soup.movie.util.ImeUtil
-import soup.movie.util.lazyFast
-import soup.movie.util.observe
-import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.*
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -52,13 +50,23 @@ class SearchFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        return SearchFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                lifecycleOwner = viewLifecycleOwner
-                header.setup()
-                contents.setup()
-            }
-            .root
+        val binding = SearchFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.header.setup()
+        binding.contents.setup()
+        binding.adaptSystemWindowInset()
+        return binding.root
+    }
+
+    private fun SearchFragmentBinding.adaptSystemWindowInset() {
+        root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+            view.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
+            contents.listView.updatePadding(
+                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+            )
+        }
     }
 
     override fun onResume() {

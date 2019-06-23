@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/homeScene"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="soup.movie.ui.home.HomeFragment">
 
         <include
             android:id="@+id/contents"

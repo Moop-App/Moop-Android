@@ -3,7 +3,9 @@ package soup.movie.ui.main
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.GravityCompat
+import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -17,6 +19,7 @@ import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.consume
+import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.observeEvent
 import javax.inject.Inject
 
@@ -33,7 +36,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        setTheme(R.style.AppTheme_Main)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         //TODO: Improve this please
@@ -54,6 +57,19 @@ class MainActivity : BaseActivity() {
                     else -> NavigationUI.onNavDestinationSelected(it, navController)
                 }
             }
+        }
+        adaptSystemWindowInsets()
+    }
+
+    private fun adaptSystemWindowInsets() {
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
+        drawerLayout.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+            navigationView.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
         }
     }
 

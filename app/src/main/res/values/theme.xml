@@ -11,7 +11,12 @@
         <item name="colorDivider">@color/colorDivider</item>
     </style>
 
-    <style name="AppTheme.Detail" parent="AppTheme">
+    <style name="AppTheme.Main">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.Detail">
         <!-- using a semi-transparent window background for the drag-back gesture -->
         <item name="android:windowBackground">@color/colorScrim</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -20,6 +25,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:colorControlActivated">?colorSecondary</item>

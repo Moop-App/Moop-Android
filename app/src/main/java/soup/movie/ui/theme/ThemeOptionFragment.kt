@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updatePadding
 import soup.movie.databinding.ThemeOptionFragmentBinding
 import soup.movie.ui.base.BaseFragment
+import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.observe
 
 class ThemeOptionFragment : BaseFragment() {
@@ -17,6 +19,7 @@ class ThemeOptionFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         val binding = ThemeOptionFragmentBinding.inflate(inflater, container, false)
+        binding.adaptSystemWindowInset()
         val listAdapter = ThemeOptionListAdapter {
             viewModel.onItemClick(it)
         }
@@ -25,5 +28,16 @@ class ThemeOptionFragment : BaseFragment() {
             listAdapter.submitList(it.items)
         }
         return binding.root
+    }
+
+    private fun ThemeOptionFragmentBinding.adaptSystemWindowInset() {
+        themeOptionScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+            view.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
+            listView.updatePadding(
+                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+            )
+        }
     }
 }

@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
+import androidx.core.view.updatePadding
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import androidx.transition.TransitionManager
@@ -23,10 +24,7 @@ import soup.movie.databinding.TheaterEditFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
-import soup.movie.util.inflate
-import soup.movie.util.lazyFast
-import soup.movie.util.observe
-import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -95,11 +93,21 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
     ): View? {
         Timber.d("onCreateView")
         postponeEnterTransition(500, TimeUnit.MILLISECONDS)
-        return TheaterEditFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                lifecycleOwner = viewLifecycleOwner
-            }
-            .root
+        val binding = TheaterEditFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.adaptSystemWindowInset()
+        return binding.root
+    }
+
+    private fun TheaterEditFragmentBinding.adaptSystemWindowInset() {
+        root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+            view.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
+            viewPager.updatePadding(
+                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+            )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
