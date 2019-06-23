@@ -2,7 +2,7 @@ package androidx.recyclerview.widget.listener
 
 import androidx.recyclerview.widget.RecyclerView
 
-interface OnDragStartListener {
+interface OnDragListener {
 
     /**
      * Called when a view is requesting a start of a drag.

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.listener.OnDragStartListener
+import androidx.recyclerview.widget.listener.OnDragListener
 import androidx.recyclerview.widget.listener.OnItemMoveListener
 import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import androidx.transition.TransitionInflater
@@ -22,7 +22,6 @@ import soup.movie.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.lazyFast
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
@@ -31,23 +30,6 @@ import java.util.concurrent.TimeUnit
 class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
 
     private val viewModel: TheaterSortViewModel by viewModel()
-
-    private val listAdapter: TheaterSortListAdapter by lazyFast {
-        val callback = SimpleItemTouchHelperCallback(object : OnItemMoveListener {
-            override fun onItemMove(fromPosition: Int, toPosition: Int) {
-                listAdapter.onItemMove(fromPosition, toPosition)
-                viewModel.onItemMove(fromPosition, toPosition)
-            }
-        })
-        val itemTouchHelper = ItemTouchHelper(callback).apply {
-            attachToRecyclerView(listView)
-        }
-        TheaterSortListAdapter(object : OnDragStartListener {
-            override fun onDragStart(viewHolder: RecyclerView.ViewHolder) {
-                itemTouchHelper.startDrag(viewHolder)
-            }
-        })
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,11 +69,11 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Timber.d("onCreateView")
         postponeEnterTransition(400, TimeUnit.MILLISECONDS)
         val binding = TheaterSortFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        binding.initViewState(viewModel)
         binding.adaptSystemWindowInset()
         return binding.root
     }
@@ -107,20 +89,31 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun TheaterSortFragmentBinding.initViewState(viewModel: TheaterSortViewModel) {
         confirmButton.setOnDebounceClickListener {
             onAddItemClick()
         }
+
+        val listAdapter = TheaterSortListAdapter()
+        val callback = SimpleItemTouchHelperCallback(object : OnItemMoveListener {
+            override fun onItemMove(fromPosition: Int, toPosition: Int) {
+                listAdapter.onItemMove(fromPosition, toPosition)
+                viewModel.onItemMove(fromPosition, toPosition)
+            }
+        })
+        val itemTouchHelper = ItemTouchHelper(callback).apply {
+            attachToRecyclerView(listView)
+        }
+        listAdapter.setOnDragListener(object : OnDragListener {
+            override fun onDragStart(viewHolder: RecyclerView.ViewHolder) {
+                itemTouchHelper.startDrag(viewHolder)
+            }
+        })
         listView.adapter = listAdapter
         viewModel.uiModel.observe(viewLifecycleOwner) {
-            render(it)
+            listAdapter.submitList(it.selectedTheaters)
+            noItemsView.isVisible = it.selectedTheaters.isEmpty()
         }
-    }
-
-    private fun render(uiModel: TheaterSortUiModel) {
-        listAdapter.submitList(uiModel.selectedTheaters)
-        noItemsView.isVisible = uiModel.selectedTheaters.isEmpty()
     }
 
     override fun onBackPressed(): Boolean {
