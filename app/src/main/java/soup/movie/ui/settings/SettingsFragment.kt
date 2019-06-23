@@ -15,16 +15,13 @@ import androidx.core.view.updatePadding
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.settings_fragment.*
-import kotlinx.android.synthetic.main.settings_item_feedback.*
 import kotlinx.android.synthetic.main.settings_item_theater.*
-import kotlinx.android.synthetic.main.settings_item_theme.*
-import kotlinx.android.synthetic.main.settings_item_version.*
 import soup.movie.BuildConfig
 import soup.movie.R
-import soup.movie.analytics.EventAnalytics
 import soup.movie.data.model.Theater
 import soup.movie.databinding.SettingsFragmentBinding
+import soup.movie.databinding.SettingsItemTheaterBinding
+import soup.movie.databinding.SettingsItemVersionBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.*
@@ -32,16 +29,11 @@ import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.Moop
-import timber.log.Timber
-import javax.inject.Inject
 
 class SettingsFragment : BaseFragment() {
 
     private val activityViewModel: MainViewModel by activityViewModel()
     private val viewModel: SettingsViewModel by viewModel()
-
-    @Inject
-    lateinit var analytics: EventAnalytics
 
     private var versionViewState: VersionSettingUiModel? = null
 
@@ -68,6 +60,7 @@ class SettingsFragment : BaseFragment() {
         val binding = SettingsFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        binding.initViewState(viewModel)
         binding.adaptSystemWindowInset()
         return binding.root
     }
@@ -83,55 +76,49 @@ class SettingsFragment : BaseFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViewState()
-        viewModel.theaterUiModel.observe(viewLifecycleOwner) {
-            render(it)
-        }
-        viewModel.versionUiModel.observe(viewLifecycleOwner) {
-            render(it)
-        }
-    }
-
-    private fun initViewState() {
+    private fun SettingsFragmentBinding.initViewState(viewModel: SettingsViewModel) {
         toolbar.setNavigationOnClickListener {
             activityViewModel.openNavigationMenu()
         }
-        editTheaterButton.setOnDebounceClickListener {
+        theaterItem.editTheaterButton.setOnDebounceClickListener {
             onTheaterEditClicked()
         }
-        editThemeButton.setOnDebounceClickListener {
+        viewModel.theaterUiModel.observe(viewLifecycleOwner) {
+            theaterItem.render(it)
+        }
+        themeItem.editThemeButton.setOnDebounceClickListener {
             onThemeEditClicked()
         }
-        themeName.setOnDebounceClickListener {
+        themeItem.themeName.setOnDebounceClickListener {
             onThemeEditClicked()
         }
         //TODO: Apply theater mode
         //tmPrepare.setOnClickListener {
         //    startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
         //}
-        bugReportButton.setOnDebounceClickListener {
+        feedbackItem.bugReportButton.setOnDebounceClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse("mailto:")
             intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(HELP_EMAIL))
             intent.putExtra(Intent.EXTRA_SUBJECT, "뭅 v${BuildConfig.VERSION_NAME} 버그리포트")
-            intent.putExtra(Intent.EXTRA_TEXT, "") //TODO
             it.context.startActivitySafely(intent)
         }
-        versionButton.setOnDebounceClickListener {
+        versionItem.versionButton.setOnDebounceClickListener {
             onVersionClicked()
         }
-        marketIcon.setOnDebounceClickListener {
-            Moop.executePlayStore(requireContext())
+        versionItem.marketIcon.setOnDebounceClickListener {
+            Moop.executePlayStore(it.context)
+        }
+        viewModel.versionUiModel.observe(viewLifecycleOwner) {
+            versionItem.render(it)
         }
     }
 
-    private fun render(viewState: TheaterSettingUiModel) {
+    private fun SettingsItemTheaterBinding.render(viewState: TheaterSettingUiModel) {
         val theaters = viewState.theaterList
-        noTheaterView?.isVisible = theaters.isEmpty()
-        theaterGroup?.isVisible = theaters.isNotEmpty()
-        theaterGroup?.run {
+        noTheaterView.isVisible = theaters.isEmpty()
+        theaterGroup.isVisible = theaters.isNotEmpty()
+        theaterGroup.run {
             removeAllViews()
             theaters.map {
                 inflate<Chip>(context, it.getChipLayout()).apply {
@@ -163,14 +150,14 @@ class SettingsFragment : BaseFragment() {
         }
     }
 
-    private fun render(viewState: VersionSettingUiModel) {
+    private fun SettingsItemVersionBinding.render(viewState: VersionSettingUiModel) {
         versionViewState = viewState
-        currentVersionLabel?.text = getString(R.string.settings_version_current, viewState.current.versionName)
-        latestVersionLabel?.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
+        currentVersionLabel.text = getString(R.string.settings_version_current, viewState.current.versionName)
+        latestVersionLabel.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
         if (viewState.isLatest) {
-            marketIcon?.setImageResource(R.drawable.ic_round_shop)
+            marketIcon.setImageResource(R.drawable.ic_round_shop)
         } else {
-            marketIcon?.setImageResource(R.drawable.ic_round_new_releases)
+            marketIcon.setImageResource(R.drawable.ic_round_new_releases)
         }
         if (viewState.isLatest.not()) {
             AlertDialog.Builder(requireContext())
