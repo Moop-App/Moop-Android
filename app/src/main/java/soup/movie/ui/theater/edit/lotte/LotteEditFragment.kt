@@ -21,12 +21,12 @@ class LotteEditFragment : TheaterEditChildFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return TheaterEditChildFragmentBinding.inflate(inflater, container, false)
-            .also { setupListener(it) }
-            .root
+        val binding = TheaterEditChildFragmentBinding.inflate(inflater, container, false)
+        binding.initViewState(viewModel)
+        return binding.root
     }
 
-    private fun setupListener(binding: TheaterEditChildFragmentBinding) {
+    private fun TheaterEditChildFragmentBinding.initViewState(viewModel: LotteEditViewModel) {
         val listAdapter = TheaterEditChildListAdapter(object : TheaterEditChildListAdapter.Listener {
 
             override fun add(theater: Theater): Boolean {
@@ -37,7 +37,7 @@ class LotteEditFragment : TheaterEditChildFragment() {
                 viewModel.remove(theater)
             }
         })
-        binding.listView.adapter = listAdapter
+        listView.adapter = listAdapter
         viewModel.uiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.areaGroupList, it.selectedTheaterIdSet)
         }
