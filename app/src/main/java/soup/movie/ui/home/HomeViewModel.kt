@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private val currentTabRelay = BehaviorRelay.createDefault(Tab.Now)
-    private val doRefreshRelay = BehaviorRelay.createDefault(false)
+    private var doRefreshRelay = BehaviorRelay.createDefault(false)
 
     private val _headerUiModel = MutableLiveData<HomeHeaderUiModel>()
     val headerUiModel: LiveData<HomeHeaderUiModel>
@@ -36,17 +36,15 @@ class HomeViewModel @Inject constructor(
 
     init {
         Observables
-            .combineLatest(
-                isNow().withoutRefresh(),
-                getMovieFilter().withoutRefresh(),
-                doRefresh()
-            )
+            .combineLatest(isNow(), getMovieFilter())
             .subscribeOn(Schedulers.io())
-            .switchMap { (isNow, movieFilter, doRefresh) ->
-                if (isNow) {
-                    getNowMovieList(doRefresh, movieFilter)
-                } else {
-                    getPlanMovieList(doRefresh, movieFilter)
+            .switchMap { (isNow, movieFilter) ->
+                onRefreshed { byUser ->
+                    if (isNow) {
+                        getNowMovieList(movieFilter, clearCache = byUser)
+                    } else {
+                        getPlanMovieList(movieFilter, clearCache = byUser)
+                    }
                 }
             }
             .observeOn(AndroidSchedulers.mainThread())
@@ -73,16 +71,13 @@ class HomeViewModel @Inject constructor(
             .doOnNext {
                 _headerUiModel.postValue(it.toHeaderUiModel())
             }
-            .withoutRefresh()
     }
 
-    private fun doRefresh(): Observable<Boolean> {
-        return doRefreshRelay.distinctUntilChanged()
-    }
-
-    private fun <T> Observable<T>.withoutRefresh(): Observable<T> {
-        return this.doOnNext {
-            doRefreshRelay.accept(false)
-        }
+    private inline fun <T> onRefreshed(
+        crossinline action: (byUser: Boolean) -> Observable<T>
+    ): Observable<T> {
+        return BehaviorRelay.createDefault(false)
+            .also { doRefreshRelay = it }
+            .switchMap { action(it) }
     }
 }

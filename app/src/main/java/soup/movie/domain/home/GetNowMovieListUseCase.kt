@@ -14,8 +14,8 @@ class GetNowMovieListUseCase(
 ) : ResultMapper {
 
     operator fun invoke(
-        clearCache: Boolean,
-        movieFilter: MovieFilter
+        movieFilter: MovieFilter,
+        clearCache: Boolean
     ): Observable<Result<HomeDomainModel>> {
         return repository.getNowList(clearCache)
             .observeOn(Schedulers.computation())

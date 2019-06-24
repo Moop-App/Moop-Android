@@ -15,8 +15,8 @@ class GetPlanMovieListUseCase(
 ) : ResultMapper {
 
     operator fun invoke(
-        clearCache: Boolean,
-        movieFilter: MovieFilter
+        movieFilter: MovieFilter,
+        clearCache: Boolean
     ): Observable<Result<HomeDomainModel>> {
         return repository.getPlanList(clearCache)
             .observeOn(Schedulers.computation())
