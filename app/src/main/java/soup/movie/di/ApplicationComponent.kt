@@ -17,6 +17,6 @@ import javax.inject.Singleton
 ])
 interface ApplicationComponent : AndroidInjector<MovieApplication> {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<MovieApplication>()
+    @Component.Factory
+    interface Factory : AndroidInjector.Factory<MovieApplication>
 }
