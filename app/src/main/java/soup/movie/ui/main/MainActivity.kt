@@ -2,6 +2,7 @@ package soup.movie.ui.main
 
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.GravityCompat
@@ -62,11 +63,13 @@ class MainActivity : BaseActivity() {
     }
 
     private fun adaptSystemWindowInsets() {
-        window.decorView.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-
-        drawerLayout.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+        val isPortrait = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+        if (isPortrait) {
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        }
+        drawerLayout.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
             navigationView.updatePadding(
                 top = initialPadding.top + windowInsets.systemWindowInsetTop
             )
