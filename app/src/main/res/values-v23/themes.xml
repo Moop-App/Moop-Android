@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Platform.V23.Theme.Moop" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <style name="Platform.Theme.Moop" parent="Platform.V23.Theme.Moop" />
+
+</resources>

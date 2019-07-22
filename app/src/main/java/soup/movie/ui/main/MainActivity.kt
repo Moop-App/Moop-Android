@@ -37,7 +37,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme_Main)
+        setTheme(R.style.Theme_Moop_Main)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         //TODO: Improve this please

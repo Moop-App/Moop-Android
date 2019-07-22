@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Platform.V21.Theme.Moop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+    </style>
+
+    <style name="Platform.Theme.Moop" parent="Platform.V21.Theme.Moop" />
+
+    <style name="Base.Theme.Moop" parent="Platform.Theme.Moop" />
+
     <attr name="colorDivider" format="reference|color" />
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Moop" parent="Base.Theme.Moop">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
@@ -11,12 +20,12 @@
         <item name="colorDivider">@color/colorDivider</item>
     </style>
 
-    <style name="AppTheme.Main">
+    <style name="Theme.Moop.Main">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="AppTheme.Detail">
+    <style name="Theme.Moop.Detail">
         <!-- using a semi-transparent window background for the drag-back gesture -->
         <item name="android:windowBackground">@color/colorScrim</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -36,8 +45,8 @@
         <item name="android:windowReturnTransition">@transition/detail_return</item>
     </style>
 
-    <style name="AppTheme.Splash">
-        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+    <style name="Theme.Moop.Splash">
+        <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:windowBackground">@drawable/ic_splash</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
