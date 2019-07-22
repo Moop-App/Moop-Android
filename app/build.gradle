@@ -91,7 +91,7 @@ dependencies {
     implementation deps.androidx.recyclerview
     implementation deps.androidx.transition
     implementation deps.androidx.core_ktx
-    implementation deps.androidx.constraint_layout
+    implementation deps.androidx.constraintlayout
     implementation deps.androidx.material
     implementation deps.androidx.browser
 
@@ -105,7 +105,7 @@ dependencies {
     implementation deps.dagger.android
     implementation deps.dagger.android_support
     kapt deps.dagger.compiler
-    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.android_processor
 
     implementation deps.room.runtime
     implementation deps.room.rxjava2

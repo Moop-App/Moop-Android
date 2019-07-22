@@ -44,7 +44,7 @@ dependencies {
 
     implementation deps.androidx.appcompat
     implementation deps.androidx.recyclerview
-    implementation deps.androidx.constraint_layout
+    implementation deps.androidx.constraintlayout
     implementation deps.androidx.material
 
     implementation deps.util.timber
