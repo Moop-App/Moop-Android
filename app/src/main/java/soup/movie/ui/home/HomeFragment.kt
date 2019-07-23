@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.*
+import androidx.core.view.children
+import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
@@ -18,9 +21,13 @@ import soup.movie.databinding.HomeHeaderBinding
 import soup.movie.databinding.HomeHeaderHintBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.main.MainViewModel
-import soup.movie.util.*
+import soup.movie.util.doOnApplyWindowInsets
+import soup.movie.util.getColorAttr
+import soup.movie.util.observe
+import soup.movie.util.setOnDebounceClickListener
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.collections.set
 
 class HomeFragment : BaseFragment() {
 
@@ -29,20 +36,6 @@ class HomeFragment : BaseFragment() {
 
     @Inject
     lateinit var analytics: EventAnalytics
-
-    private val listAdapter by lazyFast {
-        HomeListAdapter { movie, sharedElements ->
-            analytics.clickMovie()
-            MovieSelectManager.select(movie)
-            findNavController().navigate(
-                HomeFragmentDirections.actionToDetail(),
-                ActivityNavigatorExtras(
-                    activityOptions = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
-                )
-            )
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,6 +80,18 @@ class HomeFragment : BaseFragment() {
             header.appBar.setExpanded(true)
             contents.listView.smoothScrollToPosition(0)
         }
+
+        val listAdapter = HomeListAdapter { movie, sharedElements ->
+            analytics.clickMovie()
+            MovieSelectManager.select(movie)
+            findNavController().navigate(
+                HomeFragmentDirections.actionToDetail(),
+                ActivityNavigatorExtras(
+                    activityOptions = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
+                )
+            )
+        }
         contents.apply {
             swipeRefreshLayout.apply {
                 setProgressBackgroundColorSchemeColor(context.getColorAttr(R.attr.colorSurface))
@@ -116,6 +121,7 @@ class HomeFragment : BaseFragment() {
         }
         viewModel.contentsUiModel.observe(viewLifecycleOwner) {
             contents.render(it)
+            listAdapter.submitList(it.movies)
         }
     }
 
@@ -145,7 +151,6 @@ class HomeFragment : BaseFragment() {
     private fun HomeContentsBinding.render(uiModel: HomeContentsUiModel) {
         swipeRefreshLayout.isRefreshing = uiModel.isLoading
         errorView.isVisible = uiModel.isError
-        listAdapter.submitList(uiModel.movies)
         noItemsView.isVisible = uiModel.hasNoItem
     }
 

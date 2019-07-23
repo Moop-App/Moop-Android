@@ -18,12 +18,12 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.android.synthetic.main.detail_activity.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.data.model.Movie
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.spec.share
 import soup.movie.ui.base.BaseActivity
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
@@ -43,37 +43,6 @@ class DetailActivity : BaseActivity() {
 
     @Inject
     lateinit var analytics: EventAnalytics
-
-    private val listAdapter by lazyFast {
-        DetailListAdapter { item ->
-            val ctx: Context = this@DetailActivity
-            when (item) {
-                is CgvItemUiModel -> {
-                    analytics.clickCgvInfo()
-                    Cgv.executeMobileWeb(ctx, item.movieId)
-                }
-                is LotteItemUiModel -> {
-                    analytics.clickLotteInfo()
-                    LotteCinema.executeMobileWeb(ctx, item.movieId)
-                }
-                is MegaboxItemUiModel -> {
-                    analytics.clickMegaboxInfo()
-                    Megabox.executeMobileWeb(ctx, item.movieId)
-                }
-                is NaverItemUiModel -> {
-                    ctx.executeWeb(item.webLink)
-                }
-                is TrailerItemUiModel -> {
-                    analytics.clickTrailer()
-                    YouTube.executeApp(ctx, item.trailer)
-                }
-                is TrailerFooterItemUiModel -> {
-                    analytics.clickMoreTrailers()
-                    YouTube.executeAppWithQuery(ctx, item.movieTitle)
-                }
-            }
-        }
-    }
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
 
@@ -123,9 +92,6 @@ class DetailActivity : BaseActivity() {
         postponeEnterTransition()
         initViewState(binding)
 
-        viewModel.contentUiModel.observe(this) {
-            render(it)
-        }
         viewModel.shareAction.observeEvent(this) {
             executeShareAction(it)
         }
@@ -149,6 +115,34 @@ class DetailActivity : BaseActivity() {
                 share(movie)
             }
         }
+        val listAdapter = DetailListAdapter { item ->
+            val ctx: Context = this@DetailActivity
+            when (item) {
+                is CgvItemUiModel -> {
+                    analytics.clickCgvInfo()
+                    Cgv.executeMobileWeb(ctx, item.movieId)
+                }
+                is LotteItemUiModel -> {
+                    analytics.clickLotteInfo()
+                    LotteCinema.executeMobileWeb(ctx, item.movieId)
+                }
+                is MegaboxItemUiModel -> {
+                    analytics.clickMegaboxInfo()
+                    Megabox.executeMobileWeb(ctx, item.movieId)
+                }
+                is NaverItemUiModel -> {
+                    ctx.executeWeb(item.webLink)
+                }
+                is TrailerItemUiModel -> {
+                    analytics.clickTrailer()
+                    YouTube.executeApp(ctx, item.trailer)
+                }
+                is TrailerFooterItemUiModel -> {
+                    analytics.clickMoreTrailers()
+                    YouTube.executeAppWithQuery(ctx, item.movieTitle)
+                }
+            }
+        }
         binding.listView.apply {
             layoutManager = GridLayoutManager(this@DetailActivity, 3).apply {
                 spanSizeLookup = spanSizeLookup(listAdapter::getSpanSize)
@@ -158,6 +152,9 @@ class DetailActivity : BaseActivity() {
                 addDuration = 200
                 removeDuration = 200
             }
+        }
+        viewModel.contentUiModel.observe(this) {
+            listAdapter.submitList(it.items)
         }
         applyTheme(binding.root.context)
     }
@@ -176,10 +173,6 @@ class DetailActivity : BaseActivity() {
 
     override fun onBackPressed() {
         finishAfterTransition()
-    }
-
-    private fun render(uiModel: ContentUiModel) {
-        listAdapter.submitList(uiModel.items)
     }
 
     private fun applyTheme(ctx: Context) {

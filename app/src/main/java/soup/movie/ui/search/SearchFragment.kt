@@ -22,7 +22,10 @@ import soup.movie.databinding.SearchHeaderBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.HomeListAdapter
 import soup.movie.ui.home.MovieSelectManager
-import soup.movie.util.*
+import soup.movie.util.ImeUtil
+import soup.movie.util.doOnApplyWindowInsets
+import soup.movie.util.observe
+import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -31,20 +34,6 @@ class SearchFragment : BaseFragment() {
 
     @Inject
     lateinit var analytics: EventAnalytics
-
-    private val listAdapter by lazyFast {
-        HomeListAdapter { movie, sharedElements ->
-            analytics.clickMovie()
-            MovieSelectManager.select(movie)
-            findNavController().navigate(
-                SearchFragmentDirections.actionToDetail(),
-                ActivityNavigatorExtras(
-                    activityOptions = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
-                )
-            )
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -103,6 +92,17 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun SearchContentsBinding.setup() {
+        val listAdapter = HomeListAdapter { movie, sharedElements ->
+            analytics.clickMovie()
+            MovieSelectManager.select(movie)
+            findNavController().navigate(
+                SearchFragmentDirections.actionToDetail(),
+                ActivityNavigatorExtras(
+                    activityOptions = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
+                )
+            )
+        }
         listView.apply {
             adapter = listAdapter
             itemAnimator = FadeInAnimator().apply {
@@ -111,14 +111,10 @@ class SearchFragment : BaseFragment() {
             }
         }
         viewModel.uiModel.observe(viewLifecycleOwner) {
-            render(it)
+            listAdapter.submitList(it.movies)
+            loadingView.isVisible = it.isLoading
+            noItemsView.isVisible = it.hasNoItem
+            noItemsView.isVisible = it.hasNoItem
         }
-    }
-
-    private fun SearchContentsBinding.render(uiModel: SearchContentsUiModel) {
-        loadingView.isVisible = uiModel.isLoading
-        noItemsView.isVisible = uiModel.hasNoItem
-        listAdapter.submitList(uiModel.movies)
-        noItemsView.isVisible = uiModel.hasNoItem
     }
 }
