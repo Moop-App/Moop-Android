@@ -63,6 +63,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -87,13 +90,15 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
 
+    implementation deps.androidx.activity_ktx
     implementation deps.androidx.appcompat
-    implementation deps.androidx.recyclerview
-    implementation deps.androidx.transition
+    implementation deps.androidx.browser
     implementation deps.androidx.core_ktx
     implementation deps.androidx.constraintlayout
+    implementation deps.androidx.fragment_ktx
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.transition
     implementation deps.androidx.material
-    implementation deps.androidx.browser
 
     implementation deps.lifecycle.extensions
     kapt deps.lifecycle.compiler
