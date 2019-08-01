@@ -4,11 +4,13 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.navGraphViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -71,5 +73,9 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(), HasS
 
     protected inline fun <reified VM : ViewModel> parentViewModels(): Lazy<VM> {
         return requireParentFragment().viewModels { viewModelFactory }
+    }
+
+    protected inline fun <reified VM : ViewModel> navGraphViewModels(@IdRes navGraphId: Int): Lazy<VM> {
+        return navGraphViewModels(navGraphId) { viewModelFactory }
     }
 }
