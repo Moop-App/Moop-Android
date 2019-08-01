@@ -32,7 +32,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
 
     private var pendingFinish: Boolean = false
 
-    private val viewModel: TheaterEditViewModel by viewModel()
+    private val viewModel: TheaterEditViewModel by viewModels()
 
     private val pageAdapter by lazyFast {
         TheaterEditPageAdapter(childFragmentManager)

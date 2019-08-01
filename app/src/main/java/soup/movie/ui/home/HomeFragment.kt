@@ -31,8 +31,8 @@ import kotlin.collections.set
 
 class HomeFragment : BaseFragment() {
 
-    private val activityViewModel: MainViewModel by activityViewModel()
-    private val viewModel: HomeViewModel by viewModel()
+    private val activityViewModel: MainViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
     @Inject
     lateinit var analytics: EventAnalytics

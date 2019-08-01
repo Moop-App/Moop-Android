@@ -14,7 +14,7 @@ class MegaboxEditFragment : TheaterEditChildFragment() {
 
     override val title: String = "메가박스"
 
-    private val viewModel: MegaboxEditViewModel by viewModel()
+    private val viewModel: MegaboxEditViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

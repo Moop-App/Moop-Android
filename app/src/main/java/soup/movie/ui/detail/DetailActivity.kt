@@ -39,7 +39,7 @@ class DetailActivity : BaseActivity() {
         MovieSelectManager.getSelectedItem()!!
     }
 
-    private val viewModel: DetailViewModel by viewModel()
+    private val viewModel: DetailViewModel by viewModels()
 
     @Inject
     lateinit var analytics: EventAnalytics

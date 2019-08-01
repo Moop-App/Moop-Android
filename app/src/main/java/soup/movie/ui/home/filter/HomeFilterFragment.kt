@@ -14,7 +14,7 @@ import soup.movie.util.observe
 
 class HomeFilterFragment : BaseBottomSheetDialogFragment() {
 
-    private val viewModel: HomeFilterViewModel by viewModel()
+    private val viewModel: HomeFilterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

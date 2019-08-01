@@ -32,8 +32,8 @@ import soup.movie.util.helper.Moop
 
 class SettingsFragment : BaseFragment() {
 
-    private val activityViewModel: MainViewModel by activityViewModel()
-    private val viewModel: SettingsViewModel by viewModel()
+    private val activityViewModel: MainViewModel by activityViewModels()
+    private val viewModel: SettingsViewModel by viewModels()
 
     private var versionViewState: VersionSettingUiModel? = null
 

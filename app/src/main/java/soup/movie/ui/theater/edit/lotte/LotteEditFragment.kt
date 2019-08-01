@@ -14,7 +14,7 @@ class LotteEditFragment : TheaterEditChildFragment() {
 
     override val title: String = "롯데시네마"
 
-    private val viewModel: LotteEditViewModel by viewModel()
+    private val viewModel: LotteEditViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

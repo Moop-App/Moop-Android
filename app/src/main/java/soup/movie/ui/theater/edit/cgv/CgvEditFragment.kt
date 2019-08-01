@@ -14,7 +14,7 @@ class CgvEditFragment : TheaterEditChildFragment() {
 
     override val title: String = "CGV"
 
-    private val viewModel: CgvEditViewModel by viewModel()
+    private val viewModel: CgvEditViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

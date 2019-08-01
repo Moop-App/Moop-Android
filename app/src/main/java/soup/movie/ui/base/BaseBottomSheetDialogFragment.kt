@@ -5,6 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -15,10 +17,6 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 import soup.movie.R
-import soup.movie.util.activityViewModelProvider
-import soup.movie.util.lazyFast
-import soup.movie.util.parentViewModelProvider
-import soup.movie.util.viewModelProvider
 import javax.inject.Inject
 
 abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(), HasSupportFragmentInjector {
@@ -63,12 +61,15 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(), HasS
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    protected inline fun <reified VM : ViewModel> activityViewModel(): Lazy<VM> =
-        lazyFast { activityViewModelProvider<VM>(viewModelFactory) }
+    protected inline fun <reified VM : ViewModel> activityViewModels(): Lazy<VM> {
+        return activityViewModels { viewModelFactory }
+    }
 
-    protected inline fun <reified VM : ViewModel> viewModel(): Lazy<VM> =
-        lazyFast { viewModelProvider<VM>(viewModelFactory) }
+    protected inline fun <reified VM : ViewModel> viewModels(): Lazy<VM> {
+        return viewModels { viewModelFactory }
+    }
 
-    protected inline fun <reified VM : ViewModel> parentViewModel(): Lazy<VM> =
-        lazyFast { parentViewModelProvider<VM>(viewModelFactory) }
+    protected inline fun <reified VM : ViewModel> parentViewModels(): Lazy<VM> {
+        return requireParentFragment().viewModels { viewModelFactory }
+    }
 }

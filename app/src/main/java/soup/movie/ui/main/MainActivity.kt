@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModels()
 
     @Inject
     lateinit var analytics: EventAnalytics

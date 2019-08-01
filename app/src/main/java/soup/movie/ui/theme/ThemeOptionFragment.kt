@@ -12,7 +12,7 @@ import soup.movie.util.observe
 
 class ThemeOptionFragment : BaseFragment() {
 
-    private val viewModel: ThemeOptionViewModel by viewModel()
+    private val viewModel: ThemeOptionViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit
 
 class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
 
-    private val viewModel: TheaterSortViewModel by viewModel()
+    private val viewModel: TheaterSortViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

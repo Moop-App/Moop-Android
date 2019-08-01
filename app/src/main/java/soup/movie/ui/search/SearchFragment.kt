@@ -30,7 +30,7 @@ import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
 
-    private val viewModel: SearchViewModel by viewModel()
+    private val viewModel: SearchViewModel by viewModels()
 
     @Inject
     lateinit var analytics: EventAnalytics
