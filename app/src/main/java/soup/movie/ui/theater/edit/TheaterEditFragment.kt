@@ -1,5 +1,6 @@
 package soup.movie.ui.theater.edit
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -147,7 +148,12 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
             viewPager.updatePadding(
                 bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
             )
-            footerPanel.setPeekHeight(windowInsets.systemGestureInsets.bottom + originPeekHeight)
+            val bottomSystemInset = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                windowInsets.systemGestureInsets.bottom
+            } else {
+                windowInsets.systemWindowInsetBottom
+            }
+            footerPanel.setPeekHeight(bottomSystemInset + originPeekHeight)
         }
     }
 
