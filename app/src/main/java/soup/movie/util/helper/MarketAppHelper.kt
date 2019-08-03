@@ -91,10 +91,10 @@ object Cgv : MarketApp() {
     }
 
     private fun detailMobileWebUrl(movieId: CgvMovieId): String =
-            "http://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=$movieId"
+            "https://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=$movieId"
 
     private fun detailWebUrl(theater: Theater): String =
-            "http://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=${theater.code}"
+            "https://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=${theater.code}"
 }
 
 object LotteCinema : MarketApp() {
@@ -110,10 +110,10 @@ object LotteCinema : MarketApp() {
     }
 
     private fun detailMobileWebUrl(movieId: LotteMovieId): String =
-            "http://www.lottecinema.co.kr/LCMW/Contents/Movie/Movie-Detail-View.aspx?movie=$movieId"
+            "https://www.lottecinema.co.kr/LCMW/Contents/Movie/Movie-Detail-View.aspx?movie=$movieId"
 
     private fun detailWebUrl(theater: Theater): String =
-            "http://www.lottecinema.co.kr/LCMW/Contents/Cinema/cinema-detail.aspx?cinemaID=${theater.code}"
+            "https://www.lottecinema.co.kr/LCMW/Contents/Cinema/cinema-detail.aspx?cinemaID=${theater.code}"
 }
 
 object Megabox : MarketApp() {
@@ -129,10 +129,10 @@ object Megabox : MarketApp() {
     }
 
     private fun detailMobileWebUrl(movieId: MegaboxMovieId): String =
-            "http://m.megabox.co.kr/?menuId=movie-detail&movieCode=$movieId"
+            "https://m.megabox.co.kr/?menuId=movie-detail&movieCode=$movieId"
 
     private fun detailWebUrl(theater: Theater): String =
-            "http://m.megabox.co.kr/?menuId=theater-detail&cinema=${theater.code}"
+            "https://m.megabox.co.kr/?menuId=theater-detail&cinema=${theater.code}"
 }
 
 object Kakao : MarketApp() {
@@ -167,7 +167,7 @@ object YouTube : MarketApp() {
 
     private fun createTrailerWebIntent(id: String): Intent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("http://www.youtube.com/watch?v=$id"))
+            Uri.parse("https://www.youtube.com/watch?v=$id"))
 
     fun executeAppWithQuery(ctx: Context, movieTitle: String) {
         val query = "$movieTitle 예고편"
