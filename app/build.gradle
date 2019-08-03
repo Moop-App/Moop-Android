@@ -20,10 +20,6 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        def filesAuthorityValue = applicationId + '.shareprovider'
-        buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
-        manifestPlaceholders = [filesAuthority: filesAuthorityValue]
-
         buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "")
     }
     signingConfigs {
@@ -46,7 +42,13 @@ android {
         debug {
             signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
-            manifestPlaceholders = [crashlytics_enabled: false]
+
+            def filesAuthorityValue = 'soup.movie.debug.shareprovider'
+            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
+            manifestPlaceholders = [
+                    filesAuthority: filesAuthorityValue,
+                    crashlytics_enabled: false
+            ]
         }
         release {
             if (useReleaseKeystore) {
@@ -56,7 +58,13 @@ android {
             }
             minifyEnabled false
             proguardFiles 'proguard-rules.pro'
-            manifestPlaceholders = [crashlytics_enabled: true]
+
+            def filesAuthorityValue = 'soup.movie.shareprovider'
+            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
+            manifestPlaceholders = [
+                    filesAuthority: filesAuthorityValue,
+                    crashlytics_enabled: true
+            ]
         }
     }
     compileOptions {
