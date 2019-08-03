@@ -143,6 +143,7 @@ dependencies {
     implementation 'com.robinhood.ticker:ticker:2.0.0'
     implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
     implementation 'com.kakao.sdk:kakaolink:1.14.0'
+    implementation 'me.everything:overscroll-decor-android:1.0.4'
 
     implementation 'androidx.drawerlayout:drawerlayout:1.1.0-alpha02'
 

@@ -13,6 +13,7 @@ import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.android.synthetic.main.home_contents.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeContentsBinding
@@ -47,6 +48,11 @@ class HomeFragment : BaseFragment() {
         binding.init(viewModel)
         binding.adaptSystemWindowInset()
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        listView.setOnTouchListener(null)
+        super.onDestroyView()
     }
 
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
@@ -106,6 +112,8 @@ class HomeFragment : BaseFragment() {
                     addDuration = 200
                     removeDuration = 200
                 }
+                overScrollMode = View.OVER_SCROLL_NEVER
+                setOnTouchListener(HomeListScrollEffect(this))
             }
             errorView.setOnDebounceClickListener {
                 viewModel.refresh()
