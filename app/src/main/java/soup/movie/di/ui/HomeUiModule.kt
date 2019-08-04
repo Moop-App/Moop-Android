@@ -26,7 +26,7 @@ abstract class HomeUiModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun provideMovieFilterFragment(): HomeFilterFragment
+    abstract fun provideHomeFilterFragment(): HomeFilterFragment
 
     @Binds
     @IntoMap

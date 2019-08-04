@@ -42,7 +42,7 @@
             app:srcCompat="@drawable/ic_round_filter_list" />
 
         <include
-            android:id="@+id/filterPanel"
+            android:id="@+id/filter"
             layout="@layout/home_filter_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

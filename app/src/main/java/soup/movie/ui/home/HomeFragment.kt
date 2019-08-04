@@ -138,7 +138,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun HomeFragmentBinding.initFilter(viewModel: HomeFilterViewModel) {
-        filterBehavior = BottomSheetBehavior.from(filterPanel.root).apply {
+        filterBehavior = BottomSheetBehavior.from(filter.root).apply {
             state = BottomSheetBehavior.STATE_HIDDEN
         }
         filterButton.setOnDebounceClickListener {
@@ -146,7 +146,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
         viewModel.genreUiModel.observe(viewLifecycleOwner) {
-            filterPanel.genreItem.genreFilterGroup.run {
+            filter.genreItem.genreFilterGroup.run {
                 removeAllViews()
                 it.items.forEach {
                     val genreChip: Chip = inflate(context, R.layout.home_filter_item_genre)
