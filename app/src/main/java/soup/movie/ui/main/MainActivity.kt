@@ -22,6 +22,7 @@ import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.consume
 import soup.movie.util.doOnApplyWindowInsets
+import soup.movie.util.isPortrait
 import soup.movie.util.observeEvent
 import javax.inject.Inject
 
@@ -42,9 +43,20 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
         binding.lifecycleOwner = this
-        binding.root.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        if (isPortrait) {
+            binding.root.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        } else {
+            binding.root.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        }
+        binding.drawerLayout.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
+            navigationView.updatePadding(
+                top = initialPadding.top + windowInsets.systemWindowInsetTop
+            )
+        }
 
         //TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
@@ -55,7 +67,7 @@ class MainActivity : BaseActivity() {
             execute(it)
         }
 
-        navigationView.setNavigationItemSelectedListener {
+        binding.navigationView.setNavigationItemSelectedListener {
             consume {
                 drawerLayout.closeDrawer(GravityCompat.START)
                 val navController = navHostFragment.findNavController()
@@ -64,15 +76,6 @@ class MainActivity : BaseActivity() {
                     else -> NavigationUI.onNavDestinationSelected(it, navController)
                 }
             }
-        }
-        adaptSystemWindowInsets()
-    }
-
-    private fun adaptSystemWindowInsets() {
-        drawerLayout.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
-            navigationView.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
-            )
         }
     }
 

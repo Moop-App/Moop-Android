@@ -73,9 +73,15 @@ class DetailActivity : BaseActivity() {
         val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.root.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        if (isPortrait) {
+            binding.root.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        } else {
+            binding.root.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        }
         binding.root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
             binding.header.root.updatePadding(
                 top = initialPadding.top + windowInsets.systemWindowInsetTop
