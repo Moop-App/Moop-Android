@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Platform.V29.Theme.Moop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Platform.V27.Theme.Moop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/status_bar_scrim</item>
         <item name="android:windowLightStatusBar">@bool/use_light_status_bar</item>
 
@@ -9,6 +9,6 @@
         <item name="android:windowLightNavigationBar">@bool/use_light_nav_bar</item>
     </style>
 
-    <style name="Platform.Theme.Moop" parent="Platform.V29.Theme.Moop" />
+    <style name="Platform.Theme.Moop" parent="Platform.V27.Theme.Moop" />
 
 </resources>

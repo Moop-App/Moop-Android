@@ -103,7 +103,7 @@ ext.deps = deps
 
 def build_versions = [:]
 build_versions.appId = 'soup.movie'
-build_versions.min_sdk = 21
+build_versions.min_sdk = 23
 build_versions.target_sdk = 29
 build_versions.compile_sdk = 29
 build_versions.build_tools = "29.0.0"

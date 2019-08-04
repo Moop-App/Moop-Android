@@ -1,8 +1,6 @@
 package soup.movie.ui.detail
 
 import android.content.Context
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -72,13 +70,12 @@ class DetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.decorView.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-
         val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.root.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         binding.root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
             binding.header.root.updatePadding(
                 top = initialPadding.top + windowInsets.systemWindowInsetTop
@@ -156,7 +153,6 @@ class DetailActivity : BaseActivity() {
         viewModel.contentUiModel.observe(this) {
             listAdapter.submitList(it.items)
         }
-        applyTheme(binding.root.context)
     }
 
     override fun onResume() {
@@ -173,25 +169,6 @@ class DetailActivity : BaseActivity() {
 
     override fun onBackPressed() {
         finishAfterTransition()
-    }
-
-    private fun applyTheme(ctx: Context) {
-        if (ctx.isLightTheme()) {
-            // set a light status bar
-            window.decorView.setLightStatusBar()
-        }
-    }
-
-    private fun View.setLightStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
-    }
-
-    private fun Context.isLightTheme(): Boolean {
-        return resources.configuration.uiMode and
-            Configuration.UI_MODE_NIGHT_MASK ==
-            Configuration.UI_MODE_NIGHT_NO
     }
 
     //TODO: Re-implements this

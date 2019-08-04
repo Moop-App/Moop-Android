@@ -27,4 +27,7 @@
 
     <color name="chip_naver_bg">#1EC800</color>
     <color name="chip_naver_text">#FFFFFF</color>
+
+    <color name="system_ui_scrim_light">#B3FFFFFF</color> <!-- 70% white -->
+    <color name="system_ui_scrim_dark">#40000000</color> <!-- 25% black -->
 </resources>

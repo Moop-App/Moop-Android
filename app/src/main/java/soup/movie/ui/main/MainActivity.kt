@@ -2,11 +2,11 @@ package soup.movie.ui.main
 
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.main_activity.*
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
+import soup.movie.databinding.MainActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.OnBackPressedListener
@@ -39,7 +40,12 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Moop_Main)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        val binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
+        binding.lifecycleOwner = this
+        binding.root.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
         //TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
 
@@ -63,12 +69,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun adaptSystemWindowInsets() {
-        val isPortrait = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-        if (isPortrait) {
-            window.decorView.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        }
         drawerLayout.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
             navigationView.updatePadding(
                 top = initialPadding.top + windowInsets.systemWindowInsetTop
