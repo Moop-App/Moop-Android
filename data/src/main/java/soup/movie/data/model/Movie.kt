@@ -1,12 +1,14 @@
 package soup.movie.data.model
 
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class Movie(
     val id: String,
     val title: String,
-    val posterUrl: String,
+    @SerializedName("posterUrl")
+    private val _posterUrl: String,
     private val age: String,
     val ageValue: Int,
     val openDate: String,
@@ -18,6 +20,9 @@ data class Movie(
     val genre: List<String>?,
     val isNow: Boolean
 ) {
+
+    val posterUrl: String
+        get() = _posterUrl.replaceFirst("http:", "https:")
 
     val rank: Float
         get() {
