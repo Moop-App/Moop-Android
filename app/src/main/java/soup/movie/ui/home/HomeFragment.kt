@@ -12,6 +12,8 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.home_contents.*
 import soup.movie.R
@@ -21,31 +23,37 @@ import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.databinding.HomeHeaderBinding
 import soup.movie.databinding.HomeHeaderHintBinding
 import soup.movie.ui.base.BaseFragment
+import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.ui.home.filter.HomeFilterViewModel
 import soup.movie.ui.main.MainViewModel
-import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.getColorAttr
-import soup.movie.util.observe
-import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.set
 
-class HomeFragment : BaseFragment() {
-
-    private val activityViewModel: MainViewModel by activityViewModels()
-    private val viewModel: HomeViewModel by viewModels()
+class HomeFragment : BaseFragment(), OnBackPressedListener {
 
     @Inject
     lateinit var analytics: EventAnalytics
+
+    private lateinit var binding: HomeFragmentBinding
+    private lateinit var filterBehavior: BottomSheetBehavior<View>
+
+    private val activityViewModel: MainViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
+    private val filterViewModel: HomeFilterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = HomeFragmentBinding.inflate(inflater, container, false)
+        binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        binding.filterViewModel = filterViewModel
         binding.init(viewModel)
+        binding.initFilter(filterViewModel)
         binding.adaptSystemWindowInset()
         return binding.root
     }
@@ -119,10 +127,6 @@ class HomeFragment : BaseFragment() {
                 viewModel.refresh()
             }
         }
-        filterButton.setOnDebounceClickListener {
-            analytics.clickMenuFilter()
-            findNavController().navigate(HomeFragmentDirections.actionToFilter())
-        }
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
             header.render(it)
             headerHint.render(it)
@@ -130,6 +134,30 @@ class HomeFragment : BaseFragment() {
         viewModel.contentsUiModel.observe(viewLifecycleOwner) {
             contents.render(it)
             listAdapter.submitList(it.movies)
+        }
+    }
+
+    private fun HomeFragmentBinding.initFilter(viewModel: HomeFilterViewModel) {
+        filterBehavior = BottomSheetBehavior.from(filterPanel.root).apply {
+            state = BottomSheetBehavior.STATE_HIDDEN
+        }
+        filterButton.setOnDebounceClickListener {
+            analytics.clickMenuFilter()
+            filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+        viewModel.genreUiModel.observe(viewLifecycleOwner) {
+            filterPanel.genreItem.genreFilterGroup.run {
+                removeAllViews()
+                it.items.forEach {
+                    val genreChip: Chip = inflate(context, R.layout.home_filter_item_genre)
+                    genreChip.text = it.name
+                    genreChip.isChecked = it.isChecked
+                    genreChip.setOnCheckedChangeListener { _, isChecked ->
+                        viewModel.onGenreFilterClick(it.name, isChecked)
+                    }
+                    addView(genreChip)
+                }
+            }
         }
     }
 
@@ -160,6 +188,16 @@ class HomeFragment : BaseFragment() {
         swipeRefreshLayout.isRefreshing = uiModel.isLoading
         errorView.isVisible = uiModel.isError
         noItemsView.isVisible = uiModel.hasNoItem
+    }
+
+    /** Custom Back */
+
+    override fun onBackPressed(): Boolean {
+        if (filterBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+            filterBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            return true
+        }
+        return false
     }
 
     /** SharedElements */
