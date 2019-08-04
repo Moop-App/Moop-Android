@@ -109,7 +109,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         }
         contents.apply {
             swipeRefreshLayout.apply {
-                setProgressBackgroundColorSchemeColor(context.getColorAttr(R.attr.colorSurface))
+                setProgressBackgroundColorSchemeColor(context.getColorCompat(R.color.home_hint))
                 setColorSchemeColors(context.getColorAttr(R.attr.colorOnSurface))
                 setOnRefreshListener {
                     viewModel.refresh()
