@@ -8,17 +8,7 @@
     <fragment
         android:id="@+id/home"
         android:name="soup.movie.ui.home.HomeFragment"
-        tools:layout="@layout/home_fragment">
-
-        <action
-            android:id="@+id/action_to_filter"
-            app:destination="@id/home_filter" />
-    </fragment>
-
-    <dialog
-        android:id="@+id/home_filter"
-        android:name="soup.movie.ui.home.filter.HomeFilterFragment"
-        tools:layout="@layout/home_filter_fragment" />
+        tools:layout="@layout/home_fragment" />
 
     <activity
         android:id="@+id/detail"

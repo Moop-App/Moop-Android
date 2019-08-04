@@ -1,5 +1,6 @@
 package soup.movie.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.home_contents.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeContentsBinding
@@ -58,8 +58,9 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onDestroyView() {
-        listView.setOnTouchListener(null)
+        binding.contents.listView.setOnTouchListener(null)
         super.onDestroyView()
     }
 
