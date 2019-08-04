@@ -5,7 +5,7 @@
         <item name="android:statusBarColor">@color/status_bar_scrim</item>
         <item name="android:windowLightStatusBar">@bool/use_light_status_bar</item>
 
-        <item name="android:navigationBarColor">?colorOnBackground</item>
+        <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
     </style>
 
     <style name="Platform.Theme.Moop" parent="Platform.V23.Theme.Moop" />
@@ -33,7 +33,6 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:colorControlActivated">?colorSecondary</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
         <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
