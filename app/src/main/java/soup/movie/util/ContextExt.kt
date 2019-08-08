@@ -9,6 +9,7 @@ import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsIntent.COLOR_SCHEME_SYSTEM
 import androidx.core.content.ContextCompat
 import soup.movie.R
 import soup.movie.data.model.Url
@@ -48,8 +49,7 @@ fun Context.executeWeb(url: Url?) {
     if (url == null) return
     CustomTabsIntent.Builder()
         .addDefaultShareMenuItem()
-        .setToolbarColor(getColorCompat(R.color.white))
-        .setSecondaryToolbarColor(getColorCompat(R.color.black))
+        .setColorScheme(COLOR_SCHEME_SYSTEM)
         .setShowTitle(true)
         .setStartAnimations(this, R.anim.fade_in, R.anim.fade_out)
         .setExitAnimations(this, R.anim.fade_in, R.anim.fade_out)
