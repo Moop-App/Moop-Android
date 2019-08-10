@@ -65,6 +65,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
+        val fabMargin: Int = root.context.resources.getDimensionPixelSize(R.dimen.fab_margin)
         homeScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
             view.updatePadding(
                 top = initialPadding.top + windowInsets.systemWindowInsetTop
@@ -73,7 +74,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
                 bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
             )
             filterButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = windowInsets.systemWindowInsetBottom
+                bottomMargin = fabMargin + windowInsets.systemWindowInsetBottom
             }
         }
     }

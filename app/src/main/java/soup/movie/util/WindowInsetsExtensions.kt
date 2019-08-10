@@ -10,7 +10,7 @@ import androidx.databinding.BindingAdapter
 
 fun View.doOnApplyWindowInsets(f: (View, WindowInsets, InitialPadding) -> Unit) {
     // Create a snapshot of the view's padding state
-    val initialPadding = recordInitialPaddingForView(this)
+    val initialPadding = recordInitialPaddingForView()
     // Set an actual OnApplyWindowInsetsListener which proxies to the given
     // lambda, also passing in the original padding state
     setOnApplyWindowInsetsListener { v, insets ->
@@ -29,8 +29,9 @@ class InitialPadding(
     val bottom: Int
 )
 
-private fun recordInitialPaddingForView(view: View) = InitialPadding(
-    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom)
+private fun View.recordInitialPaddingForView(): InitialPadding {
+    return InitialPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+}
 
 fun View.requestApplyInsetsWhenAttached() {
     if (isAttachedToWindow) {
@@ -64,12 +65,12 @@ fun applySystemWindows(
     applyRight: Boolean,
     applyBottom: Boolean
 ) {
-    view.doOnApplyWindowInsets { view, insets, padding ->
+    view.doOnApplyWindowInsets { v, insets, padding ->
         val left = if (applyLeft) insets.systemWindowInsetLeft else 0
         val top = if (applyTop) insets.systemWindowInsetTop else 0
         val right = if (applyRight) insets.systemWindowInsetRight else 0
         val bottom = if (applyBottom) insets.systemWindowInsetBottom else 0
-        view.setPadding(
+        v.setPadding(
             padding.left + left,
             padding.top + top,
             padding.right + right,
