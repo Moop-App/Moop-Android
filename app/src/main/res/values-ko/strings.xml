@@ -6,6 +6,7 @@
     <string name="menu_plan">개봉예정</string>
     <string name="menu_settings">설정</string>
     <string name="menu_search">영화 검색</string>
+    <string name="menu_map">지도</string>
 
     <string name="action_share">공유하기</string>
     <string name="action_share_poster">포스터 공유하기</string>
@@ -31,6 +32,8 @@
     <string name="settings_version_update_button_positive">지금 업데이트</string>
     <string name="settings_version_update_button_negative">다음에</string>
     <string name="settings_category_feedback">피드백</string>
+
+    <string name="theater_map_title">지도</string>
 
     <string name="theater_sort_title">극장 순서 설정</string>
 

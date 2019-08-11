@@ -130,6 +130,7 @@ static def addAppRepositories(RepositoryHandler handler) {
     handler.maven { url "https://jitpack.io" }
     handler.maven { url 'https://maven.google.com/' }
     handler.maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+    handler.maven { url 'https://navercorp.bintray.com/maps' }
 }
 
 ext.addAppRepositories = this.&addAppRepositories

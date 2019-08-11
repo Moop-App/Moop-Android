@@ -17,6 +17,12 @@
             android:checkable="true"
             android:icon="@drawable/ic_round_search"
             android:title="@string/menu_search" />
+
+        <item
+            android:id="@+id/theater_map"
+            android:checkable="true"
+            android:icon="@drawable/ic_round_map"
+            android:title="@string/menu_map" />
     </group>
     <group
         android:id="@+id/group_secondary"
