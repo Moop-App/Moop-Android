@@ -17,7 +17,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:navermap_extent="31.43,122.37,44.35,132"
+            app:navermap_locationButtonEnabled="true"
+            app:navermap_scaleBarEnabled="false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
