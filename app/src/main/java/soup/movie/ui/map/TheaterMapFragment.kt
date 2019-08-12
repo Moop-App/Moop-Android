@@ -70,7 +70,7 @@ class TheaterMapFragment : BaseFragment() {
     private fun NaverMap.render(uiModel: TheaterMapUiModel) {
         if (uiModel is TheaterMapUiModel.DoneState) {
             clearMarkers()
-            markers.addAll(uiModel.myTheaters.map { it.toMarker() })
+            markers.addAll(uiModel.myTheaters.map(::marker))
             markers.forEach {
                 it.map = this
             }
@@ -83,10 +83,10 @@ class TheaterMapFragment : BaseFragment() {
         }
     }
 
-    private fun Theater.toMarker() = Marker().apply {
-        captionText = fullName()
-        position = position()
-        icon = OverlayImage.fromResource(getMarkerIcon())
+    private fun marker(theater: Theater) = Marker().apply {
+        captionText = theater.fullName()
+        position = theater.position()
+        icon = OverlayImage.fromResource(theater.getMarkerIcon())
         isHideCollidedSymbols = true
         isHideCollidedCaptions = true
         setOnClickListener {
