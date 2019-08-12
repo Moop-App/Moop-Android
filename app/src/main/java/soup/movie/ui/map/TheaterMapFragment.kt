@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.MapFragment
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import soup.movie.R
+import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterMapFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.doOnApplyWindowInsets
+import soup.movie.util.observe
+import kotlin.math.max
 
 class TheaterMapFragment : BaseFragment() {
 
@@ -23,6 +27,8 @@ class TheaterMapFragment : BaseFragment() {
 
     private lateinit var locationSource: FusedLocationSource
 
+    private val markers = arrayListOf<Marker>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,12 +37,17 @@ class TheaterMapFragment : BaseFragment() {
         binding = TheaterMapFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        binding.initViewState()
+        binding.initViewState(viewModel)
         binding.adaptSystemWindowInset()
         return binding.root
     }
 
-    private fun TheaterMapFragmentBinding.initViewState() {
+    override fun onDestroyView() {
+        clearMarkers()
+        super.onDestroyView()
+    }
+
+    private fun TheaterMapFragmentBinding.initViewState(viewModel: TheaterMapViewModel) {
         header.apply {
             toolbar.setNavigationOnClickListener {
                 activityViewModel.openNavigationMenu()
@@ -48,6 +59,48 @@ class TheaterMapFragment : BaseFragment() {
         mapFragment.getMapAsync { naverMap ->
             naverMap.locationSource = locationSource
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+            viewModel.uiModel.observe(viewLifecycleOwner) {
+                naverMap.render(it)
+            }
+            viewModel.onRefresh()
+        }
+    }
+
+    private fun NaverMap.render(uiModel: TheaterMapUiModel) {
+        if (uiModel is TheaterMapUiModel.DoneState) {
+            clearMarkers()
+            markers.addAll(uiModel.myTheaters.map { it.toMarker() })
+            markers.forEach {
+                it.map = this
+            }
+        }
+    }
+
+    private fun clearMarkers() {
+        markers.forEach {
+            it.map = null
+        }
+    }
+
+    private fun Theater.toMarker() = Marker().apply {
+        captionText = fullName()
+        position = position()
+        icon = OverlayImage.fromResource(getMarkerIcon())
+        isHideCollidedSymbols = true
+        isHideCollidedCaptions = true
+        setOnClickListener {
+            //TODO: Click 시, 패널 표시
+            map?.run {
+                moveCamera(
+                    CameraUpdate
+                        .scrollAndZoomTo(
+                            position,
+                            max(cameraPosition.zoom, 16.0)
+                        )
+                        .animate(CameraAnimation.Easing))
+            }
+            true
         }
     }
 
