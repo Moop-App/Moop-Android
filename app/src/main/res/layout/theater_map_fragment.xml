@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="soup.movie.ui.map.TheaterMapFragment">
 
@@ -22,6 +23,17 @@
         <include
             android:id="@+id/contents"
             layout="@layout/theater_map_contents" />
+
+        <include
+            android:id="@+id/footer"
+            layout="@layout/theater_map_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurface"
+            android:elevation="16dp"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="200dp"
+            app:layout_behavior="@string/bottom_sheet_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
