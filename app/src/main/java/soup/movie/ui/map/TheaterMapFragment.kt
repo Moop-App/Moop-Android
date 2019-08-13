@@ -85,6 +85,7 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
             }
             viewModel.uiModel.observe(viewLifecycleOwner) {
                 naverMap.render(it)
+                mapCover.animateGone(isGone = true, startDelay = 500)
             }
             viewModel.onRefresh()
         }
