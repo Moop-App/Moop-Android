@@ -155,6 +155,9 @@ dependencies {
 
     implementation 'androidx.drawerlayout:drawerlayout:1.1.0-alpha02'
 
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.naver.maps:map-sdk:3.5.0'
+
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.espresso

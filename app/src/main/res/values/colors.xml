@@ -15,8 +15,8 @@
     <color name="chip_cgv_text">#E51F20</color>
     <color name="chip_cgv_text_unchecked">#66000000</color>
 
-    <color name="chip_lotte_bg">#EB212E</color>
-    <color name="chip_lotte_bg_unchecked">#66EB212E</color>
+    <color name="chip_lotte_bg">#ED1D24</color>
+    <color name="chip_lotte_bg_unchecked">#66ED1D24</color>
     <color name="chip_lotte_text">#FFFFFF</color>
     <color name="chip_lotte_text_unchecked">#77FFFFFF</color>
 

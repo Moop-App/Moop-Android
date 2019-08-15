@@ -1,0 +1,76 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
+    <group
+        android:pivotX="12"
+        android:pivotY="12"
+        android:scaleX="1.02"
+        android:scaleY="1.02"
+        android:translateY="0.3">
+        <path
+            android:pathData="M11.99,2C6.47,2 2,6.48 2,12s4.47,10 9.99,10C17.52,22 22,17.52 22,12S17.52,2 11.99,2z"
+            android:strokeWidth="1.4"
+            android:strokeColor="@color/grey_500" />
+    </group>
+    <group
+        android:pivotX="12"
+        android:pivotY="12"
+        android:scaleX="1"
+        android:scaleY="1">
+        <path
+            android:pathData="M11.99,2C6.47,2 2,6.48 2,12s4.47,10 9.99,10C17.52,22 22,17.52 22,12S17.52,2 11.99,2z"
+            android:strokeWidth="1.5"
+            android:strokeColor="@color/white" />
+    </group>
+    <path
+        android:fillColor="@color/chip_cgv_bg"
+        android:pathData="M11.99,2C6.47,2 2,6.48 2,12s4.47,10 9.99,10C17.52,22 22,17.52 22,12S17.52,2 11.99,2z" />
+    <group
+        android:pivotX="10"
+        android:pivotY="10"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:translateX="-0.2"
+        android:translateY="4.8">
+        <path
+            android:pathData="M10,6 c0,2.2 -1.8,4 -4,4 c-2.2,0 -4,-1.8 -4,-4 c0,-2.2 1.8,-4 4,-4"
+            android:strokeWidth="2"
+            android:strokeColor="@color/chip_cgv_text"
+            android:strokeLineCap="round" />
+    </group>
+    <group
+        android:pivotX="10"
+        android:pivotY="10"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:translateX="4.6"
+        android:translateY="4.8">
+        <path
+            android:pathData="M10,6 c0,2.2 -1.8,4 -4,4 c-2.2,0 -4,-1.8 -4,-4 c0,-2.2 1.8,-4 4,-4"
+            android:strokeWidth="2"
+            android:strokeColor="@color/chip_cgv_text"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M7,6l3,0z"
+            android:strokeWidth="2"
+            android:strokeColor="@color/chip_cgv_text"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+    </group>
+    <group
+        android:pivotX="10"
+        android:pivotY="10"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:translateX="9.2"
+        android:translateY="4.8">
+        <path
+            android:pathData="M2,2l4,8l4,-8"
+            android:strokeWidth="2"
+            android:strokeColor="@color/chip_cgv_text"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+    </group>
+</vector>

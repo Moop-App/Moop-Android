@@ -22,6 +22,7 @@ abstract class ActivityBindingModule {
         SearchDomainModule::class,
         SettingsUiModule::class,
         ThemeOptionUiModule::class,
+        TheaterMapUiModule::class,
         TheaterSortUiModule::class,
         TheaterEditUiModule::class,
         TheaterEditDomainModule::class

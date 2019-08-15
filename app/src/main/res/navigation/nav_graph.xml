@@ -21,6 +21,11 @@
         tools:layout="@layout/search_fragment" />
 
     <fragment
+        android:id="@+id/theater_map"
+        android:name="soup.movie.ui.map.TheaterMapFragment"
+        tools:layout="@layout/theater_map_fragment" />
+
+    <fragment
         android:id="@+id/settings"
         android:name="soup.movie.ui.settings.SettingsFragment"
         tools:layout="@layout/settings_fragment">
@@ -67,6 +72,14 @@
     <action
         android:id="@+id/action_to_search"
         app:destination="@id/search"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <action
+        android:id="@+id/action_to_theater_map"
+        app:destination="@id/theater_map"
         app:enterAnim="@anim/fade_in"
         app:exitAnim="@anim/fade_out"
         app:popEnterAnim="@anim/fade_in"

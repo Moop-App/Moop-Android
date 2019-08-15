@@ -6,6 +6,7 @@
     <string name="menu_plan">Plan</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Movie Search</string>
+    <string name="menu_map">Map</string>
 
     <string name="action_share">Share</string>
     <string name="action_share_poster">Share poster</string>
@@ -31,6 +32,8 @@
     <string name="settings_version_update_button_positive">Update now</string>
     <string name="settings_version_update_button_negative">Try later</string>
     <string name="settings_category_feedback">Feedback</string>
+
+    <string name="theater_map_title">Map</string>
 
     <string name="theater_sort_title">Theater Order Setting</string>
 
