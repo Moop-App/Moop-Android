@@ -28,7 +28,7 @@
             android:id="@+id/footer"
             layout="@layout/theater_map_footer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="144dp"
             android:background="?attr/colorSurface"
             android:elevation="16dp"
             app:behavior_hideable="true"

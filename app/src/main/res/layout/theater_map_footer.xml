@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/infoView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="144dp"
         android:background="?colorSurface">
 
         <TextView
@@ -17,26 +17,59 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/windowInsetBottomView"
-            app:layout_constraintEnd_toStartOf="@id/navigationButton"
+            app:layout_constraintEnd_toStartOf="@id/googleMapButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Movie Title" />
 
         <ImageView
-            android:id="@+id/navigationButton"
+            android:id="@+id/googleMapButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?selectableItemBackgroundBorderless"
+            android:elevation="12dp"
+            android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_round_directions_car"
-            app:layout_constraintEnd_toStartOf="@+id/infoButton"
-            app:layout_constraintTop_toTopOf="@+id/infoButton" />
+            app:layout_constraintBottom_toBottomOf="@id/naverMapButton"
+            app:layout_constraintEnd_toStartOf="@id/naverMapButton"
+            app:layout_constraintStart_toEndOf="@id/nameView"
+            app:layout_constraintTop_toTopOf="@id/naverMapButton"
+            tools:src="@drawable/ic_round_info" />
+
+        <ImageView
+            android:id="@+id/naverMapButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:elevation="12dp"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="@id/kakaoMapButton"
+            app:layout_constraintEnd_toStartOf="@id/kakaoMapButton"
+            app:layout_constraintStart_toEndOf="@id/googleMapButton"
+            app:layout_constraintTop_toTopOf="@id/kakaoMapButton"
+            tools:src="@drawable/ic_round_info" />
+
+        <ImageView
+            android:id="@+id/kakaoMapButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:elevation="12dp"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_round_info"
+            app:layout_constraintBottom_toBottomOf="@id/infoButton"
+            app:layout_constraintEnd_toStartOf="@id/infoButton"
+            app:layout_constraintStart_toEndOf="@id/naverMapButton"
+            app:layout_constraintTop_toTopOf="@id/infoButton" />
 
         <ImageView
             android:id="@+id/infoButton"

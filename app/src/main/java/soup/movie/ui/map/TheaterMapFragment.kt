@@ -1,19 +1,27 @@
 package soup.movie.ui.map
 
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterMapFragmentBinding
@@ -24,6 +32,7 @@ import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
+import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
 
@@ -41,6 +50,10 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
     private var selectedTheater: Theater? = null
 
     private var infoPanel: BottomSheetBehavior<out View>? = null
+
+    private val launcherIcons by lazyFast {
+        LauncherIcons(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +87,7 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
             naverMap.isNightModeEnabled = isDarkTheme
             naverMap.locationSource = locationSource
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
+            naverMap.moveCamera(CameraUpdate.zoomTo(12.0))
             naverMap.setOnMapClickListener { _, _ ->
                 naverMap.run {
                     moveCamera(
@@ -95,9 +109,46 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
                 infoView.setOnDebounceClickListener { hideInfoPanel() }
                 state = STATE_HIDDEN
             }
-            navigationButton.setOnDebounceClickListener {
-                selectedTheater?.toMapIntent()?.run {
-                    it.context.startActivitySafely(this)
+            googleMapButton.apply {
+                val packageName = "com.google.android.apps.maps"
+                val appIcon = context.loadAppIcon(packageName)
+                setImageDrawable(appIcon)
+                isVisible = appIcon != null
+                setOnDebounceClickListener {
+                    selectedTheater?.run {
+                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(fullName())}")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                        mapIntent.setPackage(packageName)
+                        startActivity(mapIntent)
+                    }
+                }
+            }
+            naverMapButton.apply {
+                val packageName = "com.nhn.android.nmap"
+                val appIcon = context.loadAppIcon(packageName)
+                setImageDrawable(appIcon)
+                isVisible = appIcon != null
+                setOnDebounceClickListener {
+                    selectedTheater?.run {
+                        val gmmIntentUri = Uri.parse("nmap://place?lat=$lat&lng=$lng&name=${Uri.encode(fullName())}&appname=${BuildConfig.APPLICATION_ID}")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                        mapIntent.setPackage(packageName)
+                        startActivity(mapIntent)
+                    }
+                }
+            }
+            kakaoMapButton.apply {
+                val packageName = "net.daum.android.map"
+                val appIcon = context.loadAppIcon(packageName)
+                setImageDrawable(appIcon)
+                isVisible = appIcon != null
+                setOnDebounceClickListener {
+                    selectedTheater?.run {
+                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(fullName())}")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                        mapIntent.setPackage(packageName)
+                        startActivity(mapIntent)
+                    }
                 }
             }
             infoButton.setOnDebounceClickListener {
@@ -187,6 +238,42 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
             }
             showInfoPanel(theater)
             true
+        }
+    }
+
+    @DrawableRes
+    private fun Theater.getMarkerIcon(): Int {
+        return when(type) {
+            Theater.TYPE_CGV -> R.drawable.ic_marker_cgv
+            Theater.TYPE_LOTTE -> R.drawable.ic_marker_lotte
+            Theater.TYPE_MEGABOX -> R.drawable.ic_marker_megabox
+            else -> throw IllegalArgumentException("$type is not valid type.")
+        }
+    }
+
+    private fun Theater.position(): LatLng {
+        return LatLng(lat, lng)
+    }
+
+    private fun Theater.fullName(): String {
+        return when (type) {
+            Theater.TYPE_CGV -> "CGV $name"
+            Theater.TYPE_LOTTE -> "롯데시네마 $name"
+            Theater.TYPE_MEGABOX -> "메가박스 $name"
+            else -> name
+        }
+    }
+
+    private fun Context.loadAppIcon(packageName: String): Drawable? {
+        try {
+            return packageManager.run {
+                getApplicationInfo(packageName, 0)
+                    .let(::getApplicationIcon)
+                    .let(launcherIcons::getShadowedIcon)
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            Timber.e(e, "Failed looking up ApplicationInfo for $packageName")
+            return null
         }
     }
 

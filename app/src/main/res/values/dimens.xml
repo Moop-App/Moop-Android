@@ -16,4 +16,6 @@
 
     <dimen name="tag_width">36dp</dimen>
     <dimen name="tag_height">18dp</dimen>
+
+    <dimen name="app_icon_size">48dp</dimen>
 </resources>
