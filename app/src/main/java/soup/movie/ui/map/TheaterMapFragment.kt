@@ -17,7 +17,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.*
+import com.naver.maps.map.CameraAnimation
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.LocationTrackingMode
+import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
@@ -25,7 +28,7 @@ import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterMapFragmentBinding
-import soup.movie.ui.base.BaseFragment
+import soup.movie.ui.base.BaseMapFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.*
@@ -36,7 +39,7 @@ import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
 
-class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
+class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
 
     private lateinit var binding: TheaterMapFragmentBinding
 
@@ -69,6 +72,7 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
     }
 
     override fun onDestroyView() {
+        hideInfoPanel()
         clearMarkers()
         super.onDestroyView()
     }
@@ -81,20 +85,19 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
         }
 
         locationSource = FusedLocationSource(this@TheaterMapFragment, LOCATION_PERMISSION_REQUEST_CODE)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.naverMapFragment) as MapFragment
-        mapFragment.getMapAsync { naverMap ->
-            naverMap.mapType = NaverMap.MapType.Navi
-            naverMap.isNightModeEnabled = isDarkTheme
+        setMapView(contents.mapView)
+        getMapAsync { naverMap ->
+            if (isDarkTheme) {
+                naverMap.mapType = NaverMap.MapType.Navi
+                naverMap.isNightModeEnabled = true
+            } else {
+                naverMap.mapType = NaverMap.MapType.Basic
+                naverMap.isNightModeEnabled = false
+            }
             naverMap.locationSource = locationSource
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
             naverMap.moveCamera(CameraUpdate.zoomTo(12.0))
             naverMap.setOnMapClickListener { _, _ ->
-                naverMap.run {
-                    moveCamera(
-                        CameraUpdate
-                            .zoomTo(min(cameraPosition.zoom, 12.0))
-                            .animate(CameraAnimation.Easing))
-                }
                 hideInfoPanel()
             }
             viewModel.uiModel.observe(viewLifecycleOwner) {
@@ -106,8 +109,10 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
 
         footer.apply {
             infoPanel = BottomSheetBehavior.from(root).apply {
-                infoView.setOnDebounceClickListener { hideInfoPanel() }
                 state = STATE_HIDDEN
+            }
+            infoView.setOnDebounceClickListener {
+                hideInfoPanel()
             }
             googleMapButton.apply {
                 val packageName = "com.google.android.apps.maps"
@@ -195,6 +200,13 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
         if (infoPanel?.state != STATE_HIDDEN) {
             infoPanel?.state = STATE_HIDDEN
             selectedTheater = null
+
+            getMapAsync {
+                it.moveCamera(
+                    CameraUpdate
+                        .zoomTo(min(it.cameraPosition.zoom, 12.0))
+                        .animate(CameraAnimation.Easing))
+            }
             return true
         }
         return false
@@ -208,9 +220,10 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun showMarkers(naverMap: NaverMap, theaters: List<Theater>) {
-        markers.addAll(theaters.map(::createMarker))
-        markers.forEach {
-            it.map = naverMap
+        theaters.map(::createMarker).forEach {
+            markers += it.apply {
+                map = naverMap
+            }
         }
     }
 
@@ -218,6 +231,7 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
         markers.forEach {
             it.map = null
         }
+        markers.clear()
     }
 
     private fun createMarker(theater: Theater) = Marker().apply {
@@ -243,7 +257,7 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
 
     @DrawableRes
     private fun Theater.getMarkerIcon(): Int {
-        return when(type) {
+        return when (type) {
             Theater.TYPE_CGV -> R.drawable.ic_marker_cgv
             Theater.TYPE_LOTTE -> R.drawable.ic_marker_lotte
             Theater.TYPE_MEGABOX -> R.drawable.ic_marker_megabox
@@ -272,7 +286,7 @@ class TheaterMapFragment : BaseFragment(), OnBackPressedListener {
                     .let(launcherIcons::getShadowedIcon)
             }
         } catch (e: PackageManager.NameNotFoundException) {
-            Timber.e(e, "Failed looking up ApplicationInfo for $packageName")
+            Timber.w(e, "Failed looking up ApplicationInfo for $packageName")
             return null
         }
     }

@@ -9,9 +9,8 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <fragment
-            android:id="@+id/naverMapFragment"
-            android:name="com.naver.maps.map.MapFragment"
+        <com.naver.maps.map.MapView
+            android:id="@+id/mapView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
