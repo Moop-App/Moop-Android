@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import soup.movie.BuildConfig
 import soup.movie.data.model.*
+import soup.movie.ui.map.TheaterMarkerUiModel
 import soup.movie.util.executeWeb
 import soup.movie.util.startActivitySafely
 import timber.log.Timber
@@ -87,14 +88,18 @@ object Cgv : MarketApp() {
     }
 
     fun executeWeb(ctx: Context, theater: Theater) {
-        ctx.executeWeb(detailWebUrl(theater))
+        ctx.executeWeb(detailWebUrl(theater.code))
+    }
+
+    fun executeWeb(ctx: Context, theater: TheaterMarkerUiModel) {
+        ctx.executeWeb(detailWebUrl(theater.code))
     }
 
     private fun detailMobileWebUrl(movieId: CgvMovieId): String =
             "https://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=$movieId"
 
-    private fun detailWebUrl(theater: Theater): String =
-            "https://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=${theater.code}"
+    private fun detailWebUrl(theaterCode: String): String =
+            "https://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=$theaterCode"
 }
 
 object LotteCinema : MarketApp() {
@@ -107,6 +112,10 @@ object LotteCinema : MarketApp() {
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater))
+    }
+
+    fun executeWeb(ctx: Context, theater: TheaterMarkerUiModel) {
+        ctx.executeWeb("https://www.lottecinema.co.kr/LCMW/Contents/Cinema/cinema-detail.aspx?detailDivisionCode=${theater.areaCode}&cinemaID=${theater.code}")
     }
 
     private fun detailMobileWebUrl(movieId: LotteMovieId): String =
@@ -125,14 +134,19 @@ object Megabox : MarketApp() {
     }
 
     fun executeWeb(ctx: Context, theater: Theater) {
-        ctx.executeWeb(detailWebUrl(theater))
+        ctx.executeWeb(detailWebUrl(theater.code))
+    }
+
+    fun executeWeb(ctx: Context, theater: TheaterMarkerUiModel) {
+        ctx.executeWeb(
+            "https://m.megabox.co.kr/?menuId=theater-detail&region=${theater.areaCode}&cinema=${theater.code}")
     }
 
     private fun detailMobileWebUrl(movieId: MegaboxMovieId): String =
             "https://m.megabox.co.kr/?menuId=movie-detail&movieCode=$movieId"
 
-    private fun detailWebUrl(theater: Theater): String =
-            "https://m.megabox.co.kr/?menuId=theater-detail&cinema=${theater.code}"
+    private fun detailWebUrl(theaterCode: String): String =
+            "https://m.megabox.co.kr/?menuId=theater-detail&cinema=$theaterCode"
 }
 
 object Kakao : MarketApp() {

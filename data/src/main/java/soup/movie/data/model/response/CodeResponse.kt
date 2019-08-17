@@ -12,8 +12,4 @@ data class CodeResponse(
     fun toAreaGroupList(): List<AreaGroup> {
         return listOf(cgv, lotte, megabox).flatMap { it.list }
     }
-
-    fun toTheaterList(): List<Theater> {
-        return toAreaGroupList().flatMap { it.theaterList }
-    }
 }

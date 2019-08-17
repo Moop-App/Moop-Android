@@ -47,7 +47,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
 
     private val markers = arrayListOf<Marker>()
 
-    private var selectedTheater: Theater? = null
+    private var selectedTheater: TheaterMarkerUiModel? = null
 
     private var infoPanel: BottomSheetBehavior<out View>? = null
 
@@ -118,7 +118,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
                 isVisible = appIcon != null
                 setOnDebounceClickListener {
                     selectedTheater?.run {
-                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(fullName())}")
+                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(name)}")
                         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                         mapIntent.setPackage(packageName)
                         startActivity(mapIntent)
@@ -132,7 +132,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
                 isVisible = appIcon != null
                 setOnDebounceClickListener {
                     selectedTheater?.run {
-                        val gmmIntentUri = Uri.parse("nmap://place?lat=$lat&lng=$lng&name=${Uri.encode(fullName())}&appname=${BuildConfig.APPLICATION_ID}")
+                        val gmmIntentUri = Uri.parse("nmap://place?lat=$lat&lng=$lng&name=${Uri.encode(name)}&appname=${BuildConfig.APPLICATION_ID}")
                         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                         mapIntent.setPackage(packageName)
                         startActivity(mapIntent)
@@ -146,7 +146,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
                 isVisible = appIcon != null
                 setOnDebounceClickListener {
                     selectedTheater?.run {
-                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(fullName())}")
+                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(name)}")
                         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                         mapIntent.setPackage(packageName)
                         startActivity(mapIntent)
@@ -156,15 +156,6 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
             infoButton.setOnDebounceClickListener {
                 selectedTheater?.executeWeb(it.context)
             }
-        }
-    }
-
-    private fun Theater.executeWeb(ctx: Context) {
-        return when (type) {
-            Theater.TYPE_CGV -> Cgv.executeWeb(ctx, this)
-            Theater.TYPE_LOTTE -> LotteCinema.executeWeb(ctx, this)
-            Theater.TYPE_MEGABOX -> Megabox.executeWeb(ctx, this)
-            else -> throw IllegalArgumentException("$type is not valid type.")
         }
     }
 
@@ -184,11 +175,11 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
         return hideInfoPanel()
     }
 
-    private fun showInfoPanel(theater: Theater): Boolean {
+    private fun showInfoPanel(theater: TheaterMarkerUiModel): Boolean {
         if (infoPanel?.state == STATE_HIDDEN) {
             infoPanel?.state = STATE_COLLAPSED
         }
-        binding.footer.nameView.text = theater.fullName()
+        binding.footer.nameView.text = theater.name
         selectedTheater = theater
         return true
     }
@@ -210,13 +201,11 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     }
 
     private fun NaverMap.render(uiModel: TheaterMapUiModel) {
-        if (uiModel is TheaterMapUiModel.DoneState) {
-            clearMarkers()
-            showMarkers(this, uiModel.myTheaters)
-        }
+        clearMarkers()
+        showMarkers(this, uiModel.theaterMarkerList)
     }
 
-    private fun showMarkers(naverMap: NaverMap, theaters: List<Theater>) {
+    private fun showMarkers(naverMap: NaverMap, theaters: List<TheaterMarkerUiModel>) {
         theaters.map(::createMarker).forEach {
             markers += it.apply {
                 map = naverMap
@@ -231,9 +220,9 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
         markers.clear()
     }
 
-    private fun createMarker(theater: Theater) = Marker().apply {
-        captionText = theater.fullName()
-        position = theater.position()
+    private fun createMarker(theater: TheaterMarkerUiModel) = Marker().apply {
+        captionText = theater.name
+        position = LatLng(theater.lat, theater.lng)
         icon = OverlayImage.fromResource(theater.getMarkerIcon())
         isHideCollidedSymbols = true
         isHideCollidedCaptions = true
@@ -253,25 +242,22 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     }
 
     @DrawableRes
-    private fun Theater.getMarkerIcon(): Int {
-        return when (type) {
-            Theater.TYPE_CGV -> R.drawable.ic_marker_cgv
-            Theater.TYPE_LOTTE -> R.drawable.ic_marker_lotte
-            Theater.TYPE_MEGABOX -> R.drawable.ic_marker_megabox
-            else -> throw IllegalArgumentException("$type is not valid type.")
+    private fun TheaterMarkerUiModel.getMarkerIcon(): Int {
+        return when (this) {
+            is CgvMarkerUiModel -> R.drawable.ic_marker_cgv
+            is LotteCinemaMarkerUiModel -> R.drawable.ic_marker_lotte
+            is MegaboxMarkerUiModel -> R.drawable.ic_marker_megabox
         }
     }
 
-    private fun Theater.position(): LatLng {
-        return LatLng(lat, lng)
-    }
-
-    private fun Theater.fullName(): String {
-        return when (type) {
-            Theater.TYPE_CGV -> "CGV $name"
-            Theater.TYPE_LOTTE -> "롯데시네마 $name"
-            Theater.TYPE_MEGABOX -> "메가박스 $name"
-            else -> name
+    private fun TheaterMarkerUiModel.executeWeb(ctx: Context) {
+        return when (this) {
+            is CgvMarkerUiModel ->
+                Cgv.executeWeb(ctx, this)
+            is LotteCinemaMarkerUiModel ->
+                LotteCinema.executeWeb(ctx, this)
+            is MegaboxMarkerUiModel ->
+                Megabox.executeWeb(ctx, this)
         }
     }
 

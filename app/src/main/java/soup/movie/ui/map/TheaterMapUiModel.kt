@@ -1,22 +1,37 @@
 package soup.movie.ui.map
 
-import androidx.annotation.Keep
-import soup.movie.data.model.Theater
+class TheaterMapUiModel(
+    val theaterMarkerList: List<TheaterMarkerUiModel>
+)
 
-sealed class TheaterMapUiModel {
-
-    @Keep
-    object LoadingState : TheaterMapUiModel() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
-
-    @Keep
-    object ErrorState : TheaterMapUiModel() {
-
-        override fun toString(): String = javaClass.simpleName
-    }
-
-    @Keep
-    data class DoneState(val myTheaters: List<Theater>) : TheaterMapUiModel()
+sealed class TheaterMarkerUiModel {
+    abstract val areaCode: String
+    abstract val code: String
+    abstract val name: String
+    abstract val lng: Double
+    abstract val lat: Double
 }
+
+class CgvMarkerUiModel(
+    override val areaCode: String,
+    override val code: String,
+    override val name: String,
+    override val lng: Double,
+    override val lat: Double
+) : TheaterMarkerUiModel()
+
+class LotteCinemaMarkerUiModel(
+    override val areaCode: String,
+    override val code: String,
+    override val name: String,
+    override val lng: Double,
+    override val lat: Double
+) : TheaterMarkerUiModel()
+
+class MegaboxMarkerUiModel(
+    override val areaCode: String,
+    override val code: String,
+    override val name: String,
+    override val lng: Double,
+    override val lat: Double
+) : TheaterMarkerUiModel()
