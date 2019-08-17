@@ -2,8 +2,6 @@ package soup.movie.ui.map
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,7 +33,6 @@ import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
-import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
 
@@ -116,7 +113,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
             }
             googleMapButton.apply {
                 val packageName = "com.google.android.apps.maps"
-                val appIcon = context.loadAppIcon(packageName)
+                val appIcon = launcherIcons.getAppIcon(context, packageName)
                 setImageDrawable(appIcon)
                 isVisible = appIcon != null
                 setOnDebounceClickListener {
@@ -130,7 +127,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
             }
             naverMapButton.apply {
                 val packageName = "com.nhn.android.nmap"
-                val appIcon = context.loadAppIcon(packageName)
+                val appIcon = launcherIcons.getAppIcon(context, packageName)
                 setImageDrawable(appIcon)
                 isVisible = appIcon != null
                 setOnDebounceClickListener {
@@ -144,7 +141,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
             }
             kakaoMapButton.apply {
                 val packageName = "net.daum.android.map"
-                val appIcon = context.loadAppIcon(packageName)
+                val appIcon = launcherIcons.getAppIcon(context, packageName)
                 setImageDrawable(appIcon)
                 isVisible = appIcon != null
                 setOnDebounceClickListener {
@@ -275,19 +272,6 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
             Theater.TYPE_LOTTE -> "롯데시네마 $name"
             Theater.TYPE_MEGABOX -> "메가박스 $name"
             else -> name
-        }
-    }
-
-    private fun Context.loadAppIcon(packageName: String): Drawable? {
-        try {
-            return packageManager.run {
-                getApplicationInfo(packageName, 0)
-                    .let(::getApplicationIcon)
-                    .let(launcherIcons::getShadowedIcon)
-            }
-        } catch (e: PackageManager.NameNotFoundException) {
-            Timber.w(e, "Failed looking up ApplicationInfo for $packageName")
-            return null
         }
     }
 

@@ -16,6 +16,8 @@
 package soup.movie.util;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -28,6 +30,7 @@ import android.graphics.drawable.DrawableWrapper;
 import android.os.Build;
 import android.util.SparseArray;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
@@ -52,6 +55,17 @@ public class LauncherIcons {
     public LauncherIcons(Context context) {
         mRes = context.getResources();
         mIconSize = mRes.getDimensionPixelSize(android.R.dimen.app_icon_size);
+    }
+
+    @Nullable
+    public Drawable getAppIcon(Context context, String packageName) {
+        try {
+            PackageManager pm = context.getPackageManager();
+            ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
+            return getShadowedIcon(pm.getApplicationIcon(appInfo));
+        } catch (PackageManager.NameNotFoundException e) {
+            return null;
+        }
     }
 
     public Drawable getShadowedIcon(Drawable drawable) {
