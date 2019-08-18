@@ -36,15 +36,19 @@ class TheaterEditManager(
         return repository.getCodeList()
             .doOnSubscribe { setupSelectedList() }
             .doOnNext {
-                setupTotalList(it.toAreaGroupList())
+                setupTotalList(it)
                 cgvSubject.onNext(it.cgv)
                 lotteSubject.onNext(it.lotte)
                 megaboxSubject.onNext(it.megabox)
             }
     }
 
-    private fun setupTotalList(areaGroupList: List<AreaGroup>) {
-        theaterList = areaGroupList.flatMap { it.theaterList }
+    private fun setupTotalList(response: CodeResponse) {
+        theaterList = response.run {
+            listOf(cgv, lotte, megabox)
+                .flatMap(CodeGroup::list)
+                .flatMap(AreaGroup::theaterList)
+        }
     }
 
     private fun setupSelectedList() {
@@ -84,15 +88,15 @@ class TheaterEditManager(
     }
 
     fun save() {
-        theatersSetting.set(theaterList
-            .asSequence()
-            .filter {
-                selectedItemSet.any { selectedItem ->
-                    selectedItem.id == it.id
+        theatersSetting.set(
+            theaterList.asSequence()
+                .filter {
+                    selectedItemSet.any { selectedItem ->
+                        selectedItem.id == it.id
+                    }
                 }
-            }
-            .sortedBy { it.type }
-            .toList())
+                .sortedBy { it.type }
+                .toList())
     }
 
     companion object {

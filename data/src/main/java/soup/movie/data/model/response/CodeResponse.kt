@@ -1,15 +1,11 @@
 package soup.movie.data.model.response
 
-import soup.movie.data.model.AreaGroup
+import androidx.annotation.Keep
 import soup.movie.data.model.CodeGroup
-import soup.movie.data.model.Theater
 
+@Keep
 data class CodeResponse(
     val cgv: CodeGroup,
     val lotte: CodeGroup,
-    val megabox: CodeGroup) {
-
-    fun toAreaGroupList(): List<AreaGroup> {
-        return listOf(cgv, lotte, megabox).flatMap { it.list }
-    }
-}
+    val megabox: CodeGroup
+)
