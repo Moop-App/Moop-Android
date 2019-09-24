@@ -22,7 +22,10 @@
         <item name="colorDivider">@color/colorDivider</item>
     </style>
 
-    <style name="Theme.Moop.Main" />
+    <style name="Theme.Moop.Main">
+        <item name="android:windowExitTransition">@transition/main_exit</item>
+        <item name="android:windowReenterTransition">@transition/main_reenter</item>
+    </style>
 
     <style name="Theme.Moop.Detail">
         <!-- using a semi-transparent window background for the drag-back gesture -->
