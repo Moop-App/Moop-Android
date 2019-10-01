@@ -18,6 +18,7 @@ data class Movie(
     val naver: NaverInfo?,
     val trailers: List<Trailer>?,
     val genre: List<String>?,
+    val kobis: Kobis?,
     val isNow: Boolean
 ) {
 
