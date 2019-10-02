@@ -19,6 +19,8 @@
     <string name="filter_category_genre">장르 필터</string>
     <string name="no_movies_description">해당되는 영화가 없습니다</string>
 
+    <string name="time_minute">%d분</string>
+
     <string name="settings_category_theater">자주가는 극장</string>
     <string name="settings_theater_empty_description">선택된 극장이 없습니다</string>
     <string name="settings_category_theme">테마</string>

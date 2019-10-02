@@ -1,5 +1,6 @@
 package soup.movie.ui.detail
 
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 import soup.movie.BR
 import soup.movie.R
@@ -13,6 +14,11 @@ internal class DetailListAdapter(
     private val itemClickListener = DetailListItemListener(itemClickListener)
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<ContentItemUiModel>, position: Int) {
+        if (position == 0 && headerHeight > 0) {
+            holder.binding.root.updateLayoutParams {
+                height = headerHeight
+            }
+        }
         holder.binding.setVariable(BR.listener, itemClickListener)
         super.onBindViewHolder(holder, position)
     }
@@ -34,6 +40,13 @@ internal class DetailListAdapter(
         is LotteItemUiModel,
         is MegaboxItemUiModel -> 1
         else -> 3
+    }
+
+    private var headerHeight: Int = 0
+
+    fun updateHeader(height: Int) {
+        headerHeight = height
+        notifyItemChanged(0)
     }
 }
 

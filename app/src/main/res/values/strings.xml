@@ -19,6 +19,8 @@
     <string name="filter_category_genre">Genre Filter</string>
     <string name="no_movies_description">There are no movie items</string>
 
+    <string name="time_minute">%d min.</string>
+
     <string name="settings_category_theater">Favorite Theaters</string>
     <string name="settings_theater_empty_description">There are no favorite theaters</string>
     <string name="settings_category_theme">Theme</string>

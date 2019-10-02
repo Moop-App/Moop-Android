@@ -9,7 +9,7 @@ data class Movie(
     val title: String,
     @SerializedName("posterUrl")
     private val _posterUrl: String,
-    private val age: String,
+    val age: String,
     val ageValue: Int,
     val openDate: String,
     val cgv: CgvInfo?,

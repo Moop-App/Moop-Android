@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.core.app.ShareCompat
+import androidx.core.view.doOnLayout
+import androidx.core.view.isGone
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,6 +30,7 @@ import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.YouTube
 import soup.widget.elastic.ElasticDragDismissFrameLayout
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.min
 
@@ -156,8 +159,35 @@ class DetailActivity : BaseActivity() {
                 removeDuration = 200
             }
         }
+        viewModel.headerUiModel.observe(this) {
+            val kobis = it.movie.kobis
+            if (kobis == null) {
+                binding.header.run {
+                    genreLabel.isGone = true
+                    genreText.isGone = true
+                    nationLabel.isGone = true
+                    nationText.isGone = true
+                    runningTimeLabel.isGone = true
+                    runningTimeText.isGone = true
+                    companyLabel.isGone = true
+                    companyText.isGone = true
+                }
+            } else {
+                binding.header.genreText.text = kobis.genres?.joinToString(separator = ", ").orEmpty()
+                binding.header.nationText.text = kobis.nations?.joinToString(separator = ", ").orEmpty()
+                binding.header.runningTimeText.text = getString(R.string.time_minute, kobis.showTm)
+                binding.header.companyText.text = kobis.companys.orEmpty()
+                    .asSequence()
+                    .filter { it.companyPartNm.contains("배급") }
+                    .map { it.companyNm }
+                    .joinToString(separator = ", ")
+            }
+        }
         viewModel.contentUiModel.observe(this) {
             listAdapter.submitList(it.items)
+        }
+        binding.header.root.doOnLayout {
+            listAdapter.updateHeader(height = it.measuredHeight)
         }
     }
 
