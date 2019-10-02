@@ -20,6 +20,10 @@
     <string name="no_movies_description">해당되는 영화가 없습니다</string>
 
     <string name="time_minute">%d분</string>
+    <string name="rank">%d위</string>
+    <string name="rank_date">%s 기준</string>
+    <string name="audience">%,d명</string>
+    <string name="screen_days">개봉 %d일차</string>
 
     <string name="settings_category_theater">자주가는 극장</string>
     <string name="settings_theater_empty_description">선택된 극장이 없습니다</string>

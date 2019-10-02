@@ -3,8 +3,10 @@ package soup.movie.util.helper
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
 
 fun today(): LocalDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
+fun yesterday(): LocalDate = today().minusDays(1)
 
 /**
  * 매달 마지막 수요일은 "문화가 있는 날"
@@ -29,4 +31,8 @@ fun DayOfWeek.calculateMinusDaysTo(dayOfWeekToPrevious: DayOfWeek): Long {
         result += DayOfWeek.SUNDAY.value
     }
     return result.toLong()
+}
+
+fun LocalDate.MM_DD(): String {
+    return format(DateTimeFormatter.ofPattern("MM.dd"))
 }

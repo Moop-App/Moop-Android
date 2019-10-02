@@ -6,10 +6,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.data.model.Movie
+import soup.movie.domain.model.screenDays
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.ui.base.BaseViewModel
 import soup.movie.util.ImageUriProvider
+import soup.movie.util.helper.MM_DD
+import soup.movie.util.helper.yesterday
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -61,13 +64,16 @@ class DetailViewModel @Inject constructor(
     private fun Movie.toContentUiModel(): ContentUiModel {
         val items = mutableListOf<ContentItemUiModel>()
         items.add(HeaderItemUiModel)
-        //TODO: Add BoxOffice model
-//        val genreList = genre.orEmpty()
-//        if (genreList.isNotEmpty()) {
-//            items.add(GenreItemUiModel(
-//                genreList = genreList
-//            ))
-//        }
+        kobis?.boxOffice?.run {
+            items.add(BoxOfficeItemUiModel(
+                rank = rank,
+                rankDate = yesterday().MM_DD(),
+                audience = audiAcc,
+                screenDays = screenDays(),
+                rating = naver?.userRating.orEmpty(),
+                webLink = naver?.link
+            ))
+        }
         items.add(CgvItemUiModel(
             movieId = cgv?.id.orEmpty(),
             hasInfo = cgv != null,
@@ -83,11 +89,15 @@ class DetailViewModel @Inject constructor(
             hasInfo = megabox != null,
             rating = megabox?.star ?: "-"
         ))
-        naver?.run {
-            items.add(NaverItemUiModel(
-                rating = userRating,
-                webLink = link
-            ))
+        if (kobis?.boxOffice == null) {
+            naver?.run {
+                items.add(
+                    NaverItemUiModel(
+                        rating = userRating,
+                        webLink = link
+                    )
+                )
+            }
         }
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {

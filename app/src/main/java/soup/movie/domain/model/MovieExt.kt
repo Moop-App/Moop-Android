@@ -72,6 +72,14 @@ fun Movie.isIn(dayRange: IntRange): Boolean {
     return false
 }
 
+fun Movie.screenDays(): Int {
+    val openDate = openDate()
+    if (openDate != null) {
+        return ChronoUnit.DAYS.between(openDate, today()).toInt()
+    }
+    return 0
+}
+
 private fun Movie.openDate(): LocalDate? = openDate.split(".").let {
     return if (it.size == 3) {
         LocalDate.of(it[0].toInt(), it[1].toInt(), it[2].toInt())

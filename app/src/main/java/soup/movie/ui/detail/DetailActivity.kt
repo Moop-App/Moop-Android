@@ -30,8 +30,8 @@ import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.YouTube
 import soup.widget.elastic.ElasticDragDismissFrameLayout
-import timber.log.Timber
 import javax.inject.Inject
+import kotlin.math.max
 import kotlin.math.min
 
 class DetailActivity : BaseActivity() {
@@ -48,7 +48,7 @@ class DetailActivity : BaseActivity() {
     private val scrollListener = object : RecyclerView.OnScrollListener() {
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            val maxOffset = min(
+            val maxOffset = max(
                 header.height,
                 recyclerView.resources.getDimensionPixelSize(R.dimen.detail_header_height)
             )
@@ -124,6 +124,9 @@ class DetailActivity : BaseActivity() {
         val listAdapter = DetailListAdapter { item ->
             val ctx: Context = this@DetailActivity
             when (item) {
+                is BoxOfficeItemUiModel -> {
+                    ctx.executeWeb(item.webLink)
+                }
                 is CgvItemUiModel -> {
                     analytics.clickCgvInfo()
                     Cgv.executeMobileWeb(ctx, item.movieId)

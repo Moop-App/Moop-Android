@@ -48,8 +48,13 @@ class NaverItemUiModel(
 ) : ContentItemUiModel()
 
 @Keep
-class GenreItemUiModel(
-    val genreList: List<String>
+class BoxOfficeItemUiModel(
+    val rank: Int,
+    val rankDate: String,
+    val audience: Int,
+    val screenDays: Int,
+    val rating: String,
+    val webLink: Url?
 ) : ContentItemUiModel()
 
 @Keep
