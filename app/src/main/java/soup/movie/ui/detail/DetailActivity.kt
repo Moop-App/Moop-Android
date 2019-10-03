@@ -163,6 +163,12 @@ class DetailActivity : BaseActivity() {
             }
         }
         viewModel.headerUiModel.observe(this) {
+            if (it.movie.openDate.isEmpty()) {
+                binding.header.run {
+                    openDateLabel.isGone = true
+                    openDateText.isGone = true
+                }
+            }
             val kobis = it.movie.kobis
             if (kobis == null) {
                 binding.header.run {
@@ -176,14 +182,23 @@ class DetailActivity : BaseActivity() {
                     companyText.isGone = true
                 }
             } else {
-                binding.header.genreText.text = kobis.genres?.joinToString(separator = ", ").orEmpty()
-                binding.header.nationText.text = kobis.nations?.joinToString(separator = ", ").orEmpty()
-                binding.header.runningTimeText.text = getString(R.string.time_minute, kobis.showTm)
-                binding.header.companyText.text = kobis.companys.orEmpty()
-                    .asSequence()
-                    .filter { it.companyPartNm.contains("배급") }
-                    .map { it.companyNm }
-                    .joinToString(separator = ", ")
+                binding.header.run {
+                    genreText.text = kobis.genres?.joinToString(separator = ", ").orEmpty()
+                    nationText.text = kobis.nations?.joinToString(separator = ", ").orEmpty()
+                    runningTimeText.text = getString(R.string.time_minute, kobis.showTm)
+
+                    val companies = kobis.companys.orEmpty()
+                        .asSequence()
+                        .filter { it.companyPartNm.contains("배급") }
+                        .map { it.companyNm }
+                        .joinToString(separator = ", ")
+                    if (companies.isBlank()) {
+                        companyLabel.isGone = true
+                        companyText.isGone = true
+                    } else {
+                        companyText.text = companies
+                    }
+                }
             }
         }
         viewModel.contentUiModel.observe(this) {
