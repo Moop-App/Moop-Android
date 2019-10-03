@@ -185,7 +185,13 @@ class DetailActivity : BaseActivity() {
                 binding.header.run {
                     genreText.text = kobis.genres?.joinToString(separator = ", ").orEmpty()
                     nationText.text = kobis.nations?.joinToString(separator = ", ").orEmpty()
-                    runningTimeText.text = getString(R.string.time_minute, kobis.showTm)
+
+                    if (kobis.showTm > 0) {
+                        runningTimeText.text = getString(R.string.time_minute, kobis.showTm)
+                    } else {
+                        runningTimeLabel.isGone = true
+                        runningTimeText.isGone = true
+                    }
 
                     val companies = kobis.companys.orEmpty()
                         .asSequence()
