@@ -2,7 +2,7 @@ package soup.movie.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import soup.movie.settings.impl.*

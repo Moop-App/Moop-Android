@@ -15,6 +15,6 @@ object BuildType {
     }
 
     fun addNetworkInterceptor(builder: Builder): Builder = builder
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
             .addNetworkInterceptor(StethoInterceptor())
 }
