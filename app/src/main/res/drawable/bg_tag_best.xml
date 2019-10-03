@@ -11,7 +11,7 @@
 
         <shape android:shape="rectangle">
             <corners android:radius="4dp" />
-            <solid android:color="@color/orange" />
+            <solid android:color="@color/tag_best" />
         </shape>
     </item>
 

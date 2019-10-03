@@ -17,7 +17,7 @@
         android:gravity="center"
         android:maxLines="1"
         android:text="BEST"
-        android:textColor="@color/white"
+        android:textColor="?android:colorBackground"
         android:textSize="11dp"
         android:textStyle="bold"
         android:transitionName="@string/transition_best"

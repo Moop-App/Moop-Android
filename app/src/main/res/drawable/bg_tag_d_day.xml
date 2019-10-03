@@ -11,7 +11,7 @@
 
         <shape android:shape="rectangle">
             <corners android:radius="4dp" />
-            <solid android:color="@color/grey" />
+            <solid android:color="@color/tag_d_day" />
         </shape>
     </item>
 

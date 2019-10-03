@@ -11,7 +11,7 @@
 
         <shape android:shape="rectangle">
             <corners android:radius="4dp" />
-            <solid android:color="@color/red" />
+            <solid android:color="@color/tag_age_19" />
         </shape>
     </item>
 </layer-list>
