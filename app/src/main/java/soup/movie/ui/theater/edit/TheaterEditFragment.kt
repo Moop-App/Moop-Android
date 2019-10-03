@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
+import com.google.android.material.tabs.setupWithViewPager2
 import kotlinx.android.synthetic.main.theater_edit_footer.*
 import soup.movie.R
 import soup.movie.data.model.Theater
@@ -36,7 +37,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
     private val viewModel: TheaterEditViewModel by viewModels()
 
     private val pageAdapter by lazyFast {
-        TheaterEditPageAdapter(childFragmentManager)
+        TheaterEditPageAdapter(childFragmentManager, lifecycle)
     }
 
     private lateinit var footerPanel: BottomSheetBehavior<View>
@@ -105,9 +106,9 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
             footerPanel.takeIf { it.state == STATE_EXPANDED }
                 ?.run { state = STATE_COLLAPSED }
         }
-        tabLayout.setupWithViewPager(viewPager, true)
-        viewPager.offscreenPageLimit = pageAdapter.count
+        viewPager.offscreenPageLimit = pageAdapter.itemCount
         viewPager.adapter = pageAdapter
+        tabLayout.setupWithViewPager2(viewPager, titleProvider = pageAdapter, autoRefresh = true)
 
         // Footer
 

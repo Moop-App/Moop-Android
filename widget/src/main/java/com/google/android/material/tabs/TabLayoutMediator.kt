@@ -1,0 +1,20 @@
+package com.google.android.material.tabs
+
+import androidx.viewpager2.widget.ViewPager2
+
+interface TitleProvider {
+
+    fun getItemTitle(position: Int): CharSequence
+}
+
+fun TabLayout.setupWithViewPager2(
+    viewPager2: ViewPager2,
+    titleProvider: TitleProvider,
+    autoRefresh: Boolean
+) {
+    TabLayoutMediator(this, viewPager2, autoRefresh,
+        TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+            tab.text = titleProvider.getItemTitle(position)
+        }
+    ).attach()
+}

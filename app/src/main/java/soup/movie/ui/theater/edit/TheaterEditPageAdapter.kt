@@ -2,19 +2,30 @@ package soup.movie.ui.theater.edit
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TitleProvider
 import soup.movie.ui.theater.edit.cgv.CgvEditFragment
 import soup.movie.ui.theater.edit.lotte.LotteEditFragment
 import soup.movie.ui.theater.edit.megabox.MegaboxEditFragment
 import soup.movie.util.lazyFast
 
-class TheaterEditPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class TheaterEditPageAdapter(
+    fm: FragmentManager,
+    lifecycle: Lifecycle
+) : FragmentStateAdapter(fm, lifecycle), TitleProvider {
 
-    override fun getItem(position: Int): Fragment = items[position]
+    override fun createFragment(position: Int): Fragment {
+        return items[position]
+    }
 
-    override fun getCount(): Int = items.size
+    override fun getItemCount(): Int {
+        return items.size
+    }
 
-    override fun getPageTitle(position: Int): CharSequence = items[position].title
+    override fun getItemTitle(position: Int): CharSequence {
+        return items[position].title
+    }
 
     companion object {
 
