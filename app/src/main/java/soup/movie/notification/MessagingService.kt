@@ -14,23 +14,21 @@ import timber.log.Timber
 
 class MessagingService : FirebaseMessagingService() {
 
-    override fun onNewToken(s: String?) {
+    override fun onNewToken(s: String) {
         Timber.d("onNewToken: token=$s")
     }
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        Timber.d("onMessageReceived: from=${remoteMessage?.from}")
-        val data = remoteMessage?.data
-        if (data != null) {
-            Timber.d("Message data payload: $data")
-            val type: String? = data["type"]
-            val title: String? = data["title"]
-            val text: String? = data["text"]
-            if (type != null && title != null && text != null) {
-                when (type) {
-                    TYPE_NOTICE -> notifyNotice(title = title, text = text)
-                    TYPE_EVENT -> notifyEvent(title = title, text = text)
-                }
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Timber.d("onMessageReceived: from=${remoteMessage.from}")
+        val data = remoteMessage.data
+        Timber.d("Message data payload: $data")
+        val type: String? = data["type"]
+        val title: String? = data["title"]
+        val text: String? = data["text"]
+        if (type != null && title != null && text != null) {
+            when (type) {
+                TYPE_NOTICE -> notifyNotice(title = title, text = text)
+                TYPE_EVENT -> notifyEvent(title = title, text = text)
             }
         }
     }
