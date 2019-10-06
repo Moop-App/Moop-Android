@@ -66,6 +66,11 @@ class ImdbItemUiModel(
 ) : ContentItemUiModel()
 
 @Keep
+class PlotItemUiModel(
+    val plot: String
+) : ContentItemUiModel()
+
+@Keep
 class TrailerHeaderItemUiModel(
     val movieTitle: String
 ) : ContentItemUiModel()

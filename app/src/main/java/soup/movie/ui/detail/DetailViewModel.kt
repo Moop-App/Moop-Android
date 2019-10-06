@@ -107,6 +107,9 @@ class DetailViewModel @Inject constructor(
                 )
             }
         }
+        plot?.let {
+            items.add(PlotItemUiModel(plot = it))
+        }
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
             items.add(TrailerHeaderItemUiModel(movieTitle = title))
