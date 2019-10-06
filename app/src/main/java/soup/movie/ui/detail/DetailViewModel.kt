@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.data.model.Movie
 import soup.movie.domain.model.screenDays
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.ui.base.BaseViewModel
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImageUriProvider
 import soup.movie.util.helper.MM_DD
 import soup.movie.util.helper.yesterday
@@ -74,6 +74,14 @@ class DetailViewModel @Inject constructor(
                 webLink = naver?.link
             ))
         }
+        imdb?.run {
+            items.add(ImdbItemUiModel(
+                imdb = imdb,
+                rottenTomatoes = rt ?: "N/A",
+                metascore = mc ?: "N/A",
+                webLink = imdbUrl
+            ))
+        }
         items.add(CgvItemUiModel(
             movieId = cgv?.id.orEmpty(),
             hasInfo = cgv != null,
@@ -82,12 +90,12 @@ class DetailViewModel @Inject constructor(
         items.add(LotteItemUiModel(
             movieId = lotte?.id.orEmpty(),
             hasInfo = lotte != null,
-            rating = lotte?.star ?: "-"
+            rating = lotte?.star ?: "N/A"
         ))
         items.add(MegaboxItemUiModel(
             movieId = megabox?.id.orEmpty(),
             hasInfo = megabox != null,
-            rating = megabox?.star ?: "-"
+            rating = megabox?.star ?: "N/A"
         ))
         if (kobis?.boxOffice == null) {
             naver?.run {

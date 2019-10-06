@@ -1,19 +1,23 @@
 package soup.movie.ui.detail
 
-import androidx.core.view.isEmpty
+import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import soup.movie.R
-import soup.movie.util.inflate
 
-@BindingAdapter("genreList")
-fun ChipGroup.setGenreList(genreList: List<String>) {
-    if (isEmpty()) {
-        genreList.forEach {
-            val chip: Chip = inflate(context, R.layout.chip_action_genre)
-            chip.text = it
-            addView(chip)
+/**
+ * TOMATOMETER: https://www.rottentomatoes.com/about
+ */
+@BindingAdapter("tomatoMeterIcon")
+fun setTomatoMeterIcon(view: ImageView, rottenTomatoes: String) {
+    if (rottenTomatoes.contains('%')) {
+        val score = rottenTomatoes.substring(0, rottenTomatoes.lastIndex).toIntOrNull() ?: 0
+        if (score >= 60) {
+            view.setImageResource(R.drawable.ic_rt_fresh)
+        } else {
+            view.setImageResource(R.drawable.ic_rt_rotten)
         }
+    } else {
+        view.visibility = View.GONE
     }
 }

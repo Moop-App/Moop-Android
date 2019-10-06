@@ -58,6 +58,14 @@ class BoxOfficeItemUiModel(
 ) : ContentItemUiModel()
 
 @Keep
+class ImdbItemUiModel(
+    val imdb: String,
+    val rottenTomatoes: String,
+    val metascore: String,
+    val webLink: Url?
+) : ContentItemUiModel()
+
+@Keep
 class TrailerHeaderItemUiModel(
     val movieTitle: String
 ) : ContentItemUiModel()

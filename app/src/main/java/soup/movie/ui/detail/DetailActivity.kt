@@ -142,6 +142,9 @@ class DetailActivity : BaseActivity() {
                 is NaverItemUiModel -> {
                     ctx.executeWeb(item.webLink)
                 }
+                is ImdbItemUiModel -> {
+                    ctx.executeWeb(item.webLink)
+                }
                 is TrailerItemUiModel -> {
                     analytics.clickTrailer()
                     YouTube.executeApp(ctx, item.trailer)
