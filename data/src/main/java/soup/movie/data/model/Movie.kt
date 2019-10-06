@@ -19,6 +19,7 @@ data class Movie(
     val trailers: List<Trailer>?,
     val genre: List<String>?,
     val kobis: Kobis?,
+    val imdb: ImdbInfo?,
     val isNow: Boolean
 ) {
 
