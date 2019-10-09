@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.core.app.ShareCompat
-import androidx.core.view.doOnLayout
-import androidx.core.view.isGone
-import androidx.core.view.updatePadding
+import androidx.core.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -212,9 +210,7 @@ class DetailActivity : BaseActivity() {
         }
         viewModel.contentUiModel.observe(this) {
             listAdapter.submitList(it.items)
-        }
-        binding.header.root.doOnLayout {
-            listAdapter.updateHeader(height = it.measuredHeight)
+            listAdapter.updateHeader(height = binding.header.root.measuredHeight)
         }
     }
 
