@@ -77,25 +77,25 @@ class DetailViewModel @Inject constructor(
         imdb?.run {
             items.add(ImdbItemUiModel(
                 imdb = imdb,
-                rottenTomatoes = rt ?: "N/A",
-                metascore = mc ?: "N/A",
+                rottenTomatoes = rt ?: NO_RATING,
+                metascore = mc ?: NO_RATING,
                 webLink = imdbUrl
             ))
         }
         items.add(CgvItemUiModel(
             movieId = cgv?.id.orEmpty(),
             hasInfo = cgv != null,
-            rating = cgv?.egg ?: "-"
+            rating = cgv?.egg ?: NO_RATING
         ))
         items.add(LotteItemUiModel(
             movieId = lotte?.id.orEmpty(),
             hasInfo = lotte != null,
-            rating = lotte?.star ?: "N/A"
+            rating = lotte?.star ?: NO_RATING
         ))
         items.add(MegaboxItemUiModel(
             movieId = megabox?.id.orEmpty(),
             hasInfo = megabox != null,
-            rating = megabox?.star ?: "N/A"
+            rating = megabox?.star ?: NO_RATING
         ))
         if (kobis?.boxOffice == null) {
             naver?.run {
@@ -119,5 +119,10 @@ class DetailViewModel @Inject constructor(
             items.add(TrailerFooterItemUiModel(movieTitle = title))
         }
         return ContentUiModel(items)
+    }
+
+    companion object {
+
+        private const val NO_RATING = "평점없음"
     }
 }
