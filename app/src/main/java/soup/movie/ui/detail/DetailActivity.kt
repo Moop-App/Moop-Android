@@ -84,13 +84,11 @@ class DetailActivity : BaseActivity() {
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
         binding.root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
-            binding.header.root.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
-            )
-            binding.listView.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop,
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
-            )
+            val topPadding = initialPadding.top + windowInsets.systemWindowInsetTop
+            val bottomPadding = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+            binding.header.root.updatePadding(top = topPadding)
+            binding.listView.updatePadding(top = topPadding, bottom = bottomPadding)
+            binding.share.root.updatePadding(top = topPadding)
         }
 
         postponeEnterTransition()
@@ -110,12 +108,27 @@ class DetailActivity : BaseActivity() {
                 analytics.clickPoster()
                 showPosterViewer(from = posterView)
             }
-            kakaoTalkButton.setOnDebounceClickListener {
-                analytics.clickShare()
-                KakaoLink.share(it.context, movie)
-            }
             shareButton.setOnDebounceClickListener {
                 analytics.clickShare()
+                binding.share.root.isVisible = true
+            }
+        }
+        binding.share.apply {
+            root.setOnDebounceClickListener {
+                it.isVisible = !it.isVisible
+            }
+            facebookShareButton.setOnDebounceClickListener {
+            }
+            twitterShareButton.setOnDebounceClickListener {
+            }
+            instagramShareButton.setOnDebounceClickListener {
+            }
+            lineShareButton.setOnDebounceClickListener {
+            }
+            kakaoTalkShareButton.setOnDebounceClickListener {
+                KakaoLink.share(it.context, movie)
+            }
+            etcShareButton.setOnDebounceClickListener {
                 share(movie)
             }
         }

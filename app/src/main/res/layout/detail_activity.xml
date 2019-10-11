@@ -62,6 +62,14 @@
                 tools:listitem="@layout/detail_item_trailer"
                 tools:paddingTop="@dimen/detail_header_height" />
 
+            <include
+                android:id="@+id/share"
+                layout="@layout/detail_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </soup.widget.elastic.ElasticDragDismissFrameLayout>

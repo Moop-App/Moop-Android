@@ -30,27 +30,19 @@
             android:textColor="?attr/colorOnBackground"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/kakaoTalkButton"
+            app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="극장판 요괴워치 섀도사이드-도깨비왕의 부활" />
 
-        <ImageButton
-            android:id="@+id/kakaoTalkButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintEnd_toStartOf="@+id/shareButton"
-            app:layout_constraintTop_toTopOf="@id/shareButton"
-            app:srcCompat="@drawable/ic_logo_kakao_talk" />
-
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/shareButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
+            android:scaleType="centerInside"
             android:background="?selectableItemBackgroundBorderless"
-            android:tint="?attr/colorOnBackground"
+            app:tint="?attr/colorOnBackground"
             app:layout_constraintBottom_toBottomOf="@id/titleView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/titleView"
@@ -62,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="titleView,kakaoTalkButton,shareButton" />
+            app:constraint_referenced_ids="titleView,shareButton" />
 
         <Space
             android:id="@+id/headerGroup"
