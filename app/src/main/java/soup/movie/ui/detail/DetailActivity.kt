@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.core.app.ShareCompat
-import androidx.core.view.*
+import androidx.core.view.drawToBitmap
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +33,7 @@ import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
-class DetailActivity : BaseActivity() {
+class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
 
     private val movie: Movie by lazyFast {
         MovieSelectManager.getSelectedItem()!!
@@ -83,12 +84,12 @@ class DetailActivity : BaseActivity() {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-        binding.root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+        binding.root.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
             val topPadding = initialPadding.top + windowInsets.systemWindowInsetTop
             val bottomPadding = initialPadding.bottom + windowInsets.systemWindowInsetBottom
             binding.header.root.updatePadding(top = topPadding)
             binding.listView.updatePadding(top = topPadding, bottom = bottomPadding)
-            binding.share.root.updatePadding(top = topPadding)
+            binding.share.root.updatePadding(top = topPadding, bottom = bottomPadding)
         }
 
         postponeEnterTransition()
@@ -110,12 +111,12 @@ class DetailActivity : BaseActivity() {
             }
             shareButton.setOnDebounceClickListener {
                 analytics.clickShare()
-                binding.share.root.isVisible = true
+                binding.toggleShareButton()
             }
         }
         binding.share.apply {
             root.setOnDebounceClickListener {
-                it.isVisible = !it.isVisible
+                binding.toggleShareButton()
             }
             facebookShareButton.setOnDebounceClickListener {
             }
@@ -177,49 +178,7 @@ class DetailActivity : BaseActivity() {
             }
         }
         viewModel.headerUiModel.observe(this) {
-            if (it.movie.openDate.isEmpty()) {
-                binding.header.run {
-                    openDateLabel.isGone = true
-                    openDateText.isGone = true
-                }
-            }
-            val kobis = it.movie.kobis
-            if (kobis == null) {
-                binding.header.run {
-                    genreLabel.isGone = true
-                    genreText.isGone = true
-                    nationLabel.isGone = true
-                    nationText.isGone = true
-                    runningTimeLabel.isGone = true
-                    runningTimeText.isGone = true
-                    companyLabel.isGone = true
-                    companyText.isGone = true
-                }
-            } else {
-                binding.header.run {
-                    genreText.text = kobis.genres?.joinToString(separator = ", ").orEmpty()
-                    nationText.text = kobis.nations?.joinToString(separator = ", ").orEmpty()
-
-                    if (kobis.showTm > 0) {
-                        runningTimeText.text = getString(R.string.time_minute, kobis.showTm)
-                    } else {
-                        runningTimeLabel.isGone = true
-                        runningTimeText.isGone = true
-                    }
-
-                    val companies = kobis.companys.orEmpty()
-                        .asSequence()
-                        .filter { it.companyPartNm.contains("배급") }
-                        .map { it.companyNm }
-                        .joinToString(separator = ", ")
-                    if (companies.isBlank()) {
-                        companyLabel.isGone = true
-                        companyText.isGone = true
-                    } else {
-                        companyText.text = companies
-                    }
-                }
-            }
+            binding.render(it)
         }
         viewModel.contentUiModel.observe(this) {
             listAdapter.submitList(it.items)
@@ -241,6 +200,18 @@ class DetailActivity : BaseActivity() {
 
     override fun onBackPressed() {
         finishAfterTransition()
+    }
+
+    private fun DetailActivityBinding.toggleShareButton() {
+        share.root.let {
+            if (it.isActivated) {
+                it.isActivated = false
+                it.hideShareViewTo(header.shareButton)
+            } else {
+                it.isActivated = true
+                it.showShareViewFrom(header.shareButton)
+            }
+        }
     }
 
     //TODO: Re-implements this
