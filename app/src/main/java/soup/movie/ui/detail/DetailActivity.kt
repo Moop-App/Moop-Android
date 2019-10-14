@@ -69,9 +69,11 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
         }
     }
 
+    private lateinit var binding: DetailActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
+        binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         if (isPortrait) {
@@ -205,7 +207,11 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
     }
 
     override fun onBackPressed() {
-        finishAfterTransition()
+        if (binding.share.root.isActivated) {
+            binding.toggleShareButton()
+        } else {
+            finishAfterTransition()
+        }
     }
 
     private fun DetailActivityBinding.toggleShareButton() {
