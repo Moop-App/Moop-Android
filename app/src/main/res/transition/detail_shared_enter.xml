@@ -6,26 +6,22 @@
 
     <transitionSet>
         <targets>
-            <target android:targetId="@id/posterView" />
-            <target android:targetId="@id/ageBgView" />
-        </targets>
-        <arcMotion />
-    </transitionSet>
-    <transitionSet>
-        <targets>
             <target android:targetId="@id/backgroundView" />
             <target android:targetId="@id/posterView" />
         </targets>
+        <arcMotion />
         <changeBounds />
     </transitionSet>
-    <transitionSet android:startDelay="50"
-        android:interpolator="@android:interpolator/decelerate_quint">
+    <transitionSet
+        android:interpolator="@android:interpolator/decelerate_quint"
+        android:startDelay="50">
         <targets>
             <target android:targetId="@id/ageBgView" />
             <target android:targetId="@id/newView" />
             <target android:targetId="@id/bestView" />
             <target android:targetId="@id/dDayView" />
         </targets>
+        <arcMotion />
         <changeBounds />
     </transitionSet>
 
