@@ -20,7 +20,6 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.data.model.Movie
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
-import soup.movie.spec.share
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.*
@@ -115,22 +114,29 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
             }
         }
         binding.share.apply {
+            fun onShareClick(target: ShareTarget) {
+                viewModel.requestShareImage(target, movieCard.drawToBitmap())
+            }
             root.setOnDebounceClickListener {
                 binding.toggleShareButton()
             }
             facebookShareButton.setOnDebounceClickListener {
+                onShareClick(ShareTarget.Facebook)
             }
             twitterShareButton.setOnDebounceClickListener {
+                onShareClick(ShareTarget.Twitter)
             }
             instagramShareButton.setOnDebounceClickListener {
+                onShareClick(ShareTarget.Instagram)
             }
             lineShareButton.setOnDebounceClickListener {
+                onShareClick(ShareTarget.LINE)
             }
             kakaoTalkShareButton.setOnDebounceClickListener {
-                KakaoLink.share(it.context, movie)
+                onShareClick(ShareTarget.KakaoLink)
             }
             etcShareButton.setOnDebounceClickListener {
-                share(movie)
+                onShareClick(ShareTarget.Others)
             }
         }
         val listAdapter = DetailListAdapter { item ->
@@ -226,11 +232,25 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
     }
 
     private fun executeShareAction(action: ShareAction) {
-        ShareCompat.IntentBuilder.from(this)
-            .setChooserTitle(R.string.action_share_poster)
-            .setSubject(movie.title)
-            .setStream(action.imageUri)
-            .setType(action.mimeType)
-            .startChooser()
+        if (action.target == ShareTarget.KakaoLink) {
+            KakaoLink.share(this, movie)
+        } else {
+            ShareCompat.IntentBuilder.from(this)
+                .setChooserTitle(R.string.action_share_poster)
+                .setStream(action.imageUri)
+                .setType(action.mimeType)
+                .apply {
+                    when (action.target) {
+                        ShareTarget.Facebook -> "com.facebook.katana"
+                        ShareTarget.Twitter -> "com.twitter.android"
+                        ShareTarget.Instagram -> "com.instagram.android"
+                        ShareTarget.LINE -> "jp.naver.line.android"
+                        else -> null
+                    }?.let {
+                        intent.setPackage(it)
+                    }
+                }
+                .startChooser()
+        }
     }
 }

@@ -1,6 +1,5 @@
 package soup.movie.ui.detail
 
-import android.net.Uri
 import androidx.annotation.Keep
 import soup.movie.data.model.*
 
@@ -84,10 +83,3 @@ class TrailerItemUiModel(
 class TrailerFooterItemUiModel(
     val movieTitle: String
 ) : ContentItemUiModel()
-
-@Keep
-class ShareAction(
-    val imageUri: Uri,
-    val mimeType: String
-)
-

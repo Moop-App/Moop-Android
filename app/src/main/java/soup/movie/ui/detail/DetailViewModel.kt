@@ -1,5 +1,6 @@
 package soup.movie.ui.detail
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -46,19 +47,13 @@ class DetailViewModel @Inject constructor(
             .disposeOnCleared()
     }
 
-    fun requestShareImage(url: String) {
-        imageUriProvider(url)
-            .map { ShareAction(it, getImageMimeType(url)) }
-            .subscribeOn(Schedulers.io())
+    fun requestShareImage(target: ShareTarget, bitmap: Bitmap) {
+        imageUriProvider(bitmap)
+            .map { ShareAction(target, it, "image/*") }
+            .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _shareAction.event = it }
             .disposeOnCleared()
-    }
-
-    private fun getImageMimeType(fileName: String): String = when {
-        fileName.endsWith(".png") -> "image/png"
-        fileName.endsWith(".gif") -> "image/gif"
-        else -> "image/jpeg"
     }
 
     private fun Movie.toContentUiModel(): ContentUiModel {
