@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import soup.movie.util.glide.GlideApp
@@ -22,6 +23,7 @@ fun ImageView.loadAsync(url: String?, withKey: Boolean) {
         if (withKey) {
             signature(IntegerKey(today().weekOfYear()))
         }
+        transition(withCrossFade())
     }
 }
 
