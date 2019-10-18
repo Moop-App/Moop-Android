@@ -103,7 +103,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
 
     private fun initViewState(binding: DetailActivityBinding) {
         binding.header.apply {
-            posterView.loadAsync(movie.posterUrl, endAction = {
+            posterView.loadAsync(movie.posterUrl, withKey = true, doOnEnd = {
                 startPostponedEnterTransition()
             })
             posterCard.setOnDebounceClickListener(delay = 150L) {
@@ -230,7 +230,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
     private fun showPosterViewer(from: ImageView) {
         StfalconImageViewer
             .Builder(from.context, listOf(movie.posterUrl)) { view, imageUrl ->
-                view.loadAsync(imageUrl)
+                view.loadAsync(imageUrl, withKey = true)
             }
             .withTransitionFrom(from)
             .withHiddenStatusBar(false)

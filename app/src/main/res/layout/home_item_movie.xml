@@ -43,6 +43,7 @@
                 android:contentDescription="@{item.title}"
                 android:scaleType="centerCrop"
                 android:srcUrl="@{item.posterUrl}"
+                android:srcUrlWithKey="@{true}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="H,27:40"
                 app:layout_constraintEnd_toEndOf="parent"
