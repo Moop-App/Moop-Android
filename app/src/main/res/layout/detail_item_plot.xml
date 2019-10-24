@@ -52,6 +52,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:selected="@{item.isExpanded}"
+                app:layout_constraintBottom_toBottomOf="@id/plotLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/plotLabel"
+                app:srcCompat="@drawable/asld_plot_more"
+                tools:src="@drawable/ic_round_plot_expand" />
+
             <TextView
                 android:id="@+id/shortPlotText"
                 android:layout_width="0dp"

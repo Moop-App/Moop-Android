@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/expanded"
+        android:drawable="@drawable/ic_round_plot_collapse"
+        android:state_selected="true" />
+
+    <item
+        android:id="@+id/collapsed"
+        android:drawable="@drawable/ic_round_plot_expand"
+        android:state_selected="false" />
+
+<!-- TODO: Fix bug this can't morph.
+    <transition
+        android:drawable="@drawable/avd_plot_more_expand"
+        android:fromId="@id/collapsed"
+        android:toId="@id/expanded" />
+
+    <transition
+        android:drawable="@drawable/avd_plot_more_collapse"
+        android:fromId="@id/expanded"
+        android:toId="@id/collapsed" />
+-->
+
+</animated-selector>
