@@ -67,7 +67,10 @@ class ImdbItemUiModel(
 @Keep
 class PlotItemUiModel(
     val plot: String
-) : ContentItemUiModel()
+) : ContentItemUiModel() {
+
+    var isExpanded: Boolean = false
+}
 
 @Keep
 class TrailerHeaderItemUiModel(

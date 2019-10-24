@@ -2,8 +2,8 @@ package soup.movie.ui.detail
 
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
-import soup.movie.BR
 import soup.movie.R
+import soup.movie.ui.databinding.DataBindingItemListener
 import soup.movie.ui.databinding.DataBindingListAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 
@@ -11,15 +11,23 @@ internal class DetailListAdapter(
     itemClickListener: (ContentItemUiModel) -> Unit
 ) : DataBindingListAdapter<ContentItemUiModel>(AlwaysDiffCallback()) {
 
-    private val itemClickListener = DetailListItemListener(itemClickListener)
+    override val itemListener = DataBindingItemListener<ContentItemUiModel>(
+        onClick = { position, item ->
+            if (item is PlotItemUiModel) {
+                item.isExpanded = item.isExpanded.not()
+                notifyItemChanged(position)
+            } else {
+                itemClickListener(item)
+            }
+        }
+    )
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<ContentItemUiModel>, position: Int) {
         if (position == 0 && headerHeight > 0) {
-            holder.binding.root.updateLayoutParams {
+            holder.itemView.updateLayoutParams {
                 height = headerHeight
             }
         }
-        holder.binding.setVariable(BR.listener, itemClickListener)
         super.onBindViewHolder(holder, position)
     }
 
@@ -49,16 +57,5 @@ internal class DetailListAdapter(
     fun updateHeader(height: Int) {
         headerHeight = height
         notifyItemChanged(0)
-    }
-}
-
-class DetailListItemListener(
-    private val _onInfoClick: (ContentItemUiModel) -> Unit
-) {
-
-    fun onInfoClick(item: ContentItemUiModel?) {
-        if (item != null) {
-            _onInfoClick(item)
-        }
     }
 }

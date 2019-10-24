@@ -6,10 +6,6 @@
         <variable
             name="item"
             type="soup.movie.ui.detail.HeaderItemUiModel" />
-
-        <variable
-            name="listener"
-            type="soup.movie.ui.detail.DetailListItemListener" />
     </data>
 
     <Space

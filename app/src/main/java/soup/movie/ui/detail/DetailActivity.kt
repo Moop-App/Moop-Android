@@ -183,6 +183,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
             itemAnimator = FadeInUpAnimator().apply {
                 addDuration = 200
                 removeDuration = 200
+                supportsChangeAnimations = false
             }
         }
         viewModel.headerUiModel.observe(this) {

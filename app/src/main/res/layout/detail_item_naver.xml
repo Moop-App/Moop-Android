@@ -10,8 +10,12 @@
             type="soup.movie.ui.detail.NaverItemUiModel" />
 
         <variable
+            name="position"
+            type="int" />
+
+        <variable
             name="listener"
-            type="soup.movie.ui.detail.DetailListItemListener" />
+            type="soup.movie.ui.databinding.DataBindingItemListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -38,7 +42,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
+                app:onDebounceClick="@{() -> listener.onItemClick(position, item)}" />
 
             <ImageView
                 android:id="@+id/eggIcon"
@@ -88,7 +92,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:onDebounceClick="@{() -> listener.onInfoClick(item)}" />
+                app:onDebounceClick="@{() -> listener.onItemClick(position, item)}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
