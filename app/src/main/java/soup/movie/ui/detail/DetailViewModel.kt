@@ -102,8 +102,9 @@ class DetailViewModel @Inject constructor(
                 )
             }
         }
-        plot?.let {
-            items.add(PlotItemUiModel(plot = it))
+        val plot = plot.orEmpty()
+        if (plot.isNotBlank()) {
+            items.add(PlotItemUiModel(plot = plot))
         }
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
