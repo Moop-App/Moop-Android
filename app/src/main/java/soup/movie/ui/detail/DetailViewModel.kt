@@ -106,6 +106,24 @@ class DetailViewModel @Inject constructor(
         if (plot.isNotBlank()) {
             items.add(PlotItemUiModel(plot = plot))
         }
+        val kobis = kobis
+        if (kobis != null) {
+            val persons = mutableListOf<PersonUiModel>()
+            persons.addAll(kobis.directors.orEmpty().map {
+                PersonUiModel(name = it, cast = "감독")
+            })
+            persons.addAll(kobis.actors.orEmpty().map {
+                val cast = if (it.cast.isEmpty()) {
+                    "배우"
+                } else {
+                    it.cast
+                }
+                PersonUiModel(name = it.peopleNm, cast = cast)
+            })
+            if (persons.isNotEmpty()) {
+                items.add(CastItemUiModel(persons = persons))
+            }
+        }
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
             items.add(TrailerHeaderItemUiModel(movieTitle = title))

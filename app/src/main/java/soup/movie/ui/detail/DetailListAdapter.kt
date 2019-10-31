@@ -40,6 +40,7 @@ internal class DetailListAdapter(
         is NaverItemUiModel -> R.layout.detail_item_naver
         is ImdbItemUiModel -> R.layout.detail_item_imdb
         is PlotItemUiModel -> R.layout.detail_item_plot
+        is CastItemUiModel -> R.layout.detail_item_cast
         is TrailerHeaderItemUiModel -> R.layout.detail_item_trailer_header
         is TrailerItemUiModel -> R.layout.detail_item_trailer
         is TrailerFooterItemUiModel -> R.layout.detail_item_trailer_footer

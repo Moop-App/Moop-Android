@@ -73,6 +73,17 @@ class PlotItemUiModel(
 }
 
 @Keep
+class CastItemUiModel(
+    val persons: List<PersonUiModel>
+) : ContentItemUiModel()
+
+@Keep
+class PersonUiModel(
+    val name: String,
+    val cast: String
+)
+
+@Keep
 class TrailerHeaderItemUiModel(
     val movieTitle: String
 ) : ContentItemUiModel()

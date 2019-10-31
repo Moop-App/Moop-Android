@@ -3,6 +3,7 @@ package soup.movie.ui.detail
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import soup.movie.R
 
 /**
@@ -19,5 +20,12 @@ fun setTomatoMeterIcon(view: ImageView, rottenTomatoes: String) {
         }
     } else {
         view.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("submitPersonList")
+fun submitPersonList(view: RecyclerView, items: List<PersonUiModel>) {
+    view.adapter = DetailPersonListAdapter().apply {
+        submitList(items)
     }
 }
