@@ -42,7 +42,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:onDebounceClick="@{() -> listener.onItemClick(position, item)}" />
+                app:onDebounceClick="@{(v) -> listener.onItemClick(v, position, item)}" />
 
             <ImageView
                 android:id="@+id/eggIcon"
@@ -92,7 +92,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:onDebounceClick="@{() -> listener.onItemClick(position, item)}" />
+                app:onDebounceClick="@{(v) -> listener.onItemClick(v, position, item)}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

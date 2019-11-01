@@ -80,7 +80,8 @@ class CastItemUiModel(
 @Keep
 class PersonUiModel(
     val name: String,
-    val cast: String
+    val cast: String,
+    val query: String
 )
 
 @Keep

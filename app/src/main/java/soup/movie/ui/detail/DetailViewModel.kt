@@ -110,15 +110,11 @@ class DetailViewModel @Inject constructor(
         if (kobis != null) {
             val persons = mutableListOf<PersonUiModel>()
             persons.addAll(kobis.directors.orEmpty().map {
-                PersonUiModel(name = it, cast = "감독")
+                PersonUiModel(name = it, cast = "감독", query = "감독 $it")
             })
             persons.addAll(kobis.actors.orEmpty().map {
-                val cast = if (it.cast.isEmpty()) {
-                    "배우"
-                } else {
-                    it.cast
-                }
-                PersonUiModel(name = it.peopleNm, cast = cast)
+                val cast = if (it.cast.isEmpty()) "출연" else it.cast
+                PersonUiModel(name = it.peopleNm, cast = cast, query = "배우 ${it.peopleNm}")
             })
             if (persons.isNotEmpty()) {
                 items.add(CastItemUiModel(persons = persons))

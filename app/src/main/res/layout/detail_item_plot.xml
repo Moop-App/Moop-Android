@@ -28,7 +28,7 @@
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="16dp"
         app:cardElevation="@dimen/detail_card_elevation"
-        app:onDebounceClick="@{() -> listener.onItemClick(position, item)}">
+        app:onDebounceClick="@{(v) -> listener.onItemClick(v, position, item)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

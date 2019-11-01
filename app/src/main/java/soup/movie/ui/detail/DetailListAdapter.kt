@@ -12,7 +12,7 @@ internal class DetailListAdapter(
 ) : DataBindingListAdapter<ContentItemUiModel>(AlwaysDiffCallback()) {
 
     override val itemListener = DataBindingItemListener<ContentItemUiModel>(
-        onClick = { position, item ->
+        onClick = { _, position, item ->
             if (item is PlotItemUiModel) {
                 item.isExpanded = item.isExpanded.not()
                 notifyItemChanged(position)

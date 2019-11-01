@@ -8,6 +8,14 @@
         <variable
             name="item"
             type="soup.movie.ui.detail.PersonUiModel" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="listener"
+            type="soup.movie.ui.databinding.DataBindingItemListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -18,7 +26,8 @@
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="16dp"
-        app:cardElevation="@dimen/detail_card_elevation">
+        app:cardElevation="@dimen/detail_card_elevation"
+        app:onDebounceClick="@{(v) -> listener.onItemClick(v, position, item)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"

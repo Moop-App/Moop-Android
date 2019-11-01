@@ -25,7 +25,7 @@
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardElevation="@dimen/detail_card_elevation"
-        app:onDebounceClick="@{() -> listener.onItemClick(position, item)}"
+        app:onDebounceClick="@{(v) -> listener.onItemClick(v, position, item)}"
         app:shapeAppearance="@style/ShapeAppearance.Round.Bottom">
 
         <TextView
