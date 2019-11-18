@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
@@ -15,6 +14,7 @@ import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
+import com.google.android.material.tabs.TabLayout
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
@@ -85,12 +85,22 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             toolbar.setNavigationOnClickListener {
                 activityViewModel.openNavigationMenu()
             }
-            actionNow.setOnDebounceClickListener {
-                viewModel.onNowClick()
-            }
-            actionPlan.setOnDebounceClickListener {
-                viewModel.onPlanClick()
-            }
+            tabs.clearOnTabSelectedListeners()
+            tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> viewModel.onNowClick()
+                        1 -> viewModel.onPlanClick()
+                    }
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+            })
         }
         headerHint.hintButton.setOnDebounceClickListener {
             header.appBar.setExpanded(true)
@@ -166,16 +176,11 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     /** UI Renderer */
 
     private fun HomeHeaderBinding.render(uiModel: HomeHeaderUiModel) {
-        fun View.isTabChecked(checked: Boolean) {
-            isEnabled = checked.not()
-            if (this is ViewGroup) {
-                children.forEach {
-                    it.isEnabled = checked.not()
-                }
-            }
+        if (uiModel.isNow) {
+            tabs.selectTab(tabs.getTabAt(0))
+        } else {
+            tabs.selectTab(tabs.getTabAt(1))
         }
-        actionNow.isTabChecked(uiModel.isNow)
-        actionPlan.isTabChecked(uiModel.isPlan)
     }
 
     private fun HomeHeaderHintBinding.render(uiModel: HomeHeaderUiModel) {
