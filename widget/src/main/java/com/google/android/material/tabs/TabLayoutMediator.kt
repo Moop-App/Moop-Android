@@ -18,3 +18,11 @@ fun TabLayout.setupWithViewPager2(
         }
     ).attach()
 }
+
+fun TabLayout.setupWithViewPager2(
+    viewPager2: ViewPager2,
+    autoRefresh: Boolean,
+    configuration: (tab: TabLayout.Tab, position: Int) -> Unit
+) {
+    TabLayoutMediator(this, viewPager2, autoRefresh, configuration).attach()
+}

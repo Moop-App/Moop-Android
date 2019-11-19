@@ -3,8 +3,7 @@ package soup.movie.ui.home
 import soup.movie.data.model.Movie
 
 class HomeHeaderUiModel(
-    val isNow: Boolean,
-    val isPlan: Boolean
+    val isNow: Boolean
 )
 
 class HomeContentsUiModel(

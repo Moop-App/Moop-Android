@@ -20,9 +20,14 @@
         android:layout_height="match_parent"
         tools:context="soup.movie.ui.home.HomeFragment">
 
-        <include
-            android:id="@+id/contents"
-            layout="@layout/home_contents" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"
+            android:orientation="horizontal"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <include
             android:id="@+id/headerHint"
