@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeContentsBinding
-import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.*
 import soup.movie.util.doOnApplyWindowInsets
@@ -20,7 +19,7 @@ import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
-class HomeNowFragment : BaseFragment() {
+class HomeNowFragment : BaseFragment(), HomeTabFragment {
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -94,5 +93,9 @@ class HomeNowFragment : BaseFragment() {
 //        swipeRefreshLayout.isRefreshing = uiModel.isLoading
         errorView.isVisible = uiModel.isError
         noItemsView.isVisible = uiModel.hasNoItem
+    }
+
+    override fun scrollToTop() {
+        binding.listView.smoothScrollToPosition(0)
     }
 }

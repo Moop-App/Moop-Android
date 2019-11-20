@@ -19,7 +19,7 @@ import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
-class HomePlanFragment : BaseFragment() {
+class HomePlanFragment : BaseFragment(), HomeTabFragment {
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -94,5 +94,9 @@ class HomePlanFragment : BaseFragment() {
 //        swipeRefreshLayout.isRefreshing = uiModel.isLoading
         errorView.isVisible = uiModel.isError
         noItemsView.isVisible = uiModel.hasNoItem
+    }
+
+    override fun scrollToTop() {
+        binding.listView.smoothScrollToPosition(0)
     }
 }

@@ -12,6 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.setupWithViewPager2
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
@@ -83,19 +84,10 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
 
     private fun HomeFragmentBinding.init(viewModel: HomeViewModel) {
 //        prepareSharedElements()
-        header.apply {
-            toolbar.setNavigationOnClickListener {
-                activityViewModel.openNavigationMenu()
-            }
-        }
-        headerHint.hintButton.setOnDebounceClickListener {
-            header.appBar.setExpanded(true)
-//            contents.listView.smoothScrollToPosition(0)
-        }
 
         val pageAdapter = object : FragmentStateAdapter(childFragmentManager, viewLifecycleOwner.lifecycle) {
 
-            private val items= arrayOf(
+            private val items= arrayOf<Fragment>(
                 HomeNowFragment(),
                 HomePlanFragment()
             )
@@ -103,28 +95,57 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             override fun createFragment(position: Int): Fragment = items[position]
 
             override fun getItemCount(): Int = items.size
-        }
-        viewPager.offscreenPageLimit = pageAdapter.itemCount
-        viewPager.adapter = pageAdapter
-        header.tabs.setupWithViewPager2(viewPager, autoRefresh = true) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.setIcon(R.drawable.ic_round_movie)
-                    tab.setText(R.string.menu_now)
-                }
-                1 -> {
-                    tab.setIcon(R.drawable.ic_round_plan)
-                    tab.setText(R.string.menu_plan)
+
+            fun scrollToTop(position: Int) {
+                val item = items.getOrNull(position)
+                if (item is HomeTabFragment) {
+                    item.scrollToTop()
                 }
             }
         }
-        viewPager.registerOnPageChangeCallback(pageChangeCallback)
+        viewPager.offscreenPageLimit = pageAdapter.itemCount
+        viewPager.adapter = pageAdapter
+        header.apply {
+            toolbar.setNavigationOnClickListener {
+                activityViewModel.openNavigationMenu()
+            }
+            tabs.setupWithViewPager2(viewPager, autoRefresh = true) { tab, position ->
+                when (position) {
+                    0 -> {
+                        tab.setIcon(R.drawable.ic_round_movie)
+                        tab.setText(R.string.menu_now)
+                    }
+                    1 -> {
+                        tab.setIcon(R.drawable.ic_round_plan)
+                        tab.setText(R.string.menu_plan)
+                    }
+                }
+            }
+        }
+        headerHint.hintButton.setOnDebounceClickListener {
+            header.appBar.setExpanded(true)
+            pageAdapter.scrollToTop(viewPager.currentItem)
+        }
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
             headerHint.render(it)
         }
+        binding.header.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                pageAdapter.scrollToTop(tab.position)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab) {
+            }
+        })
+        viewPager.registerOnPageChangeCallback(pageChangeCallback)
     }
 
     override fun onDestroyView() {
+        binding.header.tabs.clearOnTabSelectedListeners()
         binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
         super.onDestroyView()
     }
