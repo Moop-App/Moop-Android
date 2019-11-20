@@ -111,18 +111,18 @@ object LotteCinema : MarketApp() {
     }
 
     fun executeWeb(ctx: Context, theater: Theater) {
-        ctx.executeWeb(detailWebUrl(theater))
+        ctx.executeWeb(detailWebUrl(theater.code))
     }
 
     fun executeWeb(ctx: Context, theater: TheaterMarkerUiModel) {
-        ctx.executeWeb("https://www.lottecinema.co.kr/LCMW/Contents/Cinema/cinema-detail.aspx?detailDivisionCode=${theater.areaCode}&cinemaID=${theater.code}")
+        ctx.executeWeb(detailWebUrl(theater.code))
     }
 
     private fun detailMobileWebUrl(movieId: LotteMovieId): String =
-            "https://www.lottecinema.co.kr/LCMW/Contents/Movie/Movie-Detail-View.aspx?movie=$movieId"
+            "https://www.lottecinema.co.kr/NLCMW/movie/moviedetailview?movie=$movieId"
 
-    private fun detailWebUrl(theater: Theater): String =
-            "https://www.lottecinema.co.kr/LCMW/Contents/Cinema/cinema-detail.aspx?cinemaID=${theater.code}"
+    private fun detailWebUrl(theaterCode: String): String =
+            "https://www.lottecinema.co.kr/NLCMW/Cinema/Detail?cinemaID=$theaterCode"
 }
 
 object Megabox : MarketApp() {
@@ -138,8 +138,7 @@ object Megabox : MarketApp() {
     }
 
     fun executeWeb(ctx: Context, theater: TheaterMarkerUiModel) {
-        ctx.executeWeb(
-            "https://m.megabox.co.kr/?menuId=theater-detail&region=${theater.areaCode}&cinema=${theater.code}")
+        ctx.executeWeb(detailWebUrl(theater.code))
     }
 
     private fun detailMobileWebUrl(movieId: MegaboxMovieId): String =
