@@ -37,6 +37,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     lateinit var analytics: EventAnalytics
 
     private lateinit var binding: HomeFragmentBinding
+    private lateinit var pageAdapter: HomePageAdapter
     private lateinit var filterBehavior: BottomSheetBehavior<View>
 
     private val activityViewModel: MainViewModel by activityViewModels()
@@ -84,25 +85,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
 
     private fun HomeFragmentBinding.init(viewModel: HomeViewModel) {
 //        prepareSharedElements()
-
-        val pageAdapter = object : FragmentStateAdapter(childFragmentManager, viewLifecycleOwner.lifecycle) {
-
-            private val items= arrayOf<Fragment>(
-                HomeNowFragment(),
-                HomePlanFragment()
-            )
-
-            override fun createFragment(position: Int): Fragment = items[position]
-
-            override fun getItemCount(): Int = items.size
-
-            fun scrollToTop(position: Int) {
-                val item = items.getOrNull(position)
-                if (item is HomeTabFragment) {
-                    item.scrollToTop()
-                }
-            }
-        }
+        pageAdapter = HomePageAdapter(this@HomeFragment)
         viewPager.offscreenPageLimit = pageAdapter.itemCount
         viewPager.adapter = pageAdapter
         header.apply {

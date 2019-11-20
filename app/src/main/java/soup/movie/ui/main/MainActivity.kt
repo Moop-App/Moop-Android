@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -128,10 +129,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun handleBackEventInChildFragment(): Boolean {
-        val current = navHostFragment.childFragmentManager.fragments.elementAtOrNull(0)
+        val current = getCurrentFragment()
         if (current is OnBackPressedListener) {
             return current.onBackPressed()
         }
         return false
+    }
+
+    private fun getCurrentFragment(): Fragment? {
+        return navHostFragment.childFragmentManager.fragments.elementAtOrNull(0)
     }
 }
