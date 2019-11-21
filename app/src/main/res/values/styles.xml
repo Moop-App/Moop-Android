@@ -98,10 +98,10 @@
     </style>
 
     <style name="Widget.Moop.SearchView" parent="android:style/Widget.Material.SearchView">
-        <item name="android:searchIcon">@android:color/transparent</item>
-        <item name="android:searchHintIcon">@android:color/transparent</item>
-        <item name="android:queryBackground">@android:color/transparent</item>
-        <item name="android:submitBackground">@android:color/transparent</item>
+        <item name="android:searchIcon">@color/transparent</item>
+        <item name="android:searchHintIcon">@color/transparent</item>
+        <item name="android:queryBackground">@color/transparent</item>
+        <item name="android:submitBackground">@color/transparent</item>
         <item name="android:closeIcon">@drawable/ic_round_close</item>
     </style>
 

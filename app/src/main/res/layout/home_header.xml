@@ -33,7 +33,7 @@
                         style="@style/Widget.MaterialComponents.TabLayout.Colored"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
+                        android:background="@color/transparent"
                         app:tabIconTint="@color/selector_home_navigation_text"
                         app:tabIndicator="@drawable/home_navigation_indicator"
                         app:tabIndicatorColor="@color/color_secondary_dim"
@@ -42,7 +42,7 @@
                         app:tabIndicatorHeight="36dp"
                         app:tabInlineLabel="true"
                         app:tabMode="scrollable"
-                        app:tabRippleColor="@android:color/transparent"
+                        app:tabRippleColor="@color/transparent"
                         app:tabSelectedTextColor="?attr/colorSecondary"
                         app:tabTextColor="?attr/colorOnSurface">
 

@@ -17,13 +17,25 @@ import soup.movie.util.helper.weekOfYear
 
 /** ImageView */
 
-@BindingAdapter(value = ["android:srcUrl", "android:srcUrlWithKey"], requireAll = false)
-fun ImageView.loadAsync(url: String?, withKey: Boolean) {
-    loadAsync(url) {
-        if (withKey) {
-            signature(IntegerKey(today().weekOfYear()))
+@BindingAdapter(value = ["android:srcUrl", "android:srcUrlWithKey", "android:placeholder"], requireAll = false)
+fun ImageView.loadAsync(url: String?, withKey: Boolean = false, placeholder: Drawable? = null) {
+    if (url == null) {
+        GlideApp.with(context)
+            .load(placeholder)
+            .into(this)
+    } else {
+        loadAsync(url) {
+            if (withKey) {
+                signature(IntegerKey(today().weekOfYear()))
+            }
+            if (placeholder != null) {
+                placeholder(placeholder)
+            } else {
+                // To improve overdraw performance,
+                // do NOT show CrossFade effect if placeholder exists.
+                transition(withCrossFade())
+            }
         }
-        transition(withCrossFade())
     }
 }
 

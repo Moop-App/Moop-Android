@@ -3,5 +3,5 @@
     <item android:state_checked="true">
         <color android:color="@color/color_secondary_dim" />
     </item>
-    <item android:drawable="@android:color/transparent" />
+    <item android:drawable="@color/transparent" />
 </selector>

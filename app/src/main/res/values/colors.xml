@@ -3,6 +3,7 @@
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="ic_launcher_background_dark">#000000</color>
 
+    <color name="transparent">#00FFFFFF</color>
     <color name="dim">#DDFFFFFF</color>
 
     <color name="home_hint">#FFFFFF</color>

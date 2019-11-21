@@ -34,7 +34,7 @@
                 android:id="@+id/searchBackContainer"
                 android:layout_width="96dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"
+                android:background="@color/transparent"
                 android:paddingStart="4dp">
 
                 <ImageButton
