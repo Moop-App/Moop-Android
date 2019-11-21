@@ -111,8 +111,8 @@ build_versions.min_sdk = 23
 build_versions.target_sdk = 29
 build_versions.compile_sdk = 29
 build_versions.build_tools = "29.0.2"
-build_versions.versionCode = 81
-build_versions.versionName = '0.8.1'
+build_versions.versionCode = 82
+build_versions.versionName = '0.8.2'
 ext.build_versions = build_versions
 
 static def addProjectRepositories(RepositoryHandler handler) {
