@@ -9,10 +9,10 @@ import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.android.synthetic.main.main_activity.*
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
@@ -29,20 +29,22 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
-
     @Inject
     lateinit var analytics: EventAnalytics
 
+    private lateinit var binding: MainActivityBinding
+
+    private val viewModel: MainViewModel by viewModels()
+
     private val listener = NavController.OnDestinationChangedListener {
         _, destination, _ ->
-        navigationView.setCheckedItem(destination.id)
+        binding.navigationView.setCheckedItem(destination.id)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Moop_Main)
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
+        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
         binding.lifecycleOwner = this
         if (isPortrait) {
             binding.root.systemUiVisibility =
@@ -54,7 +56,7 @@ class MainActivity : BaseActivity() {
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
         binding.drawerLayout.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
-            navigationView.updatePadding(
+            binding.navigationView.updatePadding(
                 top = initialPadding.top + windowInsets.systemWindowInsetTop
             )
         }
@@ -70,7 +72,7 @@ class MainActivity : BaseActivity() {
 
         binding.navigationView.setNavigationItemSelectedListener {
             consume {
-                drawerLayout.closeDrawer(GravityCompat.START)
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
                 val navController = navHostFragment.findNavController()
                 when (it.itemId) {
                     R.id.home -> navController.popBackStack(R.id.home, false)
@@ -108,7 +110,7 @@ class MainActivity : BaseActivity() {
     private fun execute(action: MainUiEvent) {
         when (action) {
             is OpenDrawerMenuUiEvent -> {
-                drawerLayout.openDrawer(GravityCompat.START)
+                binding.drawerLayout.openDrawer(GravityCompat.START)
             }
             is ShowDetailUiEvent -> {
                 MovieSelectManager.select(action.movie)
@@ -120,8 +122,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerVisible(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
             return
         }
         if (handleBackEventInChildFragment()) return
@@ -139,4 +141,7 @@ class MainActivity : BaseActivity() {
     private fun getCurrentFragment(): Fragment? {
         return navHostFragment.childFragmentManager.fragments.elementAtOrNull(0)
     }
+
+    private val navHostFragment: Fragment
+        get() = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
 }

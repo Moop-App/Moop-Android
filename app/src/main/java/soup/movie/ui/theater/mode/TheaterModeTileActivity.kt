@@ -2,24 +2,27 @@ package soup.movie.ui.theater.mode
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_theater_mode.*
+import androidx.databinding.DataBindingUtil
 import soup.movie.R
+import soup.movie.databinding.ActivityTheaterModeBinding
 import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState
 
 class TheaterModeTileActivity : AppCompatActivity() {
 
     private val tileManager = TheaterModeTileManager
 
+    private lateinit var binding: ActivityTheaterModeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_theater_mode)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_theater_mode)
 
         updateStateView()
 
-        activeButton.setOnClickListener {
+        binding.activeButton.setOnClickListener {
             updateState(TileState.Active)
         }
-        inactiveButton.setOnClickListener {
+        binding.inactiveButton.setOnClickListener {
             updateState(TileState.Inactive)
         }
     }
@@ -30,7 +33,7 @@ class TheaterModeTileActivity : AppCompatActivity() {
     }
 
     private fun updateStateView() {
-        stateView.text = when (tileManager.tileState) {
+        binding.stateView.text = when (tileManager.tileState) {
             TileState.Active -> "Active"
             TileState.Inactive -> "Inactive"
         }

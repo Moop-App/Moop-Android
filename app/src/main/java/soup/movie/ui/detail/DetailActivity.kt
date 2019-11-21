@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
-import kotlinx.android.synthetic.main.detail_activity.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.model.Movie
@@ -38,27 +37,31 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
         MovieSelectManager.getSelectedItem()!!
     }
 
-    private val viewModel: DetailViewModel by viewModels()
-
     @Inject
     lateinit var analytics: EventAnalytics
+
+    private lateinit var binding: DetailActivityBinding
+
+    private val viewModel: DetailViewModel by viewModels()
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
 
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            val maxOffset = max(
-                header.height,
-                recyclerView.resources.getDimensionPixelSize(R.dimen.detail_header_height)
-            )
-            val headerIsShown = (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
-            val offset = if (headerIsShown) {
-                min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
-            } else {
-                maxOffset.toFloat()
+            binding.header.root.run {
+                val maxOffset = max(
+                    height,
+                    recyclerView.resources.getDimensionPixelSize(R.dimen.detail_header_height)
+                )
+                val headerIsShown = (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
+                val offset = if (headerIsShown) {
+                    min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
+                } else {
+                    maxOffset.toFloat()
+                }
+                translationZ = if (offset < 10f) 1f else 0f
+                translationY = -offset
+                alpha = 1f - offset / maxOffset
             }
-            header.translationZ = if (offset < 10f) 1f else 0f
-            header.translationY = -offset
-            header.alpha = 1f - offset / maxOffset
         }
     }
 
@@ -68,8 +71,6 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
             finishAfterTransition()
         }
     }
-
-    private lateinit var binding: DetailActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -197,13 +198,13 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
 
     override fun onResume() {
         super.onResume()
-        draggableFrame.addListener(chromeFader)
-        listView.addOnScrollListener(scrollListener)
+        binding.draggableFrame.addListener(chromeFader)
+        binding.listView.addOnScrollListener(scrollListener)
     }
 
     override fun onPause() {
-        draggableFrame.removeListener(chromeFader)
-        listView.removeOnScrollListener(scrollListener)
+        binding.draggableFrame.removeListener(chromeFader)
+        binding.listView.removeOnScrollListener(scrollListener)
         super.onPause()
     }
 

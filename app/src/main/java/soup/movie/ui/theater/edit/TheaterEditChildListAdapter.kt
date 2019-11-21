@@ -1,11 +1,13 @@
 package soup.movie.ui.theater.edit
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.theater_edit_item_area.view.*
 import soup.movie.R
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
+import soup.movie.databinding.TheaterEditItemAreaBinding
 import soup.movie.domain.theater.edit.TheaterEditManager.Companion.MAX_ITEMS
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
@@ -25,33 +27,41 @@ class TheaterEditChildListAdapter(
 
     private var selectedIdSet: MutableList<Theater> = arrayListOf()
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaGroupViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = TheaterEditItemAreaBinding.inflate(layoutInflater, parent, false)
+        return AreaGroupViewHolder(binding)
+    }
+
     override fun onBindViewHolder(holder: DataBindingViewHolder<AreaGroup>, position: Int) {
         super.onBindViewHolder(holder, position)
-        holder.itemView.theaterListView.apply {
-            removeAllViews()
-            getItem(position)?.theaterList?.map { theater ->
-                inflate<Chip>(context, theater.getFilterChipLayout()).apply {
-                    text = theater.name
-                    val isSelected = selectedIdSet.any { it.id == theater.id }
-                    isChecked = isSelected
-                    isChipIconVisible = isSelected.not()
-                    setOnCheckedChangeListener { _, checked ->
-                        if (checked) {
-                            if (listener.add(theater)) {
-                                selectedIdSet.add(theater)
-                                isChipIconVisible = false
+        if (holder is AreaGroupViewHolder) {
+            holder.theaterListView.apply {
+                removeAllViews()
+                getItem(position)?.theaterList?.map { theater ->
+                    inflate<Chip>(context, theater.getFilterChipLayout()).apply {
+                        text = theater.name
+                        val isSelected = selectedIdSet.any { it.id == theater.id }
+                        isChecked = isSelected
+                        isChipIconVisible = isSelected.not()
+                        setOnCheckedChangeListener { _, checked ->
+                            if (checked) {
+                                if (listener.add(theater)) {
+                                    selectedIdSet.add(theater)
+                                    isChipIconVisible = false
+                                } else {
+                                    isChecked = false
+                                    context.showToast(context.getString(R.string.theater_select_limit_description, MAX_ITEMS))
+                                }
                             } else {
-                                isChecked = false
-                                context.showToast(context.getString(R.string.theater_select_limit_description, MAX_ITEMS))
+                                listener.remove(theater)
+                                selectedIdSet.removeAll { it.id == theater.id }
+                                isChipIconVisible = true
                             }
-                        } else {
-                            listener.remove(theater)
-                            selectedIdSet.removeAll { it.id == theater.id }
-                            isChipIconVisible = true
                         }
                     }
-                }
-            }?.forEach { addView(it) }
+                }?.forEach { addView(it) }
+            }
         }
     }
 
@@ -70,5 +80,10 @@ class TheaterEditChildListAdapter(
             Theater.TYPE_MEGABOX -> R.layout.theater_edit_item_megabox
             else -> throw IllegalArgumentException("$type is not valid type.")
         }
+    }
+
+    class AreaGroupViewHolder(binding: TheaterEditItemAreaBinding) : DataBindingViewHolder<AreaGroup>(binding) {
+
+        val theaterListView = binding.theaterListView
     }
 }

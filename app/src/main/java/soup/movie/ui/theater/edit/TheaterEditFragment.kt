@@ -18,7 +18,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.setupWithViewPager2
-import kotlinx.android.synthetic.main.theater_edit_footer.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterEditFooterBinding
@@ -33,6 +32,8 @@ import java.util.concurrent.TimeUnit
 class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
 
     private var pendingFinish: Boolean = false
+
+    private lateinit var binding: TheaterEditFragmentBinding
 
     private val viewModel: TheaterEditViewModel by viewModels()
 
@@ -53,7 +54,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
             override fun onMapSharedElements(names: MutableList<String>,
                                              sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
-                selectedTheaterGroup?.run {
+                binding.footer.selectedTheaterGroup?.run {
                     (0 until childCount)
                         .mapNotNull { getChildAt(it) }
                         .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
@@ -69,7 +70,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
             ) {
                 sharedElements.clear()
                 names.forEach { name ->
-                    selectedTheaterGroup.findViewWithTag<View>(name)?.let {
+                    binding.footer.selectedTheaterGroup.findViewWithTag<View>(name)?.let {
                         sharedElements[name] = it
                     }
                 }
@@ -84,7 +85,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         postponeEnterTransition(500, TimeUnit.MILLISECONDS)
-        val binding = TheaterEditFragmentBinding.inflate(inflater, container, false)
+        binding = TheaterEditFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.initViewState()
         binding.adaptSystemWindowInset()

@@ -1,10 +1,11 @@
 package soup.movie.ui.theater.sort
 
 import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.listener.OnDragListener
 import androidx.recyclerview.widget.listener.OnItemMoveListener
-import kotlinx.android.synthetic.main.theater_sort_item_cgv.view.*
 import soup.movie.R
 import soup.movie.data.model.Theater
 import soup.movie.ui.databinding.DataBindingAdapter
@@ -19,14 +20,15 @@ internal class TheaterSortListAdapter: DataBindingAdapter<Theater>(), OnItemMove
         this.dragListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<Theater> {
-        return super.onCreateViewHolder(parent, viewType).apply {
-            itemView.dragHandle.setOnTouchListener { _, event ->
-                if (event.actionMasked == MotionEvent.ACTION_DOWN) {
-                    dragListener?.onDragStart(this)
+    override fun createViewHolder(binding: ViewDataBinding): DataBindingViewHolder<Theater> {
+        return super.createViewHolder(binding).apply {
+            itemView.findViewById<View>(R.id.dragHandle)
+                .setOnTouchListener { _, event ->
+                    if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                        dragListener?.onDragStart(this)
+                    }
+                    false
                 }
-                false
-            }
         }
     }
 

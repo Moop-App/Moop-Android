@@ -9,7 +9,7 @@ import soup.movie.BR
 open class DataBindingViewHolder<T>(
     //TODO: Change to private access again
     //private val binding: ViewDataBinding
-    val binding: ViewDataBinding
+    open val binding: ViewDataBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @CallSuper

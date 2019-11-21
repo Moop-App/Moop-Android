@@ -13,7 +13,6 @@ import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
-import kotlinx.android.synthetic.main.search_header.*
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.SearchContentsBinding
@@ -30,16 +29,17 @@ import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
 
-    private val viewModel: SearchViewModel by viewModels()
-
     @Inject
     lateinit var analytics: EventAnalytics
+    private lateinit var binding: SearchFragmentBinding
+
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        val binding = SearchFragmentBinding.inflate(inflater, container, false)
+        binding = SearchFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.header.setup()
         binding.contents.setup()
@@ -60,12 +60,12 @@ class SearchFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        ImeUtil.showIme(searchView)
+        ImeUtil.showIme(binding.header.searchView)
     }
 
     override fun onPause() {
         super.onPause()
-        ImeUtil.hideIme(searchView)
+        ImeUtil.hideIme(binding.header.searchView)
     }
 
     private fun SearchHeaderBinding.setup() {

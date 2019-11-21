@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.listener.OnItemMoveListener
 import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import androidx.transition.TransitionInflater
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.theater_sort_fragment.*
 import soup.movie.R
 import soup.movie.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.BaseFragment
@@ -28,6 +27,8 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
+
+    private lateinit var binding: TheaterSortFragmentBinding
 
     private val viewModel: TheaterSortViewModel by viewModels()
 
@@ -41,7 +42,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
             override fun onMapSharedElements(names: List<String>,
                                              sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
-                listView?.run {
+                binding.listView?.run {
                     (0 until childCount)
                         .mapNotNull { getChildAt(it) }
                         .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
@@ -55,7 +56,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
                                              sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
                 names.forEach { name ->
-                    listView.findViewWithTag<View>(name)?.run {
+                    binding.listView.findViewWithTag<View>(name)?.run {
                         sharedElements[name] = this
                     }
                 }
@@ -70,7 +71,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         postponeEnterTransition(400, TimeUnit.MILLISECONDS)
-        val binding = TheaterSortFragmentBinding.inflate(inflater, container, false)
+        binding = TheaterSortFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         binding.initViewState(viewModel)
@@ -129,7 +130,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun createSharedElements(): Array<Pair<View, String>> =
-        listView?.run {
+        binding.listView?.run {
             (0 until childCount)
                 .mapNotNull { getChildAt(it) }
                 .mapNotNull { it.findViewById<View>(R.id.theaterChip) }

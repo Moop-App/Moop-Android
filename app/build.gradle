@@ -86,7 +86,7 @@ android {
         enabled = true
     }
     androidExtensions {
-        experimental = true
+        features = ["parcelize"]
     }
 }
 

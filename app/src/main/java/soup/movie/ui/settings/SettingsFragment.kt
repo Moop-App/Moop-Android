@@ -15,7 +15,6 @@ import androidx.core.view.updatePadding
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.settings_item_theater.*
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.data.model.Theater
@@ -32,6 +31,8 @@ import soup.movie.util.helper.Moop
 
 class SettingsFragment : BaseFragment() {
 
+    private lateinit var binding: SettingsFragmentBinding
+
     private val activityViewModel: MainViewModel by activityViewModels()
     private val viewModel: SettingsViewModel by viewModels()
 
@@ -44,7 +45,7 @@ class SettingsFragment : BaseFragment() {
                                              sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
                 names.forEach { name ->
-                    theaterGroup.findViewWithTag<View>(name)?.let {
+                    binding.theaterItem.theaterGroup.findViewWithTag<View>(name)?.let {
                         sharedElements[name] = it
                     }
                 }
@@ -57,7 +58,7 @@ class SettingsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = SettingsFragmentBinding.inflate(inflater, container, false)
+        binding = SettingsFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         binding.initViewState(viewModel)
@@ -182,7 +183,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun createSharedElementsForTheaters(): Array<Pair<View, String>> =
-        theaterGroup?.run {
+        binding.theaterItem.theaterGroup?.run {
             (0 until childCount)
                 .mapNotNull { getChildAt(it) }
                 .map { it to it.transitionName }
