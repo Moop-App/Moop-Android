@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
@@ -21,13 +19,8 @@ import soup.movie.databinding.HomeHeaderHintBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.filter.HomeFilterViewModel
-import soup.movie.ui.home.now.HomeNowFragment
-import soup.movie.ui.home.plan.HomePlanFragment
 import soup.movie.ui.main.MainViewModel
-import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.inflate
-import soup.movie.util.observe
-import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -95,11 +88,11 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             tabs.setupWithViewPager2(viewPager, autoRefresh = true) { tab, position ->
                 when (position) {
                     0 -> {
-                        tab.setIcon(R.drawable.ic_round_movie)
+                        tab.setIcon(R.drawable.asld_round_movie)
                         tab.setText(R.string.menu_now)
                     }
                     1 -> {
-                        tab.setIcon(R.drawable.ic_round_plan)
+                        tab.setIcon(R.drawable.asld_round_plan)
                         tab.setText(R.string.menu_plan)
                     }
                 }
@@ -165,6 +158,15 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         } else {
             R.string.menu_plan
         })
+        hintLabel.apply {
+            scaleX = 1.2f
+            scaleY = 1.2f
+            animate()
+                .setDuration(100)
+                .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                .scaleX(1f)
+                .scaleY(1f)
+        }
     }
 
     /** Custom Back */
