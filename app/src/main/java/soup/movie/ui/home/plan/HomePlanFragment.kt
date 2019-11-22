@@ -15,6 +15,7 @@ import soup.movie.databinding.HomeContentsBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.*
 import soup.movie.util.doOnApplyWindowInsets
+import soup.movie.util.isInProgress
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
@@ -65,13 +66,6 @@ class HomePlanFragment : BaseFragment(), HomeTabFragment {
                 )
             )
         }
-//        swipeRefreshLayout.apply {
-//            setProgressBackgroundColorSchemeColor(context.getColorCompat(R.color.home_hint))
-//            setColorSchemeColors(context.getColorAttr(R.attr.colorOnSurface))
-//            setOnRefreshListener {
-//                viewModel.refresh()
-//            }
-//        }
         listView.apply {
             adapter = listAdapter
             itemAnimator = SlideInUpAnimator().apply {
@@ -91,7 +85,7 @@ class HomePlanFragment : BaseFragment(), HomeTabFragment {
     }
 
     private fun HomeContentsBinding.render(uiModel: HomeContentsUiModel) {
-//        swipeRefreshLayout.isRefreshing = uiModel.isLoading
+        loadingView.isInProgress = uiModel.isLoading
         errorView.isVisible = uiModel.isError
         noItemsView.isVisible = uiModel.hasNoItem
     }

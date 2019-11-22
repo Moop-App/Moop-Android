@@ -65,6 +65,22 @@
 
         </androidx.viewpager2.NestedScrollableHost>
 
+        <soup.movie.widget.ContentLoadingProgressBar
+            android:id="@+id/loadingView"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="54dp"
+            android:background="@drawable/ic_loading_bg"
+            android:elevation="12dp"
+            android:indeterminateDrawable="@drawable/ic_loading"
+            android:indeterminateDuration="500"
+            android:indeterminateOnly="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
         <include
             android:id="@+id/errorView"
             layout="@layout/common_error"
