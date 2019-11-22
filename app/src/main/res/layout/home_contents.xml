@@ -38,25 +38,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icon" />
 
-        <androidx.recyclerview.widget.RecyclerViewEx
-            android:id="@+id/listView"
+        <androidx.viewpager2.NestedScrollableHost
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:padding="8dp"
-            android:requiresFadingEdge="none"
-            android:scrollbars="none"
-            app:layoutManagerType="grid"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:spanCount="@integer/grid_span_count"
-            tools:itemCount="20"
-            tools:listitem="@layout/home_item_movie"
-            tools:visibility="gone" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerViewEx
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:padding="8dp"
+                android:requiresFadingEdge="none"
+                android:scrollbars="none"
+                app:layoutManagerType="grid"
+                app:spanCount="@integer/grid_span_count"
+                tools:itemCount="20"
+                tools:listitem="@layout/home_item_movie"
+                tools:visibility="gone" />
+
+        </androidx.viewpager2.NestedScrollableHost>
 
         <include
             android:id="@+id/errorView"
