@@ -14,4 +14,5 @@ object Interpolators {
     val ACCELERATE_DECELERATE: Interpolator = AccelerateDecelerateInterpolator()
     val DECELERATE_QUINT: Interpolator = DecelerateInterpolator(2.5f)
     val PANEL_CLOSE_ACCELERATED: Interpolator = PathInterpolator(0.3f, 0f, 0.5f, 1f)
+    val SPRING = OvershootInterpolator(.7f)
 }

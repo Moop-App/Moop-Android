@@ -15,7 +15,6 @@ import soup.movie.databinding.HomeContentsBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.*
 import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.isInProgress
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject

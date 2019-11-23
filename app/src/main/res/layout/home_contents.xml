@@ -41,7 +41,6 @@
         <androidx.viewpager2.NestedScrollableHost
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,15 +69,17 @@
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginTop="54dp"
             android:background="@drawable/ic_loading_bg"
             android:elevation="12dp"
             android:indeterminateDrawable="@drawable/ic_loading"
             android:indeterminateDuration="500"
             android:indeterminateOnly="true"
+            android:translationY="-60dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:translationY="50dp"
             tools:visibility="visible" />
 
         <include
