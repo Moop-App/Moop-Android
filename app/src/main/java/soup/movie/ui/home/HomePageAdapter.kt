@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import soup.movie.ui.home.now.HomeNowFragment
 import soup.movie.ui.home.plan.HomePlanFragment
+import soup.movie.ui.home.tab.HomeTabFragment
 
 class HomePageAdapter(fragment: HomeFragment) : FragmentStateAdapter(fragment) {
 

@@ -8,20 +8,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import soup.movie.domain.home.GetMovieFilterUseCase
 import soup.movie.domain.home.GetNowMovieListUseCase
-import soup.movie.ui.base.BaseViewModel
 import soup.movie.ui.home.HomeContentsUiModel
 import soup.movie.ui.home.HomeUiMapper
+import soup.movie.ui.home.tab.HomeTabViewModel
 import javax.inject.Inject
 
 class HomeNowViewModel @Inject constructor(
     getNowMovieList: GetNowMovieListUseCase,
     getMovieFilter: GetMovieFilterUseCase
-) : BaseViewModel(), HomeUiMapper {
+) : HomeTabViewModel(), HomeUiMapper {
 
     private var doRefreshRelay = BehaviorRelay.createDefault(false)
 
     private val _contentsUiModel = MutableLiveData<HomeContentsUiModel>()
-    val contentsUiModel: LiveData<HomeContentsUiModel>
+    override val contentsUiModel: LiveData<HomeContentsUiModel>
         get() = _contentsUiModel
 
     init {
@@ -37,7 +37,7 @@ class HomeNowViewModel @Inject constructor(
             .disposeOnCleared()
     }
 
-    fun refresh() {
+    override fun refresh() {
         doRefreshRelay.accept(true)
     }
 
