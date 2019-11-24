@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.linecorp.pasha.di.qualifier.NamedHome
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeContentsBinding
@@ -24,6 +26,10 @@ class HomeNowFragment : BaseFragment(), HomeTabFragment {
     @Inject
     lateinit var analytics: EventAnalytics
 
+    @Inject
+    @field:NamedHome
+    lateinit var viewPool: RecyclerView.RecycledViewPool
+
     private lateinit var binding: HomeContentsBinding
     private val viewModel: HomeNowViewModel by viewModels()
 
@@ -34,7 +40,7 @@ class HomeNowFragment : BaseFragment(), HomeTabFragment {
     ): View? {
         binding = HomeContentsBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.init(viewModel)
+        binding.initViewState(viewModel)
         binding.adaptSystemWindowInset()
         return binding.root
     }
@@ -52,7 +58,7 @@ class HomeNowFragment : BaseFragment(), HomeTabFragment {
         super.onDestroyView()
     }
 
-    private fun HomeContentsBinding.init(viewModel: HomeNowViewModel) {
+    private fun HomeContentsBinding.initViewState(viewModel: HomeNowViewModel) {
         val listAdapter = HomeListAdapter { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
@@ -72,6 +78,7 @@ class HomeNowFragment : BaseFragment(), HomeTabFragment {
             }
             overScrollMode = View.OVER_SCROLL_NEVER
             setOnTouchListener(HomeListScrollEffect(this))
+            setRecycledViewPoolForMovie(viewPool)
         }
         errorView.setOnDebounceClickListener {
             viewModel.refresh()

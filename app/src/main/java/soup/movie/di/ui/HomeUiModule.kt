@@ -1,8 +1,11 @@
 package soup.movie.di.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
+import com.linecorp.pasha.di.qualifier.NamedHome
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import soup.movie.di.scope.ChildFragmentScope
@@ -20,7 +23,10 @@ import soup.movie.ui.home.plan.HomePlanViewModel
 abstract class HomeUiModule {
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [HomeTabUiModule::class])
+    @ContributesAndroidInjector(modules = [
+        HomeTabUiModule::class,
+        HomeViewPoolModule::class
+    ])
     abstract fun provideHomeFragment(): HomeFragment
 
     @Binds
@@ -54,4 +60,13 @@ abstract class HomeTabUiModule {
     @IntoMap
     @ViewModelKey(HomePlanViewModel::class)
     abstract fun bindHomePlanViewModel(viewModel: HomePlanViewModel): ViewModel
+}
+
+@Module
+class HomeViewPoolModule {
+
+    @FragmentScope
+    @Provides
+    @NamedHome
+    fun provideHomeViewPool(): RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
 }
