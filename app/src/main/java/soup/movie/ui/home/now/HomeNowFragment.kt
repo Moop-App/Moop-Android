@@ -89,6 +89,8 @@ class HomeNowFragment : BaseFragment(), HomeTabFragment {
     }
 
     override fun scrollToTop() {
-        binding.listView.smoothScrollToPosition(0)
+        if (::binding.isInitialized) {
+            binding.listView.scrollToPosition(0)
+        }
     }
 }
