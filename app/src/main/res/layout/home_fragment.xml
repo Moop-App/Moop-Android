@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="soup.movie.ui.home.HomeViewModel" />
-
-        <variable
-            name="filterViewModel"
-            type="soup.movie.ui.home.filter.HomeFilterViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -46,15 +42,20 @@
             android:contentDescription="@string/menu_filter"
             app:srcCompat="@drawable/ic_round_filter_list" />
 
-        <include
+        <FrameLayout
             android:id="@+id/filter"
-            layout="@layout/home_filter_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:elevation="10dp"
             app:behavior_hideable="true"
             app:behavior_skipCollapsed="true"
-            app:layout_behavior="@string/bottom_sheet_behavior"
-            app:viewModel="@{filterViewModel}" />
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/filter_container_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

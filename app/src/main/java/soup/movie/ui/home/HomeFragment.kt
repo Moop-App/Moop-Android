@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.setupWithViewPager2
 import soup.movie.R
@@ -18,9 +20,12 @@ import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.databinding.HomeHeaderHintBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.ui.home.filter.HomeFilterViewModel
+import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.main.MainViewModel
-import soup.movie.util.*
+import soup.movie.util.Interpolators
+import soup.movie.util.doOnApplyWindowInsets
+import soup.movie.util.observe
+import soup.movie.util.setOnDebounceClickListener
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -31,11 +36,10 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
 
     private lateinit var binding: HomeFragmentBinding
     private lateinit var pageAdapter: HomePageAdapter
-    private lateinit var filterBehavior: BottomSheetBehavior<View>
+    private lateinit var filterBehavior: BottomSheetBehavior<FrameLayout>
 
     private val activityViewModel: MainViewModel by activityViewModels()
     private val viewModel: HomeViewModel by viewModels()
-    private val filterViewModel: HomeFilterViewModel by viewModels()
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
@@ -57,9 +61,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        binding.filterViewModel = filterViewModel
         binding.init(viewModel)
-        binding.initFilter(filterViewModel)
         binding.adaptSystemWindowInset()
         return binding.root
     }
@@ -67,9 +69,16 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
         val fabMargin: Int = root.context.resources.getDimensionPixelSize(R.dimen.fab_margin)
         homeScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
-            view.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
-            )
+            val statusBarTopMargin = initialPadding.top + windowInsets.systemWindowInsetTop
+            headerHint.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = statusBarTopMargin
+            }
+            header.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = statusBarTopMargin
+            }
+            filterContainerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = statusBarTopMargin
+            }
             filterButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = fabMargin + windowInsets.systemWindowInsetBottom
             }
@@ -118,36 +127,25 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             }
         })
         viewPager.registerOnPageChangeCallback(pageChangeCallback)
+
+        filterBehavior = BottomSheetBehavior.from(filter).apply {
+            state = BottomSheetBehavior.STATE_HIDDEN
+        }
+        filter.doOnPreDraw {
+            childFragmentManager.commit {
+                replace<HomeFilterFragment>(R.id.filter_container_view)
+            }
+        }
+        filterButton.setOnDebounceClickListener {
+            analytics.clickMenuFilter()
+            filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
     override fun onDestroyView() {
         binding.header.tabs.clearOnTabSelectedListeners()
         binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
         super.onDestroyView()
-    }
-
-    private fun HomeFragmentBinding.initFilter(viewModel: HomeFilterViewModel) {
-        filterBehavior = BottomSheetBehavior.from(filter.root).apply {
-            state = BottomSheetBehavior.STATE_HIDDEN
-        }
-        filterButton.setOnDebounceClickListener {
-            analytics.clickMenuFilter()
-            filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        }
-        viewModel.genreUiModel.observe(viewLifecycleOwner) {
-            filter.genreItem.genreFilterGroup.run {
-                removeAllViews()
-                it.items.forEach {
-                    val genreChip: Chip = inflate(context, R.layout.home_filter_item_genre)
-                    genreChip.text = it.name
-                    genreChip.isChecked = it.isChecked
-                    genreChip.setOnCheckedChangeListener { _, isChecked ->
-                        viewModel.onGenreFilterClick(it.name, isChecked)
-                    }
-                    addView(genreChip)
-                }
-            }
-        }
     }
 
     /** UI Renderer */
