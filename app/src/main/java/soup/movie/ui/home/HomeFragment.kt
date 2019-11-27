@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.viewpager2.widget.ViewPager2
@@ -73,9 +74,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             headerHint.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 topMargin = statusBarTopMargin
             }
-            header.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                topMargin = statusBarTopMargin
-            }
+            header.collapsingToolbar.updatePadding(top = statusBarTopMargin)
             filterContainerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 topMargin = statusBarTopMargin
             }
