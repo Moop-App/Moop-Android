@@ -76,7 +76,7 @@ abstract class HomeTabFragment : BaseFragment() {
             }
         listView.apply {
             adapter = listAdapter
-            itemAnimator = SlideInUpAnimator().apply {
+            itemAnimator = HomeTabItemAnimator().apply {
                 addDuration = 200
                 removeDuration = 200
             }
