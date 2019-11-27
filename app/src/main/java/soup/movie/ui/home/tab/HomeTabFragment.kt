@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.linecorp.pasha.di.qualifier.NamedHome
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeContentsBinding
 import soup.movie.ui.base.BaseFragment
