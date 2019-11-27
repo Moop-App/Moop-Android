@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.app.SharedElementCallback
-import androidx.core.view.doOnPreDraw
+import androidx.core.view.postDelayed
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.commit
@@ -130,14 +130,20 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         filterBehavior = BottomSheetBehavior.from(filter).apply {
             state = BottomSheetBehavior.STATE_HIDDEN
         }
-        filter.doOnPreDraw {
-            childFragmentManager.commit {
-                replace<HomeFilterFragment>(R.id.filter_container_view)
-            }
-        }
         filterButton.setOnDebounceClickListener {
             analytics.clickMenuFilter()
-            filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+            val tag = "filter"
+            if (childFragmentManager.findFragmentByTag(tag) == null) {
+                childFragmentManager.commit {
+                    replace<HomeFilterFragment>(R.id.filter_container_view, tag = tag)
+                }
+                it.postDelayed(200) {
+                    filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+            } else {
+                filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
         }
     }
 
