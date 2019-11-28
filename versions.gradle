@@ -63,7 +63,7 @@ deps.dagger = [
         android_processor: "com.google.dagger:dagger-android-processor:$dagger"
 ]
 
-def kotlin = "1.3.60"
+def kotlin = "1.3.61"
 deps.kotlin = [
         stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin",
         plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
