@@ -76,7 +76,7 @@ sealed class MarketApp {
 
 object Moop : MarketApp() {
 
-    override val packageName = BuildConfig.APPLICATION_ID
+    override val packageName = "soup.movie"
 }
 
 object Cgv : MarketApp() {
