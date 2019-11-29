@@ -2,8 +2,6 @@ package soup.movie.data.source.local
 
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
-import soup.movie.data.model.Version
 import soup.movie.data.model.response.CachedMovieList
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_NOW
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
@@ -18,7 +16,6 @@ class LocalMoopDataSource(
 ) : MoopDataSource {
 
     private var codeResponse: CodeResponse? = null
-    private val versionSubject: BehaviorSubject<Version> = BehaviorSubject.create()
 
     fun saveNowList(response: MovieListResponse) {
         saveMovieListAs(TYPE_NOW, response)
@@ -55,13 +52,5 @@ class LocalMoopDataSource(
 
     override fun getCodeList(): Observable<CodeResponse> {
         return codeResponse?.toObservable().orEmpty()
-    }
-
-    fun saveVersion(version: Version) {
-        versionSubject.onNext(version)
-    }
-
-    override fun getVersion(): Observable<Version> {
-        return versionSubject
     }
 }

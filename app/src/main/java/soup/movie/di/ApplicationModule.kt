@@ -5,6 +5,8 @@ import dagger.Module
 import dagger.Provides
 import soup.movie.MovieApplication
 import soup.movie.analytics.EventAnalytics
+import soup.movie.device.InAppUpdateManager
+import soup.movie.device.ProductAppUpdateManager
 import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.theme.ThemeOptionManager
 import soup.movie.theme.ThemeOptionStore
@@ -45,4 +47,10 @@ class ApplicationModule {
             return themeOptionSetting.get()
         }
     })
+
+    @Singleton
+    @Provides
+    fun provideAppUpdateManager(
+        context: Context
+    ): InAppUpdateManager = ProductAppUpdateManager(context)
 }

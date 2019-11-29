@@ -36,37 +36,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/versionSeparator"
-            app:layout_constraintEnd_toStartOf="@+id/versionSeparator"
+            app:layout_constraintBottom_toBottomOf="@+id/versionButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/versionSeparator"
-            tools:text="현재 0.1.8" />
-
-        <TextView
-            android:id="@+id/versionSeparator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_vertical"
-            android:text="/"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/versionButton"
-            app:layout_constraintEnd_toStartOf="@+id/latestVersionLabel"
-            app:layout_constraintStart_toEndOf="@+id/currentVersionLabel"
-            app:layout_constraintTop_toTopOf="@+id/versionButton" />
-
-        <TextView
-            android:id="@+id/latestVersionLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintBottom_toBottomOf="@+id/versionSeparator"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/versionSeparator"
-            app:layout_constraintTop_toTopOf="@+id/versionSeparator"
-            tools:text="최신 0.1.8" />
+            app:layout_constraintTop_toTopOf="@+id/versionButton"
+            tools:text="현재버전 0.8.5" />
 
         <ImageView
             android:id="@+id/marketIcon"

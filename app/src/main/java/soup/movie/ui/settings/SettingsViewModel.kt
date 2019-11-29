@@ -2,10 +2,11 @@ package soup.movie.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
-import soup.movie.data.MoopRepository
-import soup.movie.data.model.Version
+import soup.movie.device.InAppUpdateManager
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.theme.ThemeOptionManager
@@ -16,7 +17,7 @@ class SettingsViewModel @Inject constructor(
     themeOptionManager: ThemeOptionManager,
     themeOptionSetting: ThemeOptionSetting,
     theatersSetting: TheatersSetting,
-    repository: MoopRepository
+    appUpdateManager: InAppUpdateManager
 ) : BaseViewModel() {
 
     private val _themeUiModel = MutableLiveData<ThemeSettingUiModel>()
@@ -32,11 +33,6 @@ class SettingsViewModel @Inject constructor(
         get() = _versionUiModel
 
     init {
-        repository
-            .refreshVersion()
-            .subscribe()
-            .disposeOnCleared()
-
         //TODO: Fix again later. This is so ugly...
         themeOptionSetting.asObservable()
             .map { ThemeSettingUiModel(themeOptionManager.getCurrentOption()) }
@@ -52,28 +48,13 @@ class SettingsViewModel @Inject constructor(
             .subscribe { _theaterUiModel.value = it }
             .disposeOnCleared()
 
-        val current = currentVersion()
-        repository.getVersion()
-            .startWith(current)
-            .defaultIfEmpty(current)
-            .onErrorReturnItem(current)
-            .distinctUntilChanged()
-            .map { latest ->
-                VersionSettingUiModel(
-                    current,
-                    latest,
-                    isLatest = current.versionCode >= latest.versionCode
-                )
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _versionUiModel.value = it }
-            .disposeOnCleared()
-    }
-
-    private fun currentVersion(): Version {
-        return Version(
-            BuildConfig.VERSION_CODE,
-            BuildConfig.VERSION_NAME
-        )
+        viewModelScope.launch {
+            val latestVersionCode = appUpdateManager.getAvailableVersionCode()
+            _versionUiModel.value = VersionSettingUiModel(
+                versionCode = BuildConfig.VERSION_CODE,
+                versionName = BuildConfig.VERSION_NAME,
+                isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
+            )
+        }
     }
 }

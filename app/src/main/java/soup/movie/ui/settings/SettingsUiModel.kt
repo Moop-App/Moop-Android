@@ -2,7 +2,6 @@ package soup.movie.ui.settings
 
 import androidx.annotation.Keep
 import soup.movie.data.model.Theater
-import soup.movie.data.model.Version
 import soup.movie.theme.ThemeOption
 
 sealed class SettingsUiModel
@@ -14,8 +13,8 @@ data class TheaterSettingUiModel(
 
 @Keep
 data class VersionSettingUiModel(
-    val current: Version,
-    val latest: Version,
+    val versionCode: Int,
+    val versionName: String,
     val isLatest: Boolean
 ) : SettingsUiModel()
 

@@ -151,20 +151,23 @@ class SettingsFragment : BaseFragment() {
         }
     }
 
-    private fun SettingsItemVersionBinding.render(viewState: VersionSettingUiModel) {
-        versionViewState = viewState
-        currentVersionLabel.text = getString(R.string.settings_version_current, viewState.current.versionName)
-        latestVersionLabel.text = getString(R.string.settings_version_latest, viewState.latest.versionName)
-        if (viewState.isLatest) {
+    private fun SettingsItemVersionBinding.render(uiModel: VersionSettingUiModel) {
+        versionViewState = uiModel
+        currentVersionLabel.text = if (uiModel.isLatest) {
+            getString(R.string.settings_version_latest, uiModel.versionName)
+        } else {
+            getString(R.string.settings_version_current, uiModel.versionName)
+        }
+        if (uiModel.isLatest) {
             marketIcon.setImageResource(R.drawable.ic_round_shop)
         } else {
             marketIcon.setImageResource(R.drawable.ic_round_new_releases)
         }
-        if (viewState.isLatest.not()) {
+        if (uiModel.isLatest.not()) {
             AlertDialog.Builder(requireContext())
                 .setIcon(R.drawable.ic_round_new_releases)
                 .setTitle(R.string.settings_version_update_title)
-                .setMessage(getString(R.string.settings_version_update_message, viewState.latest.versionName))
+                .setMessage(getString(R.string.settings_version_update_message))
                 .setPositiveButton(R.string.settings_version_update_button_positive) { _, _ ->
                     Moop.executePlayStore(requireContext())
                 }
