@@ -2,9 +2,8 @@ package soup.movie.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.liveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
 import soup.movie.device.InAppUpdateManager
 import soup.movie.settings.impl.TheatersSetting
@@ -28,9 +27,14 @@ class SettingsViewModel @Inject constructor(
     val theaterUiModel: LiveData<TheaterSettingUiModel>
         get() = _theaterUiModel
 
-    private val _versionUiModel = MutableLiveData<VersionSettingUiModel>()
-    val versionUiModel: LiveData<VersionSettingUiModel>
-        get() = _versionUiModel
+    val versionUiModel: LiveData<VersionSettingUiModel> = liveData {
+        val latestVersionCode = appUpdateManager.getAvailableVersionCode()
+        emit(VersionSettingUiModel(
+            versionCode = BuildConfig.VERSION_CODE,
+            versionName = BuildConfig.VERSION_NAME,
+            isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
+        ))
+    }
 
     init {
         //TODO: Fix again later. This is so ugly...
@@ -47,14 +51,5 @@ class SettingsViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _theaterUiModel.value = it }
             .disposeOnCleared()
-
-        viewModelScope.launch {
-            val latestVersionCode = appUpdateManager.getAvailableVersionCode()
-            _versionUiModel.value = VersionSettingUiModel(
-                versionCode = BuildConfig.VERSION_CODE,
-                versionName = BuildConfig.VERSION_NAME,
-                isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
-            )
-        }
     }
 }
