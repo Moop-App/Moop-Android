@@ -57,7 +57,7 @@ deps.navigation = [
         safe_args_plugin: "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
 ]
 
-def retrofit = "2.6.2"
+def retrofit = "2.7.0"
 deps.retrofit = [
         runtime: "com.squareup.retrofit2:retrofit:$retrofit",
         gson   : "com.squareup.retrofit2:converter-gson:$retrofit",
