@@ -32,9 +32,9 @@
     <string name="settings_category_version">Version</string>
     <string name="settings_version_current">Current %s</string>
     <string name="settings_version_latest">Latest %s</string>
-    <string name="settings_version_toast">The current version is latest.</string>
+    <string name="settings_version_toast">This is latest version.</string>
     <string name="settings_version_update_title">Version Update</string>
-    <string name="settings_version_update_message">New version(%s) has been released.\nDo you want to proceed with the update?</string>
+    <string name="settings_version_update_message">New version has been released.\nDo you want to proceed with the update?</string>
     <string name="settings_version_update_button_positive">Update now</string>
     <string name="settings_version_update_button_negative">Try later</string>
     <string name="settings_category_feedback">Feedback</string>

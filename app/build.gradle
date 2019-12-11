@@ -112,6 +112,9 @@ dependencies {
     implementation deps.androidx.viewpager2
 
     implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.livedata_ktx
+    implementation deps.lifecycle.viewmodel_ktx
+    implementation deps.lifecycle.runtime_ktx
     kapt deps.lifecycle.compiler
 
     implementation deps.navigation.fragment_ktx
@@ -158,6 +161,8 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.naver.maps:map-sdk:3.5.0'
+
+    implementation 'com.google.android.play:core-ktx:1.6.4'
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

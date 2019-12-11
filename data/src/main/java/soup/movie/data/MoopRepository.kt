@@ -1,10 +1,8 @@
 package soup.movie.data
 
-import io.reactivex.Completable
 import io.reactivex.Observable
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieId
-import soup.movie.data.model.Version
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.local.LocalMoopDataSource
@@ -93,17 +91,4 @@ class MoopRepository(
     private fun getCodeListFromNetwork(): Observable<CodeResponse> =
         remoteDataSource.getCodeList()
             .doOnNext { localDataSource.saveCodeList(it) }
-
-    fun getVersion(): Observable<Version> = getVersionInMemory()
-
-    fun refreshVersion(): Completable = getVersionFromNetwork()
-        .ignoreElements()
-        .onErrorComplete()
-
-    private fun getVersionInMemory(): Observable<Version> =
-        localDataSource.getVersion()
-
-    private fun getVersionFromNetwork(): Observable<Version> =
-        remoteDataSource.getVersion()
-            .doOnNext { localDataSource.saveVersion(it) }
 }

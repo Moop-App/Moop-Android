@@ -4,7 +4,6 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import soup.movie.data.model.Movie
 import soup.movie.data.model.response.CodeResponse
-import soup.movie.data.model.response.VersionResponse
 
 interface MoopApiService {
 
@@ -19,8 +18,4 @@ interface MoopApiService {
     // 공통코드
     @GET("code.json")
     fun getCodeList(): Observable<CodeResponse>
-
-    // 버전정보
-    @GET("version.json")
-    fun getVersion(): Observable<VersionResponse>
 }
