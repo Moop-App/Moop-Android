@@ -87,7 +87,6 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     private fun HomeFragmentBinding.init(viewModel: HomeViewModel) {
 //        prepareSharedElements()
         pageAdapter = HomePageAdapter(this@HomeFragment)
-        viewPager.offscreenPageLimit = pageAdapter.itemCount
         viewPager.adapter = pageAdapter
         header.apply {
             toolbar.setNavigationOnClickListener {

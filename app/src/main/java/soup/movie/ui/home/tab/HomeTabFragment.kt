@@ -11,8 +11,6 @@ import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.linecorp.pasha.di.qualifier.NamedHome
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeContentsBinding
 import soup.movie.ui.base.BaseFragment
@@ -26,10 +24,6 @@ abstract class HomeTabFragment : BaseFragment() {
 
     @Inject
     lateinit var analytics: EventAnalytics
-
-    @Inject
-    @field:NamedHome
-    lateinit var viewPool: RecyclerView.RecycledViewPool
 
     private lateinit var binding: HomeContentsBinding
     protected abstract val viewModel: HomeTabViewModel
@@ -81,7 +75,6 @@ abstract class HomeTabFragment : BaseFragment() {
             }
             overScrollMode = View.OVER_SCROLL_NEVER
             setOnTouchListener(HomeListScrollEffect(this))
-            setRecycledViewPoolForMovie(viewPool)
         }
         errorView.setOnDebounceClickListener {
             viewModel.refresh()
@@ -101,15 +94,6 @@ abstract class HomeTabFragment : BaseFragment() {
     fun scrollToTop() {
         if (::binding.isInitialized) {
             binding.listView.scrollToPosition(0)
-        }
-    }
-
-    fun RecyclerView.setRecycledViewPoolForMovie(pool: RecyclerView.RecycledViewPool) {
-        setRecycledViewPool(pool)
-        layoutManager?.run {
-            if (this is LinearLayoutManager) {
-                recycleChildrenOnDetach = true
-            }
         }
     }
 }
