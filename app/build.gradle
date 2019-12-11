@@ -126,6 +126,10 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.dagger.android_processor
 
+    implementation deps.work.runtime
+    implementation deps.work.rxjava2
+    androidTestImplementation deps.work.testing
+
     implementation deps.room.runtime
     implementation deps.room.rxjava2
     kapt deps.room.compiler

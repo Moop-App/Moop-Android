@@ -35,6 +35,13 @@ deps.lifecycle = [
         compiler     : "androidx.lifecycle:lifecycle-compiler:$lifecycle"
 ]
 
+def work = "2.3.0-beta01"
+deps.work = [
+        runtime : "androidx.work:work-runtime-ktx:$work",
+        rxjava2 : "androidx.work:work-rxjava2:$work",
+        testing : "androidx.work:work-testing:$work"
+]
+
 def room = "2.2.2"
 deps.room = [
         runtime : "androidx.room:room-runtime:$room",
