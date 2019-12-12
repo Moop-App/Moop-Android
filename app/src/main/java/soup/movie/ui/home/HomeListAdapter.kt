@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.core.util.Pair
-import androidx.recyclerview.widget.ext.AlwaysDiffCallback
+import androidx.recyclerview.widget.ext.IdBasedDiffCallback
 import soup.movie.R
 import soup.movie.data.model.Movie
 import soup.movie.databinding.HomeItemMovieBinding
@@ -20,7 +20,7 @@ import soup.movie.util.showToast
 
 class HomeListAdapter(
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
-) : DataBindingListAdapter<Movie>(AlwaysDiffCallback()) {
+) : DataBindingListAdapter<Movie>(IdBasedDiffCallback { it.moopId }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

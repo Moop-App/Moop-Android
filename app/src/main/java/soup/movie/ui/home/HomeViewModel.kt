@@ -7,7 +7,7 @@ import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-) : BaseViewModel(), HomeUiMapper {
+) : BaseViewModel() {
 
     private enum class Tab {
         Now, Plan

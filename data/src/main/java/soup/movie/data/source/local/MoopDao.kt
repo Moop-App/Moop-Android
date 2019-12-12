@@ -5,14 +5,14 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import io.reactivex.Maybe
+import io.reactivex.Flowable
 import soup.movie.data.model.response.CachedMovieList
 
 @Dao
 interface MoopDao {
 
     @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
-    fun findByType(type: String): Maybe<CachedMovieList>
+    fun findByType(type: String): Flowable<CachedMovieList>
 
     @Insert(onConflict = REPLACE)
     fun insert(response: CachedMovieList)

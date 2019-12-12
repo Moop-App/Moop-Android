@@ -7,8 +7,5 @@ class HomeHeaderUiModel(
 )
 
 class HomeContentsUiModel(
-    val isLoading: Boolean,
-    val movies: List<Movie>,
-    val hasNoItem: Boolean,
-    val isError: Boolean
+    val movies: List<Movie>
 )

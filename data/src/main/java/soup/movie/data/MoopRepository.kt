@@ -1,10 +1,13 @@
 package soup.movie.data
 
+import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieId
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
+import soup.movie.data.model.response.isStaleness
 import soup.movie.data.source.local.LocalMoopDataSource
 import soup.movie.data.source.remote.RemoteMoopDataSource
 import soup.movie.data.util.SearchHelper
@@ -14,31 +17,44 @@ class MoopRepository(
     private val remoteDataSource: RemoteMoopDataSource
 ) {
 
-    fun getNowList(clearCache: Boolean): Observable<MovieListResponse> = when {
-        clearCache -> getNowListFromNetwork()
-        else -> Observable.concat(
-            getNowListFromDB(),
-            getNowListFromNetwork())
-            .take(1)
+    fun getNowList(): Observable<MovieListResponse> {
+        return localDataSource.getNowList()
     }
 
-    private fun getNowListFromDB(): Observable<MovieListResponse> =
-        localDataSource.getNowList()
-
-    private fun getNowListFromNetwork(): Observable<MovieListResponse> =
-        remoteDataSource.getNowList()
-            .doOnNext { localDataSource.saveNowList(it) }
-
-    fun getPlanList(clearCache: Boolean): Observable<MovieListResponse> = when {
-        clearCache -> getPlanListFromNetwork()
-        else -> Observable.concat(
-            getPlanListFromDB(),
-            getPlanListFromNetwork())
-            .take(1)
+    fun updateNowList(): Completable {
+        return localDataSource.getNowList()
+            .subscribeOn(Schedulers.io())
+            .map { it.isStaleness() }
+            .first(true)
+            .flatMapCompletable { isStaleness ->
+                if (isStaleness) {
+                    remoteDataSource.getNowList()
+                        .doOnNext { localDataSource.saveNowList(it) }
+                        .ignoreElements()
+                } else {
+                    Completable.complete()
+                }
+            }
     }
 
-    private fun getPlanListFromDB(): Observable<MovieListResponse> =
-        localDataSource.getPlanList()
+    fun getPlanList(): Observable<MovieListResponse> {
+        return localDataSource.getPlanList()
+    }
+
+    fun updatePlanList(): Completable {
+        return localDataSource.getPlanList()
+            .map { it.isStaleness() }
+            .first(true)
+            .flatMapCompletable { isStaleness ->
+                if (isStaleness) {
+                    remoteDataSource.getPlanList()
+                        .doOnNext { localDataSource.savePlanList(it) }
+                        .ignoreElements()
+                } else {
+                    Completable.complete()
+                }
+            }
+    }
 
     private fun getPlanListFromNetwork(): Observable<MovieListResponse> =
         remoteDataSource.getPlanList()
@@ -46,12 +62,11 @@ class MoopRepository(
 
     fun getMovie(movieId: MovieId): Observable<Movie> =
         Observable.merge(
-            getNowList(false).map { it.list },
-            getPlanList(false).map { it.list })
+            getNowList().map { it.list },
+            getPlanList().map { it.list })
             .flatMapIterable { it }
             .filter { it.isMatchedWith(movieId) }
             .take(1)
-
 
     private fun Movie.isMatchedWith(movieId: MovieId): Boolean {
         return id == movieId.id
@@ -68,8 +83,8 @@ class MoopRepository(
 
     fun searchMovie(query: String): Observable<List<Movie>> =
         Observable.merge(
-            getNowList(false).map { it.list },
-            getPlanList(false).map { it.list })
+            getNowList().map { it.list },
+            getPlanList().map { it.list })
             .flatMapIterable { it }
             .filter { it.isMatchedWith(query) }
             .toList()

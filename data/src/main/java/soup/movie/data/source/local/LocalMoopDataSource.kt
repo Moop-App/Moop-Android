@@ -1,7 +1,6 @@
 package soup.movie.data.source.local
 
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.response.CachedMovieList
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_NOW
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
@@ -40,10 +39,8 @@ class LocalMoopDataSource(
     private fun getMovieListAs(type: String): Observable<MovieListResponse> {
         return moopDao.findByType(type)
             .onErrorReturn { CachedMovieList.empty(type) }
-            .toObservable()
-            .filter { it.isUpToDate() }
             .map { MovieListResponse(it.lastUpdateTime, it.list) }
-            .subscribeOn(Schedulers.io())
+            .toObservable()
     }
 
     fun saveCodeList(response: CodeResponse) {

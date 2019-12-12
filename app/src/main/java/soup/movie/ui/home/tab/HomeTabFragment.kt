@@ -7,14 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.postOnAnimationDelayed
 import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeContentsBinding
 import soup.movie.ui.base.BaseFragment
-import soup.movie.ui.home.*
+import soup.movie.ui.home.HomeFragmentDirections
+import soup.movie.ui.home.HomeListAdapter
+import soup.movie.ui.home.HomeListScrollEffect
+import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
@@ -69,26 +73,31 @@ abstract class HomeTabFragment : BaseFragment() {
             }
         listView.apply {
             adapter = listAdapter
-            itemAnimator = HomeTabItemAnimator().apply {
-                addDuration = 200
-                removeDuration = 200
-            }
+            itemAnimator = FadeInAnimator()
             overScrollMode = View.OVER_SCROLL_NEVER
             setOnTouchListener(HomeListScrollEffect(this))
         }
         errorView.setOnDebounceClickListener {
             viewModel.refresh()
         }
-        viewModel.contentsUiModel.observe(viewLifecycleOwner) {
-            render(it)
-            listAdapter.submitList(it.movies)
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            loadingView.isInProgress = it
         }
-    }
+        viewModel.isError.observe(viewLifecycleOwner) {
+            errorView.isVisible = it
+        }
+        viewModel.contentsUiModel.observe(viewLifecycleOwner) {
+            val isTopPosition = listView.canScrollVertically(-1).not()
 
-    private fun HomeContentsBinding.render(uiModel: HomeContentsUiModel) {
-        loadingView.isInProgress = uiModel.isLoading
-        errorView.isVisible = uiModel.isError
-        noItemsView.isVisible = uiModel.hasNoItem
+            noItemsView.isVisible = it.movies.isEmpty()
+            listAdapter.submitList(it.movies)
+
+            if (it.movies.isNotEmpty() && isTopPosition) {
+                listView.postOnAnimationDelayed(100) {
+                    listView.smoothScrollToPosition(0)
+                }
+            }
+        }
     }
 
     fun scrollToTop() {
