@@ -92,7 +92,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun SearchContentsBinding.setup() {
-        val listAdapter = HomeListAdapter { movie, sharedElements ->
+        val listAdapter = HomeListAdapter(root.context) { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
             findNavController().navigate(

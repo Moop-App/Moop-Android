@@ -1,5 +1,6 @@
 package soup.movie.ui.home
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,11 +20,13 @@ import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.showToast
 
 class HomeListAdapter(
+    context: Context,
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
 ) : DataBindingListAdapter<Movie>(IdBasedDiffCallback { it.moopId }) {
 
+    private val layoutInflater = LayoutInflater.from(context)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
         val binding = HomeItemMovieBinding.inflate(layoutInflater, parent, false)
         return MovieViewHolder(binding).apply {
             itemView.setOnDebounceClickListener(delay = 150L) {

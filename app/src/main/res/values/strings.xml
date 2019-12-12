@@ -8,6 +8,9 @@
     <string name="menu_search">Movie Search</string>
     <string name="menu_map">Map</string>
 
+    <string name="movie_tag_new" translatable="false">NEW</string>
+    <string name="movie_tag_best" translatable="false">BEST</string>
+
     <string name="action_share">Share</string>
     <string name="action_share_poster">Share poster</string>
 

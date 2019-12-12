@@ -112,7 +112,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
             headerHint.render(it)
         }
-        binding.header.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        header.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabReselected(tab: TabLayout.Tab) {
                 pageAdapter.scrollToTop(tab.position)

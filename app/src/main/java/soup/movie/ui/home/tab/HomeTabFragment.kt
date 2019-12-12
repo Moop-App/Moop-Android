@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.postOnAnimationDelayed
 import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
+import soup.movie.data.model.Movie
 import soup.movie.databinding.HomeContentsBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.home.HomeFragmentDirections
@@ -39,9 +40,13 @@ abstract class HomeTabFragment : BaseFragment() {
     ): View? {
         binding = HomeContentsBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.initViewState(viewModel)
         binding.adaptSystemWindowInset()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.initViewState(viewModel)
     }
 
     private fun HomeContentsBinding.adaptSystemWindowInset() {
@@ -59,18 +64,17 @@ abstract class HomeTabFragment : BaseFragment() {
     }
 
     private fun HomeContentsBinding.initViewState(viewModel: HomeTabViewModel) {
-        val listAdapter =
-            HomeListAdapter { movie, sharedElements ->
-                analytics.clickMovie()
-                MovieSelectManager.select(movie)
-                findNavController().navigate(
-                    HomeFragmentDirections.actionToDetail(),
-                    ActivityNavigatorExtras(
-                        activityOptions = ActivityOptionsCompat
-                            .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
-                    )
+        val listAdapter = HomeListAdapter(root.context) { movie, sharedElements ->
+            analytics.clickMovie()
+            MovieSelectManager.select(movie)
+            findNavController().navigate(
+                HomeFragmentDirections.actionToDetail(),
+                ActivityNavigatorExtras(
+                    activityOptions = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
                 )
-            }
+            )
+        }
         listView.apply {
             adapter = listAdapter
             itemAnimator = FadeInAnimator()
@@ -87,14 +91,20 @@ abstract class HomeTabFragment : BaseFragment() {
             errorView.isVisible = it
         }
         viewModel.contentsUiModel.observe(viewLifecycleOwner) {
-            val isTopPosition = listView.canScrollVertically(-1).not()
-
             noItemsView.isVisible = it.movies.isEmpty()
-            listAdapter.submitList(it.movies)
+            onUpdateList(listView, it.movies)
+        }
+    }
 
-            if (it.movies.isNotEmpty() && isTopPosition) {
-                listView.postOnAnimationDelayed(100) {
-                    listView.smoothScrollToPosition(0)
+    protected open fun onUpdateList(listView: RecyclerView, movies: List<Movie>) {
+        listView.run {
+            val listAdapter = adapter
+            if (listAdapter is HomeListAdapter) {
+                val isTopPosition = canScrollVertically(-1).not()
+                listAdapter.submitList(movies) {
+                    if (movies.isNotEmpty() && isTopPosition) {
+                        smoothScrollToPosition(0)
+                    }
                 }
             }
         }

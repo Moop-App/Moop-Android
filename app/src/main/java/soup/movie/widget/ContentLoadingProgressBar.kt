@@ -42,7 +42,6 @@ class ContentLoadingProgressBar @JvmOverloads constructor(
                         .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
                         .setDuration(150)
                         .translationY(-moveDistance)
-                        .withStartAction(null)
                         .withEndAction {
                             visibility = View.GONE
                         }
