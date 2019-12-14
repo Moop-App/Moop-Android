@@ -128,6 +128,7 @@ dependencies {
 
     implementation deps.work.runtime
     implementation deps.work.rxjava2
+    implementation deps.work.gcm
     androidTestImplementation deps.work.testing
 
     implementation deps.room.runtime
