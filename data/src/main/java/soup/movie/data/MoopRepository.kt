@@ -22,12 +22,12 @@ class MoopRepository(
     }
 
     fun updateNowList(): Completable {
-        return localDataSource.getNowList()
+        return localDataSource.findNowMovieList()
             .subscribeOn(Schedulers.io())
             .map { it.isStaleness() }
-            .first(true)
-            .flatMapCompletable { isStaleness ->
-                if (isStaleness) {
+            .defaultIfEmpty(true)
+            .flatMapCompletable {
+                if (it) {
                     remoteDataSource.getNowList()
                         .doOnNext { localDataSource.saveNowList(it) }
                         .ignoreElements()
@@ -42,11 +42,12 @@ class MoopRepository(
     }
 
     fun updatePlanList(): Completable {
-        return localDataSource.getPlanList()
+        return localDataSource.findPlanMovieList()
+            .subscribeOn(Schedulers.io())
             .map { it.isStaleness() }
-            .first(true)
-            .flatMapCompletable { isStaleness ->
-                if (isStaleness) {
+            .defaultIfEmpty(true)
+            .flatMapCompletable {
+                if (it) {
                     remoteDataSource.getPlanList()
                         .doOnNext { localDataSource.savePlanList(it) }
                         .ignoreElements()
@@ -55,10 +56,6 @@ class MoopRepository(
                 }
             }
     }
-
-    private fun getPlanListFromNetwork(): Observable<MovieListResponse> =
-        remoteDataSource.getPlanList()
-            .doOnNext { localDataSource.savePlanList(it) }
 
     fun getMovie(movieId: MovieId): Observable<Movie> =
         Observable.merge(
