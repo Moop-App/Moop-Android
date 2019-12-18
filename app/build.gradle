@@ -56,8 +56,8 @@ android {
             } else {
                 signingConfig signingConfigs.debug
             }
-            minifyEnabled false
-            proguardFiles 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             def filesAuthorityValue = 'soup.movie.shareprovider'
             buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""

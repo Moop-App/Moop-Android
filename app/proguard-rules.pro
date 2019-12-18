@@ -20,6 +20,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# AndroidX + support library
+-dontwarn android.support.**
+-dontwarn androidx.**
+
+# Kakao SDK
 -keep class com.kakao.** { *; }
 -keepattributes Signature
 -keepclassmembers class * {
@@ -27,3 +32,22 @@
   public *;
 }
 -dontwarn android.support.v4.**,org.slf4j.**,com.google.android.gms.**
+
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+# Crashlytics
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+
+# Dagger2
+-dontwarn com.google.errorprone.annotations.*
+
+# For kotlin-reflect
+-dontwarn org.jetbrains.annotations.**
+-keep class kotlin.Metadata { *; }
