@@ -26,26 +26,22 @@ class ContentLoadingProgressBar @JvmOverloads constructor(
         get() = visibility == View.VISIBLE
         set(value) {
             if (value) {
-                postOnAnimation {
-                    animate().cancel()
-                    visibility = View.VISIBLE
-                    animate()
-                        .setInterpolator(Interpolators.SPRING)
-                        .setDuration(400)
-                        .translationY(moveDistance)
-                        .withEndAction(null)
-                }
+                animate().cancel()
+                visibility = View.VISIBLE
+                animate()
+                    .setInterpolator(Interpolators.SPRING)
+                    .setDuration(400)
+                    .translationY(moveDistance)
+                    .withEndAction(null)
             } else {
-                postOnAnimationDelayed(1000) {
-                    animate().cancel()
-                    animate()
-                        .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-                        .setDuration(150)
-                        .translationY(-moveDistance)
-                        .withEndAction {
-                            visibility = View.GONE
-                        }
-                }
+                animate().cancel()
+                animate()
+                    .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
+                    .setDuration(150)
+                    .translationY(-moveDistance)
+                    .withEndAction {
+                        visibility = View.GONE
+                    }
             }
         }
 }
