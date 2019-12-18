@@ -91,16 +91,9 @@ class MoopRepository(
         return SearchHelper.matched(title, query)
     }
 
-    fun getCodeList(): Observable<CodeResponse> =
-        Observable.concat(
-            getCodeListInMemory(),
-            getCodeListFromNetwork())
-            .take(1)
-
-    private fun getCodeListInMemory(): Observable<CodeResponse> =
-        localDataSource.getCodeList()
-
-    private fun getCodeListFromNetwork(): Observable<CodeResponse> =
-        remoteDataSource.getCodeList()
-            .doOnNext { localDataSource.saveCodeList(it) }
+    suspend fun getCodeList(): CodeResponse {
+        return localDataSource.getCodeList()
+            ?: remoteDataSource.getCodeList()
+                .also(localDataSource::saveCodeList)
+    }
 }

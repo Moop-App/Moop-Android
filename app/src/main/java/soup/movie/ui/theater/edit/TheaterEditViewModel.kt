@@ -2,7 +2,11 @@ package soup.movie.ui.theater.edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.data.model.Theater
 import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.ui.base.BaseViewModel
@@ -21,13 +25,17 @@ class TheaterEditViewModel @Inject constructor(
         get() = _footerUiModel
 
     init {
-        manager.loadAsync()
-            .map { TheaterEditContentUiModel.DoneState as TheaterEditContentUiModel }
-            .startWith(TheaterEditContentUiModel.LoadingState)
-            .onErrorReturnItem(TheaterEditContentUiModel.ErrorState)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _contentUiModel.value = it }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            _contentUiModel.value = TheaterEditContentUiModel.LoadingState
+            _contentUiModel.value = withContext(Dispatchers.IO) {
+                try {
+                    manager.loadAsync()
+                    TheaterEditContentUiModel.DoneState
+                } catch (t: Throwable) {
+                    TheaterEditContentUiModel.ErrorState
+                }
+            }
+        }
 
         manager.asSelectedTheatersSubject()
             .map { TheaterEditFooterUiModel(it) }

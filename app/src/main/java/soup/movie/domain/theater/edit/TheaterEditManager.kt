@@ -32,15 +32,14 @@ class TheaterEditManager(
 
     fun asSelectedTheatersSubject(): Observable<List<Theater>> = selectedTheatersSubject
 
-    fun loadAsync(): Observable<CodeResponse> {
-        return repository.getCodeList()
-            .doOnSubscribe { setupSelectedList() }
-            .doOnNext {
-                setupTotalList(it)
-                cgvSubject.onNext(it.cgv)
-                lotteSubject.onNext(it.lotte)
-                megaboxSubject.onNext(it.megabox)
-            }
+    suspend fun loadAsync(): CodeResponse {
+        setupSelectedList()
+        return repository.getCodeList().also {
+            setupTotalList(it)
+            cgvSubject.onNext(it.cgv)
+            lotteSubject.onNext(it.lotte)
+            megaboxSubject.onNext(it.megabox)
+        }
     }
 
     private fun setupTotalList(response: CodeResponse) {

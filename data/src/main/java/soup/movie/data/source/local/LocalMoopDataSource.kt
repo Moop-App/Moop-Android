@@ -8,8 +8,6 @@ import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
-import soup.movie.data.util.orEmpty
-import soup.movie.data.util.toObservable
 
 class LocalMoopDataSource(
     private val moopDao: MoopDao
@@ -61,7 +59,7 @@ class LocalMoopDataSource(
         codeResponse = response
     }
 
-    override fun getCodeList(): Observable<CodeResponse> {
-        return codeResponse?.toObservable().orEmpty()
+    fun getCodeList(): CodeResponse? {
+        return codeResponse
     }
 }

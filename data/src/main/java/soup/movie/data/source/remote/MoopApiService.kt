@@ -17,5 +17,5 @@ interface MoopApiService {
 
     // 공통코드
     @GET("code.json")
-    fun getCodeList(): Observable<CodeResponse>
+    suspend fun getCodeList(): CodeResponse
 }

@@ -2,11 +2,11 @@ package soup.movie.ui.map
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.jakewharton.rxrelay2.PublishRelay
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.data.MoopRepository
-import soup.movie.data.model.Theater
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
@@ -15,25 +15,24 @@ class TheaterMapViewModel @Inject constructor(
     private val repository: MoopRepository
 ) : BaseViewModel() {
 
-    private val refreshRelay: PublishRelay<Unit> = PublishRelay.create()
-
     private val _uiModel = MutableLiveData<TheaterMapUiModel>()
     val uiModel: LiveData<TheaterMapUiModel>
         get() = _uiModel
 
     init {
-        refreshRelay
-            .switchMap { getCodeObservable() }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(_uiModel::setValue)
-            .disposeOnCleared()
+        viewModelScope.launch {
+            _uiModel.value = loadUiModel()
+        }
     }
 
-    private fun getCodeObservable(): Observable<TheaterMapUiModel> {
-        return repository.getCodeList()
-            .map { it.toTheaterList() }
-            .onErrorReturnItem(emptyList())
-            .map { TheaterMapUiModel(it) }
+    private suspend fun loadUiModel(): TheaterMapUiModel {
+        return withContext(Dispatchers.IO) {
+            try {
+                TheaterMapUiModel(repository.getCodeList().toTheaterList())
+            } catch (t: Throwable) {
+                TheaterMapUiModel(emptyList())
+            }
+        }
     }
 
     private fun CodeResponse.toTheaterList(): List<TheaterMarkerUiModel> {
@@ -71,6 +70,8 @@ class TheaterMapViewModel @Inject constructor(
     }
 
     fun onRefresh() {
-        refreshRelay.accept(Unit)
+        viewModelScope.launch {
+            _uiModel.value = loadUiModel()
+        }
     }
 }
