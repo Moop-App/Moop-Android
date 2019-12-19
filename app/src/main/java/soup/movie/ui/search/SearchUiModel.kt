@@ -2,9 +2,7 @@ package soup.movie.ui.search
 
 import soup.movie.data.model.Movie
 
-class SearchContentsUiModel(
-    val isLoading: Boolean,
+data class SearchContentsUiModel(
     val movies: List<Movie>,
-    val hasNoItem: Boolean,
-    val isError: Boolean
+    val hasNoItem: Boolean
 )

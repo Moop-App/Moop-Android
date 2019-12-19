@@ -32,6 +32,7 @@ dependencies {
 
     implementation deps.room.runtime
     implementation deps.room.rxjava2
+    implementation deps.room.ktx
     kapt deps.room.compiler
 
     implementation deps.retrofit.runtime

@@ -18,6 +18,9 @@ interface MoopDao {
     @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
     fun findByType(type: String): Maybe<CachedMovieList>
 
+    @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
+    suspend fun getMovieListOf(type: String): CachedMovieList
+
     @Insert(onConflict = REPLACE)
     fun insert(response: CachedMovieList)
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.core.util.Pair
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
 import soup.movie.R
 import soup.movie.data.model.Movie
@@ -21,8 +22,9 @@ import soup.movie.util.showToast
 
 class HomeListAdapter(
     context: Context,
+    diffCallback: DiffUtil.ItemCallback<Movie> = IdBasedDiffCallback { it.moopId },
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
-) : DataBindingListAdapter<Movie>(IdBasedDiffCallback { it.moopId }) {
+) : DataBindingListAdapter<Movie>(diffCallback) {
 
     private val layoutInflater = LayoutInflater.from(context)
 

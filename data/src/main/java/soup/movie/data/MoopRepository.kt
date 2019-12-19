@@ -78,14 +78,11 @@ class MoopRepository(
         return this == id
     }
 
-    fun searchMovie(query: String): Observable<List<Movie>> =
-        Observable.merge(
-            getNowList().map { it.list },
-            getPlanList().map { it.list })
-            .flatMapIterable { it }
+    suspend fun searchMovie(query: String): List<Movie> {
+        return localDataSource.getAllMovieList().asSequence()
             .filter { it.isMatchedWith(query) }
             .toList()
-            .toObservable()
+    }
 
     private fun Movie.isMatchedWith(query: String): Boolean {
         return SearchHelper.matched(title, query)

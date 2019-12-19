@@ -3,7 +3,6 @@ package soup.movie.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import soup.movie.di.domain.HomeDomainModule
-import soup.movie.di.domain.SearchDomainModule
 import soup.movie.di.domain.TheaterEditDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
@@ -19,7 +18,6 @@ abstract class ActivityBindingModule {
         HomeUiModule::class,
         HomeDomainModule::class,
         SearchUiModule::class,
-        SearchDomainModule::class,
         SettingsUiModule::class,
         ThemeOptionUiModule::class,
         TheaterMapUiModule::class,

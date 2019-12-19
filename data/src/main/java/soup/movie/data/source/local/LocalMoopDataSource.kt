@@ -2,6 +2,7 @@ package soup.movie.data.source.local
 
 import io.reactivex.Maybe
 import io.reactivex.Observable
+import soup.movie.data.model.Movie
 import soup.movie.data.model.response.CachedMovieList
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_NOW
 import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
@@ -53,6 +54,24 @@ class LocalMoopDataSource(
     private fun findMovieListAs(type: String): Maybe<MovieListResponse> {
         return moopDao.findByType(type)
             .map { MovieListResponse(it.lastUpdateTime, it.list) }
+    }
+
+    suspend fun getAllMovieList() : List<Movie> {
+        return getNowMovieList().list + getPlanMovieList().list
+    }
+
+    private suspend fun getNowMovieList() : MovieListResponse {
+        return getMovieListOf(TYPE_NOW)
+    }
+
+    private suspend fun getPlanMovieList() : MovieListResponse {
+        return getMovieListOf(TYPE_PLAN)
+    }
+
+    private suspend fun getMovieListOf(type: String): MovieListResponse {
+        return moopDao.getMovieListOf(type).let {
+            MovieListResponse(it.lastUpdateTime, it.list)
+        }
     }
 
     fun saveCodeList(response: CodeResponse) {

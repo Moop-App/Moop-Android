@@ -10,9 +10,12 @@ import android.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import jp.wasabeef.recyclerview.animators.FadeInAnimator
+import androidx.recyclerview.widget.ext.AlwaysDiffCallback
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.SearchContentsBinding
@@ -76,13 +79,28 @@ class SearchFragment : BaseFragment() {
             EditorInfo.IME_FLAG_NO_EXTRACT_UI or
             EditorInfo.IME_FLAG_NO_FULLSCREEN
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            private var lastQuery = ""
+
             override fun onQueryTextSubmit(query: String): Boolean {
                 ImeUtil.hideIme(searchView)
                 return true
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                viewModel.searchFor(query)
+                val searchText = query.trim()
+                if (searchText == lastQuery) {
+                    return false
+                }
+
+                lastQuery = searchText
+
+                lifecycleScope.launch {
+                    delay(300)
+                    if (searchText == lastQuery) {
+                        viewModel.searchFor(query)
+                    }
+                }
                 return true
             }
         })
@@ -92,7 +110,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun SearchContentsBinding.setup() {
-        val listAdapter = HomeListAdapter(root.context) { movie, sharedElements ->
+        val listAdapter = HomeListAdapter(root.context, AlwaysDiffCallback()) { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
             findNavController().navigate(
@@ -105,15 +123,15 @@ class SearchFragment : BaseFragment() {
         }
         listView.apply {
             adapter = listAdapter
-            itemAnimator = FadeInAnimator().apply {
-                addDuration = 0
-                removeDuration = 0
+            itemAnimator?.apply {
+                addDuration = 300
+                changeDuration = 0
+                moveDuration = 0
+                removeDuration = 300
             }
         }
         viewModel.uiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.movies)
-            loadingView.isVisible = it.isLoading
-            noItemsView.isVisible = it.hasNoItem
             noItemsView.isVisible = it.hasNoItem
         }
     }
