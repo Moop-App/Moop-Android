@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.data.MoopRepository
-import soup.movie.data.model.Movie
 import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
@@ -22,11 +21,7 @@ class SearchViewModel @Inject constructor(
     fun searchFor(query: String) {
         viewModelScope.launch {
             val movies = withContext(Dispatchers.IO) {
-                try {
-                    repository.searchMovie(query)
-                } catch (t: Throwable) {
-                    emptyList<Movie>()
-                }
+                repository.searchMovie(query)
             }
             _uiModel.value = SearchContentsUiModel(
                 movies = movies,

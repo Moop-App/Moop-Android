@@ -56,21 +56,23 @@ class LocalMoopDataSource(
             .map { MovieListResponse(it.lastUpdateTime, it.list) }
     }
 
-    suspend fun getAllMovieList() : List<Movie> {
-        return getNowMovieList().list + getPlanMovieList().list
+    suspend fun getAllMovieList(): List<Movie> {
+        return getNowMovieList() + getPlanMovieList()
     }
 
-    private suspend fun getNowMovieList() : MovieListResponse {
+    private suspend fun getNowMovieList(): List<Movie> {
         return getMovieListOf(TYPE_NOW)
     }
 
-    private suspend fun getPlanMovieList() : MovieListResponse {
+    private suspend fun getPlanMovieList(): List<Movie> {
         return getMovieListOf(TYPE_PLAN)
     }
 
-    private suspend fun getMovieListOf(type: String): MovieListResponse {
-        return moopDao.getMovieListOf(type).let {
-            MovieListResponse(it.lastUpdateTime, it.list)
+    private suspend fun getMovieListOf(type: String): List<Movie> {
+        return try {
+            moopDao.getMovieListOf(type).list
+        } catch (t: Throwable) {
+            emptyList()
         }
     }
 
