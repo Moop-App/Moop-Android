@@ -22,8 +22,8 @@ deps.androidx = [
 
 deps.test = [
         junit   : "junit:junit:4.12",
-        runner  : "androidx.test:runner:1.2.0",
-        espresso: "androidx.test.espresso:espresso-core:3.2.0"
+        runner  : "androidx.test:runner:1.1.0",
+        espresso: "androidx.test.espresso:espresso-core:3.1.0"
 ]
 
 def lifecycle = "2.2.0-rc02"
@@ -115,7 +115,7 @@ deps.util = [
         threetenabp       : 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 ]
 
-deps.android_gradle_plugin = "com.android.tools.build:gradle:3.5.2"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:3.5.3"
 ext.deps = deps
 
 def build_versions = [:]
