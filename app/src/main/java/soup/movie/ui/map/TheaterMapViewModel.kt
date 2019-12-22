@@ -36,7 +36,7 @@ class TheaterMapViewModel @Inject constructor(
     }
 
     private fun CodeResponse.toTheaterList(): List<TheaterMarkerUiModel> {
-        return cgv.list.flatMap { group ->
+        return cgv.flatMap { group ->
             group.theaterList.map {
                 CgvMarkerUiModel(
                     areaCode = group.area.code,
@@ -46,7 +46,7 @@ class TheaterMapViewModel @Inject constructor(
                     lng = it.lng
                 )
             }
-        } + lotte.list.flatMap { group ->
+        } + lotte.flatMap { group ->
             group.theaterList.map {
                 LotteCinemaMarkerUiModel(
                     areaCode = group.area.code,
@@ -56,7 +56,7 @@ class TheaterMapViewModel @Inject constructor(
                     lng = it.lng
                 )
             }
-        } + megabox.list.flatMap { group ->
+        } + megabox.flatMap { group ->
             group.theaterList.map {
                 MegaboxMarkerUiModel(
                     areaCode = group.area.code,

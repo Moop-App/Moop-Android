@@ -5,7 +5,6 @@ import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.ReplaySubject
 import soup.movie.data.MoopRepository
 import soup.movie.data.model.AreaGroup
-import soup.movie.data.model.CodeGroup
 import soup.movie.data.model.Theater
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.settings.impl.TheatersSetting
@@ -15,20 +14,20 @@ class TheaterEditManager(
     private val theatersSetting: TheatersSetting
 ) {
 
-    private val cgvSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
-    private val lotteSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
-    private val megaboxSubject: ReplaySubject<CodeGroup> = ReplaySubject.create()
+    private val cgvSubject: ReplaySubject<List<AreaGroup>> = ReplaySubject.create()
+    private val lotteSubject: ReplaySubject<List<AreaGroup>> = ReplaySubject.create()
+    private val megaboxSubject: ReplaySubject<List<AreaGroup>> = ReplaySubject.create()
     private val selectedTheatersSubject: BehaviorSubject<List<Theater>> =
         BehaviorSubject.createDefault(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
     private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
 
-    fun asCgvObservable(): Observable<CodeGroup> = cgvSubject
+    fun asCgvObservable(): Observable<List<AreaGroup>> = cgvSubject
 
-    fun asLotteObservable(): Observable<CodeGroup> = lotteSubject
+    fun asLotteObservable(): Observable<List<AreaGroup>> = lotteSubject
 
-    fun asMegaboxObservable(): Observable<CodeGroup> = megaboxSubject
+    fun asMegaboxObservable(): Observable<List<AreaGroup>> = megaboxSubject
 
     fun asSelectedTheatersSubject(): Observable<List<Theater>> = selectedTheatersSubject
 
@@ -44,9 +43,7 @@ class TheaterEditManager(
 
     private fun setupTotalList(response: CodeResponse) {
         theaterList = response.run {
-            listOf(cgv, lotte, megabox)
-                .flatMap(CodeGroup::list)
-                .flatMap(AreaGroup::theaterList)
+            (cgv + lotte + megabox).flatMap(AreaGroup::theaterList)
         }
     }
 

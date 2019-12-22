@@ -21,7 +21,7 @@ class MegaboxEditViewModel @Inject constructor(
     init {
         Observables
             .combineLatest(
-                manager.asMegaboxObservable().map { it.list },
+                manager.asMegaboxObservable(),
                 manager.asSelectedTheatersSubject(),
                 ::TheaterEditChildUiModel
             )

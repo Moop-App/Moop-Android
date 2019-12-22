@@ -21,7 +21,7 @@ class CgvEditViewModel @Inject constructor(
     init {
         Observables
             .combineLatest(
-                manager.asCgvObservable().map { it.list },
+                manager.asCgvObservable(),
                 manager.asSelectedTheatersSubject(),
                 ::TheaterEditChildUiModel
             )

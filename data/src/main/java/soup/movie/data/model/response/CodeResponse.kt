@@ -1,11 +1,12 @@
 package soup.movie.data.model.response
 
 import androidx.annotation.Keep
-import soup.movie.data.model.CodeGroup
+import soup.movie.data.model.AreaGroup
 
 @Keep
 data class CodeResponse(
-    val cgv: CodeGroup,
-    val lotte: CodeGroup,
-    val megabox: CodeGroup
+    val lastUpdateTime: Long,
+    val cgv: List<AreaGroup>,
+    val lotte: List<AreaGroup>,
+    val megabox: List<AreaGroup>
 )

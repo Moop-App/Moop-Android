@@ -21,7 +21,7 @@ class LotteEditViewModel @Inject constructor(
     init {
         Observables
             .combineLatest(
-                manager.asLotteObservable().map { it.list },
+                manager.asLotteObservable(),
                 manager.asSelectedTheatersSubject(),
                 ::TheaterEditChildUiModel
             )

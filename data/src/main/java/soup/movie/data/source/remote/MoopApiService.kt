@@ -8,14 +8,14 @@ import soup.movie.data.model.response.CodeResponse
 interface MoopApiService {
 
     // 현재상영작
-    @GET("now/list.json")
+    @GET("v1/now/list.json")
     fun getNowMovieList(): Observable<List<Movie>>
 
     // 개봉예정작
-    @GET("plan/list.json")
+    @GET("v1/plan/list.json")
     fun getPlanMovieList(): Observable<List<Movie>>
 
     // 공통코드
-    @GET("code.json")
+    @GET("v2/code.json")
     suspend fun getCodeList(): CodeResponse
 }
