@@ -19,27 +19,23 @@ class MovieFilter(
     }
 
     private fun Movie.isFilterBy(theaterFilter: TheaterFilter): Boolean {
-        val isScreeningAtCgv = cgv != null
-        val isScreeningAtLotteCinema = lotte != null
-        val isScreeningAtMegabox = megabox != null
+        val isScreeningAtCgv = theater.cgv != null
+        val isScreeningAtLotteCinema = theater.lotte != null
+        val isScreeningAtMegabox = theater.megabox != null
         return theaterFilter.hasCgv() && isScreeningAtCgv
             || theaterFilter.hasLotteCinema() && isScreeningAtLotteCinema
             || theaterFilter.hasMegabox() && isScreeningAtMegabox
     }
 
     private fun Movie.isFilterBy(ageFilter: AgeFilter): Boolean {
-        val isScreeningForAgeAll = ageValue < 12
-        val isScreeningOverAge12 = (12 <= ageValue) && (ageValue < 15)
-        val isScreeningOverAge15 = (15 <= ageValue) && (ageValue < 19)
-        val isScreeningOverAge19 = 19 <= ageValue
-        return (ageFilter.hasAll() && isScreeningForAgeAll)
-            || (ageFilter.has12() && isScreeningOverAge12)
-            || (ageFilter.has15() && isScreeningOverAge15)
-            || (ageFilter.has19() && isScreeningOverAge19)
+        return (ageFilter.hasAll() && age < 12)
+            || (ageFilter.has12() && age in 12..14)
+            || (ageFilter.has15() && age in 15..18)
+            || (ageFilter.has19() && age >= 19)
     }
 
     private fun Movie.isFilterBy(genreFilter: GenreFilter): Boolean {
-        return genre?.any { it !in genreFilter.blacklist }
-            ?: (genre.isNullOrEmpty() && GENRE_ETC !in genreFilter.blacklist)
+        return genres?.any { it !in genreFilter.blacklist }
+            ?: (genres.isNullOrEmpty() && GENRE_ETC !in genreFilter.blacklist)
     }
 }

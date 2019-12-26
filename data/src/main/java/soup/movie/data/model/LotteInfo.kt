@@ -6,8 +6,6 @@ typealias LotteMovieId = String
 
 @Keep
 data class LotteInfo(
-    val rank: Int,
     val id: LotteMovieId,
-    val star: String,
-    val specialTypes: List<String>?
+    val star: String
 )

@@ -2,6 +2,7 @@ package soup.movie.data.source.remote
 
 import io.reactivex.Observable
 import soup.movie.data.model.Movie
+import soup.movie.data.model.MovieDetail
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
@@ -18,6 +19,10 @@ class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDat
 
     private fun List<Movie>.withTimestamp(): MovieListResponse =
         MovieListResponse(System.currentTimeMillis(), this)
+
+    fun getMovieDetail(movieId: String): Observable<MovieDetail> {
+        return moopApiService.getMovieDetail(movieId)
+    }
 
     suspend fun getCodeList(): CodeResponse {
         return moopApiService.getCodeList()

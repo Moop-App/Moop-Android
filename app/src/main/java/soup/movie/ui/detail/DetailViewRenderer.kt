@@ -1,109 +1,106 @@
 package soup.movie.ui.detail
 
-import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import soup.movie.R
 import soup.movie.databinding.DetailActivityBinding
+import soup.movie.databinding.DetailHeaderBinding
+import soup.movie.databinding.DetailShareBinding
+import soup.movie.domain.model.getAgeLabel
 
 interface DetailViewRenderer {
 
     fun DetailActivityBinding.render(uiModel: HeaderUiModel) {
-        renderHeaderView(uiModel)
-        renderShareView(uiModel)
+        header.render(uiModel)
+        share.render(uiModel)
     }
 
-    private fun DetailActivityBinding.renderHeaderView(it: HeaderUiModel) {
-        if (it.movie.openDate.isEmpty()) {
-            header.run {
-                openDateLabel.isGone = true
-                openDateText.isGone = true
+    private fun DetailHeaderBinding.render(uiModel: HeaderUiModel) {
+        openDateText.text = uiModel.movie.openDate
+        val openDateVisible = uiModel.movie.openDate.isNotEmpty()
+        openDateLabel.isVisible = openDateVisible
+        openDateText.isVisible = openDateVisible
+
+        ageText.text = uiModel.movie.getAgeLabel()
+
+        val genres = uiModel.movie.genres
+        if (genres != null) {
+            genreText.text = genres.joinToString(separator = ", ")
+        }
+        val genresVisible = genres != null
+        genreLabel.isVisible = genresVisible
+        genreText.isVisible = genresVisible
+
+        val nations = uiModel.nations
+        nationText.text = nations.joinToString(separator = ", ")
+        val nationsVisible = nations.isNotEmpty()
+        nationLabel.isVisible = nationsVisible
+        nationText.isVisible = nationsVisible
+
+        val showTm = uiModel.showTm
+        val showTmVisible = showTm > 0
+        if (showTm > 0) {
+            runningTimeText.apply {
+                text = context.getString(R.string.time_minute, uiModel.showTm)
             }
         }
-        val kobis = it.movie.kobis
-        if (kobis == null) {
-            header.run {
-                genreLabel.isGone = true
-                genreText.isGone = true
-                nationLabel.isGone = true
-                nationText.isGone = true
-                runningTimeLabel.isGone = true
-                runningTimeText.isGone = true
-                companyLabel.isGone = true
-                companyText.isGone = true
-            }
-        } else {
-            header.run {
-                genreText.text = kobis.genres?.joinToString(separator = ", ").orEmpty()
-                nationText.text = kobis.nations?.joinToString(separator = ", ").orEmpty()
+        runningTimeLabel.isVisible = showTmVisible
+        runningTimeText.isVisible = showTmVisible
 
-                if (kobis.showTm > 0) {
-                    runningTimeText.apply {
-                        text = context.getString(R.string.time_minute, kobis.showTm)
-                    }
-                } else {
-                    runningTimeLabel.isGone = true
-                    runningTimeText.isGone = true
-                }
-
-                val companies = kobis.companys.orEmpty()
-                    .asSequence()
-                    .filter { it.companyPartNm.contains("배급") }
-                    .map { it.companyNm }
-                    .joinToString(separator = ", ")
-                if (companies.isBlank()) {
-                    companyLabel.isGone = true
-                    companyText.isGone = true
-                } else {
-                    companyText.text = companies
-                }
-            }
+        val companies = uiModel.companys
+            .asSequence()
+            .filter { it.companyPartNm.contains("배급") }
+            .map { it.companyNm }
+            .joinToString(separator = ", ")
+        val companiesVisible = companies.isNotBlank()
+        if (companiesVisible) {
+            companyText.text = companies
         }
+        companyLabel.isVisible = companiesVisible
+        companyText.isVisible = companiesVisible
     }
 
-    private fun DetailActivityBinding.renderShareView(it: HeaderUiModel) {
-        if (it.movie.openDate.isEmpty()) {
-            share.run {
-                openDateLabel.isGone = true
-                openDateText.isGone = true
+    private fun DetailShareBinding.render(uiModel: HeaderUiModel) {
+        openDateText.text = uiModel.movie.openDate
+        val openDateVisible = uiModel.movie.openDate.isNotEmpty()
+        openDateLabel.isVisible = openDateVisible
+        openDateText.isVisible = openDateVisible
+
+        ageText.text = uiModel.movie.getAgeLabel()
+
+        val genres = uiModel.movie.genres
+        if (genres != null) {
+            genreText.text = genres.joinToString(separator = ", ")
+        }
+        val genresVisible = genres != null
+        genreLabel.isVisible = genresVisible
+        genreText.isVisible = genresVisible
+
+        val nations = uiModel.nations
+        nationText.text = nations.joinToString(separator = ", ")
+        val nationsVisible = nations.isNotEmpty()
+        nationLabel.isVisible = nationsVisible
+        nationText.isVisible = nationsVisible
+
+        val showTm = uiModel.showTm
+        val showTmVisible = showTm > 0
+        if (showTm > 0) {
+            runningTimeText.apply {
+                text = context.getString(R.string.time_minute, uiModel.showTm)
             }
         }
-        val kobis = it.movie.kobis
-        if (kobis == null) {
-            share.run {
-                genreLabel.isGone = true
-                genreText.isGone = true
-                nationLabel.isGone = true
-                nationText.isGone = true
-                runningTimeLabel.isGone = true
-                runningTimeText.isGone = true
-                companyLabel.isGone = true
-                companyText.isGone = true
-            }
-        } else {
-            share.run {
-                genreText.text = kobis.genres?.joinToString(separator = ", ").orEmpty()
-                nationText.text = kobis.nations?.joinToString(separator = ", ").orEmpty()
+        runningTimeLabel.isVisible = showTmVisible
+        runningTimeText.isVisible = showTmVisible
 
-                if (kobis.showTm > 0) {
-                    runningTimeText.apply {
-                        text = context.getString(R.string.time_minute, kobis.showTm)
-                    }
-                } else {
-                    runningTimeLabel.isGone = true
-                    runningTimeText.isGone = true
-                }
-
-                val companies = kobis.companys.orEmpty()
-                    .asSequence()
-                    .filter { it.companyPartNm.contains("배급") }
-                    .map { it.companyNm }
-                    .joinToString(separator = ", ")
-                if (companies.isBlank()) {
-                    companyLabel.isGone = true
-                    companyText.isGone = true
-                } else {
-                    companyText.text = companies
-                }
-            }
+        val companies = uiModel.companys
+            .asSequence()
+            .filter { it.companyPartNm.contains("배급") }
+            .map { it.companyNm }
+            .joinToString(separator = ", ")
+        val companiesVisible = companies.isNotBlank()
+        if (companiesVisible) {
+            companyText.text = companies
         }
+        companyLabel.isVisible = companiesVisible
+        companyText.isVisible = companiesVisible
     }
 }

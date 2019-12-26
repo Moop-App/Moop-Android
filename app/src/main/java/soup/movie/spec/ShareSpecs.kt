@@ -10,10 +10,7 @@ import com.kakao.message.template.LinkObject
 import com.kakao.network.ErrorResult
 import com.kakao.network.callback.ResponseCallback
 import soup.movie.data.model.Movie
-import soup.movie.data.model.MovieId
 import soup.movie.domain.model.getAgeLabel
-import soup.movie.util.fromJson
-import soup.movie.util.toJson
 import timber.log.Timber
 
 object KakaoLink {
@@ -27,13 +24,13 @@ object KakaoLink {
         }
     }
 
-    fun extractMovieId(intent: Intent): MovieId? {
-        return intent.data?.getQueryParameter(MOVIE_ID)?.fromJson()
+    fun extractMovieId(intent: Intent): String? {
+        return intent.data?.getQueryParameter(MOVIE_ID)
     }
 
     fun share(context: Context, movie: Movie) {
         val movieLink = LinkObject.newBuilder()
-            .setAndroidExecutionParams("$MOVIE_ID=${movie.toMovieId().toJson()}")
+            .setAndroidExecutionParams("$MOVIE_ID=${movie.id}")
             .build()
         val params = FeedTemplate.newBuilder(
             ContentObject.newBuilder(movie.title, movie.posterUrl, movieLink)

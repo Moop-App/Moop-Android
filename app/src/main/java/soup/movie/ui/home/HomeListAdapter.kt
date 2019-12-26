@@ -22,7 +22,7 @@ import soup.movie.util.showToast
 
 class HomeListAdapter(
     context: Context,
-    diffCallback: DiffUtil.ItemCallback<Movie> = IdBasedDiffCallback { it.moopId },
+    diffCallback: DiffUtil.ItemCallback<Movie> = IdBasedDiffCallback { it.id },
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
 ) : DataBindingListAdapter<Movie>(diffCallback) {
 

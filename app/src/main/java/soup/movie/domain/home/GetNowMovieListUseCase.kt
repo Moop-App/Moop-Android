@@ -18,7 +18,7 @@ class GetNowMovieListUseCase(
             .observeOn(Schedulers.computation())
             .map { response ->
                 response.list.asSequence()
-                    .sortedBy(Movie::rank)
+                    .sortedBy(Movie::score)
                     .filter { movieFilter(it) }
                     .toList()
             }

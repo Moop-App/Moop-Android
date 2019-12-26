@@ -23,7 +23,7 @@ class GetGenreListUseCase(
     private fun MovieListResponse.toGenreSet(): Set<String> {
         return list
             .asSequence()
-            .map { it.genre.orEmpty() }
+            .map { it.genres.orEmpty() }
             .flatMap { it.asSequence() }
             .toSet()
     }

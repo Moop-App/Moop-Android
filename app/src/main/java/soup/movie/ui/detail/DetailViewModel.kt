@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import soup.movie.data.model.Movie
+import soup.movie.data.MoopRepository
+import soup.movie.data.model.MovieDetail
 import soup.movie.domain.model.screenDays
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
+    repository: MoopRepository,
     private val imageUriProvider: ImageUriProvider
 ) : BaseViewModel() {
 
@@ -34,16 +36,19 @@ class DetailViewModel @Inject constructor(
         get() = _shareAction
 
     init {
-        _headerUiModel.value = HeaderUiModel(
-            movie = MovieSelectManager.getSelectedItem()!!
-        )
-        MovieSelectManager
-            .asObservable()
-            .subscribeOn(Schedulers.io())
+        val movie = MovieSelectManager.getSelectedItem()!!
+        _headerUiModel.value = HeaderUiModel(movie)
+        repository.getMovieDetail(movie.id)
             .delay(500, TimeUnit.MILLISECONDS)
-            .map { it.toContentUiModel() }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _contentUiModel.value = it }
+            .subscribe {
+                _headerUiModel.postValue(HeaderUiModel(
+                    movie = movie,
+                    showTm = it.showTm ?: 0,
+                    nations = it.nations.orEmpty(),
+                    companys = it.companies.orEmpty()
+                ))
+                _contentUiModel.postValue(it.toContentUiModel())
+            }
             .disposeOnCleared()
     }
 
@@ -56,31 +61,31 @@ class DetailViewModel @Inject constructor(
             .disposeOnCleared()
     }
 
-    private fun Movie.toContentUiModel(): ContentUiModel {
+    private fun MovieDetail.toContentUiModel(): ContentUiModel {
         val items = mutableListOf<ContentItemUiModel>()
         items.add(HeaderItemUiModel)
-        kobis?.boxOffice?.run {
+        boxOffice?.run {
             items.add(BoxOfficeItemUiModel(
                 rank = rank,
                 rankDate = yesterday().MM_DD(),
                 audience = audiAcc,
                 screenDays = screenDays(),
-                rating = naver?.userRating.orEmpty(),
-                webLink = naver?.link
+                rating = naver?.star ?: NO_RATING,
+                webLink = naver?.url
             ))
         }
         imdb?.run {
             items.add(ImdbItemUiModel(
-                imdb = imdb,
-                rottenTomatoes = rt ?: NO_RATING,
-                metascore = mc ?: NO_RATING,
-                webLink = imdbUrl
+                imdb = star,
+                rottenTomatoes = rt?.star ?: NO_RATING,
+                metascore = mc?.star ?: NO_RATING,
+                webLink = url
             ))
         }
         items.add(CgvItemUiModel(
             movieId = cgv?.id.orEmpty(),
             hasInfo = cgv != null,
-            rating = cgv?.egg ?: NO_RATING
+            rating = cgv?.star ?: NO_RATING
         ))
         items.add(LotteItemUiModel(
             movieId = lotte?.id.orEmpty(),
@@ -92,34 +97,34 @@ class DetailViewModel @Inject constructor(
             hasInfo = megabox != null,
             rating = megabox?.star ?: NO_RATING
         ))
-        if (kobis?.boxOffice == null) {
+        if (boxOffice == null) {
             naver?.run {
                 items.add(
                     NaverItemUiModel(
-                        rating = userRating,
-                        webLink = link
+                        rating = star,
+                        webLink = url
                     )
                 )
             }
         }
+
         val plot = plot.orEmpty()
         if (plot.isNotBlank()) {
             items.add(PlotItemUiModel(plot = plot))
         }
-        val kobis = kobis
-        if (kobis != null) {
-            val persons = mutableListOf<PersonUiModel>()
-            persons.addAll(kobis.directors.orEmpty().map {
-                PersonUiModel(name = it, cast = "감독", query = "감독 $it")
-            })
-            persons.addAll(kobis.actors.orEmpty().map {
-                val cast = if (it.cast.isEmpty()) "출연" else it.cast
-                PersonUiModel(name = it.peopleNm, cast = cast, query = "배우 ${it.peopleNm}")
-            })
-            if (persons.isNotEmpty()) {
-                items.add(CastItemUiModel(persons = persons))
-            }
+
+        val persons = mutableListOf<PersonUiModel>()
+        persons.addAll(directors.orEmpty().map {
+            PersonUiModel(name = it, cast = "감독", query = "감독 $it")
+        })
+        persons.addAll(actors.orEmpty().map {
+            val cast = if (it.cast.isEmpty()) "출연" else it.cast
+            PersonUiModel(name = it.peopleNm, cast = cast, query = "배우 ${it.peopleNm}")
+        })
+        if (persons.isNotEmpty()) {
+            items.add(CastItemUiModel(persons = persons))
         }
+
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
             items.add(TrailerHeaderItemUiModel(movieTitle = title))

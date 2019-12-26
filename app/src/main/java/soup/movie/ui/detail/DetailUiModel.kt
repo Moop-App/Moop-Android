@@ -4,8 +4,11 @@ import androidx.annotation.Keep
 import soup.movie.data.model.*
 
 @Keep
-class HeaderUiModel(
-    val movie: Movie
+data class HeaderUiModel(
+    val movie: Movie,
+    val showTm: Int = 0,
+    val nations: List<String> = emptyList(),
+    val companys: List<Company> = emptyList()
 )
 
 @Keep

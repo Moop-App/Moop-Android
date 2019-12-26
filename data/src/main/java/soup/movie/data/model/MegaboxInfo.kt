@@ -6,8 +6,6 @@ typealias MegaboxMovieId = String
 
 @Keep
 data class MegaboxInfo(
-    val rank: Int,
     val id: MegaboxMovieId,
-    val star: String,
-    val specialTypes: List<String>?
+    val star: String
 )

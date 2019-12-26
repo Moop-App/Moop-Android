@@ -2,7 +2,6 @@ package soup.movie.ui.main
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import soup.movie.data.MoopRepository
-import soup.movie.data.model.MovieId
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.ui.base.BaseViewModel
@@ -16,7 +15,7 @@ class MainViewModel @Inject constructor(
     val uiEvent: EventLiveData<MainUiEvent>
         get() = _uiEvent
 
-    fun requestMovie(movieId: MovieId) {
+    fun requestMovie(movieId: String) {
         repository.getMovie(movieId)
             .observeOn(AndroidSchedulers.mainThread())
             .map { ShowDetailUiEvent(it) }

@@ -4,7 +4,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
-import soup.movie.data.model.MovieId
+import soup.movie.data.model.MovieDetail
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.model.response.isStaleness
@@ -57,26 +57,17 @@ class MoopRepository(
             }
     }
 
-    fun getMovie(movieId: MovieId): Observable<Movie> =
+    fun getMovieDetail(movieId: String): Observable<MovieDetail> {
+        return remoteDataSource.getMovieDetail(movieId)
+    }
+
+    fun getMovie(movieId: String): Observable<Movie> =
         Observable.merge(
             getNowList().map { it.list },
             getPlanList().map { it.list })
             .flatMapIterable { it }
-            .filter { it.isMatchedWith(movieId) }
+            .filter { it.id == movieId }
             .take(1)
-
-    private fun Movie.isMatchedWith(movieId: MovieId): Boolean {
-        return id == movieId.id
-            || title == movieId.title
-            || cgv?.id.isMatched(movieId.cgvId)
-            || lotte?.id.isMatched(movieId.lotteId)
-            || megabox?.id.isMatched(movieId.megaboxId)
-    }
-
-    private fun String?.isMatched(id: String?): Boolean {
-        if (this == null || id == null) return false
-        return this == id
-    }
 
     suspend fun searchMovie(query: String): List<Movie> {
         return localDataSource.getAllMovieList().asSequence()
