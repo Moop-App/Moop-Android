@@ -35,14 +35,6 @@
                 android:background="?android:attr/colorBackground"
                 android:transitionName="@string/transition_background" />
 
-            <include
-                android:id="@+id/header"
-                layout="@layout/detail_header"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:uiModel="@{viewModel.headerUiModel}" />
-
             <androidx.recyclerview.widget.RecyclerViewEx
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
@@ -62,6 +54,61 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/detail_item_trailer"
                 tools:paddingTop="@dimen/detail_header_height" />
+
+            <include
+                android:id="@+id/header"
+                layout="@layout/detail_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:uiModel="@{viewModel.headerUiModel}" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibleIf="@{viewModel.isError}"
+                app:constraint_referenced_ids="error_icon,error_description,error_retry_button"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/error_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_splash_launcher"
+                app:layout_constraintBottom_toTopOf="@id/error_description"
+                app:layout_constraintDimensionRatio="5:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/error_description"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/common_network_error"
+                app:layout_constraintBottom_toTopOf="@id/error_retry_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/error_icon"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/error_retry_button"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackground"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/common_retry"
+                android:textColor="?colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/error_description" />
 
             <include
                 android:id="@+id/share"

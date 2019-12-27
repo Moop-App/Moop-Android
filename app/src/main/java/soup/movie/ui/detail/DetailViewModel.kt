@@ -3,9 +3,15 @@ package soup.movie.ui.detail
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.data.MoopRepository
+import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
 import soup.movie.domain.model.screenDays
 import soup.movie.ui.EventLiveData
@@ -15,13 +21,15 @@ import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImageUriProvider
 import soup.movie.util.helper.MM_DD
 import soup.movie.util.helper.yesterday
-import java.util.concurrent.TimeUnit
+import timber.log.Timber
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
-    repository: MoopRepository,
+    private val repository: MoopRepository,
     private val imageUriProvider: ImageUriProvider
 ) : BaseViewModel() {
+
+    private val movie = MovieSelectManager.getSelectedItem()!!
 
     private val _headerUiModel = MutableLiveData<HeaderUiModel>()
     val headerUiModel: LiveData<HeaderUiModel>
@@ -35,21 +43,34 @@ class DetailViewModel @Inject constructor(
     val shareAction: EventLiveData<ShareAction>
         get() = _shareAction
 
+    private val _isError = MutableLiveData<Boolean>(false)
+    val isError: LiveData<Boolean>
+        get() = _isError
+
     init {
-        val movie = MovieSelectManager.getSelectedItem()!!
         _headerUiModel.value = HeaderUiModel(movie)
-        repository.getMovieDetail(movie.id)
-            .delay(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                _headerUiModel.postValue(HeaderUiModel(
-                    movie = movie,
-                    showTm = it.showTm ?: 0,
-                    nations = it.nations.orEmpty(),
-                    companys = it.companies.orEmpty()
-                ))
-                _contentUiModel.postValue(it.toContentUiModel())
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                updateDetail(movie)
             }
-            .disposeOnCleared()
+        }
+    }
+
+    private suspend fun updateDetail(movie: Movie) {
+        _isError.postValue(false)
+        try {
+            delay(500)
+            val detail = repository.getMovieDetail(movie.id)
+            _headerUiModel.postValue(HeaderUiModel(
+                movie = movie,
+                showTm = detail.showTm ?: 0,
+                nations = detail.nations.orEmpty(),
+                companys = detail.companies.orEmpty()
+            ))
+            _contentUiModel.postValue(detail.toContentUiModel())
+        } catch (t: Throwable) {
+            _isError.postValue(true)
+        }
     }
 
     fun requestShareImage(target: ShareTarget, bitmap: Bitmap) {
@@ -134,6 +155,15 @@ class DetailViewModel @Inject constructor(
             items.add(TrailerFooterItemUiModel(movieTitle = title))
         }
         return ContentUiModel(items)
+    }
+
+    fun onRetryClick() {
+        Timber.d("retry2")
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                updateDetail(movie)
+            }
+        }
     }
 
     companion object {

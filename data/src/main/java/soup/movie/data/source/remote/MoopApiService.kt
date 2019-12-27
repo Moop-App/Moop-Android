@@ -19,9 +19,9 @@ interface MoopApiService {
 
     // 영화 상세정보
     @GET("detail/{movieId}.json")
-    fun getMovieDetail(
+    suspend fun getMovieDetail(
         @Path("movieId") movieId: String
-    ): Observable<MovieDetail>
+    ): MovieDetail
 
     // 공통코드
     @GET("code.json")

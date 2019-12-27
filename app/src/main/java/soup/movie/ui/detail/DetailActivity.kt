@@ -27,6 +27,7 @@ import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.YouTube
 import soup.widget.elastic.ElasticDragDismissFrameLayout
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
@@ -58,7 +59,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
                 } else {
                     maxOffset.toFloat()
                 }
-                translationZ = if (offset < 10f) 1f else 0f
+//                translationZ = if (offset < 10f) 1f else 0f
                 translationY = -offset
                 alpha = 1f - offset / maxOffset
             }
@@ -74,7 +75,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
+        binding = DataBindingUtil.setContentView(this, R.layout.detail_activity)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         if (isPortrait) {
@@ -115,6 +116,10 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
                 analytics.clickShare()
                 binding.toggleShareButton()
             }
+        }
+        binding.errorRetryButton.setOnDebounceClickListener {
+            Timber.d("retry")
+            viewModel.onRetryClick()
         }
         binding.share.apply {
             fun onShareClick(target: ShareTarget) {

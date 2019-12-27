@@ -14,7 +14,7 @@ class RemoteMoopDataSource(private val moopApiService: MoopApiService) : MoopDat
     override fun getPlanList(): Observable<MovieListResponse> =
         moopApiService.getPlanMovieList()
 
-    fun getMovieDetail(movieId: String): Observable<MovieDetail> {
+    suspend fun getMovieDetail(movieId: String): MovieDetail {
         return moopApiService.getMovieDetail(movieId)
     }
 

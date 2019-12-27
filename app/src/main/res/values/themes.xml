@@ -36,7 +36,6 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:colorControlActivated">?colorSecondary</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
         <item name="android:windowSharedElementEnterTransition">@transition/detail_shared_enter</item>
         <item name="android:windowSharedElementReturnTransition">@transition/detail_shared_return</item>

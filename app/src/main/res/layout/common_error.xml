@@ -27,7 +27,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="네트워크 연결이 원활하지 않습니다."
+        android:text="@string/common_network_error"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         android:textColor="@color/white"
         android:textSize="14sp"

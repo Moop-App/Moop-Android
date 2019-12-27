@@ -8,6 +8,9 @@
     <string name="menu_search">영화 검색</string>
     <string name="menu_map">지도</string>
 
+    <string name="common_network_error">오프라인 상태입니다.</string>
+    <string name="common_retry">재시도</string>
+
     <string name="action_share">공유하기</string>
     <string name="action_share_poster">포스터 공유하기</string>
 

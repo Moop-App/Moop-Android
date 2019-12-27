@@ -17,7 +17,7 @@
         android:background="@color/dim"
         android:elevation="12dp"
         android:visibility="invisible"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <Space
             android:id="@+id/cancelButton"
