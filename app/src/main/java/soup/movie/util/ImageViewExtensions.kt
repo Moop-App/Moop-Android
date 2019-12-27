@@ -30,11 +30,8 @@ fun ImageView.loadAsync(url: String?, withKey: Boolean = false, placeholder: Dra
             }
             if (placeholder != null) {
                 placeholder(placeholder)
-            } else {
-                // To improve overdraw performance,
-                // do NOT show CrossFade effect if placeholder exists.
-                transition(withCrossFade())
             }
+            transition(withCrossFade())
         }
     }
 }
