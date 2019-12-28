@@ -1,6 +1,5 @@
 package soup.movie.data.source.local
 
-import io.reactivex.Maybe
 import io.reactivex.Observable
 import soup.movie.data.model.Movie
 import soup.movie.data.model.response.CachedMovieList
@@ -20,7 +19,7 @@ class LocalMoopDataSource(
         saveMovieListAs(TYPE_NOW, response)
     }
 
-    override fun getNowList(): Observable<MovieListResponse> {
+    fun getNowList(): Observable<MovieListResponse> {
         return getMovieListAs(TYPE_NOW)
     }
 
@@ -28,7 +27,7 @@ class LocalMoopDataSource(
         saveMovieListAs(TYPE_PLAN, response)
     }
 
-    override fun getPlanList(): Observable<MovieListResponse> {
+    fun getPlanList(): Observable<MovieListResponse> {
         return getMovieListAs(TYPE_PLAN)
     }
 
@@ -43,17 +42,18 @@ class LocalMoopDataSource(
             .toObservable()
     }
 
-    fun findNowMovieList() : Maybe<MovieListResponse> {
+    suspend fun findNowMovieList() : MovieListResponse {
         return findMovieListAs(TYPE_NOW)
     }
 
-    fun findPlanMovieList() : Maybe<MovieListResponse> {
+    suspend fun findPlanMovieList() : MovieListResponse {
         return findMovieListAs(TYPE_PLAN)
     }
 
-    private fun findMovieListAs(type: String): Maybe<MovieListResponse> {
-        return moopDao.findByType(type)
-            .map { MovieListResponse(it.lastUpdateTime, it.list) }
+    private suspend fun findMovieListAs(type: String): MovieListResponse {
+        return moopDao.findByType(type).run {
+            MovieListResponse(lastUpdateTime, list)
+        }
     }
 
     suspend fun getAllMovieList(): List<Movie> {

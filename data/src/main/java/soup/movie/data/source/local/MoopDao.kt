@@ -16,7 +16,7 @@ interface MoopDao {
     fun getMovieListByType(type: String): Flowable<CachedMovieList>
 
     @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
-    fun findByType(type: String): Maybe<CachedMovieList>
+    suspend fun findByType(type: String): CachedMovieList
 
     @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
     suspend fun getMovieListOf(type: String): CachedMovieList

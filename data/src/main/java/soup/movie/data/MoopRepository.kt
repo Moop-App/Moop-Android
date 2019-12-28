@@ -1,8 +1,6 @@
 package soup.movie.data
 
-import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
 import soup.movie.data.model.response.CodeResponse
@@ -21,40 +19,30 @@ class MoopRepository(
         return localDataSource.getNowList()
     }
 
-    fun updateNowList(): Completable {
-        return localDataSource.findNowMovieList()
-            .subscribeOn(Schedulers.io())
-            .map { it.isStaleness() }
-            .defaultIfEmpty(true)
-            .flatMapCompletable {
-                if (it) {
-                    remoteDataSource.getNowList()
-                        .doOnNext { localDataSource.saveNowList(it) }
-                        .ignoreElements()
-                } else {
-                    Completable.complete()
-                }
-            }
+    suspend fun updateNowList() {
+        val isStaleness = try {
+            localDataSource.findNowMovieList().isStaleness()
+        } catch (t: Throwable) {
+            true
+        }
+        if (isStaleness) {
+            localDataSource.saveNowList(remoteDataSource.getNowList())
+        }
     }
 
     fun getPlanList(): Observable<MovieListResponse> {
         return localDataSource.getPlanList()
     }
 
-    fun updatePlanList(): Completable {
-        return localDataSource.findPlanMovieList()
-            .subscribeOn(Schedulers.io())
-            .map { it.isStaleness() }
-            .defaultIfEmpty(true)
-            .flatMapCompletable {
-                if (it) {
-                    remoteDataSource.getPlanList()
-                        .doOnNext { localDataSource.savePlanList(it) }
-                        .ignoreElements()
-                } else {
-                    Completable.complete()
-                }
-            }
+    suspend fun updatePlanList() {
+        val isStaleness = try {
+            localDataSource.findPlanMovieList().isStaleness()
+        } catch (t: Throwable) {
+            true
+        }
+        if (isStaleness) {
+            localDataSource.savePlanList(remoteDataSource.getPlanList())
+        }
     }
 
     suspend fun getMovieDetail(movieId: String): MovieDetail {

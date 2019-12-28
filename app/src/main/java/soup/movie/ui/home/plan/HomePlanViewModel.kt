@@ -2,9 +2,12 @@ package soup.movie.ui.home.plan
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.data.MoopRepository
 import soup.movie.domain.home.GetMovieFilterUseCase
 import soup.movie.domain.home.GetPlanMovieListUseCase
@@ -52,18 +55,17 @@ class HomePlanViewModel @Inject constructor(
             return
         }
         _isLoading.value = true
-        repository.updatePlanList()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onComplete = {
-                    _isLoading.value = false
-                    _isError.value = false
-                },
-                onError = {
-                    _isLoading.value = false
-                    _isError.value = true
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    repository.updatePlanList()
+                    _isLoading.postValue(false)
+                    _isError.postValue(false)
+                } catch (t: Throwable) {
+                    _isLoading.postValue(false)
+                    _isError.postValue(true)
                 }
-            )
-            .disposeOnCleared()
+            }
+        }
     }
 }
