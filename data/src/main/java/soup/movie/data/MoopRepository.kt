@@ -5,48 +5,47 @@ import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.model.response.isStaleness
 import soup.movie.data.source.local.LocalMoopDataSource
 import soup.movie.data.source.remote.RemoteMoopDataSource
 import soup.movie.data.util.SearchHelper
 
 class MoopRepository(
-    private val localDataSource: LocalMoopDataSource,
-    private val remoteDataSource: RemoteMoopDataSource
+    private val local: LocalMoopDataSource,
+    private val remote: RemoteMoopDataSource
 ) {
 
     fun getNowList(): Observable<MovieListResponse> {
-        return localDataSource.getNowList()
+        return local.getNowList()
     }
 
     suspend fun updateNowList() {
         val isStaleness = try {
-            localDataSource.findNowMovieList().isStaleness()
+            local.findNowMovieList().lastUpdateTime < remote.getNowLastUpdateTime()
         } catch (t: Throwable) {
             true
         }
         if (isStaleness) {
-            localDataSource.saveNowList(remoteDataSource.getNowList())
+            local.saveNowList(remote.getNowList())
         }
     }
 
     fun getPlanList(): Observable<MovieListResponse> {
-        return localDataSource.getPlanList()
+        return local.getPlanList()
     }
 
     suspend fun updatePlanList() {
         val isStaleness = try {
-            localDataSource.findPlanMovieList().isStaleness()
+            local.findPlanMovieList().lastUpdateTime < remote.getPlanLastUpdateTime()
         } catch (t: Throwable) {
             true
         }
         if (isStaleness) {
-            localDataSource.savePlanList(remoteDataSource.getPlanList())
+            local.savePlanList(remote.getPlanList())
         }
     }
 
     suspend fun getMovieDetail(movieId: String): MovieDetail {
-        return remoteDataSource.getMovieDetail(movieId)
+        return remote.getMovieDetail(movieId)
     }
 
     fun getMovie(movieId: String): Observable<Movie> =
@@ -58,7 +57,7 @@ class MoopRepository(
             .take(1)
 
     suspend fun searchMovie(query: String): List<Movie> {
-        return localDataSource.getAllMovieList().asSequence()
+        return local.getAllMovieList().asSequence()
             .filter { it.isMatchedWith(query) }
             .toList()
     }
@@ -68,8 +67,8 @@ class MoopRepository(
     }
 
     suspend fun getCodeList(): CodeResponse {
-        return localDataSource.getCodeList()
-            ?: remoteDataSource.getCodeList()
-                .also(localDataSource::saveCodeList)
+        return local.getCodeList()
+            ?: remote.getCodeList()
+                .also(local::saveCodeList)
     }
 }

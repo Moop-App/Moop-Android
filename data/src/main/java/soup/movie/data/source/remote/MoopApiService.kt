@@ -9,12 +9,20 @@ import soup.movie.data.model.response.MovieListResponse
 interface MoopApiService {
 
     // 현재상영작
+
     @GET("now.json")
     suspend fun getNowMovieList(): MovieListResponse
 
+    @GET("now/lastUpdateTime.json")
+    suspend fun getNowLastUpdateTime(): Long
+
     // 개봉예정작
+
     @GET("plan.json")
     suspend fun getPlanMovieList(): MovieListResponse
+
+    @GET("plan/lastUpdateTime.json")
+    suspend fun getPlanLastUpdateTime(): Long
 
     // 영화 상세정보
     @GET("detail/{movieId}.json")

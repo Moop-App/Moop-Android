@@ -17,8 +17,6 @@ data class CachedMovieList(
         const val TYPE_NOW = "type_now"
         const val TYPE_PLAN = "type_plan"
 
-        const val STALE_MS = (60 * 60 * 1000).toLong() // 1 hour
-
         fun empty(type: String): CachedMovieList = CachedMovieList(type, 0, emptyList())
     }
 }
