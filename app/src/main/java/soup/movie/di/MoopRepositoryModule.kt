@@ -5,7 +5,7 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Interceptor
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -18,6 +18,8 @@ import soup.movie.data.source.local.MoopDao
 import soup.movie.data.source.local.MoopDatabase
 import soup.movie.data.source.remote.MoopApiService
 import soup.movie.data.source.remote.RemoteMoopDataSource
+import soup.movie.data.util.OkHttpInterceptors.provideOkHttpInterceptor
+import soup.movie.data.util.OkHttpInterceptors.provideOkHttpNetworkInterceptor
 import javax.inject.Singleton
 
 @Module
@@ -83,15 +85,11 @@ class MoopRepositoryModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        interceptor: Interceptor
+        context: Context
     ): OkHttpClient = BuildType
         .addNetworkInterceptor(OkHttpClient.Builder())
-        .addInterceptor(interceptor)
+        .cache(Cache(context.cacheDir, 1 * 1024 * 1024)) // 1 MB
+        .addInterceptor(provideOkHttpInterceptor())
+        .addNetworkInterceptor(provideOkHttpNetworkInterceptor())
         .build()
-
-    @Singleton
-    @Provides
-    fun provideOkHttpInterceptor(): Interceptor = Interceptor {
-        it.proceed(it.request().newBuilder().build())
-    }
 }
