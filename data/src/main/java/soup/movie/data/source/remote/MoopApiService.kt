@@ -29,6 +29,7 @@ interface MoopApiService {
     suspend fun getPlanLastUpdateTime(): Long
 
     // 영화 상세정보
+    @Headers(HEADER_USE_CACHE)
     @GET("detail/{movieId}.json")
     suspend fun getMovieDetail(
         @Path("movieId") movieId: String
