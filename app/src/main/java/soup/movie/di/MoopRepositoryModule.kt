@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import soup.movie.BuildConfig.API_BASE_URL
 import soup.movie.BuildType
@@ -66,21 +64,13 @@ class MoopRepositoryModule {
     @Singleton
     @Provides
     fun provideMoopApiService(
-        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
         okHttpClient: OkHttpClient
     ): MoopApiService = Retrofit.Builder()
         .baseUrl(API_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(rxJava2CallAdapterFactory)
         .client(okHttpClient)
         .build()
         .create(MoopApiService::class.java)
-
-    @Singleton
-    @Provides
-    fun provideRxJava2CallAdapterFactory(
-    ): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory
-        .createWithScheduler(Schedulers.io())
 
     @Singleton
     @Provides

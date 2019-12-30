@@ -61,8 +61,7 @@ deps.navigation = [
 def retrofit = "2.7.0"
 deps.retrofit = [
         runtime: "com.squareup.retrofit2:retrofit:$retrofit",
-        gson   : "com.squareup.retrofit2:converter-gson:$retrofit",
-        rxjava2: "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+        gson   : "com.squareup.retrofit2:converter-gson:$retrofit"
 ]
 
 def dagger = "2.25.2"

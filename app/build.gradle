@@ -137,7 +137,6 @@ dependencies {
 
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
-    implementation deps.retrofit.rxjava2
 
     implementation deps.rx.java2
     implementation deps.rx.kotlin
