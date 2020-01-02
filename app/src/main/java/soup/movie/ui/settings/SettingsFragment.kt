@@ -186,12 +186,12 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun createSharedElementsForTheaters(): Array<Pair<View, String>> =
-        binding.theaterItem.theaterGroup?.run {
+        binding.theaterItem.theaterGroup.run {
             (0 until childCount)
                 .mapNotNull { getChildAt(it) }
                 .map { it to it.transitionName }
                 .toTypedArray()
-        } ?: emptyArray()
+        }
 
     private fun onThemeEditClicked() {
         findNavController().navigate(

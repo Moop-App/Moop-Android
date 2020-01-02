@@ -10,9 +10,10 @@ internal class DetailPersonListAdapter :
     DataBindingListAdapter<PersonUiModel>(AlwaysDiffCallback()) {
 
     override val itemListener = DataBindingItemListener<PersonUiModel>(
-        onClick = { v, position, item ->
+        onClick = { v, _, item ->
             v.context.executeWeb("https://m.search.naver.com/search.naver?query=${item.query}")
         }
     )
+
     override fun getItemViewType(position: Int): Int = R.layout.detail_item_cast_person
 }

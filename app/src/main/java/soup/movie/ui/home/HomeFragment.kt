@@ -69,7 +69,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
 
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
         val fabMargin: Int = root.context.resources.getDimensionPixelSize(R.dimen.fab_margin)
-        homeScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+        homeScene.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
             val statusBarTopMargin = initialPadding.top + windowInsets.systemWindowInsetTop
             headerHint.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 topMargin = statusBarTopMargin

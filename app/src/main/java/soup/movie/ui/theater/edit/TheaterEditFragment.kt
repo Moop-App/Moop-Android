@@ -41,6 +41,15 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
         TheaterEditPageAdapter(childFragmentManager, lifecycle)
     }
 
+    private val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+
+        override fun onSlide(v: View, offset: Float) {}
+
+        override fun onStateChanged(v: View, state: Int) {
+            tryToFinish()
+        }
+    }
+
     private lateinit var footerPanel: BottomSheetBehavior<View>
     private var originPeekHeight: Int = 0
 
@@ -54,7 +63,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
             override fun onMapSharedElements(names: MutableList<String>,
                                              sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
-                binding.footer.selectedTheaterGroup?.run {
+                binding.footer.selectedTheaterGroup.run {
                     (0 until childCount)
                         .mapNotNull { getChildAt(it) }
                         .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
@@ -102,6 +111,11 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        footerPanel.removeBottomSheetCallback(bottomSheetCallback)
+        super.onDestroyView()
+    }
+
     private fun TheaterEditFragmentBinding.initViewState() {
         contentView.setOnInterceptTouchListener { _, _ ->
             footerPanel.takeIf { it.state == STATE_EXPANDED }
@@ -114,14 +128,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
         // Footer
 
         footerPanel = BottomSheetBehavior.from(footer.root).apply {
-            setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-
-                override fun onSlide(v: View, offset: Float) {}
-
-                override fun onStateChanged(v: View, state: Int) {
-                    tryToFinish()
-                }
-            })
+            addBottomSheetCallback(bottomSheetCallback)
         }
 
         originPeekHeight = footerPanel.peekHeight

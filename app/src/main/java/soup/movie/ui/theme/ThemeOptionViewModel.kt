@@ -15,7 +15,6 @@ class ThemeOptionViewModel @Inject constructor(
         get() = _uiModel
 
     init {
-        val options = themeOptionManager.getOptions()
         _uiModel.value = ThemeOptionUiModel(
             themeOptionManager
                 .getOptions()

@@ -42,7 +42,7 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
             override fun onMapSharedElements(names: List<String>,
                                              sharedElements: MutableMap<String, View>) {
                 sharedElements.clear()
-                binding.listView?.run {
+                binding.listView.run {
                     (0 until childCount)
                         .mapNotNull { getChildAt(it) }
                         .mapNotNull { it.findViewById<Chip>(R.id.theaterChip) }
@@ -130,11 +130,11 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun createSharedElements(): Array<Pair<View, String>> =
-        binding.listView?.run {
+        binding.listView.run {
             (0 until childCount)
                 .mapNotNull { getChildAt(it) }
                 .mapNotNull { it.findViewById<View>(R.id.theaterChip) }
                 .map { Pair(it, it.transitionName) }
                 .toTypedArray()
-        } ?: emptyArray()
+        }
 }
