@@ -19,7 +19,7 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.MainActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
-import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.ui.base.consumeBackEventInChildFragment
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.consume
 import soup.movie.util.doOnApplyWindowInsets
@@ -126,20 +126,8 @@ class MainActivity : BaseActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             return
         }
-        if (handleBackEventInChildFragment()) return
+        if (navHostFragment.consumeBackEventInChildFragment()) return
         super.onBackPressed()
-    }
-
-    private fun handleBackEventInChildFragment(): Boolean {
-        val current = getCurrentFragment()
-        if (current is OnBackPressedListener) {
-            return current.onBackPressed()
-        }
-        return false
-    }
-
-    private fun getCurrentFragment(): Fragment? {
-        return navHostFragment.childFragmentManager.fragments.elementAtOrNull(0)
     }
 
     private val navHostFragment: Fragment

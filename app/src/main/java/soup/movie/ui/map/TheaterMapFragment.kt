@@ -24,7 +24,6 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import soup.movie.BuildConfig
 import soup.movie.R
-import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterMapFragmentBinding
 import soup.movie.ui.base.BaseMapFragment
 import soup.movie.ui.base.OnBackPressedListener

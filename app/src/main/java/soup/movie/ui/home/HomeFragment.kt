@@ -21,6 +21,7 @@ import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.databinding.HomeHeaderHintBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.ui.base.consumeBackEvent
 import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.Interpolators
@@ -176,6 +177,16 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     override fun onBackPressed(): Boolean {
         if (filterBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
             filterBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            return true
+        }
+        val currentPosition = binding.viewPager.currentItem
+        val current = pageAdapter.getFragment(currentPosition)
+        if (current.consumeBackEvent()) {
+            binding.header.appBar.setExpanded(true, true)
+            return true
+        }
+        if (currentPosition > 0) {
+            binding.viewPager.currentItem = 0
             return true
         }
         return false
