@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.postDelayed
 import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.isScrolling
+import androidx.recyclerview.widget.isTop
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.model.Movie
@@ -102,25 +105,32 @@ abstract class HomeTabFragment : BaseFragment(), OnBackPressedListener {
         listView.run {
             val listAdapter = adapter
             if (listAdapter is HomeListAdapter) {
-                val isTopPosition = canScrollVertically(-1).not()
-                listAdapter.submitList(movies) {
-                    if (movies.isNotEmpty() && isTopPosition) {
-                        smoothScrollToPosition(0)
-                    }
+                listAdapter.submitList(movies)
+
+                if (movies.isNotEmpty()) {
+                    scrollToTopInternal()
                 }
             }
         }
     }
 
     fun scrollToTop() {
-        if (::binding.isInitialized) {
-            binding.listView.smoothScrollToPosition(0)
-        }
+        scrollToTopInternal()
     }
 
     override fun onBackPressed(): Boolean {
-        if (::binding.isInitialized && binding.listView.canScrollVertically(-1)) {
-            binding.listView.smoothScrollToPosition(0)
+        return scrollToTopInternal()
+    }
+
+    private fun scrollToTopInternal(): Boolean {
+        val listView = if (::binding.isInitialized) binding.listView else null
+        if (listView?.isTop() == false) {
+            if (listView.isScrolling()) {
+                listView.stopScroll()
+                listView.scrollToPosition(0)
+            } else {
+                listView.smoothScrollToPosition(0)
+            }
             return true
         }
         return false
