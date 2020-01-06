@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.postDelayed
 import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RoughAdapterDataObserver
 import androidx.recyclerview.widget.isScrolling
 import androidx.recyclerview.widget.isTop
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
@@ -37,6 +37,13 @@ abstract class HomeTabFragment : BaseFragment(), OnBackPressedListener {
     private lateinit var binding: HomeContentsBinding
     protected abstract val viewModel: HomeTabViewModel
 
+    private val adapterDataObserver = object : RoughAdapterDataObserver() {
+
+        override fun onItemRangeUpdatedRoughly() {
+            scrollToTopInternal(force = true)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +58,7 @@ abstract class HomeTabFragment : BaseFragment(), OnBackPressedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.initViewState(viewModel)
+        binding.listView.adapter?.registerAdapterDataObserver(adapterDataObserver)
     }
 
     private fun HomeContentsBinding.adaptSystemWindowInset() {
@@ -63,6 +71,7 @@ abstract class HomeTabFragment : BaseFragment(), OnBackPressedListener {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onDestroyView() {
+        binding.listView.adapter?.unregisterAdapterDataObserver(adapterDataObserver)
         binding.listView.setOnTouchListener(null)
         super.onDestroyView()
     }
@@ -102,15 +111,9 @@ abstract class HomeTabFragment : BaseFragment(), OnBackPressedListener {
     }
 
     protected open fun onUpdateList(listView: RecyclerView, movies: List<Movie>) {
-        listView.run {
-            val listAdapter = adapter
-            if (listAdapter is HomeListAdapter) {
-                listAdapter.submitList(movies)
-
-                if (movies.isNotEmpty()) {
-                    scrollToTopInternal()
-                }
-            }
+        val listAdapter = listView.adapter
+        if (listAdapter is HomeListAdapter) {
+            listAdapter.submitList(movies)
         }
     }
 
@@ -122,9 +125,9 @@ abstract class HomeTabFragment : BaseFragment(), OnBackPressedListener {
         return scrollToTopInternal()
     }
 
-    private fun scrollToTopInternal(): Boolean {
+    private fun scrollToTopInternal(force: Boolean = false): Boolean {
         val listView = if (::binding.isInitialized) binding.listView else null
-        if (listView?.isTop() == false) {
+        if (listView != null && (force || listView.isTop().not())) {
             if (listView.isScrolling()) {
                 listView.stopScroll()
                 listView.scrollToPosition(0)
