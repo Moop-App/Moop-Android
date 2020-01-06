@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/selected"
+        android:drawable="@drawable/ic_home_plan"
+        android:state_selected="true" />
+
+    <item
+        android:id="@+id/unselected"
+        android:drawable="@drawable/ic_home_plan"
+        android:state_selected="false" />
+
+    <transition
+        android:drawable="@drawable/avd_home_plan_selected"
+        android:fromId="@id/unselected"
+        android:toId="@id/selected" />
+
+</animated-selector>

@@ -51,15 +51,22 @@
                             android:id="@+id/action_now"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:icon="@drawable/ic_round_movie"
+                            android:icon="@drawable/ic_home_now"
                             android:text="@string/menu_now" />
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/action_plan"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:icon="@drawable/ic_round_plan"
+                            android:icon="@drawable/ic_home_plan"
                             android:text="@string/menu_plan" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:id="@+id/action_favorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:icon="@drawable/ic_home_favorite_selected"
+                            android:text="@string/menu_favorite" />
 
                     </com.google.android.material.tabs.TabLayout>
 

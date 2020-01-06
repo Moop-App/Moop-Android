@@ -15,6 +15,7 @@
     <color name="tag_age_19">@color/red</color>
     <color name="tag_best">@color/orange</color>
     <color name="tag_d_day">@color/grey</color>
+    <color name="tag_favorite">@color/red</color>
 
     <color name="chip_genre_bg">#EEDDDDDD</color>
     <color name="chip_genre_bg_unchecked">#33DDDDDD</color>

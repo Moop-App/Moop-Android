@@ -4,6 +4,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_now">Now</string>
     <string name="menu_plan">Plan</string>
+    <string name="menu_favorite">Favorite</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Movie Search</string>
     <string name="menu_map">Map</string>

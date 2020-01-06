@@ -3,17 +3,12 @@
 
     <item
         android:id="@+id/selected"
-        android:drawable="@drawable/ic_round_movie"
+        android:drawable="@drawable/ic_home_favorite_selected"
         android:state_selected="true" />
 
     <item
         android:id="@+id/unselected"
-        android:drawable="@drawable/ic_round_movie"
+        android:drawable="@drawable/ic_home_favorite_unselected"
         android:state_selected="false" />
-
-    <transition
-        android:drawable="@drawable/avd_round_movie_select"
-        android:fromId="@id/unselected"
-        android:toId="@id/selected" />
 
 </animated-selector>

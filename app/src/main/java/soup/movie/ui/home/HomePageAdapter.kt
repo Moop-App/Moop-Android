@@ -2,6 +2,7 @@ package soup.movie.ui.home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import soup.movie.ui.home.favorite.HomeFavoriteFragment
 import soup.movie.ui.home.now.HomeNowFragment
 import soup.movie.ui.home.plan.HomePlanFragment
 import soup.movie.ui.home.tab.HomeTabFragment
@@ -10,7 +11,8 @@ class HomePageAdapter(fragment: HomeFragment) : FragmentStateAdapter(fragment) {
 
     private val items= arrayOf<Fragment>(
         HomeNowFragment(),
-        HomePlanFragment()
+        HomePlanFragment(),
+        HomeFavoriteFragment()
     )
 
     override fun createFragment(position: Int): Fragment = items[position]

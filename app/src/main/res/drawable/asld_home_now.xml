@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/selected"
-        android:drawable="@drawable/ic_round_plan"
+        android:drawable="@drawable/ic_home_now"
         android:state_selected="true" />
 
     <item
         android:id="@+id/unselected"
-        android:drawable="@drawable/ic_round_plan"
+        android:drawable="@drawable/ic_home_now"
         android:state_selected="false" />
 
     <transition
-        android:drawable="@drawable/avd_round_plan_select"
+        android:drawable="@drawable/avd_home_now_selected"
         android:fromId="@id/unselected"
         android:toId="@id/selected" />
 

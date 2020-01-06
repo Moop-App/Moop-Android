@@ -10,6 +10,8 @@ import soup.movie.di.scope.FragmentScope
 import soup.movie.di.scope.ViewModelKey
 import soup.movie.ui.home.HomeFragment
 import soup.movie.ui.home.HomeViewModel
+import soup.movie.ui.home.favorite.HomeFavoriteFragment
+import soup.movie.ui.home.favorite.HomeFavoriteViewModel
 import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.home.filter.HomeFilterViewModel
 import soup.movie.ui.home.now.HomeNowFragment
@@ -50,17 +52,26 @@ abstract class HomeTabUiModule {
     @ContributesAndroidInjector
     abstract fun bindHomeNowFragment(): HomeNowFragment
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeNowViewModel::class)
+    abstract fun bindHomeNowViewModel(viewModel: HomeNowViewModel): ViewModel
+
     @ChildFragmentScope
     @ContributesAndroidInjector
     abstract fun bindHomePlanFragment(): HomePlanFragment
 
     @Binds
     @IntoMap
-    @ViewModelKey(HomeNowViewModel::class)
-    abstract fun bindHomeNowViewModel(viewModel: HomeNowViewModel): ViewModel
+    @ViewModelKey(HomePlanViewModel::class)
+    abstract fun bindHomePlanViewModel(viewModel: HomePlanViewModel): ViewModel
+
+    @ChildFragmentScope
+    @ContributesAndroidInjector
+    abstract fun bindHomeFavoriteFragment(): HomeFavoriteFragment
 
     @Binds
     @IntoMap
-    @ViewModelKey(HomePlanViewModel::class)
-    abstract fun bindHomePlanViewModel(viewModel: HomePlanViewModel): ViewModel
+    @ViewModelKey(HomeFavoriteViewModel::class)
+    abstract fun bindHomeFavoriteViewModel(viewModel: HomeFavoriteViewModel): ViewModel
 }

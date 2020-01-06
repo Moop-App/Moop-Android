@@ -96,12 +96,16 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             tabs.setupWithViewPager2(viewPager, autoRefresh = true) { tab, position ->
                 when (position) {
                     0 -> {
-                        tab.setIcon(R.drawable.asld_round_movie)
+                        tab.setIcon(R.drawable.asld_home_now)
                         tab.setText(R.string.menu_now)
                     }
                     1 -> {
-                        tab.setIcon(R.drawable.asld_round_plan)
+                        tab.setIcon(R.drawable.asld_home_plan)
                         tab.setText(R.string.menu_plan)
+                    }
+                    2 -> {
+                        tab.setIcon(R.drawable.asld_home_favorite)
+                        tab.setText(R.string.menu_favorite)
                     }
                 }
             }

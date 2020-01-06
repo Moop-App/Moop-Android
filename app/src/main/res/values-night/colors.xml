@@ -12,6 +12,7 @@
     <color name="tag_age_19">@color/red_300</color>
     <color name="tag_best">@color/orange_300</color>
     <color name="tag_d_day">@color/grey_300</color>
+    <color name="tag_favorite">@color/red</color>
 
     <color name="system_ui_scrim_light">#2EFFFFFF</color> <!-- 18% white -->
     <color name="system_ui_scrim_dark">#99000000</color> <!-- 60% black -->

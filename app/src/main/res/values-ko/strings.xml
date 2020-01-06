@@ -4,6 +4,7 @@
     <string name="menu_home">홈</string>
     <string name="menu_now">현재상영</string>
     <string name="menu_plan">개봉예정</string>
+    <string name="menu_favorite">즐겨찾기</string>
     <string name="menu_settings">설정</string>
     <string name="menu_search">영화 검색</string>
     <string name="menu_map">지도</string>
