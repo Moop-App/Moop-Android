@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import soup.movie.databinding.HomeContentsBinding
-import soup.movie.ui.base.BaseFragment
+import androidx.recyclerview.widget.RecyclerView
+import soup.movie.databinding.HomeTabFavoriteBinding
+import soup.movie.ui.home.tab.HomeTabFragment
 
-class HomeFavoriteFragment : BaseFragment() {
+class HomeFavoriteFragment : HomeTabFragment() {
 
-    private lateinit var binding: HomeContentsBinding
+    private lateinit var binding: HomeTabFavoriteBinding
     private val viewModel: HomeFavoriteViewModel by viewModels()
 
     override fun onCreateView(
@@ -17,6 +18,20 @@ class HomeFavoriteFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        binding = HomeTabFavoriteBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
+    }
+
+    override fun scrollToTop() {
+        getListView()?.scrollToTopInternal()
+    }
+
+    override fun onBackPressed(): Boolean {
+        return getListView()?.scrollToTopInternal() ?: false
+    }
+
+    private fun getListView(): RecyclerView? {
+        return if (::binding.isInitialized) binding.listView else null
     }
 }

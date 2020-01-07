@@ -1,8 +1,8 @@
 package soup.movie.ui.home.now
 
-import soup.movie.ui.home.tab.HomeTabFragment
+import soup.movie.ui.home.tab.HomeContentsTabFragment
 
-class HomeNowFragment : HomeTabFragment() {
+class HomeNowFragment : HomeContentsTabFragment() {
 
     override val viewModel: HomeNowViewModel by viewModels()
 }

@@ -3,9 +3,9 @@ package soup.movie.ui.home.plan
 import androidx.core.view.postOnAnimationDelayed
 import androidx.recyclerview.widget.RecyclerView
 import soup.movie.data.model.Movie
-import soup.movie.ui.home.tab.HomeTabFragment
+import soup.movie.ui.home.tab.HomeContentsTabFragment
 
-class HomePlanFragment : HomeTabFragment() {
+class HomePlanFragment : HomeContentsTabFragment() {
 
     override val viewModel: HomePlanViewModel by viewModels()
 
