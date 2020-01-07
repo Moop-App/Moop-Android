@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data />
 
@@ -29,12 +30,25 @@
                     app:contentInsetStartWithNavigation="0dp"
                     app:navigationIcon="@drawable/ic_round_menu">
 
+                    <View
+                        android:id="@+id/tab_divider"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="?attr/colorDivider"
+                        android:visibility="invisible"
+                        tools:visibility="visible" />
+
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabs"
                         style="@style/Widget.MaterialComponents.TabLayout.Colored"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
+                        android:clipToPadding="false"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="16dp"
                         app:tabIconTint="@color/selector_home_navigation_text"
                         app:tabIndicator="@drawable/home_navigation_indicator"
                         app:tabIndicatorColor="@color/color_secondary_dim"

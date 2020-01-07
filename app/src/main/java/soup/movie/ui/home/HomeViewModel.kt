@@ -14,10 +14,14 @@ class HomeViewModel @Inject constructor(
         get() = _headerUiModel
 
     fun onNowTabClick() {
-        _headerUiModel.postValueIfNew(HomeHeaderUiModel(isNow = true))
+        _headerUiModel.postValueIfNew(HomeHeaderUiModel.Now)
     }
 
     fun onPlanTabClick() {
-        _headerUiModel.postValueIfNew(HomeHeaderUiModel(isNow = false))
+        _headerUiModel.postValueIfNew(HomeHeaderUiModel.Plan)
+    }
+
+    fun onFavoriteTabClick() {
+        _headerUiModel.postValueIfNew(HomeHeaderUiModel.Favorite)
     }
 }

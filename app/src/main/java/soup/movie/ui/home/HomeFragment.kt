@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.isInvisible
 import androidx.core.view.postDelayed
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
@@ -22,6 +23,7 @@ import soup.movie.databinding.HomeHeaderHintBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.base.consumeBackEvent
+import soup.movie.ui.home.HomeHeaderUiModel.*
 import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.Interpolators
@@ -46,11 +48,10 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
         override fun onPageSelected(position: Int) {
-            val isNow = position == 0
-            if (isNow) {
-                viewModel.onNowTabClick()
-            } else {
-                viewModel.onPlanTabClick()
+            when (position) {
+                0 -> viewModel.onNowTabClick()
+                1 -> viewModel.onPlanTabClick()
+                2 -> viewModel.onFavoriteTabClick()
             }
         }
     }
@@ -63,7 +64,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        binding.init(viewModel)
+        binding.initViewState(viewModel)
         binding.adaptSystemWindowInset()
         return binding.root
     }
@@ -85,7 +86,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         }
     }
 
-    private fun HomeFragmentBinding.init(viewModel: HomeViewModel) {
+    private fun HomeFragmentBinding.initViewState(viewModel: HomeViewModel) {
 //        prepareSharedElements()
         pageAdapter = HomePageAdapter(this@HomeFragment)
         viewPager.adapter = pageAdapter
@@ -116,6 +117,9 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         }
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
             headerHint.render(it)
+        }
+        header.tabs.setOnScrollChangeListener { _, scrollX, _, _, _ ->
+            header.tabDivider.isInvisible = scrollX == 0
         }
         header.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
@@ -160,11 +164,13 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     /** UI Renderer */
 
     private fun HomeHeaderHintBinding.render(uiModel: HomeHeaderUiModel) {
-        hintLabel.setText(if (uiModel.isNow) {
-            R.string.menu_now
-        } else {
-            R.string.menu_plan
-        })
+        hintLabel.setText(
+            when (uiModel) {
+                Now -> R.string.menu_now
+                Plan -> R.string.menu_plan
+                Favorite -> R.string.menu_favorite
+            }
+        )
         hintLabel.apply {
             scaleX = 1.2f
             scaleY = 1.2f

@@ -2,9 +2,9 @@ package soup.movie.ui.home
 
 import soup.movie.data.model.Movie
 
-class HomeHeaderUiModel(
-    val isNow: Boolean
-)
+enum class HomeHeaderUiModel {
+    Now, Plan, Favorite
+}
 
 class HomeContentsUiModel(
     val movies: List<Movie>
