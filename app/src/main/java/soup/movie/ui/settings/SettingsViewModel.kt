@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.coroutines.Dispatchers
 import soup.movie.BuildConfig
 import soup.movie.device.InAppUpdateManager
 import soup.movie.settings.impl.TheatersSetting
@@ -27,7 +28,7 @@ class SettingsViewModel @Inject constructor(
     val theaterUiModel: LiveData<TheaterSettingUiModel>
         get() = _theaterUiModel
 
-    val versionUiModel: LiveData<VersionSettingUiModel> = liveData {
+    val versionUiModel: LiveData<VersionSettingUiModel> = liveData(Dispatchers.IO) {
         val latestVersionCode = appUpdateManager.getAvailableVersionCode()
         emit(VersionSettingUiModel(
             versionCode = BuildConfig.VERSION_CODE,
