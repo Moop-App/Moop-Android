@@ -127,14 +127,20 @@ abstract class HomeTabFragment : BaseFragment(), OnBackPressedListener {
 
     private fun scrollToTopInternal(force: Boolean = false): Boolean {
         val listView = if (::binding.isInitialized) binding.listView else null
-        if (listView != null && (force || listView.isTop().not())) {
-            if (listView.isScrolling()) {
+        if (listView != null) {
+            if (listView.isTop().not()) {
+                if (listView.isScrolling()) {
+                    listView.stopScroll()
+                    listView.scrollToPosition(0)
+                } else {
+                    listView.smoothScrollToPosition(0)
+                }
+                return true
+            }
+            if (force) {
                 listView.stopScroll()
                 listView.scrollToPosition(0)
-            } else {
-                listView.smoothScrollToPosition(0)
             }
-            return true
         }
         return false
     }
