@@ -59,9 +59,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
                 } else {
                     maxOffset.toFloat()
                 }
-//                translationZ = if (offset < 10f) 1f else 0f
                 translationY = -offset
-                alpha = 1f - offset / maxOffset
             }
         }
     }
@@ -111,6 +109,10 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
             posterCard.setOnDebounceClickListener(delay = 150L) {
                 analytics.clickPoster()
                 showPosterViewer(from = posterView)
+            }
+            favoriteButton.setOnDebounceClickListener {
+                val isFavorite = favoriteButton.isSelected.not()
+                viewModel.onFavoriteButtonClick(isFavorite.not())
             }
             shareButton.setOnDebounceClickListener {
                 analytics.clickShare()
@@ -191,6 +193,9 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
                 removeDuration = 200
                 supportsChangeAnimations = false
             }
+        }
+        viewModel.favoriteUiModel.observe(this) { isFavorite ->
+            binding.header.favoriteButton.isSelected = isFavorite
         }
         viewModel.headerUiModel.observe(this) {
             binding.render(it)

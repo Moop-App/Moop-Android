@@ -1,6 +1,8 @@
 package soup.movie.data
 
+import androidx.collection.ArrayMap
 import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
 import soup.movie.data.model.response.CodeResponse
@@ -70,5 +72,22 @@ class MoopRepository(
         return local.getCodeList()
             ?: remote.getCodeList()
                 .also(local::saveCodeList)
+    }
+
+    //TODO: manage using DB
+    private val subject: BehaviorSubject<List<Movie>> = BehaviorSubject.createDefault<List<Movie>>(emptyList())
+    private val map = ArrayMap<String, Movie>()
+    fun addFavoriteMovie(movie: Movie) {
+        map[movie.id] = movie
+        subject.onNext(map.values.toList())
+    }
+    fun removeFavoriteMovie(movieId: String) {
+        map.remove(movieId)
+    }
+    fun getFavoriteMovieList(): Observable<List<Movie>> {
+        return subject
+    }
+    fun isFavoriteMovie(movieId: String): Boolean {
+        return map.containsKey(movieId)
     }
 }

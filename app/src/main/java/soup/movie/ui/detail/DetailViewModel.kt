@@ -21,7 +21,6 @@ import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImageUriProvider
 import soup.movie.util.helper.MM_DD
 import soup.movie.util.helper.yesterday
-import timber.log.Timber
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
@@ -38,6 +37,10 @@ class DetailViewModel @Inject constructor(
     private val _contentUiModel = MutableLiveData<ContentUiModel>()
     val contentUiModel: LiveData<ContentUiModel>
         get() = _contentUiModel
+
+    private val _favoriteUiModel = MutableLiveData<Boolean>(repository.isFavoriteMovie(movie.id))
+    val favoriteUiModel: LiveData<Boolean>
+        get() = _favoriteUiModel
 
     private val _shareAction = MutableEventLiveData<ShareAction>()
     val shareAction: EventLiveData<ShareAction>
@@ -157,8 +160,16 @@ class DetailViewModel @Inject constructor(
         return ContentUiModel(items)
     }
 
+    fun onFavoriteButtonClick(isFavorite: Boolean) {
+        if (isFavorite) {
+            repository.addFavoriteMovie(movie)
+        } else {
+            repository.removeFavoriteMovie(movie.id)
+        }
+        _favoriteUiModel.value = isFavorite
+    }
+
     fun onRetryClick() {
-        Timber.d("retry2")
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 updateDetail(movie)

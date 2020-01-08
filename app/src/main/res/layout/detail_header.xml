@@ -31,10 +31,22 @@
             android:textColor="?attr/colorOnBackground"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/shareButton"
+            app:layout_constraintEnd_toStartOf="@+id/favoriteButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="극장판 요괴워치 섀도사이드-도깨비왕의 부활" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/favoriteButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerInside"
+            android:background="?selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="@id/titleView"
+            app:layout_constraintEnd_toStartOf="@id/shareButton"
+            app:layout_constraintTop_toTopOf="@id/titleView"
+            app:layout_constraintVertical_bias="0"
+            app:srcCompat="@drawable/asld_home_favorite" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/shareButton"
@@ -55,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="titleView,shareButton" />
+            app:constraint_referenced_ids="titleView,favoriteButton,shareButton" />
 
         <Space
             android:id="@+id/headerGroup"
