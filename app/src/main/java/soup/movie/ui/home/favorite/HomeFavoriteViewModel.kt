@@ -2,7 +2,10 @@ package soup.movie.ui.home.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import soup.movie.data.MoopRepository
 import soup.movie.data.model.Movie
 import soup.movie.ui.base.BaseViewModel
@@ -18,12 +21,11 @@ class HomeFavoriteViewModel @Inject constructor(
         get() = _contentsUiModel
 
     init {
-        repository.getFavoriteMovieList()
-            .map { it.sortedBy(Movie::openDate) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                _contentsUiModel.value = HomeContentsUiModel(it)
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getFavoriteMovieList().collect {
+                val favoriteMovieList = it.sortedBy(Movie::openDate)
+                _contentsUiModel.postValue(HomeContentsUiModel(favoriteMovieList))
             }
-            .disposeOnCleared()
+        }
     }
 }

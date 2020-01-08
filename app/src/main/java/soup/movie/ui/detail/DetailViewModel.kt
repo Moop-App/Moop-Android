@@ -38,7 +38,7 @@ class DetailViewModel @Inject constructor(
     val contentUiModel: LiveData<ContentUiModel>
         get() = _contentUiModel
 
-    private val _favoriteUiModel = MutableLiveData<Boolean>(repository.isFavoriteMovie(movie.id))
+    private val _favoriteUiModel: MutableLiveData<Boolean>
     val favoriteUiModel: LiveData<Boolean>
         get() = _favoriteUiModel
 
@@ -51,6 +51,15 @@ class DetailViewModel @Inject constructor(
         get() = _isError
 
     init {
+        val isFavorite = repository.isFavoriteMovie(movie.id)
+        _favoriteUiModel = MutableLiveData(isFavorite)
+        if (isFavorite) {
+            viewModelScope.launch(Dispatchers.IO) {
+                // Update local information
+                repository.addFavoriteMovie(movie)
+            }
+        }
+
         _headerUiModel.value = HeaderUiModel(movie)
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -161,12 +170,14 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onFavoriteButtonClick(isFavorite: Boolean) {
-        if (isFavorite) {
-            repository.addFavoriteMovie(movie)
-        } else {
-            repository.removeFavoriteMovie(movie.id)
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isFavorite) {
+                repository.addFavoriteMovie(movie)
+            } else {
+                repository.removeFavoriteMovie(movie.id)
+            }
+            _favoriteUiModel.postValue(isFavorite)
         }
-        _favoriteUiModel.value = isFavorite
     }
 
     fun onRetryClick() {

@@ -30,6 +30,8 @@ dependencies {
     api deps.kotlin.coroutines_core
     api deps.kotlin.coroutines_android
 
+    implementation deps.lifecycle.livedata_ktx
+
     implementation deps.room.runtime
     implementation deps.room.rxjava2
     implementation deps.room.ktx

@@ -1,8 +1,10 @@
 package soup.movie.data
 
 import androidx.collection.ArrayMap
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
 import io.reactivex.Observable
-import io.reactivex.subjects.BehaviorSubject
+import kotlinx.coroutines.flow.Flow
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
 import soup.movie.data.model.response.CodeResponse
@@ -75,17 +77,17 @@ class MoopRepository(
     }
 
     //TODO: manage using DB
-    private val subject: BehaviorSubject<List<Movie>> = BehaviorSubject.createDefault<List<Movie>>(emptyList())
+    private val liveData = MutableLiveData<List<Movie>>().apply { value = emptyList() }
     private val map = ArrayMap<String, Movie>()
-    fun addFavoriteMovie(movie: Movie) {
+    suspend fun addFavoriteMovie(movie: Movie) {
         map[movie.id] = movie
-        subject.onNext(map.values.toList())
+        liveData.postValue(map.values.toList())
     }
-    fun removeFavoriteMovie(movieId: String) {
+    suspend fun removeFavoriteMovie(movieId: String) {
         map.remove(movieId)
     }
-    fun getFavoriteMovieList(): Observable<List<Movie>> {
-        return subject
+    suspend fun getFavoriteMovieList(): Flow<List<Movie>> {
+        return liveData.asFlow()
     }
     fun isFavoriteMovie(movieId: String): Boolean {
         return map.containsKey(movieId)
