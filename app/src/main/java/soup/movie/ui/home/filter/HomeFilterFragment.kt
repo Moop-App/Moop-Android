@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.observe
 import com.google.android.material.chip.Chip
 import soup.movie.R
 import soup.movie.databinding.HomeFilterFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.util.inflate
-import soup.movie.util.observe
 
 class HomeFilterFragment : BaseFragment() {
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,6 @@ import soup.movie.ui.home.HomeFragmentDirections
 import soup.movie.ui.home.HomeListAdapter
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.ui.home.tab.HomeTabFragment
-import soup.movie.util.observe
 import javax.inject.Inject
 
 class HomeFavoriteFragment : HomeTabFragment() {

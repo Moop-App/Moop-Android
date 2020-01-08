@@ -10,6 +10,7 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
 import androidx.core.view.updatePadding
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import androidx.transition.TransitionManager
@@ -25,7 +26,10 @@ import soup.movie.databinding.TheaterEditFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
-import soup.movie.util.*
+import soup.movie.util.doOnApplyWindowInsets
+import soup.movie.util.inflate
+import soup.movie.util.lazyFast
+import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 

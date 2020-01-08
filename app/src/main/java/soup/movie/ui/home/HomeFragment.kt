@@ -12,6 +12,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
@@ -28,7 +29,6 @@ import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.Interpolators
 import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

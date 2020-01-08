@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import androidx.lifecycle.observe
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,6 @@ import soup.movie.ui.home.HomeListAdapter
 import soup.movie.ui.home.HomeListScrollEffect
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 

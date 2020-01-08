@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.observe
 import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterEditChildFragmentBinding
 import soup.movie.ui.theater.edit.TheaterEditChildFragment
 import soup.movie.ui.theater.edit.TheaterEditChildListAdapter
-import soup.movie.util.observe
 
 class CgvEditFragment : TheaterEditChildFragment() {
 

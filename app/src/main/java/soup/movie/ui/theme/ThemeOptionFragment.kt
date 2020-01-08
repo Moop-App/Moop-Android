@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
+import androidx.lifecycle.observe
 import soup.movie.databinding.ThemeOptionFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.observe
 
 class ThemeOptionFragment : BaseFragment() {
 

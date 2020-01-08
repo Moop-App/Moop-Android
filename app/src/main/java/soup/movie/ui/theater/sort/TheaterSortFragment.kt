@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,7 +22,6 @@ import soup.movie.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.doOnApplyWindowInsets
-import soup.movie.util.observe
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
