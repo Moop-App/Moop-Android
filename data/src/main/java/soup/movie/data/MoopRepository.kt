@@ -84,7 +84,9 @@ class MoopRepository(
         liveData.postValue(map.values.toList())
     }
     suspend fun removeFavoriteMovie(movieId: String) {
-        map.remove(movieId)
+        if (map.remove(movieId) != null) {
+            liveData.postValue(map.values.toList())
+        }
     }
     suspend fun getFavoriteMovieList(): Flow<List<Movie>> {
         return liveData.asFlow()
