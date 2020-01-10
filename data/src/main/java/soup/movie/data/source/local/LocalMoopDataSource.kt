@@ -1,10 +1,15 @@
 package soup.movie.data.source.local
 
 import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import soup.movie.data.model.Movie
-import soup.movie.data.model.response.CachedMovieList
-import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_NOW
-import soup.movie.data.model.response.CachedMovieList.Companion.TYPE_PLAN
+import soup.movie.data.model.MovieDetail
+import soup.movie.data.model.MovieTheater
+import soup.movie.data.model.entity.CachedMovieList
+import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_NOW
+import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_PLAN
+import soup.movie.data.model.entity.FavoriteMovie
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
@@ -32,7 +37,13 @@ class LocalMoopDataSource(
     }
 
     private fun saveMovieListAs(type: String, response: MovieListResponse) {
-        moopDao.insert(CachedMovieList(type, response.lastUpdateTime, response.list))
+        moopDao.insert(
+            CachedMovieList(
+                type,
+                response.lastUpdateTime,
+                response.list
+            )
+        )
     }
 
     private fun getMovieListAs(type: String): Observable<MovieListResponse> {
@@ -82,5 +93,53 @@ class LocalMoopDataSource(
 
     fun getCodeList(): CodeResponse? {
         return codeResponse
+    }
+
+    suspend fun addFavoriteMovie(movie: MovieDetail) {
+        moopDao.addFavoriteMovie(movie.toFavoriteMovie())
+    }
+    suspend fun removeFavoriteMovie(movieId: String) {
+        moopDao.removeFavoriteMovie(movieId)
+    }
+    fun getFavoriteMovieList(): Flow<List<Movie>> {
+        return moopDao.getFavoriteMovieList().map { it.map {
+            Movie(
+                id = it.id,
+                score = 0,
+                title = it.title,
+                _posterUrl = it.posterUrl,
+                openDate = it.openDate,
+                isNow = it.isNow,
+                age = it.age,
+                nationFilter = it.nationFilter,
+                genres = it.genres,
+                boxOffice = it.boxOffice,
+                theater = MovieTheater(
+                    cgv = it.cgv,
+                    lotte = it.lotte,
+                    megabox = it.megabox
+                )
+            )
+        } }
+    }
+    suspend fun isFavoriteMovie(movieId: String): Boolean {
+        return moopDao.getCountForFavoriteMovie(movieId) > 0
+    }
+
+    private fun MovieDetail.toFavoriteMovie(): FavoriteMovie {
+        return FavoriteMovie(
+            id = id,
+            title = title,
+            posterUrl = posterUrl,
+            openDate = openDate,
+            isNow = isNow,
+            age = age,
+            nationFilter = nationFilter,
+            genres = genres,
+            boxOffice = boxOffice?.rank,
+            cgv = cgv?.star,
+            lotte = lotte?.star,
+            megabox = megabox?.star
+        )
     }
 }

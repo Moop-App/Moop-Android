@@ -1,4 +1,4 @@
-package soup.movie.data.model.response
+package soup.movie.data.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -17,6 +17,7 @@ data class CachedMovieList(
         const val TYPE_NOW = "type_now"
         const val TYPE_PLAN = "type_plan"
 
-        fun empty(type: String): CachedMovieList = CachedMovieList(type, 0, emptyList())
+        fun empty(type: String): CachedMovieList =
+            CachedMovieList(type, 0, emptyList())
     }
 }

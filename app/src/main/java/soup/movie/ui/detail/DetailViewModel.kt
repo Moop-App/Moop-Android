@@ -29,6 +29,7 @@ class DetailViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val movie = MovieSelectManager.getSelectedItem()!!
+    private var movieDetail: MovieDetail? = null
 
     private val _headerUiModel = MutableLiveData<HeaderUiModel>()
     val headerUiModel: LiveData<HeaderUiModel>
@@ -38,7 +39,7 @@ class DetailViewModel @Inject constructor(
     val contentUiModel: LiveData<ContentUiModel>
         get() = _contentUiModel
 
-    private val _favoriteUiModel: MutableLiveData<Boolean>
+    private val _favoriteUiModel = MutableLiveData<Boolean>()
     val favoriteUiModel: LiveData<Boolean>
         get() = _favoriteUiModel
 
@@ -51,20 +52,10 @@ class DetailViewModel @Inject constructor(
         get() = _isError
 
     init {
-        val isFavorite = repository.isFavoriteMovie(movie.id)
-        _favoriteUiModel = MutableLiveData(isFavorite)
-        if (isFavorite) {
-            viewModelScope.launch(Dispatchers.IO) {
-                // Update local information
-                repository.addFavoriteMovie(movie)
-            }
-        }
-
         _headerUiModel.value = HeaderUiModel(movie)
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                updateDetail(movie)
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            _favoriteUiModel.postValue(repository.isFavoriteMovie(movie.id))
+            updateDetail(movie)
         }
     }
 
@@ -80,6 +71,12 @@ class DetailViewModel @Inject constructor(
                 companys = detail.companies.orEmpty()
             ))
             _contentUiModel.postValue(detail.toContentUiModel())
+
+            movieDetail = detail
+            // if favorite, update local information
+            if (_favoriteUiModel.value == true) {
+                repository.addFavoriteMovie(detail)
+            }
         } catch (t: Throwable) {
             _isError.postValue(true)
         }
@@ -172,7 +169,12 @@ class DetailViewModel @Inject constructor(
     fun onFavoriteButtonClick(isFavorite: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             if (isFavorite) {
-                repository.addFavoriteMovie(movie)
+                val detail = movieDetail
+                if (detail != null) {
+                    repository.addFavoriteMovie(detail)
+                } else {
+                    // show toast
+                }
             } else {
                 repository.removeFavoriteMovie(movie.id)
             }
