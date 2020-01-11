@@ -16,21 +16,24 @@
         android:layout_height="wrap_content"
         tools:background="@color/debug_background">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/titleView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
-            android:maxLines="3"
+            android:gravity="center_vertical"
+            android:maxLines="1"
             android:minLines="1"
             android:text="@{uiModel.movie.title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textColor="?attr/colorOnBackground"
             android:textSize="18dp"
             android:textStyle="bold"
+            app:autoSizeMaxTextSize="20dp"
+            app:autoSizeMinTextSize="15dp"
+            app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toStartOf="@+id/favoriteButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,12 +43,11 @@
             android:id="@+id/favoriteButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:scaleType="centerInside"
             android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@id/titleView"
             app:layout_constraintEnd_toStartOf="@id/shareButton"
             app:layout_constraintTop_toTopOf="@id/titleView"
-            app:layout_constraintVertical_bias="0"
             app:srcCompat="@drawable/asld_home_favorite" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -53,21 +55,13 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
-            android:scaleType="centerInside"
             android:background="?selectableItemBackgroundBorderless"
-            app:tint="?attr/colorOnBackground"
+            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@id/titleView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/titleView"
-            app:layout_constraintVertical_bias="0"
-            app:srcCompat="@drawable/ic_round_share" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/toolbarBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="titleView,favoriteButton,shareButton" />
+            app:srcCompat="@drawable/ic_round_share"
+            app:tint="?attr/colorOnBackground" />
 
         <Space
             android:id="@+id/headerGroup"
@@ -80,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarBarrier" />
+            app:layout_constraintTop_toBottomOf="@id/titleView" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/posterCard"
