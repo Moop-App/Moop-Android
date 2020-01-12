@@ -1,20 +1,15 @@
 package soup.movie.di
 
 import android.content.Context
-import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import soup.movie.BuildConfig.API_BASE_URL
 import soup.movie.BuildType
 import soup.movie.data.MoopRepository
+import soup.movie.data.source.MoopDataSourceFactory
 import soup.movie.data.source.local.LocalMoopDataSource
-import soup.movie.data.source.local.MoopDao
-import soup.movie.data.source.local.MoopDatabase
-import soup.movie.data.source.remote.MoopApiService
 import soup.movie.data.source.remote.RemoteMoopDataSource
 import soup.movie.data.util.OkHttpInterceptors.provideOkHttpInterceptor
 import soup.movie.data.util.OkHttpInterceptors.provideOkHttpNetworkInterceptor
@@ -35,42 +30,18 @@ class MoopRepositoryModule {
     @Singleton
     @Provides
     fun provideLocalDataSource(
-        moopDao: MoopDao
-    ): LocalMoopDataSource = LocalMoopDataSource(moopDao)
-
-    @Singleton
-    @Provides
-    fun provideMoopDao(
-        moopDatabase: MoopDatabase
-    ): MoopDao = moopDatabase.moopDao()
-
-    @Singleton
-    @Provides
-    fun provideDatabase(
         context: Context
-    ): MoopDatabase = Room
-        .databaseBuilder(context.applicationContext, MoopDatabase::class.java, "moop.db")
-        .fallbackToDestructiveMigration()
-        .build()
+    ): LocalMoopDataSource = MoopDataSourceFactory.createLocalDataSource(context)
 
     /* Remote */
 
     @Singleton
     @Provides
     fun provideRemoteDataSource(
-        moopApiService: MoopApiService
-    ): RemoteMoopDataSource = RemoteMoopDataSource(moopApiService)
-
-    @Singleton
-    @Provides
-    fun provideMoopApiService(
         okHttpClient: OkHttpClient
-    ): MoopApiService = Retrofit.Builder()
-        .baseUrl(API_BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient)
-        .build()
-        .create(MoopApiService::class.java)
+    ): RemoteMoopDataSource = RemoteMoopDataSource(
+        MoopDataSourceFactory.createMoopApiService(API_BASE_URL, okHttpClient)
+    )
 
     @Singleton
     @Provides

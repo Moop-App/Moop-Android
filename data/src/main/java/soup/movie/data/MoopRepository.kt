@@ -73,16 +73,18 @@ class MoopRepository(
                 .also(local::saveCodeList)
     }
 
-    //TODO: manage using DB
     fun getFavoriteMovieList(): Flow<List<Movie>> {
         return local.getFavoriteMovieList()
     }
+
     suspend fun addFavoriteMovie(movie: MovieDetail) {
         local.addFavoriteMovie(movie)
     }
+
     suspend fun removeFavoriteMovie(movieId: String) {
         local.removeFavoriteMovie(movieId)
     }
+
     suspend fun isFavoriteMovie(movieId: String): Boolean {
         return local.isFavoriteMovie(movieId)
     }

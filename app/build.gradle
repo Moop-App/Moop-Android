@@ -131,13 +131,6 @@ dependencies {
     implementation deps.work.gcm
     androidTestImplementation deps.work.testing
 
-    implementation deps.room.runtime
-    implementation deps.room.rxjava2
-    kapt deps.room.compiler
-
-    implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
-
     implementation deps.rx.java2
     implementation deps.rx.kotlin
     implementation deps.rx.android

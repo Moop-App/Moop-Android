@@ -15,7 +15,8 @@ import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
 
 class LocalMoopDataSource(
-    private val moopDao: MoopDao
+    private val moopDao: FavoriteMovieDao,
+    private val cacheDao: MovieCacheDao
 ) : MoopDataSource {
 
     private var codeResponse: CodeResponse? = null
@@ -37,7 +38,7 @@ class LocalMoopDataSource(
     }
 
     private fun saveMovieListAs(type: String, response: MovieListResponse) {
-        moopDao.insert(
+        cacheDao.insert(
             CachedMovieList(
                 type,
                 response.lastUpdateTime,
@@ -47,7 +48,7 @@ class LocalMoopDataSource(
     }
 
     private fun getMovieListAs(type: String): Observable<MovieListResponse> {
-        return moopDao.getMovieListByType(type)
+        return cacheDao.getMovieListByType(type)
             .onErrorReturn { CachedMovieList.empty(type) }
             .map { MovieListResponse(it.lastUpdateTime, it.list) }
             .toObservable()
@@ -62,7 +63,7 @@ class LocalMoopDataSource(
     }
 
     private suspend fun findMovieListAs(type: String): MovieListResponse {
-        return moopDao.findByType(type).run {
+        return cacheDao.findByType(type).run {
             MovieListResponse(lastUpdateTime, list)
         }
     }
@@ -81,7 +82,7 @@ class LocalMoopDataSource(
 
     private suspend fun getMovieListOf(type: String): List<Movie> {
         return try {
-            moopDao.getMovieListOf(type).list
+            cacheDao.getMovieListOf(type).list
         } catch (t: Throwable) {
             emptyList()
         }
@@ -102,26 +103,29 @@ class LocalMoopDataSource(
         moopDao.removeFavoriteMovie(movieId)
     }
     fun getFavoriteMovieList(): Flow<List<Movie>> {
-        return moopDao.getFavoriteMovieList().map { it.map {
-            Movie(
-                id = it.id,
-                score = 0,
-                title = it.title,
-                _posterUrl = it.posterUrl,
-                openDate = it.openDate,
-                isNow = it.isNow,
-                age = it.age,
-                nationFilter = it.nationFilter,
-                genres = it.genres,
-                boxOffice = it.boxOffice,
-                theater = MovieTheater(
-                    cgv = it.cgv,
-                    lotte = it.lotte,
-                    megabox = it.megabox
+        return moopDao.getFavoriteMovieList().map {
+            it.map {
+                Movie(
+                    id = it.id,
+                    score = 0,
+                    title = it.title,
+                    _posterUrl = it.posterUrl,
+                    openDate = it.openDate,
+                    isNow = it.isNow,
+                    age = it.age,
+                    nationFilter = it.nationFilter,
+                    genres = it.genres,
+                    boxOffice = it.boxOffice,
+                    theater = MovieTheater(
+                        cgv = it.cgv,
+                        lotte = it.lotte,
+                        megabox = it.megabox
+                    )
                 )
-            )
-        } }
+            }
+        }
     }
+
     suspend fun isFavoriteMovie(movieId: String): Boolean {
         return moopDao.getCountForFavoriteMovie(movieId) > 0
     }

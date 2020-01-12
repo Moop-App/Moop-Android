@@ -1,3 +1,3 @@
 package soup.movie.data.source
 
-interface MoopDataSource
+internal interface MoopDataSource
