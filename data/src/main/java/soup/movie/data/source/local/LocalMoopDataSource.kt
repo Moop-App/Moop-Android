@@ -104,24 +104,26 @@ class LocalMoopDataSource(
     }
     fun getFavoriteMovieList(): Flow<List<Movie>> {
         return moopDao.getFavoriteMovieList().map {
-            it.map {
-                Movie(
-                    id = it.id,
-                    score = 0,
-                    title = it.title,
-                    _posterUrl = it.posterUrl,
-                    openDate = it.openDate,
-                    isNow = it.isNow,
-                    age = it.age,
-                    nationFilter = it.nationFilter,
-                    genres = it.genres,
-                    boxOffice = it.boxOffice,
-                    theater = MovieTheater(
-                        cgv = it.cgv,
-                        lotte = it.lotte,
-                        megabox = it.megabox
+            it.map { favoriteMovie ->
+                favoriteMovie.run {
+                    Movie(
+                        id = id,
+                        score = 0,
+                        title = title,
+                        _posterUrl = posterUrl,
+                        openDate = openDate,
+                        isNow = isNow,
+                        age = age,
+                        nationFilter = nationFilter,
+                        genres = genres,
+                        boxOffice = boxOffice?.rank,
+                        theater = MovieTheater(
+                            cgv = cgv,
+                            lotte = lotte,
+                            megabox = megabox
+                        )
                     )
-                )
+                }
             }
         }
     }
@@ -140,10 +142,21 @@ class LocalMoopDataSource(
             age = age,
             nationFilter = nationFilter,
             genres = genres,
-            boxOffice = boxOffice?.rank,
+            boxOffice = boxOffice,
+            showTm = showTm,
+            nations = nations,
+            directors = directors,
+            actors = actors,
+            companies = companies,
             cgv = cgv?.star,
             lotte = lotte?.star,
-            megabox = megabox?.star
+            megabox = megabox?.star,
+            naver = naver,
+            imdb = imdb,
+            rt = rt?.star,
+            mc = mc?.star,
+            plot = plot,
+            trailers = trailers
         )
     }
 }

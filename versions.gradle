@@ -43,7 +43,7 @@ deps.work = [
         testing: "androidx.work:work-testing:$work"
 ]
 
-def room = "2.2.2"
+def room = "2.2.3"
 deps.room = [
         runtime : "androidx.room:room-runtime:$room",
         compiler: "androidx.room:room-compiler:$room",
