@@ -18,7 +18,7 @@ android {
         versionCode build_versions.versionCode
         versionName build_versions.versionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "")
     }
