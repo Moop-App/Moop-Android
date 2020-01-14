@@ -55,8 +55,4 @@ fun Context.executeWeb(url: Url?) {
         .setExitAnimations(this, R.anim.fade_in, R.anim.fade_out)
         .build()
         .launchUrl(this, Uri.parse(url))
-
-    //TODO: Prepare Fallback UI
-    //val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-    //startActivity(webIntent)
 }
