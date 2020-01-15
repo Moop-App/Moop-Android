@@ -79,7 +79,7 @@
                             android:id="@+id/action_favorite"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:icon="@drawable/ic_home_favorite_selected"
+                            android:icon="@drawable/ic_favorite_selected"
                             android:text="@string/menu_favorite" />
 
                     </com.google.android.material.tabs.TabLayout>

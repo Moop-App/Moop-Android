@@ -11,4 +11,14 @@
         android:drawable="@drawable/ic_favorite_unselected"
         android:state_selected="false" />
 
+    <transition
+        android:drawable="@drawable/avd_favorite_selected"
+        android:fromId="@id/unselected"
+        android:toId="@id/selected" />
+
+    <transition
+        android:drawable="@drawable/avd_favorite_unselected"
+        android:fromId="@id/selected"
+        android:toId="@id/unselected" />
+
 </animated-selector>

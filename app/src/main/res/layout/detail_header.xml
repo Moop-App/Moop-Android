@@ -48,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="@id/titleView"
             app:layout_constraintEnd_toStartOf="@id/shareButton"
             app:layout_constraintTop_toTopOf="@id/titleView"
-            app:srcCompat="@drawable/asld_home_favorite" />
+            app:srcCompat="@drawable/asld_favorite" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/shareButton"
