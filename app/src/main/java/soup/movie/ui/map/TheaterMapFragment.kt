@@ -87,9 +87,11 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
             if (isDarkTheme) {
                 naverMap.mapType = NaverMap.MapType.Navi
                 naverMap.isNightModeEnabled = true
+                mapCover.setBackgroundColor(NaverMap.DEFAULT_BACKGROUND_COLOR_DARK)
             } else {
                 naverMap.mapType = NaverMap.MapType.Basic
                 naverMap.isNightModeEnabled = false
+                mapCover.setBackgroundColor(NaverMap.DEFAULT_BACKGROUND_COLOR_LIGHT)
             }
             naverMap.locationSource = locationSource
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
