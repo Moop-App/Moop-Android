@@ -20,7 +20,6 @@ import soup.movie.databinding.HomeTabContentsBinding
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.HomeFragmentDirections
 import soup.movie.ui.home.HomeListAdapter
-import soup.movie.ui.home.HomeListScrollEffect
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.setOnDebounceClickListener
@@ -90,7 +89,6 @@ abstract class HomeContentsTabFragment : HomeTabFragment(), OnBackPressedListene
             adapter = listAdapter
             itemAnimator = FadeInAnimator()
             overScrollMode = View.OVER_SCROLL_NEVER
-            setOnTouchListener(HomeListScrollEffect(this))
         }
         errorView.setOnDebounceClickListener {
             viewModel.refresh()
