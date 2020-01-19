@@ -19,7 +19,6 @@ import soup.movie.data.model.Movie
 import soup.movie.databinding.HomeTabContentsBinding
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.HomeFragmentDirections
-import soup.movie.ui.home.HomeListAdapter
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.setOnDebounceClickListener
@@ -73,7 +72,7 @@ abstract class HomeContentsTabFragment : HomeTabFragment(), OnBackPressedListene
     }
 
     private fun HomeTabContentsBinding.initViewState(viewModel: HomeContentsTabViewModel) {
-        val listAdapter = HomeListAdapter(root.context) { movie, sharedElements ->
+        val listAdapter = HomeContentsTabListAdapter(root.context) { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
             findNavController().navigate(
@@ -88,7 +87,6 @@ abstract class HomeContentsTabFragment : HomeTabFragment(), OnBackPressedListene
             setItemViewCacheSize(20)
             adapter = listAdapter
             itemAnimator = FadeInAnimator()
-            overScrollMode = View.OVER_SCROLL_NEVER
         }
         errorView.setOnDebounceClickListener {
             viewModel.refresh()
@@ -107,7 +105,7 @@ abstract class HomeContentsTabFragment : HomeTabFragment(), OnBackPressedListene
 
     protected open fun onUpdateList(listView: RecyclerView, movies: List<Movie>) {
         val listAdapter = listView.adapter
-        if (listAdapter is HomeListAdapter) {
+        if (listAdapter is HomeContentsTabListAdapter) {
             listAdapter.submitList(movies)
         }
     }

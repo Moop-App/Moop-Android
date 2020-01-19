@@ -1,4 +1,4 @@
-package soup.movie.ui.home
+package soup.movie.ui.home.tab
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -20,7 +20,7 @@ import soup.movie.util.consume
 import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.showToast
 
-class HomeListAdapter(
+class HomeContentsTabListAdapter(
     context: Context,
     diffCallback: DiffUtil.ItemCallback<Movie> = IdBasedDiffCallback { it.id },
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
@@ -33,7 +33,7 @@ class HomeListAdapter(
         return MovieViewHolder(binding).apply {
             itemView.setOnDebounceClickListener(delay = 150L) {
                 val index = adapterPosition
-                if (adapterPosition in 0..itemCount) {
+                if (index in 0..itemCount) {
                     val movie: Movie = getItem(index)
                     listener(movie, createSharedElements(movie))
                 }
