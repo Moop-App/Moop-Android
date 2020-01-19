@@ -54,8 +54,5 @@ data class FavoriteMovie(
     @ColumnInfo(name = "plot")
     val plot: String?,
     @ColumnInfo(name = "trailers")
-    val trailers: List<Trailer>?,
-
-    @ColumnInfo(name = "showAlarm", defaultValue = "true")
-    val showAlarm: Boolean = true
+    val trailers: List<Trailer>?
 )

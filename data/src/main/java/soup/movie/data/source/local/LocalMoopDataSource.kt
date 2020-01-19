@@ -5,23 +5,23 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.MovieTheater
+import soup.movie.data.model.converter.EntityConverter
 import soup.movie.data.model.entity.CachedMovieList
 import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_NOW
 import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_PLAN
-import soup.movie.data.model.entity.FavoriteMovie
 import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
 
 class LocalMoopDataSource(
-    private val moopDao: FavoriteMovieDao,
+    private val favoriteMovieDao: FavoriteMovieDao,
+    private val openDateAlarmDao: OpenDateAlarmDao,
     private val cacheDao: MovieCacheDao
-) : MoopDataSource {
+) : MoopDataSource, EntityConverter {
 
     private var codeResponse: CodeResponse? = null
 
-    fun saveNowList(response: MovieListResponse) {
+    suspend fun saveNowList(response: MovieListResponse) {
         saveMovieListAs(TYPE_NOW, response)
     }
 
@@ -29,7 +29,7 @@ class LocalMoopDataSource(
         return getMovieListAs(TYPE_NOW)
     }
 
-    fun savePlanList(response: MovieListResponse) {
+    suspend fun savePlanList(response: MovieListResponse) {
         saveMovieListAs(TYPE_PLAN, response)
     }
 
@@ -37,7 +37,7 @@ class LocalMoopDataSource(
         return getMovieListAs(TYPE_PLAN)
     }
 
-    private fun saveMovieListAs(type: String, response: MovieListResponse) {
+    private suspend fun saveMovieListAs(type: String, response: MovieListResponse) {
         cacheDao.insert(
             CachedMovieList(
                 type,
@@ -45,6 +45,7 @@ class LocalMoopDataSource(
                 response.list
             )
         )
+        openDateAlarmDao.updateOpenDateAlarms(response.list.map { it.toOpenDateAlarm() })
     }
 
     private fun getMovieListAs(type: String): Observable<MovieListResponse> {
@@ -97,66 +98,24 @@ class LocalMoopDataSource(
     }
 
     suspend fun addFavoriteMovie(movie: MovieDetail) {
-        moopDao.addFavoriteMovie(movie.toFavoriteMovie())
+        favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovie())
+        if (movie.isPlan) {
+            openDateAlarmDao.insertOpenDateAlarm(movie.toOpenDateAlarm())
+        }
     }
+
     suspend fun removeFavoriteMovie(movieId: String) {
-        moopDao.removeFavoriteMovie(movieId)
+        favoriteMovieDao.deleteFavoriteMovie(movieId)
+        openDateAlarmDao.deleteOpenDateAlarm(movieId)
     }
+
     fun getFavoriteMovieList(): Flow<List<Movie>> {
-        return moopDao.getFavoriteMovieList().map {
-            it.map { favoriteMovie ->
-                favoriteMovie.run {
-                    Movie(
-                        id = id,
-                        score = 0,
-                        title = title,
-                        _posterUrl = posterUrl,
-                        openDate = openDate,
-                        isNow = isNow,
-                        age = age,
-                        nationFilter = nationFilter,
-                        genres = genres,
-                        boxOffice = boxOffice?.rank,
-                        theater = MovieTheater(
-                            cgv = cgv,
-                            lotte = lotte,
-                            megabox = megabox
-                        )
-                    )
-                }
-            }
+        return favoriteMovieDao.getFavoriteMovieList().map {
+            it.map { it.toMovie() }
         }
     }
 
     suspend fun isFavoriteMovie(movieId: String): Boolean {
-        return moopDao.getCountForFavoriteMovie(movieId) > 0
-    }
-
-    private fun MovieDetail.toFavoriteMovie(): FavoriteMovie {
-        return FavoriteMovie(
-            id = id,
-            title = title,
-            posterUrl = posterUrl,
-            openDate = openDate,
-            isNow = isNow,
-            age = age,
-            nationFilter = nationFilter,
-            genres = genres,
-            boxOffice = boxOffice,
-            showTm = showTm,
-            nations = nations,
-            directors = directors,
-            actors = actors,
-            companies = companies,
-            cgv = cgv?.star,
-            lotte = lotte?.star,
-            megabox = megabox?.star,
-            naver = naver,
-            imdb = imdb,
-            rt = rt?.star,
-            mc = mc?.star,
-            plot = plot,
-            trailers = trailers
-        )
+        return favoriteMovieDao.getCountForFavoriteMovie(movieId) > 0
     }
 }

@@ -14,10 +14,10 @@ interface FavoriteMovieDao {
     fun getFavoriteMovieList(): Flow<List<FavoriteMovie>>
 
     @Insert(onConflict = REPLACE)
-    suspend fun addFavoriteMovie(movie: FavoriteMovie)
+    suspend fun insertFavoriteMovie(movie: FavoriteMovie)
 
     @Query("DELETE FROM favorite_movies WHERE id = :movieId")
-    suspend fun removeFavoriteMovie(movieId: String)
+    suspend fun deleteFavoriteMovie(movieId: String)
 
     @Query("SELECT COUNT(id) FROM favorite_movies WHERE id = :movieId")
     suspend fun getCountForFavoriteMovie(movieId: String): Int

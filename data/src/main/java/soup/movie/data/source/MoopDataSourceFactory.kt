@@ -20,6 +20,7 @@ object MoopDataSourceFactory {
         val cacheDB = createCacheDatabase(appContext)
         return LocalMoopDataSource(
             movieDB.favoriteMovieDao(),
+            movieDB.openDateAlarmDao(),
             cacheDB.movieCacheDao()
         )
     }
