@@ -14,43 +14,30 @@
         <View
             android:id="@+id/hintButton"
             android:layout_width="108dp"
-            android:layout_height="@dimen/home_header_hint_height"
-            android:background="@drawable/bg_button_home_hint"
-            android:elevation="24dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/hintIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="10dp"
-            android:elevation="24dp"
-            android:src="@drawable/ic_round_arrow_drop_up"
-            android:tint="?colorOnSurface"
-            app:layout_constraintBottom_toBottomOf="@id/hintButton"
-            app:layout_constraintEnd_toStartOf="@id/hintLabel"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/hintButton"
-            app:layout_constraintTop_toTopOf="@id/hintButton"
-            tools:ignore="ContentDescription" />
-
         <TextView
             android:id="@+id/hintLabel"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:elevation="24dp"
+            android:layout_height="@dimen/home_header_hint_height"
+            android:background="@drawable/bg_button_home_hint"
+            android:drawableStart="@drawable/ic_round_arrow_drop_up"
+            android:drawableTint="?colorOnSurface"
+            android:elevation="12dp"
             android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="@string/menu_now"
             android:textColor="?colorOnSurface"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/hintButton"
             app:layout_constraintEnd_toEndOf="@id/hintButton"
-            app:layout_constraintStart_toEndOf="@id/hintIcon"
+            app:layout_constraintStart_toStartOf="@id/hintButton"
             app:layout_constraintTop_toTopOf="@id/hintButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
