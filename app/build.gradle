@@ -67,13 +67,6 @@ android {
             ]
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -91,11 +84,12 @@ android {
 }
 
 dependencies {
-    implementation project(':data')
+    implementation project(':data:repository')
+    implementation project(':data:db')
+    implementation project(':data:api')
     implementation project(':widget')
     implementation project(':theme')
 
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.kotlin.stdlib
 
     implementation deps.androidx.activity_ktx

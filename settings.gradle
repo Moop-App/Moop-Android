@@ -1,1 +1,8 @@
-include ':app', ':data', ':widget', ':theme', ':model'
+include ':app',
+        ':data',
+        ':widget',
+        ':theme',
+        ':model',
+        ':data:repository',
+        ':data:api',
+        ':data:db'

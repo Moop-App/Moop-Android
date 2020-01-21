@@ -1,8 +1,16 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: file('gradle/utils.gradle')
 
 buildscript {
     apply from: 'versions.gradle'
-    addProjectRepositories(repositories)
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.fabric.io/public' }
+    }
     dependencies {
         classpath deps.android_gradle_plugin
         classpath deps.kotlin.plugin
@@ -14,7 +22,30 @@ buildscript {
 }
 
 allprojects {
-    addAppRepositories(repositories)
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com/' }
+        maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+        maven { url 'https://navercorp.bintray.com/maps' }
+    }
+    plugins.whenPluginAdded {
+        if (it.isAndroidApp() || it.isAndroidLibrary() || it.isDynamicFeature()) {
+            android.compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+        }
+    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
 }
 
 task clean(type: Delete) {

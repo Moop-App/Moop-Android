@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation": "$projectDir/schemas".toString(),
+                        "room.incremental"   : "true"
+                ]
+            }
+        }
+    }
+}
+
+dependencies {
+    api project(":model")
+    implementation project(":data:api")
+    implementation project(":data:db")
+
+    implementation deps.kotlin.stdlib
+    api deps.kotlin.coroutines_core
+    api deps.kotlin.coroutines_android
+
+    implementation deps.room.runtime
+    implementation deps.room.rxjava2
+    implementation deps.room.ktx
+    kapt deps.room.compiler
+
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+
+    implementation deps.rx.java2
+
+    implementation deps.util.timber
+
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
+}

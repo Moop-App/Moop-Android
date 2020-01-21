@@ -1,45 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-android {
-    compileSdkVersion build_versions.compile_sdk
-
-    defaultConfig {
-        minSdkVersion build_versions.min_sdk
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled true
-            consumerProguardFiles 'proguard-rules.pro'
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
-    }
-}
+apply from: rootProject.file('gradle/android.gradle')
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin.stdlib
 
     implementation deps.androidx.appcompat

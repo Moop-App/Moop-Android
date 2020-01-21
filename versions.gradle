@@ -126,27 +126,3 @@ build_versions.build_tools = "29.0.2"
 build_versions.versionCode = 90
 build_versions.versionName = '0.9.0'
 ext.build_versions = build_versions
-
-static def addProjectRepositories(RepositoryHandler handler) {
-    handler.google()
-    handler.jcenter()
-    handler.mavenCentral()
-    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    handler.maven { url "https://jitpack.io" }
-    handler.maven { url 'https://maven.fabric.io/public' }
-}
-
-ext.addProjectRepositories = this.&addProjectRepositories
-
-static def addAppRepositories(RepositoryHandler handler) {
-    handler.google()
-    handler.jcenter()
-    handler.mavenCentral()
-    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    handler.maven { url "https://jitpack.io" }
-    handler.maven { url 'https://maven.google.com/' }
-    handler.maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
-    handler.maven { url 'https://navercorp.bintray.com/maps' }
-}
-
-ext.addAppRepositories = this.&addAppRepositories

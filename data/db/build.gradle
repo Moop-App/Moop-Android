@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 apply from: rootProject.file('gradle/android.gradle')
 
 dependencies {
     implementation deps.kotlin.stdlib
-    implementation deps.androidx.appcompat
+    implementation deps.kotlin.coroutines_core
+    implementation deps.kotlin.coroutines_android
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

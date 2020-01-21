@@ -1,1 +1,0 @@
--keep class soup.movie.model.** { *; }

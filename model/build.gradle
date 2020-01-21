@@ -2,25 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-android {
-    compileSdkVersion build_versions.compile_sdk
-
-    defaultConfig {
-        minSdkVersion build_versions.min_sdk
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled true
-            consumerProguardFiles 'consumer-rules.pro'
-        }
-    }
-}
+apply from: rootProject.file('gradle/android.gradle')
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.coroutines_core
     implementation deps.kotlin.coroutines_android
