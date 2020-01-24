@@ -1,7 +1,9 @@
 package soup.movie.ui.detail
 
 import androidx.annotation.Keep
-import soup.movie.data.model.*
+import soup.movie.data.model.Company
+import soup.movie.data.model.Movie
+import soup.movie.data.model.Trailer
 
 @Keep
 data class HeaderUiModel(
@@ -24,21 +26,21 @@ object HeaderItemUiModel : ContentItemUiModel()
 
 @Keep
 class CgvItemUiModel(
-    val movieId: CgvMovieId,
+    val movieId: String,
     val hasInfo: Boolean,
     val rating: String
 ) : ContentItemUiModel()
 
 @Keep
 class LotteItemUiModel(
-    val movieId: LotteMovieId,
+    val movieId: String,
     val hasInfo: Boolean,
     val rating: String
 ) : ContentItemUiModel()
 
 @Keep
 class MegaboxItemUiModel(
-    val movieId: MegaboxMovieId,
+    val movieId: String,
     val hasInfo: Boolean,
     val rating: String
 ) : ContentItemUiModel()
@@ -46,7 +48,7 @@ class MegaboxItemUiModel(
 @Keep
 class NaverItemUiModel(
     val rating: String,
-    val webLink: Url?
+    val webLink: String?
 ) : ContentItemUiModel()
 
 @Keep
@@ -56,7 +58,7 @@ class BoxOfficeItemUiModel(
     val audience: Int,
     val screenDays: Int,
     val rating: String,
-    val webLink: Url?
+    val webLink: String?
 ) : ContentItemUiModel()
 
 @Keep
@@ -64,7 +66,7 @@ class ImdbItemUiModel(
     val imdb: String,
     val rottenTomatoes: String,
     val metascore: String,
-    val webLink: Url?
+    val webLink: String?
 ) : ContentItemUiModel()
 
 @Keep

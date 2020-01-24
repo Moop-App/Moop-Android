@@ -12,7 +12,6 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsIntent.COLOR_SCHEME_SYSTEM
 import androidx.core.content.ContextCompat
 import soup.movie.R
-import soup.movie.data.model.Url
 
 /** Color */
 
@@ -45,7 +44,7 @@ private fun Intent.isValid(ctx: Context): Boolean {
     return activities != null && activities.size > 0
 }
 
-fun Context.executeWeb(url: Url?) {
+fun Context.executeWeb(url: String?) {
     if (url == null) return
     CustomTabsIntent.Builder()
         .addDefaultShareMenuItem()

@@ -83,7 +83,7 @@ object Cgv : MarketApp() {
 
     override val packageName = "com.cgv.android.movieapp"
 
-    fun executeMobileWeb(ctx: Context, movieId: CgvMovieId) {
+    fun executeMobileWeb(ctx: Context, movieId: String) {
         ctx.executeWeb(detailMobileWebUrl(movieId))
     }
 
@@ -95,7 +95,7 @@ object Cgv : MarketApp() {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
 
-    private fun detailMobileWebUrl(movieId: CgvMovieId): String =
+    private fun detailMobileWebUrl(movieId: String): String =
             "https://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=$movieId"
 
     private fun detailWebUrl(theaterCode: String): String =
@@ -106,7 +106,7 @@ object LotteCinema : MarketApp() {
 
     override val packageName = "kr.co.lottecinema.lcm"
 
-    fun executeMobileWeb(ctx: Context, movieId: LotteMovieId) {
+    fun executeMobileWeb(ctx: Context, movieId: String) {
         ctx.executeWeb(detailMobileWebUrl(movieId))
     }
 
@@ -118,7 +118,7 @@ object LotteCinema : MarketApp() {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
 
-    private fun detailMobileWebUrl(movieId: LotteMovieId): String =
+    private fun detailMobileWebUrl(movieId: String): String =
             "https://www.lottecinema.co.kr/NLCMW/movie/moviedetailview?movie=$movieId"
 
     private fun detailWebUrl(theaterCode: String): String =
@@ -129,7 +129,7 @@ object Megabox : MarketApp() {
 
     override val packageName = "com.megabox.mop"
 
-    fun executeMobileWeb(ctx: Context, movieId: MegaboxMovieId) {
+    fun executeMobileWeb(ctx: Context, movieId: String) {
         ctx.executeWeb(detailMobileWebUrl(movieId))
     }
 
@@ -141,7 +141,7 @@ object Megabox : MarketApp() {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
 
-    private fun detailMobileWebUrl(movieId: MegaboxMovieId): String =
+    private fun detailMobileWebUrl(movieId: String): String =
             "https://m.megabox.co.kr/?menuId=movie-detail&movieCode=$movieId"
 
     private fun detailWebUrl(theaterCode: String): String =

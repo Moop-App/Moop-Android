@@ -5,5 +5,5 @@ import androidx.annotation.Keep
 @Keep
 data class NaverInfo(
     val star: String,
-    val url: Url?
+    val url: String?
 )

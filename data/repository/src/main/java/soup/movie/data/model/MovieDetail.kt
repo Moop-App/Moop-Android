@@ -37,7 +37,7 @@ data class MovieDetail(
     val megabox: MegaboxInfo?,
     val naver: NaverInfo?,
     val imdb: ImdbInfo?,
-    val rt: RottenInfo?,
+    val rt: RottenTomatoInfo?,
     val mc: MetascoreInfo?,
     val plot: String?,
     val trailers: List<Trailer>?

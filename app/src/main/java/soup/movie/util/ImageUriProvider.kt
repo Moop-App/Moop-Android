@@ -23,7 +23,6 @@ import androidx.annotation.WorkerThread
 import androidx.core.content.FileProvider
 import io.reactivex.Observable
 import soup.movie.BuildConfig
-import soup.movie.data.model.Url
 import soup.movie.util.glide.GlideApp
 import java.io.File
 
@@ -35,7 +34,7 @@ class ImageUriProvider(context: Context) {
     // Only hold the app context to avoid leaks
     private val appContext = context.applicationContext
 
-    operator fun invoke(url: Url): Observable<Uri> {
+    operator fun invoke(url: String): Observable<Uri> {
         return Observable.fromCallable {
             // Retrieve the image from Glide (hopefully cached) as a File
             val file = GlideApp.with(appContext)

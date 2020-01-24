@@ -1,6 +1,6 @@
 package soup.movie.ui.theater.mode
 
-typealias Listener = (TheaterModeTileManager.TileState) -> Unit
+private typealias Listener = (TheaterModeTileManager.TileState) -> Unit
 
 object TheaterModeTileManager {
 

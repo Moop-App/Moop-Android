@@ -2,11 +2,9 @@ package soup.movie.data.model
 
 import androidx.annotation.Keep
 
-typealias TheaterType = String
-
 @Keep
 data class Theater(
-    val type: TheaterType,
+    val type: String,
     val code: String,
     val name: String,
     val lng: Double,
@@ -18,8 +16,8 @@ data class Theater(
 
     companion object {
 
-        const val TYPE_CGV: TheaterType = "C"
-        const val TYPE_LOTTE: TheaterType = "L"
-        const val TYPE_MEGABOX: TheaterType = "M"
+        const val TYPE_CGV = "C"
+        const val TYPE_LOTTE = "L"
+        const val TYPE_MEGABOX = "M"
     }
 }

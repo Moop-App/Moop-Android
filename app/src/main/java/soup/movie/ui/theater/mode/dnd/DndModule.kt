@@ -14,7 +14,7 @@ import soup.movie.util.showToast
  * Refer to {@link https://android--code.blogspot.com/2018/04/android-kotlin-turn-on-of-do-not.html}
  */
 
-typealias Listener = (Boolean) -> Unit
+private typealias Listener = (Boolean) -> Unit
 
 class DndModule(private val ctx: Context, private val listener: Listener? = null) {
 

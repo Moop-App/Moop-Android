@@ -6,7 +6,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 
-typealias OnInterceptTouchListener = (View, MotionEvent) -> Unit
+private typealias OnInterceptTouchListener = (View, MotionEvent) -> Unit
 
 class ConstraintLayoutEx @JvmOverloads constructor(
     context: Context,
