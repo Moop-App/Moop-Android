@@ -1,10 +1,10 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
 /**
  * @param peopleNm 배우 (이름)
  * @param cast 배우 (역할)
  */
-data class Actor(
+data class ActorResponse(
     val peopleNm: String,
     val cast: String
 )

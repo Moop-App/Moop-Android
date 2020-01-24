@@ -1,7 +1,7 @@
 package soup.movie.ui.theater.sort
 
 import androidx.annotation.Keep
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 
 @Keep
 class TheaterSortUiModel(

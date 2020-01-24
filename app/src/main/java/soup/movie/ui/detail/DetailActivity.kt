@@ -17,7 +17,7 @@ import com.stfalcon.imageviewer.StfalconImageViewer
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity

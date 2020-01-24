@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="soup.movie.data.model.Movie" />
+            type="soup.movie.model.Movie" />
     </data>
 
     <TextView

@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MoopRepository
-import soup.movie.data.model.TheaterAreaGroup
+import soup.movie.model.TheaterAreaGroup
 import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 

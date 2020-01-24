@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RoughAdapterDataObserver
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 import soup.movie.databinding.HomeTabContentsBinding
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.HomeFragmentDirections

@@ -1,6 +1,6 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
-data class Theater(
+data class TheaterResponse(
     val type: String,
     val code: String,
     val name: String,

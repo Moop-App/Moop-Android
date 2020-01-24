@@ -5,10 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "open_date_alarms")
-data class OpenDateAlarm(
+data class OpenDateAlarmEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String,
+    val movieId: String,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "openDate")

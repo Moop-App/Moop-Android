@@ -4,13 +4,13 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import soup.movie.data.model.converter.FavoriteMovieTypeConverters
-import soup.movie.data.model.entity.FavoriteMovie
-import soup.movie.data.model.entity.OpenDateAlarm
+import soup.movie.data.model.entity.FavoriteMovieEntity
+import soup.movie.data.model.entity.OpenDateAlarmEntity
 
 @Database(
     entities = [
-        FavoriteMovie::class,
-        OpenDateAlarm::class
+        FavoriteMovieEntity::class,
+        OpenDateAlarmEntity::class
     ],
     version = 1,
     exportSchema = false

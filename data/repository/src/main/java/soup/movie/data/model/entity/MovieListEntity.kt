@@ -2,14 +2,13 @@ package soup.movie.data.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import soup.movie.data.model.Movie
 
 @Entity(tableName = "cached_movie_list")
-data class CachedMovieList(
+data class MovieListEntity(
     @PrimaryKey
     val type: String,
     val lastUpdateTime: Long,
-    val list: List<Movie>
+    val list: List<MovieEntity>
 ) {
 
     companion object {
@@ -17,7 +16,6 @@ data class CachedMovieList(
         const val TYPE_NOW = "type_now"
         const val TYPE_PLAN = "type_plan"
 
-        fun empty(type: String): CachedMovieList =
-            CachedMovieList(type, 0, emptyList())
+        fun empty(type: String) = MovieListEntity(type, 0, emptyList())
     }
 }

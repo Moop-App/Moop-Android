@@ -18,10 +18,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import soup.movie.BuildConfig
 import soup.movie.R
-import soup.movie.data.model.Theater
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.databinding.SettingsItemTheaterBinding
 import soup.movie.databinding.SettingsItemVersionBinding
+import soup.movie.model.Theater
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.*

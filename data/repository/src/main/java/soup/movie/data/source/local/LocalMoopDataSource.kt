@@ -3,21 +3,21 @@ package soup.movie.data.source.local
 import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import soup.movie.data.model.Movie
-import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.TheaterAreaGroup
-import soup.movie.data.model.converter.EntityConverter
-import soup.movie.data.model.entity.CachedMovieList
-import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_NOW
-import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_PLAN
+import soup.movie.data.mapper.*
+import soup.movie.data.model.entity.MovieListEntity
+import soup.movie.data.model.entity.MovieListEntity.Companion.TYPE_NOW
+import soup.movie.data.model.entity.MovieListEntity.Companion.TYPE_PLAN
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.source.MoopDataSource
+import soup.movie.data.model.response.TheaterAreaGroupResponse
+import soup.movie.model.Movie
+import soup.movie.model.MovieDetail
+import soup.movie.model.TheaterAreaGroup
 
 class LocalMoopDataSource(
     private val favoriteMovieDao: FavoriteMovieDao,
     private val openDateAlarmDao: OpenDateAlarmDao,
     private val cacheDao: MovieCacheDao
-) : MoopDataSource, EntityConverter {
+) {
 
     private var codeResponse: TheaterAreaGroup? = null
 
@@ -39,34 +39,28 @@ class LocalMoopDataSource(
 
     private suspend fun saveMovieListAs(type: String, response: MovieListResponse) {
         cacheDao.insert(
-            CachedMovieList(
+            MovieListEntity(
                 type,
                 response.lastUpdateTime,
-                response.list
+                response.list.map { it.toMovieEntity() }
             )
         )
-        openDateAlarmDao.updateOpenDateAlarms(response.list.map { it.toOpenDateAlarm() })
+        openDateAlarmDao.updateOpenDateAlarms(response.list.map { it.toOpenDateAlarmEntity() })
     }
 
     private fun getMovieListAs(type: String): Observable<List<Movie>> {
         return cacheDao.getMovieListByType(type)
-            .onErrorReturn { CachedMovieList.empty(type) }
-            .map { it.list }
+            .onErrorReturn { MovieListEntity.empty(type) }
+            .map { it.list.map { movieEntity -> movieEntity.toMovie() } }
             .toObservable()
     }
 
-    suspend fun findNowMovieList() : MovieListResponse {
-        return findMovieListAs(TYPE_NOW)
+    suspend fun getNowLastUpdateTime() : Long {
+        return cacheDao.findByType(TYPE_NOW).lastUpdateTime
     }
 
-    suspend fun findPlanMovieList() : MovieListResponse {
-        return findMovieListAs(TYPE_PLAN)
-    }
-
-    private suspend fun findMovieListAs(type: String): MovieListResponse {
-        return cacheDao.findByType(type).run {
-            MovieListResponse(lastUpdateTime, list)
-        }
+    suspend fun getPlanLastUpdateTime() : Long {
+        return cacheDao.findByType(TYPE_PLAN).lastUpdateTime
     }
 
     suspend fun getAllMovieList(): List<Movie> {
@@ -83,14 +77,14 @@ class LocalMoopDataSource(
 
     private suspend fun getMovieListOf(type: String): List<Movie> {
         return try {
-            cacheDao.getMovieListOf(type).list
+            cacheDao.getMovieListOf(type).list.map { movieEntity -> movieEntity.toMovie() }
         } catch (t: Throwable) {
             emptyList()
         }
     }
 
-    fun saveCodeList(response: TheaterAreaGroup) {
-        codeResponse = response
+    fun saveCodeList(response: TheaterAreaGroupResponse) {
+        codeResponse = response.toTheaterAreaGroup()
     }
 
     fun getCodeList(): TheaterAreaGroup? {
@@ -100,7 +94,7 @@ class LocalMoopDataSource(
     suspend fun addFavoriteMovie(movie: MovieDetail) {
         favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovie())
         if (movie.isPlan) {
-            openDateAlarmDao.insertOpenDateAlarm(movie.toOpenDateAlarm())
+            openDateAlarmDao.insertOpenDateAlarm(movie.toOpenDateAlarmEntity())
         }
     }
 
@@ -111,7 +105,7 @@ class LocalMoopDataSource(
 
     fun getFavoriteMovieList(): Flow<List<Movie>> {
         return favoriteMovieDao.getFavoriteMovieList().map {
-            it.map { it.toMovie() }
+            it.map { favoriteMovieEntity -> favoriteMovieEntity.toMovie() }
         }
     }
 

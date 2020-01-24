@@ -1,9 +1,9 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import com.google.gson.annotations.SerializedName
 
-data class Trailer(
+data class TrailerResponse(
     val youtubeId: String,
     @SerializedName("title")
     private val _title: String,
@@ -11,5 +11,5 @@ data class Trailer(
     val thumbnailUrl: String
 ) {
     val title: String
-        get() = HtmlCompat.fromHtml(_title, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+        get() = _title.parseAsHtml().toString()
 }

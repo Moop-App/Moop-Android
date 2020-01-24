@@ -9,7 +9,7 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
 import soup.movie.R
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 import soup.movie.databinding.HomeItemMovieBinding
 import soup.movie.domain.model.isBest
 import soup.movie.domain.model.isDDay

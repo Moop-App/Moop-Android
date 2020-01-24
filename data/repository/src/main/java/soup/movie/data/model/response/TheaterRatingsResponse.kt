@@ -1,8 +1,8 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class TheaterRatings(
+data class TheaterRatingsResponse(
     @SerializedName("C")
     val cgv: String?,
     @SerializedName("L")

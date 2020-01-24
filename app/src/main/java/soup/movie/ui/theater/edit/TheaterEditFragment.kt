@@ -20,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDE
 import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.setupWithViewPager2
 import soup.movie.R
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 import soup.movie.databinding.TheaterEditFooterBinding
 import soup.movie.databinding.TheaterEditFragmentBinding
 import soup.movie.ui.base.BaseFragment

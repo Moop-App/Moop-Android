@@ -11,9 +11,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MoopRepository
-import soup.movie.data.model.Movie
-import soup.movie.data.model.MovieDetail
 import soup.movie.domain.model.screenDays
+import soup.movie.model.Movie
+import soup.movie.model.MovieDetail
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.ui.base.BaseViewModel

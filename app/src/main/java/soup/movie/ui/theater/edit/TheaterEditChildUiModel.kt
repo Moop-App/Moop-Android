@@ -1,8 +1,8 @@
 package soup.movie.ui.theater.edit
 
 import androidx.annotation.Keep
-import soup.movie.data.model.TheaterArea
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
+import soup.movie.model.TheaterArea
 
 @Keep
 class TheaterEditChildUiModel(

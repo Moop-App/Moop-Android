@@ -2,12 +2,13 @@ package soup.movie.data.repository
 
 import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.model.Movie
-import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.TheaterAreaGroup
+import soup.movie.data.mapper.toMovieDetail
 import soup.movie.data.source.local.LocalMoopDataSource
 import soup.movie.data.source.remote.RemoteMoopDataSource
 import soup.movie.data.util.SearchHelper
+import soup.movie.model.Movie
+import soup.movie.model.MovieDetail
+import soup.movie.model.TheaterAreaGroup
 
 class MoopRepository(
     private val local: LocalMoopDataSource,
@@ -20,7 +21,7 @@ class MoopRepository(
 
     suspend fun updateNowList() {
         val isStaleness = try {
-            local.findNowMovieList().lastUpdateTime < remote.getNowLastUpdateTime()
+            local.getNowLastUpdateTime() < remote.getNowLastUpdateTime()
         } catch (t: Throwable) {
             true
         }
@@ -35,7 +36,7 @@ class MoopRepository(
 
     suspend fun updatePlanList() {
         val isStaleness = try {
-            local.findPlanMovieList().lastUpdateTime < remote.getPlanLastUpdateTime()
+            local.getPlanLastUpdateTime() < remote.getPlanLastUpdateTime()
         } catch (t: Throwable) {
             true
         }
@@ -45,7 +46,7 @@ class MoopRepository(
     }
 
     suspend fun getMovieDetail(movieId: String): MovieDetail {
-        return remote.getMovieDetail(movieId)
+        return remote.getMovieDetail(movieId).toMovieDetail()
     }
 
     fun getMovie(movieId: String): Observable<Movie> =
@@ -65,9 +66,13 @@ class MoopRepository(
     }
 
     suspend fun getCodeList(): TheaterAreaGroup {
-        return local.getCodeList()
-            ?: remote.getCodeList()
-                .also(local::saveCodeList)
+        val cache = local.getCodeList()
+        if (cache != null) {
+            return cache
+        }
+        val response = remote.getCodeList()
+        local.saveCodeList(response)
+        return local.getCodeList()!!
     }
 
     fun getFavoriteMovieList(): Flow<List<Movie>> {

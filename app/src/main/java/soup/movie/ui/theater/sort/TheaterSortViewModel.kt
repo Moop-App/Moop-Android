@@ -2,7 +2,7 @@ package soup.movie.ui.theater.sort
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.base.BaseViewModel
 import soup.movie.util.swap

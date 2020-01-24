@@ -7,7 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject

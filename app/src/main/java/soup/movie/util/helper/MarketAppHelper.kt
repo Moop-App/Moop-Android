@@ -6,8 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import soup.movie.BuildConfig
-import soup.movie.data.model.*
+import soup.movie.model.Theater
+import soup.movie.model.Trailer
 import soup.movie.ui.map.TheaterMarkerUiModel
 import soup.movie.util.executeWeb
 import soup.movie.util.startActivitySafely

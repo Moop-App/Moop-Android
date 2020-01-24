@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.google.android.material.chip.Chip
 import soup.movie.R
-import soup.movie.data.model.TheaterArea
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 import soup.movie.databinding.TheaterEditItemAreaBinding
 import soup.movie.domain.theater.edit.TheaterEditManager.Companion.MAX_ITEMS
+import soup.movie.model.TheaterArea
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.inflate

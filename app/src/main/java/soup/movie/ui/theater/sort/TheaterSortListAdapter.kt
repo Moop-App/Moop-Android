@@ -2,12 +2,11 @@ package soup.movie.ui.theater.sort
 
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.listener.OnDragListener
 import androidx.recyclerview.widget.listener.OnItemMoveListener
 import soup.movie.R
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.swap

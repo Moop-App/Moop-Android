@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
-import soup.movie.data.model.*
+import soup.movie.model.*
 import soup.movie.util.helper.today
 
 @DrawableRes

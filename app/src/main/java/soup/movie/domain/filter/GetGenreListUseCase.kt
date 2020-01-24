@@ -2,8 +2,8 @@ package soup.movie.domain.filter
 
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables
-import soup.movie.data.model.Movie
 import soup.movie.data.repository.MoopRepository
+import soup.movie.model.Movie
 import soup.movie.settings.model.GenreFilter
 
 class GetGenreListUseCase(

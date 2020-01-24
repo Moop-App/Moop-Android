@@ -1,9 +1,9 @@
 package soup.movie.ui.detail
 
 import androidx.annotation.Keep
-import soup.movie.data.model.Company
-import soup.movie.data.model.Movie
-import soup.movie.data.model.Trailer
+import soup.movie.model.Company
+import soup.movie.model.Movie
+import soup.movie.model.Trailer
 
 @Keep
 data class HeaderUiModel(

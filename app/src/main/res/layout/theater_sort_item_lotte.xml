@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="soup.movie.data.model.Theater" />
+            type="soup.movie.model.Theater" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

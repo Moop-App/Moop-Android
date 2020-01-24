@@ -3,7 +3,7 @@ package soup.movie.settings.impl
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 import soup.movie.settings.PrefSetting
 import soup.movie.util.toJson
 import timber.log.Timber

@@ -1,6 +1,6 @@
 package soup.movie.domain.model
 
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.GenreFilter
 import soup.movie.settings.model.GenreFilter.Companion.GENRE_ETC

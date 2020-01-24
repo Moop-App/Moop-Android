@@ -1,11 +1,12 @@
 package soup.movie.data.source.remote
 
-import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.TheaterAreaGroup
+import soup.movie.data.model.response.MovieDetailResponse
+import soup.movie.data.model.response.TheaterAreaGroupResponse
 import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.source.MoopDataSource
 
-class RemoteMoopDataSource(private val moopApi: MoopApiService) : MoopDataSource {
+class RemoteMoopDataSource(
+    private val moopApi: MoopApiService
+) {
 
     suspend fun getNowList(): MovieListResponse {
         return moopApi.getNowMovieList()
@@ -23,11 +24,11 @@ class RemoteMoopDataSource(private val moopApi: MoopApiService) : MoopDataSource
         return moopApi.getPlanLastUpdateTime()
     }
 
-    suspend fun getMovieDetail(movieId: String): MovieDetail {
+    suspend fun getMovieDetail(movieId: String): MovieDetailResponse {
         return moopApi.getMovieDetail(movieId)
     }
 
-    suspend fun getCodeList(): TheaterAreaGroup {
+    suspend fun getCodeList(): TheaterAreaGroupResponse {
         return moopApi.getCodeList()
     }
 }

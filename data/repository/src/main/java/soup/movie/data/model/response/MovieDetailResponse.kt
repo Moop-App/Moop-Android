@@ -1,4 +1,4 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
  * @param showTm 상영시간 (분)
  * @param boxOffice 박스오피스 정보
  */
-data class MovieDetail(
+data class MovieDetailResponse(
     val id: String,
     val score: Int,
     val title: String,
@@ -24,21 +24,21 @@ data class MovieDetail(
     val nationFilter: List<String>?,
     val genres: List<String>?,
 
-    val boxOffice: BoxOffice?,
+    val boxOffice: BoxOfficeResponse?,
     val showTm: Int?,
     val nations: List<String>?,
     val directors: List<String>?,
-    val actors: List<Actor>?,
-    val companies: List<Company>?,
-    val cgv: CgvInfo?,
-    val lotte: LotteInfo?,
-    val megabox: MegaboxInfo?,
-    val naver: NaverInfo?,
-    val imdb: ImdbInfo?,
-    val rt: RottenTomatoInfo?,
-    val mc: MetascoreInfo?,
+    val actors: List<ActorResponse>?,
+    val companies: List<CompanyResponse>?,
+    val cgv: CgvInfoResponse?,
+    val lotte: LotteInfoResponse?,
+    val megabox: MegaboxInfoResponse?,
+    val naver: NaverInfoResponse?,
+    val imdb: ImdbInfoResponse?,
+    val rt: RottenTomatoInfoResponse?,
+    val mc: MetascoreInfoResponse?,
     val plot: String?,
-    val trailers: List<Trailer>?
+    val trailers: List<TrailerResponse>?
 ) {
 
     val posterUrl: String

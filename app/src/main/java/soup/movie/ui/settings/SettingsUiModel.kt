@@ -1,7 +1,7 @@
 package soup.movie.ui.settings
 
 import androidx.annotation.Keep
-import soup.movie.data.model.Theater
+import soup.movie.model.Theater
 import soup.movie.theme.ThemeOption
 
 sealed class SettingsUiModel

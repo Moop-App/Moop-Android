@@ -1,6 +1,6 @@
 package soup.movie.ui.home
 
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 
 enum class HomeHeaderUiModel {
     Now, Plan, Favorite

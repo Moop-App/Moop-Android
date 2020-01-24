@@ -1,6 +1,6 @@
 package soup.movie.domain.home.model
 
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 
 class HomeDomainModel(
     val movies: List<Movie>

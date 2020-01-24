@@ -1,8 +1,8 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+data class MovieResponse(
     val id: String,
     val score: Int,
     val title: String,
@@ -15,7 +15,7 @@ data class Movie(
     val nationFilter: List<String>?,
     val genres: List<String>?,
     val boxOffice: Int?,
-    val theater: TheaterRatings
+    val theater: TheaterRatingsResponse
 ) {
 
     val posterUrl: String

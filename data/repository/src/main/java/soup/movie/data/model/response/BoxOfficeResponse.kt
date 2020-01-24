@@ -1,11 +1,11 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
 /**
  * @param rank 전일 순위
  * @param audiCnt 전일 관객수
  * @param audiAcc 누적 관객수
  */
-data class BoxOffice(
+data class BoxOfficeResponse(
     val rank: Int,
     val audiCnt: Int,
     val audiAcc: Int

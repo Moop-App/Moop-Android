@@ -1,10 +1,10 @@
-package soup.movie.data.model
+package soup.movie.data.model.response
 
 /**
  * @param companyNm 회사 (이름)
  * @param companyPartNm 회사 (역할)
  */
-data class Company(
+data class CompanyResponse(
     val companyNm: String,
     val companyPartNm: String
 )

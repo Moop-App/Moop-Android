@@ -3,7 +3,7 @@ package soup.movie.domain.home
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import soup.movie.data.repository.MoopRepository
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 import soup.movie.domain.home.model.HomeDomainModel
 import soup.movie.domain.model.MovieFilter
 import soup.movie.domain.model.getDDay

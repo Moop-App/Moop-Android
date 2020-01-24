@@ -1,6 +1,6 @@
 package soup.movie.ui.search
 
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 
 data class SearchContentsUiModel(
     val movies: List<Movie>,

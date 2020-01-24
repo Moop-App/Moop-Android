@@ -3,8 +3,8 @@ package soup.movie.data.source.remote
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
-import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.TheaterAreaGroup
+import soup.movie.data.model.response.MovieDetailResponse
+import soup.movie.data.model.response.TheaterAreaGroupResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.util.OkHttpInterceptors.HEADER_USE_CACHE
 
@@ -33,9 +33,9 @@ interface MoopApiService {
     @GET("detail/{movieId}.json")
     suspend fun getMovieDetail(
         @Path("movieId") movieId: String
-    ): MovieDetail
+    ): MovieDetailResponse
 
     // 공통코드
     @GET("code.json")
-    suspend fun getCodeList(): TheaterAreaGroup
+    suspend fun getCodeList(): TheaterAreaGroupResponse
 }

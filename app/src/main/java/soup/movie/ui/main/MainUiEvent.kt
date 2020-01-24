@@ -1,6 +1,6 @@
 package soup.movie.ui.main
 
-import soup.movie.data.model.Movie
+import soup.movie.model.Movie
 
 sealed class MainUiEvent
 

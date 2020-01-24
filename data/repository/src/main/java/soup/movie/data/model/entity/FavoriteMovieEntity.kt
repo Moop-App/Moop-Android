@@ -3,13 +3,14 @@ package soup.movie.data.model.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import soup.movie.data.model.*
 
 @Entity(tableName = "favorite_movies")
-data class FavoriteMovie(
+data class FavoriteMovieEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String,
+    @ColumnInfo(name = "score")
+    val score: Int,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "posterUrl")
@@ -24,35 +25,12 @@ data class FavoriteMovie(
     val nationFilter: List<String>?,
     @ColumnInfo(name = "genres")
     val genres: List<String>?,
-
     @ColumnInfo(name = "boxOffice")
-    val boxOffice: BoxOffice?,
-    @ColumnInfo(name = "showTm")
-    val showTm: Int?,
-    @ColumnInfo(name = "nations")
-    val nations: List<String>?,
-    @ColumnInfo(name = "directors")
-    val directors: List<String>?,
-    @ColumnInfo(name = "actors")
-    val actors: List<Actor>?,
-    @ColumnInfo(name = "companies")
-    val companies: List<Company>?,
+    val boxOffice: Int?,
     @ColumnInfo(name = "cgv")
     val cgv: String?,
     @ColumnInfo(name = "lotte")
     val lotte: String?,
     @ColumnInfo(name = "megabox")
-    val megabox: String?,
-    @ColumnInfo(name = "naver")
-    val naver: NaverInfo?,
-    @ColumnInfo(name = "imdb")
-    val imdb: ImdbInfo?,
-    @ColumnInfo(name = "rt_star")
-    val rt: String?,
-    @ColumnInfo(name = "mc_star")
-    val mc: String?,
-    @ColumnInfo(name = "plot")
-    val plot: String?,
-    @ColumnInfo(name = "trailers")
-    val trailers: List<Trailer>?
+    val megabox: String?
 )

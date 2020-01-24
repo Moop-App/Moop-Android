@@ -4,9 +4,9 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.ReplaySubject
 import soup.movie.data.repository.MoopRepository
-import soup.movie.data.model.TheaterArea
-import soup.movie.data.model.Theater
-import soup.movie.data.model.TheaterAreaGroup
+import soup.movie.model.Theater
+import soup.movie.model.TheaterArea
+import soup.movie.model.TheaterAreaGroup
 import soup.movie.settings.impl.TheatersSetting
 
 class TheaterEditManager(
@@ -17,8 +17,7 @@ class TheaterEditManager(
     private val cgvSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
     private val lotteSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
     private val megaboxSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
-    private val selectedTheatersSubject: BehaviorSubject<List<Theater>> =
-        BehaviorSubject.createDefault(emptyList())
+    private val selectedTheatersSubject = BehaviorSubject.createDefault<List<Theater>>(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
     private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
@@ -41,8 +40,8 @@ class TheaterEditManager(
         }
     }
 
-    private fun setupTotalList(response: TheaterAreaGroup) {
-        theaterList = response.run {
+    private fun setupTotalList(group: TheaterAreaGroup) {
+        theaterList = group.run {
             (cgv + lotte + megabox).flatMap(TheaterArea::theaterList)
         }
     }
