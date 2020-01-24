@@ -7,6 +7,7 @@ def deps = [:]
 
 deps.androidx = [
         activity_ktx    : 'androidx.activity:activity-ktx:1.1.0',
+        annotation      : "androidx.annotation:annotation:1.1.0",
         appcompat       : 'androidx.appcompat:appcompat:1.1.0',
         browser         : 'androidx.browser:browser:1.2.0',
         constraintlayout: 'androidx.constraintlayout:constraintlayout:2.0.0-beta4',

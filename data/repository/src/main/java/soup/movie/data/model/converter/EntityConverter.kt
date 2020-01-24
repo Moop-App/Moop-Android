@@ -2,7 +2,7 @@ package soup.movie.data.model.converter
 
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.MovieTheater
+import soup.movie.data.model.TheaterRatings
 import soup.movie.data.model.entity.FavoriteMovie
 import soup.movie.data.model.entity.OpenDateAlarm
 
@@ -20,7 +20,7 @@ interface EntityConverter {
             nationFilter = nationFilter,
             genres = genres,
             boxOffice = boxOffice?.rank,
-            theater = MovieTheater(
+            theater = TheaterRatings(
                 cgv = cgv,
                 lotte = lotte,
                 megabox = megabox

@@ -1,10 +1,8 @@
 package soup.movie.data.model
 
-import androidx.annotation.Keep
 import androidx.core.text.HtmlCompat
 import com.google.gson.annotations.SerializedName
 
-@Keep
 data class Trailer(
     val youtubeId: String,
     @SerializedName("title")

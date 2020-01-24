@@ -1,6 +1,5 @@
 package soup.movie.data.model
 
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -12,7 +11,6 @@ import com.google.gson.annotations.SerializedName
  * @param showTm 상영시간 (분)
  * @param boxOffice 박스오피스 정보
  */
-@Keep
 data class MovieDetail(
     val id: String,
     val score: Int,
