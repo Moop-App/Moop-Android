@@ -5,11 +5,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
+import soup.movie.data.model.TheaterAreaGroup
 import soup.movie.data.model.converter.EntityConverter
 import soup.movie.data.model.entity.CachedMovieList
 import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_NOW
 import soup.movie.data.model.entity.CachedMovieList.Companion.TYPE_PLAN
-import soup.movie.data.model.response.CodeResponse
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
 
@@ -19,13 +19,13 @@ class LocalMoopDataSource(
     private val cacheDao: MovieCacheDao
 ) : MoopDataSource, EntityConverter {
 
-    private var codeResponse: CodeResponse? = null
+    private var codeResponse: TheaterAreaGroup? = null
 
     suspend fun saveNowList(response: MovieListResponse) {
         saveMovieListAs(TYPE_NOW, response)
     }
 
-    fun getNowList(): Observable<MovieListResponse> {
+    fun getNowList(): Observable<List<Movie>> {
         return getMovieListAs(TYPE_NOW)
     }
 
@@ -33,7 +33,7 @@ class LocalMoopDataSource(
         saveMovieListAs(TYPE_PLAN, response)
     }
 
-    fun getPlanList(): Observable<MovieListResponse> {
+    fun getPlanList(): Observable<List<Movie>> {
         return getMovieListAs(TYPE_PLAN)
     }
 
@@ -48,10 +48,10 @@ class LocalMoopDataSource(
         openDateAlarmDao.updateOpenDateAlarms(response.list.map { it.toOpenDateAlarm() })
     }
 
-    private fun getMovieListAs(type: String): Observable<MovieListResponse> {
+    private fun getMovieListAs(type: String): Observable<List<Movie>> {
         return cacheDao.getMovieListByType(type)
             .onErrorReturn { CachedMovieList.empty(type) }
-            .map { MovieListResponse(it.lastUpdateTime, it.list) }
+            .map { it.list }
             .toObservable()
     }
 
@@ -89,11 +89,11 @@ class LocalMoopDataSource(
         }
     }
 
-    fun saveCodeList(response: CodeResponse) {
+    fun saveCodeList(response: TheaterAreaGroup) {
         codeResponse = response
     }
 
-    fun getCodeList(): CodeResponse? {
+    fun getCodeList(): TheaterAreaGroup? {
         return codeResponse
     }
 

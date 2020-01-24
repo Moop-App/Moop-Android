@@ -2,8 +2,8 @@ package soup.movie.domain.filter
 
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables
+import soup.movie.data.model.Movie
 import soup.movie.data.repository.MoopRepository
-import soup.movie.data.model.response.MovieListResponse
 import soup.movie.settings.model.GenreFilter
 
 class GetGenreListUseCase(
@@ -20,15 +20,11 @@ class GetGenreListUseCase(
             .take(1)
     }
 
-    private fun MovieListResponse.toGenreSet(): Set<String> {
-        return list
-            .asSequence()
-            .map { it.genres.orEmpty() }
-            .flatMap { it.asSequence() }
-            .toSet()
+    private fun List<Movie>.toGenreSet(): Set<String> {
+        return mapNotNull { it.genres }.flatten().toSet()
     }
 
-    private fun Observable<MovieListResponse>.mapToGenreSet(): Observable<Set<String>> {
+    private fun Observable<List<Movie>>.mapToGenreSet(): Observable<Set<String>> {
         return map { it.toGenreSet() }.onErrorReturnItem(emptySet())
     }
 

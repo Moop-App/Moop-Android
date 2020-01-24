@@ -4,8 +4,7 @@ import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 import soup.movie.data.model.Movie
 import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.response.CodeResponse
-import soup.movie.data.model.response.MovieListResponse
+import soup.movie.data.model.TheaterAreaGroup
 import soup.movie.data.source.local.LocalMoopDataSource
 import soup.movie.data.source.remote.RemoteMoopDataSource
 import soup.movie.data.util.SearchHelper
@@ -15,7 +14,7 @@ class MoopRepository(
     private val remote: RemoteMoopDataSource
 ) {
 
-    fun getNowList(): Observable<MovieListResponse> {
+    fun getNowList(): Observable<List<Movie>> {
         return local.getNowList()
     }
 
@@ -30,7 +29,7 @@ class MoopRepository(
         }
     }
 
-    fun getPlanList(): Observable<MovieListResponse> {
+    fun getPlanList(): Observable<List<Movie>> {
         return local.getPlanList()
     }
 
@@ -50,9 +49,7 @@ class MoopRepository(
     }
 
     fun getMovie(movieId: String): Observable<Movie> =
-        Observable.merge(
-            getNowList().map { it.list },
-            getPlanList().map { it.list })
+        Observable.merge(getNowList(), getPlanList())
             .flatMapIterable { it }
             .filter { it.id == movieId }
             .take(1)
@@ -67,7 +64,7 @@ class MoopRepository(
         return SearchHelper.matched(title, query)
     }
 
-    suspend fun getCodeList(): CodeResponse {
+    suspend fun getCodeList(): TheaterAreaGroup {
         return local.getCodeList()
             ?: remote.getCodeList()
                 .also(local::saveCodeList)

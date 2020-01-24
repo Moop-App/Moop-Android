@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.google.android.material.chip.Chip
 import soup.movie.R
-import soup.movie.data.model.AreaGroup
+import soup.movie.data.model.TheaterArea
 import soup.movie.data.model.Theater
 import soup.movie.databinding.TheaterEditItemAreaBinding
 import soup.movie.domain.theater.edit.TheaterEditManager.Companion.MAX_ITEMS
@@ -16,7 +16,7 @@ import soup.movie.util.showToast
 
 class TheaterEditChildListAdapter(
     private val listener: Listener
-) : DataBindingAdapter<AreaGroup>() {
+) : DataBindingAdapter<TheaterArea>() {
 
     interface Listener {
 
@@ -33,7 +33,7 @@ class TheaterEditChildListAdapter(
         return AreaGroupViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DataBindingViewHolder<AreaGroup>, position: Int) {
+    override fun onBindViewHolder(holder: DataBindingViewHolder<TheaterArea>, position: Int) {
         super.onBindViewHolder(holder, position)
         if (holder is AreaGroupViewHolder) {
             holder.theaterListView.apply {
@@ -67,7 +67,7 @@ class TheaterEditChildListAdapter(
 
     override fun getItemViewType(position: Int): Int = R.layout.theater_edit_item_area
 
-    fun submitList(list: List<AreaGroup>, selectedIdSet: List<Theater>) {
+    fun submitList(list: List<TheaterArea>, selectedIdSet: List<Theater>) {
         this.selectedIdSet = selectedIdSet.toMutableList()
         submitList(list)
     }
@@ -82,7 +82,7 @@ class TheaterEditChildListAdapter(
         }
     }
 
-    class AreaGroupViewHolder(binding: TheaterEditItemAreaBinding) : DataBindingViewHolder<AreaGroup>(binding) {
+    class AreaGroupViewHolder(binding: TheaterEditItemAreaBinding) : DataBindingViewHolder<TheaterArea>(binding) {
 
         val theaterListView = binding.theaterListView
     }

@@ -1,6 +1,6 @@
-package soup.movie.model
+package soup.movie.data.model
 
-data class AreaGroup(
+data class TheaterArea(
     val area: Area,
     val theaterList: List<Theater>
 )

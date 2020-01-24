@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MoopRepository
-import soup.movie.data.model.response.CodeResponse
+import soup.movie.data.model.TheaterAreaGroup
 import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
@@ -35,7 +35,7 @@ class TheaterMapViewModel @Inject constructor(
         }
     }
 
-    private fun CodeResponse.toTheaterList(): List<TheaterMarkerUiModel> {
+    private fun TheaterAreaGroup.toTheaterList(): List<TheaterMarkerUiModel> {
         return cgv.flatMap { group ->
             group.theaterList.map {
                 CgvMarkerUiModel(

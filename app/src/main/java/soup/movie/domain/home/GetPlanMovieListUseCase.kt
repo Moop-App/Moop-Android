@@ -17,8 +17,8 @@ class GetPlanMovieListUseCase(
     ): Observable<HomeDomainModel> {
         return repository.getPlanList()
             .observeOn(Schedulers.computation())
-            .map { response ->
-                response.list.asSequence()
+            .map { list ->
+                list.asSequence()
                     .sortedBy(Movie::getDDay)
                     .filter { movieFilter(it) }
                     .toList()

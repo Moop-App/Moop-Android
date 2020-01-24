@@ -4,9 +4,9 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.ReplaySubject
 import soup.movie.data.repository.MoopRepository
-import soup.movie.data.model.AreaGroup
+import soup.movie.data.model.TheaterArea
 import soup.movie.data.model.Theater
-import soup.movie.data.model.response.CodeResponse
+import soup.movie.data.model.TheaterAreaGroup
 import soup.movie.settings.impl.TheatersSetting
 
 class TheaterEditManager(
@@ -14,24 +14,24 @@ class TheaterEditManager(
     private val theatersSetting: TheatersSetting
 ) {
 
-    private val cgvSubject: ReplaySubject<List<AreaGroup>> = ReplaySubject.create()
-    private val lotteSubject: ReplaySubject<List<AreaGroup>> = ReplaySubject.create()
-    private val megaboxSubject: ReplaySubject<List<AreaGroup>> = ReplaySubject.create()
+    private val cgvSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
+    private val lotteSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
+    private val megaboxSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
     private val selectedTheatersSubject: BehaviorSubject<List<Theater>> =
         BehaviorSubject.createDefault(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
     private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
 
-    fun asCgvObservable(): Observable<List<AreaGroup>> = cgvSubject
+    fun asCgvObservable(): Observable<List<TheaterArea>> = cgvSubject
 
-    fun asLotteObservable(): Observable<List<AreaGroup>> = lotteSubject
+    fun asLotteObservable(): Observable<List<TheaterArea>> = lotteSubject
 
-    fun asMegaboxObservable(): Observable<List<AreaGroup>> = megaboxSubject
+    fun asMegaboxObservable(): Observable<List<TheaterArea>> = megaboxSubject
 
     fun asSelectedTheatersSubject(): Observable<List<Theater>> = selectedTheatersSubject
 
-    suspend fun loadAsync(): CodeResponse {
+    suspend fun loadAsync(): TheaterAreaGroup {
         setupSelectedList()
         return repository.getCodeList().also {
             setupTotalList(it)
@@ -41,9 +41,9 @@ class TheaterEditManager(
         }
     }
 
-    private fun setupTotalList(response: CodeResponse) {
+    private fun setupTotalList(response: TheaterAreaGroup) {
         theaterList = response.run {
-            (cgv + lotte + megabox).flatMap(AreaGroup::theaterList)
+            (cgv + lotte + megabox).flatMap(TheaterArea::theaterList)
         }
     }
 

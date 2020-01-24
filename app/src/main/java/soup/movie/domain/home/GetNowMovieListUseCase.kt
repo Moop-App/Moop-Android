@@ -16,8 +16,8 @@ class GetNowMovieListUseCase(
     ): Observable<HomeDomainModel> {
         return repository.getNowList()
             .observeOn(Schedulers.computation())
-            .map { response ->
-                response.list.asSequence()
+            .map { list ->
+                list.asSequence()
                     .sortedBy(Movie::score)
                     .filter { movieFilter(it) }
                     .toList()

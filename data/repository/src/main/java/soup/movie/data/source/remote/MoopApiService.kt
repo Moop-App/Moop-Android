@@ -4,7 +4,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.response.CodeResponse
+import soup.movie.data.model.TheaterAreaGroup
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.util.OkHttpInterceptors.HEADER_USE_CACHE
 
@@ -37,5 +37,5 @@ interface MoopApiService {
 
     // 공통코드
     @GET("code.json")
-    suspend fun getCodeList(): CodeResponse
+    suspend fun getCodeList(): TheaterAreaGroup
 }

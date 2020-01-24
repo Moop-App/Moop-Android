@@ -1,7 +1,7 @@
 package soup.movie.data.source.remote
 
 import soup.movie.data.model.MovieDetail
-import soup.movie.data.model.response.CodeResponse
+import soup.movie.data.model.TheaterAreaGroup
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.data.source.MoopDataSource
 
@@ -27,7 +27,7 @@ class RemoteMoopDataSource(private val moopApi: MoopApiService) : MoopDataSource
         return moopApi.getMovieDetail(movieId)
     }
 
-    suspend fun getCodeList(): CodeResponse {
+    suspend fun getCodeList(): TheaterAreaGroup {
         return moopApi.getCodeList()
     }
 }
