@@ -2,7 +2,7 @@ package soup.movie.domain.filter
 
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables
-import soup.movie.data.MoopRepository
+import soup.movie.data.repository.MoopRepository
 import soup.movie.data.model.response.MovieListResponse
 import soup.movie.settings.model.GenreFilter
 

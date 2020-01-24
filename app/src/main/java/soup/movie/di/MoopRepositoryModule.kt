@@ -7,7 +7,7 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import soup.movie.BuildConfig.API_BASE_URL
 import soup.movie.BuildType
-import soup.movie.data.MoopRepository
+import soup.movie.data.repository.MoopRepository
 import soup.movie.data.source.MoopDataSourceFactory
 import soup.movie.data.source.local.LocalMoopDataSource
 import soup.movie.data.source.remote.RemoteMoopDataSource

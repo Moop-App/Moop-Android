@@ -3,7 +3,7 @@ package soup.movie.domain.theater.edit
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.ReplaySubject
-import soup.movie.data.MoopRepository
+import soup.movie.data.repository.MoopRepository
 import soup.movie.data.model.AreaGroup
 import soup.movie.data.model.Theater
 import soup.movie.data.model.response.CodeResponse

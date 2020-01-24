@@ -2,7 +2,7 @@ package soup.movie.di.domain
 
 import dagger.Module
 import dagger.Provides
-import soup.movie.data.MoopRepository
+import soup.movie.data.repository.MoopRepository
 import soup.movie.di.scope.ActivityScope
 import soup.movie.domain.filter.GetGenreListUseCase
 import soup.movie.domain.home.GetMovieFilterUseCase

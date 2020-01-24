@@ -1,4 +1,4 @@
-package soup.movie.data
+package soup.movie.data.repository
 
 import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow

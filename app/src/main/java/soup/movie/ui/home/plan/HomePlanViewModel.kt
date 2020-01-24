@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import soup.movie.data.MoopRepository
+import soup.movie.data.repository.MoopRepository
 import soup.movie.domain.home.GetMovieFilterUseCase
 import soup.movie.domain.home.GetPlanMovieListUseCase
 import soup.movie.ui.home.HomeContentsUiModel
