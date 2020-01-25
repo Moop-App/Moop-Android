@@ -1,6 +1,6 @@
 package soup.movie.data.mapper
 
-import soup.movie.data.model.response.*
+import soup.movie.data.api.response.*
 import soup.movie.model.*
 
 fun MovieDetailResponse.toMovieDetail() = MovieDetail(

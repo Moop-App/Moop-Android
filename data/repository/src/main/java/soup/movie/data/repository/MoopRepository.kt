@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 import soup.movie.data.mapper.toMovieDetail
 import soup.movie.data.source.local.LocalMoopDataSource
-import soup.movie.data.source.remote.RemoteMoopDataSource
+import soup.movie.data.api.MoopApiService
 import soup.movie.data.util.SearchHelper
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
@@ -12,7 +12,7 @@ import soup.movie.model.TheaterAreaGroup
 
 class MoopRepository(
     private val local: LocalMoopDataSource,
-    private val remote: RemoteMoopDataSource
+    private val remote: MoopApiService
 ) {
 
     fun getNowList(): Observable<List<Movie>> {
@@ -26,7 +26,7 @@ class MoopRepository(
             true
         }
         if (isStaleness) {
-            local.saveNowList(remote.getNowList())
+            local.saveNowList(remote.getNowMovieList())
         }
     }
 
@@ -41,7 +41,7 @@ class MoopRepository(
             true
         }
         if (isStaleness) {
-            local.savePlanList(remote.getPlanList())
+            local.savePlanList(remote.getPlanMovieList())
         }
     }
 

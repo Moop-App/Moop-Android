@@ -7,8 +7,8 @@ import soup.movie.data.mapper.*
 import soup.movie.data.model.entity.MovieListEntity
 import soup.movie.data.model.entity.MovieListEntity.Companion.TYPE_NOW
 import soup.movie.data.model.entity.MovieListEntity.Companion.TYPE_PLAN
-import soup.movie.data.model.response.MovieListResponse
-import soup.movie.data.model.response.TheaterAreaGroupResponse
+import soup.movie.data.api.response.MovieListResponse
+import soup.movie.data.api.response.TheaterAreaGroupResponse
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.TheaterAreaGroup

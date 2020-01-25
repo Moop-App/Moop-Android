@@ -4,10 +4,32 @@ apply plugin: 'kotlin-kapt'
 
 apply from: rootProject.file('gradle/android.gradle')
 
+android {
+    defaultConfig {
+        buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "")
+    }
+}
+
 dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.coroutines_core
     implementation deps.kotlin.coroutines_android
+
+    implementation deps.androidx.core_ktx
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    kapt deps.dagger.compiler
+    kapt deps.dagger.android_processor
+
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.rx.java2
+
+    debugImplementation deps.stetho.okhttp3
+    implementation deps.util.okhttp_interceptor
+    implementation deps.util.timber
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

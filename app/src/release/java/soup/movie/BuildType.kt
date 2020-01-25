@@ -5,7 +5,6 @@ import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import io.fabric.sdk.android.Fabric
 import io.reactivex.plugins.RxJavaPlugins
-import okhttp3.OkHttpClient.Builder
 import soup.movie.util.log.CrashlyticsTree
 import timber.log.Timber
 
@@ -26,6 +25,4 @@ object BuildType {
             Crashlytics.logException(it)
         }
     }
-
-    fun addNetworkInterceptor(builder: Builder): Builder = builder
 }

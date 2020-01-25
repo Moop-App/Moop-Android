@@ -19,8 +19,6 @@ android {
         versionName build_versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "")
     }
     signingConfigs {
         debug {
@@ -138,8 +136,6 @@ dependencies {
     implementation deps.firebase.messaging
 
     debugImplementation deps.stetho.core
-    debugImplementation deps.stetho.okhttp3
-    implementation deps.util.okhttp_interceptor
     implementation deps.util.timber
     implementation deps.util.threetenabp
 

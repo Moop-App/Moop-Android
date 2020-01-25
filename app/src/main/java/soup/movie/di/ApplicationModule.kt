@@ -1,5 +1,6 @@
 package soup.movie.di
 
+import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,11 @@ import javax.inject.Singleton
 
 @Module
 class ApplicationModule {
+
+    @Provides
+    fun provideApplication(
+        application: MovieApplication
+    ): Application = application
 
     @Provides
     fun provideContext(
