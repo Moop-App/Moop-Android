@@ -5,19 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MoopRepository
 import soup.movie.domain.home.GetMovieFilterUseCase
-import soup.movie.domain.home.GetPlanMovieListUseCase
+import soup.movie.domain.model.getDDay
+import soup.movie.model.Movie
 import soup.movie.ui.home.HomeContentsUiModel
 import soup.movie.ui.home.tab.HomeContentsTabViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 class HomePlanViewModel @Inject constructor(
-    getPlanMovieList: GetPlanMovieListUseCase,
     getMovieFilter: GetMovieFilterUseCase,
     private val repository: MoopRepository
 ) : HomeContentsTabViewModel() {
@@ -35,39 +34,40 @@ class HomePlanViewModel @Inject constructor(
         get() = _contentsUiModel
 
     init {
-        viewModelScope.launch {
-            getMovieFilter()
-                .flowOn(Dispatchers.IO)
-                .flatMapLatest { getPlanMovieList(it) }
-                .flowOn(Dispatchers.Main)
+        viewModelScope.launch(Dispatchers.IO) {
+            updateList()
+            repository.getPlanMovieList()
+                .combine(getMovieFilter()) { movieList, movieFilter ->
+                    movieList.asSequence()
+                        .sortedBy(Movie::getDDay)
+                        .filter { movieFilter(it) }
+                        .toList()
+                }
                 .collect {
-                    _contentsUiModel.value = HomeContentsUiModel(it.movies)
+                    Timber.d("QQQQ init: ${it.size}")
+                    _contentsUiModel.postValue(HomeContentsUiModel(it))
                 }
         }
-
-        updateList()
     }
 
     override fun refresh() {
-        updateList()
+        viewModelScope.launch(Dispatchers.IO) {
+            updateList()
+        }
     }
 
-    private fun updateList() {
+    private suspend fun updateList() {
         if (_isLoading.value == true) {
             return
         }
-        _isLoading.value = true
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    repository.updatePlanMovieList()
-                    _isLoading.postValue(false)
-                    _isError.postValue(false)
-                } catch (t: Throwable) {
-                    _isLoading.postValue(false)
-                    _isError.postValue(true)
-                }
-            }
+        _isLoading.postValue(true)
+        try {
+            repository.updatePlanMovieList()
+            _isLoading.postValue(false)
+            _isError.postValue(false)
+        } catch (t: Throwable) {
+            _isLoading.postValue(false)
+            _isError.postValue(true)
         }
     }
 }

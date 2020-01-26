@@ -3,13 +3,10 @@ package soup.movie.ui.home.filter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import soup.movie.domain.filter.GetGenreListUseCase
+import soup.movie.data.repository.MoopRepository
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
@@ -27,7 +24,7 @@ import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeFilterViewModel @Inject constructor(
-    getGenreList: GetGenreListUseCase,
+    private val repository: MoopRepository,
     private val theaterFilterSetting: TheaterFilterSetting,
     private val ageFilterSetting: AgeFilterSetting,
     private val genreFilterSetting: GenreFilterSetting
@@ -56,27 +53,35 @@ class HomeFilterViewModel @Inject constructor(
                     theaterFilter = it
                     _theaterUiModel.value = it.toUiModel()
                 }
+        }
 
+        viewModelScope.launch {
             ageFilterSetting.asFlow()
                 .distinctUntilChanged()
                 .collect { _ageUiModel.value = it.toUiModel() }
+        }
 
-            combine(
-                getGenreList(),
-                genreFilterSetting.asFlow()
-            ) { allGenre, filter ->
-                lastGenreFilter = filter
-                GenreFilterUiModel(
-                    allGenre.map {
-                        GenreFilterItem(
-                            name = it,
-                            isChecked = filter.blacklist.contains(it).not()
-                        )
-                    }
-                )
-            }
-                .flowOn(Dispatchers.IO)
-                .collect { _genreUiModel.value = it }
+        viewModelScope.launch {
+            val allGenre = getGenreList()
+            genreFilterSetting.asFlow()
+                .collect { filter ->
+                    lastGenreFilter = filter
+                    _genreUiModel.value = GenreFilterUiModel(
+                        allGenre.map {
+                            GenreFilterItem(
+                                name = it,
+                                isChecked = filter.blacklist.contains(it).not()
+                            )
+                        }
+                    )
+                }
+        }
+    }
+
+    private suspend fun getGenreList(): List<String> {
+        return mutableListOf<String>().apply {
+            addAll(repository.getGenreList())
+            add(GenreFilter.GENRE_ETC)
         }
     }
 

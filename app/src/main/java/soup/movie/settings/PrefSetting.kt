@@ -4,23 +4,25 @@ import android.content.SharedPreferences
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import timber.log.Timber
 
 abstract class PrefSetting<T>(
     private val preferences: SharedPreferences
 ) : Setting<T> {
 
-    private val settingSubject = ConflatedBroadcastChannel(getDefaultValue(preferences))
+    private val channel = ConflatedBroadcastChannel(getDefaultValue(preferences))
 
     internal abstract fun getDefaultValue(preferences: SharedPreferences): T
 
     internal abstract fun saveValue(preferences: SharedPreferences, value: T)
 
     override fun set(value: T) {
-        settingSubject.offer(value)
+        Timber.d("QQQQ PrefSetting set: $value")
+        channel.offer(value)
         saveValue(preferences, value)
     }
 
-    override fun get(): T = settingSubject.valueOrNull ?: getDefaultValue(preferences)
+    override fun get(): T = channel.valueOrNull ?: getDefaultValue(preferences)
 
-    override fun asFlow(): Flow<T> = settingSubject.asFlow()
+    override fun asFlow(): Flow<T> = channel.asFlow()
 }

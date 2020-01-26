@@ -55,8 +55,8 @@ class LocalMoopDataSource(
 
     private fun getMovieList(type: String): Flow<List<Movie>> {
         return cacheDao.getMovieListByType(type)
-            .catch { emit(MovieListEntity.empty(type)) }
             .map { it.list.map { movieEntity -> movieEntity.toMovie() } }
+            .catch { emit(emptyList()) }
     }
 
     suspend fun getNowLastUpdateTime() : Long {

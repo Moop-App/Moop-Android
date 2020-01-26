@@ -1,6 +1,8 @@
 package soup.movie.data.repository
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import soup.movie.data.api.MoopApiService
 import soup.movie.data.db.LocalMoopDataSource
 import soup.movie.data.repository.mapper.toMovieDetail
@@ -48,6 +50,18 @@ class MoopRepository(
 
     suspend fun getMovieDetail(movieId: String): MovieDetail {
         return remote.getMovieDetail(movieId).toMovieDetail()
+    }
+
+    suspend fun getGenreList(): List<String> {
+        return try {
+            local.getAllMovieList()
+                .mapNotNull { it.genres }
+                .flatten()
+                .toSet()
+                .toList()
+        } catch (t: Throwable) {
+            emptyList()
+        }
     }
 
     suspend fun findMovie(movieId: String): Movie? {

@@ -2,30 +2,14 @@ package soup.movie.di.domain
 
 import dagger.Module
 import dagger.Provides
-import soup.movie.data.repository.MoopRepository
 import soup.movie.di.scope.ActivityScope
-import soup.movie.domain.filter.GetGenreListUseCase
 import soup.movie.domain.home.GetMovieFilterUseCase
-import soup.movie.domain.home.GetNowMovieListUseCase
-import soup.movie.domain.home.GetPlanMovieListUseCase
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting
 
 @Module
 class HomeDomainModule {
-
-    @ActivityScope
-    @Provides
-    fun provideGetNowMovieListUseCase(
-        repository: MoopRepository
-    ): GetNowMovieListUseCase = GetNowMovieListUseCase(repository)
-
-    @ActivityScope
-    @Provides
-    fun provideGetPlanMovieListUseCase(
-        repository: MoopRepository
-    ): GetPlanMovieListUseCase = GetPlanMovieListUseCase(repository)
 
     @ActivityScope
     @Provides
@@ -38,10 +22,4 @@ class HomeDomainModule {
         ageFilterSetting,
         genreFilterSetting
     )
-
-    @ActivityScope
-    @Provides
-    fun provideGetGenreListUseCase(
-        repository: MoopRepository
-    ): GetGenreListUseCase = GetGenreListUseCase(repository)
 }

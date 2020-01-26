@@ -15,7 +15,5 @@ data class MovieListEntity(
 
         const val TYPE_NOW = "type_now"
         const val TYPE_PLAN = "type_plan"
-
-        fun empty(type: String) = MovieListEntity(type, 0, emptyList())
     }
 }
