@@ -1,9 +1,9 @@
-package soup.movie.data.model.converter
+package soup.movie.data.db.internal.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import soup.movie.data.model.entity.MovieEntity
+import soup.movie.data.db.entity.MovieEntity
 
 class CacheDatabaseTypeConverter {
 

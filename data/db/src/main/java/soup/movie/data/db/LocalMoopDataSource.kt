@@ -1,14 +1,19 @@
-package soup.movie.data.source.local
+package soup.movie.data.db
 
 import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import soup.movie.data.mapper.*
-import soup.movie.data.model.entity.MovieListEntity
-import soup.movie.data.model.entity.MovieListEntity.Companion.TYPE_NOW
-import soup.movie.data.model.entity.MovieListEntity.Companion.TYPE_PLAN
 import soup.movie.data.api.response.MovieListResponse
-import soup.movie.data.api.response.TheaterAreaGroupResponse
+import soup.movie.data.db.dao.FavoriteMovieDao
+import soup.movie.data.db.dao.MovieCacheDao
+import soup.movie.data.db.dao.OpenDateAlarmDao
+import soup.movie.data.db.entity.MovieListEntity
+import soup.movie.data.db.entity.MovieListEntity.Companion.TYPE_NOW
+import soup.movie.data.db.entity.MovieListEntity.Companion.TYPE_PLAN
+import soup.movie.data.db.mapper.toFavoriteMovieEntity
+import soup.movie.data.db.mapper.toMovie
+import soup.movie.data.db.mapper.toMovieEntity
+import soup.movie.data.db.mapper.toOpenDateAlarmEntity
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.TheaterAreaGroup
@@ -83,8 +88,8 @@ class LocalMoopDataSource(
         }
     }
 
-    fun saveCodeList(response: TheaterAreaGroupResponse) {
-        codeResponse = response.toTheaterAreaGroup()
+    fun saveCodeList(response: TheaterAreaGroup) {
+        codeResponse = response
     }
 
     fun getCodeList(): TheaterAreaGroup? {
@@ -92,7 +97,7 @@ class LocalMoopDataSource(
     }
 
     suspend fun addFavoriteMovie(movie: MovieDetail) {
-        favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovie())
+        favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovieEntity())
         if (movie.isPlan) {
             openDateAlarmDao.insertOpenDateAlarm(movie.toOpenDateAlarmEntity())
         }

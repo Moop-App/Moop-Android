@@ -2,10 +2,11 @@ package soup.movie.data.repository
 
 import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.mapper.toMovieDetail
-import soup.movie.data.source.local.LocalMoopDataSource
 import soup.movie.data.api.MoopApiService
-import soup.movie.data.util.SearchHelper
+import soup.movie.data.db.LocalMoopDataSource
+import soup.movie.data.repository.mapper.toMovieDetail
+import soup.movie.data.repository.mapper.toTheaterAreaGroup
+import soup.movie.data.repository.util.SearchHelper
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.TheaterAreaGroup
@@ -15,11 +16,11 @@ class MoopRepository(
     private val remote: MoopApiService
 ) {
 
-    fun getNowList(): Observable<List<Movie>> {
+    fun getNowMovieList(): Observable<List<Movie>> {
         return local.getNowList()
     }
 
-    suspend fun updateNowList() {
+    suspend fun updateNowMovieList() {
         val isStaleness = try {
             local.getNowLastUpdateTime() < remote.getNowLastUpdateTime()
         } catch (t: Throwable) {
@@ -30,11 +31,11 @@ class MoopRepository(
         }
     }
 
-    fun getPlanList(): Observable<List<Movie>> {
+    fun getPlanMovieList(): Observable<List<Movie>> {
         return local.getPlanList()
     }
 
-    suspend fun updatePlanList() {
+    suspend fun updatePlanMovieList() {
         val isStaleness = try {
             local.getPlanLastUpdateTime() < remote.getPlanLastUpdateTime()
         } catch (t: Throwable) {
@@ -50,7 +51,7 @@ class MoopRepository(
     }
 
     fun getMovie(movieId: String): Observable<Movie> =
-        Observable.merge(getNowList(), getPlanList())
+        Observable.merge(getNowMovieList(), getPlanMovieList())
             .flatMapIterable { it }
             .filter { it.id == movieId }
             .take(1)
@@ -66,13 +67,10 @@ class MoopRepository(
     }
 
     suspend fun getCodeList(): TheaterAreaGroup {
-        val cache = local.getCodeList()
-        if (cache != null) {
-            return cache
-        }
-        val response = remote.getCodeList()
-        local.saveCodeList(response)
-        return local.getCodeList()!!
+        return local.getCodeList()
+            ?: remote.getCodeList()
+                .toTheaterAreaGroup()
+                .also(local::saveCodeList)
     }
 
     fun getFavoriteMovieList(): Flow<List<Movie>> {

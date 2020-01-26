@@ -58,7 +58,7 @@ class HomeNowViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    repository.updateNowList()
+                    repository.updateNowMovieList()
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 } catch (t: Throwable) {

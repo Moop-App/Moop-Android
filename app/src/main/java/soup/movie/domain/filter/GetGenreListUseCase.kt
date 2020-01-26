@@ -13,8 +13,8 @@ class GetGenreListUseCase(
     operator fun invoke(): Observable<List<String>> {
         return Observables
             .zip(
-                repository.getNowList().mapToGenreSet(),
-                repository.getPlanList().mapToGenreSet(),
+                repository.getNowMovieList().mapToGenreSet(),
+                repository.getPlanMovieList().mapToGenreSet(),
                 ::merge
             )
             .take(1)

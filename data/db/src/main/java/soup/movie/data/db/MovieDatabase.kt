@@ -1,11 +1,13 @@
-package soup.movie.data.source.local
+package soup.movie.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import soup.movie.data.model.converter.FavoriteMovieTypeConverters
-import soup.movie.data.model.entity.FavoriteMovieEntity
-import soup.movie.data.model.entity.OpenDateAlarmEntity
+import soup.movie.data.db.internal.converter.FavoriteMovieTypeConverters
+import soup.movie.data.db.entity.FavoriteMovieEntity
+import soup.movie.data.db.entity.OpenDateAlarmEntity
+import soup.movie.data.db.dao.FavoriteMovieDao
+import soup.movie.data.db.dao.OpenDateAlarmDao
 
 @Database(
     entities = [

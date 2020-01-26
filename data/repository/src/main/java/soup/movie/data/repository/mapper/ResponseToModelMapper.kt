@@ -1,4 +1,4 @@
-package soup.movie.data.mapper
+package soup.movie.data.repository.mapper
 
 import soup.movie.data.api.response.*
 import soup.movie.model.*

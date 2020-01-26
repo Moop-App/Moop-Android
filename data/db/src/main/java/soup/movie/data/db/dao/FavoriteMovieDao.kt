@@ -1,11 +1,11 @@
-package soup.movie.data.source.local
+package soup.movie.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.model.entity.FavoriteMovieEntity
+import soup.movie.data.db.entity.FavoriteMovieEntity
 
 @Dao
 interface FavoriteMovieDao {

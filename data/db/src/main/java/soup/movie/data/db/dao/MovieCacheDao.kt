@@ -1,4 +1,4 @@
-package soup.movie.data.source.local
+package soup.movie.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import io.reactivex.Flowable
-import soup.movie.data.model.entity.MovieListEntity
+import soup.movie.data.db.entity.MovieListEntity
 
 @Dao
 interface MovieCacheDao {

@@ -1,8 +1,8 @@
-package soup.movie.data.mapper
+package soup.movie.data.db.mapper
 
-import soup.movie.data.model.entity.FavoriteMovieEntity
-import soup.movie.data.model.entity.MovieEntity
-import soup.movie.data.model.entity.OpenDateAlarmEntity
+import soup.movie.data.db.entity.FavoriteMovieEntity
+import soup.movie.data.db.entity.MovieEntity
+import soup.movie.data.db.entity.OpenDateAlarmEntity
 import soup.movie.data.api.response.MovieResponse
 import soup.movie.model.MovieDetail
 
@@ -24,7 +24,7 @@ fun MovieResponse.toMovieEntity(): MovieEntity {
     )
 }
 
-fun MovieDetail.toFavoriteMovie(): FavoriteMovieEntity {
+fun MovieDetail.toFavoriteMovieEntity(): FavoriteMovieEntity {
     return FavoriteMovieEntity(
         id = id,
         score = score,

@@ -1,4 +1,4 @@
-package soup.movie.data.model.entity
+package soup.movie.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

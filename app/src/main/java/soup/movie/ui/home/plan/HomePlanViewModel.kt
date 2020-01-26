@@ -58,7 +58,7 @@ class HomePlanViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    repository.updatePlanList()
+                    repository.updatePlanMovieList()
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 } catch (t: Throwable) {

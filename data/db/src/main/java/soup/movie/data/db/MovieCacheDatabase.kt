@@ -1,10 +1,11 @@
-package soup.movie.data.source.local
+package soup.movie.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import soup.movie.data.model.converter.CacheDatabaseTypeConverter
-import soup.movie.data.model.entity.MovieListEntity
+import soup.movie.data.db.internal.converter.CacheDatabaseTypeConverter
+import soup.movie.data.db.entity.MovieListEntity
+import soup.movie.data.db.dao.MovieCacheDao
 
 @Database(entities = [MovieListEntity::class], version = 3, exportSchema = false)
 @TypeConverters(CacheDatabaseTypeConverter::class)

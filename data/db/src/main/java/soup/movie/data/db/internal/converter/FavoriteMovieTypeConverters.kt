@@ -1,4 +1,4 @@
-package soup.movie.data.model.converter
+package soup.movie.data.db.internal.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
@@ -18,6 +18,8 @@ object FavoriteMovieTypeConverters {
     @TypeConverter
     @JvmStatic
     fun toStringList(value: String?): List<String>? {
-        return gson.fromJson(value, typeStringList)
+        return gson.fromJson(value,
+            typeStringList
+        )
     }
 }

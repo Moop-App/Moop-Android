@@ -15,7 +15,7 @@ class GetPlanMovieListUseCase(
     operator fun invoke(
         movieFilter: MovieFilter
     ): Observable<HomeDomainModel> {
-        return repository.getPlanList()
+        return repository.getPlanMovieList()
             .observeOn(Schedulers.computation())
             .map { list ->
                 list.asSequence()

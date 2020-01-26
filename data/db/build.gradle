@@ -4,10 +4,37 @@ apply plugin: 'kotlin-kapt'
 
 apply from: rootProject.file('gradle/android.gradle')
 
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental": "true"
+                ]
+            }
+        }
+    }
+}
+
 dependencies {
+    implementation project(":model")
+    implementation project(":data:api")
+
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.coroutines_core
     implementation deps.kotlin.coroutines_android
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    kapt deps.dagger.compiler
+    kapt deps.dagger.android_processor
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation deps.room.runtime
+    implementation deps.room.rxjava2
+    implementation deps.room.ktx
+    kapt deps.room.compiler
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

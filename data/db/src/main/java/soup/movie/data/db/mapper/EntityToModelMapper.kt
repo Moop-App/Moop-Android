@@ -1,7 +1,7 @@
-package soup.movie.data.mapper
+package soup.movie.data.db.mapper
 
-import soup.movie.data.model.entity.FavoriteMovieEntity
-import soup.movie.data.model.entity.MovieEntity
+import soup.movie.data.db.entity.FavoriteMovieEntity
+import soup.movie.data.db.entity.MovieEntity
 import soup.movie.model.Movie
 import soup.movie.model.TheaterRatings
 

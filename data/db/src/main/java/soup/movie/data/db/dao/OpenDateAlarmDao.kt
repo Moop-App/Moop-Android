@@ -1,4 +1,4 @@
-package soup.movie.data.source.local
+package soup.movie.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.model.entity.OpenDateAlarmEntity
+import soup.movie.data.db.entity.OpenDateAlarmEntity
 
 @Dao
 interface OpenDateAlarmDao {

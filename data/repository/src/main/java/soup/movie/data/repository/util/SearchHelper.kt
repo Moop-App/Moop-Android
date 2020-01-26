@@ -1,4 +1,4 @@
-package soup.movie.data.util
+package soup.movie.data.repository.util
 
 /**
  * 초성 검색 알고리즘을 위한 클래스
