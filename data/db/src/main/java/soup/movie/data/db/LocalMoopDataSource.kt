@@ -1,7 +1,7 @@
 package soup.movie.data.db
 
-import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import soup.movie.data.db.entity.MovieListEntity
 import soup.movie.data.db.entity.MovieListEntity.Companion.TYPE_NOW
@@ -30,16 +30,16 @@ class LocalMoopDataSource(
         saveMovieListAs(TYPE_NOW, movieList)
     }
 
-    fun getNowList(): Observable<List<Movie>> {
-        return getMovieListAs(TYPE_NOW)
+    fun getNowMovieListFlow(): Flow<List<Movie>> {
+        return getMovieList(TYPE_NOW)
     }
 
     suspend fun savePlanList(movieList: MovieList) {
         saveMovieListAs(TYPE_PLAN, movieList)
     }
 
-    fun getPlanList(): Observable<List<Movie>> {
-        return getMovieListAs(TYPE_PLAN)
+    fun getPlanMovieListFlow(): Flow<List<Movie>> {
+        return getMovieList(TYPE_PLAN)
     }
 
     private suspend fun saveMovieListAs(type: String, movieList: MovieList) {
@@ -53,11 +53,10 @@ class LocalMoopDataSource(
         openDateAlarmDao.updateOpenDateAlarms(movieList.list.map { it.toOpenDateAlarmEntity() })
     }
 
-    private fun getMovieListAs(type: String): Observable<List<Movie>> {
+    private fun getMovieList(type: String): Flow<List<Movie>> {
         return cacheDao.getMovieListByType(type)
-            .onErrorReturn { MovieListEntity.empty(type) }
+            .catch { emit(MovieListEntity.empty(type)) }
             .map { it.list.map { movieEntity -> movieEntity.toMovie() } }
-            .toObservable()
     }
 
     suspend fun getNowLastUpdateTime() : Long {
@@ -82,7 +81,8 @@ class LocalMoopDataSource(
 
     private suspend fun getMovieListOf(type: String): List<Movie> {
         return try {
-            cacheDao.getMovieListOf(type).list.map { movieEntity -> movieEntity.toMovie() }
+            cacheDao.findByType(type).list
+                .map { movieEntity -> movieEntity.toMovie() }
         } catch (t: Throwable) {
             emptyList()
         }

@@ -3,9 +3,10 @@ package soup.movie.ui.home.plan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MoopRepository
@@ -34,14 +35,15 @@ class HomePlanViewModel @Inject constructor(
         get() = _contentsUiModel
 
     init {
-        getMovieFilter()
-            .subscribeOn(Schedulers.io())
-            .switchMap { getPlanMovieList(it) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                _contentsUiModel.value = HomeContentsUiModel(it.movies)
-            }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            getMovieFilter()
+                .flowOn(Dispatchers.IO)
+                .flatMapLatest { getPlanMovieList(it) }
+                .flowOn(Dispatchers.Main)
+                .collect {
+                    _contentsUiModel.value = HomeContentsUiModel(it.movies)
+                }
+        }
 
         updateList()
     }

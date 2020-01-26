@@ -4,7 +4,6 @@ import android.content.Context
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import io.fabric.sdk.android.Fabric
-import io.reactivex.plugins.RxJavaPlugins
 import soup.movie.util.log.CrashlyticsTree
 import timber.log.Timber
 
@@ -20,9 +19,5 @@ object BuildType {
                 .disabled(BuildConfig.DEBUG)
                 .build()
         Fabric.with(context, Crashlytics.Builder().core(core).build())
-        RxJavaPlugins.setErrorHandler {
-            Timber.e(it)
-            Crashlytics.logException(it)
-        }
     }
 }

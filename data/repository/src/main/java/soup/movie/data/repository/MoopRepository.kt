@@ -1,6 +1,5 @@
 package soup.movie.data.repository
 
-import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 import soup.movie.data.api.MoopApiService
 import soup.movie.data.db.LocalMoopDataSource
@@ -17,8 +16,8 @@ class MoopRepository(
     private val remote: MoopApiService
 ) {
 
-    fun getNowMovieList(): Observable<List<Movie>> {
-        return local.getNowList()
+    fun getNowMovieList(): Flow<List<Movie>> {
+        return local.getNowMovieListFlow()
     }
 
     suspend fun updateNowMovieList() {
@@ -32,8 +31,8 @@ class MoopRepository(
         }
     }
 
-    fun getPlanMovieList(): Observable<List<Movie>> {
-        return local.getPlanList()
+    fun getPlanMovieList(): Flow<List<Movie>> {
+        return local.getPlanMovieListFlow()
     }
 
     suspend fun updatePlanMovieList() {
@@ -51,11 +50,10 @@ class MoopRepository(
         return remote.getMovieDetail(movieId).toMovieDetail()
     }
 
-    fun getMovie(movieId: String): Observable<Movie> =
-        Observable.merge(getNowMovieList(), getPlanMovieList())
-            .flatMapIterable { it }
-            .filter { it.id == movieId }
-            .take(1)
+    suspend fun findMovie(movieId: String): Movie? {
+        return local.getAllMovieList()
+            .find { it.id == movieId }
+    }
 
     suspend fun searchMovie(query: String): List<Movie> {
         return local.getAllMovieList().asSequence()

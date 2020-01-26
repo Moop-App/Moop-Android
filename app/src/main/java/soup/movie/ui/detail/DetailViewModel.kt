@@ -4,12 +4,9 @@ import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MoopRepository
 import soup.movie.domain.model.screenDays
 import soup.movie.model.Movie
@@ -83,12 +80,10 @@ class DetailViewModel @Inject constructor(
     }
 
     fun requestShareImage(target: ShareTarget, bitmap: Bitmap) {
-        imageUriProvider(bitmap)
-            .map { ShareAction(target, it, "image/*") }
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _shareAction.event = it }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            val uri = imageUriProvider(bitmap)
+            _shareAction.event = ShareAction(target, uri, "image/*")
+        }
     }
 
     private fun MovieDetail.toContentUiModel(): ContentUiModel {
@@ -183,10 +178,8 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onRetryClick() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                updateDetail(movie)
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            updateDetail(movie)
         }
     }
 

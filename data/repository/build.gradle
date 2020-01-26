@@ -13,8 +13,6 @@ dependencies {
     api deps.kotlin.coroutines_core
     api deps.kotlin.coroutines_android
 
-    implementation deps.rx.java2
-
     implementation deps.util.timber
 
     testImplementation deps.test.junit

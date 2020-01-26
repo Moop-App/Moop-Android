@@ -46,7 +46,6 @@ deps.navigation = [
 def work = "2.3.0"
 deps.work = [
         runtime: "androidx.work:work-runtime-ktx:$work",
-        rxjava2: "androidx.work:work-rxjava2:$work",
         gcm    : "androidx.work:work-gcm:$work",
         testing: "androidx.work:work-testing:$work"
 ]
@@ -55,7 +54,6 @@ def room = "2.2.3"
 deps.room = [
         runtime : "androidx.room:room-runtime:$room",
         compiler: "androidx.room:room-compiler:$room",
-        rxjava2 : "androidx.room:room-rxjava2:$room",
         ktx     : "androidx.room:room-ktx:$room"
 ]
 
@@ -87,12 +85,6 @@ def glide = "4.11.0"
 deps.glide = [
         runtime : "com.github.bumptech.glide:glide:$glide",
         compiler: "com.github.bumptech.glide:compiler:$glide"
-]
-
-deps.rx = [
-        java2  : "io.reactivex.rxjava2:rxjava:2.2.13",
-        kotlin : "io.reactivex.rxjava2:rxkotlin:2.4.0",
-        android: "io.reactivex.rxjava2:rxandroid:2.1.1"
 ]
 
 deps.firebase = [

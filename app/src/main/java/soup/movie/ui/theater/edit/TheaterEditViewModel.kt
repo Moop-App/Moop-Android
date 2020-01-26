@@ -3,12 +3,12 @@ package soup.movie.ui.theater.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import soup.movie.model.Theater
 import soup.movie.domain.theater.edit.TheaterEditManager
+import soup.movie.model.Theater
 import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
@@ -35,13 +35,11 @@ class TheaterEditViewModel @Inject constructor(
                     TheaterEditContentUiModel.ErrorState
                 }
             }
-        }
 
-        manager.asSelectedTheatersSubject()
-            .map { TheaterEditFooterUiModel(it) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _footerUiModel.value = it }
-            .disposeOnCleared()
+            manager.asSelectedTheaterListFlow().collect {
+                _footerUiModel.value = TheaterEditFooterUiModel(it)
+            }
+        }
     }
 
     fun onConfirmClicked() {

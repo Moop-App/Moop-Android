@@ -1,15 +1,14 @@
 package soup.movie.ui.home
 
-import io.reactivex.subjects.BehaviorSubject
 import soup.movie.model.Movie
 
 object MovieSelectManager {
 
-    private val movieSubject: BehaviorSubject<Movie> = BehaviorSubject.create()
+    private var selectedMovie: Movie? = null
 
-    fun getSelectedItem(): Movie? = movieSubject.value
+    fun getSelectedItem(): Movie? = selectedMovie
 
     fun select(item: Movie) {
-        movieSubject.onNext(item)
+        selectedMovie = item
     }
 }

@@ -1,8 +1,8 @@
 package soup.movie.domain.theater.edit
 
-import io.reactivex.Observable
-import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subjects.ReplaySubject
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import soup.movie.data.repository.MoopRepository
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
@@ -14,29 +14,29 @@ class TheaterEditManager(
     private val theatersSetting: TheatersSetting
 ) {
 
-    private val cgvSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
-    private val lotteSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
-    private val megaboxSubject: ReplaySubject<List<TheaterArea>> = ReplaySubject.create()
-    private val selectedTheatersSubject = BehaviorSubject.createDefault<List<Theater>>(emptyList())
+    private val cgvSubject = ConflatedBroadcastChannel<List<TheaterArea>>()
+    private val lotteSubject = ConflatedBroadcastChannel<List<TheaterArea>>()
+    private val megaboxSubject = ConflatedBroadcastChannel<List<TheaterArea>>()
+    private val selectedTheatersChannel = ConflatedBroadcastChannel<List<Theater>>(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
     private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
 
-    fun asCgvObservable(): Observable<List<TheaterArea>> = cgvSubject
+    fun asCgvFlow(): Flow<List<TheaterArea>> = cgvSubject.asFlow()
 
-    fun asLotteObservable(): Observable<List<TheaterArea>> = lotteSubject
+    fun asLotteFlow(): Flow<List<TheaterArea>> = lotteSubject.asFlow()
 
-    fun asMegaboxObservable(): Observable<List<TheaterArea>> = megaboxSubject
+    fun asMegaboxFlow(): Flow<List<TheaterArea>> = megaboxSubject.asFlow()
 
-    fun asSelectedTheatersSubject(): Observable<List<Theater>> = selectedTheatersSubject
+    fun asSelectedTheaterListFlow(): Flow<List<Theater>> = selectedTheatersChannel.asFlow()
 
     suspend fun loadAsync(): TheaterAreaGroup {
         setupSelectedList()
         return repository.getCodeList().also {
             setupTotalList(it)
-            cgvSubject.onNext(it.cgv)
-            lotteSubject.onNext(it.lotte)
-            megaboxSubject.onNext(it.megabox)
+            cgvSubject.send(it.cgv)
+            lotteSubject.send(it.lotte)
+            megaboxSubject.send(it.megabox)
         }
     }
 
@@ -50,14 +50,14 @@ class TheaterEditManager(
         selectedItemSet = theatersSetting.get()
             .asSequence()
             .toMutableSet()
-        selectedTheatersSubject.onNext(
+        selectedTheatersChannel.offer(
             selectedItemSet.asSequence()
                 .sortedBy { it.type }
                 .toList())
     }
 
     private fun updateSelectedItemCount() {
-        selectedTheatersSubject.onNext(
+        selectedTheatersChannel.offer(
             theaterList.asSequence()
                 .filter {
                     selectedItemSet.any { selectedItem ->

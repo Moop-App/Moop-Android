@@ -2,9 +2,13 @@ package soup.movie.ui.home.filter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.Observables
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
 import soup.movie.domain.filter.GetGenreListUseCase
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
@@ -45,29 +49,23 @@ class HomeFilterViewModel @Inject constructor(
         get() = _genreUiModel
 
     init {
-        theaterFilterSetting.asObservable()
-            .distinctUntilChanged()
-            .subscribeOn(Schedulers.io())
-            .doOnNext { theaterFilter = it }
-            .map { it.toUiModel() }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _theaterUiModel.value = it }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            theaterFilterSetting.asFlow()
+                .distinctUntilChanged()
+                .collect {
+                    theaterFilter = it
+                    _theaterUiModel.value = it.toUiModel()
+                }
 
-        ageFilterSetting.asObservable()
-            .distinctUntilChanged()
-            .subscribeOn(Schedulers.io())
-            .map { it.toUiModel() }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _ageUiModel.value = it }
-            .disposeOnCleared()
+            ageFilterSetting.asFlow()
+                .distinctUntilChanged()
+                .collect { _ageUiModel.value = it.toUiModel() }
 
-        Observables
-            .combineLatest(
+            combine(
                 getGenreList(),
-                genreFilterSetting.asObservable()
-                    .doOnNext { lastGenreFilter = it }
+                genreFilterSetting.asFlow()
             ) { allGenre, filter ->
+                lastGenreFilter = filter
                 GenreFilterUiModel(
                     allGenre.map {
                         GenreFilterItem(
@@ -77,10 +75,9 @@ class HomeFilterViewModel @Inject constructor(
                     }
                 )
             }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _genreUiModel.value = it }
-            .disposeOnCleared()
+                .flowOn(Dispatchers.IO)
+                .collect { _genreUiModel.value = it }
+        }
     }
 
     private fun TheaterFilter.toUiModel(): TheaterFilterUiModel {

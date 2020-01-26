@@ -2,6 +2,10 @@ package soup.movie.ui.theater.sort
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import soup.movie.model.Theater
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.ui.base.BaseViewModel
@@ -19,10 +23,11 @@ class TheaterSortViewModel @Inject constructor(
         get() = _uiModel
 
     init {
-        theatersSetting.asObservable()
-            .distinctUntilChanged()
-            .subscribe { updateTheaters(it) }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            theatersSetting.asFlow()
+                .distinctUntilChanged()
+                .collect { updateTheaters(it) }
+        }
     }
 
     private fun updateTheaters(it: List<Theater>) {

@@ -1,6 +1,7 @@
 package soup.movie.ui.main
 
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import soup.movie.data.repository.MoopRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
@@ -16,11 +17,12 @@ class MainViewModel @Inject constructor(
         get() = _uiEvent
 
     fun requestMovie(movieId: String) {
-        repository.getMovie(movieId)
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { ShowDetailUiEvent(it) }
-            .subscribe { _uiEvent.event = it }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            val movie = repository.findMovie(movieId)
+            if (movie != null) {
+                _uiEvent.event = ShowDetailUiEvent(movie)
+            }
+        }
     }
 
     fun openNavigationMenu() {

@@ -3,8 +3,12 @@ package soup.movie.ui.settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import io.reactivex.android.schedulers.AndroidSchedulers
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
 import soup.movie.device.InAppUpdateManager
 import soup.movie.settings.impl.TheatersSetting
@@ -38,19 +42,18 @@ class SettingsViewModel @Inject constructor(
     }
 
     init {
-        //TODO: Fix again later. This is so ugly...
-        themeOptionSetting.asObservable()
-            .map { ThemeSettingUiModel(themeOptionManager.getCurrentOption()) }
-            .distinctUntilChanged()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _themeUiModel.value = it }
-            .disposeOnCleared()
-
-        theatersSetting.asObservable()
-            .map { TheaterSettingUiModel(it) }
-            .distinctUntilChanged()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _theaterUiModel.value = it }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            //TODO: Fix again later. This is so ugly...
+            themeOptionSetting.asFlow()
+                .map { ThemeSettingUiModel(themeOptionManager.getCurrentOption()) }
+                .distinctUntilChanged()
+                .collect { _themeUiModel.value = it }
+        }
+        viewModelScope.launch {
+            theatersSetting.asFlow()
+                .map { TheaterSettingUiModel(it) }
+                .distinctUntilChanged()
+                .collect { _theaterUiModel.value = it }
+        }
     }
 }

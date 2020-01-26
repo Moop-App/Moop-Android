@@ -1,6 +1,6 @@
 package soup.movie.settings
 
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
 
 interface Setting<T> {
 
@@ -8,5 +8,5 @@ interface Setting<T> {
 
     fun get(): T
 
-    fun asObservable(): Observable<T>
+    fun asFlow(): Flow<T>
 }

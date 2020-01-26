@@ -3,9 +3,10 @@ package soup.movie.ui.home.now
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MoopRepository
@@ -34,14 +35,15 @@ class HomeNowViewModel @Inject constructor(
         get() = _contentsUiModel
 
     init {
-        getMovieFilter()
-            .subscribeOn(Schedulers.io())
-            .switchMap { getNowMovieList(it) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                _contentsUiModel.value = HomeContentsUiModel(it.movies)
-            }
-            .disposeOnCleared()
+        viewModelScope.launch {
+            getMovieFilter()
+                .flowOn(Dispatchers.IO)
+                .flatMapLatest { getNowMovieList(it) }
+                .flowOn(Dispatchers.Main)
+                .collect {
+                    _contentsUiModel.value = HomeContentsUiModel(it.movies)
+                }
+        }
 
         updateList()
     }
@@ -55,16 +57,14 @@ class HomeNowViewModel @Inject constructor(
             return
         }
         _isLoading.value = true
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    repository.updateNowMovieList()
-                    _isLoading.postValue(false)
-                    _isError.postValue(false)
-                } catch (t: Throwable) {
-                    _isLoading.postValue(false)
-                    _isError.postValue(true)
-                }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                repository.updateNowMovieList()
+                _isLoading.postValue(false)
+                _isError.postValue(false)
+            } catch (t: Throwable) {
+                _isLoading.postValue(false)
+                _isError.postValue(true)
             }
         }
     }

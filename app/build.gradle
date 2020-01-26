@@ -119,13 +119,7 @@ dependencies {
     kapt deps.dagger.android_processor
 
     implementation deps.work.runtime
-    implementation deps.work.rxjava2
-    implementation deps.work.gcm
     androidTestImplementation deps.work.testing
-
-    implementation deps.rx.java2
-    implementation deps.rx.kotlin
-    implementation deps.rx.android
 
     implementation deps.glide.runtime
     kapt deps.glide.compiler

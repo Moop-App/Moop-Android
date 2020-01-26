@@ -1,11 +1,14 @@
 package soup.movie.domain.home
 
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import soup.movie.data.repository.MoopRepository
-import soup.movie.model.Movie
 import soup.movie.domain.home.model.HomeDomainModel
 import soup.movie.domain.model.MovieFilter
+import soup.movie.model.Movie
 
 class GetNowMovieListUseCase(
     private val repository: MoopRepository
@@ -13,16 +16,16 @@ class GetNowMovieListUseCase(
 
     operator fun invoke(
         movieFilter: MovieFilter
-    ): Observable<HomeDomainModel> {
+    ): Flow<HomeDomainModel> {
         return repository.getNowMovieList()
-            .observeOn(Schedulers.computation())
             .map { list ->
                 list.asSequence()
                     .sortedBy(Movie::score)
                     .filter { movieFilter(it) }
                     .toList()
             }
-            .onErrorReturnItem(emptyList())
+            .flowOn(Dispatchers.Default)
+            .catch { emit(emptyList()) }
             .map { HomeDomainModel(it) }
     }
 }

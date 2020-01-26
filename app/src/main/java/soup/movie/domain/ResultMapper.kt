@@ -1,15 +1,15 @@
 package soup.movie.domain
 
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 
 interface ResultMapper {
 
-    fun <T> Observable<T>.mapResult(): Observable<Result<T>> {
-        return compose { observableSource ->
-            observableSource
-                .map { Result.Success(it) as Result<T> }
-                .onErrorReturn { Result.Failure(it) }
-                .startWith(Result.Loading)
-        }
+    fun <T> Flow<T>.mapResult(): Flow<Result<T>> {
+        return map { Result.Success(it) as Result<T> }
+            .catch { emit(Result.Failure(it)) }
+            .onStart { emit(Result.Loading) }
     }
 }
