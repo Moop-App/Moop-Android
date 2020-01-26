@@ -1,4 +1,4 @@
-package soup.movie
+package soup.movie.data.api
 
 import okhttp3.OkHttpClient.Builder
 
