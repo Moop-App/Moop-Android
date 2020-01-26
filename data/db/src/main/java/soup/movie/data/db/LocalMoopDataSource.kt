@@ -3,19 +3,19 @@ package soup.movie.data.db
 import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import soup.movie.data.api.response.MovieListResponse
-import soup.movie.data.db.dao.FavoriteMovieDao
-import soup.movie.data.db.dao.MovieCacheDao
-import soup.movie.data.db.dao.OpenDateAlarmDao
 import soup.movie.data.db.entity.MovieListEntity
 import soup.movie.data.db.entity.MovieListEntity.Companion.TYPE_NOW
 import soup.movie.data.db.entity.MovieListEntity.Companion.TYPE_PLAN
+import soup.movie.data.db.internal.dao.FavoriteMovieDao
+import soup.movie.data.db.internal.dao.MovieCacheDao
+import soup.movie.data.db.internal.dao.OpenDateAlarmDao
 import soup.movie.data.db.mapper.toFavoriteMovieEntity
 import soup.movie.data.db.mapper.toMovie
 import soup.movie.data.db.mapper.toMovieEntity
 import soup.movie.data.db.mapper.toOpenDateAlarmEntity
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
+import soup.movie.model.MovieList
 import soup.movie.model.TheaterAreaGroup
 
 class LocalMoopDataSource(
@@ -26,31 +26,31 @@ class LocalMoopDataSource(
 
     private var codeResponse: TheaterAreaGroup? = null
 
-    suspend fun saveNowList(response: MovieListResponse) {
-        saveMovieListAs(TYPE_NOW, response)
+    suspend fun saveNowList(movieList: MovieList) {
+        saveMovieListAs(TYPE_NOW, movieList)
     }
 
     fun getNowList(): Observable<List<Movie>> {
         return getMovieListAs(TYPE_NOW)
     }
 
-    suspend fun savePlanList(response: MovieListResponse) {
-        saveMovieListAs(TYPE_PLAN, response)
+    suspend fun savePlanList(movieList: MovieList) {
+        saveMovieListAs(TYPE_PLAN, movieList)
     }
 
     fun getPlanList(): Observable<List<Movie>> {
         return getMovieListAs(TYPE_PLAN)
     }
 
-    private suspend fun saveMovieListAs(type: String, response: MovieListResponse) {
+    private suspend fun saveMovieListAs(type: String, movieList: MovieList) {
         cacheDao.insert(
             MovieListEntity(
                 type,
-                response.lastUpdateTime,
-                response.list.map { it.toMovieEntity() }
+                movieList.lastUpdateTime,
+                movieList.list.map { it.toMovieEntity() }
             )
         )
-        openDateAlarmDao.updateOpenDateAlarms(response.list.map { it.toOpenDateAlarmEntity() })
+        openDateAlarmDao.updateOpenDateAlarms(movieList.list.map { it.toOpenDateAlarmEntity() })
     }
 
     private fun getMovieListAs(type: String): Observable<List<Movie>> {

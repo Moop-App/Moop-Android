@@ -3,10 +3,10 @@ package soup.movie.data.db.mapper
 import soup.movie.data.db.entity.FavoriteMovieEntity
 import soup.movie.data.db.entity.MovieEntity
 import soup.movie.data.db.entity.OpenDateAlarmEntity
-import soup.movie.data.api.response.MovieResponse
+import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 
-fun MovieResponse.toMovieEntity(): MovieEntity {
+fun Movie.toMovieEntity(): MovieEntity {
     return MovieEntity(
         id = id,
         score = score,
@@ -42,7 +42,7 @@ fun MovieDetail.toFavoriteMovieEntity(): FavoriteMovieEntity {
     )
 }
 
-fun MovieResponse.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
+fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = id,
         title = title,

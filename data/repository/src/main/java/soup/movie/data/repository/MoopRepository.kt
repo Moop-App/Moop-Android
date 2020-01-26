@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import soup.movie.data.api.MoopApiService
 import soup.movie.data.db.LocalMoopDataSource
 import soup.movie.data.repository.mapper.toMovieDetail
+import soup.movie.data.repository.mapper.toMovieList
 import soup.movie.data.repository.mapper.toTheaterAreaGroup
 import soup.movie.data.repository.util.SearchHelper
 import soup.movie.model.Movie
@@ -27,7 +28,7 @@ class MoopRepository(
             true
         }
         if (isStaleness) {
-            local.saveNowList(remote.getNowMovieList())
+            local.saveNowList(remote.getNowMovieList().toMovieList())
         }
     }
 
@@ -42,7 +43,7 @@ class MoopRepository(
             true
         }
         if (isStaleness) {
-            local.savePlanList(remote.getPlanMovieList())
+            local.savePlanList(remote.getPlanMovieList().toMovieList())
         }
     }
 

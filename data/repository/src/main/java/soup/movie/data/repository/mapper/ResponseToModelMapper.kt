@@ -3,6 +3,17 @@ package soup.movie.data.repository.mapper
 import soup.movie.data.api.response.*
 import soup.movie.model.*
 
+fun MovieListResponse.toMovieList() = MovieList(
+    lastUpdateTime, list.map { it.toMovie() }
+)
+
+private fun MovieResponse.toMovie() = Movie(
+    id, score, title, posterUrl, openDate, isNow, age, nationFilter, genres, boxOffice,
+    theater.toTheaterRatings()
+)
+
+private fun TheaterRatingsResponse.toTheaterRatings() = TheaterRatings(cgv, lotte, megabox)
+
 fun MovieDetailResponse.toMovieDetail() = MovieDetail(
     id,
     score,

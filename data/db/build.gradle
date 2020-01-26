@@ -18,7 +18,6 @@ android {
 
 dependencies {
     implementation project(":model")
-    implementation project(":data:api")
 
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.coroutines_core

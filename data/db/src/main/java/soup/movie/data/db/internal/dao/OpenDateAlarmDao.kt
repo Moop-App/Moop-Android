@@ -1,4 +1,4 @@
-package soup.movie.data.db.dao
+package soup.movie.data.db.internal.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
