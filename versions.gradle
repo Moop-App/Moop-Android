@@ -27,6 +27,10 @@ deps.test = [
         espresso: "androidx.test.espresso:espresso-core:3.1.0"
 ]
 
+deps.insetter = [
+        ktx: "dev.chrisbanes:insetter-ktx:0.2.0"
+]
+
 def lifecycle = "2.2.0"
 deps.lifecycle = [
         extensions   : "androidx.lifecycle:lifecycle-extensions:$lifecycle",

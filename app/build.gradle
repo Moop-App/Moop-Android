@@ -103,6 +103,8 @@ dependencies {
     implementation deps.androidx.material
     implementation deps.androidx.viewpager2
 
+    implementation deps.insetter.ktx
+
     implementation deps.lifecycle.extensions
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.viewmodel_ktx

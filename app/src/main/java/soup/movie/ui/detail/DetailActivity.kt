@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.model.Movie
 import soup.movie.databinding.DetailActivityBinding
+import soup.movie.model.Movie
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.home.MovieSelectManager
@@ -86,12 +87,20 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-        binding.root.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
-            val topPadding = initialPadding.top + windowInsets.systemWindowInsetTop
-            val bottomPadding = initialPadding.bottom + windowInsets.systemWindowInsetBottom
-            binding.header.root.updatePadding(top = topPadding)
-            binding.listView.updatePadding(top = topPadding, bottom = bottomPadding)
-            binding.share.root.updatePadding(top = topPadding, bottom = bottomPadding)
+        binding.header.root.doOnApplyWindowInsets { header, insets, initialState ->
+            header.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+        }
+        binding.listView.doOnApplyWindowInsets { listView, insets, initialState ->
+            listView.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop,
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+            )
+        }
+        binding.share.root.doOnApplyWindowInsets { share, insets, initialState ->
+            share.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop,
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+            )
         }
 
         postponeEnterTransition()

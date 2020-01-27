@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.lifecycle.observe
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.databinding.ThemeOptionFragmentBinding
 import soup.movie.ui.base.BaseFragment
-import soup.movie.util.doOnApplyWindowInsets
 
 class ThemeOptionFragment : BaseFragment() {
 
@@ -37,12 +37,14 @@ class ThemeOptionFragment : BaseFragment() {
     }
 
     private fun ThemeOptionFragmentBinding.adaptSystemWindowInset() {
-        themeOptionScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
-            view.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
+        themeOptionScene.doOnApplyWindowInsets { themeOptionScene, insets, initialState ->
+            themeOptionScene.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop
             )
+        }
+        listView.doOnApplyWindowInsets { listView, insets, initialState ->
             listView.updatePadding(
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
             )
         }
     }

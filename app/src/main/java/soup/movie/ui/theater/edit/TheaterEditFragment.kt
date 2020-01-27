@@ -19,14 +19,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.setupWithViewPager2
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.R
-import soup.movie.model.Theater
 import soup.movie.databinding.TheaterEditFooterBinding
 import soup.movie.databinding.TheaterEditFragmentBinding
+import soup.movie.model.Theater
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
-import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.inflate
 import soup.movie.util.lazyFast
 import soup.movie.util.setOnDebounceClickListener
@@ -154,19 +154,20 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun TheaterEditFragmentBinding.adaptSystemWindowInset() {
-        root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
-            view.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
-            )
-            viewPager.updatePadding(
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
-            )
+        root.doOnApplyWindowInsets { view, insets, initialState ->
+            view.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+
             val bottomSystemInset = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                windowInsets.systemGestureInsets.bottom
+                insets.systemGestureInsets.bottom
             } else {
-                windowInsets.systemWindowInsetBottom
+                insets.systemWindowInsetBottom
             }
             footerPanel.setPeekHeight(bottomSystemInset + originPeekHeight)
+        }
+        viewPager.doOnApplyWindowInsets { viewPager, insets, initialState ->
+            viewPager.updatePadding(
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+            )
         }
     }
 

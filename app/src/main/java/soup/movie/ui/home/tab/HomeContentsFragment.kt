@@ -13,14 +13,14 @@ import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RoughAdapterDataObserver
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
-import soup.movie.model.Movie
 import soup.movie.databinding.HomeTabContentsBinding
+import soup.movie.model.Movie
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.HomeFragmentDirections
 import soup.movie.ui.home.MovieSelectManager
-import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
@@ -57,9 +57,9 @@ abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
     }
 
     private fun HomeTabContentsBinding.adaptSystemWindowInset() {
-        root.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
+        listView.doOnApplyWindowInsets { _, insets, initialState ->
             listView.updatePadding(
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
             )
         }
     }

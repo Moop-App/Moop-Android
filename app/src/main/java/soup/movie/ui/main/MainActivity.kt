@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.messaging.FirebaseMessaging
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
@@ -22,7 +23,6 @@ import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.consumeBackEventInChildFragment
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.consume
-import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.isPortrait
 import soup.movie.util.observeEvent
 import javax.inject.Inject
@@ -55,9 +55,9 @@ class MainActivity : BaseActivity() {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-        binding.drawerLayout.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
-            binding.navigationView.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
+        binding.navigationView.doOnApplyWindowInsets { navigationView, insets, initialState ->
+            navigationView.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop
             )
         }
 

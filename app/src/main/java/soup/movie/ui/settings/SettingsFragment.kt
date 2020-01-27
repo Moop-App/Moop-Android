@@ -16,6 +16,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.SettingsFragmentBinding
@@ -68,12 +69,14 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun SettingsFragmentBinding.adaptSystemWindowInset() {
-        settingsScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
-            view.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
+        settingsScene.doOnApplyWindowInsets { settingsScene, insets, initialState ->
+            settingsScene.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop
             )
+        }
+        listView.doOnApplyWindowInsets { listView, insets, initialState ->
             listView.updatePadding(
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
             )
         }
     }

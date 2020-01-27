@@ -17,6 +17,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.setupWithViewPager2
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeFragmentBinding
@@ -28,7 +29,6 @@ import soup.movie.ui.home.HomeHeaderUiModel.*
 import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.Interpolators
-import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.setOnDebounceClickListener
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -70,18 +70,24 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
-        val fabMargin: Int = root.context.resources.getDimensionPixelSize(R.dimen.fab_margin)
-        homeScene.doOnApplyWindowInsets { _, windowInsets, initialPadding ->
-            val statusBarTopMargin = initialPadding.top + windowInsets.systemWindowInsetTop
-            headerHint.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                topMargin = statusBarTopMargin
+        headerHint.root.doOnApplyWindowInsets { headerHint, insets, initialState ->
+            headerHint.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = initialState.margins.top + insets.systemWindowInsetTop
             }
-            header.collapsingToolbar.updatePadding(top = statusBarTopMargin)
+        }
+        header.collapsingToolbar.doOnApplyWindowInsets { collapsingToolbar, insets, initialState ->
+            collapsingToolbar.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop
+            )
+        }
+        filterContainerView.doOnApplyWindowInsets { filterContainerView, insets, initialState ->
             filterContainerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                topMargin = statusBarTopMargin
+                topMargin = initialState.margins.top + insets.systemWindowInsetTop
             }
+        }
+        filterButton.doOnApplyWindowInsets { filterButton, insets, initialState ->
             filterButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = fabMargin + windowInsets.systemWindowInsetBottom
+                bottomMargin = initialState.margins.bottom + insets.systemWindowInsetBottom
             }
         }
     }

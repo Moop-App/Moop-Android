@@ -17,11 +17,11 @@ import androidx.recyclerview.widget.listener.OnItemMoveListener
 import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import androidx.transition.TransitionInflater
 import com.google.android.material.chip.Chip
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.R
 import soup.movie.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -80,12 +80,14 @@ class TheaterSortFragment : BaseFragment(), OnBackPressedListener {
     }
 
     private fun TheaterSortFragmentBinding.adaptSystemWindowInset() {
-        theaterSortScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
-            view.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
+        theaterSortScene.doOnApplyWindowInsets { theaterSortScene, insets, initialState ->
+            theaterSortScene.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop
             )
+        }
+        container.doOnApplyWindowInsets { container, insets, initialState ->
             container.updatePadding(
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
             )
         }
     }

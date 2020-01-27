@@ -23,6 +23,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.TheaterMapFragmentBinding
@@ -162,13 +163,15 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     }
 
     private fun TheaterMapFragmentBinding.adaptSystemWindowInset() {
-        theaterMapScene.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
-            view.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop,
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+        theaterMapScene.doOnApplyWindowInsets { theaterMapScene, insets, initialState ->
+            theaterMapScene.updatePadding(
+                top = initialState.paddings.top + insets.systemWindowInsetTop,
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
             )
-            footer.windowInsetBottomView.updateLayoutParams {
-                height = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+        }
+        footer.windowInsetBottomView.doOnApplyWindowInsets { windowInsetBottomView, insets, initialState ->
+            windowInsetBottomView.updateLayoutParams {
+                height = initialState.paddings.bottom + insets.systemWindowInsetBottom
             }
         }
     }

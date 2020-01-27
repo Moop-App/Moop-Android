@@ -15,6 +15,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
+import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import soup.movie.R
@@ -23,10 +24,9 @@ import soup.movie.databinding.SearchContentsBinding
 import soup.movie.databinding.SearchFragmentBinding
 import soup.movie.databinding.SearchHeaderBinding
 import soup.movie.ui.base.BaseFragment
-import soup.movie.ui.home.tab.HomeContentsListAdapter
 import soup.movie.ui.home.MovieSelectManager
+import soup.movie.ui.home.tab.HomeContentsListAdapter
 import soup.movie.util.ImeUtil
-import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
@@ -51,12 +51,14 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun SearchFragmentBinding.adaptSystemWindowInset() {
-        root.doOnApplyWindowInsets { view, windowInsets, initialPadding ->
+        root.doOnApplyWindowInsets { view, insets, initialState ->
             view.updatePadding(
-                top = initialPadding.top + windowInsets.systemWindowInsetTop
+                top = initialState.paddings.top + insets.systemWindowInsetTop
             )
-            contents.listView.updatePadding(
-                bottom = initialPadding.bottom + windowInsets.systemWindowInsetBottom
+        }
+        contents.listView.doOnApplyWindowInsets { listView, insets, initialState ->
+            listView.updatePadding(
+                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
             )
         }
     }
