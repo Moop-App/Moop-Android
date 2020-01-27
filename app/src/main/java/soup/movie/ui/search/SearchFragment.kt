@@ -23,7 +23,7 @@ import soup.movie.databinding.SearchContentsBinding
 import soup.movie.databinding.SearchFragmentBinding
 import soup.movie.databinding.SearchHeaderBinding
 import soup.movie.ui.base.BaseFragment
-import soup.movie.ui.home.tab.HomeContentsTabListAdapter
+import soup.movie.ui.home.tab.HomeContentsListAdapter
 import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImeUtil
 import soup.movie.util.doOnApplyWindowInsets
@@ -110,7 +110,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun SearchContentsBinding.setup() {
-        val listAdapter = HomeContentsTabListAdapter(root.context, AlwaysDiffCallback()) { movie, sharedElements ->
+        val listAdapter = HomeContentsListAdapter(root.context, AlwaysDiffCallback()) { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
             findNavController().navigate(

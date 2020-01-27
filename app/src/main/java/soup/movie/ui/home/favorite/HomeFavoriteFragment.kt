@@ -15,7 +15,6 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeTabFavoriteBinding
 import soup.movie.ui.home.HomeFragmentDirections
 import soup.movie.ui.home.MovieSelectManager
-import soup.movie.ui.home.tab.HomeContentsTabListAdapter
 import soup.movie.ui.home.tab.HomeTabFragment
 import javax.inject.Inject
 
@@ -39,7 +38,7 @@ class HomeFavoriteFragment : HomeTabFragment() {
     }
 
     private fun HomeTabFavoriteBinding.initViewState(viewModel: HomeFavoriteViewModel) {
-        val listAdapter = HomeContentsTabListAdapter(root.context) { movie, sharedElements ->
+        val listAdapter = HomeFavoriteListAdapter(root.context) { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
             findNavController().navigate(

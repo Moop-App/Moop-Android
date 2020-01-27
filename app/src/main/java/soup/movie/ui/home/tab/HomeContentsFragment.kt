@@ -24,13 +24,13 @@ import soup.movie.util.doOnApplyWindowInsets
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
-abstract class HomeContentsTabFragment : HomeTabFragment(), OnBackPressedListener {
+abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
 
     @Inject
     lateinit var analytics: EventAnalytics
 
     private lateinit var binding: HomeTabContentsBinding
-    protected abstract val viewModel: HomeContentsTabViewModel
+    protected abstract val viewModel: HomeContentsViewModel
 
     private val adapterDataObserver = object : RoughAdapterDataObserver() {
 
@@ -71,8 +71,8 @@ abstract class HomeContentsTabFragment : HomeTabFragment(), OnBackPressedListene
         super.onDestroyView()
     }
 
-    private fun HomeTabContentsBinding.initViewState(viewModel: HomeContentsTabViewModel) {
-        val listAdapter = HomeContentsTabListAdapter(root.context) { movie, sharedElements ->
+    private fun HomeTabContentsBinding.initViewState(viewModel: HomeContentsViewModel) {
+        val listAdapter = HomeContentsListAdapter(root.context) { movie, sharedElements ->
             analytics.clickMovie()
             MovieSelectManager.select(movie)
             findNavController().navigate(
@@ -105,7 +105,7 @@ abstract class HomeContentsTabFragment : HomeTabFragment(), OnBackPressedListene
 
     protected open fun onUpdateList(listView: RecyclerView, movies: List<Movie>) {
         val listAdapter = listView.adapter
-        if (listAdapter is HomeContentsTabListAdapter) {
+        if (listAdapter is HomeContentsListAdapter) {
             listAdapter.submitList(movies)
         }
     }

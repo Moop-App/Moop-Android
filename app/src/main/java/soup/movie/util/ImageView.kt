@@ -1,5 +1,7 @@
 package soup.movie.util
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -17,7 +19,10 @@ import soup.movie.util.helper.weekOfYear
 
 /** ImageView */
 
-@BindingAdapter(value = ["android:srcUrl", "android:srcUrlWithKey", "android:placeholder"], requireAll = false)
+@BindingAdapter(
+    value = ["android:srcUrl", "android:srcUrlWithKey", "android:placeholder"],
+    requireAll = false
+)
 fun ImageView.loadAsync(url: String?, withKey: Boolean = false, placeholder: Drawable? = null) {
     if (url == null) {
         GlideApp.with(context)
@@ -76,5 +81,14 @@ private inline fun createEndListener(crossinline action: () -> Unit): RequestLis
             action()
             return false
         }
+    }
+}
+
+@BindingAdapter("grayscale")
+fun ImageView.setGrayscale(enable: Boolean) {
+    colorFilter = if (enable) {
+        ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
+    } else {
+        null
     }
 }

@@ -1,4 +1,4 @@
-package soup.movie.ui.home.tab
+package soup.movie.ui.home.favorite
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,18 +9,18 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
 import soup.movie.R
-import soup.movie.model.Movie
-import soup.movie.databinding.HomeItemMovieBinding
+import soup.movie.databinding.HomeItemFavoriteMovieBinding
 import soup.movie.domain.model.isBest
 import soup.movie.domain.model.isDDay
 import soup.movie.domain.model.isNew
+import soup.movie.model.Movie
 import soup.movie.ui.databinding.DataBindingListAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.consume
 import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.showToast
 
-class HomeContentsTabListAdapter(
+class HomeFavoriteListAdapter(
     context: Context,
     diffCallback: DiffUtil.ItemCallback<Movie> = IdBasedDiffCallback { it.id },
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
@@ -29,7 +29,7 @@ class HomeContentsTabListAdapter(
     private val layoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val binding = HomeItemMovieBinding.inflate(layoutInflater, parent, false)
+        val binding = HomeItemFavoriteMovieBinding.inflate(layoutInflater, parent, false)
         return MovieViewHolder(binding).apply {
             itemView.setOnDebounceClickListener(delay = 150L) {
                 val index = adapterPosition
@@ -50,7 +50,7 @@ class HomeContentsTabListAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int) = R.layout.home_item_movie
+    override fun getItemViewType(position: Int) = R.layout.home_item_favorite_movie
 
     private fun MovieViewHolder.createSharedElements(movie: Movie): Array<Pair<View, String>> {
         itemView.run {
@@ -76,7 +76,7 @@ class HomeContentsTabListAdapter(
         return Pair(this, context.getString(tagId))
     }
 
-    class MovieViewHolder(binding: HomeItemMovieBinding) : DataBindingViewHolder<Movie>(binding) {
+    class MovieViewHolder(binding: HomeItemFavoriteMovieBinding) : DataBindingViewHolder<Movie>(binding) {
 
         val backgroundView = binding.backgroundView
         val posterView = binding.posterView

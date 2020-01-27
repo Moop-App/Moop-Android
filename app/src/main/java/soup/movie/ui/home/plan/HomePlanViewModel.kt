@@ -12,14 +12,14 @@ import soup.movie.domain.home.GetMovieFilterUseCase
 import soup.movie.domain.model.getDDay
 import soup.movie.model.Movie
 import soup.movie.ui.home.HomeContentsUiModel
-import soup.movie.ui.home.tab.HomeContentsTabViewModel
+import soup.movie.ui.home.tab.HomeContentsViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 class HomePlanViewModel @Inject constructor(
     getMovieFilter: GetMovieFilterUseCase,
     private val repository: MoopRepository
-) : HomeContentsTabViewModel() {
+) : HomeContentsViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>(false)
     override val isLoading: LiveData<Boolean>
