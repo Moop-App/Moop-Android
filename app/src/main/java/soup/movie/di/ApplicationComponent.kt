@@ -12,6 +12,8 @@ import javax.inject.Singleton
     ApplicationModule::class,
     ActivityBindingModule::class,
     ViewModelModule::class,
+    WorkerModule::class,
+    WorkerBindingModule::class,
     MoopRepositoryModule::class,
     SharedPreferencesModule::class
 ])
