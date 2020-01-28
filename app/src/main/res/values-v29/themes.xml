@@ -5,7 +5,7 @@
         <item name="android:statusBarColor">@color/status_bar_scrim</item>
         <item name="android:windowLightStatusBar">@bool/use_light_status_bar</item>
 
-        <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowLightNavigationBar">@bool/use_light_nav_bar</item>
     </style>
 
