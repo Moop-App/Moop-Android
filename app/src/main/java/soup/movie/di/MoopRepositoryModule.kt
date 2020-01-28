@@ -6,8 +6,8 @@ import dagger.Provides
 import soup.movie.data.api.ApiComponent
 import soup.movie.data.api.MoopApiService
 import soup.movie.data.db.DbComponent
-import soup.movie.data.repository.MoopRepository
 import soup.movie.data.db.LocalMoopDataSource
+import soup.movie.data.repository.MoopRepository
 import javax.inject.Singleton
 
 @Module

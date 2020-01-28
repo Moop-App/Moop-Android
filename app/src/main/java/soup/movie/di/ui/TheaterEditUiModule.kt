@@ -5,9 +5,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+import soup.movie.di.key.ViewModelKey
 import soup.movie.di.scope.ChildFragmentScope
 import soup.movie.di.scope.FragmentScope
-import soup.movie.di.scope.ViewModelKey
 import soup.movie.ui.theater.edit.TheaterEditFragment
 import soup.movie.ui.theater.edit.TheaterEditViewModel
 import soup.movie.ui.theater.edit.cgv.CgvEditFragment
