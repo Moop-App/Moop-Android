@@ -11,7 +11,7 @@ class WorkerFactory @Inject constructor(
     private val creators: Map<Class<out ListenableWorker>, @JvmSuppressWildcards Provider<ChildWorkerFactory>>
 ) : WorkerFactory() {
     override fun createWorker(
-        appContext: Context,
+        context: Context,
         workerClassName: String,
         workerParameters: WorkerParameters
     ): ListenableWorker? {
@@ -19,6 +19,6 @@ class WorkerFactory @Inject constructor(
             creators.entries.find { Class.forName(workerClassName).isAssignableFrom(it.key) }
         val factory = foundEntry?.value
             ?: throw IllegalArgumentException("unknown worker class $workerClassName")
-        return factory.get().create(appContext, workerParameters)
+        return factory.get().create(context, workerParameters)
     }
 }

@@ -4,7 +4,7 @@ import androidx.work.Configuration
 import dagger.Module
 import dagger.Provides
 
-@Module
+@Module(includes = [WorkerBindingModule::class])
 class WorkerModule {
 
     @Provides

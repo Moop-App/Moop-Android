@@ -11,14 +11,14 @@ import soup.movie.ui.theater.sort.TheaterSortFragment
 import soup.movie.ui.theater.sort.TheaterSortViewModel
 
 @Module
-abstract class TheaterSortUiModule {
+interface TheaterSortUiModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun bindTheaterSortFragment(): TheaterSortFragment
+    fun bindTheaterSortFragment(): TheaterSortFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(TheaterSortViewModel::class)
-    abstract fun bindTheaterSortViewModel(viewModel: TheaterSortViewModel): ViewModel
+    fun bindTheaterSortViewModel(viewModel: TheaterSortViewModel): ViewModel
 }

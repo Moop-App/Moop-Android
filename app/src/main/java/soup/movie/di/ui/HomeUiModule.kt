@@ -20,58 +20,54 @@ import soup.movie.ui.home.plan.HomePlanFragment
 import soup.movie.ui.home.plan.HomePlanViewModel
 
 @Module
-abstract class HomeUiModule {
+interface HomeUiModule {
 
     @FragmentScope
-    @ContributesAndroidInjector(
-        modules = [
-            HomeTabUiModule::class
-        ]
-    )
-    abstract fun bindHomeFragment(): HomeFragment
+    @ContributesAndroidInjector(modules = [HomeTabUiModule::class])
+    fun bindHomeFragment(): HomeFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+    fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun bindHomeFilterDialogFragment(): HomeFilterFragment
+    fun bindHomeFilterDialogFragment(): HomeFilterFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(HomeFilterViewModel::class)
-    abstract fun bindMovieFilterViewModel(viewModel: HomeFilterViewModel): ViewModel
+    fun bindMovieFilterViewModel(viewModel: HomeFilterViewModel): ViewModel
 }
 
 @Module
-abstract class HomeTabUiModule {
+interface HomeTabUiModule {
 
     @ChildFragmentScope
     @ContributesAndroidInjector
-    abstract fun bindHomeNowFragment(): HomeNowFragment
+    fun bindHomeNowFragment(): HomeNowFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(HomeNowViewModel::class)
-    abstract fun bindHomeNowViewModel(viewModel: HomeNowViewModel): ViewModel
+    fun bindHomeNowViewModel(viewModel: HomeNowViewModel): ViewModel
 
     @ChildFragmentScope
     @ContributesAndroidInjector
-    abstract fun bindHomePlanFragment(): HomePlanFragment
+    fun bindHomePlanFragment(): HomePlanFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(HomePlanViewModel::class)
-    abstract fun bindHomePlanViewModel(viewModel: HomePlanViewModel): ViewModel
+    fun bindHomePlanViewModel(viewModel: HomePlanViewModel): ViewModel
 
     @ChildFragmentScope
     @ContributesAndroidInjector
-    abstract fun bindHomeFavoriteFragment(): HomeFavoriteFragment
+    fun bindHomeFavoriteFragment(): HomeFavoriteFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(HomeFavoriteViewModel::class)
-    abstract fun bindHomeFavoriteViewModel(viewModel: HomeFavoriteViewModel): ViewModel
+    fun bindHomeFavoriteViewModel(viewModel: HomeFavoriteViewModel): ViewModel
 }

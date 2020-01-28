@@ -11,14 +11,14 @@ import soup.movie.ui.theme.ThemeOptionFragment
 import soup.movie.ui.theme.ThemeOptionViewModel
 
 @Module
-abstract class ThemeOptionUiModule {
+interface ThemeOptionUiModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun provideThemeOptionFragment(): ThemeOptionFragment
+    fun bindThemeOptionFragment(): ThemeOptionFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(ThemeOptionViewModel::class)
-    abstract fun bindThemeOptionViewModel(viewModel: ThemeOptionViewModel): ViewModel
+    fun bindThemeOptionViewModel(viewModel: ThemeOptionViewModel): ViewModel
 }

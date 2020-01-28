@@ -18,47 +18,45 @@ import soup.movie.ui.theater.edit.megabox.MegaboxEditFragment
 import soup.movie.ui.theater.edit.megabox.MegaboxEditViewModel
 
 @Module
-abstract class TheaterEditUiModule {
+interface TheaterEditUiModule {
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [
-        TheaterEditTabUiModule::class
-    ])
-    abstract fun bindTheaterEditFragment(): TheaterEditFragment
+    @ContributesAndroidInjector(modules = [TheaterEditTabUiModule::class])
+    fun bindTheaterEditFragment(): TheaterEditFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(TheaterEditViewModel::class)
-    abstract fun bindTheaterEditViewModel(viewModel: TheaterEditViewModel): ViewModel
+    fun bindTheaterEditViewModel(viewModel: TheaterEditViewModel): ViewModel
 }
 
 @Module
-abstract class TheaterEditTabUiModule {
+interface TheaterEditTabUiModule {
 
     @ChildFragmentScope
     @ContributesAndroidInjector
-    abstract fun provideCgvFragment(): CgvEditFragment
+    fun bindCgvFragment(): CgvEditFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(CgvEditViewModel::class)
-    abstract fun bindCgvEditViewModel(viewModel: CgvEditViewModel): ViewModel
+    fun bindCgvEditViewModel(viewModel: CgvEditViewModel): ViewModel
 
     @ChildFragmentScope
     @ContributesAndroidInjector
-    abstract fun provideLotteFragment(): LotteEditFragment
+    fun bindLotteFragment(): LotteEditFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(LotteEditViewModel::class)
-    abstract fun bindLotteEditViewModel(viewModel: LotteEditViewModel): ViewModel
+    fun bindLotteEditViewModel(viewModel: LotteEditViewModel): ViewModel
 
     @ChildFragmentScope
     @ContributesAndroidInjector
-    abstract fun provideMegaboxFragment(): MegaboxEditFragment
+    fun bindMegaboxFragment(): MegaboxEditFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(MegaboxEditViewModel::class)
-    abstract fun bindMegaboxEditViewModel(viewModel: MegaboxEditViewModel): ViewModel
+    fun bindMegaboxEditViewModel(viewModel: MegaboxEditViewModel): ViewModel
 }

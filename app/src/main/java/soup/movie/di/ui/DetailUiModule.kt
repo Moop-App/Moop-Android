@@ -8,10 +8,10 @@ import soup.movie.di.key.ViewModelKey
 import soup.movie.ui.detail.DetailViewModel
 
 @Module
-abstract class DetailUiModule {
+interface DetailUiModule {
 
     @Binds
     @IntoMap
     @ViewModelKey(DetailViewModel::class)
-    abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
+    fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
 }

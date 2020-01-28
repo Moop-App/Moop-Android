@@ -11,14 +11,14 @@ import soup.movie.ui.settings.SettingsFragment
 import soup.movie.ui.settings.SettingsViewModel
 
 @Module
-abstract class SettingsUiModule {
+interface SettingsUiModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun provideSettingsFragment(): SettingsFragment
+    fun bindSettingsFragment(): SettingsFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
-    abstract fun bindSettingsViewModel(viewModel: SettingsViewModel): ViewModel
+    fun bindSettingsViewModel(viewModel: SettingsViewModel): ViewModel
 }

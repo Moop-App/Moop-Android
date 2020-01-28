@@ -11,14 +11,14 @@ import soup.movie.ui.search.SearchFragment
 import soup.movie.ui.search.SearchViewModel
 
 @Module
-abstract class SearchUiModule {
+interface SearchUiModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun provideSearchFragment(): SearchFragment
+    fun bindSearchFragment(): SearchFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(SearchViewModel::class)
-    abstract fun bindSearchViewModel(viewModel: SearchViewModel): ViewModel
+    fun bindSearchViewModel(viewModel: SearchViewModel): ViewModel
 }

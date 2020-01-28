@@ -10,26 +10,26 @@ import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.MainActivity
 
 @Module
-abstract class ActivityBindingModule {
+interface ActivityBindingModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        MainUiModule::class,
-        HomeUiModule::class,
-        HomeDomainModule::class,
-        SearchUiModule::class,
-        SettingsUiModule::class,
-        ThemeOptionUiModule::class,
-        TheaterMapUiModule::class,
-        TheaterSortUiModule::class,
-        TheaterEditUiModule::class,
-        TheaterEditDomainModule::class
-    ])
-    abstract fun mainActivity(): MainActivity
+    @ContributesAndroidInjector(
+        modules = [
+            MainUiModule::class,
+            HomeUiModule::class,
+            HomeDomainModule::class,
+            SearchUiModule::class,
+            SettingsUiModule::class,
+            ThemeOptionUiModule::class,
+            TheaterMapUiModule::class,
+            TheaterSortUiModule::class,
+            TheaterEditUiModule::class,
+            TheaterEditDomainModule::class
+        ]
+    )
+    fun bindMainActivity(): MainActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [
-        DetailUiModule::class
-    ])
-    abstract fun detailActivity(): DetailActivity
+    @ContributesAndroidInjector(modules = [DetailUiModule::class])
+    fun bindDetailActivity(): DetailActivity
 }

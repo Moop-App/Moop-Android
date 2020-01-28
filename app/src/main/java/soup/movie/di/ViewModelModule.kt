@@ -5,10 +5,10 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class ViewModelModule {
+interface ViewModelModule {
 
     @Binds
-    abstract fun bindViewModelFactory(
+    fun bindViewModelFactory(
         factory: ViewModelFactory
     ): ViewModelProvider.Factory
 }

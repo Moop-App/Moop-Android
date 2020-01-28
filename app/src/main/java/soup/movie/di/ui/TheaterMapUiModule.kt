@@ -11,14 +11,14 @@ import soup.movie.ui.map.TheaterMapFragment
 import soup.movie.ui.map.TheaterMapViewModel
 
 @Module
-abstract class TheaterMapUiModule {
+interface TheaterMapUiModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun bindTheaterMapFragment(): TheaterMapFragment
+    fun bindTheaterMapFragment(): TheaterMapFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(TheaterMapViewModel::class)
-    abstract fun bindTheaterMapViewModel(viewModel: TheaterMapViewModel): ViewModel
+    fun bindTheaterMapViewModel(viewModel: TheaterMapViewModel): ViewModel
 }
