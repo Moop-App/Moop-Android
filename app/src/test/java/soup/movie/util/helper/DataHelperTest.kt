@@ -8,7 +8,6 @@ import org.threeten.bp.LocalDate
 class DataHelperTest {
 
     @Test
-    @Throws(Exception::class)
     fun isInWeekOfCultureDay_isCorrect() {
         // 5월
         assertEquals(false, date(2019, 5, 25).isInWeekOfCultureDay())
@@ -64,7 +63,6 @@ class DataHelperTest {
     }
 
     @Test
-    @Throws(Exception::class)
     fun calculateMinusDaysTo_isCorrect() {
         assertEquals(5, MONDAY.calculateMinusDaysTo(WEDNESDAY))
         assertEquals(6, TUESDAY.calculateMinusDaysTo(WEDNESDAY))
@@ -73,5 +71,16 @@ class DataHelperTest {
         assertEquals(2, FRIDAY.calculateMinusDaysTo(WEDNESDAY))
         assertEquals(3, SATURDAY.calculateMinusDaysTo(WEDNESDAY))
         assertEquals(4, SUNDAY.calculateMinusDaysTo(WEDNESDAY))
+    }
+
+    @Test
+    fun calculatePlusDaysTo_success() {
+        assertEquals(4, MONDAY.calculatePlusDaysTo(FRIDAY))
+        assertEquals(3, TUESDAY.calculatePlusDaysTo(FRIDAY))
+        assertEquals(2, WEDNESDAY.calculatePlusDaysTo(FRIDAY))
+        assertEquals(1, THURSDAY.calculatePlusDaysTo(FRIDAY))
+        assertEquals(0, FRIDAY.calculatePlusDaysTo(FRIDAY))
+        assertEquals(6, SATURDAY.calculatePlusDaysTo(FRIDAY))
+        assertEquals(5, SUNDAY.calculatePlusDaysTo(FRIDAY))
     }
 }

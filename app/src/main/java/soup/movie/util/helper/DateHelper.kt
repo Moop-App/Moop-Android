@@ -2,11 +2,14 @@ package soup.movie.util.helper
 
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.WeekFields
 
-fun today(): LocalDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
+private val ZONE_SEOUL = ZoneId.of("Asia/Seoul")
+fun currentTime(): LocalDateTime = LocalDateTime.now(ZONE_SEOUL)
+fun today(): LocalDate = LocalDate.now(ZONE_SEOUL)
 fun yesterday(): LocalDate = today().minusDays(1)
 
 /**
@@ -34,10 +37,22 @@ fun DayOfWeek.calculateMinusDaysTo(dayOfWeekToPrevious: DayOfWeek): Long {
     return result.toLong()
 }
 
+fun DayOfWeek.calculatePlusDaysTo(dayOfWeekToNext: DayOfWeek): Long {
+    var result = dayOfWeekToNext.value - value
+    if (result < 0) {
+        result += DayOfWeek.SUNDAY.value
+    }
+    return result.toLong()
+}
+
 fun LocalDate.MM_DD(): String {
     return format(DateTimeFormatter.ofPattern("MM.dd"))
 }
 
 fun LocalDate.weekOfYear(): Int {
     return get(WeekFields.of(java.util.Locale.KOREA).weekOfWeekBasedYear())
+}
+
+fun LocalDateTime.nextDayOfWeek(nextDayOfWeek: DayOfWeek): LocalDateTime {
+    return plusDays(dayOfWeek.calculatePlusDaysTo(nextDayOfWeek))
 }

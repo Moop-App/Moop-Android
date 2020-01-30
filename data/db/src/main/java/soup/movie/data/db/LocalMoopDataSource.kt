@@ -31,7 +31,7 @@ class LocalMoopDataSource(
     }
 
     fun getNowMovieListFlow(): Flow<List<Movie>> {
-        return getMovieList(TYPE_NOW)
+        return getMovieListFlow(TYPE_NOW)
     }
 
     suspend fun savePlanList(movieList: MovieList) {
@@ -39,7 +39,7 @@ class LocalMoopDataSource(
     }
 
     fun getPlanMovieListFlow(): Flow<List<Movie>> {
-        return getMovieList(TYPE_PLAN)
+        return getMovieListFlow(TYPE_PLAN)
     }
 
     private suspend fun saveMovieListAs(type: String, movieList: MovieList) {
@@ -53,7 +53,7 @@ class LocalMoopDataSource(
         openDateAlarmDao.updateOpenDateAlarms(movieList.list.map { it.toOpenDateAlarmEntity() })
     }
 
-    private fun getMovieList(type: String): Flow<List<Movie>> {
+    private fun getMovieListFlow(type: String): Flow<List<Movie>> {
         return cacheDao.getMovieListByType(type)
             .map { it.list.map { movieEntity -> movieEntity.toMovie() } }
             .catch { emit(emptyList()) }
@@ -71,7 +71,7 @@ class LocalMoopDataSource(
         return getNowMovieList() + getPlanMovieList()
     }
 
-    private suspend fun getNowMovieList(): List<Movie> {
+    suspend fun getNowMovieList(): List<Movie> {
         return getMovieListOf(TYPE_NOW)
     }
 

@@ -1,9 +1,6 @@
 package soup.movie
 
 import androidx.work.Configuration
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
@@ -23,8 +20,6 @@ class MovieApplication : DaggerApplication(), Configuration.Provider {
         AndroidThreeTen.init(this)
         NotificationSpecs.initialize(this)
         themeOptionManager.initialize()
-
-        WorkManager.getInstance(this).enqueueUniqueWork("test", ExistingWorkPolicy.REPLACE, OneTimeWorkRequest.from(HelloWorldWorker::class.java))
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

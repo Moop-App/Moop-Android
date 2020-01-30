@@ -1,8 +1,6 @@
 package soup.movie.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
 import soup.movie.data.api.MoopApiService
 import soup.movie.data.db.LocalMoopDataSource
 import soup.movie.data.repository.mapper.toMovieDetail
@@ -31,6 +29,11 @@ class MoopRepository(
         if (isStaleness) {
             local.saveNowList(remote.getNowMovieList().toMovieList())
         }
+    }
+
+    suspend fun updateAndGetNowMovieList(): List<Movie> {
+        updateNowMovieList()
+        return local.getNowMovieList()
     }
 
     fun getPlanMovieList(): Flow<List<Movie>> {

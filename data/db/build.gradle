@@ -34,6 +34,8 @@ dependencies {
     implementation deps.room.ktx
     kapt deps.room.compiler
 
+    implementation deps.util.timber
+
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.espresso

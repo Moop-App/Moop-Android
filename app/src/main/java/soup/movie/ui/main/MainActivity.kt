@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.messaging.FirebaseMessaging
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import soup.movie.work.LegacyWorker
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
@@ -80,6 +81,8 @@ class MainActivity : BaseActivity() {
                 }
             }
         }
+
+        LegacyWorker.enqueueWork(this)
     }
 
     override fun onResume() {

@@ -29,6 +29,12 @@ object NotificationSpecs {
         }
     }
 
+    inline fun notifyLegacy(ctx: Context, intercept: Builder.() -> Builder) {
+        ctx.getNotificationManager()?.run {
+            notify(3, Builder(ctx, NotificationChannels.EVENT).intercept().build())
+        }
+    }
+
     fun createNotificationForTheaterMode(ctx: Context): Builder {
         return Builder(ctx, NotificationChannels.THEATER_MODE)
     }
@@ -48,17 +54,20 @@ object NotificationChannels {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             application.getNotificationManager()?.run {
                 val notice = NotificationChannel(
-                        NOTICE,
-                        application.getString(R.string.notification_channel_notice),
-                        NotificationManager.IMPORTANCE_HIGH)
+                    NOTICE,
+                    application.getString(R.string.notification_channel_notice),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
                 val event = NotificationChannel(
-                        EVENT,
-                        application.getString(R.string.notification_channel_event),
-                        NotificationManager.IMPORTANCE_HIGH)
+                    EVENT,
+                    application.getString(R.string.notification_channel_event),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
                 val theaterMode = NotificationChannel(
-                        THEATER_MODE,
-                        application.getString(R.string.notification_channel_theater_mode),
-                        NotificationManager.IMPORTANCE_HIGH)
+                    THEATER_MODE,
+                    application.getString(R.string.notification_channel_theater_mode),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
                 createNotificationChannels(listOf(notice, event, theaterMode))
             }
         }
