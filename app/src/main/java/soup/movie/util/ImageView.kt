@@ -13,41 +13,32 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import soup.movie.util.glide.GlideApp
 import soup.movie.util.glide.GlideRequest
-import soup.movie.util.glide.IntegerKey
-import soup.movie.util.helper.today
-import soup.movie.util.helper.weekOfYear
 
 /** ImageView */
 
 @BindingAdapter(
-    value = ["android:srcUrl", "android:srcUrlWithKey", "android:placeholder"],
+    value = ["android:srcUrl", "android:placeholder"],
     requireAll = false
 )
-fun ImageView.loadAsync(url: String?, withKey: Boolean = false, placeholder: Drawable? = null) {
+fun ImageView.loadAsync(url: String?, placeholder: Drawable? = null) {
     if (url == null) {
         GlideApp.with(context)
             .load(placeholder)
             .into(this)
     } else {
-        loadAsync(url) {
-            if (withKey) {
-                signature(IntegerKey(today().weekOfYear()))
-            }
+        loadAsync(url, block = {
             if (placeholder != null) {
                 placeholder(placeholder)
             }
             transition(withCrossFade())
-        }
+        })
     }
 }
 
-fun ImageView.loadAsync(url: String?, withKey: Boolean, doOnEnd: () -> Unit) {
-    loadAsync(url) {
-        if (withKey) {
-            signature(IntegerKey(today().weekOfYear()))
-        }
+fun ImageView.loadAsync(url: String?, doOnEnd: () -> Unit) {
+    loadAsync(url, block = {
         listener(createEndListener(doOnEnd))
-    }
+    })
 }
 
 private inline fun ImageView.loadAsync(url: String?, block: GlideRequest<Drawable>.() -> Unit) {
