@@ -7,8 +7,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.work.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
@@ -55,13 +53,9 @@ class OpenDateAlarmWorker(
     }
 
     private suspend fun getOpeningDateAlarmList(): List<OpenDateAlarm> {
-        return withContext(Dispatchers.IO) {
-            repository.updatePlanMovieList()
-
-            val nextMonday = today().plusDaysTo(DayOfWeek.MONDAY).YYYY_MM_DD()
-            repository.getOpenDateAlarmListUntil(nextMonday)
-                .also { repository.deleteOpenDateAlarms(it) }
-        }
+        val nextMonday = today().plusDaysTo(DayOfWeek.MONDAY).YYYY_MM_DD()
+        return repository.getOpenDateAlarmListUntil(nextMonday)
+            .also { repository.deleteOpenDateAlarms(it) }
     }
 
     private fun showAlarmNotification(list: List<OpenDateAlarm>) = applicationContext.run {
@@ -94,11 +88,6 @@ class OpenDateAlarmWorker(
         private fun createRequest(): PeriodicWorkRequest {
             return PeriodicWorkRequestBuilder<OpenDateAlarmWorker>(2, TimeUnit.DAYS)
                 .setInitialDelay(calculateInitialDelayMinutes(), TimeUnit.MINUTES)
-                .setConstraints(
-                    Constraints.Builder()
-                        .setRequiredNetworkType(NetworkType.CONNECTED)
-                        .build()
-                )
                 .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 1, TimeUnit.MINUTES)
                 .build()
         }

@@ -6,6 +6,7 @@ import dagger.multibindings.IntoMap
 import soup.movie.di.key.WorkerKey
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
+import soup.movie.work.OpenDateSyncWorker
 
 @Module
 interface WorkerBindingModule {
@@ -19,4 +20,9 @@ interface WorkerBindingModule {
     @IntoMap
     @WorkerKey(OpenDateAlarmWorker::class)
     fun bindOpenDateAlarmWorker(factory: OpenDateAlarmWorker.Factory): ChildWorkerFactory
+
+    @Binds
+    @IntoMap
+    @WorkerKey(OpenDateSyncWorker::class)
+    fun bindOpenDateSyncWorker(factory: OpenDateSyncWorker.Factory): ChildWorkerFactory
 }
