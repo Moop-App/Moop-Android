@@ -2,7 +2,9 @@ package soup.movie.data.db.mapper
 
 import soup.movie.data.db.entity.FavoriteMovieEntity
 import soup.movie.data.db.entity.MovieEntity
+import soup.movie.data.db.entity.OpenDateAlarmEntity
 import soup.movie.model.Movie
+import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterRatings
 
 fun MovieEntity.toMovie() = Movie(
@@ -25,3 +27,5 @@ fun FavoriteMovieEntity.toMovie(): Movie {
         theater = TheaterRatings(cgv, lotte, megabox)
     )
 }
+
+fun OpenDateAlarmEntity.toOpenDateAlarm() = OpenDateAlarm(movieId, title, openDate)

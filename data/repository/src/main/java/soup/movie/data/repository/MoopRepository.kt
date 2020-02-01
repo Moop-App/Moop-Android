@@ -9,6 +9,7 @@ import soup.movie.data.repository.mapper.toTheaterAreaGroup
 import soup.movie.data.repository.util.SearchHelper
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
+import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
 
 class MoopRepository(
@@ -27,7 +28,7 @@ class MoopRepository(
             true
         }
         if (isStaleness) {
-            local.saveNowList(remote.getNowMovieList().toMovieList())
+            local.saveNowMovieList(remote.getNowMovieList().toMovieList())
         }
     }
 
@@ -47,7 +48,7 @@ class MoopRepository(
             true
         }
         if (isStaleness) {
-            local.savePlanList(remote.getPlanMovieList().toMovieList())
+            local.savePlanMovieList(remote.getPlanMovieList().toMovieList())
         }
     }
 
@@ -103,5 +104,20 @@ class MoopRepository(
 
     suspend fun isFavoriteMovie(movieId: String): Boolean {
         return local.isFavoriteMovie(movieId)
+    }
+
+    /**
+     * @param date yyyy.mm.dd ex) 2020.01.31
+     */
+    suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm> {
+        return local.getOpenDateAlarmListUntil(date)
+    }
+
+    suspend fun hasOpenDateAlarms(): Boolean {
+        return local.hasOpenDateAlarms()
+    }
+
+    suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>) {
+        return local.deleteOpenDateAlarms(alarms)
     }
 }

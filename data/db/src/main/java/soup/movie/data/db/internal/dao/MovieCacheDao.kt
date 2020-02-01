@@ -18,11 +18,11 @@ interface MovieCacheDao {
     suspend fun findByType(type: String): MovieListEntity
 
     @Insert(onConflict = REPLACE)
-    fun insert(response: MovieListEntity)
+    suspend fun insert(response: MovieListEntity)
 
     @Delete
-    fun delete(response: MovieListEntity)
+    suspend fun delete(response: MovieListEntity)
 
     @Query("DELETE FROM cached_movie_list")
-    fun deleteAll()
+    suspend fun deleteAll()
 }

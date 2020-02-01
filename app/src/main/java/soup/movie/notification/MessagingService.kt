@@ -39,7 +39,7 @@ class MessagingService : FirebaseMessagingService() {
             setContentTitle(title)
             setContentText(text)
             setAutoCancel(true)
-            setContentIntent(getMainScreenIntent())
+            setContentIntent(createLauncherIntent())
             setColor(getColorCompat(R.color.colorSecondary))
         }
     }
@@ -50,13 +50,13 @@ class MessagingService : FirebaseMessagingService() {
             setContentTitle(title)
             setContentText(text)
             setAutoCancel(true)
-            setContentIntent(getMainScreenIntent())
+            setContentIntent(createLauncherIntent())
             setColor(getColorCompat(R.color.colorSecondary))
         }
     }
 
-    private fun getMainScreenIntent(): PendingIntent {
-        val intent = Intent(applicationContext, MainActivity::class.java)
+    private fun createLauncherIntent(): PendingIntent {
+        val intent = Intent(this, MainActivity::class.java)
         return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
     }
 }

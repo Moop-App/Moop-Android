@@ -11,6 +11,6 @@ data class OpenDateAlarmEntity(
     val movieId: String,
     @ColumnInfo(name = "title")
     val title: String,
-    @ColumnInfo(name = "openDate")
+    @ColumnInfo(name = "open_date")
     val openDate: String
 )

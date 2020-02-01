@@ -14,19 +14,21 @@ import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
 import soup.movie.data.repository.MoopRepository
 import soup.movie.di.ChildWorkerFactory
-import soup.movie.domain.model.isBest
-import soup.movie.model.Movie
+import soup.movie.model.OpenDateAlarm
 import soup.movie.notification.NotificationSpecs
 import soup.movie.ui.main.MainActivity
 import soup.movie.util.getColorCompat
+import soup.movie.util.helper.YYYY_MM_DD
 import soup.movie.util.helper.currentTime
 import soup.movie.util.helper.plusDaysTo
+import soup.movie.util.helper.today
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Provider
+import kotlin.math.max
 
-class LegacyWorker(
+class OpenDateAlarmWorker(
     appContext: Context,
     params: WorkerParameters,
     private val repository: MoopRepository
@@ -35,9 +37,11 @@ class LegacyWorker(
     override suspend fun doWork(): Result {
         Timber.d("doWork: start!")
         return try {
-            val movieList = getRecommendedMovieList()
-            if (movieList.isNotEmpty()) {
-                showLegacyNotification(movieList)
+            if (repository.hasOpenDateAlarms()) {
+                val alarms = getOpeningDateAlarmList()
+                if (alarms.isNotEmpty()) {
+                    showAlarmNotification(alarms)
+                }
             }
             Result.success()
         } catch (t: Throwable) {
@@ -50,25 +54,21 @@ class LegacyWorker(
         }
     }
 
-    private suspend fun getRecommendedMovieList(): List<Movie> {
+    private suspend fun getOpeningDateAlarmList(): List<OpenDateAlarm> {
         return withContext(Dispatchers.IO) {
-            repository.updateAndGetNowMovieList().asSequence()
-                .filter {
-                    it.theater.run {
-                        cgv != null && lotte != null && megabox != null
-                    }
-                }
-                .filterIndexed { index, movie -> index < 3 || movie.isBest() }
-                .take(6)
-                .toList()
+            repository.updatePlanMovieList()
+
+            val nextMonday = today().plusDaysTo(DayOfWeek.MONDAY).YYYY_MM_DD()
+            repository.getOpenDateAlarmListUntil(nextMonday)
+                .also { repository.deleteOpenDateAlarms(it) }
         }
     }
 
-    private fun showLegacyNotification(list: List<Movie>) = applicationContext.run {
-        NotificationSpecs.notifyLegacy(this) {
+    private fun showAlarmNotification(list: List<OpenDateAlarm>) = applicationContext.run {
+        NotificationSpecs.notifyOpenDateAlarm(this) {
             setStyle(NotificationCompat.BigTextStyle())
             setSmallIcon(R.drawable.ic_notify_default)
-            setContentTitle(buildSpannedString { bold { append("간만에 영화 보는거 어때요? 👀🍿") } })
+            setContentTitle(buildSpannedString { bold { append("관심가는 작품이 곧 개봉합니다! ⏰❤️") } })
             setContentText(list.joinToString { it.title })
             setAutoCancel(true)
             setContentIntent(createLauncherIntent())
@@ -84,15 +84,15 @@ class LegacyWorker(
     companion object {
 
         private const val DEBUG = false
-        private const val TAG = "legacy"
+        private const val TAG = "open_date_alarm"
 
-        fun enqueueWork(context: Context) {
+        fun enqueuePeriodicWork(context: Context) {
             WorkManager.getInstance(context)
-                .enqueueUniqueWork(TAG, ExistingWorkPolicy.REPLACE, createRequest())
+                .enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.REPLACE, createRequest())
         }
 
-        private fun createRequest(): OneTimeWorkRequest {
-            return OneTimeWorkRequestBuilder<LegacyWorker>()
+        private fun createRequest(): PeriodicWorkRequest {
+            return PeriodicWorkRequestBuilder<OpenDateAlarmWorker>(2, TimeUnit.DAYS)
                 .setInitialDelay(calculateInitialDelayMinutes(), TimeUnit.MINUTES)
                 .setConstraints(
                     Constraints.Builder()
@@ -108,11 +108,12 @@ class LegacyWorker(
                 return 0
             }
             val current = currentTime()
-            val rebirth = current
-                .withHour(14)
-                .plusDaysTo(DayOfWeek.FRIDAY)
-                .plusWeeks(3)
-            return current.until(rebirth, ChronoUnit.MINUTES)
+            val rebirth = if (current.hour < 13) {
+                current.withHour(13)
+            } else {
+                current.withHour(13).plusDays(1)
+            }
+            return max(0, current.until(rebirth, ChronoUnit.MINUTES))
         }
     }
 
@@ -121,7 +122,7 @@ class LegacyWorker(
     ) : ChildWorkerFactory {
 
         override fun create(context: Context, params: WorkerParameters): ListenableWorker {
-            return LegacyWorker(context, params, repository.get())
+            return OpenDateAlarmWorker(context, params, repository.get())
         }
     }
 }

@@ -26,6 +26,7 @@ import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.consume
 import soup.movie.util.isPortrait
 import soup.movie.util.observeEvent
+import soup.movie.work.OpenDateAlarmWorker
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
@@ -83,6 +84,7 @@ class MainActivity : BaseActivity() {
         }
 
         LegacyWorker.enqueueWork(this)
+        OpenDateAlarmWorker.enqueuePeriodicWork(this)
     }
 
     override fun onResume() {

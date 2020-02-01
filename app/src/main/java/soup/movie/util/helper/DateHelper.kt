@@ -29,6 +29,18 @@ fun LocalDate.minusDaysTo(dayOfWeekToSubtract: DayOfWeek): LocalDate {
     return minusDays(dayOfWeek.calculateMinusDaysTo(dayOfWeekToSubtract))
 }
 
+fun LocalDateTime.minusDaysTo(dayOfWeekToSubtract: DayOfWeek): LocalDateTime {
+    return minusDays(dayOfWeek.calculateMinusDaysTo(dayOfWeekToSubtract))
+}
+
+fun LocalDate.plusDaysTo(nextDayOfWeek: DayOfWeek): LocalDate {
+    return plusDays(dayOfWeek.calculatePlusDaysTo(nextDayOfWeek))
+}
+
+fun LocalDateTime.plusDaysTo(nextDayOfWeek: DayOfWeek): LocalDateTime {
+    return plusDays(dayOfWeek.calculatePlusDaysTo(nextDayOfWeek))
+}
+
 fun DayOfWeek.calculateMinusDaysTo(dayOfWeekToPrevious: DayOfWeek): Long {
     var result = value - dayOfWeekToPrevious.value
     if (result < 0) {
@@ -48,11 +60,10 @@ fun DayOfWeek.calculatePlusDaysTo(dayOfWeekToNext: DayOfWeek): Long {
 fun LocalDate.MM_DD(): String {
     return format(DateTimeFormatter.ofPattern("MM.dd"))
 }
+fun LocalDate.YYYY_MM_DD(): String {
+    return format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+}
 
 fun LocalDate.weekOfYear(): Int {
     return get(WeekFields.of(java.util.Locale.KOREA).weekOfWeekBasedYear())
-}
-
-fun LocalDateTime.nextDayOfWeek(nextDayOfWeek: DayOfWeek): LocalDateTime {
-    return plusDays(dayOfWeek.calculatePlusDaysTo(nextDayOfWeek))
 }

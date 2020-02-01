@@ -9,14 +9,8 @@ import soup.movie.data.db.entity.MovieListEntity.Companion.TYPE_PLAN
 import soup.movie.data.db.internal.dao.FavoriteMovieDao
 import soup.movie.data.db.internal.dao.MovieCacheDao
 import soup.movie.data.db.internal.dao.OpenDateAlarmDao
-import soup.movie.data.db.mapper.toFavoriteMovieEntity
-import soup.movie.data.db.mapper.toMovie
-import soup.movie.data.db.mapper.toMovieEntity
-import soup.movie.data.db.mapper.toOpenDateAlarmEntity
-import soup.movie.model.Movie
-import soup.movie.model.MovieDetail
-import soup.movie.model.MovieList
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.data.db.mapper.*
+import soup.movie.model.*
 
 class LocalMoopDataSource(
     private val favoriteMovieDao: FavoriteMovieDao,
@@ -26,7 +20,7 @@ class LocalMoopDataSource(
 
     private var codeResponse: TheaterAreaGroup? = null
 
-    suspend fun saveNowList(movieList: MovieList) {
+    suspend fun saveNowMovieList(movieList: MovieList) {
         saveMovieListAs(TYPE_NOW, movieList)
     }
 
@@ -34,8 +28,9 @@ class LocalMoopDataSource(
         return getMovieListFlow(TYPE_NOW)
     }
 
-    suspend fun savePlanList(movieList: MovieList) {
+    suspend fun savePlanMovieList(movieList: MovieList) {
         saveMovieListAs(TYPE_PLAN, movieList)
+        openDateAlarmDao.updateAll(movieList.list.map { it.toOpenDateAlarmEntity() })
     }
 
     fun getPlanMovieListFlow(): Flow<List<Movie>> {
@@ -50,7 +45,6 @@ class LocalMoopDataSource(
                 movieList.list.map { it.toMovieEntity() }
             )
         )
-        openDateAlarmDao.updateOpenDateAlarms(movieList.list.map { it.toOpenDateAlarmEntity() })
     }
 
     private fun getMovieListFlow(type: String): Flow<List<Movie>> {
@@ -99,13 +93,13 @@ class LocalMoopDataSource(
     suspend fun addFavoriteMovie(movie: MovieDetail) {
         favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovieEntity())
         if (movie.isPlan) {
-            openDateAlarmDao.insertOpenDateAlarm(movie.toOpenDateAlarmEntity())
+            openDateAlarmDao.insert(movie.toOpenDateAlarmEntity())
         }
     }
 
     suspend fun removeFavoriteMovie(movieId: String) {
         favoriteMovieDao.deleteFavoriteMovie(movieId)
-        openDateAlarmDao.deleteOpenDateAlarm(movieId)
+        openDateAlarmDao.delete(movieId)
     }
 
     fun getFavoriteMovieList(): Flow<List<Movie>> {
@@ -116,5 +110,21 @@ class LocalMoopDataSource(
 
     suspend fun isFavoriteMovie(movieId: String): Boolean {
         return favoriteMovieDao.getCountForFavoriteMovie(movieId) > 0
+    }
+
+    /**
+     * @param date yyyy.mm.dd ex) 2020.01.31
+     */
+    suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm> {
+        return openDateAlarmDao.getAllUntil(date)
+            .map { openDateAlarmEntity -> openDateAlarmEntity.toOpenDateAlarm() }
+    }
+
+    suspend fun hasOpenDateAlarms(): Boolean {
+        return openDateAlarmDao.getCount() > 0
+    }
+
+    suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>) {
+        return openDateAlarmDao.deleteAll(alarms.map { it.movieId })
     }
 }
