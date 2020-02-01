@@ -7,7 +7,7 @@ import soup.movie.data.db.entity.MovieListEntity
 import soup.movie.data.db.internal.converter.CacheDatabaseTypeConverter
 import soup.movie.data.db.internal.dao.MovieCacheDao
 
-@Database(entities = [MovieListEntity::class], version = 3, exportSchema = false)
+@Database(entities = [MovieListEntity::class], version = 4, exportSchema = false)
 @TypeConverters(CacheDatabaseTypeConverter::class)
 abstract class MovieCacheDatabase : RoomDatabase() {
 
