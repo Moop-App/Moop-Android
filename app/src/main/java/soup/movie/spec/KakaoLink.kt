@@ -25,7 +25,11 @@ object KakaoLink {
     }
 
     fun extractMovieId(intent: Intent): String? {
-        return intent.data?.getQueryParameter(MOVIE_ID)
+        return if (intent.action == Intent.ACTION_VIEW) {
+            intent.data?.getQueryParameter(MOVIE_ID)
+        } else {
+            null
+        }
     }
 
     fun share(context: Context, movie: Movie) {

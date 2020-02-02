@@ -1,7 +1,6 @@
 package soup.movie.ui.main
 
 import android.content.Intent
-import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.GravityCompat
@@ -14,11 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.messaging.FirebaseMessaging
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
-import soup.movie.work.LegacyWorker
 import soup.movie.MainDirections
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.MainActivityBinding
+import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.consumeBackEventInChildFragment
@@ -26,6 +25,7 @@ import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.consume
 import soup.movie.util.isPortrait
 import soup.movie.util.observeEvent
+import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
 import javax.inject.Inject
@@ -105,8 +105,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun Intent.handleDeepLink() {
-        when (action) {
-            ACTION_VIEW -> {
+        FirebaseLink.extractMovieId(this) { movieId ->
+            if (movieId != null) {
+                viewModel.requestMovie(movieId)
+            } else {
                 KakaoLink.extractMovieId(this)?.let {
                     viewModel.requestMovie(it)
                 }

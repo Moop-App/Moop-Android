@@ -56,6 +56,10 @@
                 <data
                     android:host="@string/kakaolink_host"
                     android:scheme="@string/kakao_scheme" />
+
+                <data
+                    android:host="moop.link"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity

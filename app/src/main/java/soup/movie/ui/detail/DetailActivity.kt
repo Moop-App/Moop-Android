@@ -20,6 +20,7 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.DetailActivityBinding
 import soup.movie.model.Movie
+import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.home.MovieSelectManager
@@ -260,25 +261,42 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
     }
 
     private fun executeShareAction(action: ShareAction) {
-        if (action.target == ShareTarget.KakaoLink) {
-            KakaoLink.share(this, movie)
-        } else {
-            ShareCompat.IntentBuilder.from(this)
-                .setChooserTitle(R.string.action_share_poster)
-                .setStream(action.imageUri)
-                .setType(action.mimeType)
-                .apply {
-                    when (action.target) {
-                        ShareTarget.Facebook -> "com.facebook.katana"
-                        ShareTarget.Twitter -> "com.twitter.android"
-                        ShareTarget.Instagram -> "com.instagram.android"
-                        ShareTarget.LINE -> "jp.naver.line.android"
-                        else -> null
-                    }?.let {
-                        intent.setPackage(it)
+        when (action.target) {
+            ShareTarget.KakaoLink -> {
+                KakaoLink.share(this, movie)
+            }
+            ShareTarget.Instagram -> {
+                ShareCompat.IntentBuilder.from(this)
+                    .setChooserTitle(R.string.action_share_poster)
+                    .setStream(action.imageUri)
+                    .setType(action.mimeType)
+                    .apply {
+                        intent.setPackage("com.instagram.android")
                     }
+                    .startChooser()
+            }
+            ShareTarget.Facebook,
+            ShareTarget.Twitter,
+            ShareTarget.LINE,
+            ShareTarget.Others -> {
+                FirebaseLink.createDetailLink(movie) { link ->
+                    ShareCompat.IntentBuilder.from(this)
+                        .setChooserTitle(R.string.action_share)
+                        .setText("[뭅] ${movie.title}\n$link")
+                        .setType("text/plain")
+                        .apply {
+                            when (action.target) {
+                                ShareTarget.Facebook -> "com.facebook.katana"
+                                ShareTarget.Twitter -> "com.twitter.android"
+                                ShareTarget.LINE -> "jp.naver.line.android"
+                                else -> null
+                            }?.let {
+                                intent.setPackage(it)
+                            }
+                        }
+                        .startChooser()
                 }
-                .startChooser()
+            }
         }
     }
 }
