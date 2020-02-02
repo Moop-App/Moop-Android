@@ -5,6 +5,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import soup.movie.MovieApplication
+import soup.movie.ads.AdsManager
 import soup.movie.analytics.EventAnalytics
 import soup.movie.device.InAppUpdateManager
 import soup.movie.device.ProductAppUpdateManager
@@ -59,4 +60,10 @@ class ApplicationModule {
     fun provideAppUpdateManager(
         context: Context
     ): InAppUpdateManager = ProductAppUpdateManager(context)
+
+    @Singleton
+    @Provides
+    fun provideAdsManager(
+        context: Context
+    ): AdsManager = AdsManager(context)
 }

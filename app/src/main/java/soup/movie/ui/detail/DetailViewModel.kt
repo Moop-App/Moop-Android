@@ -4,9 +4,9 @@ import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import kotlinx.coroutines.*
+import soup.movie.ads.AdsManager
 import soup.movie.data.repository.MoopRepository
 import soup.movie.domain.model.screenDays
 import soup.movie.model.Movie
@@ -18,15 +18,18 @@ import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImageUriProvider
 import soup.movie.util.helper.MM_DD
 import soup.movie.util.helper.yesterday
+import timber.log.Timber
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
     private val repository: MoopRepository,
-    private val imageUriProvider: ImageUriProvider
+    private val imageUriProvider: ImageUriProvider,
+    private val adsManager: AdsManager
 ) : BaseViewModel() {
 
     private val movie = MovieSelectManager.getSelectedItem()!!
     private var movieDetail: MovieDetail? = null
+    private var nativeAd: UnifiedNativeAd? = null
 
     private val _headerUiModel = MutableLiveData<HeaderUiModel>()
     val headerUiModel: LiveData<HeaderUiModel>
@@ -50,33 +53,50 @@ class DetailViewModel @Inject constructor(
 
     init {
         _headerUiModel.value = HeaderUiModel(movie)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _favoriteUiModel.postValue(repository.isFavoriteMovie(movie.id))
-            updateDetail(movie)
+            val minDelay = async { delay(500) }
+            val loadDetail = async {
+                loadDetail(movie)
+            }
+            minDelay.await()
+            movieDetail = loadDetail.await()?.also { renderDetail(it) }
+            nativeAd = adsManager.loadNativeAd()?.takeIf {
+                // 간단한 유효성 검사
+                it.icon != null && it.headline != null
+            }?.also {
+                movieDetail?.run(::renderDetail)
+            }
         }
     }
 
-    private suspend fun updateDetail(movie: Movie) {
+    override fun onCleared() {
+        nativeAd?.destroy()
+        super.onCleared()
+    }
+
+    private suspend fun loadDetail(movie: Movie): MovieDetail? {
         _isError.postValue(false)
         try {
-            delay(500)
-            val detail = repository.getMovieDetail(movie.id)
-            _headerUiModel.postValue(HeaderUiModel(
-                movie = movie,
-                showTm = detail.showTm ?: 0,
-                nations = detail.nations.orEmpty(),
-                companys = detail.companies.orEmpty()
-            ))
-            _contentUiModel.postValue(detail.toContentUiModel())
-
-            movieDetail = detail
-            // if favorite, update local information
-            if (_favoriteUiModel.value == true) {
-                repository.addFavoriteMovie(detail)
+            return withContext(Dispatchers.IO) {
+                repository.getMovieDetail(movie.id)
             }
         } catch (t: Throwable) {
             _isError.postValue(true)
         }
+        return null
+    }
+
+    private fun renderDetail(detail: MovieDetail) {
+        _headerUiModel.postValue(
+            HeaderUiModel(
+                movie = movie,
+                showTm = detail.showTm ?: 0,
+                nations = detail.nations.orEmpty(),
+                companies = detail.companies.orEmpty()
+            )
+        )
+        _contentUiModel.postValue(detail.toContentUiModel())
     }
 
     fun requestShareImage(target: ShareTarget, bitmap: Bitmap) {
@@ -150,6 +170,11 @@ class DetailViewModel @Inject constructor(
             items.add(CastItemUiModel(persons = persons))
         }
 
+        Timber.d("nativeAd=$nativeAd")
+        nativeAd?.let {
+            items.add(AdUiModel(it))
+        }
+
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
             items.add(TrailerHeaderItemUiModel(movieTitle = title))
@@ -178,8 +203,8 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onRetryClick() {
-        viewModelScope.launch(Dispatchers.IO) {
-            updateDetail(movie)
+        viewModelScope.launch {
+            movieDetail = loadDetail(movie)?.also { renderDetail(it) }
         }
     }
 

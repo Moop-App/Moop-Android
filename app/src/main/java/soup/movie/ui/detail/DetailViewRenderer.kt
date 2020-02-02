@@ -46,7 +46,7 @@ interface DetailViewRenderer {
         runningTimeLabel.isVisible = showTmVisible
         runningTimeText.isVisible = showTmVisible
 
-        val companies = uiModel.companys
+        val companies = uiModel.companies
             .asSequence()
             .filter { it.companyPartNm.contains("배급") }
             .map { it.companyNm }
@@ -91,7 +91,7 @@ interface DetailViewRenderer {
         runningTimeLabel.isVisible = showTmVisible
         runningTimeText.isVisible = showTmVisible
 
-        val companies = uiModel.companys
+        val companies = uiModel.companies
             .asSequence()
             .filter { it.companyPartNm.contains("배급") }
             .map { it.companyNm }

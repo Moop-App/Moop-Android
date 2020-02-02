@@ -4,7 +4,9 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.formats.UnifiedNativeAd
 import soup.movie.R
+import soup.movie.widget.NativeAdView
 
 /**
  * TOMATOMETER: https://www.rottentomatoes.com/about
@@ -28,4 +30,9 @@ fun submitPersonList(view: RecyclerView, items: List<PersonUiModel>) {
     view.adapter = DetailPersonListAdapter().apply {
         submitList(items)
     }
+}
+
+@BindingAdapter("nativeAd")
+fun setNativeAd(view: NativeAdView, nativeAd: UnifiedNativeAd) {
+    view.setNativeAd(nativeAd)
 }

@@ -97,7 +97,8 @@ deps.firebase = [
         performance  : "com.google.firebase:firebase-perf:19.0.2",
         perf_plugin  : 'com.google.firebase:perf-plugin:1.3.1',
         messaging    : 'com.google.firebase:firebase-messaging:20.0.1',
-        dynamic_links: 'com.google.firebase:firebase-dynamic-links:19.0.0'
+        dynamic_links: 'com.google.firebase:firebase-dynamic-links:19.0.0',
+        ads          : 'com.google.firebase:firebase-ads:18.3.0'
 ]
 
 def stetho = "1.5.1"

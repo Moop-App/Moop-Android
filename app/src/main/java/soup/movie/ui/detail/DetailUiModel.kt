@@ -1,6 +1,7 @@
 package soup.movie.ui.detail
 
 import androidx.annotation.Keep
+import com.google.android.gms.ads.formats.UnifiedNativeAd
 import soup.movie.model.Company
 import soup.movie.model.Movie
 import soup.movie.model.Trailer
@@ -10,7 +11,7 @@ data class HeaderUiModel(
     val movie: Movie,
     val showTm: Int = 0,
     val nations: List<String> = emptyList(),
-    val companys: List<Company> = emptyList()
+    val companies: List<Company> = emptyList()
 )
 
 @Keep
@@ -90,6 +91,11 @@ class PersonUiModel(
 )
 
 @Keep
+class AdUiModel(
+    val nativeAd: UnifiedNativeAd
+) : ContentItemUiModel()
+
+@Keep
 class TrailerHeaderItemUiModel(
     val movieTitle: String
 ) : ContentItemUiModel()
@@ -103,3 +109,22 @@ class TrailerItemUiModel(
 class TrailerFooterItemUiModel(
     val movieTitle: String
 ) : ContentItemUiModel()
+
+val ContentItemUiModel.id: String
+    get() {
+        return when (this) {
+            HeaderItemUiModel -> "header"
+            is CgvItemUiModel -> "cgv"
+            is LotteItemUiModel -> "lotte"
+            is MegaboxItemUiModel -> "megabox"
+            is NaverItemUiModel -> "naver"
+            is BoxOfficeItemUiModel -> "boxoffice"
+            is ImdbItemUiModel -> "imdb"
+            is PlotItemUiModel -> "plot"
+            is CastItemUiModel -> "cast"
+            is AdUiModel -> "ad"
+            is TrailerHeaderItemUiModel -> "t_header"
+            is TrailerItemUiModel -> "t_${trailer.youtubeId}"
+            is TrailerFooterItemUiModel -> "t_footer"
+        }
+    }
