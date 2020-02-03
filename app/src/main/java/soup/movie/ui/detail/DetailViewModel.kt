@@ -60,12 +60,11 @@ class DetailViewModel @Inject constructor(
             }
             minDelay.await()
             movieDetail = loadDetail.await()?.also { renderDetail(it) }
-            nativeAd = adsManager.loadNativeAd()?.takeIf {
-                // 간단한 유효성 검사
-                it.icon != null && it.headline != null
-            }?.also { ad ->
-                movieDetail?.let { detail -> renderDetail(detail, ad) }
-            }
+            nativeAd = adsManager.loadNativeAd()
+                ?.takeIf { it.icon != null } // 간단한 유효성 검사
+                ?.also { ad ->
+                    movieDetail?.let { detail -> renderDetail(detail, ad) }
+                }
         }
     }
 
