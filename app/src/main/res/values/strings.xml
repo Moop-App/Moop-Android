@@ -12,9 +12,6 @@
     <string name="common_network_error">You\'re offline.</string>
     <string name="common_retry">Retry</string>
 
-    <string name="movie_tag_new" translatable="false">NEW</string>
-    <string name="movie_tag_best" translatable="false">BEST</string>
-
     <string name="action_share">Share</string>
     <string name="action_share_poster">Share poster</string>
 

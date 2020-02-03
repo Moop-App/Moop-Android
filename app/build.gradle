@@ -44,7 +44,7 @@ android {
             def filesAuthorityValue = 'soup.movie.debug.shareprovider'
             buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
             manifestPlaceholders = [
-                    filesAuthority: filesAuthorityValue,
+                    filesAuthority     : filesAuthorityValue,
                     crashlytics_enabled: false
             ]
         }
@@ -60,7 +60,7 @@ android {
             def filesAuthorityValue = 'soup.movie.shareprovider'
             buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
             manifestPlaceholders = [
-                    filesAuthority: filesAuthorityValue,
+                    filesAuthority     : filesAuthorityValue,
                     crashlytics_enabled: true
             ]
         }
@@ -79,6 +79,9 @@ android {
     androidExtensions {
         features = ["parcelize"]
     }
+    dynamicFeatures = [
+            ":feature:theatermap"
+    ]
 }
 
 dependencies {
