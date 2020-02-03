@@ -18,7 +18,6 @@ import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImageUriProvider
 import soup.movie.util.helper.MM_DD
 import soup.movie.util.helper.yesterday
-import timber.log.Timber
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
@@ -64,8 +63,8 @@ class DetailViewModel @Inject constructor(
             nativeAd = adsManager.loadNativeAd()?.takeIf {
                 // 간단한 유효성 검사
                 it.icon != null && it.headline != null
-            }?.also {
-                movieDetail?.run(::renderDetail)
+            }?.also { ad ->
+                movieDetail?.let { detail -> renderDetail(detail, ad) }
             }
         }
     }
@@ -87,7 +86,7 @@ class DetailViewModel @Inject constructor(
         return null
     }
 
-    private fun renderDetail(detail: MovieDetail) {
+    private fun renderDetail(detail: MovieDetail, nativeAd: UnifiedNativeAd? = null) {
         _headerUiModel.postValue(
             HeaderUiModel(
                 movie = movie,
@@ -96,7 +95,7 @@ class DetailViewModel @Inject constructor(
                 companies = detail.companies.orEmpty()
             )
         )
-        _contentUiModel.postValue(detail.toContentUiModel())
+        _contentUiModel.postValue(detail.toContentUiModel(nativeAd))
     }
 
     fun requestShareImage(target: ShareTarget, bitmap: Bitmap) {
@@ -106,7 +105,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun MovieDetail.toContentUiModel(): ContentUiModel {
+    private fun MovieDetail.toContentUiModel(nativeAd: UnifiedNativeAd?): ContentUiModel {
         val items = mutableListOf<ContentItemUiModel>()
         items.add(HeaderItemUiModel)
         boxOffice?.run {
@@ -170,7 +169,6 @@ class DetailViewModel @Inject constructor(
             items.add(CastItemUiModel(persons = persons))
         }
 
-        Timber.d("nativeAd=$nativeAd")
         nativeAd?.let {
             items.add(AdUiModel(it))
         }
