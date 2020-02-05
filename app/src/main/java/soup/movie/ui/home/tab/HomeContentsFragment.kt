@@ -20,7 +20,6 @@ import soup.movie.databinding.HomeTabContentsBinding
 import soup.movie.model.Movie
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.HomeFragmentDirections
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
@@ -74,9 +73,8 @@ abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
     private fun HomeTabContentsBinding.initViewState(viewModel: HomeContentsViewModel) {
         val listAdapter = HomeContentsListAdapter(root.context) { movie, sharedElements ->
             analytics.clickMovie()
-            MovieSelectManager.select(movie)
             findNavController().navigate(
-                HomeFragmentDirections.actionToDetail(),
+                HomeFragmentDirections.actionToDetail(movie),
                 ActivityNavigatorExtras(
                     activityOptions = ActivityOptionsCompat
                         .makeSceneTransitionAnimation(requireActivity(), *sharedElements)

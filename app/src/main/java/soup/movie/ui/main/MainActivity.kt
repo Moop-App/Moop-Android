@@ -21,7 +21,6 @@ import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.consumeBackEventInChildFragment
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.consume
 import soup.movie.util.isPortrait
 import soup.movie.util.observeEvent
@@ -122,9 +121,8 @@ class MainActivity : BaseActivity() {
                 binding.drawerLayout.openDrawer(GravityCompat.START)
             }
             is ShowDetailUiEvent -> {
-                MovieSelectManager.select(action.movie)
                 navHostFragment.findNavController().navigate(
-                    MainDirections.actionToDetail()
+                    MainDirections.actionToDetail(action.movie)
                 )
             }
         }

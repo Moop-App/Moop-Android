@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: rootProject.file('gradle/android.gradle')
 
+androidExtensions {
+    features = ["parcelize"]
+}
+
 dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.coroutines_core

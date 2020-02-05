@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.app.SharedElementCallback
 import androidx.core.view.isInvisible
 import androidx.core.view.postDelayed
 import androidx.core.view.updateLayoutParams
@@ -30,7 +29,6 @@ import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.Interpolators
 import soup.movie.util.setOnDebounceClickListener
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment(), OnBackPressedListener {
@@ -206,37 +204,5 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
             return true
         }
         return false
-    }
-
-    /** SharedElements */
-
-    private fun HomeFragmentBinding.prepareSharedElements() {
-        postponeEnterTransition(400, TimeUnit.MILLISECONDS)
-        setExitSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(
-                names: List<String>,
-                sharedElements: MutableMap<String, View>
-            ) {
-                sharedElements.clear()
-                MovieSelectManager.getSelectedItem()?.run {
-//                    contents.listView.findViewWithTag<View>(id)?.let { movieView ->
-//                        names.forEach { name ->
-//                            val id: Int = when (name) {
-//                                "background" -> R.id.backgroundView
-//                                "poster" -> R.id.posterView
-//                                "age_bg" -> R.id.ageBgView
-//                                "new" -> R.id.newView
-//                                "best" -> R.id.bestView
-//                                "d_day" -> R.id.dDayView
-//                                else -> View.NO_ID
-//                            }
-//                            movieView.findViewById<View>(id)?.let {
-//                                sharedElements[name] = it
-//                            }
-//                        }
-//                    }
-                }
-            }
-        })
     }
 }

@@ -24,7 +24,6 @@ import soup.movie.databinding.SearchContentsBinding
 import soup.movie.databinding.SearchFragmentBinding
 import soup.movie.databinding.SearchHeaderBinding
 import soup.movie.ui.base.BaseFragment
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.ui.home.tab.HomeContentsListAdapter
 import soup.movie.util.ImeUtil
 import soup.movie.util.setOnDebounceClickListener
@@ -114,9 +113,8 @@ class SearchFragment : BaseFragment() {
     private fun SearchContentsBinding.setup() {
         val listAdapter = HomeContentsListAdapter(root.context, AlwaysDiffCallback()) { movie, sharedElements ->
             analytics.clickMovie()
-            MovieSelectManager.select(movie)
             findNavController().navigate(
-                SearchFragmentDirections.actionToDetail(),
+                SearchFragmentDirections.actionToDetail(movie),
                 ActivityNavigatorExtras(
                     activityOptions = ActivityOptionsCompat
                         .makeSceneTransitionAnimation(requireActivity(), *sharedElements)

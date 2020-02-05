@@ -13,7 +13,13 @@
     <activity
         android:id="@+id/detail"
         android:name="soup.movie.ui.detail.DetailActivity"
-        tools:layout="@layout/detail_activity" />
+        tools:layout="@layout/detail_activity">
+
+        <argument
+            android:name="movie"
+            app:argType="soup.movie.model.Movie"
+            app:nullable="false" />
+    </activity>
 
     <fragment
         android:id="@+id/search"

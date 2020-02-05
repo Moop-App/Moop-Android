@@ -14,7 +14,6 @@ import soup.movie.model.MovieDetail
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.ui.base.BaseViewModel
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.ImageUriProvider
 import soup.movie.util.helper.MM_DD
 import soup.movie.util.helper.yesterday
@@ -26,7 +25,7 @@ class DetailViewModel @Inject constructor(
     private val adsManager: AdsManager
 ) : BaseViewModel() {
 
-    private val movie = MovieSelectManager.getSelectedItem()!!
+    private lateinit var movie: Movie
     private var movieDetail: MovieDetail? = null
     private var nativeAd: UnifiedNativeAd? = null
 
@@ -50,7 +49,8 @@ class DetailViewModel @Inject constructor(
     val isError: LiveData<Boolean>
         get() = _isError
 
-    init {
+    fun init(movie: Movie) {
+        this.movie = movie
         _headerUiModel.value = HeaderUiModel(movie)
         viewModelScope.launch {
             _favoriteUiModel.postValue(repository.isFavoriteMovie(movie.id))

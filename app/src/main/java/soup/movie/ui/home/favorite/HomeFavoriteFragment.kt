@@ -14,7 +14,6 @@ import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeTabFavoriteBinding
 import soup.movie.ui.home.HomeFragmentDirections
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.ui.home.tab.HomeTabFragment
 import javax.inject.Inject
 
@@ -40,9 +39,8 @@ class HomeFavoriteFragment : HomeTabFragment() {
     private fun HomeTabFavoriteBinding.initViewState(viewModel: HomeFavoriteViewModel) {
         val listAdapter = HomeFavoriteListAdapter(root.context) { movie, sharedElements ->
             analytics.clickMovie()
-            MovieSelectManager.select(movie)
             findNavController().navigate(
-                HomeFragmentDirections.actionToDetail(),
+                HomeFragmentDirections.actionToDetail(movie),
                 ActivityNavigatorExtras(
                     activityOptions = ActivityOptionsCompat
                         .makeSceneTransitionAnimation(requireActivity(), *sharedElements)

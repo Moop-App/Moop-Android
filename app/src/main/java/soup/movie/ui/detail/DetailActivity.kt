@@ -9,6 +9,7 @@ import androidx.core.view.drawToBitmap
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
+import androidx.navigation.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,11 +20,9 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.DetailActivityBinding
-import soup.movie.model.Movie
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
-import soup.movie.ui.home.MovieSelectManager
 import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
@@ -37,9 +36,7 @@ import kotlin.math.min
 
 class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
 
-    private val movie: Movie by lazyFast {
-        MovieSelectManager.getSelectedItem()!!
-    }
+    private val args: DetailActivityArgs by navArgs()
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -107,6 +104,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
         postponeEnterTransition()
         initViewState(binding)
 
+        viewModel.init(args.movie)
         viewModel.shareAction.observeEvent(this) {
             executeShareAction(it)
         }
@@ -114,7 +112,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
 
     private fun initViewState(binding: DetailActivityBinding) {
         binding.header.apply {
-            posterView.loadAsync(movie.posterUrl, doOnEnd = {
+            posterView.loadAsync(args.movie.posterUrl, doOnEnd = {
                 startPostponedEnterTransition()
             })
             posterCard.setOnDebounceClickListener(delay = 150L) {
@@ -252,7 +250,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
     //TODO: Re-implements this
     private fun showPosterViewer(from: ImageView) {
         StfalconImageViewer
-            .Builder(from.context, listOf(movie.posterUrl)) { view, imageUrl ->
+            .Builder(from.context, listOf(args.movie.posterUrl)) { view, imageUrl ->
                 view.loadAsync(imageUrl)
             }
             .withTransitionFrom(from)
@@ -261,6 +259,7 @@ class DetailActivity : BaseActivity(), DetailViewRenderer, DetailViewAnimation {
     }
 
     private fun executeShareAction(action: ShareAction) {
+        val movie = args.movie
         when (action.target) {
             ShareTarget.KakaoLink -> {
                 KakaoLink.share(this, movie)
