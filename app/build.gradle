@@ -88,8 +88,7 @@ dependencies {
     implementation project(':data:repository')
     implementation project(':data:db')
     implementation project(':data:api')
-    implementation project(':widget')
-    implementation project(':theme')
+    implementation project(':core')
 
     implementation deps.kotlin.stdlib
 

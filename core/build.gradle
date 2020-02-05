@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android.dataBinding.enabled = true
+android.buildTypes.release {
+    consumerProguardFiles 'proguard-rules-navigation.pro'
+}
+
+dependencies {
+    implementation project(':model')
+
+    implementation deps.kotlin.stdlib
+
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.core_ktx
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.material
+    implementation deps.androidx.recyclerview
+
+    implementation deps.util.timber
+
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
+}
