@@ -142,10 +142,10 @@ object Megabox : MarketApp() {
     }
 
     private fun detailMobileWebUrl(movieId: String): String =
-            "https://m.megabox.co.kr/?menuId=movie-detail&movieCode=$movieId"
+            "https://m.megabox.co.kr/movie-detail?rpstMovieNo=$movieId"
 
     private fun detailWebUrl(theaterCode: String): String =
-            "https://m.megabox.co.kr/?menuId=theater-detail&cinema=$theaterCode"
+            "https://m.megabox.co.kr/theater?brchNo=$theaterCode"
 }
 
 object Kakao : MarketApp() {
