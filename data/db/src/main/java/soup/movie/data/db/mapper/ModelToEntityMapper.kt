@@ -24,7 +24,7 @@ fun Movie.toMovieEntity(): MovieEntity {
     )
 }
 
-fun MovieDetail.toFavoriteMovieEntity(): FavoriteMovieEntity {
+fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
     return FavoriteMovieEntity(
         id = id,
         score = score,
@@ -35,10 +35,10 @@ fun MovieDetail.toFavoriteMovieEntity(): FavoriteMovieEntity {
         age = age,
         nationFilter = nationFilter,
         genres = genres,
-        boxOffice = boxOffice?.rank,
-        cgv = cgv?.star,
-        lotte = lotte?.star,
-        megabox = megabox?.star
+        boxOffice = boxOffice,
+        cgv = theater.cgv,
+        lotte = theater.lotte,
+        megabox = theater.megabox
     )
 }
 

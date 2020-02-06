@@ -20,7 +20,7 @@ interface OpenDateAlarmDao {
     @Insert(onConflict = REPLACE)
     suspend fun insert(alarm: OpenDateAlarmEntity)
 
-    @Update
+    @Update(onConflict = REPLACE)
     suspend fun updateAll(alarms: List<OpenDateAlarmEntity>)
 
     @Query("DELETE FROM open_date_alarms WHERE id = :movieId")

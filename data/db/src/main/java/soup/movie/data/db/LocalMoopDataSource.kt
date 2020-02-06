@@ -10,7 +10,10 @@ import soup.movie.data.db.internal.dao.FavoriteMovieDao
 import soup.movie.data.db.internal.dao.MovieCacheDao
 import soup.movie.data.db.internal.dao.OpenDateAlarmDao
 import soup.movie.data.db.mapper.*
-import soup.movie.model.*
+import soup.movie.model.Movie
+import soup.movie.model.MovieList
+import soup.movie.model.OpenDateAlarm
+import soup.movie.model.TheaterAreaGroup
 
 class LocalMoopDataSource(
     private val favoriteMovieDao: FavoriteMovieDao,
@@ -22,6 +25,7 @@ class LocalMoopDataSource(
 
     suspend fun saveNowMovieList(movieList: MovieList) {
         saveMovieListAs(TYPE_NOW, movieList)
+        favoriteMovieDao.updateAll(movieList.list.map { it.toFavoriteMovieEntity() })
     }
 
     fun getNowMovieListFlow(): Flow<List<Movie>> {
@@ -30,6 +34,7 @@ class LocalMoopDataSource(
 
     suspend fun savePlanMovieList(movieList: MovieList) {
         saveMovieListAs(TYPE_PLAN, movieList)
+        favoriteMovieDao.updateAll(movieList.list.map { it.toFavoriteMovieEntity() })
         openDateAlarmDao.updateAll(movieList.list.map { it.toOpenDateAlarmEntity() })
     }
 
@@ -90,7 +95,7 @@ class LocalMoopDataSource(
         return codeResponse
     }
 
-    suspend fun addFavoriteMovie(movie: MovieDetail) {
+    suspend fun addFavoriteMovie(movie: Movie) {
         favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovieEntity())
         if (movie.isPlan) {
             openDateAlarmDao.insert(movie.toOpenDateAlarmEntity())

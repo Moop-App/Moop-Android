@@ -192,12 +192,7 @@ class DetailViewModel @Inject constructor(
     fun onFavoriteButtonClick(isFavorite: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             if (isFavorite) {
-                val detail = movieDetail
-                if (detail != null) {
-                    repository.addFavoriteMovie(detail)
-                } else {
-                    // show toast
-                }
+                repository.addFavoriteMovie(movie)
             } else {
                 repository.removeFavoriteMovie(movie.id)
             }

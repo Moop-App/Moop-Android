@@ -94,7 +94,7 @@ class MoopRepository(
         return local.getFavoriteMovieList()
     }
 
-    suspend fun addFavoriteMovie(movie: MovieDetail) {
+    suspend fun addFavoriteMovie(movie: Movie) {
         local.addFavoriteMovie(movie)
     }
 
