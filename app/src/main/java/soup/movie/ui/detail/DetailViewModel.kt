@@ -60,11 +60,14 @@ class DetailViewModel @Inject constructor(
             }
             minDelay.await()
             movieDetail = loadDetail.await()?.also { renderDetail(it) }
-            nativeAd = adsManager.loadNativeAd()
-                ?.takeIf { it.icon != null } // 간단한 유효성 검사
-                ?.also { ad ->
-                    movieDetail?.let { detail -> renderDetail(detail, ad) }
-                }
+
+            withContext(Dispatchers.IO) {
+                nativeAd = adsManager.loadNativeAd()
+                    ?.takeIf { it.icon != null } // 간단한 유효성 검사
+                    ?.also { ad ->
+                        movieDetail?.let { detail -> renderDetail(detail, ad) }
+                    }
+            }
         }
     }
 
@@ -85,7 +88,10 @@ class DetailViewModel @Inject constructor(
         return null
     }
 
-    private fun renderDetail(detail: MovieDetail, nativeAd: UnifiedNativeAd? = null) {
+    private suspend fun renderDetail(
+        detail: MovieDetail,
+        nativeAd: UnifiedNativeAd? = null
+    ) = withContext(Dispatchers.Default) {
         _headerUiModel.postValue(
             HeaderUiModel(
                 movie = movie,
