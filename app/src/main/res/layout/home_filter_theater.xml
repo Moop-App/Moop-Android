@@ -16,6 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
         android:paddingStart="16dp"
         android:paddingTop="@dimen/settings_category_margin_vertical"
         android:paddingEnd="16dp"
@@ -31,9 +32,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/cgvView"
-            style="@style/Widget.Chip.Filter.Cgv"
+        <soup.widget.FilterChip
+            android:id="@+id/cgv_view"
+            style="@style/Widget.FilterChip.Cgv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -42,15 +43,14 @@
             android:checked="@{item.hasCgv}"
             android:onCheckedChanged="@{(v,isChecked) -> viewModel.onCgvFilterChanged(isChecked)}"
             android:text="CGV"
-            app:chipIconVisible="true"
-            app:layout_constraintEnd_toStartOf="@+id/lotteView"
+            app:layout_constraintEnd_toStartOf="@+id/lotte_view"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/lotteView"
-            style="@style/Widget.Chip.Filter.Lotte"
+        <soup.widget.FilterChip
+            android:id="@+id/lotte_view"
+            style="@style/Widget.FilterChip.Lotte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
@@ -58,14 +58,13 @@
             android:checked="@{item.hasLotteCinema}"
             android:onCheckedChanged="@{(v,isChecked) -> viewModel.onLotteFilterChanged(isChecked)}"
             android:text="롯데시네마"
-            app:chipIconVisible="true"
-            app:layout_constraintEnd_toStartOf="@+id/megaboxView"
-            app:layout_constraintStart_toEndOf="@+id/cgvView"
+            app:layout_constraintEnd_toStartOf="@+id/megabox_view"
+            app:layout_constraintStart_toEndOf="@+id/cgv_view"
             app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/megaboxView"
-            style="@style/Widget.Chip.Filter.Megabox"
+        <soup.widget.FilterChip
+            android:id="@+id/megabox_view"
+            style="@style/Widget.FilterChip.Megabox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_item_margin_vertical"
@@ -73,9 +72,8 @@
             android:checked="@{item.hasMegabox}"
             android:onCheckedChanged="@{(v,isChecked) -> viewModel.onMegaboxFilterChanged(isChecked)}"
             android:text="메가박스"
-            app:chipIconVisible="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lotteView"
+            app:layout_constraintStart_toEndOf="@+id/lotte_view"
             app:layout_constraintTop_toBottomOf="@+id/theaterCategory" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,9 @@
     <color name="chip_genre_text">#88000000</color>
     <color name="chip_genre_text_unchecked">#44000000</color>
 
+    <color name="chip_unchecked_bg">@color/grey_300</color>
+    <color name="chip_unchecked_text">@color/grey_600</color>
+
     <color name="chip_cgv_bg">#FFFFFF</color>
     <color name="chip_cgv_bg_unchecked">#55FFFFFF</color>
     <color name="chip_cgv_text">#E51F20</color>

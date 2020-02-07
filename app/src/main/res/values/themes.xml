@@ -10,7 +10,9 @@
 
     <style name="Platform.Theme.Moop" parent="Platform.V23.Theme.Moop" />
 
-    <style name="Base.Theme.Moop" parent="Platform.Theme.Moop" />
+    <style name="Base.Theme.Moop" parent="Platform.Theme.Moop">
+        <item name="filterChipStyle">@style/Widget.FilterChip</item>
+    </style>
 
     <attr name="colorDivider" format="reference|color" />
 

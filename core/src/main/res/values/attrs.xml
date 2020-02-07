@@ -10,4 +10,27 @@
         </attr>
     </declare-styleable>
 
+    <attr name="filterChipStyle" format="reference"/>
+
+    <declare-styleable name="FilterChip">
+        <attr name="android:checked"/>
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:fontFamily"/>
+        <attr name="strokeColor"/>
+        <attr name="strokeWidth"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="horizontalPadding" format="dimension"/>
+        <attr name="verticalPadding" format="dimension"/>
+        <attr name="selectedTextColor" format="color"/>
+        <attr name="clearIcon" format="reference"/>
+        <attr name="clearIconTint" format="color"/>
+        <attr name="foreground" format="reference"/>
+        <attr name="showIcons" format="boolean"/>
+        <attr name="dotColor" format="color"/>
+        <attr name="dotSize" format="dimension"/>
+        <attr name="dotPadding" format="dimension"/>
+    </declare-styleable>
+
 </resources>

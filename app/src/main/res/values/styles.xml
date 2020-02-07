@@ -88,6 +88,64 @@
         <item name="rippleColor">@color/white</item>
     </style>
 
+    <style name="Widget.FilterChip" parent="">
+        <item name="android:minHeight">32dp</item>
+        <item name="horizontalPadding">10dp</item>
+        <item name="verticalPadding">6dp</item>
+        <item name="showIcons">true</item>
+        <item name="android:textColor">@color/chip_cgv_text_unchecked</item>
+        <item name="selectedTextColor">@color/chip_lotte_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="dotColor">@color/chip_cgv_bg</item>
+        <item name="dotSize">10dp</item>
+        <item name="dotPadding">7dp</item>
+        <item name="clearIcon">@drawable/ic_cancel</item>
+        <item name="clearIconTint">@color/grey</item>
+        <item name="backgroundColor">@color/chip_genre_bg_unchecked</item>
+        <item name="foreground">?selectableItemBackground</item>
+        <item name="android:elevation">10dp</item>
+    </style>
+
+    <style name="Widget.FilterChip.Cgv">
+        <item name="android:textColor">@color/chip_unchecked_text</item>
+        <item name="selectedTextColor">@color/chip_cgv_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="dotColor">@color/chip_cgv_bg</item>
+        <item name="dotSize">10dp</item>
+        <item name="dotPadding">7dp</item>
+        <item name="fontFamily">bold</item>
+        <item name="clearIcon">@drawable/ic_cancel</item>
+        <item name="clearIconTint">@color/chip_cgv_text</item>
+        <item name="backgroundColor">@color/chip_unchecked_bg</item>
+        <item name="foreground">?selectableItemBackground</item>
+    </style>
+
+    <style name="Widget.FilterChip.Lotte">
+        <item name="android:textColor">@color/chip_unchecked_text</item>
+        <item name="selectedTextColor">@color/chip_lotte_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="dotColor">@color/chip_lotte_bg</item>
+        <item name="dotSize">10dp</item>
+        <item name="dotPadding">7dp</item>
+        <item name="clearIcon">@drawable/ic_cancel</item>
+        <item name="clearIconTint">@color/white</item>
+        <item name="backgroundColor">@color/chip_unchecked_bg</item>
+        <item name="foreground">?selectableItemBackground</item>
+    </style>
+
+    <style name="Widget.FilterChip.Megabox">
+        <item name="android:textColor">@color/chip_unchecked_text</item>
+        <item name="selectedTextColor">@color/chip_megabox_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="dotColor">@color/chip_megabox_bg</item>
+        <item name="dotSize">10dp</item>
+        <item name="dotPadding">7dp</item>
+        <item name="clearIcon">@drawable/ic_cancel</item>
+        <item name="clearIconTint">@color/white</item>
+        <item name="backgroundColor">@color/chip_unchecked_bg</item>
+        <item name="foreground">?selectableItemBackground</item>
+    </style>
+
     <!-- Search -->
 
     <style name="SearchViewTheme" parent="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
