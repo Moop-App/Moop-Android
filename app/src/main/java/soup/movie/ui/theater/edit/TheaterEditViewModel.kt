@@ -1,11 +1,9 @@
 package soup.movie.ui.theater.edit
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.model.Theater
@@ -16,31 +14,21 @@ class TheaterEditViewModel @Inject constructor(
     private val manager: TheaterEditManager
 ) : BaseViewModel() {
 
-    private val _contentUiModel = MutableLiveData<TheaterEditContentUiModel>()
-    val contentUiModel: LiveData<TheaterEditContentUiModel>
-        get() = _contentUiModel
-
-    private val _footerUiModel = MutableLiveData<TheaterEditFooterUiModel>()
-    val footerUiModel: LiveData<TheaterEditFooterUiModel>
-        get() = _footerUiModel
-
-    init {
-        viewModelScope.launch {
-            _contentUiModel.value = TheaterEditContentUiModel.LoadingState
-            _contentUiModel.value = withContext(Dispatchers.IO) {
-                try {
-                    manager.loadAsync()
-                    TheaterEditContentUiModel.DoneState
-                } catch (t: Throwable) {
-                    TheaterEditContentUiModel.ErrorState
-                }
-            }
-
-            manager.asSelectedTheaterListFlow().collect {
-                _footerUiModel.value = TheaterEditFooterUiModel(it)
+    val contentUiModel = liveData {
+        emit(TheaterEditContentUiModel.LoadingState)
+        withContext(Dispatchers.IO) {
+            try {
+                manager.loadAsync()
+                emit(TheaterEditContentUiModel.DoneState)
+            } catch (t: Throwable) {
+                emit(TheaterEditContentUiModel.ErrorState)
             }
         }
     }
+
+    val footerUiModel = manager.asSelectedTheaterListFlow()
+        .map { TheaterEditFooterUiModel(it) }
+        .asLiveData()
 
     fun onConfirmClicked() {
         manager.save()

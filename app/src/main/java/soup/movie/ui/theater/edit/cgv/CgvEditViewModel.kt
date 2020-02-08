@@ -3,9 +3,9 @@ package soup.movie.ui.theater.edit.cgv
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.model.Theater
 import soup.movie.ui.base.BaseViewModel
@@ -21,14 +21,12 @@ class CgvEditViewModel @Inject constructor(
         get() = _uiModel
 
     init {
-        viewModelScope.launch {
-            combine(
-                manager.asCgvFlow(),
-                manager.asSelectedTheaterListFlow()
-            ) { cgv, selectedList ->
+        manager.asCgvFlow()
+            .combine(manager.asSelectedTheaterListFlow()) { cgv, selectedList ->
                 TheaterEditChildUiModel(cgv, selectedList)
-            }.collect { _uiModel.value = it }
-        }
+            }
+            .onEach { _uiModel.value = it }
+            .launchIn(viewModelScope)
     }
 
     fun add(theater: Theater): Boolean {
