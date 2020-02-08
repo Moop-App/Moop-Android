@@ -18,7 +18,7 @@
             type="soup.movie.ui.databinding.DataBindingItemListener" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerViewEx
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipChildren="false"
@@ -28,7 +28,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="4dp"
         android:paddingBottom="8dp"
-        app:layoutManagerType="linear"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:submitPersonList="@{item.persons}"
         tools:listitem="@layout/detail_item_cast_person" />
 </layout>

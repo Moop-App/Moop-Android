@@ -5,7 +5,7 @@
 
     <data />
 
-    <androidx.recyclerview.widget.RecyclerViewEx
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +15,7 @@
         android:padding="8dp"
         android:requiresFadingEdge="none"
         android:scrollbars="none"
-        app:layoutManagerType="linear"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="3"
         tools:listitem="@layout/theater_edit_item_area" />
 </layout>
