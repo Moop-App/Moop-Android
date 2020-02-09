@@ -1,10 +1,10 @@
-package soup.movie.data.db.entity
+package soup.movie.data.db.internal.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "cached_movie_list")
-data class MovieListEntity(
+internal data class MovieListEntity(
     @PrimaryKey
     val type: String,
     val lastUpdateTime: Long,

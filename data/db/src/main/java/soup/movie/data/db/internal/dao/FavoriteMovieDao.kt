@@ -6,10 +6,10 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.db.entity.FavoriteMovieEntity
+import soup.movie.data.db.internal.entity.FavoriteMovieEntity
 
 @Dao
-interface FavoriteMovieDao {
+internal interface FavoriteMovieDao {
 
     @Query("SELECT * FROM favorite_movies")
     fun getFavoriteMovieList(): Flow<List<FavoriteMovieEntity>>

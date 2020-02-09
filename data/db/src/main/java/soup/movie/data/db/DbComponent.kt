@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Component(modules = [DbModule::class])
 interface DbComponent {
 
-    fun localDataSource(): LocalMoopDataSource
+    fun moopDatabase(): MoopDatabase
 
     @Component.Factory
     interface Factory {

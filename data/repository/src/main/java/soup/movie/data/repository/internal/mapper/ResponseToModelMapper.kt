@@ -1,9 +1,9 @@
-package soup.movie.data.repository.mapper
+package soup.movie.data.repository.internal.mapper
 
 import soup.movie.data.api.response.*
 import soup.movie.model.*
 
-fun MovieListResponse.toMovieList() = MovieList(
+internal fun MovieListResponse.toMovieList() = MovieList(
     lastUpdateTime, list.map { it.toMovie() }
 )
 
@@ -14,7 +14,7 @@ private fun MovieResponse.toMovie() = Movie(
 
 private fun TheaterRatingsResponse.toTheaterRatings() = TheaterRatings(cgv, lotte, megabox)
 
-fun MovieDetailResponse.toMovieDetail() = MovieDetail(
+internal fun MovieDetailResponse.toMovieDetail() = MovieDetail(
     id,
     score,
     title,
@@ -53,7 +53,7 @@ private fun RottenTomatoInfoResponse.toRottenTomatoInfo() = RottenTomatoInfo(sta
 private fun MetascoreInfoResponse.toMetascoreInfo() = MetascoreInfo(star)
 private fun TrailerResponse.toTrailer() = Trailer(youtubeId, title, author, thumbnailUrl)
 
-fun TheaterAreaGroupResponse.toTheaterAreaGroup() = TheaterAreaGroup(
+internal fun TheaterAreaGroupResponse.toTheaterAreaGroup() = TheaterAreaGroup(
     cgv.map { it.toTheaterArea() },
     lotte.map { it.toTheaterArea() },
     megabox.map { it.toTheaterArea() }

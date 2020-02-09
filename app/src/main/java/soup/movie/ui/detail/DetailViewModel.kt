@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import kotlinx.coroutines.*
 import soup.movie.ads.AdsManager
-import soup.movie.data.repository.MoopRepository
 import soup.movie.domain.model.screenDays
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
+import soup.movie.model.repository.MoopRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.ui.base.BaseViewModel

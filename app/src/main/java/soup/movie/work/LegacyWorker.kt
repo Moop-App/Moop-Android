@@ -12,10 +12,10 @@ import kotlinx.coroutines.withContext
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
-import soup.movie.data.repository.MoopRepository
 import soup.movie.di.ChildWorkerFactory
 import soup.movie.domain.model.isBest
 import soup.movie.model.Movie
+import soup.movie.model.repository.MoopRepository
 import soup.movie.notification.NotificationSpecs
 import soup.movie.ui.main.MainActivity
 import soup.movie.util.getColorCompat

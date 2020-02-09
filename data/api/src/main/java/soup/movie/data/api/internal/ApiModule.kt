@@ -17,7 +17,9 @@ import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpNetworkInterc
 internal class ApiModule {
 
     @Provides
-    fun provideMoopApiService(okHttpClient: OkHttpClient): MoopApiService {
+    fun provideMoopApiService(
+        okHttpClient: OkHttpClient
+    ): MoopApiService {
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

@@ -1,23 +1,20 @@
 package soup.movie.data.db.internal
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import soup.movie.data.db.LocalMoopDataSource
-import soup.movie.data.db.MovieCacheDatabase
-import soup.movie.data.db.MovieDatabase
+import soup.movie.data.db.MoopDatabase
 
 @Module(includes = [DbModule.Providers::class])
 internal class DbModule {
 
     @Provides
-    fun provideLocalDataSource(
+    fun provideMoopDatabase(
         movieDb: MovieDatabase,
         cacheDb: MovieCacheDatabase
-    ): LocalMoopDataSource {
-        return LocalMoopDataSource(
+    ): MoopDatabase {
+        return RoomDatabase(
             movieDb.favoriteMovieDao(),
             movieDb.openDateAlarmDao(),
             cacheDb.movieCacheDao()
@@ -30,16 +27,20 @@ internal class DbModule {
         @Provides
         fun createMovieDatabase(
             context: Context
-        ): MovieDatabase = Room
-            .databaseBuilder(context.applicationContext, MovieDatabase::class.java, "movie.db")
-            .build()
+        ): MovieDatabase {
+            return Room
+                .databaseBuilder(context.applicationContext, MovieDatabase::class.java, "movie.db")
+                .build()
+        }
 
         @Provides
         fun createCacheDatabase(
             context: Context
-        ): MovieCacheDatabase = Room
-            .databaseBuilder(context.applicationContext, MovieCacheDatabase::class.java, "moop.db")
-            .fallbackToDestructiveMigration()
-            .build()
+        ): MovieCacheDatabase {
+            return Room
+                .databaseBuilder(context.applicationContext, MovieCacheDatabase::class.java, "moop.db")
+                .fallbackToDestructiveMigration()
+                .build()
+        }
     }
 }

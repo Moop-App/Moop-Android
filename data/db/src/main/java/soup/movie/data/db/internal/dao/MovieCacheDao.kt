@@ -6,10 +6,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.db.entity.MovieListEntity
+import soup.movie.data.db.internal.entity.MovieListEntity
 
 @Dao
-interface MovieCacheDao {
+internal interface MovieCacheDao {
 
     @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
     fun getMovieListByType(type: String): Flow<MovieListEntity>

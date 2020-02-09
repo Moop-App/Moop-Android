@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import soup.movie.data.repository.MoopRepository
 import soup.movie.model.Movie
+import soup.movie.model.repository.MoopRepository
 import soup.movie.ui.base.BaseViewModel
 import soup.movie.ui.home.HomeContentsUiModel
 import javax.inject.Inject

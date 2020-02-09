@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import soup.movie.MovieApplication
 import soup.movie.ads.AdsManager
 import soup.movie.analytics.EventAnalytics
 import soup.movie.device.InAppUpdateManager
@@ -19,13 +18,8 @@ import javax.inject.Singleton
 class ApplicationModule {
 
     @Provides
-    fun provideApplication(
-        application: MovieApplication
-    ): Application = application
-
-    @Provides
     fun provideContext(
-        application: MovieApplication
+        application: Application
     ): Context = application.applicationContext
 
     @Singleton

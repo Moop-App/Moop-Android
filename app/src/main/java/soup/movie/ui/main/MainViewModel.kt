@@ -2,7 +2,7 @@ package soup.movie.ui.main
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import soup.movie.data.repository.MoopRepository
+import soup.movie.model.repository.MoopRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.ui.base.BaseViewModel

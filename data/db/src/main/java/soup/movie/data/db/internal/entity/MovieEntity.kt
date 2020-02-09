@@ -1,6 +1,6 @@
-package soup.movie.data.db.entity
+package soup.movie.data.db.internal.entity
 
-data class MovieEntity(
+internal data class MovieEntity(
     val id: String,
     val score: Int,
     val title: String,

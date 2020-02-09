@@ -20,4 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class soup.movie.data.db.entity.** { *; }
+-keep class soup.movie.data.db.internal.entity.** { *; }

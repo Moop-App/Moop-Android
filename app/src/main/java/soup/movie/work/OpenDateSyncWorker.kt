@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.work.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import soup.movie.data.repository.MoopRepository
 import soup.movie.di.ChildWorkerFactory
+import soup.movie.model.repository.MoopRepository
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

@@ -7,9 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import soup.movie.data.repository.MoopRepository
 import soup.movie.domain.home.GetMovieFilterUseCase
 import soup.movie.model.Movie
+import soup.movie.model.repository.MoopRepository
 import soup.movie.ui.home.HomeContentsUiModel
 import soup.movie.ui.home.tab.HomeContentsViewModel
 import javax.inject.Inject

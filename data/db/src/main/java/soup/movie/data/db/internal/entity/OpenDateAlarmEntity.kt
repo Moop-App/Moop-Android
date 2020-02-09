@@ -1,11 +1,11 @@
-package soup.movie.data.db.entity
+package soup.movie.data.db.internal.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "open_date_alarms")
-data class OpenDateAlarmEntity(
+internal data class OpenDateAlarmEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val movieId: String,

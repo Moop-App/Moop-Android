@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import soup.movie.data.repository.MoopRepository
+import soup.movie.model.repository.MoopRepository
 import soup.movie.settings.impl.AgeFilterSetting
 import soup.movie.settings.impl.GenreFilterSetting
 import soup.movie.settings.impl.TheaterFilterSetting

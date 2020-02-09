@@ -1,12 +1,12 @@
-package soup.movie.data.db.mapper
+package soup.movie.data.db.internal.mapper
 
-import soup.movie.data.db.entity.FavoriteMovieEntity
-import soup.movie.data.db.entity.MovieEntity
-import soup.movie.data.db.entity.OpenDateAlarmEntity
+import soup.movie.data.db.internal.entity.FavoriteMovieEntity
+import soup.movie.data.db.internal.entity.MovieEntity
+import soup.movie.data.db.internal.entity.OpenDateAlarmEntity
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 
-fun Movie.toMovieEntity(): MovieEntity {
+internal fun Movie.toMovieEntity(): MovieEntity {
     return MovieEntity(
         id = id,
         score = score,
@@ -24,7 +24,7 @@ fun Movie.toMovieEntity(): MovieEntity {
     )
 }
 
-fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
+internal fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
     return FavoriteMovieEntity(
         id = id,
         score = score,
@@ -42,7 +42,7 @@ fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
     )
 }
 
-fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
+internal fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = id,
         title = title,
@@ -50,7 +50,7 @@ fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     )
 }
 
-fun MovieDetail.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
+internal fun MovieDetail.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = id,
         title = title,

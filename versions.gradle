@@ -67,7 +67,7 @@ deps.retrofit = [
         gson   : "com.squareup.retrofit2:converter-gson:$retrofit"
 ]
 
-def dagger = "2.25.4"
+def dagger = "2.26"
 deps.dagger = [
         runtime          : "com.google.dagger:dagger:$dagger",
         android          : "com.google.dagger:dagger-android:$dagger",

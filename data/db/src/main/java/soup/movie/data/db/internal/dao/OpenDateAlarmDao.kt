@@ -3,10 +3,10 @@ package soup.movie.data.db.internal.dao
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.db.entity.OpenDateAlarmEntity
+import soup.movie.data.db.internal.entity.OpenDateAlarmEntity
 
 @Dao
-interface OpenDateAlarmDao {
+internal interface OpenDateAlarmDao {
 
     @Query("SELECT * FROM open_date_alarms")
     fun getAllFlow(): Flow<List<OpenDateAlarmEntity>>

@@ -3,9 +3,9 @@ package soup.movie.data.db.internal.converter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import soup.movie.data.db.entity.MovieEntity
+import soup.movie.data.db.internal.entity.MovieEntity
 
-class CacheDatabaseTypeConverter {
+internal class CacheDatabaseTypeConverter {
 
     private val gson = Gson()
     private val typeMovieEntityList = object : TypeToken<List<MovieEntity>>() {}.type

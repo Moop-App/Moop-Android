@@ -1,11 +1,11 @@
-package soup.movie.data.db.entity
+package soup.movie.data.db.internal.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_movies")
-data class FavoriteMovieEntity(
+internal data class FavoriteMovieEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String,

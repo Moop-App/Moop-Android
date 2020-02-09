@@ -1,27 +1,28 @@
-package soup.movie.data.repository
+package soup.movie.data.repository.internal
 
 import kotlinx.coroutines.flow.Flow
 import soup.movie.data.api.MoopApiService
-import soup.movie.data.db.LocalMoopDataSource
-import soup.movie.data.repository.mapper.toMovieDetail
-import soup.movie.data.repository.mapper.toMovieList
-import soup.movie.data.repository.mapper.toTheaterAreaGroup
-import soup.movie.data.repository.util.SearchHelper
+import soup.movie.data.db.MoopDatabase
+import soup.movie.data.repository.internal.mapper.toMovieDetail
+import soup.movie.data.repository.internal.mapper.toMovieList
+import soup.movie.data.repository.internal.mapper.toTheaterAreaGroup
+import soup.movie.data.repository.internal.util.SearchHelper
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.repository.MoopRepository
 
-class MoopRepository(
-    private val local: LocalMoopDataSource,
+internal class DataMoopRepository(
+    private val local: MoopDatabase,
     private val remote: MoopApiService
-) {
+): MoopRepository {
 
-    fun getNowMovieList(): Flow<List<Movie>> {
+    override fun getNowMovieList(): Flow<List<Movie>> {
         return local.getNowMovieListFlow()
     }
 
-    suspend fun updateNowMovieList() {
+    override suspend fun updateNowMovieList() {
         val isStaleness = try {
             local.getNowLastUpdateTime() < remote.getNowLastUpdateTime()
         } catch (t: Throwable) {
@@ -32,16 +33,16 @@ class MoopRepository(
         }
     }
 
-    suspend fun updateAndGetNowMovieList(): List<Movie> {
+    override suspend fun updateAndGetNowMovieList(): List<Movie> {
         updateNowMovieList()
         return local.getNowMovieList()
     }
 
-    fun getPlanMovieList(): Flow<List<Movie>> {
+    override fun getPlanMovieList(): Flow<List<Movie>> {
         return local.getPlanMovieListFlow()
     }
 
-    suspend fun updatePlanMovieList() {
+    override suspend fun updatePlanMovieList() {
         val isStaleness = try {
             local.getPlanLastUpdateTime() < remote.getPlanLastUpdateTime()
         } catch (t: Throwable) {
@@ -52,11 +53,11 @@ class MoopRepository(
         }
     }
 
-    suspend fun getMovieDetail(movieId: String): MovieDetail {
+    override suspend fun getMovieDetail(movieId: String): MovieDetail {
         return remote.getMovieDetail(movieId).toMovieDetail()
     }
 
-    suspend fun getGenreList(): List<String> {
+    override suspend fun getGenreList(): List<String> {
         return try {
             local.getAllMovieList()
                 .mapNotNull { it.genres }
@@ -68,12 +69,12 @@ class MoopRepository(
         }
     }
 
-    suspend fun findMovie(movieId: String): Movie? {
+    override suspend fun findMovie(movieId: String): Movie? {
         return local.getAllMovieList()
             .find { it.id == movieId }
     }
 
-    suspend fun searchMovie(query: String): List<Movie> {
+    override suspend fun searchMovie(query: String): List<Movie> {
         return local.getAllMovieList().asSequence()
             .filter { it.isMatchedWith(query) }
             .toList()
@@ -83,41 +84,41 @@ class MoopRepository(
         return SearchHelper.matched(title, query)
     }
 
-    suspend fun getCodeList(): TheaterAreaGroup {
+    override suspend fun getCodeList(): TheaterAreaGroup {
         return local.getCodeList()
             ?: remote.getCodeList()
                 .toTheaterAreaGroup()
                 .also(local::saveCodeList)
     }
 
-    fun getFavoriteMovieList(): Flow<List<Movie>> {
+    override fun getFavoriteMovieList(): Flow<List<Movie>> {
         return local.getFavoriteMovieList()
     }
 
-    suspend fun addFavoriteMovie(movie: Movie) {
+    override suspend fun addFavoriteMovie(movie: Movie) {
         local.addFavoriteMovie(movie)
     }
 
-    suspend fun removeFavoriteMovie(movieId: String) {
+    override suspend fun removeFavoriteMovie(movieId: String) {
         local.removeFavoriteMovie(movieId)
     }
 
-    suspend fun isFavoriteMovie(movieId: String): Boolean {
+    override suspend fun isFavoriteMovie(movieId: String): Boolean {
         return local.isFavoriteMovie(movieId)
     }
 
     /**
      * @param date yyyy.mm.dd ex) 2020.01.31
      */
-    suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm> {
+    override suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm> {
         return local.getOpenDateAlarmListUntil(date)
     }
 
-    suspend fun hasOpenDateAlarms(): Boolean {
+    override suspend fun hasOpenDateAlarms(): Boolean {
         return local.hasOpenDateAlarms()
     }
 
-    suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>) {
+    override suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>) {
         return local.deleteOpenDateAlarms(alarms)
     }
 }

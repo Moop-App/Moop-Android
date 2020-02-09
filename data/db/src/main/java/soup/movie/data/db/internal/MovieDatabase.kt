@@ -1,10 +1,10 @@
-package soup.movie.data.db
+package soup.movie.data.db.internal
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import soup.movie.data.db.entity.FavoriteMovieEntity
-import soup.movie.data.db.entity.OpenDateAlarmEntity
+import soup.movie.data.db.internal.entity.FavoriteMovieEntity
+import soup.movie.data.db.internal.entity.OpenDateAlarmEntity
 import soup.movie.data.db.internal.converter.FavoriteMovieTypeConverters
 import soup.movie.data.db.internal.dao.FavoriteMovieDao
 import soup.movie.data.db.internal.dao.OpenDateAlarmDao
@@ -18,7 +18,7 @@ import soup.movie.data.db.internal.dao.OpenDateAlarmDao
     exportSchema = false
 )
 @TypeConverters(FavoriteMovieTypeConverters::class)
-abstract class MovieDatabase : RoomDatabase() {
+internal abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun favoriteMovieDao(): FavoriteMovieDao
 
