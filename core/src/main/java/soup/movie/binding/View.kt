@@ -1,4 +1,4 @@
-package soup.movie.util
+package soup.movie.binding
 
 import android.content.res.ColorStateList
 import android.view.View
@@ -31,7 +31,7 @@ fun setSelected(view: View, isSelected: Boolean) {
 }
 
 @BindingAdapter("android:backgroundResource")
-fun setBackgroundResourceInXml(view: View, resId: Int) {
+fun setBackgroundResource(view: View, resId: Int) {
     view.setBackgroundResource(resId)
 }
 

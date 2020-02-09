@@ -22,6 +22,9 @@ import soup.movie.R
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.databinding.SettingsItemTheaterBinding
 import soup.movie.databinding.SettingsItemVersionBinding
+import soup.movie.ext.showToast
+import soup.movie.ext.startActivitySafely
+import soup.movie.util.inflate
 import soup.movie.model.Theater
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.main.MainViewModel

@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ProgressBar
-import androidx.core.view.postOnAnimationDelayed
 import soup.movie.util.Interpolators
 
 /**

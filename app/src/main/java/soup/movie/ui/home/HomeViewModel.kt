@@ -3,7 +3,7 @@ package soup.movie.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import soup.movie.ui.base.BaseViewModel
-import soup.movie.util.postValueIfNew
+import soup.movie.ext.postValueIfNew
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(

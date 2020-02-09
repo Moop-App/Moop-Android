@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics.Event
 import com.google.firebase.analytics.FirebaseAnalytics.Param
-import soup.movie.util.lazyFast
+import soup.movie.ext.lazyFast
 
 private typealias Params = Bundle.() -> Unit
 

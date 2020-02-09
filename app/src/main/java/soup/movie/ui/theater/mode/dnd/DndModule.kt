@@ -8,7 +8,7 @@ import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import soup.movie.util.showToast
+import soup.movie.ext.showToast
 
 /**
  * Refer to {@link https://android--code.blogspot.com/2018/04/android-kotlin-turn-on-of-do-not.html}

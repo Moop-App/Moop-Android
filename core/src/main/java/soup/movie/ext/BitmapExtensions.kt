@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package soup.movie.util
+package soup.movie.ext
 
 import android.content.Context
 import android.graphics.Bitmap

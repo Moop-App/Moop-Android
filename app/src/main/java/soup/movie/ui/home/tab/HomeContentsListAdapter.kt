@@ -16,9 +16,9 @@ import soup.movie.domain.model.isDDay
 import soup.movie.domain.model.isNew
 import soup.movie.ui.databinding.DataBindingListAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
-import soup.movie.util.consume
+import soup.movie.ext.consume
 import soup.movie.util.setOnDebounceClickListener
-import soup.movie.util.showToast
+import soup.movie.ext.showToast
 
 class HomeContentsListAdapter(
     context: Context,

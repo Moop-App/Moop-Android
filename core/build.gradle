@@ -15,12 +15,20 @@ dependencies {
 
     implementation deps.kotlin.stdlib
 
+    implementation deps.androidx.activity_ktx
     implementation deps.androidx.appcompat
     implementation deps.androidx.core_ktx
     implementation deps.androidx.constraintlayout
     implementation deps.androidx.fragment_ktx
     implementation deps.androidx.material
     implementation deps.androidx.recyclerview
+
+    implementation deps.navigation.fragment_ktx
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android_support
+    kapt deps.dagger.compiler
+    kapt deps.dagger.android_processor
 
     implementation deps.util.timber
 

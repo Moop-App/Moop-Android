@@ -8,7 +8,7 @@ import com.google.android.material.tabs.TitleProvider
 import soup.movie.ui.theater.edit.cgv.CgvEditFragment
 import soup.movie.ui.theater.edit.lotte.LotteEditFragment
 import soup.movie.ui.theater.edit.megabox.MegaboxEditFragment
-import soup.movie.util.lazyFast
+import soup.movie.ext.lazyFast
 
 class TheaterEditPageAdapter(
     fm: FragmentManager,

@@ -27,8 +27,10 @@ import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.TheaterMapFragmentBinding
+import soup.movie.ext.animateGone
 import soup.movie.ext.assistedViewModels
-import soup.movie.ui.base.BaseMapFragment
+import soup.movie.ext.isDarkTheme
+import soup.movie.ext.lazyFast
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.main.MainViewModel
 import soup.movie.util.*

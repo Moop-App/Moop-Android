@@ -12,7 +12,7 @@ import soup.movie.model.TheaterArea
 import soup.movie.ui.databinding.DataBindingAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder
 import soup.movie.util.inflate
-import soup.movie.util.showToast
+import soup.movie.ext.showToast
 
 class TheaterEditChildListAdapter(
     private val listener: Listener
@@ -39,7 +39,10 @@ class TheaterEditChildListAdapter(
             holder.theaterListView.apply {
                 removeAllViews()
                 getItem(position)?.theaterList?.map { theater ->
-                    inflate<Chip>(context, theater.getFilterChipLayout()).apply {
+                    inflate<Chip>(
+                        context,
+                        theater.getFilterChipLayout()
+                    ).apply {
                         text = theater.name
                         val isSelected = selectedIdSet.any { it.id == theater.id }
                         isChecked = isSelected

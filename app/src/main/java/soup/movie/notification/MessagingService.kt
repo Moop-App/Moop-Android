@@ -9,7 +9,7 @@ import soup.movie.R
 import soup.movie.notification.NotificationSpecs.TYPE_EVENT
 import soup.movie.notification.NotificationSpecs.TYPE_NOTICE
 import soup.movie.ui.main.MainActivity
-import soup.movie.util.getColorCompat
+import soup.movie.ext.getColorCompat
 import timber.log.Timber
 
 class MessagingService : FirebaseMessagingService() {

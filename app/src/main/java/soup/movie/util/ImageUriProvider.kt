@@ -24,6 +24,7 @@ import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import soup.movie.BuildConfig
+import soup.movie.ext.toCacheFile
 import soup.movie.util.glide.GlideApp
 import java.io.File
 

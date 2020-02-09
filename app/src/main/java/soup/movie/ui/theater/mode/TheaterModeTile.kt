@@ -9,7 +9,7 @@ import soup.movie.R
 import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState
 import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState.Active
 import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState.Inactive
-import soup.movie.util.toHexString
+import soup.movie.ext.toHexString
 import timber.log.Timber
 
 @RequiresApi(Build.VERSION_CODES.N)

@@ -4,7 +4,6 @@ import android.content.Context
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import io.fabric.sdk.android.Fabric
-import soup.movie.util.log.CrashlyticsTree
 import timber.log.Timber
 
 object BuildType {

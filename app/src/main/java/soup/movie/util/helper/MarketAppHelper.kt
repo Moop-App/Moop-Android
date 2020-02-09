@@ -10,7 +10,7 @@ import soup.movie.model.Theater
 import soup.movie.model.Trailer
 import soup.movie.ui.map.TheaterMarkerUiModel
 import soup.movie.util.executeWeb
-import soup.movie.util.startActivitySafely
+import soup.movie.ext.startActivitySafely
 import timber.log.Timber
 
 private fun Context.isInstalledApp(pkgName: String): Boolean {

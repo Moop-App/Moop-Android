@@ -20,6 +20,8 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.DetailActivityBinding
+import soup.movie.ext.isPortrait
+import soup.movie.ext.observeEvent
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity

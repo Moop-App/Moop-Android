@@ -28,7 +28,7 @@ import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.util.inflate
-import soup.movie.util.lazyFast
+import soup.movie.ext.lazyFast
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit

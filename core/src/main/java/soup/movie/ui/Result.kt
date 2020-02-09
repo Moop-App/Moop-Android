@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-package soup.movie.domain
+package soup.movie.ui
+
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 
 /**
  * A generic class that holds a data with its loading status.
@@ -33,4 +38,10 @@ sealed class Result<out R> {
             Loading -> "Loading"
         }
     }
+}
+
+fun <T> Flow<T>.asResult(): Flow<Result<T>> {
+    return map { Result.Success(it) as Result<T> }
+        .catch { emit(Result.Failure(it)) }
+        .onStart { emit(Result.Loading) }
 }

@@ -1,4 +1,4 @@
-package soup.movie.util.log
+package soup.movie
 
 import android.util.Log
 import com.crashlytics.android.Crashlytics

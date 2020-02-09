@@ -1,10 +1,11 @@
-package soup.movie.ui.base
+package soup.movie.ui.map
 
 import android.os.Bundle
 import android.view.View
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import soup.movie.ui.base.BaseFragment
 
 abstract class BaseMapFragment : BaseFragment() {
 

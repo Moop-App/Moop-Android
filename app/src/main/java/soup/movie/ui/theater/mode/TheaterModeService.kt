@@ -10,7 +10,7 @@ import soup.movie.R
 import soup.movie.notification.NotificationSpecs
 import soup.movie.ui.theater.mode.brightness.BrightnessModule
 import soup.movie.ui.theater.mode.dnd.DndModule
-import soup.movie.util.toHexString
+import soup.movie.ext.toHexString
 import timber.log.Timber
 
 class TheaterModeService : Service() {

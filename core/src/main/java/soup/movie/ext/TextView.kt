@@ -1,4 +1,4 @@
-package soup.movie.util
+package soup.movie.ext
 
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView

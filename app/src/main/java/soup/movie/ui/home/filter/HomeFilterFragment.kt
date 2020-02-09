@@ -34,7 +34,10 @@ class HomeFilterFragment : BaseFragment() {
             genreItem.genreFilterGroup.run {
                 removeAllViews()
                 it.items.forEach {
-                    val genreChip: Chip = inflate(context, R.layout.home_filter_item_genre)
+                    val genreChip: Chip = inflate(
+                        context,
+                        R.layout.home_filter_item_genre
+                    )
                     genreChip.text = it.name
                     genreChip.isChecked = it.isChecked
                     genreChip.setOnCheckedChangeListener { _, isChecked ->

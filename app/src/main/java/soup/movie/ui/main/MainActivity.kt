@@ -21,9 +21,9 @@ import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.consumeBackEventInChildFragment
-import soup.movie.util.consume
-import soup.movie.util.isPortrait
-import soup.movie.util.observeEvent
+import soup.movie.ext.consume
+import soup.movie.ext.isPortrait
+import soup.movie.ext.observeEvent
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
