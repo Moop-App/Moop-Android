@@ -1,5 +1,6 @@
-package soup.movie.util
+package soup.movie.ext
 
+import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
@@ -11,8 +12,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import soup.movie.util.glide.GlideApp
-import soup.movie.util.glide.GlideRequest
+import soup.movie.glide.GlideApp
+import soup.movie.glide.GlideRequest
+import java.io.File
 
 /** ImageView */
 
@@ -37,7 +39,7 @@ fun ImageView.loadAsync(url: String?, placeholder: Drawable? = null) {
 
 fun ImageView.loadAsync(url: String?, doOnEnd: () -> Unit) {
     loadAsync(url, block = {
-        listener(createEndListener(doOnEnd))
+        listener(soup.movie.ext.createEndListener(doOnEnd))
     })
 }
 
@@ -82,4 +84,12 @@ fun ImageView.setGrayscale(enable: Boolean) {
     } else {
         null
     }
+}
+
+fun Context.loadAsync(url: String): File {
+    return GlideApp.with(this)
+        .asFile()
+        .load(url)
+        .submit()
+        .get()
 }

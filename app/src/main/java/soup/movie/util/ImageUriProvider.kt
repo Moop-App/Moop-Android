@@ -24,8 +24,8 @@ import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import soup.movie.BuildConfig
+import soup.movie.ext.loadAsync
 import soup.movie.ext.toCacheFile
-import soup.movie.util.glide.GlideApp
 import java.io.File
 
 /**
@@ -38,11 +38,7 @@ class ImageUriProvider(context: Context) {
 
     suspend operator fun invoke(url: String): Uri {
         // Retrieve the image from Glide (hopefully cached) as a File
-        val file = GlideApp.with(appContext)
-            .asFile()
-            .load(url)
-            .submit()
-            .get()
+        val file = appContext.loadAsync(url)
 
         // Glide cache uses an unfriendly & extension-less name. Massage it based on the original.
         val fileName = url.substring(url.lastIndexOf('/') + 1)

@@ -1,4 +1,4 @@
-package soup.movie.util.glide
+package soup.movie.glide
 
 import android.app.ActivityManager
 import android.content.Context

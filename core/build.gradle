@@ -30,6 +30,9 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.dagger.android_processor
 
+    implementation deps.glide.runtime
+    kapt deps.glide.compiler
+
     implementation deps.util.timber
 
     testImplementation deps.test.junit
