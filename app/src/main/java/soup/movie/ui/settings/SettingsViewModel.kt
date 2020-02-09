@@ -1,9 +1,6 @@
 package soup.movie.ui.settings
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -14,7 +11,6 @@ import soup.movie.device.InAppUpdateManager
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.theme.ThemeOptionManager
-import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
@@ -22,7 +18,7 @@ class SettingsViewModel @Inject constructor(
     themeOptionSetting: ThemeOptionSetting,
     theatersSetting: TheatersSetting,
     appUpdateManager: InAppUpdateManager
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _themeUiModel = MutableLiveData<ThemeSettingUiModel>()
     val themeUiModel: LiveData<ThemeSettingUiModel>

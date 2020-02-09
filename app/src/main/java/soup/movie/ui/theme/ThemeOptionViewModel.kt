@@ -2,13 +2,13 @@ package soup.movie.ui.theme
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import soup.movie.theme.ThemeOptionManager
-import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class ThemeOptionViewModel @Inject constructor(
     private val themeOptionManager: ThemeOptionManager
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _uiModel = MutableLiveData<ThemeOptionUiModel>()
     val uiModel: LiveData<ThemeOptionUiModel>

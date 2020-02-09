@@ -3,6 +3,7 @@ package soup.movie.ui.detail
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import kotlinx.coroutines.*
@@ -13,7 +14,6 @@ import soup.movie.model.MovieDetail
 import soup.movie.model.repository.MoopRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
-import soup.movie.ui.base.BaseViewModel
 import soup.movie.util.ImageUriProvider
 import soup.movie.util.helper.MM_DD
 import soup.movie.util.helper.yesterday
@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(
     private val repository: MoopRepository,
     private val imageUriProvider: ImageUriProvider,
     private val adsManager: AdsManager
-) : BaseViewModel() {
+) : ViewModel() {
 
     private lateinit var movie: Movie
     private var movieDetail: MovieDetail? = null

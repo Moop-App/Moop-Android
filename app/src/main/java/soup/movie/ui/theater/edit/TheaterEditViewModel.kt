@@ -1,5 +1,6 @@
 package soup.movie.ui.theater.edit
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
@@ -7,12 +8,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.model.Theater
-import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class TheaterEditViewModel @Inject constructor(
     private val manager: TheaterEditManager
-) : BaseViewModel() {
+) : ViewModel() {
 
     val contentUiModel = liveData {
         emit(TheaterEditContentUiModel.LoadingState)

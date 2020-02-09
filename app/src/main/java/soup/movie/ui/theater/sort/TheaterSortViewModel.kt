@@ -2,19 +2,19 @@ package soup.movie.ui.theater.sort
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import soup.movie.model.Theater
 import soup.movie.settings.impl.TheatersSetting
-import soup.movie.ui.base.BaseViewModel
 import soup.movie.util.swap
 import javax.inject.Inject
 
 class TheaterSortViewModel @Inject constructor(
     private val theatersSetting: TheatersSetting
-) : BaseViewModel() {
+) : ViewModel() {
 
     private var listSnapshot = mutableListOf<Theater>()
 

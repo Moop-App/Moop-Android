@@ -2,6 +2,7 @@ package soup.movie.ui.home.filter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -20,7 +21,6 @@ import soup.movie.settings.model.TheaterFilter
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
-import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class HomeFilterViewModel @Inject constructor(
@@ -28,7 +28,7 @@ class HomeFilterViewModel @Inject constructor(
     private val theaterFilterSetting: TheaterFilterSetting,
     private val ageFilterSetting: AgeFilterSetting,
     private val genreFilterSetting: GenreFilterSetting
-) : BaseViewModel() {
+) : ViewModel() {
 
     private var theaterFilter: TheaterFilter? = null
     private var lastGenreFilter: GenreFilter? = null

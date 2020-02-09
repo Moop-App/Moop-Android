@@ -1,10 +1,10 @@
 package soup.movie.ui.home.tab
 
 import androidx.lifecycle.LiveData
-import soup.movie.ui.base.BaseViewModel
+import androidx.lifecycle.ViewModel
 import soup.movie.ui.home.HomeContentsUiModel
 
-abstract class HomeContentsViewModel : BaseViewModel() {
+abstract class HomeContentsViewModel : ViewModel() {
 
     abstract val isLoading: LiveData<Boolean>
     abstract val isError: LiveData<Boolean>

@@ -2,17 +2,17 @@ package soup.movie.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.model.repository.MoopRepository
-import soup.movie.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
     private val repository: MoopRepository
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _uiModel = MutableLiveData<SearchContentsUiModel>()
     val uiModel: LiveData<SearchContentsUiModel>
