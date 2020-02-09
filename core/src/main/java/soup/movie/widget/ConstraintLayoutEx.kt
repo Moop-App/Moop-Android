@@ -1,4 +1,4 @@
-package soup.widget
+package soup.movie.widget
 
 import android.content.Context
 import android.util.AttributeSet

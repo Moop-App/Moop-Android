@@ -30,7 +30,7 @@ import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.YouTube
-import soup.widget.elastic.ElasticDragDismissFrameLayout
+import soup.movie.widget.elastic.ElasticDragDismissFrameLayout
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.max

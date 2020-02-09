@@ -1,4 +1,4 @@
-package soup.widget
+package soup.movie.widget
 
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingListener
@@ -19,7 +19,8 @@ fun setListeners(
     if (attrChange == null) {
         view.setOnCheckedChangeListener(listener)
     } else {
-        view.setOnCheckedChangeListener(object : FilterChip.OnCheckedChangeListener {
+        view.setOnCheckedChangeListener(object :
+            FilterChip.OnCheckedChangeListener {
             override fun onCheckedChanged(chip: FilterChip, isChecked: Boolean) {
                 listener?.onCheckedChanged(chip, isChecked)
                 attrChange.onChange()

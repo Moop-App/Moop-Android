@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package soup.widget.util
+package soup.movie.widget.util
 
 typealias AndroidRXml = android.R.xml
 typealias AndroidRTransition = android.R.transition

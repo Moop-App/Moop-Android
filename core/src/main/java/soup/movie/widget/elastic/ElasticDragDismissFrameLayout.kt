@@ -16,7 +16,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package soup.widget.elastic
+package soup.movie.widget.elastic
 
 import android.content.Context
 import android.util.AttributeSet
@@ -24,7 +24,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import soup.movie.core.R
-import soup.widget.util.AnimUtils.fastOutSlowInInterpolator
+import soup.movie.widget.util.AnimUtils.fastOutSlowInInterpolator
 import kotlin.math.abs
 import kotlin.math.log10
 import kotlin.math.min

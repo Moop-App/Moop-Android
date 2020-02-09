@@ -1,4 +1,4 @@
-package soup.widget
+package soup.movie.widget
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -24,7 +24,7 @@ import androidx.core.graphics.withScale
 import androidx.core.graphics.withTranslation
 import com.google.android.material.math.MathUtils.lerp
 import soup.movie.core.R
-import soup.widget.util.AndroidRInterpolator
+import soup.movie.widget.util.AndroidRInterpolator
 
 /**
  * A custom view for displaying filters. Allows a custom presentation of the tag color and selection
@@ -391,7 +391,8 @@ class FilterChip @JvmOverloads constructor(
     }
 
     fun setOnCheckedChangeListener(listener: (FilterChip, Boolean) -> Unit) {
-        this.listener = object : OnCheckedChangeListener {
+        this.listener = object :
+            OnCheckedChangeListener {
             override fun onCheckedChanged(chip: FilterChip, isChecked: Boolean) {
                 listener(chip, isChecked)
             }

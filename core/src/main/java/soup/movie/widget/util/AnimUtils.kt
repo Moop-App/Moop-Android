@@ -1,4 +1,4 @@
-package soup.widget.util
+package soup.movie.widget.util
 
 import android.view.animation.Interpolator
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator

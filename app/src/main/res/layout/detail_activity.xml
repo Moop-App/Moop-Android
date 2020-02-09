@@ -10,7 +10,7 @@
             type="soup.movie.ui.detail.DetailViewModel" />
     </data>
 
-    <soup.widget.elastic.ElasticDragDismissFrameLayout
+    <soup.movie.widget.elastic.ElasticDragDismissFrameLayout
         android:id="@+id/draggableFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -122,5 +122,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </soup.widget.elastic.ElasticDragDismissFrameLayout>
+    </soup.movie.widget.elastic.ElasticDragDismissFrameLayout>
 </layout>
