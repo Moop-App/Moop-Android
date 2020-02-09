@@ -61,10 +61,4 @@
     <string name="shortcut_search_disabled">주변극장</string>
 
     <string name="trailer_search_result">\'%s 예고편\' 검색 결과</string>
-
-    <string name="theme_option_title">테마 선택</string>
-    <string name="theme_option_dark">어둡게</string>
-    <string name="theme_option_light">밝게</string>
-    <string name="theme_option_system">기본 (시스템 설정)</string>
-    <string name="theme_option_battery_saver">기본 (절전모드 시 어둡게)</string>
 </resources>

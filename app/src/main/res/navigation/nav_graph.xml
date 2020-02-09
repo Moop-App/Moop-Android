@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/theme_option"
-        android:name="soup.movie.ui.theme.ThemeOptionFragment"
+        android:name="soup.movie.theme.ThemeSettingFragment"
         tools:layout="@layout/theme_option_fragment" />
 
     <fragment

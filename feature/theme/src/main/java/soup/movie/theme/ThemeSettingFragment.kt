@@ -1,4 +1,4 @@
-package soup.movie.ui.theme
+package soup.movie.theme
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.lifecycle.observe
+import dagger.android.support.DaggerFragment
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
-import soup.movie.databinding.ThemeOptionFragmentBinding
-import soup.movie.ui.base.BaseFragment
+import soup.movie.ext.assistedViewModels
+import soup.movie.theme.databinding.ThemeOptionFragmentBinding
+import javax.inject.Inject
 
-class ThemeOptionFragment : BaseFragment() {
+class ThemeSettingFragment : DaggerFragment() {
 
-    private val viewModel: ThemeOptionViewModel by viewModels()
+    @Inject
+    lateinit var themeOptionViewModelFactory: ThemeSettingViewModel.Factory
+    private val viewModel: ThemeSettingViewModel by assistedViewModels {
+        themeOptionViewModelFactory.create()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,8 +32,8 @@ class ThemeOptionFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun ThemeOptionFragmentBinding.initViewState(viewModel: ThemeOptionViewModel) {
-        val listAdapter = ThemeOptionListAdapter {
+    private fun ThemeOptionFragmentBinding.initViewState(viewModel: ThemeSettingViewModel) {
+        val listAdapter = ThemeSettingListAdapter {
             viewModel.onItemClick(it)
         }
         listView.adapter = listAdapter

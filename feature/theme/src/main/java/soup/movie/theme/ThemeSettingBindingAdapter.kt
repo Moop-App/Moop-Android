@@ -1,9 +1,7 @@
-package soup.movie.ui.theme
+package soup.movie.theme
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import soup.movie.R
-import soup.movie.theme.ThemeOption
 
 @BindingAdapter("themeOptionLabel")
 fun setThemeOptionLabel(textView: TextView, themeOption: ThemeOption?) {

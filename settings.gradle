@@ -1,6 +1,7 @@
 include ':app',
-        ':feature:system',
         ':feature:theatermap',
+        ':feature:theme',
+        ':feature:system',
         ':core',
         ':model',
         ':data:repository',

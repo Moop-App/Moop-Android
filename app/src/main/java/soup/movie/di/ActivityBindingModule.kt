@@ -21,7 +21,7 @@ interface ActivityBindingModule {
             HomeDomainModule::class,
             SearchUiModule::class,
             SettingsUiModule::class,
-            ThemeOptionUiModule::class,
+            ThemeSettingUiModule::class,
             TheaterMapUiModule::class,
             TheaterSortUiModule::class,
             TheaterEditUiModule::class,

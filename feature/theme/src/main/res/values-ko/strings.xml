@@ -1,0 +1,7 @@
+<resources>
+    <string name="theme_option_title">Select theme</string>
+    <string name="theme_option_dark">Dark</string>
+    <string name="theme_option_light">Light</string>
+    <string name="theme_option_system">Default (Set system setting)</string>
+    <string name="theme_option_battery_saver">Default (Set by battery saver)</string>
+</resources>
