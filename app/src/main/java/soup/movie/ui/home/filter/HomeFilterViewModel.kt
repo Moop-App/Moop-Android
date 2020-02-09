@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import soup.movie.model.repository.MoopRepository
 import soup.movie.settings.impl.AgeFilterSetting
@@ -46,20 +48,18 @@ class HomeFilterViewModel @Inject constructor(
         get() = _genreUiModel
 
     init {
-        viewModelScope.launch {
-            theaterFilterSetting.asFlow()
-                .distinctUntilChanged()
-                .collect {
-                    theaterFilter = it
-                    _theaterUiModel.value = it.toUiModel()
-                }
-        }
+        theaterFilterSetting.asFlow()
+            .distinctUntilChanged()
+            .onEach {
+                theaterFilter = it
+                _theaterUiModel.value = it.toUiModel()
+            }
+            .launchIn(viewModelScope)
 
-        viewModelScope.launch {
-            ageFilterSetting.asFlow()
-                .distinctUntilChanged()
-                .collect { _ageUiModel.value = it.toUiModel() }
-        }
+        ageFilterSetting.asFlow()
+            .distinctUntilChanged()
+            .onEach { _ageUiModel.value = it.toUiModel() }
+            .launchIn(viewModelScope)
 
         viewModelScope.launch {
             val allGenre = getGenreList()

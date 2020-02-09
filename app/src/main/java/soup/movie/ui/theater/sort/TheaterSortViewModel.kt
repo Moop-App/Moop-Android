@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import soup.movie.model.Theater
 import soup.movie.settings.impl.TheatersSetting
 import soup.movie.util.swap
@@ -23,11 +23,10 @@ class TheaterSortViewModel @Inject constructor(
         get() = _uiModel
 
     init {
-        viewModelScope.launch {
-            theatersSetting.asFlow()
-                .distinctUntilChanged()
-                .collect { updateTheaters(it) }
-        }
+        theatersSetting.asFlow()
+            .distinctUntilChanged()
+            .onEach { updateTheaters(it) }
+            .launchIn(viewModelScope)
     }
 
     private fun updateTheaters(it: List<Theater>) {

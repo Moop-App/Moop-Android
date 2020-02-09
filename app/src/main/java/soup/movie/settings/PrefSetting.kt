@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import timber.log.Timber
 
 abstract class PrefSetting<T>(
     private val preferences: SharedPreferences
@@ -17,7 +16,6 @@ abstract class PrefSetting<T>(
     internal abstract fun saveValue(preferences: SharedPreferences, value: T)
 
     override fun set(value: T) {
-        Timber.d("QQQQ PrefSetting set: $value")
         channel.offer(value)
         saveValue(preferences, value)
     }
