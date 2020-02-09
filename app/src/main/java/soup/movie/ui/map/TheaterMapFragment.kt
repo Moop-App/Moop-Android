@@ -27,16 +27,14 @@ import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.TheaterMapFragmentBinding
-import soup.movie.ext.animateGone
-import soup.movie.ext.assistedViewModels
-import soup.movie.ext.isDarkTheme
-import soup.movie.ext.lazyFast
+import soup.movie.ext.*
+import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.ui.main.MainViewModel
-import soup.movie.util.*
+import soup.movie.util.LauncherIcons
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
+import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
@@ -45,7 +43,11 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
 
     private lateinit var binding: TheaterMapFragmentBinding
 
-    private val activityViewModel: MainViewModel by activityViewModels()
+    @Inject
+    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
+        systemViewModelFactory.create()
+    }
 
     @Inject
     lateinit var theaterMapFactory: TheaterMapViewModel.Factory
@@ -87,7 +89,7 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     private fun TheaterMapFragmentBinding.initViewState(viewModel: TheaterMapViewModel) {
         header.apply {
             toolbar.setNavigationOnClickListener {
-                activityViewModel.openNavigationMenu()
+                systemViewModel.openNavigationMenu()
             }
         }
 

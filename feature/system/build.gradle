@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+apply from: rootProject.file('gradle/android.gradle')
+
+dependencies {
+    implementation project(':core')
+    implementation project(':data:repository')
+
+    implementation deps.kotlin.stdlib
+
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.core_ktx
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android_support
+    kapt deps.dagger.compiler
+    kapt deps.dagger.android_processor
+    compileOnly deps.dagger.assisted_inject
+    kapt deps.dagger.assisted_inject_processor
+
+    implementation deps.util.timber
+
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
+}

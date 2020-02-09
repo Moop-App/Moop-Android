@@ -15,26 +15,32 @@ import com.google.firebase.messaging.FirebaseMessaging
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.MainDirections
 import soup.movie.R
-import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.MainActivityBinding
-import soup.movie.spec.FirebaseLink
-import soup.movie.spec.KakaoLink
-import soup.movie.ui.base.BaseActivity
-import soup.movie.ui.base.consumeBackEventInChildFragment
+import soup.movie.ext.assistedActivityViewModels
 import soup.movie.ext.consume
 import soup.movie.ext.isPortrait
 import soup.movie.ext.observeEvent
+import soup.movie.spec.FirebaseLink
+import soup.movie.spec.KakaoLink
+import soup.movie.system.SystemEvent
+import soup.movie.system.SystemViewModel
+import soup.movie.ui.base.BaseActivity
+import soup.movie.ui.base.consumeBackEventInChildFragment
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
 import javax.inject.Inject
+import javax.inject.Provider
 
 class MainActivity : BaseActivity() {
 
-    @Inject
-    lateinit var analytics: EventAnalytics
-
     private lateinit var binding: MainActivityBinding
+
+    @Inject
+    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
+        systemViewModelFactory.create()
+    }
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -68,8 +74,11 @@ class MainActivity : BaseActivity() {
 
         intent?.handleDeepLink()
 
+        systemViewModel.systemEvent.observeEvent(this) {
+            handleEvent(it)
+        }
         viewModel.uiEvent.observeEvent(this) {
-            execute(it)
+            handleEvent(it)
         }
 
         binding.navigationView.setNavigationItemSelectedListener {
@@ -115,14 +124,19 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun execute(action: MainUiEvent) {
-        when (action) {
-            is OpenDrawerMenuUiEvent -> {
+    private fun handleEvent(event: SystemEvent) {
+        when (event) {
+            is SystemEvent.OpenDrawerMenuUiEvent -> {
                 binding.drawerLayout.openDrawer(GravityCompat.START)
             }
-            is ShowDetailUiEvent -> {
+        }
+    }
+
+    private fun handleEvent(event: MainUiEvent) {
+        when (event) {
+            is MainUiEvent.ShowDetailUiEvent -> {
                 navHostFragment.findNavController().navigate(
-                    MainDirections.actionToDetail(action.movie)
+                    MainDirections.actionToDetail(event.movie)
                 )
             }
         }

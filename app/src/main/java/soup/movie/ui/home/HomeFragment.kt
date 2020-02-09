@@ -21,15 +21,17 @@ import soup.movie.R
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeFragmentBinding
 import soup.movie.databinding.HomeHeaderHintBinding
+import soup.movie.ext.assistedActivityViewModels
+import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.BaseFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.base.consumeBackEvent
 import soup.movie.ui.home.HomeHeaderUiModel.*
 import soup.movie.ui.home.filter.HomeFilterFragment
-import soup.movie.ui.main.MainViewModel
 import soup.movie.util.Interpolators
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
+import javax.inject.Provider
 
 class HomeFragment : BaseFragment(), OnBackPressedListener {
 
@@ -40,7 +42,12 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
     private lateinit var pageAdapter: HomePageAdapter
     private lateinit var filterBehavior: BottomSheetBehavior<FrameLayout>
 
-    private val activityViewModel: MainViewModel by activityViewModels()
+    @Inject
+    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
+        systemViewModelFactory.create()
+    }
+
     private val viewModel: HomeViewModel by viewModels()
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
@@ -96,7 +103,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener {
         viewPager.adapter = pageAdapter
         header.apply {
             toolbar.setNavigationOnClickListener {
-                activityViewModel.openNavigationMenu()
+                systemViewModel.openNavigationMenu()
             }
             tabs.setupWithViewPager2(viewPager, autoRefresh = true) { tab, position ->
                 when (position) {

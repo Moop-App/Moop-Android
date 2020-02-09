@@ -22,23 +22,29 @@ import soup.movie.R
 import soup.movie.databinding.SettingsFragmentBinding
 import soup.movie.databinding.SettingsItemTheaterBinding
 import soup.movie.databinding.SettingsItemVersionBinding
+import soup.movie.ext.assistedActivityViewModels
 import soup.movie.ext.showToast
 import soup.movie.ext.startActivitySafely
 import soup.movie.util.inflate
 import soup.movie.model.Theater
+import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.BaseFragment
-import soup.movie.ui.main.MainViewModel
 import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
 import soup.movie.util.helper.Moop
+import javax.inject.Inject
 
 class SettingsFragment : BaseFragment() {
 
     private lateinit var binding: SettingsFragmentBinding
 
-    private val activityViewModel: MainViewModel by activityViewModels()
+    @Inject
+    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
+        systemViewModelFactory.create()
+    }
     private val viewModel: SettingsViewModel by viewModels()
 
     private var versionViewState: VersionSettingUiModel? = null
@@ -86,7 +92,7 @@ class SettingsFragment : BaseFragment() {
 
     private fun SettingsFragmentBinding.initViewState(viewModel: SettingsViewModel) {
         toolbar.setNavigationOnClickListener {
-            activityViewModel.openNavigationMenu()
+            systemViewModel.openNavigationMenu()
         }
         theaterItem.editTheaterButton.setOnDebounceClickListener {
             onTheaterEditClicked()

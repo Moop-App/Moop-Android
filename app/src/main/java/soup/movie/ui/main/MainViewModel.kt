@@ -20,12 +20,8 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val movie = repository.findMovie(movieId)
             if (movie != null) {
-                _uiEvent.event = ShowDetailUiEvent(movie)
+                _uiEvent.event = MainUiEvent.ShowDetailUiEvent(movie)
             }
         }
-    }
-
-    fun openNavigationMenu() {
-        _uiEvent.event = OpenDrawerMenuUiEvent
     }
 }

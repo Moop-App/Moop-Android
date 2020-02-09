@@ -6,6 +6,7 @@ import soup.movie.di.domain.HomeDomainModule
 import soup.movie.di.domain.TheaterEditDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
+import soup.movie.system.di.SystemAssistedInjectModule
 import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.MainActivity
 
@@ -24,7 +25,8 @@ interface ActivityBindingModule {
             TheaterMapUiModule::class,
             TheaterSortUiModule::class,
             TheaterEditUiModule::class,
-            TheaterEditDomainModule::class
+            TheaterEditDomainModule::class,
+            SystemAssistedInjectModule::class
         ]
     )
     fun bindMainActivity(): MainActivity
