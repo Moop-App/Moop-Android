@@ -121,6 +121,8 @@ dependencies {
     implementation deps.dagger.android_support
     kapt deps.dagger.compiler
     kapt deps.dagger.android_processor
+    compileOnly deps.dagger.assisted_inject
+    kapt deps.dagger.assisted_inject_processor
 
     implementation deps.work.runtime
     androidTestImplementation deps.work.testing

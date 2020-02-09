@@ -1,24 +1,21 @@
 package soup.movie.di.ui
 
-import androidx.lifecycle.ViewModel
-import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import dagger.multibindings.IntoMap
-import soup.movie.di.key.ViewModelKey
 import soup.movie.di.scope.FragmentScope
 import soup.movie.ui.map.TheaterMapFragment
-import soup.movie.ui.map.TheaterMapViewModel
+import soup.movie.ui.map.di.TheaterMapAssistedInjectModule
+import soup.movie.ui.map.di.TheaterMapFragmentModule
 
 @Module
 interface TheaterMapUiModule {
 
     @FragmentScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(
+        modules = [
+            TheaterMapFragmentModule::class,
+            TheaterMapAssistedInjectModule::class
+        ]
+    )
     fun bindTheaterMapFragment(): TheaterMapFragment
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(TheaterMapViewModel::class)
-    fun bindTheaterMapViewModel(viewModel: TheaterMapViewModel): ViewModel
 }

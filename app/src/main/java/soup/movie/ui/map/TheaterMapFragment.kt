@@ -27,6 +27,7 @@ import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.TheaterMapFragmentBinding
+import soup.movie.ext.assistedViewModels
 import soup.movie.ui.base.BaseMapFragment
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.main.MainViewModel
@@ -34,6 +35,7 @@ import soup.movie.util.*
 import soup.movie.util.helper.Cgv
 import soup.movie.util.helper.LotteCinema
 import soup.movie.util.helper.Megabox
+import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
@@ -42,7 +44,12 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     private lateinit var binding: TheaterMapFragmentBinding
 
     private val activityViewModel: MainViewModel by activityViewModels()
-    private val viewModel: TheaterMapViewModel by viewModels()
+
+    @Inject
+    lateinit var theaterMapFactory: TheaterMapViewModel.Factory
+    private val viewModel: TheaterMapViewModel by assistedViewModels {
+        theaterMapFactory.create()
+    }
 
     private lateinit var locationSource: FusedLocationSource
 
