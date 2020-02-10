@@ -10,9 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import soup.movie.model.repository.MoopRepository
-import soup.movie.settings.impl.AgeFilterSetting
-import soup.movie.settings.impl.GenreFilterSetting
-import soup.movie.settings.impl.TheaterFilterSetting
+import soup.movie.settings.AppSettings
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.AgeFilter.Companion.FLAG_AGE_12
 import soup.movie.settings.model.AgeFilter.Companion.FLAG_AGE_15
@@ -27,9 +25,7 @@ import javax.inject.Inject
 
 class HomeFilterViewModel @Inject constructor(
     private val repository: MoopRepository,
-    private val theaterFilterSetting: TheaterFilterSetting,
-    private val ageFilterSetting: AgeFilterSetting,
-    private val genreFilterSetting: GenreFilterSetting
+    private val appSettings: AppSettings
 ) : ViewModel() {
 
     private var theaterFilter: TheaterFilter? = null
@@ -48,7 +44,7 @@ class HomeFilterViewModel @Inject constructor(
         get() = _genreUiModel
 
     init {
-        theaterFilterSetting.asFlow()
+        appSettings.getTheaterFilterFlow()
             .distinctUntilChanged()
             .onEach {
                 theaterFilter = it
@@ -56,14 +52,14 @@ class HomeFilterViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
 
-        ageFilterSetting.asFlow()
+        appSettings.getAgeFilterFlow()
             .distinctUntilChanged()
             .onEach { _ageUiModel.value = it.toUiModel() }
             .launchIn(viewModelScope)
 
         viewModelScope.launch {
             val allGenre = getGenreList()
-            genreFilterSetting.asFlow()
+            appSettings.getGenreFilterFlow()
                 .collect { filter ->
                     lastGenreFilter = filter
                     _genreUiModel.value = GenreFilterUiModel(
@@ -122,7 +118,7 @@ class HomeFilterViewModel @Inject constructor(
                 it.removeFlag(flag)
             }
             if (success) {
-                theaterFilterSetting.set(it)
+                appSettings.theaterFilter = it
             }
         }
     }
@@ -144,7 +140,7 @@ class HomeFilterViewModel @Inject constructor(
     }
 
     private fun updateAgeFilter(flags: Int) {
-        ageFilterSetting.set(AgeFilter(flags))
+        appSettings.ageFilter = AgeFilter(flags)
     }
 
     fun onGenreFilterClick(genre: String, isChecked: Boolean) {
@@ -155,7 +151,7 @@ class HomeFilterViewModel @Inject constructor(
             lastGenreSet.add(genre)
         }
         if (changed) {
-            genreFilterSetting.set(GenreFilter(lastGenreSet))
+            appSettings.genreFilter = GenreFilter(lastGenreSet)
         }
     }
 }

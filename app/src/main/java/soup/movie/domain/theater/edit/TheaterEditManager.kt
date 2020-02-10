@@ -7,11 +7,11 @@ import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
 import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
-import soup.movie.settings.impl.TheatersSetting
+import soup.movie.settings.AppSettings
 
 class TheaterEditManager(
     private val repository: MoopRepository,
-    private val theatersSetting: TheatersSetting
+    private val appSettings: AppSettings
 ) {
 
     private val cgvSubject = ConflatedBroadcastChannel<List<TheaterArea>>()
@@ -47,9 +47,7 @@ class TheaterEditManager(
     }
 
     private fun setupSelectedList() {
-        selectedItemSet = theatersSetting.get()
-            .asSequence()
-            .toMutableSet()
+        selectedItemSet = appSettings.favoriteTheaterList.toMutableSet()
         selectedTheatersChannel.offer(
             selectedItemSet.asSequence()
                 .sortedBy { it.type }
@@ -83,15 +81,14 @@ class TheaterEditManager(
     }
 
     fun save() {
-        theatersSetting.set(
-            theaterList.asSequence()
-                .filter {
-                    selectedItemSet.any { selectedItem ->
-                        selectedItem.id == it.id
-                    }
+        appSettings.favoriteTheaterList = theaterList.asSequence()
+            .filter {
+                selectedItemSet.any { selectedItem ->
+                    selectedItem.id == it.id
                 }
-                .sortedBy { it.type }
-                .toList())
+            }
+            .sortedBy { it.type }
+            .toList()
     }
 
     companion object {

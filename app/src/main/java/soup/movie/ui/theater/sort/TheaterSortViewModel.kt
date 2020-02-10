@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import soup.movie.model.Theater
-import soup.movie.settings.impl.TheatersSetting
+import soup.movie.settings.AppSettings
 import soup.movie.util.swap
 import javax.inject.Inject
 
 class TheaterSortViewModel @Inject constructor(
-    private val theatersSetting: TheatersSetting
+    private val appSettings: AppSettings
 ) : ViewModel() {
 
     private var listSnapshot = mutableListOf<Theater>()
@@ -23,7 +23,7 @@ class TheaterSortViewModel @Inject constructor(
         get() = _uiModel
 
     init {
-        theatersSetting.asFlow()
+        appSettings.getFavoriteTheaterListFlow()
             .distinctUntilChanged()
             .onEach { updateTheaters(it) }
             .launchIn(viewModelScope)
@@ -39,6 +39,6 @@ class TheaterSortViewModel @Inject constructor(
     }
 
     fun saveSnapshot() {
-        theatersSetting.set(listSnapshot.toList())
+        appSettings.favoriteTheaterList = listSnapshot.toList()
     }
 }

@@ -4,9 +4,7 @@ import dagger.Module
 import dagger.Provides
 import soup.movie.di.scope.ActivityScope
 import soup.movie.domain.home.GetMovieFilterUseCase
-import soup.movie.settings.impl.AgeFilterSetting
-import soup.movie.settings.impl.GenreFilterSetting
-import soup.movie.settings.impl.TheaterFilterSetting
+import soup.movie.settings.AppSettings
 
 @Module
 class HomeDomainModule {
@@ -14,12 +12,8 @@ class HomeDomainModule {
     @ActivityScope
     @Provides
     fun provideGetMovieFilterUseCase(
-        theaterFilterSetting: TheaterFilterSetting,
-        ageFilterSetting: AgeFilterSetting,
-        genreFilterSetting: GenreFilterSetting
-    ): GetMovieFilterUseCase = GetMovieFilterUseCase(
-        theaterFilterSetting,
-        ageFilterSetting,
-        genreFilterSetting
-    )
+        appSettings: AppSettings
+    ): GetMovieFilterUseCase {
+        return GetMovieFilterUseCase(appSettings)
+    }
 }

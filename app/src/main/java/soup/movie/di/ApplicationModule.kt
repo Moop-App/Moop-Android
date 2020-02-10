@@ -8,13 +8,14 @@ import soup.movie.ads.AdsManager
 import soup.movie.ads.AdsManagerImpl
 import soup.movie.analytics.EventAnalytics
 import soup.movie.analytics.EventAnalyticsImpl
-import soup.movie.device.InAppUpdateManager
-import soup.movie.device.ProductAppUpdateManager
-import soup.movie.settings.impl.ThemeOptionSetting
-import soup.movie.theme.ThemeOptionManager
-import soup.movie.theme.ThemeOptionStore
 import soup.movie.device.ImageUriProvider
 import soup.movie.device.ImageUriProviderImpl
+import soup.movie.device.InAppUpdateManager
+import soup.movie.device.ProductAppUpdateManager
+import soup.movie.settings.AppSettings
+import soup.movie.settings.AppSettingsImpl
+import soup.movie.theme.ThemeOptionManager
+import soup.movie.theme.ThemeOptionStore
 import javax.inject.Singleton
 
 @Module
@@ -42,15 +43,15 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideThemeOptionManager(
-        themeOptionSetting: ThemeOptionSetting
+        appSettings: AppSettings
     ): ThemeOptionManager = ThemeOptionManager(object : ThemeOptionStore {
 
         override fun save(option: String) {
-            themeOptionSetting.set(option)
+            appSettings.themeOption = option
         }
 
         override fun restore(): String {
-            return themeOptionSetting.get()
+            return appSettings.themeOption
         }
     })
 
@@ -67,4 +68,10 @@ class ApplicationModule {
     ): AdsManager {
         return AdsManagerImpl(context)
     }
+
+    @Singleton
+    @Provides
+    fun provideAppSettings(
+        context: Context
+    ): AppSettings = AppSettingsImpl(context)
 }

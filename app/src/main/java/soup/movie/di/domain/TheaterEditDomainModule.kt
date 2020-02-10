@@ -5,7 +5,7 @@ import dagger.Provides
 import soup.movie.di.scope.ActivityScope
 import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.model.repository.MoopRepository
-import soup.movie.settings.impl.TheatersSetting
+import soup.movie.settings.AppSettings
 
 @Module
 class TheaterEditDomainModule {
@@ -14,6 +14,8 @@ class TheaterEditDomainModule {
     @Provides
     fun provideTheaterEditManager(
         repository: MoopRepository,
-        theatersSetting: TheatersSetting
-    ): TheaterEditManager = TheaterEditManager(repository, theatersSetting)
+        appSettings: AppSettings
+    ): TheaterEditManager {
+        return TheaterEditManager(repository, appSettings)
+    }
 }

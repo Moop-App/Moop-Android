@@ -1,24 +1,28 @@
 package soup.movie.settings.impl
 
 import android.content.SharedPreferences
-import soup.movie.settings.PrefSetting
+import androidx.core.content.edit
 import soup.movie.settings.model.TheaterFilter
+import kotlin.reflect.KProperty
 
-class TheaterFilterSetting(
-    preferences: SharedPreferences
-) : PrefSetting<TheaterFilter>(preferences) {
+class TheaterFilterPreference(
+    private val preferences: SharedPreferences,
+    private val name: String
+) : Preference<TheaterFilter>(TheaterFilter(DEFAULT_VALUE)) {
 
-    override fun getDefaultValue(preferences: SharedPreferences): TheaterFilter {
-        return TheaterFilter(preferences.getInt(KEY, DEFAULT_VALUE))
+    override fun getValue(thisRef: Any, property: KProperty<*>): TheaterFilter {
+        return TheaterFilter(preferences.getInt(name, DEFAULT_VALUE))
     }
 
-    override fun saveValue(preferences: SharedPreferences, value: TheaterFilter) {
-        preferences.edit().putInt(KEY, value.toFlags()).apply()
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: TheaterFilter) {
+        super.setValue(thisRef, property, value)
+        preferences.edit {
+            putInt(name, value.toFlags())
+        }
     }
 
     companion object {
 
-        private const val KEY = "theater_filter"
-        private const val DEFAULT_VALUE: Int = TheaterFilter.FLAG_THEATER_ALL
+        private const val DEFAULT_VALUE = TheaterFilter.FLAG_THEATER_ALL
     }
 }
