@@ -30,10 +30,10 @@ import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.BaseFragment
 import soup.movie.util.*
-import soup.movie.util.helper.Cgv
-import soup.movie.util.helper.LotteCinema
-import soup.movie.util.helper.Megabox
-import soup.movie.util.helper.Moop
+import soup.movie.util.Cgv
+import soup.movie.util.LotteCinema
+import soup.movie.util.Megabox
+import soup.movie.util.Moop
 import javax.inject.Inject
 
 class SettingsFragment : BaseFragment() {

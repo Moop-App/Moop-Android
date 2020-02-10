@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".detail.DetailActivity">
+
+    <data>
+
+        <variable
+            name="uiModel"
+            type="soup.movie.detail.HeaderUiModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/detail_share_dim"
+        android:elevation="12dp"
+        android:visibility="invisible"
+        tools:visibility="invisible">
+
+        <Space
+            android:id="@+id/cancelButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/facebookShareButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            app:clipToOval="@{true}"
+            app:layout_constraintEnd_toEndOf="@id/cancelButton"
+            app:layout_constraintStart_toStartOf="@id/cancelButton"
+            app:layout_constraintTop_toBottomOf="@id/cancelButton"
+            app:srcCompat="@drawable/ic_logo_facebook" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/twitterShareButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            app:clipToOval="@{true}"
+            app:layout_constraintEnd_toEndOf="@id/facebookShareButton"
+            app:layout_constraintStart_toStartOf="@id/facebookShareButton"
+            app:layout_constraintTop_toBottomOf="@id/facebookShareButton"
+            app:srcCompat="@drawable/ic_logo_twitter" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/instagramShareButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            app:clipToOval="@{true}"
+            app:layout_constraintEnd_toEndOf="@id/twitterShareButton"
+            app:layout_constraintStart_toStartOf="@id/twitterShareButton"
+            app:layout_constraintTop_toBottomOf="@id/twitterShareButton"
+            app:srcCompat="@drawable/ic_logo_instagram" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/lineShareButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            app:clipToOval="@{true}"
+            app:layout_constraintEnd_toEndOf="@id/instagramShareButton"
+            app:layout_constraintStart_toStartOf="@id/instagramShareButton"
+            app:layout_constraintTop_toBottomOf="@id/instagramShareButton"
+            app:srcCompat="@drawable/ic_logo_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/kakaoTalkShareButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            app:clipToOval="@{true}"
+            app:layout_constraintEnd_toEndOf="@id/lineShareButton"
+            app:layout_constraintStart_toStartOf="@id/lineShareButton"
+            app:layout_constraintTop_toBottomOf="@id/lineShareButton"
+            app:srcCompat="@drawable/ic_logo_kakaotalk" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/etcShareButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="4dp"
+            app:clipToOval="@{true}"
+            app:layout_constraintEnd_toEndOf="@id/kakaoTalkShareButton"
+            app:layout_constraintStart_toStartOf="@id/kakaoTalkShareButton"
+            app:layout_constraintTop_toBottomOf="@id/kakaoTalkShareButton"
+            app:srcCompat="@drawable/ic_logo_more" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/movieCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="invisible"
+            app:cardBackgroundColor="?colorSurface"
+            app:cardElevation="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/titleView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:minLines="1"
+                    android:text="@{uiModel.movie.title}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="극장판 요괴워치 섀도사이드" />
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_splash_launcher"
+                    app:layout_constraintDimensionRatio="5:2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/titleView" />
+
+                <Space
+                    android:id="@+id/headerGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="168dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/titleView"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/posterCard"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:srcUrl="@{uiModel.movie.posterUrl}"
+                    app:layout_constraintBottom_toBottomOf="@id/headerGroup"
+                    app:layout_constraintDimensionRatio="V,27:40"
+                    app:layout_constraintStart_toStartOf="@id/headerGroup"
+                    app:layout_constraintTop_toTopOf="@id/headerGroup"
+                    tools:src="@tools:sample/avatars" />
+
+                <include
+                    android:id="@+id/ageBgView"
+                    layout="@layout/movie_tag_age_bg"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:item="@{uiModel.movie}"
+                    app:layout_constraintBottom_toBottomOf="@id/ageView"
+                    app:layout_constraintEnd_toEndOf="@id/ageView"
+                    app:layout_constraintStart_toStartOf="@id/ageView"
+                    app:layout_constraintTop_toTopOf="@id/ageView" />
+
+                <include
+                    android:id="@+id/ageView"
+                    layout="@layout/movie_tag_age"
+                    android:layout_width="@dimen/tag_width"
+                    android:layout_height="@dimen/tag_height"
+                    android:layout_marginTop="12dp"
+                    app:item="@{uiModel.movie}"
+                    app:layout_constraintEnd_toEndOf="@id/posterCard"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toTopOf="@id/posterCard" />
+
+                <include
+                    android:id="@+id/newView"
+                    layout="@layout/movie_tag_new"
+                    android:layout_width="@dimen/tag_width"
+                    android:layout_height="@dimen/tag_height"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    app:item="@{uiModel.movie}"
+                    app:layout_constraintEnd_toEndOf="@id/posterCard"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/ageView"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/bestView"
+                    layout="@layout/movie_tag_best"
+                    android:layout_width="@dimen/tag_width"
+                    android:layout_height="@dimen/tag_height"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    app:item="@{uiModel.movie}"
+                    app:layout_constraintEnd_toEndOf="@id/posterCard"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/newView"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/dDayView"
+                    layout="@layout/movie_tag_d_day"
+                    android:layout_width="@dimen/tag_width"
+                    android:layout_height="@dimen/tag_height"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    app:item="@{uiModel.movie}"
+                    app:layout_constraintEnd_toEndOf="@id/posterCard"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/bestView"
+                    tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/labelBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="openDateLabel,ageLabel,genreLabel,nationLabel,companyLabel" />
+
+                <TextView
+                    android:id="@+id/openDateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="12dp"
+                    android:alpha="0.5"
+                    android:text="개봉"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toTopOf="@id/headerGroup" />
+
+                <TextView
+                    android:id="@+id/openDateText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/openDateLabel"
+                    app:layout_constraintEnd_toEndOf="@id/headerGroup"
+                    app:layout_constraintStart_toEndOf="@id/labelBarrier"
+                    tools:text="18.10.19" />
+
+                <TextView
+                    android:id="@+id/ageLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.5"
+                    android:text="등급"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/openDateLabel" />
+
+                <TextView
+                    android:id="@+id/ageText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/ageLabel"
+                    app:layout_constraintEnd_toEndOf="@id/headerGroup"
+                    app:layout_constraintStart_toEndOf="@id/labelBarrier"
+                    tools:text="청소년 관람불가" />
+
+                <TextView
+                    android:id="@+id/genreLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.5"
+                    android:text="장르"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/ageLabel" />
+
+                <TextView
+                    android:id="@+id/genreText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/genreLabel"
+                    app:layout_constraintEnd_toEndOf="@id/headerGroup"
+                    app:layout_constraintStart_toEndOf="@id/labelBarrier"
+                    tools:text="코미디, 드라마" />
+
+                <TextView
+                    android:id="@+id/nationLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.5"
+                    android:text="국가"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/genreLabel" />
+
+                <TextView
+                    android:id="@+id/nationText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/nationLabel"
+                    app:layout_constraintEnd_toEndOf="@id/headerGroup"
+                    app:layout_constraintStart_toEndOf="@id/labelBarrier"
+                    tools:text="미국" />
+
+                <TextView
+                    android:id="@+id/runningTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.5"
+                    android:text="러닝타임"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/nationLabel" />
+
+                <TextView
+                    android:id="@+id/runningTimeText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/runningTimeLabel"
+                    app:layout_constraintEnd_toEndOf="@id/headerGroup"
+                    app:layout_constraintStart_toEndOf="@id/runningTimeLabel"
+                    tools:text="109분" />
+
+                <TextView
+                    android:id="@+id/companyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.5"
+                    android:text="배급"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toEndOf="@id/posterCard"
+                    app:layout_constraintTop_toBottomOf="@id/runningTimeLabel" />
+
+                <TextView
+                    android:id="@+id/companyText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="14dp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/companyLabel"
+                    app:layout_constraintEnd_toEndOf="@id/headerGroup"
+                    app:layout_constraintStart_toEndOf="@id/labelBarrier"
+                    tools:text="오드 AUD" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

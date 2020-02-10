@@ -13,14 +13,14 @@ import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.R
 import soup.movie.di.ChildWorkerFactory
-import soup.movie.domain.model.isBest
+import soup.movie.ext.isBest
 import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
 import soup.movie.notification.NotificationSpecs
 import soup.movie.ui.main.MainActivity
 import soup.movie.ext.getColorCompat
-import soup.movie.util.helper.currentTime
-import soup.movie.util.helper.plusDaysTo
+import soup.movie.util.currentTime
+import soup.movie.util.plusDaysTo
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

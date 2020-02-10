@@ -16,10 +16,10 @@ import soup.movie.model.repository.MoopRepository
 import soup.movie.notification.NotificationSpecs
 import soup.movie.ui.main.MainActivity
 import soup.movie.ext.getColorCompat
-import soup.movie.util.helper.YYYY_MM_DD
-import soup.movie.util.helper.currentTime
-import soup.movie.util.helper.plusDaysTo
-import soup.movie.util.helper.today
+import soup.movie.util.YYYY_MM_DD
+import soup.movie.util.currentTime
+import soup.movie.util.plusDaysTo
+import soup.movie.util.today
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

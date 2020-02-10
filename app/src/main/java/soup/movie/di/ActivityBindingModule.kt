@@ -7,7 +7,6 @@ import soup.movie.di.domain.TheaterEditDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
 import soup.movie.system.di.SystemAssistedInjectModule
-import soup.movie.ui.detail.DetailActivity
 import soup.movie.ui.main.MainActivity
 
 @Module
@@ -30,8 +29,4 @@ interface ActivityBindingModule {
         ]
     )
     fun bindMainActivity(): MainActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [DetailUiModule::class])
-    fun bindDetailActivity(): DetailActivity
 }

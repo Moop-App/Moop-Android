@@ -1,0 +1,12 @@
+<resources>
+    <string name="action_share">공유하기</string>
+    <string name="action_share_poster">포스터 공유하기</string>
+
+    <string name="time_minute">%d분</string>
+    <string name="rank">%d위</string>
+    <string name="rank_date">%s 기준</string>
+    <string name="audience">%,d명</string>
+    <string name="screen_days">개봉 %d일차</string>
+
+    <string name="trailer_search_result">\'%s 예고편\' 검색 결과</string>
+</resources>

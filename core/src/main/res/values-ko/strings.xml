@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="description_filter_applied">%1$s 필터 적용됨</string>
+    <string name="description_filter_not_applied">%1$s 필터 적용 안됨</string>
+
+    <string name="common_network_error">오프라인 상태입니다.</string>
+    <string name="common_retry">재시도</string>
+</resources>

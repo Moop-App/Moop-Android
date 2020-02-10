@@ -1,0 +1,12 @@
+<resources>
+    <string name="action_share">Share</string>
+    <string name="action_share_poster">Share poster</string>
+
+    <string name="time_minute">%d min.</string>
+    <string name="rank">%d</string>
+    <string name="rank_date">%s date</string>
+    <string name="audience">%,d</string>
+    <string name="screen_days">%d days</string>
+
+    <string name="trailer_search_result">\'%s 예고편\' 검색 결과</string>
+</resources>

@@ -17,6 +17,7 @@ dependencies {
 
     implementation deps.androidx.activity_ktx
     implementation deps.androidx.appcompat
+    implementation deps.androidx.browser
     implementation deps.androidx.core_ktx
     implementation deps.androidx.constraintlayout
     implementation deps.androidx.fragment_ktx
@@ -33,7 +34,13 @@ dependencies {
     implementation deps.glide.runtime
     kapt deps.glide.compiler
 
+    implementation deps.firebase.dynamic_links
+    implementation deps.firebase.ads
+
+    api deps.util.threetenabp
     implementation deps.util.timber
+
+    implementation 'com.kakao.sdk:kakaolink:1.14.0'
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

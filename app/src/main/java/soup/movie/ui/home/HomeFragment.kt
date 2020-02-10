@@ -31,7 +31,6 @@ import soup.movie.ui.home.filter.HomeFilterFragment
 import soup.movie.util.Interpolators
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
-import javax.inject.Provider
 
 class HomeFragment : BaseFragment(), OnBackPressedListener {
 

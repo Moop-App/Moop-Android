@@ -4,6 +4,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.threeten.bp.DayOfWeek.*
 import org.threeten.bp.LocalDate
+import soup.movie.util.calculateMinusDaysTo
+import soup.movie.util.calculatePlusDaysTo
+import soup.movie.util.isInWeekOfCultureDay
 
 class DataHelperTest {
 

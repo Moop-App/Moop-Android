@@ -28,12 +28,16 @@ import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.TheaterMapFragmentBinding
 import soup.movie.ext.*
+import soup.movie.model.Theater
+import soup.movie.model.Theater.Companion.TYPE_CGV
+import soup.movie.model.Theater.Companion.TYPE_LOTTE
+import soup.movie.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.LauncherIcons
-import soup.movie.util.helper.Cgv
-import soup.movie.util.helper.LotteCinema
-import soup.movie.util.helper.Megabox
+import soup.movie.util.Cgv
+import soup.movie.util.LotteCinema
+import soup.movie.util.Megabox
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 import kotlin.math.max
@@ -269,11 +273,11 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     private fun TheaterMarkerUiModel.executeWeb(ctx: Context) {
         return when (this) {
             is CgvMarkerUiModel ->
-                Cgv.executeWeb(ctx, this)
+                Cgv.executeWeb(ctx, Theater(TYPE_CGV, code, name, lng, lat))
             is LotteCinemaMarkerUiModel ->
-                LotteCinema.executeWeb(ctx, this)
+                LotteCinema.executeWeb(ctx, Theater(TYPE_LOTTE, code, name, lng, lat))
             is MegaboxMarkerUiModel ->
-                Megabox.executeWeb(ctx, this)
+                Megabox.executeWeb(ctx, Theater(TYPE_MEGABOX, code, name, lng, lat))
         }
     }
 

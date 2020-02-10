@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tag_width">36dp</dimen>
+    <dimen name="tag_height">18dp</dimen>
+</resources>

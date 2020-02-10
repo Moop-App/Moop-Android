@@ -85,6 +85,7 @@ android {
 }
 
 dependencies {
+    implementation project(':feature:detail')
     implementation project(':feature:theme')
     implementation project(':feature:system')
     implementation project(':data:repository')
@@ -96,7 +97,6 @@ dependencies {
 
     implementation deps.androidx.activity_ktx
     implementation deps.androidx.appcompat
-    implementation deps.androidx.browser
     implementation deps.androidx.core_ktx
     implementation deps.androidx.constraintlayout
     implementation deps.androidx.drawerlayout
@@ -141,12 +141,9 @@ dependencies {
 
     debugImplementation deps.stetho.core
     implementation deps.util.timber
-    implementation deps.util.threetenabp
 
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
     implementation 'com.robinhood.ticker:ticker:2.0.0'
-    implementation 'com.github.stfalcon:stfalcon-imageviewer:1.0.0'
-    implementation 'com.kakao.sdk:kakaolink:1.14.0'
 
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.naver.maps:map-sdk:3.6.2'

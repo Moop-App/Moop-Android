@@ -69,7 +69,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.detail.DetailActivity"
+            android:name=".detail.DetailActivity"
             android:theme="@style/Theme.Moop.Detail" />
 
         <provider

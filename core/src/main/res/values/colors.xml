@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="ic_launcher_background_dark">#000000</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="home_hint">#FFFFFF</color>
+
+    <color name="tag_age_unknown">@color/grey</color>
+    <color name="tag_age_all">@color/green</color>
+    <color name="tag_age_12">@color/blue</color>
+    <color name="tag_age_15">@color/amber</color>
+    <color name="tag_age_19">@color/red</color>
+    <color name="tag_best">@color/orange</color>
+    <color name="tag_d_day">@color/grey</color>
+    <color name="tag_favorite">@color/red</color>
+
+    <color name="chip_genre_bg">#EEDDDDDD</color>
+    <color name="chip_genre_bg_unchecked">#33DDDDDD</color>
+    <color name="chip_genre_text">#88000000</color>
+    <color name="chip_genre_text_unchecked">#44000000</color>
+
+    <color name="chip_unchecked_bg">@color/grey_300</color>
+    <color name="chip_unchecked_text">@color/grey_600</color>
+
+    <color name="chip_cgv_bg">#FFFFFF</color>
+    <color name="chip_cgv_bg_unchecked">#55FFFFFF</color>
+    <color name="chip_cgv_text">#E51F20</color>
+    <color name="chip_cgv_text_unchecked">#66000000</color>
+
+    <color name="chip_lotte_bg">#ED1D24</color>
+    <color name="chip_lotte_bg_unchecked">#66ED1D24</color>
+    <color name="chip_lotte_text">#FFFFFF</color>
+    <color name="chip_lotte_text_unchecked">#77FFFFFF</color>
+
+    <color name="chip_megabox_bg">#352263</color>
+    <color name="chip_megabox_bg_unchecked">#77352263</color>
+    <color name="chip_megabox_text">#FFFFFF</color>
+    <color name="chip_megabox_text_unchecked">#77FFFFFF</color>
+
+    <color name="chip_naver_bg">#1EC800</color>
+    <color name="chip_naver_text">#FFFFFF</color>
+
+    <color name="system_ui_scrim_light">#B3FFFFFF</color> <!-- 70% white -->
+    <color name="system_ui_scrim_dark">#40000000</color> <!-- 25% black -->
+</resources>

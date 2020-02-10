@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="soup.movie.detail.ImdbItemUiModel" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="listener"
+            type="soup.movie.ui.databinding.DataBindingItemListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="@dimen/detail_card_elevation"
+        app:onDebounceClick="@{(v) -> listener.onItemClick(v, position, item)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp">
+
+            <Space
+                android:id="@+id/imdbSpace"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/rtSpace"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imdbLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:src="@drawable/ic_imdb"
+                android:text="IMDb"
+                app:layout_constraintEnd_toEndOf="@id/imdbSpace"
+                app:layout_constraintStart_toStartOf="@id/imdbSpace"
+                app:layout_constraintTop_toTopOf="@id/imdbSpace" />
+
+            <TextView
+                android:id="@+id/imdbRatingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{item.imdb}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/imdbSpace"
+                app:layout_constraintEnd_toEndOf="@id/imdbSpace"
+                app:layout_constraintStart_toStartOf="@id/imdbSpace"
+                app:layout_constraintTop_toBottomOf="@id/imdbLogo"
+                tools:text="5/10" />
+
+            <Space
+                android:id="@+id/rtSpace"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/metascoreSpace"
+                app:layout_constraintStart_toEndOf="@id/imdbSpace"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/rtLogo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:src="@drawable/ic_rt"
+                app:layout_constraintEnd_toEndOf="@id/rtSpace"
+                app:layout_constraintStart_toStartOf="@id/rtSpace"
+                app:layout_constraintTop_toTopOf="@id/rtSpace" />
+
+            <ImageView
+                android:id="@+id/rtRatingIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:tomatoMeterIcon="@{item.rottenTomatoes}"
+                app:layout_constraintBottom_toBottomOf="@id/rtRatingText"
+                app:layout_constraintEnd_toStartOf="@id/rtRatingText"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/rtSpace"
+                app:layout_constraintTop_toTopOf="@id/rtRatingText"
+                tools:src="@drawable/ic_rt_fresh" />
+
+            <TextView
+                android:id="@+id/rtRatingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{item.rottenTomatoes}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/rtSpace"
+                app:layout_constraintEnd_toEndOf="@id/rtSpace"
+                app:layout_constraintStart_toEndOf="@id/rtRatingIcon"
+                app:layout_constraintTop_toBottomOf="@id/rtLogo"
+                tools:text="50%" />
+
+            <Space
+                android:id="@+id/metascoreSpace"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rtSpace"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/metascoreTitle"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:src="@drawable/ic_metacritic"
+                app:layout_constraintEnd_toEndOf="@id/metascoreSpace"
+                app:layout_constraintStart_toStartOf="@id/metascoreSpace"
+                app:layout_constraintTop_toTopOf="@id/metascoreSpace" />
+
+            <TextView
+                android:id="@+id/metascoreRatingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{item.metascore}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/metascoreSpace"
+                app:layout_constraintEnd_toEndOf="@id/metascoreSpace"
+                app:layout_constraintStart_toStartOf="@id/metascoreSpace"
+                app:layout_constraintTop_toBottomOf="@id/metascoreTitle"
+                tools:text="50" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

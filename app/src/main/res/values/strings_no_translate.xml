@@ -1,8 +1,4 @@
 <resources>
     <!-- navigation -->
     <string name="map_label" translatable="false">TheaterMap</string>
-
-    <!-- tag -->
-    <string name="movie_tag_new" translatable="false">NEW</string>
-    <string name="movie_tag_best" translatable="false">BEST</string>
 </resources>

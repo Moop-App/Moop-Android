@@ -3,11 +3,14 @@ package soup.movie.ext
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import soup.movie.core.R
 
 /** Color */
 
@@ -38,4 +41,16 @@ fun Context.startActivitySafely(intent: Intent) {
 private fun Intent.isValid(ctx: Context): Boolean {
     val activities = ctx.packageManager?.queryIntentActivities(this, PackageManager.MATCH_DEFAULT_ONLY)
     return activities != null && activities.size > 0
+}
+
+fun Context.executeWeb(url: String?) {
+    if (url == null) return
+    CustomTabsIntent.Builder()
+        .addDefaultShareMenuItem()
+        .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
+        .setShowTitle(true)
+        .setStartAnimations(this, R.anim.fade_in, R.anim.fade_out)
+        .setExitAnimations(this, R.anim.fade_in, R.anim.fade_out)
+        .build()
+        .launchUrl(this, Uri.parse(url))
 }

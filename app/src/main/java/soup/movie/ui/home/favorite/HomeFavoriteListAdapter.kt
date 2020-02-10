@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
 import soup.movie.R
 import soup.movie.databinding.HomeItemFavoriteMovieBinding
-import soup.movie.domain.model.isBest
-import soup.movie.domain.model.isDDay
-import soup.movie.domain.model.isNew
+import soup.movie.ext.isBest
+import soup.movie.ext.isDDay
+import soup.movie.ext.isNew
 import soup.movie.model.Movie
 import soup.movie.ui.databinding.DataBindingListAdapter
 import soup.movie.ui.databinding.DataBindingViewHolder

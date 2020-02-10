@@ -5,13 +5,16 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import soup.movie.ads.AdsManager
+import soup.movie.ads.AdsManagerImpl
 import soup.movie.analytics.EventAnalytics
+import soup.movie.analytics.EventAnalyticsImpl
 import soup.movie.device.InAppUpdateManager
 import soup.movie.device.ProductAppUpdateManager
 import soup.movie.settings.impl.ThemeOptionSetting
 import soup.movie.theme.ThemeOptionManager
 import soup.movie.theme.ThemeOptionStore
-import soup.movie.util.ImageUriProvider
+import soup.movie.device.ImageUriProvider
+import soup.movie.device.ImageUriProviderImpl
 import javax.inject.Singleton
 
 @Module
@@ -26,13 +29,15 @@ class ApplicationModule {
     @Provides
     fun provideImageUriProvider(
         context: Context
-    ): ImageUriProvider = ImageUriProvider(context)
+    ): ImageUriProvider {
+        return ImageUriProviderImpl(context)
+    }
 
     @Singleton
     @Provides
     fun provideEventAnalytics(
         context: Context
-    ): EventAnalytics = EventAnalytics(context)
+    ): EventAnalytics = EventAnalyticsImpl(context)
 
     @Singleton
     @Provides
@@ -59,5 +64,7 @@ class ApplicationModule {
     @Provides
     fun provideAdsManager(
         context: Context
-    ): AdsManager = AdsManager(context)
+    ): AdsManager {
+        return AdsManagerImpl(context)
+    }
 }

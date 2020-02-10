@@ -6,6 +6,7 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import soup.movie.MovieApplication
+import soup.movie.detail.di.DetailActivityModule
 import javax.inject.Singleton
 
 @Singleton
@@ -13,6 +14,7 @@ import javax.inject.Singleton
     AndroidInjectionModule::class,
     ApplicationModule::class,
     ActivityBindingModule::class,
+    DetailActivityModule.DetailActivityBuilder::class,
     ViewModelModule::class,
     WorkerModule::class,
     DbComponentModule::class,
