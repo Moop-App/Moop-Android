@@ -1,16 +1,14 @@
-package soup.movie.ui.databinding
+package soup.movie.databinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.CallSuper
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 
-abstract class DataBindingListAdapter<T>(
-    diffCallback: DiffUtil.ItemCallback<T>
-) : ListAdapter<T, DataBindingViewHolder<T>>(diffCallback) {
+abstract class DataBindingAdapter<T> : RecyclerView.Adapter<DataBindingViewHolder<T>>() {
+
+    protected var items = mutableListOf<T>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<T> {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -22,8 +20,16 @@ abstract class DataBindingListAdapter<T>(
         return DataBindingViewHolder(binding)
     }
 
-    @CallSuper
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    fun getItem(position: Int): T? = items.getOrNull(position)
+
+    final override fun getItemCount(): Int = items.size
+
+    fun submitList(list: List<T>) {
+        this.items = list.toMutableList()
+        notifyDataSetChanged()
     }
 }

@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.listener.OnDragListener
 import androidx.recyclerview.widget.listener.OnItemMoveListener
 import soup.movie.R
 import soup.movie.model.Theater
-import soup.movie.ui.databinding.DataBindingAdapter
-import soup.movie.ui.databinding.DataBindingViewHolder
+import soup.movie.databinding.DataBindingAdapter
+import soup.movie.databinding.DataBindingViewHolder
 import soup.movie.util.swap
 
 internal class TheaterSortListAdapter: DataBindingAdapter<Theater>(), OnItemMoveListener {

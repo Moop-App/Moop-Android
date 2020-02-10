@@ -2,4 +2,6 @@
 <resources>
     <dimen name="tag_width">36dp</dimen>
     <dimen name="tag_height">18dp</dimen>
+
+    <integer name="grid_span_count">3</integer>
 </resources>

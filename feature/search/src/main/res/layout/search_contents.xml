@@ -62,7 +62,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="@integer/grid_span_count"
-            tools:listitem="@layout/home_item_movie"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

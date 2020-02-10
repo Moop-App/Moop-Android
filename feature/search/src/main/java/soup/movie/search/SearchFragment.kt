@@ -1,4 +1,4 @@
-package soup.movie.ui.search
+package soup.movie.search
 
 import android.os.Bundle
 import android.text.InputType
@@ -15,27 +15,31 @@ import androidx.lifecycle.observe
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
+import dagger.android.support.DaggerFragment
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import soup.movie.R
 import soup.movie.analytics.EventAnalytics
-import soup.movie.databinding.SearchContentsBinding
-import soup.movie.databinding.SearchFragmentBinding
-import soup.movie.databinding.SearchHeaderBinding
-import soup.movie.ui.base.BaseFragment
-import soup.movie.ui.home.tab.HomeContentsListAdapter
+import soup.movie.ext.assistedViewModels
+import soup.movie.home.HomeContentsListAdapter
+import soup.movie.search.databinding.SearchContentsBinding
+import soup.movie.search.databinding.SearchFragmentBinding
+import soup.movie.search.databinding.SearchHeaderBinding
 import soup.movie.util.ImeUtil
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
-class SearchFragment : BaseFragment() {
+class SearchFragment : DaggerFragment() {
 
     @Inject
     lateinit var analytics: EventAnalytics
     private lateinit var binding: SearchFragmentBinding
 
-    private val viewModel: SearchViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: SearchViewModel.Factory
+    private val viewModel: SearchViewModel by assistedViewModels {
+        viewModelFactory.create()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

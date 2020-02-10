@@ -1,5 +1,7 @@
 include ':app',
+        ':feature:home',
         ':feature:detail',
+        ':feature:search',
         ':feature:theatermap',
         ':feature:theme',
         ':feature:system',

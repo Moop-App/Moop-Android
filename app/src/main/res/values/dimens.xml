@@ -5,7 +5,6 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="home_header_hint_height">30dp</dimen>
-    <integer name="grid_span_count">3</integer>
 
     <dimen name="settings_category_margin_vertical">24dp</dimen>
     <dimen name="settings_item_margin_vertical">12dp</dimen>

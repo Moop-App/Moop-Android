@@ -1,4 +1,4 @@
-package soup.movie.ui.home.tab
+package soup.movie.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,17 +8,12 @@ import androidx.annotation.StringRes
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
-import soup.movie.R
+import soup.movie.databinding.DataBindingListAdapter
+import soup.movie.databinding.DataBindingViewHolder
+import soup.movie.ext.*
+import soup.movie.home.databinding.HomeItemMovieBinding
 import soup.movie.model.Movie
-import soup.movie.databinding.HomeItemMovieBinding
-import soup.movie.ext.isBest
-import soup.movie.ext.isDDay
-import soup.movie.ext.isNew
-import soup.movie.ui.databinding.DataBindingListAdapter
-import soup.movie.ui.databinding.DataBindingViewHolder
-import soup.movie.ext.consume
 import soup.movie.util.setOnDebounceClickListener
-import soup.movie.ext.showToast
 
 class HomeContentsListAdapter(
     context: Context,

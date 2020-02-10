@@ -1,4 +1,4 @@
-package soup.movie.ui.search
+package soup.movie.search
 
 import soup.movie.model.Movie
 

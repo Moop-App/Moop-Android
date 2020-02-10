@@ -17,6 +17,7 @@ import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.databinding.HomeTabContentsBinding
+import soup.movie.home.HomeContentsListAdapter
 import soup.movie.model.Movie
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.home.HomeFragmentDirections

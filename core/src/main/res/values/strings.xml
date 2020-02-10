@@ -5,4 +5,6 @@
 
     <string name="common_network_error">You\'re offline.</string>
     <string name="common_retry">Retry</string>
+
+    <string name="no_movies_description">There are no movie items</string>
 </resources>

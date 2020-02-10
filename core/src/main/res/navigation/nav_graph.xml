@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="soup.movie.ui.search.SearchFragment" />
+        android:name="soup.movie.search.SearchFragment" />
 
     <fragment
         android:id="@+id/theater_map"

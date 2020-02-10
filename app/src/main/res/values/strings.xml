@@ -9,13 +9,10 @@
     <string name="menu_search">Movie Search</string>
     <string name="menu_map">Map</string>
 
-    <string name="search_hint">Search Movie</string>
-
     <string name="menu_filter">Movie Filter</string>
     <string name="filter_category_theater">Theater Filter</string>
     <string name="filter_category_age">Age Filter</string>
     <string name="filter_category_genre">Genre Filter</string>
-    <string name="no_movies_description">There are no movie items</string>
 
     <string name="settings_category_theater">Favorite Theaters</string>
     <string name="settings_theater_empty_description">There are no favorite theaters</string>

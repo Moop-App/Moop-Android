@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android.dataBinding.enabled = true
+
+dependencies {
+    implementation project(':feature:home')
+    implementation project(':core')
+    implementation project(':data:repository')
+
+    implementation deps.kotlin.stdlib
+
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.core_ktx
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.material
+    implementation deps.androidx.recyclerview
+
+    implementation deps.insetter.ktx
+
+    implementation deps.lifecycle.extensions
+
+    implementation deps.navigation.fragment_ktx
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android_support
+    kapt deps.dagger.compiler
+    kapt deps.dagger.android_processor
+    compileOnly deps.dagger.assisted_inject
+    kapt deps.dagger.assisted_inject_processor
+
+    implementation deps.util.timber
+
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
+}

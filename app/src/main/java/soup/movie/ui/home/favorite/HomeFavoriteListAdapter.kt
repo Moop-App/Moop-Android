@@ -14,8 +14,8 @@ import soup.movie.ext.isBest
 import soup.movie.ext.isDDay
 import soup.movie.ext.isNew
 import soup.movie.model.Movie
-import soup.movie.ui.databinding.DataBindingListAdapter
-import soup.movie.ui.databinding.DataBindingViewHolder
+import soup.movie.databinding.DataBindingListAdapter
+import soup.movie.databinding.DataBindingViewHolder
 import soup.movie.ext.consume
 import soup.movie.util.setOnDebounceClickListener
 import soup.movie.ext.showToast

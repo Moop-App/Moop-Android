@@ -44,7 +44,6 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_arrow_back_padded"
                     android:transitionName="@string/transition_search_back" />
-
             </FrameLayout>
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
