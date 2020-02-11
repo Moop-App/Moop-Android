@@ -14,8 +14,6 @@
         <item name="filterChipStyle">@style/Widget.FilterChip</item>
     </style>
 
-    <attr name="colorDivider" format="reference|color" />
-
     <style name="Theme.Moop" parent="Base.Theme.Moop">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

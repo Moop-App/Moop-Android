@@ -1,17 +1,14 @@
 package soup.movie.di.ui
 
-import androidx.lifecycle.ViewModel
-import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import dagger.multibindings.IntoMap
-import soup.movie.di.key.ViewModelKey
-import soup.movie.di.scope.ChildFragmentScope
 import soup.movie.di.scope.FragmentScope
-import soup.movie.model.repository.MoopRepository
-import soup.movie.settings.AppSettings
-import soup.movie.ui.theater.edit.*
+import soup.movie.theater.di.TheaterAssistedInjectModule
+import soup.movie.theater.di.TheaterEditDomainModule
+import soup.movie.theater.di.TheaterEditFragmentModule
+import soup.movie.theater.di.TheaterSortFragmentModule
+import soup.movie.theater.edit.TheaterEditFragment
+import soup.movie.theater.sort.TheaterSortFragment
 
 @Module
 interface TheaterEditUiModule {
@@ -19,45 +16,19 @@ interface TheaterEditUiModule {
     @FragmentScope
     @ContributesAndroidInjector(
         modules = [
-            TheaterEditTabUiModule::class,
-            TheaterEditDomainModule::class
+            TheaterSortFragmentModule::class,
+            TheaterAssistedInjectModule::class
+        ]
+    )
+    fun bindTheaterSortFragment(): TheaterSortFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector(
+        modules = [
+            TheaterEditFragmentModule::class,
+            TheaterEditDomainModule::class,
+            TheaterAssistedInjectModule::class
         ]
     )
     fun bindTheaterEditFragment(): TheaterEditFragment
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(TheaterEditViewModel::class)
-    fun bindTheaterEditViewModel(viewModel: TheaterEditViewModel): ViewModel
-}
-
-@Module
-interface TheaterEditTabUiModule {
-
-    @ChildFragmentScope
-    @ContributesAndroidInjector
-    fun bindCgvFragment(): CgvEditFragment
-
-    @ChildFragmentScope
-    @ContributesAndroidInjector
-    fun bindLotteFragment(): LotteEditFragment
-
-    @ChildFragmentScope
-    @ContributesAndroidInjector
-    fun bindMegaboxFragment(): MegaboxEditFragment
-}
-
-@Module
-class TheaterEditDomainModule {
-
-    @Provides
-    fun provideTheaterEditManager(
-        repository: MoopRepository,
-        appSettings: AppSettings
-    ): TheaterEditManager {
-        return TheaterEditManager(
-            repository,
-            appSettings
-        )
-    }
 }

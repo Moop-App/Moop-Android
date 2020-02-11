@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/theater_sort"
-        android:name="soup.movie.ui.theater.sort.TheaterSortFragment">
+        android:name="soup.movie.theater.sort.TheaterSortFragment">
 
         <action
             android:id="@+id/action_to_theater_edit"
@@ -60,7 +60,7 @@
 
     <fragment
         android:id="@+id/theater_edit"
-        android:name="soup.movie.ui.theater.edit.TheaterEditFragment" />
+        android:name="soup.movie.theater.edit.TheaterEditFragment" />
 
     <!-- Global Actions -->
 

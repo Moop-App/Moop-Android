@@ -88,6 +88,7 @@ dependencies {
     implementation project(':feature:home')
     implementation project(':feature:detail')
     implementation project(':feature:search')
+    implementation project(':feature:theater')
     implementation project(':feature:theme')
     implementation project(':feature:system')
     implementation project(':data:repository')
@@ -145,7 +146,6 @@ dependencies {
     implementation deps.util.timber
 
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
-    implementation 'com.robinhood.ticker:ticker:2.0.0'
 
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.naver.maps:map-sdk:3.6.2'

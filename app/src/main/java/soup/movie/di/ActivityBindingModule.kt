@@ -2,7 +2,6 @@ package soup.movie.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import soup.movie.di.ui.TheaterEditDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
 import soup.movie.system.di.SystemAssistedInjectModule
@@ -20,9 +19,7 @@ interface ActivityBindingModule {
             SettingsUiModule::class,
             ThemeSettingUiModule::class,
             TheaterMapUiModule::class,
-            TheaterSortUiModule::class,
             TheaterEditUiModule::class,
-            TheaterEditDomainModule::class,
             SystemAssistedInjectModule::class
         ]
     )
