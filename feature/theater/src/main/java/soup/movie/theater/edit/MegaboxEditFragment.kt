@@ -8,7 +8,7 @@ import androidx.lifecycle.observe
 import dagger.android.support.DaggerFragment
 import soup.movie.ext.assistedActivityViewModels
 import soup.movie.model.Theater
-import soup.movie.theater.edit.databinding.TheaterEditChildFragmentBinding
+import soup.movie.theater.databinding.TheaterEditChildFragmentBinding
 import javax.inject.Inject
 
 class MegaboxEditFragment : DaggerFragment() {

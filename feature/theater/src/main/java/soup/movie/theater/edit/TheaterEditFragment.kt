@@ -24,9 +24,10 @@ import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.ext.assistedActivityViewModels
 import soup.movie.ext.lazyFast
 import soup.movie.model.Theater
+import soup.movie.theater.R
+import soup.movie.theater.databinding.TheaterEditFooterBinding
+import soup.movie.theater.databinding.TheaterEditFragmentBinding
 import soup.movie.theater.edit.TheaterEditContentUiModel.LoadingState
-import soup.movie.theater.edit.databinding.TheaterEditFooterBinding
-import soup.movie.theater.edit.databinding.TheaterEditFragmentBinding
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.inflate
 import soup.movie.util.setOnDebounceClickListener

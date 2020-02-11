@@ -9,8 +9,9 @@ import soup.movie.databinding.DataBindingViewHolder
 import soup.movie.ext.showToast
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
+import soup.movie.theater.R
+import soup.movie.theater.databinding.TheaterEditItemAreaBinding
 import soup.movie.theater.edit.TheaterEditManager.Companion.MAX_ITEMS
-import soup.movie.theater.edit.databinding.TheaterEditItemAreaBinding
 import soup.movie.util.inflate
 
 class TheaterEditChildListAdapter(

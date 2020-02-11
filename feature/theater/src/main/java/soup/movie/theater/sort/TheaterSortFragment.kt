@@ -20,8 +20,8 @@ import com.google.android.material.chip.Chip
 import dagger.android.support.DaggerFragment
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.ext.assistedViewModels
-import soup.movie.theater.edit.R
-import soup.movie.theater.edit.databinding.TheaterSortFragmentBinding
+import soup.movie.theater.R
+import soup.movie.theater.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
