@@ -7,17 +7,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import soup.movie.domain.home.GetMovieFilterUseCase
+import soup.movie.ui.home.domain.getMovieFilterFlow
 import soup.movie.ext.getDDay
 import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
+import soup.movie.settings.AppSettings
 import soup.movie.ui.home.HomeContentsUiModel
 import soup.movie.ui.home.tab.HomeContentsViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 class HomePlanViewModel @Inject constructor(
-    getMovieFilter: GetMovieFilterUseCase,
+    private val appSettings: AppSettings,
     private val repository: MoopRepository
 ) : HomeContentsViewModel() {
 
@@ -37,14 +37,13 @@ class HomePlanViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             updateList()
             repository.getPlanMovieList()
-                .combine(getMovieFilter()) { movieList, movieFilter ->
+                .combine(appSettings.getMovieFilterFlow()) { movieList, movieFilter ->
                     movieList.asSequence()
                         .sortedBy(Movie::getDDay)
                         .filter { movieFilter(it) }
                         .toList()
                 }
                 .collect {
-                    Timber.d("QQQQ init: ${it.size}")
                     _contentsUiModel.postValue(HomeContentsUiModel(it))
                 }
         }

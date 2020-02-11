@@ -2,7 +2,6 @@ package soup.movie.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import soup.movie.di.domain.HomeDomainModule
 import soup.movie.di.domain.TheaterEditDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
@@ -17,7 +16,6 @@ interface ActivityBindingModule {
         modules = [
             MainUiModule::class,
             HomeUiModule::class,
-            HomeDomainModule::class,
             SearchUiModule::class,
             SettingsUiModule::class,
             ThemeSettingUiModule::class,

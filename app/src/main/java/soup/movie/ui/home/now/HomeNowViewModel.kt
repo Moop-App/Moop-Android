@@ -7,15 +7,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import soup.movie.domain.home.GetMovieFilterUseCase
+import soup.movie.ui.home.domain.getMovieFilterFlow
 import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
+import soup.movie.settings.AppSettings
 import soup.movie.ui.home.HomeContentsUiModel
 import soup.movie.ui.home.tab.HomeContentsViewModel
 import javax.inject.Inject
 
 class HomeNowViewModel @Inject constructor(
-    getMovieFilter: GetMovieFilterUseCase,
+    private val appSettings: AppSettings,
     private val repository: MoopRepository
 ) : HomeContentsViewModel() {
 
@@ -35,7 +36,7 @@ class HomeNowViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             updateList()
             repository.getNowMovieList()
-                .combine(getMovieFilter()) { movieList, movieFilter ->
+                .combine(appSettings.getMovieFilterFlow()) { movieList, movieFilter ->
                     movieList.asSequence()
                         .sortedBy(Movie::score)
                         .filter { movieFilter(it) }

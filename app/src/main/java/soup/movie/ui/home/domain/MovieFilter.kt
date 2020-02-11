@@ -1,4 +1,4 @@
-package soup.movie.domain.model
+package soup.movie.ui.home.domain
 
 import soup.movie.model.Movie
 import soup.movie.settings.model.AgeFilter
