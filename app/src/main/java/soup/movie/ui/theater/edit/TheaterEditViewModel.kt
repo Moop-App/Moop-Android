@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import soup.movie.domain.theater.edit.TheaterEditManager
 import soup.movie.model.Theater
 import javax.inject.Inject
 
@@ -26,15 +26,37 @@ class TheaterEditViewModel @Inject constructor(
         }
     }
 
+    val cgvUiModel = manager.asCgvFlow()
+        .combine(manager.asSelectedTheaterListFlow()) { cgv, selectedList ->
+            TheaterEditChildUiModel(cgv, selectedList)
+        }
+        .asLiveData()
+
+    val lotteUiModel = manager.asLotteFlow()
+        .combine(manager.asSelectedTheaterListFlow()) { lotte, selectedList ->
+            TheaterEditChildUiModel(lotte, selectedList)
+        }
+        .asLiveData()
+
+    val megaboxUiModel = manager.asMegaboxFlow()
+        .combine(manager.asSelectedTheaterListFlow()) { megabox, selectedList ->
+            TheaterEditChildUiModel(megabox, selectedList)
+        }
+        .asLiveData()
+
     val footerUiModel = manager.asSelectedTheaterListFlow()
         .map { TheaterEditFooterUiModel(it) }
         .asLiveData()
 
-    fun onConfirmClicked() {
-        manager.save()
+    fun add(theater: Theater): Boolean {
+        return manager.add(theater)
     }
 
     fun remove(theater: Theater) {
         manager.remove(theater)
+    }
+
+    fun onConfirmClicked() {
+        manager.save()
     }
 }

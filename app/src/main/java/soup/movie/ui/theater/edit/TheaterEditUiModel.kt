@@ -2,7 +2,6 @@ package soup.movie.ui.theater.edit
 
 import androidx.annotation.Keep
 import soup.movie.model.Theater
-import soup.movie.domain.theater.edit.TheaterEditManager
 
 sealed class TheaterEditContentUiModel {
 

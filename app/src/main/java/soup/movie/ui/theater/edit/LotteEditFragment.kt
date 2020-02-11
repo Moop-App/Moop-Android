@@ -1,20 +1,17 @@
-package soup.movie.ui.theater.edit.cgv
+package soup.movie.ui.theater.edit
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.observe
-import soup.movie.model.Theater
 import soup.movie.databinding.TheaterEditChildFragmentBinding
-import soup.movie.ui.theater.edit.TheaterEditChildFragment
-import soup.movie.ui.theater.edit.TheaterEditChildListAdapter
+import soup.movie.model.Theater
+import soup.movie.ui.base.BaseFragment
 
-class CgvEditFragment : TheaterEditChildFragment() {
+class LotteEditFragment : BaseFragment() {
 
-    override val title: String = "CGV"
-
-    private val viewModel: CgvEditViewModel by viewModels()
+    private val viewModel: TheaterEditViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +23,7 @@ class CgvEditFragment : TheaterEditChildFragment() {
         return binding.root
     }
 
-    private fun TheaterEditChildFragmentBinding.initViewState(viewModel: CgvEditViewModel) {
+    private fun TheaterEditChildFragmentBinding.initViewState(viewModel: TheaterEditViewModel) {
         val listAdapter = TheaterEditChildListAdapter(object : TheaterEditChildListAdapter.Listener {
 
             override fun add(theater: Theater): Boolean {
@@ -38,7 +35,7 @@ class CgvEditFragment : TheaterEditChildFragment() {
             }
         })
         listView.adapter = listAdapter
-        viewModel.uiModel.observe(viewLifecycleOwner) {
+        viewModel.lotteUiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.areaGroupList, it.selectedTheaterIdSet)
         }
     }

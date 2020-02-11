@@ -39,7 +39,7 @@ class TheaterEditFragment : BaseFragment(), OnBackPressedListener {
 
     private lateinit var binding: TheaterEditFragmentBinding
 
-    private val viewModel: TheaterEditViewModel by viewModels()
+    private val viewModel: TheaterEditViewModel by activityViewModels()
 
     private val pageAdapter by lazyFast {
         TheaterEditPageAdapter(childFragmentManager, lifecycle)

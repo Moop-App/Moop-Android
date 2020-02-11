@@ -2,7 +2,7 @@ package soup.movie.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import soup.movie.di.domain.TheaterEditDomainModule
+import soup.movie.di.ui.TheaterEditDomainModule
 import soup.movie.di.scope.ActivityScope
 import soup.movie.di.ui.*
 import soup.movie.system.di.SystemAssistedInjectModule

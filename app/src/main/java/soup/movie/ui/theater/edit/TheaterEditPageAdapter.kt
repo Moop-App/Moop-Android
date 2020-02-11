@@ -5,9 +5,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TitleProvider
-import soup.movie.ui.theater.edit.cgv.CgvEditFragment
-import soup.movie.ui.theater.edit.lotte.LotteEditFragment
-import soup.movie.ui.theater.edit.megabox.MegaboxEditFragment
 import soup.movie.ext.lazyFast
 
 class TheaterEditPageAdapter(
@@ -16,15 +13,21 @@ class TheaterEditPageAdapter(
 ) : FragmentStateAdapter(fm, lifecycle), TitleProvider {
 
     override fun createFragment(position: Int): Fragment {
-        return items[position]
+        return when (position) {
+            0 -> CgvEditFragment()
+            1 -> LotteEditFragment()
+            else -> MegaboxEditFragment()
+        }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = 3
 
     override fun getItemTitle(position: Int): CharSequence {
-        return items[position].title
+        return when (position) {
+            0 -> "CGV"
+            1 -> "롯데시네마"
+            else -> "메가박스"
+        }
     }
 
     companion object {

@@ -1,20 +1,17 @@
-package soup.movie.ui.theater.edit.lotte
+package soup.movie.ui.theater.edit
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.observe
-import soup.movie.model.Theater
 import soup.movie.databinding.TheaterEditChildFragmentBinding
-import soup.movie.ui.theater.edit.TheaterEditChildFragment
-import soup.movie.ui.theater.edit.TheaterEditChildListAdapter
+import soup.movie.model.Theater
+import soup.movie.ui.base.BaseFragment
 
-class LotteEditFragment : TheaterEditChildFragment() {
+class MegaboxEditFragment : BaseFragment() {
 
-    override val title: String = "롯데시네마"
-
-    private val viewModel: LotteEditViewModel by viewModels()
+    private val viewModel: TheaterEditViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +23,7 @@ class LotteEditFragment : TheaterEditChildFragment() {
         return binding.root
     }
 
-    private fun TheaterEditChildFragmentBinding.initViewState(viewModel: LotteEditViewModel) {
+    private fun TheaterEditChildFragmentBinding.initViewState(viewModel: TheaterEditViewModel) {
         val listAdapter = TheaterEditChildListAdapter(object : TheaterEditChildListAdapter.Listener {
 
             override fun add(theater: Theater): Boolean {
@@ -38,7 +35,7 @@ class LotteEditFragment : TheaterEditChildFragment() {
             }
         })
         listView.adapter = listAdapter
-        viewModel.uiModel.observe(viewLifecycleOwner) {
+        viewModel.megaboxUiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.areaGroupList, it.selectedTheaterIdSet)
         }
     }

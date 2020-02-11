@@ -1,4 +1,4 @@
-package soup.movie.domain.theater.edit
+package soup.movie.ui.theater.edit
 
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
@@ -8,6 +8,7 @@ import soup.movie.model.TheaterArea
 import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
 import soup.movie.settings.AppSettings
+import timber.log.Timber
 
 class TheaterEditManager(
     private val repository: MoopRepository,
