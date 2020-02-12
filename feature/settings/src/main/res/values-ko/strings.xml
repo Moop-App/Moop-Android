@@ -1,0 +1,17 @@
+<resources>
+    <string name="menu_settings">설정</string>
+
+    <string name="settings_category_theater">자주가는 극장</string>
+    <string name="settings_theater_empty_description">선택된 극장이 없습니다</string>
+    <string name="settings_category_theme">테마</string>
+    <string name="settings_category_theater_mode">영화관 모드</string>
+    <string name="settings_category_version">버전 정보</string>
+    <string name="settings_version_current">현재버전 %s</string>
+    <string name="settings_version_latest">최신버전 %s</string>
+    <string name="settings_version_toast">최신 버전입니다.</string>
+    <string name="settings_version_update_title">버전 업데이트</string>
+    <string name="settings_version_update_message">새 버전이 출시되었습니다.\n업데이트를 진행 하시겠습니까?</string>
+    <string name="settings_version_update_button_positive">지금 업데이트</string>
+    <string name="settings_version_update_button_negative">다음에</string>
+    <string name="settings_category_feedback">피드백</string>
+</resources>

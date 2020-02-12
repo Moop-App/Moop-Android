@@ -1,4 +1,4 @@
-package soup.movie.ui.settings
+package soup.movie.settings
 
 import android.content.Context
 import android.content.Intent
@@ -16,27 +16,21 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
+import dagger.android.support.DaggerFragment
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
-import soup.movie.BuildConfig
-import soup.movie.R
-import soup.movie.databinding.SettingsFragmentBinding
-import soup.movie.databinding.SettingsItemTheaterBinding
-import soup.movie.databinding.SettingsItemVersionBinding
 import soup.movie.ext.assistedActivityViewModels
+import soup.movie.ext.assistedViewModels
 import soup.movie.ext.showToast
 import soup.movie.ext.startActivitySafely
-import soup.movie.util.inflate
 import soup.movie.model.Theater
+import soup.movie.settings.databinding.SettingsFragmentBinding
+import soup.movie.settings.databinding.SettingsItemTheaterBinding
+import soup.movie.settings.databinding.SettingsItemVersionBinding
 import soup.movie.system.SystemViewModel
-import soup.movie.ui.base.BaseFragment
 import soup.movie.util.*
-import soup.movie.util.Cgv
-import soup.movie.util.LotteCinema
-import soup.movie.util.Megabox
-import soup.movie.util.Moop
 import javax.inject.Inject
 
-class SettingsFragment : BaseFragment() {
+class SettingsFragment : DaggerFragment() {
 
     private lateinit var binding: SettingsFragmentBinding
 
@@ -45,7 +39,12 @@ class SettingsFragment : BaseFragment() {
     private val systemViewModel: SystemViewModel by assistedActivityViewModels {
         systemViewModelFactory.create()
     }
-    private val viewModel: SettingsViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModelFactory: SettingsViewModel.Factory
+    private val viewModel: SettingsViewModel by assistedViewModels {
+        viewModelFactory.create()
+    }
 
     private var versionViewState: VersionSettingUiModel? = null
 

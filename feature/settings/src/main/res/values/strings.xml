@@ -1,0 +1,17 @@
+<resources>
+    <string name="menu_settings">Settings</string>
+
+    <string name="settings_category_theater">Favorite Theaters</string>
+    <string name="settings_theater_empty_description">There are no favorite theaters</string>
+    <string name="settings_category_theme">Theme</string>
+    <string name="settings_category_theater_mode">Theater Mode</string>
+    <string name="settings_category_version">Version</string>
+    <string name="settings_version_current">Current %s</string>
+    <string name="settings_version_latest">Latest %s</string>
+    <string name="settings_version_toast">This is latest version.</string>
+    <string name="settings_version_update_title">Version Update</string>
+    <string name="settings_version_update_message">New version has been released.\nDo you want to proceed with the update?</string>
+    <string name="settings_version_update_button_positive">Update now</string>
+    <string name="settings_version_update_button_negative">Try later</string>
+    <string name="settings_category_feedback">Feedback</string>
+</resources>

@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/settings"
-        android:name="soup.movie.ui.settings.SettingsFragment">
+        android:name="soup.movie.settings.SettingsFragment">
 
         <action
             android:id="@+id/action_to_theme_option"

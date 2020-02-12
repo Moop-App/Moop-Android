@@ -31,8 +31,7 @@ class AppSettingsImpl(context: Context) : AppSettings {
         return genreFilterPref.asFlow()
     }
 
-    private val themeOptionPref =
-        StringPreference(prefs, "theme_option", "")
+    private val themeOptionPref = StringPreference(prefs, "theme_option", "")
     override var themeOption by themeOptionPref
     override fun getThemeOptionFlow(): Flow<String> {
         return themeOptionPref.asFlow()

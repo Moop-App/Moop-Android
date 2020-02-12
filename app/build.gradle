@@ -89,6 +89,7 @@ dependencies {
     implementation project(':feature:detail')
     implementation project(':feature:search')
     implementation project(':feature:theater')
+    implementation project(':feature:settings')
     implementation project(':feature:theme')
     implementation project(':feature:system')
     implementation project(':data:repository')

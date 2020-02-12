@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="settings_category_margin_vertical">24dp</dimen>
+    <dimen name="settings_item_margin_vertical">12dp</dimen>
+</resources>

@@ -6,8 +6,5 @@
 
     <dimen name="home_header_hint_height">30dp</dimen>
 
-    <dimen name="settings_category_margin_vertical">24dp</dimen>
-    <dimen name="settings_item_margin_vertical">12dp</dimen>
-
     <dimen name="app_icon_size">48dp</dimen>
 </resources>

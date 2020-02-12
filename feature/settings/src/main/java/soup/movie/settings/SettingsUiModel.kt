@@ -1,4 +1,4 @@
-package soup.movie.ui.settings
+package soup.movie.settings
 
 import androidx.annotation.Keep
 import soup.movie.model.Theater
