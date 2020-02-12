@@ -1,4 +1,4 @@
-package soup.movie.notification
+package soup.movie.push
 
 import android.app.PendingIntent
 import android.content.Context
@@ -10,6 +10,7 @@ import soup.movie.notification.NotificationSpecs.TYPE_EVENT
 import soup.movie.notification.NotificationSpecs.TYPE_NOTICE
 import soup.movie.ui.main.MainActivity
 import soup.movie.ext.getColorCompat
+import soup.movie.notification.NotificationSpecs
 import timber.log.Timber
 
 class MessagingService : FirebaseMessagingService() {

@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import soup.movie.BuildConfig
-import soup.movie.device.InAppUpdateManager
+import soup.movie.install.InAppUpdateManager
 import soup.movie.settings.AppSettings
 import soup.movie.theme.ThemeOptionManager
 import javax.inject.Inject

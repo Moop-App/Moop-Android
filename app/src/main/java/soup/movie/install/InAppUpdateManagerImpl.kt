@@ -1,20 +1,10 @@
-package soup.movie.device
+package soup.movie.install
 
 import android.content.Context
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.ktx.requestAppUpdateInfo
 
-interface InAppUpdateManager {
-
-    suspend fun getAvailableVersionCode(): Int
-
-    companion object {
-
-        const val UNKNOWN_VERSION_CODE: Int = 0
-    }
-}
-
-class ProductAppUpdateManager(context: Context) : InAppUpdateManager {
+class InAppUpdateManagerImpl(context: Context) : InAppUpdateManager {
 
     private val appUpdateManager = AppUpdateManagerFactory.create(context)
 

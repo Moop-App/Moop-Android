@@ -10,8 +10,8 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.analytics.EventAnalyticsImpl
 import soup.movie.device.ImageUriProvider
 import soup.movie.device.ImageUriProviderImpl
-import soup.movie.device.InAppUpdateManager
-import soup.movie.device.ProductAppUpdateManager
+import soup.movie.install.InAppUpdateManager
+import soup.movie.install.InAppUpdateManagerImpl
 import soup.movie.settings.AppSettings
 import soup.movie.settings.AppSettingsImpl
 import soup.movie.theme.ThemeOptionManager
@@ -59,7 +59,7 @@ class ApplicationModule {
     @Provides
     fun provideAppUpdateManager(
         context: Context
-    ): InAppUpdateManager = ProductAppUpdateManager(context)
+    ): InAppUpdateManager = InAppUpdateManagerImpl(context)
 
     @Singleton
     @Provides
