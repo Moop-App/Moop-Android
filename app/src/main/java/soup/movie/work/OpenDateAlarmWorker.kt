@@ -82,7 +82,7 @@ class OpenDateAlarmWorker(
 
         fun enqueuePeriodicWork(context: Context) {
             WorkManager.getInstance(context)
-                .enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.REPLACE, createRequest())
+                .enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.KEEP, createRequest())
         }
 
         private fun createRequest(): PeriodicWorkRequest {
