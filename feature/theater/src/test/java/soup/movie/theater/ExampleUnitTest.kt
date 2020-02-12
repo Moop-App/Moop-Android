@@ -1,8 +1,7 @@
-package soup.movie.theater.edit
+package soup.movie.theater
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).

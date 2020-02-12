@@ -1,8 +1,6 @@
 apply from: file('gradle/utils.gradle')
 
-buildscript { 
-    ext.kotlin_version = '1.3.61'
-
+buildscript {
     apply from: 'versions.gradle'
     repositories {
         google()
@@ -20,7 +18,7 @@ buildscript {
         classpath 'com.google.gms:google-services:4.3.3'
         classpath 'io.fabric.tools:gradle:1.31.0'
         classpath deps.firebase.perf_plugin
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" }
+    }
 }
 
 allprojects {
