@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="soup.movie.ui.home.HomeFragment" />
+        android:name="soup.movie.home.HomeFragment" />
 
     <activity
         android:id="@+id/detail"

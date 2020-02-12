@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="home_header_hint_height">30dp</dimen>
+    <dimen name="home_fab_margin">16dp</dimen>
+
+    <dimen name="home_filter_category_margin_vertical">24dp</dimen>
+    <dimen name="home_filter_item_margin_vertical">12dp</dimen>
+</resources>

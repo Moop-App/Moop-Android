@@ -1,17 +1,7 @@
 <resources>
     <string name="app_name">뭅</string>
 
-    <string name="menu_home">홈</string>
-    <string name="menu_now">현재상영</string>
-    <string name="menu_plan">개봉예정</string>
-    <string name="menu_favorite">즐겨찾기</string>
-    <string name="menu_search">영화 검색</string>
     <string name="menu_map">지도</string>
-
-    <string name="menu_filter">영화 필터</string>
-    <string name="filter_category_theater">극장 필터</string>
-    <string name="filter_category_age">연령 필터</string>
-    <string name="filter_category_genre">장르 필터</string>
 
     <string name="theater_map_title">지도</string>
 

@@ -1,17 +1,7 @@
 <resources>
     <string name="app_name">Moop</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_now">Now</string>
-    <string name="menu_plan">Plan</string>
-    <string name="menu_favorite">Favorite</string>
-    <string name="menu_search">Movie Search</string>
     <string name="menu_map">Map</string>
-
-    <string name="menu_filter">Movie Filter</string>
-    <string name="filter_category_theater">Theater Filter</string>
-    <string name="filter_category_age">Age Filter</string>
-    <string name="filter_category_genre">Genre Filter</string>
 
     <string name="theater_map_title">Map</string>
 
