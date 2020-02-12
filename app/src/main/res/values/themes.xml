@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Platform.V23.Theme.Moop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/status_bar_scrim</item>
-        <item name="android:windowLightStatusBar">@bool/use_light_status_bar</item>
-
-        <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
-    </style>
-
-    <style name="Platform.Theme.Moop" parent="Platform.V23.Theme.Moop" />
-
-    <style name="Base.Theme.Moop" parent="Platform.Theme.Moop">
-        <item name="filterChipStyle">@style/Widget.FilterChip</item>
-    </style>
-
     <style name="Theme.Moop" parent="Base.Theme.Moop">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
