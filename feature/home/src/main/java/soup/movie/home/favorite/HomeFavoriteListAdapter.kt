@@ -8,8 +8,8 @@ import androidx.annotation.StringRes
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
-import soup.movie.databinding.DataBindingListAdapter
-import soup.movie.databinding.DataBindingViewHolder
+import soup.movie.binding.DataBindingListAdapter
+import soup.movie.binding.DataBindingViewHolder
 import soup.movie.ext.*
 import soup.movie.home.R
 import soup.movie.home.databinding.HomeItemFavoriteMovieBinding

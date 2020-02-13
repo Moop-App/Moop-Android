@@ -1,4 +1,4 @@
-package soup.movie.databinding
+package soup.movie.binding
 
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding

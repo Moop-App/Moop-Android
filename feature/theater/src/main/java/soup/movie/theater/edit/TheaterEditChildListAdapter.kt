@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.google.android.material.chip.Chip
-import soup.movie.databinding.DataBindingAdapter
-import soup.movie.databinding.DataBindingViewHolder
+import soup.movie.binding.DataBindingAdapter
+import soup.movie.binding.DataBindingViewHolder
 import soup.movie.ext.showToast
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea

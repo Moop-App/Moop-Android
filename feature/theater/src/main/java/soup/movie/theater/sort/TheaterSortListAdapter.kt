@@ -5,8 +5,8 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.listener.OnDragListener
 import androidx.recyclerview.widget.listener.OnItemMoveListener
-import soup.movie.databinding.DataBindingAdapter
-import soup.movie.databinding.DataBindingViewHolder
+import soup.movie.binding.DataBindingAdapter
+import soup.movie.binding.DataBindingViewHolder
 import soup.movie.ext.swap
 import soup.movie.model.Theater
 import soup.movie.theater.R
