@@ -46,3 +46,38 @@ dependencies {
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.espresso
 }
+
+task buildNavigationProguard doLast {
+    def navigationGraphXml = project.file("src/main/res/navigation/nav_graph.xml")
+
+    // XmlParser didn't work so let me use the dirty hack
+    if (!navigationGraphXml.text.contains("xmlns:app=\"http://schemas.android.com/apk/res-auto\"")) {
+        throw new GradleScriptException("the namespace has been changed from app")
+    }
+
+    def fqdns = []
+
+    navigationGraphXml.eachLine {
+        def line = it.trim()
+
+        if (line.startsWith("android:name=\"")) {
+            def className = line.substring("android:name=\"".length(), line.lastIndexOf("\""))
+
+            if (className.contains(".")) {
+                fqdns << className
+            }
+        } else if (line.startsWith("app:argType=\"")) {
+            def className = line.substring("app:argType=\"".length(), line.lastIndexOf("\""))
+
+            if (className.contains(".")) {
+                fqdns << className
+            }
+        }
+    }
+
+    project.file("proguard-rules-navigation.pro").write(fqdns.sort().collect {
+        "-keepnames class $it"
+    }.join("\n"))
+}
+
+preBuild.dependsOn(buildNavigationProguard)
