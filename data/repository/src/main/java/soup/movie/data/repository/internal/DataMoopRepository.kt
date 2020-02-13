@@ -118,6 +118,10 @@ internal class DataMoopRepository(
         return local.hasOpenDateAlarms()
     }
 
+    override suspend fun insertOpenDateAlarms(alarm: OpenDateAlarm) {
+        local.insertOpenDateAlarm(alarm)
+    }
+
     override suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>) {
         return local.deleteOpenDateAlarms(alarms)
     }

@@ -13,6 +13,7 @@ import soup.movie.device.ImageUriProvider
 import soup.movie.ext.screenDays
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
+import soup.movie.model.OpenDateAlarm
 import soup.movie.model.repository.MoopRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
@@ -41,9 +42,9 @@ class DetailViewModel @AssistedInject constructor(
     val favoriteUiModel: LiveData<Boolean>
         get() = _favoriteUiModel
 
-    private val _shareAction = MutableEventLiveData<ShareAction>()
-    val shareAction: EventLiveData<ShareAction>
-        get() = _shareAction
+    private val _uiEvent = MutableEventLiveData<UiEvent>()
+    val uiEvent: EventLiveData<UiEvent>
+        get() = _uiEvent
 
     private val _isError = MutableLiveData<Boolean>(false)
     val isError: LiveData<Boolean>
@@ -106,7 +107,7 @@ class DetailViewModel @AssistedInject constructor(
     fun requestShareImage(target: ShareTarget, bitmap: Bitmap) {
         viewModelScope.launch {
             val uri = imageUriProvider(bitmap)
-            _shareAction.event = ShareAction(target, uri, "image/*")
+            _uiEvent.event = ShareAction(target, uri, "image/*")
         }
     }
 
@@ -211,6 +212,10 @@ class DetailViewModel @AssistedInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             if (isFavorite) {
                 repository.addFavoriteMovie(movie)
+                if (movie.isPlan) {
+                    repository.insertOpenDateAlarms(OpenDateAlarm(movie.id, movie.title, movie.openDate))
+                    _uiEvent.postEvent(ToastAction(R.string.action_toast_opendate_alarm))
+                }
             } else {
                 repository.removeFavoriteMovie(movie.id)
             }

@@ -1,6 +1,7 @@
 <resources>
     <string name="action_share">Share</string>
     <string name="action_share_poster">Share poster</string>
+    <string name="action_toast_opendate_alarm">⏰ I\'ll let you know when released.</string>
 
     <string name="time_minute">%d min.</string>
     <string name="rank">%d</string>

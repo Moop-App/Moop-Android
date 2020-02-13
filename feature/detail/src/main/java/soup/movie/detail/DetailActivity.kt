@@ -108,8 +108,11 @@ class DetailActivity : DaggerAppCompatActivity(),
         initViewState(binding)
 
         viewModel.init(args.movie)
-        viewModel.shareAction.observeEvent(this) {
-            executeShareAction(it)
+        viewModel.uiEvent.observeEvent(this) {
+            when (it) {
+                is ShareAction -> executeShareAction(it)
+                is ToastAction -> showToast(it.resId)
+            }
         }
     }
 

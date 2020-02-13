@@ -18,11 +18,14 @@ interface MoopRepository {
     suspend fun findMovie(movieId: String): Movie?
     suspend fun searchMovie(query: String): List<Movie>
     suspend fun getCodeList(): TheaterAreaGroup
+
     fun getFavoriteMovieList(): Flow<List<Movie>>
     suspend fun addFavoriteMovie(movie: Movie)
     suspend fun removeFavoriteMovie(movieId: String)
     suspend fun isFavoriteMovie(movieId: String): Boolean
+
     suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm>
     suspend fun hasOpenDateAlarms(): Boolean
+    suspend fun insertOpenDateAlarms(alarm: OpenDateAlarm)
     suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>)
 }

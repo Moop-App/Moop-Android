@@ -16,13 +16,17 @@ interface MoopDatabase {
     suspend fun getPlanLastUpdateTime(): Long
     suspend fun getAllMovieList(): List<Movie>
     suspend fun getNowMovieList(): List<Movie>
+
     fun saveCodeList(response: TheaterAreaGroup)
     fun getCodeList(): TheaterAreaGroup?
+
     suspend fun addFavoriteMovie(movie: Movie)
     suspend fun removeFavoriteMovie(movieId: String)
     fun getFavoriteMovieList(): Flow<List<Movie>>
     suspend fun isFavoriteMovie(movieId: String): Boolean
+
     suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm>
     suspend fun hasOpenDateAlarms(): Boolean
+    suspend fun insertOpenDateAlarm(alarm: OpenDateAlarm)
     suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>)
 }

@@ -98,9 +98,6 @@ internal class RoomDatabase(
 
     override suspend fun addFavoriteMovie(movie: Movie) {
         favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovieEntity())
-        if (movie.isPlan) {
-            openDateAlarmDao.insert(movie.toOpenDateAlarmEntity())
-        }
     }
 
     override suspend fun removeFavoriteMovie(movieId: String) {
@@ -128,6 +125,10 @@ internal class RoomDatabase(
 
     override suspend fun hasOpenDateAlarms(): Boolean {
         return openDateAlarmDao.getCount() > 0
+    }
+
+    override suspend fun insertOpenDateAlarm(alarm: OpenDateAlarm) {
+        openDateAlarmDao.insert(alarm.toEntity())
     }
 
     override suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>) {
