@@ -34,7 +34,7 @@ object FirebaseLink {
     fun createDetailLink(movie: Movie, onResult: (Uri?) -> Unit) {
         FirebaseDynamicLinks.getInstance().createDynamicLink()
             .setLink(Uri.parse("https://moop.link/$PATH_DETAIL?$MOVIE_ID=${movie.id}"))
-            .setDomainUriPrefix("https://moooop.page.link")
+            .setDomainUriPrefix("https://moop.page.link")
             .setAndroidParameters(
                 DynamicLink.AndroidParameters.Builder("soup.movie")
                     .setMinimumVersion(92)
