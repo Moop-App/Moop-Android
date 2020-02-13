@@ -47,6 +47,15 @@ dependencies {
     androidTestImplementation deps.test.espresso
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        freeCompilerArgs = [
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                '-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi'
+        ]
+    }
+}
+
 task buildNavigationProguard doLast {
     def navigationGraphXml = project.file("src/main/res/navigation/nav_graph.xml")
 
