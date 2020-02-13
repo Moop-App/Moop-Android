@@ -12,6 +12,8 @@ import soup.movie.device.ImageUriProvider
 import soup.movie.device.ImageUriProviderImpl
 import soup.movie.install.InAppUpdateManager
 import soup.movie.install.InAppUpdateManagerImpl
+import soup.movie.notification.NotificationBuilder
+import soup.movie.notification.NotificationBuilderImpl
 import soup.movie.settings.AppSettings
 import soup.movie.settings.AppSettingsImpl
 import soup.movie.theme.ThemeOptionManager
@@ -74,4 +76,10 @@ class ApplicationModule {
     fun provideAppSettings(
         context: Context
     ): AppSettings = AppSettingsImpl(context)
+
+    @Singleton
+    @Provides
+    fun provideNotificationBuilder(
+        context: Context
+    ): NotificationBuilder = NotificationBuilderImpl(context)
 }

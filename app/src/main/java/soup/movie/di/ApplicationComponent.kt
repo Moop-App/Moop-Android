@@ -7,6 +7,7 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import soup.movie.MovieApplication
 import soup.movie.detail.di.DetailActivityModule
+import soup.movie.work.di.WorkerModule
 import javax.inject.Singleton
 
 @Singleton

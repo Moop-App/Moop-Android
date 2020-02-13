@@ -2,20 +2,20 @@ package soup.movie.work
 
 import android.content.Context
 import androidx.work.*
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import soup.movie.di.ChildWorkerFactory
 import soup.movie.model.repository.MoopRepository
+import soup.movie.work.di.ChildWorkerFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Provider
 
-class OpenDateSyncWorker(
-    appContext: Context,
-    params: WorkerParameters,
+class OpenDateSyncWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted params: WorkerParameters,
     private val repository: MoopRepository
-) : CoroutineWorker(appContext, params) {
+) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
         Timber.d("doWork: start!")
@@ -58,12 +58,6 @@ class OpenDateSyncWorker(
         }
     }
 
-    class Factory @Inject constructor(
-        private val repository: Provider<MoopRepository>
-    ) : ChildWorkerFactory {
-
-        override fun create(context: Context, params: WorkerParameters): ListenableWorker {
-            return OpenDateSyncWorker(context, params, repository.get())
-        }
-    }
+    @AssistedInject.Factory
+    interface Factory : ChildWorkerFactory
 }

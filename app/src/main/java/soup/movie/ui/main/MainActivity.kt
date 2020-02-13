@@ -25,7 +25,6 @@ import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.system.SystemEvent
 import soup.movie.system.SystemViewModel
-import soup.movie.ui.base.BaseActivity
 import soup.movie.ui.base.consumeBackEventInChildFragment
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker

@@ -1,43 +1,36 @@
 package soup.movie.work
 
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import androidx.core.app.NotificationCompat
-import androidx.core.text.bold
-import androidx.core.text.buildSpannedString
 import androidx.work.*
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
-import soup.movie.R
-import soup.movie.di.ChildWorkerFactory
 import soup.movie.ext.isBest
 import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
-import soup.movie.notification.NotificationSpecs
-import soup.movie.ui.main.MainActivity
-import soup.movie.ext.getColorCompat
+import soup.movie.notification.NotificationBuilder
 import soup.movie.util.currentTime
 import soup.movie.util.plusDaysTo
+import soup.movie.work.di.ChildWorkerFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Provider
 
-class LegacyWorker(
-    appContext: Context,
-    params: WorkerParameters,
-    private val repository: MoopRepository
-) : CoroutineWorker(appContext, params) {
+class LegacyWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted params: WorkerParameters,
+    private val repository: MoopRepository,
+    private val notificationBuilder: NotificationBuilder
+) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
         Timber.d("doWork: start!")
         return try {
             val movieList = getRecommendedMovieList()
             if (movieList.isNotEmpty()) {
-                showLegacyNotification(movieList)
+                notificationBuilder.showLegacyNotification(movieList)
             }
             Result.success()
         } catch (t: Throwable) {
@@ -62,23 +55,6 @@ class LegacyWorker(
                 .take(6)
                 .toList()
         }
-    }
-
-    private fun showLegacyNotification(list: List<Movie>) = applicationContext.run {
-        NotificationSpecs.notifyLegacy(this) {
-            setStyle(NotificationCompat.BigTextStyle())
-            setSmallIcon(R.drawable.ic_notify_default)
-            setContentTitle(buildSpannedString { bold { append("간만에 영화 보는거 어때요? 👀🍿") } })
-            setContentText(list.joinToString { it.title })
-            setAutoCancel(true)
-            setContentIntent(createLauncherIntent())
-            setColor(getColorCompat(R.color.colorSecondary))
-        }
-    }
-
-    private fun Context.createLauncherIntent(): PendingIntent {
-        val intent = Intent(this, MainActivity::class.java)
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
     }
 
     companion object {
@@ -116,12 +92,6 @@ class LegacyWorker(
         }
     }
 
-    class Factory @Inject constructor(
-        private val repository: Provider<MoopRepository>
-    ) : ChildWorkerFactory {
-
-        override fun create(context: Context, params: WorkerParameters): ListenableWorker {
-            return LegacyWorker(context, params, repository.get())
-        }
-    }
+    @AssistedInject.Factory
+    interface Factory : ChildWorkerFactory
 }

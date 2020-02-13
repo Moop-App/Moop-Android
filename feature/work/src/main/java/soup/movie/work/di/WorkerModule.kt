@@ -1,10 +1,10 @@
-package soup.movie.di
+package soup.movie.work.di
 
 import androidx.work.Configuration
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [WorkerBindingModule::class])
+@Module(includes = [WorkerBindingModule::class, WorkerAssistedInjectModule::class])
 class WorkerModule {
 
     @Provides

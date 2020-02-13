@@ -1,4 +1,4 @@
-package soup.movie.di
+package soup.movie.work.di
 
 import android.content.Context
 import androidx.work.ListenableWorker

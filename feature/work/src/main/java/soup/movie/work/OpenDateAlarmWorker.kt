@@ -1,36 +1,29 @@
 package soup.movie.work
 
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import androidx.core.app.NotificationCompat
-import androidx.core.text.bold
-import androidx.core.text.buildSpannedString
 import androidx.work.*
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
-import soup.movie.R
-import soup.movie.di.ChildWorkerFactory
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.repository.MoopRepository
-import soup.movie.notification.NotificationSpecs
-import soup.movie.ui.main.MainActivity
-import soup.movie.ext.getColorCompat
+import soup.movie.notification.NotificationBuilder
 import soup.movie.util.YYYY_MM_DD
 import soup.movie.util.currentTime
 import soup.movie.util.plusDaysTo
 import soup.movie.util.today
+import soup.movie.work.di.ChildWorkerFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Provider
 import kotlin.math.max
 
-class OpenDateAlarmWorker(
-    appContext: Context,
-    params: WorkerParameters,
-    private val repository: MoopRepository
-) : CoroutineWorker(appContext, params) {
+class OpenDateAlarmWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted params: WorkerParameters,
+    private val repository: MoopRepository,
+    private val notificationBuilder: NotificationBuilder
+) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
         Timber.d("doWork: start!")
@@ -38,7 +31,7 @@ class OpenDateAlarmWorker(
             if (repository.hasOpenDateAlarms()) {
                 val alarms = getOpeningDateAlarmList()
                 if (alarms.isNotEmpty()) {
-                    showAlarmNotification(alarms)
+                    notificationBuilder.showAlarmNotification(alarms)
                 }
             }
             Result.success()
@@ -56,23 +49,6 @@ class OpenDateAlarmWorker(
         val nextMonday = today().plusDaysTo(DayOfWeek.MONDAY).YYYY_MM_DD()
         return repository.getOpenDateAlarmListUntil(nextMonday)
             .also { repository.deleteOpenDateAlarms(it) }
-    }
-
-    private fun showAlarmNotification(list: List<OpenDateAlarm>) = applicationContext.run {
-        NotificationSpecs.notifyOpenDateAlarm(this) {
-            setStyle(NotificationCompat.BigTextStyle())
-            setSmallIcon(R.drawable.ic_notify_default)
-            setContentTitle(buildSpannedString { bold { append("관심가는 작품이 곧 개봉합니다! ⏰❤️") } })
-            setContentText(list.joinToString { it.title })
-            setAutoCancel(true)
-            setContentIntent(createLauncherIntent())
-            setColor(getColorCompat(R.color.colorSecondary))
-        }
-    }
-
-    private fun Context.createLauncherIntent(): PendingIntent {
-        val intent = Intent(this, MainActivity::class.java)
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
     }
 
     companion object {
@@ -106,12 +82,6 @@ class OpenDateAlarmWorker(
         }
     }
 
-    class Factory @Inject constructor(
-        private val repository: Provider<MoopRepository>
-    ) : ChildWorkerFactory {
-
-        override fun create(context: Context, params: WorkerParameters): ListenableWorker {
-            return OpenDateAlarmWorker(context, params, repository.get())
-        }
-    }
+    @AssistedInject.Factory
+    interface Factory : ChildWorkerFactory
 }

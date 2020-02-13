@@ -1,4 +1,4 @@
-package soup.movie.di.key
+package soup.movie.work.di.key
 
 import androidx.work.ListenableWorker
 import dagger.MapKey

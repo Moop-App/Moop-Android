@@ -5,7 +5,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import soup.movie.di.DaggerApplicationComponent
-import soup.movie.notification.NotificationSpecs
+import soup.movie.notification.NotificationChannels
 import soup.movie.theme.ThemeOptionManager
 import javax.inject.Inject
 
@@ -18,7 +18,7 @@ class MovieApplication : DaggerApplication(), Configuration.Provider {
         super.onCreate()
         BuildType.init(this)
         AndroidThreeTen.init(this)
-        NotificationSpecs.initialize(this)
+        NotificationChannels.initialize(this)
         themeOptionManager.initialize()
     }
 

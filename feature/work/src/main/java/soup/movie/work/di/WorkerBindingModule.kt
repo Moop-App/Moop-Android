@@ -1,12 +1,12 @@
-package soup.movie.di
+package soup.movie.work.di
 
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import soup.movie.di.key.WorkerKey
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
+import soup.movie.work.di.key.WorkerKey
 
 @Module
 interface WorkerBindingModule {

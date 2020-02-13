@@ -91,6 +91,7 @@ dependencies {
     implementation project(':feature:theater')
     implementation project(':feature:settings')
     implementation project(':feature:theme')
+    implementation project(':feature:work')
     implementation project(':feature:system')
     implementation project(':data:repository')
     implementation project(':data:db')
@@ -129,9 +130,6 @@ dependencies {
     kapt deps.dagger.android_processor
     compileOnly deps.dagger.assisted_inject
     kapt deps.dagger.assisted_inject_processor
-
-    implementation deps.work.runtime
-    androidTestImplementation deps.work.testing
 
     implementation deps.glide.runtime
     kapt deps.glide.compiler
