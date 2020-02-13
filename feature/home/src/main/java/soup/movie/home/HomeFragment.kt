@@ -31,6 +31,7 @@ import soup.movie.ui.base.consumeBackEvent
 import soup.movie.util.Interpolators
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
+import javax.inject.Provider
 
 class HomeFragment : DaggerFragment(), OnBackPressedListener {
 
@@ -42,9 +43,9 @@ class HomeFragment : DaggerFragment(), OnBackPressedListener {
     private lateinit var filterBehavior: BottomSheetBehavior<FrameLayout>
 
     @Inject
-    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    lateinit var systemViewModelProvider: Provider<SystemViewModel>
     private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelFactory.create()
+        systemViewModelProvider.get()
     }
 
     @Inject

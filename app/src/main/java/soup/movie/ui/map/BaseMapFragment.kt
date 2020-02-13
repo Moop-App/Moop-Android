@@ -5,9 +5,9 @@ import android.view.View
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
-import soup.movie.ui.base.BaseFragment
+import dagger.android.support.DaggerFragment
 
-abstract class BaseMapFragment : BaseFragment() {
+abstract class BaseMapFragment : DaggerFragment() {
 
     private val callbacks = ArrayList<OnMapReadyCallback>()
     private var mapView: MapView? = null

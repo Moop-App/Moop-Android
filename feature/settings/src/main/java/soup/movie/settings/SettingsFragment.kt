@@ -29,15 +29,16 @@ import soup.movie.settings.databinding.SettingsItemVersionBinding
 import soup.movie.system.SystemViewModel
 import soup.movie.util.*
 import javax.inject.Inject
+import javax.inject.Provider
 
 class SettingsFragment : DaggerFragment() {
 
     private lateinit var binding: SettingsFragmentBinding
 
     @Inject
-    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    lateinit var systemViewModelProvider: Provider<SystemViewModel>
     private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelFactory.create()
+        systemViewModelProvider.get()
     }
 
     @Inject

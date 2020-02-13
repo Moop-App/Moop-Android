@@ -21,6 +21,6 @@ abstract class DetailActivityModule {
                 DetailAssistedInjectModule::class
             ]
         )
-        abstract fun contributeMainActivity(): DetailActivity
+        abstract fun contributeDetailActivity(): DetailActivity
     }
 }

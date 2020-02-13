@@ -1,11 +1,11 @@
 package soup.movie.system
 
 import androidx.lifecycle.ViewModel
-import com.squareup.inject.assisted.AssistedInject
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
+import javax.inject.Inject
 
-class SystemViewModel @AssistedInject constructor() : ViewModel() {
+class SystemViewModel @Inject constructor() : ViewModel() {
 
     private val _systemEvent = MutableEventLiveData<SystemEvent>()
     val systemEvent: EventLiveData<SystemEvent>
@@ -13,10 +13,5 @@ class SystemViewModel @AssistedInject constructor() : ViewModel() {
 
     fun openNavigationMenu() {
         _systemEvent.event = SystemEvent.OpenDrawerMenuUiEvent
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): SystemViewModel
     }
 }

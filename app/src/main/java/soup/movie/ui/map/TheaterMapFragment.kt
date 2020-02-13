@@ -40,6 +40,7 @@ import soup.movie.util.LotteCinema
 import soup.movie.util.Megabox
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
+import javax.inject.Provider
 import kotlin.math.max
 import kotlin.math.min
 
@@ -48,9 +49,9 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     private lateinit var binding: TheaterMapFragmentBinding
 
     @Inject
-    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    lateinit var systemViewModelProvider: Provider<SystemViewModel>
     private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelFactory.create()
+        systemViewModelProvider.get()
     }
 
     @Inject

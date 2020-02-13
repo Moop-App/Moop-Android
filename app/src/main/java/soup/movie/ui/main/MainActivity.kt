@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.messaging.FirebaseMessaging
+import dagger.android.support.DaggerAppCompatActivity
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.R
 import soup.movie.core.MainDirections
@@ -30,18 +31,23 @@ import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
 import javax.inject.Inject
+import javax.inject.Provider
 
-class MainActivity : BaseActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
 
     @Inject
-    lateinit var systemViewModelFactory: SystemViewModel.Factory
+    lateinit var systemViewModelProvider: Provider<SystemViewModel>
     private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelFactory.create()
+        systemViewModelProvider.get()
     }
 
-    private val viewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: MainViewModel.Factory
+    private val viewModel: MainViewModel by assistedActivityViewModels {
+        viewModelFactory.create()
+    }
 
     private val listener = NavController.OnDestinationChangedListener {
         _, destination, _ ->
