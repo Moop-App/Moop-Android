@@ -93,10 +93,10 @@ dependencies {
     implementation project(':feature:theme')
     implementation project(':feature:work')
     implementation project(':feature:system')
+    implementation project(':core')
     implementation project(':data:repository')
     implementation project(':data:db')
     implementation project(':data:api')
-    implementation project(':core')
 
     implementation deps.kotlin.stdlib
 

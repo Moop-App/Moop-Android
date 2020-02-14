@@ -27,7 +27,6 @@ import soup.movie.theme.di.ThemeSettingAssistedInjectModule
 import soup.movie.theme.di.ThemeSettingFragmentModule
 import soup.movie.ui.main.MainActivity
 import soup.movie.ui.map.TheaterMapFragment
-import soup.movie.ui.map.di.TheaterMapAssistedInjectModule
 import soup.movie.ui.map.di.TheaterMapFragmentModule
 
 @Module
@@ -104,8 +103,7 @@ interface MainActivityModule {
     @FragmentScope
     @ContributesAndroidInjector(
         modules = [
-            TheaterMapFragmentModule::class,
-            TheaterMapAssistedInjectModule::class
+            TheaterMapFragmentModule::class
         ]
     )
     fun bindTheaterMapFragment(): TheaterMapFragment
@@ -115,8 +113,7 @@ interface MainActivityModule {
 
         @ContributesAndroidInjector(
             modules = [
-                MainActivityModule::class,
-                TheaterMapAssistedInjectModule::class
+                MainActivityModule::class
             ]
         )
         abstract fun contributeMainActivity(): MainActivity
