@@ -23,7 +23,7 @@ dependencies {
     compileOnly deps.dagger.assisted_inject
     kapt deps.dagger.assisted_inject_processor
 
-    implementation deps.work.runtime
+    api deps.work.runtime
     androidTestImplementation deps.work.testing
 
     implementation deps.util.timber
