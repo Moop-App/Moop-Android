@@ -3,8 +3,6 @@
 
     <string name="menu_map">지도</string>
 
-    <string name="theater_map_title">지도</string>
-
     <string name="shortcut_search_short_label">주변극장</string>
     <string name="shortcut_search_long_label">주변극장</string>
     <string name="shortcut_search_disabled">주변극장</string>

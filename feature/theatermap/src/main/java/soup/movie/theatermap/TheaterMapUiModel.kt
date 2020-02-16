@@ -1,4 +1,4 @@
-package soup.movie.ui.map
+package soup.movie.theatermap
 
 class TheaterMapUiModel(
     val theaterMarkerList: List<TheaterMarkerUiModel>

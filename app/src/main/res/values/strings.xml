@@ -3,8 +3,6 @@
 
     <string name="menu_map">Map</string>
 
-    <string name="theater_map_title">Map</string>
-
     <string name="shortcut_search_short_label">Theater</string>
     <string name="shortcut_search_long_label">Theater</string>
     <string name="shortcut_search_disabled">Theater</string>

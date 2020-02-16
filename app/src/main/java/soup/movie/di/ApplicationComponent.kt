@@ -7,6 +7,7 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import soup.movie.MovieApplication
 import soup.movie.detail.di.DetailActivityModule
+import soup.movie.model.repository.MoopRepository
 import soup.movie.work.di.WorkerModule
 import javax.inject.Singleton
 
@@ -29,4 +30,8 @@ interface ApplicationComponent : AndroidInjector<MovieApplication> {
     interface Factory {
         fun create(@BindsInstance application: Application): ApplicationComponent
     }
+
+    fun moopRepository(): MoopRepository
 }
+
+fun Application.createAppComponent() = DaggerApplicationComponent.factory().create(this)

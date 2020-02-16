@@ -12,7 +12,7 @@
         android:background="?colorSurface">
 
         <TextView
-            android:id="@+id/nameView"
+            android:id="@+id/name_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -23,42 +23,42 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/windowInsetBottomView"
-            app:layout_constraintEnd_toStartOf="@id/googleMapButton"
+            app:layout_constraintBottom_toTopOf="@id/window_inset_bottom_view"
+            app:layout_constraintEnd_toStartOf="@id/google_map_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Movie Title" />
 
         <ImageView
-            android:id="@+id/googleMapButton"
+            android:id="@+id/google_map_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?selectableItemBackgroundBorderless"
             android:elevation="12dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="@id/naverMapButton"
-            app:layout_constraintEnd_toStartOf="@id/naverMapButton"
-            app:layout_constraintStart_toEndOf="@id/nameView"
-            app:layout_constraintTop_toTopOf="@id/naverMapButton"
+            app:layout_constraintBottom_toBottomOf="@id/naver_map_button"
+            app:layout_constraintEnd_toStartOf="@id/naver_map_button"
+            app:layout_constraintStart_toEndOf="@id/name_view"
+            app:layout_constraintTop_toTopOf="@id/naver_map_button"
             tools:src="@drawable/ic_round_info" />
 
         <ImageView
-            android:id="@+id/naverMapButton"
+            android:id="@+id/naver_map_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?selectableItemBackgroundBorderless"
             android:elevation="12dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="@id/kakaoMapButton"
-            app:layout_constraintEnd_toStartOf="@id/kakaoMapButton"
-            app:layout_constraintStart_toEndOf="@id/googleMapButton"
-            app:layout_constraintTop_toTopOf="@id/kakaoMapButton"
+            app:layout_constraintBottom_toBottomOf="@id/kakao_map_button"
+            app:layout_constraintEnd_toStartOf="@id/kakao_map_button"
+            app:layout_constraintStart_toEndOf="@id/google_map_button"
+            app:layout_constraintTop_toTopOf="@id/kakao_map_button"
             tools:src="@drawable/ic_round_info" />
 
         <ImageView
-            android:id="@+id/kakaoMapButton"
+            android:id="@+id/kakao_map_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?selectableItemBackgroundBorderless"
@@ -66,25 +66,25 @@
             android:padding="6dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_round_info"
-            app:layout_constraintBottom_toBottomOf="@id/infoButton"
-            app:layout_constraintEnd_toStartOf="@id/infoButton"
-            app:layout_constraintStart_toEndOf="@id/naverMapButton"
-            app:layout_constraintTop_toTopOf="@id/infoButton" />
+            app:layout_constraintBottom_toBottomOf="@id/info_button"
+            app:layout_constraintEnd_toStartOf="@id/info_button"
+            app:layout_constraintStart_toEndOf="@id/naver_map_button"
+            app:layout_constraintTop_toTopOf="@id/info_button" />
 
         <ImageView
-            android:id="@+id/infoButton"
+            android:id="@+id/info_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_round_info"
-            app:layout_constraintBottom_toTopOf="@id/windowInsetBottomView"
+            app:layout_constraintBottom_toTopOf="@id/window_inset_bottom_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Space
-            android:id="@+id/windowInsetBottomView"
+            android:id="@+id/window_inset_bottom_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

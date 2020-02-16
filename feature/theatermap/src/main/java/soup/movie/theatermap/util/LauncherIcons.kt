@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.util
+package soup.movie.theatermap.util
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -55,7 +55,10 @@ class LauncherIcons(context: Context) {
             return drawable
         }
         val shadow = getShadowBitmap(drawable)
-        return ShadowDrawable(shadow, drawable)
+        return ShadowDrawable(
+            shadow,
+            drawable
+        )
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -105,7 +108,11 @@ class LauncherIcons(context: Context) {
         private val state: MyConstantState
 
         constructor(shadow: Bitmap, dr: Drawable) : super(dr) {
-            this.state = MyConstantState(shadow, dr.constantState!!)
+            this.state =
+                MyConstantState(
+                    shadow,
+                    dr.constantState!!
+                )
         }
 
         constructor(state: MyConstantState) : super(state.childState.newDrawable()) {
@@ -140,7 +147,9 @@ class LauncherIcons(context: Context) {
             val paint = Paint(Paint.FILTER_BITMAP_FLAG)
 
             override fun newDrawable(): Drawable {
-                return ShadowDrawable(this)
+                return ShadowDrawable(
+                    this
+                )
             }
 
             override fun getChangingConfigurations(): Int {

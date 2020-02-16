@@ -7,6 +7,8 @@ apply from: rootProject.file('gradle/android-dynamic-module.gradle')
 
 dependencies {
     implementation project(':app')
+    implementation project(':feature:system')
+    implementation project(':core')
     implementation project(':data:repository')
 
     implementation deps.kotlin.stdlib
@@ -26,8 +28,13 @@ dependencies {
     implementation deps.dagger.android_support
     kapt deps.dagger.compiler
     kapt deps.dagger.android_processor
+    compileOnly deps.dagger.assisted_inject
+    kapt deps.dagger.assisted_inject_processor
 
     implementation deps.util.timber
+
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.naver.maps:map-sdk:3.6.2'
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

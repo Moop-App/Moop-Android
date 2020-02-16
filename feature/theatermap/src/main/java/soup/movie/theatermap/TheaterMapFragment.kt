@@ -1,4 +1,4 @@
-package soup.movie.ui.map
+package soup.movie.theatermap
 
 import android.content.Context
 import android.content.Intent
@@ -25,16 +25,18 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.BuildConfig
-import soup.movie.R
-import soup.movie.databinding.TheaterMapFragmentBinding
+import soup.movie.MovieApplication
 import soup.movie.ext.*
 import soup.movie.model.Theater
 import soup.movie.model.Theater.Companion.TYPE_CGV
 import soup.movie.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.system.SystemViewModel
+import soup.movie.theatermap.databinding.TheaterMapFragmentBinding
+import soup.movie.theatermap.di.DaggerTheaterMapComponent
+import soup.movie.theatermap.di.TheaterMapModule
+import soup.movie.theatermap.util.LauncherIcons
 import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.util.LauncherIcons
 import soup.movie.util.Cgv
 import soup.movie.util.LotteCinema
 import soup.movie.util.Megabox
@@ -55,9 +57,9 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
     }
 
     @Inject
-    lateinit var theaterMapFactory: TheaterMapViewModel.Factory
+    lateinit var theaterMapFactory: Provider<TheaterMapViewModel>
     private val viewModel: TheaterMapViewModel by assistedViewModels {
-        theaterMapFactory.create()
+        theaterMapFactory.get()
     }
 
     private lateinit var locationSource: FusedLocationSource
@@ -70,6 +72,14 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
 
     private val launcherIcons by lazyFast {
         LauncherIcons(requireContext())
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val applicationComponent = (requireContext().applicationContext as MovieApplication).applicationComponent
+        DaggerTheaterMapComponent.factory()
+            .create(applicationComponent, TheaterMapModule(this))
+            .inject(this)
     }
 
     override fun onCreateView(

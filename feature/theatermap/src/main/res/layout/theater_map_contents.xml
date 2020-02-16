@@ -10,7 +10,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.naver.maps.map.MapView
-            android:id="@+id/mapView"
+            android:id="@+id/map_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

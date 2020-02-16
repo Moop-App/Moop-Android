@@ -26,8 +26,6 @@ import soup.movie.theme.ThemeSettingFragment
 import soup.movie.theme.di.ThemeSettingAssistedInjectModule
 import soup.movie.theme.di.ThemeSettingFragmentModule
 import soup.movie.ui.main.MainActivity
-import soup.movie.ui.map.TheaterMapFragment
-import soup.movie.ui.map.di.TheaterMapFragmentModule
 
 @Module
 interface MainActivityModule {
@@ -98,15 +96,6 @@ interface MainActivityModule {
         ]
     )
     fun themeSettingFragment(): ThemeSettingFragment
-
-    //TODO: Move into :feature:theatermap
-    @FragmentScope
-    @ContributesAndroidInjector(
-        modules = [
-            TheaterMapFragmentModule::class
-        ]
-    )
-    fun bindTheaterMapFragment(): TheaterMapFragment
 
     @Module
     abstract class MainActivityBuilder {

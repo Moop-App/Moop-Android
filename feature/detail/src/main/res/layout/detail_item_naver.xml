@@ -72,13 +72,13 @@
                 android:textColor="?attr/colorOnSurface"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/eggIcon"
-                app:layout_constraintEnd_toStartOf="@id/infoButton"
+                app:layout_constraintEnd_toStartOf="@id/info_button"
                 app:layout_constraintStart_toEndOf="@+id/eggIcon"
                 app:layout_constraintTop_toTopOf="@+id/eggIcon"
                 tools:text="0.0" />
 
             <TextView
-                android:id="@+id/infoButton"
+                android:id="@+id/info_button"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:background="?selectableItemBackground"

@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/theater_map"
-        android:name="soup.movie.ui.map.TheaterMapFragment" />
+        android:name="soup.movie.theatermap.TheaterMapFragment" />
 
     <fragment
         android:id="@+id/settings"

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <!-- com.naver.maps:map-sdk -->
+
+    <string name="navermap_legend" />
+    <string name="navermap_legal_notice" />
+    <string name="navermap_open_source_license" />
+
+    <style name="navermap_app" />
+
+</resources>

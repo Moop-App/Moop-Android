@@ -1,13 +1,13 @@
-package soup.movie.ui.map
+package soup.movie.theatermap
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
-import dagger.android.support.DaggerFragment
 
-abstract class BaseMapFragment : DaggerFragment() {
+abstract class BaseMapFragment : Fragment() {
 
     private val callbacks = ArrayList<OnMapReadyCallback>()
     private var mapView: MapView? = null

@@ -1,17 +1,17 @@
-package soup.movie.ui.map
+package soup.movie.theatermap
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
+import javax.inject.Inject
 
-class TheaterMapViewModel @AssistedInject constructor(
+class TheaterMapViewModel @Inject constructor(
     private val repository: MoopRepository
 ) : ViewModel() {
 
@@ -73,10 +73,5 @@ class TheaterMapViewModel @AssistedInject constructor(
         viewModelScope.launch {
             _uiModel.value = loadUiModel()
         }
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): TheaterMapViewModel
     }
 }
