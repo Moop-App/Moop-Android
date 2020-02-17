@@ -1,6 +1,9 @@
 package soup.movie.ui.main
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.GravityCompat
@@ -11,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.android.support.DaggerAppCompatActivity
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
@@ -48,9 +52,21 @@ class MainActivity : DaggerAppCompatActivity() {
         viewModelFactory.create()
     }
 
-    private val listener = NavController.OnDestinationChangedListener {
-        _, destination, _ ->
+    private val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
         binding.navigationView.setCheckedItem(destination.id)
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        SplitCompat.installActivity(this)
+    }
+
+    override fun applyOverrideConfiguration(overrideConfiguration: Configuration?) {
+        // https://issuetracker.google.com/issues/147937971
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            return
+        }
+        super.applyOverrideConfiguration(overrideConfiguration)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

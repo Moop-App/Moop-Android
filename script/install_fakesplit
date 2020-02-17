@@ -1,0 +1,31 @@
+#!/bin/sh
+
+WORKDIR=$(cd $(dirname "$0")/../; pwd)
+
+# Build with option
+${WORKDIR}/gradlew clean :app:bundleDebug -PuseFakeSplit=true
+
+# create apks file
+java -jar ${WORKDIR}/third_party/bundletool/bundletool-all-0.13.0.jar build-apks \
+             --bundle=${WORKDIR}/app/build/outputs/bundle/debug/app-debug.aab \
+             --output=${WORKDIR}/app/build/outputs/bundle/debug/app-debug.apks \
+             --ks=${WORKDIR}/signing/app-debug.jks \
+             --ks-pass=pass:android \
+             --ks-key-alias=android \
+             --key-pass=pass:android \
+             --connected-device
+
+# unzip
+unzip ${WORKDIR}/app/build/outputs/bundle/debug/app-debug.apks -d app/build/outputs/bundle/debug
+
+# Uninstall the app if needed
+adb uninstall soup.movie.debug
+
+# Create directory for FakeInstallSplitManager
+adb shell mkdir -p /sdcard/Android/data/soup.movie.debug/files
+
+# Push apks to device
+adb push ${WORKDIR}/app/build/outputs/bundle/debug/splits/* /sdcard/Android/data/soup.movie.debug/files
+
+# Install the app
+java -jar ${WORKDIR}/third_party/bundletool/bundletool-all-0.13.0.jar install-apks --apks=${WORKDIR}/app/build/outputs/bundle/debug/app-debug.apks

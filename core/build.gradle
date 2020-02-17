@@ -25,6 +25,7 @@ dependencies {
     implementation deps.androidx.recyclerview
 
     implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.dynamic_features_fragment
 
     implementation deps.dagger.runtime
     implementation deps.dagger.android_support

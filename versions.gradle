@@ -40,11 +40,12 @@ deps.lifecycle = [
         compiler     : "androidx.lifecycle:lifecycle-compiler:$lifecycle"
 ]
 
-def navigation = "2.2.0"
+def navigation = "2.3.0-alpha01"
 deps.navigation = [
-        fragment_ktx    : "androidx.navigation:navigation-fragment-ktx:$navigation",
-        ui_ktx          : "androidx.navigation:navigation-ui-ktx:$navigation",
-        safe_args_plugin: "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
+        fragment_ktx             : "androidx.navigation:navigation-fragment-ktx:$navigation",
+        ui_ktx                   : "androidx.navigation:navigation-ui-ktx:$navigation",
+        dynamic_features_fragment: "androidx.navigation:navigation-dynamic-features-fragment:$navigation",
+        safe_args_plugin         : "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
 ]
 
 def work = "2.3.0"

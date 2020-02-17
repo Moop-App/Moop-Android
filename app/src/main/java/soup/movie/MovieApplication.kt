@@ -1,7 +1,9 @@
 package soup.movie
 
+import android.content.Context
 import androidx.work.Configuration
 import androidx.work.WorkManager
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
@@ -26,6 +28,11 @@ class MovieApplication : DaggerApplication() {
         NotificationChannels.initialize(this)
         themeOptionManager.initialize()
         WorkManager.initialize(this, workConfiguration)
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

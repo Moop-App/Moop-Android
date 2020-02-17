@@ -5,7 +5,7 @@
         dist:instant="false"
         dist:title="@string/map_label">
         <dist:delivery>
-            <dist:install-time />
+            <dist:on-demand />
         </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>

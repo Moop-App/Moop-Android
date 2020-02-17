@@ -47,6 +47,7 @@ android {
                     filesAuthority     : filesAuthorityValue,
                     crashlytics_enabled: false
             ]
+            buildConfigField("boolean", "USE_FAKE_SPLIT", "Boolean.parseBoolean(\"${project.hasProperty("useFakeSplit")}\")")
         }
         release {
             if (useReleaseKeystore) {
@@ -63,6 +64,7 @@ android {
                     filesAuthority     : filesAuthorityValue,
                     crashlytics_enabled: true
             ]
+            buildConfigField("boolean", "USE_FAKE_SPLIT", "false")
         }
     }
     testOptions {
@@ -122,6 +124,7 @@ dependencies {
 
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.ui_ktx
+    implementation deps.navigation.dynamic_features_fragment
 
     implementation deps.dagger.runtime
     implementation deps.dagger.android
