@@ -14,10 +14,4 @@ class HomePlanFragment : HomeContentsFragment() {
     override val viewModel: HomePlanViewModel by assistedViewModels {
         viewModelFactory.create()
     }
-
-    override fun onUpdateList(listView: RecyclerView, movies: List<Movie>) {
-        listView.postOnAnimationDelayed(300) {
-            super.onUpdateList(listView, movies)
-        }
-    }
 }

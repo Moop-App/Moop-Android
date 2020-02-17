@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import soup.movie.ext.getDDay
 import soup.movie.home.HomeContentsUiModel
@@ -43,6 +45,7 @@ class HomePlanViewModel @AssistedInject constructor(
                         .filter { movieFilter(it) }
                         .toList()
                 }
+                .onStart { delay(200) }
                 .collect {
                     _contentsUiModel.postValue(HomeContentsUiModel(it))
                 }
