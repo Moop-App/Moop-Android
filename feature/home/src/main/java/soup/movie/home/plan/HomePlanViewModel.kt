@@ -2,6 +2,7 @@ package soup.movie.home.plan
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +22,7 @@ import soup.movie.settings.AppSettings
 class HomePlanViewModel @AssistedInject constructor(
     private val appSettings: AppSettings,
     private val repository: MoopRepository
-) : HomeContentsViewModel() {
+) : ViewModel(), HomeContentsViewModel {
 
     private val _isLoading = MutableLiveData<Boolean>(false)
     override val isLoading: LiveData<Boolean>

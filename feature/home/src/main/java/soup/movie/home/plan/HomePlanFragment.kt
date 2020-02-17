@@ -1,10 +1,7 @@
 package soup.movie.home.plan
 
-import androidx.core.view.postOnAnimationDelayed
-import androidx.recyclerview.widget.RecyclerView
 import soup.movie.ext.assistedViewModels
 import soup.movie.home.tab.HomeContentsFragment
-import soup.movie.model.Movie
 import javax.inject.Inject
 
 class HomePlanFragment : HomeContentsFragment() {

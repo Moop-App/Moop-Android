@@ -19,7 +19,6 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.home.HomeContentsListAdapter
 import soup.movie.home.HomeFragmentDirections
 import soup.movie.home.databinding.HomeTabContentsBinding
-import soup.movie.model.Movie
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
@@ -98,14 +97,7 @@ abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
         }
         viewModel.contentsUiModel.observe(viewLifecycleOwner) {
             noItemsView.isVisible = it.movies.isEmpty()
-            onUpdateList(listView, it.movies)
-        }
-    }
-
-    protected open fun onUpdateList(listView: RecyclerView, movies: List<Movie>) {
-        val listAdapter = listView.adapter
-        if (listAdapter is HomeContentsListAdapter) {
-            listAdapter.submitList(movies)
+            listAdapter.submitList(it.movies)
         }
     }
 
