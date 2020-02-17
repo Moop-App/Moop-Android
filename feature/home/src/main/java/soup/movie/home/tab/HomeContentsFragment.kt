@@ -1,6 +1,5 @@
 package soup.movie.home.tab
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -63,10 +62,8 @@ abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onDestroyView() {
         binding.listView.adapter?.unregisterAdapterDataObserver(adapterDataObserver)
-        binding.listView.setOnTouchListener(null)
         super.onDestroyView()
     }
 
