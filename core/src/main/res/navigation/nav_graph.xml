@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@+id/home"
+    app:startDestination="@id/home"
+    app:progressDestination="@id/progress"
     tools:ignore="UnusedNavigation">
 
     <fragment
@@ -23,6 +24,10 @@
     <fragment
         android:id="@+id/search"
         android:name="soup.movie.search.SearchFragment" />
+
+    <fragment
+        android:id="@+id/progress"
+        android:name="soup.movie.ui.CustomProgressFragment" />
 
     <fragment
         android:id="@+id/theater_map"

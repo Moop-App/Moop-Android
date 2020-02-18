@@ -35,7 +35,7 @@ import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.databinding.TheaterMapFragmentBinding
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.theatermap.di.TheaterMapModule
-import soup.movie.theatermap.util.LauncherIcons
+import soup.movie.util.LauncherIcons
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.Cgv
 import soup.movie.util.LotteCinema

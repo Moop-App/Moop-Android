@@ -7,3 +7,4 @@
 -keepnames class soup.movie.theater.sort.TheaterSortFragment
 -keepnames class soup.movie.theatermap.TheaterMapFragment
 -keepnames class soup.movie.theme.ThemeSettingFragment
+-keepnames class soup.movie.ui.CustomProgressFragment
