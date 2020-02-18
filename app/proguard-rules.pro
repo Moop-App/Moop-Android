@@ -51,3 +51,6 @@
 # For kotlin-reflect
 -dontwarn org.jetbrains.annotations.**
 -keep class kotlin.Metadata { *; }
+
+# For dynamic-features module
+-keep class soup.movie.theatermap.** { *; }
