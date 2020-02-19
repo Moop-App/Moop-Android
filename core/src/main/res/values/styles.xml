@@ -93,8 +93,7 @@
         <item name="dotColor">@color/chip_cgv_bg</item>
         <item name="dotSize">10dp</item>
         <item name="dotPadding">7dp</item>
-        <item name="clearIcon">@drawable/ic_cancel</item>
-        <item name="clearIconTint">@color/grey</item>
+        <item name="clearIcon">@drawable/filter_chip_cancel</item>
         <item name="backgroundColor">@color/chip_genre_bg_unchecked</item>
         <item name="foreground">?selectableItemBackground</item>
         <item name="android:elevation">10dp</item>
@@ -108,8 +107,7 @@
         <item name="dotSize">10dp</item>
         <item name="dotPadding">7dp</item>
         <item name="fontFamily">bold</item>
-        <item name="clearIcon">@drawable/ic_cancel</item>
-        <item name="clearIconTint">@color/chip_cgv_text</item>
+        <item name="clearIcon">@drawable/filter_chip_cgv_cancel</item>
         <item name="backgroundColor">@color/chip_unchecked_bg</item>
         <item name="foreground">?selectableItemBackground</item>
     </style>
@@ -121,8 +119,7 @@
         <item name="dotColor">@color/chip_lotte_bg</item>
         <item name="dotSize">10dp</item>
         <item name="dotPadding">7dp</item>
-        <item name="clearIcon">@drawable/ic_cancel</item>
-        <item name="clearIconTint">@color/white</item>
+        <item name="clearIcon">@drawable/filter_chip_lotte_cancel</item>
         <item name="backgroundColor">@color/chip_unchecked_bg</item>
         <item name="foreground">?selectableItemBackground</item>
     </style>
@@ -134,8 +131,7 @@
         <item name="dotColor">@color/chip_megabox_bg</item>
         <item name="dotSize">10dp</item>
         <item name="dotPadding">7dp</item>
-        <item name="clearIcon">@drawable/ic_cancel</item>
-        <item name="clearIconTint">@color/white</item>
+        <item name="clearIcon">@drawable/filter_chip_megabox_cancel</item>
         <item name="backgroundColor">@color/chip_unchecked_bg</item>
         <item name="foreground">?selectableItemBackground</item>
     </style>
