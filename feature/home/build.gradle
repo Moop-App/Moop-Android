@@ -36,7 +36,7 @@ dependencies {
 
     implementation deps.util.timber
 
-    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+    implementation deps.ui.recyclerview_animators
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

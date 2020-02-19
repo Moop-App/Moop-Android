@@ -147,9 +147,9 @@ dependencies {
     debugImplementation deps.stetho.core
     implementation deps.util.timber
 
-    implementation 'com.google.android.play:core-ktx:1.6.4'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.airbnb.android:lottie:3.3.1'
+    implementation deps.google.play_core
+    implementation deps.google.gson
+    implementation deps.ui.lottie
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

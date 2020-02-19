@@ -36,7 +36,7 @@ dependencies {
 
     implementation deps.util.timber
 
-    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+    implementation deps.ui.recyclerview_animators
     implementation 'com.github.stfalcon:stfalcon-imageviewer:1.0.0'
 
     testImplementation deps.test.junit

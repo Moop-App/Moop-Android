@@ -28,7 +28,7 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.dagger.android_processor
 
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation deps.google.gson
     implementation deps.room.runtime
     implementation deps.room.ktx
     kapt deps.room.compiler

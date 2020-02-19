@@ -95,6 +95,11 @@ deps.glide = [
         compiler: "com.github.bumptech.glide:compiler:$glide"
 ]
 
+deps.google = [
+        play_core: 'com.google.android.play:core-ktx:1.6.4',
+        gson     : 'com.google.code.gson:gson:2.8.6'
+]
+
 deps.firebase = [
         core         : 'com.google.firebase:firebase-core:17.2.1',
         crashlytics  : 'com.crashlytics.sdk.android:crashlytics:2.10.1',
@@ -109,6 +114,11 @@ def stetho = "1.5.1"
 deps.stetho = [
         core   : "com.facebook.stetho:stetho:$stetho",
         okhttp3: "com.facebook.stetho:stetho-okhttp3:$stetho"
+]
+
+deps.ui = [
+        lottie                : 'com.airbnb.android:lottie:3.3.1',
+        recyclerview_animators: 'jp.wasabeef:recyclerview-animators:3.0.0'
 ]
 
 deps.util = [
