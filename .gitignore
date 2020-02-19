@@ -34,12 +34,13 @@ captures/
 
 # Intellij
 *.iml
-.idea/
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
+.idea/*
+.idea/caches
+.idea/codeStyles
 .idea/dictionaries
 .idea/libraries
+!.idea/icon.png
+!.idea/icon_dark.png
 
 # Keystore files
 signing/app-release.jks
