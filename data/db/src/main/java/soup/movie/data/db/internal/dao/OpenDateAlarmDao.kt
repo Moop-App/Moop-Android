@@ -1,7 +1,10 @@
 package soup.movie.data.db.internal.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import soup.movie.data.db.internal.entity.OpenDateAlarmEntity
 
@@ -16,6 +19,10 @@ internal interface OpenDateAlarmDao {
 
     @Query("SELECT COUNT(*) FROM open_date_alarms")
     suspend fun getCount(): Int
+
+    suspend fun hasAlarms(): Boolean {
+        return getCount() > 0
+    }
 
     @Insert(onConflict = REPLACE)
     suspend fun insert(alarm: OpenDateAlarmEntity)

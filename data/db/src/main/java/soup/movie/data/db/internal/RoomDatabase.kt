@@ -20,7 +20,7 @@ internal class RoomDatabase(
     private val favoriteMovieDao: FavoriteMovieDao,
     private val openDateAlarmDao: OpenDateAlarmDao,
     private val cacheDao: MovieCacheDao
-): MoopDatabase {
+) : MoopDatabase {
 
     private var codeResponse: TheaterAreaGroup? = null
 
@@ -59,11 +59,11 @@ internal class RoomDatabase(
             .catch { emit(emptyList()) }
     }
 
-    override suspend fun getNowLastUpdateTime() : Long {
+    override suspend fun getNowLastUpdateTime(): Long {
         return cacheDao.findByType(TYPE_NOW).lastUpdateTime
     }
 
-    override suspend fun getPlanLastUpdateTime() : Long {
+    override suspend fun getPlanLastUpdateTime(): Long {
         return cacheDao.findByType(TYPE_PLAN).lastUpdateTime
     }
 
@@ -112,7 +112,7 @@ internal class RoomDatabase(
     }
 
     override suspend fun isFavoriteMovie(movieId: String): Boolean {
-        return favoriteMovieDao.getCountForFavoriteMovie(movieId) > 0
+        return favoriteMovieDao.isFavoriteMovie(movieId)
     }
 
     /**
@@ -124,7 +124,7 @@ internal class RoomDatabase(
     }
 
     override suspend fun hasOpenDateAlarms(): Boolean {
-        return openDateAlarmDao.getCount() > 0
+        return openDateAlarmDao.hasAlarms()
     }
 
     override suspend fun insertOpenDateAlarm(alarm: OpenDateAlarm) {

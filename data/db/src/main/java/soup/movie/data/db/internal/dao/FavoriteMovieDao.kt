@@ -25,4 +25,8 @@ internal interface FavoriteMovieDao {
 
     @Query("SELECT COUNT(id) FROM favorite_movies WHERE id = :movieId")
     suspend fun getCountForFavoriteMovie(movieId: String): Int
+
+    suspend fun isFavoriteMovie(movieId: String): Boolean {
+        return getCountForFavoriteMovie(movieId) > 0
+    }
 }
