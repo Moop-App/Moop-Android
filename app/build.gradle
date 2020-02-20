@@ -107,8 +107,11 @@ dependencies {
     implementation deps.androidx.preference_ktx
     implementation deps.androidx.recyclerview
     implementation deps.androidx.transition
-    implementation deps.androidx.material
     implementation deps.androidx.viewpager2
+
+    implementation deps.google.gson
+    implementation deps.google.material
+    implementation deps.google.play_core
 
     implementation deps.insetter.ktx
 
@@ -143,8 +146,6 @@ dependencies {
     debugImplementation deps.stetho.core
     implementation deps.util.timber
 
-    implementation deps.google.play_core
-    implementation deps.google.gson
     implementation deps.ui.lottie
 
     testImplementation deps.test.junit

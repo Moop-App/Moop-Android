@@ -15,8 +15,9 @@ dependencies {
 
     implementation deps.androidx.appcompat
     implementation deps.androidx.core_ktx
-    implementation deps.androidx.material
     implementation deps.androidx.recyclerview
+
+    implementation deps.google.material
 
     implementation deps.insetter.ktx
 

@@ -18,7 +18,8 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.androidx.core_ktx
     implementation deps.androidx.constraintlayout
-    implementation deps.androidx.material
+
+    implementation deps.google.material
 
     implementation deps.insetter.ktx
 
