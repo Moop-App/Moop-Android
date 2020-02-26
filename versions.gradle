@@ -127,7 +127,7 @@ deps.util = [
         threetenabp       : 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 ]
 
-deps.android_gradle_plugin = "com.android.tools.build:gradle:3.5.3"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:3.6.0"
 ext.deps = deps
 
 def build_versions = [:]
