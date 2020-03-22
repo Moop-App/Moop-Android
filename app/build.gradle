@@ -115,7 +115,6 @@ dependencies {
 
     implementation deps.insetter.ktx
 
-    implementation deps.lifecycle.extensions
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.viewmodel_ktx
     implementation deps.lifecycle.runtime_ktx
