@@ -66,6 +66,10 @@
                 <data
                     android:host="moop.link"
                     android:scheme="https" />
+
+                <data
+                    android:host="movie"
+                    android:scheme="moop" />
             </intent-filter>
         </activity>
         <activity
