@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.firebase.crashlytics'
 
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
@@ -39,6 +40,9 @@ android {
         debug {
             signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
 
             def filesAuthorityValue = 'soup.movie.debug.shareprovider'
             buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
@@ -154,5 +158,4 @@ dependencies {
 
 if (file("google-services.json").exists()) {
     apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'io.fabric'
 }
