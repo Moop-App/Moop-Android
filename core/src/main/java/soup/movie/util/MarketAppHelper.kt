@@ -56,93 +56,59 @@ private fun Context.executePlayStoreForApp(pkgName: String) {
     }
 }
 
-sealed class MarketApp {
+object Moop {
 
-    protected abstract val packageName: String
-
-    fun isInstalled(ctx: Context): Boolean {
-        return ctx.isInstalledApp(packageName)
-    }
+    private const val packageName = "soup.movie"
 
     fun executePlayStore(ctx: Context) {
         ctx.executePlayStoreForApp(packageName)
     }
-
-    fun executeApp(ctx: Context) {
-        ctx.executeMarketApp(packageName)
-    }
 }
 
-object Moop : MarketApp() {
+object Cgv {
 
-    override val packageName = "soup.movie"
-}
-
-object Cgv : MarketApp() {
-
-    override val packageName = "com.cgv.android.movieapp"
-
-    fun executeMobileWeb(ctx: Context, movieId: String) {
-        ctx.executeWeb(detailMobileWebUrl(movieId))
-    }
+    private const val packageName = "com.cgv.android.movieapp"
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
-
-    private fun detailMobileWebUrl(movieId: String): String =
-            "https://m.cgv.co.kr/WebApp/MovieV4/movieDetail.aspx?MovieIdx=$movieId"
 
     private fun detailWebUrl(theaterCode: String): String =
             "https://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=$theaterCode"
 }
 
-object LotteCinema : MarketApp() {
+object LotteCinema {
 
-    override val packageName = "kr.co.lottecinema.lcm"
-
-    fun executeMobileWeb(ctx: Context, movieId: String) {
-        ctx.executeWeb(detailMobileWebUrl(movieId))
-    }
+    private const val packageName = "kr.co.lottecinema.lcm"
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
-
-    private fun detailMobileWebUrl(movieId: String): String =
-            "https://www.lottecinema.co.kr/NLCMW/movie/moviedetailview?movie=$movieId"
 
     private fun detailWebUrl(theaterCode: String): String =
             "https://www.lottecinema.co.kr/NLCMW/Cinema/Detail?cinemaID=$theaterCode"
 }
 
-object Megabox : MarketApp() {
+object Megabox {
 
-    override val packageName = "com.megabox.mop"
-
-    fun executeMobileWeb(ctx: Context, movieId: String) {
-        ctx.executeWeb(detailMobileWebUrl(movieId))
-    }
+    private const val packageName = "com.megabox.mop"
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
 
-    private fun detailMobileWebUrl(movieId: String): String =
-            "https://m.megabox.co.kr/movie-detail?rpstMovieNo=$movieId"
-
     private fun detailWebUrl(theaterCode: String): String =
             "https://m.megabox.co.kr/theater?brchNo=$theaterCode"
 }
 
-object Kakao : MarketApp() {
+object Kakao {
 
-    override val packageName = "com.kakao.talk"
+    private const val packageName = "com.kakao.talk"
 }
 
-object YouTube : MarketApp() {
+object YouTube {
 
-    override val packageName = "com.google.android.youtube"
+    private const val packageName = "com.google.android.youtube"
 
     fun executeApp(ctx: Context, trailer: Trailer) {
         val id = trailer.youtubeId

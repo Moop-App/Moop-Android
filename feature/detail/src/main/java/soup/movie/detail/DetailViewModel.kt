@@ -140,21 +140,24 @@ class DetailViewModel @AssistedInject constructor(
             CgvItemUiModel(
                 movieId = cgv?.id.orEmpty(),
                 hasInfo = cgv != null,
-                rating = cgv?.star ?: NO_RATING
+                rating = cgv?.star ?: NO_RATING,
+                webLink = cgv?.url
             )
         )
         items.add(
             LotteItemUiModel(
                 movieId = lotte?.id.orEmpty(),
                 hasInfo = lotte != null,
-                rating = lotte?.star ?: NO_RATING
+                rating = lotte?.star ?: NO_RATING,
+                webLink = lotte?.url
             )
         )
         items.add(
             MegaboxItemUiModel(
                 movieId = megabox?.id.orEmpty(),
                 hasInfo = megabox != null,
-                rating = megabox?.star ?: NO_RATING
+                rating = megabox?.star ?: NO_RATING,
+                webLink = megabox?.url
             )
         )
         if (boxOffice == null) {
