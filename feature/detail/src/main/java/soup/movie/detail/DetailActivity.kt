@@ -172,15 +172,15 @@ class DetailActivity : DaggerAppCompatActivity(),
                 }
                 is CgvItemUiModel -> {
                     analytics.clickCgvInfo()
-                    Cgv.executeMobileWeb(ctx, item.movieId)
+                    ctx.executeWeb(item.webLink)
                 }
                 is LotteItemUiModel -> {
                     analytics.clickLotteInfo()
-                    LotteCinema.executeMobileWeb(ctx, item.movieId)
+                    ctx.executeWeb(item.webLink)
                 }
                 is MegaboxItemUiModel -> {
                     analytics.clickMegaboxInfo()
-                    Megabox.executeMobileWeb(ctx, item.movieId)
+                    ctx.executeWeb(item.webLink)
                 }
                 is NaverItemUiModel -> {
                     ctx.executeWeb(item.webLink)

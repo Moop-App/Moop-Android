@@ -29,21 +29,24 @@ object HeaderItemUiModel : ContentItemUiModel()
 class CgvItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
-    val rating: String
+    val rating: String,
+    val webLink: String?
 ) : ContentItemUiModel()
 
 @Keep
 class LotteItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
-    val rating: String
+    val rating: String,
+    val webLink: String?
 ) : ContentItemUiModel()
 
 @Keep
 class MegaboxItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
-    val rating: String
+    val rating: String,
+    val webLink: String?
 ) : ContentItemUiModel()
 
 @Keep
