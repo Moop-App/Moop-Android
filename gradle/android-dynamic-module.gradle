@@ -7,11 +7,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        dataBinding = true
+    }
     buildTypes {
         release {
             proguardFiles 'proguard-rules-dynamic-features.pro'
         }
     }
-    dataBinding.enabled = true
 }

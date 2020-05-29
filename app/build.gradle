@@ -20,6 +20,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    buildFeatures {
+        dataBinding = true
+    }
     signingConfigs {
         debug {
             storeFile rootProject.file("signing/app-debug.jks")
@@ -77,9 +80,6 @@ android {
     }
     lintOptions {
         checkReleaseBuilds false
-    }
-    dataBinding {
-        enabled = true
     }
     dynamicFeatures = [
             ":feature:theatermap"
