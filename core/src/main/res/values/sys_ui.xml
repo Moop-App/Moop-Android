@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- When in 'light' mode, we use a light scrim and light status bar -->
-    <color name="status_bar_scrim">@color/system_ui_scrim_light</color>
+    <color name="status_bar_scrim">@color/transparent</color>
     <bool name="use_light_status_bar">true</bool>
 
     <!-- We use a dark scrim for the nav bar, since light nav bar is API 27+ -->
