@@ -27,8 +27,6 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
 
-    debugImplementation deps.stetho.okhttp3
-    implementation deps.util.okhttp_interceptor
     implementation deps.util.timber
 
     testImplementation deps.test.junit

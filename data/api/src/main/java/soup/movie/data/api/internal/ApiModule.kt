@@ -9,7 +9,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import soup.movie.data.api.BuildConfig.API_BASE_URL
 import soup.movie.data.api.MoopApiService
-import soup.movie.data.api.addNetworkDebuggingInterceptor
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpInterceptor
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpNetworkInterceptor
 
@@ -38,7 +37,6 @@ internal class ApiModule {
             .cache(Cache(context.cacheDir, 1 * 1024 * 1024)) // 1 MB
             .addInterceptor(createOkHttpInterceptor())
             .addNetworkInterceptor(createOkHttpNetworkInterceptor())
-            .addNetworkDebuggingInterceptor()
             .build()
     }
 }

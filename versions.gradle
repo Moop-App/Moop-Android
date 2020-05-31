@@ -103,17 +103,9 @@ deps.firebase = [
         core              : 'com.google.firebase:firebase-core:17.2.1',
         crashlytics       : 'com.google.firebase:firebase-crashlytics:17.0.0-beta02',
         crashlytics_plugin: 'com.google.firebase:firebase-crashlytics-gradle:2.0.0-beta03',
-        performance       : "com.google.firebase:firebase-perf:19.0.2",
-        perf_plugin       : 'com.google.firebase:perf-plugin:1.3.1',
         messaging         : 'com.google.firebase:firebase-messaging:20.0.1',
         dynamic_links     : 'com.google.firebase:firebase-dynamic-links:19.0.0',
         ads               : 'com.google.firebase:firebase-ads:18.3.0'
-]
-
-def stetho = "1.5.1"
-deps.stetho = [
-        core   : "com.facebook.stetho:stetho:$stetho",
-        okhttp3: "com.facebook.stetho:stetho-okhttp3:$stetho"
 ]
 
 deps.ui = [
@@ -122,7 +114,6 @@ deps.ui = [
 ]
 
 deps.util = [
-        okhttp_interceptor: "com.squareup.okhttp3:logging-interceptor:4.2.1",
         timber            : "com.jakewharton.timber:timber:4.7.1",
         threetenabp       : 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 ]

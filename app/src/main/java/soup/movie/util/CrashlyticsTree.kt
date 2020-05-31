@@ -1,4 +1,4 @@
-package soup.movie
+package soup.movie.util
 
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics

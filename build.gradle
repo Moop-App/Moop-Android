@@ -16,7 +16,6 @@ buildscript {
         classpath deps.navigation.safe_args_plugin
         classpath 'com.google.gms:google-services:4.3.3'
         classpath deps.firebase.crashlytics_plugin
-        classpath deps.firebase.perf_plugin
     }
 }
 

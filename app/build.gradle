@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.google.firebase.crashlytics'
 
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
@@ -141,12 +140,10 @@ dependencies {
 
     implementation deps.firebase.core
     implementation deps.firebase.crashlytics
-    implementation deps.firebase.performance
     implementation deps.firebase.messaging
     implementation deps.firebase.dynamic_links
     implementation deps.firebase.ads
 
-    debugImplementation deps.stetho.core
     implementation deps.util.timber
 
     implementation deps.ui.lottie

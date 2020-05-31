@@ -10,6 +10,8 @@ import dagger.android.support.DaggerApplication
 import soup.movie.di.createAppComponent
 import soup.movie.notification.NotificationChannels
 import soup.movie.theme.ThemeOptionManager
+import soup.movie.util.CrashlyticsTree
+import timber.log.Timber
 import javax.inject.Inject
 
 class MovieApplication : DaggerApplication() {
@@ -23,7 +25,11 @@ class MovieApplication : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        BuildType.init(this)
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(CrashlyticsTree())
+        }
         AndroidThreeTen.init(this)
         NotificationChannels.initialize(this)
         themeOptionManager.initialize()
