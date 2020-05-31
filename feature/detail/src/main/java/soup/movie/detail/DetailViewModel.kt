@@ -60,14 +60,12 @@ class DetailViewModel @AssistedInject constructor(
                 loadDetail(movie)
             }
             minDelay.await()
-            movieDetail = loadDetail.await()?.also { renderDetail(it) }
-
+            movieDetail = loadDetail.await()?.also {
+                renderDetail(it, getNativeAd())
+            }
             withContext(Dispatchers.IO) {
-                nativeAd = adsManager.loadNativeAd()
-                    ?.takeIf { it.icon != null } // 간단한 유효성 검사
-                    ?.also { ad ->
-                        movieDetail?.let { detail -> renderDetail(detail, ad) }
-                    }
+                adsManager.onNativeAdConsumed()
+                adsManager.loadNextNativeAd()
             }
         }
     }
@@ -91,7 +89,7 @@ class DetailViewModel @AssistedInject constructor(
 
     private suspend fun renderDetail(
         detail: MovieDetail,
-        nativeAd: UnifiedNativeAd? = null
+        nativeAd: UnifiedNativeAd?
     ) = withContext(Dispatchers.Default) {
         _headerUiModel.postValue(
             HeaderUiModel(
@@ -228,8 +226,12 @@ class DetailViewModel @AssistedInject constructor(
 
     fun onRetryClick() {
         viewModelScope.launch {
-            movieDetail = loadDetail(movie)?.also { renderDetail(it) }
+            movieDetail = loadDetail(movie)?.also { renderDetail(it, getNativeAd()) }
         }
+    }
+
+    private fun getNativeAd(): UnifiedNativeAd? {
+        return adsManager.getLoadedNativeAd()
     }
 
     companion object {

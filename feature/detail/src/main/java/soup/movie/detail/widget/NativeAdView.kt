@@ -16,82 +16,89 @@ class NativeAdView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private var nativeAd: UnifiedNativeAd? = null
-    private lateinit var nativeAdView: UnifiedNativeAdView
 
-    private lateinit var primaryView: TextView
-    private lateinit var secondaryView: TextView
-    private lateinit var ratingBar: RatingBar
-    private lateinit var iconView: ImageView
-    private lateinit var callToActionView: Button
+    private val adView: UnifiedNativeAdView
+    private val headlineView: TextView
+    private val bodyView: TextView
+    private val callToActionView: Button
+    private val iconView: ImageView
+    private val priceView: TextView
+    private val starRatingView: RatingBar
 
     init {
         View.inflate(context, R.layout.native_ad, this)
-    }
+        adView = findViewById(R.id.native_ad_view)
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
+        headlineView = findViewById(R.id.ad_headline)
+        adView.headlineView = headlineView
 
-        nativeAdView = findViewById(R.id.native_ad_view)
-        primaryView = findViewById(R.id.primary)
-        secondaryView = findViewById(R.id.secondary)
+        bodyView = findViewById(R.id.ad_body)
 
-        ratingBar = findViewById(R.id.rating_bar)
-        ratingBar.isEnabled = false
+        callToActionView = findViewById(R.id.ad_call_to_action)
+        adView.callToActionView = callToActionView
 
-        callToActionView = findViewById(R.id.cta)
-        iconView = findViewById(R.id.icon)
-    }
+        iconView = findViewById(R.id.ad_icon)
+        adView.iconView = iconView
 
-    private fun UnifiedNativeAd.hasOnlyStore(): Boolean {
-        return store.isNullOrEmpty().not() && advertiser.isNullOrEmpty()
+        priceView = adView.findViewById(R.id.ad_price)
+        adView.priceView = priceView
+
+        starRatingView = adView.findViewById(R.id.ad_stars)
+        adView.starRatingView = starRatingView
     }
 
     fun setNativeAd(nativeAd: UnifiedNativeAd) {
         this.nativeAd = nativeAd
 
-        nativeAdView.callToActionView = callToActionView
-        nativeAdView.headlineView = primaryView
+        headlineView.text = nativeAd.headline
 
-        secondaryView.visibility = View.VISIBLE
-        val advertiser = nativeAd.advertiser
         val secondaryText: String = when {
-            nativeAd.hasOnlyStore() -> {
-                nativeAdView.storeView = secondaryView
+            nativeAd.advertiser.isNullOrEmpty().not() -> {
+                adView.advertiserView = bodyView
+                nativeAd.advertiser
+            }
+            nativeAd.store.isNullOrEmpty().not() -> {
+                adView.storeView = bodyView
                 nativeAd.store
             }
-            advertiser.isNullOrEmpty().not() -> {
-                nativeAdView.advertiserView = secondaryView
-                advertiser
-            }
             else -> {
-                ""
+                adView.bodyView = bodyView
+                nativeAd.body
             }
         }
+        if (secondaryText.isEmpty()) {
+            bodyView.visibility = View.GONE
+        } else {
+            bodyView.visibility = View.VISIBLE
+            bodyView.text = secondaryText
+        }
 
-        primaryView.text = nativeAd.headline
         callToActionView.text = nativeAd.callToAction
 
-        //  Set the secondary view to be the star rating if available.
-        val starRating = nativeAd.starRating
-        if (starRating != null && starRating > 0) {
-            secondaryView.visibility = View.GONE
-            ratingBar.visibility = View.VISIBLE
-            ratingBar.max = 5
-            nativeAdView.starRatingView = ratingBar
-        } else {
-            secondaryView.text = secondaryText
-            secondaryView.visibility = View.VISIBLE
-            ratingBar.visibility = View.GONE
-        }
-
         val icon = nativeAd.icon
-        if (icon != null) {
-            iconView.visibility = View.VISIBLE
-            iconView.setImageDrawable(icon.drawable)
+        if (icon == null) {
+            iconView.visibility = View.INVISIBLE
         } else {
-            iconView.visibility = View.GONE
+            iconView.setImageDrawable(icon.drawable)
+            iconView.visibility = View.VISIBLE
         }
 
-        nativeAdView.setNativeAd(nativeAd)
+        val price = nativeAd.price
+        if (price == null) {
+            priceView.visibility = View.INVISIBLE
+        } else {
+            priceView.visibility = View.VISIBLE
+            priceView.text = price
+        }
+
+        val starRating = nativeAd.starRating
+        if (starRating == null) {
+            starRatingView.visibility = View.GONE
+        } else {
+            starRatingView.rating = nativeAd.starRating.toFloat()
+            starRatingView.visibility = View.VISIBLE
+        }
+
+        adView.setNativeAd(nativeAd)
     }
 }
