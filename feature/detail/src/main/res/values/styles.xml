@@ -1,5 +1,13 @@
 <resources>
 
+    <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogTheme.Button</item>
+    </style>
+
+    <style name="AlertDialogTheme.Button" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
     <!-- MDC ShapeAppearance -->
 
     <style name="ShapeAppearance.Round" parent="ShapeAppearance.MaterialComponents">

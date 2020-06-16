@@ -2,8 +2,13 @@ package soup.movie.detail
 
 import android.content.Context
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ShareCompat
 import androidx.core.view.drawToBitmap
 import androidx.core.view.updatePadding
@@ -23,7 +28,8 @@ import soup.movie.detail.databinding.DetailActivityBinding
 import soup.movie.ext.*
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
-import soup.movie.util.*
+import soup.movie.util.YouTube
+import soup.movie.util.setOnDebounceClickListener
 import soup.movie.widget.elastic.ElasticDragDismissFrameLayout
 import timber.log.Timber
 import javax.inject.Inject
@@ -187,6 +193,19 @@ class DetailActivity : DaggerAppCompatActivity(),
                 }
                 is ImdbItemUiModel -> {
                     ctx.executeWeb(item.webLink)
+                }
+                is TrailerHeaderItemUiModel -> {
+                    val message = SpannableString(ctx.getText(R.string.trailer_dialog_message))
+                    Linkify.addLinks(message, Linkify.WEB_URLS)
+                    AlertDialog.Builder(ctx, R.style.AlertDialogTheme)
+                        .setTitle(R.string.trailer_dialog_title)
+                        .setMessage(message)
+                        .setPositiveButton(R.string.trailer_dialog_button, null)
+                        .show()
+                        .apply {
+                            findViewById<TextView>(android.R.id.message)?.movementMethod =
+                                LinkMovementMethod.getInstance()
+                        }
                 }
                 is TrailerItemUiModel -> {
                     analytics.clickTrailer()
