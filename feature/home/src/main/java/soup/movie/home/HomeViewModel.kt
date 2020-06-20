@@ -1,12 +1,12 @@
 package soup.movie.home
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.squareup.inject.assisted.AssistedInject
 import soup.movie.ext.postValueIfNew
 
-class HomeViewModel @AssistedInject constructor(
+class HomeViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _headerUiModel = MutableLiveData<HomeHeaderUiModel>()
@@ -23,10 +23,5 @@ class HomeViewModel @AssistedInject constructor(
 
     fun onFavoriteTabClick() {
         _headerUiModel.postValueIfNew(HomeHeaderUiModel.Favorite)
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): HomeViewModel
     }
 }

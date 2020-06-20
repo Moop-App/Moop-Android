@@ -1,9 +1,11 @@
 package soup.movie.di
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import soup.movie.ads.AdsManager
 import soup.movie.ads.AdsManagerImpl
 import soup.movie.analytics.EventAnalytics
@@ -21,17 +23,13 @@ import soup.movie.theme.ThemeOptionStore
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class ApplicationModule {
-
-    @Provides
-    fun provideContext(
-        application: Application
-    ): Context = application.applicationContext
 
     @Singleton
     @Provides
     fun provideImageUriProvider(
-        context: Context
+        @ApplicationContext context: Context
     ): ImageUriProvider {
         return ImageUriProviderImpl(context)
     }
@@ -39,7 +37,7 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideEventAnalytics(
-        context: Context
+        @ApplicationContext context: Context
     ): EventAnalytics = EventAnalyticsImpl(context)
 
     @Singleton
@@ -60,13 +58,13 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideAppUpdateManager(
-        context: Context
+        @ApplicationContext context: Context
     ): InAppUpdateManager = InAppUpdateManagerImpl(context)
 
     @Singleton
     @Provides
     fun provideAdsManager(
-        context: Context
+        @ApplicationContext context: Context
     ): AdsManager {
         return AdsManagerImpl(context)
     }
@@ -74,12 +72,12 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideAppSettings(
-        context: Context
+        @ApplicationContext context: Context
     ): AppSettings = AppSettingsImpl(context)
 
     @Singleton
     @Provides
     fun provideNotificationBuilder(
-        context: Context
+        @ApplicationContext context: Context
     ): NotificationBuilder = NotificationBuilderImpl(context)
 }

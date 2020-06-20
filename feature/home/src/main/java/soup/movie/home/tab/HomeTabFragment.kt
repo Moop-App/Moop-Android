@@ -1,12 +1,12 @@
 package soup.movie.home.tab
 
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.isScrolling
 import androidx.recyclerview.widget.isTop
-import dagger.android.support.DaggerFragment
 import soup.movie.ui.base.OnBackPressedListener
 
-abstract class HomeTabFragment : DaggerFragment(), OnBackPressedListener {
+abstract class HomeTabFragment : Fragment(), OnBackPressedListener {
 
     abstract fun scrollToTop()
 

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.firebase.crashlytics'
 
@@ -127,13 +128,11 @@ dependencies {
     implementation deps.navigation.ui_ktx
     implementation deps.navigation.dynamic_features_fragment
 
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android
-    implementation deps.dagger.android_support
-    kapt deps.dagger.compiler
-    kapt deps.dagger.android_processor
-    compileOnly deps.dagger.assisted_inject
-    kapt deps.dagger.assisted_inject_processor
+    implementation deps.dagger.hilt
+    kapt deps.dagger.hilt_compiler
+    implementation deps.hilt.viewmodel
+    implementation deps.hilt.work
+    kapt deps.hilt.compiler
 
     implementation deps.glide.runtime
     kapt deps.glide.compiler

@@ -12,14 +12,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
-import soup.movie.ext.assistedActivityViewModels
-import soup.movie.ext.assistedViewModels
 import soup.movie.ext.showToast
 import soup.movie.ext.startActivitySafely
 import soup.movie.model.Theater
@@ -28,24 +29,14 @@ import soup.movie.settings.databinding.SettingsItemTheaterBinding
 import soup.movie.settings.databinding.SettingsItemVersionBinding
 import soup.movie.system.SystemViewModel
 import soup.movie.util.*
-import javax.inject.Inject
-import javax.inject.Provider
 
-class SettingsFragment : DaggerFragment() {
+@AndroidEntryPoint
+class SettingsFragment : Fragment() {
 
     private lateinit var binding: SettingsFragmentBinding
 
-    @Inject
-    lateinit var systemViewModelProvider: Provider<SystemViewModel>
-    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelProvider.get()
-    }
-
-    @Inject
-    lateinit var viewModelFactory: SettingsViewModel.Factory
-    private val viewModel: SettingsViewModel by assistedViewModels {
-        viewModelFactory.create()
-    }
+    private val systemViewModel: SystemViewModel by activityViewModels()
+    private val viewModel: SettingsViewModel by viewModels()
 
     private var versionViewState: VersionSettingUiModel? = null
 

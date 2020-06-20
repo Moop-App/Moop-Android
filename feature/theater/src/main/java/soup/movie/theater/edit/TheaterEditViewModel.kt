@@ -1,16 +1,16 @@
 package soup.movie.theater.edit
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.model.Theater
 
-class TheaterEditViewModel @AssistedInject constructor(
+class TheaterEditViewModel @ViewModelInject constructor(
     private val manager: TheaterEditManager
 ) : ViewModel() {
 
@@ -58,10 +58,5 @@ class TheaterEditViewModel @AssistedInject constructor(
 
     fun onConfirmClicked() {
         manager.save()
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): TheaterEditViewModel
     }
 }

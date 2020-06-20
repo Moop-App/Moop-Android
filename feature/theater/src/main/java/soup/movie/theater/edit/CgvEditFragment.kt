@@ -4,20 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
-import dagger.android.support.DaggerFragment
-import soup.movie.ext.assistedActivityViewModels
+import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.model.Theater
 import soup.movie.theater.databinding.TheaterEditChildFragmentBinding
-import javax.inject.Inject
 
-class CgvEditFragment : DaggerFragment() {
+@AndroidEntryPoint
+class CgvEditFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: TheaterEditViewModel.Factory
-    private val viewModel: TheaterEditViewModel by assistedActivityViewModels {
-        viewModelFactory.create()
-    }
+    private val viewModel: TheaterEditViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

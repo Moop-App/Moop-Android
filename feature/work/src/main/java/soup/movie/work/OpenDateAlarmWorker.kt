@@ -1,9 +1,10 @@
 package soup.movie.work
 
 import android.content.Context
+import androidx.hilt.Assisted
+import androidx.hilt.work.WorkerInject
 import androidx.work.*
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.model.OpenDateAlarm
@@ -13,13 +14,12 @@ import soup.movie.util.YYYY_MM_DD
 import soup.movie.util.currentTime
 import soup.movie.util.plusDaysTo
 import soup.movie.util.today
-import soup.movie.work.di.ChildWorkerFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 
-class OpenDateAlarmWorker @AssistedInject constructor(
-    @Assisted context: Context,
+class OpenDateAlarmWorker @WorkerInject constructor(
+    @Assisted @ApplicationContext context: Context,
     @Assisted params: WorkerParameters,
     private val repository: MoopRepository,
     private val notificationBuilder: NotificationBuilder
@@ -81,7 +81,4 @@ class OpenDateAlarmWorker @AssistedInject constructor(
             return max(0, current.until(rebirth, ChronoUnit.MINUTES))
         }
     }
-
-    @AssistedInject.Factory
-    interface Factory : ChildWorkerFactory
 }

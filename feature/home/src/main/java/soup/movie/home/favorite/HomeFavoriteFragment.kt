@@ -6,18 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
-import soup.movie.ext.assistedViewModels
 import soup.movie.home.HomeFragmentDirections
 import soup.movie.home.databinding.HomeTabFavoriteBinding
 import soup.movie.home.tab.HomeTabFragment
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFavoriteFragment : HomeTabFragment() {
 
     @Inject
@@ -25,11 +27,7 @@ class HomeFavoriteFragment : HomeTabFragment() {
 
     private lateinit var binding: HomeTabFavoriteBinding
 
-    @Inject
-    lateinit var viewModelFactory: HomeFavoriteViewModel.Factory
-    private val viewModel: HomeFavoriteViewModel by assistedViewModels {
-        viewModelFactory.create()
-    }
+    private val viewModel: HomeFavoriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

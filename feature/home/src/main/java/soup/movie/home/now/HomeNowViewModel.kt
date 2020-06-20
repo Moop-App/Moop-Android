@@ -1,10 +1,10 @@
 package soup.movie.home.now
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -18,7 +18,7 @@ import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
 import soup.movie.settings.AppSettings
 
-class HomeNowViewModel @AssistedInject constructor(
+class HomeNowViewModel @ViewModelInject constructor(
     private val appSettings: AppSettings,
     private val repository: MoopRepository
 ) : ViewModel(), HomeContentsViewModel {
@@ -71,10 +71,5 @@ class HomeNowViewModel @AssistedInject constructor(
             _isLoading.postValue(false)
             _isError.postValue(true)
         }
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): HomeNowViewModel
     }
 }

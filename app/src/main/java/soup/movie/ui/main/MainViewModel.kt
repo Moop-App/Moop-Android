@@ -1,8 +1,8 @@
 package soup.movie.ui.main
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import soup.movie.ads.AdsManager
@@ -10,7 +10,7 @@ import soup.movie.model.repository.MoopRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 
-class MainViewModel @AssistedInject constructor(
+class MainViewModel @ViewModelInject constructor(
     private val repository: MoopRepository,
     adsManager: AdsManager
 ) : ViewModel() {
@@ -32,10 +32,5 @@ class MainViewModel @AssistedInject constructor(
                 _uiEvent.event = MainUiEvent.ShowDetailUiEvent(movie)
             }
         }
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): MainViewModel
     }
 }

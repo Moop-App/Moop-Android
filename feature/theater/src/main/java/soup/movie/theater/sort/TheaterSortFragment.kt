@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -17,26 +19,21 @@ import androidx.recyclerview.widget.listener.OnItemMoveListener
 import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import androidx.transition.TransitionInflater
 import com.google.android.material.chip.Chip
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
-import soup.movie.ext.assistedViewModels
 import soup.movie.theater.R
 import soup.movie.theater.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class TheaterSortFragment : DaggerFragment(), OnBackPressedListener {
+@AndroidEntryPoint
+class TheaterSortFragment : Fragment(), OnBackPressedListener {
 
     private lateinit var binding: TheaterSortFragmentBinding
 
-    @Inject
-    lateinit var viewModelFactory: TheaterSortViewModel.Factory
-    private val viewModel: TheaterSortViewModel by assistedViewModels {
-        viewModelFactory.create()
-    }
+    private val viewModel: TheaterSortViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

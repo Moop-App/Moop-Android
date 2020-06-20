@@ -12,7 +12,7 @@ import soup.movie.model.repository.MoopRepository
 import javax.inject.Inject
 
 class TheaterMapViewModel @Inject constructor(
-    private val repository: MoopRepository
+    //private val repository: MoopRepository
 ) : ViewModel() {
 
     private val _uiModel = MutableLiveData<TheaterMapUiModel>()
@@ -28,7 +28,9 @@ class TheaterMapViewModel @Inject constructor(
     private suspend fun loadUiModel(): TheaterMapUiModel {
         return withContext(Dispatchers.IO) {
             try {
-                TheaterMapUiModel(repository.getCodeList().toTheaterList())
+                //TODO: Fix this
+                //TheaterMapUiModel(repository.getCodeList().toTheaterList())
+                TheaterMapUiModel(emptyList())
             } catch (t: Throwable) {
                 TheaterMapUiModel(emptyList())
             }

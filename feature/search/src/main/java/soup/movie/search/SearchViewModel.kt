@@ -1,16 +1,16 @@
 package soup.movie.search
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.model.repository.MoopRepository
 
-class SearchViewModel @AssistedInject constructor(
+class SearchViewModel @ViewModelInject constructor(
     private val repository: MoopRepository
 ) : ViewModel() {
 
@@ -28,10 +28,5 @@ class SearchViewModel @AssistedInject constructor(
                 hasNoItem = movies.isEmpty()
             )
         }
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): SearchViewModel
     }
 }

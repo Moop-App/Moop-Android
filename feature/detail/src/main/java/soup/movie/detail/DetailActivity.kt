@@ -8,7 +8,9 @@ import android.text.util.Linkify
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.view.drawToBitmap
 import androidx.core.view.updatePadding
@@ -20,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
@@ -36,9 +38,8 @@ import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
-class DetailActivity : DaggerAppCompatActivity(),
-    DetailViewRenderer,
-    DetailViewAnimation {
+@AndroidEntryPoint
+class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimation {
 
     private val args: DetailActivityArgs by navArgs()
 
@@ -49,11 +50,7 @@ class DetailActivity : DaggerAppCompatActivity(),
     @Inject
     lateinit var analytics: EventAnalytics
 
-    @Inject
-    lateinit var detailFactory: DetailViewModel.Factory
-    private val viewModel: DetailViewModel by assistedActivityViewModels {
-        detailFactory.create()
-    }
+    private val viewModel: DetailViewModel by viewModels()
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
 

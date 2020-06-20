@@ -1,27 +1,24 @@
 package soup.movie
 
+import android.app.Application
 import android.content.Context
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.jakewharton.threetenabp.AndroidThreeTen
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
-import soup.movie.di.createAppComponent
+import dagger.hilt.android.HiltAndroidApp
 import soup.movie.notification.NotificationChannels
 import soup.movie.theme.ThemeOptionManager
 import soup.movie.util.CrashlyticsTree
 import timber.log.Timber
 import javax.inject.Inject
 
-class MovieApplication : DaggerApplication() {
+@HiltAndroidApp
+class MovieApplication : Application() {
 
-    @Inject lateinit var workConfiguration: Configuration
     @Inject lateinit var themeOptionManager: ThemeOptionManager
-
-    val applicationComponent by lazy {
-        createAppComponent()
-    }
+    @Inject lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
@@ -33,15 +30,13 @@ class MovieApplication : DaggerApplication() {
         AndroidThreeTen.init(this)
         NotificationChannels.initialize(this)
         themeOptionManager.initialize()
-        WorkManager.initialize(this, workConfiguration)
+        WorkManager.initialize(this, Configuration.Builder()
+                .setWorkerFactory(workerFactory)
+                .build())
     }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         SplitCompat.install(this)
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return applicationComponent
     }
 }
