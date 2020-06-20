@@ -28,8 +28,6 @@ dependencies {
 
     implementation deps.dagger.hilt
     kapt deps.dagger.hilt_compiler
-    implementation deps.hilt.viewmodel
-    kapt deps.hilt.compiler
 
     implementation deps.util.timber
 

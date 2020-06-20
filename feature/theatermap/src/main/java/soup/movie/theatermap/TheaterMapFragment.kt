@@ -36,20 +36,27 @@ import soup.movie.model.Theater
 import soup.movie.model.Theater.Companion.TYPE_CGV
 import soup.movie.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.model.Theater.Companion.TYPE_MEGABOX
+import soup.movie.model.repository.MoopRepository
 import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.databinding.TheaterMapFragmentBinding
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.*
+import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
 class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
 
+    @Inject
+    lateinit var repository: MoopRepository
+
     private lateinit var binding: TheaterMapFragmentBinding
 
     private val systemViewModel: SystemViewModel by activityViewModels()
-    private val viewModel: TheaterMapViewModel by viewModels()
+    private val viewModel: TheaterMapViewModel by viewModels {
+        viewModelProviderFactoryOf { TheaterMapViewModel(repository) }
+    }
 
     private lateinit var locationSource: FusedLocationSource
 
