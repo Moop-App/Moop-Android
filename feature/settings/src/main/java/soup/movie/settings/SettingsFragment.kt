@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
@@ -15,6 +13,7 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -28,10 +27,11 @@ import soup.movie.settings.databinding.SettingsFragmentBinding
 import soup.movie.settings.databinding.SettingsItemTheaterBinding
 import soup.movie.settings.databinding.SettingsItemVersionBinding
 import soup.movie.system.SystemViewModel
+import soup.movie.theme.setThemeOptionLabel
 import soup.movie.util.*
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     private lateinit var binding: SettingsFragmentBinding
 
@@ -55,17 +55,12 @@ class SettingsFragment : Fragment() {
         })
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = SettingsFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        binding.initViewState(viewModel)
-        binding.adaptSystemWindowInset()
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = SettingsFragmentBinding.bind(view).apply {
+            initViewState(viewModel)
+            adaptSystemWindowInset()
+        }
     }
 
     private fun SettingsFragmentBinding.adaptSystemWindowInset() {
@@ -91,12 +86,17 @@ class SettingsFragment : Fragment() {
         viewModel.theaterUiModel.observe(viewLifecycleOwner) {
             theaterItem.render(it)
         }
+
         themeItem.editThemeButton.setOnDebounceClickListener {
             onThemeEditClicked()
         }
         themeItem.themeName.setOnDebounceClickListener {
             onThemeEditClicked()
         }
+        viewModel.themeUiModel.observe(viewLifecycleOwner, Observer {
+            themeItem.themeName.setThemeOptionLabel(it.themeOption)
+        })
+
         //TODO: Apply theater mode
         //tmPrepare.setOnClickListener {
         //    startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))

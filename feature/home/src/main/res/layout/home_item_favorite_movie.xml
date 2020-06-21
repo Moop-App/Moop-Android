@@ -1,100 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroundView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/transparent"
+    app:cardElevation="0dp"
+    app:rippleColor="@color/color_on_poster"
+    tools:layout_width="120dp">
 
-    <data>
-
-        <variable
-            name="item"
-            type="soup.movie.model.Movie" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/backgroundView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        app:cardBackgroundColor="@color/transparent"
-        app:cardElevation="0dp"
-        app:rippleColor="@color/color_on_poster"
-        tools:layout_width="120dp">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:tag="@{item.id}">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/posterView"
+            app:layout_constraintEnd_toEndOf="@+id/posterView"
+            app:layout_constraintStart_toStartOf="@+id/posterView"
+            app:layout_constraintTop_toTopOf="@+id/posterView" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/posterView"
-                app:layout_constraintEnd_toEndOf="@+id/posterView"
-                app:layout_constraintStart_toStartOf="@+id/posterView"
-                app:layout_constraintTop_toTopOf="@+id/posterView" />
+        <ImageView
+            android:id="@+id/posterView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,27:40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-            <ImageView
-                android:id="@+id/posterView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:contentDescription="@{item.title}"
-                android:placeholder="@{@drawable/bg_on_surface_dim}"
-                android:scaleType="centerCrop"
-                android:srcUrl="@{item.posterUrl}"
-                app:grayscale="@{item.isPlan}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="H,27:40"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+        <include
+            android:id="@+id/ageBgView"
+            layout="@layout/movie_tag_age_bg"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <include
-                android:id="@+id/ageBgView"
-                layout="@layout/movie_tag_age_bg"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_margin="7dp"
-                app:item="@{item}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+        <include
+            android:id="@+id/newView"
+            layout="@layout/movie_tag_new"
+            android:layout_width="@dimen/tag_width"
+            android:layout_height="@dimen/tag_height"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="gone" />
 
-            <include
-                android:id="@+id/newView"
-                layout="@layout/movie_tag_new"
-                android:layout_width="@dimen/tag_width"
-                android:layout_height="@dimen/tag_height"
-                android:layout_margin="4dp"
-                app:item="@{item}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:visibility="gone" />
+        <include
+            android:id="@+id/bestView"
+            layout="@layout/movie_tag_best"
+            android:layout_width="@dimen/tag_width"
+            android:layout_height="@dimen/tag_height"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
 
-            <include
-                android:id="@+id/bestView"
-                layout="@layout/movie_tag_best"
-                android:layout_width="@dimen/tag_width"
-                android:layout_height="@dimen/tag_height"
-                android:layout_margin="4dp"
-                app:item="@{item}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:visibility="visible" />
+        <include
+            android:id="@+id/dDayView"
+            layout="@layout/movie_tag_d_day"
+            android:layout_width="@dimen/tag_width"
+            android:layout_height="@dimen/tag_height"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="gone" />
 
-            <include
-                android:id="@+id/dDayView"
-                layout="@layout/movie_tag_d_day"
-                android:layout_width="@dimen/tag_width"
-                android:layout_height="@dimen/tag_height"
-                android:layout_margin="4dp"
-                app:item="@{item}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:visibility="gone" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</layout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

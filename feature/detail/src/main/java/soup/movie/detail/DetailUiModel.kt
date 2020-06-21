@@ -94,7 +94,7 @@ class PersonUiModel(
 )
 
 @Keep
-class AdUiModel(
+class AdItemUiModel(
     val nativeAd: UnifiedNativeAd
 ) : ContentItemUiModel()
 
@@ -124,7 +124,7 @@ val ContentItemUiModel.id: String
         is ImdbItemUiModel -> "imdb"
         is PlotItemUiModel -> "plot"
         is CastItemUiModel -> "cast"
-        is AdUiModel -> "ad"
+        is AdItemUiModel -> "ad"
         is TrailerHeaderItemUiModel -> "t_header"
         is TrailerItemUiModel -> "t_${trailer.youtubeId}"
         is TrailerFooterItemUiModel -> "t_footer"

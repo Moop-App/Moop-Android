@@ -1,46 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="soup.movie.theatermap.TheaterMapFragment">
+    android:id="@+id/theater_map_scene"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TheaterMapFragment">
 
-    <data>
+    <include
+        android:id="@+id/header"
+        layout="@layout/theater_map_header" />
 
-        <variable
-            name="viewModel"
-            type="soup.movie.theatermap.TheaterMapViewModel" />
-    </data>
+    <include
+        android:id="@+id/contents"
+        layout="@layout/theater_map_contents" />
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/theater_map_scene"
+    <include
+        android:id="@+id/footer"
+        layout="@layout/theater_map_footer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="144dp"
+        android:background="?attr/colorSurface"
+        android:elevation="16dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="200dp"
+        app:layout_behavior="@string/bottom_sheet_behavior" />
 
-        <include
-            android:id="@+id/header"
-            layout="@layout/theater_map_header" />
+    <View
+        android:id="@+id/map_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/colorBackground"
+        tools:visibility="gone" />
 
-        <include
-            android:id="@+id/contents"
-            layout="@layout/theater_map_contents" />
-
-        <include
-            android:id="@+id/footer"
-            layout="@layout/theater_map_footer"
-            android:layout_width="match_parent"
-            android:layout_height="144dp"
-            android:background="?attr/colorSurface"
-            android:elevation="16dp"
-            app:behavior_hideable="true"
-            app:behavior_peekHeight="200dp"
-            app:layout_behavior="@string/bottom_sheet_behavior" />
-
-        <View
-            android:id="@+id/map_cover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/colorBackground"
-            tools:visibility="gone" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

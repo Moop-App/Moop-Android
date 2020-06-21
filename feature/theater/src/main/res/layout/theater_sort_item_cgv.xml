@@ -1,45 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="?selectableItemBackground"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    tools:background="@color/debug_background">
 
-    <data>
+    <com.google.android.material.chip.Chip
+        android:id="@+id/theaterChip"
+        style="@style/Widget.Chip.Cgv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="CGV 서울" />
 
-        <variable
-            name="item"
-            type="soup.movie.model.Theater" />
-    </data>
+    <ImageView
+        android:id="@+id/dragHandle"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_round_drag_handle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="?selectableItemBackground"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        tools:background="@color/debug_background">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/theaterChip"
-            style="@style/Widget.Chip.Cgv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="@{item.id}"
-            android:text="@{item.name}"
-            android:transitionName="@{item.id}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="CGV 서울" />
-
-        <ImageView
-            android:id="@+id/dragHandle"
-            android:layout_width="48dp"
-            android:layout_height="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_round_drag_handle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

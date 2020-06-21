@@ -2,12 +2,16 @@ package soup.movie.theatermap
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 
-abstract class BaseMapFragment : Fragment() {
+abstract class BaseMapFragment : Fragment {
+
+    constructor() : super()
+    constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
 
     private val callbacks = ArrayList<OnMapReadyCallback>()
     private var mapView: MapView? = null

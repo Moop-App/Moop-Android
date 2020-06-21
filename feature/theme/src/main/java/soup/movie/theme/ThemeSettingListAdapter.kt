@@ -31,8 +31,7 @@ class ThemeSettingListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ThemeSettingItemUiModel) {
-            binding.item = item
-            binding.executePendingBindings()
+            binding.root.setThemeOptionLabel(item.themeOption)
         }
     }
 }

@@ -1,60 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    tools:background="@color/debug_background">
 
-    <data>
+    <TextView
+        android:id="@+id/areaView"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/theaterListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2018.03.31"
+        tools:visibility="visible" />
 
-        <variable
-            name="item"
-            type="soup.movie.model.TheaterArea" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/theaterListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        tools:background="@color/debug_background">
+        android:clipToPadding="false"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/areaView"
+        tools:visibility="visible">
 
-        <TextView
-            android:id="@+id/areaView"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@{item.area.name}"
-            android:textColor="?attr/colorOnBackground"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/theaterListView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="2018.03.31"
-            tools:visibility="visible" />
+        <!-- for preview
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/theaterListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/areaView"
-            tools:visibility="visible">
+        <include layout="@layout/theater_edit_item_cgv" />
+        <include layout="@layout/theater_edit_item_lotte" />
+        <include layout="@layout/theater_edit_item_megabox" />
+         -->
 
-            <!-- for preview
+    </com.google.android.material.chip.ChipGroup>
 
-            <include layout="@layout/theater_edit_item_cgv" />
-            <include layout="@layout/theater_edit_item_lotte" />
-            <include layout="@layout/theater_edit_item_megabox" />
-             -->
-
-        </com.google.android.material.chip.ChipGroup>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,21 +2,19 @@ package soup.movie.ui.theater.mode
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import soup.movie.R
 import soup.movie.databinding.ActivityTheaterModeBinding
 import soup.movie.ui.theater.mode.TheaterModeTileManager.TileState
+import soup.movie.util.viewBindings
 
 class TheaterModeTileActivity : AppCompatActivity() {
 
     private val tileManager = TheaterModeTileManager
 
-    private lateinit var binding: ActivityTheaterModeBinding
+    private val binding by viewBindings(ActivityTheaterModeBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_theater_mode)
-
+        setContentView(binding.root)
         updateStateView()
 
         binding.activeButton.setOnClickListener {

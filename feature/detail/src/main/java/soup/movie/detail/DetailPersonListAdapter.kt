@@ -2,6 +2,7 @@ package soup.movie.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
@@ -32,8 +33,9 @@ internal class DetailPersonListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PersonUiModel) {
-            binding.item = item
-            binding.executePendingBindings()
+            binding.nameText.text = item.name
+            binding.castText.text = item.cast
+            binding.castText.isGone = item.cast.isEmpty()
         }
     }
 }

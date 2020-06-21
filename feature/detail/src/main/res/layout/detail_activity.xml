@@ -1,126 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<soup.movie.widget.elastic.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/draggableFrame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="false"
+    app:dragDismissDistance="@dimen/drag_dismiss_distance"
+    app:dragDismissScale="0.95"
+    tools:context=".DetailActivity">
 
-    <data>
+    <!-- Use a separate view for the background, rather than on the root view because it is a
+         shared element. Otherwise it interferes with the window enter transition i.e. as it is
+         resized for the shared element transition, many views are considered 'off-screen' so
+         visibility transitions are not run. -->
 
-        <variable
-            name="viewModel"
-            type="soup.movie.detail.DetailViewModel" />
-    </data>
-
-    <soup.movie.widget.elastic.ElasticDragDismissFrameLayout
-        android:id="@+id/draggableFrame"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionGroup="false"
-        app:dragDismissDistance="@dimen/drag_dismiss_distance"
-        app:dragDismissScale="0.95"
-        tools:context=".detail.DetailActivity">
+        android:layout_height="match_parent">
 
-        <!-- Use a separate view for the background, rather than on the root view because it is a
-             shared element. Otherwise it interferes with the window enter transition i.e. as it is
-             resized for the shared element transition, many views are considered 'off-screen' so
-             visibility transitions are not run. -->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
+            android:id="@+id/backgroundView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?android:attr/colorBackground"
+            android:transitionName="@string/transition_background" />
 
-            <View
-                android:id="@+id/backgroundView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?android:attr/colorBackground"
-                android:transitionName="@string/transition_background" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
+            android:requiresFadingEdge="none"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/detail_item_trailer"
+            tools:paddingTop="@dimen/detail_header_height" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="8dp"
-                android:requiresFadingEdge="none"
-                android:scrollbars="none"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/detail_item_trailer"
-                tools:paddingTop="@dimen/detail_header_height" />
+        <include
+            android:id="@+id/header"
+            layout="@layout/detail_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                android:id="@+id/header"
-                layout="@layout/detail_header"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:uiModel="@{viewModel.headerUiModel}" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/error_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="error_icon,error_description,error_retry_button"
+            tools:visibility="gone" />
 
-            <androidx.constraintlayout.widget.Group
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibleIf="@{viewModel.isError}"
-                app:constraint_referenced_ids="error_icon,error_description,error_retry_button"
-                tools:visibility="gone" />
+        <ImageView
+            android:id="@+id/error_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_splash_launcher"
+            app:layout_constraintBottom_toTopOf="@id/error_description"
+            app:layout_constraintDimensionRatio="5:2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-            <ImageView
-                android:id="@+id/error_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_splash_launcher"
-                app:layout_constraintBottom_toTopOf="@id/error_description"
-                app:layout_constraintDimensionRatio="5:2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header"
-                app:layout_constraintVertical_chainStyle="packed" />
+        <TextView
+            android:id="@+id/error_description"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/common_network_error"
+            app:layout_constraintBottom_toTopOf="@id/error_retry_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_icon"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
-                android:id="@+id/error_description"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/common_network_error"
-                app:layout_constraintBottom_toTopOf="@id/error_retry_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/error_icon"
-                app:layout_constraintVertical_chainStyle="packed" />
+        <TextView
+            android:id="@+id/error_retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/common_retry"
+            android:textColor="?colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_description" />
 
-            <TextView
-                android:id="@+id/error_retry_button"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:background="?selectableItemBackground"
-                android:gravity="center"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:text="@string/common_retry"
-                android:textColor="?colorAccent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/error_description" />
+        <include
+            android:id="@+id/share"
+            layout="@layout/detail_share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                android:id="@+id/share"
-                layout="@layout/detail_share"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:uiModel="@{viewModel.headerUiModel}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </soup.movie.widget.elastic.ElasticDragDismissFrameLayout>
-</layout>
+</soup.movie.widget.elastic.ElasticDragDismissFrameLayout>

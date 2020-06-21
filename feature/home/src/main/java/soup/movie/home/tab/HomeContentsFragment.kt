@@ -1,9 +1,7 @@
 package soup.movie.home.tab
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -17,12 +15,13 @@ import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.home.HomeContentsListAdapter
 import soup.movie.home.HomeFragmentDirections
+import soup.movie.home.R
 import soup.movie.home.databinding.HomeTabContentsBinding
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
-abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
+abstract class HomeContentsFragment : HomeTabFragment(R.layout.home_tab_contents), OnBackPressedListener {
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -37,21 +36,13 @@ abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = HomeTabContentsBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.adaptSystemWindowInset()
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.initViewState(viewModel)
-        binding.listView.adapter?.registerAdapterDataObserver(adapterDataObserver)
+        binding = HomeTabContentsBinding.bind(view).apply {
+            adaptSystemWindowInset()
+            initViewState(viewModel)
+            listView.adapter?.registerAdapterDataObserver(adapterDataObserver)
+        }
     }
 
     private fun HomeTabContentsBinding.adaptSystemWindowInset() {
@@ -83,14 +74,14 @@ abstract class HomeContentsFragment : HomeTabFragment(), OnBackPressedListener {
             adapter = listAdapter
             itemAnimator = FadeInAnimator()
         }
-        errorView.setOnDebounceClickListener {
+        errorView.root.setOnDebounceClickListener {
             viewModel.refresh()
         }
         viewModel.isLoading.observe(viewLifecycleOwner) {
             loadingView.isInProgress = it
         }
         viewModel.isError.observe(viewLifecycleOwner) {
-            errorView.isVisible = it
+            errorView.root.isVisible = it
         }
         viewModel.contentsUiModel.observe(viewLifecycleOwner) {
             noItemsView.isVisible = it.movies.isEmpty()

@@ -1,101 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="8dp"
+    android:animateLayoutChanges="true"
+    app:cardBackgroundColor="?attr/colorSurface"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="@dimen/detail_card_elevation">
 
-    <data>
-
-        <variable
-            name="item"
-            type="soup.movie.detail.PlotItemUiModel" />
-
-        <variable
-            name="position"
-            type="int" />
-
-        <variable
-            name="listener"
-            type="soup.movie.ui.databinding.DataBindingItemListener" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
-        android:animateLayoutChanges="true"
-        app:cardBackgroundColor="?attr/colorSurface"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="@dimen/detail_card_elevation"
-        app:onDebounceClick="@{(v) -> listener.onItemClick(v, position, item)}">
+        android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/plotLabel"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:drawableStart="@drawable/ic_round_plot"
+            android:drawablePadding="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="줄거리"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/plotLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_round_plot"
-                android:drawablePadding="8dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="줄거리"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:textColor="?attr/colorOnSurface"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/more_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/plotLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/plotLabel"
+            app:srcCompat="@drawable/asld_plot_more"
+            tools:src="@drawable/ic_round_plot_expand" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:selected="@{item.isExpanded}"
-                app:layout_constraintBottom_toBottomOf="@id/plotLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/plotLabel"
-                app:srcCompat="@drawable/asld_plot_more"
-                tools:src="@drawable/ic_round_plot_expand" />
+        <TextView
+            android:id="@+id/shortPlotText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/plotLabel"
+            tools:text="“내 인생이 비극인줄 알았는데, 코미디였어”고담시의 광대 아서 플렉은 코미디언을 꿈꾸는 남자.하지만 모두가 미쳐가는 코미디 같은 세상에서 맨 정신으로는 그가 설 자리가 없음을 깨닫게 되는데…이제껏 본 적 없는 진짜 ‘조커’를 만나라!"
+            tools:visibility="gone" />
 
-            <TextView
-                android:id="@+id/shortPlotText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:ellipsize="end"
-                android:goneIf="@{item.isExpanded}"
-                android:maxLines="3"
-                android:text="@{item.plot}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:textColor="?attr/colorOnSurface"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/plotLabel"
-                tools:text="“내 인생이 비극인줄 알았는데, 코미디였어”고담시의 광대 아서 플렉은 코미디언을 꿈꾸는 남자.하지만 모두가 미쳐가는 코미디 같은 세상에서 맨 정신으로는 그가 설 자리가 없음을 깨닫게 되는데…이제껏 본 적 없는 진짜 ‘조커’를 만나라!"
-                tools:visibility="gone" />
+        <TextView
+            android:id="@+id/longPlotText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/plotLabel"
+            tools:text="“내 인생이 비극인줄 알았는데, 코미디였어”고담시의 광대 아서 플렉은 코미디언을 꿈꾸는 남자.하지만 모두가 미쳐가는 코미디 같은 세상에서 맨 정신으로는 그가 설 자리가 없음을 깨닫게 되는데…이제껏 본 적 없는 진짜 ‘조커’를 만나라!"
+            tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/longPlotText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="@{item.plot}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:textColor="?attr/colorOnSurface"
-                android:visibleIf="@{item.isExpanded}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/plotLabel"
-                tools:text="“내 인생이 비극인줄 알았는데, 코미디였어”고담시의 광대 아서 플렉은 코미디언을 꿈꾸는 남자.하지만 모두가 미쳐가는 코미디 같은 세상에서 맨 정신으로는 그가 설 자리가 없음을 깨닫게 되는데…이제껏 본 적 없는 진짜 ‘조커’를 만나라!"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</layout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

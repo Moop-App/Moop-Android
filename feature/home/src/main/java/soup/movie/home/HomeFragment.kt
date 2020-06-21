@@ -30,7 +30,7 @@ import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), OnBackPressedListener {
+class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -53,17 +53,12 @@ class HomeFragment : Fragment(), OnBackPressedListener {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = HomeFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        binding.initViewState(viewModel)
-        binding.adaptSystemWindowInset()
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = HomeFragmentBinding.bind(view).apply {
+            initViewState(viewModel)
+            adaptSystemWindowInset()
+        }
     }
 
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
