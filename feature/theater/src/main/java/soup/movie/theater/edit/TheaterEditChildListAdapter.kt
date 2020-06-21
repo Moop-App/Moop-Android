@@ -3,9 +3,8 @@ package soup.movie.theater.edit
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
-import soup.movie.binding.DataBindingAdapter
-import soup.movie.binding.DataBindingViewHolder
 import soup.movie.ext.showToast
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
@@ -16,7 +15,7 @@ import soup.movie.util.inflate
 
 class TheaterEditChildListAdapter(
     private val listener: Listener
-) : DataBindingAdapter<TheaterArea>() {
+) : RecyclerView.Adapter<TheaterEditChildListAdapter.AreaGroupViewHolder>() {
 
     interface Listener {
 
@@ -25,7 +24,8 @@ class TheaterEditChildListAdapter(
         fun remove(theater: Theater)
     }
 
-    private var selectedIdSet: MutableList<Theater> = arrayListOf()
+    private val items = mutableListOf<TheaterArea>()
+    private val selectedIdSet: MutableList<Theater> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaGroupViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -33,46 +33,49 @@ class TheaterEditChildListAdapter(
         return AreaGroupViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DataBindingViewHolder<TheaterArea>, position: Int) {
-        super.onBindViewHolder(holder, position)
-        if (holder is AreaGroupViewHolder) {
-            holder.theaterListView.apply {
-                removeAllViews()
-                getItem(position)?.theaterList?.map { theater ->
-                    inflate<Chip>(
-                        context,
-                        theater.getFilterChipLayout()
-                    ).apply {
-                        text = theater.name
-                        val isSelected = selectedIdSet.any { it.id == theater.id }
-                        isChecked = isSelected
-                        isChipIconVisible = isSelected.not()
-                        setOnCheckedChangeListener { _, checked ->
-                            if (checked) {
-                                if (listener.add(theater)) {
-                                    selectedIdSet.add(theater)
-                                    isChipIconVisible = false
-                                } else {
-                                    isChecked = false
-                                    context.showToast(context.getString(R.string.theater_select_limit_description, MAX_ITEMS))
-                                }
+    override fun onBindViewHolder(holder: AreaGroupViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.areaView.text = item.area.name
+        holder.theaterListView.apply {
+            removeAllViews()
+            item.theaterList.map { theater ->
+                inflate<Chip>(context, theater.getFilterChipLayout()).apply {
+                    text = theater.name
+                    val isSelected = selectedIdSet.any { it.id == theater.id }
+                    isChecked = isSelected
+                    isChipIconVisible = isSelected.not()
+                    setOnCheckedChangeListener { _, checked ->
+                        if (checked) {
+                            if (listener.add(theater)) {
+                                selectedIdSet.add(theater)
+                                isChipIconVisible = false
                             } else {
-                                listener.remove(theater)
-                                selectedIdSet.removeAll { it.id == theater.id }
-                                isChipIconVisible = true
+                                isChecked = false
+                                context.showToast(context.getString(R.string.theater_select_limit_description, MAX_ITEMS))
                             }
+                        } else {
+                            listener.remove(theater)
+                            selectedIdSet.removeAll { it.id == theater.id }
+                            isChipIconVisible = true
                         }
                     }
-                }?.forEach { addView(it) }
-            }
+                }
+            }.forEach { addView(it) }
         }
     }
 
     override fun getItemViewType(position: Int): Int = R.layout.theater_edit_item_area
 
+    override fun getItemCount(): Int = items.size
+
+    private fun getItem(position: Int): TheaterArea = items[position]
+
     fun submitList(list: List<TheaterArea>, selectedIdSet: List<Theater>) {
-        this.selectedIdSet = selectedIdSet.toMutableList()
-        submitList(list)
+        this.selectedIdSet.clear()
+        this.selectedIdSet.addAll(selectedIdSet)
+        this.items.clear()
+        this.items.addAll(list)
+        notifyDataSetChanged()
     }
 
     @LayoutRes
@@ -85,8 +88,8 @@ class TheaterEditChildListAdapter(
         }
     }
 
-    class AreaGroupViewHolder(binding: TheaterEditItemAreaBinding) : DataBindingViewHolder<TheaterArea>(binding) {
-
+    class AreaGroupViewHolder(binding: TheaterEditItemAreaBinding) : RecyclerView.ViewHolder(binding.root) {
+        val areaView = binding.areaView
         val theaterListView = binding.theaterListView
     }
 }

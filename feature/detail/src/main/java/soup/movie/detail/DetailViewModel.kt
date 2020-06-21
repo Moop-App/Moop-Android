@@ -46,7 +46,7 @@ class DetailViewModel @ViewModelInject constructor(
     val uiEvent: EventLiveData<UiEvent>
         get() = _uiEvent
 
-    private val _isError = MutableLiveData<Boolean>(false)
+    private val _isError = MutableLiveData(false)
     val isError: LiveData<Boolean>
         get() = _isError
 
@@ -195,7 +195,7 @@ class DetailViewModel @ViewModelInject constructor(
         }
 
         nativeAd?.let {
-            items.add(AdUiModel(it))
+            items.add(AdItemUiModel(it))
         }
 
         val trailers = trailers.orEmpty()

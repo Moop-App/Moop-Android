@@ -1,135 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:background="?attr/colorSurface">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/peekView"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:background="?attr/colorSurface">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/peekView"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center_vertical"
-                android:text="자주가는 극장은 최대 10개까지\n선택할 수 있습니다."
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/confirmButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/confirmButton"
-                android:layout_width="100dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_button_confirm"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/checkView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:src="@drawable/ic_round_check"
-                    android:tint="?attr/colorOnSecondary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.robinhood.ticker.TickerView
-                    android:id="@+id/currentCountView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:gravity="end"
-                    android:text="0"
-                    android:textColor="?attr/colorOnSecondary"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/totalCountView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:ticker_defaultCharacterList="number"
-                    tools:text="10" />
-
-                <TextView
-                    android:id="@+id/totalCountView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="/ 10"
-                    android:textColor="?attr/colorOnSecondary"
-                    android:textSize="14dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="?attr/colorDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/peekView" />
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/noTheaterView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/theater_empty_description"
-            android:textColor="?attr/colorOnSurface"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/peekView"
-            tools:visibility="visible" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/selectedTheaterGroup"
+            android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:padding="16dp"
-            app:chipSpacing="8dp"
-            app:chipSpacingVertical="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:text="자주가는 극장은 최대 10개까지\n선택할 수 있습니다."
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/confirmButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/confirmButton"
+            android:layout_width="100dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_button_confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/peekView"
-            app:layout_constraintVertical_bias="0"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <!-- for preview
-            <include layout="@layout/chip_action_cgv" />
-            <include layout="@layout/chip_action_lotte" />
-            <include layout="@layout/chip_action_megabox" />
-             -->
+            <ImageView
+                android:id="@+id/checkView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_round_check"
+                app:tint="?attr/colorOnSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.chip.ChipGroup>
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/currentCountView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:gravity="end"
+                android:text="0"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/totalCountView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:ticker_defaultCharacterList="number"
+                tools:text="10" />
 
+            <TextView
+                android:id="@+id/totalCountView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="/ 10"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?attr/colorDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/peekView" />
+
+    <TextView
+        android:id="@+id/noTheaterView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/theater_empty_description"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/peekView"
+        tools:visibility="visible" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/selectedTheaterGroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        app:chipSpacing="8dp"
+        app:chipSpacingVertical="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/peekView"
+        app:layout_constraintVertical_bias="0"
+        tools:visibility="visible">
+
+        <!-- for preview
+        <include layout="@layout/chip_action_cgv" />
+        <include layout="@layout/chip_action_lotte" />
+        <include layout="@layout/chip_action_megabox" />
+         -->
+
+    </com.google.android.material.chip.ChipGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import androidx.databinding.BindingAdapter
+import androidx.annotation.DrawableRes
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -18,11 +18,7 @@ import java.io.File
 
 /** ImageView */
 
-@BindingAdapter(
-    value = ["android:srcUrl", "android:placeholder"],
-    requireAll = false
-)
-fun ImageView.loadAsync(url: String?, placeholder: Drawable? = null) {
+fun ImageView.loadAsync(url: String?, @DrawableRes placeholder: Int? = null) {
     if (url == null) {
         GlideApp.with(context)
             .load(placeholder)
@@ -77,7 +73,6 @@ private inline fun createEndListener(crossinline action: () -> Unit): RequestLis
     }
 }
 
-@BindingAdapter("grayscale")
 fun ImageView.setGrayscale(enable: Boolean) {
     colorFilter = if (enable) {
         ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })

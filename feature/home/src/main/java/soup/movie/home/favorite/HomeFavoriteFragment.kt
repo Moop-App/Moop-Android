@@ -1,9 +1,7 @@
 package soup.movie.home.favorite
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -15,29 +13,27 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.home.HomeFragmentDirections
+import soup.movie.home.R
 import soup.movie.home.databinding.HomeTabFavoriteBinding
 import soup.movie.home.tab.HomeTabFragment
+import soup.movie.util.autoCleared
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFavoriteFragment : HomeTabFragment() {
+class HomeFavoriteFragment : HomeTabFragment(R.layout.home_tab_favorite) {
 
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private lateinit var binding: HomeTabFavoriteBinding
+    private var binding: HomeTabFavoriteBinding by autoCleared()
 
     private val viewModel: HomeFavoriteViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = HomeTabFavoriteBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.initViewState(viewModel)
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = HomeTabFavoriteBinding.bind(view).apply {
+            initViewState(viewModel)
+        }
     }
 
     private fun HomeTabFavoriteBinding.initViewState(viewModel: HomeFavoriteViewModel) {
@@ -70,6 +66,6 @@ class HomeFavoriteFragment : HomeTabFragment() {
     }
 
     private fun getListView(): RecyclerView? {
-        return if (::binding.isInitialized) binding.listView else null
+        return binding.listView
     }
 }

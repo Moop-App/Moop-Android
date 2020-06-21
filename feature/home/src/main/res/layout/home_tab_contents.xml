@@ -1,98 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/noItemsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="icon,description" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/ic_round_no_movies"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_movies_description"
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
+
+    <androidx.viewpager2.NestedScrollableHost
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/noItemsView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="icon,description" />
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:src="@drawable/ic_round_no_movies"
-            app:layout_constraintBottom_toTopOf="@+id/description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_movies_description"
-            android:textColor="?attr/colorOnBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon" />
-
-        <androidx.viewpager2.NestedScrollableHost
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:padding="8dp"
+            android:requiresFadingEdge="none"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="@integer/grid_span_count"
+            tools:itemCount="20"
+            tools:listitem="@layout/home_item_movie"
+            tools:visibility="gone" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:padding="8dp"
-                android:requiresFadingEdge="none"
-                android:scrollbars="none"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="@integer/grid_span_count"
-                tools:itemCount="20"
-                tools:listitem="@layout/home_item_movie"
-                tools:visibility="gone" />
+    </androidx.viewpager2.NestedScrollableHost>
 
-        </androidx.viewpager2.NestedScrollableHost>
+    <soup.movie.widget.ContentLoadingProgressBar
+        android:id="@+id/loadingView"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_loading_bg"
+        android:elevation="12dp"
+        android:indeterminateDrawable="@drawable/ic_loading"
+        android:indeterminateDuration="500"
+        android:indeterminateOnly="true"
+        android:translationY="-60dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:translationY="50dp"
+        tools:visibility="visible" />
 
-        <soup.movie.widget.ContentLoadingProgressBar
-            android:id="@+id/loadingView"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/ic_loading_bg"
-            android:elevation="12dp"
-            android:indeterminateDrawable="@drawable/ic_loading"
-            android:indeterminateDuration="500"
-            android:indeterminateOnly="true"
-            android:translationY="-60dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:translationY="50dp"
-            tools:visibility="visible" />
+    <include
+        android:id="@+id/errorView"
+        layout="@layout/common_error"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
-        <include
-            android:id="@+id/errorView"
-            layout="@layout/common_error"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

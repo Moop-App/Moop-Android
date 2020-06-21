@@ -24,14 +24,15 @@ import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.theater.R
 import soup.movie.theater.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.util.autoCleared
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class TheaterSortFragment : Fragment(), OnBackPressedListener {
+class TheaterSortFragment : Fragment(R.layout.theater_sort_fragment), OnBackPressedListener {
 
-    private lateinit var binding: TheaterSortFragmentBinding
+    private var binding: TheaterSortFragmentBinding by autoCleared()
 
     private val viewModel: TheaterSortViewModel by viewModels()
 
@@ -74,12 +75,15 @@ class TheaterSortFragment : Fragment(), OnBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         postponeEnterTransition(400, TimeUnit.MILLISECONDS)
-        binding = TheaterSortFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        binding.initViewState(viewModel)
-        binding.adaptSystemWindowInset()
-        return binding.root
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = TheaterSortFragmentBinding.bind(view).apply {
+            initViewState(viewModel)
+            adaptSystemWindowInset()
+        }
     }
 
     private fun TheaterSortFragmentBinding.adaptSystemWindowInset() {

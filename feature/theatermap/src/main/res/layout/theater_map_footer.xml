@@ -1,96 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/infoView"
+    android:layout_width="match_parent"
+    android:layout_height="144dp"
+    android:background="?colorSurface">
 
-    <data />
+    <TextView
+        android:id="@+id/name_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/window_inset_bottom_view"
+        app:layout_constraintEnd_toStartOf="@id/google_map_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Movie Title" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/infoView"
+    <ImageView
+        android:id="@+id/google_map_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:elevation="12dp"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@id/naver_map_button"
+        app:layout_constraintEnd_toStartOf="@id/naver_map_button"
+        app:layout_constraintStart_toEndOf="@id/name_view"
+        app:layout_constraintTop_toTopOf="@id/naver_map_button"
+        tools:src="@drawable/ic_round_info" />
+
+    <ImageView
+        android:id="@+id/naver_map_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:elevation="12dp"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@id/kakao_map_button"
+        app:layout_constraintEnd_toStartOf="@id/kakao_map_button"
+        app:layout_constraintStart_toEndOf="@id/google_map_button"
+        app:layout_constraintTop_toTopOf="@id/kakao_map_button"
+        tools:src="@drawable/ic_round_info" />
+
+    <ImageView
+        android:id="@+id/kakao_map_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:elevation="12dp"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_round_info"
+        app:layout_constraintBottom_toBottomOf="@id/info_button"
+        app:layout_constraintEnd_toStartOf="@id/info_button"
+        app:layout_constraintStart_toEndOf="@id/naver_map_button"
+        app:layout_constraintTop_toTopOf="@id/info_button" />
+
+    <ImageView
+        android:id="@+id/info_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_round_info"
+        app:layout_constraintBottom_toTopOf="@id/window_inset_bottom_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/window_inset_bottom_view"
         android:layout_width="match_parent"
-        android:layout_height="144dp"
-        android:background="?colorSurface">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_height="48dp" />
 
-        <TextView
-            android:id="@+id/name_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/window_inset_bottom_view"
-            app:layout_constraintEnd_toStartOf="@id/google_map_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Movie Title" />
-
-        <ImageView
-            android:id="@+id/google_map_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:elevation="12dp"
-            android:padding="6dp"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="@id/naver_map_button"
-            app:layout_constraintEnd_toStartOf="@id/naver_map_button"
-            app:layout_constraintStart_toEndOf="@id/name_view"
-            app:layout_constraintTop_toTopOf="@id/naver_map_button"
-            tools:src="@drawable/ic_round_info" />
-
-        <ImageView
-            android:id="@+id/naver_map_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:elevation="12dp"
-            android:padding="6dp"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="@id/kakao_map_button"
-            app:layout_constraintEnd_toStartOf="@id/kakao_map_button"
-            app:layout_constraintStart_toEndOf="@id/google_map_button"
-            app:layout_constraintTop_toTopOf="@id/kakao_map_button"
-            tools:src="@drawable/ic_round_info" />
-
-        <ImageView
-            android:id="@+id/kakao_map_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:elevation="12dp"
-            android:padding="6dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_round_info"
-            app:layout_constraintBottom_toBottomOf="@id/info_button"
-            app:layout_constraintEnd_toStartOf="@id/info_button"
-            app:layout_constraintStart_toEndOf="@id/naver_map_button"
-            app:layout_constraintTop_toTopOf="@id/info_button" />
-
-        <ImageView
-            android:id="@+id/info_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="8dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_round_info"
-            app:layout_constraintBottom_toTopOf="@id/window_inset_bottom_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Space
-            android:id="@+id/window_inset_bottom_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_height="48dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

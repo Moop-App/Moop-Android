@@ -1,57 +1,73 @@
 package soup.movie.detail
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
-import soup.movie.ui.databinding.DataBindingItemListener
+import soup.movie.detail.databinding.*
+import soup.movie.ext.loadAsync
+import soup.movie.util.setOnDebounceClickListener
+
+private typealias OnItemClickListener = (Int) -> Unit
 
 internal class DetailListAdapter(
-    itemClickListener: (ContentItemUiModel) -> Unit
+    onItemClick: (ContentItemUiModel) -> Unit
 ) : ListAdapter<ContentItemUiModel, DetailListAdapter.ViewHolder>(IdBasedDiffCallback { it.id }) {
 
-    private val itemListener = DataBindingItemListener<ContentItemUiModel>(
-        onClick = { _, position, item ->
-            when (item) {
-                is PlotItemUiModel -> {
-                    item.isExpanded = item.isExpanded.not()
-                    notifyItemChanged(position)
-                }
-                is AdUiModel -> {
-                    // do nothing
-                }
-                else -> {
-                    itemClickListener(item)
-                }
+    private val itemListener: OnItemClickListener = { position ->
+        when (val item = getItem(position)) {
+            is PlotItemUiModel -> {
+                item.isExpanded = item.isExpanded.not()
+                notifyItemChanged(position)
             }
+            else -> onItemClick(item)
         }
-    )
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ViewDataBinding =
-            DataBindingUtil.inflate(layoutInflater, viewType, parent, false)
-        return ViewHolder(binding)
+        return when (viewType) {
+            R.layout.detail_item_header ->
+                HeaderViewHolder(DetailItemHeaderBinding.inflate(layoutInflater, parent, false))
+            R.layout.detail_item_box_office ->
+                BoxOfficeViewHolder(DetailItemBoxOfficeBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_cgv ->
+                CgvViewHolder(DetailItemCgvBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_lotte ->
+                LotteViewHolder(DetailItemLotteBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_megabox ->
+                MegaboxViewHolder(DetailItemMegaboxBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_naver ->
+                NaverViewHolder(DetailItemNaverBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_imdb ->
+                ImdbViewHolder(DetailItemImdbBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_plot ->
+                PlotViewHolder(DetailItemPlotBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_cast ->
+                CastViewHolder(DetailItemCastBinding.inflate(layoutInflater, parent, false))
+            R.layout.detail_item_trailer_header ->
+                TrailerHeaderViewHolder(DetailItemTrailerHeaderBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_trailer ->
+                TrailerViewHolder(DetailItemTrailerBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_trailer_footer ->
+                TrailerFooterViewHolder(DetailItemTrailerFooterBinding.inflate(layoutInflater, parent, false), itemListener)
+            R.layout.detail_item_ad -> AdViewHolder(DetailItemAdBinding.inflate(layoutInflater, parent, false))
+            else -> throw IllegalArgumentException("This is not valid type.")
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position == 0) {
+        if (holder is HeaderViewHolder) {
             if (headerHeight > 0) {
-                holder.itemView.updateLayoutParams {
-                    height = headerHeight
-                }
+                holder.itemView.updateLayoutParams { height = headerHeight }
             }
         } else {
-            holder.binding.apply {
-                setVariable(BR.item, getItem(position))
-                setVariable(BR.position, position)
-                setVariable(BR.listener, itemListener)
-                executePendingBindings()
-            }
+            holder.bind(getItem(position))
         }
     }
 
@@ -68,7 +84,7 @@ internal class DetailListAdapter(
         is TrailerHeaderItemUiModel -> R.layout.detail_item_trailer_header
         is TrailerItemUiModel -> R.layout.detail_item_trailer
         is TrailerFooterItemUiModel -> R.layout.detail_item_trailer_footer
-        is AdUiModel -> R.layout.detail_item_ad
+        is AdItemUiModel -> R.layout.detail_item_ad
     }
 
     fun getSpanSize(position: Int): Int = when (getItem(position)) {
@@ -85,7 +101,220 @@ internal class DetailListAdapter(
         notifyItemChanged(0)
     }
 
-    class ViewHolder(
-        val binding: ViewDataBinding
-    ) : RecyclerView.ViewHolder(binding.root)
+    abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        open fun bind(item: ContentItemUiModel) {}
+    }
+
+    class HeaderViewHolder(
+        binding: DetailItemHeaderBinding
+    ) : ViewHolder(binding.root)
+
+    class BoxOfficeViewHolder(
+        private val binding: DetailItemBoxOfficeBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is BoxOfficeItemUiModel) return
+            val context = itemView.context
+            binding.rankText.text = context.getString(R.string.rank, item.rank)
+            binding.rankDescription.text = context.getString(R.string.rank_date, item.rankDate)
+            binding.audienceText.text = context.getString(R.string.audience, item.audience)
+            binding.audienceDescription.text = context.getString(R.string.screen_days, item.screenDays)
+            binding.ratingText.text = item.rating
+        }
+    }
+
+    class CgvViewHolder(
+        private val binding: DetailItemCgvBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is CgvItemUiModel) return
+            itemView.isEnabled = item.hasInfo
+            binding.eggLabel.text = item.rating
+        }
+    }
+
+    class LotteViewHolder(
+        private val binding: DetailItemLotteBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is LotteItemUiModel) return
+            itemView.isEnabled = item.hasInfo
+            binding.eggLabel.text = item.rating
+        }
+    }
+
+    class MegaboxViewHolder(
+        private val binding: DetailItemMegaboxBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is MegaboxItemUiModel) return
+            itemView.isEnabled = item.hasInfo
+            binding.eggLabel.text = item.rating
+        }
+    }
+
+    class NaverViewHolder(
+        private val binding: DetailItemNaverBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            binding.brandView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+            binding.infoButton.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is NaverItemUiModel) return
+            binding.eggLabel.text = item.rating
+        }
+    }
+
+    class ImdbViewHolder(
+        private val binding: DetailItemImdbBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is ImdbItemUiModel) return
+            binding.imdbRatingText.text = item.imdb
+            binding.rtRatingIcon.setTomatoMeterIcon(item.rottenTomatoes)
+            binding.rtRatingText.text = item.rottenTomatoes
+            binding.metascoreRatingText.text = item.metascore
+        }
+    }
+
+    class PlotViewHolder(
+        private val binding: DetailItemPlotBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is PlotItemUiModel) return
+            binding.moreIcon.isSelected = item.isExpanded
+            binding.shortPlotText.isGone = item.isExpanded
+            binding.shortPlotText.text = item.plot
+            binding.longPlotText.isVisible = item.isExpanded
+            binding.longPlotText.text = item.plot
+        }
+    }
+
+    class CastViewHolder(
+        binding: DetailItemCastBinding
+    ) : ViewHolder(binding.root) {
+
+        private val adapter = DetailPersonListAdapter()
+
+        init {
+            binding.root.adapter = adapter
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is CastItemUiModel) return
+            adapter.submitList(item.persons)
+        }
+    }
+
+    class TrailerHeaderViewHolder(
+        private val binding: DetailItemTrailerHeaderBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            binding.privacyTip.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is TrailerHeaderItemUiModel) return
+            binding.searchLabel.text = itemView.context.getString(R.string.trailer_search_result, item.movieTitle)
+        }
+    }
+
+    class TrailerViewHolder(
+        private val binding: DetailItemTrailerBinding,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is TrailerItemUiModel) return
+            binding.trailerImage.loadAsync(item.trailer.thumbnailUrl)
+            binding.titleView.text = item.trailer.title
+            binding.authorView.text = item.trailer.author
+        }
+    }
+
+    class TrailerFooterViewHolder(
+        binding: DetailItemTrailerFooterBinding,
+        listener: OnItemClickListener
+    ) : ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnDebounceClickListener {
+                listener(adapterPosition)
+            }
+        }
+    }
+
+    class AdViewHolder(private val binding: DetailItemAdBinding) : ViewHolder(binding.root) {
+
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is AdItemUiModel) return
+            binding.adView.setNativeAd(item.nativeAd)
+        }
+    }
 }

@@ -1,57 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/settings_category_margin_vertical"
+    android:paddingBottom="@dimen/settings_category_margin_vertical">
 
-    <data />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/feedback_category"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/settings_category_margin_vertical"
-        android:paddingBottom="@dimen/settings_category_margin_vertical">
+        android:text="@string/settings_category_feedback"
+        android:textAppearance="@style/TextAppearance.Settings.Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/feedback_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_category_feedback"
-            android:textAppearance="@style/TextAppearance.Settings.Category"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:id="@+id/bug_report_button"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/settings_item_margin_vertical"
+        android:background="@drawable/bg_setting_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedback_category" />
 
-        <View
-            android:id="@+id/bug_report_button"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="@dimen/settings_item_margin_vertical"
-            android:background="@drawable/bg_setting_item"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/feedback_category" />
+    <TextView
+        android:id="@+id/bug_report_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:text="개발자에게 버그 신고하기"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:layout_constraintBottom_toBottomOf="@id/bug_report_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bug_report_button" />
 
-        <TextView
-            android:id="@+id/bug_report_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
-            android:text="개발자에게 버그 신고하기"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintBottom_toBottomOf="@id/bug_report_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/bug_report_button" />
+    <ImageView
+        android:id="@+id/bug_report_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_round_bug_report"
+        app:layout_constraintBottom_toBottomOf="@id/bug_report_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bug_report_button" />
 
-        <ImageView
-            android:id="@+id/bug_report_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_round_bug_report"
-            app:layout_constraintBottom_toBottomOf="@id/bug_report_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/bug_report_button" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

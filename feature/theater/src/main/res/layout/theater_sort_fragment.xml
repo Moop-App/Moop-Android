@@ -1,108 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/theaterSortScene"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="soup.movie.theater.sort.TheaterSortFragment">
 
-    <data>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <variable
-            name="viewModel"
-            type="soup.movie.theater.sort.TheaterSortViewModel" />
-    </data>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/theater_sort_title" />
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/theaterSortScene"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="soup.movie.theater.sort.TheaterSortFragment">
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="@string/theater_sort_title" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="none"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/theater_sort_item_cgv"
+            tools:visibility="gone" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:requiresFadingEdge="none"
-                android:scrollbars="none"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/theater_sort_item_cgv"
-                tools:visibility="gone" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noItemsView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/noItemsView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="48dp"
+                android:layout_height="68dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_round_no_theaters"
+                app:layout_constraintBottom_toTopOf="@+id/description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible">
+                app:layout_constraintVertical_chainStyle="packed" />
 
-                <ImageView
-                    android:id="@+id/icon"
-                    android:layout_width="48dp"
-                    android:layout_height="68dp"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/ic_round_no_theaters"
-                    app:layout_constraintBottom_toTopOf="@+id/description"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="@string/theater_empty_description"
-                    android:textColor="?attr/colorOnBackground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/icon" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/confirmButton"
+            <TextView
+                android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:contentDescription="@string/theater_select_action_confirm"
+                android:layout_margin="8dp"
+                android:text="@string/theater_empty_description"
+                android:textColor="?attr/colorOnBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_round_add" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/confirmButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/theater_select_action_confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_round_add" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,7 +3,6 @@ package soup.movie.util
 import android.graphics.Outline
 import android.view.View
 import android.view.ViewOutlineProvider
-import androidx.databinding.BindingAdapter
 
 object OvalOutlineProvider : ViewOutlineProvider() {
 
@@ -30,14 +29,12 @@ class RoundRectOutlineProvider(private val radius: Float) : ViewOutlineProvider(
     }
 }
 
-@BindingAdapter("clipToOval")
-fun clipToOval(view: View, clip: Boolean) {
-    view.clipToOutline = clip
-    view.outlineProvider = if (clip) OvalOutlineProvider else null
+fun View.clipToOval(clip: Boolean) {
+    clipToOutline = clip
+    outlineProvider = if (clip) OvalOutlineProvider else null
 }
 
-@BindingAdapter("clipToRoundRect")
-fun clipToRoundRect(view: View, clipRadius: Float) {
-    view.clipToOutline = true
-    view.outlineProvider = RoundRectOutlineProvider(clipRadius)
+fun View.clipToRoundRect(clipRadius: Float) {
+    clipToOutline = true
+    outlineProvider = RoundRectOutlineProvider(clipRadius)
 }

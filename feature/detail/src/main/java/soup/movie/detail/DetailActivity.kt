@@ -13,8 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.view.drawToBitmap
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,7 +31,9 @@ import soup.movie.ext.*
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.util.YouTube
+import soup.movie.util.clipToOval
 import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.viewBindings
 import soup.movie.widget.elastic.ElasticDragDismissFrameLayout
 import timber.log.Timber
 import javax.inject.Inject
@@ -43,9 +45,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
 
     private val args: DetailActivityArgs by navArgs()
 
-    private val binding: DetailActivityBinding by lazy {
-        DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
-    }
+    private val binding by viewBindings(DetailActivityBinding::inflate)
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -80,8 +80,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        setContentView(binding.root)
         if (isPortrait) {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
@@ -148,21 +147,27 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
             root.setOnDebounceClickListener {
                 binding.toggleShareButton()
             }
+            facebookShareButton.clipToOval(true)
             facebookShareButton.setOnDebounceClickListener {
                 onShareClick(ShareTarget.Facebook)
             }
+            twitterShareButton.clipToOval(true)
             twitterShareButton.setOnDebounceClickListener {
                 onShareClick(ShareTarget.Twitter)
             }
+            instagramShareButton.clipToOval(true)
             instagramShareButton.setOnDebounceClickListener {
                 onShareClick(ShareTarget.Instagram)
             }
+            lineShareButton.clipToOval(true)
             lineShareButton.setOnDebounceClickListener {
                 onShareClick(ShareTarget.LINE)
             }
+            kakaoTalkShareButton.clipToOval(true)
             kakaoTalkShareButton.setOnDebounceClickListener {
                 onShareClick(ShareTarget.KakaoLink)
             }
+            etcShareButton.clipToOval(true)
             etcShareButton.setOnDebounceClickListener {
                 onShareClick(ShareTarget.Others)
             }
@@ -234,6 +239,9 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         viewModel.contentUiModel.observe(this) {
             listAdapter.submitList(it.items)
             listAdapter.updateHeader(height = binding.header.root.measuredHeight)
+        }
+        viewModel.isError.observe(this) {
+            binding.errorGroup.isVisible = it
         }
     }
 

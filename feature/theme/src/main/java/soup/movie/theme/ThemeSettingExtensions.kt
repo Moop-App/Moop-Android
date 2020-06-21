@@ -1,10 +1,8 @@
 package soup.movie.theme
 
 import android.widget.TextView
-import androidx.databinding.BindingAdapter
 
-@BindingAdapter("themeOptionLabel")
-fun setThemeOptionLabel(textView: TextView, themeOption: ThemeOption?) {
+fun TextView.setThemeOptionLabel(themeOption: ThemeOption?) {
     val resId = when (themeOption) {
         ThemeOption.Light -> R.string.theme_option_light
         ThemeOption.Dark -> R.string.theme_option_dark
@@ -12,5 +10,5 @@ fun setThemeOptionLabel(textView: TextView, themeOption: ThemeOption?) {
         ThemeOption.System -> R.string.theme_option_system
         else -> R.string.theme_option_system
     }
-    textView.setText(resId)
+    setText(resId)
 }

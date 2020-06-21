@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.core.util.Pair
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
-import soup.movie.binding.DataBindingListAdapter
-import soup.movie.binding.DataBindingViewHolder
 import soup.movie.ext.*
 import soup.movie.home.databinding.HomeItemMovieBinding
 import soup.movie.model.Movie
@@ -19,7 +20,7 @@ class HomeContentsListAdapter(
     context: Context,
     diffCallback: DiffUtil.ItemCallback<Movie> = IdBasedDiffCallback { it.id },
     private val listener: (Movie, Array<Pair<View, String>>) -> Unit
-) : DataBindingListAdapter<Movie>(diffCallback) {
+) : ListAdapter<Movie, HomeContentsListAdapter.MovieViewHolder>(diffCallback) {
 
     private val layoutInflater = LayoutInflater.from(context)
 
@@ -43,6 +44,10 @@ class HomeContentsListAdapter(
                 }
             }
         }
+    }
+
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
     override fun getItemViewType(position: Int) = R.layout.home_item_movie
@@ -71,7 +76,7 @@ class HomeContentsListAdapter(
         return Pair(this, context.getString(tagId))
     }
 
-    class MovieViewHolder(binding: HomeItemMovieBinding) : DataBindingViewHolder<Movie>(binding) {
+    class MovieViewHolder(private val binding: HomeItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
 
         val backgroundView = binding.backgroundView
         val posterView = binding.posterView
@@ -79,5 +84,16 @@ class HomeContentsListAdapter(
         val newView = binding.newView.root
         val bestView = binding.bestView.root
         val dDayView = binding.dDayView.root
+
+        fun bind(item: Movie) {
+            binding.container.tag = item.id
+            posterView.loadAsync(item.posterUrl, R.drawable.bg_on_surface_dim)
+            posterView.contentDescription = item.title
+            ageBgView.setBackgroundResource(item.getAgeBackground())
+            newView.isVisible = item.isNew()
+            bestView.isVisible = item.isBest()
+            dDayView.isVisible = item.isDDay()
+            dDayView.asyncText(item.getDDayLabel())
+        }
     }
 }

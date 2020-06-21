@@ -10,7 +10,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -31,6 +30,7 @@ import soup.movie.spec.KakaoLink
 import soup.movie.system.SystemEvent
 import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.consumeBackEventInChildFragment
+import soup.movie.util.viewBindings
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
@@ -38,7 +38,7 @@ import soup.movie.work.OpenDateSyncWorker
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: MainActivityBinding
+    private val binding by viewBindings(MainActivityBinding::inflate)
 
     private val systemViewModel: SystemViewModel by viewModels()
 
@@ -64,8 +64,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Moop_Main)
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
-        binding.lifecycleOwner = this
+        setContentView(binding.root)
         if (isPortrait) {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or

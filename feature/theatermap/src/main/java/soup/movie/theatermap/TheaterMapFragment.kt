@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -46,12 +44,12 @@ import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
-class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
+class TheaterMapFragment : BaseMapFragment(R.layout.theater_map_fragment), OnBackPressedListener {
 
     @Inject
     lateinit var repository: MoopRepository
 
-    private lateinit var binding: TheaterMapFragmentBinding
+    private var binding: TheaterMapFragmentBinding by autoCleared()
 
     private val systemViewModel: SystemViewModel by activityViewModels()
     private val viewModel: TheaterMapViewModel by viewModels {
@@ -84,17 +82,12 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
             .inject(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = TheaterMapFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        binding.initViewState(viewModel)
-        binding.adaptSystemWindowInset()
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = TheaterMapFragmentBinding.bind(view).apply {
+            initViewState(viewModel)
+            adaptSystemWindowInset()
+        }
     }
 
     override fun onDestroyView() {

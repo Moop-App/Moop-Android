@@ -30,17 +30,18 @@ import soup.movie.theater.databinding.TheaterEditFooterBinding
 import soup.movie.theater.databinding.TheaterEditFragmentBinding
 import soup.movie.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.util.autoCleared
 import soup.movie.util.inflate
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class TheaterEditFragment : Fragment(), OnBackPressedListener {
+class TheaterEditFragment : Fragment(R.layout.theater_edit_fragment), OnBackPressedListener {
 
     private var pendingFinish: Boolean = false
 
-    private lateinit var binding: TheaterEditFragmentBinding
+    private var binding: TheaterEditFragmentBinding by autoCleared()
 
     private val viewModel: TheaterEditViewModel by activityViewModels()
 
@@ -101,21 +102,25 @@ class TheaterEditFragment : Fragment(), OnBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         postponeEnterTransition(500, TimeUnit.MILLISECONDS)
-        binding = TheaterEditFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.initViewState()
-        binding.adaptSystemWindowInset()
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
-        viewModel.contentUiModel.observe(viewLifecycleOwner) {
-            binding.render(it)
-        }
-        viewModel.footerUiModel.observe(viewLifecycleOwner) {
-            binding.footer.render(it)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = TheaterEditFragmentBinding.bind(view).apply {
+            initViewState()
+            adaptSystemWindowInset()
 
-            //FixMe: find a timing to call startPostponedEnterTransition()
-            startPostponedEnterTransition()
+            viewModel.contentUiModel.observe(viewLifecycleOwner) {
+                binding.render(it)
+            }
+            viewModel.footerUiModel.observe(viewLifecycleOwner) {
+                binding.footer.render(it)
+
+                //FixMe: find a timing to call startPostponedEnterTransition()
+                startPostponedEnterTransition()
+            }
         }
-        return binding.root
     }
 
     override fun onDestroyView() {
@@ -133,8 +138,7 @@ class TheaterEditFragment : Fragment(), OnBackPressedListener {
         tabLayout.setupWithViewPager2(viewPager, titleProvider = pageAdapter, autoRefresh = true)
 
         // Footer
-
-        footerPanel = BottomSheetBehavior.from(footer.root).apply {
+        footerPanel = BottomSheetBehavior.from(footer.root as View).apply {
             addBottomSheetCallback(bottomSheetCallback)
         }
 

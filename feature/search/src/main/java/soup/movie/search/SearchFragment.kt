@@ -2,9 +2,7 @@ package soup.movie.search
 
 import android.os.Bundle
 import android.text.InputType
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
@@ -27,28 +25,27 @@ import soup.movie.search.databinding.SearchContentsBinding
 import soup.movie.search.databinding.SearchFragmentBinding
 import soup.movie.search.databinding.SearchHeaderBinding
 import soup.movie.util.ImeUtil
+import soup.movie.util.autoCleared
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(R.layout.search_fragment) {
 
     @Inject
     lateinit var analytics: EventAnalytics
-    private lateinit var binding: SearchFragmentBinding
+
+    private var binding: SearchFragmentBinding by autoCleared()
 
     private val viewModel: SearchViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        binding = SearchFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.header.setup()
-        binding.contents.setup()
-        binding.adaptSystemWindowInset()
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = SearchFragmentBinding.bind(view).apply {
+            header.setup()
+            contents.setup()
+            adaptSystemWindowInset()
+        }
     }
 
     private fun SearchFragmentBinding.adaptSystemWindowInset() {

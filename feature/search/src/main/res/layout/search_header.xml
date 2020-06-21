@@ -1,50 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <data />
-
-    <com.google.android.material.appbar.AppBarLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?android:actionBarSize"
+        android:elevation="4dp"
+        android:outlineProvider="bounds"
+        android:theme="@style/SearchViewTheme"
+        android:transitionGroup="false">
+
+        <View
+            android:id="@+id/searchBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary" />
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/search_hint"
+            android:transitionGroup="true" />
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:elevation="4dp"
-            android:outlineProvider="bounds"
-            android:theme="@style/SearchViewTheme"
-            android:transitionGroup="false">
+            android:id="@+id/searchBackContainer"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:paddingStart="4dp">
 
-            <View
-                android:id="@+id/searchBackground"
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/searchBack"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="?attr/colorPrimary" />
-
-            <SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipChildren="false"
-                android:iconifiedByDefault="false"
-                android:queryHint="@string/search_hint"
-                android:transitionGroup="true" />
-
-            <FrameLayout
-                android:id="@+id/searchBackContainer"
-                android:layout_width="96dp"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:paddingStart="4dp">
-
-                <ImageButton
-                    android:id="@+id/searchBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_arrow_back_padded"
-                    android:transitionName="@string/transition_search_back" />
-            </FrameLayout>
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_back_padded"
+                android:transitionName="@string/transition_search_back" />
         </FrameLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-</layout>
+    </FrameLayout>
+</com.google.android.material.appbar.AppBarLayout>

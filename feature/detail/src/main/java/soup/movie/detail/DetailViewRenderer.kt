@@ -4,7 +4,7 @@ import androidx.core.view.isVisible
 import soup.movie.detail.databinding.DetailActivityBinding
 import soup.movie.detail.databinding.DetailHeaderBinding
 import soup.movie.detail.databinding.DetailShareBinding
-import soup.movie.ext.getAgeLabel
+import soup.movie.ext.*
 
 interface DetailViewRenderer {
 
@@ -14,6 +14,16 @@ interface DetailViewRenderer {
     }
 
     private fun DetailHeaderBinding.render(uiModel: HeaderUiModel) {
+        titleView.text = uiModel.movie.title
+
+        val item = uiModel.movie
+        ageBgView.root.setBackgroundResource(item.getAgeBackground())
+        ageView.root.asyncText(item.getSimpleAgeLabel())
+        newView.root.isVisible = item.isNew()
+        bestView.root.isVisible = item.isBest()
+        dDayView.root.isVisible = item.isDDay()
+        dDayView.root.asyncText(item.getDDayLabel())
+
         openDateText.text = uiModel.movie.openDate
         val openDateVisible = uiModel.movie.openDate.isNotEmpty()
         openDateLabel.isVisible = openDateVisible
@@ -59,6 +69,17 @@ interface DetailViewRenderer {
     }
 
     private fun DetailShareBinding.render(uiModel: HeaderUiModel) {
+        titleView.text = uiModel.movie.title
+        posterCard.loadAsync(uiModel.movie.posterUrl)
+
+        val item = uiModel.movie
+        ageBgView.root.setBackgroundResource(item.getAgeBackground())
+        ageView.root.asyncText(item.getSimpleAgeLabel())
+        newView.root.isVisible = item.isNew()
+        bestView.root.isVisible = item.isBest()
+        dDayView.root.isVisible = item.isDDay()
+        dDayView.root.asyncText(item.getDDayLabel())
+
         openDateText.text = uiModel.movie.openDate
         val openDateVisible = uiModel.movie.openDate.isNotEmpty()
         openDateLabel.isVisible = openDateVisible
