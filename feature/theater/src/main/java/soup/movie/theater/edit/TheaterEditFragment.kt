@@ -10,6 +10,8 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
 import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
@@ -19,9 +21,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.setupWithViewPager2
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
-import soup.movie.ext.assistedActivityViewModels
 import soup.movie.ext.lazyFast
 import soup.movie.model.Theater
 import soup.movie.theater.R
@@ -33,19 +34,15 @@ import soup.movie.util.inflate
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class TheaterEditFragment : DaggerFragment(), OnBackPressedListener {
+@AndroidEntryPoint
+class TheaterEditFragment : Fragment(), OnBackPressedListener {
 
     private var pendingFinish: Boolean = false
 
     private lateinit var binding: TheaterEditFragmentBinding
 
-    @Inject
-    lateinit var viewModelFactory: TheaterEditViewModel.Factory
-    private val viewModel: TheaterEditViewModel by assistedActivityViewModels {
-        viewModelFactory.create()
-    }
+    private val viewModel: TheaterEditViewModel by activityViewModels()
 
     private val pageAdapter by lazyFast {
         TheaterEditPageAdapter(childFragmentManager, lifecycle)

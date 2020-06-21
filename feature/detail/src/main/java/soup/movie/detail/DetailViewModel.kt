@@ -1,12 +1,12 @@
 package soup.movie.detail
 
 import android.graphics.Bitmap
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.formats.UnifiedNativeAd
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.*
 import soup.movie.ads.AdsManager
 import soup.movie.device.ImageUriProvider
@@ -20,7 +20,7 @@ import soup.movie.ui.MutableEventLiveData
 import soup.movie.util.MM_DD
 import soup.movie.util.yesterday
 
-class DetailViewModel @AssistedInject constructor(
+class DetailViewModel @ViewModelInject constructor(
     private val repository: MoopRepository,
     private val imageUriProvider: ImageUriProvider,
     private val adsManager: AdsManager
@@ -237,10 +237,5 @@ class DetailViewModel @AssistedInject constructor(
     companion object {
 
         private const val NO_RATING = "평점없음"
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): DetailViewModel
     }
 }

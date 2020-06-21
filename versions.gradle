@@ -72,14 +72,19 @@ deps.retrofit = [
         gson   : "com.squareup.retrofit2:converter-gson:$retrofit"
 ]
 
-def dagger = "2.27"
+def hilt = "1.0.0-alpha01"
+deps.hilt = [
+        work     : "androidx.hilt:hilt-work:$hilt",
+        viewmodel: "androidx.hilt:hilt-lifecycle-viewmodel:$hilt",
+        compiler : "androidx.hilt:hilt-compiler:$hilt"
+]
+
+def dagger_hilt = "2.28-alpha"
 def assistedInject = "0.5.2"
 deps.dagger = [
-        runtime                  : "com.google.dagger:dagger:$dagger",
-        android                  : "com.google.dagger:dagger-android:$dagger",
-        android_support          : "com.google.dagger:dagger-android-support:$dagger",
-        compiler                 : "com.google.dagger:dagger-compiler:$dagger",
-        android_processor        : "com.google.dagger:dagger-android-processor:$dagger",
+        hilt                     : "com.google.dagger:hilt-android:$dagger_hilt",
+        hilt_compiler            : "com.google.dagger:hilt-android-compiler:$dagger_hilt",
+        hilt_plugin              : "com.google.dagger:hilt-android-gradle-plugin:$dagger_hilt",
         assisted_inject          : "com.squareup.inject:assisted-inject-annotations-dagger2:$assistedInject",
         assisted_inject_processor: "com.squareup.inject:assisted-inject-processor-dagger2:$assistedInject"
 ]

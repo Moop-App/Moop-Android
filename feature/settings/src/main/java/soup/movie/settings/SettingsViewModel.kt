@@ -1,17 +1,17 @@
 package soup.movie.settings
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import soup.movie.install.InAppUpdateManager
 import soup.movie.theme.ThemeOptionManager
 
-class SettingsViewModel @AssistedInject constructor(
+class SettingsViewModel @ViewModelInject constructor(
     themeOptionManager: ThemeOptionManager,
     appSettings: AppSettings,
     appUpdateManager: InAppUpdateManager
@@ -37,10 +37,5 @@ class SettingsViewModel @AssistedInject constructor(
                 isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
             )
         )
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): SettingsViewModel
     }
 }

@@ -11,6 +11,8 @@ import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
@@ -23,43 +25,37 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import dagger.hilt.android.EntryPointAccessors
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.BuildConfig
-import soup.movie.MovieApplication
-import soup.movie.ext.*
+import soup.movie.di.TheaterMapModuleDependencies
+import soup.movie.ext.animateGone
+import soup.movie.ext.isDarkTheme
+import soup.movie.ext.lazyFast
 import soup.movie.model.Theater
 import soup.movie.model.Theater.Companion.TYPE_CGV
 import soup.movie.model.Theater.Companion.TYPE_LOTTE
 import soup.movie.model.Theater.Companion.TYPE_MEGABOX
+import soup.movie.model.repository.MoopRepository
 import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.databinding.TheaterMapFragmentBinding
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
-import soup.movie.theatermap.di.TheaterMapModule
-import soup.movie.util.LauncherIcons
 import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.util.Cgv
-import soup.movie.util.LotteCinema
-import soup.movie.util.Megabox
-import soup.movie.util.setOnDebounceClickListener
+import soup.movie.util.*
 import javax.inject.Inject
-import javax.inject.Provider
 import kotlin.math.max
 import kotlin.math.min
 
 class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
 
+    @Inject
+    lateinit var repository: MoopRepository
+
     private lateinit var binding: TheaterMapFragmentBinding
 
-    @Inject
-    lateinit var systemViewModelProvider: Provider<SystemViewModel>
-    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelProvider.get()
-    }
-
-    @Inject
-    lateinit var theaterMapFactory: Provider<TheaterMapViewModel>
-    private val viewModel: TheaterMapViewModel by assistedViewModels {
-        theaterMapFactory.get()
+    private val systemViewModel: SystemViewModel by activityViewModels()
+    private val viewModel: TheaterMapViewModel by viewModels {
+        viewModelProviderFactoryOf { TheaterMapViewModel(repository) }
     }
 
     private lateinit var locationSource: FusedLocationSource
@@ -76,9 +72,15 @@ class TheaterMapFragment : BaseMapFragment(), OnBackPressedListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        val applicationComponent = (requireContext().applicationContext as MovieApplication).applicationComponent
-        DaggerTheaterMapComponent.factory()
-            .create(applicationComponent, TheaterMapModule(this))
+        DaggerTheaterMapComponent.builder()
+            .context(context)
+            .appDependencies(
+                EntryPointAccessors.fromApplication(
+                    context.applicationContext,
+                    TheaterMapModuleDependencies::class.java
+                )
+            )
+            .build()
             .inject(this)
     }
 

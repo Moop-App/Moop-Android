@@ -1,14 +1,11 @@
 package soup.movie.home.plan
 
-import soup.movie.ext.assistedViewModels
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.home.tab.HomeContentsFragment
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomePlanFragment : HomeContentsFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: HomePlanViewModel.Factory
-    override val viewModel: HomePlanViewModel by assistedViewModels {
-        viewModelFactory.create()
-    }
+    override val viewModel: HomePlanViewModel by viewModels()
 }

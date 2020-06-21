@@ -1,11 +1,11 @@
 package soup.movie.theme
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.squareup.inject.assisted.AssistedInject
 
-class ThemeSettingViewModel @AssistedInject constructor(
+class ThemeSettingViewModel @ViewModelInject constructor(
     private val themeOptionManager: ThemeOptionManager
 ) : ViewModel() {
 
@@ -23,10 +23,5 @@ class ThemeSettingViewModel @AssistedInject constructor(
 
     fun onItemClick(item: ThemeSettingItemUiModel) {
         themeOptionManager.apply(item.themeOption)
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): ThemeSettingViewModel
     }
 }

@@ -9,18 +9,15 @@ import androidx.core.view.isInvisible
 import androidx.core.view.postDelayed
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import androidx.fragment.app.*
 import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.setupWithViewPager2
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.analytics.EventAnalytics
-import soup.movie.ext.assistedActivityViewModels
-import soup.movie.ext.assistedViewModels
 import soup.movie.home.HomeHeaderUiModel.*
 import soup.movie.home.databinding.HomeFragmentBinding
 import soup.movie.home.databinding.HomeHeaderHintBinding
@@ -31,9 +28,9 @@ import soup.movie.ui.base.consumeBackEvent
 import soup.movie.util.Interpolators
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
-import javax.inject.Provider
 
-class HomeFragment : DaggerFragment(), OnBackPressedListener {
+@AndroidEntryPoint
+class HomeFragment : Fragment(), OnBackPressedListener {
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -42,17 +39,8 @@ class HomeFragment : DaggerFragment(), OnBackPressedListener {
     private lateinit var pageAdapter: HomePageAdapter
     private lateinit var filterBehavior: BottomSheetBehavior<FrameLayout>
 
-    @Inject
-    lateinit var systemViewModelProvider: Provider<SystemViewModel>
-    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelProvider.get()
-    }
-
-    @Inject
-    lateinit var viewModelFactory: HomeViewModel.Factory
-    private val viewModel: HomeViewModel by assistedViewModels {
-        viewModelFactory.create()
-    }
+    private val systemViewModel: SystemViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 

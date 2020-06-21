@@ -1,7 +1,7 @@
 package soup.movie.home.filter
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import soup.movie.model.repository.MoopRepository
@@ -17,7 +17,7 @@ import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
 
-class HomeFilterViewModel @AssistedInject constructor(
+class HomeFilterViewModel @ViewModelInject constructor(
     private val repository: MoopRepository,
     private val appSettings: AppSettings
 ) : ViewModel() {
@@ -143,10 +143,5 @@ class HomeFilterViewModel @AssistedInject constructor(
         if (changed) {
             appSettings.genreFilter = GenreFilter(lastGenreSet)
         }
-    }
-
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(): HomeFilterViewModel
     }
 }

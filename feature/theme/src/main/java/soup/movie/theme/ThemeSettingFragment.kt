@@ -5,20 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
-import soup.movie.ext.assistedViewModels
 import soup.movie.theme.databinding.ThemeOptionFragmentBinding
-import javax.inject.Inject
 
-class ThemeSettingFragment : DaggerFragment() {
+@AndroidEntryPoint
+class ThemeSettingFragment : Fragment() {
 
-    @Inject
-    lateinit var themeOptionViewModelFactory: ThemeSettingViewModel.Factory
-    private val viewModel: ThemeSettingViewModel by assistedViewModels {
-        themeOptionViewModelFactory.create()
-    }
+    private val viewModel: ThemeSettingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

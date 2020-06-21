@@ -6,6 +6,8 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
@@ -16,12 +18,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.messaging.FirebaseMessaging
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.R
 import soup.movie.core.MainDirections
 import soup.movie.databinding.MainActivityBinding
-import soup.movie.ext.assistedActivityViewModels
 import soup.movie.ext.consume
 import soup.movie.ext.isPortrait
 import soup.movie.ext.observeEvent
@@ -33,24 +34,15 @@ import soup.movie.ui.base.consumeBackEventInChildFragment
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
-import javax.inject.Inject
-import javax.inject.Provider
 
-class MainActivity : DaggerAppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
 
-    @Inject
-    lateinit var systemViewModelProvider: Provider<SystemViewModel>
-    private val systemViewModel: SystemViewModel by assistedActivityViewModels {
-        systemViewModelProvider.get()
-    }
+    private val systemViewModel: SystemViewModel by viewModels()
 
-    @Inject
-    lateinit var viewModelFactory: MainViewModel.Factory
-    private val viewModel: MainViewModel by assistedActivityViewModels {
-        viewModelFactory.create()
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     private val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
         binding.navigationView.setCheckedItem(destination.id)

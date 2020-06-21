@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
@@ -23,10 +24,8 @@ dependencies {
     implementation deps.kotlin.coroutines_core
     implementation deps.kotlin.coroutines_android
 
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android_support
-    kapt deps.dagger.compiler
-    kapt deps.dagger.android_processor
+    implementation deps.dagger.hilt
+    kapt deps.dagger.hilt_compiler
 
     implementation deps.google.gson
     implementation deps.room.runtime

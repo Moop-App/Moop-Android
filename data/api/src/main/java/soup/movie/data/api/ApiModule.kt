@@ -1,21 +1,26 @@
-package soup.movie.data.api.internal
+package soup.movie.data.api
 
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import soup.movie.data.api.BuildConfig.API_BASE_URL
-import soup.movie.data.api.MoopApiService
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpInterceptor
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpNetworkInterceptor
+import javax.inject.Singleton
 
 @Module(includes = [ApiModule.Providers::class])
-internal class ApiModule {
+@InstallIn(ApplicationComponent::class)
+object ApiModule {
 
     @Provides
+    @Singleton
     fun provideMoopApiService(
         okHttpClient: OkHttpClient
     ): MoopApiService {
@@ -28,11 +33,13 @@ internal class ApiModule {
     }
 
     @Module
+    @InstallIn(ApplicationComponent::class)
     internal object Providers {
 
         @Provides
+        @Singleton
         fun provideOkHttpClient(
-            context: Context
+            @ApplicationContext context: Context
         ): OkHttpClient = OkHttpClient.Builder()
             .cache(Cache(context.cacheDir, 1 * 1024 * 1024)) // 1 MB
             .addInterceptor(createOkHttpInterceptor())

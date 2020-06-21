@@ -4,24 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.google.android.material.chip.Chip
-import dagger.android.support.DaggerFragment
-import soup.movie.ext.assistedViewModels
+import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.home.R
 import soup.movie.home.databinding.HomeFilterFragmentBinding
 import soup.movie.util.inflate
-import javax.inject.Inject
 
-class HomeFilterFragment : DaggerFragment() {
+@AndroidEntryPoint
+class HomeFilterFragment : Fragment() {
 
     private lateinit var binding: HomeFilterFragmentBinding
 
-    @Inject
-    lateinit var viewModelFactory: HomeFilterViewModel.Factory
-    private val viewModel: HomeFilterViewModel by assistedViewModels {
-        viewModelFactory.create()
-    }
+    private val viewModel: HomeFilterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

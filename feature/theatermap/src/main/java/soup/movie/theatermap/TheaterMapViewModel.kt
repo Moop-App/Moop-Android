@@ -9,9 +9,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
-import javax.inject.Inject
 
-class TheaterMapViewModel @Inject constructor(
+class TheaterMapViewModel(
     private val repository: MoopRepository
 ) : ViewModel() {
 
