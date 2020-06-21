@@ -25,6 +25,9 @@ dependencies {
 
     implementation deps.google.material
 
+    implementation deps.lifecycle.runtime_ktx
+    implementation deps.lifecycle.compiler
+
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.dynamic_features_fragment
 

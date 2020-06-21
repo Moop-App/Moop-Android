@@ -122,7 +122,7 @@ dependencies {
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.viewmodel_ktx
     implementation deps.lifecycle.runtime_ktx
-    kapt deps.lifecycle.compiler
+    implementation deps.lifecycle.compiler
 
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.ui_ktx

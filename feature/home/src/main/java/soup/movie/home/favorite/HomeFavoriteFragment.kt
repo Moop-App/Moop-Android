@@ -16,6 +16,7 @@ import soup.movie.home.HomeFragmentDirections
 import soup.movie.home.R
 import soup.movie.home.databinding.HomeTabFavoriteBinding
 import soup.movie.home.tab.HomeTabFragment
+import soup.movie.util.autoCleared
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,7 +25,7 @@ class HomeFavoriteFragment : HomeTabFragment(R.layout.home_tab_favorite) {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private lateinit var binding: HomeTabFavoriteBinding
+    private var binding: HomeTabFavoriteBinding by autoCleared()
 
     private val viewModel: HomeFavoriteViewModel by viewModels()
 
@@ -65,6 +66,6 @@ class HomeFavoriteFragment : HomeTabFragment(R.layout.home_tab_favorite) {
     }
 
     private fun getListView(): RecyclerView? {
-        return if (::binding.isInitialized) binding.listView else null
+        return binding.listView
     }
 }

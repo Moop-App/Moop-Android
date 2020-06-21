@@ -16,11 +16,12 @@ import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.CustomProgressFragmentBinding
 import soup.movie.util.LauncherIcons
+import soup.movie.util.autoCleared
 import timber.log.Timber
 
 class CustomProgressFragment : AbstractProgressFragment(R.layout.custom_progress_fragment) {
 
-    private lateinit var binding: CustomProgressFragmentBinding
+    private var binding: CustomProgressFragmentBinding by autoCleared()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = CustomProgressFragmentBinding.bind(view)

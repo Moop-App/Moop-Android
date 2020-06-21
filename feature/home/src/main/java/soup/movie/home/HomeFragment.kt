@@ -1,7 +1,6 @@
 package soup.movie.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -26,6 +25,7 @@ import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.base.consumeBackEvent
 import soup.movie.util.Interpolators
+import soup.movie.util.autoCleared
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
@@ -35,7 +35,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private lateinit var binding: HomeFragmentBinding
+    private var binding: HomeFragmentBinding by autoCleared {
+        header.tabs.clearOnTabSelectedListeners()
+        viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
+    }
     private lateinit var pageAdapter: HomePageAdapter
     private lateinit var filterBehavior: BottomSheetBehavior<FrameLayout>
 
@@ -151,12 +154,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
                 filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
-    }
-
-    override fun onDestroyView() {
-        binding.header.tabs.clearOnTabSelectedListeners()
-        binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
-        super.onDestroyView()
     }
 
     /** UI Renderer */

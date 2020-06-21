@@ -25,6 +25,7 @@ import soup.movie.search.databinding.SearchContentsBinding
 import soup.movie.search.databinding.SearchFragmentBinding
 import soup.movie.search.databinding.SearchHeaderBinding
 import soup.movie.util.ImeUtil
+import soup.movie.util.autoCleared
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
@@ -33,7 +34,8 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
     @Inject
     lateinit var analytics: EventAnalytics
-    private lateinit var binding: SearchFragmentBinding
+
+    private var binding: SearchFragmentBinding by autoCleared()
 
     private val viewModel: SearchViewModel by viewModels()
 

@@ -24,6 +24,7 @@ import dev.chrisbanes.insetter.doOnApplyWindowInsets
 import soup.movie.theater.R
 import soup.movie.theater.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.util.autoCleared
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit
 @AndroidEntryPoint
 class TheaterSortFragment : Fragment(R.layout.theater_sort_fragment), OnBackPressedListener {
 
-    private lateinit var binding: TheaterSortFragmentBinding
+    private var binding: TheaterSortFragmentBinding by autoCleared()
 
     private val viewModel: TheaterSortViewModel by viewModels()
 

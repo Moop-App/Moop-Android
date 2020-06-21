@@ -18,6 +18,7 @@ import soup.movie.home.HomeFragmentDirections
 import soup.movie.home.R
 import soup.movie.home.databinding.HomeTabContentsBinding
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.util.autoCleared
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
 
@@ -26,7 +27,9 @@ abstract class HomeContentsFragment : HomeTabFragment(R.layout.home_tab_contents
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private lateinit var binding: HomeTabContentsBinding
+    private var binding: HomeTabContentsBinding by autoCleared {
+        listView.adapter?.unregisterAdapterDataObserver(adapterDataObserver)
+    }
     protected abstract val viewModel: HomeContentsViewModel
 
     private val adapterDataObserver = object : RoughAdapterDataObserver() {
@@ -51,11 +54,6 @@ abstract class HomeContentsFragment : HomeTabFragment(R.layout.home_tab_contents
                 bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
             )
         }
-    }
-
-    override fun onDestroyView() {
-        binding.listView.adapter?.unregisterAdapterDataObserver(adapterDataObserver)
-        super.onDestroyView()
     }
 
     private fun HomeTabContentsBinding.initViewState(viewModel: HomeContentsViewModel) {
@@ -98,6 +96,6 @@ abstract class HomeContentsFragment : HomeTabFragment(R.layout.home_tab_contents
     }
 
     private fun getListView(): RecyclerView? {
-        return if (::binding.isInitialized) binding.listView else null
+        return runCatching { binding.listView }.getOrNull()
     }
 }

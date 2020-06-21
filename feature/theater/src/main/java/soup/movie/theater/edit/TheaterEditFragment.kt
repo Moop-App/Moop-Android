@@ -30,6 +30,7 @@ import soup.movie.theater.databinding.TheaterEditFooterBinding
 import soup.movie.theater.databinding.TheaterEditFragmentBinding
 import soup.movie.theater.edit.TheaterEditContentUiModel.LoadingState
 import soup.movie.ui.base.OnBackPressedListener
+import soup.movie.util.autoCleared
 import soup.movie.util.inflate
 import soup.movie.util.setOnDebounceClickListener
 import timber.log.Timber
@@ -40,7 +41,7 @@ class TheaterEditFragment : Fragment(R.layout.theater_edit_fragment), OnBackPres
 
     private var pendingFinish: Boolean = false
 
-    private lateinit var binding: TheaterEditFragmentBinding
+    private var binding: TheaterEditFragmentBinding by autoCleared()
 
     private val viewModel: TheaterEditViewModel by activityViewModels()
 

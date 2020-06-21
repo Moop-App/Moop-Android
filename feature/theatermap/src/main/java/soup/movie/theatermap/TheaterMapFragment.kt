@@ -49,7 +49,7 @@ class TheaterMapFragment : BaseMapFragment(R.layout.theater_map_fragment), OnBac
     @Inject
     lateinit var repository: MoopRepository
 
-    private lateinit var binding: TheaterMapFragmentBinding
+    private var binding: TheaterMapFragmentBinding by autoCleared()
 
     private val systemViewModel: SystemViewModel by activityViewModels()
     private val viewModel: TheaterMapViewModel by viewModels {

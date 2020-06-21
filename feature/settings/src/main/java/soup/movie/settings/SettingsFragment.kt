@@ -33,7 +33,7 @@ import soup.movie.util.*
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
-    private lateinit var binding: SettingsFragmentBinding
+    private var binding: SettingsFragmentBinding by autoCleared()
 
     private val systemViewModel: SystemViewModel by activityViewModels()
     private val viewModel: SettingsViewModel by viewModels()
