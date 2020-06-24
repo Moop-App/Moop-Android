@@ -88,6 +88,19 @@
             android:exported="false"
             tools:node="remove" />
 
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="soup.movie.init.TimberInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="soup.movie.init.WorkManagerInitializer"
+                android:value="androidx.startup" />
+        </provider>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notify_default" />

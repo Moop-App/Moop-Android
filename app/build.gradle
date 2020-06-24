@@ -110,6 +110,7 @@ dependencies {
     implementation deps.androidx.fragment_ktx
     implementation deps.androidx.preference_ktx
     implementation deps.androidx.recyclerview
+    implementation deps.androidx.startup
     implementation deps.androidx.transition
     implementation deps.androidx.viewpager2
 
