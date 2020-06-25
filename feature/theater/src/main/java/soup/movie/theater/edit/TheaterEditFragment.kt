@@ -22,7 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDE
 import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.setupWithViewPager2
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.ext.lazyFast
 import soup.movie.model.Theater
 import soup.movie.theater.R
@@ -161,21 +161,23 @@ class TheaterEditFragment : Fragment(R.layout.theater_edit_fragment), OnBackPres
     }
 
     private fun TheaterEditFragmentBinding.adaptSystemWindowInset() {
-        root.doOnApplyWindowInsets { view, insets, initialState ->
-            view.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
 
-            val bottomSystemInset = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                insets.systemGestureInsets.bottom
-            } else {
-                insets.systemWindowInsetBottom
+                val bottomSystemInset = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    insets.systemGestureInsets.bottom
+                } else {
+                    insets.systemWindowInsetBottom
+                }
+                footerPanel.setPeekHeight(bottomSystemInset + originPeekHeight)
             }
-            footerPanel.setPeekHeight(bottomSystemInset + originPeekHeight)
-        }
-        viewPager.doOnApplyWindowInsets { viewPager, insets, initialState ->
-            viewPager.updatePadding(
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
+            .applyToView(root)
+        Insetter.builder()
+            .setOnApplyInsetsListener { viewPager, insets, initialState ->
+                viewPager.updatePadding(bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom)
+            }
+            .applyToView(viewPager)
     }
 
     private fun TheaterEditFragmentBinding.render(viewState: TheaterEditContentUiModel) {

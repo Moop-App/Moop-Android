@@ -19,7 +19,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.ext.showToast
 import soup.movie.ext.startActivitySafely
 import soup.movie.model.Theater
@@ -64,16 +64,20 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
     }
 
     private fun SettingsFragmentBinding.adaptSystemWindowInset() {
-        settingsScene.doOnApplyWindowInsets { settingsScene, insets, initialState ->
-            settingsScene.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop
-            )
-        }
-        listView.doOnApplyWindowInsets { listView, insets, initialState ->
-            listView.updatePadding(
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
+        Insetter.builder()
+            .setOnApplyInsetsListener { settingsScene, insets, initialState ->
+                settingsScene.updatePadding(
+                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                )
+            }
+            .applyToView(settingsScene)
+        Insetter.builder()
+            .setOnApplyInsetsListener { listView, insets, initialState ->
+                listView.updatePadding(
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
+            }
+            .applyToView(listView)
     }
 
     private fun SettingsFragmentBinding.initViewState(viewModel: SettingsViewModel) {

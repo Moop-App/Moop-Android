@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.databinding.DetailActivityBinding
@@ -90,21 +90,27 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-        binding.header.root.doOnApplyWindowInsets { header, insets, initialState ->
-            header.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
-        }
-        binding.listView.doOnApplyWindowInsets { listView, insets, initialState ->
-            listView.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop,
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
-        binding.share.root.doOnApplyWindowInsets { share, insets, initialState ->
-            share.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop,
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
+        Insetter.builder()
+            .setOnApplyInsetsListener { header, insets, initialState ->
+                header.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+            }
+            .applyToView(binding.header.root)
+        Insetter.builder()
+            .setOnApplyInsetsListener { listView, insets, initialState ->
+                listView.updatePadding(
+                    top = initialState.paddings.top + insets.systemWindowInsetTop,
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
+            }
+            .applyToView(binding.listView)
+        Insetter.builder()
+            .setOnApplyInsetsListener { share, insets, initialState ->
+                share.updatePadding(
+                    top = initialState.paddings.top + insets.systemWindowInsetTop,
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
+            }
+            .applyToView(binding.share.root)
 
         postponeEnterTransition()
         initViewState(binding)

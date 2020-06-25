@@ -24,7 +24,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.BuildConfig
 import soup.movie.di.TheaterMapModuleDependencies
 import soup.movie.ext.animateGone
@@ -184,17 +184,21 @@ class TheaterMapFragment : BaseMapFragment(R.layout.theater_map_fragment), OnBac
     }
 
     private fun TheaterMapFragmentBinding.adaptSystemWindowInset() {
-        theaterMapScene.doOnApplyWindowInsets { theaterMapScene, insets, initialState ->
-            theaterMapScene.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop,
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
-        footer.windowInsetBottomView.doOnApplyWindowInsets { windowInsetBottomView, insets, initialState ->
-            windowInsetBottomView.updateLayoutParams {
-                height = initialState.paddings.bottom + insets.systemWindowInsetBottom
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(
+                    top = initialState.paddings.top + insets.systemWindowInsetTop,
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
             }
-        }
+            .applyToView(theaterMapScene)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updateLayoutParams {
+                    height = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                }
+            }
+            .applyToView(footer.windowInsetBottomView)
     }
 
     override fun onBackPressed(): Boolean {

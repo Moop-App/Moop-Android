@@ -11,7 +11,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.navigation.dynamicfeatures.fragment.ui.AbstractProgressFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.databinding.CustomProgressFragmentBinding
@@ -26,11 +26,13 @@ class CustomProgressFragment : AbstractProgressFragment(R.layout.custom_progress
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = CustomProgressFragmentBinding.bind(view)
         binding.progressIcon.setActivityIcon()
-        binding.appLogo.doOnApplyWindowInsets { appLogo, insets, initialState ->
-            appLogo.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = initialState.margins.bottom + insets.systemWindowInsetBottom
+        Insetter.builder()
+            .setOnApplyInsetsListener { appLogo, insets, initialState ->
+                appLogo.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    bottomMargin = initialState.margins.bottom + insets.systemWindowInsetBottom
+                }
             }
-        }
+            .applyToView(binding.appLogo)
     }
 
     private fun ImageView.setActivityIcon() {

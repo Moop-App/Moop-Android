@@ -10,7 +10,7 @@ import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RoughAdapterDataObserver
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.home.HomeContentsListAdapter
@@ -49,11 +49,13 @@ abstract class HomeContentsFragment : HomeTabFragment(R.layout.home_tab_contents
     }
 
     private fun HomeTabContentsBinding.adaptSystemWindowInset() {
-        listView.doOnApplyWindowInsets { _, insets, initialState ->
-            listView.updatePadding(
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
+            }
+            .applyToView(listView)
     }
 
     private fun HomeTabContentsBinding.initViewState(viewModel: HomeContentsViewModel) {

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.theme.databinding.ThemeOptionFragmentBinding
 
 @AndroidEntryPoint
@@ -34,15 +34,15 @@ class ThemeSettingFragment : Fragment(R.layout.theme_option_fragment) {
     }
 
     private fun ThemeOptionFragmentBinding.adaptSystemWindowInset() {
-        themeOptionScene.doOnApplyWindowInsets { themeOptionScene, insets, initialState ->
-            themeOptionScene.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop
-            )
-        }
-        listView.doOnApplyWindowInsets { listView, insets, initialState ->
-            listView.updatePadding(
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+            }
+            .applyToView(themeOptionScene)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom)
+            }
+            .applyToView(listView)
     }
 }

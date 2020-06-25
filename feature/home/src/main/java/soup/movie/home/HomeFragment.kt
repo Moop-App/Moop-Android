@@ -15,7 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.setupWithViewPager2
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.analytics.EventAnalytics
 import soup.movie.home.HomeHeaderUiModel.*
 import soup.movie.home.databinding.HomeFragmentBinding
@@ -65,26 +65,34 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
     }
 
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
-        headerHint.root.doOnApplyWindowInsets { headerHint, insets, initialState ->
-            headerHint.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                topMargin = initialState.margins.top + insets.systemWindowInsetTop
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    topMargin = initialState.margins.top + insets.systemWindowInsetTop
+                }
             }
-        }
-        header.collapsingToolbar.doOnApplyWindowInsets { collapsingToolbar, insets, initialState ->
-            collapsingToolbar.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop
-            )
-        }
-        filterContainerView.doOnApplyWindowInsets { filterContainerView, insets, initialState ->
-            filterContainerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                topMargin = initialState.margins.top + insets.systemWindowInsetTop
+            .applyToView(headerHint.root)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(
+                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                )
             }
-        }
-        filterButton.doOnApplyWindowInsets { filterButton, insets, initialState ->
-            filterButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = initialState.margins.bottom + insets.systemWindowInsetBottom
+            .applyToView(header.collapsingToolbar)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    topMargin = initialState.margins.top + insets.systemWindowInsetTop
+                }
             }
-        }
+            .applyToView(filterContainerView)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    bottomMargin = initialState.margins.bottom + insets.systemWindowInsetBottom
+                }
+            }
+            .applyToView(filterButton)
     }
 
     private fun HomeFragmentBinding.initViewState(viewModel: HomeViewModel) {

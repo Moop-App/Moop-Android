@@ -16,7 +16,7 @@ import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import soup.movie.analytics.EventAnalytics
@@ -49,16 +49,19 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
     }
 
     private fun SearchFragmentBinding.adaptSystemWindowInset() {
-        root.doOnApplyWindowInsets { view, insets, initialState ->
+        Insetter.builder().setOnApplyInsetsListener { view, insets, initialState ->
             view.updatePadding(
                 top = initialState.paddings.top + insets.systemWindowInsetTop
             )
         }
-        contents.listView.doOnApplyWindowInsets { listView, insets, initialState ->
-            listView.updatePadding(
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
+            .applyToView(root)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
+            }
+            .applyToView(contents.listView)
     }
 
     override fun onResume() {

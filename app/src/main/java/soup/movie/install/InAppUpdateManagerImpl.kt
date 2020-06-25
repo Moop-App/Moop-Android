@@ -1,8 +1,10 @@
 package soup.movie.install
 
 import android.content.Context
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.ktx.requestAppUpdateInfo
+import kotlin.coroutines.suspendCoroutine
 
 class InAppUpdateManagerImpl(context: Context) : InAppUpdateManager {
 
@@ -14,6 +16,18 @@ class InAppUpdateManagerImpl(context: Context) : InAppUpdateManager {
                 .availableVersionCode()
         } catch (e: Exception) {
             InAppUpdateManager.UNKNOWN_VERSION_CODE
+        }
+    }
+
+    private suspend fun AppUpdateManager.requestAppUpdateInfo(): AppUpdateInfo {
+        return suspendCoroutine { continuation ->
+            appUpdateInfo
+                .addOnSuccessListener {
+                    continuation.resumeWith(Result.success(it))
+                }
+                .addOnFailureListener {
+                    continuation.resumeWith(Result.failure(it))
+                }
         }
     }
 }

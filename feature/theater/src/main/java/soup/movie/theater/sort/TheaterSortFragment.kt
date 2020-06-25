@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.util.SimpleItemTouchHelperCallback
 import androidx.transition.TransitionInflater
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.theater.R
 import soup.movie.theater.databinding.TheaterSortFragmentBinding
 import soup.movie.ui.base.OnBackPressedListener
@@ -87,16 +87,20 @@ class TheaterSortFragment : Fragment(R.layout.theater_sort_fragment), OnBackPres
     }
 
     private fun TheaterSortFragmentBinding.adaptSystemWindowInset() {
-        theaterSortScene.doOnApplyWindowInsets { theaterSortScene, insets, initialState ->
-            theaterSortScene.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop
-            )
-        }
-        container.doOnApplyWindowInsets { container, insets, initialState ->
-            container.updatePadding(
-                bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
-            )
-        }
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(
+                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                )
+            }
+            .applyToView(theaterSortScene)
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(
+                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                )
+            }
+            .applyToView(container)
     }
 
     private fun TheaterSortFragmentBinding.initViewState(viewModel: TheaterSortViewModel) {

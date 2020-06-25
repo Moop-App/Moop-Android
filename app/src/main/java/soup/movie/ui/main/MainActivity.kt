@@ -18,7 +18,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.doOnApplyWindowInsets
+import dev.chrisbanes.insetter.Insetter
 import soup.movie.R
 import soup.movie.core.MainDirections
 import soup.movie.databinding.MainActivityBinding
@@ -74,11 +74,13 @@ class MainActivity : AppCompatActivity() {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-        binding.navigationView.doOnApplyWindowInsets { navigationView, insets, initialState ->
-            navigationView.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop
-            )
-        }
+        Insetter.builder()
+            .setOnApplyInsetsListener { view, insets, initialState ->
+                view.updatePadding(
+                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                )
+            }
+            .applyToView(binding.navigationView)
 
         //TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
