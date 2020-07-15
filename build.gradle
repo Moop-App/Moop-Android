@@ -11,7 +11,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.android.tools.build:gradle:4.0.1'
         classpath deps.kotlin.plugin
         classpath deps.dagger.hilt_plugin
         classpath deps.navigation.safe_args_plugin
