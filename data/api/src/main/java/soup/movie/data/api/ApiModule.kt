@@ -4,8 +4,8 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -16,7 +16,7 @@ import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpNetworkInterc
 import javax.inject.Singleton
 
 @Module(includes = [ApiModule.Providers::class])
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object ApiModule {
 
     @Provides
@@ -33,7 +33,7 @@ object ApiModule {
     }
 
     @Module
-    @InstallIn(ApplicationComponent::class)
+    @InstallIn(SingletonComponent::class)
     internal object Providers {
 
         @Provides

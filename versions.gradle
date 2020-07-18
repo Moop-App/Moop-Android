@@ -80,7 +80,7 @@ deps.hilt = [
         compiler : "androidx.hilt:hilt-compiler:$hilt"
 ]
 
-def dagger_hilt = "2.28.1-alpha"
+def dagger_hilt = "2.28.3-alpha"
 def assistedInject = "0.5.2"
 deps.dagger = [
         hilt                     : "com.google.dagger:hilt-android:$dagger_hilt",
