@@ -70,7 +70,8 @@ deps.work = [
 def retrofit = "2.9.0"
 deps.retrofit = [
         runtime: "com.squareup.retrofit2:retrofit:$retrofit",
-        gson   : "com.squareup.retrofit2:converter-gson:$retrofit"
+        gson   : "com.squareup.retrofit2:converter-gson:$retrofit",
+        moshi  : "com.squareup.retrofit2:converter-moshi:$retrofit"
 ]
 
 def hilt = "1.0.0-alpha01"
