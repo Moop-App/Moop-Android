@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import soup.movie.data.api.BuildConfig.API_BASE_URL
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpInterceptor
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpNetworkInterceptor
@@ -26,7 +26,7 @@ object ApiModule {
     ): MoopApiService {
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .build()
             .create(MoopApiService::class.java)

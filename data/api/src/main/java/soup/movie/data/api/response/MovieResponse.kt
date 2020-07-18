@@ -1,15 +1,15 @@
 package soup.movie.data.api.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class MovieResponse(
     val id: String,
     val score: Int,
     val title: String,
-    @SerializedName("posterUrl")
+    @Json(name = "posterUrl")
     private val _posterUrl: String,
     val openDate: String,
-    @SerializedName("now")
+    @Json(name = "now")
     val isNow: Boolean,
     val age: Int,
     val nationFilter: List<String>?,

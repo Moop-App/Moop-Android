@@ -1,11 +1,11 @@
 package soup.movie.data.api.response
 
 import androidx.core.text.parseAsHtml
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class TrailerResponse(
     val youtubeId: String,
-    @SerializedName("title")
+    @Json(name = "title")
     private val _title: String,
     val author: String,
     val thumbnailUrl: String

@@ -1,12 +1,12 @@
 package soup.movie.data.api.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class TheaterRatingsResponse(
-    @SerializedName("C")
+    @Json(name = "C")
     val cgv: String?,
-    @SerializedName("L")
+    @Json(name = "L")
     val lotte: String?,
-    @SerializedName("M")
+    @Json(name = "M")
     val megabox: String?
 )
