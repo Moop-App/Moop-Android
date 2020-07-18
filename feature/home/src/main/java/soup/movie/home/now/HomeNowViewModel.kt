@@ -17,6 +17,7 @@ import soup.movie.home.tab.HomeContentsViewModel
 import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
 import soup.movie.settings.AppSettings
+import timber.log.Timber
 
 class HomeNowViewModel @ViewModelInject constructor(
     private val appSettings: AppSettings,
@@ -68,6 +69,7 @@ class HomeNowViewModel @ViewModelInject constructor(
             _isLoading.postValue(false)
             _isError.postValue(false)
         } catch (t: Throwable) {
+            Timber.w(t)
             _isLoading.postValue(false)
             _isError.postValue(true)
         }
