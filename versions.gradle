@@ -107,8 +107,8 @@ deps.glide = [
 
 deps.firebase = [
         core              : 'com.google.firebase:firebase-core:17.2.1',
-        crashlytics       : 'com.google.firebase:firebase-crashlytics:17.0.0-beta02',
-        crashlytics_plugin: 'com.google.firebase:firebase-crashlytics-gradle:2.0.0-beta03',
+        crashlytics       : 'com.google.firebase:firebase-crashlytics:17.2.2',
+        crashlytics_plugin: 'com.google.firebase:firebase-crashlytics-gradle:2.3.0',
         messaging         : 'com.google.firebase:firebase-messaging:20.0.1',
         dynamic_links     : 'com.google.firebase:firebase-dynamic-links:19.0.0',
         ads               : 'com.google.firebase:firebase-ads:18.3.0'
