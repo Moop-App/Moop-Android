@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
+import timber.log.Timber
 
 class TheaterMapViewModel(
     private val repository: MoopRepository
@@ -29,6 +30,7 @@ class TheaterMapViewModel(
             try {
                 TheaterMapUiModel(repository.getCodeList().toTheaterList())
             } catch (t: Throwable) {
+                Timber.w(t)
                 TheaterMapUiModel(emptyList())
             }
         }

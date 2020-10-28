@@ -15,6 +15,7 @@ import soup.movie.model.Movie
 import soup.movie.model.MovieList
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
+import timber.log.Timber
 
 internal class RoomDatabase(
     private val favoriteMovieDao: FavoriteMovieDao,
@@ -84,6 +85,7 @@ internal class RoomDatabase(
             cacheDao.findByType(type).list
                 .map { movieEntity -> movieEntity.toMovie() }
         } catch (t: Throwable) {
+            Timber.w(t)
             emptyList()
         }
     }

@@ -12,6 +12,7 @@ import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
+import timber.log.Timber
 
 internal class DataMoopRepository(
     private val local: MoopDatabase,
@@ -26,6 +27,7 @@ internal class DataMoopRepository(
         val isStaleness = try {
             local.getNowLastUpdateTime() < remote.getNowLastUpdateTime()
         } catch (t: Throwable) {
+            Timber.w(t)
             true
         }
         if (isStaleness) {
@@ -46,6 +48,7 @@ internal class DataMoopRepository(
         val isStaleness = try {
             local.getPlanLastUpdateTime() < remote.getPlanLastUpdateTime()
         } catch (t: Throwable) {
+            Timber.w(t)
             true
         }
         if (isStaleness) {
@@ -65,6 +68,7 @@ internal class DataMoopRepository(
                 .toSet()
                 .toList()
         } catch (t: Throwable) {
+            Timber.w(t)
             emptyList()
         }
     }

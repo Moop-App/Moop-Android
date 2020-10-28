@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.model.Theater
+import timber.log.Timber
 
 class TheaterEditViewModel @ViewModelInject constructor(
     private val manager: TheaterEditManager
@@ -21,6 +22,7 @@ class TheaterEditViewModel @ViewModelInject constructor(
                 manager.loadAsync()
                 emit(TheaterEditContentUiModel.DoneState)
             } catch (t: Throwable) {
+                Timber.w(t)
                 emit(TheaterEditContentUiModel.ErrorState)
             }
         }

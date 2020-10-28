@@ -27,6 +27,7 @@ import android.graphics.drawable.DrawableWrapper
 import android.os.Build
 import android.util.SparseArray
 import androidx.annotation.RequiresApi
+import timber.log.Timber
 import kotlin.math.max
 
 /**
@@ -43,6 +44,7 @@ class LauncherIcons(context: Context) {
             val appInfo = pm.getApplicationInfo(packageName, 0)
             getShadowedIcon(pm.getApplicationIcon(appInfo))
         } catch (e: PackageManager.NameNotFoundException) {
+            Timber.w(e)
             null
         }
     }

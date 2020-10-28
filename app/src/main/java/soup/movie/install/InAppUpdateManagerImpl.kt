@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import timber.log.Timber
 import kotlin.coroutines.suspendCoroutine
 
 class InAppUpdateManagerImpl(context: Context) : InAppUpdateManager {
@@ -15,6 +16,7 @@ class InAppUpdateManagerImpl(context: Context) : InAppUpdateManager {
             appUpdateManager.requestAppUpdateInfo()
                 .availableVersionCode()
         } catch (e: Exception) {
+            Timber.w(e)
             InAppUpdateManager.UNKNOWN_VERSION_CODE
         }
     }
