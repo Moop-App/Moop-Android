@@ -1,5 +1,8 @@
 package soup.movie.data.api.response
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class TheaterResponse(
     val type: String,
     val code: String,

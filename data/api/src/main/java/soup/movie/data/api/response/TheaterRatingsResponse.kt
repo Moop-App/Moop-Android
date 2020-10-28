@@ -1,12 +1,14 @@
 package soup.movie.data.api.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class TheaterRatingsResponse(
-    @SerializedName("C")
+    @SerialName("C")
     val cgv: String?,
-    @SerializedName("L")
+    @SerialName("L")
     val lotte: String?,
-    @SerializedName("M")
+    @SerialName("M")
     val megabox: String?
 )

@@ -1,6 +1,7 @@
 package soup.movie.data.api.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * @param genres 장르
@@ -11,14 +12,15 @@ import com.google.gson.annotations.SerializedName
  * @param showTm 상영시간 (분)
  * @param boxOffice 박스오피스 정보
  */
+@Serializable
 data class MovieDetailResponse(
     val id: String,
     val score: Int,
     val title: String,
-    @SerializedName("posterUrl")
+    @SerialName("posterUrl")
     private val _posterUrl: String,
     val openDate: String,
-    @SerializedName("now")
+    @SerialName("now")
     val isNow: Boolean,
     val age: Int,
     val nationFilter: List<String>?,

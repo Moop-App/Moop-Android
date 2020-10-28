@@ -26,7 +26,6 @@ dependencies {
     kapt deps.dagger.hilt_compiler
 
     implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
     implementation deps.retrofit.serialization
 
     implementation deps.util.timber
