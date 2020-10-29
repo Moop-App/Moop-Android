@@ -33,7 +33,7 @@ dependencies {
     implementation deps.util.timber
 
     implementation deps.ui.recyclerview_animators
-    implementation 'com.github.stfalcon:stfalcon-imageviewer:1.0.0'
+    implementation deps.ui.stfalcon_imageviewer
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner

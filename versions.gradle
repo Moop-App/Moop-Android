@@ -6,18 +6,18 @@
 def deps = [:]
 
 deps.androidx = [
-        activity_ktx    : 'androidx.activity:activity-ktx:1.2.0-alpha06',
+        activity_ktx    : 'androidx.activity:activity-ktx:1.2.0-beta01',
         annotation      : "androidx.annotation:annotation:1.2.0-alpha01",
-        appcompat       : 'androidx.appcompat:appcompat:1.3.0-alpha01',
-        browser         : 'androidx.browser:browser:1.3.0-alpha04',
-        constraintlayout: 'androidx.constraintlayout:constraintlayout:2.0.0-beta7',
+        appcompat       : 'androidx.appcompat:appcompat:1.3.0-alpha02',
+        browser         : 'androidx.browser:browser:1.3.0-beta01',
+        constraintlayout: 'androidx.constraintlayout:constraintlayout:2.0.3',
         core_ktx        : 'androidx.core:core-ktx:1.4.0-alpha01',
-        drawerlayout    : 'androidx.drawerlayout:drawerlayout:1.1.0',
-        fragment_ktx    : 'androidx.fragment:fragment-ktx:1.3.0-alpha06',
+        drawerlayout    : 'androidx.drawerlayout:drawerlayout:1.1.1',
+        fragment_ktx    : 'androidx.fragment:fragment-ktx:1.3.0-beta01',
         preference_ktx  : 'androidx.preference:preference-ktx:1.1.1',
-        recyclerview    : 'androidx.recyclerview:recyclerview:1.2.0-alpha04',
-        startup         : "androidx.startup:startup-runtime:1.0.0-alpha01",
-        transition      : 'androidx.transition:transition:1.4.0-alpha01',
+        recyclerview    : 'androidx.recyclerview:recyclerview:1.2.0-alpha06',
+        startup         : "androidx.startup:startup-runtime:1.0.0",
+        transition      : 'androidx.transition:transition:1.4.0-beta01',
         viewpager2      : 'androidx.viewpager2:viewpager2:1.1.0-alpha01',
 ]
 
@@ -36,7 +36,7 @@ deps.insetter = [
         ktx: "dev.chrisbanes:insetter-ktx:0.3.0"
 ]
 
-def lifecycle = "2.3.0-alpha05"
+def lifecycle = "2.3.0-beta01"
 deps.lifecycle = [
         livedata_ktx : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle",
         viewmodel_ktx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle",
@@ -44,7 +44,7 @@ deps.lifecycle = [
         compiler     : "androidx.lifecycle:lifecycle-common-java8:$lifecycle"
 ]
 
-def navigation = "2.3.0"
+def navigation = "2.3.1"
 deps.navigation = [
         fragment_ktx             : "androidx.navigation:navigation-fragment-ktx:$navigation",
         ui_ktx                   : "androidx.navigation:navigation-ui-ktx:$navigation",
@@ -52,14 +52,14 @@ deps.navigation = [
         safe_args_plugin         : "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation"
 ]
 
-def room = "2.3.0-alpha01"
+def room = "2.3.0-alpha03"
 deps.room = [
         runtime : "androidx.room:room-runtime:$room",
         compiler: "androidx.room:room-compiler:$room",
         ktx     : "androidx.room:room-ktx:$room"
 ]
 
-def work = "2.4.0-rc01"
+def work = "2.4.0"
 deps.work = [
         runtime: "androidx.work:work-runtime-ktx:$work",
         gcm    : "androidx.work:work-gcm:$work",
@@ -72,21 +72,19 @@ deps.retrofit = [
         serialization: "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
 ]
 
-def hilt = "1.0.0-alpha01"
+def hilt = "1.0.0-alpha02"
 deps.hilt = [
         work     : "androidx.hilt:hilt-work:$hilt",
         viewmodel: "androidx.hilt:hilt-lifecycle-viewmodel:$hilt",
         compiler : "androidx.hilt:hilt-compiler:$hilt"
 ]
 
-def dagger_hilt = "2.28.3-alpha"
-def assistedInject = "0.5.2"
+def dagger_hilt = "2.29.1-alpha"
 deps.dagger = [
         hilt                     : "com.google.dagger:hilt-android:$dagger_hilt",
         hilt_compiler            : "com.google.dagger:hilt-android-compiler:$dagger_hilt",
         hilt_plugin              : "com.google.dagger:hilt-android-gradle-plugin:$dagger_hilt",
-        assisted_inject          : "com.squareup.inject:assisted-inject-annotations-dagger2:$assistedInject",
-        assisted_inject_processor: "com.squareup.inject:assisted-inject-processor-dagger2:$assistedInject"
+        hilt_testing             : "com.google.dagger:hilt-android-testing:$dagger_hilt"
 ]
 
 def kotlin = "1.4.10"
@@ -116,13 +114,14 @@ deps.firebase = [
 ]
 
 deps.ui = [
-        lottie                : 'com.airbnb.android:lottie:3.4.0',
-        recyclerview_animators: 'jp.wasabeef:recyclerview-animators:3.0.0'
+        lottie                : 'com.airbnb.android:lottie:3.4.4',
+        recyclerview_animators: 'jp.wasabeef:recyclerview-animators:4.0.1',
+        stfalcon_imageviewer  : 'com.github.stfalcon:stfalcon-imageviewer:1.0.1'
 ]
 
 deps.util = [
         timber            : "com.jakewharton.timber:timber:4.7.1",
-        threetenabp       : 'com.jakewharton.threetenabp:threetenabp:1.2.4'
+        threetenabp       : 'com.jakewharton.threetenabp:threetenabp:1.3.0'
 ]
 
 ext.deps = deps
