@@ -29,8 +29,7 @@ deps.test = [
 
 deps.google = [
         material : 'com.google.android.material:material:1.3.0-alpha01',
-        play_core: 'com.google.android.play:core:1.7.3',
-        gson     : 'com.google.code.gson:gson:2.8.6'
+        play_core: 'com.google.android.play:core:1.7.3'
 ]
 
 deps.insetter = [
@@ -70,7 +69,6 @@ deps.work = [
 def retrofit = "2.9.0"
 deps.retrofit = [
         runtime      : "com.squareup.retrofit2:retrofit:$retrofit",
-        gson         : "com.squareup.retrofit2:converter-gson:$retrofit",
         serialization: "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
 ]
 

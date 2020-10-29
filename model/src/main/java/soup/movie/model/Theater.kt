@@ -1,5 +1,8 @@
 package soup.movie.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Theater(
     val type: String,
     val code: String,

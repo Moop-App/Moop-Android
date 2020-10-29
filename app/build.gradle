@@ -116,7 +116,6 @@ dependencies {
     implementation deps.androidx.transition
     implementation deps.androidx.viewpager2
 
-    implementation deps.google.gson
     implementation deps.google.material
     implementation deps.google.play_core
 
