@@ -19,6 +19,7 @@ import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.util.MM_DD
 import soup.movie.util.yesterday
+import timber.log.Timber
 
 class DetailViewModel @ViewModelInject constructor(
     private val repository: MoopRepository,
@@ -82,6 +83,7 @@ class DetailViewModel @ViewModelInject constructor(
                 repository.getMovieDetail(movie.id)
             }
         } catch (t: Throwable) {
+            Timber.w(t)
             _isError.postValue(true)
         }
         return null

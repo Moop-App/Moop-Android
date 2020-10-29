@@ -50,6 +50,7 @@ private fun Context.executePlayStoreForApp(pkgName: String) {
                 Intent.ACTION_VIEW,
                 Uri.parse("market://details?id=$pkgName")))
     } catch (e: ActivityNotFoundException) {
+        Timber.w(e)
         startActivity(Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse("https://play.google.com/store/apps/details?id=$pkgName")))
@@ -115,6 +116,7 @@ object YouTube {
         try {
             ctx.startActivity(createTrailerAppIntent(id))
         } catch (e: ActivityNotFoundException) {
+            Timber.w(e)
             ctx.startActivitySafely(
                 createTrailerWebIntent(
                     id
@@ -144,6 +146,7 @@ object YouTube {
         try {
             ctx.startActivity(createSearchAppIntent(query))
         } catch (e: ActivityNotFoundException) {
+            Timber.w(e)
             ctx.startActivitySafely(
                 createSearchWebIntent(
                     query

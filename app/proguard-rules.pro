@@ -54,3 +54,14 @@
 
 # For dynamic-features module
 -keep class soup.movie.theatermap.** { *; }
+
+# For kotlinx.serialization
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.SerializationKt
+-keep,includedescriptorclasses class soup.movie.**$$serializer { *; }
+-keepclassmembers class soup.movie.** {
+    *** Companion;
+}
+-keepclasseswithmembers class soup.movie.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}

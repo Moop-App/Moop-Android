@@ -1,15 +1,17 @@
 package soup.movie.data.api
 
 import android.content.Context
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
 import okhttp3.Cache
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import soup.movie.data.api.BuildConfig.API_BASE_URL
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpInterceptor
 import soup.movie.data.api.internal.OkHttpInterceptors.createOkHttpNetworkInterceptor
@@ -26,7 +28,10 @@ object ApiModule {
     ): MoopApiService {
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(Json {
+                isLenient = true
+                ignoreUnknownKeys = true
+            }.asConverterFactory(MediaType.get("application/json")))
             .client(okHttpClient)
             .build()
             .create(MoopApiService::class.java)

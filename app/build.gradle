@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.google.firebase.crashlytics'
@@ -101,6 +102,7 @@ dependencies {
     implementation project(':data:api')
 
     implementation deps.kotlin.stdlib
+    implementation deps.kotlin.serialization
 
     implementation deps.androidx.activity_ktx
     implementation deps.androidx.appcompat
