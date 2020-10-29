@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class MegaboxInfoResponse(
     val id: String,
     val star: String,
-    val url: String?
+    val url: String? = null
 )

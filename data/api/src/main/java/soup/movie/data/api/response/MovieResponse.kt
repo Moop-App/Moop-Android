@@ -14,9 +14,9 @@ data class MovieResponse(
     @SerialName("now")
     val isNow: Boolean,
     val age: Int,
-    val nationFilter: List<String>?,
-    val genres: List<String>?,
-    val boxOffice: Int?,
+    val nationFilter: List<String>? = null,
+    val genres: List<String>? = null,
+    val boxOffice: Int? = null,
     val theater: TheaterRatingsResponse
 ) {
 

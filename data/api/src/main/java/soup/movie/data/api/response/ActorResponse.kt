@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ActorResponse(
     val peopleNm: String,
-    val cast: String
+    val cast: String = ""
 )

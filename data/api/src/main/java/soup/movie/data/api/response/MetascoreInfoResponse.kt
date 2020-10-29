@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MetascoreInfoResponse(
-    val star: String?
+    val star: String? = null
 )

@@ -23,24 +23,24 @@ data class MovieDetailResponse(
     @SerialName("now")
     val isNow: Boolean,
     val age: Int,
-    val nationFilter: List<String>?,
-    val genres: List<String>?,
+    val nationFilter: List<String>? = null,
+    val genres: List<String>? = null,
 
-    val boxOffice: BoxOfficeResponse?,
+    val boxOffice: BoxOfficeResponse? = null,
     val showTm: Int?,
-    val nations: List<String>?,
-    val directors: List<String>?,
-    val actors: List<ActorResponse>?,
-    val companies: List<CompanyResponse>?,
-    val cgv: CgvInfoResponse?,
-    val lotte: LotteInfoResponse?,
-    val megabox: MegaboxInfoResponse?,
-    val naver: NaverInfoResponse?,
-    val imdb: ImdbInfoResponse?,
-    val rt: RottenTomatoInfoResponse?,
-    val mc: MetascoreInfoResponse?,
-    val plot: String?,
-    val trailers: List<TrailerResponse>?
+    val nations: List<String>? = null,
+    val directors: List<String>? = null,
+    val actors: List<ActorResponse>? = null,
+    val companies: List<CompanyResponse>? = null,
+    val cgv: CgvInfoResponse? = null,
+    val lotte: LotteInfoResponse? = null,
+    val megabox: MegaboxInfoResponse? = null,
+    val naver: NaverInfoResponse? = null,
+    val imdb: ImdbInfoResponse? = null,
+    val rt: RottenTomatoInfoResponse? = null,
+    val mc: MetascoreInfoResponse? = null,
+    val plot: String? = null,
+    val trailers: List<TrailerResponse>? = null
 ) {
 
     val posterUrl: String

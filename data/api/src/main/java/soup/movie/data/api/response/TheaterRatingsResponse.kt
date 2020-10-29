@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TheaterRatingsResponse(
     @SerialName("C")
-    val cgv: String?,
+    val cgv: String? = null,
     @SerialName("L")
-    val lotte: String?,
+    val lotte: String? = null,
     @SerialName("M")
-    val megabox: String?
+    val megabox: String? = null
 )

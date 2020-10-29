@@ -9,8 +9,8 @@ data class TrailerResponse(
     val youtubeId: String,
     @SerialName("title")
     private val _title: String,
-    val author: String,
-    val thumbnailUrl: String
+    val author: String = "",
+    val thumbnailUrl: String? = null
 ) {
 
     val title: String
