@@ -1,25 +1,24 @@
 package soup.movie.data.db.internal.converter
 
 import androidx.room.TypeConverter
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 internal object FavoriteMovieTypeConverters {
 
-    private val gson = Gson()
-    private val typeStringList = object : TypeToken<List<String>>() {}.type
-
     @TypeConverter
     @JvmStatic
-    fun fromStringList(value: List<String>?): String {
-        return gson.toJson(value)
+    fun fromString(string: String?): List<String>? {
+        if (string == null) {
+            return null
+        }
+        return Json.decodeFromString(string)
     }
 
     @TypeConverter
     @JvmStatic
-    fun toStringList(value: String?): List<String>? {
-        return gson.fromJson(value,
-            typeStringList
-        )
+    fun toString(value: List<String>?): String {
+        return Json.encodeToString(value.orEmpty())
     }
 }

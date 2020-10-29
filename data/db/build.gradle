@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'dagger.hilt.android.plugin'
 
 apply from: rootProject.file('gradle/android.gradle')
@@ -21,13 +22,13 @@ dependencies {
     implementation project(":model")
 
     implementation deps.kotlin.stdlib
+    implementation deps.kotlin.serialization
     implementation deps.kotlin.coroutines_core
     implementation deps.kotlin.coroutines_android
 
     implementation deps.dagger.hilt
     kapt deps.dagger.hilt_compiler
 
-    implementation deps.google.gson
     implementation deps.room.runtime
     implementation deps.room.ktx
     kapt deps.room.compiler

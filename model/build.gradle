@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
 
 apply from: rootProject.file('gradle/android.gradle')
 
@@ -10,6 +11,7 @@ androidExtensions {
 
 dependencies {
     implementation deps.kotlin.stdlib
+    implementation deps.kotlin.serialization
     implementation deps.kotlin.coroutines_core
     implementation deps.kotlin.coroutines_android
 
