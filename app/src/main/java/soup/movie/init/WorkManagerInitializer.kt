@@ -5,7 +5,6 @@ import androidx.hilt.work.HiltWorkerFactory
 import androidx.startup.Initializer
 import androidx.work.Configuration
 import androidx.work.WorkManager
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import soup.movie.di.DaggerInitializerComponent
 import soup.movie.di.InitializerDependencies
