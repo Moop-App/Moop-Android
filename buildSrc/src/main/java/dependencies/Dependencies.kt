@@ -6,8 +6,8 @@ object Versions {
     const val targetSdk = 29
     const val compileSdk = 29
     const val buildTools = "29.0.3"
-    const val versionCode = 103
-    const val versionName = "1.0.3"
+    const val versionCode = 104
+    const val versionName = "1.0.4"
 }
 
 object Libs {
