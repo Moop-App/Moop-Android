@@ -1,3 +1,5 @@
+import dependencies.Libs
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -10,12 +12,12 @@ androidExtensions {
 }
 
 dependencies {
-    implementation deps.kotlin.stdlib
-    implementation deps.kotlin.serialization
-    implementation deps.kotlin.coroutines_core
-    implementation deps.kotlin.coroutines_android
+    implementation Libs.Kotlin.stdlib
+    implementation Libs.Kotlin.serialization
+    implementation Libs.Coroutines.core
+    implementation Libs.Coroutines.android
 
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.runner
-    androidTestImplementation deps.test.espresso
+    testImplementation Libs.Test.junit
+    androidTestImplementation Libs.Test.runner
+    androidTestImplementation Libs.Test.espresso
 }

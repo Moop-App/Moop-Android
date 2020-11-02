@@ -1,3 +1,5 @@
+import dependencies.Libs
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -13,43 +15,43 @@ android.buildTypes.release {
 dependencies {
     implementation project(':model')
 
-    implementation deps.kotlin.stdlib
+    implementation Libs.Kotlin.stdlib
 
-    implementation deps.androidx.activity_ktx
-    implementation deps.androidx.appcompat
-    implementation deps.androidx.browser
-    implementation deps.androidx.core_ktx
-    implementation deps.androidx.constraintlayout
-    implementation deps.androidx.fragment_ktx
-    implementation deps.androidx.recyclerview
+    implementation Libs.AndroidX.activity
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.browser
+    implementation Libs.AndroidX.core
+    implementation Libs.AndroidX.constraintlayout
+    implementation Libs.AndroidX.fragment
+    implementation Libs.AndroidX.recyclerview
 
-    implementation deps.google.material
+    implementation Libs.Google.material
 
-    implementation deps.lifecycle.runtime_ktx
-    implementation deps.lifecycle.compiler
+    implementation Libs.AndroidX.Lifecycle.runtime
+    implementation Libs.AndroidX.Lifecycle.compiler
 
-    implementation deps.navigation.fragment_ktx
-    implementation deps.navigation.dynamic_features_fragment
+    implementation Libs.AndroidX.Navigation.fragment
+    implementation Libs.AndroidX.Navigation.dynamicFeaturesFragment
 
-    implementation deps.dagger.hilt
-    kapt deps.dagger.hilt_compiler
-    implementation deps.hilt.viewmodel
-    kapt deps.hilt.compiler
+    implementation Libs.Dagger.hilt
+    kapt Libs.Dagger.hiltCompiler
+    implementation Libs.AndroidX.Hilt.viewmodel
+    kapt Libs.AndroidX.Hilt.compiler
 
-    implementation deps.glide.runtime
-    kapt deps.glide.compiler
+    implementation Libs.Glide.runtime
+    kapt Libs.Glide.compiler
 
-    implementation deps.firebase.dynamic_links
-    implementation deps.firebase.ads
+    implementation Libs.Firebase.dynamicLinks
+    implementation Libs.Firebase.ads
 
-    api deps.util.threetenabp
-    implementation deps.util.timber
+    api Libs.threetenAbp
+    implementation Libs.timber
 
     implementation 'com.kakao.sdk:kakaolink:1.14.0'
 
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.runner
-    androidTestImplementation deps.test.espresso
+    testImplementation Libs.Test.junit
+    androidTestImplementation Libs.Test.runner
+    androidTestImplementation Libs.Test.espresso
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {

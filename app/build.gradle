@@ -1,3 +1,6 @@
+import dependencies.Libs
+import dependencies.Versions
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -9,15 +12,15 @@ apply plugin: 'com.google.firebase.crashlytics'
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_tools
+    compileSdkVersion Versions.compileSdk
+    buildToolsVersion Versions.buildTools
 
     defaultConfig {
-        applicationId build_versions.appId
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode build_versions.versionCode
-        versionName build_versions.versionName
+        applicationId Versions.appId
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Versions.versionCode
+        versionName Versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -82,9 +85,7 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
-    dynamicFeatures = [
-            ":feature:theatermap"
-    ]
+    dynamicFeatures = [":feature:theatermap"]
 }
 
 dependencies {
@@ -101,57 +102,56 @@ dependencies {
     implementation project(':data:db')
     implementation project(':data:api')
 
-    implementation deps.kotlin.stdlib
-    implementation deps.kotlin.serialization
+    implementation Libs.Kotlin.stdlib
+    implementation Libs.Kotlin.serialization
 
-    implementation deps.androidx.activity_ktx
-    implementation deps.androidx.appcompat
-    implementation deps.androidx.core_ktx
-    implementation deps.androidx.constraintlayout
-    implementation deps.androidx.drawerlayout
-    implementation deps.androidx.fragment_ktx
-    implementation deps.androidx.preference_ktx
-    implementation deps.androidx.recyclerview
-    implementation deps.androidx.startup
-    implementation deps.androidx.transition
-    implementation deps.androidx.viewpager2
+    implementation Libs.AndroidX.activity
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.core
+    implementation Libs.AndroidX.constraintlayout
+    implementation Libs.AndroidX.drawerlayout
+    implementation Libs.AndroidX.fragment
+    implementation Libs.AndroidX.preference
+    implementation Libs.AndroidX.recyclerview
+    implementation Libs.AndroidX.startup
+    implementation Libs.AndroidX.transition
+    implementation Libs.AndroidX.viewpager2
 
-    implementation deps.google.material
-    implementation deps.google.play_core
+    implementation Libs.Google.material
+    implementation Libs.Google.play
 
-    implementation deps.insetter.ktx
+    implementation Libs.insetter
 
-    implementation deps.lifecycle.livedata_ktx
-    implementation deps.lifecycle.viewmodel_ktx
-    implementation deps.lifecycle.runtime_ktx
-    implementation deps.lifecycle.compiler
+    implementation Libs.AndroidX.Lifecycle.livedata
+    implementation Libs.AndroidX.Lifecycle.viewmodel
+    implementation Libs.AndroidX.Lifecycle.runtime
+    implementation Libs.AndroidX.Lifecycle.compiler
 
-    implementation deps.navigation.fragment_ktx
-    implementation deps.navigation.ui_ktx
-    implementation deps.navigation.dynamic_features_fragment
+    implementation Libs.AndroidX.Navigation.fragment
+    implementation Libs.AndroidX.Navigation.ui
+    implementation Libs.AndroidX.Navigation.dynamicFeaturesFragment
 
-    implementation deps.dagger.hilt
-    kapt deps.dagger.hilt_compiler
-    implementation deps.hilt.viewmodel
-    implementation deps.hilt.work
-    kapt deps.hilt.compiler
+    implementation Libs.Dagger.hilt
+    kapt Libs.Dagger.hiltCompiler
+    implementation Libs.AndroidX.Hilt.viewmodel
+    implementation Libs.AndroidX.Hilt.work
+    kapt Libs.AndroidX.Hilt.compiler
 
-    implementation deps.glide.runtime
-    kapt deps.glide.compiler
+    implementation Libs.Glide.runtime
+    kapt Libs.Glide.compiler
 
-    implementation deps.firebase.core
-    implementation deps.firebase.crashlytics
-    implementation deps.firebase.messaging
-    implementation deps.firebase.dynamic_links
-    implementation deps.firebase.ads
+    implementation Libs.Firebase.core
+    implementation Libs.Firebase.crashlytics
+    implementation Libs.Firebase.messaging
+    implementation Libs.Firebase.dynamicLinks
+    implementation Libs.Firebase.ads
 
-    implementation deps.util.timber
+    implementation Libs.timber
+    implementation Libs.lottie
 
-    implementation deps.ui.lottie
-
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.runner
-    androidTestImplementation deps.test.espresso
+    testImplementation Libs.Test.junit
+    androidTestImplementation Libs.Test.runner
+    androidTestImplementation Libs.Test.espresso
 }
 
 if (file("google-services.json").exists()) {
