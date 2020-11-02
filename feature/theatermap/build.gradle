@@ -1,3 +1,5 @@
+import dependencies.Libs
+
 apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -12,29 +14,29 @@ dependencies {
     implementation project(':core')
     implementation project(':data:repository')
 
-    implementation deps.kotlin.stdlib
-    implementation deps.kotlin.coroutines_core
-    implementation deps.kotlin.coroutines_android
+    implementation Libs.Kotlin.stdlib
+    implementation Libs.Coroutines.core
+    implementation Libs.Coroutines.android
 
-    implementation deps.androidx.core_ktx
-    implementation deps.androidx.constraintlayout
+    implementation Libs.AndroidX.core
+    implementation Libs.AndroidX.constraintlayout
 
-    implementation deps.google.material
+    implementation Libs.Google.material
 
-    implementation deps.insetter.ktx
+    implementation Libs.insetter
 
-    implementation deps.navigation.fragment_ktx
-    implementation deps.navigation.ui_ktx
+    implementation Libs.AndroidX.Navigation.fragment
+    implementation Libs.AndroidX.Navigation.ui
 
-    implementation deps.dagger.hilt
-    kapt deps.dagger.hilt_compiler
+    implementation Libs.Dagger.hilt
+    kapt Libs.Dagger.hiltCompiler
 
-    implementation deps.util.timber
+    implementation Libs.timber
 
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.naver.maps:map-sdk:3.6.2'
 
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.runner
-    androidTestImplementation deps.test.espresso
+    testImplementation Libs.Test.junit
+    androidTestImplementation Libs.Test.runner
+    androidTestImplementation Libs.Test.espresso
 }

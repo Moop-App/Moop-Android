@@ -1,7 +1,8 @@
+import dependencies.Libs
+
 apply from: file('gradle/utils.gradle')
 
 buildscript {
-    apply from: 'versions.gradle'
     repositories {
         google()
         jcenter()
@@ -11,13 +12,13 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
-        classpath deps.kotlin.plugin
-        classpath deps.kotlin.serialization_plugin
-        classpath deps.dagger.hilt_plugin
-        classpath deps.navigation.safe_args_plugin
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.plugin
+        classpath Libs.Kotlin.serializationPlugin
+        classpath Libs.Dagger.hiltPlugin
+        classpath Libs.AndroidX.Navigation.safeArgsPlugin
         classpath 'com.google.gms:google-services:4.3.3'
-        classpath deps.firebase.crashlytics_plugin
+        classpath Libs.Firebase.crashlyticsPlugin
     }
 }
 
