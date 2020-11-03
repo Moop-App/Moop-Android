@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 internal data class MovieListEntity(
     @PrimaryKey
     val type: String,
-    val lastUpdateTime: Long,
-    val list: List<MovieEntity>
+    val lastUpdateTime: Long = 0,
+    val list: List<MovieEntity> = emptyList()
 ) {
 
     companion object {

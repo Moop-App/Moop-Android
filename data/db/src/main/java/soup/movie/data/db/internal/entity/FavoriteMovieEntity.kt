@@ -22,15 +22,15 @@ internal data class FavoriteMovieEntity(
     @ColumnInfo(name = "age")
     val age: Int,
     @ColumnInfo(name = "nationFilter")
-    val nationFilter: List<String>?,
+    val nationFilter: List<String>? = emptyList(),
     @ColumnInfo(name = "genres")
-    val genres: List<String>?,
+    val genres: List<String>? = emptyList(),
     @ColumnInfo(name = "boxOffice")
-    val boxOffice: Int?,
+    val boxOffice: Int? = null,
     @ColumnInfo(name = "cgv")
-    val cgv: String?,
+    val cgv: String? = null,
     @ColumnInfo(name = "lotte")
-    val lotte: String?,
+    val lotte: String? = null,
     @ColumnInfo(name = "megabox")
-    val megabox: String?
+    val megabox: String? = null
 )
