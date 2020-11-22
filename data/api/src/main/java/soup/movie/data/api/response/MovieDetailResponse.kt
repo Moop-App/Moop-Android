@@ -27,7 +27,7 @@ data class MovieDetailResponse(
     val genres: List<String>? = null,
 
     val boxOffice: BoxOfficeResponse? = null,
-    val showTm: Int?,
+    val showTm: Int? = null,
     val nations: List<String>? = null,
     val directors: List<String>? = null,
     val actors: List<ActorResponse>? = null,
