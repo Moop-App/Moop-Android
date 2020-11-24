@@ -4,7 +4,6 @@ import soup.movie.data.db.internal.entity.FavoriteMovieEntity
 import soup.movie.data.db.internal.entity.MovieEntity
 import soup.movie.data.db.internal.entity.OpenDateAlarmEntity
 import soup.movie.model.Movie
-import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 
 internal fun Movie.toMovieEntity(): MovieEntity {

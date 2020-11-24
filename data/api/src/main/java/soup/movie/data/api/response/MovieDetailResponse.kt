@@ -45,7 +45,4 @@ data class MovieDetailResponse(
 
     val posterUrl: String
         get() = _posterUrl.replaceFirst("http:", "https:")
-
-    val isPlan: Boolean
-        get() = !isNow
 }

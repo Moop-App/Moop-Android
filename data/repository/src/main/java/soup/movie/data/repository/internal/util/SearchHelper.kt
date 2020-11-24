@@ -110,7 +110,7 @@ internal object SearchHelper {
         var endIdx = -1
         var idx = 0
         val queryLen = conciseQuery.length
-        for (k in 0 until conciseValue.length) {
+        for (k in conciseValue.indices) {
             val ch = conciseValue[k]
             if (ch == ' ') {
                 continue

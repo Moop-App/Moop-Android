@@ -20,7 +20,7 @@ class SimpleItemTouchHelperCallback(
     ): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
-        return ItemTouchHelper.Callback.makeMovementFlags(dragFlags, swipeFlags)
+        return makeMovementFlags(dragFlags, swipeFlags)
     }
 
     override fun onMove(
@@ -28,11 +28,11 @@ class SimpleItemTouchHelperCallback(
         source: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        moveListener?.onItemMove(source.adapterPosition, target.adapterPosition)
+        moveListener?.onItemMove(source.bindingAdapterPosition, target.bindingAdapterPosition)
         return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
-        dismissListener?.onItemDismiss(viewHolder.adapterPosition)
+        dismissListener?.onItemDismiss(viewHolder.bindingAdapterPosition)
     }
 }

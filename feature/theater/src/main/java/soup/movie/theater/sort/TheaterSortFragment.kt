@@ -145,7 +145,7 @@ class TheaterSortFragment : Fragment(R.layout.theater_sort_fragment), OnBackPres
         binding.listView.run {
             (0 until childCount)
                 .mapNotNull { getChildAt(it) }
-                .mapNotNull { it.findViewById<View>(R.id.theaterChip) }
+                .mapNotNull { it.findViewById(R.id.theaterChip) }
                 .map { Pair(it, it.transitionName) }
                 .toTypedArray()
         }

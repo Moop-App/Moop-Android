@@ -17,7 +17,7 @@ class ThemeSettingListAdapter(
         val binding = ThemeOptionItemOptionBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding).apply {
             itemView.setOnDebounceClickListener(delay = 350L) {
-                getItem(adapterPosition)?.run(listener)
+                getItem(bindingAdapterPosition)?.run(listener)
             }
         }
     }

@@ -6,19 +6,19 @@ import androidx.core.view.isGone
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.AlwaysDiffCallback
+import soup.movie.detail.DetailPersonListAdapter.ViewHolder
 import soup.movie.detail.databinding.DetailItemCastPersonBinding
 import soup.movie.ext.executeWeb
 import soup.movie.util.setOnDebounceClickListener
 
-internal class DetailPersonListAdapter(
-) : ListAdapter<PersonUiModel, DetailPersonListAdapter.ViewHolder>(AlwaysDiffCallback()) {
+internal class DetailPersonListAdapter : ListAdapter<PersonUiModel, ViewHolder>(AlwaysDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DetailItemCastPersonBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding).apply {
             itemView.setOnDebounceClickListener {
-                val query = getItem(adapterPosition).query
+                val query = getItem(bindingAdapterPosition).query
                 it.context.executeWeb("https://m.search.naver.com/search.naver?query=$query")
             }
         }

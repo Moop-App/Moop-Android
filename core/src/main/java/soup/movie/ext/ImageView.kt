@@ -35,7 +35,7 @@ fun ImageView.loadAsync(url: String?, @DrawableRes placeholder: Int? = null) {
 
 fun ImageView.loadAsync(url: String?, doOnEnd: () -> Unit) {
     loadAsync(url, block = {
-        listener(soup.movie.ext.createEndListener(doOnEnd))
+        listener(createEndListener(doOnEnd))
     })
 }
 

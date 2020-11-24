@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TitleProvider
-import soup.movie.ext.lazyFast
 
 class TheaterEditPageAdapter(
     fm: FragmentManager,
@@ -27,17 +26,6 @@ class TheaterEditPageAdapter(
             0 -> "CGV"
             1 -> "롯데시네마"
             else -> "메가박스"
-        }
-    }
-
-    companion object {
-
-        private val items by lazyFast {
-            arrayOf(
-                CgvEditFragment(),
-                LotteEditFragment(),
-                MegaboxEditFragment()
-            )
         }
     }
 }

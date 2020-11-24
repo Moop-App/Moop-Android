@@ -35,7 +35,4 @@ data class MovieDetail(
     val mc: MetascoreInfo?,
     val plot: String?,
     val trailers: List<Trailer>?
-) {
-
-    val isPlan: Boolean = !isNow
-}
+)

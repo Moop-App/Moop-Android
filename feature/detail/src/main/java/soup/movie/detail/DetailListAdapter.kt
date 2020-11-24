@@ -116,7 +116,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -138,7 +138,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -156,7 +156,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -174,7 +174,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -192,10 +192,10 @@ internal class DetailListAdapter(
 
         init {
             binding.brandView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
             binding.infoButton.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -212,7 +212,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -232,7 +232,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -269,7 +269,7 @@ internal class DetailListAdapter(
 
         init {
             binding.privacyTip.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -286,7 +286,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
 
@@ -305,7 +305,7 @@ internal class DetailListAdapter(
 
         init {
             itemView.setOnDebounceClickListener {
-                listener(adapterPosition)
+                listener(bindingAdapterPosition)
             }
         }
     }

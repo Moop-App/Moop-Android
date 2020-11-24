@@ -12,11 +12,9 @@ fun TabLayout.setupWithViewPager2(
     titleProvider: TitleProvider,
     autoRefresh: Boolean
 ) {
-    TabLayoutMediator(this, viewPager2, autoRefresh,
-        TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-            tab.text = titleProvider.getItemTitle(position)
-        }
-    ).attach()
+    TabLayoutMediator(this, viewPager2, autoRefresh) { tab, position ->
+        tab.text = titleProvider.getItemTitle(position)
+    }.attach()
 }
 
 fun TabLayout.setupWithViewPager2(

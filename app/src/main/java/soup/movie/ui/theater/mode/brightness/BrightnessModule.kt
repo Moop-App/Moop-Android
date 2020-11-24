@@ -19,7 +19,7 @@ class BrightnessModule(private val ctx: Context, private val listener: (Boolean)
     fun isEnabled(): Boolean = isMinBrightness() && isManualMode()
 
     private fun getScreenBrightness(): Int =
-            Settings.System.getInt(contentResolver, SCREEN_BRIGHTNESS, MAX_SCREEN_BRIGHTNESS)
+            getInt(contentResolver, SCREEN_BRIGHTNESS, MAX_SCREEN_BRIGHTNESS)
 
     private fun isMinBrightness(): Boolean =
             getScreenBrightness() <= MIN_SCREEN_BRIGHTNESS
@@ -28,7 +28,7 @@ class BrightnessModule(private val ctx: Context, private val listener: (Boolean)
             getScreenBrightness() >= MAX_SCREEN_BRIGHTNESS
 
     private fun getScreenBrightnessMode(): Int =
-            Settings.System.getInt(contentResolver, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL)
+            getInt(contentResolver, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL)
 
     private fun isManualMode(): Boolean =
             getScreenBrightnessMode() == SCREEN_BRIGHTNESS_MODE_MANUAL
@@ -38,23 +38,23 @@ class BrightnessModule(private val ctx: Context, private val listener: (Boolean)
 
     fun enable(): Boolean {
         return checkManageWriteSettings {
-            Settings.System.putInt(contentResolver, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
-            Settings.System.putInt(contentResolver, SCREEN_BRIGHTNESS, MIN_SCREEN_BRIGHTNESS)
+            putInt(contentResolver, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
+            putInt(contentResolver, SCREEN_BRIGHTNESS, MIN_SCREEN_BRIGHTNESS)
             fireOnStateChanged()
         }
     }
 
     fun disable(): Boolean {
         return checkManageWriteSettings {
-            Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, MAX_SCREEN_BRIGHTNESS)
-            Settings.System.putInt(contentResolver, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL)
+            putInt(contentResolver, SCREEN_BRIGHTNESS, MAX_SCREEN_BRIGHTNESS)
+            putInt(contentResolver, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL)
             fireOnStateChanged()
         }
     }
 
     private inline fun checkManageWriteSettings(executor: () -> Unit): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Settings.System.canWrite(ctx)) {
+            if (canWrite(ctx)) {
                 executor.invoke()
                 return true
             } else {

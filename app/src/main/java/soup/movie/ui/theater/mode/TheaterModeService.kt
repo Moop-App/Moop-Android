@@ -22,7 +22,7 @@ class TheaterModeService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        throw UnsupportedOperationException("Service binding is NOT Supported");
+        throw UnsupportedOperationException("Service binding is NOT Supported")
     }
 
     override fun onCreate() {

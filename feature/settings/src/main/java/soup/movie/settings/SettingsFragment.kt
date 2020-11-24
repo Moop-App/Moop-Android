@@ -13,7 +13,6 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
@@ -96,9 +95,9 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         themeItem.themeName.setOnDebounceClickListener {
             onThemeEditClicked()
         }
-        viewModel.themeUiModel.observe(viewLifecycleOwner, Observer {
+        viewModel.themeUiModel.observe(viewLifecycleOwner) {
             themeItem.themeName.setThemeOptionLabel(it.themeOption)
-        })
+        }
 
         //TODO: Apply theater mode
         //tmPrepare.setOnClickListener {

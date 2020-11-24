@@ -25,11 +25,11 @@ class HomePlanViewModel @ViewModelInject constructor(
     private val repository: MoopRepository
 ) : ViewModel(), HomeContentsViewModel {
 
-    private val _isLoading = MutableLiveData<Boolean>(false)
+    private val _isLoading = MutableLiveData(false)
     override val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val _isError = MutableLiveData<Boolean>(false)
+    private val _isError = MutableLiveData(false)
     override val isError: LiveData<Boolean>
         get() = _isError
 

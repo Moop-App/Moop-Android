@@ -29,7 +29,7 @@ class HomeFavoriteListAdapter(
         val binding = HomeItemFavoriteMovieBinding.inflate(layoutInflater, parent, false)
         return MovieViewHolder(binding).apply {
             itemView.setOnDebounceClickListener(delay = 150L) {
-                val index = adapterPosition
+                val index = bindingAdapterPosition
                 if (index in 0..itemCount) {
                     val movie: Movie = getItem(index)
                     listener(movie, createSharedElements(movie))
@@ -37,7 +37,7 @@ class HomeFavoriteListAdapter(
             }
             itemView.setOnLongClickListener {
                 consume {
-                    val index = adapterPosition
+                    val index = bindingAdapterPosition
                     if (index in 0..itemCount) {
                         val movie: Movie = getItem(index)
                         it?.context?.showToast(movie.title)
