@@ -11,7 +11,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.0"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.1"
 
     // UI
     const val insetter = "dev.chrisbanes:insetter-ktx:0.3.0"
@@ -46,6 +46,7 @@ object Libs {
     }
 
     object Google {
+        const val gmsPlugin = "com.google.gms:google-services:4.3.4"
         const val material = "com.google.android.material:material:1.3.0-alpha01"
         const val play = "com.google.android.play:core:1.7.3"
     }

@@ -17,7 +17,7 @@ buildscript {
         classpath Libs.Kotlin.serializationPlugin
         classpath Libs.Dagger.hiltPlugin
         classpath Libs.AndroidX.Navigation.safeArgsPlugin
-        classpath 'com.google.gms:google-services:4.3.3'
+        classpath Libs.Google.gmsPlugin
         classpath Libs.Firebase.crashlyticsPlugin
     }
 }
