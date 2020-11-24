@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.home.R

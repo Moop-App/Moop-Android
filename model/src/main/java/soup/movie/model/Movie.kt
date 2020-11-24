@@ -1,7 +1,8 @@
 package soup.movie.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Movie(
@@ -18,5 +19,6 @@ data class Movie(
     val theater: TheaterRatings
 ) : Parcelable {
 
+    @IgnoredOnParcel
     val isPlan: Boolean = !isNow
 }

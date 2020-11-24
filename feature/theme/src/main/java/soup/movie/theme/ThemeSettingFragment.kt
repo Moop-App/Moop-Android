@@ -5,7 +5,6 @@ import android.view.View
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
 import soup.movie.theme.databinding.ThemeOptionFragmentBinding

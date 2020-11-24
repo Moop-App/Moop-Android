@@ -15,7 +15,6 @@ import androidx.core.app.ShareCompat
 import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.lifecycle.observe
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager

@@ -2,14 +2,10 @@ import dependencies.Libs
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlinx-serialization'
 
 apply from: rootProject.file('gradle/android.gradle')
-
-androidExtensions {
-    features = ["parcelize"]
-}
 
 dependencies {
     implementation Libs.Kotlin.stdlib

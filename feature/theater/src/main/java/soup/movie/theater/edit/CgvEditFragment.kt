@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.model.Theater
 import soup.movie.theater.R
