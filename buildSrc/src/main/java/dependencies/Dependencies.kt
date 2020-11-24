@@ -14,8 +14,8 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.1"
 
     // UI
-    const val insetter = "dev.chrisbanes:insetter-ktx:0.3.0"
-    const val lottie = "com.airbnb.android:lottie:3.4.4"
+    const val insetter = "dev.chrisbanes:insetter-ktx:0.3.1"
+    const val lottie = "com.airbnb.android:lottie:3.5.0"
     const val recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.1"
     const val stfalconImageviewer = "com.github.stfalcon:stfalcon-imageviewer:1.0.1"
 
@@ -38,7 +38,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.29.1-alpha"
+        private const val version = "2.30-alpha"
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val hiltTesting = "com.google.dagger:hilt-android-testing:$version"
@@ -47,8 +47,8 @@ object Libs {
 
     object Google {
         const val gmsPlugin = "com.google.gms:google-services:4.3.4"
-        const val material = "com.google.android.material:material:1.3.0-alpha01"
-        const val play = "com.google.android.play:core:1.7.3"
+        const val material = "com.google.android.material:material:1.3.0-alpha03"
+        const val play = "com.google.android.play:core:1.8.3"
     }
 
     object AndroidX {
@@ -56,8 +56,8 @@ object Libs {
         const val activity = "androidx.activity:activity-ktx:1.2.0-beta01"
         const val annotation = "androidx.annotation:annotation:1.2.0-alpha01"
         const val appcompat = "androidx.appcompat:appcompat:1.3.0-alpha02"
-        const val browser = "androidx.browser:browser:1.3.0-beta01"
-        const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.3"
+        const val browser = "androidx.browser:browser:1.3.0-rc01"
+        const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val core = "androidx.core:core-ktx:1.4.0-alpha01"
         const val drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
         const val fragment = "androidx.fragment:fragment-ktx:1.3.0-beta01"
@@ -100,7 +100,7 @@ object Libs {
         }
 
         object WorkManager {
-            private const val version = "2.4.0"
+            private const val version = "2.5.0-beta01"
             const val runtime = "androidx.work:work-runtime-ktx:$version"
             const val gcm = "androidx.work:work-gcm:$version"
             const val testing = "androidx.work:work-testing:$version"
