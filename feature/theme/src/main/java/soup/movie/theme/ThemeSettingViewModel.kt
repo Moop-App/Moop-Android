@@ -1,11 +1,13 @@
 package soup.movie.theme
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ThemeSettingViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ThemeSettingViewModel @Inject constructor(
     private val themeOptionManager: ThemeOptionManager
 ) : ViewModel() {
 

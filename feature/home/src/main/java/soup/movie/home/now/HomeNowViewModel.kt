@@ -1,10 +1,10 @@
 package soup.movie.home.now
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -18,8 +18,10 @@ import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
 import soup.movie.settings.AppSettings
 import timber.log.Timber
+import javax.inject.Inject
 
-class HomeNowViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HomeNowViewModel @Inject constructor(
     private val appSettings: AppSettings,
     private val repository: MoopRepository
 ) : ViewModel(), HomeContentsViewModel {

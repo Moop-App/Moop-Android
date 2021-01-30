@@ -1,17 +1,19 @@
 package soup.movie.settings
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import soup.movie.install.InAppUpdateManager
 import soup.movie.theme.ThemeOptionManager
+import javax.inject.Inject
 
-class SettingsViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
     themeOptionManager: ThemeOptionManager,
     appSettings: AppSettings,
     appUpdateManager: InAppUpdateManager

@@ -1,17 +1,19 @@
 package soup.movie.theater.edit
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.model.Theater
 import timber.log.Timber
+import javax.inject.Inject
 
-class TheaterEditViewModel @ViewModelInject constructor(
+@HiltViewModel
+class TheaterEditViewModel @Inject constructor(
     private val manager: TheaterEditManager
 ) : ViewModel() {
 

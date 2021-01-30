@@ -1,13 +1,14 @@
 package soup.movie.home
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import soup.movie.ext.postValueIfNew
+import javax.inject.Inject
 
-class HomeViewModel @ViewModelInject constructor(
-) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _headerUiModel = MutableLiveData<HomeHeaderUiModel>()
     val headerUiModel: LiveData<HomeHeaderUiModel>

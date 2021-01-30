@@ -1,9 +1,10 @@
 package soup.movie.work
 
 import android.content.Context
-import androidx.hilt.Assisted
-import androidx.hilt.work.WorkerInject
+import androidx.hilt.work.HiltWorker
 import androidx.work.*
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -11,8 +12,9 @@ import soup.movie.model.repository.MoopRepository
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-class OpenDateSyncWorker @WorkerInject constructor(
-    @Assisted @ApplicationContext context: Context,
+@HiltWorker
+class OpenDateSyncWorker @AssistedInject constructor(
+    @Assisted context: Context,
     @Assisted params: WorkerParameters,
     private val repository: MoopRepository
 ) : CoroutineWorker(context, params) {

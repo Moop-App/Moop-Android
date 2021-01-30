@@ -38,7 +38,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.30-alpha"
+        private const val version = "2.31.2-alpha"
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val hiltTesting = "com.google.dagger:hilt-android-testing:$version"
@@ -68,7 +68,7 @@ object Libs {
         const val viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-alpha01"
 
         object Hilt {
-            private const val version = "1.0.0-alpha02"
+            private const val version = "1.0.0-alpha03"
             const val work = "androidx.hilt:hilt-work:$version"
             const val viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$version"
             const val compiler = "androidx.hilt:hilt-compiler:$version"

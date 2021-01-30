@@ -1,7 +1,7 @@
 package soup.movie.home.filter
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import soup.movie.model.repository.MoopRepository
@@ -16,8 +16,10 @@ import soup.movie.settings.model.TheaterFilter
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
 import soup.movie.settings.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
+import javax.inject.Inject
 
-class HomeFilterViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HomeFilterViewModel @Inject constructor(
     private val repository: MoopRepository,
     private val appSettings: AppSettings
 ) : ViewModel() {

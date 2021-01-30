@@ -1,12 +1,12 @@
 package soup.movie.detail
 
 import android.graphics.Bitmap
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.formats.UnifiedNativeAd
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import soup.movie.ads.AdsManager
 import soup.movie.device.ImageUriProvider
@@ -20,8 +20,10 @@ import soup.movie.ui.MutableEventLiveData
 import soup.movie.util.MM_DD
 import soup.movie.util.yesterday
 import timber.log.Timber
+import javax.inject.Inject
 
-class DetailViewModel @ViewModelInject constructor(
+@HiltViewModel
+class DetailViewModel @Inject constructor(
     private val repository: MoopRepository,
     private val imageUriProvider: ImageUriProvider,
     private val adsManager: AdsManager
