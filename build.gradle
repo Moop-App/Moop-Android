@@ -32,7 +32,7 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url 'https://maven.google.com/' }
         maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
-        maven { url 'https://navercorp.bintray.com/maps' }
+        maven { url 'https://naver.jfrog.io/artifactory/maven/' }
     }
     plugins.whenPluginAdded {
         if (it.isAndroidApp() || it.isAndroidLibrary() || it.isDynamicFeature()) {
