@@ -11,7 +11,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.2"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.1"
 
     // UI
     const val insetter = "dev.chrisbanes:insetter-ktx:0.3.1"
@@ -38,7 +38,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.31.2-alpha"
+        private const val version = "2.35"
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val hiltTesting = "com.google.dagger:hilt-android-testing:$version"
