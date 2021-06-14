@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -91,22 +92,24 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         }
         Insetter.builder()
             .setOnApplyInsetsListener { header, insets, initialState ->
-                header.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+                header.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)
             }
             .applyToView(binding.header.root)
         Insetter.builder()
             .setOnApplyInsetsListener { listView, insets, initialState ->
+                val systemWindowInsets = insets.getInsets(systemBars())
                 listView.updatePadding(
-                    top = initialState.paddings.top + insets.systemWindowInsetTop,
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    top = initialState.paddings.top + systemWindowInsets.top,
+                    bottom = initialState.paddings.bottom + systemWindowInsets.bottom
                 )
             }
             .applyToView(binding.listView)
         Insetter.builder()
             .setOnApplyInsetsListener { share, insets, initialState ->
+                val systemWindowInsets = insets.getInsets(systemBars())
                 share.updatePadding(
-                    top = initialState.paddings.top + insets.systemWindowInsetTop,
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    top = initialState.paddings.top + systemWindowInsets.top,
+                    bottom = initialState.paddings.bottom + systemWindowInsets.bottom
                 )
             }
             .applyToView(binding.share.root)

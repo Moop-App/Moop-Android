@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.StringRes
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -29,7 +30,7 @@ class CustomProgressFragment : AbstractProgressFragment(R.layout.custom_progress
         Insetter.builder()
             .setOnApplyInsetsListener { appLogo, insets, initialState ->
                 appLogo.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    bottomMargin = initialState.margins.bottom + insets.systemWindowInsetBottom
+                    bottomMargin = initialState.margins.bottom + insets.getInsets(systemBars()).bottom
                 }
             }
             .applyToView(binding.appLogo)

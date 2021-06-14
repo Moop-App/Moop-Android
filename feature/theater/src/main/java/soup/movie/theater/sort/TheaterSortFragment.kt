@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
@@ -89,14 +90,14 @@ class TheaterSortFragment : Fragment(R.layout.theater_sort_fragment), OnBackPres
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
-                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                    top = initialState.paddings.top + insets.getInsets(systemBars()).top
                 )
             }
             .applyToView(theaterSortScene)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    bottom = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom
                 )
             }
             .applyToView(container)

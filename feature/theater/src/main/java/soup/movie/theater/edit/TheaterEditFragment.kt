@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
+import androidx.core.view.WindowInsetsCompat.Type.systemGestures
 import androidx.core.view.isVisible
 import androidx.core.view.postOnAnimationDelayed
 import androidx.core.view.updatePadding
@@ -162,19 +164,19 @@ class TheaterEditFragment : Fragment(R.layout.theater_edit_fragment), OnBackPres
     private fun TheaterEditFragmentBinding.adaptSystemWindowInset() {
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+                view.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)
 
                 val bottomSystemInset = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    insets.systemGestureInsets.bottom
+                    insets.getInsets(systemGestures()).bottom
                 } else {
-                    insets.systemWindowInsetBottom
+                    insets.getInsets(systemBars()).bottom
                 }
                 footerPanel.setPeekHeight(bottomSystemInset + originPeekHeight)
             }
             .applyToView(root)
         Insetter.builder()
             .setOnApplyInsetsListener { viewPager, insets, initialState ->
-                viewPager.updatePadding(bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom)
+                viewPager.updatePadding(bottom = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom)
             }
             .applyToView(viewPager)
     }

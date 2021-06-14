@@ -14,7 +14,7 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.1"
 
     // UI
-    const val insetter = "dev.chrisbanes:insetter-ktx:0.3.1"
+    const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
     const val lottie = "com.airbnb.android:lottie:3.5.0"
     const val recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.1"
     const val stfalconImageviewer = "com.github.stfalcon:stfalcon-imageviewer:1.0.1"

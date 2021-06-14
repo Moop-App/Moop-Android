@@ -8,6 +8,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.SharedElementCallback
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
@@ -65,14 +66,14 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         Insetter.builder()
             .setOnApplyInsetsListener { settingsScene, insets, initialState ->
                 settingsScene.updatePadding(
-                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                    top = initialState.paddings.top + insets.getInsets(systemBars()).top
                 )
             }
             .applyToView(settingsScene)
         Insetter.builder()
             .setOnApplyInsetsListener { listView, insets, initialState ->
                 listView.updatePadding(
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    bottom = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom
                 )
             }
             .applyToView(listView)
