@@ -9,6 +9,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
-                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                    top = initialState.paddings.top + insets.getInsets(systemBars()).top
                 )
             }
             .applyToView(binding.navigationView)

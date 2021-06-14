@@ -3,6 +3,7 @@ package soup.movie.home.tab
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.navigation.ActivityNavigatorExtras
@@ -51,7 +52,7 @@ abstract class HomeContentsFragment : HomeTabFragment(R.layout.home_tab_contents
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    bottom = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom
                 )
             }
             .applyToView(listView)

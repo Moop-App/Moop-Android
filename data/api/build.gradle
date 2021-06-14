@@ -10,7 +10,7 @@ apply from: rootProject.file('gradle/android.gradle')
 
 android {
     defaultConfig {
-        buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "")
+        buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "\"https://moop-public-api.firebaseio.com/alpha/\"")
     }
 }
 

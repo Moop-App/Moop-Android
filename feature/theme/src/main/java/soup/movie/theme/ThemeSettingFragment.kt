@@ -2,6 +2,7 @@ package soup.movie.theme
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,12 +36,12 @@ class ThemeSettingFragment : Fragment(R.layout.theme_option_fragment) {
     private fun ThemeOptionFragmentBinding.adaptSystemWindowInset() {
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updatePadding(top = initialState.paddings.top + insets.systemWindowInsetTop)
+                view.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)
             }
             .applyToView(themeOptionScene)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updatePadding(bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom)
+                view.updatePadding(bottom = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom)
             }
             .applyToView(listView)
     }

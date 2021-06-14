@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.view.isInvisible
-import androidx.core.view.postDelayed
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
+import androidx.core.view.*
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.fragment.app.*
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -67,28 +65,28 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    topMargin = initialState.margins.top + insets.systemWindowInsetTop
+                    topMargin = initialState.margins.top + insets.getInsets(systemBars()).top
                 }
             }
             .applyToView(headerHint.root)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
-                    top = initialState.paddings.top + insets.systemWindowInsetTop
+                    top = initialState.paddings.top + insets.getInsets(systemBars()).top
                 )
             }
             .applyToView(header.collapsingToolbar)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    topMargin = initialState.margins.top + insets.systemWindowInsetTop
+                    topMargin = initialState.margins.top + insets.getInsets(systemBars()).top
                 }
             }
             .applyToView(filterContainerView)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    bottomMargin = initialState.margins.bottom + insets.systemWindowInsetBottom
+                    bottomMargin = initialState.margins.bottom + insets.getInsets(systemBars()).bottom
                 }
             }
             .applyToView(filterButton)

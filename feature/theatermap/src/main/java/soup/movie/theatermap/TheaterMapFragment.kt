@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
@@ -185,16 +186,17 @@ class TheaterMapFragment : BaseMapFragment(R.layout.theater_map_fragment), OnBac
     private fun TheaterMapFragmentBinding.adaptSystemWindowInset() {
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
+                val systemWindowInsets = insets.getInsets(systemBars())
                 view.updatePadding(
-                    top = initialState.paddings.top + insets.systemWindowInsetTop,
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    top = initialState.paddings.top + systemWindowInsets.top,
+                    bottom = initialState.paddings.bottom + systemWindowInsets.bottom
                 )
             }
             .applyToView(theaterMapScene)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updateLayoutParams {
-                    height = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    height = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom
                 }
             }
             .applyToView(footer.windowInsetBottomView)

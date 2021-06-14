@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
@@ -50,14 +51,14 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
     private fun SearchFragmentBinding.adaptSystemWindowInset() {
         Insetter.builder().setOnApplyInsetsListener { view, insets, initialState ->
             view.updatePadding(
-                top = initialState.paddings.top + insets.systemWindowInsetTop
+                top = initialState.paddings.top + insets.getInsets(systemBars()).top
             )
         }
             .applyToView(root)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
-                    bottom = initialState.paddings.bottom + insets.systemWindowInsetBottom
+                    bottom = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom
                 )
             }
             .applyToView(contents.listView)

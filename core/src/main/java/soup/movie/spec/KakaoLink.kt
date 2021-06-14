@@ -29,7 +29,7 @@ object KakaoLink {
                 description = movie.description,
                 imageUrl = movie.posterUrl,
                 link = Link(
-                    androidExecParams = mapOf(MOVIE_ID to movie.id)
+                    androidExecutionParams = mapOf(MOVIE_ID to movie.id)
                 )
             )
         )
