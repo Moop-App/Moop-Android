@@ -11,6 +11,6 @@ class IdBasedDiffCallback<T>(
     }
 
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-        return oldItem == newItem
+        return java.util.Objects.equals(oldItem, newItem)
     }
 }
