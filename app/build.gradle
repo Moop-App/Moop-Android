@@ -133,7 +133,6 @@ dependencies {
 
     implementation Libs.Dagger.hilt
     kapt Libs.Dagger.hiltCompiler
-    implementation Libs.AndroidX.Hilt.viewmodel
     implementation Libs.AndroidX.Hilt.work
     kapt Libs.AndroidX.Hilt.compiler
 

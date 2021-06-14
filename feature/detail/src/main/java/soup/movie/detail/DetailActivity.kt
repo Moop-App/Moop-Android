@@ -303,7 +303,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                 KakaoLink.share(this, movie)
             }
             ShareTarget.Instagram -> {
-                ShareCompat.IntentBuilder.from(this)
+                ShareCompat.IntentBuilder(this)
                     .setChooserTitle(R.string.action_share_poster)
                     .setStream(action.imageUri)
                     .setType(action.mimeType)
@@ -317,7 +317,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
             ShareTarget.LINE,
             ShareTarget.Others -> {
                 FirebaseLink.createDetailLink(movie) { link ->
-                    ShareCompat.IntentBuilder.from(this)
+                    ShareCompat.IntentBuilder(this)
                         .setChooserTitle(R.string.action_share)
                         .setText("[뭅] ${movie.title}\n$link")
                         .setType("text/plain")

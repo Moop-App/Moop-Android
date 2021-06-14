@@ -46,7 +46,7 @@ private fun Intent.isValid(ctx: Context): Boolean {
 fun Context.executeWeb(url: String?) {
     if (url == null) return
     CustomTabsIntent.Builder()
-        .addDefaultShareMenuItem()
+        .setShareState(CustomTabsIntent.SHARE_STATE_ON)
         .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
         .setShowTitle(true)
         .setStartAnimations(this, R.anim.fade_in, R.anim.fade_out)

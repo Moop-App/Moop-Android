@@ -36,7 +36,6 @@ dependencies {
 
     implementation Libs.Dagger.hilt
     kapt Libs.Dagger.hiltCompiler
-    implementation Libs.AndroidX.Hilt.viewmodel
     kapt Libs.AndroidX.Hilt.compiler
 
     implementation Libs.Glide.runtime

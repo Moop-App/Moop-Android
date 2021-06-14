@@ -53,29 +53,29 @@ object Libs {
 
     object AndroidX {
 
-        const val activity = "androidx.activity:activity-ktx:1.2.0-rc01"
-        const val annotation = "androidx.annotation:annotation:1.2.0-beta01"
-        const val appcompat = "androidx.appcompat:appcompat:1.3.0-beta01"
+        const val activity = "androidx.activity:activity-ktx:1.2.3"
+        const val annotation = "androidx.annotation:annotation:1.2.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.3.0"
         const val browser = "androidx.browser:browser:1.3.0"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-        const val core = "androidx.core:core-ktx:1.5.0-beta01"
+        const val core = "androidx.core:core-ktx:1.5.0"
         const val drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
-        const val fragment = "androidx.fragment:fragment-ktx:1.3.0-rc02"
+        const val fragment = "androidx.fragment:fragment-ktx:1.3.4"
         const val preference = "androidx.preference:preference-ktx:1.1.1"
-        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.0-beta01"
+        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
         const val startup = "androidx.startup:startup-runtime:1.0.0"
-        const val transition = "androidx.transition:transition:1.4.0"
+        const val transition = "androidx.transition:transition:1.4.1"
         const val viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-alpha01"
 
         object Hilt {
-            private const val version = "1.0.0-alpha03"
+            private const val version = "1.0.0"
             const val work = "androidx.hilt:hilt-work:$version"
             const val viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$version"
             const val compiler = "androidx.hilt:hilt-compiler:$version"
         }
 
         object Lifecycle {
-            private const val version = "2.3.0-rc01"
+            private const val version = "2.3.1"
             const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
@@ -83,7 +83,7 @@ object Libs {
         }
 
         object Navigation {
-            private const val version = "2.3.3"
+            private const val version = "2.3.5"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val ui = "androidx.navigation:navigation-ui-ktx:$version"
             const val dynamicFeaturesFragment =
@@ -93,7 +93,7 @@ object Libs {
         }
 
         object Room {
-            private const val version = "2.3.0-beta01"
+            private const val version = "2.3.0"
             const val runtime = "androidx.room:room-runtime:$version"
             const val compiler = "androidx.room:room-compiler:$version"
             const val ktx = "androidx.room:room-ktx:$version"
