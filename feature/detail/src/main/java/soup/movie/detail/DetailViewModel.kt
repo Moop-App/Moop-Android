@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.detail
 
 import android.graphics.Bitmap
@@ -7,7 +22,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.ads.AdsManager
 import soup.movie.device.ImageUriProvider
 import soup.movie.ext.screenDays
@@ -57,7 +76,7 @@ class DetailViewModel @Inject constructor(
         this.movie = movie
         _headerUiModel.value = HeaderUiModel(movie)
         viewModelScope.launch {
-            //FIXME: Elvis operator (?:) is used because of lint rule error https://issuetracker.google.com/issues/169249668
+            // FIXME: Elvis operator (?:) is used because of lint rule error https://issuetracker.google.com/issues/169249668
             _favoriteUiModel.postValue(repository.isFavoriteMovie(movie.id) ?: false)
             val minDelay = async { delay(500) }
             val loadDetail = async {
@@ -180,21 +199,25 @@ class DetailViewModel @Inject constructor(
         }
 
         val persons = mutableListOf<PersonUiModel>()
-        persons.addAll(directors.orEmpty().map {
-            PersonUiModel(
-                name = it,
-                cast = "감독",
-                query = "감독 $it"
-            )
-        })
-        persons.addAll(actors.orEmpty().map {
-            val cast = if (it.cast.isEmpty()) "출연" else it.cast
-            PersonUiModel(
-                name = it.peopleNm,
-                cast = cast,
-                query = "배우 ${it.peopleNm}"
-            )
-        })
+        persons.addAll(
+            directors.orEmpty().map {
+                PersonUiModel(
+                    name = it,
+                    cast = "감독",
+                    query = "감독 $it"
+                )
+            }
+        )
+        persons.addAll(
+            actors.orEmpty().map {
+                val cast = if (it.cast.isEmpty()) "출연" else it.cast
+                PersonUiModel(
+                    name = it.peopleNm,
+                    cast = cast,
+                    query = "배우 ${it.peopleNm}"
+                )
+            }
+        )
         if (persons.isNotEmpty()) {
             items.add(CastItemUiModel(persons = persons))
         }
@@ -206,9 +229,11 @@ class DetailViewModel @Inject constructor(
         val trailers = trailers.orEmpty()
         if (trailers.isNotEmpty()) {
             items.add(TrailerHeaderItemUiModel(movieTitle = title))
-            items.addAll(trailers.map {
-                TrailerItemUiModel(trailer = it)
-            })
+            items.addAll(
+                trailers.map {
+                    TrailerItemUiModel(trailer = it)
+                }
+            )
             items.add(TrailerFooterItemUiModel(movieTitle = title))
         }
         return ContentUiModel(items)

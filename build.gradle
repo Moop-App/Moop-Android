@@ -20,8 +20,12 @@ buildscript {
 }
 
 plugins {
-    id 'com.diffplug.spotless' version '5.13.0'
+    id 'com.diffplug.spotless' version '5.12.4'
 }
+
+Plugin.metaClass.isAndroidApp = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.AppPlugin" }
+Plugin.metaClass.isDynamicFeature = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.DynamicFeaturePlugin" }
+Plugin.metaClass.isAndroidLibrary = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.LibraryPlugin" }
 
 allprojects {
     repositories {
@@ -65,10 +69,6 @@ subprojects {
         }
     }
 }
-
-Plugin.metaClass.isAndroidApp = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.AppPlugin" }
-Plugin.metaClass.isDynamicFeature = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.DynamicFeaturePlugin" }
-Plugin.metaClass.isAndroidLibrary = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.LibraryPlugin" }
 
 Object propOrDef(String propertyName, Object defaultValue) {
     def properties = new Properties()

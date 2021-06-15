@@ -1,11 +1,11 @@
 /*
- * Copyright 2018 stfalcon.com
+ * Copyright 2018 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.stfalcon.imageviewer.viewer.view
 
 import android.view.View
@@ -24,7 +23,15 @@ import android.widget.ImageView
 import androidx.transition.AutoTransition
 import androidx.transition.Transition
 import androidx.transition.TransitionManager
-import com.stfalcon.imageviewer.common.extensions.*
+import com.stfalcon.imageviewer.common.extensions.addListener
+import com.stfalcon.imageviewer.common.extensions.applyMargin
+import com.stfalcon.imageviewer.common.extensions.globalVisibleRect
+import com.stfalcon.imageviewer.common.extensions.isRectVisible
+import com.stfalcon.imageviewer.common.extensions.localVisibleRect
+import com.stfalcon.imageviewer.common.extensions.makeViewMatchParent
+import com.stfalcon.imageviewer.common.extensions.postApply
+import com.stfalcon.imageviewer.common.extensions.postDelayed
+import com.stfalcon.imageviewer.common.extensions.requestNewSize
 
 internal class TransitionImageAnimator(
     private val externalImage: ImageView?,
@@ -79,15 +86,18 @@ internal class TransitionImageAnimator(
         prepareTransitionLayout()
 
         internalRoot.postApply {
-            //ain't nothing but a kludge to prevent blinking when transition is starting
+            // ain't nothing but a kludge to prevent blinking when transition is starting
             externalImage?.postDelayed(50) { visibility = View.INVISIBLE }
 
-            TransitionManager.beginDelayedTransition(internalRoot, createTransition {
-                if (!isClosing) {
-                    isAnimating = false
-                    onTransitionEnd()
+            TransitionManager.beginDelayedTransition(
+                internalRoot,
+                createTransition {
+                    if (!isClosing) {
+                        isAnimating = false
+                        onTransitionEnd()
+                    }
                 }
-            })
+            )
 
             internalImageContainer.makeViewMatchParent()
             internalImage.makeViewMatchParent()
@@ -96,7 +106,8 @@ internal class TransitionImageAnimator(
                 containerPadding[0],
                 containerPadding[1],
                 containerPadding[2],
-                containerPadding[3])
+                containerPadding[3]
+            )
 
             internalImageContainer.requestLayout()
         }
@@ -107,7 +118,8 @@ internal class TransitionImageAnimator(
         isClosing = true
 
         TransitionManager.beginDelayedTransition(
-            internalRoot, createTransition { handleCloseTransitionEnd(onTransitionEnd) })
+            internalRoot, createTransition { handleCloseTransitionEnd(onTransitionEnd) }
+        )
 
         prepareTransitionLayout()
         internalImageContainer.requestLayout()

@@ -1,12 +1,34 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.home
 
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.view.*
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
-import androidx.fragment.app.*
+import androidx.core.view.isInvisible
+import androidx.core.view.postDelayed
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
@@ -14,7 +36,6 @@ import com.google.android.material.tabs.setupWithViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
 import soup.movie.analytics.EventAnalytics
-import soup.movie.home.HomeHeaderUiModel.*
 import soup.movie.home.databinding.HomeFragmentBinding
 import soup.movie.home.databinding.HomeHeaderHintBinding
 import soup.movie.home.filter.HomeFilterFragment
@@ -86,7 +107,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    bottomMargin = initialState.margins.bottom + insets.getInsets(systemBars()).bottom
+                    bottomMargin =
+                        initialState.margins.bottom + insets.getInsets(systemBars()).bottom
                 }
             }
             .applyToView(filterButton)
@@ -166,9 +188,9 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
     private fun HomeHeaderHintBinding.render(uiModel: HomeHeaderUiModel) {
         hintLabel.setText(
             when (uiModel) {
-                Now -> R.string.menu_now
-                Plan -> R.string.menu_plan
-                Favorite -> R.string.menu_favorite
+                HomeHeaderUiModel.Now -> R.string.menu_now
+                HomeHeaderUiModel.Plan -> R.string.menu_plan
+                HomeHeaderUiModel.Favorite -> R.string.menu_favorite
             }
         )
         hintLabel.apply {

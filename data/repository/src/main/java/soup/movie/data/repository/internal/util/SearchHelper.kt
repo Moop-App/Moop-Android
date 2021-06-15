@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.data.repository.internal.util
 
 /**
@@ -10,12 +25,13 @@ internal object SearchHelper {
 
     private const val HANGUL_BEGIN_UNICODE: Char = 44032.toChar() // 가
     private const val HANGUL_LAST_UNICODE: Char = 55203.toChar() // 힣
-    private const val HANGUL_BASE_UNIT: Char = 588.toChar()//각자음 마다 가지는 글자수
+    private const val HANGUL_BASE_UNIT: Char = 588.toChar() // 각자음 마다 가지는 글자수
 
-    //자음
+    // 자음
     private val INITIAL_SOUND = charArrayOf(
         'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ',
-        'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ')
+        'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+    )
 
     private const val NO_MATCHED = -1
 

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.util
 
 import android.content.ActivityNotFoundException
@@ -14,7 +29,7 @@ import timber.log.Timber
 
 private fun Context.isInstalledApp(pkgName: String): Boolean {
     return packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
-            .find { it?.packageName == pkgName } != null
+        .find { it?.packageName == pkgName } != null
 }
 
 private fun Context.executeMarketApp(pkgName: String, className: String? = null) {
@@ -46,14 +61,20 @@ private fun Context.executeApp(pkgName: String, className: String? = null): Bool
 
 private fun Context.executePlayStoreForApp(pkgName: String) {
     try {
-        startActivity(Intent(
+        startActivity(
+            Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$pkgName")))
+                Uri.parse("market://details?id=$pkgName")
+            )
+        )
     } catch (e: ActivityNotFoundException) {
         Timber.w(e)
-        startActivity(Intent(
+        startActivity(
+            Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=$pkgName")))
+                Uri.parse("https://play.google.com/store/apps/details?id=$pkgName")
+            )
+        )
     }
 }
 
@@ -75,7 +96,7 @@ object Cgv {
     }
 
     private fun detailWebUrl(theaterCode: String): String =
-            "https://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=$theaterCode"
+        "https://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=$theaterCode"
 }
 
 object LotteCinema {
@@ -87,7 +108,7 @@ object LotteCinema {
     }
 
     private fun detailWebUrl(theaterCode: String): String =
-            "https://www.lottecinema.co.kr/NLCMW/Cinema/Detail?cinemaID=$theaterCode"
+        "https://www.lottecinema.co.kr/NLCMW/Cinema/Detail?cinemaID=$theaterCode"
 }
 
 object Megabox {
@@ -99,7 +120,7 @@ object Megabox {
     }
 
     private fun detailWebUrl(theaterCode: String): String =
-            "https://m.megabox.co.kr/theater?brchNo=$theaterCode"
+        "https://m.megabox.co.kr/theater?brchNo=$theaterCode"
 }
 
 object Kakao {
@@ -126,20 +147,22 @@ object YouTube {
     }
 
     private fun createTrailerAppIntent(id: String): Intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("vnd.youtube:$id")).apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
-                            Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
-                } else {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                }
-            }
+        Intent.ACTION_VIEW,
+        Uri.parse("vnd.youtube:$id")
+    ).apply {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
+                Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
+        } else {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+    }
 
     private fun createTrailerWebIntent(id: String): Intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://www.youtube.com/watch?v=$id"))
+        Intent.ACTION_VIEW,
+        Uri.parse("https://www.youtube.com/watch?v=$id")
+    )
 
     fun executeAppWithQuery(ctx: Context, movieTitle: String) {
         val query = "$movieTitle 예고편"
@@ -156,19 +179,21 @@ object YouTube {
     }
 
     private fun createSearchAppIntent(query: String): Intent = Intent(
-            Intent.ACTION_SEARCH)
-            .setPackage(packageName)
-            .putExtra("query", query).apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
-                            Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
-                } else {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                }
+        Intent.ACTION_SEARCH
+    )
+        .setPackage(packageName)
+        .putExtra("query", query).apply {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
+                    Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
+            } else {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
+        }
 
     private fun createSearchWebIntent(query: String): Intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://www.youtube.com/results?search_query=$query"))
+        Intent.ACTION_VIEW,
+        Uri.parse("https://www.youtube.com/results?search_query=$query")
+    )
 }
