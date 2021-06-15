@@ -12,4 +12,5 @@ include ':app',
         ':model',
         ':data:repository',
         ':data:api',
-        ':data:db'
+        ':data:db',
+        ':library:stfalcon-imageviewer'
