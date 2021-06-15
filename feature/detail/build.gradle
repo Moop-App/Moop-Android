@@ -11,6 +11,7 @@ apply from: rootProject.file('gradle/android.gradle')
 dependencies {
     implementation project(':core')
     implementation project(':data:repository')
+    implementation project(':library:stfalcon-imageviewer')
 
     implementation Libs.Kotlin.stdlib
 
@@ -34,7 +35,6 @@ dependencies {
     implementation Libs.timber
 
     implementation Libs.recyclerViewAnimators
-    implementation Libs.stfalconImageviewer
 
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.Test.runner
