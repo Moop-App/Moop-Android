@@ -20,13 +20,13 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
@@ -43,7 +43,6 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.databinding.DetailActivityBinding
 import soup.movie.ext.executeWeb
-import soup.movie.ext.isPortrait
 import soup.movie.ext.loadAsync
 import soup.movie.ext.observeEvent
 import soup.movie.ext.showToast
@@ -101,15 +100,16 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        if (isPortrait) {
-            binding.root.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        } else {
-            binding.root.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        Insetter.builder()
+            .setOnApplyInsetsListener { container, insets, initialState ->
+                val systemInsets = insets.getInsets(systemBars())
+                container.updatePadding(
+                    left = initialState.paddings.left + systemInsets.left,
+                    right = initialState.paddings.right + systemInsets.right,
+                )
+            }
+            .applyToView(binding.container)
         Insetter.builder()
             .setOnApplyInsetsListener { header, insets, initialState ->
                 header.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)

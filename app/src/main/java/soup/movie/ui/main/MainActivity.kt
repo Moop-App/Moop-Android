@@ -20,10 +20,10 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
@@ -39,7 +39,6 @@ import soup.movie.R
 import soup.movie.core.MainDirections
 import soup.movie.databinding.MainActivityBinding
 import soup.movie.ext.consume
-import soup.movie.ext.isPortrait
 import soup.movie.ext.observeEvent
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
@@ -81,15 +80,16 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_Moop_Main)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        if (isPortrait) {
-            binding.root.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        } else {
-            binding.root.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        Insetter.builder()
+            .setOnApplyInsetsListener { container, insets, initialState ->
+                val systemInsets = insets.getInsets(systemBars())
+                container.updatePadding(
+                    left = initialState.paddings.left + systemInsets.left,
+                    right = initialState.paddings.right + systemInsets.right
+                )
+            }
+            .applyToView(binding.root)
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
