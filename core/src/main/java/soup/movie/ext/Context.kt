@@ -15,10 +15,11 @@
  */
 package soup.movie.ext
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.ColorRes
@@ -54,12 +55,15 @@ fun Context.startActivitySafely(intent: Intent) {
 }
 
 private fun Intent.isValid(ctx: Context): Boolean {
-    val activities = ctx.packageManager?.queryIntentActivities(this, PackageManager.MATCH_DEFAULT_ONLY)
-    return activities != null && activities.size > 0
+    return resolveActivity(ctx.packageManager) != null
 }
 
 fun Context.executeWeb(url: String?) {
     if (url == null) return
+    startNonBrowserActivity(url, fallback = { startBrowserActivity(url) })
+}
+
+private fun Context.startBrowserActivity(url: String) {
     CustomTabsIntent.Builder()
         .setShareState(CustomTabsIntent.SHARE_STATE_ON)
         .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
@@ -68,4 +72,20 @@ fun Context.executeWeb(url: String?) {
         .setExitAnimations(this, R.anim.fade_in, R.anim.fade_out)
         .build()
         .launchUrl(this, Uri.parse(url))
+}
+
+private fun Context.startNonBrowserActivity(url: String, fallback: () -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                addCategory(Intent.CATEGORY_BROWSABLE)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REQUIRE_NON_BROWSER
+            }
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            fallback()
+        }
+    } else {
+        fallback()
+    }
 }
