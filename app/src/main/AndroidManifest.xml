@@ -12,8 +12,10 @@
         tools:ignore="ProtectedPermissions" />
 
     <queries>
-        <!-- For KakaoLink V2 -->
-        <package android:name="com.kakao.talk" />
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
     </queries>
 
     <application
