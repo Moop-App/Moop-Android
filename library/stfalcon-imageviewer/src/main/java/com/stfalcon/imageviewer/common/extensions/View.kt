@@ -1,11 +1,11 @@
 /*
- * Copyright 2018 stfalcon.com
+ * Copyright 2018 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.stfalcon.imageviewer.common.extensions
 
 import android.animation.Animator
@@ -76,7 +75,9 @@ internal fun View.applyMargin(
 }
 
 internal fun View.requestNewSize(
-    width: Int, height: Int) {
+    width: Int,
+    height: Int
+) {
     layoutParams.width = width
     layoutParams.height = height
     layoutParams = layoutParams
@@ -86,7 +87,8 @@ internal fun View.makeViewMatchParent() {
     applyMargin(0, 0, 0, 0)
     requestNewSize(
         ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.MATCH_PARENT)
+        ViewGroup.LayoutParams.MATCH_PARENT
+    )
 }
 
 internal fun View.animateAlpha(from: Float?, to: Float?, duration: Long) {
@@ -119,4 +121,3 @@ internal fun View.switchVisibilityWithAnimation() {
         start()
     }
 }
-

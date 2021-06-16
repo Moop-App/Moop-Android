@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.data.db.internal
 
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +25,12 @@ import soup.movie.data.db.internal.dao.OpenDateAlarmDao
 import soup.movie.data.db.internal.entity.MovieListEntity
 import soup.movie.data.db.internal.entity.MovieListEntity.Companion.TYPE_NOW
 import soup.movie.data.db.internal.entity.MovieListEntity.Companion.TYPE_PLAN
-import soup.movie.data.db.internal.mapper.*
+import soup.movie.data.db.internal.mapper.toEntity
+import soup.movie.data.db.internal.mapper.toFavoriteMovieEntity
+import soup.movie.data.db.internal.mapper.toMovie
+import soup.movie.data.db.internal.mapper.toMovieEntity
+import soup.movie.data.db.internal.mapper.toOpenDateAlarm
+import soup.movie.data.db.internal.mapper.toOpenDateAlarmEntity
 import soup.movie.model.Movie
 import soup.movie.model.MovieList
 import soup.movie.model.OpenDateAlarm

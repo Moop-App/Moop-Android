@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.theater.edit
 
 import android.os.Build
@@ -69,8 +84,10 @@ class TheaterEditFragment : Fragment(R.layout.theater_edit_fragment), OnBackPres
         sharedElementReturnTransition = TransitionInflater.from(context)
             .inflateTransition(android.R.transition.move)
         setEnterSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: MutableList<String>,
-                                             sharedElements: MutableMap<String, View>) {
+            override fun onMapSharedElements(
+                names: MutableList<String>,
+                sharedElements: MutableMap<String, View>
+            ) {
                 sharedElements.clear()
                 binding.footer.selectedTheaterGroup.run {
                     (0 until childCount)
@@ -118,7 +135,7 @@ class TheaterEditFragment : Fragment(R.layout.theater_edit_fragment), OnBackPres
             viewModel.footerUiModel.observe(viewLifecycleOwner) {
                 binding.footer.render(it)
 
-                //FixMe: find a timing to call startPostponedEnterTransition()
+                // FixMe: find a timing to call startPostponedEnterTransition()
                 startPostponedEnterTransition()
             }
         }
@@ -213,7 +230,7 @@ class TheaterEditFragment : Fragment(R.layout.theater_edit_fragment), OnBackPres
 
     @LayoutRes
     private fun Theater.getChipLayout(): Int {
-        return when(type) {
+        return when (type) {
             Theater.TYPE_CGV -> R.layout.chip_action_cgv
             Theater.TYPE_LOTTE -> R.layout.chip_action_lotte
             Theater.TYPE_MEGABOX -> R.layout.chip_action_megabox

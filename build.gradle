@@ -1,7 +1,5 @@
 import dependencies.Libs
 
-apply from: file('gradle/utils.gradle')
-
 buildscript {
     repositories {
         google()
@@ -20,6 +18,14 @@ buildscript {
         classpath Libs.Firebase.crashlyticsPlugin
     }
 }
+
+plugins {
+    id 'com.diffplug.spotless' version '5.12.4'
+}
+
+Plugin.metaClass.isAndroidApp = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.AppPlugin" }
+Plugin.metaClass.isDynamicFeature = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.DynamicFeaturePlugin" }
+Plugin.metaClass.isAndroidLibrary = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.LibraryPlugin" }
 
 allprojects {
     repositories {
@@ -50,8 +56,18 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+subprojects {
+    apply plugin: 'com.diffplug.spotless'
+    spotless {
+        kotlin {
+            target '**/*.kt'
+            targetExclude("$buildDir/**/*.kt")
+            targetExclude('bin/**/*.kt')
+
+            ktlint("0.41.0")
+            licenseHeaderFile rootProject.file('spotless/copyright.kt')
+        }
+    }
 }
 
 Object propOrDef(String propertyName, Object defaultValue) {

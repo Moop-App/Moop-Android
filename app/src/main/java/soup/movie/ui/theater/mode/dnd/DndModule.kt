@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.ui.theater.mode.dnd
 
 import android.app.NotificationManager
@@ -56,8 +71,10 @@ class DndModule(private val ctx: Context, private val listener: Listener? = null
                 return true
             } else {
                 ctx.showToast("You need to grant notification policy access.")
-                ctx.startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                ctx.startActivity(
+                    Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
             }
         } else {
             ctx.showToast("Device does not support this feature.")
@@ -66,12 +83,12 @@ class DndModule(private val ctx: Context, private val listener: Listener? = null
     }
 
     fun startTracking() {
-        //TODO: register listener to system service
+        // TODO: register listener to system service
         fireOnStateChanged()
     }
 
     fun stopTracking() {
-        //TODO: unregister listener to system service
+        // TODO: unregister listener to system service
     }
 
     private fun fireOnStateChanged() {

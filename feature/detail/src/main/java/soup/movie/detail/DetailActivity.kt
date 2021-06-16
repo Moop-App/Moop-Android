@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.detail
 
 import android.content.Context
@@ -27,7 +42,11 @@ import dev.chrisbanes.insetter.Insetter
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.databinding.DetailActivityBinding
-import soup.movie.ext.*
+import soup.movie.ext.executeWeb
+import soup.movie.ext.isPortrait
+import soup.movie.ext.loadAsync
+import soup.movie.ext.observeEvent
+import soup.movie.ext.showToast
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.util.YouTube
@@ -60,7 +79,8 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                     height,
                     recyclerView.resources.getDimensionPixelSize(R.dimen.detail_header_height)
                 )
-                val headerIsShown = (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
+                val headerIsShown =
+                    (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
                 val offset = if (headerIsShown) {
                     min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
                 } else {
@@ -84,11 +104,11 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         if (isPortrait) {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         } else {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
         Insetter.builder()
             .setOnApplyInsetsListener { header, insets, initialState ->
@@ -128,9 +148,12 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
 
     private fun initViewState(binding: DetailActivityBinding) {
         binding.header.apply {
-            posterView.loadAsync(args.movie.posterUrl, doOnEnd = {
-                startPostponedEnterTransition()
-            })
+            posterView.loadAsync(
+                args.movie.posterUrl,
+                doOnEnd = {
+                    startPostponedEnterTransition()
+                }
+            )
             posterCard.setOnDebounceClickListener(delay = 150L) {
                 analytics.clickPoster()
                 showPosterViewer(from = posterView)
@@ -285,7 +308,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         }
     }
 
-    //TODO: Re-implements this
+    // TODO: Re-implements this
     private fun showPosterViewer(from: ImageView) {
         StfalconImageViewer
             .Builder(from.context, listOf(args.movie.posterUrl)) { view, imageUrl ->

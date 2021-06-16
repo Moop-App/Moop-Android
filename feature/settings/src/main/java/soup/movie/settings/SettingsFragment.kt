@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 SOUP
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package soup.movie.settings
 
 import android.content.Context
@@ -27,7 +42,13 @@ import soup.movie.settings.databinding.SettingsItemTheaterBinding
 import soup.movie.settings.databinding.SettingsItemVersionBinding
 import soup.movie.system.SystemViewModel
 import soup.movie.theme.setThemeOptionLabel
-import soup.movie.util.*
+import soup.movie.util.Cgv
+import soup.movie.util.LotteCinema
+import soup.movie.util.Megabox
+import soup.movie.util.Moop
+import soup.movie.util.autoCleared
+import soup.movie.util.inflate
+import soup.movie.util.setOnDebounceClickListener
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.settings_fragment) {
@@ -42,8 +63,10 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setExitSharedElementCallback(object : SharedElementCallback() {
-            override fun onMapSharedElements(names: List<String>,
-                                             sharedElements: MutableMap<String, View>) {
+            override fun onMapSharedElements(
+                names: List<String>,
+                sharedElements: MutableMap<String, View>
+            ) {
                 sharedElements.clear()
                 names.forEach { name ->
                     binding.theaterItem.theaterGroup.findViewWithTag<View>(name)?.let {
@@ -100,10 +123,10 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             themeItem.themeName.setThemeOptionLabel(it.themeOption)
         }
 
-        //TODO: Apply theater mode
-        //tmPrepare.setOnClickListener {
+        // TODO: Apply theater mode
+        // tmPrepare.setOnClickListener {
         //    startActivity(Intent(requireContext(), TheaterModeTileActivity::class.java))
-        //}
+        // }
         feedbackItem.bugReportButton.setOnDebounceClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse("mailto:")
@@ -141,7 +164,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     @LayoutRes
     private fun Theater.getChipLayout(): Int {
-        return when(type) {
+        return when (type) {
             Theater.TYPE_CGV -> R.layout.chip_action_cgv
             Theater.TYPE_LOTTE -> R.layout.chip_action_lotte
             Theater.TYPE_MEGABOX -> R.layout.chip_action_megabox
@@ -202,7 +225,8 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     private fun onThemeEditClicked() {
         findNavController().navigate(
-            SettingsFragmentDirections.actionToThemeOption())
+            SettingsFragmentDirections.actionToThemeOption()
+        )
     }
 
     private fun onVersionClicked() {
