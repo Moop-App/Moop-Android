@@ -39,9 +39,15 @@ import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
+import javax.inject.Inject
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.databinding.DetailActivityBinding
+import soup.movie.ext.executeWeb
+import soup.movie.ext.isPortrait
+import soup.movie.ext.loadAsync
+import soup.movie.ext.observeEvent
+import soup.movie.ext.showToast
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.util.YouTube
@@ -50,7 +56,6 @@ import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.viewBindings
 import soup.movie.widget.elastic.ElasticDragDismissFrameLayout
 import timber.log.Timber
-import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
@@ -74,7 +79,8 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                     height,
                     recyclerView.resources.getDimensionPixelSize(R.dimen.detail_header_height)
                 )
-                val headerIsShown = (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
+                val headerIsShown =
+                    (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
                 val offset = if (headerIsShown) {
                     min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
                 } else {
@@ -98,11 +104,11 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         if (isPortrait) {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         } else {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
         Insetter.builder()
             .setOnApplyInsetsListener { header, insets, initialState ->

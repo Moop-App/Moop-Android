@@ -21,10 +21,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.core.util.Pair
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
+import soup.movie.ext.asyncText
 import soup.movie.ext.consume
 import soup.movie.ext.getAgeBackground
 import soup.movie.ext.getDDayLabel

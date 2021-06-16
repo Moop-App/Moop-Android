@@ -30,6 +30,7 @@ import com.stfalcon.imageviewer.common.extensions.addOnPageChangeListener
 import com.stfalcon.imageviewer.common.extensions.animateAlpha
 import com.stfalcon.imageviewer.common.extensions.applyMargin
 import com.stfalcon.imageviewer.common.extensions.copyBitmapFrom
+import com.stfalcon.imageviewer.common.extensions.isRectVisible
 import com.stfalcon.imageviewer.common.extensions.isVisible
 import com.stfalcon.imageviewer.common.extensions.makeGone
 import com.stfalcon.imageviewer.common.extensions.makeInvisible
