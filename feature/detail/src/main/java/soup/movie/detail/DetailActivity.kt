@@ -39,7 +39,6 @@ import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
-import javax.inject.Inject
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.databinding.DetailActivityBinding
@@ -56,6 +55,7 @@ import soup.movie.util.setOnDebounceClickListener
 import soup.movie.util.viewBindings
 import soup.movie.widget.elastic.ElasticDragDismissFrameLayout
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.math.max
 import kotlin.math.min
 
@@ -104,11 +104,11 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         if (isPortrait) {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         } else {
             binding.root.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
         Insetter.builder()
             .setOnApplyInsetsListener { header, insets, initialState ->
