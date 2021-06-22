@@ -99,7 +99,7 @@ object Libs {
         }
 
         object WorkManager {
-            private const val version = "2.5.0"
+            private const val version = "2.6.0-beta01"
             const val runtime = "androidx.work:work-runtime-ktx:$version"
             const val gcm = "androidx.work:work-gcm:$version"
             const val testing = "androidx.work:work-testing:$version"
