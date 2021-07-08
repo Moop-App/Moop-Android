@@ -7,6 +7,9 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+if (file("google-services.json").exists()) {
+    apply plugin: 'com.google.gms.google-services'
+}
 apply plugin: 'com.google.firebase.crashlytics'
 
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
@@ -152,8 +155,4 @@ dependencies {
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.Test.runner
     androidTestImplementation Libs.Test.espresso
-}
-
-if (file("google-services.json").exists()) {
-    apply plugin: 'com.google.gms.google-services'
 }
