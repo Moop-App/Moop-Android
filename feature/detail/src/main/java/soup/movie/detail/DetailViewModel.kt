@@ -20,7 +20,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.nativead.NativeAd
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -50,7 +50,7 @@ class DetailViewModel @Inject constructor(
 
     private lateinit var movie: Movie
     private var movieDetail: MovieDetail? = null
-    private var nativeAd: UnifiedNativeAd? = null
+    private var nativeAd: NativeAd? = null
 
     private val _headerUiModel = MutableLiveData<HeaderUiModel>()
     val headerUiModel: LiveData<HeaderUiModel>
@@ -113,7 +113,7 @@ class DetailViewModel @Inject constructor(
 
     private suspend fun renderDetail(
         detail: MovieDetail,
-        nativeAd: UnifiedNativeAd?
+        nativeAd: NativeAd?
     ) = withContext(Dispatchers.Default) {
         _headerUiModel.postValue(
             HeaderUiModel(
@@ -133,7 +133,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun MovieDetail.toContentUiModel(nativeAd: UnifiedNativeAd?): ContentUiModel {
+    private fun MovieDetail.toContentUiModel(nativeAd: NativeAd?): ContentUiModel {
         val items = mutableListOf<ContentItemUiModel>()
         items.add(HeaderItemUiModel)
         boxOffice?.run {
@@ -260,7 +260,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun getNativeAd(): UnifiedNativeAd? {
+    private fun getNativeAd(): NativeAd? {
         return adsManager.getLoadedNativeAd()
     }
 
