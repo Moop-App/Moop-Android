@@ -23,8 +23,8 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import com.google.android.gms.ads.formats.UnifiedNativeAd
-import com.google.android.gms.ads.formats.UnifiedNativeAdView
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdView
 import soup.movie.detail.R
 
 class NativeAdView @JvmOverloads constructor(
@@ -34,9 +34,9 @@ class NativeAdView @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
-    private var nativeAd: UnifiedNativeAd? = null
+    private var nativeAd: NativeAd? = null
 
-    private val adView: UnifiedNativeAdView
+    private val adView: NativeAdView
     private val headlineView: TextView
     private val bodyView: TextView
     private val callToActionView: Button
@@ -66,7 +66,7 @@ class NativeAdView @JvmOverloads constructor(
         adView.starRatingView = starRatingView
     }
 
-    fun setNativeAd(nativeAd: UnifiedNativeAd) {
+    fun setNativeAd(nativeAd: NativeAd) {
         this.nativeAd = nativeAd
 
         headlineView.text = nativeAd.headline

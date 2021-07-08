@@ -19,8 +19,9 @@ import android.content.Context
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.nativead.NativeAd
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -35,7 +36,7 @@ class AdsManagerImpl(private val context: Context) : AdsManager {
         LOADED, CONSUMED
     }
     private var state: State = State.CONSUMED
-    private var lastNativeAd: UnifiedNativeAd? = null
+    private var lastNativeAd: NativeAd? = null
 
     init {
         GlobalScope.launch(Dispatchers.IO) {
@@ -43,7 +44,7 @@ class AdsManagerImpl(private val context: Context) : AdsManager {
         }
     }
 
-    override fun getLoadedNativeAd(): UnifiedNativeAd? {
+    override fun getLoadedNativeAd(): NativeAd? {
         Timber.d("getLoadedNativeAd: state=$state")
         return lastNativeAd
     }
@@ -54,14 +55,14 @@ class AdsManagerImpl(private val context: Context) : AdsManager {
         }
 
         val adLoader = AdLoader.Builder(context, adUnitId)
-            .forUnifiedNativeAd {
+            .forNativeAd {
                 lastNativeAd = it
                 state = State.LOADED
                 Timber.d("loadNextNativeAd: State.LOADED")
             }
             .withAdListener(object : AdListener() {
-                override fun onAdFailedToLoad(errorCode: Int) {
-                    Timber.w("onAdFailedToLoad: errorCode=$errorCode")
+                override fun onAdFailedToLoad(error: LoadAdError) {
+                    Timber.w("onAdFailedToLoad: errorCode=${error.code}")
                 }
             })
             .build()

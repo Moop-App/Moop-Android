@@ -41,6 +41,7 @@ dependencies {
     implementation Libs.Glide.runtime
     kapt Libs.Glide.compiler
 
+    implementation platform(Libs.Firebase.bom)
     implementation Libs.Firebase.dynamicLinks
     implementation Libs.Firebase.ads
 

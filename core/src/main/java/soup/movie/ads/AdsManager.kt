@@ -15,11 +15,11 @@
  */
 package soup.movie.ads
 
-import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.nativead.NativeAd
 
 interface AdsManager {
 
-    fun getLoadedNativeAd(): UnifiedNativeAd?
+    fun getLoadedNativeAd(): NativeAd?
 
     suspend fun loadNextNativeAd()
 

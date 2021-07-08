@@ -45,7 +45,7 @@ object Libs {
     }
 
     object Google {
-        const val gmsPlugin = "com.google.gms:google-services:4.3.4"
+        const val gmsPlugin = "com.google.gms:google-services:4.3.8"
         const val material = "com.google.android.material:material:1.3.0-alpha03"
         const val play = "com.google.android.play:core:1.8.3"
     }
@@ -126,11 +126,12 @@ object Libs {
     }
 
     object Firebase {
-        const val core = "com.google.firebase:firebase-core:17.2.1"
-        const val crashlytics = "com.google.firebase:firebase-crashlytics:17.2.2"
-        const val crashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:2.3.0"
-        const val messaging = "com.google.firebase:firebase-messaging:20.0.1"
-        const val dynamicLinks = "com.google.firebase:firebase-dynamic-links:19.0.0"
-        const val ads = "com.google.firebase:firebase-ads:18.3.0"
+        const val bom = "com.google.firebase:firebase-bom:28.2.0"
+        const val analytics = "com.google.firebase:firebase-analytics-ktx"
+        const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+        const val crashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:2.7.1"
+        const val messaging = "com.google.firebase:firebase-messaging-ktx"
+        const val dynamicLinks = "com.google.firebase:firebase-dynamic-links-ktx"
+        const val ads = "com.google.android.gms:play-services-ads:20.2.0"
     }
 }

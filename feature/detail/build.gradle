@@ -30,6 +30,7 @@ dependencies {
     kapt Libs.Dagger.hiltCompiler
     kapt Libs.AndroidX.Hilt.compiler
 
+    implementation platform(Libs.Firebase.bom)
     implementation Libs.Firebase.ads
 
     implementation Libs.timber

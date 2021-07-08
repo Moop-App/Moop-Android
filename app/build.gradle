@@ -7,6 +7,9 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+if (file("google-services.json").exists()) {
+    apply plugin: 'com.google.gms.google-services'
+}
 apply plugin: 'com.google.firebase.crashlytics'
 
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
@@ -139,7 +142,8 @@ dependencies {
     implementation Libs.Glide.runtime
     kapt Libs.Glide.compiler
 
-    implementation Libs.Firebase.core
+    implementation platform(Libs.Firebase.bom)
+    implementation Libs.Firebase.analytics
     implementation Libs.Firebase.crashlytics
     implementation Libs.Firebase.messaging
     implementation Libs.Firebase.dynamicLinks
@@ -151,8 +155,4 @@ dependencies {
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.Test.runner
     androidTestImplementation Libs.Test.espresso
-}
-
-if (file("google-services.json").exists()) {
-    apply plugin: 'com.google.gms.google-services'
 }

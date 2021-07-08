@@ -27,7 +27,8 @@ dependencies {
     implementation Libs.Dagger.hilt
     kapt Libs.Dagger.hiltCompiler
 
-    implementation Libs.Retrofit.runtime
+    //TODO: need to change this to implementation.
+    api Libs.Retrofit.runtime
     implementation Libs.Retrofit.serialization
 
     implementation Libs.timber
