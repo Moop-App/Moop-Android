@@ -16,6 +16,7 @@
 package soup.movie.di
 
 import android.content.Context
+import androidx.lifecycle.ProcessLifecycleOwner
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -91,7 +92,7 @@ class ApplicationModule {
     fun provideAdsManager(
         @ApplicationContext context: Context
     ): AdsManager {
-        return AdsManagerImpl(context)
+        return AdsManagerImpl(context, ProcessLifecycleOwner.get())
     }
 
     @Singleton

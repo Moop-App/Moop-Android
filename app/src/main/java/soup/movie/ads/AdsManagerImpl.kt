@@ -16,6 +16,8 @@
 package soup.movie.ads
 
 import android.content.Context
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
@@ -23,23 +25,26 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.nativead.NativeAd
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import soup.movie.R
 import timber.log.Timber
 
-class AdsManagerImpl(private val context: Context) : AdsManager {
+class AdsManagerImpl(
+    private val context: Context,
+    lifecycleOwner: LifecycleOwner
+) : AdsManager {
 
     private val adUnitId: String = context.getString(R.string.admob_ad_unit_detail)
 
     enum class State {
         LOADED, CONSUMED
     }
+
     private var state: State = State.CONSUMED
     private var lastNativeAd: NativeAd? = null
 
     init {
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             MobileAds.initialize(context)
         }
     }
