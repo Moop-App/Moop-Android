@@ -77,6 +77,7 @@ object Libs {
             private const val version = "2.3.1"
             const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+            const val process = "androidx.lifecycle:lifecycle-process:$version"
             const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
             const val compiler = "androidx.lifecycle:lifecycle-common-java8:$version"
         }

@@ -71,7 +71,7 @@ class NativeAdView @JvmOverloads constructor(
 
         headlineView.text = nativeAd.headline
 
-        val secondaryText: String = when {
+        val secondaryText: String? = when {
             nativeAd.advertiser.isNullOrEmpty().not() -> {
                 adView.advertiserView = bodyView
                 nativeAd.advertiser
@@ -85,7 +85,7 @@ class NativeAdView @JvmOverloads constructor(
                 nativeAd.body
             }
         }
-        if (secondaryText.isEmpty()) {
+        if (secondaryText.isNullOrEmpty()) {
             bodyView.visibility = View.GONE
         } else {
             bodyView.visibility = View.VISIBLE
@@ -114,7 +114,7 @@ class NativeAdView @JvmOverloads constructor(
         if (starRating == null) {
             starRatingView.visibility = View.GONE
         } else {
-            starRatingView.rating = nativeAd.starRating.toFloat()
+            starRatingView.rating = starRating.toFloat()
             starRatingView.visibility = View.VISIBLE
         }
 

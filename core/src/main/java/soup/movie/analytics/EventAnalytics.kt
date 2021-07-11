@@ -20,7 +20,7 @@ import android.app.Activity
 interface EventAnalytics {
 
     /* Common */
-    fun screen(activity: Activity, screenName: String)
+    fun screen(activity: Activity, screenName: String, screenClass: String?)
 
     /* Main */
     fun clickMovie()
