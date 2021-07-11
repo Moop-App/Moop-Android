@@ -31,8 +31,8 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
         FirebaseAnalytics.getInstance(context)
     }
 
-    private inline fun logEvent(var1: String, params: Params) {
-        delegate.logEvent(var1, Bundle().apply { params() })
+    private inline fun logEvent(name: String, params: Params) {
+        delegate.logEvent(name, Bundle().apply { params() })
     }
 
     private inline fun logSelectEvent(params: Params) {
@@ -45,8 +45,11 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
 
     /* Common */
 
-    override fun screen(activity: Activity, screenName: String) {
-        delegate.setCurrentScreen(activity, screenName, null)
+    override fun screen(activity: Activity, screenName: String, screenClass: String?) {
+        logEvent(Event.SCREEN_VIEW) {
+            putString(Param.SCREEN_NAME, screenName)
+            putString(Param.SCREEN_CLASS, screenClass ?: activity.javaClass.simpleName)
+        }
     }
 
     /* Main */
