@@ -11,7 +11,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.1"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.2"
 
     // UI
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
@@ -104,6 +104,11 @@ object Libs {
             const val runtime = "androidx.work:work-runtime-ktx:$version"
             const val gcm = "androidx.work:work-gcm:$version"
             const val testing = "androidx.work:work-testing:$version"
+        }
+
+        object DataStore {
+            private const val version = "1.0.0-rc01"
+            const val preferences = "androidx.datastore:datastore-preferences:$version"
         }
     }
 
