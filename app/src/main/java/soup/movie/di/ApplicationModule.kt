@@ -22,6 +22,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
 import soup.movie.Credentials
 import soup.movie.CredentialsImpl
 import soup.movie.ads.AdsManager
@@ -73,11 +74,15 @@ class ApplicationModule {
     ): ThemeOptionManager = ThemeOptionManager(object : ThemeOptionStore {
 
         override fun save(option: String) {
-            appSettings.themeOption = option
+            // TODO: Avoid blocking threads on DataStore
+            runBlocking {
+                appSettings.setThemeOption(option)
+            }
         }
 
         override fun restore(): String {
-            return appSettings.themeOption
+            // TODO: Avoid blocking threads on DataStore
+            return runBlocking { appSettings.getThemeOption() }
         }
     })
 

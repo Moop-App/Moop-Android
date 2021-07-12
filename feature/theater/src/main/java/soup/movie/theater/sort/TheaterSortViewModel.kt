@@ -23,6 +23,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import soup.movie.ext.swap
 import soup.movie.model.Theater
 import soup.movie.settings.AppSettings
@@ -56,6 +57,8 @@ class TheaterSortViewModel @Inject constructor(
     }
 
     fun saveSnapshot() {
-        appSettings.favoriteTheaterList = listSnapshot.toList()
+        viewModelScope.launch {
+            appSettings.setFavoriteTheaterList(listSnapshot.toList())
+        }
     }
 }

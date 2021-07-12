@@ -23,18 +23,20 @@ import soup.movie.settings.model.TheaterFilter
 
 interface AppSettings {
 
-    var theaterFilter: TheaterFilter
+    suspend fun setTheaterFilter(theaterFilter: TheaterFilter)
     fun getTheaterFilterFlow(): Flow<TheaterFilter>
 
-    var ageFilter: AgeFilter
+    suspend fun setAgeFilter(ageFilter: AgeFilter)
     fun getAgeFilterFlow(): Flow<AgeFilter>
 
-    var genreFilter: GenreFilter
+    suspend fun setGenreFilter(genreFilter: GenreFilter)
     fun getGenreFilterFlow(): Flow<GenreFilter>
 
-    var themeOption: String
+    suspend fun setThemeOption(themeOption: String)
+    suspend fun getThemeOption(): String
     fun getThemeOptionFlow(): Flow<String>
 
-    var favoriteTheaterList: List<Theater>
+    suspend fun setFavoriteTheaterList(list: List<Theater>)
+    suspend fun getFavoriteTheaterList(): List<Theater>
     fun getFavoriteTheaterListFlow(): Flow<List<Theater>>
 }

@@ -18,6 +18,7 @@ package soup.movie.theater.edit
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.runBlocking
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
 import soup.movie.model.TheaterAreaGroup
@@ -62,7 +63,8 @@ class TheaterEditManager(
     }
 
     private fun setupSelectedList() {
-        selectedItemSet = appSettings.favoriteTheaterList.toMutableSet()
+        // TODO: Avoid blocking threads on DataStore
+        selectedItemSet = runBlocking { appSettings.getFavoriteTheaterList() }.toMutableSet()
         selectedTheatersChannel.offer(
             selectedItemSet.asSequence()
                 .sortedBy { it.type }
@@ -98,14 +100,19 @@ class TheaterEditManager(
     }
 
     fun save() {
-        appSettings.favoriteTheaterList = theaterList.asSequence()
-            .filter {
-                selectedItemSet.any { selectedItem ->
-                    selectedItem.id == it.id
-                }
-            }
-            .sortedBy { it.type }
-            .toList()
+        // TODO: Avoid blocking threads on DataStore
+        runBlocking {
+            appSettings.setFavoriteTheaterList(
+                theaterList.asSequence()
+                    .filter {
+                        selectedItemSet.any { selectedItem ->
+                            selectedItem.id == it.id
+                        }
+                    }
+                    .sortedBy { it.type }
+                    .toList()
+            )
+        }
     }
 
     companion object {

@@ -133,7 +133,9 @@ class HomeFilterViewModel @Inject constructor(
                 it.removeFlag(flag)
             }
             if (success) {
-                appSettings.theaterFilter = it
+                viewModelScope.launch {
+                    appSettings.setTheaterFilter(it)
+                }
             }
         }
     }
@@ -155,7 +157,9 @@ class HomeFilterViewModel @Inject constructor(
     }
 
     private fun updateAgeFilter(flags: Int) {
-        appSettings.ageFilter = AgeFilter(flags)
+        viewModelScope.launch {
+            appSettings.setAgeFilter(AgeFilter(flags))
+        }
     }
 
     fun onGenreFilterClick(genre: String, isChecked: Boolean) {
@@ -166,7 +170,9 @@ class HomeFilterViewModel @Inject constructor(
             lastGenreSet.add(genre)
         }
         if (changed) {
-            appSettings.genreFilter = GenreFilter(lastGenreSet)
+            viewModelScope.launch {
+                appSettings.setGenreFilter(GenreFilter(lastGenreSet))
+            }
         }
     }
 }
