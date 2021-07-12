@@ -114,7 +114,6 @@ dependencies {
     implementation Libs.AndroidX.constraintlayout
     implementation Libs.AndroidX.drawerlayout
     implementation Libs.AndroidX.fragment
-    implementation Libs.AndroidX.preference
     implementation Libs.AndroidX.recyclerview
     implementation Libs.AndroidX.startup
     implementation Libs.AndroidX.transition

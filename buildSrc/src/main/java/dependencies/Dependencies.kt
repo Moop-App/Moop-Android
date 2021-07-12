@@ -60,7 +60,6 @@ object Libs {
         const val core = "androidx.core:core-ktx:1.5.0"
         const val drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
         const val fragment = "androidx.fragment:fragment-ktx:1.3.4"
-        const val preference = "androidx.preference:preference-ktx:1.1.1"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
         const val startup = "androidx.startup:startup-runtime:1.0.0"
         const val transition = "androidx.transition:transition:1.4.1"
