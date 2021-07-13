@@ -15,9 +15,8 @@
  */
 package soup.movie.theater.edit
 
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
@@ -30,29 +29,29 @@ class TheaterEditManager(
     private val appSettings: AppSettings
 ) {
 
-    private val cgvSubject = ConflatedBroadcastChannel<List<TheaterArea>>()
-    private val lotteSubject = ConflatedBroadcastChannel<List<TheaterArea>>()
-    private val megaboxSubject = ConflatedBroadcastChannel<List<TheaterArea>>()
-    private val selectedTheatersChannel = ConflatedBroadcastChannel<List<Theater>>(emptyList())
+    private val cgvSubject = MutableStateFlow<List<TheaterArea>>(emptyList())
+    private val lotteSubject = MutableStateFlow<List<TheaterArea>>(emptyList())
+    private val megaboxSubject = MutableStateFlow<List<TheaterArea>>(emptyList())
+    private val selectedTheatersChannel = MutableStateFlow<List<Theater>>(emptyList())
 
     private var theaterList: List<Theater> = emptyList()
     private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
 
-    fun asCgvFlow(): Flow<List<TheaterArea>> = cgvSubject.asFlow()
+    fun asCgvFlow(): Flow<List<TheaterArea>> = cgvSubject
 
-    fun asLotteFlow(): Flow<List<TheaterArea>> = lotteSubject.asFlow()
+    fun asLotteFlow(): Flow<List<TheaterArea>> = lotteSubject
 
-    fun asMegaboxFlow(): Flow<List<TheaterArea>> = megaboxSubject.asFlow()
+    fun asMegaboxFlow(): Flow<List<TheaterArea>> = megaboxSubject
 
-    fun asSelectedTheaterListFlow(): Flow<List<Theater>> = selectedTheatersChannel.asFlow()
+    fun asSelectedTheaterListFlow(): Flow<List<Theater>> = selectedTheatersChannel
 
     suspend fun loadAsync(): TheaterAreaGroup {
         setupSelectedList()
         return repository.getCodeList().also {
             setupTotalList(it)
-            cgvSubject.send(it.cgv)
-            lotteSubject.send(it.lotte)
-            megaboxSubject.send(it.megabox)
+            cgvSubject.value = it.cgv
+            lotteSubject.value = it.lotte
+            megaboxSubject.value = it.megabox
         }
     }
 
@@ -65,24 +64,20 @@ class TheaterEditManager(
     private fun setupSelectedList() {
         // TODO: Avoid blocking threads on DataStore
         selectedItemSet = runBlocking { appSettings.getFavoriteTheaterList() }.toMutableSet()
-        selectedTheatersChannel.offer(
-            selectedItemSet.asSequence()
-                .sortedBy { it.type }
-                .toList()
-        )
+        selectedTheatersChannel.value = selectedItemSet.asSequence()
+            .sortedBy { it.type }
+            .toList()
     }
 
     private fun updateSelectedItemCount() {
-        selectedTheatersChannel.offer(
-            theaterList.asSequence()
-                .filter {
-                    selectedItemSet.any { selectedItem ->
-                        selectedItem == it
-                    }
+        selectedTheatersChannel.value = theaterList.asSequence()
+            .filter {
+                selectedItemSet.any { selectedItem ->
+                    selectedItem == it
                 }
-                .sortedBy { it.type }
-                .toList()
-        )
+            }
+            .sortedBy { it.type }
+            .toList()
     }
 
     fun add(theater: Theater): Boolean {
