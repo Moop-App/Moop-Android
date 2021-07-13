@@ -15,23 +15,23 @@ object Libs {
 
     // UI
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
-    const val lottie = "com.airbnb.android:lottie:3.5.0"
-    const val recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.1"
+    const val lottie = "com.airbnb.android:lottie:3.7.1"
+    const val recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.2"
 
     // Utils
     const val timber = "com.jakewharton.timber:timber:4.7.1"
-    const val threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.0"
+    const val threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.1"
 
     object Kotlin {
         private const val version = "1.5.10"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
-        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1"
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
         const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:$version"
     }
 
     object Coroutines {
-        private const val version = "1.5.0"
+        private const val version = "1.5.1"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
     }
@@ -46,8 +46,8 @@ object Libs {
 
     object Google {
         const val gmsPlugin = "com.google.gms:google-services:4.3.8"
-        const val material = "com.google.android.material:material:1.3.0-alpha03"
-        const val play = "com.google.android.play:core:1.8.3"
+        const val material = "com.google.android.material:material:1.4.0"
+        const val play = "com.google.android.play:core:1.10.0"
     }
 
     object AndroidX {
@@ -57,7 +57,7 @@ object Libs {
         const val appcompat = "androidx.appcompat:appcompat:1.3.0"
         const val browser = "androidx.browser:browser:1.3.0"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-        const val core = "androidx.core:core-ktx:1.5.0"
+        const val core = "androidx.core:core-ktx:1.6.0"
         const val drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
         const val fragment = "androidx.fragment:fragment-ktx:1.3.4"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
