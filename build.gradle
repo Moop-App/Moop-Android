@@ -16,6 +16,7 @@ buildscript {
         classpath Libs.AndroidX.Navigation.safeArgsPlugin
         classpath Libs.Google.gmsPlugin
         classpath Libs.Firebase.crashlyticsPlugin
+        classpath Libs.Firebase.perfPlugin
     }
 }
 
