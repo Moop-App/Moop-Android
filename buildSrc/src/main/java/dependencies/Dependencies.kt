@@ -137,6 +137,8 @@ object Libs {
         const val crashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:2.7.1"
         const val messaging = "com.google.firebase:firebase-messaging-ktx"
         const val dynamicLinks = "com.google.firebase:firebase-dynamic-links-ktx"
+        const val perf = "com.google.firebase:firebase-perf-ktx"
+        const val perfPlugin = "com.google.firebase:perf-plugin:1.4.0"
         const val ads = "com.google.android.gms:play-services-ads:20.2.0"
     }
 }
