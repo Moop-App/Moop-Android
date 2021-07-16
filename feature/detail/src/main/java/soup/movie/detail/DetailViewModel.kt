@@ -15,7 +15,6 @@
  */
 package soup.movie.detail
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -126,10 +125,20 @@ class DetailViewModel @Inject constructor(
         _contentUiModel.postValue(detail.toContentUiModel(nativeAd))
     }
 
-    fun requestShareImage(target: ShareTarget, bitmap: Bitmap) {
+    fun requestShareText(target: ShareTarget) {
         viewModelScope.launch {
-            val uri = imageUriProvider(bitmap)
-            _uiEvent.event = ShareAction(target, uri, "image/*")
+            _uiEvent.event = ShareAction.Text(target)
+        }
+    }
+
+    fun requestShareImage(target: ShareTarget, imageUrl: String) {
+        viewModelScope.launch {
+            val uri = imageUriProvider(imageUrl)
+            _uiEvent.event = if (uri != null) {
+                ShareAction.Image(target, uri, "image/*")
+            } else {
+                ToastAction(R.string.action_share_poster_failed)
+            }
         }
     }
 
@@ -244,7 +253,13 @@ class DetailViewModel @Inject constructor(
             if (isFavorite) {
                 repository.addFavoriteMovie(movie)
                 if (movie.isPlan) {
-                    repository.insertOpenDateAlarms(OpenDateAlarm(movie.id, movie.title, movie.openDate))
+                    repository.insertOpenDateAlarms(
+                        OpenDateAlarm(
+                            movie.id,
+                            movie.title,
+                            movie.openDate
+                        )
+                    )
                     _uiEvent.postEvent(ToastAction(R.string.action_toast_opendate_alarm))
                 }
             } else {

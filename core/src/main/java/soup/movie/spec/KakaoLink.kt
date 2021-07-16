@@ -22,6 +22,7 @@ import com.kakao.sdk.template.model.Content
 import com.kakao.sdk.template.model.FeedTemplate
 import com.kakao.sdk.template.model.Link
 import soup.movie.ext.getAgeLabel
+import soup.movie.ext.showToast
 import soup.movie.model.Movie
 import timber.log.Timber
 
@@ -50,6 +51,7 @@ object KakaoLink {
         )
         LinkClient.instance.defaultTemplate(context, defaultFeed) { linkResult, error ->
             if (error != null) {
+                context.showToast("실행할 앱을 찾을 수 없습니다.")
                 Timber.e(error)
             } else if (linkResult != null) {
                 context.startActivity(linkResult.intent)

@@ -1,6 +1,7 @@
 <resources>
     <string name="action_share">공유하기</string>
     <string name="action_share_poster">포스터 공유하기</string>
+    <string name="action_share_poster_failed">포스터 공유가 실패했어요.</string>
     <string name="action_toast_opendate_alarm">⏰ 영화가 개봉할 때, 알려드릴게요.</string>
 
     <string name="time_minute">%d분</string>

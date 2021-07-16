@@ -28,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
-import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.navigation.navArgs
@@ -173,7 +172,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         }
         binding.share.apply {
             fun onShareClick(target: ShareTarget) {
-                viewModel.requestShareImage(target, movieCard.drawToBitmap())
+                viewModel.requestShareText(target)
             }
             root.setOnDebounceClickListener {
                 binding.toggleShareButton()
@@ -188,7 +187,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
             }
             instagramShareButton.clipToOval(true)
             instagramShareButton.setOnDebounceClickListener {
-                onShareClick(ShareTarget.Instagram)
+                viewModel.requestShareImage(ShareTarget.Instagram, imageUrl = args.movie.posterUrl)
             }
             lineShareButton.clipToOval(true)
             lineShareButton.setOnDebounceClickListener {
@@ -320,41 +319,52 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
     }
 
     private fun executeShareAction(action: ShareAction) {
-        val movie = args.movie
-        when (action.target) {
-            ShareTarget.KakaoLink -> {
-                KakaoLink.share(this, movie)
-            }
-            ShareTarget.Instagram -> {
-                ShareCompat.IntentBuilder(this)
-                    .setChooserTitle(R.string.action_share_poster)
-                    .setStream(action.imageUri)
-                    .setType(action.mimeType)
-                    .apply {
-                        intent.setPackage("com.instagram.android")
+        when (action) {
+            is ShareAction.Text -> {
+                val movie = args.movie
+                when (action.target) {
+                    ShareTarget.KakaoLink -> {
+                        KakaoLink.share(this, movie)
                     }
-                    .startChooser()
+                    ShareTarget.Instagram -> {
+                        throw IllegalStateException("Instagram does not support to share text.")
+                    }
+                    ShareTarget.Facebook,
+                    ShareTarget.Twitter,
+                    ShareTarget.LINE,
+                    ShareTarget.Others -> {
+                        FirebaseLink.createDetailLink(movie) { link ->
+                            ShareCompat.IntentBuilder(this)
+                                .setChooserTitle(R.string.action_share)
+                                .setText("[뭅] ${movie.title}\n$link")
+                                .setType("text/plain")
+                                .apply {
+                                    when (action.target) {
+                                        ShareTarget.Facebook -> "com.facebook.katana"
+                                        ShareTarget.Twitter -> "com.twitter.android"
+                                        ShareTarget.LINE -> "jp.naver.line.android"
+                                        else -> null
+                                    }?.let {
+                                        intent.setPackage(it)
+                                    }
+                                }
+                                .startChooser()
+                        }
+                    }
+                }
             }
-            ShareTarget.Facebook,
-            ShareTarget.Twitter,
-            ShareTarget.LINE,
-            ShareTarget.Others -> {
-                FirebaseLink.createDetailLink(movie) { link ->
+            is ShareAction.Image -> {
+                if (action.target == ShareTarget.Instagram) {
                     ShareCompat.IntentBuilder(this)
-                        .setChooserTitle(R.string.action_share)
-                        .setText("[뭅] ${movie.title}\n$link")
-                        .setType("text/plain")
+                        .setChooserTitle(R.string.action_share_poster)
+                        .setStream(action.imageUri)
+                        .setType(action.mimeType)
                         .apply {
-                            when (action.target) {
-                                ShareTarget.Facebook -> "com.facebook.katana"
-                                ShareTarget.Twitter -> "com.twitter.android"
-                                ShareTarget.LINE -> "jp.naver.line.android"
-                                else -> null
-                            }?.let {
-                                intent.setPackage(it)
-                            }
+                            intent.setPackage("com.instagram.android")
                         }
                         .startChooser()
+                } else {
+                    throw IllegalStateException("This ShareTarget(${action.target}) does not support to share image.")
                 }
             }
         }

@@ -124,10 +124,9 @@ object Libs {
             "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     }
 
-    object Glide {
-        private const val version = "4.12.0"
-        const val runtime = "com.github.bumptech.glide:glide:$version"
-        const val compiler = "com.github.bumptech.glide:compiler:$version"
+    object Coil {
+        private const val version = "1.3.0"
+        const val runtime = "io.coil-kt:coil:1.3.0"
     }
 
     object Firebase {
