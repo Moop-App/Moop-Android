@@ -22,11 +22,18 @@ import androidx.annotation.StringRes
 sealed class UiEvent
 
 @Keep
-class ShareAction(
-    val target: ShareTarget,
-    val imageUri: Uri,
-    val mimeType: String
-) : UiEvent()
+sealed class ShareAction : UiEvent() {
+
+    class Text(
+        val target: ShareTarget
+    ) : ShareAction()
+
+    class Image(
+        val target: ShareTarget,
+        val imageUri: Uri,
+        val mimeType: String
+    ) : ShareAction()
+}
 
 enum class ShareTarget {
     Facebook,

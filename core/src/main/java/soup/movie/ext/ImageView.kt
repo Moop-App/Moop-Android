@@ -37,7 +37,6 @@ fun ImageView.loadAsync(url: String?, @DrawableRes placeholder: Int? = null) {
                 placeholder(placeholder)
             }
             crossfade(true)
-            allowHardware(false)
         }
     }
 }
