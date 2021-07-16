@@ -38,8 +38,7 @@ dependencies {
     kapt Libs.Dagger.hiltCompiler
     kapt Libs.AndroidX.Hilt.compiler
 
-    implementation Libs.Glide.runtime
-    kapt Libs.Glide.compiler
+    implementation Libs.Coil.runtime
 
     implementation platform(Libs.Firebase.bom)
     implementation Libs.Firebase.dynamicLinks

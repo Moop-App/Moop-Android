@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2015 Google Inc.
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -12,11 +11,9 @@
   limitations under the License.
   -->
 
-<paths xmlns:tools="http://schemas.android.com/tools">
-    <!-- Based on default Glide operation, see InternalCacheDiskCacheFactory instantiated
-                     from GlideBuilder.createGlide() -->
+<paths>
+    <!-- Based on default Coil operation, see Cache instantiated from CoilUtils.createDefaultCache() -->
     <cache-path
         name="share"
-        path="image_manager_disk_cache"
-        tools:path="DiskCache.Factory.DEFAULT_DISK_CACHE_DIR" />
+        path="image_cache" />
 </paths>

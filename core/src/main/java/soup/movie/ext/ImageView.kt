@@ -16,81 +16,38 @@
 package soup.movie.ext
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.BitmapDrawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
-import com.bumptech.glide.Priority
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import soup.movie.glide.GlideApp
-import soup.movie.glide.GlideRequest
-import java.io.File
+import coil.imageLoader
+import coil.load
+import coil.request.ImageRequest
 
 /** ImageView */
 
 fun ImageView.loadAsync(url: String?, @DrawableRes placeholder: Int? = null) {
     if (url == null) {
-        GlideApp.with(context)
-            .load(placeholder)
-            .into(this)
+        placeholder?.let { load(it) }
     } else {
-        loadAsync(
-            url,
-            block = {
-                if (placeholder != null) {
-                    placeholder(placeholder)
-                }
-                transition(withCrossFade())
+        load(url) {
+            if (placeholder != null) {
+                placeholder(placeholder)
             }
-        )
+            crossfade(true)
+            allowHardware(false)
+        }
     }
 }
 
 fun ImageView.loadAsync(url: String?, doOnEnd: () -> Unit) {
-    loadAsync(
-        url,
-        block = {
-            listener(createEndListener(doOnEnd))
-        }
-    )
-}
-
-private inline fun ImageView.loadAsync(url: String?, block: GlideRequest<Drawable>.() -> Unit) {
-    GlideApp.with(context)
-        .load(url)
-        .apply(block)
-        .priority(Priority.IMMEDIATE)
-        .into(this)
-}
-
-private inline fun createEndListener(crossinline action: () -> Unit): RequestListener<Drawable> {
-    return object : RequestListener<Drawable> {
-
-        override fun onResourceReady(
-            resource: Drawable?,
-            model: Any?,
-            target: Target<Drawable>?,
-            dataSource: DataSource?,
-            isFirstResource: Boolean
-        ): Boolean {
-            action()
-            return false
-        }
-
-        override fun onLoadFailed(
-            e: GlideException?,
-            model: Any?,
-            target: Target<Drawable>?,
-            isFirstResource: Boolean
-        ): Boolean {
-            action()
-            return false
-        }
+    load(url) {
+        listener(
+            onSuccess = { _, _ -> doOnEnd() },
+            onError = { _, _ -> doOnEnd() }
+        )
     }
 }
 
@@ -102,10 +59,10 @@ fun ImageView.setGrayscale(enable: Boolean) {
     }
 }
 
-fun Context.loadAsync(url: String): File {
-    return GlideApp.with(this)
-        .asFile()
-        .load(url)
-        .submit()
-        .get()
+suspend fun Context.loadAsync(url: String): Bitmap? {
+    val request = ImageRequest.Builder(this)
+        .data(url)
+        .build()
+    val result = imageLoader.execute(request).drawable
+    return (result as? BitmapDrawable)?.bitmap
 }

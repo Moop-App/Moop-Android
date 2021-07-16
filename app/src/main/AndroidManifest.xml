@@ -84,7 +84,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/glide_disk_cache_path" />
+                android:resource="@xml/coil_disk_cache_path" />
         </provider>
 
         <provider
@@ -94,6 +94,9 @@
             tools:node="merge">
             <meta-data
                 android:name="soup.movie.init.TimberInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="soup.movie.init.CoilInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="soup.movie.init.WorkManagerInitializer"

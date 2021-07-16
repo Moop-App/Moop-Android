@@ -30,20 +30,19 @@ import java.io.File
 /**
  * A class responsible for resolving an image as identified by Url into a sharable [Uri].
  */
-class ImageUriProviderImpl(context: Context) :
-    ImageUriProvider {
+class ImageUriProviderImpl(context: Context) : ImageUriProvider {
 
     // Only hold the app context to avoid leaks
     private val appContext = context.applicationContext
 
-    override suspend operator fun invoke(url: String): Uri {
-        // Retrieve the image from Glide (hopefully cached) as a File
-        val file = appContext.loadAsync(url)
-
-        // Glide cache uses an unfriendly & extension-less name. Massage it based on the original.
-        val fileName = url.substring(url.lastIndexOf('/') + 1)
-        return File(file.parent, fileName)
-            .apply { file.renameTo(this) }
+    override suspend operator fun invoke(url: String): Uri? {
+        val bitmap = appContext.loadAsync(url) ?: return null
+        return bitmap
+            .toCacheFile(
+                appContext,
+                folderName = CACHE_DIRECTORY_NAME,
+                fileName = url.substring(url.lastIndexOf('/') + 1)
+            )
             .toImageUri()
     }
 
@@ -52,11 +51,13 @@ class ImageUriProviderImpl(context: Context) :
     }
 
     override suspend operator fun invoke(bitmap: Bitmap): Uri {
-        return bitmap.toCacheFile(
-            appContext,
-            folderName = "image_manager_disk_cache",
-            fileName = "share.jpg"
-        ).toImageUri()
+        return bitmap
+            .toCacheFile(
+                appContext,
+                folderName = CACHE_DIRECTORY_NAME,
+                fileName = "share.jpg"
+            )
+            .toImageUri()
     }
 
     @WorkerThread
@@ -64,5 +65,13 @@ class ImageUriProviderImpl(context: Context) :
         return withContext(Dispatchers.IO) {
             FileProvider.getUriForFile(appContext, BuildConfig.FILES_AUTHORITY, this@toImageUri)
         }
+    }
+
+    companion object {
+
+        /**
+         * Same as [coil.util.Utils.CACHE_DIRECTORY_NAME].
+         */
+        private const val CACHE_DIRECTORY_NAME = "image_cache"
     }
 }
