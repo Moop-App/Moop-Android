@@ -91,6 +91,10 @@ class LegacyWorker @AssistedInject constructor(
                 .enqueueUniqueWork(TAG, ExistingWorkPolicy.REPLACE, createRequest())
         }
 
+        fun cancelWork(context: Context) {
+            WorkManager.getInstance(context).cancelUniqueWork(TAG)
+        }
+
         private fun createRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<LegacyWorker>()
                 .setInitialDelay(calculateInitialDelayMinutes(), TimeUnit.MINUTES)
