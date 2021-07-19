@@ -36,6 +36,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
 import soup.movie.R
+import soup.movie.config.Config
+import soup.movie.config.RemoteConfig
 import soup.movie.core.MainDirections
 import soup.movie.databinding.MainActivityBinding
 import soup.movie.ext.consume
@@ -121,7 +123,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        LegacyWorker.enqueueWork(this)
+        val config: Config = RemoteConfig()
+        config.fetchAndActivate {
+            if (config.allowToRunLegacyWorker) {
+                LegacyWorker.enqueueWork(this)
+            } else {
+                LegacyWorker.cancelWork(this)
+            }
+        }
         OpenDateAlarmWorker.enqueuePeriodicWork(this)
         OpenDateSyncWorker.enqueuePeriodicWork(this)
     }

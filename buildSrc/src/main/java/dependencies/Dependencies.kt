@@ -130,8 +130,9 @@ object Libs {
     }
 
     object Firebase {
-        const val bom = "com.google.firebase:firebase-bom:28.2.0"
+        const val bom = "com.google.firebase:firebase-bom:28.2.1"
         const val analytics = "com.google.firebase:firebase-analytics-ktx"
+        const val config = "com.google.firebase:firebase-config-ktx"
         const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
         const val crashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:2.7.1"
         const val messaging = "com.google.firebase:firebase-messaging-ktx"
