@@ -146,6 +146,7 @@ dependencies {
 
     implementation platform(Libs.Firebase.bom)
     implementation Libs.Firebase.analytics
+    implementation Libs.Firebase.config
     implementation Libs.Firebase.crashlytics
     implementation Libs.Firebase.messaging
     implementation Libs.Firebase.dynamicLinks
