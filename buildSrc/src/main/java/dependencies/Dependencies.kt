@@ -11,7 +11,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.2"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
 
     // UI
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
@@ -23,7 +23,7 @@ object Libs {
     const val threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.1"
 
     object Kotlin {
-        private const val version = "1.5.10"
+        private const val version = "1.5.21"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
@@ -37,7 +37,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.35"
+        private const val version = "2.38.1"
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val hiltTesting = "com.google.dagger:hilt-android-testing:$version"
