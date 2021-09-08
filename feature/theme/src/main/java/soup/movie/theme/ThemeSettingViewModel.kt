@@ -26,16 +26,14 @@ class ThemeSettingViewModel @Inject constructor(
     private val themeOptionManager: ThemeOptionManager
 ) : ViewModel() {
 
-    private val _uiModel = MutableLiveData<ThemeSettingUiModel>()
-    val uiModel: LiveData<ThemeSettingUiModel>
-        get() = _uiModel
+    private val _items = MutableLiveData<List<ThemeSettingItemUiModel>>()
+    val items: LiveData<List<ThemeSettingItemUiModel>>
+        get() = _items
 
     init {
-        _uiModel.value = ThemeSettingUiModel(
-            themeOptionManager
-                .getOptions()
-                .map { ThemeSettingItemUiModel(it) }
-        )
+        _items.value = themeOptionManager
+            .getOptions()
+            .map { ThemeSettingItemUiModel(it) }
     }
 
     fun onItemClick(item: ThemeSettingItemUiModel) {
