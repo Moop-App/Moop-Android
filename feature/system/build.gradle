@@ -24,6 +24,6 @@ dependencies {
     implementation Libs.timber
 
     testImplementation Libs.Test.junit
-    androidTestImplementation Libs.Test.runner
-    androidTestImplementation Libs.Test.espresso
+    androidTestImplementation Libs.AndroidX.Test.runner
+    androidTestImplementation Libs.AndroidX.Test.espresso
 }
