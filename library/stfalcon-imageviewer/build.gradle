@@ -17,5 +17,5 @@ dependencies {
     implementation Libs.Kotlin.stdlib
     implementation Libs.AndroidX.appcompat
     implementation Libs.AndroidX.transition
-    implementation 'com.github.chrisbanes:PhotoView:2.2.0'
+    implementation Libs.photoview
 }

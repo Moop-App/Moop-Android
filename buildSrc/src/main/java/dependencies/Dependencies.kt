@@ -15,15 +15,20 @@ object Libs {
 
     // UI
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
+    const val photoview = "com.github.chrisbanes:PhotoView:2.3.0"
     const val lottie = "com.airbnb.android:lottie:3.7.1"
     const val recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.2"
+    const val kakaoLink = "com.kakao.sdk:v2-link:2.7.0"
+    const val naverMap = "com.naver.maps:map-sdk:3.12.0"
+    const val ticker = "com.robinhood.ticker:ticker:2.0.2"
+    const val playServicesLocation = "com.google.android.gms:play-services-location:17.1.0"
 
     // Utils
-    const val timber = "com.jakewharton.timber:timber:4.7.1"
+    const val timber = "com.jakewharton.timber:timber:5.0.1"
     const val threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.1"
 
     object Kotlin {
-        private const val version = "1.5.21"
+        private const val version = "1.5.30"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
@@ -34,6 +39,7 @@ object Libs {
         private const val version = "1.5.1"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
 
     object Dagger {
@@ -52,18 +58,18 @@ object Libs {
 
     object AndroidX {
 
-        const val activity = "androidx.activity:activity-ktx:1.2.3"
+        const val activity = "androidx.activity:activity-ktx:1.3.1"
         const val annotation = "androidx.annotation:annotation:1.2.0"
-        const val appcompat = "androidx.appcompat:appcompat:1.3.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.3.1"
         const val browser = "androidx.browser:browser:1.3.0"
-        const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+        const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.0"
         const val core = "androidx.core:core-ktx:1.6.0"
         const val drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
-        const val fragment = "androidx.fragment:fragment-ktx:1.3.4"
+        const val fragment = "androidx.fragment:fragment-ktx:1.3.6"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
-        const val startup = "androidx.startup:startup-runtime:1.0.0"
+        const val startup = "androidx.startup:startup-runtime:1.1.0"
         const val transition = "androidx.transition:transition:1.4.1"
-        const val viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-alpha01"
+        const val viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-beta01"
 
         object Hilt {
             private const val version = "1.0.0"
@@ -99,22 +105,28 @@ object Libs {
         }
 
         object WorkManager {
-            private const val version = "2.6.0-beta01"
+            private const val version = "2.6.0"
             const val runtime = "androidx.work:work-runtime-ktx:$version"
             const val gcm = "androidx.work:work-gcm:$version"
             const val testing = "androidx.work:work-testing:$version"
         }
 
         object DataStore {
-            private const val version = "1.0.0-rc01"
+            private const val version = "1.0.0"
             const val preferences = "androidx.datastore:datastore-preferences:$version"
+        }
+
+        object Test {
+            const val core = "androidx.test:core-ktx:1.4.0"
+            const val junit = "androidx.test.ext:junit-ktx:1.1.3"
+            const val truth = "androidx.test.ext:truth:1.4.0"
+            const val runner = "androidx.test:runner:1.4.0"
+            const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
         }
     }
 
     object Test {
         const val junit = "junit:junit:4.13"
-        const val runner = "androidx.test:runner:1.1.0"
-        const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
     }
 
     object Retrofit {
@@ -125,12 +137,12 @@ object Libs {
     }
 
     object Coil {
-        private const val version = "1.3.0"
-        const val runtime = "io.coil-kt:coil:1.3.0"
+        private const val version = "1.3.2"
+        const val runtime = "io.coil-kt:coil:$version"
     }
 
     object Firebase {
-        const val bom = "com.google.firebase:firebase-bom:28.2.1"
+        const val bom = "com.google.firebase:firebase-bom:28.4.0"
         const val analytics = "com.google.firebase:firebase-analytics-ktx"
         const val config = "com.google.firebase:firebase-config-ktx"
         const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
@@ -139,6 +151,6 @@ object Libs {
         const val dynamicLinks = "com.google.firebase:firebase-dynamic-links-ktx"
         const val perf = "com.google.firebase:firebase-perf-ktx"
         const val perfPlugin = "com.google.firebase:perf-plugin:1.4.0"
-        const val ads = "com.google.android.gms:play-services-ads:20.2.0"
+        const val ads = "com.google.android.gms:play-services-ads:20.3.0"
     }
 }

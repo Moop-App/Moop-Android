@@ -36,6 +36,6 @@ dependencies {
     implementation 'com.robinhood.ticker:ticker:2.0.0'
 
     testImplementation Libs.Test.junit
-    androidTestImplementation Libs.Test.runner
-    androidTestImplementation Libs.Test.espresso
+    androidTestImplementation Libs.AndroidX.Test.runner
+    androidTestImplementation Libs.AndroidX.Test.espresso
 }
