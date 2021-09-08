@@ -11,7 +11,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.2"
 
     // UI
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
