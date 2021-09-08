@@ -26,7 +26,7 @@ dependencies {
     implementation Libs.AndroidX.recyclerview
     implementation Libs.AndroidX.startup
 
-    implementation Libs.Google.material
+    api Libs.Material.view
 
     implementation Libs.AndroidX.Lifecycle.runtime
     implementation Libs.AndroidX.Lifecycle.compiler

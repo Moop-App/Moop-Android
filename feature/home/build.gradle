@@ -20,8 +20,6 @@ dependencies {
     implementation Libs.AndroidX.constraintlayout
     implementation Libs.AndroidX.recyclerview
 
-    implementation Libs.Google.material
-
     implementation Libs.insetter
 
     implementation Libs.AndroidX.Lifecycle.livedata

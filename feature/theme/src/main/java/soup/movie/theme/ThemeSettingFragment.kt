@@ -16,48 +16,115 @@
 package soup.movie.theme
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.core.view.WindowInsetsCompat.Type.systemBars
-import androidx.core.view.updatePadding
+import android.view.ViewGroup
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.insets.systemBarsPadding
+import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.Insetter
-import soup.movie.theme.databinding.ThemeOptionFragmentBinding
 
 @AndroidEntryPoint
-class ThemeSettingFragment : Fragment(R.layout.theme_option_fragment) {
+class ThemeSettingFragment : Fragment() {
 
     private val viewModel: ThemeSettingViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        with(ThemeOptionFragmentBinding.bind(view)) {
-            initViewState(viewModel)
-            adaptSystemWindowInset()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                MdcTheme {
+                    ThemeOptionScreen()
+                }
+            }
         }
     }
 
-    private fun ThemeOptionFragmentBinding.initViewState(viewModel: ThemeSettingViewModel) {
-        val listAdapter = ThemeSettingListAdapter {
-            viewModel.onItemClick(it)
-        }
-        listView.adapter = listAdapter
-        viewModel.uiModel.observe(viewLifecycleOwner) {
-            listAdapter.submitList(it.items)
+    @Composable
+    private fun ThemeOptionScreen() {
+        ProvideWindowInsets {
+            val items = viewModel.items.observeAsState(emptyList())
+            Scaffold(
+                modifier = Modifier.systemBarsPadding(),
+                topBar = {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                stringResource(R.string.theme_option_title),
+                                color = MaterialTheme.colors.onBackground,
+                            )
+                        }
+                    )
+                }
+            ) { paddingValues ->
+                ThemeOptionList(
+                    items = items.value,
+                    onItemClick = viewModel::onItemClick,
+                    modifier = Modifier.padding(paddingValues)
+                )
+            }
         }
     }
 
-    private fun ThemeOptionFragmentBinding.adaptSystemWindowInset() {
-        Insetter.builder()
-            .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)
+    @Composable
+    private fun ThemeOptionList(
+        items: List<ThemeSettingItemUiModel>,
+        onItemClick: (ThemeSettingItemUiModel) -> Unit,
+        modifier: Modifier = Modifier,
+    ) {
+        Column(
+            modifier = modifier
+                .padding(8.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            items.forEach {
+                ThemeOptionItem(it, onItemClick)
             }
-            .applyToView(themeOptionScene)
-        Insetter.builder()
-            .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updatePadding(bottom = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom)
-            }
-            .applyToView(listView)
+        }
+    }
+
+    @Composable
+    private fun ThemeOptionItem(
+        item: ThemeSettingItemUiModel,
+        onItemClick: (ThemeSettingItemUiModel) -> Unit,
+        modifier: Modifier = Modifier,
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier
+                .fillMaxWidth()
+                .height(60.dp)
+                .debounceClickable { onItemClick(item) }
+                .padding(horizontal = 24.dp)
+        ) {
+            Text(
+                text = stringResource(stringResIdOf(item.themeOption)),
+                fontSize = 17.sp,
+                color = MaterialTheme.colors.onBackground,
+            )
+        }
     }
 }
