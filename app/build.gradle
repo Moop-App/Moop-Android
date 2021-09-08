@@ -120,7 +120,6 @@ dependencies {
     implementation Libs.AndroidX.transition
     implementation Libs.AndroidX.viewpager2
 
-    implementation Libs.Google.material
     implementation Libs.Google.play
 
     implementation Libs.insetter
@@ -154,7 +153,7 @@ dependencies {
     implementation Libs.Firebase.ads
 
     implementation Libs.timber
-    implementation Libs.lottie
+    implementation Libs.Lottie.view
 
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.AndroidX.Test.runner

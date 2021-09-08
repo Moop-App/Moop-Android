@@ -16,7 +16,6 @@ object Libs {
     // UI
     const val insetter = "dev.chrisbanes.insetter:insetter:0.6.0"
     const val photoview = "com.github.chrisbanes:PhotoView:2.3.0"
-    const val lottie = "com.airbnb.android:lottie:3.7.1"
     const val recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.2"
     const val kakaoLink = "com.kakao.sdk:v2-link:2.7.0"
     const val naverMap = "com.naver.maps:map-sdk:3.12.0"
@@ -28,7 +27,7 @@ object Libs {
     const val threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.1"
 
     object Kotlin {
-        private const val version = "1.5.30"
+        private const val version = "1.5.21"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
@@ -52,12 +51,10 @@ object Libs {
 
     object Google {
         const val gmsPlugin = "com.google.gms:google-services:4.3.8"
-        const val material = "com.google.android.material:material:1.4.0"
         const val play = "com.google.android.play:core:1.10.0"
     }
 
     object AndroidX {
-
         const val activity = "androidx.activity:activity-ktx:1.3.1"
         const val annotation = "androidx.annotation:annotation:1.2.0"
         const val appcompat = "androidx.appcompat:appcompat:1.3.1"
@@ -125,6 +122,47 @@ object Libs {
         }
     }
 
+    object Material {
+        const val view = "com.google.android.material:material:1.4.0"
+        const val composeThemeAdapter = "com.google.android.material:compose-theme-adapter:1.0.2"
+    }
+
+    object Compose {
+        const val version = "1.0.2"
+        const val activity = "androidx.activity:activity-compose:1.3.1"
+        const val constraintlayout =
+            "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07"
+        const val navigation = "androidx.navigation:navigation-compose:2.4.0-alpha06"
+        const val runtime = "androidx.compose.runtime:runtime:$version"
+        const val runtime_livedata = "androidx.compose.runtime:runtime-livedata:$version"
+        const val foundation = "androidx.compose.foundation:foundation:$version"
+        const val foundation_layout = "androidx.compose.foundation:foundation-layout:$version"
+        const val ui = "androidx.compose.ui:ui:$version"
+        const val ui_test_junit4 = "androidx.compose.ui:ui-test-junit4:$version"
+        const val ui_test_manifest = "androidx.compose.ui:ui-test-manifest:$version"
+        const val ui_tooling = "androidx.compose.ui:ui-tooling:$version"
+        const val ui_util = "androidx.compose.ui:ui-util:$version"
+        const val material = "androidx.compose.material:material:$version"
+        const val material_icons_extended =
+            "androidx.compose.material:material-icons-extended:$version"
+        const val animation = "androidx.compose.animation:animation:$version"
+    }
+
+    object Accompanist {
+        private const val version = "0.18.0"
+        const val drawablepainter = "com.google.accompanist:accompanist-drawablepainter:$version"
+        const val flowlayout = "com.google.accompanist:accompanist-flowlayout:$version"
+        const val insets = "com.google.accompanist:accompanist-insets:$version"
+        const val insets_ui = "com.google.accompanist:accompanist-insets-ui:$version"
+        const val pager = "com.google.accompanist:accompanist-pager:$version"
+        const val pager_indicators = "com.google.accompanist:accompanist-pager-indicators:$version"
+        const val permissions = "com.google.accompanist:accompanist-permissions:$version"
+        const val placeholder = "com.google.accompanist:accompanist-placeholder-material:$version"
+        const val swiperefresh = "com.google.accompanist:accompanist-swiperefresh:$version"
+        const val systemuicontroller =
+            "com.google.accompanist:accompanist-systemuicontroller:$version"
+    }
+
     object Test {
         const val junit = "junit:junit:4.13"
     }
@@ -139,6 +177,13 @@ object Libs {
     object Coil {
         private const val version = "1.3.2"
         const val runtime = "io.coil-kt:coil:$version"
+        const val compose = "io.coil-kt:coil-compose:$version"
+    }
+
+    object Lottie {
+        private const val version = "4.0.0"
+        const val view = "com.airbnb.android:lottie:$version"
+        const val compose = "com.airbnb.android:lottie-compose:$version"
     }
 
     object Firebase {
