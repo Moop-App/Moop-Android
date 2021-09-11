@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.theatermap
+package soup.movie.theatermap.internal
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -26,27 +27,45 @@ import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
 import timber.log.Timber
 
-class TheaterMapViewModel(
+internal class TheaterMapViewModel(
     private val repository: MoopRepository
 ) : ViewModel() {
 
-    private val _uiModel = MutableLiveData<TheaterMapUiModel>()
-    val uiModel: LiveData<TheaterMapUiModel>
-        get() = _uiModel
+    var uiModel by mutableStateOf<List<TheaterMarkerUiModel>>(emptyList())
+        private set
+
+    var selectedTheater by mutableStateOf<TheaterMarkerUiModel?>(null)
+        private set
 
     init {
         viewModelScope.launch {
-            _uiModel.value = loadUiModel()
+            uiModel = loadUiModel()
         }
     }
 
-    private suspend fun loadUiModel(): TheaterMapUiModel {
+    fun onRefresh() {
+        viewModelScope.launch {
+            if (uiModel.isEmpty()) {
+                uiModel = loadUiModel()
+            }
+        }
+    }
+
+    fun onTheaterSelected(theater: TheaterMarkerUiModel) {
+        selectedTheater = theater
+    }
+
+    fun onTheaterUnselected() {
+        selectedTheater = null
+    }
+
+    private suspend fun loadUiModel(): List<TheaterMarkerUiModel> {
         return withContext(Dispatchers.IO) {
             try {
-                TheaterMapUiModel(repository.getCodeList().toTheaterList())
+                repository.getCodeList().toTheaterList()
             } catch (t: Throwable) {
                 Timber.w(t)
-                TheaterMapUiModel(emptyList())
+                emptyList()
             }
         }
     }
@@ -82,12 +101,6 @@ class TheaterMapViewModel(
                     lng = it.lng
                 )
             }
-        }
-    }
-
-    fun onRefresh() {
-        viewModelScope.launch {
-            _uiModel.value = loadUiModel()
         }
     }
 }
