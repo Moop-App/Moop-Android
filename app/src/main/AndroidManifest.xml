@@ -16,6 +16,9 @@
             <action android:name="android.intent.action.SENDTO" />
             <data android:scheme="mailto" />
         </intent>
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="com.nhn.android.nmap" />
+        <package android:name="net.daum.android.map" />
     </queries>
 
     <application

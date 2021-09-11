@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.theatermap
+package soup.movie.theatermap.internal
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,13 +29,16 @@ import soup.movie.model.TheaterAreaGroup
 import soup.movie.model.repository.MoopRepository
 import timber.log.Timber
 
-class TheaterMapViewModel(
+internal class TheaterMapViewModel(
     private val repository: MoopRepository
 ) : ViewModel() {
 
-    private val _uiModel = MutableLiveData<TheaterMapUiModel>()
-    val uiModel: LiveData<TheaterMapUiModel>
+    private val _uiModel = MutableLiveData<List<TheaterMarkerUiModel>>()
+    val uiModel: LiveData<List<TheaterMarkerUiModel>>
         get() = _uiModel
+
+    var selectedTheater by mutableStateOf<TheaterMarkerUiModel?>(null)
+        private set
 
     init {
         viewModelScope.launch {
@@ -40,13 +46,27 @@ class TheaterMapViewModel(
         }
     }
 
-    private suspend fun loadUiModel(): TheaterMapUiModel {
+    fun onRefresh() {
+        viewModelScope.launch {
+            _uiModel.value = loadUiModel()
+        }
+    }
+
+    fun onTheaterSelected(theater: TheaterMarkerUiModel) {
+        selectedTheater = theater
+    }
+
+    fun onTheaterUnselected() {
+        selectedTheater = null
+    }
+
+    private suspend fun loadUiModel(): List<TheaterMarkerUiModel> {
         return withContext(Dispatchers.IO) {
             try {
-                TheaterMapUiModel(repository.getCodeList().toTheaterList())
+                repository.getCodeList().toTheaterList()
             } catch (t: Throwable) {
                 Timber.w(t)
-                TheaterMapUiModel(emptyList())
+                emptyList()
             }
         }
     }
@@ -82,12 +102,6 @@ class TheaterMapViewModel(
                     lng = it.lng
                 )
             }
-        }
-    }
-
-    fun onRefresh() {
-        viewModelScope.launch {
-            _uiModel.value = loadUiModel()
         }
     }
 }

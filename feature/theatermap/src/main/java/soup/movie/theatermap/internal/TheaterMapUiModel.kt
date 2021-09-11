@@ -13,13 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.theatermap
+package soup.movie.theatermap.internal
 
-class TheaterMapUiModel(
-    val theaterMarkerList: List<TheaterMarkerUiModel>
-)
-
-sealed class TheaterMarkerUiModel {
+internal sealed class TheaterMarkerUiModel {
     abstract val areaCode: String
     abstract val code: String
     abstract val name: String
@@ -27,7 +23,7 @@ sealed class TheaterMarkerUiModel {
     abstract val lat: Double
 }
 
-class CgvMarkerUiModel(
+internal class CgvMarkerUiModel(
     override val areaCode: String,
     override val code: String,
     override val name: String,
@@ -35,7 +31,7 @@ class CgvMarkerUiModel(
     override val lat: Double
 ) : TheaterMarkerUiModel()
 
-class LotteCinemaMarkerUiModel(
+internal class LotteCinemaMarkerUiModel(
     override val areaCode: String,
     override val code: String,
     override val name: String,
@@ -43,7 +39,7 @@ class LotteCinemaMarkerUiModel(
     override val lat: Double
 ) : TheaterMarkerUiModel()
 
-class MegaboxMarkerUiModel(
+internal class MegaboxMarkerUiModel(
     override val areaCode: String,
     override val code: String,
     override val name: String,

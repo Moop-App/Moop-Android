@@ -15,30 +15,14 @@
  */
 package soup.movie.theme
 
-import androidx.compose.foundation.clickable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
-
 private const val INTERVAL: Long = 300
 
 private var lastTime: Long = 0
 
-fun Modifier.debounceClickable(
-    enabled: Boolean = true,
-    onClickLabel: String? = null,
-    role: Role? = null,
-    onClick: () -> Unit
-): Modifier {
-    return clickable(
-        enabled = enabled,
-        onClickLabel = onClickLabel,
-        role = role,
-        onClick = {
-            val now = System.currentTimeMillis()
-            if (now >= lastTime + INTERVAL) {
-                lastTime = now
-                onClick()
-            }
-        },
-    )
+fun debounce(action: () -> Unit) {
+    val now = System.currentTimeMillis()
+    if (now >= lastTime + INTERVAL) {
+        lastTime = now
+        action()
+    }
 }

@@ -16,77 +16,39 @@
 package soup.movie.theatermap
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.DrawableRes
-import androidx.core.view.WindowInsetsCompat.Type.systemBars
-import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
+import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraAnimation
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.OverlayImage
+import com.google.android.material.composethemeadapter.MdcTheme
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
-import dev.chrisbanes.insetter.Insetter
-import soup.movie.BuildConfig
 import soup.movie.di.TheaterMapModuleDependencies
-import soup.movie.ext.animateGone
-import soup.movie.ext.isDarkTheme
 import soup.movie.ext.lazyFast
-import soup.movie.model.Theater
-import soup.movie.model.Theater.Companion.TYPE_CGV
-import soup.movie.model.Theater.Companion.TYPE_LOTTE
-import soup.movie.model.Theater.Companion.TYPE_MEGABOX
 import soup.movie.model.repository.MoopRepository
 import soup.movie.system.SystemViewModel
-import soup.movie.theatermap.databinding.TheaterMapFragmentBinding
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
-import soup.movie.ui.base.OnBackPressedListener
-import soup.movie.util.Cgv
-import soup.movie.util.LauncherIcons
-import soup.movie.util.LotteCinema
-import soup.movie.util.Megabox
-import soup.movie.util.autoCleared
-import soup.movie.util.setOnDebounceClickListener
+import soup.movie.theatermap.internal.TheaterMapScreen
+import soup.movie.theatermap.internal.TheaterMapViewModel
 import soup.movie.util.viewModelProviderFactoryOf
 import javax.inject.Inject
-import kotlin.math.max
-import kotlin.math.min
 
-class TheaterMapFragment : BaseMapFragment(R.layout.theater_map_fragment), OnBackPressedListener {
+class TheaterMapFragment : Fragment() {
 
     @Inject
     lateinit var repository: MoopRepository
-
-    private var binding: TheaterMapFragmentBinding by autoCleared()
 
     private val systemViewModel: SystemViewModel by activityViewModels()
     private val viewModel: TheaterMapViewModel by viewModels {
         viewModelProviderFactoryOf { TheaterMapViewModel(repository) }
     }
 
-    private lateinit var locationSource: FusedLocationSource
-
-    private val markers = arrayListOf<Marker>()
-
-    private var selectedTheater: TheaterMarkerUiModel? = null
-
-    private var infoPanel: BottomSheetBehavior<out View>? = null
-
-    private val launcherIcons by lazyFast {
-        LauncherIcons(requireContext())
+    private val locationSource by lazyFast {
+        FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
 
     override fun onAttach(context: Context) {
@@ -103,217 +65,17 @@ class TheaterMapFragment : BaseMapFragment(R.layout.theater_map_fragment), OnBac
             .inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = TheaterMapFragmentBinding.bind(view).apply {
-            initViewState(viewModel)
-            adaptSystemWindowInset()
-        }
-    }
-
-    override fun onDestroyView() {
-        hideInfoPanel()
-        clearMarkers()
-        super.onDestroyView()
-    }
-
-    private fun TheaterMapFragmentBinding.initViewState(viewModel: TheaterMapViewModel) {
-        header.apply {
-            toolbar.setNavigationOnClickListener {
-                systemViewModel.openNavigationMenu()
-            }
-        }
-
-        locationSource =
-            FusedLocationSource(this@TheaterMapFragment, LOCATION_PERMISSION_REQUEST_CODE)
-        setMapView(contents.mapView)
-        getMapAsync { naverMap ->
-            if (isDarkTheme) {
-                naverMap.mapType = NaverMap.MapType.Navi
-                naverMap.isNightModeEnabled = true
-                mapCover.setBackgroundColor(NaverMap.DEFAULT_BACKGROUND_COLOR_DARK)
-            } else {
-                naverMap.mapType = NaverMap.MapType.Basic
-                naverMap.isNightModeEnabled = false
-                mapCover.setBackgroundColor(NaverMap.DEFAULT_BACKGROUND_COLOR_LIGHT)
-            }
-            naverMap.locationSource = locationSource
-            naverMap.locationTrackingMode = LocationTrackingMode.Follow
-            naverMap.moveCamera(CameraUpdate.zoomTo(12.0))
-            naverMap.setOnMapClickListener { _, _ ->
-                hideInfoPanel()
-            }
-            viewModel.uiModel.observe(viewLifecycleOwner) {
-                naverMap.render(it)
-                mapCover.animateGone(isGone = true, startDelay = 500)
-            }
-            viewModel.onRefresh()
-        }
-
-        footer.apply {
-            infoPanel = BottomSheetBehavior.from(root).apply {
-                state = STATE_HIDDEN
-            }
-            infoView.setOnDebounceClickListener {
-                hideInfoPanel()
-            }
-            googleMapButton.apply {
-                val packageName = "com.google.android.apps.maps"
-                val appIcon = launcherIcons.getAppIcon(context, packageName)
-                setImageDrawable(appIcon)
-                isVisible = appIcon != null
-                setOnDebounceClickListener {
-                    selectedTheater?.run {
-                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(name)}")
-                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                        mapIntent.setPackage(packageName)
-                        startActivity(mapIntent)
-                    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                MdcTheme {
+                    TheaterMapScreen(viewModel, systemViewModel, locationSource)
                 }
             }
-            naverMapButton.apply {
-                val packageName = "com.nhn.android.nmap"
-                val appIcon = launcherIcons.getAppIcon(context, packageName)
-                setImageDrawable(appIcon)
-                isVisible = appIcon != null
-                setOnDebounceClickListener {
-                    selectedTheater?.run {
-                        val gmmIntentUri =
-                            Uri.parse("nmap://place?lat=$lat&lng=$lng&name=${Uri.encode(name)}&appname=${BuildConfig.APPLICATION_ID}")
-                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                        mapIntent.setPackage(packageName)
-                        startActivity(mapIntent)
-                    }
-                }
-            }
-            kakaoMapButton.apply {
-                val packageName = "net.daum.android.map"
-                val appIcon = launcherIcons.getAppIcon(context, packageName)
-                setImageDrawable(appIcon)
-                isVisible = appIcon != null
-                setOnDebounceClickListener {
-                    selectedTheater?.run {
-                        val gmmIntentUri = Uri.parse("geo:$lat,$lng?q=${Uri.encode(name)}")
-                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                        mapIntent.setPackage(packageName)
-                        startActivity(mapIntent)
-                    }
-                }
-            }
-            infoButton.setOnDebounceClickListener {
-                selectedTheater?.executeWeb(it.context)
-            }
-        }
-    }
-
-    private fun TheaterMapFragmentBinding.adaptSystemWindowInset() {
-        Insetter.builder()
-            .setOnApplyInsetsListener { view, insets, initialState ->
-                val systemWindowInsets = insets.getInsets(systemBars())
-                view.updatePadding(
-                    top = initialState.paddings.top + systemWindowInsets.top,
-                    bottom = initialState.paddings.bottom + systemWindowInsets.bottom
-                )
-            }
-            .applyToView(theaterMapScene)
-        Insetter.builder()
-            .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updateLayoutParams {
-                    height = initialState.paddings.bottom + insets.getInsets(systemBars()).bottom
-                }
-            }
-            .applyToView(footer.windowInsetBottomView)
-    }
-
-    override fun onBackPressed(): Boolean {
-        return hideInfoPanel()
-    }
-
-    private fun showInfoPanel(theater: TheaterMarkerUiModel): Boolean {
-        if (infoPanel?.state == STATE_HIDDEN) {
-            infoPanel?.state = STATE_COLLAPSED
-        }
-        binding.footer.nameView.text = theater.name
-        selectedTheater = theater
-        return true
-    }
-
-    private fun hideInfoPanel(): Boolean {
-        if (infoPanel?.state != STATE_HIDDEN) {
-            infoPanel?.state = STATE_HIDDEN
-            selectedTheater = null
-
-            getMapAsync {
-                it.moveCamera(
-                    CameraUpdate
-                        .zoomTo(min(it.cameraPosition.zoom, 12.0))
-                        .animate(CameraAnimation.Easing)
-                )
-            }
-            return true
-        }
-        return false
-    }
-
-    private fun NaverMap.render(uiModel: TheaterMapUiModel) {
-        clearMarkers()
-        showMarkers(this, uiModel.theaterMarkerList)
-    }
-
-    private fun showMarkers(naverMap: NaverMap, theaters: List<TheaterMarkerUiModel>) {
-        theaters.map(::createMarker).forEach {
-            markers += it.apply {
-                map = naverMap
-            }
-        }
-    }
-
-    private fun clearMarkers() {
-        markers.forEach {
-            it.map = null
-        }
-        markers.clear()
-    }
-
-    private fun createMarker(theater: TheaterMarkerUiModel) = Marker().apply {
-        captionText = theater.name
-        position = LatLng(theater.lat, theater.lng)
-        icon = OverlayImage.fromResource(theater.getMarkerIcon())
-        isHideCollidedSymbols = true
-        isHideCollidedCaptions = true
-        setOnClickListener {
-            map?.run {
-                moveCamera(
-                    CameraUpdate
-                        .scrollAndZoomTo(
-                            position,
-                            max(cameraPosition.zoom, 16.0)
-                        )
-                        .animate(CameraAnimation.Fly)
-                )
-            }
-            showInfoPanel(theater)
-            true
-        }
-    }
-
-    @DrawableRes
-    private fun TheaterMarkerUiModel.getMarkerIcon(): Int {
-        return when (this) {
-            is CgvMarkerUiModel -> R.drawable.ic_marker_cgv
-            is LotteCinemaMarkerUiModel -> R.drawable.ic_marker_lotte
-            is MegaboxMarkerUiModel -> R.drawable.ic_marker_megabox
-        }
-    }
-
-    private fun TheaterMarkerUiModel.executeWeb(ctx: Context) {
-        return when (this) {
-            is CgvMarkerUiModel ->
-                Cgv.executeWeb(ctx, Theater(TYPE_CGV, code, name, lng, lat))
-            is LotteCinemaMarkerUiModel ->
-                LotteCinema.executeWeb(ctx, Theater(TYPE_LOTTE, code, name, lng, lat))
-            is MegaboxMarkerUiModel ->
-                Megabox.executeWeb(ctx, Theater(TYPE_MEGABOX, code, name, lng, lat))
         }
     }
 

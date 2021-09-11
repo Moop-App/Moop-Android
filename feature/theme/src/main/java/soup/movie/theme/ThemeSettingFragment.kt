@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,7 +41,8 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.systemBarsPadding
+import com.google.accompanist.insets.navigationBarsPadding
+import com.google.accompanist.insets.statusBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -68,7 +70,9 @@ class ThemeSettingFragment : Fragment() {
         ProvideWindowInsets {
             val items = viewModel.items.observeAsState(emptyList())
             Scaffold(
-                modifier = Modifier.systemBarsPadding(),
+                modifier = Modifier
+                    .statusBarsPadding()
+                    .navigationBarsPadding(start = false, end = false),
                 topBar = {
                     TopAppBar(
                         title = {
@@ -117,7 +121,7 @@ class ThemeSettingFragment : Fragment() {
             modifier = modifier
                 .fillMaxWidth()
                 .height(60.dp)
-                .debounceClickable { onItemClick(item) }
+                .clickable { debounce { onItemClick(item) } }
                 .padding(horizontal = 24.dp)
         ) {
             Text(
