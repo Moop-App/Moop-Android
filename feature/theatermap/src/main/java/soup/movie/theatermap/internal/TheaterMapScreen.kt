@@ -37,19 +37,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -101,7 +99,33 @@ internal fun TheaterMapScreen(
     locationSource: LocationSource?
 ) {
     ProvideWindowInsets {
-        Scaffold(
+        val coroutineScope = rememberCoroutineScope()
+        val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
+        val bottomSheetState = bottomSheetScaffoldState.bottomSheetState
+        val selectedTheater = viewModel.selectedTheater
+        val bottomSheetVisible = viewModel.selectedTheater != null
+        LaunchedEffect(bottomSheetVisible) {
+            coroutineScope.launch {
+                if (bottomSheetVisible) {
+                    bottomSheetState.expand()
+                } else {
+                    bottomSheetState.collapse()
+                }
+            }
+        }
+        BackHandler(enabled = bottomSheetState.isExpanded) {
+            viewModel.onTheaterUnselected()
+        }
+        BottomSheetScaffold(
+            scaffoldState = bottomSheetScaffoldState,
+            sheetPeekHeight = 0.dp,
+            sheetElevation = 16.dp,
+            sheetContent = {
+                TheaterMapFooter(
+                    selectedTheater = selectedTheater,
+                    onClick = { viewModel.onTheaterUnselected() }
+                )
+            },
             topBar = {
                 Toolbar(
                     text = stringResource(R.string.theater_map_title),
@@ -113,53 +137,20 @@ internal fun TheaterMapScreen(
                 .navigationBarsPadding(start = false, end = false)
         ) { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
-                val coroutineScope = rememberCoroutineScope()
-                val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
                 var coverVisible by remember { mutableStateOf(true) }
-                val bottomSheetVisible = viewModel.selectedTheater != null
-                LaunchedEffect(bottomSheetVisible) {
-                    coroutineScope.launch {
-                        if (bottomSheetVisible) {
-                            sheetState.show()
-                        } else {
-                            sheetState.hide()
-                        }
+                val uiModel = viewModel.uiModel.observeAsState(emptyList())
+                TheaterMapContents(
+                    theaters = uiModel.value,
+                    selectedTheater = selectedTheater,
+                    onTheaterClick = { viewModel.onTheaterSelected(it) },
+                    modifier = Modifier.padding(paddingValues),
+                    locationSource = locationSource,
+                    onMapClick = { viewModel.onTheaterUnselected() },
+                    onMapUpdated = {
+                        coverVisible = false
+                        viewModel.onRefresh()
                     }
-                }
-                LaunchedEffect(sheetState.isVisible) {
-                    if (sheetState.isVisible.not()) {
-                        viewModel.onTheaterUnselected()
-                    }
-                }
-                BackHandler(enabled = sheetState.isVisible) {
-                    viewModel.onTheaterUnselected()
-                }
-                val selectedTheater = viewModel.selectedTheater
-                ModalBottomSheetLayout(
-                    sheetState = sheetState,
-                    sheetElevation = 16.dp,
-                    scrimColor = Color.Transparent,
-                    sheetContent = {
-                        TheaterMapFooter(
-                            selectedTheater = selectedTheater,
-                            onClick = { viewModel.onTheaterUnselected() }
-                        )
-                    }
-                ) {
-                    val uiModel = viewModel.uiModel.observeAsState(emptyList())
-                    TheaterMapContents(
-                        theaters = uiModel.value,
-                        selectedTheater = selectedTheater,
-                        onTheaterClick = { viewModel.onTheaterSelected(it) },
-                        modifier = Modifier.padding(paddingValues),
-                        locationSource = locationSource,
-                        onMapClick = { viewModel.onTheaterUnselected() },
-                        onMapUpdated = {
-                            coverVisible = false
-                            viewModel.onRefresh()
-                        }
-                    )
-                }
+                )
                 TheaterMapCover(visible = coverVisible)
             }
         }
