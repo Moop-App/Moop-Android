@@ -18,8 +18,6 @@ package soup.movie.theatermap.internal
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -33,22 +31,23 @@ internal class TheaterMapViewModel(
     private val repository: MoopRepository
 ) : ViewModel() {
 
-    private val _uiModel = MutableLiveData<List<TheaterMarkerUiModel>>()
-    val uiModel: LiveData<List<TheaterMarkerUiModel>>
-        get() = _uiModel
+    var uiModel by mutableStateOf<List<TheaterMarkerUiModel>>(emptyList())
+        private set
 
     var selectedTheater by mutableStateOf<TheaterMarkerUiModel?>(null)
         private set
 
     init {
         viewModelScope.launch {
-            _uiModel.value = loadUiModel()
+            uiModel = loadUiModel()
         }
     }
 
     fun onRefresh() {
         viewModelScope.launch {
-            _uiModel.value = loadUiModel()
+            if (uiModel.isEmpty()) {
+                uiModel = loadUiModel()
+            }
         }
     }
 

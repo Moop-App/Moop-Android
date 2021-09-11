@@ -19,13 +19,11 @@ import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.geometry.LatLngBounds
-import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.NaverMapOptions
@@ -41,17 +39,29 @@ internal suspend inline fun MapView.awaitMap(): NaverMap {
 }
 
 @Composable
-internal fun rememberMapViewWithLifecycle(): MapView {
+internal fun rememberSavedInstanceState(): Bundle {
+    return rememberSaveable { Bundle() }
+}
+
+@Composable
+internal fun rememberMapViewWithLifecycle(
+    options: NaverMapOptions,
+    savedInstanceState: Bundle = rememberSavedInstanceState()
+): MapView {
     val context = LocalContext.current
     val mapView = remember {
-        MapView(context, naverMapOptions())
+        MapView(context, options)
     }
 
     val lifecycle = LocalLifecycleOwner.current.lifecycle
-    DisposableEffect(lifecycle, mapView) {
-        val lifecycleObserver = getMapLifecycleObserver(mapView)
+    DisposableEffect(lifecycle, mapView, savedInstanceState) {
+        val lifecycleObserver = getMapLifecycleObserver(
+            mapView,
+            savedInstanceState.takeUnless { it.isEmpty }
+        )
         lifecycle.addObserver(lifecycleObserver)
         onDispose {
+            mapView.onSaveInstanceState(savedInstanceState)
             lifecycle.removeObserver(lifecycleObserver)
         }
     }
@@ -59,24 +69,13 @@ internal fun rememberMapViewWithLifecycle(): MapView {
     return mapView
 }
 
-private fun naverMapOptions(): NaverMapOptions {
-    return NaverMapOptions()
-        .extent(
-            LatLngBounds.from(
-                LatLng(31.43, 122.37),
-                LatLng(44.35, 132.0)
-            )
-        )
-        .locationButtonEnabled(true)
-        .scaleBarEnabled(false)
-        .minZoom(6.0)
-        .camera(CameraPosition(LatLng.INVALID, 12.0))
-}
-
-private fun getMapLifecycleObserver(mapView: MapView): LifecycleEventObserver {
+private fun getMapLifecycleObserver(
+    mapView: MapView,
+    savedInstanceState: Bundle?
+): LifecycleEventObserver {
     return LifecycleEventObserver { _, event ->
         when (event) {
-            Lifecycle.Event.ON_CREATE -> mapView.onCreate(Bundle())
+            Lifecycle.Event.ON_CREATE -> mapView.onCreate(savedInstanceState)
             Lifecycle.Event.ON_START -> mapView.onStart()
             Lifecycle.Event.ON_RESUME -> mapView.onResume()
             Lifecycle.Event.ON_PAUSE -> mapView.onPause()
