@@ -26,8 +26,7 @@ dependencies {
     implementation Libs.Coroutines.core
     implementation Libs.Coroutines.android
 
-    implementation Libs.AndroidX.core
-    implementation Libs.AndroidX.constraintlayout
+    implementation Libs.AndroidX.fragment
 
     implementation Libs.Material.composeThemeAdapter
     implementation Libs.Compose.activity
@@ -38,10 +37,6 @@ dependencies {
     implementation Libs.Compose.runtime_livedata
     implementation Libs.Accompanist.drawablepainter
     implementation Libs.Accompanist.insets
-    implementation Libs.insetter
-
-    implementation Libs.AndroidX.Navigation.fragment
-    implementation Libs.AndroidX.Navigation.ui
 
     implementation Libs.Dagger.hilt
     kapt Libs.Dagger.hiltCompiler

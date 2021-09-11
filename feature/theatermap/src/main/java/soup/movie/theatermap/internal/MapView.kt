@@ -47,10 +47,9 @@ internal fun rememberMapViewWithLifecycle(): MapView {
         MapView(context, naverMapOptions())
     }
 
-    // Makes MapView follow the lifecycle of this composable
-    val lifecycleObserver = rememberMapLifecycleObserver(mapView)
     val lifecycle = LocalLifecycleOwner.current.lifecycle
-    DisposableEffect(lifecycle) {
+    DisposableEffect(lifecycle, mapView) {
+        val lifecycleObserver = getMapLifecycleObserver(mapView)
         lifecycle.addObserver(lifecycleObserver)
         onDispose {
             lifecycle.removeObserver(lifecycleObserver)
@@ -74,19 +73,16 @@ private fun naverMapOptions(): NaverMapOptions {
         .camera(CameraPosition(LatLng.INVALID, 12.0))
 }
 
-@Composable
-private fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserver {
-    return remember(mapView) {
-        LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_CREATE -> mapView.onCreate(Bundle())
-                Lifecycle.Event.ON_START -> mapView.onStart()
-                Lifecycle.Event.ON_RESUME -> mapView.onResume()
-                Lifecycle.Event.ON_PAUSE -> mapView.onPause()
-                Lifecycle.Event.ON_STOP -> mapView.onStop()
-                Lifecycle.Event.ON_DESTROY -> mapView.onDestroy()
-                else -> throw IllegalStateException()
-            }
+private fun getMapLifecycleObserver(mapView: MapView): LifecycleEventObserver {
+    return LifecycleEventObserver { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_CREATE -> mapView.onCreate(Bundle())
+            Lifecycle.Event.ON_START -> mapView.onStart()
+            Lifecycle.Event.ON_RESUME -> mapView.onResume()
+            Lifecycle.Event.ON_PAUSE -> mapView.onPause()
+            Lifecycle.Event.ON_STOP -> mapView.onStop()
+            Lifecycle.Event.ON_DESTROY -> mapView.onDestroy()
+            else -> throw IllegalStateException()
         }
     }
 }
