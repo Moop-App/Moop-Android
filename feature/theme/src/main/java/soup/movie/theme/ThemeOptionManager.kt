@@ -22,11 +22,12 @@ class ThemeOptionManager(
     private val store: ThemeOptionStore
 ) {
 
-    private val defaultThemeOption: ThemeOption = if (isAtLeastQ()) {
-        ThemeOption.System
-    } else {
-        ThemeOption.Battery
-    }
+    private val defaultThemeOption: ThemeOption =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ThemeOption.System
+        } else {
+            ThemeOption.Battery
+        }
 
     private val options: List<ThemeOption> = listOf(
         ThemeOption.Light,
@@ -75,10 +76,6 @@ class ThemeOptionManager(
             ThemeOption.System -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             ThemeOption.Battery -> AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
         }
-    }
-
-    private fun isAtLeastQ(): Boolean {
-        return Build.VERSION.SDK_INT >= 29
     }
 
     companion object {

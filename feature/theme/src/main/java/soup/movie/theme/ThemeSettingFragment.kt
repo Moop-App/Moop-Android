@@ -19,33 +19,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.util.debounce
+import soup.movie.theme.internal.ThemeOptionScreen
 
 @AndroidEntryPoint
 class ThemeSettingFragment : Fragment() {
@@ -60,76 +39,9 @@ class ThemeSettingFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MdcTheme {
-                    ThemeOptionScreen()
+                    ThemeOptionScreen(viewModel)
                 }
             }
-        }
-    }
-
-    @Composable
-    private fun ThemeOptionScreen() {
-        ProvideWindowInsets {
-            val items = viewModel.items.observeAsState(emptyList())
-            Scaffold(
-                modifier = Modifier
-                    .statusBarsPadding()
-                    .navigationBarsPadding(start = false, end = false),
-                topBar = {
-                    TopAppBar(
-                        title = {
-                            Text(
-                                stringResource(R.string.theme_option_title),
-                                color = MaterialTheme.colors.onBackground,
-                            )
-                        }
-                    )
-                }
-            ) { paddingValues ->
-                ThemeOptionList(
-                    items = items.value,
-                    onItemClick = viewModel::onItemClick,
-                    modifier = Modifier.padding(paddingValues)
-                )
-            }
-        }
-    }
-
-    @Composable
-    private fun ThemeOptionList(
-        items: List<ThemeSettingItemUiModel>,
-        onItemClick: (ThemeSettingItemUiModel) -> Unit,
-        modifier: Modifier = Modifier,
-    ) {
-        Column(
-            modifier = modifier
-                .padding(8.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            items.forEach {
-                ThemeOptionItem(it, onItemClick)
-            }
-        }
-    }
-
-    @Composable
-    private fun ThemeOptionItem(
-        item: ThemeSettingItemUiModel,
-        onItemClick: (ThemeSettingItemUiModel) -> Unit,
-        modifier: Modifier = Modifier,
-    ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            modifier = modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .clickable { debounce { onItemClick(item) } }
-                .padding(horizontal = 24.dp)
-        ) {
-            Text(
-                text = stringResource(stringResIdOf(item.themeOption)),
-                fontSize = 17.sp,
-                color = MaterialTheme.colors.onBackground,
-            )
         }
     }
 }

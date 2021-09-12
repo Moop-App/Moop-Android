@@ -15,8 +15,9 @@
  */
 package soup.movie.theme
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -26,12 +27,11 @@ class ThemeSettingViewModel @Inject constructor(
     private val themeOptionManager: ThemeOptionManager
 ) : ViewModel() {
 
-    private val _items = MutableLiveData<List<ThemeSettingItemUiModel>>()
-    val items: LiveData<List<ThemeSettingItemUiModel>>
-        get() = _items
+    var items by mutableStateOf<List<ThemeSettingItemUiModel>>(emptyList())
+        private set
 
     init {
-        _items.value = themeOptionManager
+        items = themeOptionManager
             .getOptions()
             .map { ThemeSettingItemUiModel(it) }
     }
