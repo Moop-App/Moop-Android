@@ -69,6 +69,13 @@ subprojects {
             licenseHeaderFile rootProject.file('spotless/copyright.kt')
         }
     }
+    afterEvaluate {
+        tasks.find {
+            it.name.contains("preBuild")
+        }.each {
+            it.dependsOn spotlessApply
+        }
+    }
 }
 
 Object propOrDef(String propertyName, Object defaultValue) {
