@@ -110,8 +110,6 @@ dependencies {
     implementation Libs.Kotlin.serialization
 
     implementation Libs.AndroidX.activity
-    implementation Libs.AndroidX.appcompat
-    implementation Libs.AndroidX.core
     implementation Libs.AndroidX.constraintlayout
     implementation Libs.AndroidX.drawerlayout
     implementation Libs.AndroidX.fragment
@@ -152,7 +150,6 @@ dependencies {
     implementation Libs.Firebase.perf
     implementation Libs.Firebase.ads
 
-    implementation Libs.timber
     implementation Libs.Lottie.view
 
     testImplementation Libs.Test.junit

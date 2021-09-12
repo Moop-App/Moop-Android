@@ -14,8 +14,6 @@ dependencies {
 
     implementation Libs.Kotlin.stdlib
 
-    implementation Libs.AndroidX.appcompat
-    implementation Libs.AndroidX.core
     implementation Libs.AndroidX.constraintlayout
     implementation Libs.AndroidX.recyclerview
 
@@ -29,9 +27,7 @@ dependencies {
     kapt Libs.Dagger.hiltCompiler
     kapt Libs.AndroidX.Hilt.compiler
 
-    implementation Libs.timber
-
-    implementation 'com.robinhood.ticker:ticker:2.0.0'
+    implementation Libs.ticker
 
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.AndroidX.Test.runner
