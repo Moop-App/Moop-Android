@@ -22,8 +22,6 @@ dependencies {
 
     implementation Libs.Kotlin.stdlib
 
-    implementation Libs.AndroidX.appcompat
-    implementation Libs.AndroidX.core
     implementation Libs.AndroidX.recyclerview
 
     implementation Libs.Material.composeThemeAdapter
@@ -33,15 +31,12 @@ dependencies {
     implementation Libs.Compose.ui
     implementation Libs.Compose.runtime_livedata
     implementation Libs.Accompanist.insets
-    implementation Libs.insetter
 
     implementation Libs.AndroidX.Navigation.fragment
 
     implementation Libs.Dagger.hilt
     kapt Libs.Dagger.hiltCompiler
     kapt Libs.AndroidX.Hilt.compiler
-
-    implementation Libs.timber
 
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.AndroidX.Test.runner

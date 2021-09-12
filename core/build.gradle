@@ -15,18 +15,16 @@ android.buildTypes.release {
 dependencies {
     implementation project(':model')
 
-    implementation Libs.Kotlin.stdlib
+    api Libs.Kotlin.stdlib
+    api Libs.AndroidX.appcompat
+    api Libs.AndroidX.constraintlayout
+    api Libs.AndroidX.core
+    api Libs.Material.view
 
-    implementation Libs.AndroidX.activity
-    implementation Libs.AndroidX.appcompat
     implementation Libs.AndroidX.browser
-    implementation Libs.AndroidX.core
-    implementation Libs.AndroidX.constraintlayout
     implementation Libs.AndroidX.fragment
     implementation Libs.AndroidX.recyclerview
     implementation Libs.AndroidX.startup
-
-    api Libs.Material.view
 
     implementation Libs.AndroidX.Lifecycle.runtime
     implementation Libs.AndroidX.Lifecycle.compiler
@@ -45,7 +43,7 @@ dependencies {
     implementation Libs.Firebase.ads
 
     api Libs.threetenAbp
-    implementation Libs.timber
+    api Libs.timber
     implementation Libs.kakaoLink
 
     testImplementation Libs.Test.junit
