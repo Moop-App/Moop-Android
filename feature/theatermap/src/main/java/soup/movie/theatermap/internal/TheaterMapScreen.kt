@@ -136,7 +136,7 @@ internal fun TheaterMapScreen(
                 BottomSheetScaffold(
                     scaffoldState = bottomSheetScaffoldState,
                     sheetPeekHeight = 0.dp,
-                    sheetElevation = 16.dp,
+                    sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
                     sheetContent = {
                         TheaterMapFooter(
                             selectedTheater = selectedTheater,
@@ -250,7 +250,6 @@ private fun TheaterMapFooter(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .requiredHeight(100.dp)
-            .background(color = MaterialTheme.colors.surface)
             .clickable { onClick() },
     ) {
         val context = LocalContext.current
@@ -263,7 +262,6 @@ private fun TheaterMapFooter(
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 16.dp, end = 8.dp),
-                color = MaterialTheme.colors.onSurface,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
@@ -332,8 +330,7 @@ private fun InfoButton(
     ) {
         Icon(
             Icons.Rounded.Info,
-            contentDescription = null,
-            tint = MaterialTheme.colors.onSurface,
+            contentDescription = null
         )
     }
 }
@@ -390,17 +387,11 @@ private fun Toolbar(text: String, onNavigationOnClick: () -> Unit) {
             IconButton(onClick = onNavigationOnClick) {
                 Icon(
                     Icons.Outlined.Menu,
-                    contentDescription = null,
-                    tint = MaterialTheme.colors.onBackground,
+                    contentDescription = null
                 )
             }
         },
-        title = {
-            Text(
-                text = text,
-                color = MaterialTheme.colors.onBackground,
-            )
-        }
+        title = { Text(text = text) }
     )
 }
 

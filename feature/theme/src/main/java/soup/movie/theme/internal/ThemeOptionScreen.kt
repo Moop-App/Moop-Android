@@ -45,19 +45,11 @@ import soup.movie.util.debounce
 internal fun ThemeOptionScreen(viewModel: ThemeSettingViewModel) {
     ProvideWindowInsets {
         Scaffold(
-            contentColor = MaterialTheme.colors.onSurface,
             modifier = Modifier
                 .statusBarsPadding()
                 .navigationBarsPadding(start = false, end = false),
             topBar = {
-                TopAppBar(
-                    title = {
-                        Text(
-                            stringResource(R.string.theme_option_title),
-                            color = MaterialTheme.colors.onBackground,
-                        )
-                    }
-                )
+                TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
             }
         ) { paddingValues ->
             ThemeOptionList(
