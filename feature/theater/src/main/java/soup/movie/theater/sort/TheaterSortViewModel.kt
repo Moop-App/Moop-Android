@@ -15,15 +15,17 @@
  */
 package soup.movie.theater.sort
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.ext.swap
 import soup.movie.model.Theater
 import soup.movie.settings.AppSettings
@@ -36,9 +38,8 @@ class TheaterSortViewModel @Inject constructor(
 
     private var listSnapshot = mutableListOf<Theater>()
 
-    private val _uiModel = MutableLiveData<TheaterSortUiModel>()
-    val uiModel: LiveData<TheaterSortUiModel>
-        get() = _uiModel
+    var selectedTheaters by mutableStateOf<List<Theater>>(emptyList())
+        private set
 
     init {
         appSettings.getFavoriteTheaterListFlow()
@@ -49,15 +50,16 @@ class TheaterSortViewModel @Inject constructor(
 
     private fun updateTheaters(it: List<Theater>) {
         listSnapshot = it.toMutableList()
-        _uiModel.value = TheaterSortUiModel(it)
+        selectedTheaters = it
     }
 
     fun onItemMove(fromPosition: Int, toPosition: Int) {
         listSnapshot.swap(fromPosition, toPosition)
+        updateTheaters(listSnapshot)
     }
 
-    fun saveSnapshot() {
-        viewModelScope.launch {
+    suspend fun saveSnapshot() {
+        withContext(Dispatchers.IO) {
             appSettings.setFavoriteTheaterList(listSnapshot.toList())
         }
     }
