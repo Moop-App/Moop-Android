@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.theme
+package soup.movie.settings
 
-import androidx.annotation.StringRes
+import androidx.compose.material.Colors
+import androidx.compose.ui.graphics.Color
 
-@StringRes
-fun stringResIdOf(themeOption: ThemeOption?): Int = when (themeOption) {
-    ThemeOption.Light -> R.string.theme_option_light
-    ThemeOption.Dark -> R.string.theme_option_dark
-    ThemeOption.Battery -> R.string.theme_option_battery_saver
-    ThemeOption.System -> R.string.theme_option_system
-    else -> R.string.theme_option_system
-}
+val Colors.divider: Color
+    get() = if (isLight) {
+        Color(0xFFF5F5F5)
+    } else {
+        Color(0xFF212121)
+    }
