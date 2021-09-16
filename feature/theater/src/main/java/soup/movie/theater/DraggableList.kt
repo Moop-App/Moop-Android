@@ -15,6 +15,7 @@
  */
 package soup.movie.theater
 
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.lazy.LazyListItemInfo
 import androidx.compose.foundation.lazy.LazyListState
@@ -32,6 +33,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 
 interface DraggableListState {
     fun onDragStart(offset: Offset)
+    fun onDragStart(index: Int)
     fun onDrag(offset: Offset)
     fun onDragEnd()
     fun onDragCancel()
@@ -76,6 +78,27 @@ fun Modifier.draggableList(
     )
 }
 
+fun Modifier.draggableItem(
+    index: Int,
+    listState: DraggableListState
+): Modifier = pointerInput(Unit) {
+    detectDragGestures(
+        onDragStart = {
+            listState.onDragStart(index)
+        },
+        onDrag = { change, offset ->
+            change.consumeAllChanges()
+            listState.onDrag(offset)
+        },
+        onDragEnd = {
+            listState.onDragEnd()
+        },
+        onDragCancel = {
+            listState.onDragCancel()
+        }
+    )
+}
+
 class DefaultDraggableListState(
     private val lazyListState: LazyListState,
     private val onMove: (fromIndex: Int, toIndex: Int) -> Unit
@@ -91,6 +114,15 @@ class DefaultDraggableListState(
     override fun onDragStart(offset: Offset) {
         lazyListState.layoutInfo.visibleItemsInfo
             .firstOrNull { offset.y.toInt() in it.offset..it.offsetEnd }
+            ?.also {
+                draggingItem = it
+                currentIndexOfDraggingItem = it.index
+            }
+    }
+
+    override fun onDragStart(index: Int) {
+        lazyListState.layoutInfo.visibleItemsInfo
+            .find(index)
             ?.also {
                 draggingItem = it
                 currentIndexOfDraggingItem = it.index

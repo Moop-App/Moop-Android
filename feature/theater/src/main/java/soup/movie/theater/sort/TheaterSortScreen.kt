@@ -54,6 +54,7 @@ import soup.movie.theater.CgvChip
 import soup.movie.theater.LotteChip
 import soup.movie.theater.MegaboxChip
 import soup.movie.theater.R
+import soup.movie.theater.draggableItem
 import soup.movie.theater.draggableList
 import soup.movie.theater.rememberDraggableListState
 import soup.movie.util.debounce
@@ -160,6 +161,7 @@ private fun TheaterSortReorderList(
                     modifier = Modifier
                         .width(48.dp)
                         .fillMaxHeight()
+                        .draggableItem(index, draggableListState)
                 )
             }
         }
