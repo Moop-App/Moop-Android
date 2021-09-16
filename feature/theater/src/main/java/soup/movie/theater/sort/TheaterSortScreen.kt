@@ -27,7 +27,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -52,8 +54,8 @@ import soup.movie.theater.CgvChip
 import soup.movie.theater.LotteChip
 import soup.movie.theater.MegaboxChip
 import soup.movie.theater.R
-import soup.movie.theater.ReorderableList
-import soup.movie.theater.rememberReorderableListState
+import soup.movie.theater.draggableList
+import soup.movie.theater.rememberDraggableListState
 import soup.movie.util.debounce
 
 @Composable
@@ -122,24 +124,26 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
 @Composable
 private fun TheaterSortReorderList(
     selectedTheaters: List<Theater>,
-    onMove: (fromPosition: Int, toPosition: Int) -> Unit,
+    onMove: (fromIndex: Int, toIndex: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val listState = rememberReorderableListState(onMove = onMove)
-    ReorderableList(
-        listState = listState,
-        modifier = modifier
+    val lazyListState = rememberLazyListState()
+    val draggableListState = rememberDraggableListState(lazyListState, onMove = onMove)
+    LazyColumn(
+        modifier = modifier.draggableList(draggableListState),
+        state = lazyListState
     ) {
         itemsIndexed(selectedTheaters) { index, theater ->
-            val translateY by animateFloatAsState(targetValue = listState.offsetOf(index))
+            val itemState = draggableListState.getItemState(index)
+            val transY by animateFloatAsState(targetValue = itemState.offset.y)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp)
                     .padding(horizontal = 12.dp)
-                    .graphicsLayer { translationY = translateY }
-                    .zIndex(listState.zIndexOf(index))
+                    .graphicsLayer { translationY = transY }
+                    .zIndex(itemState.zIndex)
             ) {
                 when (theater.type) {
                     Theater.TYPE_CGV -> CgvChip(text = theater.name)
