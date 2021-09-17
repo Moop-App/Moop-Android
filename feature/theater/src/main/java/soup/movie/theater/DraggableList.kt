@@ -111,8 +111,11 @@ class DefaultDraggableListState(
     private inline val LazyListItemInfo.offsetEnd: Int
         get() = offset + size
 
+    private val visibleItemsInfo: List<LazyListItemInfo>
+        get() = lazyListState.layoutInfo.visibleItemsInfo
+
     override fun onDragStart(offset: Offset) {
-        lazyListState.layoutInfo.visibleItemsInfo
+        visibleItemsInfo
             .firstOrNull { offset.y.toInt() in it.offset..it.offsetEnd }
             ?.also {
                 draggingItem = it
@@ -121,8 +124,8 @@ class DefaultDraggableListState(
     }
 
     override fun onDragStart(index: Int) {
-        lazyListState.layoutInfo.visibleItemsInfo
-            .find(index)
+        visibleItemsInfo
+            .find(absoluteIndex = index)
             ?.also {
                 draggingItem = it
                 currentIndexOfDraggingItem = it.index
@@ -134,10 +137,10 @@ class DefaultDraggableListState(
 
         val draggingItem = draggingItem ?: return
         val currentIndex = currentIndexOfDraggingItem ?: return
-        val hovered = lazyListState.layoutInfo.visibleItemsInfo.find(absoluteIndex = currentIndex) ?: return
+        val hovered = visibleItemsInfo.find(absoluteIndex = currentIndex) ?: return
         val startOffset = draggingItem.offset + draggingDistance
         val endOffset = draggingItem.offsetEnd + draggingDistance
-        lazyListState.layoutInfo.visibleItemsInfo
+        visibleItemsInfo
             .filterNot { item -> startOffset > item.offsetEnd || item.offset > endOffset || hovered.index == item.index }
             .firstOrNull { item ->
                 if (startOffset <= hovered.offset) {
@@ -162,7 +165,7 @@ class DefaultDraggableListState(
     override fun getItemState(index: Int): DraggableItemState {
         val isDraggingItem = index == currentIndexOfDraggingItem
         val offset = if (isDraggingItem) {
-            val hovered = lazyListState.layoutInfo.visibleItemsInfo.find(absoluteIndex = index)
+            val hovered = visibleItemsInfo.find(absoluteIndex = index)
             if (hovered != null) {
                 val offsetY = (draggingItem?.offset ?: 0) + draggingDistance - hovered.offset
                 Offset(x = 0f, y = offsetY)
@@ -186,6 +189,6 @@ class DefaultDraggableListState(
     }
 
     private fun List<LazyListItemInfo>.find(absoluteIndex: Int): LazyListItemInfo? {
-        return getOrNull(absoluteIndex - first().index)
+        return find { it.index == absoluteIndex }
     }
 }
