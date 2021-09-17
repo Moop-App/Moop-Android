@@ -153,7 +153,6 @@ private fun TheaterSortReorderList(
                     else -> throw IllegalArgumentException("This is not valid type.")
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                // TODO: Touch Down 시, Drag가 시작하도록 수정 필요
                 Image(
                     painterResource(R.drawable.ic_round_drag_handle),
                     contentDescription = null,
