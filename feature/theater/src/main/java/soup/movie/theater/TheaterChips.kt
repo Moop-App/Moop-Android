@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.settings
+package soup.movie.theater
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.Text
@@ -41,13 +41,15 @@ private fun rippleTheme(color: Color) = object : RippleTheme {
 }
 
 @Composable
-internal fun CgvChip(
+fun CgvChip(
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit = {},
+    enabled: Boolean = true
 ) {
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color(0xFFBDBDBD))) {
         Chip(
             onClick = onClick,
+            enabled = enabled,
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             colors = ChipDefaults.chipColors(
                 backgroundColor = Color.White,
@@ -61,13 +63,15 @@ internal fun CgvChip(
 }
 
 @Composable
-internal fun LotteChip(
+fun LotteChip(
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit = {},
+    enabled: Boolean = true
 ) {
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
         Chip(
             onClick = onClick,
+            enabled = enabled,
             colors = ChipDefaults.chipColors(
                 backgroundColor = Color(0xFFED1D24),
                 contentColor = Color.White
@@ -80,13 +84,15 @@ internal fun LotteChip(
 }
 
 @Composable
-internal fun MegaboxChip(
+fun MegaboxChip(
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit = {},
+    enabled: Boolean = true
 ) {
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
         Chip(
             onClick = onClick,
+            enabled = enabled,
             colors = ChipDefaults.chipColors(
                 backgroundColor = Color(0xFF352263),
                 contentColor = Color.White

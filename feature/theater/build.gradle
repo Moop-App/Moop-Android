@@ -8,6 +8,14 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
+android {
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "${Libs.Compose.version}"
+    }
+}
 dependencies {
     implementation project(':core')
     implementation project(':data:repository')
@@ -16,6 +24,14 @@ dependencies {
 
     implementation Libs.AndroidX.constraintlayout
     implementation Libs.AndroidX.recyclerview
+
+    implementation Libs.Material.composeThemeAdapter
+    implementation Libs.Compose.activity
+    implementation Libs.Compose.foundation
+    implementation Libs.Compose.material
+    implementation Libs.Compose.ui
+    implementation Libs.Compose.runtime_livedata
+    implementation Libs.Accompanist.insets
 
     implementation Libs.insetter
 

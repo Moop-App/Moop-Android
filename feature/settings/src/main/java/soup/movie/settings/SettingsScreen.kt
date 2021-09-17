@@ -56,6 +56,9 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
+import soup.movie.theater.CgvChip
+import soup.movie.theater.LotteChip
+import soup.movie.theater.MegaboxChip
 import soup.movie.theme.stringResIdOf
 import soup.movie.util.debounce
 

@@ -17,6 +17,7 @@ android {
     }
 }
 dependencies {
+    implementation project(':feature:theater')
     implementation project(':feature:theme')
     implementation project(':feature:system')
     implementation project(':core')
