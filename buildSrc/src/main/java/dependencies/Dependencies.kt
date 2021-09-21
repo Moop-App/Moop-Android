@@ -181,8 +181,7 @@ object Libs {
     }
 
     object Lottie {
-        private const val version = "4.0.0"
-        const val view = "com.airbnb.android:lottie:$version"
+        private const val version = "4.1.0"
         const val compose = "com.airbnb.android:lottie-compose:$version"
     }
 

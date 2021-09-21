@@ -30,6 +30,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "${Libs.Compose.version}"
     }
     signingConfigs {
         debug {
@@ -150,7 +154,14 @@ dependencies {
     implementation Libs.Firebase.perf
     implementation Libs.Firebase.ads
 
-    implementation Libs.Lottie.view
+    implementation Libs.Material.composeThemeAdapter
+    implementation Libs.Compose.activity
+    implementation Libs.Compose.foundation
+    implementation Libs.Compose.material
+    implementation Libs.Compose.ui
+    implementation Libs.Accompanist.drawablepainter
+    implementation Libs.Accompanist.insets
+    implementation Libs.Lottie.compose
 
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.AndroidX.Test.runner
