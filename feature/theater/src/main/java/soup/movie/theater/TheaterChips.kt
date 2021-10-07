@@ -16,15 +16,19 @@
 package soup.movie.theater
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import soup.compose.material.chip.Chip
+import soup.compose.material.chip.ChipDefaults
 
 @Composable
 private fun rippleTheme(color: Color) = object : RippleTheme {
@@ -55,7 +59,7 @@ fun CgvChip(
                 backgroundColor = Color.White,
                 contentColor = Color(0xFFE51F20)
             ),
-            minTouchTargetSize = 40.dp
+            modifier = Modifier.padding(vertical = 4.dp)
         ) {
             Text(text = text, fontWeight = FontWeight.Bold)
         }
@@ -76,7 +80,7 @@ fun LotteChip(
                 backgroundColor = Color(0xFFED1D24),
                 contentColor = Color.White
             ),
-            minTouchTargetSize = 40.dp
+            modifier = Modifier.padding(vertical = 4.dp)
         ) {
             Text(text = text, fontWeight = FontWeight.Bold)
         }
@@ -97,7 +101,7 @@ fun MegaboxChip(
                 backgroundColor = Color(0xFF352263),
                 contentColor = Color.White
             ),
-            minTouchTargetSize = 40.dp
+            modifier = Modifier.padding(vertical = 4.dp)
         ) {
             Text(text = text, fontWeight = FontWeight.Bold)
         }

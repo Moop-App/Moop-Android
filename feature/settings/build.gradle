@@ -33,6 +33,7 @@ dependencies {
     implementation Libs.Compose.runtime_livedata
     implementation Libs.Accompanist.insets
     implementation Libs.Accompanist.flowlayout
+    implementation Libs.ComposeExperimental.material
 
     implementation Libs.AndroidX.Lifecycle.livedata
 

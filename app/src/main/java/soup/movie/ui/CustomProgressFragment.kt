@@ -39,6 +39,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -60,10 +61,11 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
+import soup.compose.ui.Visibility
+import soup.compose.ui.VisibilityState
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.util.LauncherIcons
-import soup.movie.util.invisible
 import timber.log.Timber
 
 class CustomProgressFragment : AbstractProgressFragment() {
@@ -158,6 +160,7 @@ class CustomProgressFragment : AbstractProgressFragment() {
         )
     }
 
+    @OptIn(ExperimentalComposeUiApi::class)
     @Composable
     private fun CustomProgressContents(state: State, modifier: Modifier = Modifier) {
         val context = LocalContext.current
@@ -189,24 +192,30 @@ class CustomProgressFragment : AbstractProgressFragment() {
                 )
             }
 
-            val (indeterminate, progress) = if (state is State.Progress) {
-                if (state.bytesTotal == 0L) {
-                    true to 0f
-                } else {
-                    false to state.bytesDownloaded / state.bytesTotal.toFloat()
-                }
+            val visibility = if (state !is State.Progress) {
+                VisibilityState.Invisible
             } else {
-                true to 0f
+                VisibilityState.Visible
             }
-            LinearProgressIndicator(
-                indeterminate = indeterminate,
-                progress = progress,
-                color = MaterialTheme.colors.secondary,
-                modifier = Modifier
-                    .invisible(state !is State.Progress)
-                    .fillMaxWidth()
-                    .padding(vertical = 14.dp)
-            )
+            Visibility(visibility) {
+                val (indeterminate, progress) = if (state is State.Progress) {
+                    if (state.bytesTotal == 0L) {
+                        true to 0f
+                    } else {
+                        false to state.bytesDownloaded / state.bytesTotal.toFloat()
+                    }
+                } else {
+                    true to 0f
+                }
+                LinearProgressIndicator(
+                    indeterminate = indeterminate,
+                    progress = progress,
+                    color = MaterialTheme.colors.secondary,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 14.dp)
+                )
+            }
 
             if (state == State.Cancelled) {
                 Button(

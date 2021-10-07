@@ -163,6 +163,12 @@ object Libs {
             "com.google.accompanist:accompanist-systemuicontroller:$version"
     }
 
+    object ComposeExperimental {
+        private const val version = "0.1.2"
+        const val material = "com.github.fornewid.compose-experimental:material:$version"
+        const val ui = "com.github.fornewid.compose-experimental:ui:$version"
+    }
+
     object Test {
         const val junit = "junit:junit:4.13"
     }

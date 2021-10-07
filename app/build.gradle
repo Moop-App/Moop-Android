@@ -161,6 +161,7 @@ dependencies {
     implementation Libs.Compose.ui
     implementation Libs.Accompanist.drawablepainter
     implementation Libs.Accompanist.insets
+    implementation Libs.ComposeExperimental.ui
     implementation Libs.Lottie.compose
 
     testImplementation Libs.Test.junit
