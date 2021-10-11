@@ -61,8 +61,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
-import soup.compose.ui.Visibility
-import soup.compose.ui.VisibilityState
+import soup.compose.ui.Invisible
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.util.LauncherIcons
@@ -192,12 +191,7 @@ class CustomProgressFragment : AbstractProgressFragment() {
                 )
             }
 
-            val visibility = if (state !is State.Progress) {
-                VisibilityState.Invisible
-            } else {
-                VisibilityState.Visible
-            }
-            Visibility(visibility) {
+            Invisible(invisible = state !is State.Progress) {
                 val (indeterminate, progress) = if (state is State.Progress) {
                     if (state.bytesTotal == 0L) {
                         true to 0f

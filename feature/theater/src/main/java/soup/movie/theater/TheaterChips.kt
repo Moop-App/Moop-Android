@@ -17,6 +17,7 @@ package soup.movie.theater
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -27,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import soup.compose.material.chip.Chip
+import soup.compose.material.chip.ActionChip
 import soup.compose.material.chip.ChipDefaults
 
 @Composable
@@ -44,6 +45,7 @@ private fun rippleTheme(color: Color) = object : RippleTheme {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CgvChip(
     text: String,
@@ -51,21 +53,25 @@ fun CgvChip(
     enabled: Boolean = true
 ) {
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color(0xFFBDBDBD))) {
-        Chip(
+        ActionChip(
             onClick = onClick,
             enabled = enabled,
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
-            colors = ChipDefaults.chipColors(
+            colors = ChipDefaults.actionChipColors(
                 backgroundColor = Color.White,
                 contentColor = Color(0xFFE51F20)
             ),
-            modifier = Modifier.padding(vertical = 4.dp)
         ) {
-            Text(text = text, fontWeight = FontWeight.Bold)
+            Text(
+                text = text,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(ChipDefaults.TextPadding)
+            )
         }
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LotteChip(
     text: String,
@@ -73,20 +79,24 @@ fun LotteChip(
     enabled: Boolean = true
 ) {
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
-        Chip(
+        ActionChip(
             onClick = onClick,
             enabled = enabled,
-            colors = ChipDefaults.chipColors(
+            colors = ChipDefaults.actionChipColors(
                 backgroundColor = Color(0xFFED1D24),
                 contentColor = Color.White
             ),
-            modifier = Modifier.padding(vertical = 4.dp)
         ) {
-            Text(text = text, fontWeight = FontWeight.Bold)
+            Text(
+                text = text,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(ChipDefaults.TextPadding)
+            )
         }
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MegaboxChip(
     text: String,
@@ -94,16 +104,19 @@ fun MegaboxChip(
     enabled: Boolean = true
 ) {
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
-        Chip(
+        ActionChip(
             onClick = onClick,
             enabled = enabled,
-            colors = ChipDefaults.chipColors(
+            colors = ChipDefaults.actionChipColors(
                 backgroundColor = Color(0xFF352263),
                 contentColor = Color.White
             ),
-            modifier = Modifier.padding(vertical = 4.dp)
         ) {
-            Text(text = text, fontWeight = FontWeight.Bold)
+            Text(
+                text = text,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(ChipDefaults.TextPadding)
+            )
         }
     }
 }
