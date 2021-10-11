@@ -164,7 +164,7 @@ object Libs {
     }
 
     object ComposeExperimental {
-        private const val version = "0.1.2"
+        private const val version = "0.1.3"
         const val material = "com.github.fornewid.compose-experimental:material:$version"
         const val ui = "com.github.fornewid.compose-experimental:ui:$version"
     }
