@@ -31,7 +31,10 @@ dependencies {
     implementation Libs.Compose.material
     implementation Libs.Compose.ui
     implementation Libs.Compose.runtime_livedata
+    implementation Libs.Accompanist.flowlayout
     implementation Libs.Accompanist.insets
+    implementation Libs.Accompanist.pager
+    implementation Libs.Accompanist.pager_indicators
     implementation Libs.ComposeExperimental.material
 
     implementation Libs.insetter
@@ -43,8 +46,6 @@ dependencies {
     implementation Libs.Dagger.hilt
     kapt Libs.Dagger.hiltCompiler
     kapt Libs.AndroidX.Hilt.compiler
-
-    implementation Libs.ticker
 
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.AndroidX.Test.runner

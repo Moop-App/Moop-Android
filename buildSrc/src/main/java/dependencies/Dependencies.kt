@@ -19,7 +19,6 @@ object Libs {
     const val recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.2"
     const val kakaoLink = "com.kakao.sdk:v2-link:2.7.0"
     const val naverMap = "com.naver.maps:map-sdk:3.12.0"
-    const val ticker = "com.robinhood.ticker:ticker:2.0.2"
     const val playServicesLocation = "com.google.android.gms:play-services-location:17.1.0"
 
     // Utils
@@ -164,7 +163,7 @@ object Libs {
     }
 
     object ComposeExperimental {
-        private const val version = "0.1.4"
+        private const val version = "0.1.5"
         const val material = "com.github.fornewid.compose-experimental:material:$version"
         const val ui = "com.github.fornewid.compose-experimental:ui:$version"
     }

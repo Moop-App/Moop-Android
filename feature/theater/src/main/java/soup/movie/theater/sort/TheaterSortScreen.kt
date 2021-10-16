@@ -50,10 +50,8 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import soup.movie.model.Theater
-import soup.movie.theater.CgvChip
-import soup.movie.theater.LotteChip
-import soup.movie.theater.MegaboxChip
 import soup.movie.theater.R
+import soup.movie.theater.TheaterChip
 import soup.movie.theater.draggableItem
 import soup.movie.theater.draggableList
 import soup.movie.theater.rememberDraggableListState
@@ -146,12 +144,7 @@ private fun TheaterSortReorderList(
                     .graphicsLayer { translationY = transY }
                     .zIndex(itemState.zIndex)
             ) {
-                when (theater.type) {
-                    Theater.TYPE_CGV -> CgvChip(text = theater.name)
-                    Theater.TYPE_LOTTE -> LotteChip(text = theater.name)
-                    Theater.TYPE_MEGABOX -> MegaboxChip(text = theater.name)
-                    else -> throw IllegalArgumentException("This is not valid type.")
-                }
+                TheaterChip(theater)
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
                     painterResource(R.drawable.ic_round_drag_handle),

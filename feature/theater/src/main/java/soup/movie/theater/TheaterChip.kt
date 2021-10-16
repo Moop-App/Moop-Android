@@ -30,24 +30,36 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import soup.compose.material.chip.ActionChip
 import soup.compose.material.chip.ChipDefaults
+import soup.movie.model.Theater
+import soup.movie.util.debounce
 
-@Composable
-private fun rippleTheme(color: Color) = object : RippleTheme {
-
-    @Composable
-    override fun defaultColor(): Color {
-        return color
-    }
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha {
-        return RippleAlpha(1f, 1f, 1f, 1f)
-    }
-}
+private val MinTouchTargetSize = 40.dp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CgvChip(
+fun TheaterChip(
+    theater: Theater,
+    onTheaterClick: (Theater) -> Unit = {}
+) {
+    when (theater.type) {
+        Theater.TYPE_CGV -> CgvChip(
+            text = theater.name,
+            onClick = { debounce { onTheaterClick(theater) } }
+        )
+        Theater.TYPE_LOTTE -> LotteChip(
+            text = theater.name,
+            onClick = { debounce { onTheaterClick(theater) } }
+        )
+        Theater.TYPE_MEGABOX -> MegaboxChip(
+            text = theater.name,
+            onClick = { debounce { onTheaterClick(theater) } }
+        )
+    }
+}
+
+@ExperimentalMaterialApi
+@Composable
+private fun CgvChip(
     text: String,
     onClick: () -> Unit = {},
     enabled: Boolean = true
@@ -61,6 +73,7 @@ fun CgvChip(
                 backgroundColor = Color.White,
                 contentColor = Color(0xFFE51F20)
             ),
+            minTouchTargetSize = MinTouchTargetSize
         ) {
             Text(
                 text = text,
@@ -73,7 +86,7 @@ fun CgvChip(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun LotteChip(
+private fun LotteChip(
     text: String,
     onClick: () -> Unit = {},
     enabled: Boolean = true
@@ -86,6 +99,7 @@ fun LotteChip(
                 backgroundColor = Color(0xFFED1D24),
                 contentColor = Color.White
             ),
+            minTouchTargetSize = MinTouchTargetSize
         ) {
             Text(
                 text = text,
@@ -98,7 +112,7 @@ fun LotteChip(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MegaboxChip(
+private fun MegaboxChip(
     text: String,
     onClick: () -> Unit = {},
     enabled: Boolean = true
@@ -111,6 +125,7 @@ fun MegaboxChip(
                 backgroundColor = Color(0xFF352263),
                 contentColor = Color.White
             ),
+            minTouchTargetSize = MinTouchTargetSize
         ) {
             Text(
                 text = text,
@@ -118,5 +133,19 @@ fun MegaboxChip(
                 modifier = Modifier.padding(ChipDefaults.TextPadding)
             )
         }
+    }
+}
+
+@Composable
+internal fun rippleTheme(color: Color) = object : RippleTheme {
+
+    @Composable
+    override fun defaultColor(): Color {
+        return color
+    }
+
+    @Composable
+    override fun rippleAlpha(): RippleAlpha {
+        return RippleAlpha(1f, 1f, 1f, 1f)
     }
 }

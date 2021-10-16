@@ -61,7 +61,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
-import soup.compose.ui.Invisible
+import soup.compose.ui.invisible
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.util.LauncherIcons
@@ -191,25 +191,24 @@ class CustomProgressFragment : AbstractProgressFragment() {
                 )
             }
 
-            Invisible(invisible = state !is State.Progress) {
-                val (indeterminate, progress) = if (state is State.Progress) {
-                    if (state.bytesTotal == 0L) {
-                        true to 0f
-                    } else {
-                        false to state.bytesDownloaded / state.bytesTotal.toFloat()
-                    }
-                } else {
+            val (indeterminate, progress) = if (state is State.Progress) {
+                if (state.bytesTotal == 0L) {
                     true to 0f
+                } else {
+                    false to state.bytesDownloaded / state.bytesTotal.toFloat()
                 }
-                LinearProgressIndicator(
-                    indeterminate = indeterminate,
-                    progress = progress,
-                    color = MaterialTheme.colors.secondary,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 14.dp)
-                )
+            } else {
+                true to 0f
             }
+            LinearProgressIndicator(
+                indeterminate = indeterminate,
+                progress = progress,
+                color = MaterialTheme.colors.secondary,
+                modifier = Modifier
+                    .invisible(state !is State.Progress)
+                    .fillMaxWidth()
+                    .padding(vertical = 14.dp)
+            )
 
             if (state == State.Cancelled) {
                 Button(

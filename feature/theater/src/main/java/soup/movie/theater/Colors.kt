@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.theater.edit
+package soup.movie.theater
 
-import androidx.annotation.Keep
-import soup.movie.model.Theater
-import soup.movie.model.TheaterArea
+import androidx.compose.material.Colors
+import androidx.compose.ui.graphics.Color
 
-@Keep
-class TheaterEditChildUiModel(
-    val areaGroupList: List<TheaterArea>,
-    val selectedTheaterIdSet: List<Theater>
-)
+val Colors.divider: Color
+    get() = if (isLight) {
+        Color(0xFFF5F5F5)
+    } else {
+        Color(0xFF212121)
+    }

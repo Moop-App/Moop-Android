@@ -31,7 +31,24 @@ sealed class TheaterEditContentUiModel {
 }
 
 @Keep
-class TheaterEditFooterUiModel(
+data class TheaterEditChildUiModel(
+    val areaGroupList: List<TheaterEditAreaGroupUiModel>
+)
+
+@Keep
+data class TheaterEditAreaGroupUiModel(
+    val title: String,
+    val theaterList: List<TheaterEditTheaterUiModel>
+)
+
+@Keep
+data class TheaterEditTheaterUiModel(
+    val theater: Theater,
+    val checked: Boolean
+)
+
+@Keep
+data class TheaterEditFooterUiModel(
     val theaterList: List<Theater>
 ) {
 
