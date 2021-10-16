@@ -27,7 +27,7 @@ object Libs {
     const val threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.1"
 
     object Kotlin {
-        private const val version = "1.5.21"
+        private const val version = "1.5.31"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
@@ -128,7 +128,7 @@ object Libs {
     }
 
     object Compose {
-        const val version = "1.0.2"
+        const val version = "1.0.4"
         const val activity = "androidx.activity:activity-compose:1.3.1"
         const val constraintlayout =
             "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07"
@@ -164,7 +164,7 @@ object Libs {
     }
 
     object ComposeExperimental {
-        private const val version = "0.1.3"
+        private const val version = "0.1.4"
         const val material = "com.github.fornewid.compose-experimental:material:$version"
         const val ui = "com.github.fornewid.compose-experimental:ui:$version"
     }
