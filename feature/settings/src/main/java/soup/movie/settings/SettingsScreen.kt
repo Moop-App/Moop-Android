@@ -57,9 +57,7 @@ import com.google.accompanist.insets.statusBarsPadding
 import soup.compose.material.UnelevatedButton
 import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
-import soup.movie.theater.CgvChip
-import soup.movie.theater.LotteChip
-import soup.movie.theater.MegaboxChip
+import soup.movie.theater.TheaterChip
 import soup.movie.theme.stringResIdOf
 import soup.movie.util.debounce
 
@@ -206,20 +204,7 @@ private fun SettingsTheaterItem(
             } else {
                 FlowRow(mainAxisSpacing = 8.dp) {
                     theaterList.forEach { theater ->
-                        when (theater.type) {
-                            Theater.TYPE_CGV -> CgvChip(
-                                text = theater.name,
-                                onClick = { debounce { onItemClick(theater) } }
-                            )
-                            Theater.TYPE_LOTTE -> LotteChip(
-                                text = theater.name,
-                                onClick = { debounce { onItemClick(theater) } }
-                            )
-                            Theater.TYPE_MEGABOX -> MegaboxChip(
-                                text = theater.name,
-                                onClick = { debounce { onItemClick(theater) } }
-                            )
-                        }
+                        TheaterChip(theater, onItemClick)
                     }
                 }
             }

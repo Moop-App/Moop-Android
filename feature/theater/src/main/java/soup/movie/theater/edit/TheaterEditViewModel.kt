@@ -16,14 +16,14 @@
 package soup.movie.theater.edit
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.model.Theater
+import soup.movie.model.TheaterArea
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -32,40 +32,42 @@ class TheaterEditViewModel @Inject constructor(
     private val manager: TheaterEditManager
 ) : ViewModel() {
 
-    val contentUiModel = liveData {
+    val contentUiModel = flow {
         emit(TheaterEditContentUiModel.LoadingState)
-        withContext(Dispatchers.IO) {
-            try {
+        try {
+            withContext(Dispatchers.IO) {
                 manager.loadAsync()
-                emit(TheaterEditContentUiModel.DoneState)
-            } catch (t: Throwable) {
-                Timber.w(t)
-                emit(TheaterEditContentUiModel.ErrorState)
             }
+            emit(TheaterEditContentUiModel.DoneState)
+        } catch (t: Throwable) {
+            Timber.w(t)
+            emit(TheaterEditContentUiModel.ErrorState)
         }
     }
 
-    val cgvUiModel = manager.asCgvFlow()
-        .combine(manager.asSelectedTheaterListFlow()) { cgv, selectedList ->
-            TheaterEditChildUiModel(cgv, selectedList)
-        }
-        .asLiveData()
+    val cgvUiModel = combine(
+        manager.asCgvFlow(),
+        manager.asSelectedTheaterListFlow()
+    ) { cgv, selectedList ->
+        cgv.toUiModel(selectedList)
+    }
 
-    val lotteUiModel = manager.asLotteFlow()
-        .combine(manager.asSelectedTheaterListFlow()) { lotte, selectedList ->
-            TheaterEditChildUiModel(lotte, selectedList)
-        }
-        .asLiveData()
+    val lotteUiModel = combine(
+        manager.asLotteFlow(),
+        manager.asSelectedTheaterListFlow()
+    ) { lotte, selectedList ->
+        lotte.toUiModel(selectedList)
+    }
 
-    val megaboxUiModel = manager.asMegaboxFlow()
-        .combine(manager.asSelectedTheaterListFlow()) { megabox, selectedList ->
-            TheaterEditChildUiModel(megabox, selectedList)
-        }
-        .asLiveData()
+    val megaboxUiModel = combine(
+        manager.asMegaboxFlow(),
+        manager.asSelectedTheaterListFlow()
+    ) { megabox, selectedList ->
+        megabox.toUiModel(selectedList)
+    }
 
     val footerUiModel = manager.asSelectedTheaterListFlow()
         .map { TheaterEditFooterUiModel(it) }
-        .asLiveData()
 
     fun add(theater: Theater): Boolean {
         return manager.add(theater)
@@ -75,7 +77,24 @@ class TheaterEditViewModel @Inject constructor(
         manager.remove(theater)
     }
 
-    fun onConfirmClicked() {
+    fun onConfirmClick() {
         manager.save()
     }
+
+    private suspend fun List<TheaterArea>.toUiModel(selectedList: List<Theater>) =
+        withContext(Dispatchers.Default) {
+            TheaterEditChildUiModel(
+                map { theaterArea ->
+                    TheaterEditAreaGroupUiModel(
+                        title = theaterArea.area.name,
+                        theaterList = theaterArea.theaterList.map { theater ->
+                            TheaterEditTheaterUiModel(
+                                theater = theater,
+                                checked = selectedList.any { it.id == theater.id }
+                            )
+                        }
+                    )
+                }
+            )
+        }
 }

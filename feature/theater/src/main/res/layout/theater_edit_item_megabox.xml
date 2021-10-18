@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Widget.Chip.Filter.Megabox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:checked="false"
-    tools:text="메가박스 서울" />
