@@ -154,7 +154,7 @@ dependencies {
     implementation Libs.Firebase.ads
 
     implementation Libs.Material.composeThemeAdapter
-    implementation Libs.Compose.activity
+    implementation Libs.AndroidX.activityCompose
     implementation Libs.Compose.foundation
     implementation Libs.Compose.material
     implementation Libs.Compose.ui

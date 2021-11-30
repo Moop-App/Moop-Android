@@ -101,10 +101,7 @@ private enum class Page(val title: String) {
 internal fun TheaterEditScreen(viewModel: TheaterEditViewModel, upPress: () -> Unit) {
     ProvideWindowInsets {
         val pages = Page.values()
-        val pagerState = rememberPagerState(
-            pageCount = pages.size,
-            initialOffscreenLimit = pages.size
-        )
+        val pagerState = rememberPagerState()
         val coroutineScope = rememberCoroutineScope()
         val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
         FirstLaunchedEffect {
@@ -182,7 +179,7 @@ internal fun TheaterEditScreen(viewModel: TheaterEditViewModel, upPress: () -> U
                         false
                     }
             ) {
-                HorizontalPager(state = pagerState) { page ->
+                HorizontalPager(count = pages.size, state = pagerState) { page ->
                     when (Page.of(page)) {
                         Page.CGV -> CgvScreen(viewModel)
                         Page.Lotte -> LotteScreen(viewModel)
