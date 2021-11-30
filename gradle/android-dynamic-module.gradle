@@ -1,10 +1,10 @@
 import dependencies.Versions
 
 android {
-    compileSdkVersion Versions.compileSdk
+    compileSdk Versions.compileSdk
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
+        minSdk Versions.minSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

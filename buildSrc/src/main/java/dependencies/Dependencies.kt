@@ -3,9 +3,8 @@ package dependencies
 object Versions {
     const val appId = "soup.movie"
     const val minSdk = 23
-    const val targetSdk = 30
-    const val compileSdk = 30
-    const val buildTools = "30.0.2"
+    const val targetSdk = 31
+    const val compileSdk = 31
     const val versionCode = 106
     const val versionName = "1.0.6"
 }

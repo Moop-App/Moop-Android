@@ -48,6 +48,7 @@
 
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Moop.Splash">
 
@@ -78,6 +79,7 @@
         </activity>
         <activity
             android:name=".detail.DetailActivity"
+            android:exported="false"
             android:theme="@style/Theme.Moop.Detail" />
 
         <provider
@@ -120,7 +122,9 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <service android:name=".push.MessagingService"
+        <service
+            android:name=".push.MessagingService"
+            android:exported="true"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

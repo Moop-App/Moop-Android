@@ -16,20 +16,19 @@ apply plugin: 'com.google.firebase.firebase-perf'
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
 android {
-    compileSdkVersion Versions.compileSdk
-    buildToolsVersion Versions.buildTools
+    compileSdk Versions.compileSdk
 
     defaultConfig {
         applicationId Versions.appId
-        minSdkVersion Versions.minSdk
-        targetSdkVersion Versions.targetSdk
+        minSdk Versions.minSdk
+        targetSdk Versions.targetSdk
         versionCode Versions.versionCode
         versionName Versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
-        viewBinding = true
+        viewBinding true
         compose true
     }
     composeOptions {
