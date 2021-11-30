@@ -1,10 +1,10 @@
 import dependencies.Versions
 
 android {
-    compileSdkVersion Versions.compileSdk
+    compileSdk Versions.compileSdk
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
+        minSdk Versions.minSdk
         buildConfigField 'int', 'VERSION_CODE', "${Versions.versionCode}"
         buildConfigField 'String', 'VERSION_NAME', "\"${Versions.versionName}\""
 
