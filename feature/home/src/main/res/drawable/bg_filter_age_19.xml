@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/selector_filter_age_19_bg" />
-    <corners
-        android:topRightRadius="8dp"
-        android:bottomRightRadius="8dp" />
-</shape>

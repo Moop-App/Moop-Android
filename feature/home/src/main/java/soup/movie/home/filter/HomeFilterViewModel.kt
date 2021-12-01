@@ -15,6 +15,9 @@
  */
 package soup.movie.home.filter
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -59,9 +62,8 @@ class HomeFilterViewModel @Inject constructor(
         .map { it.toUiModel() }
         .asLiveData()
 
-    private val _genreUiModel = MutableLiveData<GenreFilterUiModel>()
-    val genreUiModel: LiveData<GenreFilterUiModel>
-        get() = _genreUiModel
+    var genreFilterList by mutableStateOf<List<GenreFilterItem>>(emptyList())
+        private set
 
     init {
         appSettings.getTheaterFilterFlow()
@@ -77,14 +79,12 @@ class HomeFilterViewModel @Inject constructor(
             appSettings.getGenreFilterFlow()
                 .collect { filter ->
                     lastGenreFilter = filter
-                    _genreUiModel.value = GenreFilterUiModel(
-                        allGenre.map {
-                            GenreFilterItem(
-                                name = it,
-                                isChecked = filter.blacklist.contains(it).not()
-                            )
-                        }
-                    )
+                    genreFilterList = allGenre.map {
+                        GenreFilterItem(
+                            name = it,
+                            isChecked = filter.blacklist.contains(it).not()
+                        )
+                    }
                 }
         }
     }
