@@ -1,4 +1,4 @@
--keepnames class soup.movie.detail.DetailActivity
+-keepnames class soup.movie.detail.DetailFragment
 -keepnames class soup.movie.home.HomeFragment
 -keepnames class soup.movie.model.Movie
 -keepnames class soup.movie.search.SearchFragment

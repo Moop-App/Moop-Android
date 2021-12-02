@@ -8,7 +8,7 @@
     android:transitionGroup="false"
     app:dragDismissDistance="@dimen/drag_dismiss_distance"
     app:dragDismissScale="0.95"
-    tools:context=".DetailActivity">
+    tools:context=".DetailFragment">
 
     <!-- Use a separate view for the background, rather than on the root view because it is a
          shared element. Otherwise it interferes with the window enter transition i.e. as it is
@@ -24,8 +24,7 @@
             android:id="@+id/backgroundView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/colorBackground"
-            android:transitionName="@string/transition_background" />
+            android:background="?android:attr/colorBackground" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listView"

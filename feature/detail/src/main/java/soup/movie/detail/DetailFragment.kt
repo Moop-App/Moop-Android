@@ -20,17 +20,18 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.navigation.navArgs
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,17 +41,18 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
-import soup.movie.detail.databinding.DetailActivityBinding
+import soup.movie.detail.databinding.DetailFragmentBinding
 import soup.movie.ext.executeWeb
 import soup.movie.ext.loadAsync
 import soup.movie.ext.observeEvent
 import soup.movie.ext.showToast
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
+import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.YouTube
+import soup.movie.util.autoCleared
 import soup.movie.util.clipToOval
 import soup.movie.util.setOnDebounceClickListener
-import soup.movie.util.viewBindings
 import soup.movie.widget.elastic.ElasticDragDismissFrameLayout
 import timber.log.Timber
 import javax.inject.Inject
@@ -58,11 +60,15 @@ import kotlin.math.max
 import kotlin.math.min
 
 @AndroidEntryPoint
-class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimation {
+class DetailFragment :
+    Fragment(R.layout.detail_fragment),
+    DetailViewRenderer,
+    DetailViewAnimation,
+    OnBackPressedListener {
 
-    private val args: DetailActivityArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
 
-    private val binding by viewBindings(DetailActivityBinding::inflate)
+    private var binding: DetailFragmentBinding by autoCleared()
 
     @Inject
     lateinit var analytics: EventAnalytics
@@ -92,28 +98,32 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
     private val chromeFader = object : ElasticDragDismissFrameLayout.ElasticDragDismissCallback() {
 
         override fun onDragDismissed() {
-            finishAfterTransition()
+            findNavController().navigateUp()
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        Insetter.builder()
-            .setOnApplyInsetsListener { container, insets, initialState ->
-                val systemInsets = insets.getInsets(systemBars())
-                container.updatePadding(
-                    left = initialState.paddings.left + systemInsets.left,
-                    right = initialState.paddings.right + systemInsets.right,
-                )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = DetailFragmentBinding.bind(view).apply {
+            initViewState(viewModel)
+            adaptSystemWindowInset()
+        }
+
+        viewModel.init(args.movie)
+        viewModel.uiEvent.observeEvent(viewLifecycleOwner) {
+            when (it) {
+                is ShareAction -> view.context.executeShareAction(it)
+                is ToastAction -> view.context.showToast(it.resId)
             }
-            .applyToView(binding.container)
+        }
+    }
+
+    private fun DetailFragmentBinding.adaptSystemWindowInset() {
         Insetter.builder()
             .setOnApplyInsetsListener { header, insets, initialState ->
                 header.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)
             }
-            .applyToView(binding.header.root)
+            .applyToView(header.root)
         Insetter.builder()
             .setOnApplyInsetsListener { listView, insets, initialState ->
                 val systemWindowInsets = insets.getInsets(systemBars())
@@ -122,7 +132,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                     bottom = initialState.paddings.bottom + systemWindowInsets.bottom
                 )
             }
-            .applyToView(binding.listView)
+            .applyToView(listView)
         Insetter.builder()
             .setOnApplyInsetsListener { share, insets, initialState ->
                 val systemWindowInsets = insets.getInsets(systemBars())
@@ -131,28 +141,13 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                     bottom = initialState.paddings.bottom + systemWindowInsets.bottom
                 )
             }
-            .applyToView(binding.share.root)
-
-        postponeEnterTransition()
-        initViewState(binding)
-
-        viewModel.init(args.movie)
-        viewModel.uiEvent.observeEvent(this) {
-            when (it) {
-                is ShareAction -> executeShareAction(it)
-                is ToastAction -> showToast(it.resId)
-            }
-        }
+            .applyToView(share.root)
     }
 
-    private fun initViewState(binding: DetailActivityBinding) {
-        binding.header.apply {
-            posterView.loadAsync(
-                args.movie.posterUrl,
-                doOnEnd = {
-                    startPostponedEnterTransition()
-                }
-            )
+    private fun DetailFragmentBinding.initViewState(viewModel: DetailViewModel) {
+        val ctx: Context = this.root.context
+        header.apply {
+            posterView.loadAsync(args.movie.posterUrl)
             posterCard.setOnDebounceClickListener(delay = 150L) {
                 analytics.clickPoster()
                 showPosterViewer(from = posterView)
@@ -163,19 +158,19 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
             }
             shareButton.setOnDebounceClickListener {
                 analytics.clickShare()
-                binding.toggleShareButton()
+                toggleShareButton()
             }
         }
-        binding.errorRetryButton.setOnDebounceClickListener {
+        errorRetryButton.setOnDebounceClickListener {
             Timber.d("retry")
             viewModel.onRetryClick()
         }
-        binding.share.apply {
+        share.apply {
             fun onShareClick(target: ShareTarget) {
                 viewModel.requestShareText(target)
             }
             root.setOnDebounceClickListener {
-                binding.toggleShareButton()
+                toggleShareButton()
             }
             facebookShareButton.clipToOval(true)
             facebookShareButton.setOnDebounceClickListener {
@@ -203,7 +198,6 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
             }
         }
         val listAdapter = DetailListAdapter { item ->
-            val ctx: Context = this@DetailActivity
             when (item) {
                 is BoxOfficeItemUiModel -> {
                     ctx.executeWeb(item.webLink)
@@ -249,8 +243,8 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                 }
             }
         }
-        binding.listView.apply {
-            layoutManager = GridLayoutManager(this@DetailActivity, 3).apply {
+        listView.apply {
+            layoutManager = GridLayoutManager(ctx, 3).apply {
                 spanSizeLookup = spanSizeLookup(listAdapter::getSpanSize)
             }
             adapter = listAdapter
@@ -260,18 +254,18 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
                 supportsChangeAnimations = false
             }
         }
-        viewModel.favoriteUiModel.observe(this) { isFavorite ->
-            binding.header.favoriteButton.isSelected = isFavorite
+        viewModel.favoriteUiModel.observe(viewLifecycleOwner) { isFavorite ->
+            header.favoriteButton.isSelected = isFavorite
         }
-        viewModel.headerUiModel.observe(this) {
-            binding.render(it)
+        viewModel.headerUiModel.observe(viewLifecycleOwner) {
+            render(it)
         }
-        viewModel.contentUiModel.observe(this) {
+        viewModel.contentUiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.items)
             listAdapter.updateHeader(height = binding.header.root.measuredHeight)
         }
-        viewModel.isError.observe(this) {
-            binding.errorGroup.isVisible = it
+        viewModel.isError.observe(viewLifecycleOwner) {
+            errorGroup.isVisible = it
         }
     }
 
@@ -287,15 +281,16 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
         super.onPause()
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed(): Boolean {
         if (binding.share.root.isActivated) {
             binding.toggleShareButton()
+            return true
         } else {
-            finishAfterTransition()
+            return false
         }
     }
 
-    private fun DetailActivityBinding.toggleShareButton() {
+    private fun DetailFragmentBinding.toggleShareButton() {
         share.root.let {
             if (it.isActivated) {
                 it.isActivated = false
@@ -318,7 +313,7 @@ class DetailActivity : AppCompatActivity(), DetailViewRenderer, DetailViewAnimat
             .show()
     }
 
-    private fun executeShareAction(action: ShareAction) {
+    private fun Context.executeShareAction(action: ShareAction) {
         when (action) {
             is ShareAction.Text -> {
                 val movie = args.movie

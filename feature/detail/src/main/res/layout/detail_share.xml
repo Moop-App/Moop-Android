@@ -7,7 +7,7 @@
     android:background="@color/detail_share_dim"
     android:elevation="12dp"
     android:visibility="invisible"
-    tools:context=".DetailActivity"
+    tools:context=".DetailFragment"
     tools:visibility="invisible">
 
     <Space
