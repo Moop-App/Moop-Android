@@ -15,7 +15,7 @@
         android:layout_height="48dp">
 
         <ImageView
-            android:id="@+id/brandView"
+            android:id="@+id/brand_view"
             android:layout_width="48dp"
             android:layout_height="0dp"
             android:scaleType="centerInside"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/searchLabel"
+            android:id="@+id/search_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -37,7 +37,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/privacy_tip"
-            app:layout_constraintStart_toEndOf="@id/brandView"
+            app:layout_constraintStart_toEndOf="@id/brand_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="\'죠스 예고편\' 검색 결과" />
 
@@ -50,7 +50,7 @@
             android:src="@drawable/ic_privacy_tip"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/searchLabel"
+            app:layout_constraintStart_toEndOf="@id/search_label"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@
     tools:context=".DetailFragment">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/titleView"
+        android:id="@+id/title_view"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -24,37 +24,37 @@
         app:autoSizeMaxTextSize="20dp"
         app:autoSizeMinTextSize="15dp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintEnd_toStartOf="@+id/favoriteButton"
+        app:layout_constraintEnd_toStartOf="@+id/favorite_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="극장판 요괴워치 섀도사이드-도깨비왕의 부활" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/favoriteButton"
+        android:id="@+id/favorite_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?selectableItemBackgroundBorderless"
         android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="@id/titleView"
-        app:layout_constraintEnd_toStartOf="@id/shareButton"
-        app:layout_constraintTop_toTopOf="@id/titleView"
+        app:layout_constraintBottom_toBottomOf="@id/title_view"
+        app:layout_constraintEnd_toStartOf="@id/share_button"
+        app:layout_constraintTop_toTopOf="@id/title_view"
         app:srcCompat="@drawable/asld_favorite" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/shareButton"
+        android:id="@+id/share_button"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:background="?selectableItemBackgroundBorderless"
         android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="@id/titleView"
+        app:layout_constraintBottom_toBottomOf="@id/title_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/titleView"
+        app:layout_constraintTop_toTopOf="@id/title_view"
         app:srcCompat="@drawable/ic_round_share"
         app:tint="?attr/colorOnBackground" />
 
     <Space
-        android:id="@+id/headerGroup"
+        android:id="@+id/header_group"
         android:layout_width="0dp"
         android:layout_height="168dp"
         android:layout_marginStart="16dp"
@@ -64,21 +64,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleView" />
+        app:layout_constraintTop_toBottomOf="@id/title_view" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/posterCard"
+        android:id="@+id/poster_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/headerGroup"
+        app:layout_constraintBottom_toBottomOf="@id/header_group"
         app:layout_constraintDimensionRatio="V,27:40"
-        app:layout_constraintStart_toStartOf="@id/headerGroup"
-        app:layout_constraintTop_toTopOf="@id/headerGroup"
+        app:layout_constraintStart_toStartOf="@id/header_group"
+        app:layout_constraintTop_toTopOf="@id/header_group"
         app:rippleColor="@color/color_on_poster">
 
         <ImageView
-            android:id="@+id/posterView"
+            android:id="@+id/poster_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -87,70 +87,70 @@
     </com.google.android.material.card.MaterialCardView>
 
     <include
-        android:id="@+id/ageBgView"
+        android:id="@+id/age_bg_view"
         layout="@layout/movie_tag_age_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ageView"
-        app:layout_constraintEnd_toEndOf="@+id/ageView"
-        app:layout_constraintStart_toStartOf="@+id/ageView"
-        app:layout_constraintTop_toTopOf="@+id/ageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/age_view"
+        app:layout_constraintEnd_toEndOf="@+id/age_view"
+        app:layout_constraintStart_toStartOf="@+id/age_view"
+        app:layout_constraintTop_toTopOf="@+id/age_view" />
 
     <include
-        android:id="@+id/ageView"
+        android:id="@+id/age_view"
         layout="@layout/movie_tag_age"
         android:layout_width="@dimen/tag_width"
         android:layout_height="@dimen/tag_height"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/posterCard"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toTopOf="@+id/posterCard" />
+        app:layout_constraintEnd_toEndOf="@+id/poster_card"
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toTopOf="@+id/poster_card" />
 
     <include
-        android:id="@+id/newView"
+        android:id="@+id/new_view"
         layout="@layout/movie_tag_new"
         android:layout_width="@dimen/tag_width"
         android:layout_height="@dimen/tag_height"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/posterCard"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/ageView"
+        app:layout_constraintEnd_toEndOf="@+id/poster_card"
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/age_view"
         tools:visibility="visible" />
 
     <include
-        android:id="@+id/bestView"
+        android:id="@+id/best_view"
         layout="@layout/movie_tag_best"
         android:layout_width="@dimen/tag_width"
         android:layout_height="@dimen/tag_height"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/posterCard"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/newView"
+        app:layout_constraintEnd_toEndOf="@+id/poster_card"
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/new_view"
         tools:visibility="visible" />
 
     <include
-        android:id="@+id/dDayView"
+        android:id="@+id/d_day_view"
         layout="@layout/movie_tag_d_day"
         android:layout_width="@dimen/tag_width"
         android:layout_height="@dimen/tag_height"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/posterCard"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/bestView"
+        app:layout_constraintEnd_toEndOf="@+id/poster_card"
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/best_view"
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/labelBarrier"
+        android:id="@+id/label_barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="end"
-        app:constraint_referenced_ids="openDateLabel,ageLabel,genreLabel,nationLabel,companyLabel" />
+        app:constraint_referenced_ids="open_date_label,age_label,genre_label,nation_label,company_label" />
 
     <TextView
-        android:id="@+id/openDateLabel"
+        android:id="@+id/open_date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -160,11 +160,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toTopOf="@id/headerGroup" />
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toTopOf="@id/header_group" />
 
     <TextView
-        android:id="@+id/openDateText"
+        android:id="@+id/open_date_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -173,13 +173,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/openDateLabel"
-        app:layout_constraintEnd_toEndOf="@id/headerGroup"
-        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
+        app:layout_constraintBaseline_toBaselineOf="@id/open_date_label"
+        app:layout_constraintEnd_toEndOf="@id/header_group"
+        app:layout_constraintStart_toEndOf="@+id/label_barrier"
         tools:text="18.10.19" />
 
     <TextView
-        android:id="@+id/ageLabel"
+        android:id="@+id/age_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -189,11 +189,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/openDateLabel" />
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/open_date_label" />
 
     <TextView
-        android:id="@+id/ageText"
+        android:id="@+id/age_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -203,13 +203,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/ageLabel"
-        app:layout_constraintEnd_toEndOf="@id/headerGroup"
-        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
+        app:layout_constraintBaseline_toBaselineOf="@id/age_label"
+        app:layout_constraintEnd_toEndOf="@id/header_group"
+        app:layout_constraintStart_toEndOf="@+id/label_barrier"
         tools:text="청소년 관람불가" />
 
     <TextView
-        android:id="@+id/genreLabel"
+        android:id="@+id/genre_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -219,11 +219,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/ageLabel" />
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/age_label" />
 
     <TextView
-        android:id="@+id/genreText"
+        android:id="@+id/genre_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -233,13 +233,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/genreLabel"
-        app:layout_constraintEnd_toEndOf="@id/headerGroup"
-        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
+        app:layout_constraintBaseline_toBaselineOf="@id/genre_label"
+        app:layout_constraintEnd_toEndOf="@id/header_group"
+        app:layout_constraintStart_toEndOf="@+id/label_barrier"
         tools:text="코미디, 드라마" />
 
     <TextView
-        android:id="@+id/nationLabel"
+        android:id="@+id/nation_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -249,11 +249,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/genreLabel" />
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/genre_label" />
 
     <TextView
-        android:id="@+id/nationText"
+        android:id="@+id/nation_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -263,13 +263,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/nationLabel"
-        app:layout_constraintEnd_toEndOf="@id/headerGroup"
-        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
+        app:layout_constraintBaseline_toBaselineOf="@id/nation_label"
+        app:layout_constraintEnd_toEndOf="@id/header_group"
+        app:layout_constraintStart_toEndOf="@+id/label_barrier"
         tools:text="미국" />
 
     <TextView
-        android:id="@+id/runningTimeLabel"
+        android:id="@+id/running_time_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -279,11 +279,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/nationLabel" />
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/nation_label" />
 
     <TextView
-        android:id="@+id/runningTimeText"
+        android:id="@+id/running_time_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -293,13 +293,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/runningTimeLabel"
-        app:layout_constraintEnd_toEndOf="@id/headerGroup"
-        app:layout_constraintStart_toEndOf="@+id/runningTimeLabel"
+        app:layout_constraintBaseline_toBaselineOf="@id/running_time_label"
+        app:layout_constraintEnd_toEndOf="@id/header_group"
+        app:layout_constraintStart_toEndOf="@+id/running_time_label"
         tools:text="109분" />
 
     <TextView
-        android:id="@+id/companyLabel"
+        android:id="@+id/company_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -309,11 +309,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintStart_toEndOf="@+id/posterCard"
-        app:layout_constraintTop_toBottomOf="@+id/runningTimeLabel" />
+        app:layout_constraintStart_toEndOf="@+id/poster_card"
+        app:layout_constraintTop_toBottomOf="@+id/running_time_label" />
 
     <TextView
-        android:id="@+id/companyText"
+        android:id="@+id/company_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -323,9 +323,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?attr/colorOnBackground"
         android:textSize="14dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/companyLabel"
-        app:layout_constraintEnd_toEndOf="@id/headerGroup"
-        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
+        app:layout_constraintBaseline_toBaselineOf="@id/company_label"
+        app:layout_constraintEnd_toEndOf="@id/header_group"
+        app:layout_constraintStart_toEndOf="@+id/label_barrier"
         tools:text="오드 AUD" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/stateView"
+        android:id="@+id/state_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
@@ -18,22 +18,22 @@
         tools:text="State" />
 
     <Button
-        android:id="@+id/activeButton"
+        android:id="@+id/active_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Active"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/inactiveButton"
+        app:layout_constraintEnd_toStartOf="@id/inactive_button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/inactiveButton"
+        android:id="@+id/inactive_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Inactive"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/activeButton" />
+        app:layout_constraintStart_toEndOf="@id/active_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

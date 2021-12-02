@@ -18,7 +18,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/plotLabel"
+            android:id="@+id/plot_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_round_plot"
@@ -38,14 +38,14 @@
             android:id="@+id/more_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="@id/plotLabel"
+            app:layout_constraintBottom_toBottomOf="@id/plot_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/plotLabel"
+            app:layout_constraintTop_toTopOf="@id/plot_label"
             app:srcCompat="@drawable/asld_plot_more"
             tools:src="@drawable/ic_round_plot_expand" />
 
         <TextView
-            android:id="@+id/shortPlotText"
+            android:id="@+id/short_plot_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -56,12 +56,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/plotLabel"
+            app:layout_constraintTop_toBottomOf="@id/plot_label"
             tools:text="“내 인생이 비극인줄 알았는데, 코미디였어”고담시의 광대 아서 플렉은 코미디언을 꿈꾸는 남자.하지만 모두가 미쳐가는 코미디 같은 세상에서 맨 정신으로는 그가 설 자리가 없음을 깨닫게 되는데…이제껏 본 적 없는 진짜 ‘조커’를 만나라!"
             tools:visibility="gone" />
 
         <TextView
-            android:id="@+id/longPlotText"
+            android:id="@+id/long_plot_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -70,7 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/plotLabel"
+            app:layout_constraintTop_toBottomOf="@id/plot_label"
             tools:text="“내 인생이 비극인줄 알았는데, 코미디였어”고담시의 광대 아서 플렉은 코미디언을 꿈꾸는 남자.하지만 모두가 미쳐가는 코미디 같은 세상에서 맨 정신으로는 그가 설 자리가 없음을 깨닫게 되는데…이제껏 본 적 없는 진짜 ‘조커’를 만나라!"
             tools:visibility="visible" />
 

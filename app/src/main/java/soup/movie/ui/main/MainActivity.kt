@@ -190,5 +190,5 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val navHostFragment: Fragment
-        get() = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 }

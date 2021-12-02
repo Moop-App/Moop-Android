@@ -20,7 +20,7 @@
         android:paddingBottom="8dp">
 
         <TextView
-            android:id="@+id/nameText"
+            android:id="@+id/name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -29,14 +29,14 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/castText"
+            app:layout_constraintBottom_toTopOf="@id/cast_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="이병헌" />
 
         <TextView
-            android:id="@+id/castText"
+            android:id="@+id/cast_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -47,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameText"
+            app:layout_constraintTop_toBottomOf="@id/name_text"
             tools:text="감독" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
