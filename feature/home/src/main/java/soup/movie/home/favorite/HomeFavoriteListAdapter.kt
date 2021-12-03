@@ -17,10 +17,7 @@ package soup.movie.home.favorite
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
-import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -43,7 +40,7 @@ import soup.movie.util.setOnDebounceClickListener
 class HomeFavoriteListAdapter(
     context: Context,
     diffCallback: DiffUtil.ItemCallback<Movie> = IdBasedDiffCallback { it.id },
-    private val listener: (Movie, Array<Pair<View, String>>) -> Unit
+    private val listener: (Movie) -> Unit
 ) : ListAdapter<Movie, HomeFavoriteListAdapter.MovieViewHolder>(diffCallback) {
 
     private val layoutInflater = LayoutInflater.from(context)
@@ -55,7 +52,7 @@ class HomeFavoriteListAdapter(
                 val index = bindingAdapterPosition
                 if (index in 0..itemCount) {
                     val movie: Movie = getItem(index)
-                    listener(movie, createSharedElements(movie))
+                    listener(movie)
                 }
             }
             itemView.setOnLongClickListener {
@@ -76,38 +73,13 @@ class HomeFavoriteListAdapter(
 
     override fun getItemViewType(position: Int) = R.layout.home_item_favorite_movie
 
-    private fun MovieViewHolder.createSharedElements(movie: Movie): Array<Pair<View, String>> {
-        itemView.run {
-            val sharedElements = mutableListOf(
-                backgroundView to R.string.transition_background,
-                posterView to R.string.transition_poster,
-                ageBgView to R.string.transition_age_bg
-            )
-            if (movie.isNew()) {
-                sharedElements.add(newView to R.string.transition_new)
-            }
-            if (movie.isBest()) {
-                sharedElements.add(bestView to R.string.transition_best)
-            }
-            if (movie.isDDay()) {
-                sharedElements.add(dDayView to R.string.transition_d_day)
-            }
-            return sharedElements.toTypedArray()
-        }
-    }
-
-    private infix fun View.to(@StringRes tagId: Int): Pair<View, String> {
-        return Pair(this, context.getString(tagId))
-    }
-
     class MovieViewHolder(private val binding: HomeItemFavoriteMovieBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        val backgroundView = binding.backgroundView
-        val posterView = binding.posterView
-        val ageBgView = binding.ageBgView.root
-        val newView = binding.newView.root
-        val bestView = binding.bestView.root
-        val dDayView = binding.dDayView.root
+        private val posterView = binding.posterView
+        private val ageBgView = binding.ageBgView.root
+        private val newView = binding.newView.root
+        private val bestView = binding.bestView.root
+        private val dDayView = binding.dDayView.root
 
         fun bind(item: Movie) {
             binding.container.tag = item.id

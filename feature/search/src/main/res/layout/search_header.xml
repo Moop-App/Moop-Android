@@ -12,13 +12,13 @@
         android:transitionGroup="false">
 
         <View
-            android:id="@+id/searchBackground"
+            android:id="@+id/search_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary" />
 
         <SearchView
-            android:id="@+id/searchView"
+            android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="false"
@@ -27,14 +27,14 @@
             android:transitionGroup="true" />
 
         <FrameLayout
-            android:id="@+id/searchBackContainer"
+            android:id="@+id/search_back_container"
             android:layout_width="96dp"
             android:layout_height="match_parent"
             android:background="@color/transparent"
             android:paddingStart="4dp">
 
             <ImageButton
-                android:id="@+id/searchBack"
+                android:id="@+id/search_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="?selectableItemBackgroundBorderless"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/noItemsView"
+        android:id="@+id/no_items_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listView"
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -61,7 +61,7 @@
     </androidx.viewpager2.NestedScrollableHost>
 
     <soup.movie.widget.ContentLoadingProgressBar
-        android:id="@+id/loadingView"
+        android:id="@+id/loading_view"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -79,7 +79,7 @@
         tools:visibility="visible" />
 
     <include
-        android:id="@+id/errorView"
+        android:id="@+id/error_view"
         layout="@layout/common_error"
         android:layout_width="match_parent"
         android:layout_height="40dp"

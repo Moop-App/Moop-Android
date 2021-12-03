@@ -8,6 +8,5 @@
     android:textColor="?android:colorBackground"
     android:textSize="12dp"
     android:textStyle="bold"
-    android:transitionName="@string/transition_age"
     tools:background="@drawable/bg_tag_age_19"
     tools:text="청불" />

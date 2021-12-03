@@ -17,10 +17,8 @@ package soup.movie.home.favorite
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,15 +49,9 @@ class HomeFavoriteFragment : HomeTabFragment(R.layout.home_tab_favorite) {
     }
 
     private fun HomeTabFavoriteBinding.initViewState(viewModel: HomeFavoriteViewModel) {
-        val listAdapter = HomeFavoriteListAdapter(root.context) { movie, sharedElements ->
+        val listAdapter = HomeFavoriteListAdapter(root.context) { movie ->
             analytics.clickMovie()
-            findNavController().navigate(
-                HomeFragmentDirections.actionToDetail(movie),
-                ActivityNavigatorExtras(
-                    activityOptions = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
-                )
-            )
+            findNavController().navigate(HomeFragmentDirections.actionToDetail(movie))
         }
         listView.apply {
             adapter = listAdapter

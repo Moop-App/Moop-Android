@@ -16,7 +16,7 @@
 package soup.movie.detail
 
 import androidx.core.view.isVisible
-import soup.movie.detail.databinding.DetailActivityBinding
+import soup.movie.detail.databinding.DetailFragmentBinding
 import soup.movie.detail.databinding.DetailHeaderBinding
 import soup.movie.ext.asyncText
 import soup.movie.ext.getAgeBackground
@@ -29,7 +29,7 @@ import soup.movie.ext.isNew
 
 interface DetailViewRenderer {
 
-    fun DetailActivityBinding.render(uiModel: HeaderUiModel) {
+    fun DetailFragmentBinding.render(uiModel: HeaderUiModel) {
         header.render(uiModel)
     }
 

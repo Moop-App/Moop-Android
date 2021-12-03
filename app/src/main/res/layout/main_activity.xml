@@ -8,13 +8,13 @@
     tools:context=".ui.main.MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:openDrawer="start">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/navHostFragment"
+            android:id="@+id/nav_host_fragment"
             android:name="soup.movie.ui.CustomDynamicNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,7 +22,7 @@
             app:navGraph="@navigation/nav_graph" />
 
         <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationView"
+            android:id="@+id/navigation_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"

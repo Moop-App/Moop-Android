@@ -18,28 +18,28 @@
         android:paddingBottom="14dp">
 
         <Space
-            android:id="@+id/rankSpace"
+            android:id="@+id/rank_space"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/audienceSpace"
+            app:layout_constraintEnd_toStartOf="@id/audience_space"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/rankTitle"
+            android:id="@+id/rank_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.7"
             android:text="박스오피스"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="?attr/colorOnSurface"
-            app:layout_constraintEnd_toEndOf="@id/rankSpace"
-            app:layout_constraintStart_toStartOf="@id/rankSpace"
-            app:layout_constraintTop_toTopOf="@id/rankSpace" />
+            app:layout_constraintEnd_toEndOf="@id/rank_space"
+            app:layout_constraintStart_toStartOf="@id/rank_space"
+            app:layout_constraintTop_toTopOf="@id/rank_space" />
 
         <TextView
-            android:id="@+id/rankText"
+            android:id="@+id/rank_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -47,13 +47,13 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/rankSpace"
-            app:layout_constraintStart_toStartOf="@id/rankSpace"
-            app:layout_constraintTop_toBottomOf="@id/rankTitle"
+            app:layout_constraintEnd_toEndOf="@id/rank_space"
+            app:layout_constraintStart_toStartOf="@id/rank_space"
+            app:layout_constraintTop_toBottomOf="@id/rank_title"
             tools:text="9위" />
 
         <TextView
-            android:id="@+id/rankDescription"
+            android:id="@+id/rank_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -68,35 +68,35 @@
             android:textColor="?colorSurface"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/rankSpace"
-            app:layout_constraintEnd_toEndOf="@id/rankSpace"
-            app:layout_constraintStart_toStartOf="@id/rankSpace"
-            app:layout_constraintTop_toBottomOf="@id/rankText"
+            app:layout_constraintBottom_toBottomOf="@id/rank_space"
+            app:layout_constraintEnd_toEndOf="@id/rank_space"
+            app:layout_constraintStart_toStartOf="@id/rank_space"
+            app:layout_constraintTop_toBottomOf="@id/rank_text"
             tools:text="09.30 기준" />
 
         <Space
-            android:id="@+id/audienceSpace"
+            android:id="@+id/audience_space"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ratingSpace"
-            app:layout_constraintStart_toEndOf="@id/rankSpace"
+            app:layout_constraintEnd_toStartOf="@id/rating_space"
+            app:layout_constraintStart_toEndOf="@id/rank_space"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/audienceTitle"
+            android:id="@+id/audience_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.7"
             android:text="누적 관객수"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="?attr/colorOnSurface"
-            app:layout_constraintEnd_toEndOf="@id/audienceSpace"
-            app:layout_constraintStart_toStartOf="@id/audienceSpace"
-            app:layout_constraintTop_toTopOf="@id/audienceSpace" />
+            app:layout_constraintEnd_toEndOf="@id/audience_space"
+            app:layout_constraintStart_toStartOf="@id/audience_space"
+            app:layout_constraintTop_toTopOf="@id/audience_space" />
 
         <TextView
-            android:id="@+id/audienceText"
+            android:id="@+id/audience_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -104,13 +104,13 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/audienceSpace"
-            app:layout_constraintStart_toStartOf="@id/audienceSpace"
-            app:layout_constraintTop_toBottomOf="@id/audienceTitle"
+            app:layout_constraintEnd_toEndOf="@id/audience_space"
+            app:layout_constraintStart_toStartOf="@id/audience_space"
+            app:layout_constraintTop_toBottomOf="@id/audience_title"
             tools:text="5.2만명" />
 
         <TextView
-            android:id="@+id/audienceDescription"
+            android:id="@+id/audience_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -125,48 +125,48 @@
             android:textColor="?colorSurface"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/audienceSpace"
-            app:layout_constraintEnd_toEndOf="@id/audienceSpace"
-            app:layout_constraintStart_toStartOf="@id/audienceSpace"
-            app:layout_constraintTop_toBottomOf="@id/audienceText"
+            app:layout_constraintBottom_toBottomOf="@id/audience_space"
+            app:layout_constraintEnd_toEndOf="@id/audience_space"
+            app:layout_constraintStart_toStartOf="@id/audience_space"
+            app:layout_constraintTop_toBottomOf="@id/audience_text"
             tools:text="개봉 7일차" />
 
         <Space
-            android:id="@+id/ratingSpace"
+            android:id="@+id/rating_space"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/audienceSpace"
+            app:layout_constraintStart_toEndOf="@id/audience_space"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/ratingTitle"
+            android:id="@+id/rating_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.7"
             android:text="평점"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="?attr/colorOnSurface"
-            app:layout_constraintEnd_toEndOf="@id/ratingSpace"
-            app:layout_constraintStart_toStartOf="@id/ratingSpace"
-            app:layout_constraintTop_toTopOf="@id/ratingSpace" />
+            app:layout_constraintEnd_toEndOf="@id/rating_space"
+            app:layout_constraintStart_toStartOf="@id/rating_space"
+            app:layout_constraintTop_toTopOf="@id/rating_space" />
 
         <ImageView
-            android:id="@+id/ratingIcon"
+            android:id="@+id/rating_icon"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/ic_round_star"
-            app:layout_constraintBottom_toBottomOf="@id/ratingText"
-            app:layout_constraintEnd_toStartOf="@id/ratingText"
+            app:layout_constraintBottom_toBottomOf="@id/rating_text"
+            app:layout_constraintEnd_toStartOf="@id/rating_text"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/ratingSpace"
-            app:layout_constraintTop_toTopOf="@id/ratingText"
+            app:layout_constraintStart_toStartOf="@id/rating_space"
+            app:layout_constraintTop_toTopOf="@id/rating_text"
             app:tint="@color/amber"
             app:tintMode="src_in" />
 
         <TextView
-            android:id="@+id/ratingText"
+            android:id="@+id/rating_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -179,13 +179,13 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/ratingSpace"
-            app:layout_constraintStart_toEndOf="@id/ratingIcon"
-            app:layout_constraintTop_toBottomOf="@id/ratingTitle"
+            app:layout_constraintEnd_toEndOf="@id/rating_space"
+            app:layout_constraintStart_toEndOf="@id/rating_icon"
+            app:layout_constraintTop_toBottomOf="@id/rating_title"
             tools:text="0.0" />
 
         <TextView
-            android:id="@+id/ratingDescription"
+            android:id="@+id/rating_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -201,10 +201,10 @@
             android:textColor="?colorSurface"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/ratingSpace"
-            app:layout_constraintEnd_toEndOf="@id/ratingSpace"
-            app:layout_constraintStart_toStartOf="@id/ratingSpace"
-            app:layout_constraintTop_toBottomOf="@id/ratingText" />
+            app:layout_constraintBottom_toBottomOf="@id/rating_space"
+            app:layout_constraintEnd_toEndOf="@id/rating_space"
+            app:layout_constraintStart_toStartOf="@id/rating_space"
+            app:layout_constraintTop_toBottomOf="@id/rating_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

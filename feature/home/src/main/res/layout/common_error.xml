@@ -7,7 +7,7 @@
     android:foreground="?selectableItemBackground">
 
     <ImageView
-        android:id="@+id/infoIcon"
+        android:id="@+id/info_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_round_info"
@@ -34,7 +34,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/infoIcon"
+        app:layout_constraintStart_toEndOf="@+id/info_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

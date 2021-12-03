@@ -7,12 +7,12 @@
     <fade android:fadingMode="fade_in" />
     <targets>
         <target android:excludeId="@android:id/navigationBarBackground" />
-        <target android:excludeId="@id/backgroundView" />
-        <target android:excludeId="@id/posterView" />
-        <target android:excludeId="@id/ageBgView" />
-        <target android:excludeId="@id/newView" />
-        <target android:excludeId="@id/bestView" />
-        <target android:excludeId="@id/dDayView" />
+        <target android:excludeId="@id/background_view" />
+        <target android:excludeId="@id/poster_view" />
+        <target android:excludeId="@id/age_bg_view" />
+        <target android:excludeId="@id/new_view" />
+        <target android:excludeId="@id/best_view" />
+        <target android:excludeId="@id/d_day_view" />
     </targets>
 
 </transitionSet>

@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/backgroundView"
+    android:id="@+id/background_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
@@ -22,13 +22,13 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/posterView"
-            app:layout_constraintEnd_toEndOf="@+id/posterView"
-            app:layout_constraintStart_toStartOf="@+id/posterView"
-            app:layout_constraintTop_toTopOf="@+id/posterView" />
+            app:layout_constraintBottom_toBottomOf="@+id/poster_view"
+            app:layout_constraintEnd_toEndOf="@+id/poster_view"
+            app:layout_constraintStart_toStartOf="@+id/poster_view"
+            app:layout_constraintTop_toTopOf="@+id/poster_view" />
 
         <ImageView
-            android:id="@+id/posterView"
+            android:id="@+id/poster_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -40,7 +40,7 @@
             tools:src="@tools:sample/avatars" />
 
         <include
-            android:id="@+id/ageBgView"
+            android:id="@+id/age_bg_view"
             layout="@layout/movie_tag_age_bg"
             android:layout_width="10dp"
             android:layout_height="10dp"
@@ -49,7 +49,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <include
-            android:id="@+id/newView"
+            android:id="@+id/new_view"
             layout="@layout/movie_tag_new"
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"
@@ -59,7 +59,7 @@
             tools:visibility="gone" />
 
         <include
-            android:id="@+id/bestView"
+            android:id="@+id/best_view"
             layout="@layout/movie_tag_best"
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"
@@ -69,7 +69,7 @@
             tools:visibility="visible" />
 
         <include
-            android:id="@+id/dDayView"
+            android:id="@+id/d_day_view"
             layout="@layout/movie_tag_d_day"
             android:layout_width="@dimen/tag_width"
             android:layout_height="@dimen/tag_height"

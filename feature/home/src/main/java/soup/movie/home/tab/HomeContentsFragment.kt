@@ -17,11 +17,9 @@ package soup.movie.home.tab
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
-import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RoughAdapterDataObserver
@@ -74,15 +72,9 @@ abstract class HomeContentsFragment : HomeTabFragment(R.layout.home_tab_contents
     }
 
     private fun HomeTabContentsBinding.initViewState(viewModel: HomeContentsViewModel) {
-        val listAdapter = HomeContentsListAdapter(root.context) { movie, sharedElements ->
+        val listAdapter = HomeContentsListAdapter(root.context) { movie ->
             analytics.clickMovie()
-            findNavController().navigate(
-                HomeFragmentDirections.actionToDetail(movie),
-                ActivityNavigatorExtras(
-                    activityOptions = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(requireActivity(), *sharedElements)
-                )
-            )
+            findNavController().navigate(HomeFragmentDirections.actionToDetail(movie))
         }
         listView.apply {
             setItemViewCacheSize(20)

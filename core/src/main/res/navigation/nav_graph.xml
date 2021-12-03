@@ -11,15 +11,15 @@
         android:id="@+id/home"
         android:name="soup.movie.home.HomeFragment" />
 
-    <activity
+    <fragment
         android:id="@+id/detail"
-        android:name="soup.movie.detail.DetailActivity">
+        android:name="soup.movie.detail.DetailFragment">
 
         <argument
             android:name="movie"
             app:argType="soup.movie.model.Movie"
             app:nullable="false" />
-    </activity>
+    </fragment>
 
     <fragment
         android:id="@+id/search"

@@ -7,7 +7,7 @@
     tools:visibility="visible">
 
     <View
-        android:id="@+id/hintButton"
+        android:id="@+id/hint_button"
         android:layout_width="108dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/hintLabel"
+        android:id="@+id/hint_label"
         android:layout_width="0dp"
         android:layout_height="@dimen/home_header_hint_height"
         android:background="@drawable/bg_button_home_hint"
@@ -30,9 +30,9 @@
         android:textColor="?colorOnSurface"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/hintButton"
-        app:layout_constraintEnd_toEndOf="@id/hintButton"
-        app:layout_constraintStart_toStartOf="@id/hintButton"
-        app:layout_constraintTop_toTopOf="@id/hintButton" />
+        app:layout_constraintBottom_toBottomOf="@id/hint_button"
+        app:layout_constraintEnd_toEndOf="@id/hint_button"
+        app:layout_constraintStart_toStartOf="@id/hint_button"
+        app:layout_constraintTop_toTopOf="@id/hint_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

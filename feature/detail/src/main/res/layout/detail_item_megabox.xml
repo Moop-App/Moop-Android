@@ -19,7 +19,7 @@
         android:paddingBottom="6dp">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/brandView"
+            android:id="@+id/brand_view"
             style="@style/Widget.Chip.Megabox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,21 +29,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/eggIcon"
+            android:id="@+id/egg_icon"
             android:layout_width="24dp"
             android:layout_height="36dp"
             android:layout_marginTop="4dp"
             android:src="@drawable/ic_round_star"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/eggLabel"
+            app:layout_constraintEnd_toStartOf="@+id/egg_label"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brandView"
+            app:layout_constraintTop_toBottomOf="@+id/brand_view"
             app:tint="@color/amber"
             app:tintMode="src_in" />
 
         <TextView
-            android:id="@+id/eggLabel"
+            android:id="@+id/egg_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -54,10 +54,10 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/eggIcon"
+            app:layout_constraintBottom_toBottomOf="@id/egg_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/eggIcon"
-            app:layout_constraintTop_toTopOf="@id/eggIcon"
+            app:layout_constraintStart_toEndOf="@id/egg_icon"
+            app:layout_constraintTop_toTopOf="@id/egg_icon"
             tools:text="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
