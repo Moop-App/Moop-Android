@@ -24,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import soup.movie.home.HomeContentsUiModel
 import soup.movie.model.Movie
 import soup.movie.model.repository.MoopRepository
 import javax.inject.Inject
@@ -34,15 +33,15 @@ class HomeFavoriteViewModel @Inject constructor(
     repository: MoopRepository
 ) : ViewModel() {
 
-    private val _contentsUiModel = MutableLiveData<HomeContentsUiModel>()
-    val contentsUiModel: LiveData<HomeContentsUiModel>
-        get() = _contentsUiModel
+    private val _movies = MutableLiveData<List<Movie>>()
+    val movies: LiveData<List<Movie>>
+        get() = _movies
 
     init {
         repository.getFavoriteMovieList()
             .onEach {
                 val favoriteMovieList = it.sortedBy(Movie::openDate)
-                _contentsUiModel.postValue(HomeContentsUiModel(favoriteMovieList))
+                _movies.postValue(favoriteMovieList)
             }
             .flowOn(Dispatchers.IO)
             .launchIn(viewModelScope)
