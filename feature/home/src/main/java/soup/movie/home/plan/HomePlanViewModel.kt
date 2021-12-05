@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import soup.movie.ext.getDDay
-import soup.movie.home.HomeContentsUiModel
 import soup.movie.home.domain.getMovieFilterFlow
 import soup.movie.home.tab.HomeContentsViewModel
 import soup.movie.model.Movie
@@ -50,9 +49,9 @@ class HomePlanViewModel @Inject constructor(
     override val isError: LiveData<Boolean>
         get() = _isError
 
-    private val _contentsUiModel = MutableLiveData<HomeContentsUiModel>()
-    override val contentsUiModel: LiveData<HomeContentsUiModel>
-        get() = _contentsUiModel
+    private val _movies = MutableLiveData<List<Movie>>()
+    override val movies: LiveData<List<Movie>>
+        get() = _movies
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -66,7 +65,7 @@ class HomePlanViewModel @Inject constructor(
                 }
                 .onStart { delay(200) }
                 .collect {
-                    _contentsUiModel.postValue(HomeContentsUiModel(it))
+                    _movies.postValue(it)
                 }
         }
     }

@@ -39,6 +39,7 @@ class HomePageAdapter(fragment: HomeFragment) : FragmentStateAdapter(fragment) {
     }
 
     fun scrollToTop(position: Int) {
-        getFragment(position)?.scrollToTop()
+        // TODO: re-implements in HomeTabFragment
+        // getFragment(position)?.scrollToTop()
     }
 }
