@@ -36,6 +36,7 @@ dependencies {
     implementation Libs.Compose.runtime_livedata
     implementation Libs.Accompanist.insets
     implementation Libs.Accompanist.flowlayout
+    implementation Libs.Accompanist.swiperefresh
     implementation Libs.ComposeExperimental.material
     implementation Libs.Coil.compose
 
@@ -46,8 +47,6 @@ dependencies {
     implementation Libs.Dagger.hilt
     kapt Libs.Dagger.hiltCompiler
     kapt Libs.AndroidX.Hilt.compiler
-
-    implementation Libs.recyclerViewAnimators
 
     testImplementation Libs.Test.junit
     androidTestImplementation Libs.AndroidX.Test.runner
