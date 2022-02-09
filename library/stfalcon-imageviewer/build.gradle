@@ -1,21 +1,18 @@
-import dependencies.Libs
-import dependencies.Versions
-
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
 }
 
 android {
-    compileSdk Versions.compileSdk
+    compileSdk buildConfig.compileSdk
     defaultConfig {
-        minSdk Versions.minSdk
+        minSdk buildConfig.minSdk
     }
 }
 
 dependencies {
-    implementation Libs.Kotlin.stdlib
-    implementation Libs.AndroidX.appcompat
-    implementation Libs.AndroidX.transition
-    implementation Libs.photoview
+    implementation libs.kotlin.stdlib
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.transition
+    implementation libs.photoview
 }

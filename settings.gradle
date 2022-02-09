@@ -1,16 +1,20 @@
-include ':app',
-        ':feature:home',
-        ':feature:detail',
-        ':feature:search',
-        ':feature:theater',
-        ':feature:theatermap',
-        ':feature:settings',
-        ':feature:theme',
-        ':feature:work',
-        ':feature:system',
-        ':core',
-        ':model',
-        ':data:repository',
-        ':data:api',
-        ':data:db',
-        ':library:stfalcon-imageviewer'
+include ':app'
+include ':feature:home'
+include ':feature:detail'
+include ':feature:search'
+include ':feature:theater'
+include ':feature:theatermap'
+include ':feature:settings'
+include ':feature:theme'
+include ':feature:work'
+include ':feature:system'
+include ':core'
+include ':model'
+include ':data:repository'
+include ':data:api'
+include ':data:db'
+include ':library:stfalcon-imageviewer'
+
+// Enable Gradle's version catalog support
+// https://docs.gradle.org/current/userguide/platforms.html
+enableFeaturePreview("VERSION_CATALOGS")

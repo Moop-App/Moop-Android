@@ -1,0 +1,199 @@
+[versions]
+
+# Android
+gradlePlugin = "7.0.3"
+
+# Kotlin
+kotlin = "1.5.31"
+kotlinx-serialization = "1.2.2"
+coroutines = "1.5.1"
+
+# Dagger
+dagger = "2.40.2"
+androidx-hilt = "1.0.0"
+
+# AndroidX
+androidx-activity = "1.4.0"
+androidx-appcompat = "1.4.0"
+androidx-browser = "1.4.0"
+androidx-constraintlayout = "2.1.0"
+androidx-core = "1.7.0"
+androidx-datastore = "1.0.0"
+androidx-drawerlayout = "1.1.1"
+androidx-fragment = "1.4.0"
+androidx-lifecycle = "2.4.0"
+androidx-navigation = "2.4.0-beta02"
+androidx-recyclerview = "1.2.1"
+androidx-room = "2.3.0"
+androidx-startup = "1.1.0"
+androidx-transition = "1.4.1"
+androidx-viewpager2 = "1.1.0-beta01"
+androidx-work = "2.7.1"
+
+# Compose
+androidx-compose = "1.0.5"
+accompanist = "0.20.2"
+compose-extensions = "0.2.0"
+
+# Test
+test-junit = "4.13"
+androidx-test-common = "1.4.0"
+androidx-test-junit = "1.1.3"
+androidx-test-espresso = "3.4.0"
+
+# Google
+google-gradlePlugin = "4.3.10"
+google-play = "1.10.2"
+
+# Etc
+retrofit-common = "2.9.0"
+retrofit-serialization = "0.8.0"
+coil = "1.4.0"
+lottie = "4.2.1"
+insetter = "0.6.1"
+photoview = "2.3.0"
+recyclerViewAnimators = "4.0.2"
+kakaoLink = "2.8.3"
+naverMap = "3.13.0"
+playServicesLocation = "17.1.0"
+timber = "5.0.1"
+threetenAbp = "1.3.1"
+
+
+[libraries]
+
+# Android
+
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
+
+# Kotlin
+
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlin-serializationGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
+# Dagger
+
+dagger-hilt-gradlePlugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
+dagger-hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
+
+androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "androidx-hilt" }
+androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidx-hilt" }
+
+# AndroidX
+
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+
+androidx-browser = { module = "androidx.browser:browser", version.ref = "androidx-browser" }
+
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
+
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+
+androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "androidx-drawerlayout" }
+
+androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
+
+androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "androidx-lifecycle" }
+
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
+androidx-navigation-dynamicFeaturesFragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "androidx-navigation" }
+androidx-navigation-safeArgsGradlePlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidx-recyclerview" }
+
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
+
+androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidx-startup" }
+
+androidx-transition = { module = "androidx.transition:transition", version.ref = "androidx-transition" }
+
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "androidx-viewpager2" }
+
+androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work" }
+androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "androidx-work" }
+
+# Compose
+
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "androidx-compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "androidx-compose" }
+compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidx-compose" }
+compose-runtimeLivedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "androidx-compose" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose" }
+
+accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
+accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
+accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
+accompanist-pagerIndicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
+
+compose-extensions-material = { module = "com.github.fornewid.compose-extensions:material", version.ref = "compose-extensions" }
+compose-extensions-visibility = { module = "com.github.fornewid.compose-extensions:visibility", version.ref = "compose-extensions" }
+
+# Test
+test-junit = { module = "junit:junit", version.ref = "test-junit" }
+
+androidx-test-core = { module = "androidx.test:core-ktx", version.ref = "androidx-test-common" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-common" }
+androidx-test-ext-truth = { module = "androidx.test.ext:truth", version.ref = "androidx-test-common" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "androidx-test-junit" }
+androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
+
+# Google
+
+google-gradlePlugin = { module = "com.google.gms:google-services", version.ref = "google-gradlePlugin" }
+google-play = { module = "com.google.android.play:core", version.ref = "google-play" }
+google-ads = "com.google.android.gms:play-services-ads:20.5.0"
+
+material-material = "com.google.android.material:material:1.4.0"
+material-composeThemeAdapter = "com.google.android.material:compose-theme-adapter:1.0.5"
+
+firebase-bom = "com.google.firebase:firebase-bom:29.0.0"
+firebase-crashlytics-gradlePlugin = "com.google.firebase:firebase-crashlytics-gradle:2.8.0"
+firebase-perf-gradlePlugin = "com.google.firebase:perf-plugin:1.4.0"
+
+# Etc
+
+retrofit-runtime = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit-common" }
+retrofit-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization" }
+
+coil-runtime = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
+
+insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref = "insetter" }
+
+photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoview" }
+
+recyclerViewAnimators = { module = "jp.wasabeef:recyclerview-animators", version.ref = "recyclerViewAnimators" }
+
+kakaoLink = { module = "com.kakao.sdk:v2-link", version.ref = "kakaoLink" }
+
+naverMap = { module = "com.naver.maps:map-sdk", version.ref = "naverMap" }
+playServicesLocation = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+threetenAbp = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threetenAbp" }

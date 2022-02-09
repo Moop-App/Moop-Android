@@ -1,12 +1,10 @@
-import dependencies.Versions
-
 android {
-    compileSdk Versions.compileSdk
+    compileSdk buildConfig.compileSdk
 
     defaultConfig {
-        minSdk Versions.minSdk
-        buildConfigField 'int', 'VERSION_CODE', "${Versions.versionCode}"
-        buildConfigField 'String', 'VERSION_NAME', "\"${Versions.versionName}\""
+        minSdk buildConfig.minSdk
+        buildConfigField 'int', 'VERSION_CODE', "${buildConfig.versionCode}"
+        buildConfigField 'String', 'VERSION_NAME', "\"${buildConfig.versionName}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

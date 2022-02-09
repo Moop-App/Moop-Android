@@ -1,5 +1,3 @@
-import dependencies.Libs
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -11,17 +9,17 @@ dependencies {
     implementation project(':core')
     implementation project(':data:repository')
 
-    implementation Libs.Kotlin.stdlib
+    implementation libs.kotlin.stdlib
 
-    implementation Libs.Dagger.hilt
-    kapt Libs.Dagger.hiltCompiler
-    implementation Libs.AndroidX.Hilt.work
-    kapt Libs.AndroidX.Hilt.compiler
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+    implementation libs.androidx.hilt.work
+    kapt libs.androidx.hilt.compiler
 
-    api Libs.AndroidX.WorkManager.runtime
-    androidTestImplementation Libs.AndroidX.WorkManager.testing
+    api libs.androidx.work.runtime
+    androidTestImplementation libs.androidx.work.testing
 
-    testImplementation Libs.Test.junit
-    androidTestImplementation Libs.AndroidX.Test.runner
-    androidTestImplementation Libs.AndroidX.Test.espresso
+    testImplementation libs.test.junit
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.espresso
 }

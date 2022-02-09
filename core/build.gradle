@@ -1,5 +1,3 @@
-import dependencies.Libs
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -15,40 +13,39 @@ android.buildTypes.release {
 dependencies {
     implementation project(':model')
 
-    api Libs.Kotlin.stdlib
-    api Libs.AndroidX.appcompat
-    api Libs.AndroidX.constraintlayout
-    api Libs.AndroidX.core
-    api Libs.Material.view
+    api libs.kotlin.stdlib
+    api libs.androidx.appcompat
+    api libs.androidx.constraintlayout
+    api libs.androidx.core
+    api libs.material.material
 
-    implementation Libs.AndroidX.browser
-    implementation Libs.AndroidX.fragment
-    implementation Libs.AndroidX.recyclerview
-    implementation Libs.AndroidX.startup
+    implementation libs.androidx.browser
+    implementation libs.androidx.fragment
+    implementation libs.androidx.recyclerview
+    implementation libs.androidx.startup
 
-    implementation Libs.AndroidX.Lifecycle.runtime
-    implementation Libs.AndroidX.Lifecycle.compiler
+    implementation libs.androidx.lifecycle.runtime
+    implementation libs.androidx.lifecycle.compiler
 
-    implementation Libs.AndroidX.Navigation.fragment
-    implementation Libs.AndroidX.Navigation.dynamicFeaturesFragment
+    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.navigation.dynamicFeaturesFragment
 
-    implementation Libs.Dagger.hilt
-    kapt Libs.Dagger.hiltCompiler
-    kapt Libs.AndroidX.Hilt.compiler
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
 
-    implementation Libs.Coil.runtime
+    implementation libs.coil.runtime
 
-    implementation platform(Libs.Firebase.bom)
-    implementation Libs.Firebase.dynamicLinks
-    implementation Libs.Firebase.ads
+    implementation platform(libs.firebase.bom)
+    implementation firebase.dynamicLinks
+    implementation libs.google.ads
 
-    api Libs.threetenAbp
-    api Libs.timber
-    implementation Libs.kakaoLink
+    api libs.threetenAbp
+    api libs.timber
+    implementation libs.kakaoLink
 
-    testImplementation Libs.Test.junit
-    androidTestImplementation Libs.AndroidX.Test.runner
-    androidTestImplementation Libs.AndroidX.Test.espresso
+    testImplementation libs.test.junit
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.espresso
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {

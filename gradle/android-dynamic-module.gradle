@@ -1,10 +1,8 @@
-import dependencies.Versions
-
 android {
-    compileSdk Versions.compileSdk
+    compileSdk buildConfig.compileSdk
 
     defaultConfig {
-        minSdk Versions.minSdk
+        minSdk buildConfig.minSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
