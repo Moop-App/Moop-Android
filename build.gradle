@@ -1,6 +1,20 @@
-import dependencies.Libs
-
 buildscript {
+    ext.buildConfig = [
+            'appId'      : "soup.movie",
+            'minSdk'     : 23,
+            'targetSdk'  : 31,
+            'compileSdk' : 31,
+            'versionCode': 106,
+            'versionName': "1.0.6",
+    ]
+    ext.firebase = [
+            'analytics'   : "com.google.firebase:firebase-analytics-ktx",
+            'config'      : "com.google.firebase:firebase-config-ktx",
+            'crashlytics' : "com.google.firebase:firebase-crashlytics-ktx",
+            'dynamicLinks': "com.google.firebase:firebase-dynamic-links-ktx",
+            'messaging'   : "com.google.firebase:firebase-messaging-ktx",
+            'perf'        : "com.google.firebase:firebase-perf-ktx",
+    ]
     repositories {
         google()
         mavenCentral()
@@ -9,14 +23,14 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath Libs.androidGradlePlugin
-        classpath Libs.Kotlin.plugin
-        classpath Libs.Kotlin.serializationPlugin
-        classpath Libs.Dagger.hiltPlugin
-        classpath Libs.AndroidX.Navigation.safeArgsPlugin
-        classpath Libs.Google.gmsPlugin
-        classpath Libs.Firebase.crashlyticsPlugin
-        classpath Libs.Firebase.perfPlugin
+        classpath libs.android.pluginGradle
+        classpath libs.kotlin.pluginGradle
+        classpath libs.kotlin.serializationPluginGradle
+        classpath libs.dagger.hilt.pluginGradle
+        classpath libs.androidx.navigation.safeArgsPluginGradle
+        classpath libs.google.pluginGradle
+        classpath libs.firebase.crashlytics.pluginGradle
+        classpath libs.firebase.perf.pluginGradle
     }
 }
 

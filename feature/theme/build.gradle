@@ -1,5 +1,3 @@
-import dependencies.Libs
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -13,31 +11,30 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion "${Libs.Compose.version}"
+        kotlinCompilerExtensionVersion "${libs.versions.compose.get()}"
     }
 }
 dependencies {
     implementation project(':core')
     implementation project(':data:repository')
 
-    implementation Libs.Kotlin.stdlib
+    implementation libs.kotlin.stdlib
 
-    implementation Libs.AndroidX.recyclerview
+    implementation libs.androidx.recyclerview
 
-    implementation Libs.Material.composeThemeAdapter
-    implementation Libs.AndroidX.activityCompose
-    implementation Libs.Compose.foundation
-    implementation Libs.Compose.material
-    implementation Libs.Compose.ui
-    implementation Libs.Accompanist.insets
+    implementation libs.material.composeThemeAdapter
+    implementation libs.androidx.activity.compose
+    implementation libs.compose.foundation
+    implementation libs.compose.material
+    implementation libs.compose.ui
+    implementation libs.accompanist.insets
 
-    implementation Libs.AndroidX.Navigation.fragment
+    implementation libs.androidx.navigation.fragment
 
-    implementation Libs.Dagger.hilt
-    kapt Libs.Dagger.hiltCompiler
-    kapt Libs.AndroidX.Hilt.compiler
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
 
-    testImplementation Libs.Test.junit
-    androidTestImplementation Libs.AndroidX.Test.runner
-    androidTestImplementation Libs.AndroidX.Test.espresso
+    testImplementation libs.test.junit
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.espresso
 }

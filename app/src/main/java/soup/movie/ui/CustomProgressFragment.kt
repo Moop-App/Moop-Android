@@ -39,7 +39,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -61,7 +60,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
-import soup.compose.ui.invisible
+import soup.compose.visibility.invisible
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.util.LauncherIcons
@@ -159,7 +158,6 @@ class CustomProgressFragment : AbstractProgressFragment() {
         )
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     @Composable
     private fun CustomProgressContents(state: State, modifier: Modifier = Modifier) {
         val context = LocalContext.current
