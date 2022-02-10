@@ -54,7 +54,7 @@ internal object SearchHelper {
      */
     private fun getInitialSound(c: Char): Char {
         val hanBegin = c - HANGUL_BEGIN_UNICODE
-        val index = hanBegin / HANGUL_BASE_UNIT.toInt()
+        val index = hanBegin / HANGUL_BASE_UNIT.code
         return INITIAL_SOUND[index]
     }
 
@@ -119,8 +119,8 @@ internal object SearchHelper {
             return IntRange(fullIdx, fullIdx + query.length) // 일치
         }
 
-        val conciseQuery = query.toLowerCase().replace(" ".toRegex(), "")
-        val conciseValue = sentence.toLowerCase()
+        val conciseQuery = query.lowercase().replace(" ".toRegex(), "")
+        val conciseValue = sentence.lowercase()
 
         var startIdx = -1
         var endIdx = -1
@@ -161,6 +161,6 @@ internal object SearchHelper {
         v == q || isInitialSound(q) && isHangul(v) && getInitialSound(v) == q // korean
 
     private fun indexOfIgnoreCase(sentence: String, word: String): Int {
-        return sentence.toLowerCase().indexOf(word.toLowerCase())
+        return sentence.lowercase().indexOf(word.lowercase())
     }
 }
