@@ -23,14 +23,14 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath libs.android.gradlePlugin
-        classpath libs.kotlin.gradlePlugin
-        classpath libs.kotlin.serializationGradlePlugin
-        classpath libs.dagger.hilt.gradlePlugin
-        classpath libs.androidx.navigation.safeArgsGradlePlugin
-        classpath libs.google.gradlePlugin
-        classpath libs.firebase.crashlytics.gradlePlugin
-        classpath libs.firebase.perf.gradlePlugin
+        classpath libs.android.pluginGradle
+        classpath libs.kotlin.pluginGradle
+        classpath libs.kotlin.serializationPluginGradle
+        classpath libs.dagger.hilt.pluginGradle
+        classpath libs.androidx.navigation.safeArgsPluginGradle
+        classpath libs.google.pluginGradle
+        classpath libs.firebase.crashlytics.pluginGradle
+        classpath libs.firebase.perf.pluginGradle
     }
 }
 
