@@ -33,7 +33,7 @@ class RemoteConfig : Config {
 
     override fun fetchAndActivate(onComplete: () -> Unit) {
         remoteConfig.fetchAndActivate()
-            .addOnCompleteListener { task ->
+            .addOnCompleteListener {
                 onComplete()
             }
     }

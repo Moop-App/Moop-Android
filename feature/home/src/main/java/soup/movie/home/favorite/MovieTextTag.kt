@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal inline fun MovieTextTag(
+internal fun MovieTextTag(
     text: String,
     tagBackgroundColor: Color,
     modifier: Modifier = Modifier,
