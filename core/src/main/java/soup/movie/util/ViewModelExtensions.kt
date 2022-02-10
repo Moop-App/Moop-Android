@@ -22,5 +22,5 @@ inline fun <VM : ViewModel> viewModelProviderFactoryOf(
     crossinline f: () -> VM
 ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T = f() as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = f() as T
 }
