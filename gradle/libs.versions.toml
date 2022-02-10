@@ -16,8 +16,8 @@ room = "2.3.0"
 work = "2.7.1"
 
 # Compose
-compose = "1.0.5"
-accompanist = "0.20.2"
+compose = "1.1.0"
+accompanist = "0.23.0"
 composeextensions = "0.2.0"
 
 # Test
