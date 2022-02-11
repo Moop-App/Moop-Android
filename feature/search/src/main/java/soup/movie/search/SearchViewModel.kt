@@ -18,11 +18,18 @@ package soup.movie.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import soup.movie.ext.setValueIfNew
 import soup.movie.model.repository.MoopRepository
 import javax.inject.Inject
 
@@ -31,19 +38,29 @@ class SearchViewModel @Inject constructor(
     private val repository: MoopRepository
 ) : ViewModel() {
 
-    private val _uiModel = MutableLiveData<SearchContentsUiModel>()
-    val uiModel: LiveData<SearchContentsUiModel>
-        get() = _uiModel
+    private val _query = MutableLiveData("")
+    val query: LiveData<String>
+        get() = _query
 
-    fun searchFor(query: String) {
-        viewModelScope.launch {
+    @OptIn(FlowPreview::class)
+    val uiModel: LiveData<SearchContentsUiModel> = _query.asFlow()
+        .debounce(300)
+        .map { it.trim() }
+        .distinctUntilChanged()
+        .flatMapLatest { query ->
             val movies = withContext(Dispatchers.IO) {
                 repository.searchMovie(query)
             }
-            _uiModel.value = SearchContentsUiModel(
-                movies = movies,
-                hasNoItem = movies.isEmpty()
+            flowOf(
+                SearchContentsUiModel(
+                    movies = movies,
+                    hasNoItem = query.isNotEmpty() && movies.isEmpty()
+                )
             )
         }
+        .asLiveData()
+
+    fun onQueryChanged(query: String) {
+        _query.setValueIfNew(query)
     }
 }

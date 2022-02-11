@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Search -->
-    <string name="transition_search_back" translatable="false">search_back</string>
-</resources>
