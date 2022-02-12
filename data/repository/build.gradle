@@ -11,8 +11,8 @@ dependencies {
     implementation project(":data:db")
 
     implementation libs.kotlin.stdlib
-    api libs.coroutines.core
-    api libs.coroutines.android
+    implementation libs.coroutines.core
+    implementation libs.coroutines.android
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

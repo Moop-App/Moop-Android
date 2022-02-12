@@ -132,6 +132,8 @@ dependencies {
     implementation libs.androidx.navigation.ui
     implementation libs.androidx.navigation.dynamicFeaturesFragment
 
+    implementation libs.androidx.work.runtime
+
     implementation libs.androidx.datastore.preferences
 
     implementation libs.dagger.hilt.android

@@ -16,7 +16,7 @@ dependencies {
     implementation libs.androidx.hilt.work
     kapt libs.androidx.hilt.compiler
 
-    api libs.androidx.work.runtime
+    implementation libs.androidx.work.runtime
     androidTestImplementation libs.androidx.work.testing
 
     testImplementation libs.test.junit

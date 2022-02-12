@@ -14,8 +14,10 @@ dependencies {
     implementation project(':model')
 
     api libs.kotlin.stdlib
+    api libs.coroutines.core
+    api libs.coroutines.android
+
     api libs.androidx.appcompat
-    api libs.androidx.constraintlayout
     api libs.androidx.core
     api libs.material.material
 

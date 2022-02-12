@@ -20,9 +20,6 @@ dependencies {
 
     implementation libs.kotlin.stdlib
 
-    implementation libs.androidx.constraintlayout
-    implementation libs.androidx.recyclerview
-
     implementation libs.material.composeThemeAdapter
     implementation libs.androidx.activity.compose
     implementation libs.compose.foundation
@@ -34,8 +31,6 @@ dependencies {
     implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
     implementation libs.compose.extensions.material
-
-    implementation libs.insetter
 
     implementation libs.androidx.lifecycle.livedata
 
