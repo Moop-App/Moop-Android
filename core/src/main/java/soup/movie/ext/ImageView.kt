@@ -41,15 +41,6 @@ fun ImageView.loadAsync(url: String?, @DrawableRes placeholder: Int? = null) {
     }
 }
 
-fun ImageView.loadAsync(url: String?, doOnEnd: () -> Unit) {
-    load(url) {
-        listener(
-            onSuccess = { _, _ -> doOnEnd() },
-            onError = { _, _ -> doOnEnd() }
-        )
-    }
-}
-
 fun ImageView.setGrayscale(enable: Boolean) {
     colorFilter = if (enable) {
         ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })

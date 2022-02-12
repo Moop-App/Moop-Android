@@ -14,8 +14,10 @@ dependencies {
     implementation project(':model')
 
     api libs.kotlin.stdlib
+    api libs.coroutines.core
+    api libs.coroutines.android
+
     api libs.androidx.appcompat
-    api libs.androidx.constraintlayout
     api libs.androidx.core
     api libs.material.material
 
@@ -28,7 +30,6 @@ dependencies {
     implementation libs.androidx.lifecycle.compiler
 
     implementation libs.androidx.navigation.fragment
-    implementation libs.androidx.navigation.dynamicFeaturesFragment
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
