@@ -58,7 +58,7 @@ import soup.movie.model.Movie
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun MovieList(
+fun MovieList(
     movies: List<Movie>,
     onItemClick: (Movie) -> Unit,
     onLongItemClick: (Movie) -> Unit,
@@ -141,7 +141,7 @@ private fun MovieItem(
 }
 
 @Composable
-internal fun NoMovieItems(
+fun NoMovieItems(
     modifier: Modifier = Modifier
 ) {
     Column(
