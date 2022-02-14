@@ -49,8 +49,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
-import soup.compose.material.chip.ChipDefaults
-import soup.compose.material.chip.FilterChip
+import soup.metronome.material.chip.ChipDefaults
+import soup.metronome.material.chip.FilterChip
 import soup.movie.home.R
 
 @Composable
@@ -272,8 +272,7 @@ private fun GenreFilterChip(
                 checkedContentColor = Color(0x88000000),
                 uncheckedBackgroundColor = Color(0x33DDDDDD),
                 uncheckedContentColor = Color(0x44000000)
-            ),
-            minTouchTargetSize = 40.dp
+            )
         ) {
             Text(
                 text = text,

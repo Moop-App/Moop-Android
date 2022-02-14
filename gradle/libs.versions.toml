@@ -18,7 +18,7 @@ work = "2.7.1"
 # Compose
 compose = "1.1.0"
 accompanist = "0.23.0"
-composeextensions = "0.2.0"
+metronome = "0.3.0"
 
 # Test
 androidxtest = "1.4.0"
@@ -105,8 +105,8 @@ accompanist-pager = { module = "com.google.accompanist:accompanist-pager", versi
 accompanist-pagerIndicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 
-compose-extensions-material = { module = "com.github.fornewid.compose-extensions:material", version.ref = "composeextensions" }
-compose-extensions-visibility = { module = "com.github.fornewid.compose-extensions:visibility", version.ref = "composeextensions" }
+metronome-material = { module = "com.github.fornewid.compose-extensions:material", version.ref = "metronome" }
+metronome-visibility = { module = "com.github.fornewid.compose-extensions:visibility", version.ref = "metronome" }
 
 # Test
 test-junit =  "junit:junit:4.13"

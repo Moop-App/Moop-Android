@@ -159,7 +159,7 @@ dependencies {
     implementation libs.compose.ui
     implementation libs.accompanist.drawablepainter
     implementation libs.accompanist.insets
-    implementation libs.compose.extensions.visibility
+    implementation libs.metronome.visibility
     implementation libs.lottie.compose
 
     testImplementation libs.test.junit
