@@ -30,7 +30,7 @@ dependencies {
     implementation libs.accompanist.insets
     implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
-    implementation libs.compose.extensions.material
+    implementation libs.metronome.material
 
     implementation libs.androidx.lifecycle.livedata
 

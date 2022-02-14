@@ -35,7 +35,7 @@ dependencies {
     implementation libs.accompanist.insets
     implementation libs.accompanist.flowlayout
     implementation libs.accompanist.swiperefresh
-    implementation libs.compose.extensions.material
+    implementation libs.metronome.material
     implementation libs.coil.compose
 
     implementation libs.androidx.lifecycle.livedata

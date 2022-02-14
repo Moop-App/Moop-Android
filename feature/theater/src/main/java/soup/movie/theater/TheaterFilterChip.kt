@@ -28,11 +28,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import soup.compose.material.chip.ChipDefaults
-import soup.compose.material.chip.FilterChip
+import soup.metronome.material.chip.ChipDefaults
+import soup.metronome.material.chip.FilterChip
 import soup.movie.model.Theater
-
-private val MinTouchTargetSize = 40.dp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -91,8 +89,7 @@ private fun CgvFilterChip(
                 checkedContentColor = Color(0xFFE51F20),
                 uncheckedBackgroundColor = Color(0x55FFFFFF),
                 uncheckedContentColor = Color(0x66000000)
-            ),
-            minTouchTargetSize = MinTouchTargetSize
+            )
         ) {
             Text(
                 text = text,
@@ -133,8 +130,7 @@ private fun LotteFilterChip(
                 checkedContentColor = Color.White,
                 uncheckedBackgroundColor = Color(0x66ED1D24),
                 uncheckedContentColor = Color(0x77FFFFFF)
-            ),
-            minTouchTargetSize = MinTouchTargetSize
+            )
         ) {
             Text(
                 text = text,
@@ -175,8 +171,7 @@ private fun MegaboxFilterChip(
                 checkedContentColor = Color.White,
                 uncheckedBackgroundColor = Color(0x77352263),
                 uncheckedContentColor = Color(0x77FFFFFF)
-            ),
-            minTouchTargetSize = MinTouchTargetSize
+            )
         ) {
             Text(
                 text = text,

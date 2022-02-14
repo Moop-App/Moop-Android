@@ -28,12 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import soup.compose.material.chip.ActionChip
-import soup.compose.material.chip.ChipDefaults
+import soup.metronome.material.chip.ActionChip
+import soup.metronome.material.chip.ChipDefaults
 import soup.movie.model.Theater
 import soup.movie.util.debounce
-
-private val MinTouchTargetSize = 40.dp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -72,8 +70,7 @@ private fun CgvChip(
             colors = ChipDefaults.actionChipColors(
                 backgroundColor = Color.White,
                 contentColor = Color(0xFFE51F20)
-            ),
-            minTouchTargetSize = MinTouchTargetSize
+            )
         ) {
             Text(
                 text = text,
@@ -98,8 +95,7 @@ private fun LotteChip(
             colors = ChipDefaults.actionChipColors(
                 backgroundColor = Color(0xFFED1D24),
                 contentColor = Color.White
-            ),
-            minTouchTargetSize = MinTouchTargetSize
+            )
         ) {
             Text(
                 text = text,
@@ -124,8 +120,7 @@ private fun MegaboxChip(
             colors = ChipDefaults.actionChipColors(
                 backgroundColor = Color(0xFF352263),
                 contentColor = Color.White
-            ),
-            minTouchTargetSize = MinTouchTargetSize
+            )
         ) {
             Text(
                 text = text,

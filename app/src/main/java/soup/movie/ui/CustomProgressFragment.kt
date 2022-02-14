@@ -60,7 +60,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
-import soup.compose.visibility.invisible
+import soup.metronome.visibility.invisible
 import soup.movie.BuildConfig
 import soup.movie.R
 import soup.movie.util.LauncherIcons
