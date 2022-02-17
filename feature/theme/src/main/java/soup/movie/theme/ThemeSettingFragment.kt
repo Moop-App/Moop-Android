@@ -21,15 +21,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.theme.internal.ThemeOptionScreen
 
 @AndroidEntryPoint
 class ThemeSettingFragment : Fragment() {
-
-    private val viewModel: ThemeSettingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +36,7 @@ class ThemeSettingFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MdcTheme {
-                    ThemeOptionScreen(viewModel)
+                    ThemeOptionScreen()
                 }
             }
         }

@@ -56,8 +56,7 @@ class SettingsFragment : Fragment() {
                 MdcTheme {
                     val context = LocalContext.current
                     SettingsScreen(
-                        viewModel,
-                        systemViewModel,
+                        systemViewModel = systemViewModel,
                         onThemeEditClick = {
                             onThemeEditClicked()
                         },

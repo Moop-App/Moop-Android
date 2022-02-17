@@ -19,20 +19,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.compose.BackHandler
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TheaterSortFragment : Fragment() {
-
-    private val viewModel: TheaterSortViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,22 +36,18 @@ class TheaterSortFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MdcTheme {
-                    val coroutineScope = rememberCoroutineScope()
-                    BackHandler {
-                        coroutineScope.launch {
-                            viewModel.saveSnapshot()
+                    TheaterSortScreen(
+                        upPress = {
                             findNavController().popBackStack()
+                        },
+                        onAddItemClick = {
+                            findNavController().navigate(
+                                TheaterSortFragmentDirections.actionToTheaterEdit()
+                            )
                         }
-                    }
-                    TheaterSortScreen(viewModel, onAddItemClick = { onAddItemClick() })
+                    )
                 }
             }
         }
-    }
-
-    private fun onAddItemClick() {
-        findNavController().navigate(
-            TheaterSortFragmentDirections.actionToTheaterEdit()
-        )
     }
 }

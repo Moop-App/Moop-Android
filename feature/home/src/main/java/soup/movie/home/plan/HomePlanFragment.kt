@@ -15,12 +15,41 @@
  */
 package soup.movie.home.plan
 
-import androidx.fragment.app.viewModels
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.home.tab.HomeContentsFragment
+import soup.movie.analytics.EventAnalytics
+import soup.movie.home.HomeFragmentDirections
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomePlanFragment : HomeContentsFragment() {
+class HomePlanFragment : Fragment() {
 
-    override val viewModel: HomePlanViewModel by viewModels()
+    @Inject
+    lateinit var analytics: EventAnalytics
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                MdcTheme {
+                    HomePlanScreen(
+                        onItemClick = { movie ->
+                            analytics.clickMovie()
+                            findNavController().navigate(HomeFragmentDirections.actionToDetail(movie))
+                        }
+                    )
+                }
+            }
+        }
+    }
 }

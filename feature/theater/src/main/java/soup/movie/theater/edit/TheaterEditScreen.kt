@@ -59,6 +59,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
@@ -98,7 +99,10 @@ private enum class Page(val title: String) {
     ExperimentalPagerApi::class
 )
 @Composable
-internal fun TheaterEditScreen(viewModel: TheaterEditViewModel, upPress: () -> Unit) {
+internal fun TheaterEditScreen(
+    viewModel: TheaterEditViewModel = viewModel(),
+    upPress: () -> Unit
+) {
     ProvideWindowInsets {
         val pages = Page.values()
         val pagerState = rememberPagerState()

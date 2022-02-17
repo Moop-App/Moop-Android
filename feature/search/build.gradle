@@ -29,6 +29,7 @@ dependencies {
     implementation libs.accompanist.insets
 
     implementation libs.androidx.lifecycle.livedata
+    implementation libs.androidx.lifecycle.viewmodel.compose
     implementation libs.androidx.navigation.fragment
 
     implementation libs.dagger.hilt.android
