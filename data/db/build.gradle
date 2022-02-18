@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.devtools.ksp'
 apply plugin: 'kotlinx-serialization'
 
 apply from: rootProject.file('gradle/android.gradle')
@@ -27,7 +27,7 @@ dependencies {
 
     implementation libs.androidx.room.runtime
     implementation libs.androidx.room.ktx
-    kapt libs.androidx.room.compiler
+    ksp libs.androidx.room.compiler
 
     implementation libs.timber
 
