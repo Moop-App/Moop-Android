@@ -32,7 +32,7 @@ import soup.movie.ext.screenDays
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.util.MM_DD
@@ -42,7 +42,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: MoopRepository,
+    private val repository: MovieRepository,
     private val imageUriProvider: ImageUriProvider,
     private val adsManager: AdsManager
 ) : ViewModel() {

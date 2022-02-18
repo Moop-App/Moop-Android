@@ -15,14 +15,18 @@
  */
 package soup.movie.data.repository
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import soup.movie.data.api.MoopApiService
-import soup.movie.data.db.MoopDatabase
-import soup.movie.data.repository.internal.DataMoopRepository
-import soup.movie.model.repository.MoopRepository
+import soup.movie.data.api.RemoteDataSource
+import soup.movie.data.api.RemoteDataSourceFactory
+import soup.movie.data.db.LocalDataSource
+import soup.movie.data.db.LocalDataSourceFactory
+import soup.movie.data.repository.internal.MovieRepositoryImpl
+import soup.movie.model.repository.MovieRepository
 import javax.inject.Singleton
 
 @Module
@@ -31,10 +35,26 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun moopRepository(
-        moopDb: MoopDatabase,
-        moopApi: MoopApiService
-    ): MoopRepository {
-        return DataMoopRepository(moopDb, moopApi)
+    fun provideRepository(
+        local: LocalDataSource,
+        remote: RemoteDataSource
+    ): MovieRepository {
+        return MovieRepositoryImpl(local, remote)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLocalDataSource(
+        @ApplicationContext context: Context
+    ): LocalDataSource {
+        return LocalDataSourceFactory.create(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        @ApplicationContext context: Context
+    ): RemoteDataSource {
+        return RemoteDataSourceFactory.create(context)
     }
 }

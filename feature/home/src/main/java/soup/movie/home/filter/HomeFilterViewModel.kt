@@ -24,13 +24,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import soup.movie.settings.AppSettings
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.AgeFilter.Companion.FLAG_AGE_12
@@ -46,7 +45,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeFilterViewModel @Inject constructor(
-    private val repository: MoopRepository,
+    private val repository: MovieRepository,
     private val appSettings: AppSettings
 ) : ViewModel() {
 

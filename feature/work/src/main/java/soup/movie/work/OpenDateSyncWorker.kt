@@ -30,7 +30,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit
 class OpenDateSyncWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
-    private val repository: MoopRepository
+    private val repository: MovieRepository
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {

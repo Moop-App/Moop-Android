@@ -24,11 +24,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.model.TheaterAreaGroup
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import timber.log.Timber
 
 internal class TheaterMapViewModel(
-    private val repository: MoopRepository
+    private val repository: MovieRepository
 ) : ViewModel() {
 
     var uiModel by mutableStateOf<List<TheaterMarkerUiModel>>(emptyList())

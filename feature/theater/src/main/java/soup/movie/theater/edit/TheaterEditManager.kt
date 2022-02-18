@@ -21,11 +21,11 @@ import kotlinx.coroutines.runBlocking
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
 import soup.movie.model.TheaterAreaGroup
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import soup.movie.settings.AppSettings
 
 class TheaterEditManager(
-    private val repository: MoopRepository,
+    private val repository: MovieRepository,
     private val appSettings: AppSettings
 ) {
 

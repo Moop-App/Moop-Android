@@ -18,11 +18,11 @@ package soup.movie.di
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 
 @EntryPoint
 @InstallIn(SingletonComponent::class)
 interface TheaterMapModuleDependencies {
 
-    fun moopRepository(): MoopRepository
+    fun movieRepository(): MovieRepository
 }

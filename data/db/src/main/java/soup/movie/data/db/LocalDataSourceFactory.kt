@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2022 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,28 +17,16 @@ package soup.movie.data.db
 
 import android.content.Context
 import androidx.room.Room
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
+import soup.movie.data.db.internal.LocalDataSourceImpl
 import soup.movie.data.db.internal.MovieCacheDatabase
 import soup.movie.data.db.internal.MovieDatabase
-import soup.movie.data.db.internal.RoomDatabase
-import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object DbModule {
+object LocalDataSourceFactory {
 
-    @Singleton
-    @Provides
-    fun provideMoopDatabase(
-        @ApplicationContext context: Context
-    ): MoopDatabase {
+    fun create(context: Context): LocalDataSource {
         val movieDb = createMovieDatabase(context)
         val cacheDb = createCacheDatabase(context)
-        return RoomDatabase(
+        return LocalDataSourceImpl(
             movieDb.favoriteMovieDao(),
             movieDb.openDateAlarmDao(),
             cacheDb.movieCacheDao()

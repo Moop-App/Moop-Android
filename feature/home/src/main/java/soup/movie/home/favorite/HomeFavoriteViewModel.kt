@@ -25,12 +25,12 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import soup.movie.model.Movie
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeFavoriteViewModel @Inject constructor(
-    repository: MoopRepository
+    repository: MovieRepository
 ) : ViewModel() {
 
     private val _movies = MutableLiveData<List<Movie>>()

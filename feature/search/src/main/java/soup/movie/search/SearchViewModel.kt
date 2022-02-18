@@ -30,12 +30,12 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.ext.setValueIfNew
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val repository: MoopRepository
+    private val repository: MovieRepository
 ) : ViewModel() {
 
     private val _query = MutableLiveData("")

@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
-apply plugin: 'dagger.hilt.android.plugin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
@@ -22,11 +21,7 @@ dependencies {
 
     implementation libs.androidx.core
 
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
-
-    //TODO: need to change this to implementation.
-    api libs.retrofit.runtime
+    implementation libs.retrofit.runtime
     implementation libs.retrofit.serialization
 
     implementation libs.timber
