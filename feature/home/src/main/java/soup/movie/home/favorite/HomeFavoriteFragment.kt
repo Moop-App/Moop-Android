@@ -19,11 +19,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,8 +34,6 @@ class HomeFavoriteFragment : Fragment() {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private val viewModel: HomeFavoriteViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,9 +42,7 @@ class HomeFavoriteFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MdcTheme {
-                    val movies by viewModel.movies.observeAsState(emptyList())
                     HomeFavoriteScreen(
-                        movies = movies,
                         onItemClick = { movie ->
                             analytics.clickMovie()
                             findNavController().navigate(HomeFragmentDirections.actionToDetail(movie))

@@ -20,8 +20,6 @@ dependencies {
 
     implementation libs.kotlin.stdlib
 
-    implementation libs.androidx.recyclerview
-
     implementation libs.material.composeThemeAdapter
     implementation libs.androidx.activity.compose
     implementation libs.compose.foundation
@@ -29,7 +27,7 @@ dependencies {
     implementation libs.compose.ui
     implementation libs.accompanist.insets
 
-    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.lifecycle.viewmodel.compose
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

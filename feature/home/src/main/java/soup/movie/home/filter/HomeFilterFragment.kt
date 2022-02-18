@@ -21,14 +21,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFilterFragment : Fragment() {
-
-    private val viewModel: HomeFilterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +35,7 @@ class HomeFilterFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MdcTheme {
-                    HomeFilterScreen(viewModel)
+                    HomeFilterScreen()
                 }
             }
         }

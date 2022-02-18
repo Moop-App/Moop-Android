@@ -50,6 +50,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
@@ -63,7 +64,7 @@ import soup.movie.util.debounce
 
 @Composable
 internal fun SettingsScreen(
-    viewModel: SettingsViewModel,
+    viewModel: SettingsViewModel = viewModel(),
     systemViewModel: SystemViewModel,
     onThemeEditClick: () -> Unit,
     onTheaterItemClick: (Theater) -> Unit,

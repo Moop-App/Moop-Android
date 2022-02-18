@@ -32,7 +32,7 @@ dependencies {
     implementation libs.accompanist.pagerIndicators
     implementation libs.metronome.material
 
-    implementation libs.androidx.lifecycle.livedata
+    implementation libs.androidx.lifecycle.viewmodel.compose
 
     implementation libs.androidx.navigation.fragment
 

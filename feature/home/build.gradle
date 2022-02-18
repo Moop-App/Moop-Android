@@ -22,7 +22,6 @@ dependencies {
     implementation libs.kotlin.stdlib
 
     implementation libs.androidx.constraintlayout
-    implementation libs.androidx.recyclerview
 
     implementation libs.insetter
 
@@ -39,6 +38,7 @@ dependencies {
     implementation libs.coil.compose
 
     implementation libs.androidx.lifecycle.livedata
+    implementation libs.androidx.lifecycle.viewmodel.compose
 
     implementation libs.androidx.navigation.fragment
 

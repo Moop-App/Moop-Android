@@ -20,7 +20,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import soup.movie.home.favorite.HomeFavoriteFragment
 import soup.movie.home.now.HomeNowFragment
 import soup.movie.home.plan.HomePlanFragment
-import soup.movie.home.tab.HomeTabFragment
 
 class HomePageAdapter(fragment: HomeFragment) : FragmentStateAdapter(fragment) {
 
@@ -34,8 +33,8 @@ class HomePageAdapter(fragment: HomeFragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = items.size
 
-    fun getFragment(position: Int): HomeTabFragment? {
-        return items.getOrNull(position) as? HomeTabFragment
+    fun getFragment(position: Int): Fragment? {
+        return items.getOrNull(position)
     }
 
     fun scrollToTop(position: Int) {

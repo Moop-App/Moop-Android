@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
@@ -41,7 +42,9 @@ import soup.movie.theme.stringResIdOf
 import soup.movie.util.debounce
 
 @Composable
-internal fun ThemeOptionScreen(viewModel: ThemeSettingViewModel) {
+internal fun ThemeOptionScreen(
+    viewModel: ThemeSettingViewModel = viewModel()
+) {
     ProvideWindowInsets {
         Scaffold(
             modifier = Modifier

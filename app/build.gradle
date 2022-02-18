@@ -113,7 +113,6 @@ dependencies {
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.drawerlayout
     implementation libs.androidx.fragment
-    implementation libs.androidx.recyclerview
     implementation libs.androidx.startup
     implementation libs.androidx.transition
     implementation libs.androidx.viewpager2
@@ -123,7 +122,7 @@ dependencies {
     implementation libs.insetter
 
     implementation libs.androidx.lifecycle.livedata
-    implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation libs.androidx.lifecycle.process
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.compiler

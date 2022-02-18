@@ -21,15 +21,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TheaterEditFragment : Fragment() {
-
-    private val viewModel: TheaterEditViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +37,6 @@ class TheaterEditFragment : Fragment() {
             setContent {
                 MdcTheme {
                     TheaterEditScreen(
-                        viewModel,
                         upPress = { findNavController().navigateUp() }
                     )
                 }

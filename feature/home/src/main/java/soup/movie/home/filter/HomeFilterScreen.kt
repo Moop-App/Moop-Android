@@ -48,13 +48,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.home.R
 
 @Composable
-internal fun HomeFilterScreen(viewModel: HomeFilterViewModel) {
+internal fun HomeFilterScreen(viewModel: HomeFilterViewModel = viewModel()) {
     Surface(
         color = MaterialTheme.colors.background
     ) {

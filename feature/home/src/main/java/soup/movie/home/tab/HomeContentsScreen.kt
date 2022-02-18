@@ -53,7 +53,7 @@ import soup.movie.model.Movie
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomeContentsScreen(
+internal fun HomeContentsScreen(
     movies: List<Movie>,
     onItemClick: (Movie) -> Unit,
     modifier: Modifier = Modifier,

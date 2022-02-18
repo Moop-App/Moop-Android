@@ -15,6 +15,7 @@
  */
 package soup.movie.theater.sort
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -38,6 +39,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -46,9 +48,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
+import kotlinx.coroutines.launch
 import soup.movie.model.Theater
 import soup.movie.theater.R
 import soup.movie.theater.TheaterChip
@@ -58,7 +62,18 @@ import soup.movie.theater.rememberDraggableListState
 import soup.movie.util.debounce
 
 @Composable
-internal fun TheaterSortScreen(viewModel: TheaterSortViewModel, onAddItemClick: () -> Unit) {
+internal fun TheaterSortScreen(
+    viewModel: TheaterSortViewModel = viewModel(),
+    upPress: () -> Unit,
+    onAddItemClick: () -> Unit
+) {
+    val coroutineScope = rememberCoroutineScope()
+    BackHandler {
+        coroutineScope.launch {
+            viewModel.saveSnapshot()
+            upPress()
+        }
+    }
     ProvideWindowInsets {
         Scaffold(
             modifier = Modifier

@@ -19,9 +19,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
 import soup.movie.ext.showToast
@@ -31,11 +34,12 @@ import soup.movie.model.Movie
 
 @Composable
 internal fun HomeFavoriteScreen(
-    movies: List<Movie>,
+    viewModel: HomeFavoriteViewModel = viewModel(),
     onItemClick: (Movie) -> Unit
 ) {
     ProvideWindowInsets {
         Box(modifier = Modifier.fillMaxSize()) {
+            val movies by viewModel.movies.observeAsState(emptyList())
             if (movies.isEmpty()) {
                 NoMovieItems(modifier = Modifier.align(Alignment.Center))
             } else {

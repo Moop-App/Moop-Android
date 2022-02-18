@@ -21,7 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,8 +33,6 @@ class SearchFragment : Fragment() {
     @Inject
     lateinit var analytics: EventAnalytics
 
-    private val viewModel: SearchViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,11 +42,14 @@ class SearchFragment : Fragment() {
             setContent {
                 MdcTheme {
                     SearchScreen(
-                        viewModel,
                         upPress = { findNavController().navigateUp() },
                         onItemClick = { movie ->
                             analytics.clickMovie()
-                            findNavController().navigate(SearchFragmentDirections.actionToDetail(movie))
+                            findNavController().navigate(
+                                SearchFragmentDirections.actionToDetail(
+                                    movie
+                                )
+                            )
                         }
                     )
                 }
