@@ -14,7 +14,3 @@ include ':data:repository'
 include ':data:api'
 include ':data:db'
 include ':library:stfalcon-imageviewer'
-
-// Enable Gradle's version catalog support
-// https://docs.gradle.org/current/userguide/platforms.html
-enableFeaturePreview("VERSION_CATALOGS")
