@@ -16,8 +16,8 @@
 package soup.movie.data.repository.internal
 
 import kotlinx.coroutines.flow.Flow
-import soup.movie.data.api.MoopApiService
-import soup.movie.data.db.MoopDatabase
+import soup.movie.data.api.RemoteDataSource
+import soup.movie.data.db.LocalDataSource
 import soup.movie.data.repository.internal.mapper.toMovieDetail
 import soup.movie.data.repository.internal.mapper.toMovieList
 import soup.movie.data.repository.internal.mapper.toTheaterAreaGroup
@@ -26,13 +26,13 @@ import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import timber.log.Timber
 
-internal class DataMoopRepository(
-    private val local: MoopDatabase,
-    private val remote: MoopApiService
-) : MoopRepository {
+internal class MovieRepositoryImpl(
+    private val local: LocalDataSource,
+    private val remote: RemoteDataSource
+) : MovieRepository {
 
     override fun getNowMovieList(): Flow<List<Movie>> {
         return local.getNowMovieListFlow()

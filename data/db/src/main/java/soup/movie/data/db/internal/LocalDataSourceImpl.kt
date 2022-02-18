@@ -18,7 +18,7 @@ package soup.movie.data.db.internal
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import soup.movie.data.db.MoopDatabase
+import soup.movie.data.db.LocalDataSource
 import soup.movie.data.db.internal.dao.FavoriteMovieDao
 import soup.movie.data.db.internal.dao.MovieCacheDao
 import soup.movie.data.db.internal.dao.OpenDateAlarmDao
@@ -37,11 +37,11 @@ import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
 import timber.log.Timber
 
-internal class RoomDatabase(
+internal class LocalDataSourceImpl(
     private val favoriteMovieDao: FavoriteMovieDao,
     private val openDateAlarmDao: OpenDateAlarmDao,
     private val cacheDao: MovieCacheDao
-) : MoopDatabase {
+) : LocalDataSource {
 
     private var codeResponse: TheaterAreaGroup? = null
 

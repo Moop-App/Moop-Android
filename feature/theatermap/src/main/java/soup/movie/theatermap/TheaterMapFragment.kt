@@ -29,7 +29,7 @@ import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
 import soup.movie.di.TheaterMapModuleDependencies
 import soup.movie.ext.lazyFast
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.theatermap.internal.TheaterMapScreen
@@ -40,7 +40,7 @@ import javax.inject.Inject
 class TheaterMapFragment : Fragment() {
 
     @Inject
-    lateinit var repository: MoopRepository
+    lateinit var repository: MovieRepository
 
     private val systemViewModel: SystemViewModel by activityViewModels()
     private val viewModel: TheaterMapViewModel by viewModels {

@@ -13,34 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.model.repository
+package soup.movie.data.db
 
 import kotlinx.coroutines.flow.Flow
 import soup.movie.model.Movie
-import soup.movie.model.MovieDetail
+import soup.movie.model.MovieList
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
 
-interface MoopRepository {
+interface LocalDataSource {
 
-    fun getNowMovieList(): Flow<List<Movie>>
-    suspend fun updateNowMovieList()
-    suspend fun updateAndGetNowMovieList(): List<Movie>
-    fun getPlanMovieList(): Flow<List<Movie>>
-    suspend fun updatePlanMovieList()
-    suspend fun getMovieDetail(movieId: String): MovieDetail
-    suspend fun getGenreList(): List<String>
-    suspend fun findMovie(movieId: String): Movie?
-    suspend fun searchMovie(query: String): List<Movie>
-    suspend fun getCodeList(): TheaterAreaGroup
+    suspend fun saveNowMovieList(movieList: MovieList)
+    fun getNowMovieListFlow(): Flow<List<Movie>>
+    suspend fun savePlanMovieList(movieList: MovieList)
+    fun getPlanMovieListFlow(): Flow<List<Movie>>
+    suspend fun getNowLastUpdateTime(): Long
+    suspend fun getPlanLastUpdateTime(): Long
+    suspend fun getAllMovieList(): List<Movie>
+    suspend fun getNowMovieList(): List<Movie>
 
-    fun getFavoriteMovieList(): Flow<List<Movie>>
+    fun saveCodeList(response: TheaterAreaGroup)
+    fun getCodeList(): TheaterAreaGroup?
+
     suspend fun addFavoriteMovie(movie: Movie)
     suspend fun removeFavoriteMovie(movieId: String)
+    fun getFavoriteMovieList(): Flow<List<Movie>>
     suspend fun isFavoriteMovie(movieId: String): Boolean
 
     suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm>
     suspend fun hasOpenDateAlarms(): Boolean
-    suspend fun insertOpenDateAlarms(alarm: OpenDateAlarm)
+    suspend fun insertOpenDateAlarm(alarm: OpenDateAlarm)
     suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>)
 }

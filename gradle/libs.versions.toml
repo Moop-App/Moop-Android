@@ -5,14 +5,14 @@ kotlin = "1.6.10"
 coroutines = "1.6.0"
 
 # Dagger
-dagger = "2.40.2"
+dagger = "2.41"
 androidxhilt = "1.0.0"
 
 # AndroidX
 activity = "1.4.0"
 lifecycle = "2.4.0"
 navigation = "2.4.1"
-room = "2.3.0"
+room = "2.4.1"
 work = "2.7.1"
 
 # Compose

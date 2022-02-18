@@ -34,7 +34,7 @@ import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.ext.isBest
 import soup.movie.model.Movie
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import soup.movie.notification.NotificationBuilder
 import soup.movie.util.currentTime
 import soup.movie.util.plusDaysTo
@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit
 class LegacyWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
-    private val repository: MoopRepository,
+    private val repository: MovieRepository,
     private val notificationBuilder: NotificationBuilder
 ) : CoroutineWorker(context, params) {
 

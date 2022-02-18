@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.data.api
+package soup.movie.data.api.internal
 
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -23,7 +23,7 @@ import soup.movie.data.api.response.MovieDetailResponse
 import soup.movie.data.api.response.MovieListResponse
 import soup.movie.data.api.response.TheaterAreaGroupResponse
 
-interface MoopApiService {
+internal interface MovieApiService {
 
     // 현재상영작
 

@@ -22,7 +22,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -30,7 +29,7 @@ import soup.movie.ext.getDDay
 import soup.movie.home.domain.getMovieFilterFlow
 import soup.movie.home.tab.HomeContentsViewModel
 import soup.movie.model.Movie
-import soup.movie.model.repository.MoopRepository
+import soup.movie.model.repository.MovieRepository
 import soup.movie.settings.AppSettings
 import timber.log.Timber
 import javax.inject.Inject
@@ -38,7 +37,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomePlanViewModel @Inject constructor(
     private val appSettings: AppSettings,
-    private val repository: MoopRepository
+    private val repository: MovieRepository
 ) : ViewModel(), HomeContentsViewModel {
 
     private val _isLoading = MutableLiveData(false)
