@@ -36,6 +36,7 @@ buildscript {
 
 plugins {
     id 'com.diffplug.spotless' version '5.12.4'
+    id "com.google.devtools.ksp" version "1.6.10-1.0.2"
 }
 
 Plugin.metaClass.isAndroidApp = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.AppPlugin" }
