@@ -36,6 +36,7 @@ dependencies {
 
     implementation libs.playServicesLocation
     implementation libs.naverMap
+    implementation libs.naverMapCompose
 
     testImplementation libs.test.junit
     androidTestImplementation libs.androidx.test.runner
