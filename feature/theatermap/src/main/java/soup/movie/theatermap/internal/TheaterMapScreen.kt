@@ -20,19 +20,10 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.activity.compose.BackHandler
-import androidx.annotation.DrawableRes
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
@@ -51,22 +42,19 @@ import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsPadding
@@ -77,12 +65,18 @@ import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationSource
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.NaverMapOptions
-import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.compose.CameraPositionState
+import com.naver.maps.map.compose.ExperimentalNaverMapApi
+import com.naver.maps.map.compose.LocationTrackingMode
+import com.naver.maps.map.compose.MapProperties
+import com.naver.maps.map.compose.MapType
+import com.naver.maps.map.compose.MapUiSettings
+import com.naver.maps.map.compose.Marker
+import com.naver.maps.map.compose.NaverMap
+import com.naver.maps.map.compose.NaverMapConstants
+import com.naver.maps.map.compose.rememberCameraPositionState
+import com.naver.maps.map.compose.rememberMarkerState
 import com.naver.maps.map.overlay.OverlayImage
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
 import soup.movie.model.Theater
@@ -106,7 +100,11 @@ internal fun TheaterMapScreen(
         val coroutineScope = rememberCoroutineScope()
         val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
         val bottomSheetState = bottomSheetScaffoldState.bottomSheetState
-        val bottomSheetVisible = viewModel.selectedTheater != null
+        val bottomSheetVisible by remember {
+            derivedStateOf {
+                viewModel.selectedTheater != null
+            }
+        }
         LaunchedEffect(bottomSheetVisible) {
             coroutineScope.launch {
                 if (bottomSheetVisible) {
@@ -131,37 +129,32 @@ internal fun TheaterMapScreen(
                 .navigationBarsPadding(start = false, end = false)
         ) { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
-                var coverVisible by remember { mutableStateOf(true) }
-                val selectedTheater = viewModel.selectedTheater
                 BottomSheetScaffold(
                     scaffoldState = bottomSheetScaffoldState,
                     sheetPeekHeight = 0.dp,
                     sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
                     sheetContent = {
                         TheaterMapFooter(
-                            selectedTheater = selectedTheater,
+                            selectedTheater = viewModel.selectedTheater,
                             onClick = { viewModel.onTheaterUnselected() }
                         )
                     }
                 ) {
                     TheaterMapContents(
                         theaters = viewModel.uiModel,
-                        selectedTheater = selectedTheater,
+                        selectedTheater = viewModel.selectedTheater,
                         onTheaterClick = { viewModel.onTheaterSelected(it) },
                         locationSource = locationSource,
                         onMapClick = { viewModel.onTheaterUnselected() },
-                        onMapReady = {
-                            coverVisible = false
-                            viewModel.onRefresh()
-                        }
+                        onMapLoaded = { viewModel.onRefresh() }
                     )
                 }
-                TheaterMapCover(visible = coverVisible)
             }
         }
     }
 }
 
+@OptIn(ExperimentalNaverMapApi::class)
 @Composable
 private fun TheaterMapContents(
     theaters: List<TheaterMarkerUiModel>,
@@ -171,76 +164,88 @@ private fun TheaterMapContents(
     locationSource: LocationSource? = null,
     isLightTheme: Boolean = MaterialTheme.colors.isLight,
     onMapClick: () -> Unit = {},
-    onMapReady: () -> Unit = {},
+    onMapLoaded: () -> Unit = {},
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val savedInstanceState = rememberSavedInstanceState()
-    val mapView = rememberMapViewWithLifecycle(naverMapOptions(), savedInstanceState)
-    AndroidView(
-        factory = {
-            mapView.apply {
-                coroutineScope.launch {
-                    val naverMap = awaitMap()
-                    if (isLightTheme) {
-                        naverMap.mapType = NaverMap.MapType.Basic
-                        naverMap.isNightModeEnabled = false
-                    } else {
-                        naverMap.mapType = NaverMap.MapType.Navi
-                        naverMap.isNightModeEnabled = true
-                    }
-                    naverMap.moveCamera(CameraUpdate.zoomTo(12.0))
-                    naverMap.locationSource = locationSource
-                    // TODO: 처음에 현재 위치로 이동하지 않는 문제를 임시로 수정한다.
-                    if (savedInstanceState.isEmpty) delay(1)
-                    naverMap.locationTrackingMode = LocationTrackingMode.Follow
-                    naverMap.setOnMapClickListener { _, _ -> onMapClick() }
-                    onMapReady()
-                }
-            }
-        },
-        modifier = modifier
-    )
-
-    var markers by remember {
-        mutableStateOf<List<Marker>>(emptyList())
+    val cameraPositionState: CameraPositionState = rememberCameraPositionState {
+        this.position = CameraPosition(LatLng.INVALID, 12.0)
     }
-    LaunchedEffect(theaters) {
-        coroutineScope.launch {
-            val naverMap = mapView.awaitMap()
-            markers.forEach {
-                it.map = null
-            }
-            markers = theaters.map {
-                createMarker(it, onTheaterClick).apply {
-                    map = naverMap
+    NaverMap(
+        modifier = modifier,
+        cameraPositionState = cameraPositionState,
+        properties = MapProperties(
+            mapType = if (isLightTheme) {
+                MapType.Basic
+            } else {
+                MapType.Navi
+            },
+            extent = LatLngBounds.from(
+                LatLng(31.43, 122.37),
+                LatLng(44.35, 132.0)
+            ),
+            minZoom = 6.0,
+            isNightModeEnabled = isLightTheme.not(),
+            backgroundColor = if (isLightTheme) {
+                NaverMapConstants.DefaultBackgroundColorLight
+            } else {
+                NaverMapConstants.DefaultBackgroundColorDark
+            },
+            backgroundResource = if (isLightTheme) {
+                NaverMapConstants.DefaultBackgroundDrawableLight
+            } else {
+                NaverMapConstants.DefaultBackgroundDrawableDark
+            },
+            locationTrackingMode = LocationTrackingMode.Follow,
+        ),
+        uiSettings = MapUiSettings(
+            isLocationButtonEnabled = false,
+            isScaleBarEnabled = false,
+        ),
+        locationSource = locationSource,
+        onMapClick = { _, _ ->
+            onMapClick()
+        },
+        onMapLoaded = { onMapLoaded() }
+    ) {
+        theaters.forEach { theater ->
+            Marker(
+                state = rememberMarkerState(
+                    position = LatLng(theater.lat, theater.lng)
+                ),
+                captionText = theater.name,
+                icon = theater.getMarkerIcon(),
+                isHideCollidedSymbols = true,
+                isHideCollidedCaptions = true,
+                onClick = {
+                    onTheaterClick(theater)
+                    true
                 }
-            }
+            )
         }
     }
+
+    val coroutineScope = rememberCoroutineScope()
     LaunchedEffect(selectedTheater) {
         coroutineScope.launch {
-            val naverMap = mapView.awaitMap()
             if (selectedTheater != null) {
-                naverMap.moveCamera(
-                    CameraUpdate
-                        .scrollAndZoomTo(
-                            LatLng(selectedTheater.lat, selectedTheater.lng),
-                            max(naverMap.cameraPosition.zoom, 16.0)
-                        )
-                        .animate(CameraAnimation.Fly)
+                cameraPositionState.animate(
+                    update = CameraUpdate.scrollAndZoomTo(
+                        LatLng(selectedTheater.lat, selectedTheater.lng),
+                        max(cameraPositionState.position.zoom, 16.0)
+                    ),
+                    animation = CameraAnimation.Fly,
                 )
             } else {
-                naverMap.moveCamera(
-                    CameraUpdate
-                        .zoomTo(min(naverMap.cameraPosition.zoom, 12.0))
-                        .animate(CameraAnimation.Easing)
+                cameraPositionState.animate(
+                    update = CameraUpdate.zoomTo(
+                        min(cameraPositionState.position.zoom, 12.0)
+                    ),
+                    animation = CameraAnimation.Easing
                 )
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TheaterMapFooter(
     selectedTheater: TheaterMarkerUiModel?,
@@ -358,28 +363,6 @@ private fun MapButton(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-private fun TheaterMapCover(
-    visible: Boolean,
-    modifier: Modifier = Modifier
-) {
-    AnimatedVisibility(
-        visible = visible,
-        modifier = modifier.fillMaxSize(),
-        enter = EnterTransition.None,
-        exit = fadeOut(animationSpec = tween(delayMillis = 500))
-    ) {
-        val isLightTheme = MaterialTheme.colors.isLight
-        val color = if (isLightTheme) {
-            Color(NaverMap.DEFAULT_BACKGROUND_COLOR_LIGHT)
-        } else {
-            Color(NaverMap.DEFAULT_BACKGROUND_COLOR_DARK)
-        }
-        Spacer(modifier = Modifier.background(color))
-    }
-}
-
 @Composable
 private fun Toolbar(text: String, onNavigationOnClick: () -> Unit) {
     TopAppBar(
@@ -395,42 +378,18 @@ private fun Toolbar(text: String, onNavigationOnClick: () -> Unit) {
     )
 }
 
-private fun naverMapOptions(): NaverMapOptions {
-    return NaverMapOptions()
-        .extent(
-            LatLngBounds.from(
-                LatLng(31.43, 122.37),
-                LatLng(44.35, 132.0)
-            )
-        )
-        .locationButtonEnabled(true)
-        .scaleBarEnabled(false)
-        .minZoom(6.0)
-        .camera(CameraPosition(LatLng.INVALID, 12.0))
-}
-
-private fun createMarker(
-    theater: TheaterMarkerUiModel,
-    onTheaterClick: (TheaterMarkerUiModel) -> Unit
-) = Marker().apply {
-    captionText = theater.name
-    position = LatLng(theater.lat, theater.lng)
-    icon = OverlayImage.fromResource(theater.getMarkerIcon())
-    isHideCollidedSymbols = true
-    isHideCollidedCaptions = true
-    setOnClickListener {
-        onTheaterClick(theater)
-        true
-    }
-}
-
-@DrawableRes
-private fun TheaterMarkerUiModel.getMarkerIcon(): Int {
+private fun TheaterMarkerUiModel.getMarkerIcon(): OverlayImage {
     return when (this) {
-        is CgvMarkerUiModel -> R.drawable.ic_marker_cgv
-        is LotteCinemaMarkerUiModel -> R.drawable.ic_marker_lotte
-        is MegaboxMarkerUiModel -> R.drawable.ic_marker_megabox
+        is CgvMarkerUiModel -> TheaterMarkerIcons.Cgv
+        is LotteCinemaMarkerUiModel -> TheaterMarkerIcons.LotteCinema
+        is MegaboxMarkerUiModel -> TheaterMarkerIcons.Megabox
     }
+}
+
+private object TheaterMarkerIcons {
+    val Cgv = OverlayImage.fromResource(R.drawable.ic_marker_cgv)
+    val LotteCinema = OverlayImage.fromResource(R.drawable.ic_marker_lotte)
+    val Megabox = OverlayImage.fromResource(R.drawable.ic_marker_megabox)
 }
 
 private fun TheaterMarkerUiModel.executeWeb(ctx: Context) {
