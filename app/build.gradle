@@ -9,6 +9,7 @@ if (file("google-services.json").exists()) {
 }
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.dropbox.dependency-guard'
 
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
@@ -164,4 +165,9 @@ dependencies {
     testImplementation libs.test.junit
     androidTestImplementation libs.androidx.test.runner
     androidTestImplementation libs.androidx.test.espresso
+}
+
+dependencyGuard {
+    // All dependencies included in Production Release APK
+    configuration("releaseRuntimeClasspath")
 }
