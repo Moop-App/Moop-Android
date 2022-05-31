@@ -29,8 +29,8 @@ androidx.compose.ui:ui-unit:1.1.1
 androidx.compose.ui:ui-util:1.1.1
 androidx.compose.ui:ui:1.1.1
 androidx.concurrent:concurrent-futures:1.0.0
-androidx.constraintlayout:constraintlayout-core:1.0.0
-androidx.constraintlayout:constraintlayout:2.1.0
+androidx.constraintlayout:constraintlayout-core:1.0.4
+androidx.constraintlayout:constraintlayout:2.1.4
 androidx.coordinatorlayout:coordinatorlayout:1.1.0
 androidx.core:core-ktx:1.7.0
 androidx.core:core:1.7.0
