@@ -36,7 +36,7 @@ androidx.core:core-ktx:1.7.0
 androidx.core:core:1.7.0
 androidx.cursoradapter:cursoradapter:1.0.0
 androidx.customview:customview:1.1.0
-androidx.databinding:viewbinding:7.1.1
+androidx.databinding:viewbinding:7.2.1
 androidx.datastore:datastore-core:1.0.0
 androidx.datastore:datastore-preferences-core:1.0.0
 androidx.datastore:datastore-preferences:1.0.0
