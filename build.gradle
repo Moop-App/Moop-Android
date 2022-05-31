@@ -31,12 +31,14 @@ buildscript {
         classpath libs.google.pluginGradle
         classpath libs.firebase.crashlytics.pluginGradle
         classpath libs.firebase.perf.pluginGradle
+        classpath libs.dependencyGuard.pluginGradle
     }
 }
 
 plugins {
     id 'com.diffplug.spotless' version '5.12.4'
     id "com.google.devtools.ksp" version "1.6.10-1.0.2"
+    alias(libs.plugins.dependencyGuard)
 }
 
 Plugin.metaClass.isAndroidApp = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.AppPlugin" }
@@ -90,6 +92,12 @@ subprojects {
         }.each {
             it.dependsOn spotlessApply
         }
+    }
+}
+
+dependencyGuard {
+    configuration("classpath") {
+        it.tree = true
     }
 }
 
