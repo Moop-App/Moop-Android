@@ -87,7 +87,7 @@ android {
             includeAndroidResources = true
         }
     }
-    lintOptions {
+    lint {
         checkReleaseBuilds false
     }
     dynamicFeatures = [":feature:theatermap"]
