@@ -96,9 +96,7 @@ subprojects {
 }
 
 dependencyGuard {
-    configuration("classpath") {
-        it.tree = true
-    }
+    configuration("classpath")
 }
 
 Object propOrDef(String propertyName, Object defaultValue) {
