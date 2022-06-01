@@ -30,6 +30,7 @@ import soup.movie.ext.showToast
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
+import soup.movie.ui.isPortrait
 
 @Composable
 internal fun HomeFavoriteScreen(
@@ -58,6 +59,7 @@ internal fun HomeFavoriteScreen(
 //                }
 //            }
 
+            val isPortrait = isPortrait()
             val context = LocalContext.current
             MovieList(
                 movies,
@@ -65,7 +67,11 @@ internal fun HomeFavoriteScreen(
                 onLongItemClick = {
                     context.showToast(it.title)
                 },
-                modifier = Modifier.navigationBarsPadding()
+                modifier = if (isPortrait) {
+                    Modifier.navigationBarsPadding()
+                } else {
+                    Modifier
+                }
             )
         }
     }

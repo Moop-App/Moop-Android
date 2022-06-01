@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.sp
 import soup.movie.ext.showToast
 import soup.movie.home.R
 import soup.movie.model.Movie
+import soup.movie.ui.isPortrait
 
 @Composable
 internal fun HomeContentsScreen(
@@ -79,6 +80,7 @@ internal fun HomeContentsScreen(
 //                }
 //            }
 
+            val isPortrait = isPortrait()
             val context = LocalContext.current
             MovieList(
                 movies = movies,
@@ -86,7 +88,11 @@ internal fun HomeContentsScreen(
                 onLongItemClick = {
                     context.showToast(it.title)
                 },
-                modifier = Modifier.navigationBarsPadding()
+                modifier = if (isPortrait) {
+                    Modifier.navigationBarsPadding()
+                } else {
+                    Modifier
+                }
             )
         }
         if (isError) {

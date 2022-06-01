@@ -112,10 +112,15 @@ class CustomProgressFragment : AbstractProgressFragment() {
             modifier = Modifier.fillMaxHeight(),
             contentAlignment = Alignment.Center
         ) {
+            val isPortrait = isPortrait()
             if (state is State.Progress) {
                 ProgressAnimation(
                     modifier = Modifier
-                        .navigationBarsPadding()
+                        .apply {
+                            if (isPortrait) {
+                                navigationBarsPadding()
+                            }
+                        }
                         .padding(end = 8.dp, bottom = 160.dp)
                         .size(width = 256.dp, height = 300.dp)
                 )
@@ -124,7 +129,11 @@ class CustomProgressFragment : AbstractProgressFragment() {
                 state = state,
                 modifier = Modifier
                     .fillMaxSize()
-                    .navigationBarsPadding()
+                    .apply {
+                        if (isPortrait) {
+                            navigationBarsPadding()
+                        }
+                    }
                     .padding(horizontal = 32.dp)
             )
             Image(
@@ -132,7 +141,11 @@ class CustomProgressFragment : AbstractProgressFragment() {
                 contentDescription = null,
                 contentScale = ContentScale.Inside,
                 modifier = Modifier
-                    .navigationBarsPadding()
+                    .apply {
+                        if (isPortrait) {
+                            navigationBarsPadding()
+                        }
+                    }
                     .padding(16.dp)
                     .size(width = 100.dp, height = 40.dp)
                     .align(Alignment.BottomEnd)

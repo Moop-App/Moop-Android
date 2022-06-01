@@ -38,16 +38,20 @@ import soup.movie.theme.R
 import soup.movie.theme.ThemeSettingItemUiModel
 import soup.movie.theme.ThemeSettingViewModel
 import soup.movie.theme.stringResIdOf
+import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 @Composable
 internal fun ThemeOptionScreen(
     viewModel: ThemeSettingViewModel = viewModel()
 ) {
+    val isPortrait = isPortrait()
     Scaffold(
-        modifier = Modifier
-            .statusBarsPadding()
-            .navigationBarsPadding(),
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        },
         topBar = {
             TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
         }

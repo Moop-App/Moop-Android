@@ -81,6 +81,7 @@ import soup.movie.BuildConfig
 import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.R
+import soup.movie.ui.isPortrait
 import soup.movie.util.Cgv
 import soup.movie.util.LauncherIcons
 import soup.movie.util.LotteCinema
@@ -115,6 +116,7 @@ internal fun TheaterMapScreen(
     BackHandler(enabled = bottomSheetState.isExpanded) {
         viewModel.onTheaterUnselected()
     }
+    val isPortrait = isPortrait()
     Scaffold(
         topBar = {
             Toolbar(
@@ -122,9 +124,11 @@ internal fun TheaterMapScreen(
                 onNavigationOnClick = { systemViewModel.openNavigationMenu() }
             )
         },
-        modifier = Modifier
-            .statusBarsPadding()
-            .navigationBarsPadding()
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        }
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             BottomSheetScaffold(

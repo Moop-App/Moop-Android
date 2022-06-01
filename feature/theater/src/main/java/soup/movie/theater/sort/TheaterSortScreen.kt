@@ -58,6 +58,7 @@ import soup.movie.theater.TheaterChip
 import soup.movie.theater.draggableItem
 import soup.movie.theater.draggableList
 import soup.movie.theater.rememberDraggableListState
+import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 @Composable
@@ -73,10 +74,13 @@ internal fun TheaterSortScreen(
             upPress()
         }
     }
+    val isPortrait = isPortrait()
     Scaffold(
-        modifier = Modifier
-            .statusBarsPadding()
-            .navigationBarsPadding(),
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        },
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(R.string.theater_sort_title)) }

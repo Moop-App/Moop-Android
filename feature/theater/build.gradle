@@ -27,7 +27,6 @@ dependencies {
     implementation libs.compose.ui
     implementation libs.compose.runtimeLivedata
     implementation libs.accompanist.flowlayout
-    implementation libs.accompanist.insets
     implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
     implementation libs.metronome.material

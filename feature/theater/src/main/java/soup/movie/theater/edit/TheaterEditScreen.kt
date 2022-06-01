@@ -74,6 +74,7 @@ import soup.movie.model.Theater
 import soup.movie.theater.R
 import soup.movie.theater.TheaterChip
 import soup.movie.theater.divider
+import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 private enum class Page(val title: String) {
@@ -112,11 +113,14 @@ internal fun TheaterEditScreen(
         delay(500)
         bottomSheetScaffoldState.bottomSheetState.collapse()
     }
+    val isPortrait = isPortrait()
     BottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
-        modifier = Modifier
-            .statusBarsPadding()
-            .navigationBarsPadding(),
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        },
         topBar = {
             TabRow(
                 selectedTabIndex = pagerState.currentPage,

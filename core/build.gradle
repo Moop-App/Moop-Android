@@ -6,8 +6,18 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
-android.buildTypes.release {
-    consumerProguardFiles 'proguard-rules-navigation.pro'
+android {
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules-navigation.pro'
+        }
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "${libs.versions.compose.get()}"
+    }
 }
 
 dependencies {
@@ -20,6 +30,8 @@ dependencies {
     api libs.androidx.appcompat
     api libs.androidx.core
     api libs.material.material
+
+    implementation libs.compose.ui
 
     implementation libs.androidx.browser
     implementation libs.androidx.fragment

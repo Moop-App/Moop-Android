@@ -62,6 +62,7 @@ import soup.movie.ext.showToast
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
+import soup.movie.ui.isPortrait
 
 @Composable
 fun SearchScreen(
@@ -69,10 +70,13 @@ fun SearchScreen(
     upPress: () -> Unit,
     onItemClick: (Movie) -> Unit
 ) {
+    val isPortrait = isPortrait()
     Scaffold(
-        modifier = Modifier
-            .statusBarsPadding()
-            .navigationBarsPadding(),
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        },
         topBar = {
             Surface(
                 modifier = Modifier.fillMaxWidth().height(56.dp),
