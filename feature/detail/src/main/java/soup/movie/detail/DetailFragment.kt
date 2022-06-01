@@ -241,6 +241,14 @@ class DetailFragment :
                     analytics.clickMoreTrailers()
                     YouTube.executeAppWithQuery(ctx, item.movieTitle)
                 }
+                is AdItemUiModel -> {
+                }
+                is CastItemUiModel -> {
+                }
+                is HeaderItemUiModel -> {
+                }
+                is PlotItemUiModel -> {
+                }
             }
         }
         listView.apply {

@@ -19,7 +19,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
@@ -56,9 +58,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 import soup.movie.ext.showToast
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
@@ -70,100 +69,98 @@ fun SearchScreen(
     upPress: () -> Unit,
     onItemClick: (Movie) -> Unit
 ) {
-    ProvideWindowInsets {
-        Scaffold(
-            modifier = Modifier
-                .statusBarsPadding()
-                .navigationBarsPadding(start = false, end = false),
-            topBar = {
-                Surface(
-                    modifier = Modifier.fillMaxWidth().height(56.dp),
-                    color = MaterialTheme.colors.primarySurface,
-                    elevation = AppBarDefaults.TopAppBarElevation
-                ) {
-                    val focusManager = LocalFocusManager.current
-                    val handleColor = MaterialTheme.colors.secondary
-                    val contentAlpha = ContentAlpha.medium
-                    val customTextSelectionColors = remember(handleColor, contentAlpha) {
-                        TextSelectionColors(
-                            handleColor = handleColor,
-                            backgroundColor = handleColor.copy(alpha = contentAlpha)
-                        )
+    Scaffold(
+        modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding(),
+        topBar = {
+            Surface(
+                modifier = Modifier.fillMaxWidth().height(56.dp),
+                color = MaterialTheme.colors.primarySurface,
+                elevation = AppBarDefaults.TopAppBarElevation
+            ) {
+                val focusManager = LocalFocusManager.current
+                val handleColor = MaterialTheme.colors.secondary
+                val contentAlpha = ContentAlpha.medium
+                val customTextSelectionColors = remember(handleColor, contentAlpha) {
+                    TextSelectionColors(
+                        handleColor = handleColor,
+                        backgroundColor = handleColor.copy(alpha = contentAlpha)
+                    )
+                }
+                CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {
+                    val focusRequester = FocusRequester()
+                    LaunchedEffect(Unit) {
+                        focusRequester.requestFocus()
                     }
-                    CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {
-                        val focusRequester = FocusRequester()
-                        LaunchedEffect(Unit) {
-                            focusRequester.requestFocus()
-                        }
 
-                        val query by viewModel.query.observeAsState("")
-                        TextField(
-                            value = query,
-                            onValueChange = { viewModel.onQueryChanged(it) },
-                            modifier = Modifier.fillMaxSize()
-                                .focusRequester(focusRequester),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Text,
-                                imeAction = ImeAction.Search
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onSearch = {
-                                    focusManager.clearFocus()
-                                }
-                            ),
-                            singleLine = true,
-                            placeholder = {
-                                Text(stringResource(R.string.search_hint))
-                            },
-                            leadingIcon = {
-                                IconButton(onClick = upPress) {
-                                    Icon(
-                                        Icons.Default.ArrowBack,
-                                        contentDescription = null
-                                    )
-                                }
-                            },
-                            trailingIcon = {
-                                IconButton(onClick = { viewModel.onQueryChanged("") }) {
-                                    Icon(
-                                        Icons.Default.Close,
-                                        contentDescription = null
-                                    )
-                                }
-                            },
-                            colors = TextFieldDefaults.textFieldColors(
-                                cursorColor = MaterialTheme.colors.secondary,
-                                backgroundColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                disabledIndicatorColor = Color.Transparent,
-                                leadingIconColor = MaterialTheme.colors.onSurface,
-                                trailingIconColor = MaterialTheme.colors.onSurface
-                            )
+                    val query by viewModel.query.observeAsState("")
+                    TextField(
+                        value = query,
+                        onValueChange = { viewModel.onQueryChanged(it) },
+                        modifier = Modifier.fillMaxSize()
+                            .focusRequester(focusRequester),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Search
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onSearch = {
+                                focusManager.clearFocus()
+                            }
+                        ),
+                        singleLine = true,
+                        placeholder = {
+                            Text(stringResource(R.string.search_hint))
+                        },
+                        leadingIcon = {
+                            IconButton(onClick = upPress) {
+                                Icon(
+                                    Icons.Default.ArrowBack,
+                                    contentDescription = null
+                                )
+                            }
+                        },
+                        trailingIcon = {
+                            IconButton(onClick = { viewModel.onQueryChanged("") }) {
+                                Icon(
+                                    Icons.Default.Close,
+                                    contentDescription = null
+                                )
+                            }
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
+                            cursorColor = MaterialTheme.colors.secondary,
+                            backgroundColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                            leadingIconColor = MaterialTheme.colors.onSurface,
+                            trailingIconColor = MaterialTheme.colors.onSurface
                         )
-                    }
+                    )
                 }
             }
-        ) { paddingValues ->
-            val uiModel by viewModel.uiModel.observeAsState()
-            uiModel?.let {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                ) {
-                    if (it.hasNoItem) {
-                        NoMovieItems(modifier = Modifier.align(Alignment.Center))
-                    } else {
-                        val context = LocalContext.current
-                        MovieList(
-                            movies = it.movies,
-                            onItemClick = onItemClick,
-                            onLongItemClick = {
-                                context.showToast(it.title)
-                            }
-                        )
-                    }
+        }
+    ) { paddingValues ->
+        val uiModel by viewModel.uiModel.observeAsState()
+        uiModel?.let {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                if (it.hasNoItem) {
+                    NoMovieItems(modifier = Modifier.align(Alignment.Center))
+                } else {
+                    val context = LocalContext.current
+                    MovieList(
+                        movies = it.movies,
+                        onItemClick = onItemClick,
+                        onLongItemClick = {
+                            context.showToast(it.title)
+                        }
+                    )
                 }
             }
         }

@@ -24,9 +24,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
@@ -56,9 +58,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.CameraAnimation
@@ -96,59 +95,57 @@ internal fun TheaterMapScreen(
     systemViewModel: SystemViewModel,
     locationSource: LocationSource?
 ) {
-    ProvideWindowInsets {
-        val coroutineScope = rememberCoroutineScope()
-        val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
-        val bottomSheetState = bottomSheetScaffoldState.bottomSheetState
-        val bottomSheetVisible by remember {
-            derivedStateOf {
-                viewModel.selectedTheater != null
+    val coroutineScope = rememberCoroutineScope()
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
+    val bottomSheetState = bottomSheetScaffoldState.bottomSheetState
+    val bottomSheetVisible by remember {
+        derivedStateOf {
+            viewModel.selectedTheater != null
+        }
+    }
+    LaunchedEffect(bottomSheetVisible) {
+        coroutineScope.launch {
+            if (bottomSheetVisible) {
+                bottomSheetState.expand()
+            } else {
+                bottomSheetState.collapse()
             }
         }
-        LaunchedEffect(bottomSheetVisible) {
-            coroutineScope.launch {
-                if (bottomSheetVisible) {
-                    bottomSheetState.expand()
-                } else {
-                    bottomSheetState.collapse()
-                }
-            }
-        }
-        BackHandler(enabled = bottomSheetState.isExpanded) {
-            viewModel.onTheaterUnselected()
-        }
-        Scaffold(
-            topBar = {
-                Toolbar(
-                    text = stringResource(R.string.theater_map_title),
-                    onNavigationOnClick = { systemViewModel.openNavigationMenu() }
-                )
-            },
-            modifier = Modifier
-                .statusBarsPadding()
-                .navigationBarsPadding(start = false, end = false)
-        ) { paddingValues ->
-            Box(modifier = Modifier.padding(paddingValues)) {
-                BottomSheetScaffold(
-                    scaffoldState = bottomSheetScaffoldState,
-                    sheetPeekHeight = 0.dp,
-                    sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
-                    sheetContent = {
-                        TheaterMapFooter(
-                            selectedTheater = viewModel.selectedTheater,
-                            onClick = { viewModel.onTheaterUnselected() }
-                        )
-                    }
-                ) {
-                    TheaterMapContents(
-                        theaters = viewModel.uiModel,
+    }
+    BackHandler(enabled = bottomSheetState.isExpanded) {
+        viewModel.onTheaterUnselected()
+    }
+    Scaffold(
+        topBar = {
+            Toolbar(
+                text = stringResource(R.string.theater_map_title),
+                onNavigationOnClick = { systemViewModel.openNavigationMenu() }
+            )
+        },
+        modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding()
+    ) { paddingValues ->
+        Box(modifier = Modifier.padding(paddingValues)) {
+            BottomSheetScaffold(
+                scaffoldState = bottomSheetScaffoldState,
+                sheetPeekHeight = 0.dp,
+                sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
+                sheetContent = {
+                    TheaterMapFooter(
                         selectedTheater = viewModel.selectedTheater,
-                        onTheaterClick = { viewModel.onTheaterSelected(it) },
-                        locationSource = locationSource,
-                        onMapClick = { viewModel.onTheaterUnselected() },
-                        onMapLoaded = { viewModel.onRefresh() }
+                        onClick = { viewModel.onTheaterUnselected() }
                     )
                 }
+            ) {
+                TheaterMapContents(
+                    theaters = viewModel.uiModel,
+                    selectedTheater = viewModel.selectedTheater,
+                    onTheaterClick = { viewModel.onTheaterSelected(it) },
+                    locationSource = locationSource,
+                    onMapClick = { viewModel.onTheaterUnselected() },
+                    onMapLoaded = { viewModel.onRefresh() }
+                )
             }
         }
     }
@@ -197,7 +194,6 @@ private fun TheaterMapContents(
             locationTrackingMode = LocationTrackingMode.Follow,
         ),
         uiSettings = MapUiSettings(
-            isLocationButtonEnabled = false,
             isScaleBarEnabled = false,
         ),
         locationSource = locationSource,

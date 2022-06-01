@@ -17,7 +17,7 @@ package androidx.recyclerview.widget.ext
 
 import androidx.recyclerview.widget.DiffUtil
 
-class IdBasedDiffCallback<T>(
+class IdBasedDiffCallback<T : Any>(
     private val getIdOf: (T) -> String
 ) : DiffUtil.ItemCallback<T>() {
 

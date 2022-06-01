@@ -24,11 +24,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -43,7 +43,7 @@ import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import soup.movie.ext.getDDayLabel
 import soup.movie.ext.isBest
 import soup.movie.ext.isDDay
@@ -56,17 +56,16 @@ import soup.movie.home.favorite.MovieNewTag
 import soup.movie.home.filter.rippleTheme
 import soup.movie.model.Movie
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MovieList(
     movies: List<Movie>,
     onItemClick: (Movie) -> Unit,
     onLongItemClick: (Movie) -> Unit,
     modifier: Modifier = Modifier,
-    state: LazyListState = rememberLazyListState()
+    state: LazyGridState = rememberLazyGridState()
 ) {
     LazyVerticalGrid(
-        cells = GridCells.Fixed(integerResource(R.integer.grid_span_count)),
+        columns = GridCells.Fixed(integerResource(R.integer.grid_span_count)),
         modifier = modifier,
         state = state,
         contentPadding = PaddingValues(8.dp)
@@ -99,9 +98,7 @@ private fun MovieItem(
         ) {
             Box {
                 Image(
-                    painter = rememberImagePainter(movie.posterUrl) {
-                        crossfade(true)
-                    },
+                    painter = rememberAsyncImagePainter(movie.posterUrl),
                     contentDescription = movie.title,
                     modifier = Modifier
                         .aspectRatio(27 / 40f)

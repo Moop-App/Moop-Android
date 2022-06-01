@@ -23,9 +23,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -52,9 +54,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 import soup.metronome.material.UnelevatedButton
 import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
@@ -73,45 +72,43 @@ internal fun SettingsScreen(
     onMarketIconClick: () -> Unit,
     onBugReportClick: () -> Unit
 ) {
-    ProvideWindowInsets {
-        Scaffold(
+    Scaffold(
+        modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding(),
+        topBar = {
+            Toolbar(
+                text = stringResource(R.string.menu_settings),
+                onNavigationOnClick = { systemViewModel.openNavigationMenu() }
+            )
+        }
+    ) { paddingValues ->
+        val theme by viewModel.themeUiModel.observeAsState()
+        val theater by viewModel.theaterUiModel.observeAsState()
+        val version by viewModel.versionUiModel.observeAsState()
+        Column(
             modifier = Modifier
-                .statusBarsPadding()
-                .navigationBarsPadding(start = false, end = false),
-            topBar = {
-                Toolbar(
-                    text = stringResource(R.string.menu_settings),
-                    onNavigationOnClick = { systemViewModel.openNavigationMenu() }
-                )
-            }
-        ) { paddingValues ->
-            val theme by viewModel.themeUiModel.observeAsState()
-            val theater by viewModel.theaterUiModel.observeAsState()
-            val version by viewModel.versionUiModel.observeAsState()
-            Column(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .padding(horizontal = 16.dp)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                SettingsThemeItem(theme, onClick = onThemeEditClick)
-                SettingsDivider()
-                SettingsTheaterItem(
-                    theater?.theaterList.orEmpty(),
-                    onItemClick = onTheaterItemClick,
-                    onEditClick = onTheaterEditClick
-                )
-                SettingsDivider()
-                SettingsTheaterModeItem()
-                SettingsDivider()
-                SettingsVersionItem(
-                    version = version,
-                    onClick = onVersionClick,
-                    onActionClick = onMarketIconClick
-                )
-                SettingsDivider()
-                SettingsFeedbackItem(onClick = onBugReportClick)
-            }
+                .padding(paddingValues)
+                .padding(horizontal = 16.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            SettingsThemeItem(theme, onClick = onThemeEditClick)
+            SettingsDivider()
+            SettingsTheaterItem(
+                theater?.theaterList.orEmpty(),
+                onItemClick = onTheaterItemClick,
+                onEditClick = onTheaterEditClick
+            )
+            SettingsDivider()
+            SettingsTheaterModeItem()
+            SettingsDivider()
+            SettingsVersionItem(
+                version = version,
+                onClick = onVersionClick,
+                onActionClick = onMarketIconClick
+            )
+            SettingsDivider()
+            SettingsFeedbackItem(onClick = onBugReportClick)
         }
     }
 }
