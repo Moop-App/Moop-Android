@@ -26,7 +26,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
     implementation libs.compose.runtimeLivedata
-    implementation libs.accompanist.insets
 
     implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.lifecycle.viewmodel.compose

@@ -1,7 +1,7 @@
 [versions]
 
 # Kotlin
-kotlin = "1.6.10"
+kotlin = "1.6.21"
 coroutines = "1.6.0"
 
 # Dagger
@@ -16,12 +16,12 @@ room = "2.4.1"
 work = "2.7.1"
 
 # Compose
-compose = "1.1.1"
-accompanist = "0.23.1"
-metronome = "0.3.1"
+compose = "1.2.0-beta02"
+accompanist = "0.24.9-beta"
+metronome = "0.4.1"
 
 # Etc
-coil = "1.4.0"
+coil = "2.1.0"
 dependencyGuard = "0.3.0"
 
 
@@ -34,7 +34,7 @@ android-pluginGradle = "com.android.tools.build:gradle:7.2.1"
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-serializationPluginGradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
-kotlin-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1"
+kotlin-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
 
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
@@ -58,7 +58,7 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-appcompat = "androidx.appcompat:appcompat:1.4.1"
 androidx-browser = "androidx.browser:browser:1.4.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-androidx-core = "androidx.core:core-ktx:1.7.0"
+androidx-core = "androidx.core:core-ktx:1.8.0-rc02"
 androidx-datastore-preferences = "androidx.datastore:datastore-preferences:1.0.0"
 androidx-drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
 androidx-fragment = "androidx.fragment:fragment-ktx:1.4.1"
@@ -142,7 +142,7 @@ photoview = "com.github.chrisbanes:PhotoView:2.3.0"
 recyclerViewAnimators = "jp.wasabeef:recyclerview-animators:4.0.2"
 kakaoLink = "com.kakao.sdk:v2-link:2.8.3"
 naverMap = "com.naver.maps:map-sdk:3.15.0"
-naverMapCompose = "io.github.fornewid:naver-map-compose:1.0.0"
+naverMapCompose = "io.github.fornewid:naver-map-compose:1.1.1"
 playServicesLocation = "com.google.android.gms:play-services-location:17.1.0"
 timber = "com.jakewharton.timber:timber:5.0.1"
 threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.3.1"

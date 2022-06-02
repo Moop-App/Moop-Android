@@ -20,7 +20,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
@@ -32,34 +34,33 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 import soup.movie.theme.R
 import soup.movie.theme.ThemeSettingItemUiModel
 import soup.movie.theme.ThemeSettingViewModel
 import soup.movie.theme.stringResIdOf
+import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 @Composable
 internal fun ThemeOptionScreen(
     viewModel: ThemeSettingViewModel = viewModel()
 ) {
-    ProvideWindowInsets {
-        Scaffold(
-            modifier = Modifier
-                .statusBarsPadding()
-                .navigationBarsPadding(start = false, end = false),
-            topBar = {
-                TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
-            }
-        ) { paddingValues ->
-            ThemeOptionList(
-                items = viewModel.items,
-                onItemClick = { viewModel.onItemClick(it) },
-                modifier = Modifier.padding(paddingValues)
-            )
+    val isPortrait = isPortrait()
+    Scaffold(
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        },
+        topBar = {
+            TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
         }
+    ) { paddingValues ->
+        ThemeOptionList(
+            items = viewModel.items,
+            onItemClick = { viewModel.onItemClick(it) },
+            modifier = Modifier.padding(paddingValues)
+        )
     }
 }
 

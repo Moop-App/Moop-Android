@@ -26,7 +26,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -49,9 +51,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 import kotlinx.coroutines.launch
 import soup.movie.model.Theater
 import soup.movie.theater.R
@@ -59,6 +58,7 @@ import soup.movie.theater.TheaterChip
 import soup.movie.theater.draggableItem
 import soup.movie.theater.draggableList
 import soup.movie.theater.rememberDraggableListState
+import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 @Composable
@@ -74,41 +74,42 @@ internal fun TheaterSortScreen(
             upPress()
         }
     }
-    ProvideWindowInsets {
-        Scaffold(
-            modifier = Modifier
-                .statusBarsPadding()
-                .navigationBarsPadding(start = false, end = false),
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = stringResource(R.string.theater_sort_title)) }
+    val isPortrait = isPortrait()
+    Scaffold(
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        },
+        topBar = {
+            TopAppBar(
+                title = { Text(text = stringResource(R.string.theater_sort_title)) }
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { debounce(onAddItemClick) }) {
+                Icon(
+                    painterResource(R.drawable.ic_round_add),
+                    contentDescription = stringResource(R.string.theater_select_action_confirm)
                 )
-            },
-            floatingActionButton = {
-                FloatingActionButton(onClick = { debounce(onAddItemClick) }) {
-                    Icon(
-                        painterResource(R.drawable.ic_round_add),
-                        contentDescription = stringResource(R.string.theater_select_action_confirm)
-                    )
-                }
             }
-        ) { paddingValues ->
-            val selectedTheaters = viewModel.selectedTheaters
-            val modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+        }
+    ) { paddingValues ->
+        val selectedTheaters = viewModel.selectedTheaters
+        val modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
 
-            if (selectedTheaters.isEmpty()) {
-                TheaterSortNoItem(modifier)
-            } else {
-                TheaterSortReorderList(
-                    selectedTheaters,
-                    modifier = modifier,
-                    onMove = { fromPosition, toPosition ->
-                        viewModel.onItemMove(fromPosition, toPosition)
-                    }
-                )
-            }
+        if (selectedTheaters.isEmpty()) {
+            TheaterSortNoItem(modifier)
+        } else {
+            TheaterSortReorderList(
+                selectedTheaters,
+                modifier = modifier,
+                onMove = { fromPosition, toPosition ->
+                    viewModel.onItemMove(fromPosition, toPosition)
+                }
+            )
         }
     }
 }

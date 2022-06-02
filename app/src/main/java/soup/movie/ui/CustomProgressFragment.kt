@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
@@ -55,8 +56,6 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
@@ -109,37 +108,48 @@ class CustomProgressFragment : AbstractProgressFragment() {
 
     @Composable
     private fun CustomProgressScreen(state: State) {
-        ProvideWindowInsets {
-            Box(
-                modifier = Modifier.fillMaxHeight(),
-                contentAlignment = Alignment.Center
-            ) {
-                if (state is State.Progress) {
-                    ProgressAnimation(
-                        modifier = Modifier
-                            .navigationBarsPadding(start = false, end = false)
-                            .padding(end = 8.dp, bottom = 160.dp)
-                            .size(width = 256.dp, height = 300.dp)
-                    )
-                }
-                CustomProgressContents(
-                    state = state,
+        Box(
+            modifier = Modifier.fillMaxHeight(),
+            contentAlignment = Alignment.Center
+        ) {
+            val isPortrait = isPortrait()
+            if (state is State.Progress) {
+                ProgressAnimation(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .navigationBarsPadding(start = false, end = false, bottom = false)
-                        .padding(horizontal = 32.dp)
-                )
-                Image(
-                    painterResource(id = R.drawable.ic_splash_launcher),
-                    contentDescription = null,
-                    contentScale = ContentScale.Inside,
-                    modifier = Modifier
-                        .navigationBarsPadding(start = false, end = false)
-                        .padding(16.dp)
-                        .size(width = 100.dp, height = 40.dp)
-                        .align(Alignment.BottomEnd)
+                        .apply {
+                            if (isPortrait) {
+                                navigationBarsPadding()
+                            }
+                        }
+                        .padding(end = 8.dp, bottom = 160.dp)
+                        .size(width = 256.dp, height = 300.dp)
                 )
             }
+            CustomProgressContents(
+                state = state,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .apply {
+                        if (isPortrait) {
+                            navigationBarsPadding()
+                        }
+                    }
+                    .padding(horizontal = 32.dp)
+            )
+            Image(
+                painterResource(id = R.drawable.ic_splash_launcher),
+                contentDescription = null,
+                contentScale = ContentScale.Inside,
+                modifier = Modifier
+                    .apply {
+                        if (isPortrait) {
+                            navigationBarsPadding()
+                        }
+                    }
+                    .padding(16.dp)
+                    .size(width = 100.dp, height = 40.dp)
+                    .align(Alignment.BottomEnd)
+            )
         }
     }
 

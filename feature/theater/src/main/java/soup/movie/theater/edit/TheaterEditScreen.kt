@@ -22,9 +22,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetState
@@ -61,9 +63,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
@@ -75,6 +74,7 @@ import soup.movie.model.Theater
 import soup.movie.theater.R
 import soup.movie.theater.TheaterChip
 import soup.movie.theater.divider
+import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 private enum class Page(val title: String) {
@@ -103,102 +103,103 @@ internal fun TheaterEditScreen(
     viewModel: TheaterEditViewModel = viewModel(),
     upPress: () -> Unit
 ) {
-    ProvideWindowInsets {
-        val pages = Page.values()
-        val pagerState = rememberPagerState()
-        val coroutineScope = rememberCoroutineScope()
-        val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
-        FirstLaunchedEffect {
-            delay(500)
-            bottomSheetScaffoldState.bottomSheetState.expand()
-            delay(500)
-            bottomSheetScaffoldState.bottomSheetState.collapse()
-        }
-        BottomSheetScaffold(
-            scaffoldState = bottomSheetScaffoldState,
-            modifier = Modifier
-                .statusBarsPadding()
-                .navigationBarsPadding(start = false, end = false),
-            topBar = {
-                TabRow(
-                    selectedTabIndex = pagerState.currentPage,
-                    indicator = { tabPositions ->
-                        TabRowDefaults.Indicator(
-                            modifier = Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
-                            color = MaterialTheme.colors.secondary
-                        )
-                    },
-                    modifier = Modifier.shadow(elevation = 4.dp)
-                ) {
-                    pages.forEachIndexed { index, page ->
-                        Tab(
-                            text = { Text(page.title) },
-                            selected = pagerState.currentPage == index,
-                            onClick = {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(index)
-                                }
-                            },
-                            selectedContentColor = MaterialTheme.colors.secondary,
-                            unselectedContentColor = MaterialTheme.colors.onBackground
-                        )
-                    }
-                }
-            },
-            sheetPeekHeight = 60.dp,
-            sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
-            sheetContent = {
-                val uiModel by viewModel.footerUiModel.collectAsState(
-                    TheaterEditFooterUiModel(emptyList())
-                )
-                TheaterEditFooter(
-                    uiModel = uiModel,
-                    onClick = {
-                        coroutineScope.launch {
-                            bottomSheetScaffoldState.bottomSheetState.toggle()
-                        }
-                    },
-                    onTheaterClick = {
-                        viewModel.remove(it)
-                    },
-                    onConfirmClick = {
-                        viewModel.onConfirmClick()
-                        upPress()
-                    }
-                )
-            },
-        ) { paddingValues ->
-            Box(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .pointerInteropFilter {
-                        if (it.action == MotionEvent.ACTION_DOWN) {
-                            if (bottomSheetScaffoldState.bottomSheetState.isExpanded) {
-                                coroutineScope.launch {
-                                    bottomSheetScaffoldState.bottomSheetState.collapse()
-                                }
-                                return@pointerInteropFilter true
-                            }
-                        }
-                        false
-                    }
+    val pages = Page.values()
+    val pagerState = rememberPagerState()
+    val coroutineScope = rememberCoroutineScope()
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
+    FirstLaunchedEffect {
+        delay(500)
+        bottomSheetScaffoldState.bottomSheetState.expand()
+        delay(500)
+        bottomSheetScaffoldState.bottomSheetState.collapse()
+    }
+    val isPortrait = isPortrait()
+    BottomSheetScaffold(
+        scaffoldState = bottomSheetScaffoldState,
+        modifier = if (isPortrait) {
+            Modifier.statusBarsPadding().navigationBarsPadding()
+        } else {
+            Modifier.statusBarsPadding()
+        },
+        topBar = {
+            TabRow(
+                selectedTabIndex = pagerState.currentPage,
+                indicator = { tabPositions ->
+                    TabRowDefaults.Indicator(
+                        modifier = Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
+                        color = MaterialTheme.colors.secondary
+                    )
+                },
+                modifier = Modifier.shadow(elevation = 4.dp)
             ) {
-                HorizontalPager(count = pages.size, state = pagerState) { page ->
-                    when (Page.of(page)) {
-                        Page.CGV -> CgvScreen(viewModel)
-                        Page.Lotte -> LotteScreen(viewModel)
-                        Page.Megabox -> MegaboxScreen(viewModel)
-                    }
-                }
-                val viewState by viewModel.contentUiModel.collectAsState(
-                    TheaterEditContentUiModel.LoadingState
-                )
-                if (viewState is TheaterEditContentUiModel.LoadingState) {
-                    CircularProgressIndicator(
-                        color = MaterialTheme.colors.secondary,
-                        modifier = Modifier.align(Alignment.Center)
+                pages.forEachIndexed { index, page ->
+                    Tab(
+                        text = { Text(page.title) },
+                        selected = pagerState.currentPage == index,
+                        onClick = {
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(index)
+                            }
+                        },
+                        selectedContentColor = MaterialTheme.colors.secondary,
+                        unselectedContentColor = MaterialTheme.colors.onBackground
                     )
                 }
+            }
+        },
+        sheetPeekHeight = 60.dp,
+        sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
+        sheetContent = {
+            val uiModel by viewModel.footerUiModel.collectAsState(
+                TheaterEditFooterUiModel(emptyList())
+            )
+            TheaterEditFooter(
+                uiModel = uiModel,
+                onClick = {
+                    coroutineScope.launch {
+                        bottomSheetScaffoldState.bottomSheetState.toggle()
+                    }
+                },
+                onTheaterClick = {
+                    viewModel.remove(it)
+                },
+                onConfirmClick = {
+                    viewModel.onConfirmClick()
+                    upPress()
+                }
+            )
+        },
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .padding(paddingValues)
+                .pointerInteropFilter {
+                    if (it.action == MotionEvent.ACTION_DOWN) {
+                        if (bottomSheetScaffoldState.bottomSheetState.isExpanded) {
+                            coroutineScope.launch {
+                                bottomSheetScaffoldState.bottomSheetState.collapse()
+                            }
+                            return@pointerInteropFilter true
+                        }
+                    }
+                    false
+                }
+        ) {
+            HorizontalPager(count = pages.size, state = pagerState) { page ->
+                when (Page.of(page)) {
+                    Page.CGV -> CgvScreen(viewModel)
+                    Page.Lotte -> LotteScreen(viewModel)
+                    Page.Megabox -> MegaboxScreen(viewModel)
+                }
+            }
+            val viewState by viewModel.contentUiModel.collectAsState(
+                TheaterEditContentUiModel.LoadingState
+            )
+            if (viewState is TheaterEditContentUiModel.LoadingState) {
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.secondary,
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
         }
     }

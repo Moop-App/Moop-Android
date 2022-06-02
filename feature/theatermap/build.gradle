@@ -29,7 +29,6 @@ dependencies {
     implementation libs.compose.materialIconsExtended
     implementation libs.compose.ui
     implementation libs.accompanist.drawablepainter
-    implementation libs.accompanist.insets
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
