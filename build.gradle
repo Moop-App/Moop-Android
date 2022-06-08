@@ -3,7 +3,7 @@ buildscript {
             'appId'      : "soup.movie",
             'minSdk'     : 23,
             'targetSdk'  : 31,
-            'compileSdk' : 31,
+            'compileSdk' : 32,
             'versionCode': 106,
             'versionName': "1.0.6",
     ]
