@@ -75,7 +75,8 @@ class DetailViewModel @Inject constructor(
         this.movie = movie
         _headerUiModel.value = HeaderUiModel(movie)
         viewModelScope.launch {
-            _favoriteUiModel.postValue(repository.isFavoriteMovie(movie.id))
+            // FIXME: Elvis operator (?:) is used because of lint rule error https://issuetracker.google.com/issues/169249668
+            _favoriteUiModel.postValue(repository.isFavoriteMovie(movie.id) ?: false)
             val minDelay = async { delay(500) }
             val loadDetail = async {
                 loadDetail(movie)
