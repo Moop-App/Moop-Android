@@ -28,7 +28,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 
 interface DraggableListState {
@@ -66,7 +65,7 @@ fun Modifier.draggableList(
             listState.onDragStart(offset)
         },
         onDrag = { change, offset ->
-            change.consumeAllChanges()
+            change.consume()
             listState.onDrag(offset)
         },
         onDragEnd = {
@@ -87,7 +86,7 @@ fun Modifier.draggableItem(
             listState.onDragStart(index)
         },
         onDrag = { change, offset ->
-            change.consumeAllChanges()
+            change.consume()
             listState.onDrag(offset)
         },
         onDragEnd = {
