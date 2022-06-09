@@ -2,7 +2,7 @@ buildscript {
     ext.buildConfig = [
             'appId'      : "soup.movie",
             'minSdk'     : 23,
-            'targetSdk'  : 31,
+            'targetSdk'  : 32,
             'compileSdk' : 32,
             'versionCode': 106,
             'versionName': "1.0.6",
