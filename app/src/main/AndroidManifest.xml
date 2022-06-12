@@ -8,14 +8,17 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
     <queries>
         <intent>
             <action android:name="android.intent.action.SENDTO" />
+
             <data android:scheme="mailto" />
         </intent>
+
         <package android:name="com.google.android.apps.maps" />
         <package android:name="com.nhn.android.nmap" />
         <package android:name="net.daum.android.map" />
@@ -30,34 +33,33 @@
         android:theme="@style/Theme.Moop"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <profileable
+            android:shell="true"
+            tools:targetApi="q" />
+
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="${crashlytics_enabled}" />
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="@string/naver_map_sdk_client_id" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_app_id"/>
+            android:value="@string/admob_app_id" />
 
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Moop.Splash">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -67,11 +69,9 @@
                 <data
                     android:host="@string/kakaolink_host"
                     android:scheme="@string/kakao_scheme" />
-
                 <data
                     android:host="moop.link"
                     android:scheme="https" />
-
                 <data
                     android:host="movie"
                     android:scheme="moop" />
@@ -87,7 +87,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/coil_disk_cache_path" />
         </provider>
-
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
@@ -126,27 +125,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-<!-- TODO: Apply theater mode
-        <activity android:name=".ui.theater.mode.TheaterModeTileActivity">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
-            </intent-filter>
-        </activity>
-        <service
-            android:name=".ui.theater.mode.TheaterModeTile"
-            android:label="Sample"
-            android:icon="@drawable/ic_tile_sample"
-            android:exported="true"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name=".ui.theater.mode.TheaterModeService"
-            android:exported="false" />
- -->
     </application>
 
 </manifest>
