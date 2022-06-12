@@ -64,6 +64,23 @@ android {
             ]
             buildConfigField("boolean", "USE_FAKE_SPLIT", "Boolean.parseBoolean(\"${project.hasProperty("useFakeSplit")}\")")
         }
+        benchmark {
+            if (useReleaseKeystore) {
+                signingConfig signingConfigs.release
+            } else {
+                signingConfig signingConfigs.debug
+            }
+            matchingFallbacks = ['release']
+            debuggable false
+
+            def filesAuthorityValue = 'soup.movie.shareprovider'
+            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
+            manifestPlaceholders = [
+                    filesAuthority     : filesAuthorityValue,
+                    crashlytics_enabled: true
+            ]
+            buildConfigField("boolean", "USE_FAKE_SPLIT", "false")
+        }
         release {
             if (useReleaseKeystore) {
                 signingConfig signingConfigs.release
@@ -160,6 +177,8 @@ dependencies {
     implementation libs.accompanist.drawablepainter
     implementation libs.metronome.visibility
     implementation libs.lottie.compose
+
+    implementation libs.androidx.profileinstaller
 
     testImplementation libs.test.junit
     androidTestImplementation libs.androidx.test.runner
