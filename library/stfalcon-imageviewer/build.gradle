@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace "com.stfalcon.imageviewer"
     compileSdk buildConfig.compileSdk
     defaultConfig {
         minSdk buildConfig.minSdk

@@ -14,10 +14,9 @@ apply plugin: 'com.dropbox.dependency-guard'
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
 android {
+    namespace "soup.movie"
     compileSdk buildConfig.compileSdk
-
     defaultConfig {
-        applicationId buildConfig.appId
         minSdk buildConfig.minSdk
         targetSdk buildConfig.targetSdk
         versionCode buildConfig.versionCode

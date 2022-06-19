@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace "soup.movie.macrobenchmark"
     compileSdk buildConfig.compileSdk
     defaultConfig {
         minSdk buildConfig.minSdk

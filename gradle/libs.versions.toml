@@ -11,7 +11,7 @@ androidxhilt = "1.0.0"
 # AndroidX
 activity = "1.4.0"
 lifecycle = "2.4.1"
-navigation = "2.4.1"
+navigation = "2.5.0-rc02"
 room = "2.4.1"
 work = "2.7.1"
 
