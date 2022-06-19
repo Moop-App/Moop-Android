@@ -219,12 +219,13 @@ class CustomProgressFragment : AbstractProgressFragment() {
             )
 
             if (state == State.Cancelled) {
-                Button(
-                    onClick = { navigate() },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
-                ) {
-                    Text(text = stringResource(R.string.retry))
-                }
+// TODO(b/236451816):
+//                Button(
+//                    onClick = { navigate() },
+//                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+//                ) {
+//                    Text(text = stringResource(R.string.retry))
+//                }
             } else if (state == State.Failed) {
                 Button(
                     onClick = { findNavController().popBackStack() },

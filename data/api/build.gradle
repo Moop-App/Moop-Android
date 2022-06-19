@@ -6,6 +6,7 @@ apply plugin: 'kotlinx-serialization'
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
+    namespace "soup.movie.data.api"
     defaultConfig {
         buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "\"https://moop-public-api.firebaseio.com/alpha/\"")
     }

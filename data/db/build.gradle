@@ -6,6 +6,7 @@ apply plugin: 'kotlinx-serialization'
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
+    namespace "soup.movie.data.db"
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {

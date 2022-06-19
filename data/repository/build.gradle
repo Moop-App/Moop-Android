@@ -5,6 +5,8 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
+android.namespace "soup.movie.data.repository"
+
 dependencies {
     api project(":model")
     implementation project(":data:api")

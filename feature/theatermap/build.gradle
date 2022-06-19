@@ -7,6 +7,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply from: rootProject.file('gradle/android-dynamic-module.gradle')
 
 android {
+    namespace "soup.movie.theatermap"
     buildFeatures {
         compose true
     }

@@ -6,6 +6,8 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
+android.namespace "soup.movie.detail"
+
 dependencies {
     implementation project(':core')
     implementation project(':data:repository')

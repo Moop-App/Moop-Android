@@ -1,5 +1,4 @@
-<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="soup.movie.theatermap">
+<manifest xmlns:dist="http://schemas.android.com/apk/distribution">
 
     <dist:module
         dist:instant="false"

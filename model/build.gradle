@@ -5,6 +5,8 @@ apply plugin: 'kotlinx-serialization'
 
 apply from: rootProject.file('gradle/android.gradle')
 
+android.namespace "soup.movie.model"
+
 dependencies {
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
