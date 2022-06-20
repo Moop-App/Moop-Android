@@ -185,6 +185,8 @@ com.squareup.okio:okio-jvm:3.0.0
 com.squareup.okio:okio:3.0.0
 com.squareup.retrofit2:converter-gson:2.6.2
 com.squareup.retrofit2:retrofit:2.9.0
+com.webtoonscorp.android:readmore-foundation:1.1.3
+com.webtoonscorp.android:readmore-material:1.1.3
 dev.chrisbanes.insetter:insetter:0.6.1
 dev.chrisbanes.snapper:snapper:0.2.0
 io.coil-kt:coil-base:2.1.0

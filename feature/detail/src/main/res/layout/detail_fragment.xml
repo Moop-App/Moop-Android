@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/detail_item_trailer"
+            tools:listitem="@layout/detail_item_naver"
             tools:paddingTop="@dimen/detail_header_height" />
 
         <include

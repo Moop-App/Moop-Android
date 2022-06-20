@@ -18,26 +18,54 @@ package soup.movie.detail
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
+import coil.compose.rememberAsyncImagePainter
+import com.google.android.material.composethemeadapter.MdcTheme
+import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.detail.databinding.DetailItemAdBinding
 import soup.movie.detail.databinding.DetailItemBoxOfficeBinding
-import soup.movie.detail.databinding.DetailItemCastBinding
 import soup.movie.detail.databinding.DetailItemCgvBinding
 import soup.movie.detail.databinding.DetailItemHeaderBinding
 import soup.movie.detail.databinding.DetailItemImdbBinding
 import soup.movie.detail.databinding.DetailItemLotteBinding
 import soup.movie.detail.databinding.DetailItemMegaboxBinding
 import soup.movie.detail.databinding.DetailItemNaverBinding
-import soup.movie.detail.databinding.DetailItemPlotBinding
-import soup.movie.detail.databinding.DetailItemTrailerBinding
-import soup.movie.detail.databinding.DetailItemTrailerFooterBinding
-import soup.movie.detail.databinding.DetailItemTrailerHeaderBinding
-import soup.movie.ext.loadAsync
 import soup.movie.util.setOnDebounceClickListener
 
 private typealias OnItemClickListener = (Int) -> Unit
@@ -59,31 +87,59 @@ internal class DetailListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            R.layout.detail_item_header ->
+            detail_item_header ->
                 HeaderViewHolder(DetailItemHeaderBinding.inflate(layoutInflater, parent, false))
-            R.layout.detail_item_box_office ->
-                BoxOfficeViewHolder(DetailItemBoxOfficeBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_cgv ->
-                CgvViewHolder(DetailItemCgvBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_lotte ->
-                LotteViewHolder(DetailItemLotteBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_megabox ->
-                MegaboxViewHolder(DetailItemMegaboxBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_naver ->
-                NaverViewHolder(DetailItemNaverBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_imdb ->
-                ImdbViewHolder(DetailItemImdbBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_plot ->
-                PlotViewHolder(DetailItemPlotBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_cast ->
-                CastViewHolder(DetailItemCastBinding.inflate(layoutInflater, parent, false))
-            R.layout.detail_item_trailer_header ->
-                TrailerHeaderViewHolder(DetailItemTrailerHeaderBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_trailer ->
-                TrailerViewHolder(DetailItemTrailerBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_trailer_footer ->
-                TrailerFooterViewHolder(DetailItemTrailerFooterBinding.inflate(layoutInflater, parent, false), itemListener)
-            R.layout.detail_item_ad -> AdViewHolder(DetailItemAdBinding.inflate(layoutInflater, parent, false))
+            detail_item_box_office ->
+                BoxOfficeViewHolder(
+                    DetailItemBoxOfficeBinding.inflate(
+                        layoutInflater,
+                        parent,
+                        false
+                    ),
+                    itemListener
+                )
+            detail_item_cgv ->
+                CgvViewHolder(
+                    DetailItemCgvBinding.inflate(layoutInflater, parent, false),
+                    itemListener
+                )
+            detail_item_lotte ->
+                LotteViewHolder(
+                    DetailItemLotteBinding.inflate(layoutInflater, parent, false),
+                    itemListener
+                )
+            detail_item_megabox ->
+                MegaboxViewHolder(
+                    DetailItemMegaboxBinding.inflate(layoutInflater, parent, false),
+                    itemListener
+                )
+            detail_item_naver ->
+                NaverViewHolder(
+                    DetailItemNaverBinding.inflate(layoutInflater, parent, false),
+                    itemListener
+                )
+            detail_item_imdb ->
+                ImdbViewHolder(
+                    DetailItemImdbBinding.inflate(layoutInflater, parent, false),
+                    itemListener
+                )
+            detail_item_plot ->
+                PlotViewHolder(ComposeView(parent.context), itemListener)
+            detail_item_cast ->
+                CastViewHolder(ComposeView(parent.context))
+            detail_item_trailer_header ->
+                TrailerHeaderViewHolder(ComposeView(parent.context), itemListener)
+            detail_item_trailer ->
+                TrailerViewHolder(ComposeView(parent.context), itemListener)
+            detail_item_trailer_footer ->
+                TrailerFooterViewHolder(ComposeView(parent.context), itemListener)
+            detail_item_ad -> AdViewHolder(
+                DetailItemAdBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
+            )
             else -> throw IllegalArgumentException("This is not valid type.")
         }
     }
@@ -99,19 +155,19 @@ internal class DetailListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
-        is HeaderItemUiModel -> R.layout.detail_item_header
-        is BoxOfficeItemUiModel -> R.layout.detail_item_box_office
-        is CgvItemUiModel -> R.layout.detail_item_cgv
-        is LotteItemUiModel -> R.layout.detail_item_lotte
-        is MegaboxItemUiModel -> R.layout.detail_item_megabox
-        is NaverItemUiModel -> R.layout.detail_item_naver
-        is ImdbItemUiModel -> R.layout.detail_item_imdb
-        is PlotItemUiModel -> R.layout.detail_item_plot
-        is CastItemUiModel -> R.layout.detail_item_cast
-        is TrailerHeaderItemUiModel -> R.layout.detail_item_trailer_header
-        is TrailerItemUiModel -> R.layout.detail_item_trailer
-        is TrailerFooterItemUiModel -> R.layout.detail_item_trailer_footer
-        is AdItemUiModel -> R.layout.detail_item_ad
+        is HeaderItemUiModel -> detail_item_header
+        is BoxOfficeItemUiModel -> detail_item_box_office
+        is CgvItemUiModel -> detail_item_cgv
+        is LotteItemUiModel -> detail_item_lotte
+        is MegaboxItemUiModel -> detail_item_megabox
+        is NaverItemUiModel -> detail_item_naver
+        is ImdbItemUiModel -> detail_item_imdb
+        is PlotItemUiModel -> detail_item_plot
+        is CastItemUiModel -> detail_item_cast
+        is TrailerHeaderItemUiModel -> detail_item_trailer_header
+        is TrailerItemUiModel -> detail_item_trailer
+        is TrailerFooterItemUiModel -> detail_item_trailer_footer
+        is AdItemUiModel -> detail_item_ad
     }
 
     fun getSpanSize(position: Int): Int = when (getItem(position)) {
@@ -126,6 +182,22 @@ internal class DetailListAdapter(
     fun updateHeader(height: Int) {
         headerHeight = height
         notifyItemChanged(0)
+    }
+
+    companion object {
+        const val detail_item_header = 1
+        const val detail_item_box_office = 2
+        const val detail_item_cgv = 3
+        const val detail_item_lotte = 4
+        const val detail_item_megabox = 5
+        const val detail_item_naver = 6
+        const val detail_item_imdb = 7
+        const val detail_item_plot = 8
+        const val detail_item_cast = 9
+        const val detail_item_trailer_header = 10
+        const val detail_item_trailer = 11
+        const val detail_item_trailer_footer = 12
+        const val detail_item_ad = 13
     }
 
     abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -153,7 +225,8 @@ internal class DetailListAdapter(
             binding.rankText.text = context.getString(R.string.rank, item.rank)
             binding.rankDescription.text = context.getString(R.string.rank_date, item.rankDate)
             binding.audienceText.text = context.getString(R.string.audience, item.audience)
-            binding.audienceDescription.text = context.getString(R.string.screen_days, item.screenDays)
+            binding.audienceDescription.text =
+                context.getString(R.string.screen_days, item.screenDays)
             binding.ratingText.text = item.rating
         }
     }
@@ -253,86 +326,90 @@ internal class DetailListAdapter(
     }
 
     class PlotViewHolder(
-        private val binding: DetailItemPlotBinding,
+        private val composeView: ComposeView,
         private val listener: OnItemClickListener
-    ) : ViewHolder(binding.root) {
-
-        init {
-            itemView.setOnDebounceClickListener {
-                listener(bindingAdapterPosition)
-            }
-        }
+    ) : ViewHolder(composeView) {
 
         override fun bind(item: ContentItemUiModel) {
             if (item !is PlotItemUiModel) return
-            binding.moreIcon.isSelected = item.isExpanded
-            binding.shortPlotText.isGone = item.isExpanded
-            binding.shortPlotText.text = item.plot
-            binding.longPlotText.isVisible = item.isExpanded
-            binding.longPlotText.text = item.plot
+            composeView.setContent {
+                MdcTheme {
+                    Plot(
+                        uiModel = item,
+                        onClick = {
+                            listener(bindingAdapterPosition)
+                        }
+                    )
+                }
+            }
         }
     }
 
     class CastViewHolder(
-        binding: DetailItemCastBinding
-    ) : ViewHolder(binding.root) {
-
-        private val adapter = DetailPersonListAdapter()
-
-        init {
-            binding.root.adapter = adapter
-        }
+        private val composeView: ComposeView
+    ) : ViewHolder(composeView) {
 
         override fun bind(item: ContentItemUiModel) {
             if (item !is CastItemUiModel) return
-            adapter.submitList(item.persons)
+            composeView.setContent {
+                MdcTheme {
+                    Cast(item)
+                }
+            }
         }
     }
 
     class TrailerHeaderViewHolder(
-        private val binding: DetailItemTrailerHeaderBinding,
+        private val composeView: ComposeView,
         private val listener: OnItemClickListener
-    ) : ViewHolder(binding.root) {
-
-        init {
-            binding.privacyTip.setOnDebounceClickListener {
-                listener(bindingAdapterPosition)
-            }
-        }
+    ) : ViewHolder(composeView) {
 
         override fun bind(item: ContentItemUiModel) {
             if (item !is TrailerHeaderItemUiModel) return
-            binding.searchLabel.text = itemView.context.getString(R.string.trailer_search_result, item.movieTitle)
+            composeView.setContent {
+                MdcTheme {
+                    TrailerHeader(
+                        uiModel = item,
+                        onPrivacyTipClick = {
+                            listener(bindingAdapterPosition)
+                        }
+                    )
+                }
+            }
         }
     }
 
     class TrailerViewHolder(
-        private val binding: DetailItemTrailerBinding,
+        private val composeView: ComposeView,
         private val listener: OnItemClickListener
-    ) : ViewHolder(binding.root) {
-
-        init {
-            itemView.setOnDebounceClickListener {
-                listener(bindingAdapterPosition)
-            }
-        }
+    ) : ViewHolder(composeView) {
 
         override fun bind(item: ContentItemUiModel) {
             if (item !is TrailerItemUiModel) return
-            binding.trailerImage.loadAsync(item.trailer.thumbnailUrl)
-            binding.titleView.text = item.trailer.title
-            binding.authorView.text = item.trailer.author
+            composeView.setContent {
+                MdcTheme {
+                    TrailerItem(
+                        uiModel = item,
+                        onClick = { listener(bindingAdapterPosition) }
+                    )
+                }
+            }
         }
     }
 
     class TrailerFooterViewHolder(
-        binding: DetailItemTrailerFooterBinding,
-        listener: OnItemClickListener
-    ) : ViewHolder(binding.root) {
+        private val composeView: ComposeView,
+        private val listener: OnItemClickListener
+    ) : ViewHolder(composeView) {
 
-        init {
-            itemView.setOnDebounceClickListener {
-                listener(bindingAdapterPosition)
+        override fun bind(item: ContentItemUiModel) {
+            if (item !is TrailerFooterItemUiModel) return
+            composeView.setContent {
+                MdcTheme {
+                    TrailerFooter(
+                        onClick = { listener(bindingAdapterPosition) }
+                    )
+                }
             }
         }
     }
@@ -342,6 +419,175 @@ internal class DetailListAdapter(
         override fun bind(item: ContentItemUiModel) {
             if (item !is AdItemUiModel) return
             binding.adView.setNativeAd(item.nativeAd)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun Plot(
+    uiModel: PlotItemUiModel,
+    onClick: () -> Unit,
+) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        shape = RoundedCornerShape(16.dp),
+        backgroundColor = MaterialTheme.colors.surface,
+        elevation = dimensionResource(R.dimen.detail_card_elevation),
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+        ) {
+            val isExpanded by derivedStateOf { uiModel.isExpanded }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painterResource(R.drawable.ic_round_plot),
+                    contentDescription = null
+                )
+                Text(
+                    text = "줄거리",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colors.onSurface,
+                    style = MaterialTheme.typography.subtitle2,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(start = 8.dp),
+                )
+            }
+            ReadMoreText(
+                text = uiModel.plot,
+                expanded = isExpanded,
+                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier
+                    .padding(top = 6.dp)
+                    .fillMaxWidth()
+                    .animateContentSize(animationSpec = tween(durationMillis = 100)),
+                readMoreText = "더보기",
+                readMoreColor = MaterialTheme.colors.secondary,
+                readMoreFontWeight = FontWeight.Bold,
+                readMoreMaxLines = 3,
+            )
+        }
+    }
+}
+
+@Composable
+private fun TrailerHeader(
+    uiModel: TrailerHeaderItemUiModel,
+    onPrivacyTipClick: () -> Unit,
+) {
+    Card(
+        modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+        shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+        backgroundColor = MaterialTheme.colors.surface,
+        elevation = dimensionResource(R.dimen.detail_card_elevation),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.ic_logo_youtube),
+                contentDescription = null,
+                modifier = Modifier.requiredWidth(48.dp).fillMaxHeight(),
+                contentScale = ContentScale.Inside,
+            )
+            Text(
+                text = stringResource(R.string.trailer_search_result, uiModel.movieTitle),
+                maxLines = 1,
+                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.subtitle2,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(start = 4.dp).weight(1f),
+            )
+            IconButton(onClick = onPrivacyTipClick) {
+                Image(
+                    painter = painterResource(R.drawable.ic_privacy_tip),
+                    contentDescription = null,
+                    modifier = Modifier.requiredWidth(48.dp).fillMaxHeight(),
+                    contentScale = ContentScale.Inside,
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun TrailerItem(
+    uiModel: TrailerItemUiModel,
+    onClick: () -> Unit,
+) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+        shape = RectangleShape,
+        backgroundColor = MaterialTheme.colors.surface,
+        elevation = dimensionResource(R.dimen.detail_card_elevation),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .requiredHeight(100.dp)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+        ) {
+            Image(
+                painter = rememberAsyncImagePainter(
+                    model = uiModel.trailer.thumbnailUrl,
+                    placeholder = ColorPainter(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)),
+                ),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .requiredWidth(140.dp)
+                    .fillMaxHeight(),
+            )
+            Column(
+                modifier = Modifier.fillMaxSize().padding(start = 12.dp)
+            ) {
+                Text(
+                    text = uiModel.trailer.title,
+                    style = MaterialTheme.typography.body2,
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 2.dp)
+                )
+                Text(
+                    text = uiModel.trailer.author,
+                    style = MaterialTheme.typography.caption,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun TrailerFooter(
+    onClick: () -> Unit,
+) {
+    Card(
+        onClick = onClick,
+        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
+        backgroundColor = MaterialTheme.colors.surface,
+        elevation = dimensionResource(R.dimen.detail_card_elevation),
+    ) {
+        Box(
+            modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(
+                text = "더보기",
+                color = MaterialTheme.colors.secondary,
+                fontWeight = FontWeight.Bold,
+            )
         }
     }
 }
