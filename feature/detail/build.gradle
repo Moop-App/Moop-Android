@@ -6,7 +6,15 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
-android.namespace "soup.movie.detail"
+android {
+    namespace "soup.movie.detail"
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "${libs.versions.compose.get()}"
+    }
+}
 
 dependencies {
     implementation project(':core')
@@ -28,6 +36,11 @@ dependencies {
     implementation libs.google.ads
 
     implementation libs.recyclerViewAnimators
+
+    implementation libs.material.composeThemeAdapter
+    implementation libs.compose.foundation
+    implementation libs.compose.material
+    implementation libs.compose.ui
 
     testImplementation libs.test.junit
     androidTestImplementation libs.androidx.test.runner
