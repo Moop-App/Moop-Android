@@ -110,6 +110,8 @@ accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiper
 metronome-material = { module = "com.github.fornewid.metronome:material", version.ref = "metronome" }
 metronome-visibility = { module = "com.github.fornewid.metronome:visibility", version.ref = "metronome" }
 
+readmore-material = "com.webtoonscorp.android:readmore-material:1.1.3"
+
 # Test
 test-junit =  "junit:junit:4.13"
 
