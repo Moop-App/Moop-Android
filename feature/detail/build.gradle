@@ -24,7 +24,6 @@ dependencies {
     implementation libs.kotlin.stdlib
 
     implementation libs.androidx.constraintlayout
-    implementation libs.androidx.recyclerview
 
     implementation libs.insetter
 
@@ -35,12 +34,11 @@ dependencies {
 
     implementation libs.google.ads
 
-    implementation libs.recyclerViewAnimators
-
     implementation libs.material.composeThemeAdapter
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
+    implementation libs.compose.runtimeLivedata
     implementation libs.coil.compose
     implementation libs.readmore.material
 
