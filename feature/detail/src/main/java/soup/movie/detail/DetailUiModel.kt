@@ -38,12 +38,19 @@ class ContentUiModel(
 sealed class ContentItemUiModel
 
 @Keep
+class TheatersItemUiModel(
+    val cgv: CgvItemUiModel,
+    val lotte: LotteItemUiModel,
+    val megabox: MegaboxItemUiModel,
+) : ContentItemUiModel()
+
+@Keep
 class CgvItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
     val rating: String,
     val webLink: String?
-) : ContentItemUiModel()
+)
 
 @Keep
 class LotteItemUiModel(
@@ -51,7 +58,7 @@ class LotteItemUiModel(
     val hasInfo: Boolean,
     val rating: String,
     val webLink: String?
-) : ContentItemUiModel()
+)
 
 @Keep
 class MegaboxItemUiModel(
@@ -59,7 +66,7 @@ class MegaboxItemUiModel(
     val hasInfo: Boolean,
     val rating: String,
     val webLink: String?
-) : ContentItemUiModel()
+)
 
 @Keep
 class NaverItemUiModel(
@@ -88,10 +95,7 @@ class ImdbItemUiModel(
 @Keep
 class PlotItemUiModel(
     val plot: String
-) : ContentItemUiModel() {
-
-    var isExpanded: Boolean = false
-}
+) : ContentItemUiModel()
 
 @Keep
 class CastItemUiModel(
@@ -127,9 +131,7 @@ class TrailerFooterItemUiModel(
 
 val ContentItemUiModel.id: String
     get() = when (this) {
-        is CgvItemUiModel -> "cgv"
-        is LotteItemUiModel -> "lotte"
-        is MegaboxItemUiModel -> "megabox"
+        is TheatersItemUiModel -> "theaters"
         is NaverItemUiModel -> "naver"
         is BoxOfficeItemUiModel -> "boxoffice"
         is ImdbItemUiModel -> "imdb"

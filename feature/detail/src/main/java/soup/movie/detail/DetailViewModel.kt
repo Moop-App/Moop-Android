@@ -167,27 +167,25 @@ class DetailViewModel @Inject constructor(
             )
         }
         items.add(
-            CgvItemUiModel(
-                movieId = cgv?.id.orEmpty(),
-                hasInfo = cgv != null,
-                rating = cgv?.star ?: NO_RATING,
-                webLink = cgv?.url
-            )
-        )
-        items.add(
-            LotteItemUiModel(
-                movieId = lotte?.id.orEmpty(),
-                hasInfo = lotte != null,
-                rating = lotte?.star ?: NO_RATING,
-                webLink = lotte?.url
-            )
-        )
-        items.add(
-            MegaboxItemUiModel(
-                movieId = megabox?.id.orEmpty(),
-                hasInfo = megabox != null,
-                rating = megabox?.star ?: NO_RATING,
-                webLink = megabox?.url
+            TheatersItemUiModel(
+                cgv = CgvItemUiModel(
+                    movieId = cgv?.id.orEmpty(),
+                    hasInfo = cgv != null,
+                    rating = cgv?.star ?: NO_RATING,
+                    webLink = cgv?.url
+                ),
+                lotte = LotteItemUiModel(
+                    movieId = lotte?.id.orEmpty(),
+                    hasInfo = lotte != null,
+                    rating = lotte?.star ?: NO_RATING,
+                    webLink = lotte?.url
+                ),
+                megabox = MegaboxItemUiModel(
+                    movieId = megabox?.id.orEmpty(),
+                    hasInfo = megabox != null,
+                    rating = megabox?.star ?: NO_RATING,
+                    webLink = megabox?.url
+                )
             )
         )
         if (boxOffice == null) {

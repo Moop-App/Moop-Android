@@ -24,6 +24,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.core.app.ShareCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
@@ -31,12 +33,10 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.spanSizeLookup
+import com.google.android.material.composethemeadapter.MdcTheme
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.databinding.DetailFragmentBinding
 import soup.movie.ext.executeWeb
@@ -98,7 +98,7 @@ class DetailFragment :
                     bottom = initialState.paddings.bottom + systemWindowInsets.bottom
                 )
             }
-            .applyToView(listView)
+            .applyToView(composeView)
         Insetter.builder()
             .setOnApplyInsetsListener { share, insets, initialState ->
                 val systemWindowInsets = insets.getInsets(systemBars())
@@ -111,7 +111,6 @@ class DetailFragment :
     }
 
     private fun DetailFragmentBinding.initViewState(viewModel: DetailViewModel) {
-        val ctx: Context = this.root.context
         header.apply {
             posterView.loadAsync(args.movie.posterUrl)
             posterCard.setOnDebounceClickListener(delay = 150L) {
@@ -163,67 +162,16 @@ class DetailFragment :
                 onShareClick(ShareTarget.Others)
             }
         }
-        val listAdapter = DetailListAdapter { item ->
-            when (item) {
-                is BoxOfficeItemUiModel -> {
-                    ctx.executeWeb(item.webLink)
+        composeView.setContent {
+            MdcTheme {
+                val contentUiModel by viewModel.contentUiModel.observeAsState()
+                contentUiModel?.let {
+                    DetailList(
+                        items = it.items,
+                        analytics = analytics,
+                        onItemClick = { item -> onItemClick(item) }
+                    )
                 }
-                is CgvItemUiModel -> {
-                    analytics.clickCgvInfo()
-                    ctx.executeWeb(item.webLink)
-                }
-                is LotteItemUiModel -> {
-                    analytics.clickLotteInfo()
-                    ctx.executeWeb(item.webLink)
-                }
-                is MegaboxItemUiModel -> {
-                    analytics.clickMegaboxInfo()
-                    ctx.executeWeb(item.webLink)
-                }
-                is NaverItemUiModel -> {
-                    ctx.executeWeb(item.webLink)
-                }
-                is ImdbItemUiModel -> {
-                    ctx.executeWeb(item.webLink)
-                }
-                is TrailerHeaderItemUiModel -> {
-                    val message = SpannableString(ctx.getText(R.string.trailer_dialog_message))
-                    Linkify.addLinks(message, Linkify.WEB_URLS)
-                    AlertDialog.Builder(ctx, R.style.AlertDialogTheme)
-                        .setTitle(R.string.trailer_dialog_title)
-                        .setMessage(message)
-                        .setPositiveButton(R.string.trailer_dialog_button, null)
-                        .show()
-                        .apply {
-                            findViewById<TextView>(android.R.id.message)?.movementMethod =
-                                LinkMovementMethod.getInstance()
-                        }
-                }
-                is TrailerItemUiModel -> {
-                    analytics.clickTrailer()
-                    YouTube.executeApp(ctx, item.trailer)
-                }
-                is TrailerFooterItemUiModel -> {
-                    analytics.clickMoreTrailers()
-                    YouTube.executeAppWithQuery(ctx, item.movieTitle)
-                }
-                is AdItemUiModel -> {
-                }
-                is CastItemUiModel -> {
-                }
-                is PlotItemUiModel -> {
-                }
-            }
-        }
-        listView.apply {
-            layoutManager = GridLayoutManager(ctx, 3).apply {
-                spanSizeLookup = spanSizeLookup(listAdapter::getSpanSize)
-            }
-            adapter = listAdapter
-            itemAnimator = FadeInUpAnimator().apply {
-                addDuration = 200
-                removeDuration = 200
-                supportsChangeAnimations = false
             }
         }
         viewModel.favoriteUiModel.observe(viewLifecycleOwner) { isFavorite ->
@@ -231,9 +179,6 @@ class DetailFragment :
         }
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
             header.render(it)
-        }
-        viewModel.contentUiModel.observe(viewLifecycleOwner) {
-            listAdapter.submitList(it.items)
         }
         viewModel.isError.observe(viewLifecycleOwner) {
             errorGroup.isVisible = it
@@ -320,6 +265,50 @@ class DetailFragment :
                 } else {
                     throw IllegalStateException("This ShareTarget(${action.target}) does not support to share image.")
                 }
+            }
+        }
+    }
+
+    private fun onItemClick(item: ContentItemUiModel) {
+        val ctx: Context = requireContext()
+        when (item) {
+            is BoxOfficeItemUiModel -> {
+                ctx.executeWeb(item.webLink)
+            }
+            is TheatersItemUiModel -> {
+            }
+            is NaverItemUiModel -> {
+                ctx.executeWeb(item.webLink)
+            }
+            is ImdbItemUiModel -> {
+                ctx.executeWeb(item.webLink)
+            }
+            is TrailerHeaderItemUiModel -> {
+                val message = SpannableString(ctx.getText(R.string.trailer_dialog_message))
+                Linkify.addLinks(message, Linkify.WEB_URLS)
+                AlertDialog.Builder(ctx, R.style.AlertDialogTheme)
+                    .setTitle(R.string.trailer_dialog_title)
+                    .setMessage(message)
+                    .setPositiveButton(R.string.trailer_dialog_button, null)
+                    .show()
+                    .apply {
+                        findViewById<TextView>(android.R.id.message)?.movementMethod =
+                            LinkMovementMethod.getInstance()
+                    }
+            }
+            is TrailerItemUiModel -> {
+                analytics.clickTrailer()
+                YouTube.executeApp(ctx, item.trailer)
+            }
+            is TrailerFooterItemUiModel -> {
+                analytics.clickMoreTrailers()
+                YouTube.executeAppWithQuery(ctx, item.movieTitle)
+            }
+            is AdItemUiModel -> {
+            }
+            is CastItemUiModel -> {
+            }
+            is PlotItemUiModel -> {
             }
         }
     }

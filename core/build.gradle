@@ -36,7 +36,6 @@ dependencies {
 
     implementation libs.androidx.browser
     implementation libs.androidx.fragment
-    implementation libs.androidx.recyclerview
     implementation libs.androidx.startup
 
     implementation libs.androidx.lifecycle.runtime
