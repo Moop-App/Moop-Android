@@ -38,9 +38,6 @@ class ContentUiModel(
 sealed class ContentItemUiModel
 
 @Keep
-object HeaderItemUiModel : ContentItemUiModel()
-
-@Keep
 class CgvItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
@@ -130,7 +127,6 @@ class TrailerFooterItemUiModel(
 
 val ContentItemUiModel.id: String
     get() = when (this) {
-        HeaderItemUiModel -> "header"
         is CgvItemUiModel -> "cgv"
         is LotteItemUiModel -> "lotte"
         is MegaboxItemUiModel -> "megabox"

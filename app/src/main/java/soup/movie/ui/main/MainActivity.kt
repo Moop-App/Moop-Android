@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_Moop_Main)
+        setTheme(R.style.Theme_Moop)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, false)
