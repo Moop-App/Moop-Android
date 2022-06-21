@@ -10,25 +10,6 @@
         <item name="colorDivider">@color/colorDivider</item>
     </style>
 
-    <style name="Theme.Moop.Main">
-        <item name="android:windowExitTransition">@transition/main_exit</item>
-        <item name="android:windowReenterTransition">@transition/main_reenter</item>
-    </style>
-
-    <style name="Theme.Moop.Detail">
-        <!-- using a semi-transparent window background for the drag-back gesture -->
-        <item name="android:windowBackground">@color/colorScrim</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowAllowReturnTransitionOverlap">false</item>
-        <item name="android:windowEnterTransition">@transition/detail_enter</item>
-        <item name="android:windowReturnTransition">@transition/detail_return</item>
-    </style>
-
     <style name="Theme.Moop.Splash">
         <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:windowBackground">@drawable/ic_splash</item>

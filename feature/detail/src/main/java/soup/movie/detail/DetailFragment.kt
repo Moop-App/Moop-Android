@@ -30,11 +30,8 @@ import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.spanSizeLookup
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,11 +50,8 @@ import soup.movie.util.YouTube
 import soup.movie.util.autoCleared
 import soup.movie.util.clipToOval
 import soup.movie.util.setOnDebounceClickListener
-import soup.movie.widget.elastic.ElasticDragDismissFrameLayout
 import timber.log.Timber
 import javax.inject.Inject
-import kotlin.math.max
-import kotlin.math.min
 
 @AndroidEntryPoint
 class DetailFragment :
@@ -74,33 +68,6 @@ class DetailFragment :
     lateinit var analytics: EventAnalytics
 
     private val viewModel: DetailViewModel by viewModels()
-
-    private val scrollListener = object : RecyclerView.OnScrollListener() {
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            binding.header.root.run {
-                val maxOffset = max(
-                    height,
-                    recyclerView.resources.getDimensionPixelSize(R.dimen.detail_header_height)
-                )
-                val headerIsShown =
-                    (recyclerView.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() == 0
-                val offset = if (headerIsShown) {
-                    min(maxOffset, recyclerView.computeVerticalScrollOffset()).toFloat()
-                } else {
-                    maxOffset.toFloat()
-                }
-                translationY = -offset
-            }
-        }
-    }
-
-    private val chromeFader = object : ElasticDragDismissFrameLayout.ElasticDragDismissCallback() {
-
-        override fun onDragDismissed() {
-            findNavController().navigateUp()
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -123,12 +90,11 @@ class DetailFragment :
             .setOnApplyInsetsListener { header, insets, initialState ->
                 header.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)
             }
-            .applyToView(header.root)
+            .applyToView(toolbarLayout)
         Insetter.builder()
             .setOnApplyInsetsListener { listView, insets, initialState ->
                 val systemWindowInsets = insets.getInsets(systemBars())
                 listView.updatePadding(
-                    top = initialState.paddings.top + systemWindowInsets.top,
                     bottom = initialState.paddings.bottom + systemWindowInsets.bottom
                 )
             }
@@ -245,8 +211,6 @@ class DetailFragment :
                 }
                 is CastItemUiModel -> {
                 }
-                is HeaderItemUiModel -> {
-                }
                 is PlotItemUiModel -> {
                 }
             }
@@ -266,27 +230,14 @@ class DetailFragment :
             header.favoriteButton.isSelected = isFavorite
         }
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
-            render(it)
+            header.render(it)
         }
         viewModel.contentUiModel.observe(viewLifecycleOwner) {
             listAdapter.submitList(it.items)
-            listAdapter.updateHeader(height = binding.header.root.measuredHeight)
         }
         viewModel.isError.observe(viewLifecycleOwner) {
             errorGroup.isVisible = it
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.draggableFrame.addListener(chromeFader)
-        binding.listView.addOnScrollListener(scrollListener)
-    }
-
-    override fun onPause() {
-        binding.draggableFrame.removeListener(chromeFader)
-        binding.listView.removeOnScrollListener(scrollListener)
-        super.onPause()
     }
 
     override fun onBackPressed(): Boolean {

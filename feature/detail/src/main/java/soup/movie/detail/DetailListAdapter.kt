@@ -51,7 +51,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ext.IdBasedDiffCallback
@@ -61,7 +60,6 @@ import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.detail.databinding.DetailItemAdBinding
 import soup.movie.detail.databinding.DetailItemBoxOfficeBinding
 import soup.movie.detail.databinding.DetailItemCgvBinding
-import soup.movie.detail.databinding.DetailItemHeaderBinding
 import soup.movie.detail.databinding.DetailItemImdbBinding
 import soup.movie.detail.databinding.DetailItemLotteBinding
 import soup.movie.detail.databinding.DetailItemMegaboxBinding
@@ -87,8 +85,6 @@ internal class DetailListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            detail_item_header ->
-                HeaderViewHolder(DetailItemHeaderBinding.inflate(layoutInflater, parent, false))
             detail_item_box_office ->
                 BoxOfficeViewHolder(
                     DetailItemBoxOfficeBinding.inflate(
@@ -145,17 +141,10 @@ internal class DetailListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (holder is HeaderViewHolder) {
-            if (headerHeight > 0) {
-                holder.itemView.updateLayoutParams { height = headerHeight }
-            }
-        } else {
-            holder.bind(getItem(position))
-        }
+        holder.bind(getItem(position))
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
-        is HeaderItemUiModel -> detail_item_header
         is BoxOfficeItemUiModel -> detail_item_box_office
         is CgvItemUiModel -> detail_item_cgv
         is LotteItemUiModel -> detail_item_lotte
@@ -177,15 +166,7 @@ internal class DetailListAdapter(
         else -> 3
     }
 
-    private var headerHeight: Int = 0
-
-    fun updateHeader(height: Int) {
-        headerHeight = height
-        notifyItemChanged(0)
-    }
-
     companion object {
-        const val detail_item_header = 1
         const val detail_item_box_office = 2
         const val detail_item_cgv = 3
         const val detail_item_lotte = 4
@@ -203,10 +184,6 @@ internal class DetailListAdapter(
     abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         open fun bind(item: ContentItemUiModel) {}
     }
-
-    class HeaderViewHolder(
-        binding: DetailItemHeaderBinding
-    ) : ViewHolder(binding.root)
 
     class BoxOfficeViewHolder(
         private val binding: DetailItemBoxOfficeBinding,

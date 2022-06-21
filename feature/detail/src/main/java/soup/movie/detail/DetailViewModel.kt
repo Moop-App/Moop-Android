@@ -144,7 +144,6 @@ class DetailViewModel @Inject constructor(
 
     private fun MovieDetail.toContentUiModel(nativeAd: NativeAd?): ContentUiModel {
         val items = mutableListOf<ContentItemUiModel>()
-        items.add(HeaderItemUiModel)
         boxOffice?.run {
             items.add(
                 BoxOfficeItemUiModel(
