@@ -8,7 +8,7 @@
     android:elevation="12dp"
     android:visibility="invisible"
     tools:context=".DetailFragment"
-    tools:visibility="invisible">
+    tools:visibility="visible">
 
     <Space
         android:id="@+id/cancel_button"

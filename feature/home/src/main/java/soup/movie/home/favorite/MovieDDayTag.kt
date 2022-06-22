@@ -31,7 +31,7 @@ private val Colors.tagDDay: Color
     }
 
 @Composable
-internal fun MovieDDayTag(
+fun MovieDDayTag(
     text: String,
     modifier: Modifier = Modifier
 ) {

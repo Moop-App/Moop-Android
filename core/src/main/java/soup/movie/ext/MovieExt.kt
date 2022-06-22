@@ -15,7 +15,6 @@
  */
 package soup.movie.ext
 
-import androidx.annotation.DrawableRes
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.model.CgvInfo
@@ -24,24 +23,6 @@ import soup.movie.model.MegaboxInfo
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.util.today
-import soup.movie.core.R as CoreR
-
-@DrawableRes
-fun Movie.getAgeBackground(): Int = when {
-    age >= 19 -> CoreR.drawable.bg_tag_age_19
-    age >= 15 -> CoreR.drawable.bg_tag_age_15
-    age >= 12 -> CoreR.drawable.bg_tag_age_12
-    age >= 0 -> CoreR.drawable.bg_tag_age_all
-    else -> CoreR.drawable.bg_tag_age_unknown
-}
-
-fun Movie.getSimpleAgeLabel(): String = when {
-    age >= 19 -> "청불"
-    age >= 15 -> "15"
-    age >= 12 -> "12"
-    age >= 0 -> "전체"
-    else -> "미정"
-}
 
 fun Movie.getDDay(): Long = openDate.toLocalDate()?.let {
     ChronoUnit.DAYS.between(today(), it)

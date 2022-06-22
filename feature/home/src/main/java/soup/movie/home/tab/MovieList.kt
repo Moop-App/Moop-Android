@@ -49,7 +49,7 @@ import soup.movie.ext.isBest
 import soup.movie.ext.isDDay
 import soup.movie.ext.isNew
 import soup.movie.home.R
-import soup.movie.home.favorite.MovieAgeTag
+import soup.movie.home.favorite.MovieAgeBadge
 import soup.movie.home.favorite.MovieBestTag
 import soup.movie.home.favorite.MovieDDayTag
 import soup.movie.home.favorite.MovieNewTag
@@ -108,7 +108,7 @@ private fun MovieItem(
                         ),
                     contentScale = ContentScale.Crop
                 )
-                MovieAgeTag(
+                MovieAgeBadge(
                     age = movie.age,
                     modifier = Modifier
                         .padding(7.dp)

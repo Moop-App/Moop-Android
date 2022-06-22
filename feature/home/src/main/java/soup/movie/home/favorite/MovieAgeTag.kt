@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import soup.movie.home.textUnit
 
 private val Colors.ageTagUnknown: Color
     get() = if (isLight) {
@@ -63,7 +64,7 @@ private val Colors.ageTag19: Color
     }
 
 @Composable
-internal fun MovieAgeTag(
+internal fun MovieAgeBadge(
     age: Int,
     modifier: Modifier = Modifier
 ) {
@@ -79,5 +80,25 @@ internal fun MovieAgeTag(
             .size(10.dp)
             .background(color = color, shape = RoundedCornerShape(5.dp))
             .border(1.dp, MaterialTheme.colors.background, shape = RoundedCornerShape(5.dp))
+    )
+}
+
+@Composable
+fun MovieAgeTag(
+    age: Int,
+    modifier: Modifier = Modifier
+) {
+    val (text, color) = when {
+        age >= 19 -> "청불" to MaterialTheme.colors.ageTag19
+        age >= 15 -> "15" to MaterialTheme.colors.ageTag15
+        age >= 12 -> "12" to MaterialTheme.colors.ageTag12
+        age >= 0 -> "전체" to MaterialTheme.colors.ageTagAll
+        else -> "미정" to MaterialTheme.colors.ageTagUnknown
+    }
+    MovieTextTag(
+        text = text,
+        tagBackgroundColor = color,
+        modifier = modifier,
+        fontSize = 12.dp.textUnit
     )
 }

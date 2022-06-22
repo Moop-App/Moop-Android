@@ -27,7 +27,7 @@ private val Colors.tagNew: Color
     get() = Color(0xFFF44336)
 
 @Composable
-internal fun MovieNewTag(
+fun MovieNewTag(
     modifier: Modifier = Modifier
 ) {
     MovieTextTag(

@@ -21,7 +21,6 @@ import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.runtime.getValue
@@ -56,7 +55,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DetailFragment :
     Fragment(R.layout.detail_fragment),
-    DetailViewRenderer,
     DetailViewAnimation,
     OnBackPressedListener {
 
@@ -111,21 +109,6 @@ class DetailFragment :
     }
 
     private fun DetailFragmentBinding.initViewState(viewModel: DetailViewModel) {
-        header.apply {
-            posterView.loadAsync(args.movie.posterUrl)
-            posterCard.setOnDebounceClickListener(delay = 150L) {
-                analytics.clickPoster()
-                showPosterViewer(from = posterView)
-            }
-            favoriteButton.setOnDebounceClickListener {
-                val isFavorite = favoriteButton.isSelected.not()
-                viewModel.onFavoriteButtonClick(isFavorite)
-            }
-            shareButton.setOnDebounceClickListener {
-                analytics.clickShare()
-                toggleShareButton()
-            }
-        }
         errorRetryButton.setOnDebounceClickListener {
             Timber.d("retry")
             viewModel.onRetryClick()
@@ -162,6 +145,29 @@ class DetailFragment :
                 onShareClick(ShareTarget.Others)
             }
         }
+        header.setContent {
+            MdcTheme {
+                val headerUiModel by viewModel.headerUiModel.observeAsState()
+                val isFavorite by viewModel.favoriteUiModel.observeAsState(initial = false)
+                headerUiModel?.let {
+                    DetailHeader(
+                        uiModel = it,
+                        isFavorite = isFavorite,
+                        onImageClick = {
+                            analytics.clickPoster()
+                            showPosterViewer()
+                        },
+                        onFavoriteClick = { isFavorite ->
+                            viewModel.onFavoriteButtonClick(isFavorite)
+                        },
+                        onShareClick = {
+                            analytics.clickShare()
+                            toggleShareButton()
+                        },
+                    )
+                }
+            }
+        }
         composeView.setContent {
             MdcTheme {
                 val contentUiModel by viewModel.contentUiModel.observeAsState()
@@ -173,12 +179,6 @@ class DetailFragment :
                     )
                 }
             }
-        }
-        viewModel.favoriteUiModel.observe(viewLifecycleOwner) { isFavorite ->
-            header.favoriteButton.isSelected = isFavorite
-        }
-        viewModel.headerUiModel.observe(viewLifecycleOwner) {
-            header.render(it)
         }
         viewModel.isError.observe(viewLifecycleOwner) {
             errorGroup.isVisible = it
@@ -198,21 +198,20 @@ class DetailFragment :
         share.root.let {
             if (it.isActivated) {
                 it.isActivated = false
-                it.hideShareViewTo(header.shareButton)
+                it.hideShareViewTo()
             } else {
                 it.isActivated = true
-                it.showShareViewFrom(header.shareButton)
+                it.showShareView()
             }
         }
     }
 
     // TODO: Re-implements this
-    private fun showPosterViewer(from: ImageView) {
+    private fun showPosterViewer() {
         StfalconImageViewer
-            .Builder(from.context, listOf(args.movie.posterUrl)) { view, imageUrl ->
+            .Builder(context, listOf(args.movie.posterUrl)) { view, imageUrl ->
                 view.loadAsync(imageUrl)
             }
-            .withTransitionFrom(from)
             .withHiddenStatusBar(false)
             .show()
     }

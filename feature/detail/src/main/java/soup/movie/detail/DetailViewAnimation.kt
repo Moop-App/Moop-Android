@@ -23,15 +23,15 @@ import kotlin.math.hypot
 
 interface DetailViewAnimation {
 
-    fun View.showShareViewFrom(button: View) {
+    fun View.showShareView() {
         visibility = View.VISIBLE
-        startCircularRevealOf(button, 0f, diagonalLength()) {
+        startCircularRevealOf(0f, diagonalLength()) {
             duration = 300
         }
     }
 
-    fun View.hideShareViewTo(button: View) {
-        startCircularRevealOf(button, diagonalLength(), 0f) {
+    fun View.hideShareViewTo() {
+        startCircularRevealOf(diagonalLength(), 0f) {
             duration = 300
             doOnEnd {
                 visibility = View.GONE
@@ -40,28 +40,18 @@ interface DetailViewAnimation {
     }
 
     private inline fun View.startCircularRevealOf(
-        target: View,
         startRadius: Float,
         endRadius: Float,
         block: Animator.() -> Unit
     ) {
         ViewAnimationUtils.createCircularReveal(
             this,
-            target.centerX(),
-            target.centerY(),
+            width,
+            0,
             startRadius,
             endRadius
         ).apply(block).start()
     }
-
-    private fun View.centerX(): Int {
-        return (right + left) / 2
-    }
-
-    private fun View.centerY(): Int {
-        return (bottom + top) / 2
-    }
-
     private fun View.diagonalLength(): Float {
         return hypot(width.toFloat(), height.toFloat())
     }
