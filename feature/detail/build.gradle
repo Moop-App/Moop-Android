@@ -19,6 +19,7 @@ android {
 dependencies {
     implementation project(':core')
     implementation project(':data:repository')
+    implementation project(':feature:home')
     implementation project(':library:stfalcon-imageviewer')
 
     implementation libs.kotlin.stdlib
@@ -39,6 +40,7 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
     implementation libs.compose.runtimeLivedata
+    implementation libs.compose.animation.graphics
     implementation libs.coil.compose
     implementation libs.readmore.material
 

@@ -12,8 +12,9 @@ androidx.browser:browser:1.4.0
 androidx.cardview:cardview:1.0.0
 androidx.collection:collection-ktx:1.1.0
 androidx.collection:collection:1.2.0
-androidx.compose.animation:animation-core:1.1.1
-androidx.compose.animation:animation:1.1.1
+androidx.compose.animation:animation-core:1.2.0-rc01
+androidx.compose.animation:animation-graphics:1.2.0-rc01
+androidx.compose.animation:animation:1.2.0-rc01
 androidx.compose.foundation:foundation-layout:1.2.0-rc01
 androidx.compose.foundation:foundation:1.2.0-rc01
 androidx.compose.material:material-icons-core:1.2.0-rc01

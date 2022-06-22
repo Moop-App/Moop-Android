@@ -31,7 +31,7 @@ private val Colors.tagBest: Color
     }
 
 @Composable
-internal fun MovieBestTag(
+fun MovieBestTag(
     modifier: Modifier = Modifier
 ) {
     MovieTextTag(
