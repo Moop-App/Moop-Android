@@ -60,18 +60,13 @@ import soup.movie.home.favorite.MovieDDayTag
 import soup.movie.home.favorite.MovieNewTag
 import soup.movie.model.Movie
 
-@OptIn(
-    ExperimentalAnimationGraphicsApi::class,
-    ExperimentalMaterialApi::class,
-)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun DetailHeader(
     uiModel: HeaderUiModel,
-    isFavorite: Boolean,
-    onImageClick: (Movie) -> Unit,
-    onFavoriteClick: (isFavorite: Boolean) -> Unit,
-    onShareClick: () -> Unit,
+    onPosterClick: (Movie) -> Unit,
     modifier: Modifier = Modifier,
+    actions: @Composable () -> Unit = {},
 ) {
     val movie: Movie = uiModel.movie
     Column(modifier = modifier) {
@@ -86,31 +81,14 @@ internal fun DetailHeader(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
             )
-            val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected)
-            IconButton(onClick = { onFavoriteClick(!isFavorite) }) {
-                Image(
-                    rememberAnimatedVectorPainter(image, isFavorite),
-                    contentDescription = null,
-                    modifier = Modifier.requiredSize(48.dp),
-                    contentScale = ContentScale.Inside,
-                )
-            }
-            IconButton(onClick = onShareClick) {
-                Image(
-                    Icons.Default.Share,
-                    contentDescription = null,
-                    modifier = Modifier.requiredSize(48.dp),
-                    contentScale = ContentScale.Inside,
-                    colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
-                )
-            }
+            actions()
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(all = 16.dp)) {
+        Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
             Box(
                 contentAlignment = Alignment.TopEnd,
             ) {
                 Card(
-                    onClick = { onImageClick(movie) },
+                    onClick = { onPosterClick(movie) },
                     shape = RoundedCornerShape(4.dp),
                     elevation = 0.dp,
                     modifier = Modifier.padding(end = 18.dp),
@@ -122,7 +100,7 @@ internal fun DetailHeader(
                             .requiredWidthIn(max = 110.dp)
                             .aspectRatio(27 / 40f)
                             .clickable(
-                                onClick = { onImageClick(movie) },
+                                onClick = { onPosterClick(movie) },
                             ),
                         contentScale = ContentScale.Crop
                     )
@@ -151,7 +129,7 @@ internal fun DetailHeader(
                 }
             }
             Column(modifier = Modifier.fillMaxWidth().padding(start = 12.dp)) {
-                if (uiModel.movie.openDate.isNotEmpty()) {
+                if (movie.openDate.isNotEmpty()) {
                     Row {
                         Text(
                             text = "개봉",
@@ -161,7 +139,7 @@ internal fun DetailHeader(
                             modifier = Modifier.alpha(0.5f),
                         )
                         Text(
-                            text = uiModel.movie.openDate,
+                            text = movie.openDate,
                             color = MaterialTheme.colors.onBackground,
                             style = MaterialTheme.typography.body2,
                             fontSize = 14.sp,
@@ -180,7 +158,7 @@ internal fun DetailHeader(
                         modifier = Modifier.alpha(0.5f),
                     )
                     Text(
-                        text = uiModel.movie.getAgeLabel(),
+                        text = movie.getAgeLabel(),
                         color = MaterialTheme.colors.onBackground,
                         style = MaterialTheme.typography.body2,
                         fontSize = 14.sp,
@@ -189,7 +167,7 @@ internal fun DetailHeader(
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                val genres = uiModel.movie.genres
+                val genres = movie.genres
                 if (genres != null) {
                     Row(modifier = Modifier.padding(top = 8.dp)) {
                         Text(
@@ -279,5 +257,37 @@ internal fun DetailHeader(
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalAnimationGraphicsApi::class)
+@Composable
+internal fun FavoriteButton(
+    isFavorite: Boolean,
+    onFavoriteChange: (Boolean) -> Unit,
+) {
+    val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected)
+    IconButton(onClick = { onFavoriteChange(!isFavorite) }) {
+        Image(
+            rememberAnimatedVectorPainter(image, isFavorite),
+            contentDescription = null,
+            modifier = Modifier.requiredSize(48.dp),
+            contentScale = ContentScale.Inside,
+        )
+    }
+}
+
+@Composable
+internal fun ShareButton(
+    onClick: () -> Unit,
+) {
+    IconButton(onClick = onClick) {
+        Image(
+            Icons.Default.Share,
+            contentDescription = null,
+            modifier = Modifier.requiredSize(48.dp),
+            contentScale = ContentScale.Inside,
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
+        )
     }
 }
