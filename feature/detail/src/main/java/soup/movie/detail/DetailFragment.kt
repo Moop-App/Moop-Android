@@ -20,11 +20,12 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,100 +34,53 @@ import com.google.android.material.composethemeadapter.MdcTheme
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.analytics.EventAnalytics
-import soup.movie.detail.databinding.DetailFragmentBinding
 import soup.movie.ext.executeWeb
 import soup.movie.ext.loadAsync
 import soup.movie.ext.observeEvent
 import soup.movie.ext.showToast
+import soup.movie.model.Movie
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
-import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.YouTube
-import soup.movie.util.autoCleared
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailFragment :
-    Fragment(R.layout.detail_fragment),
-    DetailViewAnimation,
-    OnBackPressedListener {
+class DetailFragment : Fragment() {
 
     private val args: DetailFragmentArgs by navArgs()
-
-    private var binding: DetailFragmentBinding by autoCleared()
 
     @Inject
     lateinit var analytics: EventAnalytics
 
     private val viewModel: DetailViewModel by viewModels()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                MdcTheme {
+                    DetailScreen(
+                        movie = args.movie,
+                        viewModel = viewModel,
+                        analytics = analytics,
+                        onPosterClick = { showPosterViewer() },
+                        onItemClick = { onItemClick(it) },
+                    )
+                }
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = DetailFragmentBinding.bind(view).apply {
-            initViewState(viewModel)
-        }
-
         viewModel.init(args.movie)
         viewModel.uiEvent.observeEvent(viewLifecycleOwner) {
             when (it) {
                 is ShareAction -> view.context.executeShareAction(it)
                 is ToastAction -> view.context.showToast(it.resId)
-            }
-        }
-    }
-
-    private fun DetailFragmentBinding.initViewState(viewModel: DetailViewModel) {
-        share.setContent {
-            MdcTheme {
-                DetailShare(
-                    onClick = { toggleShareButton() },
-                    onShareClick = { target ->
-                        if (target == ShareTarget.Instagram) {
-                            viewModel.requestShareImage(target, imageUrl = args.movie.posterUrl)
-                        } else {
-                            viewModel.requestShareText(target)
-                        }
-                    },
-                )
-            }
-        }
-        composeView.setContent {
-            MdcTheme {
-                DetailScreen(
-                    viewModel = viewModel,
-                    analytics = analytics,
-                    onPosterClick = {
-                        analytics.clickPoster()
-                        showPosterViewer()
-                    },
-                    onShareClick = {
-                        analytics.clickShare()
-                        toggleShareButton()
-                    },
-                    onItemClick = { onItemClick(it) },
-                    modifier = Modifier.fillMaxSize(),
-                )
-            }
-        }
-    }
-
-    override fun onBackPressed(): Boolean {
-        if (binding.share.isActivated) {
-            binding.toggleShareButton()
-            return true
-        } else {
-            return false
-        }
-    }
-
-    private fun DetailFragmentBinding.toggleShareButton() {
-        share.let {
-            if (it.isActivated) {
-                it.isActivated = false
-                it.hideShareViewTo()
-            } else {
-                it.isActivated = true
-                it.showShareView()
             }
         }
     }
@@ -141,10 +95,9 @@ class DetailFragment :
             .show()
     }
 
-    private fun Context.executeShareAction(action: ShareAction) {
+    private fun Context.executeShareAction(action: ShareAction, movie: Movie = args.movie) {
         when (action) {
             is ShareAction.Text -> {
-                val movie = args.movie
                 when (action.target) {
                     ShareTarget.KakaoLink -> {
                         KakaoLink.share(this, movie)

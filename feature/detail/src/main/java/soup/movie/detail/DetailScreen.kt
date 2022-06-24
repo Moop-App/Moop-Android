@@ -15,68 +15,60 @@
  */
 package soup.movie.detail
 
-import androidx.compose.foundation.layout.Box
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.geometry.Offset
 import soup.movie.analytics.EventAnalytics
+import soup.movie.model.Movie
 
 @Composable
 internal fun DetailScreen(
+    movie: Movie,
     viewModel: DetailViewModel,
     analytics: EventAnalytics,
     onPosterClick: () -> Unit,
-    onShareClick: () -> Unit,
     onItemClick: (ContentItemUiModel) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
-    val headerUiModel by viewModel.headerUiModel.observeAsState()
-    val isFavorite by viewModel.favoriteUiModel.observeAsState(initial = false)
-    val contentUiModel by viewModel.contentUiModel.observeAsState()
-    val isError by viewModel.isError.observeAsState(initial = false)
-    Box(modifier = modifier) {
-        if (isError) {
-            DetailError(
-                onRetryClick = {
-                    viewModel.onRetryClick()
-                },
-                modifier = Modifier.fillMaxSize(),
-            )
-        }
-        contentUiModel?.let {
-            DetailList(
-                header = {
-                    headerUiModel?.let { uiModel ->
-                        DetailHeader(
-                            uiModel = uiModel,
-                            onPosterClick = {
-                                onPosterClick()
-                            },
-                            modifier = Modifier.padding(bottom = 8.dp),
-                            actions = {
-                                FavoriteButton(
-                                    isFavorite = isFavorite,
-                                    onFavoriteChange = { isFavorite ->
-                                        viewModel.onFavoriteButtonClick(isFavorite)
-                                    }
-                                )
-                                ShareButton(
-                                    onClick = {
-                                        onShareClick()
-                                    }
-                                )
-                            }
-                        )
-                    }
-                },
-                items = it.items,
-                analytics = analytics,
-                onItemClick = { item -> onItemClick(item) }
-            )
-        }
-    }
+    var showShare by remember { mutableStateOf(false) }
+    BackHandler(
+        enabled = showShare,
+        onBack = { showShare = false }
+    )
+    DetailContent(
+        viewModel = viewModel,
+        analytics = analytics,
+        onPosterClick = {
+            analytics.clickPoster()
+            onPosterClick()
+        },
+        onShareClick = {
+            analytics.clickShare()
+            showShare = true
+        },
+        onItemClick = { onItemClick(it) },
+        modifier = Modifier.fillMaxSize(),
+    )
+    DetailShare(
+        onClick = { showShare = false },
+        onShareClick = { target ->
+            if (target == ShareTarget.Instagram) {
+                viewModel.requestShareImage(
+                    target,
+                    imageUrl = movie.posterUrl
+                )
+            } else {
+                viewModel.requestShareText(target)
+            }
+        },
+        modifier = Modifier.circularReveal(
+            visible = showShare,
+            center = Offset(x = 1f, y = 0f)
+        ),
+    )
 }
