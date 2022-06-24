@@ -46,8 +46,10 @@ import soup.movie.util.autoCleared
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailFragment : Fragment(R.layout.detail_fragment),
-    DetailViewAnimation, OnBackPressedListener {
+class DetailFragment :
+    Fragment(R.layout.detail_fragment),
+    DetailViewAnimation,
+    OnBackPressedListener {
 
     private val args: DetailFragmentArgs by navArgs()
 
