@@ -26,13 +26,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -47,23 +52,24 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.PrivacyTip
+import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.rounded.Subject
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -79,18 +85,21 @@ import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.widget.NativeAdView
 import soup.movie.ext.executeWeb
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun DetailList(
+    header: @Composable () -> Unit,
     items: List<ContentItemUiModel>,
     analytics: EventAnalytics,
     onItemClick: (ContentItemUiModel) -> Unit
 ) {
-    val nestedScrollInterop = rememberNestedScrollInteropConnection()
     LazyColumn(
-        modifier = Modifier.nestedScroll(nestedScrollInterop),
-        contentPadding = PaddingValues(all = 8.dp),
+        contentPadding = WindowInsets.systemBars
+            .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+            .asPaddingValues(),
     ) {
+        item {
+            header()
+        }
         items(items, key = { it.id }) { item ->
             when (item) {
                 is BoxOfficeItemUiModel -> {
@@ -186,7 +195,7 @@ private fun BoxOffice(
 ) {
     Card(
         onClick = onClick,
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -275,7 +284,7 @@ private fun BoxOffice(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Image(
-                        painterResource(R.drawable.ic_round_star),
+                        Icons.Rounded.Star,
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
                         modifier = Modifier.requiredSize(16.dp),
@@ -320,7 +329,7 @@ private fun Cgv(
     Card(
         onClick = onClick,
         enabled = uiModel.hasInfo,
-        modifier = modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        modifier = modifier.padding(start = 12.dp, end = 4.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -348,7 +357,7 @@ private fun Cgv(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painterResource(R.drawable.ic_round_star),
+                    Icons.Rounded.Star,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
                     modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
@@ -402,7 +411,7 @@ private fun Lotte(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painterResource(R.drawable.ic_round_star),
+                    Icons.Rounded.Star,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
                     modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
@@ -429,7 +438,7 @@ private fun Megabox(
     Card(
         onClick = onClick,
         enabled = uiModel.hasInfo,
-        modifier = modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        modifier = modifier.padding(start = 4.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -456,7 +465,7 @@ private fun Megabox(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painterResource(R.drawable.ic_round_star),
+                    Icons.Rounded.Star,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
                     modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
@@ -481,7 +490,7 @@ private fun Plot(
 ) {
     Card(
         onClick = onClick,
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp).fillMaxWidth(),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp).fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -491,8 +500,9 @@ private fun Plot(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    painterResource(R.drawable.ic_round_plot),
-                    contentDescription = null
+                    Icons.Rounded.Subject,
+                    contentDescription = null,
+                    modifier = Modifier.requiredSize(20.dp),
                 )
                 Text(
                     text = "줄거리",
@@ -534,7 +544,7 @@ private fun Naver(
     onClick: () -> Unit,
 ) {
     Card(
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -563,7 +573,7 @@ private fun Naver(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painterResource(R.drawable.ic_round_star),
+                    Icons.Rounded.Star,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
                     modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
@@ -602,7 +612,7 @@ private fun Imdb(
 ) {
     Card(
         onClick = onClick,
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -699,7 +709,7 @@ private fun Cast(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
     ) {
         items(uiModel.persons) { item ->
             Person(
@@ -754,7 +764,7 @@ private fun TrailerHeader(
     onPrivacyTipClick: () -> Unit,
 ) {
     Card(
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -778,11 +788,14 @@ private fun TrailerHeader(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(start = 4.dp).weight(1f),
             )
-            IconButton(onClick = onPrivacyTipClick) {
+            IconButton(
+                modifier = Modifier.requiredWidth(48.dp).fillMaxHeight(),
+                onClick = onPrivacyTipClick,
+            ) {
                 Image(
-                    painter = painterResource(R.drawable.ic_privacy_tip),
+                    Icons.Outlined.PrivacyTip,
                     contentDescription = null,
-                    modifier = Modifier.requiredWidth(48.dp).fillMaxHeight(),
+                    modifier = Modifier.requiredSize(18.dp),
                     contentScale = ContentScale.Inside,
                 )
             }
@@ -798,7 +811,7 @@ private fun TrailerItem(
 ) {
     Card(
         onClick = onClick,
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RectangleShape,
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -849,7 +862,7 @@ private fun TrailerFooter(
 ) {
     Card(
         onClick = onClick,
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 16.dp),
         shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),
@@ -872,7 +885,7 @@ private fun NativeAd(
     uiModel: AdItemUiModel,
 ) {
     Card(
-        modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
+        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
         elevation = dimensionResource(R.dimen.detail_card_elevation),

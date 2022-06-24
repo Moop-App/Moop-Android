@@ -18,6 +18,7 @@ androidx.compose.animation:animation:1.2.0-rc02
 androidx.compose.foundation:foundation-layout:1.2.0-rc02
 androidx.compose.foundation:foundation:1.2.0-rc02
 androidx.compose.material:material-icons-core:1.2.0-rc02
+androidx.compose.material:material-icons-extended:1.2.0-rc02
 androidx.compose.material:material-ripple:1.2.0-rc02
 androidx.compose.material:material:1.2.0-rc02
 androidx.compose.runtime:runtime-livedata:1.2.0-rc02

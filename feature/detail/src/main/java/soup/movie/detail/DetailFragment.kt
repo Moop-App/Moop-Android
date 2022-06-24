@@ -23,19 +23,15 @@ import android.text.util.Linkify
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 import androidx.core.app.ShareCompat
-import androidx.core.view.WindowInsetsCompat.Type.systemBars
-import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.Insetter
 import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.databinding.DetailFragmentBinding
 import soup.movie.ext.executeWeb
@@ -47,9 +43,6 @@ import soup.movie.spec.KakaoLink
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.util.YouTube
 import soup.movie.util.autoCleared
-import soup.movie.util.clipToOval
-import soup.movie.util.setOnDebounceClickListener
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -71,7 +64,6 @@ class DetailFragment :
         super.onViewCreated(view, savedInstanceState)
         binding = DetailFragmentBinding.bind(view).apply {
             initViewState(viewModel)
-            adaptSystemWindowInset()
         }
 
         viewModel.init(args.movie)
@@ -83,110 +75,43 @@ class DetailFragment :
         }
     }
 
-    private fun DetailFragmentBinding.adaptSystemWindowInset() {
-        Insetter.builder()
-            .setOnApplyInsetsListener { header, insets, initialState ->
-                header.updatePadding(top = initialState.paddings.top + insets.getInsets(systemBars()).top)
-            }
-            .applyToView(toolbarLayout)
-        Insetter.builder()
-            .setOnApplyInsetsListener { listView, insets, initialState ->
-                val systemWindowInsets = insets.getInsets(systemBars())
-                listView.updatePadding(
-                    bottom = initialState.paddings.bottom + systemWindowInsets.bottom
-                )
-            }
-            .applyToView(composeView)
-        Insetter.builder()
-            .setOnApplyInsetsListener { share, insets, initialState ->
-                val systemWindowInsets = insets.getInsets(systemBars())
-                share.updatePadding(
-                    top = initialState.paddings.top + systemWindowInsets.top,
-                    bottom = initialState.paddings.bottom + systemWindowInsets.bottom
-                )
-            }
-            .applyToView(share.root)
-    }
-
     private fun DetailFragmentBinding.initViewState(viewModel: DetailViewModel) {
-        errorRetryButton.setOnDebounceClickListener {
-            Timber.d("retry")
-            viewModel.onRetryClick()
-        }
-        share.apply {
-            fun onShareClick(target: ShareTarget) {
-                viewModel.requestShareText(target)
-            }
-            root.setOnDebounceClickListener {
-                toggleShareButton()
-            }
-            facebookShareButton.clipToOval(true)
-            facebookShareButton.setOnDebounceClickListener {
-                onShareClick(ShareTarget.Facebook)
-            }
-            twitterShareButton.clipToOval(true)
-            twitterShareButton.setOnDebounceClickListener {
-                onShareClick(ShareTarget.Twitter)
-            }
-            instagramShareButton.clipToOval(true)
-            instagramShareButton.setOnDebounceClickListener {
-                viewModel.requestShareImage(ShareTarget.Instagram, imageUrl = args.movie.posterUrl)
-            }
-            lineShareButton.clipToOval(true)
-            lineShareButton.setOnDebounceClickListener {
-                onShareClick(ShareTarget.LINE)
-            }
-            kakaoTalkShareButton.clipToOval(true)
-            kakaoTalkShareButton.setOnDebounceClickListener {
-                onShareClick(ShareTarget.KakaoLink)
-            }
-            etcShareButton.clipToOval(true)
-            etcShareButton.setOnDebounceClickListener {
-                onShareClick(ShareTarget.Others)
-            }
-        }
-        header.setContent {
+        share.setContent {
             MdcTheme {
-                val headerUiModel by viewModel.headerUiModel.observeAsState()
-                val isFavorite by viewModel.favoriteUiModel.observeAsState(initial = false)
-                headerUiModel?.let {
-                    DetailHeader(
-                        uiModel = it,
-                        isFavorite = isFavorite,
-                        onImageClick = {
-                            analytics.clickPoster()
-                            showPosterViewer()
-                        },
-                        onFavoriteClick = { isFavorite ->
-                            viewModel.onFavoriteButtonClick(isFavorite)
-                        },
-                        onShareClick = {
-                            analytics.clickShare()
-                            toggleShareButton()
-                        },
-                    )
-                }
+                DetailShare(
+                    onClick = { toggleShareButton() },
+                    onShareClick = { target ->
+                        if (target == ShareTarget.Instagram) {
+                            viewModel.requestShareImage(target, imageUrl = args.movie.posterUrl)
+                        } else {
+                            viewModel.requestShareText(target)
+                        }
+                    },
+                )
             }
         }
         composeView.setContent {
             MdcTheme {
-                val contentUiModel by viewModel.contentUiModel.observeAsState()
-                contentUiModel?.let {
-                    DetailList(
-                        items = it.items,
-                        analytics = analytics,
-                        onItemClick = { item -> onItemClick(item) }
-                    )
-                }
+                DetailScreen(
+                    viewModel = viewModel,
+                    analytics = analytics,
+                    onPosterClick = {
+                        analytics.clickPoster()
+                        showPosterViewer()
+                    },
+                    onShareClick = {
+                        analytics.clickShare()
+                        toggleShareButton()
+                    },
+                    onItemClick = { onItemClick(it) },
+                    modifier = Modifier.fillMaxSize(),
+                )
             }
-        }
-        viewModel.isError.observe(viewLifecycleOwner) {
-            errorGroup.isVisible = it
         }
     }
 
     override fun onBackPressed(): Boolean {
-        if (binding.share.root.isActivated) {
+        if (binding.share.isActivated) {
             binding.toggleShareButton()
             return true
         } else {
@@ -195,7 +120,7 @@ class DetailFragment :
     }
 
     private fun DetailFragmentBinding.toggleShareButton() {
-        share.root.let {
+        share.let {
             if (it.isActivated) {
                 it.isActivated = false
                 it.hideShareViewTo()
