@@ -17,8 +17,6 @@ package soup.movie.ext
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes

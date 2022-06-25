@@ -21,12 +21,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetState
@@ -74,7 +77,6 @@ import soup.movie.model.Theater
 import soup.movie.theater.R
 import soup.movie.theater.TheaterChip
 import soup.movie.theater.divider
-import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 private enum class Page(val title: String) {
@@ -113,14 +115,13 @@ internal fun TheaterEditScreen(
         delay(500)
         bottomSheetScaffoldState.bottomSheetState.collapse()
     }
-    val isPortrait = isPortrait()
     BottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
-        modifier = if (isPortrait) {
-            Modifier.statusBarsPadding().navigationBarsPadding()
-        } else {
-            Modifier.statusBarsPadding()
-        },
+        modifier = Modifier.padding(
+            WindowInsets.systemBars
+                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+                .asPaddingValues()
+        ),
         topBar = {
             TabRow(
                 selectedTabIndex = pagerState.currentPage,

@@ -18,11 +18,14 @@ package soup.movie.theme.internal
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
@@ -38,20 +41,18 @@ import soup.movie.theme.R
 import soup.movie.theme.ThemeSettingItemUiModel
 import soup.movie.theme.ThemeSettingViewModel
 import soup.movie.theme.stringResIdOf
-import soup.movie.ui.isPortrait
 import soup.movie.util.debounce
 
 @Composable
 internal fun ThemeOptionScreen(
     viewModel: ThemeSettingViewModel = viewModel()
 ) {
-    val isPortrait = isPortrait()
     Scaffold(
-        modifier = if (isPortrait) {
-            Modifier.statusBarsPadding().navigationBarsPadding()
-        } else {
-            Modifier.statusBarsPadding()
-        },
+        modifier = Modifier.padding(
+            WindowInsets.systemBars
+                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+                .asPaddingValues()
+        ),
         topBar = {
             TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
         }

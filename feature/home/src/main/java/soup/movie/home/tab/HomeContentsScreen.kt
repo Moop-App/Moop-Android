@@ -22,10 +22,14 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
@@ -48,7 +52,6 @@ import androidx.compose.ui.unit.sp
 import soup.movie.ext.showToast
 import soup.movie.home.R
 import soup.movie.model.Movie
-import soup.movie.ui.isPortrait
 
 @Composable
 internal fun HomeContentsScreen(
@@ -80,7 +83,6 @@ internal fun HomeContentsScreen(
 //                }
 //            }
 
-            val isPortrait = isPortrait()
             val context = LocalContext.current
             MovieList(
                 movies = movies,
@@ -88,11 +90,11 @@ internal fun HomeContentsScreen(
                 onLongItemClick = {
                     context.showToast(it.title)
                 },
-                modifier = if (isPortrait) {
-                    Modifier.navigationBarsPadding()
-                } else {
-                    Modifier
-                }
+                modifier = Modifier.padding(
+                    WindowInsets.navigationBars
+                        .only(WindowInsetsSides.Bottom)
+                        .asPaddingValues()
+                )
             )
         }
         if (isError) {

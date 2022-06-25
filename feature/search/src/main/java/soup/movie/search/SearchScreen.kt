@@ -16,12 +16,15 @@
 package soup.movie.search
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
@@ -62,7 +65,6 @@ import soup.movie.ext.showToast
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
-import soup.movie.ui.isPortrait
 
 @Composable
 fun SearchScreen(
@@ -70,13 +72,12 @@ fun SearchScreen(
     upPress: () -> Unit,
     onItemClick: (Movie) -> Unit
 ) {
-    val isPortrait = isPortrait()
     Scaffold(
-        modifier = if (isPortrait) {
-            Modifier.statusBarsPadding().navigationBarsPadding()
-        } else {
-            Modifier.statusBarsPadding()
-        },
+        modifier = Modifier.padding(
+            WindowInsets.systemBars
+                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+                .asPaddingValues()
+        ),
         topBar = {
             Surface(
                 modifier = Modifier.fillMaxWidth().height(56.dp),

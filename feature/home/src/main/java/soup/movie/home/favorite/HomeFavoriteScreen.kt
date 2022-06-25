@@ -16,8 +16,13 @@
 package soup.movie.home.favorite
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,7 +35,6 @@ import soup.movie.ext.showToast
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
-import soup.movie.ui.isPortrait
 
 @Composable
 internal fun HomeFavoriteScreen(
@@ -59,7 +63,6 @@ internal fun HomeFavoriteScreen(
 //                }
 //            }
 
-            val isPortrait = isPortrait()
             val context = LocalContext.current
             MovieList(
                 movies,
@@ -67,11 +70,11 @@ internal fun HomeFavoriteScreen(
                 onLongItemClick = {
                     context.showToast(it.title)
                 },
-                modifier = if (isPortrait) {
-                    Modifier.navigationBarsPadding()
-                } else {
-                    Modifier
-                }
+                modifier = Modifier.padding(
+                    WindowInsets.navigationBars
+                        .only(WindowInsetsSides.Bottom)
+                        .asPaddingValues(),
+                )
             )
         }
     }

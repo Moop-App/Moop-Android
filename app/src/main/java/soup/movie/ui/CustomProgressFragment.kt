@@ -23,10 +23,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
@@ -112,15 +116,14 @@ class CustomProgressFragment : AbstractProgressFragment() {
             modifier = Modifier.fillMaxHeight(),
             contentAlignment = Alignment.Center
         ) {
-            val isPortrait = isPortrait()
             if (state is State.Progress) {
                 ProgressAnimation(
                     modifier = Modifier
-                        .apply {
-                            if (isPortrait) {
-                                navigationBarsPadding()
-                            }
-                        }
+                        .padding(
+                            WindowInsets.navigationBars
+                                .only(WindowInsetsSides.Bottom)
+                                .asPaddingValues(),
+                        )
                         .padding(end = 8.dp, bottom = 160.dp)
                         .size(width = 256.dp, height = 300.dp)
                 )
@@ -129,11 +132,11 @@ class CustomProgressFragment : AbstractProgressFragment() {
                 state = state,
                 modifier = Modifier
                     .fillMaxSize()
-                    .apply {
-                        if (isPortrait) {
-                            navigationBarsPadding()
-                        }
-                    }
+                    .padding(
+                        WindowInsets.navigationBars
+                            .only(WindowInsetsSides.Bottom)
+                            .asPaddingValues(),
+                    )
                     .padding(horizontal = 32.dp)
             )
             Image(
@@ -141,11 +144,11 @@ class CustomProgressFragment : AbstractProgressFragment() {
                 contentDescription = null,
                 contentScale = ContentScale.Inside,
                 modifier = Modifier
-                    .apply {
-                        if (isPortrait) {
-                            navigationBarsPadding()
-                        }
-                    }
+                    .padding(
+                        WindowInsets.navigationBars
+                            .only(WindowInsetsSides.Bottom)
+                            .asPaddingValues(),
+                    )
                     .padding(16.dp)
                     .size(width = 100.dp, height = 40.dp)
                     .align(Alignment.BottomEnd)
