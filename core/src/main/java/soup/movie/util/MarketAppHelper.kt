@@ -18,7 +18,6 @@ package soup.movie.util
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import soup.movie.ext.executeWeb
@@ -26,38 +25,6 @@ import soup.movie.ext.startActivitySafely
 import soup.movie.model.Theater
 import soup.movie.model.Trailer
 import timber.log.Timber
-
-private fun Context.isInstalledApp(pkgName: String): Boolean {
-    return packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
-        .find { it?.packageName == pkgName } != null
-}
-
-private fun Context.executeMarketApp(pkgName: String, className: String? = null) {
-    if (executeApp(pkgName, className).not()) {
-        executePlayStoreForApp(pkgName)
-    }
-}
-
-private fun Context.executeApp(pkgName: String, className: String? = null): Boolean {
-    if (className != null) {
-        val launchIntent = Intent().apply {
-            setClassName(pkgName, className)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        try {
-            startActivity(launchIntent)
-            return true
-        } catch (e: ActivityNotFoundException) {
-            Timber.w(e)
-        }
-    }
-    val launchIntent = packageManager.getLaunchIntentForPackage(pkgName)
-    if (launchIntent != null) {
-        startActivity(launchIntent)
-        return true
-    }
-    return false
-}
 
 private fun Context.executePlayStoreForApp(pkgName: String) {
     try {
@@ -89,8 +56,6 @@ object Moop {
 
 object Cgv {
 
-    private const val packageName = "com.cgv.android.movieapp"
-
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
@@ -100,8 +65,6 @@ object Cgv {
 }
 
 object LotteCinema {
-
-    private const val packageName = "kr.co.lottecinema.lcm"
 
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater.code))
@@ -113,19 +76,12 @@ object LotteCinema {
 
 object Megabox {
 
-    private const val packageName = "com.megabox.mop"
-
     fun executeWeb(ctx: Context, theater: Theater) {
         ctx.executeWeb(detailWebUrl(theater.code))
     }
 
     private fun detailWebUrl(theaterCode: String): String =
         "https://m.megabox.co.kr/theater?brchNo=$theaterCode"
-}
-
-object Kakao {
-
-    private const val packageName = "com.kakao.talk"
 }
 
 object YouTube {

@@ -47,10 +47,6 @@ object NotificationSpecs {
             notify(4, Builder(ctx, NotificationChannels.OPEN_DATE_ALARM).intercept().build())
         }
     }
-
-    fun createNotificationForTheaterMode(ctx: Context): Builder {
-        return Builder(ctx, NotificationChannels.THEATER_MODE)
-    }
 }
 
 fun Context.getNotificationManager(): NotificationManager? {

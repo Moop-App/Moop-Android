@@ -23,8 +23,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.runBlocking
-import soup.movie.Credentials
-import soup.movie.CredentialsImpl
 import soup.movie.ads.AdsManager
 import soup.movie.ads.AdsManagerImpl
 import soup.movie.analytics.EventAnalytics
@@ -44,14 +42,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
-
-    @Singleton
-    @Provides
-    fun provideCredentials(
-        @ApplicationContext context: Context
-    ): Credentials {
-        return CredentialsImpl(context)
-    }
 
     @Singleton
     @Provides

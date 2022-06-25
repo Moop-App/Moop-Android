@@ -13,13 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie
+package soup.movie.startup
 
 import android.content.Context
+import androidx.startup.Initializer
+import soup.movie.BuildConfig
+import soup.movie.util.CrashlyticsTree
+import timber.log.Timber
 
-class CredentialsImpl(private val appContext: Context) : Credentials {
+class TimberInitializer : Initializer<Unit> {
 
-    override fun getKakaoAppKey(): String {
-        return appContext.getString(R.string.kakao_app_key)
+    override fun create(context: Context) {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(CrashlyticsTree())
+        }
+    }
+
+    override fun dependencies(): List<Class<out Initializer<*>>> {
+        return emptyList()
     }
 }

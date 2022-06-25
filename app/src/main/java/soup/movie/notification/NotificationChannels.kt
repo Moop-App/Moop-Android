@@ -25,7 +25,6 @@ object NotificationChannels {
 
     const val NOTICE = "NTC"
     const val EVENT = "EVT" // Default
-    const val THEATER_MODE = "THM"
     const val OPEN_DATE_ALARM = "ODA"
 
     internal fun initialize(application: Application) {
@@ -41,17 +40,12 @@ object NotificationChannels {
                     application.getString(R.string.notification_channel_event),
                     NotificationManager.IMPORTANCE_HIGH
                 )
-                val theaterMode = NotificationChannel(
-                    THEATER_MODE,
-                    application.getString(R.string.notification_channel_theater_mode),
-                    NotificationManager.IMPORTANCE_HIGH
-                )
                 val openDateAlarm = NotificationChannel(
                     OPEN_DATE_ALARM,
                     application.getString(R.string.notification_channel_open_date_alarm),
                     NotificationManager.IMPORTANCE_HIGH
                 )
-                createNotificationChannels(listOf(notice, event, theaterMode, openDateAlarm))
+                createNotificationChannels(listOf(notice, event, openDateAlarm))
             }
         }
     }

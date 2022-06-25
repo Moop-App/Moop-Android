@@ -13,22 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.init
+package soup.movie.startup
 
 import android.content.Context
 import androidx.startup.Initializer
-import soup.movie.BuildConfig
-import soup.movie.util.CrashlyticsTree
-import timber.log.Timber
+import com.kakao.sdk.common.KakaoSdk
+import soup.movie.R
 
-class TimberInitializer : Initializer<Unit> {
+class KakaoInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        } else {
-            Timber.plant(CrashlyticsTree())
-        }
+        KakaoSdk.init(context = context, appKey = context.getString(R.string.kakao_app_key))
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

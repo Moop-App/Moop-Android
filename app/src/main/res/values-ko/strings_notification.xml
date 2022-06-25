@@ -1,6 +1,5 @@
 <resources>
     <string name="notification_channel_notice">공지사항</string>
     <string name="notification_channel_event">이벤트</string>
-    <string name="notification_channel_theater_mode">극장모드</string>
     <string name="notification_channel_open_date_alarm">개봉일 알림</string>
 </resources>
