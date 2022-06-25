@@ -24,11 +24,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
@@ -81,7 +84,6 @@ import soup.movie.BuildConfig
 import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.R
-import soup.movie.ui.isPortrait
 import soup.movie.util.Cgv
 import soup.movie.util.LauncherIcons
 import soup.movie.util.LotteCinema
@@ -116,7 +118,6 @@ internal fun TheaterMapScreen(
     BackHandler(enabled = bottomSheetState.isExpanded) {
         viewModel.onTheaterUnselected()
     }
-    val isPortrait = isPortrait()
     Scaffold(
         topBar = {
             Toolbar(
@@ -124,11 +125,11 @@ internal fun TheaterMapScreen(
                 onNavigationOnClick = { systemViewModel.openNavigationMenu() }
             )
         },
-        modifier = if (isPortrait) {
-            Modifier.statusBarsPadding().navigationBarsPadding()
-        } else {
-            Modifier.statusBarsPadding()
-        }
+        modifier = Modifier.padding(
+            WindowInsets.systemBars
+                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+                .asPaddingValues()
+        ),
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             BottomSheetScaffold(
