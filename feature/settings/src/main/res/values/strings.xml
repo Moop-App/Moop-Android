@@ -4,7 +4,6 @@
     <string name="settings_category_theater">Favorite Theaters</string>
     <string name="settings_theater_empty_description">There are no favorite theaters</string>
     <string name="settings_category_theme">Theme</string>
-    <string name="settings_category_theater_mode">Theater Mode</string>
     <string name="settings_category_version">Version</string>
     <string name="settings_version_current">Current %s</string>
     <string name="settings_version_latest">Latest %s</string>

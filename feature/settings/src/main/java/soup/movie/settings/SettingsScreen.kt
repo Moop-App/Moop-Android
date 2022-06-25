@@ -104,8 +104,6 @@ internal fun SettingsScreen(
                 onEditClick = onTheaterEditClick
             )
             SettingsDivider()
-            SettingsTheaterModeItem()
-            SettingsDivider()
             SettingsVersionItem(
                 version = version,
                 onClick = onVersionClick,
@@ -210,29 +208,6 @@ private fun SettingsTheaterItem(
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun SettingsTheaterModeItem() {
-    Column(
-        modifier = Modifier.padding(vertical = 24.dp)
-    ) {
-        SettingsCategory(text = stringResource(R.string.settings_category_theater_mode))
-        Spacer(modifier = Modifier.height(12.dp))
-        SettingsButton(
-            onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .requiredHeight(48.dp),
-            enabled = false,
-        ) {
-            Text(
-                text = "준비 중입니다",
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.body2
-            )
         }
     }
 }
