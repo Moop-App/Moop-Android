@@ -41,14 +41,6 @@ fun ImageView.loadAsync(url: String?, @DrawableRes placeholder: Int? = null) {
     }
 }
 
-fun ImageView.setGrayscale(enable: Boolean) {
-    colorFilter = if (enable) {
-        ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
-    } else {
-        null
-    }
-}
-
 suspend fun Context.loadAsync(url: String): Bitmap? {
     val request = ImageRequest.Builder(this)
         .data(url)
