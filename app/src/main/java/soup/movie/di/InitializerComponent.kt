@@ -18,7 +18,7 @@ package soup.movie.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import soup.movie.init.WorkManagerInitializer
+import soup.movie.startup.WorkManagerInitializer
 
 @Component(dependencies = [InitializerDependencies::class])
 interface InitializerComponent {

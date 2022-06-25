@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.core.di
+package soup.movie.startup
 
 import android.content.Context
-import dagger.BindsInstance
-import dagger.Component
-import soup.movie.init.KakaoInitializer
+import androidx.startup.Initializer
+import com.kakao.sdk.common.KakaoSdk
+import soup.movie.R
 
-@Component(dependencies = [InitializerDependencies::class])
-interface InitializerComponent {
+class KakaoInitializer : Initializer<Unit> {
 
-    fun inject(initializer: KakaoInitializer)
+    override fun create(context: Context) {
+        KakaoSdk.init(context = context, appKey = context.getString(R.string.kakao_app_key))
+    }
 
-    @Component.Builder
-    interface Builder {
-        fun context(@BindsInstance context: Context): Builder
-        fun appDependencies(dependencies: InitializerDependencies): Builder
-        fun build(): InitializerComponent
+    override fun dependencies(): List<Class<out Initializer<*>>> {
+        return emptyList()
     }
 }

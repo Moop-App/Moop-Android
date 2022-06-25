@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.init
+package soup.movie.startup
 
 import android.content.Context
 import androidx.startup.Initializer
-import soup.movie.BuildConfig
-import soup.movie.util.CrashlyticsTree
-import timber.log.Timber
+import coil.Coil
+import coil.ImageLoader
 
-class TimberInitializer : Initializer<Unit> {
+class CoilInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        } else {
-            Timber.plant(CrashlyticsTree())
-        }
+        val imageLoader = ImageLoader.Builder(context)
+            .crossfade(true)
+            .build()
+        Coil.setImageLoader(imageLoader)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
-        return emptyList()
+        return listOf(TimberInitializer::class.java)
     }
 }

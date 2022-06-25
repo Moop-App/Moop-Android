@@ -92,18 +92,21 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="soup.movie.init.TimberInitializer"
+                android:name="soup.movie.startup.TimberInitializer"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="soup.movie.init.CoilInitializer"
+                android:name="soup.movie.startup.CoilInitializer"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="soup.movie.init.WorkManagerInitializer"
+                android:name="soup.movie.startup.WorkManagerInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.work.WorkManagerInitializer"
                 android:value="androidx.startup"
                 tools:node="remove" />
+            <meta-data
+                android:name="soup.movie.startup.KakaoInitializer"
+                android:value="androidx.startup" />
         </provider>
 
         <meta-data
