@@ -5,8 +5,6 @@
 
     <color name="transparent">#00FFFFFF</color>
 
-    <color name="home_hint">#FFFFFF</color>
-
     <color name="tag_favorite">@color/red</color>
 
     <color name="chip_cgv_bg">#FFFFFF</color>

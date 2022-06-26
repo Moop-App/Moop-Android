@@ -37,12 +37,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.Insetter
 import soup.movie.analytics.EventAnalytics
 import soup.movie.home.databinding.HomeFragmentBinding
-import soup.movie.home.databinding.HomeHeaderHintBinding
 import soup.movie.home.filter.HomeFilterFragment
 import soup.movie.system.SystemViewModel
 import soup.movie.ui.base.OnBackPressedListener
 import soup.movie.ui.base.consumeBackEvent
-import soup.movie.util.Interpolators
 import soup.movie.util.autoCleared
 import soup.movie.util.setOnDebounceClickListener
 import javax.inject.Inject
@@ -85,13 +83,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
     private fun HomeFragmentBinding.adaptSystemWindowInset() {
         Insetter.builder()
             .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    topMargin = initialState.margins.top + insets.getInsets(systemBars()).top
-                }
-            }
-            .applyToView(headerHint.root)
-        Insetter.builder()
-            .setOnApplyInsetsListener { view, insets, initialState ->
                 view.updatePadding(
                     top = initialState.paddings.top + insets.getInsets(systemBars()).top
                 )
@@ -115,7 +106,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
     }
 
     private fun HomeFragmentBinding.initViewState(viewModel: HomeViewModel) {
-//        prepareSharedElements()
         pageAdapter = HomePageAdapter(this@HomeFragment)
         viewPager.adapter = pageAdapter
         header.apply {
@@ -139,12 +129,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
                 }
             }
         }
-        headerHint.hintButton.setOnDebounceClickListener {
-            header.appBar.setExpanded(true)
-            pageAdapter.scrollToTop(viewPager.currentItem)
-        }
         viewModel.headerUiModel.observe(viewLifecycleOwner) {
-            headerHint.render(it)
+            // TODO:
         }
         header.tabs.setOnScrollChangeListener { _, scrollX, _, _, _ ->
             header.tabDivider.isInvisible = scrollX == 0
@@ -180,27 +166,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnBackPressedListener {
             } else {
                 filterBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
-        }
-    }
-
-    /** UI Renderer */
-
-    private fun HomeHeaderHintBinding.render(uiModel: HomeHeaderUiModel) {
-        hintLabel.setText(
-            when (uiModel) {
-                HomeHeaderUiModel.Now -> R.string.menu_now
-                HomeHeaderUiModel.Plan -> R.string.menu_plan
-                HomeHeaderUiModel.Favorite -> R.string.menu_favorite
-            }
-        )
-        hintLabel.apply {
-            scaleX = 1.2f
-            scaleY = 1.2f
-            animate()
-                .setDuration(100)
-                .setInterpolator(Interpolators.ACCELERATE_DECELERATE)
-                .scaleX(1f)
-                .scaleY(1f)
         }
     }
 
