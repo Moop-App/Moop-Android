@@ -38,6 +38,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -146,8 +148,9 @@ private fun CommonError(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                painter = painterResource(R.drawable.ic_round_info),
+                Icons.Rounded.Info,
                 contentDescription = null,
+                tint = MaterialTheme.colors.onBackground,
             )
             Text(
                 text = stringResource(R.string.common_network_error),

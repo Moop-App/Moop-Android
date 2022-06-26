@@ -42,11 +42,15 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -90,7 +94,7 @@ internal fun TheaterSortScreen(
         floatingActionButton = {
             FloatingActionButton(onClick = { debounce(onAddItemClick) }) {
                 Icon(
-                    painterResource(R.drawable.ic_round_add),
+                    Icons.Rounded.Add,
                     contentDescription = stringResource(R.string.theater_select_action_confirm)
                 )
             }
@@ -164,13 +168,14 @@ private fun TheaterSortReorderList(
                 TheaterChip(theater)
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
-                    painterResource(R.drawable.ic_round_drag_handle),
+                    Icons.Rounded.DragHandle,
                     contentDescription = null,
                     contentScale = ContentScale.Inside,
                     modifier = Modifier
                         .width(48.dp)
                         .fillMaxHeight()
-                        .draggableItem(index, draggableListState)
+                        .draggableItem(index, draggableListState),
+                    colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
                 )
             }
         }
