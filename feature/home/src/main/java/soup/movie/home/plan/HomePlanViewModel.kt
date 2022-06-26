@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import soup.movie.ext.getDDay
 import soup.movie.home.domain.getMovieFilterFlow
-import soup.movie.home.tab.HomeContentsViewModel
 import soup.movie.model.Movie
 import soup.movie.model.repository.MovieRepository
 import soup.movie.settings.AppSettings
@@ -38,18 +37,18 @@ import javax.inject.Inject
 class HomePlanViewModel @Inject constructor(
     private val appSettings: AppSettings,
     private val repository: MovieRepository
-) : ViewModel(), HomeContentsViewModel {
+) : ViewModel() {
 
     private val _isLoading = MutableLiveData(false)
-    override val isLoading: LiveData<Boolean>
+    val isLoading: LiveData<Boolean>
         get() = _isLoading
 
     private val _isError = MutableLiveData(false)
-    override val isError: LiveData<Boolean>
+    val isError: LiveData<Boolean>
         get() = _isError
 
     private val _movies = MutableLiveData<List<Movie>>()
-    override val movies: LiveData<List<Movie>>
+    val movies: LiveData<List<Movie>>
         get() = _movies
 
     init {
@@ -69,7 +68,7 @@ class HomePlanViewModel @Inject constructor(
         }
     }
 
-    override fun refresh() {
+    fun refresh() {
         viewModelScope.launch(Dispatchers.IO) {
             updateList()
         }

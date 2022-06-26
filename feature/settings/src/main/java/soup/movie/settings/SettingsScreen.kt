@@ -66,6 +66,7 @@ import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
 import soup.movie.theater.TheaterChip
 import soup.movie.theme.stringResIdOf
+import soup.movie.ui.divider
 import soup.movie.util.debounce
 
 @Composable
