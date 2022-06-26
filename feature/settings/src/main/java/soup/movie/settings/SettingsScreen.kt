@@ -44,12 +44,16 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.rounded.BugReport
+import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.NewReleases
+import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.Shop
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -142,8 +146,9 @@ private fun SettingsThemeItem(
                 modifier = Modifier.size(48.dp)
             ) {
                 Icon(
-                    painterResource(R.drawable.ic_round_palette),
+                    Icons.Rounded.Palette,
                     contentDescription = null,
+                    tint = MaterialTheme.colors.onBackground,
                 )
             }
         }
@@ -189,8 +194,9 @@ private fun SettingsTheaterItem(
                 modifier = Modifier.size(48.dp)
             ) {
                 Icon(
-                    painterResource(R.drawable.ic_round_edit),
+                    Icons.Rounded.Edit,
                     contentDescription = null,
+                    tint = MaterialTheme.colors.onBackground,
                 )
             }
         }
@@ -219,20 +225,6 @@ private fun SettingsVersionItem(
     onClick: (VersionSettingUiModel) -> Unit,
     onActionClick: () -> Unit = {}
 ) {
-    val text = if (version != null) {
-        if (version.isLatest) {
-            stringResource(R.string.settings_version_latest, version.versionName)
-        } else {
-            stringResource(R.string.settings_version_current, version.versionName)
-        }
-    } else {
-        ""
-    }
-    val actionIcon = if (version?.isLatest == true) {
-        painterResource(R.drawable.ic_round_shop)
-    } else {
-        painterResource(R.drawable.ic_round_new_releases)
-    }
     Column(
         modifier = Modifier.padding(vertical = 24.dp)
     ) {
@@ -244,7 +236,13 @@ private fun SettingsVersionItem(
                 modifier = Modifier.fillMaxSize()
             ) {
                 Text(
-                    text = text,
+                    text = version?.let { version ->
+                        if (version.isLatest) {
+                            stringResource(R.string.settings_version_latest, version.versionName)
+                        } else {
+                            stringResource(R.string.settings_version_current, version.versionName)
+                        }
+                    }.orEmpty(),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.body2
                 )
@@ -256,10 +254,19 @@ private fun SettingsVersionItem(
                     .padding(end = 4.dp)
                     .align(Alignment.CenterEnd)
             ) {
-                Icon(
-                    actionIcon,
-                    contentDescription = null,
-                )
+                if (version?.isLatest == true) {
+                    Icon(
+                        Icons.Rounded.Shop,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onSurface,
+                    )
+                } else {
+                    Icon(
+                        Icons.Rounded.NewReleases,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onError,
+                    )
+                }
             }
         }
     }
@@ -286,8 +293,9 @@ private fun SettingsFeedbackItem(
                 )
             }
             Icon(
-                painterResource(id = R.drawable.ic_round_bug_report),
+                Icons.Rounded.BugReport,
                 contentDescription = null,
+                tint = MaterialTheme.colors.onSurface,
                 modifier = Modifier
                     .padding(end = 16.dp)
                     .align(Alignment.CenterEnd)
