@@ -46,7 +46,6 @@ import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.system.SystemEvent
 import soup.movie.system.SystemViewModel
-import soup.movie.ui.base.consumeBackEventInChildFragment
 import soup.movie.util.viewBindings
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
@@ -185,7 +184,6 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             return
         }
-        if (navHostFragment.consumeBackEventInChildFragment()) return
         super.onBackPressed()
     }
 

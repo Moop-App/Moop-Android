@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.android.material.tabs
+package soup.movie.ui
 
-import androidx.viewpager2.widget.ViewPager2
+import androidx.compose.material.Colors
+import androidx.compose.ui.graphics.Color
 
-fun TabLayout.setupWithViewPager2(
-    viewPager2: ViewPager2,
-    autoRefresh: Boolean,
-    configuration: (tab: TabLayout.Tab, position: Int) -> Unit
-) {
-    TabLayoutMediator(this, viewPager2, autoRefresh, configuration).attach()
-}
+val Colors.divider: Color
+    get() = if (isLight) {
+        Color(0xFFF5F5F5)
+    } else {
+        Color(0xFF212121)
+    }

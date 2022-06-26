@@ -15,6 +15,6 @@
  */
 package soup.movie.home
 
-enum class HomeHeaderUiModel {
+enum class HomeTabUiModel {
     Now, Plan, Favorite
 }

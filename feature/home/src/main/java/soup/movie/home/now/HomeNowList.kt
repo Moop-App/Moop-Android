@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.home.plan
+package soup.movie.home.now
 
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -23,20 +25,26 @@ import soup.movie.home.tab.HomeContentsScreen
 import soup.movie.model.Movie
 
 @Composable
-internal fun HomePlanScreen(
-    viewModel: HomePlanViewModel = viewModel(),
-    onItemClick: (Movie) -> Unit
+internal fun HomeNowList(
+    state: LazyGridState = rememberLazyGridState(),
+    viewModel: HomeNowViewModel = viewModel(),
+    onItemClick: (Movie) -> Unit,
+    onItemLongClick: (Movie) -> Unit,
 ) {
     val isLoading by viewModel.isLoading.observeAsState(false)
     val isError by viewModel.isError.observeAsState(false)
-    val movies by viewModel.movies.observeAsState(emptyList())
-    HomeContentsScreen(
-        movies = movies,
-        onItemClick = onItemClick,
-        isLoading = isLoading,
-        isError = isError,
-        onErrorClick = {
-            viewModel.refresh()
-        }
-    )
+    val movies by viewModel.movies.observeAsState()
+    movies?.let {
+        HomeContentsScreen(
+            state = state,
+            movies = it,
+            onItemClick = onItemClick,
+            onItemLongClick = onItemLongClick,
+            isLoading = isLoading,
+            isError = isError,
+            onErrorClick = {
+                viewModel.refresh()
+            }
+        )
+    }
 }

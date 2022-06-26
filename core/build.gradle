@@ -32,8 +32,9 @@ dependencies {
     api libs.androidx.core
     api libs.material.material
 
-    implementation libs.compose.ui
+    implementation libs.compose.material
     api libs.compose.materialIconsExtended
+    implementation libs.compose.ui
 
     implementation libs.androidx.browser
     implementation libs.androidx.fragment

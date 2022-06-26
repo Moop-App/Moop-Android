@@ -22,7 +22,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
@@ -31,7 +37,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -56,21 +61,25 @@ import soup.movie.home.R
 
 @Composable
 internal fun HomeFilterScreen(viewModel: HomeFilterViewModel = viewModel()) {
-    Surface(
-        color = MaterialTheme.colors.background
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                WindowInsets.navigationBars
+                    .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+                    .asPaddingValues()
+            ),
     ) {
-        Column {
-            HomeFilterTheater(viewModel)
-            HomeFilterDivider()
-            HomeFilterAge(viewModel)
-            HomeFilterDivider()
-            HomeFilterGenre(
-                items = viewModel.genreFilterList,
-                onCheckedChange = { genreFilter, isChecked ->
-                    viewModel.onGenreFilterClick(genreFilter.name, isChecked)
-                }
-            )
-        }
+        HomeFilterTheater(viewModel)
+        HomeFilterDivider()
+        HomeFilterAge(viewModel)
+        HomeFilterDivider()
+        HomeFilterGenre(
+            items = viewModel.genreFilterList,
+            onCheckedChange = { genreFilter, isChecked ->
+                viewModel.onGenreFilterClick(genreFilter.name, isChecked)
+            }
+        )
     }
 }
 

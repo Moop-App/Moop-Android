@@ -21,10 +21,17 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -64,20 +71,35 @@ fun MovieList(
     onItemClick: (Movie) -> Unit,
     onLongItemClick: (Movie) -> Unit,
     modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(8.dp),
     state: LazyGridState = rememberLazyGridState()
 ) {
+    val spanCount = integerResource(R.integer.grid_span_count)
     LazyVerticalGrid(
-        columns = GridCells.Fixed(integerResource(R.integer.grid_span_count)),
+        columns = GridCells.Fixed(count = spanCount),
         modifier = modifier,
         state = state,
-        contentPadding = PaddingValues(8.dp)
+        contentPadding = contentPadding,
     ) {
-        items(movies) { movie ->
+        items(
+            movies,
+            key = { it.id },
+            contentType = { "movie" },
+        ) { movie ->
             MovieItem(
                 movie = movie,
                 onClick = onItemClick,
                 onLongClick = onLongItemClick,
                 modifier = Modifier.padding(4.dp)
+            )
+        }
+        item(span = { GridItemSpan(currentLineSpan = spanCount) }) {
+            Spacer(
+                modifier = Modifier.padding(
+                    WindowInsets.navigationBars
+                        .only(WindowInsetsSides.Bottom)
+                        .asPaddingValues()
+                )
             )
         }
     }
