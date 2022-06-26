@@ -267,7 +267,6 @@ private fun TheaterEditFooterPeek(
                     Icons.Rounded.Check,
                     contentDescription = null,
                     modifier = Modifier.padding(start = 8.dp),
-                    tint = MaterialTheme.colors.onBackground,
                 )
                 // TODO: Ticker Animation
                 Text(
