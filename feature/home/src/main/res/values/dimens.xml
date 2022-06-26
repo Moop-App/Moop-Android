@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="home_header_hint_height">30dp</dimen>
     <dimen name="home_fab_margin">16dp</dimen>
 </resources>

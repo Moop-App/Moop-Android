@@ -2,8 +2,6 @@
 <resources>
     <color name="transparent">#00000000</color>
 
-    <color name="home_hint">#282828</color>
-
     <color name="tag_favorite">@color/red</color>
 
     <color name="system_ui_scrim_light">#2EFFFFFF</color> <!-- 18% white -->

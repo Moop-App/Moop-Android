@@ -17,10 +17,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <include
-        android:id="@+id/header_hint"
-        layout="@layout/home_header_hint" />
-
-    <include
         android:id="@+id/header"
         layout="@layout/home_header" />
 
