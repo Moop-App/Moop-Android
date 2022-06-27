@@ -22,9 +22,9 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.analytics.EventAnalytics
+import soup.movie.ui.MovieTheme
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,7 +40,7 @@ class SearchFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                MdcTheme {
+                MovieTheme {
                     SearchScreen(
                         upPress = { findNavController().navigateUp() },
                         onItemClick = { movie ->

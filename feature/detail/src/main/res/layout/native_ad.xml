@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4285f4"
                 android:lines="1"
-                android:textColor="@color/white"
+                android:textColor="#FFFFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="CTA" />

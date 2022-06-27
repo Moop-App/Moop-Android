@@ -24,10 +24,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.analytics.EventAnalytics
 import soup.movie.system.SystemViewModel
+import soup.movie.ui.MovieTheme
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                MdcTheme {
+                MovieTheme {
                     HomeScreen(
                         viewModel = viewModel,
                         analytics = analytics,

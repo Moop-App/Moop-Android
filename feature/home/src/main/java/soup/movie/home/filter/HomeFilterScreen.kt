@@ -58,6 +58,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.home.R
+import soup.movie.ui.divider
 
 @Composable
 internal fun HomeFilterScreen(viewModel: HomeFilterViewModel = viewModel()) {
@@ -86,11 +87,7 @@ internal fun HomeFilterScreen(viewModel: HomeFilterViewModel = viewModel()) {
 @Composable
 private fun HomeFilterDivider() {
     Divider(
-        color = if (MaterialTheme.colors.isLight) {
-            Color(0xFFF5F5F5)
-        } else {
-            Color(0xFF212121)
-        },
+        color = MaterialTheme.colors.divider,
         modifier = Modifier.padding(horizontal = 16.dp)
     )
 }

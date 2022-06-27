@@ -22,8 +22,8 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
+import soup.movie.ui.MovieTheme
 
 @AndroidEntryPoint
 class TheaterSortFragment : Fragment() {
@@ -35,7 +35,7 @@ class TheaterSortFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                MdcTheme {
+                MovieTheme {
                     TheaterSortScreen(
                         upPress = {
                             findNavController().popBackStack()

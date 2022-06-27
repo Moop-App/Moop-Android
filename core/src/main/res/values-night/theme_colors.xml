@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">@color/black</color>
-    <color name="colorPrimaryDark">@color/black</color>
-    <color name="colorOnPrimary">@color/white</color>
-    <color name="colorSecondary">#8EB5F0</color>
-    <color name="colorOnSecondary">@color/black</color>
-    <color name="colorDivider">@color/grey_900</color>
+    <color name="colorPrimary">#FF000000</color>
+    <color name="colorPrimaryDark">#FF000000</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+    <color name="colorSecondary">#FF8EB5F0</color>
+    <color name="colorOnSecondary">#FF000000</color>
 
 </resources>
