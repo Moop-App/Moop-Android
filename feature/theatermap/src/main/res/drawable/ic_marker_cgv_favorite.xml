@@ -9,7 +9,7 @@
         android:pivotX="12"
         android:pivotY="12">
         <path
-            android:fillColor="@color/grey_300"
+            android:fillColor="#FFE0E0E0"
             android:pathData="M11.99,2C6.47,2 2,6.48 2,12s4.47,10 9.99,10C17.52,22 22,17.52 22,12S17.52,2 11.99,2z"/>
     </group>
     <path

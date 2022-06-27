@@ -60,7 +60,6 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import com.google.android.material.composethemeadapter.MdcTheme
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import soup.metronome.visibility.invisible
@@ -86,7 +85,7 @@ class CustomProgressFragment : AbstractProgressFragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                MdcTheme {
+                MovieTheme {
                     CustomProgressScreen(state)
                 }
             }

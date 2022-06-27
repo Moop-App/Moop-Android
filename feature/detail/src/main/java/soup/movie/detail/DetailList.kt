@@ -283,12 +283,7 @@ private fun BoxOffice(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Image(
-                        Icons.Rounded.Star,
-                        contentDescription = null,
-                        colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
-                        modifier = Modifier.requiredSize(16.dp),
-                    )
+                    StarIcon(modifier = Modifier.requiredSize(16.dp))
                     Text(
                         text = uiModel.rating,
                         color = MaterialTheme.colors.onSurface,
@@ -309,7 +304,7 @@ private fun BoxOffice(
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .background(
-                            color = colorResource(R.color.chip_naver_bg),
+                            color = MaterialTheme.colors.naver,
                             shape = RoundedCornerShape(percent = 50)
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
@@ -356,12 +351,7 @@ private fun Cgv(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
-                    Icons.Rounded.Star,
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
-                    modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
-                )
+                StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
                     color = MaterialTheme.colors.onSurface,
@@ -410,12 +400,7 @@ private fun Lotte(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
-                    Icons.Rounded.Star,
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
-                    modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
-                )
+                StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
                     color = MaterialTheme.colors.onSurface,
@@ -464,12 +449,7 @@ private fun Megabox(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
-                    Icons.Rounded.Star,
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
-                    modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
-                )
+                StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
                     color = MaterialTheme.colors.onSurface,
@@ -557,8 +537,8 @@ private fun Naver(
                 onClick = onClick,
                 modifier = Modifier.padding(horizontal = 12.dp),
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = colorResource(R.color.chip_naver_bg),
-                    contentColor = colorResource(R.color.chip_naver_text),
+                    backgroundColor = MaterialTheme.colors.naver,
+                    contentColor = Color.White,
                 )
             ) {
                 Text(
@@ -572,12 +552,7 @@ private fun Naver(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
-                    Icons.Rounded.Star,
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(R.color.amber)),
-                    modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp),
-                )
+                StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
                     color = MaterialTheme.colors.onSurface,
@@ -900,4 +875,14 @@ private fun NativeAd(
             }
         )
     }
+}
+
+@Composable
+private fun StarIcon(modifier: Modifier = Modifier) {
+    Image(
+        Icons.Rounded.Star,
+        contentDescription = null,
+        colorFilter = ColorFilter.tint(MaterialTheme.colors.star),
+        modifier = modifier,
+    )
 }

@@ -7,7 +7,6 @@
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="colorDivider">@color/colorDivider</item>
     </style>
 
     <style name="Theme.Moop.Splash">

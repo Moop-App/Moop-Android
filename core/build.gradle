@@ -32,6 +32,7 @@ dependencies {
     api libs.androidx.core
     api libs.material.material
 
+    implementation libs.material.composeThemeAdapter
     implementation libs.compose.material
     api libs.compose.materialIconsExtended
     implementation libs.compose.ui

@@ -30,7 +30,6 @@ import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.composethemeadapter.MdcTheme
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.analytics.EventAnalytics
@@ -41,6 +40,7 @@ import soup.movie.ext.showToast
 import soup.movie.model.Movie
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
+import soup.movie.ui.MovieTheme
 import soup.movie.util.YouTube
 import javax.inject.Inject
 
@@ -61,7 +61,7 @@ class DetailFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                MdcTheme {
+                MovieTheme {
                     DetailScreen(
                         movie = args.movie,
                         viewModel = viewModel,

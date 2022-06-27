@@ -22,7 +22,6 @@ dependencies {
 
     implementation libs.kotlin.stdlib
 
-    implementation libs.material.composeThemeAdapter
     implementation libs.androidx.activity.compose
     implementation libs.compose.animation.graphics
     implementation libs.compose.foundation

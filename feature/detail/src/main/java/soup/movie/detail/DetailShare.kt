@@ -33,12 +33,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
@@ -61,7 +61,7 @@ internal fun DetailShare(
                     .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
                     .asPaddingValues(),
             )
-            .background(color = colorResource(R.color.detail_share_dim))
+            .background(color = MaterialTheme.colors.detailShareDim)
             .padding(horizontal = 16.dp)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.End,

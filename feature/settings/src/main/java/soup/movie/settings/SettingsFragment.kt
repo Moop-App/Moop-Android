@@ -29,12 +29,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.composethemeadapter.MdcTheme
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.ext.showToast
 import soup.movie.ext.startActivitySafely
 import soup.movie.model.Theater
 import soup.movie.system.SystemViewModel
+import soup.movie.ui.MovieTheme
 import soup.movie.util.Cgv
 import soup.movie.util.LotteCinema
 import soup.movie.util.Megabox
@@ -53,7 +53,7 @@ class SettingsFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                MdcTheme {
+                MovieTheme {
                     val context = LocalContext.current
                     SettingsScreen(
                         systemViewModel = systemViewModel,

@@ -24,7 +24,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.google.android.material.composethemeadapter.MdcTheme
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
 import soup.movie.di.TheaterMapModuleDependencies
@@ -34,6 +33,7 @@ import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.theatermap.internal.TheaterMapScreen
 import soup.movie.theatermap.internal.TheaterMapViewModel
+import soup.movie.ui.MovieTheme
 import soup.movie.util.viewModelProviderFactoryOf
 import javax.inject.Inject
 
@@ -72,7 +72,7 @@ class TheaterMapFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                MdcTheme {
+                MovieTheme {
                     TheaterMapScreen(viewModel, systemViewModel, locationSource)
                 }
             }

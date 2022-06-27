@@ -168,7 +168,6 @@ dependencies {
     implementation firebase.perf
     implementation libs.google.ads
 
-    implementation libs.material.composeThemeAdapter
     implementation libs.androidx.activity.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
