@@ -33,7 +33,6 @@ dependencies {
     kapt libs.dagger.hilt.compiler
 
     implementation libs.playServicesLocation
-    implementation libs.naverMap
     implementation libs.naverMapCompose
 
     testImplementation libs.test.junit

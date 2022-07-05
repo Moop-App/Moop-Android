@@ -16,6 +16,7 @@
 package soup.movie.detail
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,9 +25,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import soup.compose.material.motion.circularReveal
 import soup.movie.analytics.EventAnalytics
 import soup.movie.model.Movie
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun DetailScreen(
     movie: Movie,
@@ -68,7 +71,7 @@ internal fun DetailScreen(
         },
         modifier = Modifier.circularReveal(
             visible = showShare,
-            center = Offset(x = 1f, y = 0f)
+            center = { Offset(x = it.width, y = 0f) }
         ),
     )
 }
