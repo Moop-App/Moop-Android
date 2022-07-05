@@ -39,6 +39,7 @@ dependencies {
     implementation libs.compose.animation.graphics
     implementation libs.coil.compose
     implementation libs.readmore.material
+    implementation libs.materialMotionCompose.core
 
     testImplementation libs.test.junit
     androidTestImplementation libs.androidx.test.runner
