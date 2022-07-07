@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 apply from: rootProject.file('gradle/android.gradle')
 
@@ -30,10 +29,6 @@ dependencies {
     implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
     implementation libs.metronome.material
-
-    implementation libs.androidx.lifecycle.viewmodel.compose
-
-    implementation libs.androidx.navigation.fragment
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

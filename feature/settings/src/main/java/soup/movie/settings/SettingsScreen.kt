@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
@@ -41,6 +42,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
@@ -54,25 +56,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.UnelevatedButton
 import soup.movie.model.Theater
-import soup.movie.system.SystemViewModel
 import soup.movie.theater.TheaterChip
 import soup.movie.theme.stringResIdOf
 import soup.movie.ui.divider
+import soup.movie.util.Moop
 import soup.movie.util.debounce
 
 @Composable
 internal fun SettingsScreen(
-    viewModel: SettingsViewModel = viewModel(),
-    systemViewModel: SystemViewModel,
+    viewModel: SettingsViewModel,
+    openNavigationMenu: () -> Unit,
     onThemeEditClick: () -> Unit,
     onTheaterItemClick: (Theater) -> Unit,
     onTheaterEditClick: () -> Unit,
@@ -89,7 +91,7 @@ internal fun SettingsScreen(
         topBar = {
             Toolbar(
                 text = stringResource(R.string.menu_settings),
-                onNavigationOnClick = { systemViewModel.openNavigationMenu() }
+                onNavigationOnClick = { openNavigationMenu() }
             )
         }
     ) { paddingValues ->
@@ -118,6 +120,44 @@ internal fun SettingsScreen(
             SettingsDivider()
             SettingsFeedbackItem(onClick = onBugReportClick)
         }
+    }
+    if (viewModel.showVersionUpdateDialog) {
+        val context = LocalContext.current
+        AlertDialog(
+            onDismissRequest = { viewModel.showVersionUpdateDialog = false },
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        Icons.Rounded.NewReleases,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.error
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = stringResource(R.string.settings_version_update_title))
+                }
+            },
+            text = { Text(text = stringResource(R.string.settings_version_update_message)) },
+            confirmButton = {
+                TextButton(
+                    onClick = { Moop.executePlayStore(context) },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colors.secondary
+                    ),
+                ) {
+                    Text(text = stringResource(R.string.settings_version_update_button_positive))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { viewModel.showVersionUpdateDialog = false },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colors.secondary
+                    ),
+                ) {
+                    Text(text = stringResource(R.string.settings_version_update_button_negative))
+                }
+            },
+        )
     }
 }
 

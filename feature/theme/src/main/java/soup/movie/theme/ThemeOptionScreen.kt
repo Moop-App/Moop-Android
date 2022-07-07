@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.theme.internal
+package soup.movie.theme
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,16 +36,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import soup.movie.theme.R
-import soup.movie.theme.ThemeSettingItemUiModel
-import soup.movie.theme.ThemeSettingViewModel
-import soup.movie.theme.stringResIdOf
 import soup.movie.util.debounce
 
 @Composable
-internal fun ThemeOptionScreen(
-    viewModel: ThemeSettingViewModel = viewModel()
+fun ThemeOptionScreen(
+    viewModel: ThemeOptionViewModel
 ) {
     Scaffold(
         modifier = Modifier.padding(

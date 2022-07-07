@@ -23,7 +23,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ThemeSettingViewModel @Inject constructor(
+class ThemeOptionViewModel @Inject constructor(
     private val themeOptionManager: ThemeOptionManager
 ) : ViewModel() {
 
