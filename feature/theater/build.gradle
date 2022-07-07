@@ -31,10 +31,6 @@ dependencies {
     implementation libs.accompanist.pagerIndicators
     implementation libs.metronome.material
 
-    implementation libs.androidx.lifecycle.viewmodel.compose
-
-    implementation libs.androidx.navigation.fragment
-
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
 

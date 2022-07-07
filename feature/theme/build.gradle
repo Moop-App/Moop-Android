@@ -26,8 +26,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
 
-    implementation libs.androidx.lifecycle.viewmodel.compose
-
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
 

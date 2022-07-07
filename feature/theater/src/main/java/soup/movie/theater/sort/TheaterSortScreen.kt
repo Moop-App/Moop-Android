@@ -57,7 +57,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import soup.movie.model.Theater
 import soup.movie.theater.R
@@ -68,8 +67,8 @@ import soup.movie.theater.rememberDraggableListState
 import soup.movie.util.debounce
 
 @Composable
-internal fun TheaterSortScreen(
-    viewModel: TheaterSortViewModel = viewModel(),
+fun TheaterSortScreen(
+    viewModel: TheaterSortViewModel,
     upPress: () -> Unit,
     onAddItemClick: () -> Unit
 ) {

@@ -15,14 +15,20 @@
  */
 package soup.movie.settings
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.install.InAppUpdateManager
 import soup.movie.theme.ThemeOptionManager
 import javax.inject.Inject
@@ -45,14 +51,24 @@ class SettingsViewModel @Inject constructor(
         .distinctUntilChanged()
         .asLiveData()
 
-    val versionUiModel: LiveData<VersionSettingUiModel> = liveData(Dispatchers.IO) {
-        val latestVersionCode = appUpdateManager.getAvailableVersionCode()
-        emit(
-            VersionSettingUiModel(
+    private val _versionUiModel = MutableLiveData<VersionSettingUiModel>()
+    val versionUiModel: LiveData<VersionSettingUiModel>
+        get() = _versionUiModel
+
+    var showVersionUpdateDialog by mutableStateOf(false)
+
+    init {
+        viewModelScope.launch {
+            val latestVersionCode = withContext(Dispatchers.IO) {
+                appUpdateManager.getAvailableVersionCode()
+            }
+            val isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
+            _versionUiModel.value = VersionSettingUiModel(
                 versionCode = BuildConfig.VERSION_CODE,
                 versionName = BuildConfig.VERSION_NAME,
                 isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
             )
-        )
+            showVersionUpdateDialog = isLatest.not()
+        }
     }
 }
