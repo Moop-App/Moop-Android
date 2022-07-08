@@ -18,16 +18,18 @@ package soup.movie.settings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import soup.compose.material.motion.animation.materialSharedAxisZIn
+import soup.compose.material.motion.animation.materialSharedAxisZOut
+import soup.compose.material.motion.navigation.MaterialMotionNavHost
+import soup.compose.material.motion.navigation.composable
+import soup.compose.material.motion.navigation.rememberMaterialMotionNavController
 import soup.movie.ext.showToast
 import soup.movie.ext.startActivitySafely
 import soup.movie.model.Theater
-import soup.movie.system.SystemViewModel
 import soup.movie.theater.edit.TheaterEditScreen
 import soup.movie.theater.edit.TheaterEditViewModel
 import soup.movie.theater.sort.TheaterSortScreen
@@ -46,20 +48,26 @@ private enum class Screen(val route: String) {
     TheaterEdit("TheaterEditScreen"),
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun SettingsNavGraph(
-    systemViewModel: SystemViewModel,
+    openNavigationMenu: () -> Unit,
 ) {
-    val navController = rememberNavController()
-    NavHost(navController, startDestination = Screen.Settings.route) {
+    val navController = rememberMaterialMotionNavController()
+    MaterialMotionNavHost(
+        navController,
+        startDestination = Screen.Settings.route,
+        enterTransition = { materialSharedAxisZIn(forward = true) },
+        exitTransition = { materialSharedAxisZOut(forward = true) },
+        popEnterTransition = { materialSharedAxisZIn(forward = false) },
+        popExitTransition = { materialSharedAxisZOut(forward = false) },
+    ) {
         composable(Screen.Settings.route) {
             val context = LocalContext.current
             val viewModel = hiltViewModel<SettingsViewModel>()
             SettingsScreen(
                 viewModel = viewModel,
-                openNavigationMenu = {
-                    systemViewModel.openNavigationMenu()
-                },
+                openNavigationMenu = openNavigationMenu,
                 onThemeEditClick = {
                     navController.navigate(Screen.ThemeOption.route)
                 },

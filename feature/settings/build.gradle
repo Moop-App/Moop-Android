@@ -27,7 +27,6 @@ dependencies {
     implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.fragment
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.navigation.compose
     implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
@@ -35,6 +34,7 @@ dependencies {
     implementation libs.compose.runtimeLivedata
     implementation libs.accompanist.flowlayout
     implementation libs.metronome.material
+    implementation libs.materialMotionCompose.navigation
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

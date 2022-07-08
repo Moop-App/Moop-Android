@@ -118,6 +118,7 @@ metronome-visibility = { module = "com.github.fornewid.metronome:visibility", ve
 readmore-material = { module = "com.webtoonscorp.android:readmore-material", version.ref = "readmore" }
 
 materialMotionCompose-core = { module = "io.github.fornewid:material-motion-compose-core", version.ref = "materialmotion" }
+materialMotionCompose-navigation = { module = "io.github.fornewid:material-motion-compose-navigation", version.ref = "materialmotion" }
 
 # Test
 test-junit =  "junit:junit:4.13"

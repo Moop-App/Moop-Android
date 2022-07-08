@@ -39,7 +39,11 @@ class SettingsFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MovieTheme {
-                    SettingsNavGraph(systemViewModel)
+                    SettingsNavGraph(
+                        openNavigationMenu = {
+                            systemViewModel.openNavigationMenu()
+                        }
+                    )
                 }
             }
         }

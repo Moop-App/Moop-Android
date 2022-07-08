@@ -201,6 +201,7 @@ io.coil-kt:coil:2.1.0
 io.github.aakira:napier-android:1.4.1
 io.github.aakira:napier:1.4.1
 io.github.fornewid:material-motion-compose-core:0.10.0-alpha
+io.github.fornewid:material-motion-compose-navigation:0.10.0-alpha
 javax.inject:javax.inject:1
 org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.7.0
 org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.0
