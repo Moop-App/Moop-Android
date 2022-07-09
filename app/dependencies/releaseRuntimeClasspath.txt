@@ -105,7 +105,7 @@ androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
 androidx.viewpager2:viewpager2:1.1.0-beta01
 androidx.viewpager:viewpager:1.0.0
-androidx.window:window:1.0.0
+androidx.window:window:1.1.0-alpha02
 androidx.work:work-runtime-ktx:2.7.1
 androidx.work:work-runtime:2.7.1
 com.airbnb.android:lottie-compose:4.2.1
