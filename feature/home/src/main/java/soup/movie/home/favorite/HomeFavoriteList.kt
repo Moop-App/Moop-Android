@@ -24,15 +24,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
 
 @Composable
 internal fun HomeFavoriteList(
+    viewModel: HomeFavoriteViewModel,
     state: LazyGridState = rememberLazyGridState(),
-    viewModel: HomeFavoriteViewModel = viewModel(),
     onItemClick: (Movie) -> Unit,
     onItemLongClick: (Movie) -> Unit,
 ) {

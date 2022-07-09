@@ -22,14 +22,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
 import soup.movie.di.TheaterMapModuleDependencies
 import soup.movie.ext.lazyFast
 import soup.movie.model.repository.MovieRepository
-import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.theatermap.internal.TheaterMapScreen
 import soup.movie.theatermap.internal.TheaterMapViewModel
@@ -42,7 +41,6 @@ class TheaterMapFragment : Fragment() {
     @Inject
     lateinit var repository: MovieRepository
 
-    private val systemViewModel: SystemViewModel by activityViewModels()
     private val viewModel: TheaterMapViewModel by viewModels {
         viewModelProviderFactoryOf { TheaterMapViewModel(repository) }
     }
@@ -73,7 +71,13 @@ class TheaterMapFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MovieTheme {
-                    TheaterMapScreen(viewModel, systemViewModel, locationSource)
+                    TheaterMapScreen(
+                        viewModel = viewModel,
+                        locationSource = locationSource,
+                        onNavigationOnClick = {
+                            findNavController().navigateUp()
+                        },
+                    )
                 }
             }
         }

@@ -21,17 +21,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.analytics.EventAnalytics
 import soup.movie.ui.MovieTheme
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
-
-    @Inject
-    lateinit var analytics: EventAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,14 +37,13 @@ class SearchFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MovieTheme {
+                    val viewModel = hiltViewModel<SearchViewModel>()
                     SearchScreen(
+                        viewModel = viewModel,
                         upPress = { findNavController().navigateUp() },
                         onItemClick = { movie ->
-                            analytics.clickMovie()
                             findNavController().navigate(
-                                SearchFragmentDirections.actionToDetail(
-                                    movie
-                                )
+                                SearchFragmentDirections.actionToDetail(movie)
                             )
                         }
                     )

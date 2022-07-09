@@ -51,7 +51,7 @@ private enum class Screen(val route: String) {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun SettingsNavGraph(
-    openNavigationMenu: () -> Unit,
+    onNavigationOnClick: () -> Unit,
 ) {
     val navController = rememberMaterialMotionNavController()
     MaterialMotionNavHost(
@@ -67,7 +67,7 @@ internal fun SettingsNavGraph(
             val viewModel = hiltViewModel<SettingsViewModel>()
             SettingsScreen(
                 viewModel = viewModel,
-                openNavigationMenu = openNavigationMenu,
+                onNavigationOnClick = onNavigationOnClick,
                 onThemeEditClick = {
                     navController.navigate(Screen.ThemeOption.route)
                 },

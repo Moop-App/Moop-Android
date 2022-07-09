@@ -60,15 +60,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import soup.movie.ext.showToast
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
 
 @Composable
-fun SearchScreen(
-    viewModel: SearchViewModel = viewModel(),
+internal fun SearchScreen(
+    viewModel: SearchViewModel,
     upPress: () -> Unit,
     onItemClick: (Movie) -> Unit
 ) {
@@ -161,7 +160,10 @@ fun SearchScreen(
                     val context = LocalContext.current
                     MovieList(
                         movies = it.movies,
-                        onItemClick = onItemClick,
+                        onItemClick = {
+                            viewModel.onMovieClick()
+                            onItemClick(it)
+                        },
                         onLongItemClick = {
                             context.showToast(it.title)
                         }
