@@ -90,6 +90,8 @@ androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-transition = "androidx.transition:transition:1.4.1"
 androidx-viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-beta01"
 
+androidx-window = "androidx.window:window:1.1.0-alpha02"
+
 androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "work" }
 

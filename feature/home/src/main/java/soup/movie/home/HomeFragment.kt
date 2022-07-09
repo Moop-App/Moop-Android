@@ -28,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.analytics.EventAnalytics
 import soup.movie.system.SystemViewModel
 import soup.movie.ui.MovieTheme
+import soup.movie.ui.windowsizeclass.calculateWindowSizeClass
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -48,6 +49,7 @@ class HomeFragment : Fragment() {
             setContent {
                 MovieTheme {
                     HomeScreen(
+                        widthSizeClass = calculateWindowSizeClass(requireActivity()).widthSizeClass,
                         viewModel = viewModel,
                         analytics = analytics,
                         onNavigationClick = {

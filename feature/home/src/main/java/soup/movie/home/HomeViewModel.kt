@@ -25,11 +25,11 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
 
-    private val _uiModel = MutableLiveData(HomeTabUiModel.Now)
-    val uiModel: LiveData<HomeTabUiModel>
-        get() = _uiModel
+    private val _selectedTab = MutableLiveData(HomeTabUiModel.Now)
+    val selectedTab: LiveData<HomeTabUiModel>
+        get() = _selectedTab
 
     fun onTabSelected(tab: HomeTabUiModel) {
-        _uiModel.setValueIfNew(tab)
+        _selectedTab.setValueIfNew(tab)
     }
 }

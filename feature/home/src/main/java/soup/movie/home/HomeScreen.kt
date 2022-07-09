@@ -20,33 +20,20 @@ import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
-import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AppBarDefaults
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ContentAlpha
@@ -54,46 +41,28 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
+import androidx.compose.material.NavigationRail
+import androidx.compose.material.NavigationRailItem
 import androidx.compose.material.Scaffold
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Surface
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material.Text
-import androidx.compose.material.contentColorFor
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.rounded.FilterList
-import androidx.compose.material.primarySurface
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
-import soup.metronome.visibility.visible
 import soup.movie.analytics.EventAnalytics
 import soup.movie.ext.showToast
 import soup.movie.home.favorite.HomeFavoriteList
@@ -101,31 +70,12 @@ import soup.movie.home.filter.HomeFilterScreen
 import soup.movie.home.now.HomeNowList
 import soup.movie.home.plan.HomePlanList
 import soup.movie.model.Movie
-import soup.movie.ui.divider
+import soup.movie.ui.windowsizeclass.WindowWidthSizeClass
 
-private enum class Page {
-    Now,
-    Plan,
-    Favorite,
-    ;
-
-    companion object {
-        fun of(page: Int): Page {
-            return when (page) {
-                0 -> Now
-                1 -> Plan
-                else -> Favorite
-            }
-        }
-    }
-}
-
-@OptIn(
-    ExperimentalMaterialApi::class,
-    ExperimentalPagerApi::class,
-)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
+    widthSizeClass: WindowWidthSizeClass,
     viewModel: HomeViewModel,
     analytics: EventAnalytics,
     onNavigationClick: () -> Unit,
@@ -133,34 +83,9 @@ fun HomeScreen(
     onMovieItemClick: (Movie) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val uiModel by viewModel.uiModel.observeAsState(HomeTabUiModel.Now)
-    val pages = Page.values()
-    val gridStates = pages.map { rememberLazyGridState() }
-    val pagerState = rememberPagerState()
-    LaunchedEffect(uiModel) {
-        val page = when (uiModel) {
-            HomeTabUiModel.Now -> 0
-            HomeTabUiModel.Plan -> 1
-            HomeTabUiModel.Favorite -> 2
-        }
-        pagerState.scrollToPage(page)
-    }
-    val currentPage by remember {
-        derivedStateOf {
-            pagerState.currentPage
-        }
-    }
-    val isScrollInProgress = pagerState.isScrollInProgress
-    LaunchedEffect(currentPage, isScrollInProgress) {
-        if (isScrollInProgress.not()) {
-            val tab = when (Page.of(currentPage)) {
-                Page.Now -> HomeTabUiModel.Now
-                Page.Plan -> HomeTabUiModel.Plan
-                Page.Favorite -> HomeTabUiModel.Favorite
-            }
-            onTabSelected(tab)
-        }
-    }
+    val currentTab by viewModel.selectedTab.observeAsState(HomeTabUiModel.Now)
+    val tabs = HomeTabUiModel.values()
+    val gridStates = tabs.map { rememberLazyGridState() }
 
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed)
@@ -173,26 +98,24 @@ fun HomeScreen(
     }
     val isTopAtCurrentTab by remember {
         derivedStateOf {
-            gridStates[currentPage].let {
+            gridStates[currentTab.ordinal].let {
                 it.firstVisibleItemIndex == 0 && it.firstVisibleItemScrollOffset == 0
             }
         }
     }
-    BackHandler(enabled = bottomSheetVisible || isTopAtCurrentTab.not() || currentPage > 0) {
+    BackHandler(enabled = bottomSheetVisible || isTopAtCurrentTab.not() || currentTab != HomeTabUiModel.Now) {
         if (bottomSheetVisible) {
             coroutineScope.launch {
                 bottomSheetState.collapse()
             }
         }
         if (isTopAtCurrentTab.not()) {
-            val currentGridState = gridStates[currentPage]
+            val currentGridState = gridStates[currentTab.ordinal]
             coroutineScope.launch {
                 currentGridState.animateScrollToItem(0)
             }
         } else {
-            coroutineScope.launch {
-                pagerState.animateScrollToPage(0)
-            }
+            onTabSelected(HomeTabUiModel.Now)
         }
     }
     BottomSheetScaffold(
@@ -202,102 +125,37 @@ fun HomeScreen(
         sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
         sheetContent = {
             HomeFilterScreen()
-        }
-    ) {
-        Scaffold(
-            topBar = {
-                Column {
-                    CustomAppBar(
-                        navigationIcon = {
-                            IconButton(onClick = { onNavigationClick() }) {
-                                Icon(
-                                    Icons.Outlined.Menu,
-                                    contentDescription = null
-                                )
-                            }
-                        },
-                        title = {
-                            Row {
-                                val scrollState = rememberScrollState()
-                                val showDivider by remember {
-                                    derivedStateOf {
-                                        scrollState.value != 0
-                                    }
-                                }
-                                Box(
-                                    modifier = Modifier
-                                        .visible(showDivider)
-                                        .padding(vertical = 4.dp)
-                                        .width(1.dp)
-                                        .fillMaxHeight()
-                                        .background(color = MaterialTheme.colors.divider)
-                                )
-                                ScrollableTabRow(
-                                    selectedTabIndex = currentPage,
-                                    edgePadding = 0.dp,
-                                    indicator = { tabPositions ->
-                                        Box(
-                                            modifier = Modifier
-                                                .tabIndicatorOffset(tabPositions[currentPage])
-                                                .fillMaxSize()
-                                                .requiredHeight(36.dp)
-                                                .background(
-                                                    color = MaterialTheme.colors.secondary.copy(
-                                                        alpha = 0.15f
-                                                    ),
-                                                    shape = CircleShape
-                                                )
-                                        )
-                                    },
-                                    divider = {},
-                                ) {
-                                    pages.forEachIndexed { index, page ->
-                                        when (page) {
-                                            Page.Now -> HomeNowTab(
-                                                isSelected = currentPage == index,
-                                                onTabSelected = {
-                                                    coroutineScope.launch {
-                                                        pagerState.animateScrollToPage(index)
-                                                    }
-                                                },
-                                                onTabReselected = {
-                                                    coroutineScope.launch {
-                                                        gridStates[index].animateScrollToItem(0)
-                                                    }
-                                                }
-                                            )
-                                            Page.Plan -> HomePlanTab(
-                                                isSelected = currentPage == index,
-                                                onTabSelected = {
-                                                    coroutineScope.launch {
-                                                        pagerState.animateScrollToPage(index)
-                                                    }
-                                                },
-                                                onTabReselected = {
-                                                    coroutineScope.launch {
-                                                        gridStates[index].animateScrollToItem(0)
-                                                    }
-                                                }
-                                            )
-                                            Page.Favorite -> HomeFavoriteTab(
-                                                isSelected = currentPage == index,
-                                                onTabSelected = {
-                                                    coroutineScope.launch {
-                                                        pagerState.animateScrollToPage(index)
-                                                    }
-                                                },
-                                                onTabReselected = {
-                                                    coroutineScope.launch {
-                                                        gridStates[index].animateScrollToItem(0)
-                                                    }
-                                                }
-                                            )
-                                        }
-                                    }
-                                }
-                            }
+        },
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { onNavigationClick() }) {
+                        Icon(
+                            Icons.Outlined.Menu,
+                            contentDescription = null
+                        )
+                    }
+                },
+                title = {
+                    Text(
+                        text = when (currentTab) {
+                            HomeTabUiModel.Now -> stringResource(R.string.menu_now)
+                            HomeTabUiModel.Plan -> stringResource(R.string.menu_plan)
+                            HomeTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
                         }
                     )
+                }
+            )
+        },
+    ) {
+        HomeScaffold(
+            widthSizeClass = widthSizeClass,
+            currentTab = currentTab,
+            tabs = tabs,
+            onTabSelected = onTabSelected,
+            onTabReselected = { tab ->
+                coroutineScope.launch {
+                    gridStates[tab.ordinal].animateScrollToItem(0)
                 }
             },
             floatingActionButton = {
@@ -308,84 +166,32 @@ fun HomeScreen(
                             bottomSheetState.expand()
                         }
                     },
-                    modifier = Modifier.padding(
-                        WindowInsets.navigationBars
-                            .only(WindowInsetsSides.Bottom)
-                            .asPaddingValues()
-                    ),
                 )
-            }
+            },
         ) { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
                 val context = LocalContext.current
-                HorizontalPager(count = pages.size, state = pagerState) { page ->
-                    when (Page.of(page)) {
-                        Page.Now -> HomeNowList(
-                            state = gridStates[page],
-                            onItemClick = onMovieItemClick,
-                            onItemLongClick = {
-                                context.showToast(it.title)
-                            }
-                        )
-                        Page.Plan -> HomePlanList(
-                            state = gridStates[page],
-                            onItemClick = onMovieItemClick,
-                            onItemLongClick = {
-                                context.showToast(it.title)
-                            }
-                        )
-                        Page.Favorite -> HomeFavoriteList(
-                            state = gridStates[page],
-                            onItemClick = onMovieItemClick,
-                            onItemLongClick = {
-                                context.showToast(it.title)
-                            }
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun CustomAppBar(
-    title: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    navigationIcon: @Composable (() -> Unit)? = null,
-    backgroundColor: Color = MaterialTheme.colors.primarySurface,
-    contentColor: Color = contentColorFor(backgroundColor),
-    elevation: Dp = AppBarDefaults.TopAppBarElevation
-) {
-    Surface(
-        color = backgroundColor,
-        contentColor = contentColor,
-        elevation = elevation,
-        shape = RectangleShape,
-        modifier = modifier
-    ) {
-        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
-            Row(
-                modifier = Modifier.fillMaxWidth().height(56.dp),
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                if (navigationIcon != null) {
-                    Row(
-                        modifier = Modifier.fillMaxHeight().requiredWidth(56.dp),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        navigationIcon()
-                    }
-                }
-                Row(
-                    modifier = Modifier.fillMaxHeight().weight(1f),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    ProvideTextStyle(
-                        value = MaterialTheme.typography.h6,
-                        content = title,
+                when (currentTab) {
+                    HomeTabUiModel.Now -> HomeNowList(
+                        state = gridStates[currentTab.ordinal],
+                        onItemClick = onMovieItemClick,
+                        onItemLongClick = {
+                            context.showToast(it.title)
+                        }
+                    )
+                    HomeTabUiModel.Plan -> HomePlanList(
+                        state = gridStates[currentTab.ordinal],
+                        onItemClick = onMovieItemClick,
+                        onItemLongClick = {
+                            context.showToast(it.title)
+                        }
+                    )
+                    HomeTabUiModel.Favorite -> HomeFavoriteList(
+                        state = gridStates[currentTab.ordinal],
+                        onItemClick = onMovieItemClick,
+                        onItemLongClick = {
+                            context.showToast(it.title)
+                        }
                     )
                 }
             }
@@ -393,135 +199,155 @@ private fun CustomAppBar(
     }
 }
 
-@OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
-private fun HomeNowTab(
-    isSelected: Boolean,
-    onTabSelected: () -> Unit,
-    onTabReselected: () -> Unit,
+private fun HomeScaffold(
+    widthSizeClass: WindowWidthSizeClass,
+    currentTab: HomeTabUiModel,
+    tabs: Array<HomeTabUiModel>,
+    onTabSelected: (HomeTabUiModel) -> Unit,
+    onTabReselected: (HomeTabUiModel) -> Unit,
+    floatingActionButton: @Composable () -> Unit = {},
+    content: @Composable (PaddingValues) -> Unit,
 ) {
-    HomeTab(
-        AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected),
-        label = stringResource(R.string.menu_now),
-        isSelected = isSelected,
-        onTabSelected = onTabSelected,
-        onTabReselected = onTabReselected,
-    )
+    when (widthSizeClass) {
+        WindowWidthSizeClass.Compact -> {
+            CompactScreen(
+                currentTab = currentTab,
+                tabs = tabs,
+                onTabSelected = onTabSelected,
+                onTabReselected = onTabReselected,
+                floatingActionButton = floatingActionButton,
+                content = content,
+            )
+        }
+        WindowWidthSizeClass.Medium,
+        WindowWidthSizeClass.Expanded -> {
+            MediumScreen(
+                currentTab = currentTab,
+                tabs = tabs,
+                onTabSelected = onTabSelected,
+                onTabReselected = onTabReselected,
+                floatingActionButton = floatingActionButton,
+                content = content,
+            )
+        }
+    }
 }
 
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
-private fun HomePlanTab(
-    isSelected: Boolean,
-    onTabSelected: () -> Unit,
-    onTabReselected: () -> Unit,
+private fun CompactScreen(
+    currentTab: HomeTabUiModel,
+    tabs: Array<HomeTabUiModel>,
+    onTabSelected: (HomeTabUiModel) -> Unit,
+    onTabReselected: (HomeTabUiModel) -> Unit = onTabSelected,
+    floatingActionButton: @Composable () -> Unit = {},
+    content: @Composable (PaddingValues) -> Unit,
 ) {
-    HomeTab(
-        AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_plan_selected),
-        label = stringResource(R.string.menu_plan),
-        isSelected = isSelected,
-        onTabSelected = onTabSelected,
-        onTabReselected = onTabReselected,
-    )
-}
-
-@OptIn(ExperimentalAnimationGraphicsApi::class)
-@Composable
-private fun HomeFavoriteTab(
-    isSelected: Boolean,
-    onTabSelected: () -> Unit,
-    onTabReselected: () -> Unit,
-) {
-    HomeTab(
-        AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected),
-        label = stringResource(R.string.menu_favorite),
-        isSelected = isSelected,
-        onTabSelected = onTabSelected,
-        onTabReselected = onTabReselected,
-    )
-}
-
-@OptIn(ExperimentalAnimationGraphicsApi::class)
-@Composable
-private fun HomeTab(
-    imageVector: AnimatedImageVector,
-    label: String,
-    isSelected: Boolean,
-    onTabSelected: () -> Unit,
-    onTabReselected: () -> Unit,
-) {
-    LeadingIconTab(
-        modifier = Modifier
-            .fillMaxHeight()
-            .requiredHeight(36.dp)
-            .clip(shape = RoundedCornerShape(percent = 50)),
-        selected = isSelected,
-        onClick = {
-            if (isSelected) {
-                onTabReselected()
-            } else {
-                onTabSelected()
+    Scaffold(
+        modifier = Modifier.padding(
+            WindowInsets.navigationBars
+                .only(WindowInsetsSides.Bottom)
+                .asPaddingValues()
+        ),
+        bottomBar = {
+            BottomNavigation {
+                tabs.forEach { tab ->
+                    val selected = currentTab == tab
+                    BottomNavigationItem(
+                        icon = {
+                            val imageVector = when (tab) {
+                                HomeTabUiModel.Now -> AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected)
+                                HomeTabUiModel.Plan -> AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_plan_selected)
+                                HomeTabUiModel.Favorite -> AnimatedImageVector.animatedVectorResource(
+                                    R.drawable.avd_favorite_selected
+                                )
+                            }
+                            Icon(
+                                rememberAnimatedVectorPainter(imageVector, selected),
+                                contentDescription = null,
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = when (tab) {
+                                    HomeTabUiModel.Now -> stringResource(R.string.menu_now)
+                                    HomeTabUiModel.Plan -> stringResource(R.string.menu_plan)
+                                    HomeTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
+                                }
+                            )
+                        },
+                        selected = selected,
+                        onClick = {
+                            if (selected) {
+                                onTabReselected(tab)
+                            } else {
+                                onTabSelected(tab)
+                            }
+                        },
+                        selectedContentColor = MaterialTheme.colors.secondary,
+                        unselectedContentColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                    )
+                }
             }
         },
-        icon = {
-            Icon(
-                rememberAnimatedVectorPainter(imageVector, isSelected),
-                contentDescription = null,
-                tint = if (isSelected) {
-                    MaterialTheme.colors.secondary
-                } else {
-                    MaterialTheme.colors.onSurface
-                },
-            )
-        },
-        text = {
-            Text(
-                text = label,
-            )
-        },
-        selectedContentColor = MaterialTheme.colors.secondary,
-        unselectedContentColor = MaterialTheme.colors.onSurface,
+        floatingActionButton = floatingActionButton,
+        content = content,
     )
 }
 
+@OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
-private fun LeadingIconTab(
-    selected: Boolean,
-    onClick: () -> Unit,
-    text: @Composable (() -> Unit),
-    icon: @Composable (() -> Unit),
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    selectedContentColor: Color = LocalContentColor.current,
-    unselectedContentColor: Color = selectedContentColor.copy(alpha = ContentAlpha.medium)
+private fun MediumScreen(
+    currentTab: HomeTabUiModel,
+    tabs: Array<HomeTabUiModel>,
+    onTabSelected: (HomeTabUiModel) -> Unit,
+    onTabReselected: (HomeTabUiModel) -> Unit = onTabSelected,
+    floatingActionButton: @Composable () -> Unit = {},
+    content: @Composable (PaddingValues) -> Unit
 ) {
-    val color = if (selected) selectedContentColor else unselectedContentColor
-    CompositionLocalProvider(
-        LocalContentColor provides color.copy(alpha = 1f),
-        LocalContentAlpha provides color.alpha,
-    ) {
-        Row(
-            modifier = modifier
-                .height(48.dp)
-                .selectable(
+    Row(modifier = Modifier.fillMaxSize()) {
+        NavigationRail(elevation = 24.dp) {
+            tabs.forEach { tab ->
+                val selected = currentTab == tab
+                NavigationRailItem(
+                    icon = {
+                        val imageVector = when (tab) {
+                            HomeTabUiModel.Now -> AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected)
+                            HomeTabUiModel.Plan -> AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_plan_selected)
+                            HomeTabUiModel.Favorite -> AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected)
+                        }
+                        Icon(
+                            rememberAnimatedVectorPainter(imageVector, selected),
+                            contentDescription = null,
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = when (tab) {
+                                HomeTabUiModel.Now -> stringResource(R.string.menu_now)
+                                HomeTabUiModel.Plan -> stringResource(R.string.menu_plan)
+                                HomeTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
+                            }
+                        )
+                    },
                     selected = selected,
-                    onClick = onClick,
-                    enabled = enabled,
-                    role = Role.Tab,
-                    interactionSource = interactionSource,
-                    indication = null
+                    onClick = {
+                        if (selected) {
+                            onTabReselected(tab)
+                        } else {
+                            onTabSelected(tab)
+                        }
+                    },
+                    selectedContentColor = MaterialTheme.colors.secondary,
+                    unselectedContentColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
                 )
-                .padding(horizontal = 12.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            icon()
-            Spacer(Modifier.requiredWidth(8.dp))
-            val style = MaterialTheme.typography.button.copy(textAlign = TextAlign.Center)
-            ProvideTextStyle(style, content = text)
+            }
         }
+        Scaffold(
+            floatingActionButton = floatingActionButton,
+            content = content,
+        )
     }
 }
 
