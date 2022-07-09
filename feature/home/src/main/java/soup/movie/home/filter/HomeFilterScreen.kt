@@ -33,6 +33,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
@@ -62,7 +63,7 @@ import soup.movie.ui.divider
 
 @Composable
 internal fun HomeFilterScreen(viewModel: HomeFilterViewModel = viewModel()) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(
@@ -71,16 +72,22 @@ internal fun HomeFilterScreen(viewModel: HomeFilterViewModel = viewModel()) {
                     .asPaddingValues()
             ),
     ) {
-        HomeFilterTheater(viewModel)
-        HomeFilterDivider()
-        HomeFilterAge(viewModel)
-        HomeFilterDivider()
-        HomeFilterGenre(
-            items = viewModel.genreFilterList,
-            onCheckedChange = { genreFilter, isChecked ->
-                viewModel.onGenreFilterClick(genreFilter.name, isChecked)
-            }
-        )
+        item {
+            HomeFilterTheater(viewModel)
+        }
+        item {
+            HomeFilterDivider()
+            HomeFilterAge(viewModel)
+        }
+        item {
+            HomeFilterDivider()
+            HomeFilterGenre(
+                items = viewModel.genreFilterList,
+                onCheckedChange = { genreFilter, isChecked ->
+                    viewModel.onGenreFilterClick(genreFilter.name, isChecked)
+                }
+            )
+        }
     }
 }
 

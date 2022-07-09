@@ -21,17 +21,10 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -49,7 +42,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
@@ -74,9 +66,8 @@ fun MovieList(
     contentPadding: PaddingValues = PaddingValues(8.dp),
     state: LazyGridState = rememberLazyGridState()
 ) {
-    val spanCount = integerResource(R.integer.grid_span_count)
     LazyVerticalGrid(
-        columns = GridCells.Fixed(count = spanCount),
+        columns = GridCells.Adaptive(minSize = 105.dp),
         modifier = modifier,
         state = state,
         contentPadding = contentPadding,
@@ -91,15 +82,6 @@ fun MovieList(
                 onClick = onItemClick,
                 onLongClick = onLongItemClick,
                 modifier = Modifier.padding(4.dp)
-            )
-        }
-        item(span = { GridItemSpan(currentLineSpan = spanCount) }) {
-            Spacer(
-                modifier = Modifier.padding(
-                    WindowInsets.navigationBars
-                        .only(WindowInsetsSides.Bottom)
-                        .asPaddingValues()
-                )
             )
         }
     }
