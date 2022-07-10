@@ -20,14 +20,13 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.lifecycle.viewmodel.compose.viewModel
 import soup.movie.home.tab.HomeContentsScreen
 import soup.movie.model.Movie
 
 @Composable
 internal fun HomePlanList(
+    viewModel: HomePlanViewModel,
     state: LazyGridState = rememberLazyGridState(),
-    viewModel: HomePlanViewModel = viewModel(),
     onItemClick: (Movie) -> Unit,
     onItemLongClick: (Movie) -> Unit,
 ) {

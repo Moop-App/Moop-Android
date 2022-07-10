@@ -42,7 +42,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
@@ -82,7 +82,6 @@ import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
 import soup.movie.model.Theater
-import soup.movie.system.SystemViewModel
 import soup.movie.theatermap.R
 import soup.movie.util.Cgv
 import soup.movie.util.LauncherIcons
@@ -95,8 +94,8 @@ import kotlin.math.min
 @Composable
 internal fun TheaterMapScreen(
     viewModel: TheaterMapViewModel,
-    systemViewModel: SystemViewModel,
-    locationSource: LocationSource?
+    locationSource: LocationSource?,
+    onNavigationOnClick: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
@@ -122,7 +121,7 @@ internal fun TheaterMapScreen(
         topBar = {
             Toolbar(
                 text = stringResource(R.string.theater_map_title),
-                onNavigationOnClick = { systemViewModel.openNavigationMenu() }
+                onNavigationOnClick = onNavigationOnClick
             )
         },
         modifier = Modifier.padding(
@@ -370,7 +369,7 @@ private fun Toolbar(text: String, onNavigationOnClick: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = onNavigationOnClick) {
                 Icon(
-                    Icons.Outlined.Menu,
+                    Icons.Outlined.ArrowBack,
                     contentDescription = null
                 )
             }

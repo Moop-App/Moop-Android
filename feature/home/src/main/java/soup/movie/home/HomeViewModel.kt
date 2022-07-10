@@ -19,11 +19,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import soup.movie.analytics.EventAnalytics
 import soup.movie.ext.setValueIfNew
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val analytics: EventAnalytics,
+) : ViewModel() {
 
     private val _selectedTab = MutableLiveData(HomeTabUiModel.Now)
     val selectedTab: LiveData<HomeTabUiModel>
@@ -31,5 +34,13 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     fun onTabSelected(tab: HomeTabUiModel) {
         _selectedTab.setValueIfNew(tab)
+    }
+
+    fun onMovieClick() {
+        analytics.clickMovie()
+    }
+
+    fun onFilterButtonClick() {
+        analytics.clickMenuFilter()
     }
 }

@@ -17,11 +17,11 @@ android {
 }
 dependencies {
     implementation project(':app')
-    implementation project(':feature:system')
     implementation project(':core')
     implementation project(':data:repository')
 
     implementation libs.androidx.fragment
+    implementation libs.androidx.navigation.fragment
 
     implementation libs.androidx.activity.compose
     implementation libs.compose.foundation

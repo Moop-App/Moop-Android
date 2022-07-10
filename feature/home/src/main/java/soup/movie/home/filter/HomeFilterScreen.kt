@@ -54,7 +54,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
@@ -62,7 +61,9 @@ import soup.movie.home.R
 import soup.movie.ui.divider
 
 @Composable
-internal fun HomeFilterScreen(viewModel: HomeFilterViewModel = viewModel()) {
+internal fun HomeFilterScreen(
+    viewModel: HomeFilterViewModel,
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()

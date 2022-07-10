@@ -21,15 +21,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.system.SystemViewModel
 import soup.movie.ui.MovieTheme
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
-
-    private val systemViewModel: SystemViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,9 +37,9 @@ class SettingsFragment : Fragment() {
             setContent {
                 MovieTheme {
                     SettingsNavGraph(
-                        openNavigationMenu = {
-                            systemViewModel.openNavigationMenu()
-                        }
+                        onNavigationOnClick = {
+                            findNavController().navigateUp()
+                        },
                     )
                 }
             }

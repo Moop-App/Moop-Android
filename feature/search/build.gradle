@@ -21,14 +21,13 @@ dependencies {
     implementation project(':core')
     implementation project(':data:repository')
 
-    implementation libs.androidx.activity.compose
+    implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
     implementation libs.compose.runtimeLivedata
 
     implementation libs.androidx.lifecycle.livedata
-    implementation libs.androidx.lifecycle.viewmodel.compose
     implementation libs.androidx.navigation.fragment
 
     implementation libs.dagger.hilt.android

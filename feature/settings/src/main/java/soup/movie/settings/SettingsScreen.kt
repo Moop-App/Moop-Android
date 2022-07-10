@@ -45,7 +45,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.NewReleases
@@ -74,7 +74,7 @@ import soup.movie.util.debounce
 @Composable
 internal fun SettingsScreen(
     viewModel: SettingsViewModel,
-    openNavigationMenu: () -> Unit,
+    onNavigationOnClick: () -> Unit,
     onThemeEditClick: () -> Unit,
     onTheaterItemClick: (Theater) -> Unit,
     onTheaterEditClick: () -> Unit,
@@ -91,7 +91,7 @@ internal fun SettingsScreen(
         topBar = {
             Toolbar(
                 text = stringResource(R.string.menu_settings),
-                onNavigationOnClick = { openNavigationMenu() }
+                onNavigationOnClick = { onNavigationOnClick() }
             )
         }
     ) { paddingValues ->
@@ -351,7 +351,7 @@ private fun Toolbar(text: String, onNavigationOnClick: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = onNavigationOnClick) {
                 Icon(
-                    Icons.Outlined.Menu,
+                    Icons.Outlined.ArrowBack,
                     contentDescription = null
                 )
             }

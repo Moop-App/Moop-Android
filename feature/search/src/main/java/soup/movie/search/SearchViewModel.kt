@@ -29,13 +29,15 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import soup.movie.analytics.EventAnalytics
 import soup.movie.ext.setValueIfNew
 import soup.movie.model.repository.MovieRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
+    private val analytics: EventAnalytics,
 ) : ViewModel() {
 
     private val _query = MutableLiveData("")
@@ -62,5 +64,9 @@ class SearchViewModel @Inject constructor(
 
     fun onQueryChanged(query: String) {
         _query.setValueIfNew(query)
+    }
+
+    fun onMovieClick() {
+        analytics.clickMovie()
     }
 }

@@ -62,8 +62,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
-import soup.movie.analytics.EventAnalytics
 import soup.movie.ext.showToast
 import soup.movie.home.favorite.HomeFavoriteList
 import soup.movie.home.filter.HomeFilterScreen
@@ -77,9 +77,7 @@ import soup.movie.ui.windowsizeclass.WindowWidthSizeClass
 fun HomeScreen(
     widthSizeClass: WindowWidthSizeClass,
     viewModel: HomeViewModel,
-    analytics: EventAnalytics,
     onNavigationClick: () -> Unit,
-    onTabSelected: (HomeTabUiModel) -> Unit,
     onMovieItemClick: (Movie) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -115,7 +113,7 @@ fun HomeScreen(
                 currentGridState.animateScrollToItem(0)
             }
         } else {
-            onTabSelected(HomeTabUiModel.Now)
+            viewModel.onTabSelected(HomeTabUiModel.Now)
         }
     }
     BottomSheetScaffold(
@@ -124,7 +122,7 @@ fun HomeScreen(
         sheetPeekHeight = 0.dp,
         sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
         sheetContent = {
-            HomeFilterScreen()
+            HomeFilterScreen(viewModel = hiltViewModel())
         },
         topBar = {
             TopAppBar(
@@ -152,7 +150,7 @@ fun HomeScreen(
             widthSizeClass = widthSizeClass,
             currentTab = currentTab,
             tabs = tabs,
-            onTabSelected = onTabSelected,
+            onTabSelected = { viewModel.onTabSelected(it) },
             onTabReselected = { tab ->
                 coroutineScope.launch {
                     gridStates[tab.ordinal].animateScrollToItem(0)
@@ -161,7 +159,7 @@ fun HomeScreen(
             floatingActionButton = {
                 HomeFilterButton(
                     onClick = {
-                        analytics.clickMenuFilter()
+                        viewModel.onFilterButtonClick()
                         coroutineScope.launch {
                             bottomSheetState.expand()
                         }
@@ -173,22 +171,34 @@ fun HomeScreen(
                 val context = LocalContext.current
                 when (currentTab) {
                     HomeTabUiModel.Now -> HomeNowList(
+                        viewModel = hiltViewModel(),
                         state = gridStates[currentTab.ordinal],
-                        onItemClick = onMovieItemClick,
+                        onItemClick = {
+                            viewModel.onMovieClick()
+                            onMovieItemClick(it)
+                        },
                         onItemLongClick = {
                             context.showToast(it.title)
                         }
                     )
                     HomeTabUiModel.Plan -> HomePlanList(
+                        viewModel = hiltViewModel(),
                         state = gridStates[currentTab.ordinal],
-                        onItemClick = onMovieItemClick,
+                        onItemClick = {
+                            viewModel.onMovieClick()
+                            onMovieItemClick(it)
+                        },
                         onItemLongClick = {
                             context.showToast(it.title)
                         }
                     )
                     HomeTabUiModel.Favorite -> HomeFavoriteList(
+                        viewModel = hiltViewModel(),
                         state = gridStates[currentTab.ordinal],
-                        onItemClick = onMovieItemClick,
+                        onItemClick = {
+                            viewModel.onMovieClick()
+                            onMovieItemClick(it)
+                        },
                         onItemLongClick = {
                             context.showToast(it.title)
                         }

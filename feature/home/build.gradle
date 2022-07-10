@@ -23,6 +23,7 @@ dependencies {
     implementation libs.kotlin.stdlib
 
     implementation libs.androidx.activity.compose
+    implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.animation.graphics
     implementation libs.compose.foundation
     implementation libs.compose.material
@@ -37,7 +38,6 @@ dependencies {
     implementation libs.coil.compose
 
     implementation libs.androidx.lifecycle.livedata
-    implementation libs.androidx.lifecycle.viewmodel.compose
 
     implementation libs.androidx.navigation.fragment
 
