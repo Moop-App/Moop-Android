@@ -34,10 +34,6 @@
         android:name="soup.movie.theatermap.TheaterMapFragment"
         app:moduleName="theatermap" />
 
-    <fragment
-        android:id="@+id/settings"
-        android:name="soup.movie.settings.SettingsFragment" />
-
     <!-- Global Actions -->
 
     <action
@@ -55,14 +51,6 @@
     <action
         android:id="@+id/action_to_theater_map"
         app:destination="@id/theater_map"
-        app:enterAnim="@anim/fade_in"
-        app:exitAnim="@anim/fade_out"
-        app:popEnterAnim="@anim/fade_in"
-        app:popExitAnim="@anim/fade_out" />
-
-    <action
-        android:id="@+id/action_to_settings"
-        app:destination="@id/settings"
         app:enterAnim="@anim/fade_in"
         app:exitAnim="@anim/fade_out"
         app:popEnterAnim="@anim/fade_in"

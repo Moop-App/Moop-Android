@@ -15,6 +15,10 @@
  */
 package soup.movie.home
 
+enum class MainTabUiModel {
+    Home, Favorite, TheaterMap, Settings
+}
+
 enum class HomeTabUiModel {
-    Now, Plan, Favorite
+    Now, Plan
 }

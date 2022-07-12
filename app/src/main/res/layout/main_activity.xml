@@ -7,32 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="soup.movie.ui.CustomDynamicNavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="start">
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/nav_host_fragment"
-            android:name="soup.movie.ui.CustomDynamicNavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/main_header"
-            app:insetForeground="@color/transparent"
-            app:itemBackground="@drawable/selector_navigation_menu_bg"
-            app:itemIconTint="@color/selector_navigation_menu"
-            app:itemTextColor="@color/selector_navigation_menu"
-            app:menu="@menu/main_navigation_items" />
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 </FrameLayout>

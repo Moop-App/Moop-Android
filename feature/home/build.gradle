@@ -16,7 +16,7 @@ android {
     }
 }
 dependencies {
-    implementation project(':feature:system')
+    implementation project(':feature:settings')
     implementation project(':core')
     implementation project(':data:repository')
 

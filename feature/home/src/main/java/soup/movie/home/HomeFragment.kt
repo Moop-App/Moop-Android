@@ -21,18 +21,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.system.SystemViewModel
 import soup.movie.ui.MovieTheme
 import soup.movie.ui.windowsizeclass.calculateWindowSizeClass
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
-    private val systemViewModel: SystemViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,15 +39,19 @@ class HomeFragment : Fragment() {
             setContent {
                 MovieTheme {
                     val viewModel = hiltViewModel<HomeViewModel>()
-                    HomeScreen(
+                    MainScreen(
                         widthSizeClass = calculateWindowSizeClass(requireActivity()).widthSizeClass,
                         viewModel = viewModel,
-                        onNavigationClick = {
-                            systemViewModel.openNavigationMenu()
+                        onSearchClick = {
+                            findNavController().navigate(HomeFragmentDirections.actionToSearch())
+                        },
+                        onTheaterMapClick = {
+                            findNavController().navigate(HomeFragmentDirections.actionToTheaterMap())
+                        },
+                        onMovieItemClick = { movie ->
+                            findNavController().navigate(HomeFragmentDirections.actionToDetail(movie))
                         }
-                    ) { movie ->
-                        findNavController().navigate(HomeFragmentDirections.actionToDetail(movie))
-                    }
+                    )
                 }
             }
         }

@@ -15,15 +15,26 @@
  */
 package soup.movie.home.favorite
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import kotlinx.coroutines.launch
+import soup.movie.home.R
 import soup.movie.home.tab.MovieList
 import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
@@ -31,21 +42,45 @@ import soup.movie.model.Movie
 @Composable
 internal fun HomeFavoriteList(
     viewModel: HomeFavoriteViewModel,
+    modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
     onItemClick: (Movie) -> Unit,
     onItemLongClick: (Movie) -> Unit,
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        val movies by viewModel.movies.observeAsState(emptyList())
-        if (movies.isEmpty()) {
-            NoMovieItems(modifier = Modifier.align(Alignment.Center))
-        } else {
-            MovieList(
-                state = state,
-                movies = movies,
-                onItemClick = onItemClick,
-                onLongItemClick = onItemLongClick,
+    val coroutineScope = rememberCoroutineScope()
+    val isTopAtCurrentTab by remember {
+        derivedStateOf {
+            state.firstVisibleItemIndex == 0 && state.firstVisibleItemScrollOffset == 0
+        }
+    }
+    BackHandler(enabled = isTopAtCurrentTab.not()) {
+        if (isTopAtCurrentTab.not()) {
+            coroutineScope.launch {
+                state.animateScrollToItem(0)
+            }
+        }
+    }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(R.string.menu_favorite))
+                }
             )
+        },
+    ) { paddingValues ->
+        Box(modifier = modifier.fillMaxSize().padding(paddingValues)) {
+            val movies by viewModel.movies.observeAsState(emptyList())
+            if (movies.isEmpty()) {
+                NoMovieItems(modifier = Modifier.align(Alignment.Center))
+            } else {
+                MovieList(
+                    state = state,
+                    movies = movies,
+                    onItemClick = onItemClick,
+                    onLongItemClick = onItemLongClick,
+                )
+            }
         }
     }
 }

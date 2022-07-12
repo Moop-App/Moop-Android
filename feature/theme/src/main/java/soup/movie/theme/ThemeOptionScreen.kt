@@ -18,14 +18,9 @@ package soup.movie.theme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
@@ -43,11 +38,6 @@ fun ThemeOptionScreen(
     viewModel: ThemeOptionViewModel
 ) {
     Scaffold(
-        modifier = Modifier.padding(
-            WindowInsets.systemBars
-                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
-                .asPaddingValues()
-        ),
         topBar = {
             TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
         }

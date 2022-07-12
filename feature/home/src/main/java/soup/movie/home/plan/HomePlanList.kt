@@ -43,7 +43,7 @@ internal fun HomePlanList(
             isError = isError,
             onErrorClick = {
                 viewModel.refresh()
-            }
+            },
         )
     }
 }

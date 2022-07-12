@@ -20,17 +20,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -45,7 +40,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.NewReleases
@@ -74,7 +68,6 @@ import soup.movie.util.debounce
 @Composable
 internal fun SettingsScreen(
     viewModel: SettingsViewModel,
-    onNavigationOnClick: () -> Unit,
     onThemeEditClick: () -> Unit,
     onTheaterItemClick: (Theater) -> Unit,
     onTheaterEditClick: () -> Unit,
@@ -83,15 +76,9 @@ internal fun SettingsScreen(
     onBugReportClick: () -> Unit
 ) {
     Scaffold(
-        modifier = Modifier.padding(
-            WindowInsets.systemBars
-                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
-                .asPaddingValues()
-        ),
         topBar = {
-            Toolbar(
-                text = stringResource(R.string.menu_settings),
-                onNavigationOnClick = { onNavigationOnClick() }
+            TopAppBar(
+                title = { Text(text = stringResource(R.string.menu_settings)) }
             )
         }
     ) { paddingValues ->
@@ -343,21 +330,6 @@ private fun SettingsFeedbackItem(
             )
         }
     }
-}
-
-@Composable
-private fun Toolbar(text: String, onNavigationOnClick: () -> Unit) {
-    TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = onNavigationOnClick) {
-                Icon(
-                    Icons.Outlined.ArrowBack,
-                    contentDescription = null
-                )
-            }
-        },
-        title = { Text(text = text) }
-    )
 }
 
 @Composable

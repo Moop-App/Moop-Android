@@ -57,7 +57,7 @@ internal fun HomeContentsScreen(
     state: LazyGridState = rememberLazyGridState(),
     isLoading: Boolean = false,
     isError: Boolean = false,
-    onErrorClick: () -> Unit = {}
+    onErrorClick: () -> Unit = {},
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         if (movies.isEmpty()) {
@@ -76,6 +76,7 @@ internal fun HomeContentsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(40.dp)
+                    .align(Alignment.BottomCenter)
             )
         }
         AnimatedVisibility(
@@ -117,7 +118,7 @@ private fun CommonError(
             Icon(
                 Icons.Rounded.Info,
                 contentDescription = null,
-                tint = MaterialTheme.colors.onBackground,
+                tint = MaterialTheme.colors.onError,
             )
             Text(
                 text = stringResource(R.string.common_network_error),

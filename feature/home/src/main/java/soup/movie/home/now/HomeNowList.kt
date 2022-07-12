@@ -43,7 +43,7 @@ internal fun HomeNowList(
             isError = isError,
             onErrorClick = {
                 viewModel.refresh()
-            }
+            },
         )
     }
 }
