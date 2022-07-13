@@ -21,7 +21,6 @@ import android.content.Intent
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import soup.movie.R
-import soup.movie.ext.getColorCompat
 import soup.movie.notification.NotificationSpecs
 import soup.movie.notification.NotificationSpecs.TYPE_EVENT
 import soup.movie.notification.NotificationSpecs.TYPE_NOTICE
@@ -56,7 +55,6 @@ class MessagingService : FirebaseMessagingService() {
             setContentText(text)
             setAutoCancel(true)
             setContentIntent(createLauncherIntent())
-            setColor(getColorCompat(R.color.colorSecondary))
         }
     }
 
@@ -67,7 +65,6 @@ class MessagingService : FirebaseMessagingService() {
             setContentText(text)
             setAutoCancel(true)
             setContentIntent(createLauncherIntent())
-            setColor(getColorCompat(R.color.colorSecondary))
         }
     }
 

@@ -772,6 +772,7 @@ private fun TrailerHeader(
                     contentDescription = null,
                     modifier = Modifier.requiredSize(18.dp),
                     contentScale = ContentScale.Inside,
+                    colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onSurface),
                 )
             }
         }

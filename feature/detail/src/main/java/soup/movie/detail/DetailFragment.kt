@@ -17,14 +17,9 @@ package soup.movie.detail
 
 import android.content.Context
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.method.LinkMovementMethod
-import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
@@ -33,7 +28,6 @@ import androidx.navigation.fragment.navArgs
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.analytics.EventAnalytics
-import soup.movie.ext.executeWeb
 import soup.movie.ext.loadAsync
 import soup.movie.ext.observeEvent
 import soup.movie.ext.showToast
@@ -41,7 +35,6 @@ import soup.movie.model.Movie
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.ui.MovieTheme
-import soup.movie.util.YouTube
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -67,7 +60,6 @@ class DetailFragment : Fragment() {
                         viewModel = viewModel,
                         analytics = analytics,
                         onPosterClick = { showPosterViewer() },
-                        onItemClick = { onItemClick(it) },
                     )
                 }
             }
@@ -142,50 +134,6 @@ class DetailFragment : Fragment() {
                 } else {
                     throw IllegalStateException("This ShareTarget(${action.target}) does not support to share image.")
                 }
-            }
-        }
-    }
-
-    private fun onItemClick(item: ContentItemUiModel) {
-        val ctx: Context = requireContext()
-        when (item) {
-            is BoxOfficeItemUiModel -> {
-                ctx.executeWeb(item.webLink)
-            }
-            is TheatersItemUiModel -> {
-            }
-            is NaverItemUiModel -> {
-                ctx.executeWeb(item.webLink)
-            }
-            is ImdbItemUiModel -> {
-                ctx.executeWeb(item.webLink)
-            }
-            is TrailerHeaderItemUiModel -> {
-                val message = SpannableString(ctx.getText(R.string.trailer_dialog_message))
-                Linkify.addLinks(message, Linkify.WEB_URLS)
-                AlertDialog.Builder(ctx, R.style.AlertDialogTheme)
-                    .setTitle(R.string.trailer_dialog_title)
-                    .setMessage(message)
-                    .setPositiveButton(R.string.trailer_dialog_button, null)
-                    .show()
-                    .apply {
-                        findViewById<TextView>(android.R.id.message)?.movementMethod =
-                            LinkMovementMethod.getInstance()
-                    }
-            }
-            is TrailerItemUiModel -> {
-                analytics.clickTrailer()
-                YouTube.executeApp(ctx, item.trailer)
-            }
-            is TrailerFooterItemUiModel -> {
-                analytics.clickMoreTrailers()
-                YouTube.executeAppWithQuery(ctx, item.movieTitle)
-            }
-            is AdItemUiModel -> {
-            }
-            is CastItemUiModel -> {
-            }
-            is PlotItemUiModel -> {
             }
         }
     }

@@ -15,12 +15,41 @@
  */
 package soup.movie.ui
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import com.google.android.material.composethemeadapter.MdcTheme
+import androidx.compose.ui.graphics.Color
+
+private val MovieThemeLight = lightColors(
+    primary = Color.White,
+    primaryVariant = Color(0xFF9E9E9E),
+    onPrimary = Color.Black,
+    secondary = Color(0xFF2D7AF6),
+    onSecondary = Color.White
+)
+
+private val MovieThemeDark = darkColors(
+    primary = Color.Black,
+    primaryVariant = Color.Black,
+    onPrimary = Color.White,
+    secondary = Color(0xFF8EB5F0),
+    onSecondary = Color.Black,
+)
 
 @Composable
 fun MovieTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    MdcTheme(content = content)
+    val colors = if (darkTheme) {
+        MovieThemeDark
+    } else {
+        MovieThemeLight
+    }
+    MaterialTheme(
+        colors = colors,
+        content = content,
+    )
 }
