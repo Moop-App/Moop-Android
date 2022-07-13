@@ -15,9 +15,6 @@
  */
 package soup.movie.settings
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -28,17 +25,12 @@ import soup.compose.material.motion.navigation.MaterialMotionNavHost
 import soup.compose.material.motion.navigation.composable
 import soup.compose.material.motion.navigation.rememberMaterialMotionNavController
 import soup.movie.ext.showToast
-import soup.movie.ext.startActivitySafely
-import soup.movie.model.Theater
 import soup.movie.theater.edit.TheaterEditScreen
 import soup.movie.theater.edit.TheaterEditViewModel
 import soup.movie.theater.sort.TheaterSortScreen
 import soup.movie.theater.sort.TheaterSortViewModel
 import soup.movie.theme.ThemeOptionScreen
 import soup.movie.theme.ThemeOptionViewModel
-import soup.movie.util.Cgv
-import soup.movie.util.LotteCinema
-import soup.movie.util.Megabox
 import soup.movie.util.Moop
 
 private enum class Screen(val route: String) {
@@ -68,9 +60,6 @@ fun SettingsNavGraph() {
                 onThemeEditClick = {
                     navController.navigate(Screen.ThemeOption.route)
                 },
-                onTheaterItemClick = { theater ->
-                    context.executeWeb(theater)
-                },
                 onTheaterEditClick = {
                     navController.navigate(Screen.TheaterSort.route)
                 },
@@ -84,16 +73,6 @@ fun SettingsNavGraph() {
                 onMarketIconClick = {
                     Moop.executePlayStore(context)
                 },
-                onBugReportClick = {
-                    val intent = Intent(Intent.ACTION_SENDTO)
-                    intent.data = Uri.parse("mailto:")
-                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(HELP_EMAIL))
-                    intent.putExtra(
-                        Intent.EXTRA_SUBJECT,
-                        "뭅 v${BuildConfig.VERSION_NAME} 버그리포트"
-                    )
-                    context.startActivitySafely(intent)
-                }
             )
         }
         composable(Screen.ThemeOption.route) {
@@ -121,14 +100,3 @@ fun SettingsNavGraph() {
         }
     }
 }
-
-private fun Context.executeWeb(theater: Theater) {
-    return when (theater.type) {
-        Theater.TYPE_CGV -> Cgv.executeWeb(this, theater)
-        Theater.TYPE_LOTTE -> LotteCinema.executeWeb(this, theater)
-        Theater.TYPE_MEGABOX -> Megabox.executeWeb(this, theater)
-        else -> throw IllegalArgumentException("${theater.type} is not valid type.")
-    }
-}
-
-private const val HELP_EMAIL = "help.moop@gmail.com"

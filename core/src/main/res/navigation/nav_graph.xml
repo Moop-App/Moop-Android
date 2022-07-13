@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="soup.movie.home.HomeFragment" />
+        android:name="soup.movie.ui.main.MainFragment" />
 
     <fragment
         android:id="@+id/detail"
@@ -20,10 +20,6 @@
             app:argType="soup.movie.model.Movie"
             app:nullable="false" />
     </fragment>
-
-    <fragment
-        android:id="@+id/search"
-        android:name="soup.movie.search.SearchFragment" />
 
     <fragment
         android:id="@+id/progress"
@@ -39,14 +35,6 @@
     <action
         android:id="@+id/action_to_detail"
         app:destination="@id/detail" />
-
-    <action
-        android:id="@+id/action_to_search"
-        app:destination="@id/search"
-        app:enterAnim="@anim/fade_in"
-        app:exitAnim="@anim/fade_out"
-        app:popEnterAnim="@anim/fade_in"
-        app:popExitAnim="@anim/fade_out" />
 
     <action
         android:id="@+id/action_to_theater_map"

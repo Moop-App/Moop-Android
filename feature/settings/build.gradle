@@ -21,10 +21,7 @@ dependencies {
     implementation project(':data:repository')
 
     implementation libs.kotlin.stdlib
-
     implementation libs.androidx.lifecycle.livedata
-    implementation libs.androidx.fragment
-    implementation libs.androidx.navigation.fragment
 
     implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation

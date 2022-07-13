@@ -39,7 +39,6 @@ androidx.core:core:1.8.0
 androidx.cursoradapter:cursoradapter:1.0.0
 androidx.customview:customview-poolingcontainer:1.0.0-rc01
 androidx.customview:customview:1.1.0
-androidx.databinding:viewbinding:7.2.1
 androidx.datastore:datastore-core:1.0.0
 androidx.datastore:datastore-preferences-core:1.0.0
 androidx.datastore:datastore-preferences:1.0.0
@@ -87,7 +86,7 @@ androidx.navigation:navigation-ui-ktx:2.5.0
 androidx.navigation:navigation-ui:2.5.0
 androidx.print:print:1.0.0
 androidx.profileinstaller:profileinstaller:1.2.0-rc01
-androidx.recyclerview:recyclerview:1.2.0
+androidx.recyclerview:recyclerview:1.1.0
 androidx.resourceinspection:resourceinspection-annotation:1.0.0
 androidx.room:room-common:2.4.1
 androidx.room:room-ktx:2.4.1
@@ -103,7 +102,7 @@ androidx.transition:transition:1.4.1
 androidx.vectordrawable:vectordrawable-animated:1.1.0
 androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
-androidx.viewpager2:viewpager2:1.1.0-beta01
+androidx.viewpager2:viewpager2:1.0.0
 androidx.viewpager:viewpager:1.0.0
 androidx.window:window:1.1.0-alpha02
 androidx.work:work-runtime-ktx:2.7.1
@@ -192,7 +191,6 @@ com.squareup.retrofit2:converter-gson:2.6.2
 com.squareup.retrofit2:retrofit:2.9.0
 com.webtoonscorp.android:readmore-foundation:1.1.5
 com.webtoonscorp.android:readmore-material:1.1.5
-dev.chrisbanes.insetter:insetter:0.6.1
 dev.chrisbanes.snapper:snapper:0.2.2
 io.coil-kt:coil-base:2.1.0
 io.coil-kt:coil-compose-base:2.1.0

@@ -39,8 +39,6 @@ dependencies {
 
     implementation libs.androidx.lifecycle.livedata
 
-    implementation libs.androidx.navigation.fragment
-
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
 

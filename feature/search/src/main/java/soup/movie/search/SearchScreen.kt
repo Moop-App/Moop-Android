@@ -66,7 +66,7 @@ import soup.movie.home.tab.NoMovieItems
 import soup.movie.model.Movie
 
 @Composable
-internal fun SearchScreen(
+fun SearchScreen(
     viewModel: SearchViewModel,
     upPress: () -> Unit,
     onItemClick: (Movie) -> Unit

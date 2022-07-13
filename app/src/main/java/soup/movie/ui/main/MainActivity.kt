@@ -22,33 +22,25 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat.Type.systemBars
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.Insetter
 import soup.movie.R
 import soup.movie.config.Config
 import soup.movie.config.RemoteConfig
 import soup.movie.core.MainDirections
-import soup.movie.databinding.MainActivityBinding
 import soup.movie.ext.observeEvent
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
-import soup.movie.util.viewBindings
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
 import soup.movie.work.OpenDateSyncWorker
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    private val binding by viewBindings(MainActivityBinding::inflate)
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -68,24 +60,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Moop)
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        Insetter.builder()
-            .setOnApplyInsetsListener { container, insets, initialState ->
-                val systemInsets = insets.getInsets(systemBars())
-                container.updatePadding(
-                    left = initialState.paddings.left + systemInsets.left,
-                    right = initialState.paddings.right + systemInsets.right
-                )
-            }
-            .applyToView(binding.root)
-//        Insetter.builder()
-//            .setOnApplyInsetsListener { view, insets, initialState ->
-//                view.updatePadding(
-//                    top = initialState.paddings.top + insets.getInsets(systemBars()).top
-//                )
-//            }
-//            .applyToView(binding.navigationView)
+        setContentView(R.layout.main_activity)
 
         // TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true

@@ -22,7 +22,6 @@ import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
@@ -31,7 +30,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.BottomNavigation
@@ -228,12 +226,7 @@ private fun MediumScreen(
     content: @Composable (PaddingValues) -> Unit
 ) {
     Row(modifier = modifier.fillMaxSize()) {
-        NavigationRail(
-            elevation = 24.dp,
-            header = {
-                Spacer(modifier = Modifier.statusBarsPadding())
-            }
-        ) {
+        NavigationRail(elevation = 24.dp) {
             tabs.forEach { tab ->
                 val selected = currentTab == tab
                 NavigationRailItem(

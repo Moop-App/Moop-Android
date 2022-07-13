@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2022 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.search
+package soup.movie.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,13 +21,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.ui.MovieTheme
+import soup.movie.ui.windowsizeclass.calculateWindowSizeClass
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class MainFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,14 +37,13 @@ class SearchFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MovieTheme {
-                    val viewModel = hiltViewModel<SearchViewModel>()
-                    SearchScreen(
-                        viewModel = viewModel,
-                        upPress = { findNavController().navigateUp() },
-                        onItemClick = { movie ->
-                            findNavController().navigate(
-                                SearchFragmentDirections.actionToDetail(movie)
-                            )
+                    MainNavGraph(
+                        widthSizeClass = calculateWindowSizeClass(requireActivity()).widthSizeClass,
+                        onTheaterMapClick = {
+                            findNavController().navigate(MainFragmentDirections.actionToTheaterMap())
+                        },
+                        onMovieItemClick = { movie ->
+                            findNavController().navigate(MainFragmentDirections.actionToDetail(movie))
                         }
                     )
                 }

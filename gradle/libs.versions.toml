@@ -86,8 +86,6 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-transition = "androidx.transition:transition:1.4.1"
-androidx-viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-beta01"
-
 androidx-window = "androidx.window:window:1.1.0-alpha02"
 
 androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
@@ -151,7 +149,6 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 retrofit-runtime = "com.squareup.retrofit2:retrofit:2.9.0"
 retrofit-serialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
 lottie-compose = "com.airbnb.android:lottie-compose:4.2.1"
-insetter = "dev.chrisbanes.insetter:insetter:0.6.1"
 photoview = "com.github.chrisbanes:PhotoView:2.3.0"
 kakaoLink = "com.kakao.sdk:v2-link:2.8.3"
 naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
