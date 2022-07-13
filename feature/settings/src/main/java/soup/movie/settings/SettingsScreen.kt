@@ -15,6 +15,9 @@
  */
 package soup.movie.settings
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -58,10 +61,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.UnelevatedButton
+import soup.movie.ext.startActivitySafely
 import soup.movie.model.Theater
 import soup.movie.theater.TheaterChip
 import soup.movie.theme.stringResIdOf
 import soup.movie.ui.divider
+import soup.movie.util.Cgv
+import soup.movie.util.LotteCinema
+import soup.movie.util.Megabox
 import soup.movie.util.Moop
 import soup.movie.util.debounce
 
@@ -69,11 +76,9 @@ import soup.movie.util.debounce
 internal fun SettingsScreen(
     viewModel: SettingsViewModel,
     onThemeEditClick: () -> Unit,
-    onTheaterItemClick: (Theater) -> Unit,
     onTheaterEditClick: () -> Unit,
     onVersionClick: (VersionSettingUiModel) -> Unit,
     onMarketIconClick: () -> Unit,
-    onBugReportClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -82,6 +87,7 @@ internal fun SettingsScreen(
             )
         }
     ) { paddingValues ->
+        val context = LocalContext.current
         val theme by viewModel.themeUiModel.observeAsState()
         val theater by viewModel.theaterUiModel.observeAsState()
         val version by viewModel.versionUiModel.observeAsState()
@@ -95,7 +101,7 @@ internal fun SettingsScreen(
             SettingsDivider()
             SettingsTheaterItem(
                 theater?.theaterList.orEmpty(),
-                onItemClick = onTheaterItemClick,
+                onItemClick = { theater -> context.executeWeb(theater) },
                 onEditClick = onTheaterEditClick
             )
             SettingsDivider()
@@ -105,7 +111,7 @@ internal fun SettingsScreen(
                 onActionClick = onMarketIconClick
             )
             SettingsDivider()
-            SettingsFeedbackItem(onClick = onBugReportClick)
+            SettingsFeedbackItem(onClick = { context.goToEmail() })
         }
     }
     if (viewModel.showVersionUpdateDialog) {
@@ -368,4 +374,24 @@ private fun SettingsButton(
         ),
         content = content
     )
+}
+
+private fun Context.executeWeb(theater: Theater) {
+    return when (theater.type) {
+        Theater.TYPE_CGV -> Cgv.executeWeb(this, theater)
+        Theater.TYPE_LOTTE -> LotteCinema.executeWeb(this, theater)
+        Theater.TYPE_MEGABOX -> Megabox.executeWeb(this, theater)
+        else -> throw IllegalArgumentException("${theater.type} is not valid type.")
+    }
+}
+
+private fun Context.goToEmail() {
+    val intent = Intent(Intent.ACTION_SENDTO)
+    intent.data = Uri.parse("mailto:")
+    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("help.moop@gmail.com"))
+    intent.putExtra(
+        Intent.EXTRA_SUBJECT,
+        "뭅 v${BuildConfig.VERSION_NAME} 버그리포트"
+    )
+    startActivitySafely(intent)
 }

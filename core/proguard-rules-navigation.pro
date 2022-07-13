@@ -1,6 +1,5 @@
 -keepnames class soup.movie.detail.DetailFragment
--keepnames class soup.movie.home.HomeFragment
 -keepnames class soup.movie.model.Movie
--keepnames class soup.movie.search.SearchFragment
 -keepnames class soup.movie.theatermap.TheaterMapFragment
 -keepnames class soup.movie.ui.CustomProgressFragment
+-keepnames class soup.movie.ui.main.MainFragment

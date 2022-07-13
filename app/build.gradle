@@ -25,7 +25,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
-        viewBinding true
         compose true
     }
     composeOptions {
@@ -126,15 +125,10 @@ dependencies {
     implementation libs.kotlin.serialization
 
     implementation libs.androidx.activity.ktx
-    implementation libs.androidx.constraintlayout
     implementation libs.androidx.fragment
     implementation libs.androidx.startup
-    implementation libs.androidx.transition
-    implementation libs.androidx.viewpager2
 
     implementation libs.google.play
-
-    implementation libs.insetter
 
     implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.lifecycle.viewmodel.ktx
@@ -142,6 +136,7 @@ dependencies {
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.compiler
 
+    implementation libs.androidx.navigation.compose
     implementation libs.androidx.navigation.fragment
     implementation libs.androidx.navigation.ui
     implementation libs.androidx.navigation.dynamicFeaturesFragment
@@ -167,6 +162,7 @@ dependencies {
     implementation libs.google.ads
 
     implementation libs.androidx.activity.compose
+    implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui

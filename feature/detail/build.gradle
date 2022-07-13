@@ -30,6 +30,7 @@ dependencies {
     kapt libs.dagger.hilt.compiler
 
     implementation libs.google.ads
+    implementation libs.androidx.constraintlayout
 
     implementation libs.androidx.activity.compose
     implementation libs.compose.foundation
