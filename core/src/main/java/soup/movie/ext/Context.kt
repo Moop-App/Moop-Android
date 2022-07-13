@@ -22,19 +22,9 @@ import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import soup.movie.core.R
-
-/** Color */
-
-fun Context.getColorCompat(@ColorRes colorResId: Int) =
-    ContextCompat.getColor(this, colorResId)
-
-fun Context.getColorStateListCompat(@ColorRes colorResId: Int) =
-    ContextCompat.getColorStateList(this, colorResId)
 
 /** Toast */
 

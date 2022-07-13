@@ -93,7 +93,8 @@ internal fun ContentLoadingProgressBar(
             )
             Icon(
                 painter = painterResource(R.drawable.ic_loading_logo),
-                contentDescription = null
+                contentDescription = null,
+                tint = MaterialTheme.colors.onSurface,
             )
         }
     }

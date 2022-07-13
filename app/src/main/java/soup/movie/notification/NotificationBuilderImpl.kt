@@ -18,17 +18,16 @@ package soup.movie.notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import soup.movie.R
-import soup.movie.ext.getColorCompat
 import soup.movie.model.Movie
 import soup.movie.model.OpenDateAlarm
 import soup.movie.ui.main.MainActivity
 
-class NotificationBuilderImpl(context: Context) :
-    NotificationBuilder {
+class NotificationBuilderImpl(context: Context) : NotificationBuilder {
 
     private val applicationContext = context.applicationContext
 
@@ -40,7 +39,6 @@ class NotificationBuilderImpl(context: Context) :
             setContentText(list.joinToString { it.title })
             setAutoCancel(true)
             setContentIntent(createLauncherIntent())
-            setColor(getColorCompat(R.color.colorSecondary))
         }
     }
 
@@ -52,12 +50,16 @@ class NotificationBuilderImpl(context: Context) :
             setContentText(list.joinToString { it.title })
             setAutoCancel(true)
             setContentIntent(createLauncherIntent())
-            setColor(getColorCompat(R.color.colorSecondary))
         }
     }
 
     private fun Context.createLauncherIntent(): PendingIntent {
         val intent = Intent(this, MainActivity::class.java)
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_MUTABLE
+        } else {
+            PendingIntent.FLAG_ONE_SHOT
+        }
+        return PendingIntent.getActivity(this, 0, intent, flags)
     }
 }

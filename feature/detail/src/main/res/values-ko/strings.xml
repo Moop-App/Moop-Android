@@ -13,6 +13,6 @@
     <string name="trailer_search_result">\'%s 예고편\' 검색 결과</string>
 
     <string name="trailer_dialog_title">YouTube API 서비스 사용</string>
-    <string name="trailer_dialog_message">이 정보는 YouTube API 서비스를 통해 수집되었습니다. 구글의 개인정보처리방침( https://policies.google.com/privacy )을 따릅니다.</string>
+    <string name="trailer_dialog_message">이 정보는 YouTube API 서비스를 통해 수집되었습니다. 구글의 개인정보처리방침을 따릅니다.</string>
     <string name="trailer_dialog_button">확인</string>
 </resources>
