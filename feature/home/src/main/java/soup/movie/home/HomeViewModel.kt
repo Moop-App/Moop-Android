@@ -28,12 +28,20 @@ class HomeViewModel @Inject constructor(
     private val analytics: EventAnalytics,
 ) : ViewModel() {
 
-    private val _selectedTab = MutableLiveData(HomeTabUiModel.Now)
-    val selectedTab: LiveData<HomeTabUiModel>
-        get() = _selectedTab
+    private val _selectedMainTab = MutableLiveData(MainTabUiModel.Home)
+    val selectedMainTab: LiveData<MainTabUiModel>
+        get() = _selectedMainTab
 
-    fun onTabSelected(tab: HomeTabUiModel) {
-        _selectedTab.setValueIfNew(tab)
+    private val _selectedHomeTab = MutableLiveData(HomeTabUiModel.Now)
+    val selectedHomeTab: LiveData<HomeTabUiModel>
+        get() = _selectedHomeTab
+
+    fun onMainTabSelected(mainTab: MainTabUiModel) {
+        _selectedMainTab.setValueIfNew(mainTab)
+    }
+
+    fun onHomeTabSelected(homeTab: HomeTabUiModel) {
+        _selectedHomeTab.setValueIfNew(homeTab)
     }
 
     fun onMovieClick() {

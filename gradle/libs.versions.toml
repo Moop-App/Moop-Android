@@ -66,7 +66,6 @@ androidx-browser = "androidx.browser:browser:1.4.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-core = "androidx.core:core-ktx:1.8.0"
 androidx-datastore-preferences = "androidx.datastore:datastore-preferences:1.0.0"
-androidx-drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
 androidx-fragment = "androidx.fragment:fragment-ktx:1.4.1"
 
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }

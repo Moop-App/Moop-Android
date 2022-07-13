@@ -22,15 +22,12 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,12 +37,9 @@ import soup.movie.config.Config
 import soup.movie.config.RemoteConfig
 import soup.movie.core.MainDirections
 import soup.movie.databinding.MainActivityBinding
-import soup.movie.ext.consume
 import soup.movie.ext.observeEvent
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
-import soup.movie.system.SystemEvent
-import soup.movie.system.SystemViewModel
 import soup.movie.util.viewBindings
 import soup.movie.work.LegacyWorker
 import soup.movie.work.OpenDateAlarmWorker
@@ -56,13 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by viewBindings(MainActivityBinding::inflate)
 
-    private val systemViewModel: SystemViewModel by viewModels()
-
     private val viewModel: MainViewModel by viewModels()
-
-    private val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
-        binding.navigationView.setCheckedItem(destination.id)
-    }
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
@@ -91,35 +79,21 @@ class MainActivity : AppCompatActivity() {
                 )
             }
             .applyToView(binding.root)
-        Insetter.builder()
-            .setOnApplyInsetsListener { view, insets, initialState ->
-                view.updatePadding(
-                    top = initialState.paddings.top + insets.getInsets(systemBars()).top
-                )
-            }
-            .applyToView(binding.navigationView)
+//        Insetter.builder()
+//            .setOnApplyInsetsListener { view, insets, initialState ->
+//                view.updatePadding(
+//                    top = initialState.paddings.top + insets.getInsets(systemBars()).top
+//                )
+//            }
+//            .applyToView(binding.navigationView)
 
         // TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
 
         intent?.handleDeepLink()
 
-        systemViewModel.systemEvent.observeEvent(this) {
-            handleEvent(it)
-        }
         viewModel.uiEvent.observeEvent(this) {
             handleEvent(it)
-        }
-
-        binding.navigationView.setNavigationItemSelectedListener {
-            consume {
-                binding.drawerLayout.closeDrawer(GravityCompat.START)
-                val navController = navHostFragment.findNavController()
-                when (it.itemId) {
-                    R.id.home -> navController.popBackStack(R.id.home, false)
-                    else -> NavigationUI.onNavDestinationSelected(it, navController)
-                }
-            }
         }
 
         val config: Config = RemoteConfig()
@@ -132,16 +106,6 @@ class MainActivity : AppCompatActivity() {
         }
         OpenDateAlarmWorker.enqueuePeriodicWork(this)
         OpenDateSyncWorker.enqueuePeriodicWork(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        navHostFragment.findNavController().addOnDestinationChangedListener(listener)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        navHostFragment.findNavController().removeOnDestinationChangedListener(listener)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -161,14 +125,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleEvent(event: SystemEvent) {
-        when (event) {
-            is SystemEvent.OpenDrawerMenuUiEvent -> {
-                binding.drawerLayout.openDrawer(GravityCompat.START)
-            }
-        }
-    }
-
     private fun handleEvent(event: MainUiEvent) {
         when (event) {
             is MainUiEvent.ShowDetailUiEvent -> {
@@ -177,14 +133,6 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
-    }
-
-    override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerVisible(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-            return
-        }
-        super.onBackPressed()
     }
 
     private val navHostFragment: Fragment

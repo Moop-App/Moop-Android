@@ -4,6 +4,7 @@
     <string name="menu_now">Now</string>
     <string name="menu_plan">Plan</string>
     <string name="menu_favorite">Favorite</string>
+    <string name="menu_map">Map</string>
     <string name="menu_filter">Movie Filter</string>
     <string name="filter_category_theater">Theater Filter</string>
     <string name="filter_category_age">Age Filter</string>

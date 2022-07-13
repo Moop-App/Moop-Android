@@ -117,7 +117,6 @@ dependencies {
     implementation project(':feature:settings')
     implementation project(':feature:theme')
     implementation project(':feature:work')
-    implementation project(':feature:system')
     implementation project(':core')
     implementation project(':data:repository')
     implementation project(':data:db')
@@ -128,7 +127,6 @@ dependencies {
 
     implementation libs.androidx.activity.ktx
     implementation libs.androidx.constraintlayout
-    implementation libs.androidx.drawerlayout
     implementation libs.androidx.fragment
     implementation libs.androidx.startup
     implementation libs.androidx.transition
