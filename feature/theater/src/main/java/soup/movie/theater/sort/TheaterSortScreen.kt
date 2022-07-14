@@ -120,7 +120,8 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
             contentDescription = null,
             modifier = Modifier
                 .width(48.dp)
-                .height(68.dp)
+                .height(68.dp),
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
         )
         Text(
             stringResource(R.string.theater_empty_description),
