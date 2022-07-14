@@ -133,8 +133,6 @@ google-pluginGradle = "com.google.gms:google-services:4.3.10"
 google-play = "com.google.android.play:core:1.10.2"
 google-ads = "com.google.android.gms:play-services-ads:20.5.0"
 
-material-material = "com.google.android.material:material:1.5.0"
-
 firebase-bom = "com.google.firebase:firebase-bom:29.0.0"
 firebase-crashlytics-pluginGradle = "com.google.firebase:firebase-crashlytics-gradle:2.8.0"
 firebase-perf-pluginGradle = "com.google.firebase:perf-plugin:1.4.1"

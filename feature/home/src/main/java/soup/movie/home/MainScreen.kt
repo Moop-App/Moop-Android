@@ -170,22 +170,38 @@ private fun CompactScreen(
                     val selected = currentTab == tab
                     BottomNavigationItem(
                         icon = {
-                            val painter = when (tab) {
-                                MainTabUiModel.Home -> rememberAnimatedVectorPainter(
-                                    AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected),
-                                    selected
-                                )
-                                MainTabUiModel.Favorite -> rememberAnimatedVectorPainter(
-                                    AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected),
-                                    selected
-                                )
-                                MainTabUiModel.TheaterMap -> rememberVectorPainter(Icons.Rounded.Map)
-                                MainTabUiModel.Settings -> rememberVectorPainter(Icons.Rounded.Settings)
+                            when (tab) {
+                                MainTabUiModel.Home -> {
+                                    Icon(
+                                        rememberAnimatedVectorPainter(
+                                            AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected),
+                                            selected
+                                        ),
+                                        contentDescription = null,
+                                    )
+                                }
+                                MainTabUiModel.Favorite -> {
+                                    Icon(
+                                        rememberAnimatedVectorPainter(
+                                            AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected),
+                                            selected
+                                        ),
+                                        contentDescription = null,
+                                    )
+                                }
+                                MainTabUiModel.TheaterMap -> {
+                                    Icon(
+                                        rememberVectorPainter(Icons.Rounded.Map),
+                                        contentDescription = null,
+                                    )
+                                }
+                                MainTabUiModel.Settings -> {
+                                    Icon(
+                                        rememberVectorPainter(Icons.Rounded.Settings),
+                                        contentDescription = null,
+                                    )
+                                }
                             }
-                            Icon(
-                                painter,
-                                contentDescription = null,
-                            )
                         },
                         label = {
                             Text(
@@ -231,22 +247,38 @@ private fun MediumScreen(
                 val selected = currentTab == tab
                 NavigationRailItem(
                     icon = {
-                        val painter = when (tab) {
-                            MainTabUiModel.Home -> rememberAnimatedVectorPainter(
-                                AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected),
-                                selected
-                            )
-                            MainTabUiModel.Favorite -> rememberAnimatedVectorPainter(
-                                AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected),
-                                selected
-                            )
-                            MainTabUiModel.TheaterMap -> rememberVectorPainter(Icons.Rounded.Map)
-                            MainTabUiModel.Settings -> rememberVectorPainter(Icons.Rounded.Settings)
+                        when (tab) {
+                            MainTabUiModel.Home -> {
+                                Icon(
+                                    rememberAnimatedVectorPainter(
+                                        AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected),
+                                        selected
+                                    ),
+                                    contentDescription = null,
+                                )
+                            }
+                            MainTabUiModel.Favorite -> {
+                                Icon(
+                                    rememberAnimatedVectorPainter(
+                                        AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected),
+                                        selected
+                                    ),
+                                    contentDescription = null,
+                                )
+                            }
+                            MainTabUiModel.TheaterMap -> {
+                                Icon(
+                                    rememberVectorPainter(Icons.Rounded.Map),
+                                    contentDescription = null,
+                                )
+                            }
+                            MainTabUiModel.Settings -> {
+                                Icon(
+                                    rememberVectorPainter(Icons.Rounded.Settings),
+                                    contentDescription = null,
+                                )
+                            }
                         }
-                        Icon(
-                            painter,
-                            contentDescription = null,
-                        )
                     },
                     label = {
                         Text(

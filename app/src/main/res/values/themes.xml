@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Moop" parent="Base.Theme.Moop">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorOnSecondary">@color/colorOnSecondary</item>
-    </style>
+    <style name="Theme.Moop" parent="Base.Theme.Moop" />
 
     <style name="Theme.Moop.Splash">
-        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:windowBackground">@drawable/ic_splash</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
