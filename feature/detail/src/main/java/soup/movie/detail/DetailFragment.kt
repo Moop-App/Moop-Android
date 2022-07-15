@@ -20,15 +20,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.stfalcon.imageviewer.StfalconImageViewer
+import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import soup.compose.material.motion.circularReveal
+import soup.metronome.zoomable.ExperimentalZoomableApi
+import soup.metronome.zoomable.ZoomableBox
+import soup.metronome.zoomable.rememberZoomableState
 import soup.movie.analytics.EventAnalytics
-import soup.movie.ext.loadAsync
 import soup.movie.ext.observeEvent
 import soup.movie.ext.showToast
 import soup.movie.model.Movie
@@ -55,11 +74,10 @@ class DetailFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MovieTheme {
-                    DetailScreen(
+                    DetailNavGraph(
                         movie = args.movie,
                         viewModel = viewModel,
                         analytics = analytics,
-                        onPosterClick = { showPosterViewer() },
                     )
                 }
             }
@@ -75,16 +93,6 @@ class DetailFragment : Fragment() {
                 is ToastAction -> view.context.showToast(it.resId)
             }
         }
-    }
-
-    // TODO: Re-implements this
-    private fun showPosterViewer() {
-        StfalconImageViewer
-            .Builder(context, listOf(args.movie.posterUrl)) { view, imageUrl ->
-                view.loadAsync(imageUrl)
-            }
-            .withHiddenStatusBar(false)
-            .show()
     }
 
     private fun Context.executeShareAction(action: ShareAction, movie: Movie = args.movie) {
@@ -136,5 +144,83 @@ class DetailFragment : Fragment() {
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+private fun DetailNavGraph(
+    movie: Movie,
+    viewModel: DetailViewModel,
+    analytics: EventAnalytics,
+) {
+    Box {
+        var showShare by remember { mutableStateOf(false) }
+        var showPoster by remember { mutableStateOf(false) }
+        BackHandler(
+            enabled = showShare,
+            onBack = { showShare = false }
+        )
+        DetailScreen(
+            movie = movie,
+            viewModel = viewModel,
+            analytics = analytics,
+            onShareClick = {
+                showShare = true
+            },
+            onPosterClick = {
+                showPoster = true
+            },
+        )
+        DetailShare(
+            onClick = { showShare = false },
+            onShareClick = { target ->
+                if (target == ShareTarget.Instagram) {
+                    viewModel.requestShareImage(
+                        target,
+                        imageUrl = movie.posterUrl
+                    )
+                } else {
+                    viewModel.requestShareText(target)
+                }
+            },
+            modifier = Modifier.circularReveal(
+                visible = showShare,
+                center = { Offset(x = it.width, y = 0f) }
+            ),
+        )
+        if (showPoster) {
+            DetailPoster(movie)
+        }
+    }
+}
+
+@OptIn(ExperimentalZoomableApi::class)
+@Composable
+private fun DetailPoster(
+    movie: Movie,
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val zoomableState = rememberZoomableState()
+    BackHandler(enabled = zoomableState.isScaled) {
+        coroutineScope.launch {
+            zoomableState.animateToInitialState()
+        }
+    }
+    ZoomableBox(
+        modifier = Modifier.background(Color.Black),
+        state = zoomableState,
+    ) {
+        AsyncImage(
+            movie.posterUrl,
+            contentDescription = movie.title,
+            modifier = Modifier.fillMaxSize(),
+            transform = {
+                if (it is AsyncImagePainter.State.Success) {
+                    zoomableState.contentIntrinsicSize = it.painter.intrinsicSize
+                }
+                it
+            }
+        )
     }
 }

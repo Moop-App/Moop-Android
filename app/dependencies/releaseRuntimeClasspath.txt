@@ -109,9 +109,9 @@ androidx.work:work-runtime-ktx:2.7.1
 androidx.work:work-runtime:2.7.1
 com.airbnb.android:lottie-compose:4.2.1
 com.airbnb.android:lottie:4.2.1
-com.github.chrisbanes:PhotoView:2.3.0
-com.github.fornewid.metronome:material:0.5.0
-com.github.fornewid.metronome:visibility:0.5.0
+com.github.fornewid.metronome:material:0.5.2
+com.github.fornewid.metronome:visibility:0.5.2
+com.github.fornewid.metronome:zoomable:0.5.2
 com.google.accompanist:accompanist-drawablepainter:0.24.13-rc
 com.google.accompanist:accompanist-flowlayout:0.24.13-rc
 com.google.accompanist:accompanist-pager-indicators:0.24.13-rc
