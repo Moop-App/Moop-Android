@@ -15,7 +15,6 @@
  */
 package soup.movie.detail
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,14 +30,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import soup.compose.material.motion.circularReveal
 import soup.movie.analytics.EventAnalytics
 import soup.movie.ext.executeWeb
 import soup.movie.model.Movie
@@ -50,14 +47,10 @@ internal fun DetailScreen(
     movie: Movie,
     viewModel: DetailViewModel,
     analytics: EventAnalytics,
+    onShareClick: () -> Unit,
     onPosterClick: () -> Unit,
 ) {
     var showPrivacyDialog by remember { mutableStateOf(false) }
-    var showShare by remember { mutableStateOf(false) }
-    BackHandler(
-        enabled = showShare,
-        onBack = { showShare = false }
-    )
 
     val context = LocalContext.current
     DetailContent(
@@ -69,7 +62,7 @@ internal fun DetailScreen(
         },
         onShareClick = {
             analytics.clickShare()
-            showShare = true
+            onShareClick()
         },
         onItemClick = { item ->
             when (item) {
@@ -97,23 +90,6 @@ internal fun DetailScreen(
             }
         },
         modifier = Modifier.fillMaxSize(),
-    )
-    DetailShare(
-        onClick = { showShare = false },
-        onShareClick = { target ->
-            if (target == ShareTarget.Instagram) {
-                viewModel.requestShareImage(
-                    target,
-                    imageUrl = movie.posterUrl
-                )
-            } else {
-                viewModel.requestShareText(target)
-            }
-        },
-        modifier = Modifier.circularReveal(
-            visible = showShare,
-            center = { Offset(x = it.width, y = 0f) }
-        ),
     )
     if (showPrivacyDialog) {
         AlertDialog(
