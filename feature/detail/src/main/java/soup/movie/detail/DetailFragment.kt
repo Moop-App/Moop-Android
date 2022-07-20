@@ -21,7 +21,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -189,8 +192,15 @@ private fun DetailNavGraph(
                 center = { Offset(x = it.width, y = 0f) }
             ),
         )
-        if (showPoster) {
-            DetailPoster(movie)
+        AnimatedVisibility(
+            visible = showPoster,
+            enter = fadeIn(),
+            exit = fadeOut(),
+        ) {
+            DetailPoster(
+                movie = movie,
+                upPress = { showPoster = false },
+            )
         }
     }
 }
