@@ -199,12 +199,17 @@ private fun DetailNavGraph(
 @Composable
 private fun DetailPoster(
     movie: Movie,
+    upPress: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     val zoomableState = rememberZoomableState()
-    BackHandler(enabled = zoomableState.isScaled) {
+    BackHandler {
         coroutineScope.launch {
-            zoomableState.animateToInitialState()
+            if (zoomableState.isScaled) {
+                zoomableState.animateToInitialState()
+            } else {
+                upPress()
+            }
         }
     }
     ZoomableBox(
