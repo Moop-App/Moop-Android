@@ -81,7 +81,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.rememberAsyncImagePainter
 import com.webtoonscorp.android.readmore.material.ReadMoreText
-import soup.movie.analytics.EventAnalytics
 import soup.movie.detail.widget.NativeAdView
 import soup.movie.ext.executeWeb
 
@@ -89,7 +88,7 @@ import soup.movie.ext.executeWeb
 internal fun DetailList(
     header: @Composable () -> Unit,
     items: List<ContentItemUiModel>,
-    analytics: EventAnalytics,
+    viewModel: DetailViewModel,
     onItemClick: (ContentItemUiModel) -> Unit
 ) {
     LazyColumn(
@@ -114,7 +113,7 @@ internal fun DetailList(
                         Cgv(
                             uiModel = item.cgv,
                             onClick = {
-                                analytics.clickCgvInfo()
+                                viewModel.clickCgvInfo()
                                 ctx.executeWeb(item.cgv.webLink)
                             },
                             modifier = Modifier.weight(1f),
@@ -122,7 +121,7 @@ internal fun DetailList(
                         Lotte(
                             uiModel = item.lotte,
                             onClick = {
-                                analytics.clickLotteInfo()
+                                viewModel.clickLotteInfo()
                                 ctx.executeWeb(item.lotte.webLink)
                             },
                             modifier = Modifier.weight(1f),
@@ -130,7 +129,7 @@ internal fun DetailList(
                         Megabox(
                             uiModel = item.megabox,
                             onClick = {
-                                analytics.clickMegaboxInfo()
+                                viewModel.clickMegaboxInfo()
                                 ctx.executeWeb(item.megabox.webLink)
                             },
                             modifier = Modifier.weight(1f),

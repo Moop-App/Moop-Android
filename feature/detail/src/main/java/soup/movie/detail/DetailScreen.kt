@@ -15,7 +15,6 @@
  */
 package soup.movie.detail
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.ClickableText
@@ -36,17 +35,12 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import soup.movie.analytics.EventAnalytics
 import soup.movie.ext.executeWeb
-import soup.movie.model.Movie
 import soup.movie.util.YouTube
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun DetailScreen(
-    movie: Movie,
     viewModel: DetailViewModel,
-    analytics: EventAnalytics,
     onShareClick: () -> Unit,
     onPosterClick: () -> Unit,
 ) {
@@ -55,13 +49,12 @@ internal fun DetailScreen(
     val context = LocalContext.current
     DetailContent(
         viewModel = viewModel,
-        analytics = analytics,
         onPosterClick = {
-            analytics.clickPoster()
+            viewModel.clickPoster()
             onPosterClick()
         },
         onShareClick = {
-            analytics.clickShare()
+            viewModel.clickShare()
             onShareClick()
         },
         onItemClick = { item ->
@@ -79,11 +72,11 @@ internal fun DetailScreen(
                     showPrivacyDialog = true
                 }
                 is TrailerItemUiModel -> {
-                    analytics.clickTrailer()
+                    viewModel.clickTrailer()
                     YouTube.executeApp(context, item.trailer)
                 }
                 is TrailerFooterItemUiModel -> {
-                    analytics.clickMoreTrailers()
+                    viewModel.clickMoreTrailers()
                     YouTube.executeAppWithQuery(context, item.movieTitle)
                 }
                 else -> {}

@@ -15,6 +15,7 @@
  */
 package soup.movie.detail
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,21 +40,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ShareCompat
+import soup.movie.model.Movie
+import soup.movie.spec.FirebaseLink
+import soup.movie.spec.KakaoLink
 
 @Composable
 internal fun DetailShare(
-    onClick: () -> Unit,
-    onShareClick: (ShareTarget) -> Unit,
+    movie: Movie,
+    onClose: () -> Unit,
+    onShareInstagram: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
     Column(
         modifier = modifier
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
-                onClick = onClick,
+                onClick = onClose,
             )
             .fillMaxSize()
             .padding(
@@ -68,7 +76,9 @@ internal fun DetailShare(
     ) {
         Spacer(modifier = Modifier.requiredSize(48.dp))
         IconButton(
-            onClick = { onShareClick(ShareTarget.Facebook) },
+            onClick = {
+                context.shareText(movie, "com.facebook.katana")
+            },
             modifier = Modifier.padding(top = 4.dp),
         ) {
             Surface(
@@ -83,7 +93,9 @@ internal fun DetailShare(
             }
         }
         IconButton(
-            onClick = { onShareClick(ShareTarget.Twitter) },
+            onClick = {
+                context.shareText(movie, "com.twitter.android")
+            },
             modifier = Modifier.padding(top = 4.dp),
         ) {
             Surface(
@@ -98,7 +110,7 @@ internal fun DetailShare(
             }
         }
         IconButton(
-            onClick = { onShareClick(ShareTarget.Instagram) },
+            onClick = { onShareInstagram() },
             modifier = Modifier.padding(top = 4.dp),
         ) {
             Surface(
@@ -113,7 +125,9 @@ internal fun DetailShare(
             }
         }
         IconButton(
-            onClick = { onShareClick(ShareTarget.LINE) },
+            onClick = {
+                context.shareText(movie, "jp.naver.line.android")
+            },
             modifier = Modifier.padding(top = 4.dp),
         ) {
             Surface(
@@ -128,7 +142,9 @@ internal fun DetailShare(
             }
         }
         IconButton(
-            onClick = { onShareClick(ShareTarget.KakaoLink) },
+            onClick = {
+                KakaoLink.share(context, movie)
+            },
             modifier = Modifier.padding(top = 4.dp),
         ) {
             Surface(
@@ -143,7 +159,9 @@ internal fun DetailShare(
             }
         }
         IconButton(
-            onClick = { onShareClick(ShareTarget.Others) },
+            onClick = {
+                context.shareText(movie)
+            },
             modifier = Modifier.padding(top = 4.dp),
         ) {
             Surface(
@@ -157,5 +175,20 @@ internal fun DetailShare(
                 )
             }
         }
+    }
+}
+
+private fun Context.shareText(movie: Movie, packageName: String? = null) {
+    FirebaseLink.createDetailLink(movie) { link ->
+        ShareCompat.IntentBuilder(this)
+            .setChooserTitle(R.string.action_share)
+            .setText("[뭅] ${movie.title}\n$link")
+            .setType("text/plain")
+            .apply {
+                if (packageName != null) {
+                    intent.setPackage(packageName)
+                }
+            }
+            .startChooser()
     }
 }
