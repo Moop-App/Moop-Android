@@ -141,10 +141,10 @@ com.google.android.play:core:1.10.3
 com.google.android.ump:user-messaging-platform:1.0.0
 com.google.code.findbugs:jsr305:3.0.2
 com.google.code.gson:gson:2.8.6
-com.google.dagger:dagger-lint-aar:2.42
-com.google.dagger:dagger:2.42
-com.google.dagger:hilt-android:2.42
-com.google.dagger:hilt-core:2.42
+com.google.dagger:dagger-lint-aar:2.43
+com.google.dagger:dagger:2.43
+com.google.dagger:hilt-android:2.43
+com.google.dagger:hilt-core:2.43
 com.google.firebase:firebase-abt:21.0.0
 com.google.firebase:firebase-analytics-ktx:20.0.0
 com.google.firebase:firebase-analytics:20.0.0
