@@ -22,11 +22,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.nativead.NativeAd
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.ads.AdsManager
+import soup.movie.analytics.EventAnalytics
 import soup.movie.device.ImageUriProvider
 import soup.movie.ext.screenDays
 import soup.movie.model.Movie
@@ -43,13 +42,16 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val repository: MovieRepository,
+    private val analytics: EventAnalytics,
     private val imageUriProvider: ImageUriProvider,
-    private val adsManager: AdsManager
+    private val adsManager: AdsManager,
 ) : ViewModel() {
 
-    private lateinit var movie: Movie
-    private var movieDetail: MovieDetail? = null
     private var nativeAd: NativeAd? = null
+
+    private val _movie = MutableLiveData<Movie>()
+    val movie: LiveData<Movie>
+        get() = _movie
 
     private val _headerUiModel = MutableLiveData<HeaderUiModel>()
     val headerUiModel: LiveData<HeaderUiModel>
@@ -72,17 +74,12 @@ class DetailViewModel @Inject constructor(
         get() = _isError
 
     fun init(movie: Movie) {
-        this.movie = movie
+        _movie.value = movie
         _headerUiModel.value = HeaderUiModel(movie)
         viewModelScope.launch {
             // FIXME: Elvis operator (?:) is used because of lint rule error https://issuetracker.google.com/issues/169249668
             _favoriteUiModel.postValue(repository.isFavoriteMovie(movie.id) ?: false)
-            val minDelay = async { delay(500) }
-            val loadDetail = async {
-                loadDetail(movie)
-            }
-            minDelay.await()
-            movieDetail = loadDetail.await()?.also {
+            loadDetail(movie)?.also {
                 renderDetail(it, getNativeAd())
             }
             withContext(Dispatchers.IO) {
@@ -113,29 +110,26 @@ class DetailViewModel @Inject constructor(
     private suspend fun renderDetail(
         detail: MovieDetail,
         nativeAd: NativeAd?
-    ) = withContext(Dispatchers.Default) {
-        _headerUiModel.postValue(
-            HeaderUiModel(
-                movie = movie,
-                showTm = detail.showTm ?: 0,
-                nations = detail.nations.orEmpty(),
-                companies = detail.companies.orEmpty()
+    ) {
+        val movie = _movie.value ?: return
+        withContext(Dispatchers.Default) {
+            _headerUiModel.postValue(
+                HeaderUiModel(
+                    movie = movie,
+                    showTm = detail.showTm ?: 0,
+                    nations = detail.nations.orEmpty(),
+                    companies = detail.companies.orEmpty()
+                )
             )
-        )
-        _contentUiModel.postValue(detail.toContentUiModel(nativeAd))
-    }
-
-    fun requestShareText(target: ShareTarget) {
-        viewModelScope.launch {
-            _uiEvent.event = ShareAction.Text(target)
+            _contentUiModel.postValue(detail.toContentUiModel(nativeAd))
         }
     }
 
-    fun requestShareImage(target: ShareTarget, imageUrl: String) {
+    fun requestShareImage(imageUrl: String) {
         viewModelScope.launch {
             val uri = imageUriProvider(imageUrl)
             _uiEvent.event = if (uri != null) {
-                ShareAction.Image(target, uri, "image/*")
+                ShareImageAction(uri, "image/*")
             } else {
                 ToastAction(R.string.action_share_poster_failed)
             }
@@ -246,6 +240,7 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onFavoriteButtonClick(isFavorite: Boolean) {
+        val movie = _movie.value ?: return
         viewModelScope.launch(Dispatchers.IO) {
             if (isFavorite) {
                 repository.addFavoriteMovie(movie)
@@ -267,8 +262,9 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onRetryClick() {
+        val movie = _movie.value ?: return
         viewModelScope.launch {
-            movieDetail = loadDetail(movie)?.also { renderDetail(it, getNativeAd()) }
+            loadDetail(movie)?.also { renderDetail(it, getNativeAd()) }
         }
     }
 
@@ -276,8 +272,35 @@ class DetailViewModel @Inject constructor(
         return adsManager.getLoadedNativeAd()
     }
 
-    companion object {
+    fun clickPoster() {
+        analytics.clickPoster()
+    }
 
+    fun clickShare() {
+        analytics.clickShare()
+    }
+
+    fun clickTrailer() {
+        analytics.clickTrailer()
+    }
+
+    fun clickMoreTrailers() {
+        analytics.clickMoreTrailers()
+    }
+
+    fun clickCgvInfo() {
+        analytics.clickCgvInfo()
+    }
+
+    fun clickLotteInfo() {
+        analytics.clickLotteInfo()
+    }
+
+    fun clickMegaboxInfo() {
+        analytics.clickMegaboxInfo()
+    }
+
+    companion object {
         private const val NO_RATING = "평점없음"
     }
 }

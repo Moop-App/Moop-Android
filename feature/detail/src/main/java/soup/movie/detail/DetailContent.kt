@@ -23,12 +23,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import soup.movie.analytics.EventAnalytics
 
 @Composable
 internal fun DetailContent(
     viewModel: DetailViewModel,
-    analytics: EventAnalytics,
     onPosterClick: () -> Unit,
     onShareClick: () -> Unit,
     onItemClick: (ContentItemUiModel) -> Unit,
@@ -74,7 +72,7 @@ internal fun DetailContent(
                     }
                 },
                 items = it.items,
-                analytics = analytics,
+                viewModel = viewModel,
                 onItemClick = { item -> onItemClick(item) }
             )
         }

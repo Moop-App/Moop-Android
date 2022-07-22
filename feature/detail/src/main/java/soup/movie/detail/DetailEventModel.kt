@@ -22,27 +22,10 @@ import androidx.annotation.StringRes
 sealed class UiEvent
 
 @Keep
-sealed class ShareAction : UiEvent() {
-
-    class Text(
-        val target: ShareTarget
-    ) : ShareAction()
-
-    class Image(
-        val target: ShareTarget,
-        val imageUri: Uri,
-        val mimeType: String
-    ) : ShareAction()
-}
-
-enum class ShareTarget {
-    Facebook,
-    Twitter,
-    Instagram,
-    LINE,
-    KakaoLink,
-    Others
-}
+class ShareImageAction(
+    val imageUri: Uri,
+    val mimeType: String,
+) : UiEvent()
 
 @Keep
 class ToastAction(
