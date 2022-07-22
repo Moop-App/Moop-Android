@@ -3,8 +3,6 @@
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="ic_launcher_background_dark">#000000</color>
 
-    <color name="transparent">#00FFFFFF</color>
-
     <color name="tag_favorite">#FFF44336</color>
 
     <color name="chip_cgv_bg">#FFFFFFFF</color>
@@ -15,7 +13,4 @@
 
     <color name="chip_megabox_bg">#FF352263</color>
     <color name="chip_megabox_text">#FFFFFFFF</color>
-
-    <color name="system_ui_scrim_light">#B3FFFFFF</color> <!-- 70% white -->
-    <color name="system_ui_scrim_dark">#40000000</color> <!-- 25% black -->
 </resources>

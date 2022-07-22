@@ -26,6 +26,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,8 +66,8 @@ internal fun CgvFilterChip(
             enabled = enabled,
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             colors = ChipDefaults.filterChipColors(
-                checkedBackgroundColor = Color.White,
-                checkedContentColor = Color(0xFFE51F20),
+                checkedBackgroundColor = colorResource(R.color.chip_cgv_bg),
+                checkedContentColor = colorResource(R.color.chip_cgv_text),
                 uncheckedBackgroundColor = Color(0x55FFFFFF),
                 uncheckedContentColor = Color(0x66000000)
             )
