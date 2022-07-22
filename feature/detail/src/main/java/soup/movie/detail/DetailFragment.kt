@@ -22,14 +22,11 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.ui.MovieTheme
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
-
-    private val args: DetailFragmentArgs by navArgs()
 
     private val viewModel: DetailViewModel by viewModels()
 
@@ -38,12 +35,10 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.init(args.movie)
         return ComposeView(requireContext()).apply {
             setContent {
                 MovieTheme {
                     DetailNavGraph(
-                        movie = args.movie,
                         viewModel = viewModel,
                     )
                 }

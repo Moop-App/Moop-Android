@@ -34,15 +34,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
 import soup.compose.material.motion.circularReveal
 import soup.movie.ext.showToast
-import soup.movie.model.Movie
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun DetailNavGraph(
-    movie: Movie,
     viewModel: DetailViewModel,
 ) {
     Box {
+        val movie by viewModel.movie
         var showShare by remember { mutableStateOf(false) }
         var showPoster by remember { mutableStateOf(false) }
         BackHandler(
