@@ -44,7 +44,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import soup.movie.ext.getDDayLabel
 import soup.movie.ext.isBest
 import soup.movie.ext.isDDay
@@ -103,8 +103,8 @@ private fun MovieItem(
             elevation = 0.dp
         ) {
             Box {
-                Image(
-                    painter = rememberAsyncImagePainter(movie.posterUrl),
+                AsyncImage(
+                    movie.posterUrl,
                     contentDescription = movie.title,
                     modifier = Modifier
                         .aspectRatio(27 / 40f)

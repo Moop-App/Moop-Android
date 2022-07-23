@@ -79,7 +79,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.detail.widget.NativeAdView
 import soup.movie.ext.executeWeb
@@ -797,11 +797,9 @@ private fun TrailerItem(
                 .requiredHeight(100.dp)
                 .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
-            Image(
-                painter = rememberAsyncImagePainter(
-                    model = uiModel.trailer.thumbnailUrl,
-                    placeholder = ColorPainter(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)),
-                ),
+            AsyncImage(
+                uiModel.trailer.thumbnailUrl,
+                placeholder = ColorPainter(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
