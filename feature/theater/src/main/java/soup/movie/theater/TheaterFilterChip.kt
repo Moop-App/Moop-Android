@@ -19,18 +19,25 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.model.Theater
+import soup.movie.ui.cgvBg
+import soup.movie.ui.cgvText
+import soup.movie.ui.lotteText
+import soup.movie.ui.megaboxText
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -72,21 +79,25 @@ private fun CgvFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    painterResource(R.drawable.ic_logo_cgv),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(
+                        Color.Black.copy(alpha = 0.2f)
+                    ),
                 )
             },
             checkedIcon = {
                 Image(
-                    painterResource(R.drawable.ic_check_cgv),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.cgvText),
                 )
             },
             enabled = enabled,
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             colors = ChipDefaults.filterChipColors(
-                checkedBackgroundColor = Color.White,
-                checkedContentColor = Color(0xFFE51F20),
+                checkedBackgroundColor = MaterialTheme.colors.cgvBg,
+                checkedContentColor = MaterialTheme.colors.cgvText,
                 uncheckedBackgroundColor = Color(0x55FFFFFF),
                 uncheckedContentColor = Color(0x66000000)
             )
@@ -114,14 +125,18 @@ private fun LotteFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    painterResource(R.drawable.ic_logo_lotte),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(
+                        MaterialTheme.colors.lotteText.copy(alpha = 0.4f)
+                    ),
                 )
             },
             checkedIcon = {
                 Image(
-                    painterResource(R.drawable.ic_check_lotte),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.lotteText),
                 )
             },
             enabled = enabled,
@@ -155,14 +170,18 @@ private fun MegaboxFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    painterResource(R.drawable.ic_logo_megabox),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(
+                        MaterialTheme.colors.megaboxText.copy(alpha = 0.4f)
+                    ),
                 )
             },
             checkedIcon = {
                 Image(
-                    painterResource(R.drawable.ic_check_megabox),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.megaboxText),
                 )
             },
             enabled = enabled,

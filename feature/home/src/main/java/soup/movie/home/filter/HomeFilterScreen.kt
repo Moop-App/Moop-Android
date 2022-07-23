@@ -34,6 +34,8 @@ import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
@@ -43,7 +45,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -260,14 +262,18 @@ private fun GenreFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    painterResource(R.drawable.ic_logo_genre),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(
+                        Color.Black.copy(alpha = 0.2f)
+                    ),
                 )
             },
             checkedIcon = {
                 Image(
-                    painterResource(R.drawable.ic_check_genre),
-                    contentDescription = null
+                    Icons.Rounded.Check,
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(Color(0x88000000)),
                 )
             },
             enabled = enabled,

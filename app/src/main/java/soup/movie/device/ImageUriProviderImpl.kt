@@ -17,15 +17,17 @@ package soup.movie.device
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.annotation.WorkerThread
 import androidx.core.content.FileProvider
+import coil.imageLoader
+import coil.request.ImageRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import soup.movie.BuildConfig
-import soup.movie.ext.loadAsync
-import soup.movie.ext.toCacheFile
 import java.io.File
+import java.io.FileOutputStream
 
 /**
  * A class responsible for resolving an image as identified by Url into a sharable [Uri].
@@ -36,34 +38,56 @@ class ImageUriProviderImpl(context: Context) : ImageUriProvider {
     private val appContext = context.applicationContext
 
     override suspend operator fun invoke(url: String): Uri? {
-        val bitmap = appContext.loadAsync(url) ?: return null
-        return bitmap
-            .toCacheFile(
+        val request = ImageRequest.Builder(appContext)
+            .data(url)
+            .build()
+        val result = appContext.imageLoader.execute(request).drawable
+        val bitmap = (result as? BitmapDrawable)?.bitmap ?: return null
+        return imageUriOf(
+            bitmap.toCacheFile(
                 appContext,
                 folderName = CACHE_DIRECTORY_NAME,
                 fileName = url.substring(url.lastIndexOf('/') + 1)
             )
-            .toImageUri()
+        )
     }
 
     override suspend operator fun invoke(file: File): Uri {
-        return file.toImageUri()
+        return imageUriOf(file)
     }
 
     override suspend operator fun invoke(bitmap: Bitmap): Uri {
-        return bitmap
-            .toCacheFile(
+        return imageUriOf(
+            bitmap.toCacheFile(
                 appContext,
                 folderName = CACHE_DIRECTORY_NAME,
                 fileName = "share.jpg"
             )
-            .toImageUri()
+        )
     }
 
     @WorkerThread
-    private suspend fun File.toImageUri(): Uri {
+    private suspend fun imageUriOf(file: File): Uri {
         return withContext(Dispatchers.IO) {
-            FileProvider.getUriForFile(appContext, BuildConfig.FILES_AUTHORITY, this@toImageUri)
+            FileProvider.getUriForFile(appContext, BuildConfig.FILES_AUTHORITY, file)
+        }
+    }
+
+    private fun Bitmap.toCacheFile(
+        context: Context,
+        folderName: String? = null,
+        fileName: String
+    ): File {
+        val cacheDir = if (folderName.isNullOrBlank()) {
+            context.cacheDir
+        } else {
+            File(context.cacheDir, folderName).apply { mkdirs() }
+        }
+        return File(cacheDir, fileName).apply {
+            FileOutputStream(this).use {
+                compress(Bitmap.CompressFormat.JPEG, 100, it)
+                it.flush()
+            }
         }
     }
 

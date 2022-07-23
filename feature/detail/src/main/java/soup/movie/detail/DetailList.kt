@@ -70,7 +70,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -83,6 +82,14 @@ import coil.compose.rememberAsyncImagePainter
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.detail.widget.NativeAdView
 import soup.movie.ext.executeWeb
+import soup.movie.ui.cgvBg
+import soup.movie.ui.cgvText
+import soup.movie.ui.lotteBg
+import soup.movie.ui.lotteText
+import soup.movie.ui.megaboxBg
+import soup.movie.ui.megaboxText
+import soup.movie.ui.naver
+import soup.movie.ui.star
 
 @Composable
 internal fun DetailList(
@@ -335,8 +342,8 @@ private fun Cgv(
             Chip(
                 onClick = onClick,
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = colorResource(R.color.chip_cgv_bg),
-                    contentColor = colorResource(R.color.chip_cgv_text),
+                    backgroundColor = MaterialTheme.colors.cgvBg,
+                    contentColor = MaterialTheme.colors.cgvText,
                 ),
                 border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             ) {
@@ -385,8 +392,8 @@ private fun Lotte(
             Chip(
                 onClick = onClick,
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = colorResource(R.color.chip_lotte_bg),
-                    contentColor = colorResource(R.color.chip_lotte_text),
+                    backgroundColor = MaterialTheme.colors.lotteBg,
+                    contentColor = MaterialTheme.colors.lotteText,
                 ),
             ) {
                 Text(
@@ -434,8 +441,8 @@ private fun Megabox(
             Chip(
                 onClick = onClick,
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = colorResource(R.color.chip_megabox_bg),
-                    contentColor = colorResource(R.color.chip_megabox_text),
+                    backgroundColor = MaterialTheme.colors.megaboxBg,
+                    contentColor = MaterialTheme.colors.megaboxText,
                 ),
             ) {
                 Text(

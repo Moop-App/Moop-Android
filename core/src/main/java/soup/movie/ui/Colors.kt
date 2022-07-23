@@ -24,3 +24,34 @@ val Colors.divider: Color
     } else {
         Color(0xFF212121)
     }
+
+val Colors.star: Color
+    get() = Color(0xFFFFC107)
+
+val Colors.detailShareDim: Color
+    get() = if (isLight) {
+        Color(0xDDFFFFFF)
+    } else {
+        Color(0xAA000000)
+    }
+
+val Colors.naver: Color
+    get() = Color(0xFF1EC800)
+
+val Colors.cgvBg: Color
+    get() = Color.White
+
+val Colors.cgvText: Color
+    get() = Color(0xFFE51F20)
+
+val Colors.lotteBg: Color
+    get() = Color(0xFFED1D24)
+
+val Colors.lotteText: Color
+    get() = Color.White
+
+val Colors.megaboxBg: Color
+    get() = Color(0xFF352263)
+
+val Colors.megaboxText: Color
+    get() = Color.White

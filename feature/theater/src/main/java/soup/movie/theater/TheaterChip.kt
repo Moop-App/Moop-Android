@@ -18,6 +18,7 @@ package soup.movie.theater
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ActionChip
 import soup.metronome.material.chip.ChipDefaults
 import soup.movie.model.Theater
+import soup.movie.ui.cgvText
 import soup.movie.util.debounce
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -69,7 +71,7 @@ private fun CgvChip(
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             colors = ChipDefaults.actionChipColors(
                 backgroundColor = Color.White,
-                contentColor = Color(0xFFE51F20)
+                contentColor = MaterialTheme.colors.cgvText,
             )
         ) {
             Text(
