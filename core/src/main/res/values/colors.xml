@@ -2,15 +2,4 @@
 <resources>
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="ic_launcher_background_dark">#000000</color>
-
-    <color name="tag_favorite">#FFF44336</color>
-
-    <color name="chip_cgv_bg">#FFFFFFFF</color>
-    <color name="chip_cgv_text">#FFE51F20</color>
-
-    <color name="chip_lotte_bg">#FFED1D24</color>
-    <color name="chip_lotte_text">#FFFFFFFF</color>
-
-    <color name="chip_megabox_bg">#FF352263</color>
-    <color name="chip_megabox_text">#FFFFFFFF</color>
 </resources>

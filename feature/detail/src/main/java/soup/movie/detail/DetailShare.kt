@@ -47,6 +47,7 @@ import androidx.core.app.ShareCompat
 import soup.movie.model.Movie
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
+import soup.movie.ui.detailShareDim
 
 @Composable
 internal fun DetailShare(

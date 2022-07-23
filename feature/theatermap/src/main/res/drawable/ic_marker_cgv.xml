@@ -25,7 +25,7 @@
             android:strokeColor="#FFFFFFFF" />
     </group>
     <path
-        android:fillColor="@color/chip_cgv_bg"
+        android:fillColor="#FFFFFFFF"
         android:pathData="M11.99,2C6.47,2 2,6.48 2,12s4.47,10 9.99,10C17.52,22 22,17.52 22,12S17.52,2 11.99,2z" />
     <group
         android:pivotX="10"
@@ -37,7 +37,7 @@
         <path
             android:pathData="M10,6 c0,2.2 -1.8,4 -4,4 c-2.2,0 -4,-1.8 -4,-4 c0,-2.2 1.8,-4 4,-4"
             android:strokeWidth="2"
-            android:strokeColor="@color/chip_cgv_text"
+            android:strokeColor="#FFE51F20"
             android:strokeLineCap="round" />
     </group>
     <group
@@ -50,12 +50,12 @@
         <path
             android:pathData="M10,6 c0,2.2 -1.8,4 -4,4 c-2.2,0 -4,-1.8 -4,-4 c0,-2.2 1.8,-4 4,-4"
             android:strokeWidth="2"
-            android:strokeColor="@color/chip_cgv_text"
+            android:strokeColor="#FFE51F20"
             android:strokeLineCap="round" />
         <path
             android:pathData="M7,6l3,0z"
             android:strokeWidth="2"
-            android:strokeColor="@color/chip_cgv_text"
+            android:strokeColor="#FFE51F20"
             android:strokeLineCap="round"
             android:strokeLineJoin="round" />
     </group>
@@ -69,7 +69,7 @@
         <path
             android:pathData="M2,2l4,8l4,-8"
             android:strokeWidth="2"
-            android:strokeColor="@color/chip_cgv_text"
+            android:strokeColor="#FFE51F20"
             android:strokeLineCap="round"
             android:strokeLineJoin="round" />
     </group>

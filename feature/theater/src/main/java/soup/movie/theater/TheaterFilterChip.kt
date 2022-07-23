@@ -19,6 +19,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
@@ -28,12 +29,15 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.model.Theater
+import soup.movie.ui.cgvBg
+import soup.movie.ui.cgvText
+import soup.movie.ui.lotteText
+import soup.movie.ui.megaboxText
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -86,14 +90,14 @@ private fun CgvFilterChip(
                 Image(
                     Icons.Rounded.Check,
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(R.color.chip_cgv_text)),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.cgvText),
                 )
             },
             enabled = enabled,
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             colors = ChipDefaults.filterChipColors(
-                checkedBackgroundColor = colorResource(R.color.chip_cgv_bg),
-                checkedContentColor = colorResource(R.color.chip_cgv_text),
+                checkedBackgroundColor = MaterialTheme.colors.cgvBg,
+                checkedContentColor = MaterialTheme.colors.cgvText,
                 uncheckedBackgroundColor = Color(0x55FFFFFF),
                 uncheckedContentColor = Color(0x66000000)
             )
@@ -124,7 +128,7 @@ private fun LotteFilterChip(
                     Icons.Rounded.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
-                        colorResource(R.color.chip_lotte_text).copy(alpha = 0.4f)
+                        MaterialTheme.colors.lotteText.copy(alpha = 0.4f)
                     ),
                 )
             },
@@ -132,7 +136,7 @@ private fun LotteFilterChip(
                 Image(
                     Icons.Rounded.Check,
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(R.color.chip_lotte_text)),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.lotteText),
                 )
             },
             enabled = enabled,
@@ -169,7 +173,7 @@ private fun MegaboxFilterChip(
                     Icons.Rounded.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
-                        colorResource(R.color.chip_megabox_text).copy(alpha = 0.4f)
+                        MaterialTheme.colors.megaboxText.copy(alpha = 0.4f)
                     ),
                 )
             },
@@ -177,7 +181,7 @@ private fun MegaboxFilterChip(
                 Image(
                     Icons.Rounded.Check,
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(colorResource(R.color.chip_megabox_text)),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.megaboxText),
                 )
             },
             enabled = enabled,
