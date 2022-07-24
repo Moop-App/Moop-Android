@@ -48,7 +48,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import soup.movie.ext.getAgeLabel
 import soup.movie.ext.getDDayLabel
 import soup.movie.ext.isBest
@@ -93,8 +93,8 @@ internal fun DetailHeader(
                     elevation = 0.dp,
                     modifier = Modifier.padding(end = 18.dp),
                 ) {
-                    Image(
-                        painter = rememberAsyncImagePainter(movie.posterUrl),
+                    AsyncImage(
+                        movie.posterUrl,
                         contentDescription = movie.title,
                         modifier = Modifier
                             .requiredWidthIn(max = 110.dp)
