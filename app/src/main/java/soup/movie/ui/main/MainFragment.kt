@@ -23,6 +23,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import soup.movie.core.MainDirections.Companion.actionToDetail
+import soup.movie.core.MainDirections.Companion.actionToTheaterMap
 import soup.movie.ui.MovieTheme
 import soup.movie.ui.windowsizeclass.calculateWindowSizeClass
 
@@ -40,10 +42,10 @@ class MainFragment : Fragment() {
                     MainNavGraph(
                         widthSizeClass = calculateWindowSizeClass(requireActivity()).widthSizeClass,
                         onTheaterMapClick = {
-                            findNavController().navigate(MainFragmentDirections.actionToTheaterMap())
+                            findNavController().navigate(actionToTheaterMap())
                         },
                         onMovieItemClick = { movie ->
-                            findNavController().navigate(MainFragmentDirections.actionToDetail(movie))
+                            findNavController().navigate(actionToDetail(movieId = movie.id))
                         }
                     )
                 }

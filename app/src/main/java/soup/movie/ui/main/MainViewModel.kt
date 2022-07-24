@@ -21,14 +21,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import soup.movie.ads.AdsManager
-import soup.movie.model.repository.MovieRepository
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: MovieRepository,
     adsManager: AdsManager
 ) : ViewModel() {
 
@@ -43,11 +41,6 @@ class MainViewModel @Inject constructor(
     }
 
     fun requestMovie(movieId: String) {
-        viewModelScope.launch {
-            val movie = repository.findMovie(movieId)
-            if (movie != null) {
-                _uiEvent.event = MainUiEvent.ShowDetailUiEvent(movie)
-            }
-        }
+        _uiEvent.event = MainUiEvent.ShowDetailUiEvent(movieId)
     }
 }

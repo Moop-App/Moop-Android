@@ -30,7 +30,6 @@ interface MovieRepository {
     suspend fun updatePlanMovieList()
     suspend fun getMovieDetail(movieId: String): MovieDetail
     suspend fun getGenreList(): List<String>
-    suspend fun findMovie(movieId: String): Movie?
     suspend fun searchMovie(query: String): List<Movie>
     suspend fun getCodeList(): TheaterAreaGroup
 

@@ -200,8 +200,8 @@ io.github.aakira:napier:1.4.1
 io.github.fornewid:material-motion-compose-core:0.10.0-alpha
 io.github.fornewid:material-motion-compose-navigation:0.10.0-alpha
 javax.inject:javax.inject:1
-org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.7.10
-org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.10
+org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.6.10
+org.jetbrains.kotlin:kotlin-parcelize-runtime:1.6.10
 org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10
 org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10

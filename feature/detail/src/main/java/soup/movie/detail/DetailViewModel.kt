@@ -15,7 +15,6 @@
  */
 package soup.movie.detail
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -34,6 +33,7 @@ import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.repository.MovieRepository
+import soup.movie.model.toMovie
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData
 import soup.movie.util.MM_DD
@@ -52,8 +52,11 @@ class DetailViewModel @Inject constructor(
 
     private var nativeAd: NativeAd? = null
 
-    private val _movie: Movie = savedStateHandle["movie"]!!
-    val movie = mutableStateOf(_movie)
+    private val movieId: String = savedStateHandle["movieId"]!!
+
+    private val _movie = MutableLiveData<Movie>()
+    val movie: LiveData<Movie>
+        get() = _movie
 
     private val _headerUiModel = MutableLiveData<HeaderUiModel>()
     val headerUiModel: LiveData<HeaderUiModel>
@@ -76,11 +79,10 @@ class DetailViewModel @Inject constructor(
         get() = _isError
 
     init {
-        _headerUiModel.value = HeaderUiModel(this._movie)
         viewModelScope.launch {
             // FIXME: Elvis operator (?:) is used because of lint rule error https://issuetracker.google.com/issues/169249668
-            _favoriteUiModel.postValue(repository.isFavoriteMovie(_movie.id) ?: false)
-            loadDetail(_movie)?.also {
+            _favoriteUiModel.postValue(repository.isFavoriteMovie(movieId) ?: false)
+            loadDetail(movieId)?.also {
                 renderDetail(it, getNativeAd())
             }
             withContext(Dispatchers.IO) {
@@ -95,11 +97,11 @@ class DetailViewModel @Inject constructor(
         super.onCleared()
     }
 
-    private suspend fun loadDetail(movie: Movie): MovieDetail? {
+    private suspend fun loadDetail(movieId: String): MovieDetail? {
         _isError.postValue(false)
         try {
             return withContext(Dispatchers.IO) {
-                repository.getMovieDetail(movie.id)
+                repository.getMovieDetail(movieId)
             }
         } catch (t: Throwable) {
             Timber.w(t)
@@ -113,9 +115,11 @@ class DetailViewModel @Inject constructor(
         nativeAd: NativeAd?
     ) {
         withContext(Dispatchers.Default) {
+            val movie = detail.toMovie()
+            _movie.postValue(movie)
             _headerUiModel.postValue(
                 HeaderUiModel(
-                    movie = _movie,
+                    movie = movie,
                     showTm = detail.showTm ?: 0,
                     nations = detail.nations.orEmpty(),
                     companies = detail.companies.orEmpty()
@@ -240,21 +244,22 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onFavoriteButtonClick(isFavorite: Boolean) {
+        val movie = _movie.value ?: return
         viewModelScope.launch(Dispatchers.IO) {
             if (isFavorite) {
-                repository.addFavoriteMovie(_movie)
-                if (_movie.isPlan) {
+                repository.addFavoriteMovie(movie)
+                if (movie.isPlan) {
                     repository.insertOpenDateAlarms(
                         OpenDateAlarm(
-                            _movie.id,
-                            _movie.title,
-                            _movie.openDate
+                            movie.id,
+                            movie.title,
+                            movie.openDate
                         )
                     )
                     _uiEvent.postEvent(ToastAction(R.string.action_toast_opendate_alarm))
                 }
             } else {
-                repository.removeFavoriteMovie(_movie.id)
+                repository.removeFavoriteMovie(movie.id)
             }
             _favoriteUiModel.postValue(isFavorite)
         }
@@ -262,7 +267,7 @@ class DetailViewModel @Inject constructor(
 
     fun onRetryClick() {
         viewModelScope.launch {
-            loadDetail(_movie)?.also { renderDetail(it, getNativeAd()) }
+            loadDetail(movieId)?.also { renderDetail(it, getNativeAd()) }
         }
     }
 

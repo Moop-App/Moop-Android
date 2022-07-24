@@ -41,7 +41,6 @@ internal fun DetailNavGraph(
     viewModel: DetailViewModel,
 ) {
     Box {
-        val movie by viewModel.movie
         var showShare by remember { mutableStateOf(false) }
         var showPoster by remember { mutableStateOf(false) }
         BackHandler(
@@ -57,28 +56,31 @@ internal fun DetailNavGraph(
                 showPoster = true
             },
         )
-        DetailShare(
-            movie = movie,
-            onClose = { showShare = false },
-            onShareInstagram = {
-                viewModel.requestShareImage(
-                    imageUrl = movie.posterUrl
-                )
-            },
-            modifier = Modifier.circularReveal(
-                visible = showShare,
-                center = { Offset(x = it.width, y = 0f) }
-            ),
-        )
-        AnimatedVisibility(
-            visible = showPoster,
-            enter = fadeIn(),
-            exit = fadeOut(),
-        ) {
-            DetailPoster(
+        val movie by viewModel.movie.observeAsState()
+        movie?.let { movie ->
+            DetailShare(
                 movie = movie,
-                upPress = { showPoster = false },
+                onClose = { showShare = false },
+                onShareInstagram = {
+                    viewModel.requestShareImage(
+                        imageUrl = it.posterUrl
+                    )
+                },
+                modifier = Modifier.circularReveal(
+                    visible = showShare,
+                    center = { Offset(x = it.width, y = 0f) }
+                ),
             )
+            AnimatedVisibility(
+                visible = showPoster,
+                enter = fadeIn(),
+                exit = fadeOut(),
+            ) {
+                DetailPoster(
+                    movie = movie,
+                    upPress = { showPoster = false },
+                )
+            }
         }
     }
 

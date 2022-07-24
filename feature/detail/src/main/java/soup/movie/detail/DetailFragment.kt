@@ -21,14 +21,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.ui.MovieTheme
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
-
-    private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +37,7 @@ class DetailFragment : Fragment() {
             setContent {
                 MovieTheme {
                     DetailNavGraph(
-                        viewModel = viewModel,
+                        viewModel = hiltViewModel(),
                     )
                 }
             }
