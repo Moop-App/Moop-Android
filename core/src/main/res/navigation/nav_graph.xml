@@ -16,8 +16,8 @@
         android:name="soup.movie.detail.DetailFragment">
 
         <argument
-            android:name="movie"
-            app:argType="soup.movie.model.Movie"
+            android:name="movieId"
+            app:argType="string"
             app:nullable="false" />
     </fragment>
 

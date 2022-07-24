@@ -53,7 +53,7 @@ import soup.movie.ui.detailShareDim
 internal fun DetailShare(
     movie: Movie,
     onClose: () -> Unit,
-    onShareInstagram: () -> Unit,
+    onShareInstagram: (Movie) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -111,7 +111,7 @@ internal fun DetailShare(
             }
         }
         IconButton(
-            onClick = { onShareInstagram() },
+            onClick = { onShareInstagram(movie) },
             modifier = Modifier.padding(top = 4.dp),
         ) {
             Surface(

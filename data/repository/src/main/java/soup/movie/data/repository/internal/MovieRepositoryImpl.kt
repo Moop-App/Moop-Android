@@ -88,11 +88,6 @@ internal class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun findMovie(movieId: String): Movie? {
-        return local.getAllMovieList()
-            .find { it.id == movieId }
-    }
-
     override suspend fun searchMovie(query: String): List<Movie> {
         return local.getAllMovieList().asSequence()
             .filter { it.isMatchedWith(query) }

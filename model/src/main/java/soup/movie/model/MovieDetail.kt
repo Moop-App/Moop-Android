@@ -51,3 +51,23 @@ data class MovieDetail(
     val plot: String?,
     val trailers: List<Trailer>?
 )
+
+fun MovieDetail.toMovie(): Movie {
+    return Movie(
+        id = id,
+        score = score,
+        title = title,
+        posterUrl = posterUrl,
+        openDate = openDate,
+        isNow = isNow,
+        age = age,
+        nationFilter = nationFilter,
+        genres = genres,
+        boxOffice = boxOffice?.rank,
+        theater = TheaterRatings(
+            cgv = cgv?.star,
+            lotte = lotte?.star,
+            megabox = megabox?.star,
+        ),
+    )
+}

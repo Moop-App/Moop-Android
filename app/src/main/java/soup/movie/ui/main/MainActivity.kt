@@ -31,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.R
 import soup.movie.config.Config
 import soup.movie.config.RemoteConfig
-import soup.movie.core.MainDirections
+import soup.movie.core.MainDirections.Companion.actionToDetail
 import soup.movie.ext.observeEvent
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
@@ -103,9 +103,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleEvent(event: MainUiEvent) {
         when (event) {
             is MainUiEvent.ShowDetailUiEvent -> {
-                navHostFragment.findNavController().navigate(
-                    MainDirections.actionToDetail(event.movie)
-                )
+                navHostFragment.findNavController().navigate(actionToDetail(event.movieId))
             }
         }
     }
