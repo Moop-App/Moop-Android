@@ -30,8 +30,8 @@ object KakaoLink {
 
     private const val MOVIE_ID = "movieId"
 
-    fun extractMovieId(intent: Intent): String? {
-        return if (intent.action == Intent.ACTION_VIEW) {
+    fun extractMovieId(intent: Intent?): String? {
+        return if (intent?.action == Intent.ACTION_VIEW) {
             intent.data?.getQueryParameter(MOVIE_ID)
         } else {
             null
