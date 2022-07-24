@@ -36,8 +36,8 @@ buildscript {
 }
 
 plugins {
-    id 'com.diffplug.spotless' version '5.12.4'
-    id "com.google.devtools.ksp" version "1.7.0-1.0.6"
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.dependencyGuard)
 }
 
