@@ -26,9 +26,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
+import soup.movie.data.repository.MovieRepository
 import soup.movie.di.TheaterMapModuleDependencies
 import soup.movie.ext.lazyFast
-import soup.movie.model.repository.MovieRepository
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.theatermap.internal.TheaterMapScreen
 import soup.movie.theatermap.internal.TheaterMapViewModel

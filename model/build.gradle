@@ -1,18 +1,5 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlinx-serialization'
-
-apply from: rootProject.file('gradle/android.gradle')
-
-android.namespace "soup.movie.model"
+apply plugin: 'kotlin'
 
 dependencies {
     implementation libs.kotlin.stdlib
-    implementation libs.kotlin.serialization
-    implementation libs.coroutines.core
-    implementation libs.coroutines.android
-
-    testImplementation libs.test.junit
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.androidx.test.espresso
 }

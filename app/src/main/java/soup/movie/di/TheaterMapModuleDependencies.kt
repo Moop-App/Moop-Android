@@ -18,7 +18,7 @@ package soup.movie.di
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import soup.movie.model.repository.MovieRepository
+import soup.movie.data.repository.MovieRepository
 
 @EntryPoint
 @InstallIn(SingletonComponent::class)

@@ -16,8 +16,15 @@
 package soup.movie.data.api.response
 
 import kotlinx.serialization.Serializable
+import soup.movie.model.RottenTomatoInfo
 
 @Serializable
-data class RottenTomatoInfoResponse(
-    val star: String? = null
+class RottenTomatoInfoResponse(
+    val star: String? = null,
 )
+
+fun RottenTomatoInfoResponse.asModel(): RottenTomatoInfo {
+    return RottenTomatoInfo(
+        star = star,
+    )
+}

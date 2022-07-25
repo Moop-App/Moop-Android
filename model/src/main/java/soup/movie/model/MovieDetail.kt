@@ -52,6 +52,7 @@ data class MovieDetail(
     val trailers: List<Trailer>?
 )
 
+//TODO: remove this
 fun MovieDetail.toMovie(): Movie {
     return Movie(
         id = id,

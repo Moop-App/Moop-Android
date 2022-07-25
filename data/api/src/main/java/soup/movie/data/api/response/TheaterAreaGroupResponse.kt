@@ -16,11 +16,20 @@
 package soup.movie.data.api.response
 
 import kotlinx.serialization.Serializable
+import soup.movie.model.TheaterAreaGroup
 
 @Serializable
-data class TheaterAreaGroupResponse(
+class TheaterAreaGroupResponse(
     val lastUpdateTime: Long,
     val cgv: List<TheaterAreaResponse> = emptyList(),
     val lotte: List<TheaterAreaResponse> = emptyList(),
-    val megabox: List<TheaterAreaResponse> = emptyList()
+    val megabox: List<TheaterAreaResponse> = emptyList(),
 )
+
+fun TheaterAreaGroupResponse.asModel(): TheaterAreaGroup {
+    return TheaterAreaGroup(
+        cgv = cgv.map { it.asModel() },
+        lotte = lotte.map { it.asModel() },
+        megabox = megabox.map { it.asModel() },
+    )
+}

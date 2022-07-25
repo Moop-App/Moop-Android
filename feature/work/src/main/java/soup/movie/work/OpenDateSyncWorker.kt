@@ -30,7 +30,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import soup.movie.model.repository.MovieRepository
+import soup.movie.data.repository.MovieRepository
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 

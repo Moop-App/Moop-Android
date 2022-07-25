@@ -28,8 +28,8 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
+import soup.movie.data.repository.MovieRepository
 import soup.movie.model.OpenDateAlarm
-import soup.movie.model.repository.MovieRepository
 import soup.movie.notification.NotificationBuilder
 import soup.movie.util.YYYY_MM_DD
 import soup.movie.util.currentTime

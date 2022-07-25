@@ -17,6 +17,7 @@ package soup.movie.data.api.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import soup.movie.model.MovieDetail
 
 /**
  * @param genres 장르
@@ -28,12 +29,11 @@ import kotlinx.serialization.Serializable
  * @param boxOffice 박스오피스 정보
  */
 @Serializable
-data class MovieDetailResponse(
+class MovieDetailResponse(
     val id: String,
     val score: Int,
     val title: String,
-    @SerialName("posterUrl")
-    private val _posterUrl: String,
+    val posterUrl: String,
     val openDate: String,
     @SerialName("now")
     val isNow: Boolean,
@@ -55,9 +55,34 @@ data class MovieDetailResponse(
     val rt: RottenTomatoInfoResponse? = null,
     val mc: MetascoreInfoResponse? = null,
     val plot: String? = null,
-    val trailers: List<TrailerResponse>? = null
-) {
+    val trailers: List<TrailerResponse>? = null,
+)
 
-    val posterUrl: String
-        get() = _posterUrl.replaceFirst("http:", "https:")
+fun MovieDetailResponse.asModel(): MovieDetail {
+    return MovieDetail(
+        id = id,
+        score = score,
+        title = title,
+        posterUrl = posterUrl.replaceFirst("http:", "https:"),
+        openDate = openDate,
+        isNow = isNow,
+        age = age,
+        nationFilter = nationFilter,
+        genres = genres,
+        boxOffice = boxOffice?.asModel(),
+        showTm = showTm,
+        nations = nations,
+        directors = directors,
+        actors = actors?.map { it.asModel() },
+        companies = companies?.map { it.asModel() },
+        cgv = cgv?.asModel(),
+        lotte = lotte?.asModel(),
+        megabox = megabox?.asModel(),
+        naver = naver?.asModel(),
+        imdb = imdb?.asModel(),
+        rt = rt?.asModel(),
+        mc = mc?.asModel(),
+        plot = plot,
+        trailers = trailers?.map { it.asModel() },
+    )
 }

@@ -16,18 +16,22 @@
 package soup.movie.data.api.response
 
 import androidx.core.text.parseAsHtml
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import soup.movie.model.Trailer
 
 @Serializable
-data class TrailerResponse(
+class TrailerResponse(
     val youtubeId: String,
-    @SerialName("title")
-    private val _title: String,
+    val title: String,
     val author: String = "",
-    val thumbnailUrl: String? = null
-) {
+    val thumbnailUrl: String? = null,
+)
 
-    val title: String
-        get() = _title.parseAsHtml().toString()
+fun TrailerResponse.asModel(): Trailer {
+    return Trailer(
+        youtubeId = youtubeId,
+        title = title.parseAsHtml().toString(),
+        author = author,
+        thumbnailUrl = thumbnailUrl,
+    )
 }

@@ -17,14 +17,14 @@ package soup.movie.data.api.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import soup.movie.model.Movie
 
 @Serializable
-data class MovieResponse(
+class MovieResponse(
     val id: String,
     val score: Int,
     val title: String,
-    @SerialName("posterUrl")
-    private val _posterUrl: String,
+    val posterUrl: String,
     val openDate: String,
     @SerialName("now")
     val isNow: Boolean,
@@ -32,9 +32,21 @@ data class MovieResponse(
     val nationFilter: List<String>? = null,
     val genres: List<String>? = null,
     val boxOffice: Int? = null,
-    val theater: TheaterRatingsResponse
-) {
+    val theater: TheaterRatingsResponse,
+)
 
-    val posterUrl: String
-        get() = _posterUrl.replaceFirst("http:", "https:")
+fun MovieResponse.asModel(): Movie {
+    return Movie(
+        id = id,
+        score = score,
+        title = title,
+        posterUrl = posterUrl.replaceFirst("http:", "https:"),
+        openDate = openDate,
+        isNow = isNow,
+        age = age,
+        nationFilter = nationFilter,
+        genres = genres,
+        boxOffice = boxOffice,
+        theater = theater.asModel(),
+    )
 }

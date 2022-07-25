@@ -63,6 +63,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.UnelevatedButton
 import soup.movie.ext.startActivitySafely
 import soup.movie.model.Theater
+import soup.movie.model.TheaterType
 import soup.movie.theater.TheaterChip
 import soup.movie.theme.stringResIdOf
 import soup.movie.ui.divider
@@ -378,10 +379,9 @@ private fun SettingsButton(
 
 private fun Context.executeWeb(theater: Theater) {
     return when (theater.type) {
-        Theater.TYPE_CGV -> Cgv.executeWeb(this, theater)
-        Theater.TYPE_LOTTE -> LotteCinema.executeWeb(this, theater)
-        Theater.TYPE_MEGABOX -> Megabox.executeWeb(this, theater)
-        else -> throw IllegalArgumentException("${theater.type} is not valid type.")
+        TheaterType.CGV -> Cgv.executeWeb(this, theater.code)
+        TheaterType.LOTTE -> LotteCinema.executeWeb(this, theater.code)
+        TheaterType.MEGABOX -> Megabox.executeWeb(this, theater.code)
     }
 }
 

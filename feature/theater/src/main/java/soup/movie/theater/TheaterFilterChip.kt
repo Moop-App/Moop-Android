@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.model.Theater
+import soup.movie.model.TheaterType
 import soup.movie.ui.cgvBg
 import soup.movie.ui.cgvText
 import soup.movie.ui.lotteText
@@ -47,17 +48,17 @@ internal fun TheaterFilterChip(
     onCheckedChange: (Boolean) -> Unit
 ) {
     when (theater.type) {
-        Theater.TYPE_CGV -> CgvFilterChip(
+        TheaterType.CGV -> CgvFilterChip(
             text = theater.name,
             checked = checked,
             onCheckedChange = onCheckedChange
         )
-        Theater.TYPE_LOTTE -> LotteFilterChip(
+        TheaterType.LOTTE -> LotteFilterChip(
             text = theater.name,
             checked = checked,
             onCheckedChange = onCheckedChange
         )
-        Theater.TYPE_MEGABOX -> MegaboxFilterChip(
+        TheaterType.MEGABOX -> MegaboxFilterChip(
             text = theater.name,
             checked = checked,
             onCheckedChange = onCheckedChange

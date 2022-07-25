@@ -16,10 +16,19 @@
 package soup.movie.data.api.response
 
 import kotlinx.serialization.Serializable
+import soup.movie.model.LotteInfo
 
 @Serializable
-data class LotteInfoResponse(
+class LotteInfoResponse(
     val id: String,
     val star: String,
-    val url: String? = null
+    val url: String? = null,
 )
+
+fun LotteInfoResponse.asModel(): LotteInfo {
+    return LotteInfo(
+        id = id,
+        star = star,
+        url = url,
+    )
+}
