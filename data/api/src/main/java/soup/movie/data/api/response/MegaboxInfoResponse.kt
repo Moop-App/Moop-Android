@@ -16,10 +16,19 @@
 package soup.movie.data.api.response
 
 import kotlinx.serialization.Serializable
+import soup.movie.model.MegaboxInfo
 
 @Serializable
-data class MegaboxInfoResponse(
+class MegaboxInfoResponse(
     val id: String,
     val star: String,
-    val url: String? = null
+    val url: String? = null,
 )
+
+fun MegaboxInfoResponse.asModel(): MegaboxInfo {
+    return MegaboxInfo(
+        id = id,
+        star = star,
+        url = url,
+    )
+}

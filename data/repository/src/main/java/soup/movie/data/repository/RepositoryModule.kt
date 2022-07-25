@@ -26,7 +26,6 @@ import soup.movie.data.api.RemoteDataSourceFactory
 import soup.movie.data.db.LocalDataSource
 import soup.movie.data.db.LocalDataSourceFactory
 import soup.movie.data.repository.internal.MovieRepositoryImpl
-import soup.movie.model.repository.MovieRepository
 import javax.inject.Singleton
 
 @Module

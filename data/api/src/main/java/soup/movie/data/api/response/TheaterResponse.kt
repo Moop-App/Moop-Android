@@ -16,23 +16,37 @@
 package soup.movie.data.api.response
 
 import kotlinx.serialization.Serializable
+import soup.movie.model.Theater
+import soup.movie.model.TheaterType
 
 @Serializable
-data class TheaterResponse(
+class TheaterResponse(
     val type: String,
     val code: String,
     val name: String,
     val lng: Double,
-    val lat: Double
-) {
+    val lat: Double,
+)
 
-    val id: String
-        get() = "$type:$code"
+fun TheaterResponse.asModel(): Theater {
+    return Theater(
+        id = "$type:$code",
+        type = TheaterTypeParser.parse(type),
+        code = code,
+        name = name,
+        lng = lng,
+        lat = lat,
+    )
+}
 
-    companion object {
+private object TheaterTypeParser {
 
-        const val TYPE_CGV = "C"
-        const val TYPE_LOTTE = "L"
-        const val TYPE_MEGABOX = "M"
+    fun parse(type: String): TheaterType {
+        return when (type) {
+            "C" -> TheaterType.CGV
+            "L" -> TheaterType.LOTTE
+            "M" -> TheaterType.MEGABOX
+            else -> throw IllegalArgumentException("$type is not valid type.")
+        }
     }
 }

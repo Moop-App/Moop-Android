@@ -32,9 +32,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
+import soup.movie.data.repository.MovieRepository
 import soup.movie.ext.isBest
 import soup.movie.model.Movie
-import soup.movie.model.repository.MovieRepository
 import soup.movie.notification.NotificationBuilder
 import soup.movie.util.currentTime
 import soup.movie.util.plusDaysTo

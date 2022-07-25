@@ -17,13 +17,22 @@ package soup.movie.data.api.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import soup.movie.model.TheaterRatings
 
 @Serializable
-data class TheaterRatingsResponse(
+class TheaterRatingsResponse(
     @SerialName("C")
     val cgv: String? = null,
     @SerialName("L")
     val lotte: String? = null,
     @SerialName("M")
-    val megabox: String? = null
+    val megabox: String? = null,
 )
+
+fun TheaterRatingsResponse.asModel(): TheaterRatings {
+    return TheaterRatings(
+        cgv = cgv,
+        lotte = lotte,
+        megabox = megabox,
+    )
+}

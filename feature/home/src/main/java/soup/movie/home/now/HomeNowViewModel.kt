@@ -25,9 +25,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import soup.movie.data.repository.MovieRepository
 import soup.movie.home.domain.getMovieFilterFlow
 import soup.movie.model.Movie
-import soup.movie.model.repository.MovieRepository
 import soup.movie.settings.AppSettings
 import timber.log.Timber
 import javax.inject.Inject

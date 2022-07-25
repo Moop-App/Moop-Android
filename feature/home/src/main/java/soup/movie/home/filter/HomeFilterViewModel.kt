@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import soup.movie.model.repository.MovieRepository
+import soup.movie.data.repository.MovieRepository
 import soup.movie.settings.AppSettings
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.AgeFilter.Companion.FLAG_AGE_12

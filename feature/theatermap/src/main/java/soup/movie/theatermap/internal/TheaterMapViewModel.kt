@@ -23,8 +23,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import soup.movie.data.repository.MovieRepository
 import soup.movie.model.TheaterAreaGroup
-import soup.movie.model.repository.MovieRepository
 import timber.log.Timber
 
 internal class TheaterMapViewModel(

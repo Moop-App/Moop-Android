@@ -24,8 +24,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import soup.movie.data.repository.MovieRepository
 import soup.movie.model.Movie
-import soup.movie.model.repository.MovieRepository
 import javax.inject.Inject
 
 @HiltViewModel

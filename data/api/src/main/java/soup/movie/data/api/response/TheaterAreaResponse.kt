@@ -16,9 +16,17 @@
 package soup.movie.data.api.response
 
 import kotlinx.serialization.Serializable
+import soup.movie.model.TheaterArea
 
 @Serializable
-data class TheaterAreaResponse(
+class TheaterAreaResponse(
     val area: AreaResponse,
-    val theaterList: List<TheaterResponse> = emptyList()
+    val theaterList: List<TheaterResponse> = emptyList(),
 )
+
+fun TheaterAreaResponse.asModel(): TheaterArea {
+    return TheaterArea(
+        area = area.asModel(),
+        theaterList = theaterList.map { it.asModel() },
+    )
+}

@@ -17,21 +17,19 @@ package soup.movie.data.repository.internal
 
 import kotlinx.coroutines.flow.Flow
 import soup.movie.data.api.RemoteDataSource
+import soup.movie.data.api.response.asModel
 import soup.movie.data.db.LocalDataSource
-import soup.movie.data.repository.internal.mapper.toMovieDetail
-import soup.movie.data.repository.internal.mapper.toMovieList
-import soup.movie.data.repository.internal.mapper.toTheaterAreaGroup
+import soup.movie.data.repository.MovieRepository
 import soup.movie.data.repository.internal.util.SearchHelper
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
-import soup.movie.model.repository.MovieRepository
 import timber.log.Timber
 
 internal class MovieRepositoryImpl(
     private val local: LocalDataSource,
-    private val remote: RemoteDataSource
+    private val remote: RemoteDataSource,
 ) : MovieRepository {
 
     override fun getNowMovieList(): Flow<List<Movie>> {
@@ -46,7 +44,7 @@ internal class MovieRepositoryImpl(
             true
         }
         if (isStaleness) {
-            local.saveNowMovieList(remote.getNowMovieList().toMovieList())
+            local.saveNowMovieList(remote.getNowMovieList().asModel())
         }
     }
 
@@ -67,12 +65,12 @@ internal class MovieRepositoryImpl(
             true
         }
         if (isStaleness) {
-            local.savePlanMovieList(remote.getPlanMovieList().toMovieList())
+            local.savePlanMovieList(remote.getPlanMovieList().asModel())
         }
     }
 
     override suspend fun getMovieDetail(movieId: String): MovieDetail {
-        return remote.getMovieDetail(movieId).toMovieDetail()
+        return remote.getMovieDetail(movieId).asModel()
     }
 
     override suspend fun getGenreList(): List<String> {
@@ -101,7 +99,7 @@ internal class MovieRepositoryImpl(
     override suspend fun getCodeList(): TheaterAreaGroup {
         return local.getCodeList()
             ?: remote.getCodeList()
-                .toTheaterAreaGroup()
+                .asModel()
                 .also(local::saveCodeList)
     }
 

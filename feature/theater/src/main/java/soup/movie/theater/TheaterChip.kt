@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ActionChip
 import soup.metronome.material.chip.ChipDefaults
 import soup.movie.model.Theater
+import soup.movie.model.TheaterType
 import soup.movie.ui.cgvText
 import soup.movie.util.debounce
 
@@ -42,15 +43,15 @@ fun TheaterChip(
     onTheaterClick: (Theater) -> Unit = {}
 ) {
     when (theater.type) {
-        Theater.TYPE_CGV -> CgvChip(
+        TheaterType.CGV -> CgvChip(
             text = theater.name,
             onClick = { debounce { onTheaterClick(theater) } }
         )
-        Theater.TYPE_LOTTE -> LotteChip(
+        TheaterType.LOTTE -> LotteChip(
             text = theater.name,
             onClick = { debounce { onTheaterClick(theater) } }
         )
-        Theater.TYPE_MEGABOX -> MegaboxChip(
+        TheaterType.MEGABOX -> MegaboxChip(
             text = theater.name,
             onClick = { debounce { onTheaterClick(theater) } }
         )

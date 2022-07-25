@@ -86,7 +86,6 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
-androidx-transition = "androidx.transition:transition:1.4.1"
 androidx-window = "androidx.window:window:1.1.0-alpha02"
 
 androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }

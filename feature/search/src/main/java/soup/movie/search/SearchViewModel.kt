@@ -30,8 +30,8 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.analytics.EventAnalytics
+import soup.movie.data.repository.MovieRepository
 import soup.movie.ext.setValueIfNew
-import soup.movie.model.repository.MovieRepository
 import javax.inject.Inject
 
 @HiltViewModel

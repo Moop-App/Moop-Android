@@ -27,12 +27,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.ads.AdsManager
 import soup.movie.analytics.EventAnalytics
+import soup.movie.data.repository.MovieRepository
 import soup.movie.device.ImageUriProvider
 import soup.movie.ext.screenDays
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
-import soup.movie.model.repository.MovieRepository
 import soup.movie.model.toMovie
 import soup.movie.ui.EventLiveData
 import soup.movie.ui.MutableEventLiveData

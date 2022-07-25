@@ -81,7 +81,6 @@ import com.naver.maps.map.compose.rememberMarkerState
 import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
-import soup.movie.model.Theater
 import soup.movie.theatermap.R
 import soup.movie.util.Cgv
 import soup.movie.util.LauncherIcons
@@ -395,10 +394,10 @@ private object TheaterMarkerIcons {
 private fun TheaterMarkerUiModel.executeWeb(ctx: Context) {
     return when (this) {
         is CgvMarkerUiModel ->
-            Cgv.executeWeb(ctx, Theater(Theater.TYPE_CGV, code, name, lng, lat))
+            Cgv.executeWeb(ctx, code)
         is LotteCinemaMarkerUiModel ->
-            LotteCinema.executeWeb(ctx, Theater(Theater.TYPE_LOTTE, code, name, lng, lat))
+            LotteCinema.executeWeb(ctx, code)
         is MegaboxMarkerUiModel ->
-            Megabox.executeWeb(ctx, Theater(Theater.TYPE_MEGABOX, code, name, lng, lat))
+            Megabox.executeWeb(ctx, code)
     }
 }

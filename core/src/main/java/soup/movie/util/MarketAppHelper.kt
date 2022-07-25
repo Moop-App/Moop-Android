@@ -22,7 +22,6 @@ import android.net.Uri
 import android.os.Build
 import soup.movie.ext.executeWeb
 import soup.movie.ext.startActivitySafely
-import soup.movie.model.Theater
 import soup.movie.model.Trailer
 import timber.log.Timber
 
@@ -56,8 +55,8 @@ object Moop {
 
 object Cgv {
 
-    fun executeWeb(ctx: Context, theater: Theater) {
-        ctx.executeWeb(detailWebUrl(theater.code))
+    fun executeWeb(ctx: Context, theaterCode: String) {
+        ctx.executeWeb(detailWebUrl(theaterCode))
     }
 
     private fun detailWebUrl(theaterCode: String): String =
@@ -66,8 +65,8 @@ object Cgv {
 
 object LotteCinema {
 
-    fun executeWeb(ctx: Context, theater: Theater) {
-        ctx.executeWeb(detailWebUrl(theater.code))
+    fun executeWeb(ctx: Context, theaterCode: String) {
+        ctx.executeWeb(detailWebUrl(theaterCode))
     }
 
     private fun detailWebUrl(theaterCode: String): String =
@@ -76,8 +75,8 @@ object LotteCinema {
 
 object Megabox {
 
-    fun executeWeb(ctx: Context, theater: Theater) {
-        ctx.executeWeb(detailWebUrl(theater.code))
+    fun executeWeb(ctx: Context, theaterCode: String) {
+        ctx.executeWeb(detailWebUrl(theaterCode))
     }
 
     private fun detailWebUrl(theaterCode: String): String =
