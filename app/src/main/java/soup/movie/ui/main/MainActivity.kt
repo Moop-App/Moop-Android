@@ -22,17 +22,12 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.R
 import soup.movie.config.Config
 import soup.movie.config.RemoteConfig
-import soup.movie.core.MainDirections.Companion.actionToDetail
-import soup.movie.ext.observeEvent
 import soup.movie.spec.FirebaseLink
 import soup.movie.spec.KakaoLink
 import soup.movie.work.LegacyWorker
@@ -67,10 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         handleDeepLink(intent)
 
-        viewModel.uiEvent.observeEvent(this) {
-            handleEvent(it)
-        }
-
         val config: Config = RemoteConfig()
         config.fetchAndActivate {
             if (config.allowToRunLegacyWorker) {
@@ -99,15 +90,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun handleEvent(event: MainUiEvent) {
-        when (event) {
-            is MainUiEvent.ShowDetailUiEvent -> {
-                navHostFragment.findNavController().navigate(actionToDetail(event.movieId))
-            }
-        }
-    }
-
-    private val navHostFragment: Fragment
-        get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 }

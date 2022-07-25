@@ -166,6 +166,7 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
+    implementation libs.compose.runtimeLivedata
     implementation libs.accompanist.drawablepainter
     implementation libs.metronome.visibility
     implementation libs.lottie.compose
