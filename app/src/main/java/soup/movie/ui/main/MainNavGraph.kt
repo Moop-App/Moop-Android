@@ -16,13 +16,18 @@
 package soup.movie.ui.main
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import soup.movie.detail.DetailNavGraph
+import soup.movie.detail.DetailViewModel
 import soup.movie.home.HomeViewModel
 import soup.movie.home.MainScreen
-import soup.movie.model.Movie
 import soup.movie.search.SearchScreen
 import soup.movie.search.SearchViewModel
 import soup.movie.ui.windowsizeclass.WindowWidthSizeClass
@@ -30,13 +35,18 @@ import soup.movie.ui.windowsizeclass.WindowWidthSizeClass
 private enum class Screen(val route: String) {
     Main("main"),
     Search("search"),
+    Detail("detail"),
+}
+
+private fun NavController.navigateToDetail(movieId: String) {
+    navigate(route = Screen.Detail.route + "/" + movieId)
 }
 
 @Composable
 fun MainNavGraph(
+    mainViewModel: MainViewModel,
     widthSizeClass: WindowWidthSizeClass,
     onTheaterMapClick: () -> Unit,
-    onMovieItemClick: (Movie) -> Unit,
 ) {
     val navController = rememberNavController()
     NavHost(
@@ -52,7 +62,9 @@ fun MainNavGraph(
                     navController.navigate(Screen.Search.route)
                 },
                 onTheaterMapClick = onTheaterMapClick,
-                onMovieItemClick = onMovieItemClick,
+                onMovieItemClick = {
+                    navController.navigateToDetail(movieId = it.id)
+                },
             )
         }
         composable(Screen.Search.route) {
@@ -60,8 +72,29 @@ fun MainNavGraph(
             SearchScreen(
                 viewModel = viewModel,
                 upPress = { navController.navigateUp() },
-                onItemClick = onMovieItemClick,
+                onItemClick = {
+                    navController.navigateToDetail(movieId = it.id)
+                },
             )
+        }
+        composable(
+            route = Screen.Detail.route + "/{movieId}",
+            arguments = listOf(navArgument("movieId") { nullable = false })
+        ) {
+            val viewModel = hiltViewModel<DetailViewModel>()
+            DetailNavGraph(
+                viewModel = viewModel,
+            )
+        }
+    }
+
+    val uiEvent by mainViewModel.uiEvent.observeAsState()
+    val event = uiEvent?.getContentIfNotHandled()
+    if (event != null) {
+        when (event) {
+            is MainUiEvent.ShowDetailUiEvent -> {
+                navController.navigateToDetail(movieId = event.movieId)
+            }
         }
     }
 }

@@ -21,15 +21,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.core.MainDirections.Companion.actionToDetail
 import soup.movie.core.MainDirections.Companion.actionToTheaterMap
 import soup.movie.ui.MovieTheme
 import soup.movie.ui.windowsizeclass.calculateWindowSizeClass
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
+
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +42,11 @@ class MainFragment : Fragment() {
             setContent {
                 MovieTheme {
                     MainNavGraph(
+                        mainViewModel = viewModel,
                         widthSizeClass = calculateWindowSizeClass(requireActivity()).widthSizeClass,
                         onTheaterMapClick = {
                             findNavController().navigate(actionToTheaterMap())
                         },
-                        onMovieItemClick = { movie ->
-                            findNavController().navigate(actionToDetail(movieId = movie.id))
-                        }
                     )
                 }
             }

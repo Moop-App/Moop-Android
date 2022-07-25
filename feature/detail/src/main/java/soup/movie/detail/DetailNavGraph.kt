@@ -37,7 +37,7 @@ import soup.movie.ext.showToast
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-internal fun DetailNavGraph(
+fun DetailNavGraph(
     viewModel: DetailViewModel,
 ) {
     Box {
@@ -57,9 +57,9 @@ internal fun DetailNavGraph(
             },
         )
         val movie by viewModel.movie.observeAsState()
-        movie?.let { movie ->
+        movie?.let {
             DetailShare(
-                movie = movie,
+                movie = it,
                 onClose = { showShare = false },
                 onShareInstagram = {
                     viewModel.requestShareImage(
@@ -77,20 +77,20 @@ internal fun DetailNavGraph(
                 exit = fadeOut(),
             ) {
                 DetailPoster(
-                    movie = movie,
+                    movie = it,
                     upPress = { showPoster = false },
                 )
             }
         }
     }
 
-    val event = viewModel.uiEvent.observeAsState()
-    val uiEvent = event.value?.getContentIfNotHandled()
-    if (uiEvent != null) {
+    val uiEvent by viewModel.uiEvent.observeAsState()
+    val event = uiEvent?.getContentIfNotHandled()
+    if (event != null) {
         val context = LocalContext.current
-        when (uiEvent) {
-            is ShareImageAction -> context.shareImage(uiEvent)
-            is ToastAction -> context.showToast(uiEvent.resId)
+        when (event) {
+            is ShareImageAction -> context.shareImage(event)
+            is ToastAction -> context.showToast(event.resId)
         }
     }
 }

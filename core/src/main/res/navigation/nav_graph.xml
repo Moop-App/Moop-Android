@@ -3,23 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/home"
     app:progressDestination="@id/progress"
+    app:startDestination="@id/home"
     tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@+id/home"
         android:name="soup.movie.ui.main.MainFragment" />
-
-    <fragment
-        android:id="@+id/detail"
-        android:name="soup.movie.detail.DetailFragment">
-
-        <argument
-            android:name="movieId"
-            app:argType="string"
-            app:nullable="false" />
-    </fragment>
 
     <fragment
         android:id="@+id/progress"
@@ -31,10 +21,6 @@
         app:moduleName="theatermap" />
 
     <!-- Global Actions -->
-
-    <action
-        android:id="@+id/action_to_detail"
-        app:destination="@id/detail" />
 
     <action
         android:id="@+id/action_to_theater_map"
