@@ -81,7 +81,6 @@ import com.naver.maps.map.compose.rememberMarkerState
 import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
-import soup.movie.model.Theater
 import soup.movie.theatermap.R
 import soup.movie.util.Cgv
 import soup.movie.util.LauncherIcons

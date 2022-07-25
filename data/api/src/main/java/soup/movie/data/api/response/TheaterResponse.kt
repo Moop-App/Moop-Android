@@ -43,8 +43,8 @@ private object TheaterTypeParser {
 
     fun parse(type: String): TheaterType {
         return when (type) {
-            "C"  -> TheaterType.CGV
-            "L"  -> TheaterType.LOTTE
+            "C" -> TheaterType.CGV
+            "L" -> TheaterType.LOTTE
             "M" -> TheaterType.MEGABOX
             else -> throw IllegalArgumentException("$type is not valid type.")
         }
