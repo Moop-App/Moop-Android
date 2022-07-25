@@ -68,8 +68,8 @@ com.google.dagger:hilt-android-gradle-plugin:2.43
 com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:1.7.10-1.0.6
 com.google.devtools.ksp:symbol-processing-gradle-plugin:1.7.10-1.0.6
 com.google.errorprone:error_prone_annotations:2.3.4
-com.google.firebase:firebase-crashlytics-buildtools:2.8.0
-com.google.firebase:firebase-crashlytics-gradle:2.8.0
+com.google.firebase:firebase-crashlytics-buildtools:2.9.1
+com.google.firebase:firebase-crashlytics-gradle:2.9.1
 com.google.firebase:perf-plugin:1.4.1
 com.google.flatbuffers:flatbuffers-java:1.12.0
 com.google.gms:google-services:4.3.10
