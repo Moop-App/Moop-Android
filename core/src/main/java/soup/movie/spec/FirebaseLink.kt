@@ -29,7 +29,7 @@ object FirebaseLink {
     private const val PATH_DETAIL = "detail"
     private const val MOVIE_ID = "movieId"
 
-    fun extractMovieId(intent: Intent, onResult: (String?) -> Unit) {
+    fun extractMovieId(intent: Intent?, onResult: (String?) -> Unit) {
         FirebaseDynamicLinks.getInstance()
             .getDynamicLink(intent)
             .addOnSuccessListener {

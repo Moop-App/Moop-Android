@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         // TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
 
-        intent?.handleDeepLink()
+        handleDeepLink(intent)
 
         viewModel.uiEvent.observeEvent(this) {
             handleEvent(it)
@@ -85,15 +85,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        intent?.handleDeepLink()
+        handleDeepLink(intent)
     }
 
-    private fun Intent.handleDeepLink() {
-        FirebaseLink.extractMovieId(this) { movieId ->
+    private fun handleDeepLink(intent: Intent?) {
+        FirebaseLink.extractMovieId(intent) { movieId ->
             if (movieId != null) {
                 viewModel.requestMovie(movieId)
             } else {
-                KakaoLink.extractMovieId(this)?.let {
+                KakaoLink.extractMovieId(intent)?.let {
                     viewModel.requestMovie(it)
                 }
             }
