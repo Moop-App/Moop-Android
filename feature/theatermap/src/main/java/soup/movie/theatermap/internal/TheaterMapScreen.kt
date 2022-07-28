@@ -22,27 +22,20 @@ import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
@@ -94,7 +87,6 @@ import kotlin.math.min
 internal fun TheaterMapScreen(
     viewModel: TheaterMapViewModel,
     locationSource: LocationSource?,
-    onNavigationOnClick: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
@@ -116,41 +108,34 @@ internal fun TheaterMapScreen(
     BackHandler(enabled = bottomSheetState.isExpanded) {
         viewModel.onTheaterUnselected()
     }
-    Scaffold(
-        topBar = {
-            Toolbar(
-                text = stringResource(R.string.theater_map_title),
-                onNavigationOnClick = onNavigationOnClick
+    BottomSheetScaffold(
+        modifier = Modifier.systemBarsPadding(),
+        scaffoldState = bottomSheetScaffoldState,
+        sheetPeekHeight = 0.dp,
+        sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
+        sheetContent = {
+            TheaterMapFooter(
+                selectedTheater = viewModel.selectedTheater,
+                onClick = { viewModel.onTheaterUnselected() }
             )
         },
-        modifier = Modifier.padding(
-            WindowInsets.systemBars
-                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
-                .asPaddingValues()
-        ),
-    ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
-            BottomSheetScaffold(
-                scaffoldState = bottomSheetScaffoldState,
-                sheetPeekHeight = 0.dp,
-                sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
-                sheetContent = {
-                    TheaterMapFooter(
-                        selectedTheater = viewModel.selectedTheater,
-                        onClick = { viewModel.onTheaterUnselected() }
-                    )
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(R.string.theater_map_title))
                 }
-            ) {
-                TheaterMapContents(
-                    theaters = viewModel.uiModel,
-                    selectedTheater = viewModel.selectedTheater,
-                    onTheaterClick = { viewModel.onTheaterSelected(it) },
-                    locationSource = locationSource,
-                    onMapClick = { viewModel.onTheaterUnselected() },
-                    onMapLoaded = { viewModel.onRefresh() }
-                )
-            }
-        }
+            )
+        },
+    ) { paddingValues ->
+        TheaterMapContents(
+            modifier = Modifier.padding(paddingValues),
+            theaters = viewModel.uiModel,
+            selectedTheater = viewModel.selectedTheater,
+            onTheaterClick = { viewModel.onTheaterSelected(it) },
+            locationSource = locationSource,
+            onMapClick = { viewModel.onTheaterUnselected() },
+            onMapLoaded = { viewModel.onRefresh() }
+        )
     }
 }
 
@@ -360,21 +345,6 @@ private fun MapButton(
             )
         }
     }
-}
-
-@Composable
-private fun Toolbar(text: String, onNavigationOnClick: () -> Unit) {
-    TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = onNavigationOnClick) {
-                Icon(
-                    Icons.Outlined.ArrowBack,
-                    contentDescription = null
-                )
-            }
-        },
-        title = { Text(text = text) }
-    )
 }
 
 private fun TheaterMarkerUiModel.getMarkerIcon(): OverlayImage {

@@ -22,15 +22,16 @@ import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -160,8 +161,8 @@ private fun CompactScreen(
 ) {
     Scaffold(
         modifier = modifier.padding(
-            WindowInsets.systemBars
-                .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+            WindowInsets.navigationBars
+                .only(WindowInsetsSides.Bottom)
                 .asPaddingValues()
         ),
         bottomBar = {
@@ -241,8 +242,25 @@ private fun MediumScreen(
     onTabReselected: (MainTabUiModel) -> Unit = onTabSelected,
     content: @Composable (PaddingValues) -> Unit
 ) {
-    Row(modifier = modifier.fillMaxSize()) {
-        NavigationRail(elevation = 24.dp) {
+    Row(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(
+                WindowInsets.navigationBars
+                    .only(WindowInsetsSides.Horizontal)
+                    .asPaddingValues()
+            ),
+    ) {
+        NavigationRail(
+            elevation = 24.dp,
+            header = {
+                Spacer(
+                    modifier = modifier.padding(
+                        WindowInsets.statusBars.asPaddingValues()
+                    )
+                )
+            },
+        ) {
             tabs.forEach { tab ->
                 val selected = currentTab == tab
                 NavigationRailItem(
@@ -304,6 +322,6 @@ private fun MediumScreen(
             }
         }
         Divider(modifier = Modifier.width(1.dp).fillMaxHeight())
-        content(WindowInsets.statusBars.asPaddingValues())
+        content(PaddingValues())
     }
 }

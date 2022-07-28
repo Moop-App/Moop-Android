@@ -19,6 +19,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.Scaffold
@@ -61,6 +62,7 @@ internal fun HomeFavoriteList(
         }
     }
     Scaffold(
+        modifier = modifier.statusBarsPadding(),
         topBar = {
             TopAppBar(
                 title = {
@@ -69,7 +71,7 @@ internal fun HomeFavoriteList(
             )
         },
     ) { paddingValues ->
-        Box(modifier = modifier.fillMaxSize().padding(paddingValues)) {
+        Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
             val movies by viewModel.movies.observeAsState(emptyList())
             if (movies.isEmpty()) {
                 NoMovieItems(modifier = Modifier.align(Alignment.Center))
