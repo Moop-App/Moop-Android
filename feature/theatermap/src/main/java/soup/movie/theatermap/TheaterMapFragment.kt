@@ -23,7 +23,6 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
 import soup.movie.data.repository.MovieRepository
@@ -74,9 +73,6 @@ class TheaterMapFragment : Fragment() {
                     TheaterMapScreen(
                         viewModel = viewModel,
                         locationSource = locationSource,
-                        onNavigationOnClick = {
-                            findNavController().navigateUp()
-                        },
                     )
                 }
             }

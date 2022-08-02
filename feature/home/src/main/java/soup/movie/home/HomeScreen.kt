@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.BottomSheetScaffold
@@ -104,6 +105,7 @@ internal fun HomeScreen(
         }
     }
     BottomSheetScaffold(
+        modifier = Modifier.statusBarsPadding(),
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 0.dp,
         sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,

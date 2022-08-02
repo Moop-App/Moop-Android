@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetState
@@ -111,6 +112,7 @@ fun TheaterEditScreen(
         bottomSheetScaffoldState.bottomSheetState.collapse()
     }
     BottomSheetScaffold(
+        modifier = Modifier.statusBarsPadding(),
         scaffoldState = bottomSheetScaffoldState,
         topBar = {
             TabRow(
