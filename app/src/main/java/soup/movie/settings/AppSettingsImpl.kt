@@ -26,10 +26,12 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import soup.movie.model.Theater
+import soup.movie.model.TheaterType
 import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.GenreFilter
 import soup.movie.settings.model.TheaterFilter
@@ -112,7 +114,8 @@ class AppSettingsImpl(private val context: Context) : AppSettings {
 
     override suspend fun setFavoriteTheaterList(list: List<Theater>) {
         context.dataStore.edit { settings ->
-            settings[favoriteTheaterListKey] = Json.encodeToString(list)
+            val rawList = list.map { it.toRaw() }
+            settings[favoriteTheaterListKey] = Json.encodeToString(rawList)
         }
     }
 
@@ -124,7 +127,8 @@ class AppSettingsImpl(private val context: Context) : AppSettings {
         return context.dataStore.data.map { preferences ->
             val string = preferences[favoriteTheaterListKey]
             if (string != null) {
-                Json.decodeFromString(string)
+                val rawList: List<RawTheater> = Json.decodeFromString(string)
+                rawList.map { it.toModel() }
             } else {
                 emptyList()
             }
@@ -136,3 +140,31 @@ class AppSettingsImpl(private val context: Context) : AppSettings {
         private const val SEPARATOR = "|"
     }
 }
+
+@Serializable
+private data class RawTheater(
+    val id: String,
+    val type: String,
+    val code: String,
+    val name: String,
+    val lng: Double,
+    val lat: Double,
+) {
+    fun toModel() = Theater(
+        id = id,
+        type = TheaterType.valueOf(type),
+        code = code,
+        name = name,
+        lng = lng,
+        lat = lat,
+    )
+}
+
+private fun Theater.toRaw() = RawTheater(
+    id = id,
+    type = type.name,
+    code = code,
+    name = name,
+    lng = lng,
+    lat = lat,
+)
