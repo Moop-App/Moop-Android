@@ -20,9 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MovieRepository
 import soup.movie.model.TheaterAreaGroup
 import timber.log.Timber
@@ -60,13 +58,11 @@ internal class TheaterMapViewModel(
     }
 
     private suspend fun loadUiModel(): List<TheaterMarkerUiModel> {
-        return withContext(Dispatchers.IO) {
-            try {
-                repository.getCodeList().toTheaterList()
-            } catch (t: Throwable) {
-                Timber.w(t)
-                emptyList()
-            }
+        return try {
+            repository.getCodeList().toTheaterList()
+        } catch (t: Throwable) {
+            Timber.w(t)
+            emptyList()
         }
     }
 

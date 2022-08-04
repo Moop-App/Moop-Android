@@ -20,17 +20,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import soup.movie.common.IoDispatcher
 import soup.movie.data.repository.MovieRepository
 import soup.movie.model.Movie
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeFavoriteViewModel @Inject constructor(
-    repository: MovieRepository
+    repository: MovieRepository,
+    @IoDispatcher ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
     private val _movies = MutableLiveData<List<Movie>>()
@@ -43,7 +45,7 @@ class HomeFavoriteViewModel @Inject constructor(
                 val favoriteMovieList = it.sortedBy(Movie::openDate)
                 _movies.postValue(favoriteMovieList)
             }
-            .flowOn(Dispatchers.IO)
+            .flowOn(ioDispatcher)
             .launchIn(viewModelScope)
     }
 }

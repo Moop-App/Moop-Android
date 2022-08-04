@@ -22,11 +22,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.nativead.NativeAd
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.ads.AdsManager
 import soup.movie.analytics.EventAnalytics
+import soup.movie.common.DefaultDispatcher
 import soup.movie.data.repository.MovieRepository
 import soup.movie.device.ImageUriProvider
 import soup.movie.ext.screenDays
@@ -48,6 +49,7 @@ class DetailViewModel @Inject constructor(
     private val analytics: EventAnalytics,
     private val imageUriProvider: ImageUriProvider,
     private val adsManager: AdsManager,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
     private var nativeAd: NativeAd? = null
@@ -80,15 +82,12 @@ class DetailViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            // FIXME: Elvis operator (?:) is used because of lint rule error https://issuetracker.google.com/issues/169249668
-            _favoriteUiModel.postValue(repository.isFavoriteMovie(movieId) ?: false)
+            _favoriteUiModel.value = repository.isFavoriteMovie(movieId)
             loadDetail(movieId)?.also {
                 renderDetail(it, getNativeAd())
             }
-            withContext(Dispatchers.IO) {
-                adsManager.onNativeAdConsumed()
-                adsManager.loadNextNativeAd()
-            }
+            adsManager.onNativeAdConsumed()
+            adsManager.loadNextNativeAd()
         }
     }
 
@@ -100,9 +99,7 @@ class DetailViewModel @Inject constructor(
     private suspend fun loadDetail(movieId: String): MovieDetail? {
         _isError.postValue(false)
         try {
-            return withContext(Dispatchers.IO) {
-                repository.getMovieDetail(movieId)
-            }
+            return repository.getMovieDetail(movieId)
         } catch (t: Throwable) {
             Timber.w(t)
             _isError.postValue(true)
@@ -114,7 +111,7 @@ class DetailViewModel @Inject constructor(
         detail: MovieDetail,
         nativeAd: NativeAd?
     ) {
-        withContext(Dispatchers.Default) {
+        withContext(defaultDispatcher) {
             val movie = detail.toMovie()
             _movie.postValue(movie)
             _headerUiModel.postValue(
@@ -245,7 +242,7 @@ class DetailViewModel @Inject constructor(
 
     fun onFavoriteButtonClick(isFavorite: Boolean) {
         val movie = _movie.value ?: return
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             if (isFavorite) {
                 repository.addFavoriteMovie(movie)
                 if (movie.isPlan) {
@@ -256,12 +253,12 @@ class DetailViewModel @Inject constructor(
                             movie.openDate
                         )
                     )
-                    _uiEvent.postEvent(ToastAction(R.string.action_toast_opendate_alarm))
+                    _uiEvent.event = ToastAction(R.string.action_toast_opendate_alarm)
                 }
             } else {
                 repository.removeFavoriteMovie(movie.id)
             }
-            _favoriteUiModel.postValue(isFavorite)
+            _favoriteUiModel.value = isFavorite
         }
     }
 

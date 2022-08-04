@@ -9,6 +9,7 @@ android.namespace "soup.movie.data.repository"
 
 dependencies {
     api project(":model")
+    implementation project(":common")
     implementation project(":data:api")
     implementation project(":data:db")
 

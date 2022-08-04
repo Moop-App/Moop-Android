@@ -18,7 +18,6 @@ package soup.movie.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import soup.movie.ads.AdsManager
 import soup.movie.ui.EventLiveData
@@ -35,7 +34,7 @@ class MainViewModel @Inject constructor(
         get() = _uiEvent
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             adsManager.loadNextNativeAd()
         }
     }

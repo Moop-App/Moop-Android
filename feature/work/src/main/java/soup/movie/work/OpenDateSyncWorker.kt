@@ -28,8 +28,6 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import soup.movie.data.repository.MovieRepository
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -45,9 +43,7 @@ class OpenDateSyncWorker @AssistedInject constructor(
         Timber.d("doWork: start!")
         return try {
             if (repository.hasOpenDateAlarms()) {
-                withContext(Dispatchers.IO) {
-                    repository.updatePlanMovieList()
-                }
+                repository.updatePlanMovieList()
             }
             Result.success()
         } catch (t: Throwable) {

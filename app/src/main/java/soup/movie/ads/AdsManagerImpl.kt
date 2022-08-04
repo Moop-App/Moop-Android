@@ -24,14 +24,16 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.nativead.NativeAd
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.movie.R
 import timber.log.Timber
 
 class AdsManagerImpl(
     private val context: Context,
-    lifecycleOwner: LifecycleOwner
+    lifecycleOwner: LifecycleOwner,
+    private val ioDispatcher: CoroutineDispatcher,
 ) : AdsManager {
 
     private val adUnitId: String = context.getString(R.string.admob_ad_unit_detail)
@@ -44,7 +46,7 @@ class AdsManagerImpl(
     private var lastNativeAd: NativeAd? = null
 
     init {
-        lifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleOwner.lifecycleScope.launch(ioDispatcher) {
             MobileAds.initialize(context)
         }
     }
@@ -54,9 +56,9 @@ class AdsManagerImpl(
         return lastNativeAd
     }
 
-    override suspend fun loadNextNativeAd() {
+    override suspend fun loadNextNativeAd() = withContext(ioDispatcher) {
         if (state == State.LOADED) {
-            return
+            return@withContext
         }
 
         val adLoader = AdLoader.Builder(context, adUnitId)
