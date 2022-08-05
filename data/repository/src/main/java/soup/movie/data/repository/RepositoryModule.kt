@@ -21,6 +21,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import soup.movie.common.IoDispatcher
 import soup.movie.data.api.RemoteDataSource
 import soup.movie.data.api.RemoteDataSourceFactory
 import soup.movie.data.db.LocalDataSource
@@ -36,9 +38,10 @@ object RepositoryModule {
     @Singleton
     fun provideRepository(
         local: LocalDataSource,
-        remote: RemoteDataSource
+        remote: RemoteDataSource,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
     ): MovieRepository {
-        return MovieRepositoryImpl(local, remote)
+        return MovieRepositoryImpl(local, remote, ioDispatcher)
     }
 
     @Singleton

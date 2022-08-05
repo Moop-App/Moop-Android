@@ -19,20 +19,27 @@ import android.content.Context
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import kotlin.coroutines.suspendCoroutine
 
-class InAppUpdateManagerImpl(context: Context) : InAppUpdateManager {
+class InAppUpdateManagerImpl(
+    context: Context,
+    private val ioDispatcher: CoroutineDispatcher,
+) : InAppUpdateManager {
 
     private val appUpdateManager = AppUpdateManagerFactory.create(context)
 
     override suspend fun getAvailableVersionCode(): Int {
-        return try {
-            appUpdateManager.requestAppUpdateInfo()
-                .availableVersionCode()
-        } catch (e: Exception) {
-            Timber.w(e)
-            InAppUpdateManager.UNKNOWN_VERSION_CODE
+        return withContext(ioDispatcher) {
+            try {
+                appUpdateManager.requestAppUpdateInfo()
+                    .availableVersionCode()
+            } catch (e: Exception) {
+                Timber.w(e)
+                InAppUpdateManager.UNKNOWN_VERSION_CODE
+            }
         }
     }
 

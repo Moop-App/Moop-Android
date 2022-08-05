@@ -21,14 +21,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import soup.movie.analytics.EventAnalytics
 import soup.movie.data.repository.MovieRepository
 import soup.movie.ext.setValueIfNew
@@ -50,9 +48,7 @@ class SearchViewModel @Inject constructor(
         .map { it.trim() }
         .distinctUntilChanged()
         .flatMapLatest { query ->
-            val movies = withContext(Dispatchers.IO) {
-                repository.searchMovie(query)
-            }
+            val movies = repository.searchMovie(query)
             flowOf(
                 SearchContentsUiModel(
                     movies = movies,

@@ -20,7 +20,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
@@ -52,7 +51,7 @@ class HomePlanViewModel @Inject constructor(
         get() = _movies
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             updateList()
             repository.getPlanMovieList()
                 .combine(appSettings.getMovieFilterFlow()) { movieList, movieFilter ->
@@ -69,7 +68,7 @@ class HomePlanViewModel @Inject constructor(
     }
 
     fun refresh() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             updateList()
         }
     }

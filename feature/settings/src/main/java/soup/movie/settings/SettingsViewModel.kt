@@ -24,11 +24,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import soup.movie.install.InAppUpdateManager
 import soup.movie.theme.ThemeOptionManager
 import javax.inject.Inject
@@ -59,9 +57,7 @@ class SettingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val latestVersionCode = withContext(Dispatchers.IO) {
-                appUpdateManager.getAvailableVersionCode()
-            }
+            val latestVersionCode = appUpdateManager.getAvailableVersionCode()
             val isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
             _versionUiModel.value = VersionSettingUiModel(
                 versionCode = BuildConfig.VERSION_CODE,

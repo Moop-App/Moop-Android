@@ -17,11 +17,12 @@ package soup.movie.theater.edit
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import soup.movie.common.DefaultDispatcher
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
 import timber.log.Timber
@@ -29,15 +30,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TheaterEditViewModel @Inject constructor(
-    private val manager: TheaterEditManager
+    private val manager: TheaterEditManager,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
     val contentUiModel = flow {
         emit(TheaterEditContentUiModel.LoadingState)
         try {
-            withContext(Dispatchers.IO) {
-                manager.loadAsync()
-            }
+            manager.loadAsync()
             emit(TheaterEditContentUiModel.DoneState)
         } catch (t: Throwable) {
             Timber.w(t)
@@ -82,7 +82,7 @@ class TheaterEditViewModel @Inject constructor(
     }
 
     private suspend fun List<TheaterArea>.toUiModel(selectedList: List<Theater>) =
-        withContext(Dispatchers.Default) {
+        withContext(defaultDispatcher) {
             TheaterEditChildUiModel(
                 map { theaterArea ->
                     TheaterEditAreaGroupUiModel(

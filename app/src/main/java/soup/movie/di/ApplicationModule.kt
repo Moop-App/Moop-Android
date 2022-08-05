@@ -22,11 +22,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.runBlocking
 import soup.movie.ads.AdsManager
 import soup.movie.ads.AdsManagerImpl
 import soup.movie.analytics.EventAnalytics
 import soup.movie.analytics.EventAnalyticsImpl
+import soup.movie.common.IoDispatcher
 import soup.movie.device.ImageUriProvider
 import soup.movie.device.ImageUriProviderImpl
 import soup.movie.install.InAppUpdateManager
@@ -46,9 +48,10 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideImageUriProvider(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
     ): ImageUriProvider {
-        return ImageUriProviderImpl(context)
+        return ImageUriProviderImpl(context, ioDispatcher)
     }
 
     @Singleton
@@ -79,22 +82,27 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideAppUpdateManager(
-        @ApplicationContext context: Context
-    ): InAppUpdateManager = InAppUpdateManagerImpl(context)
+        @ApplicationContext context: Context,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
+    ): InAppUpdateManager {
+        return InAppUpdateManagerImpl(context, ioDispatcher)
+    }
 
     @Singleton
     @Provides
     fun provideAdsManager(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
     ): AdsManager {
-        return AdsManagerImpl(context, ProcessLifecycleOwner.get())
+        return AdsManagerImpl(context, ProcessLifecycleOwner.get(), ioDispatcher)
     }
 
     @Singleton
     @Provides
     fun provideAppSettings(
-        @ApplicationContext context: Context
-    ): AppSettings = AppSettingsImpl(context)
+        @ApplicationContext context: Context,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
+    ): AppSettings = AppSettingsImpl(context, ioDispatcher)
 
     @Singleton
     @Provides

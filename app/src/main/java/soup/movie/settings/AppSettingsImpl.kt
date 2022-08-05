@@ -23,9 +23,11 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -36,7 +38,10 @@ import soup.movie.settings.model.AgeFilter
 import soup.movie.settings.model.GenreFilter
 import soup.movie.settings.model.TheaterFilter
 
-class AppSettingsImpl(private val context: Context) : AppSettings {
+class AppSettingsImpl(
+    private val context: Context,
+    private val ioDispatcher: CoroutineDispatcher,
+) : AppSettings {
 
     private val Context.preferencesName: String
         get() = packageName + "_preferences"
@@ -95,8 +100,10 @@ class AppSettingsImpl(private val context: Context) : AppSettings {
     private val themeOptionKey = stringPreferencesKey("theme_option")
 
     override suspend fun setThemeOption(themeOption: String) {
-        context.dataStore.edit { settings ->
-            settings[themeOptionKey] = themeOption
+        withContext(ioDispatcher) {
+            context.dataStore.edit { settings ->
+                settings[themeOptionKey] = themeOption
+            }
         }
     }
 
@@ -113,9 +120,11 @@ class AppSettingsImpl(private val context: Context) : AppSettings {
     private val favoriteTheaterListKey = stringPreferencesKey("favorite_theaters")
 
     override suspend fun setFavoriteTheaterList(list: List<Theater>) {
-        context.dataStore.edit { settings ->
-            val rawList = list.map { it.toRaw() }
-            settings[favoriteTheaterListKey] = Json.encodeToString(rawList)
+        withContext(ioDispatcher) {
+            context.dataStore.edit { settings ->
+                val rawList = list.map { it.toRaw() }
+                settings[favoriteTheaterListKey] = Json.encodeToString(rawList)
+            }
         }
     }
 

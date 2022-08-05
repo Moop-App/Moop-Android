@@ -23,7 +23,7 @@ import androidx.annotation.WorkerThread
 import androidx.core.content.FileProvider
 import coil.imageLoader
 import coil.request.ImageRequest
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import soup.movie.BuildConfig
 import java.io.File
@@ -32,7 +32,10 @@ import java.io.FileOutputStream
 /**
  * A class responsible for resolving an image as identified by Url into a sharable [Uri].
  */
-class ImageUriProviderImpl(context: Context) : ImageUriProvider {
+class ImageUriProviderImpl(
+    context: Context,
+    private val ioDispatcher: CoroutineDispatcher,
+) : ImageUriProvider {
 
     // Only hold the app context to avoid leaks
     private val appContext = context.applicationContext
@@ -68,7 +71,7 @@ class ImageUriProviderImpl(context: Context) : ImageUriProvider {
 
     @WorkerThread
     private suspend fun imageUriOf(file: File): Uri {
-        return withContext(Dispatchers.IO) {
+        return withContext(ioDispatcher) {
             FileProvider.getUriForFile(appContext, BuildConfig.FILES_AUTHORITY, file)
         }
     }

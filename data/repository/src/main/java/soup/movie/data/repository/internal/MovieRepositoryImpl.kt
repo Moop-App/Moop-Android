@@ -15,7 +15,9 @@
  */
 package soup.movie.data.repository.internal
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import soup.movie.data.api.RemoteDataSource
 import soup.movie.data.api.response.asModel
 import soup.movie.data.db.LocalDataSource
@@ -30,6 +32,7 @@ import timber.log.Timber
 internal class MovieRepositoryImpl(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource,
+    private val ioDispatcher: CoroutineDispatcher,
 ) : MovieRepository {
 
     override fun getNowMovieList(): Flow<List<Movie>> {
@@ -37,6 +40,12 @@ internal class MovieRepositoryImpl(
     }
 
     override suspend fun updateNowMovieList() {
+        return withContext(ioDispatcher) {
+            updateNowMovieListInternal()
+        }
+    }
+
+    private suspend fun updateNowMovieListInternal() {
         val isStaleness = try {
             local.getNowLastUpdateTime() < remote.getNowLastUpdateTime()
         } catch (t: Throwable) {
@@ -49,8 +58,10 @@ internal class MovieRepositoryImpl(
     }
 
     override suspend fun updateAndGetNowMovieList(): List<Movie> {
-        updateNowMovieList()
-        return local.getNowMovieList()
+        return withContext(ioDispatcher) {
+            updateNowMovieListInternal()
+            local.getNowMovieList()
+        }
     }
 
     override fun getPlanMovieList(): Flow<List<Movie>> {
@@ -58,19 +69,23 @@ internal class MovieRepositoryImpl(
     }
 
     override suspend fun updatePlanMovieList() {
-        val isStaleness = try {
-            local.getPlanLastUpdateTime() < remote.getPlanLastUpdateTime()
-        } catch (t: Throwable) {
-            Timber.w(t)
-            true
-        }
-        if (isStaleness) {
-            local.savePlanMovieList(remote.getPlanMovieList().asModel())
+        return withContext(ioDispatcher) {
+            val isStaleness = try {
+                local.getPlanLastUpdateTime() < remote.getPlanLastUpdateTime()
+            } catch (t: Throwable) {
+                Timber.w(t)
+                true
+            }
+            if (isStaleness) {
+                local.savePlanMovieList(remote.getPlanMovieList().asModel())
+            }
         }
     }
 
     override suspend fun getMovieDetail(movieId: String): MovieDetail {
-        return remote.getMovieDetail(movieId).asModel()
+        return withContext(ioDispatcher) {
+            remote.getMovieDetail(movieId).asModel()
+        }
     }
 
     override suspend fun getGenreList(): List<String> {
@@ -97,10 +112,11 @@ internal class MovieRepositoryImpl(
     }
 
     override suspend fun getCodeList(): TheaterAreaGroup {
-        return local.getCodeList()
-            ?: remote.getCodeList()
+        return withContext(ioDispatcher) {
+            local.getCodeList() ?: remote.getCodeList()
                 .asModel()
                 .also(local::saveCodeList)
+        }
     }
 
     override fun getFavoriteMovieList(): Flow<List<Movie>> {

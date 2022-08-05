@@ -28,8 +28,6 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.data.repository.MovieRepository
@@ -68,17 +66,15 @@ class LegacyWorker @AssistedInject constructor(
     }
 
     private suspend fun getRecommendedMovieList(): List<Movie> {
-        return withContext(Dispatchers.IO) {
-            repository.updateAndGetNowMovieList().asSequence()
-                .filter {
-                    it.theater.run {
-                        cgv != null && lotte != null && megabox != null
-                    }
+        return repository.updateAndGetNowMovieList().asSequence()
+            .filter {
+                it.theater.run {
+                    cgv != null && lotte != null && megabox != null
                 }
-                .filterIndexed { index, movie -> index < 3 || movie.isBest() }
-                .take(6)
-                .toList()
-        }
+            }
+            .filterIndexed { index, movie -> index < 3 || movie.isBest() }
+            .take(6)
+            .toList()
     }
 
     companion object {

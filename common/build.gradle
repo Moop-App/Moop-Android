@@ -1,0 +1,17 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.common"
+}
+
+dependencies {
+    implementation libs.coroutines.android
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+}

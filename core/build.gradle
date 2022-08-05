@@ -23,6 +23,7 @@ android {
 
 dependencies {
     implementation project(':model')
+    api project(':common')
 
     api libs.kotlin.stdlib
     api libs.coroutines.core
