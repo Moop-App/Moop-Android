@@ -1,13 +1,15 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+    id "dagger.hilt.android.plugin"
+    id "androidx.navigation.safeargs.kotlin"
+}
 
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace "soup.movie.core"
+    namespace "soup.movie.feature.common"
     buildTypes {
         release {
             consumerProguardFiles 'proguard-rules-navigation.pro'
@@ -22,8 +24,9 @@ android {
 }
 
 dependencies {
-    implementation project(':model')
     api project(':common')
+    api project(':model')
+    api project(':data:repository')
 
     api libs.kotlin.stdlib
     api libs.coroutines.core
