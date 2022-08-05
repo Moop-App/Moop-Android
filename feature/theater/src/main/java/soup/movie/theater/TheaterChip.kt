@@ -33,8 +33,8 @@ import soup.metronome.material.chip.ActionChip
 import soup.metronome.material.chip.ChipDefaults
 import soup.movie.model.Theater
 import soup.movie.model.TheaterType
-import soup.movie.ui.cgvText
-import soup.movie.util.debounce
+import soup.movie.feature.common.ui.cgvText
+import soup.movie.feature.common.util.debounce
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

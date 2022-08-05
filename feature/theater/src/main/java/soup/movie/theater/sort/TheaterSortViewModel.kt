@@ -24,9 +24,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import soup.movie.ext.swap
+import soup.movie.feature.common.ext.swap
 import soup.movie.model.Theater
-import soup.movie.settings.AppSettings
+import soup.movie.feature.common.settings.AppSettings
 import javax.inject.Inject
 
 @HiltViewModel

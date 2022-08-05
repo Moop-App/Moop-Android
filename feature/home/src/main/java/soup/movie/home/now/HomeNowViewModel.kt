@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 import soup.movie.data.repository.MovieRepository
 import soup.movie.home.domain.getMovieFilterFlow
 import soup.movie.model.Movie
-import soup.movie.settings.AppSettings
+import soup.movie.feature.common.settings.AppSettings
 import timber.log.Timber
 import javax.inject.Inject
 

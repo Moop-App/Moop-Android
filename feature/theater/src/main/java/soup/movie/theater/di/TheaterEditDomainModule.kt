@@ -21,7 +21,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import soup.movie.data.repository.MovieRepository
-import soup.movie.settings.AppSettings
+import soup.movie.feature.common.settings.AppSettings
 import soup.movie.theater.edit.TheaterEditManager
 
 @Module

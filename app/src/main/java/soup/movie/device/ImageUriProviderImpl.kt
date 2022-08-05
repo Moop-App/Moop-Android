@@ -26,6 +26,7 @@ import coil.request.ImageRequest
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import soup.movie.BuildConfig
+import soup.movie.feature.common.device.ImageUriProvider
 import java.io.File
 import java.io.FileOutputStream
 

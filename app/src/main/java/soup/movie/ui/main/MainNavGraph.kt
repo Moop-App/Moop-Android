@@ -30,7 +30,7 @@ import soup.movie.home.HomeViewModel
 import soup.movie.home.MainScreen
 import soup.movie.search.SearchScreen
 import soup.movie.search.SearchViewModel
-import soup.movie.ui.windowsizeclass.WindowWidthSizeClass
+import soup.movie.feature.common.ui.windowsizeclass.WindowWidthSizeClass
 
 private enum class Screen(val route: String) {
     Main("main"),

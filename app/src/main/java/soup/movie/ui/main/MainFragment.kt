@@ -25,8 +25,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.feature.common.MainDirections.Companion.actionToTheaterMap
-import soup.movie.ui.MovieTheme
-import soup.movie.ui.windowsizeclass.calculateWindowSizeClass
+import soup.movie.feature.common.ui.MovieTheme
+import soup.movie.feature.common.ui.windowsizeclass.calculateWindowSizeClass
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {

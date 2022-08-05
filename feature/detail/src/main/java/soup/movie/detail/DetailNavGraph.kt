@@ -33,7 +33,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
 import soup.compose.material.motion.circularReveal
-import soup.movie.ext.showToast
+import soup.movie.feature.common.ext.showToast
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable

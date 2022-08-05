@@ -65,6 +65,7 @@ import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import soup.metronome.visibility.invisible
 import soup.movie.BuildConfig
 import soup.movie.R
+import soup.movie.feature.common.ui.MovieTheme
 import soup.movie.util.LauncherIcons
 import timber.log.Timber
 

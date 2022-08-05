@@ -60,7 +60,7 @@ import soup.movie.theater.TheaterChip
 import soup.movie.theater.draggableItem
 import soup.movie.theater.draggableList
 import soup.movie.theater.rememberDraggableListState
-import soup.movie.util.debounce
+import soup.movie.feature.common.util.debounce
 
 @Composable
 fun TheaterSortScreen(

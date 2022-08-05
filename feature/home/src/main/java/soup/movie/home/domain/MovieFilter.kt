@@ -16,10 +16,10 @@
 package soup.movie.home.domain
 
 import soup.movie.model.Movie
-import soup.movie.settings.model.AgeFilter
-import soup.movie.settings.model.GenreFilter
-import soup.movie.settings.model.GenreFilter.Companion.GENRE_ETC
-import soup.movie.settings.model.TheaterFilter
+import soup.movie.feature.common.settings.model.AgeFilter
+import soup.movie.feature.common.settings.model.GenreFilter
+import soup.movie.feature.common.settings.model.GenreFilter.Companion.GENRE_ETC
+import soup.movie.feature.common.settings.model.TheaterFilter
 
 class MovieFilter(
     private val theaterFilter: TheaterFilter,

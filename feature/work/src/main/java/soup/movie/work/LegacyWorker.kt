@@ -31,11 +31,11 @@ import dagger.assisted.AssistedInject
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.data.repository.MovieRepository
-import soup.movie.ext.isBest
+import soup.movie.feature.common.ext.isBest
 import soup.movie.model.Movie
-import soup.movie.notification.NotificationBuilder
-import soup.movie.util.currentTime
-import soup.movie.util.plusDaysTo
+import soup.movie.feature.common.notification.NotificationBuilder
+import soup.movie.feature.common.util.currentTime
+import soup.movie.feature.common.util.plusDaysTo
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 

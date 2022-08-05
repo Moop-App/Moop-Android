@@ -25,9 +25,9 @@ import org.threeten.bp.DayOfWeek.THURSDAY
 import org.threeten.bp.DayOfWeek.TUESDAY
 import org.threeten.bp.DayOfWeek.WEDNESDAY
 import org.threeten.bp.LocalDate
-import soup.movie.util.calculateMinusDaysTo
-import soup.movie.util.calculatePlusDaysTo
-import soup.movie.util.isInWeekOfCultureDay
+import soup.movie.feature.common.util.calculateMinusDaysTo
+import soup.movie.feature.common.util.calculatePlusDaysTo
+import soup.movie.feature.common.util.isInWeekOfCultureDay
 
 class DataHelperTest {
 

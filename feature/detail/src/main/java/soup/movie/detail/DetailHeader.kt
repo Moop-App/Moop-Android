@@ -49,11 +49,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import soup.movie.ext.getAgeLabel
-import soup.movie.ext.getDDayLabel
-import soup.movie.ext.isBest
-import soup.movie.ext.isDDay
-import soup.movie.ext.isNew
+import soup.movie.feature.common.ext.getAgeLabel
+import soup.movie.feature.common.ext.getDDayLabel
+import soup.movie.feature.common.ext.isBest
+import soup.movie.feature.common.ext.isDDay
+import soup.movie.feature.common.ext.isNew
 import soup.movie.home.favorite.MovieAgeTag
 import soup.movie.home.favorite.MovieBestTag
 import soup.movie.home.favorite.MovieDDayTag

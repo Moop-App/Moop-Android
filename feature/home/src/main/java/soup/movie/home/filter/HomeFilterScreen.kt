@@ -55,7 +55,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.home.R
-import soup.movie.ui.divider
+import soup.movie.feature.common.ui.divider
 
 @Composable
 internal fun HomeFilterScreen(
