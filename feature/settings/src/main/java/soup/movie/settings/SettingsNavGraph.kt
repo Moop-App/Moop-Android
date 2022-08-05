@@ -25,13 +25,13 @@ import soup.compose.material.motion.navigation.MaterialMotionNavHost
 import soup.compose.material.motion.navigation.composable
 import soup.compose.material.motion.navigation.rememberMaterialMotionNavController
 import soup.movie.feature.common.ext.showToast
+import soup.movie.feature.common.util.Moop
 import soup.movie.theater.edit.TheaterEditScreen
 import soup.movie.theater.edit.TheaterEditViewModel
 import soup.movie.theater.sort.TheaterSortScreen
 import soup.movie.theater.sort.TheaterSortViewModel
 import soup.movie.theme.ThemeOptionScreen
 import soup.movie.theme.ThemeOptionViewModel
-import soup.movie.feature.common.util.Moop
 
 private enum class Screen(val route: String) {
     Settings("SettingsScreen"),

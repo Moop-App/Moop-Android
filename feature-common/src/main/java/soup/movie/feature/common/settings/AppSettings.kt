@@ -16,10 +16,10 @@
 package soup.movie.feature.common.settings
 
 import kotlinx.coroutines.flow.Flow
-import soup.movie.model.Theater
 import soup.movie.feature.common.settings.model.AgeFilter
 import soup.movie.feature.common.settings.model.GenreFilter
 import soup.movie.feature.common.settings.model.TheaterFilter
+import soup.movie.model.Theater
 
 interface AppSettings {
 

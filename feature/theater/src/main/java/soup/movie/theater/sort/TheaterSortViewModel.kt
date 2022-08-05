@@ -25,8 +25,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import soup.movie.feature.common.ext.swap
-import soup.movie.model.Theater
 import soup.movie.feature.common.settings.AppSettings
+import soup.movie.model.Theater
 import javax.inject.Inject
 
 @HiltViewModel

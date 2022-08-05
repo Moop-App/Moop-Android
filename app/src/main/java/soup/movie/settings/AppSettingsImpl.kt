@@ -33,11 +33,11 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import soup.movie.feature.common.settings.AppSettings
-import soup.movie.model.Theater
-import soup.movie.model.TheaterType
 import soup.movie.feature.common.settings.model.AgeFilter
 import soup.movie.feature.common.settings.model.GenreFilter
 import soup.movie.feature.common.settings.model.TheaterFilter
+import soup.movie.model.Theater
+import soup.movie.model.TheaterType
 
 class AppSettingsImpl(
     private val context: Context,
