@@ -54,13 +54,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kotlinx.coroutines.launch
+import soup.movie.feature.common.util.debounce
 import soup.movie.model.Theater
 import soup.movie.theater.R
 import soup.movie.theater.TheaterChip
 import soup.movie.theater.draggableItem
 import soup.movie.theater.draggableList
 import soup.movie.theater.rememberDraggableListState
-import soup.movie.util.debounce
 
 @Composable
 fun TheaterSortScreen(

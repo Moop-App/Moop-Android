@@ -8,8 +8,7 @@ apply from: rootProject.file('gradle/android.gradle')
 android.namespace "soup.movie.work"
 
 dependencies {
-    implementation project(':core')
-    implementation project(':data:repository')
+    implementation project(':feature-common')
 
     implementation libs.kotlin.stdlib
 

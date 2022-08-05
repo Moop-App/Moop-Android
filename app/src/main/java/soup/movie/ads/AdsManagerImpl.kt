@@ -28,6 +28,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.R
+import soup.movie.feature.common.ads.AdsManager
 import timber.log.Timber
 
 class AdsManagerImpl(

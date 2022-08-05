@@ -16,9 +16,8 @@ android {
     }
 }
 dependencies {
+    implementation project(':feature-common')
     implementation project(':feature:settings')
-    implementation project(':core')
-    implementation project(':data:repository')
 
     implementation libs.kotlin.stdlib
 

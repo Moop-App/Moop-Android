@@ -35,8 +35,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import soup.movie.ext.executeWeb
-import soup.movie.util.YouTube
+import soup.movie.feature.common.ext.executeWeb
+import soup.movie.feature.common.util.YouTube
 
 @Composable
 internal fun DetailScreen(

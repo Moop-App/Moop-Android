@@ -54,7 +54,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
-import soup.movie.ext.showToast
+import soup.movie.feature.common.ext.showToast
 import soup.movie.home.filter.HomeFilterScreen
 import soup.movie.home.now.HomeNowList
 import soup.movie.home.plan.HomePlanList

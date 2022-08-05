@@ -15,10 +15,9 @@ android {
     }
 }
 dependencies {
+    implementation project(':feature-common')
     implementation project(':feature:theater')
     implementation project(':feature:theme')
-    implementation project(':core')
-    implementation project(':data:repository')
 
     implementation libs.kotlin.stdlib
     implementation libs.androidx.lifecycle.livedata

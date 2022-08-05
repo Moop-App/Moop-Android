@@ -81,15 +81,15 @@ import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.AsyncImage
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.detail.widget.NativeAdView
-import soup.movie.ext.executeWeb
-import soup.movie.ui.cgvBg
-import soup.movie.ui.cgvText
-import soup.movie.ui.lotteBg
-import soup.movie.ui.lotteText
-import soup.movie.ui.megaboxBg
-import soup.movie.ui.megaboxText
-import soup.movie.ui.naver
-import soup.movie.ui.star
+import soup.movie.feature.common.ext.executeWeb
+import soup.movie.feature.common.ui.cgvBg
+import soup.movie.feature.common.ui.cgvText
+import soup.movie.feature.common.ui.lotteBg
+import soup.movie.feature.common.ui.lotteText
+import soup.movie.feature.common.ui.megaboxBg
+import soup.movie.feature.common.ui.megaboxText
+import soup.movie.feature.common.ui.naver
+import soup.movie.feature.common.ui.star
 
 @Composable
 internal fun DetailList(

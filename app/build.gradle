@@ -116,8 +116,7 @@ dependencies {
     implementation project(':feature:settings')
     implementation project(':feature:theme')
     implementation project(':feature:work')
-    implementation project(':core')
-    implementation project(':data:repository')
+    implementation project(':feature-common')
     implementation project(':data:db')
     implementation project(':data:api')
 

@@ -62,17 +62,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.UnelevatedButton
-import soup.movie.ext.startActivitySafely
+import soup.movie.feature.common.ext.startActivitySafely
+import soup.movie.feature.common.ui.divider
+import soup.movie.feature.common.util.Cgv
+import soup.movie.feature.common.util.LotteCinema
+import soup.movie.feature.common.util.Megabox
+import soup.movie.feature.common.util.Moop
+import soup.movie.feature.common.util.debounce
 import soup.movie.model.Theater
 import soup.movie.model.TheaterType
 import soup.movie.theater.TheaterChip
 import soup.movie.theme.stringResIdOf
-import soup.movie.ui.divider
-import soup.movie.util.Cgv
-import soup.movie.util.LotteCinema
-import soup.movie.util.Megabox
-import soup.movie.util.Moop
-import soup.movie.util.debounce
 
 @Composable
 internal fun SettingsScreen(

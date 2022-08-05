@@ -27,12 +27,12 @@ import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
 import soup.movie.data.repository.MovieRepository
 import soup.movie.di.TheaterMapModuleDependencies
-import soup.movie.ext.lazyFast
+import soup.movie.feature.common.ext.lazyFast
+import soup.movie.feature.common.ui.MovieTheme
+import soup.movie.feature.common.util.viewModelProviderFactoryOf
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.theatermap.internal.TheaterMapScreen
 import soup.movie.theatermap.internal.TheaterMapViewModel
-import soup.movie.ui.MovieTheme
-import soup.movie.util.viewModelProviderFactoryOf
 import javax.inject.Inject
 
 class TheaterMapFragment : Fragment() {

@@ -32,9 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.EntryChip
+import soup.movie.feature.common.ui.cgvBg
+import soup.movie.feature.common.ui.cgvText
 import soup.movie.home.R
-import soup.movie.ui.cgvBg
-import soup.movie.ui.cgvText
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

@@ -32,7 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import soup.movie.util.debounce
+import soup.movie.feature.common.util.debounce
 
 @Composable
 fun ThemeOptionScreen(

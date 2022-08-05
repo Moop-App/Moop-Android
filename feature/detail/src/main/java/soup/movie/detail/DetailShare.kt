@@ -44,10 +44,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ShareCompat
+import soup.movie.feature.common.spec.FirebaseLink
+import soup.movie.feature.common.spec.KakaoLink
+import soup.movie.feature.common.ui.detailShareDim
 import soup.movie.model.Movie
-import soup.movie.spec.FirebaseLink
-import soup.movie.spec.KakaoLink
-import soup.movie.ui.detailShareDim
 
 @Composable
 internal fun DetailShare(

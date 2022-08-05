@@ -23,6 +23,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import soup.movie.R
+import soup.movie.feature.common.notification.NotificationBuilder
 import soup.movie.model.Movie
 import soup.movie.model.OpenDateAlarm
 import soup.movie.ui.main.MainActivity

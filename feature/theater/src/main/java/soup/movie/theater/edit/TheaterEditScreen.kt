@@ -69,11 +69,11 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import soup.movie.feature.common.ui.divider
+import soup.movie.feature.common.util.debounce
 import soup.movie.model.Theater
 import soup.movie.theater.R
 import soup.movie.theater.TheaterChip
-import soup.movie.ui.divider
-import soup.movie.util.debounce
 
 private enum class Page(val title: String) {
     CGV("CGV"),

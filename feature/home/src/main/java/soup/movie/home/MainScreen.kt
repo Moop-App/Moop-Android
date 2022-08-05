@@ -55,11 +55,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import soup.movie.ext.showToast
+import soup.movie.feature.common.ext.showToast
+import soup.movie.feature.common.ui.windowsizeclass.WindowWidthSizeClass
 import soup.movie.home.favorite.HomeFavoriteList
 import soup.movie.model.Movie
 import soup.movie.settings.SettingsNavGraph
-import soup.movie.ui.windowsizeclass.WindowWidthSizeClass
 
 @Composable
 fun MainScreen(

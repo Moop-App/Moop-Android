@@ -15,9 +15,8 @@ android {
     }
 }
 dependencies {
+    implementation project(':feature-common')
     implementation project(':app')
-    implementation project(':core')
-    implementation project(':data:repository')
 
     implementation libs.androidx.fragment
 
