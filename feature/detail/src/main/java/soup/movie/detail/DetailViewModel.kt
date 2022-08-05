@@ -82,7 +82,8 @@ class DetailViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _favoriteUiModel.value = repository.isFavoriteMovie(movieId)
+            val isFavoriteMovie: Boolean = repository.isFavoriteMovie(movieId)
+            _favoriteUiModel.value = isFavoriteMovie
             loadDetail(movieId)?.also {
                 renderDetail(it, getNativeAd())
             }
