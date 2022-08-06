@@ -1,0 +1,35 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+    id "org.jetbrains.kotlin.plugin.serialization"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.data.network"
+    defaultConfig {
+        buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "\"https://moop-public-api.firebaseio.com/alpha/\"")
+    }
+}
+
+dependencies {
+    implementation project(":model")
+
+    implementation libs.kotlin.stdlib
+    implementation libs.kotlin.serialization
+    implementation libs.coroutines.core
+    implementation libs.coroutines.android
+
+    implementation libs.androidx.core
+
+    implementation libs.retrofit.runtime
+    implementation libs.retrofit.serialization
+
+    implementation libs.timber
+
+    testImplementation libs.test.junit
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.espresso
+}
