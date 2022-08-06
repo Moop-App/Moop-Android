@@ -1,11 +1,15 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+    id "dagger.hilt.android.plugin"
+}
 
 apply from: rootProject.file('gradle/android.gradle')
 
-android.namespace "soup.movie.data.repository"
+android {
+    namespace "soup.movie.data.repository"
+}
 
 dependencies {
     api project(":model")

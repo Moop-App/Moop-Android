@@ -117,8 +117,8 @@ dependencies {
     implementation project(':feature:theme')
     implementation project(':feature:work')
     implementation project(':feature-common')
-    implementation project(':data:db')
-    implementation project(':data:api')
+    implementation project(':data-database')
+    implementation project(':data-network')
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
