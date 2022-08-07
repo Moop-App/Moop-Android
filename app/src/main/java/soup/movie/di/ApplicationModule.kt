@@ -35,10 +35,10 @@ import soup.movie.feature.common.install.InAppUpdateManager
 import soup.movie.feature.common.install.InAppUpdateManagerImpl
 import soup.movie.feature.common.notification.NotificationBuilder
 import soup.movie.feature.common.settings.AppSettings
+import soup.movie.feature.theme.ThemeOptionManager
+import soup.movie.feature.theme.ThemeOptionStore
 import soup.movie.notification.NotificationBuilderImpl
 import soup.movie.settings.AppSettingsImpl
-import soup.movie.theme.ThemeOptionManager
-import soup.movie.theme.ThemeOptionStore
 import javax.inject.Singleton
 
 @Module

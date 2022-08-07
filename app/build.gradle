@@ -105,17 +105,17 @@ android {
     lint {
         checkReleaseBuilds false
     }
-    dynamicFeatures = [":feature:theatermap"]
+    dynamicFeatures = [":theatermap"]
 }
 
 dependencies {
-    implementation project(':feature:home')
-    implementation project(':feature:detail')
-    implementation project(':feature:search')
-    implementation project(':feature:theater')
-    implementation project(':feature:settings')
-    implementation project(':feature:theme')
-    implementation project(':feature:work')
+    implementation project(':feature-home')
+    implementation project(':feature-detail')
+    implementation project(':feature-search')
+    implementation project(':feature-theater')
+    implementation project(':feature-settings')
+    implementation project(':feature-theme')
+    implementation project(':feature-work')
     implementation project(':feature-common')
     implementation project(':data-database')
     implementation project(':data-network')

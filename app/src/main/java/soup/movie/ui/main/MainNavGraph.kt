@@ -24,13 +24,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import soup.movie.detail.DetailNavGraph
-import soup.movie.detail.DetailViewModel
 import soup.movie.feature.common.ui.windowsizeclass.WindowWidthSizeClass
-import soup.movie.home.HomeViewModel
-import soup.movie.home.MainScreen
-import soup.movie.search.SearchScreen
-import soup.movie.search.SearchViewModel
+import soup.movie.feature.detail.DetailNavGraph
+import soup.movie.feature.detail.DetailViewModel
+import soup.movie.feature.home.HomeViewModel
+import soup.movie.feature.home.MainScreen
+import soup.movie.feature.search.SearchScreen
+import soup.movie.feature.search.SearchViewModel
 
 private enum class Screen(val route: String) {
     Main("main"),

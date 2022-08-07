@@ -20,8 +20,8 @@ import android.content.Context
 import com.google.android.play.core.splitcompat.SplitCompat
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
+import soup.movie.feature.theme.ThemeOptionManager
 import soup.movie.notification.NotificationChannels
-import soup.movie.theme.ThemeOptionManager
 import javax.inject.Inject
 
 @HiltAndroidApp
