@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2022 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.data.repository.di
 
-import dagger.hilt.EntryPoint
+import android.content.Context
+import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import soup.movie.data.repository.TheaterRepository
+import soup.movie.data.database.LocalDataSource
+import soup.movie.data.database.impl.LocalDataSourceFactory
+import javax.inject.Singleton
 
-@EntryPoint
+@Module
 @InstallIn(SingletonComponent::class)
-interface TheaterMapModuleDependencies {
+object DatabaseModule {
 
-    fun provideTheaterRepository(): TheaterRepository
+    @Singleton
+    @Provides
+    fun provideLocalDataSource(
+        @ApplicationContext context: Context
+    ): LocalDataSource {
+        return LocalDataSourceFactory.create(context)
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2022 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.data.repository
 
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.data.repository.TheaterRepository
+import soup.movie.model.TheaterAreaGroup
 
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface TheaterMapModuleDependencies {
-
-    fun provideTheaterRepository(): TheaterRepository
+interface TheaterRepository {
+    suspend fun getCodeList(): TheaterAreaGroup
 }

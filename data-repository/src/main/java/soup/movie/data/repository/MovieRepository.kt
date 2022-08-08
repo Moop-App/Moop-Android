@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.Flow
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
-import soup.movie.model.TheaterAreaGroup
 
 interface MovieRepository {
 
@@ -31,7 +30,6 @@ interface MovieRepository {
     suspend fun getMovieDetail(movieId: String): MovieDetail
     suspend fun getGenreList(): List<String>
     suspend fun searchMovie(query: String): List<Movie>
-    suspend fun getCodeList(): TheaterAreaGroup
 
     fun getFavoriteMovieList(): Flow<List<Movie>>
     suspend fun addFavoriteMovie(movie: Movie)

@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.data.database.impl.entity
 
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.data.repository.TheaterRepository
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface TheaterMapModuleDependencies {
-
-    fun provideTheaterRepository(): TheaterRepository
-}
+@Entity(tableName = "open_date_alarms")
+internal data class OpenDateAlarmEntity(
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val movieId: String,
+    @ColumnInfo(name = "title")
+    val title: String,
+    @ColumnInfo(name = "open_date")
+    val openDate: String
+)

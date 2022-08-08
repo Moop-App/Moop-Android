@@ -20,7 +20,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import soup.movie.data.repository.MovieRepository
+import soup.movie.data.repository.TheaterRepository
 import soup.movie.feature.common.settings.AppSettings
 import soup.movie.feature.theater.edit.TheaterEditManager
 
@@ -31,7 +31,7 @@ class TheaterEditDomainModule {
     @Provides
     @ViewModelScoped
     fun provideTheaterEditManager(
-        repository: MovieRepository,
+        repository: TheaterRepository,
         appSettings: AppSettings
     ): TheaterEditManager {
         return TheaterEditManager(

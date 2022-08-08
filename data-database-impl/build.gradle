@@ -1,0 +1,37 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "com.google.devtools.ksp"
+    id "org.jetbrains.kotlin.plugin.serialization"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.data.database.impl"
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental": "true"
+                ]
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation project(":model")
+    implementation project(":data-database")
+
+    implementation libs.kotlin.stdlib
+    implementation libs.kotlin.serialization
+    implementation libs.coroutines.core
+    implementation libs.coroutines.android
+
+    implementation libs.androidx.room.runtime
+    implementation libs.androidx.room.ktx
+    ksp libs.androidx.room.compiler
+
+    implementation libs.timber
+}
