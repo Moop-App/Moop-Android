@@ -29,7 +29,6 @@ dependencies {
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
 
-    testImplementation libs.test.junit
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.androidx.test.espresso
+    testImplementation project(':testing')
+    androidTestImplementation project(':testing')
 }

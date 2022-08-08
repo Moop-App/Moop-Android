@@ -43,7 +43,6 @@ dependencies {
     implementation libs.materialMotionCompose.core
     implementation libs.metronome.zoomable
 
-    testImplementation libs.test.junit
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.androidx.test.espresso
+    testImplementation project(':testing')
+    androidTestImplementation project(':testing')
 }

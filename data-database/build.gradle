@@ -33,8 +33,4 @@ dependencies {
     ksp libs.androidx.room.compiler
 
     implementation libs.timber
-
-    testImplementation libs.test.junit
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.androidx.test.espresso
 }

@@ -122,6 +122,7 @@ materialMotionCompose-navigation = { module = "io.github.fornewid:material-motio
 test-junit =  "junit:junit:4.13"
 
 androidx-test-core = "androidx.test:core-ktx:1.4.0"
+androidx-test-rules = "androidx.test:rules:1.4.0"
 androidx-test-runner = "androidx.test:runner:1.4.0"
 androidx-test-ext-truth = "androidx.test.ext:truth:1.4.0"
 androidx-test-ext-junit = "androidx.test.ext:junit-ktx:1.1.3"

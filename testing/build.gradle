@@ -1,0 +1,31 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+    id "dagger.hilt.android.plugin"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.testing"
+}
+
+dependencies {
+    implementation project(':common')
+    implementation project(':model')
+    implementation project(':data-repository')
+
+    implementation libs.kotlin.stdlib
+    api libs.coroutines.test
+
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+    api libs.dagger.hilt.testing
+
+    api libs.test.junit
+    api libs.androidx.test.core
+    api libs.androidx.test.rules
+    api libs.androidx.test.runner
+    api libs.androidx.test.espresso
+}
