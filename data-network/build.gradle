@@ -28,8 +28,4 @@ dependencies {
     implementation libs.retrofit.serialization
 
     implementation libs.timber
-
-    testImplementation libs.test.junit
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.androidx.test.espresso
 }

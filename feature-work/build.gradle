@@ -24,7 +24,6 @@ dependencies {
     implementation libs.androidx.work.runtime
     androidTestImplementation libs.androidx.work.testing
 
-    testImplementation libs.test.junit
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.androidx.test.espresso
+    testImplementation project(':testing')
+    androidTestImplementation project(':testing')
 }

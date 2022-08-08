@@ -174,9 +174,8 @@ dependencies {
 
     implementation libs.kakaoLink
 
-    testImplementation libs.test.junit
-    androidTestImplementation libs.androidx.test.runner
-    androidTestImplementation libs.androidx.test.espresso
+    testImplementation project(':testing')
+    androidTestImplementation project(':testing')
 }
 
 dependencyGuard {
