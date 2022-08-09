@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.data.database.impl.entity
 
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.data.repository.TheaterRepository
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface TheaterMapModuleDependencies {
+@Entity(tableName = "cached_movie_list")
+internal data class MovieListEntity(
+    @PrimaryKey
+    val type: String,
+    val lastUpdateTime: Long = 0,
+    val list: List<MovieEntity> = emptyList()
+) {
 
-    fun provideTheaterRepository(): TheaterRepository
+    companion object {
+
+        const val TYPE_NOW = "type_now"
+        const val TYPE_PLAN = "type_plan"
+    }
 }

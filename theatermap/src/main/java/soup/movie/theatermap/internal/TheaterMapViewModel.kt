@@ -21,12 +21,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import soup.movie.data.repository.MovieRepository
+import soup.movie.data.repository.TheaterRepository
 import soup.movie.model.TheaterAreaGroup
 import timber.log.Timber
 
 internal class TheaterMapViewModel(
-    private val repository: MovieRepository
+    private val repository: TheaterRepository
 ) : ViewModel() {
 
     var uiModel by mutableStateOf<List<TheaterMarkerUiModel>>(emptyList())

@@ -18,14 +18,14 @@ package soup.movie.feature.theater.edit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
-import soup.movie.data.repository.MovieRepository
+import soup.movie.data.repository.TheaterRepository
 import soup.movie.feature.common.settings.AppSettings
 import soup.movie.model.Theater
 import soup.movie.model.TheaterArea
 import soup.movie.model.TheaterAreaGroup
 
 class TheaterEditManager(
-    private val repository: MovieRepository,
+    private val repository: TheaterRepository,
     private val appSettings: AppSettings
 ) {
 

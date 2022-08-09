@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.data.database.impl
 
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.data.repository.TheaterRepository
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import soup.movie.data.database.impl.converter.CacheDatabaseTypeConverter
+import soup.movie.data.database.impl.dao.MovieCacheDao
+import soup.movie.data.database.impl.entity.MovieListEntity
 
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface TheaterMapModuleDependencies {
+@Database(entities = [MovieListEntity::class], version = 4, exportSchema = false)
+@TypeConverters(CacheDatabaseTypeConverter::class)
+internal abstract class MovieCacheDatabase : RoomDatabase() {
 
-    fun provideTheaterRepository(): TheaterRepository
+    abstract fun movieCacheDao(): MovieCacheDao
 }

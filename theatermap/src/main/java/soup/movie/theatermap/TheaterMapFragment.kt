@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
-import soup.movie.data.repository.MovieRepository
+import soup.movie.data.repository.TheaterRepository
 import soup.movie.di.TheaterMapModuleDependencies
 import soup.movie.feature.common.ext.lazyFast
 import soup.movie.feature.common.ui.MovieTheme
@@ -38,7 +38,7 @@ import javax.inject.Inject
 class TheaterMapFragment : Fragment() {
 
     @Inject
-    lateinit var repository: MovieRepository
+    lateinit var repository: TheaterRepository
 
     private val viewModel: TheaterMapViewModel by viewModels {
         viewModelProviderFactoryOf { TheaterMapViewModel(repository) }

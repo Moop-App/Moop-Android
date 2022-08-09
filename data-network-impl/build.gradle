@@ -8,11 +8,15 @@ plugins {
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace "soup.movie.data.network"
+    namespace "soup.movie.data.network.impl"
+    defaultConfig {
+        buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "\"https://moop-public-api.firebaseio.com/alpha/\"")
+    }
 }
 
 dependencies {
     implementation project(":model")
+    implementation project(":data-network")
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
@@ -20,4 +24,9 @@ dependencies {
     implementation libs.coroutines.android
 
     implementation libs.androidx.core
+
+    implementation libs.retrofit.runtime
+    implementation libs.retrofit.serialization
+
+    implementation libs.timber
 }

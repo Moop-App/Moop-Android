@@ -13,16 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.data.database.impl.entity
 
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.data.repository.TheaterRepository
+import kotlinx.serialization.Serializable
 
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface TheaterMapModuleDependencies {
-
-    fun provideTheaterRepository(): TheaterRepository
-}
+@Serializable
+internal data class MovieEntity(
+    val id: String,
+    val score: Int,
+    val title: String,
+    val posterUrl: String,
+    val openDate: String,
+    val isNow: Boolean,
+    val age: Int,
+    val nationFilter: List<String>? = null,
+    val genres: List<String>? = null,
+    val boxOffice: Int? = null,
+    val cgv: String? = null,
+    val lotte: String? = null,
+    val megabox: String? = null
+)

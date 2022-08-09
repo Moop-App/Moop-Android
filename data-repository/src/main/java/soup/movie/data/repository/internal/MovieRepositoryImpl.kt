@@ -18,6 +18,7 @@ package soup.movie.data.repository.internal
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import soup.movie.common.IoDispatcher
 import soup.movie.data.database.LocalDataSource
 import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.response.asModel
@@ -26,13 +27,13 @@ import soup.movie.data.repository.internal.util.SearchHelper
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
-import soup.movie.model.TheaterAreaGroup
 import timber.log.Timber
+import javax.inject.Inject
 
-internal class MovieRepositoryImpl(
+class MovieRepositoryImpl @Inject constructor(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource,
-    private val ioDispatcher: CoroutineDispatcher,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : MovieRepository {
 
     override fun getNowMovieList(): Flow<List<Movie>> {
@@ -109,14 +110,6 @@ internal class MovieRepositoryImpl(
 
     private fun Movie.isMatchedWith(query: String): Boolean {
         return SearchHelper.matched(title, query)
-    }
-
-    override suspend fun getCodeList(): TheaterAreaGroup {
-        return withContext(ioDispatcher) {
-            local.getCodeList() ?: remote.getCodeList()
-                .asModel()
-                .also(local::saveCodeList)
-        }
     }
 
     override fun getFavoriteMovieList(): Flow<List<Movie>> {
