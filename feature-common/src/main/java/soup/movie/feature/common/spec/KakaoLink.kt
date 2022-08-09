@@ -17,7 +17,7 @@ package soup.movie.feature.common.spec
 
 import android.content.Context
 import android.content.Intent
-import com.kakao.sdk.link.LinkClient
+import com.kakao.sdk.share.ShareClient
 import com.kakao.sdk.template.model.Content
 import com.kakao.sdk.template.model.FeedTemplate
 import com.kakao.sdk.template.model.Link
@@ -49,12 +49,12 @@ object KakaoLink {
                 )
             )
         )
-        LinkClient.instance.defaultTemplate(context, defaultFeed) { linkResult, error ->
+        ShareClient.instance.shareDefault(context, defaultFeed) { sharingResult, error ->
             if (error != null) {
                 context.showToast("실행할 앱을 찾을 수 없습니다.")
                 Timber.e(error)
-            } else if (linkResult != null) {
-                context.startActivity(linkResult.intent)
+            } else if (sharingResult != null) {
+                context.startActivity(sharingResult.intent)
             }
         }
     }

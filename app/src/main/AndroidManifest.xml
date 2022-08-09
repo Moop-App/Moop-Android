@@ -18,6 +18,7 @@
             <data android:scheme="mailto" />
         </intent>
 
+        <package android:name="com.kakao.talk" />
         <package android:name="com.google.android.apps.maps" />
         <package android:name="com.nhn.android.nmap" />
         <package android:name="net.daum.android.map" />
@@ -66,7 +67,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="@string/kakaolink_host"
+                    android:host="kakaolink"
                     android:scheme="@string/kakao_scheme" />
                 <data
                     android:host="moop.link"
