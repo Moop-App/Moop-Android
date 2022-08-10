@@ -5,6 +5,7 @@ plugins {
     id "org.jetbrains.kotlin.plugin.serialization"
     id "dagger.hilt.android.plugin"
     id "androidx.navigation.safeargs.kotlin"
+    id "moop.android.application.compose"
     id "moop.spotless"
 }
 if (file("google-services.json").exists()) {
@@ -26,12 +27,6 @@ android {
         versionName buildConfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
     }
     signingConfigs {
         debug {

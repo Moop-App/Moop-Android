@@ -4,6 +4,7 @@ plugins {
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
     id "androidx.navigation.safeargs.kotlin"
+    id "moop.android.library.compose"
     id "moop.spotless"
 }
 
@@ -15,12 +16,6 @@ android {
         release {
             consumerProguardFiles 'proguard-rules-navigation.pro'
         }
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
     }
 }
 

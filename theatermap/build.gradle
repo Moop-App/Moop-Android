@@ -3,6 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
+    id "moop.android.dynamic-feature.compose"
     id "moop.spotless"
 }
 
@@ -10,12 +11,6 @@ apply from: rootProject.file('gradle/android-dynamic-module.gradle')
 
 android {
     namespace "soup.movie.theatermap"
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
-    }
 }
 
 dependencies {
