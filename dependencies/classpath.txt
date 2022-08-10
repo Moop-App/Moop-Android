@@ -39,13 +39,6 @@ com.android.tools:sdk-common:30.2.2
 com.android.tools:sdklib:30.2.2
 com.android:signflinger:7.2.2
 com.android:zipflinger:7.2.2
-com.diffplug.durian:durian-collect:1.2.0
-com.diffplug.durian:durian-core:1.2.0
-com.diffplug.durian:durian-io:1.2.0
-com.diffplug.spotless:com.diffplug.spotless.gradle.plugin:5.12.4
-com.diffplug.spotless:spotless-lib-extra:2.13.4
-com.diffplug.spotless:spotless-lib:2.13.4
-com.diffplug.spotless:spotless-plugin-gradle:5.12.4
 com.dropbox.dependency-guard:com.dropbox.dependency-guard.gradle.plugin:0.3.1
 com.dropbox.dependency-guard:dependency-guard:0.3.1
 com.fasterxml.jackson.core:jackson-annotations:2.11.1
@@ -81,8 +74,6 @@ com.google.jimfs:jimfs:1.1
 com.google.protobuf:protobuf-java-util:3.10.0
 com.google.protobuf:protobuf-java:3.10.0
 com.google.testing.platform:core-proto:0.0.8-alpha07
-com.googlecode.concurrent-trees:concurrent-trees:2.6.1
-com.googlecode.javaewah:JavaEWAH:1.1.7
 com.googlecode.json-simple:json-simple:1.1
 com.googlecode.juniversalchardet:juniversalchardet:1.0.3
 com.squareup:javapoet:1.13.0
@@ -130,11 +121,8 @@ org.bitbucket.b_c:jose4j:0.7.0
 org.bouncycastle:bcpkix-jdk15on:1.56
 org.bouncycastle:bcprov-jdk15on:1.56
 org.checkerframework:checker-qual:3.5.0
-org.codehaus.groovy:groovy-xml:3.0.7
-org.codehaus.groovy:groovy:3.0.7
 org.codehaus.mojo:animal-sniffer-annotations:1.17
 org.codehaus.woodstox:stax2-api:4.2.1
-org.eclipse.jgit:org.eclipse.jgit:5.10.0.202012080955-r
 org.glassfish.jaxb:jaxb-runtime:2.3.2
 org.glassfish.jaxb:txw2:2.3.2
 org.javassist:javassist:3.26.0-GA

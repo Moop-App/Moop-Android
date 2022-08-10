@@ -3,6 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
+    id "moop.spotless"
 }
 
 apply from: rootProject.file('gradle/android-dynamic-module.gradle')
