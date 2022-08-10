@@ -3,6 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "com.google.devtools.ksp"
     id "org.jetbrains.kotlin.plugin.serialization"
+    id "moop.spotless"
 }
 
 apply from: rootProject.file('gradle/android.gradle')

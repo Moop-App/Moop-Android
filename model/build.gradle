@@ -1,4 +1,7 @@
-apply plugin: 'kotlin'
+plugins {
+    id "kotlin"
+    id "moop.spotless"
+}
 
 dependencies {
     implementation libs.kotlin.stdlib

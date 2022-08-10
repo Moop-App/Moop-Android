@@ -1,6 +1,7 @@
 plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
+    id "moop.spotless"
 }
 
 apply from: rootProject.file('gradle/android.gradle')
