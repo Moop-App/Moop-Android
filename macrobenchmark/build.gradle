@@ -1,15 +1,11 @@
 plugins {
-    id 'com.android.test'
-    id 'org.jetbrains.kotlin.android'
+    id "moop.android.test"
     id "moop.spotless"
 }
 
 android {
     namespace "soup.movie.macrobenchmark"
-    compileSdk buildConfig.compileSdk
     defaultConfig {
-        minSdk buildConfig.minSdk
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,10 +17,6 @@ android {
             signingConfig = debug.signingConfig
             matchingFallbacks = ["release"]
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
     targetProjectPath = ":app"
     experimentalProperties["android.experimental.self-instrumenting"] = true

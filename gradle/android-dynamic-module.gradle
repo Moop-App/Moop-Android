@@ -1,9 +1,5 @@
 android {
-    compileSdk buildConfig.compileSdk
-
     defaultConfig {
-        minSdk buildConfig.minSdk
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

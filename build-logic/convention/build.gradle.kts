@@ -17,6 +17,18 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("androidApplication") {
+            id = "moop.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
+        register("androidDynamicFeature") {
+            id = "moop.android.dynamic-feature"
+            implementationClass = "AndroidDynamicFeatureConventionPlugin"
+        }
+        register("androidLibrary") {
+            id = "moop.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
         register("androidApplicationCompose") {
             id = "moop.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
@@ -28,6 +40,10 @@ gradlePlugin {
         register("androidLibraryCompose") {
             id = "moop.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+        register("androidTest") {
+            id = "moop.android.test"
+            implementationClass = "AndroidTestConventionPlugin"
         }
         register("spotless") {
             id = "moop.spotless"
