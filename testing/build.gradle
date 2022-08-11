@@ -5,8 +5,6 @@ plugins {
     id "moop.spotless"
 }
 
-apply from: rootProject.file('gradle/android.gradle')
-
 android {
     namespace "soup.movie.testing"
 }

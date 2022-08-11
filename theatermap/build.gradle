@@ -6,10 +6,16 @@ plugins {
     id "moop.spotless"
 }
 
-apply from: rootProject.file('gradle/android-dynamic-module.gradle')
-
 android {
     namespace "soup.movie.theatermap"
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            proguardFiles 'proguard-rules-dynamic-features.pro'
+        }
+    }
 }
 
 dependencies {

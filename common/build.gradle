@@ -4,10 +4,14 @@ plugins {
     id "moop.spotless"
 }
 
-apply from: rootProject.file('gradle/android.gradle')
-
 android {
     namespace "soup.movie.common"
+    defaultConfig {
+        buildConfigField 'int', 'VERSION_CODE', "${buildConfig.versionCode}"
+        buildConfigField 'String', 'VERSION_NAME', "\"${buildConfig.versionName}\""
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
