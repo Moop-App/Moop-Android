@@ -1,8 +1,5 @@
 android {
-    compileSdk buildConfig.compileSdk
-
     defaultConfig {
-        minSdk buildConfig.minSdk
         buildConfigField 'int', 'VERSION_CODE', "${buildConfig.versionCode}"
         buildConfigField 'String', 'VERSION_NAME', "\"${buildConfig.versionName}\""
 

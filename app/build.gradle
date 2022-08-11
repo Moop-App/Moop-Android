@@ -1,6 +1,5 @@
 plugins {
-    id "com.android.application"
-    id "org.jetbrains.kotlin.android"
+    id "moop.android.application"
     id "org.jetbrains.kotlin.kapt"
     id "org.jetbrains.kotlin.plugin.serialization"
     id "dagger.hilt.android.plugin"
@@ -19,10 +18,7 @@ def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
 android {
     namespace "soup.movie"
-    compileSdk buildConfig.compileSdk
     defaultConfig {
-        minSdk buildConfig.minSdk
-        targetSdk buildConfig.targetSdk
         versionCode buildConfig.versionCode
         versionName buildConfig.versionName
 

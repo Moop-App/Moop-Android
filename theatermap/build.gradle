@@ -1,6 +1,5 @@
 plugins {
-    id "com.android.dynamic-feature"
-    id "org.jetbrains.kotlin.android"
+    id "moop.android.dynamic-feature"
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
     id "moop.android.dynamic-feature.compose"
