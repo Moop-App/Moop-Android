@@ -5,12 +5,20 @@ plugins {
     id "moop.spotless"
 }
 
-apply from: rootProject.file('gradle/android.gradle')
-
 android {
     namespace "soup.movie.data.network.impl"
     defaultConfig {
         buildConfigField 'String', 'API_BASE_URL', propOrDef("MOOP_API_BASE_URL", "\"https://moop-public-api.firebaseio.com/alpha/\"")
+
+        buildConfigField 'int', 'VERSION_CODE', "${buildConfig.versionCode}"
+        buildConfigField 'String', 'VERSION_NAME', "\"${buildConfig.versionName}\""
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
     }
 }
 
