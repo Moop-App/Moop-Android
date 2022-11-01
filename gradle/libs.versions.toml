@@ -131,7 +131,7 @@ androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 
 # Google
 
-google-pluginGradle = "com.google.gms:google-services:4.3.10"
+google-pluginGradle = "com.google.gms:google-services:4.3.14"
 google-play = "com.google.android.play:core:1.10.2"
 google-ads = "com.google.android.gms:play-services-ads:20.5.0"
 

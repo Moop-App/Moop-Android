@@ -48,7 +48,7 @@ com.diffplug.spotless:spotless-lib:2.13.4
 com.diffplug.spotless:spotless-plugin-gradle:5.12.4
 com.dropbox.dependency-guard:com.dropbox.dependency-guard.gradle.plugin:0.3.1
 com.dropbox.dependency-guard:dependency-guard:0.3.1
-com.google.android.gms:strict-version-matcher-plugin:1.2.2
+com.google.android.gms:strict-version-matcher-plugin:1.2.4
 com.google.android:annotations:4.1.1.4
 com.google.api.grpc:proto-google-common-protos:2.0.1
 com.google.auto.value:auto-value-annotations:1.6.2
@@ -64,7 +64,7 @@ com.google.firebase:firebase-crashlytics-buildtools:2.9.1
 com.google.firebase:firebase-crashlytics-gradle:2.9.1
 com.google.firebase:perf-plugin:1.4.1
 com.google.flatbuffers:flatbuffers-java:1.12.0
-com.google.gms:google-services:4.3.10
+com.google.gms:google-services:4.3.14
 com.google.guava:failureaccess:1.0.1
 com.google.guava:guava:30.1-jre
 com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
