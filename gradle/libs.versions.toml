@@ -7,13 +7,13 @@ serialization = "1.4.1"
 ksp = "1.7.20-1.0.7"
 
 # Dagger
-dagger = "2.43.2"
+dagger = "2.44"
 androidxhilt = "1.0.0"
 
 # AndroidX
-activity = "1.5.1"
+activity = "1.6.1"
 lifecycle = "2.5.1"
-navigation = "2.5.1"
+navigation = "2.5.3"
 room = "2.4.3"
 work = "2.7.1"
 
@@ -62,12 +62,12 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 
-androidx-appcompat = "androidx.appcompat:appcompat:1.5.0"
+androidx-appcompat = "androidx.appcompat:appcompat:1.5.1"
 androidx-browser = "androidx.browser:browser:1.4.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-androidx-core = "androidx.core:core-ktx:1.8.0"
+androidx-core = "androidx.core:core-ktx:1.9.0"
 androidx-datastore-preferences = "androidx.datastore:datastore-preferences:1.0.0"
-androidx-fragment = "androidx.fragment:fragment-ktx:1.5.2"
+androidx-fragment = "androidx.fragment:fragment-ktx:1.5.4"
 
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
