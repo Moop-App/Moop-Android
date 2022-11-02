@@ -41,7 +41,11 @@ class LauncherIcons(context: Context) {
     fun getAppIcon(context: Context, packageName: String): Drawable? {
         return try {
             val pm = context.packageManager
-            val appInfo = pm.getApplicationInfo(packageName, 0)
+            val appInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                pm.getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(0))
+            } else {
+                pm.getApplicationInfo(packageName, 0)
+            }
             getShadowedIcon(pm.getApplicationIcon(appInfo))
         } catch (e: PackageManager.NameNotFoundException) {
             Timber.w(e)
