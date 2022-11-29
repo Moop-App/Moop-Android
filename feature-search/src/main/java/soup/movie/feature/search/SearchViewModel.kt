@@ -43,14 +43,14 @@ class SearchViewModel @Inject constructor(
         get() = _query
 
     @OptIn(FlowPreview::class)
-    val uiModel: LiveData<SearchContentsUiModel> = _query.asFlow()
+    val uiModel: LiveData<SearchUiModel> = _query.asFlow()
         .debounce(300)
         .map { it.trim() }
         .distinctUntilChanged()
         .flatMapLatest { query ->
             val movies = repository.searchMovie(query)
             flowOf(
-                SearchContentsUiModel(
+                SearchUiModel(
                     movies = movies,
                     hasNoItem = query.isNotEmpty() && movies.isEmpty()
                 )

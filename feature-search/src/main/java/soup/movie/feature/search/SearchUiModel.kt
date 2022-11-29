@@ -17,7 +17,7 @@ package soup.movie.feature.search
 
 import soup.movie.model.Movie
 
-data class SearchContentsUiModel(
+data class SearchUiModel(
     val movies: List<Movie>,
     val hasNoItem: Boolean
 )
