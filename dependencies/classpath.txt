@@ -1,7 +1,7 @@
 androidx.databinding:databinding-common:7.3.1
 androidx.databinding:databinding-compiler-common:7.3.1
-androidx.navigation:navigation-safe-args-generator:2.5.3
-androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3
+androidx.navigation:navigation-safe-args-generator:2.6.0-alpha04
+androidx.navigation:navigation-safe-args-gradle-plugin:2.6.0-alpha04
 com.android.databinding:baseLibrary:7.3.1
 com.android.tools.analytics-library:crash:30.3.1
 com.android.tools.analytics-library:protos:30.3.1
@@ -79,7 +79,7 @@ com.googlecode.json-simple:json-simple:1.1
 com.googlecode.juniversalchardet:juniversalchardet:1.0.3
 com.squareup:javapoet:1.13.0
 com.squareup:javawriter:2.5.0
-com.squareup:kotlinpoet:1.8.0
+com.squareup:kotlinpoet:1.12.0
 com.sun.activation:javax.activation:1.2.0
 com.sun.istack:istack-commons-runtime:3.0.8
 com.sun.xml.fastinfoset:FastInfoset:1.2.16
@@ -145,7 +145,7 @@ org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20
 org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.7.20
 org.jetbrains.kotlin:kotlin-native-utils:1.7.20
 org.jetbrains.kotlin:kotlin-project-model:1.7.20
-org.jetbrains.kotlin:kotlin-reflect:1.5.31
+org.jetbrains.kotlin:kotlin-reflect:1.7.0
 org.jetbrains.kotlin:kotlin-scripting-common:1.7.20
 org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.7.20
 org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:1.7.20

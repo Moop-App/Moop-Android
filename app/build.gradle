@@ -129,7 +129,8 @@ dependencies {
     implementation libs.androidx.fragment
     implementation libs.androidx.startup
 
-    implementation libs.google.play
+    implementation libs.google.play.featureDelivery
+    implementation libs.google.play.appUpdate
 
     implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.lifecycle.viewmodel.ktx
