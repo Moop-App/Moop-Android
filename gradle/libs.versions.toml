@@ -13,7 +13,7 @@ androidxhilt = "1.0.0"
 # AndroidX
 activity = "1.6.1"
 lifecycle = "2.5.1"
-navigation = "2.5.3"
+navigation = "2.6.0-alpha04"
 room = "2.4.3"
 work = "2.7.1"
 
@@ -132,7 +132,8 @@ androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 # Google
 
 google-pluginGradle = "com.google.gms:google-services:4.3.14"
-google-play = "com.google.android.play:core:1.10.2"
+google-play-featureDelivery = "com.google.android.play:feature-delivery-ktx:2.0.1"
+google-play-appUpdate = "com.google.android.play:app-update-ktx:2.0.1"
 google-ads = "com.google.android.gms:play-services-ads:21.3.0"
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version = "31.1.0" }
