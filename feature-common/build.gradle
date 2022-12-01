@@ -4,6 +4,7 @@ plugins {
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
     id "androidx.navigation.safeargs.kotlin"
+    id "moop.spotless"
 }
 
 apply from: rootProject.file('gradle/android.gradle')
