@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -83,7 +82,7 @@ internal fun SettingsScreen(
     onMarketIconClick: () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.statusBarsPadding(),
+        modifier = Modifier,
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(R.string.menu_settings)) }

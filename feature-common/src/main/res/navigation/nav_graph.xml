@@ -24,10 +24,6 @@
 
     <action
         android:id="@+id/action_to_theater_map"
-        app:destination="@id/theater_map"
-        app:enterAnim="@anim/fade_in"
-        app:exitAnim="@anim/fade_out"
-        app:popEnterAnim="@anim/fade_in"
-        app:popExitAnim="@anim/fade_out" />
+        app:destination="@id/theater_map" />
 
 </navigation>

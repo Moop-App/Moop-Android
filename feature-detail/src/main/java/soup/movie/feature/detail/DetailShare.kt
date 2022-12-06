@@ -22,14 +22,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -65,11 +61,7 @@ internal fun DetailShare(
                 onClick = onClose,
             )
             .fillMaxSize()
-            .padding(
-                WindowInsets.systemBars
-                    .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
-                    .asPaddingValues(),
-            )
+            .systemBarsPadding()
             .background(color = MaterialTheme.colors.detailShareDim)
             .padding(horizontal = 16.dp)
             .verticalScroll(rememberScrollState()),

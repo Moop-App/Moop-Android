@@ -27,12 +27,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
@@ -99,9 +97,7 @@ internal fun DetailList(
     onItemClick: (ContentItemUiModel) -> Unit
 ) {
     LazyColumn(
-        contentPadding = WindowInsets.systemBars
-            .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
-            .asPaddingValues(),
+        contentPadding = WindowInsets.systemBars.asPaddingValues(),
     ) {
         item {
             header()
