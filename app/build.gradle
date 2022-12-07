@@ -119,10 +119,6 @@ dependencies {
     implementation project(':feature-theme')
     implementation project(':feature-work')
     implementation project(':feature-common')
-    implementation project(":data-database")
-    runtimeOnly project(":data-database-impl")
-    implementation project(":data-network")
-    runtimeOnly project(":data-network-impl")
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization

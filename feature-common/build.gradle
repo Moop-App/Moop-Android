@@ -26,7 +26,8 @@ android {
 dependencies {
     api project(':common')
     api project(':model')
-    api project(':data-repository')
+    api project(':data-repository-api')
+    runtimeOnly project(":data-repository-impl")
 
     api libs.kotlin.stdlib
     api libs.coroutines.core

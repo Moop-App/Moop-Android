@@ -36,8 +36,9 @@ import soup.movie.model.MovieList
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterAreaGroup
 import timber.log.Timber
+import javax.inject.Inject
 
-internal class LocalDataSourceImpl(
+class LocalDataSourceImpl @Inject constructor(
     private val favoriteMovieDao: FavoriteMovieDao,
     private val openDateAlarmDao: OpenDateAlarmDao,
     private val cacheDao: MovieCacheDao

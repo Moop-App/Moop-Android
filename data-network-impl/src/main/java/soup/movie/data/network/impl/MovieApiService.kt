@@ -23,7 +23,7 @@ import soup.movie.data.network.response.MovieDetailResponse
 import soup.movie.data.network.response.MovieListResponse
 import soup.movie.data.network.response.TheaterAreaGroupResponse
 
-internal interface MovieApiService {
+interface MovieApiService {
 
     // 현재상영작
 

@@ -3,6 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
     id "org.jetbrains.kotlin.plugin.serialization"
+    id "dagger.hilt.android.plugin"
 }
 
 apply from: rootProject.file('gradle/android.gradle')
@@ -16,7 +17,7 @@ android {
 
 dependencies {
     implementation project(":model")
-    implementation project(":data-network")
+    implementation project(':data-network-api')
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
@@ -27,6 +28,9 @@ dependencies {
 
     implementation libs.retrofit.runtime
     implementation libs.retrofit.serialization
+
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
 
     implementation libs.timber
 }

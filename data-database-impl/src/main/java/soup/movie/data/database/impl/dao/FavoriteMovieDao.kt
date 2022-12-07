@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.Flow
 import soup.movie.data.database.impl.entity.FavoriteMovieEntity
 
 @Dao
-internal interface FavoriteMovieDao {
+interface FavoriteMovieDao {
 
     @Query("SELECT * FROM favorite_movies")
     fun getFavoriteMovieList(): Flow<List<FavoriteMovieEntity>>

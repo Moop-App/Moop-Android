@@ -18,7 +18,7 @@ package soup.movie.data.network.impl
 import okhttp3.Interceptor
 import okhttp3.Request
 
-internal object OkHttpInterceptors {
+object OkHttpInterceptors {
 
     private const val HEADER_CACHE_CONTROL = "Cache-Control"
     private const val HEADER_CACHE_MAX_AGE = "public, max-age=${5 * 60}" // 5 minutes

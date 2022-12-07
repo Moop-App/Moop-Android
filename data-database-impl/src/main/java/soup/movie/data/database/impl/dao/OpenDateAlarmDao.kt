@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.Flow
 import soup.movie.data.database.impl.entity.OpenDateAlarmEntity
 
 @Dao
-internal interface OpenDateAlarmDao {
+interface OpenDateAlarmDao {
 
     @Query("SELECT * FROM open_date_alarms")
     fun getAllFlow(): Flow<List<OpenDateAlarmEntity>>

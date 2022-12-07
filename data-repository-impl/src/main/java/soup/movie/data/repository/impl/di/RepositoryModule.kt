@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 SOUP
+ * Copyright 2021 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.data.repository.di
+package soup.movie.data.repository.impl.di
 
-import android.content.Context
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import soup.movie.data.network.RemoteDataSource
-import soup.movie.data.network.impl.RemoteDataSourceFactory
+import soup.movie.data.repository.MovieRepository
+import soup.movie.data.repository.TheaterRepository
+import soup.movie.data.repository.impl.MovieRepositoryImpl
+import soup.movie.data.repository.impl.TheaterRepositoryImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+interface RepositoryModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideRemoteDataSource(
-        @ApplicationContext context: Context
-    ): RemoteDataSource {
-        return RemoteDataSourceFactory.create(context)
-    }
+    fun provideMovieRepository(
+        movieRepositoryImpl: MovieRepositoryImpl
+    ): MovieRepository
+
+    @Binds
+    @Singleton
+    fun provideTheaterRepository(
+        theaterRepositoryImpl: TheaterRepositoryImpl
+    ): TheaterRepository
 }

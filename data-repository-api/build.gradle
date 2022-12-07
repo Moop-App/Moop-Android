@@ -1,0 +1,17 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.data.repository"
+}
+
+dependencies {
+    implementation project(":model")
+
+    implementation libs.kotlin.stdlib
+    implementation libs.coroutines.core
+}

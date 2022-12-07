@@ -1,8 +1,10 @@
 plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
     id "com.google.devtools.ksp"
     id "org.jetbrains.kotlin.plugin.serialization"
+    id "dagger.hilt.android.plugin"
 }
 
 apply from: rootProject.file('gradle/android.gradle')
@@ -22,7 +24,7 @@ android {
 
 dependencies {
     implementation project(":model")
-    implementation project(":data-database")
+    implementation project(':data-database-api')
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
@@ -32,6 +34,9 @@ dependencies {
     implementation libs.androidx.room.runtime
     implementation libs.androidx.room.ktx
     ksp libs.androidx.room.compiler
+
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
 
     implementation libs.timber
 }

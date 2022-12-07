@@ -14,7 +14,7 @@ android {
 dependencies {
     implementation project(':common')
     implementation project(':model')
-    implementation project(':data-repository')
+    implementation project(':data-repository-api')
 
     implementation libs.kotlin.stdlib
     api libs.coroutines.test

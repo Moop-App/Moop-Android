@@ -20,7 +20,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "open_date_alarms")
-internal data class OpenDateAlarmEntity(
+data class OpenDateAlarmEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val movieId: String,

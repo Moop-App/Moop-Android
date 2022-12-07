@@ -18,7 +18,7 @@ package soup.movie.data.database.impl.entity
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class MovieEntity(
+data class MovieEntity(
     val id: String,
     val score: Int,
     val title: String,

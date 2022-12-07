@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.Flow
 import soup.movie.data.database.impl.entity.MovieListEntity
 
 @Dao
-internal interface MovieCacheDao {
+interface MovieCacheDao {
 
     @Query("SELECT * FROM cached_movie_list WHERE type LIKE :type")
     fun getMovieListByType(type: String): Flow<MovieListEntity>

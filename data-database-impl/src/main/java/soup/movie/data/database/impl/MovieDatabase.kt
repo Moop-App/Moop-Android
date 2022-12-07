@@ -33,7 +33,7 @@ import soup.movie.data.database.impl.entity.OpenDateAlarmEntity
     exportSchema = false
 )
 @TypeConverters(FavoriteMovieTypeConverters::class)
-internal abstract class MovieDatabase : RoomDatabase() {
+abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun favoriteMovieDao(): FavoriteMovieDao
 
