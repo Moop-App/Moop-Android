@@ -1,6 +1,6 @@
 plugins {
-    id "com.android.library"
-    id "org.jetbrains.kotlin.android"
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
 }
@@ -8,20 +8,23 @@ plugins {
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace "soup.movie.data.repository"
+    namespace "soup.movie.data.repository.impl"
 }
 
 dependencies {
-    api project(":model")
+    implementation project(":model")
     implementation project(":common")
-    implementation project(":data-network")
-    implementation project(":data-network-impl")
-    implementation project(":data-database")
-    implementation project(":data-database-impl")
+    implementation project(':data-network-api')
+    runtimeOnly project(":data-network-impl")
+    implementation project(':data-database-api')
+    runtimeOnly project(":data-database-impl")
+    implementation project(':data-repository-api')
 
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core
     implementation libs.coroutines.android
+
+    implementation libs.androidx.core
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

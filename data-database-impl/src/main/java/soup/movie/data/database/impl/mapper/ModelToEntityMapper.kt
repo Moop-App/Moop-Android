@@ -21,7 +21,7 @@ import soup.movie.data.database.impl.entity.OpenDateAlarmEntity
 import soup.movie.model.Movie
 import soup.movie.model.OpenDateAlarm
 
-internal fun Movie.toMovieEntity(): MovieEntity {
+fun Movie.toMovieEntity(): MovieEntity {
     return MovieEntity(
         id = id,
         score = score,
@@ -39,7 +39,7 @@ internal fun Movie.toMovieEntity(): MovieEntity {
     )
 }
 
-internal fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
+fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
     return FavoriteMovieEntity(
         id = id,
         score = score,
@@ -57,7 +57,7 @@ internal fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
     )
 }
 
-internal fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
+fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = id,
         title = title,
@@ -65,7 +65,7 @@ internal fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     )
 }
 
-internal fun OpenDateAlarm.toEntity(): OpenDateAlarmEntity {
+fun OpenDateAlarm.toEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = movieId,
         title = title,

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.data.repository.internal
+package soup.movie.data.repository.impl
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

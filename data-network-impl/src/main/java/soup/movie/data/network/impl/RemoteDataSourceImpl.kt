@@ -19,8 +19,9 @@ import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.response.MovieDetailResponse
 import soup.movie.data.network.response.MovieListResponse
 import soup.movie.data.network.response.TheaterAreaGroupResponse
+import javax.inject.Inject
 
-internal class RemoteDataSourceImpl(
+class RemoteDataSourceImpl @Inject constructor(
     private val apiService: MovieApiService
 ) : RemoteDataSource {
 

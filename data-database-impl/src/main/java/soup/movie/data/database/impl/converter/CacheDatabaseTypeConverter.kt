@@ -21,7 +21,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import soup.movie.data.database.impl.entity.MovieEntity
 
-internal class CacheDatabaseTypeConverter {
+class CacheDatabaseTypeConverter {
 
     @TypeConverter
     fun fromString(string: String?): List<MovieEntity> {

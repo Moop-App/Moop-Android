@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.data.repository.internal.util
+package soup.movie.data.repository.impl.util
 
 /**
  * 초성 검색 알고리즘을 위한 클래스
@@ -21,7 +21,7 @@ package soup.movie.data.repository.internal.util
  * @author roter
  * @see <a href="http://www.roter.pe.kr">http://www.roter.pe.kr</a>
  */
-internal object SearchHelper {
+object SearchHelper {
 
     private const val HANGUL_BEGIN_UNICODE: Char = 44032.toChar() // 가
     private const val HANGUL_LAST_UNICODE: Char = 55203.toChar() // 힣

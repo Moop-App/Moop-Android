@@ -22,12 +22,12 @@ import soup.movie.model.Movie
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.TheaterRatings
 
-internal fun MovieEntity.toMovie() = Movie(
+fun MovieEntity.toMovie() = Movie(
     id, score, title, posterUrl, openDate, isNow, age, nationFilter, genres, boxOffice,
     TheaterRatings(cgv, lotte, megabox)
 )
 
-internal fun FavoriteMovieEntity.toMovie(): Movie {
+fun FavoriteMovieEntity.toMovie(): Movie {
     return Movie(
         id = id,
         score = score,
@@ -43,4 +43,4 @@ internal fun FavoriteMovieEntity.toMovie(): Movie {
     )
 }
 
-internal fun OpenDateAlarmEntity.toOpenDateAlarm() = OpenDateAlarm(movieId, title, openDate)
+fun OpenDateAlarmEntity.toOpenDateAlarm() = OpenDateAlarm(movieId, title, openDate)

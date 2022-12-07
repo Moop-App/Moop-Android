@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.data.repository.internal
+package soup.movie.data.repository.impl
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ import soup.movie.data.database.LocalDataSource
 import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.response.asModel
 import soup.movie.data.repository.MovieRepository
-import soup.movie.data.repository.internal.util.SearchHelper
+import soup.movie.data.repository.impl.util.SearchHelper
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm

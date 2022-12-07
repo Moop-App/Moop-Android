@@ -19,7 +19,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "cached_movie_list")
-internal data class MovieListEntity(
+data class MovieListEntity(
     @PrimaryKey
     val type: String,
     val lastUpdateTime: Long = 0,
