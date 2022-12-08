@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.theme
+package soup.movie.feature.theme.impl
 
 interface ThemeOptionStore {
 

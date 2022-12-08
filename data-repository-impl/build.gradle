@@ -15,9 +15,7 @@ dependencies {
     implementation project(":model")
     implementation project(":common")
     implementation project(':data-network-api')
-    runtimeOnly project(":data-network-impl")
     implementation project(':data-database-api')
-    runtimeOnly project(":data-database-impl")
     implementation project(':data-repository-api')
 
     implementation libs.kotlin.stdlib

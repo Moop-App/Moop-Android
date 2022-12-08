@@ -119,10 +119,14 @@ dependencies {
     implementation project(':feature-theme')
     implementation project(':feature-work')
     implementation project(':feature-common')
+    runtimeOnly project(":data-network-impl")
+    runtimeOnly project(":data-database-impl")
+    runtimeOnly project(":data-repository-impl")
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
 
+    implementation libs.androidx.appcompat
     implementation libs.androidx.activity.ktx
     implementation libs.androidx.fragment
     implementation libs.androidx.startup

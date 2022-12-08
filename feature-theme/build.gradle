@@ -22,6 +22,7 @@ dependencies {
 
     implementation libs.kotlin.stdlib
 
+    implementation libs.androidx.appcompat
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui

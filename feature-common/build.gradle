@@ -27,13 +27,11 @@ dependencies {
     api project(':common')
     api project(':model')
     api project(':data-repository-api')
-    runtimeOnly project(":data-repository-impl")
 
     api libs.kotlin.stdlib
     api libs.coroutines.core
     api libs.coroutines.android
 
-    api libs.androidx.appcompat
     api libs.androidx.core
 
     implementation libs.compose.material
