@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import soup.movie.feature.common.ext.executeWeb
 import soup.movie.feature.common.util.YouTube
+import soup.movie.resources.R
 
 @Composable
 internal fun DetailScreen(

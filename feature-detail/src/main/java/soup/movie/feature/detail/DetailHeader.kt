@@ -59,6 +59,7 @@ import soup.movie.feature.home.favorite.MovieBestTag
 import soup.movie.feature.home.favorite.MovieDDayTag
 import soup.movie.feature.home.favorite.MovieNewTag
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

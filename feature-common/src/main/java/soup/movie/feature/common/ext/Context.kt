@@ -24,7 +24,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.StringRes
 import androidx.browser.customtabs.CustomTabsIntent
-import soup.movie.feature.common.R
+import soup.movie.resources.R
 
 /** Toast */
 

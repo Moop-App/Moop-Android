@@ -34,10 +34,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
-import soup.movie.feature.home.R
 import soup.movie.feature.home.tab.MovieList
 import soup.movie.feature.home.tab.NoMovieItems
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @Composable
 internal fun HomeFavoriteList(

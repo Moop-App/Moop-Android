@@ -45,8 +45,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import soup.movie.feature.home.R
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @Composable
 internal fun HomeContentsScreen(

@@ -45,6 +45,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
+import androidx.compose.material.Colors
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -68,11 +69,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -88,6 +89,10 @@ import soup.movie.feature.common.ui.megaboxText
 import soup.movie.feature.common.ui.naver
 import soup.movie.feature.common.ui.star
 import soup.movie.feature.detail.widget.NativeAdView
+import soup.movie.resources.R
+
+private val Colors.detailCardElevation: Dp
+    get() = if (isLight) 10.dp else 1.dp
 
 @Composable
 internal fun DetailList(
@@ -200,7 +205,7 @@ private fun BoxOffice(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Row(
             modifier = Modifier.padding(top = 12.dp, bottom = 14.dp).fillMaxWidth(),
@@ -329,7 +334,7 @@ private fun Cgv(
         modifier = modifier.padding(start = 12.dp, end = 4.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Column(
             modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
@@ -379,7 +384,7 @@ private fun Lotte(
         modifier = modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Column(
             modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
@@ -428,7 +433,7 @@ private fun Megabox(
         modifier = modifier.padding(start = 4.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Column(
             modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
@@ -475,7 +480,7 @@ private fun Plot(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp).fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -529,7 +534,7 @@ private fun Naver(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Row(
             modifier = Modifier.padding(vertical = 4.dp),
@@ -592,7 +597,7 @@ private fun Imdb(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Row(
             modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
@@ -710,7 +715,7 @@ private fun Person(
         modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -744,7 +749,7 @@ private fun TrailerHeader(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
@@ -792,7 +797,7 @@ private fun TrailerItem(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RectangleShape,
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Row(
             modifier = Modifier
@@ -841,7 +846,7 @@ private fun TrailerFooter(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 16.dp),
         shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         Box(
             modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
@@ -864,7 +869,7 @@ private fun NativeAd(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        elevation = dimensionResource(R.dimen.detail_card_elevation),
+        elevation = MaterialTheme.colors.detailCardElevation,
     ) {
         AndroidView(
             factory = {

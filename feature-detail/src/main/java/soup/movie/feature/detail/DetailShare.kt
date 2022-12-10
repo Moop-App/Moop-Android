@@ -44,6 +44,7 @@ import soup.movie.feature.common.spec.FirebaseLink
 import soup.movie.feature.common.spec.KakaoLink
 import soup.movie.feature.common.ui.detailShareDim
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @Composable
 internal fun DetailShare(

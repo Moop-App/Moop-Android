@@ -49,13 +49,13 @@ import soup.movie.feature.common.ext.getDDayLabel
 import soup.movie.feature.common.ext.isBest
 import soup.movie.feature.common.ext.isDDay
 import soup.movie.feature.common.ext.isNew
-import soup.movie.feature.home.R
 import soup.movie.feature.home.favorite.MovieAgeBadge
 import soup.movie.feature.home.favorite.MovieBestTag
 import soup.movie.feature.home.favorite.MovieDDayTag
 import soup.movie.feature.home.favorite.MovieNewTag
 import soup.movie.feature.home.filter.rippleTheme
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @Composable
 fun MovieList(

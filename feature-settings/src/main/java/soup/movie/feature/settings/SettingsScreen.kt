@@ -72,6 +72,7 @@ import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theme.stringResIdOf
 import soup.movie.model.Theater
 import soup.movie.model.TheaterType
+import soup.movie.resources.R
 
 @Composable
 internal fun SettingsScreen(

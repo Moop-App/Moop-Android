@@ -77,7 +77,7 @@ import soup.movie.BuildConfig
 import soup.movie.feature.common.util.Cgv
 import soup.movie.feature.common.util.LotteCinema
 import soup.movie.feature.common.util.Megabox
-import soup.movie.theatermap.R
+import soup.movie.resources.R
 import soup.movie.util.LauncherIcons
 import kotlin.math.max
 import kotlin.math.min

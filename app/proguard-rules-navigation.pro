@@ -1,3 +1,2 @@
 -keepnames class soup.movie.theatermap.TheaterMapFragment
--keepnames class soup.movie.ui.CustomProgressFragment
 -keepnames class soup.movie.ui.main.MainFragment

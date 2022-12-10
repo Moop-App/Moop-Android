@@ -34,7 +34,7 @@ import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.EntryChip
 import soup.movie.feature.common.ui.cgvBg
 import soup.movie.feature.common.ui.cgvText
-import soup.movie.feature.home.R
+import soup.movie.resources.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

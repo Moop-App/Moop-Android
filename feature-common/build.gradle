@@ -18,7 +18,8 @@ android {
 }
 
 dependencies {
-    api project(':common')
+    api project(':core-common')
+    api project(':core-resources')
     api project(':model')
     api project(':data-repository-api')
 

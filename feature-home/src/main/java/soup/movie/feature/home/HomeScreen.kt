@@ -59,6 +59,7 @@ import soup.movie.feature.home.filter.HomeFilterScreen
 import soup.movie.feature.home.now.HomeNowList
 import soup.movie.feature.home.plan.HomePlanList
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
