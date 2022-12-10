@@ -23,7 +23,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.runBlocking
 import soup.movie.ads.AdsManagerImpl
 import soup.movie.analytics.EventAnalyticsImpl
 import soup.movie.common.IoDispatcher
@@ -35,8 +34,6 @@ import soup.movie.feature.common.install.InAppUpdateManager
 import soup.movie.feature.common.install.InAppUpdateManagerImpl
 import soup.movie.feature.common.notification.NotificationBuilder
 import soup.movie.feature.common.settings.AppSettings
-import soup.movie.feature.theme.ThemeOptionManager
-import soup.movie.feature.theme.ThemeOptionStore
 import soup.movie.notification.NotificationBuilderImpl
 import soup.movie.settings.AppSettingsImpl
 import javax.inject.Singleton
@@ -59,25 +56,6 @@ class ApplicationModule {
     fun provideEventAnalytics(
         @ApplicationContext context: Context
     ): EventAnalytics = EventAnalyticsImpl(context)
-
-    @Singleton
-    @Provides
-    fun provideThemeOptionManager(
-        appSettings: AppSettings
-    ): ThemeOptionManager = ThemeOptionManager(object : ThemeOptionStore {
-
-        override fun save(option: String) {
-            // TODO: Avoid blocking threads on DataStore
-            runBlocking {
-                appSettings.setThemeOption(option)
-            }
-        }
-
-        override fun restore(): String {
-            // TODO: Avoid blocking threads on DataStore
-            return runBlocking { appSettings.getThemeOption() }
-        }
-    })
 
     @Singleton
     @Provides
