@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.feature.common.MainDirections.Companion.actionToTheaterMap
+import soup.movie.MainDirections.Companion.actionToTheaterMap
 import soup.movie.feature.common.ui.MovieTheme
 import soup.movie.feature.common.ui.windowsizeclass.calculateWindowSizeClass
 
