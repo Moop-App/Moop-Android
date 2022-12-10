@@ -32,6 +32,7 @@ import soup.movie.feature.theater.sort.TheaterSortScreen
 import soup.movie.feature.theater.sort.TheaterSortViewModel
 import soup.movie.feature.theme.ThemeOptionScreen
 import soup.movie.feature.theme.ThemeOptionViewModel
+import soup.movie.resources.R
 
 private enum class Screen(val route: String) {
     Settings("SettingsScreen"),

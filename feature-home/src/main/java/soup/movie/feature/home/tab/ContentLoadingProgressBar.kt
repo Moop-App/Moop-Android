@@ -40,7 +40,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import soup.movie.feature.home.R
+import soup.movie.resources.R
 
 @Composable
 internal fun ContentLoadingProgressBar(

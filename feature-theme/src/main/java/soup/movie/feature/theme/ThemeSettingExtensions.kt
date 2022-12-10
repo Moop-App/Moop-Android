@@ -16,6 +16,7 @@
 package soup.movie.feature.theme
 
 import androidx.annotation.StringRes
+import soup.movie.resources.R
 
 @StringRes
 fun stringResIdOf(themeOption: ThemeOption?): Int = when (themeOption) {

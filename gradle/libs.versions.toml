@@ -147,7 +147,6 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 retrofit-runtime = "com.squareup.retrofit2:retrofit:2.9.0"
 retrofit-serialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
-lottie-compose = "com.airbnb.android:lottie-compose:5.2.0"
 kakaoLink = "com.kakao.sdk:v2-share:2.11.2"
 naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
 playServicesLocation = "com.google.android.gms:play-services-location:17.1.0"

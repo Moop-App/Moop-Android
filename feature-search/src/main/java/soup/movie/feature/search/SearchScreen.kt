@@ -60,6 +60,7 @@ import soup.movie.feature.common.ext.showToast
 import soup.movie.feature.home.tab.MovieList
 import soup.movie.feature.home.tab.NoMovieItems
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @Composable
 fun SearchScreen(

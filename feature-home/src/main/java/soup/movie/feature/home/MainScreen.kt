@@ -54,6 +54,7 @@ import soup.movie.feature.common.ui.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.favorite.HomeFavoriteList
 import soup.movie.feature.settings.SettingsNavGraph
 import soup.movie.model.Movie
+import soup.movie.resources.R
 
 @Composable
 fun MainScreen(

@@ -39,6 +39,7 @@ import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.toMovie
+import soup.movie.resources.R
 import timber.log.Timber
 import javax.inject.Inject
 

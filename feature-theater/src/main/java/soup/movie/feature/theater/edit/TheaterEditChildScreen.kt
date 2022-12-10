@@ -34,9 +34,9 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import kotlinx.coroutines.launch
 import soup.movie.feature.common.ext.showToast
-import soup.movie.feature.theater.R
 import soup.movie.feature.theater.TheaterFilterChip
 import soup.movie.model.Theater
+import soup.movie.resources.R
 
 @Composable
 internal fun CgvScreen(viewModel: TheaterEditViewModel) {

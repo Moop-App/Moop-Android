@@ -107,8 +107,6 @@ androidx.viewpager:viewpager:1.0.0
 androidx.window:window:1.1.0-alpha04
 androidx.work:work-runtime-ktx:2.7.1
 androidx.work:work-runtime:2.7.1
-com.airbnb.android:lottie-compose:5.2.0
-com.airbnb.android:lottie:5.2.0
 com.github.fornewid.metronome:material:0.5.2
 com.github.fornewid.metronome:visibility:0.5.2
 com.github.fornewid.metronome:zoomable:0.5.2

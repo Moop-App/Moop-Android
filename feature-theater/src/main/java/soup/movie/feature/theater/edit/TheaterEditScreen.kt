@@ -70,9 +70,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import soup.movie.feature.common.ui.divider
 import soup.movie.feature.common.util.debounce
-import soup.movie.feature.theater.R
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.model.Theater
+import soup.movie.resources.R
 
 private enum class Page(val title: String) {
     CGV("CGV"),
