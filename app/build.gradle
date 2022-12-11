@@ -111,6 +111,7 @@ android {
 }
 
 dependencies {
+    implementation project(':core-ads')
     implementation project(':feature-home')
     implementation project(':feature-detail')
     implementation project(':feature-search')
@@ -136,7 +137,6 @@ dependencies {
 
     implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.lifecycle.viewmodel.ktx
-    implementation libs.androidx.lifecycle.process
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.compiler
 
@@ -163,7 +163,6 @@ dependencies {
     implementation firebase.messaging
     implementation firebase.dynamicLinks
     implementation firebase.perf
-    implementation libs.google.ads
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.navigation.compose

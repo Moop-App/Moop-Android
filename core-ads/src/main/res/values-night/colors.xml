@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorOnSurface">#000000</color>
+    <color name="core_ads_on_surface">#FFFFFF</color>
 </resources>

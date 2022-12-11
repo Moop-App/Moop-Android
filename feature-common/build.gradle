@@ -47,7 +47,6 @@ dependencies {
 
     implementation platform(libs.firebase.bom)
     implementation firebase.dynamicLinks
-    implementation libs.google.ads
 
     api libs.threetenAbp
     api libs.timber

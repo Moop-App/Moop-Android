@@ -20,14 +20,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.ads.nativead.NativeAd
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
+import soup.movie.core.ads.AdsManager
+import soup.movie.core.ads.NativeAdInfo
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.ads.AdsManager
 import soup.movie.feature.common.analytics.EventAnalytics
 import soup.movie.feature.common.device.ImageUriProvider
 import soup.movie.feature.common.ext.screenDays
@@ -52,8 +52,6 @@ class DetailViewModel @Inject constructor(
     private val adsManager: AdsManager,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
-
-    private var nativeAd: NativeAd? = null
 
     private val movieId: String = savedStateHandle["movieId"]!!
 
@@ -86,16 +84,11 @@ class DetailViewModel @Inject constructor(
             val isFavoriteMovie: Boolean = repository.isFavoriteMovie(movieId)
             _favoriteUiModel.value = isFavoriteMovie
             loadDetail(movieId)?.also {
-                renderDetail(it, getNativeAd())
+                renderDetail(it, adsManager.getLoadedNativeAd())
             }
             adsManager.onNativeAdConsumed()
             adsManager.loadNextNativeAd()
         }
-    }
-
-    override fun onCleared() {
-        nativeAd?.destroy()
-        super.onCleared()
     }
 
     private suspend fun loadDetail(movieId: String): MovieDetail? {
@@ -111,7 +104,7 @@ class DetailViewModel @Inject constructor(
 
     private suspend fun renderDetail(
         detail: MovieDetail,
-        nativeAd: NativeAd?
+        adInfo: NativeAdInfo?
     ) {
         withContext(defaultDispatcher) {
             val movie = detail.toMovie()
@@ -124,7 +117,7 @@ class DetailViewModel @Inject constructor(
                     companies = detail.companies.orEmpty()
                 )
             )
-            _contentUiModel.postValue(detail.toContentUiModel(nativeAd))
+            _contentUiModel.postValue(detail.toContentUiModel(adInfo))
         }
     }
 
@@ -139,7 +132,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun MovieDetail.toContentUiModel(nativeAd: NativeAd?): ContentUiModel {
+    private fun MovieDetail.toContentUiModel(adInfo: NativeAdInfo?): ContentUiModel {
         val items = mutableListOf<ContentItemUiModel>()
         boxOffice?.run {
             items.add(
@@ -225,7 +218,7 @@ class DetailViewModel @Inject constructor(
             items.add(CastItemUiModel(persons = persons))
         }
 
-        nativeAd?.let {
+        adInfo?.let {
             items.add(AdItemUiModel(it))
         }
 
@@ -266,12 +259,8 @@ class DetailViewModel @Inject constructor(
 
     fun onRetryClick() {
         viewModelScope.launch {
-            loadDetail(movieId)?.also { renderDetail(it, getNativeAd()) }
+            loadDetail(movieId)?.also { renderDetail(it, adsManager.getLoadedNativeAd()) }
         }
-    }
-
-    private fun getNativeAd(): NativeAd? {
-        return adsManager.getLoadedNativeAd()
     }
 
     fun clickPoster() {
