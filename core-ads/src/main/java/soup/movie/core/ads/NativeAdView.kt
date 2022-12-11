@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.detail.widget
+package soup.movie.core.ads
 
 import android.content.Context
 import android.util.AttributeSet
@@ -25,9 +25,8 @@ import android.widget.RatingBar
 import android.widget.TextView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
-import soup.movie.feature.detail.R
 
-class NativeAdView @JvmOverloads constructor(
+internal class NativeAdView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,

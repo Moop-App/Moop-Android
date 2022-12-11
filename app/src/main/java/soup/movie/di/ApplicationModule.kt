@@ -16,18 +16,17 @@
 package soup.movie.di
 
 import android.content.Context
-import androidx.lifecycle.ProcessLifecycleOwner
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
-import soup.movie.ads.AdsManagerImpl
+import soup.movie.ads.AdsConfigImpl
 import soup.movie.analytics.EventAnalyticsImpl
 import soup.movie.common.IoDispatcher
+import soup.movie.core.ads.AdsConfig
 import soup.movie.device.ImageUriProviderImpl
-import soup.movie.feature.common.ads.AdsManager
 import soup.movie.feature.common.analytics.EventAnalytics
 import soup.movie.feature.common.device.ImageUriProvider
 import soup.movie.feature.common.install.InAppUpdateManager
@@ -68,11 +67,10 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideAdsManager(
+    fun provideAdsConfig(
         @ApplicationContext context: Context,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher,
-    ): AdsManager {
-        return AdsManagerImpl(context, ProcessLifecycleOwner.get(), ioDispatcher)
+    ): AdsConfig {
+        return AdsConfigImpl(context)
     }
 
     @Singleton

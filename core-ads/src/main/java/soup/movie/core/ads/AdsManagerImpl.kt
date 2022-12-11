@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.ads
+package soup.movie.core.ads
 
+import android.annotation.SuppressLint
 import android.content.Context
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
@@ -24,20 +25,20 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.nativead.NativeAd
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import soup.movie.R
-import soup.movie.feature.common.ads.AdsManager
+import soup.movie.common.IoDispatcher
 import timber.log.Timber
+import javax.inject.Inject
 
-class AdsManagerImpl(
-    private val context: Context,
-    lifecycleOwner: LifecycleOwner,
-    private val ioDispatcher: CoroutineDispatcher,
+@SuppressLint("MissingPermission")
+class AdsManagerImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val config: AdsConfig,
 ) : AdsManager {
-
-    private val adUnitId: String = context.getString(R.string.admob_ad_unit_detail)
 
     enum class State {
         LOADED, CONSUMED
@@ -47,34 +48,36 @@ class AdsManagerImpl(
     private var lastNativeAd: NativeAd? = null
 
     init {
-        lifecycleOwner.lifecycleScope.launch(ioDispatcher) {
+        ProcessLifecycleOwner.get().lifecycleScope.launch(ioDispatcher) {
             MobileAds.initialize(context)
         }
     }
 
-    override fun getLoadedNativeAd(): NativeAd? {
+    override fun getLoadedNativeAd(): NativeAdInfo? {
         Timber.d("getLoadedNativeAd: state=$state")
-        return lastNativeAd
+        return lastNativeAd?.let { NativeAdInfo(it) }
     }
 
-    override suspend fun loadNextNativeAd() = withContext(ioDispatcher) {
-        if (state == State.LOADED) {
-            return@withContext
-        }
-
-        val adLoader = AdLoader.Builder(context, adUnitId)
-            .forNativeAd {
-                lastNativeAd = it
-                state = State.LOADED
-                Timber.d("loadNextNativeAd: State.LOADED")
+    override suspend fun loadNextNativeAd() {
+        withContext(ioDispatcher) {
+            if (state == State.LOADED) {
+                return@withContext
             }
-            .withAdListener(object : AdListener() {
-                override fun onAdFailedToLoad(error: LoadAdError) {
-                    Timber.w("onAdFailedToLoad: errorCode=${error.code}")
+
+            val adLoader = AdLoader.Builder(context, config.detailAdUnitId)
+                .forNativeAd {
+                    lastNativeAd = it
+                    state = State.LOADED
+                    Timber.d("loadNextNativeAd: State.LOADED")
                 }
-            })
-            .build()
-        adLoader.loadAd(AdRequest.Builder().build())
+                .withAdListener(object : AdListener() {
+                    override fun onAdFailedToLoad(error: LoadAdError) {
+                        Timber.w("onAdFailedToLoad: errorCode=${error.code}")
+                    }
+                })
+                .build()
+            adLoader.loadAd(AdRequest.Builder().build())
+        }
     }
 
     override fun onNativeAdConsumed() {

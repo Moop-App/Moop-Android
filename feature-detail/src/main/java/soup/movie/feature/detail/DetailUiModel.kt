@@ -16,7 +16,7 @@
 package soup.movie.feature.detail
 
 import androidx.annotation.Keep
-import com.google.android.gms.ads.nativead.NativeAd
+import soup.movie.core.ads.NativeAdInfo
 import soup.movie.model.Company
 import soup.movie.model.Movie
 import soup.movie.model.Trailer
@@ -111,7 +111,7 @@ class PersonUiModel(
 
 @Keep
 class AdItemUiModel(
-    val nativeAd: NativeAd
+    val adInfo: NativeAdInfo
 ) : ContentItemUiModel()
 
 @Keep

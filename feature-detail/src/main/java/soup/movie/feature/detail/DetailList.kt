@@ -76,9 +76,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.AsyncImage
 import com.webtoonscorp.android.readmore.material.ReadMoreText
+import soup.movie.core.ads.NativeAd
 import soup.movie.feature.common.ext.executeWeb
 import soup.movie.feature.common.ui.cgvBg
 import soup.movie.feature.common.ui.cgvText
@@ -88,7 +88,6 @@ import soup.movie.feature.common.ui.megaboxBg
 import soup.movie.feature.common.ui.megaboxText
 import soup.movie.feature.common.ui.naver
 import soup.movie.feature.common.ui.star
-import soup.movie.feature.detail.widget.NativeAdView
 import soup.movie.resources.R
 
 private val Colors.detailCardElevation: Dp
@@ -185,7 +184,7 @@ internal fun DetailList(
                     )
                 }
                 is AdItemUiModel -> {
-                    NativeAd(
+                    DetailAd(
                         uiModel = item,
                     )
                 }
@@ -862,7 +861,7 @@ private fun TrailerFooter(
 }
 
 @Composable
-private fun NativeAd(
+private fun DetailAd(
     uiModel: AdItemUiModel,
 ) {
     Card(
@@ -871,15 +870,7 @@ private fun NativeAd(
         backgroundColor = MaterialTheme.colors.surface,
         elevation = MaterialTheme.colors.detailCardElevation,
     ) {
-        AndroidView(
-            factory = {
-                NativeAdView(it)
-            },
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            update = {
-                it.setNativeAd(uiModel.nativeAd)
-            }
-        )
+        NativeAd(uiModel.adInfo)
     }
 }
 

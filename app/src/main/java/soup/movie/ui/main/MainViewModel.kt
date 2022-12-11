@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import soup.movie.feature.common.ads.AdsManager
+import soup.movie.core.ads.AdsManager
 import soup.movie.feature.common.ui.EventLiveData
 import soup.movie.feature.common.ui.MutableEventLiveData
 import javax.inject.Inject

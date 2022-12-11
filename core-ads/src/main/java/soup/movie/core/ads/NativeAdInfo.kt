@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2022 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.common.ads
+package soup.movie.core.ads
 
 import com.google.android.gms.ads.nativead.NativeAd
 
-interface AdsManager {
-
-    fun getLoadedNativeAd(): NativeAd?
-
-    suspend fun loadNextNativeAd()
-
-    fun onNativeAdConsumed()
-}
+class NativeAdInfo(
+    internal val nativeAd: NativeAd,
+)
