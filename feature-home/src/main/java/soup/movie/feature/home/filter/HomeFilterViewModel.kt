@@ -30,17 +30,17 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.settings.AppSettings
-import soup.movie.feature.common.settings.model.AgeFilter
-import soup.movie.feature.common.settings.model.AgeFilter.Companion.FLAG_AGE_12
-import soup.movie.feature.common.settings.model.AgeFilter.Companion.FLAG_AGE_15
-import soup.movie.feature.common.settings.model.AgeFilter.Companion.FLAG_AGE_19
-import soup.movie.feature.common.settings.model.AgeFilter.Companion.FLAG_AGE_ALL
-import soup.movie.feature.common.settings.model.GenreFilter
-import soup.movie.feature.common.settings.model.TheaterFilter
-import soup.movie.feature.common.settings.model.TheaterFilter.Companion.FLAG_THEATER_CGV
-import soup.movie.feature.common.settings.model.TheaterFilter.Companion.FLAG_THEATER_LOTTE
-import soup.movie.feature.common.settings.model.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
+import soup.movie.data.settings.AppSettings
+import soup.movie.model.settings.AgeFilter
+import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_12
+import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_15
+import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_19
+import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_ALL
+import soup.movie.model.settings.GenreFilter
+import soup.movie.model.settings.TheaterFilter
+import soup.movie.model.settings.TheaterFilter.Companion.FLAG_THEATER_CGV
+import soup.movie.model.settings.TheaterFilter.Companion.FLAG_THEATER_LOTTE
+import soup.movie.model.settings.TheaterFilter.Companion.FLAG_THEATER_MEGABOX
 import javax.inject.Inject
 
 @HiltViewModel

@@ -32,9 +32,7 @@ import soup.movie.feature.common.device.ImageUriProvider
 import soup.movie.feature.common.install.InAppUpdateManager
 import soup.movie.feature.common.install.InAppUpdateManagerImpl
 import soup.movie.feature.common.notification.NotificationBuilder
-import soup.movie.feature.common.settings.AppSettings
 import soup.movie.notification.NotificationBuilderImpl
-import soup.movie.settings.AppSettingsImpl
 import javax.inject.Singleton
 
 @Module
@@ -72,13 +70,6 @@ class ApplicationModule {
     ): AdsConfig {
         return AdsConfigImpl(context)
     }
-
-    @Singleton
-    @Provides
-    fun provideAppSettings(
-        @ApplicationContext context: Context,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher,
-    ): AppSettings = AppSettingsImpl(context, ioDispatcher)
 
     @Singleton
     @Provides

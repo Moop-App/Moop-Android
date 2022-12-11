@@ -18,7 +18,8 @@ android {
 }
 
 dependencies {
-    implementation project(':feature-common')
+    implementation project(":data-settings-api")
+    implementation project(":feature-common")
 
     implementation libs.kotlin.stdlib
 
@@ -30,6 +31,6 @@ dependencies {
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
 
-    testImplementation project(':testing')
-    androidTestImplementation project(':testing')
+    testImplementation project(":testing")
+    androidTestImplementation project(":testing")
 }

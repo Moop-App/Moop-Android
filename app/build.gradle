@@ -2,7 +2,6 @@ plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
-    id "org.jetbrains.kotlin.plugin.serialization"
     id "dagger.hilt.android.plugin"
     id "androidx.navigation.safeargs.kotlin"
 }
@@ -111,21 +110,21 @@ android {
 }
 
 dependencies {
-    implementation project(':core-ads')
-    implementation project(':feature-home')
-    implementation project(':feature-detail')
-    implementation project(':feature-search')
-    implementation project(':feature-theater')
-    implementation project(':feature-settings')
-    implementation project(':feature-theme')
-    implementation project(':feature-work')
-    implementation project(':feature-common')
+    implementation project(":core-ads")
+    implementation project(":feature-home")
+    implementation project(":feature-detail")
+    implementation project(":feature-search")
+    implementation project(":feature-theater")
+    implementation project(":feature-settings")
+    implementation project(":feature-theme")
+    implementation project(":feature-work")
+    implementation project(":feature-common")
     runtimeOnly project(":data-network-impl")
     runtimeOnly project(":data-database-impl")
     runtimeOnly project(":data-repository-impl")
+    runtimeOnly project(":data-settings-impl")
 
     implementation libs.kotlin.stdlib
-    implementation libs.kotlin.serialization
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.activity.ktx
@@ -146,8 +145,6 @@ dependencies {
     implementation libs.androidx.navigation.dynamicFeaturesFragment
 
     implementation libs.androidx.work.runtime
-
-    implementation libs.androidx.datastore.preferences
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
@@ -177,8 +174,8 @@ dependencies {
 
     implementation libs.kakaoLink
 
-    testImplementation project(':testing')
-    androidTestImplementation project(':testing')
+    testImplementation project(":testing")
+    androidTestImplementation project(":testing")
 }
 
 dependencyGuard {

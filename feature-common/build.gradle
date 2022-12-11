@@ -18,10 +18,10 @@ android {
 }
 
 dependencies {
-    api project(':core-common')
-    api project(':core-resources')
-    api project(':model')
-    api project(':data-repository-api')
+    api project(":core-common")
+    api project(":core-resources")
+    api project(":model")
+    api project(":data-repository-api")
 
     api libs.kotlin.stdlib
     api libs.coroutines.core
@@ -52,8 +52,8 @@ dependencies {
     api libs.timber
     implementation libs.kakaoLink
 
-    testImplementation project(':testing')
-    androidTestImplementation project(':testing')
+    testImplementation project(":testing")
+    androidTestImplementation project(":testing")
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {

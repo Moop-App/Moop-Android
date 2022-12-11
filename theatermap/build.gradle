@@ -18,8 +18,8 @@ android {
 }
 
 dependencies {
-    implementation project(':feature-common')
-    implementation project(':app')
+    implementation project(":feature-common")
+    implementation project(":app")
 
     implementation libs.androidx.fragment
 
@@ -35,6 +35,6 @@ dependencies {
     implementation libs.playServicesLocation
     implementation libs.naverMapCompose
 
-    testImplementation project(':testing')
-    androidTestImplementation project(':testing')
+    testImplementation project(":testing")
+    androidTestImplementation project(":testing")
 }

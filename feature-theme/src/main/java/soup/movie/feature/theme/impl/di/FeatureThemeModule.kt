@@ -21,7 +21,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.runBlocking
-import soup.movie.feature.common.settings.AppSettings
+import soup.movie.data.settings.AppSettings
 import soup.movie.feature.theme.ThemeOptionManager
 import soup.movie.feature.theme.impl.ThemeOptionManagerImpl
 import soup.movie.feature.theme.impl.ThemeOptionStore

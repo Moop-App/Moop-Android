@@ -27,8 +27,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import soup.movie.data.settings.AppSettings
 import soup.movie.feature.common.install.InAppUpdateManager
-import soup.movie.feature.common.settings.AppSettings
 import soup.movie.feature.theme.ThemeOptionManager
 import javax.inject.Inject
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2022 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,30 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.theater.di
+package soup.movie.data.settings.impl.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
-import soup.movie.data.repository.TheaterRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import soup.movie.common.IoDispatcher
 import soup.movie.data.settings.AppSettings
-import soup.movie.feature.theater.edit.TheaterEditManager
+import soup.movie.data.settings.impl.AppSettingsImpl
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
-class TheaterEditDomainModule {
+@InstallIn(SingletonComponent::class)
+class DataSettingsModule {
 
+    @Singleton
     @Provides
-    @ViewModelScoped
-    fun provideTheaterEditManager(
-        repository: TheaterRepository,
-        appSettings: AppSettings
-    ): TheaterEditManager {
-        return TheaterEditManager(
-            repository,
-            appSettings
-        )
+    fun provideAppSettings(
+        @ApplicationContext context: Context,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
+    ): AppSettings {
+        return AppSettingsImpl(context, ioDispatcher)
     }
 }

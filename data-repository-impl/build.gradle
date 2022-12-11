@@ -1,6 +1,6 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
 }
@@ -13,10 +13,10 @@ android {
 
 dependencies {
     implementation project(":model")
-    implementation project(':core-common')
-    implementation project(':data-network-api')
-    implementation project(':data-database-api')
-    implementation project(':data-repository-api')
+    implementation project(":core-common")
+    implementation project(":data-network-api")
+    implementation project(":data-database-api")
+    implementation project(":data-repository-api")
 
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core

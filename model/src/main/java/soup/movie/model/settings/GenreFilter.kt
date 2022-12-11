@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.common.settings.model
+package soup.movie.model.settings
 
 class GenreFilter(
     val blacklist: Set<String>
