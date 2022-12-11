@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2022 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.settings
+package soup.movie.data.settings.impl
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -32,12 +32,12 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import soup.movie.feature.common.settings.AppSettings
-import soup.movie.feature.common.settings.model.AgeFilter
-import soup.movie.feature.common.settings.model.GenreFilter
-import soup.movie.feature.common.settings.model.TheaterFilter
+import soup.movie.data.settings.AppSettings
 import soup.movie.model.Theater
 import soup.movie.model.TheaterType
+import soup.movie.model.settings.AgeFilter
+import soup.movie.model.settings.GenreFilter
+import soup.movie.model.settings.TheaterFilter
 
 class AppSettingsImpl(
     private val context: Context,
@@ -64,7 +64,10 @@ class AppSettingsImpl(
 
     override fun getTheaterFilterFlow(): Flow<TheaterFilter> {
         return context.dataStore.data.map { preferences ->
-            TheaterFilter(preferences[theaterFilterKey] ?: TheaterFilter.FLAG_THEATER_ALL)
+            TheaterFilter(
+                preferences[theaterFilterKey]
+                    ?: TheaterFilter.FLAG_THEATER_ALL
+            )
         }
     }
 
@@ -78,7 +81,9 @@ class AppSettingsImpl(
 
     override fun getAgeFilterFlow(): Flow<AgeFilter> {
         return context.dataStore.data.map { preferences ->
-            AgeFilter(preferences[ageFilterKey] ?: AgeFilter.FLAG_AGE_DEFAULT)
+            AgeFilter(
+                preferences[ageFilterKey] ?: AgeFilter.FLAG_AGE_DEFAULT
+            )
         }
     }
 

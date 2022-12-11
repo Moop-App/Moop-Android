@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.common.settings
+package soup.movie.data.settings
 
 import kotlinx.coroutines.flow.Flow
-import soup.movie.feature.common.settings.model.AgeFilter
-import soup.movie.feature.common.settings.model.GenreFilter
-import soup.movie.feature.common.settings.model.TheaterFilter
 import soup.movie.model.Theater
+import soup.movie.model.settings.AgeFilter
+import soup.movie.model.settings.GenreFilter
+import soup.movie.model.settings.TheaterFilter
 
 interface AppSettings {
 

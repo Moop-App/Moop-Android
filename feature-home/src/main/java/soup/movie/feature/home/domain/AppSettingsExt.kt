@@ -17,7 +17,7 @@ package soup.movie.feature.home.domain
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import soup.movie.feature.common.settings.AppSettings
+import soup.movie.data.settings.AppSettings
 
 fun AppSettings.getMovieFilterFlow(): Flow<MovieFilter> {
     return combine(

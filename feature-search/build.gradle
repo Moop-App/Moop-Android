@@ -18,8 +18,8 @@ android {
 }
 
 dependencies {
-    implementation project(':feature-common')
-    implementation project(':feature-home')
+    implementation project(":feature-common")
+    implementation project(":feature-home")
 
     implementation libs.compose.foundation
     implementation libs.compose.material
@@ -31,6 +31,6 @@ dependencies {
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
 
-    testImplementation project(':testing')
-    androidTestImplementation project(':testing')
+    testImplementation project(":testing")
+    androidTestImplementation project(":testing")
 }

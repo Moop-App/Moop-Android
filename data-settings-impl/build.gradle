@@ -2,30 +2,29 @@ plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
+    id "org.jetbrains.kotlin.plugin.serialization"
     id "dagger.hilt.android.plugin"
 }
 
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace "soup.movie.testing"
+    namespace "soup.movie.data.settings.impl"
 }
 
 dependencies {
-    implementation project(":core-common")
     implementation project(":model")
-    implementation project(":data-repository-api")
+    implementation project(":core-common")
+    implementation project(":data-settings-api")
 
     implementation libs.kotlin.stdlib
-    api libs.coroutines.test
+    implementation libs.kotlin.serialization
+    implementation libs.coroutines.core
+
+    implementation libs.androidx.datastore.preferences
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
-    api libs.dagger.hilt.testing
 
-    api libs.test.junit
-    api libs.androidx.test.core
-    api libs.androidx.test.rules
-    api libs.androidx.test.runner
-    api libs.androidx.test.espresso
+    implementation libs.timber
 }
