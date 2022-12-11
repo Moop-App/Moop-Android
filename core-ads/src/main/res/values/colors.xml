@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorOnSurface">#000000</color>
+    <color name="core_ads_on_surface">#000000</color>
+    <color name="core_ads_accent">#4285f4</color>
+    <color name="core_ads_star">#FFC107</color>
+    <color name="core_ads_white">#FFFFFF</color>
 </resources>
