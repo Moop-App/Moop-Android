@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2020 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.common.device
+package soup.movie.theatermap.internal
 
-import android.graphics.Bitmap
-import android.net.Uri
-import java.io.File
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
-interface ImageUriProvider {
-
-    suspend operator fun invoke(url: String): Uri?
-    suspend operator fun invoke(file: File): Uri
-    suspend operator fun invoke(bitmap: Bitmap): Uri
+internal inline fun <VM : ViewModel> viewModelProviderFactoryOf(
+    crossinline f: () -> VM
+): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = f() as T
 }

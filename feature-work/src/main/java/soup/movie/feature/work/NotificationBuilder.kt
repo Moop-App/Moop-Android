@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("NOTHING_TO_INLINE")
+package soup.movie.feature.work
 
-package soup.movie.feature.common.ext
+import soup.movie.model.Movie
+import soup.movie.model.OpenDateAlarm
 
-inline fun <T> lazyFast(noinline initializer: () -> T): Lazy<T> =
-    lazy(LazyThreadSafetyMode.NONE, initializer)
+interface NotificationBuilder {
+
+    fun showLegacyNotification(list: List<Movie>)
+    fun showAlarmNotification(list: List<OpenDateAlarm>)
+}

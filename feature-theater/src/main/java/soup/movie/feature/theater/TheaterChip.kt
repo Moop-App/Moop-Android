@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ActionChip
 import soup.metronome.material.chip.ChipDefaults
-import soup.movie.feature.common.ui.cgvText
+import soup.movie.core.designsystem.theme.cgvText
 import soup.movie.feature.common.util.debounce
 import soup.movie.model.Theater
 import soup.movie.model.TheaterType

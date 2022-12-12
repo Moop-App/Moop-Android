@@ -54,7 +54,7 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
-import soup.movie.feature.common.ui.divider
+import soup.movie.core.designsystem.theme.divider
 import soup.movie.resources.R
 
 @Composable

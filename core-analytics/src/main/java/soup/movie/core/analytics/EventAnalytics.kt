@@ -13,13 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.common.notification
+package soup.movie.core.analytics
 
-import soup.movie.model.Movie
-import soup.movie.model.OpenDateAlarm
+import android.app.Activity
 
-interface NotificationBuilder {
+interface EventAnalytics {
 
-    fun showLegacyNotification(list: List<Movie>)
-    fun showAlarmNotification(list: List<OpenDateAlarm>)
+    /* Common */
+    fun screen(activity: Activity, screenName: String, screenClass: String?)
+
+    /* Main */
+    fun clickMovie()
+    fun clickMenuFilter()
+
+    /* Detail */
+    fun clickPoster()
+    fun clickShare()
+    fun clickCgvInfo()
+    fun clickLotteInfo()
+    fun clickMegaboxInfo()
+
+    /* Detail: Trailers */
+    fun clickTrailer()
+    fun clickMoreTrailers()
 }

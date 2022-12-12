@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.device
+package soup.movie.imageloading
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -26,7 +26,7 @@ import coil.request.ImageRequest
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import soup.movie.BuildConfig
-import soup.movie.feature.common.device.ImageUriProvider
+import soup.movie.core.imageloading.ImageUriProvider
 import java.io.File
 import java.io.FileOutputStream
 

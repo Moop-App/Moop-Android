@@ -24,7 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import soup.movie.feature.common.ui.windowsizeclass.WindowWidthSizeClass
+import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.detail.DetailNavGraph
 import soup.movie.feature.detail.DetailViewModel
 import soup.movie.feature.home.HomeViewModel

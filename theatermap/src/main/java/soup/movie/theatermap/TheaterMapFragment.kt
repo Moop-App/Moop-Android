@@ -25,14 +25,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.EntryPointAccessors
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.data.repository.TheaterRepository
 import soup.movie.di.TheaterMapModuleDependencies
-import soup.movie.feature.common.ext.lazyFast
-import soup.movie.feature.common.ui.MovieTheme
-import soup.movie.feature.common.util.viewModelProviderFactoryOf
 import soup.movie.theatermap.di.DaggerTheaterMapComponent
 import soup.movie.theatermap.internal.TheaterMapScreen
 import soup.movie.theatermap.internal.TheaterMapViewModel
+import soup.movie.theatermap.internal.viewModelProviderFactoryOf
 import javax.inject.Inject
 
 class TheaterMapFragment : Fragment() {
@@ -44,7 +43,7 @@ class TheaterMapFragment : Fragment() {
         viewModelProviderFactoryOf { TheaterMapViewModel(repository) }
     }
 
-    private val locationSource by lazyFast {
+    private val locationSource by lazy {
         FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
 

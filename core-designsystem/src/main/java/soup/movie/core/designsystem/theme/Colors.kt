@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.common.ui
+package soup.movie.core.designsystem.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
