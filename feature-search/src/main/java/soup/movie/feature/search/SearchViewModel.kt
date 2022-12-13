@@ -27,8 +27,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import soup.movie.core.analytics.EventAnalytics
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.analytics.EventAnalytics
 import soup.movie.feature.common.ext.setValueIfNew
 import javax.inject.Inject
 

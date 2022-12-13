@@ -29,7 +29,6 @@ import dagger.assisted.AssistedInject
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.notification.NotificationBuilder
 import soup.movie.feature.common.util.YYYY_MM_DD
 import soup.movie.feature.common.util.currentTime
 import soup.movie.feature.common.util.plusDaysTo

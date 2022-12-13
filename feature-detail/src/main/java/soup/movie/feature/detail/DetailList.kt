@@ -79,15 +79,15 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.core.ads.NativeAd
+import soup.movie.core.designsystem.theme.cgvBg
+import soup.movie.core.designsystem.theme.cgvText
+import soup.movie.core.designsystem.theme.lotteBg
+import soup.movie.core.designsystem.theme.lotteText
+import soup.movie.core.designsystem.theme.megaboxBg
+import soup.movie.core.designsystem.theme.megaboxText
+import soup.movie.core.designsystem.theme.naver
+import soup.movie.core.designsystem.theme.star
 import soup.movie.feature.common.ext.executeWeb
-import soup.movie.feature.common.ui.cgvBg
-import soup.movie.feature.common.ui.cgvText
-import soup.movie.feature.common.ui.lotteBg
-import soup.movie.feature.common.ui.lotteText
-import soup.movie.feature.common.ui.megaboxBg
-import soup.movie.feature.common.ui.megaboxText
-import soup.movie.feature.common.ui.naver
-import soup.movie.feature.common.ui.star
 import soup.movie.resources.R
 
 private val Colors.detailCardElevation: Dp

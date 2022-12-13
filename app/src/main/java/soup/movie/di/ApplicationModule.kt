@@ -26,12 +26,12 @@ import soup.movie.ads.AdsConfigImpl
 import soup.movie.analytics.EventAnalyticsImpl
 import soup.movie.common.IoDispatcher
 import soup.movie.core.ads.AdsConfig
-import soup.movie.device.ImageUriProviderImpl
-import soup.movie.feature.common.analytics.EventAnalytics
-import soup.movie.feature.common.device.ImageUriProvider
+import soup.movie.core.analytics.EventAnalytics
+import soup.movie.core.imageloading.ImageUriProvider
 import soup.movie.feature.common.install.InAppUpdateManager
 import soup.movie.feature.common.install.InAppUpdateManagerImpl
-import soup.movie.feature.common.notification.NotificationBuilder
+import soup.movie.feature.work.NotificationBuilder
+import soup.movie.imageloading.ImageUriProviderImpl
 import soup.movie.notification.NotificationBuilderImpl
 import javax.inject.Singleton
 

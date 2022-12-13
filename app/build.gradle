@@ -111,6 +111,9 @@ android {
 
 dependencies {
     implementation project(":core-ads")
+    implementation project(":core-analytics")
+    implementation project(":core-designsystem")
+    implementation project(":core-imageloading")
     implementation project(":feature-home")
     implementation project(":feature-detail")
     implementation project(":feature-search")

@@ -19,6 +19,8 @@ android {
 }
 
 dependencies {
+    implementation project(":core-analytics")
+    implementation project(":core-designsystem")
     implementation project(":data-settings-api")
     implementation project(":feature-common")
     implementation project(":feature-settings")
@@ -30,6 +32,7 @@ dependencies {
     implementation libs.compose.animation.graphics
     implementation libs.compose.foundation
     implementation libs.compose.material
+    implementation libs.compose.materialIconsExtended
     implementation libs.compose.ui
     implementation libs.compose.runtimeLivedata
     implementation libs.accompanist.flowlayout

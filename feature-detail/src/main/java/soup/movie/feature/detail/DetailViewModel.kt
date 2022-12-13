@@ -27,9 +27,9 @@ import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
 import soup.movie.core.ads.AdsManager
 import soup.movie.core.ads.NativeAdInfo
+import soup.movie.core.analytics.EventAnalytics
+import soup.movie.core.imageloading.ImageUriProvider
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.analytics.EventAnalytics
-import soup.movie.feature.common.device.ImageUriProvider
 import soup.movie.feature.common.ext.screenDays
 import soup.movie.feature.common.ui.EventLiveData
 import soup.movie.feature.common.ui.MutableEventLiveData

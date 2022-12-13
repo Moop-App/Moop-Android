@@ -21,14 +21,13 @@ import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics.Event
 import com.google.firebase.analytics.FirebaseAnalytics.Param
-import soup.movie.feature.common.analytics.EventAnalytics
-import soup.movie.feature.common.ext.lazyFast
+import soup.movie.core.analytics.EventAnalytics
 
 private typealias Params = Bundle.() -> Unit
 
 class EventAnalyticsImpl(context: Context) : EventAnalytics {
 
-    private val delegate by lazyFast {
+    private val delegate by lazy {
         FirebaseAnalytics.getInstance(context)
     }
 

@@ -68,7 +68,7 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import soup.movie.feature.common.ui.divider
+import soup.movie.core.designsystem.theme.divider
 import soup.movie.feature.common.util.debounce
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.model.Theater

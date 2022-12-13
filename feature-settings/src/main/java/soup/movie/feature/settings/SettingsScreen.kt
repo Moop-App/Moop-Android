@@ -61,8 +61,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.UnelevatedButton
+import soup.movie.core.designsystem.theme.divider
 import soup.movie.feature.common.ext.startActivitySafely
-import soup.movie.feature.common.ui.divider
 import soup.movie.feature.common.util.Cgv
 import soup.movie.feature.common.util.LotteCinema
 import soup.movie.feature.common.util.Megabox
