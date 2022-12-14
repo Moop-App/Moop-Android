@@ -41,8 +41,8 @@ import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -103,7 +103,7 @@ private fun HomeFilterCategory(text: String) {
 
 @Composable
 private fun HomeFilterTheater(viewModel: HomeFilterViewModel) {
-    val theaterUiModel by viewModel.theaterUiModel.observeAsState()
+    val theaterUiModel by viewModel.theaterUiModel.collectAsState()
     Column(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
         HomeFilterCategory(text = stringResource(R.string.filter_category_theater))
         Row(
@@ -144,7 +144,7 @@ private fun HomeFilterTheater(viewModel: HomeFilterViewModel) {
 
 @Composable
 private fun HomeFilterAge(viewModel: HomeFilterViewModel) {
-    val ageUiModel by viewModel.ageUiModel.observeAsState()
+    val ageUiModel by viewModel.ageUiModel.collectAsState()
     Column(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
         HomeFilterCategory(text = stringResource(R.string.filter_category_age))
         Row(

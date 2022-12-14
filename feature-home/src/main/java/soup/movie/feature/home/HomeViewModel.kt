@@ -15,12 +15,13 @@
  */
 package soup.movie.feature.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import soup.movie.core.analytics.EventAnalytics
-import soup.movie.feature.common.ext.setValueIfNew
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,20 +29,22 @@ class HomeViewModel @Inject constructor(
     private val analytics: EventAnalytics,
 ) : ViewModel() {
 
-    private val _selectedMainTab = MutableLiveData(MainTabUiModel.Home)
-    val selectedMainTab: LiveData<MainTabUiModel>
-        get() = _selectedMainTab
+    private val _selectedMainTab = MutableStateFlow(MainTabUiModel.Home)
+    val selectedMainTab: StateFlow<MainTabUiModel> = _selectedMainTab
 
-    private val _selectedHomeTab = MutableLiveData(HomeTabUiModel.Now)
-    val selectedHomeTab: LiveData<HomeTabUiModel>
-        get() = _selectedHomeTab
+    private val _selectedHomeTab = MutableStateFlow(HomeTabUiModel.Now)
+    val selectedHomeTab: StateFlow<HomeTabUiModel> = _selectedHomeTab
 
     fun onMainTabSelected(mainTab: MainTabUiModel) {
-        _selectedMainTab.setValueIfNew(mainTab)
+        viewModelScope.launch {
+            _selectedMainTab.emit(mainTab)
+        }
     }
 
     fun onHomeTabSelected(homeTab: HomeTabUiModel) {
-        _selectedHomeTab.setValueIfNew(homeTab)
+        viewModelScope.launch {
+            _selectedHomeTab.emit(homeTab)
+        }
     }
 
     fun onMovieClick() {

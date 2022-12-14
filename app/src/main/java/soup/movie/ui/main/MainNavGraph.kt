@@ -16,8 +16,7 @@
 package soup.movie.ui.main
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -88,12 +87,12 @@ fun MainNavGraph(
         }
     }
 
-    val uiEvent by mainViewModel.uiEvent.observeAsState()
-    val event = uiEvent?.getContentIfNotHandled()
-    if (event != null) {
-        when (event) {
-            is MainUiEvent.ShowDetailUiEvent -> {
-                navController.navigateToDetail(movieId = event.movieId)
+    LaunchedEffect(Unit) {
+        mainViewModel.uiEvent.collect { event ->
+            when (event) {
+                is MainUiEvent.ShowDetailUiEvent -> {
+                    navController.navigateToDetail(movieId = event.movieId)
+                }
             }
         }
     }

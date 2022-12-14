@@ -36,7 +36,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.materialIconsExtended
     implementation libs.compose.ui
-    implementation libs.compose.runtimeLivedata
     implementation libs.compose.animation.graphics
     implementation libs.coil.compose
     implementation libs.readmore.material

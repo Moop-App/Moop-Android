@@ -15,12 +15,12 @@
  */
 package soup.movie.feature.home.favorite
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -35,15 +35,14 @@ class HomeFavoriteViewModel @Inject constructor(
     @IoDispatcher ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>>
-        get() = _movies
+    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
+    val movies: StateFlow<List<Movie>> = _movies
 
     init {
         repository.getFavoriteMovieList()
             .onEach {
                 val favoriteMovieList = it.sortedBy(Movie::openDate)
-                _movies.postValue(favoriteMovieList)
+                _movies.emit(favoriteMovieList)
             }
             .flowOn(ioDispatcher)
             .launchIn(viewModelScope)

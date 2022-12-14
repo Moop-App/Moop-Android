@@ -15,21 +15,22 @@
  */
 package soup.movie.feature.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import soup.movie.core.analytics.EventAnalytics
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.ext.setValueIfNew
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,28 +39,33 @@ class SearchViewModel @Inject constructor(
     private val analytics: EventAnalytics,
 ) : ViewModel() {
 
-    private val _query = MutableLiveData("")
-    val query: LiveData<String>
-        get() = _query
+    private val _query = MutableStateFlow("")
+    val query: StateFlow<String> = _query
 
     @OptIn(FlowPreview::class)
-    val uiModel: LiveData<SearchUiModel> = _query.asFlow()
+    val uiModel: StateFlow<SearchUiModel> = _query
         .debounce(300)
         .map { it.trim() }
         .distinctUntilChanged()
         .flatMapLatest { query ->
             val movies = repository.searchMovie(query)
             flowOf(
-                SearchUiModel(
+                SearchUiModel.Success(
                     movies = movies,
                     hasNoItem = query.isNotEmpty() && movies.isEmpty()
                 )
             )
         }
-        .asLiveData()
+        .stateIn(
+            scope = viewModelScope,
+            initialValue = SearchUiModel.None,
+            started = SharingStarted.WhileSubscribed(5_000)
+        )
 
     fun onQueryChanged(query: String) {
-        _query.setValueIfNew(query)
+        viewModelScope.launch {
+            _query.emit(query)
+        }
     }
 
     fun onMovieClick() {

@@ -137,7 +137,6 @@ dependencies {
     implementation libs.google.play.featureDelivery
     implementation libs.google.play.appUpdate
 
-    implementation libs.androidx.lifecycle.livedata
     implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.compiler
@@ -169,7 +168,6 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
-    implementation libs.compose.runtimeLivedata
     implementation libs.accompanist.drawablepainter
     implementation libs.metronome.visibility
 

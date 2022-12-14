@@ -42,9 +42,9 @@ import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -70,7 +70,7 @@ internal fun HomeScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val selectedTab by viewModel.selectedHomeTab.observeAsState(HomeTabUiModel.Now)
+    val selectedTab by viewModel.selectedHomeTab.collectAsState()
 
     val homeTabs = HomeTabUiModel.values()
     val gridStates = homeTabs.map { rememberLazyGridState() }

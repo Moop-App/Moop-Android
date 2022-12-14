@@ -18,10 +18,11 @@ package soup.movie.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import soup.movie.core.ads.AdsManager
-import soup.movie.feature.common.ui.EventLiveData
-import soup.movie.feature.common.ui.MutableEventLiveData
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,9 +30,8 @@ class MainViewModel @Inject constructor(
     adsManager: AdsManager
 ) : ViewModel() {
 
-    private val _uiEvent = MutableEventLiveData<MainUiEvent>()
-    val uiEvent: EventLiveData<MainUiEvent>
-        get() = _uiEvent
+    private val _uiEvent = MutableSharedFlow<MainUiEvent>()
+    val uiEvent: SharedFlow<MainUiEvent> = _uiEvent.asSharedFlow()
 
     init {
         viewModelScope.launch {
@@ -40,6 +40,8 @@ class MainViewModel @Inject constructor(
     }
 
     fun requestMovie(movieId: String) {
-        _uiEvent.event = MainUiEvent.ShowDetailUiEvent(movieId)
+        viewModelScope.launch {
+            _uiEvent.emit(MainUiEvent.ShowDetailUiEvent(movieId))
+        }
     }
 }

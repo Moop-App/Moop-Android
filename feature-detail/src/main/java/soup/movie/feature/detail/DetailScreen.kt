@@ -42,6 +42,7 @@ import soup.movie.resources.R
 @Composable
 internal fun DetailScreen(
     viewModel: DetailViewModel,
+    uiModel: DetailUiModel,
     onShareClick: () -> Unit,
     onPosterClick: () -> Unit,
 ) {
@@ -50,6 +51,7 @@ internal fun DetailScreen(
     val context = LocalContext.current
     DetailContent(
         viewModel = viewModel,
+        uiModel = uiModel,
         onPosterClick = {
             viewModel.clickPoster()
             onPosterClick()

@@ -41,8 +41,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
@@ -64,7 +64,7 @@ fun MainScreen(
     onTheaterMapClick: () -> Unit,
     onMovieItemClick: (Movie) -> Unit,
 ) {
-    val currentMainTab by viewModel.selectedMainTab.observeAsState(MainTabUiModel.Home)
+    val currentMainTab by viewModel.selectedMainTab.collectAsState()
     val tabs = MainTabUiModel.values()
     MainScaffold(
         widthSizeClass = widthSizeClass,

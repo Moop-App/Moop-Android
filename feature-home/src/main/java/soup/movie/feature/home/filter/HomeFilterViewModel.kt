@@ -18,16 +18,15 @@ package soup.movie.feature.home.filter
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import soup.movie.data.repository.MovieRepository
 import soup.movie.data.settings.AppSettings
@@ -52,27 +51,30 @@ class HomeFilterViewModel @Inject constructor(
     private var theaterFilter: TheaterFilter? = null
     private var lastGenreFilter: GenreFilter? = null
 
-    private val _theaterUiModel = MutableLiveData<TheaterFilterUiModel>()
-    val theaterUiModel: LiveData<TheaterFilterUiModel>
-        get() = _theaterUiModel
+    private val _theaterUiModel = MutableStateFlow<TheaterFilterUiModel?>(null)
+    val theaterUiModel: StateFlow<TheaterFilterUiModel?> = _theaterUiModel
 
-    val ageUiModel = appSettings.getAgeFilterFlow()
+    val ageUiModel: StateFlow<AgeFilterUiModel?> = appSettings.getAgeFilterFlow()
         .distinctUntilChanged()
         .map { it.toUiModel() }
-        .asLiveData()
+        .stateIn(
+            scope = viewModelScope,
+            initialValue = null,
+            started = SharingStarted.WhileSubscribed(5_000)
+        )
 
     var genreFilterList by mutableStateOf<List<GenreFilterItem>>(emptyList())
         private set
 
     init {
-        appSettings.getTheaterFilterFlow()
-            .distinctUntilChanged()
-            .onEach {
-                theaterFilter = it
-                _theaterUiModel.value = it.toUiModel()
-            }
-            .launchIn(viewModelScope)
-
+        viewModelScope.launch {
+            appSettings.getTheaterFilterFlow()
+                .distinctUntilChanged()
+                .collect {
+                    theaterFilter = it
+                    _theaterUiModel.emit(it.toUiModel())
+                }
+        }
         viewModelScope.launch {
             val allGenre = getGenreList()
             appSettings.getGenreFilterFlow()
