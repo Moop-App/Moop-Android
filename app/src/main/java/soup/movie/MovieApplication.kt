@@ -18,7 +18,6 @@ package soup.movie
 import android.app.Application
 import android.content.Context
 import com.google.android.play.core.splitcompat.SplitCompat
-import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
 import soup.movie.feature.theme.ThemeOptionManager
 import soup.movie.notification.NotificationChannels
@@ -31,7 +30,6 @@ class MovieApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AndroidThreeTen.init(this)
         NotificationChannels.initialize(this)
         themeOptionManager.initialize()
     }

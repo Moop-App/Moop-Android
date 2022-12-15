@@ -15,12 +15,12 @@
  */
 package soup.movie.feature.common.util
 
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneId
-import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.temporal.WeekFields
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.temporal.WeekFields
 
 private val ZONE_SEOUL = ZoneId.of("Asia/Seoul")
 fun currentTime(): LocalDateTime = LocalDateTime.now(ZONE_SEOUL)

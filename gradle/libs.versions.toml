@@ -34,6 +34,7 @@ dependencyGuard = "0.3.2"
 [libraries]
 
 android-pluginGradle = "com.android.tools.build:gradle:7.3.1"
+android-desugar-jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
 
 # Kotlin
 
@@ -149,7 +150,6 @@ kakaoLink = "com.kakao.sdk:v2-share:2.11.2"
 naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
 playServicesLocation = "com.google.android.gms:play-services-location:17.1.0"
 timber = "com.jakewharton.timber:timber:5.0.1"
-threetenAbp = "com.jakewharton.threetenabp:threetenabp:1.4.3"
 
 dependencyGuard-pluginGradle = { module = "com.dropbox.dependency-guard:dependency-guard", version.ref = "dependencyGuard" }
 

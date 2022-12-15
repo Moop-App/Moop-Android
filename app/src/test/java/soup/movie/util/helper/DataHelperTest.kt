@@ -17,17 +17,17 @@ package soup.movie.util.helper
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.threeten.bp.DayOfWeek.FRIDAY
-import org.threeten.bp.DayOfWeek.MONDAY
-import org.threeten.bp.DayOfWeek.SATURDAY
-import org.threeten.bp.DayOfWeek.SUNDAY
-import org.threeten.bp.DayOfWeek.THURSDAY
-import org.threeten.bp.DayOfWeek.TUESDAY
-import org.threeten.bp.DayOfWeek.WEDNESDAY
-import org.threeten.bp.LocalDate
 import soup.movie.feature.common.util.calculateMinusDaysTo
 import soup.movie.feature.common.util.calculatePlusDaysTo
 import soup.movie.feature.common.util.isInWeekOfCultureDay
+import java.time.DayOfWeek.FRIDAY
+import java.time.DayOfWeek.MONDAY
+import java.time.DayOfWeek.SATURDAY
+import java.time.DayOfWeek.SUNDAY
+import java.time.DayOfWeek.THURSDAY
+import java.time.DayOfWeek.TUESDAY
+import java.time.DayOfWeek.WEDNESDAY
+import java.time.LocalDate
 
 class DataHelperTest {
 

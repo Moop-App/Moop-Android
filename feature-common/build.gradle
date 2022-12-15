@@ -7,9 +7,14 @@ apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.feature.common"
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+    }
 }
 
 dependencies {
+    coreLibraryDesugaring libs.android.desugar.jdk
+
     api project(":core-common")
     api project(":core-resources")
     api project(":model")
@@ -29,7 +34,6 @@ dependencies {
     implementation platform(libs.firebase.bom)
     implementation firebase.dynamicLinks
 
-    api libs.threetenAbp
     api libs.timber
     implementation libs.kakaoLink
 

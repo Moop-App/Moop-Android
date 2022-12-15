@@ -15,14 +15,14 @@
  */
 package soup.movie.feature.common.ext
 
-import org.threeten.bp.LocalDate
-import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.feature.common.util.today
 import soup.movie.model.CgvInfo
 import soup.movie.model.LotteInfo
 import soup.movie.model.MegaboxInfo
 import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 fun Movie.getDDay(): Long = openDate.toLocalDate()?.let {
     ChronoUnit.DAYS.between(today(), it)
