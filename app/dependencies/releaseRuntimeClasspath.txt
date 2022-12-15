@@ -177,7 +177,6 @@ com.google.firebase:protolite-well-known-types:18.0.0
 com.google.guava:listenablefuture:1.0
 com.google.protobuf:protobuf-javalite:3.17.3
 com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0
-com.jakewharton.threetenabp:threetenabp:1.4.3
 com.jakewharton.timber:timber:5.0.1
 com.kakao.sdk:v2-common:2.11.2
 com.kakao.sdk:v2-network:2.11.2
@@ -217,4 +216,3 @@ org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1
 org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.1
 org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1
 org.jetbrains:annotations:20.1.0
-org.threeten:threetenbp:1.6.4

@@ -28,14 +28,14 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.temporal.ChronoUnit
 import soup.movie.data.repository.MovieRepository
 import soup.movie.feature.common.ext.isBest
 import soup.movie.feature.common.util.currentTime
 import soup.movie.feature.common.util.plusDaysTo
 import soup.movie.model.Movie
 import timber.log.Timber
+import java.time.DayOfWeek
+import java.time.temporal.ChronoUnit
 import java.util.concurrent.TimeUnit
 
 @HiltWorker

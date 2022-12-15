@@ -9,9 +9,14 @@ apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.feature.work"
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+    }
 }
 
 dependencies {
+    coreLibraryDesugaring libs.android.desugar.jdk
+
     implementation project(":feature-common")
 
     implementation libs.kotlin.stdlib
