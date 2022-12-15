@@ -21,17 +21,21 @@ import soup.movie.model.Company
 import soup.movie.model.Movie
 import soup.movie.model.Trailer
 
+sealed interface DetailUiModel {
+    object None : DetailUiModel
+    object Failure : DetailUiModel
+    data class Success(
+        val header: HeaderUiModel,
+        val items: List<ContentItemUiModel>,
+    ) : DetailUiModel
+}
+
 @Keep
 data class HeaderUiModel(
     val movie: Movie,
     val showTm: Int = 0,
     val nations: List<String> = emptyList(),
     val companies: List<Company> = emptyList()
-)
-
-@Keep
-class ContentUiModel(
-    val items: List<ContentItemUiModel>
 )
 
 @Keep

@@ -19,38 +19,29 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun DetailContent(
     viewModel: DetailViewModel,
+    uiModel: DetailUiModel,
     onPosterClick: () -> Unit,
     onShareClick: () -> Unit,
     onItemClick: (ContentItemUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val headerUiModel by viewModel.headerUiModel.observeAsState()
-    val isFavorite by viewModel.favoriteUiModel.observeAsState(initial = false)
-    val contentUiModel by viewModel.contentUiModel.observeAsState()
-    val isError by viewModel.isError.observeAsState(initial = false)
     Box(modifier = modifier) {
-        if (isError) {
-            DetailError(
-                onRetryClick = {
-                    viewModel.onRetryClick()
-                },
-                modifier = Modifier.fillMaxSize(),
-            )
-        }
-        contentUiModel?.let {
-            DetailList(
-                header = {
-                    headerUiModel?.let { uiModel ->
+        when (uiModel) {
+            is DetailUiModel.None -> {}
+            is DetailUiModel.Success -> {
+                DetailList(
+                    header = {
+                        val isFavorite by viewModel.isFavorite.collectAsState()
                         DetailHeader(
-                            uiModel = uiModel,
+                            uiModel = uiModel.header,
                             onPosterClick = {
                                 onPosterClick()
                             },
@@ -69,12 +60,20 @@ internal fun DetailContent(
                                 )
                             }
                         )
-                    }
-                },
-                items = it.items,
-                viewModel = viewModel,
-                onItemClick = { item -> onItemClick(item) }
-            )
+                    },
+                    items = uiModel.items,
+                    viewModel = viewModel,
+                    onItemClick = { item -> onItemClick(item) }
+                )
+            }
+            is DetailUiModel.Failure -> {
+                DetailError(
+                    onRetryClick = {
+                        viewModel.onRetryClick()
+                    },
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
         }
     }
 }

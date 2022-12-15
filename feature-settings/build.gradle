@@ -25,14 +25,12 @@ dependencies {
     implementation project(":feature-theme")
 
     implementation libs.kotlin.stdlib
-    implementation libs.androidx.lifecycle.livedata
 
     implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.materialIconsExtended
     implementation libs.compose.ui
-    implementation libs.compose.runtimeLivedata
     implementation libs.accompanist.flowlayout
     implementation libs.metronome.material
     implementation libs.materialMotionCompose.navigation

@@ -34,7 +34,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.materialIconsExtended
     implementation libs.compose.ui
-    implementation libs.compose.runtimeLivedata
     implementation libs.accompanist.flowlayout
     implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
@@ -42,8 +41,6 @@ dependencies {
     implementation libs.metronome.material
     implementation libs.metronome.visibility
     implementation libs.coil.compose
-
-    implementation libs.androidx.lifecycle.livedata
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

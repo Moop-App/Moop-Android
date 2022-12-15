@@ -25,9 +25,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -71,7 +71,7 @@ internal fun HomeFavoriteList(
         },
     ) { paddingValues ->
         Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-            val movies by viewModel.movies.observeAsState(emptyList())
+            val movies by viewModel.movies.collectAsState()
             if (movies.isEmpty()) {
                 NoMovieItems(modifier = Modifier.align(Alignment.Center))
             } else {

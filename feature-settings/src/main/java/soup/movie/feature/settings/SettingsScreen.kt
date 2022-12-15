@@ -49,8 +49,8 @@ import androidx.compose.material.icons.rounded.NewReleases
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Shop
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -91,9 +91,9 @@ internal fun SettingsScreen(
         }
     ) { paddingValues ->
         val context = LocalContext.current
-        val theme by viewModel.themeUiModel.observeAsState()
-        val theater by viewModel.theaterUiModel.observeAsState()
-        val version by viewModel.versionUiModel.observeAsState()
+        val theme by viewModel.themeUiModel.collectAsState()
+        val theater by viewModel.theaterUiModel.collectAsState()
+        val version by viewModel.versionUiModel
         Column(
             modifier = Modifier
                 .padding(paddingValues)

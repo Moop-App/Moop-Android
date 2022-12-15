@@ -42,8 +42,8 @@ import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -91,7 +91,7 @@ fun SearchScreen(
                         focusRequester.requestFocus()
                     }
 
-                    val query by viewModel.query.observeAsState("")
+                    val query by viewModel.query.collectAsState()
                     TextField(
                         value = query,
                         onValueChange = { viewModel.onQueryChanged(it) },
@@ -140,27 +140,31 @@ fun SearchScreen(
             }
         }
     ) { paddingValues ->
-        val uiModel by viewModel.uiModel.observeAsState()
-        uiModel?.let {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                if (it.hasNoItem) {
-                    NoMovieItems(modifier = Modifier.align(Alignment.Center))
-                } else {
-                    val context = LocalContext.current
-                    MovieList(
-                        movies = it.movies,
-                        onItemClick = {
-                            viewModel.onMovieClick()
-                            onItemClick(it)
-                        },
-                        onLongItemClick = {
-                            context.showToast(it.title)
-                        }
-                    )
+        val uiModel by viewModel.uiModel.collectAsState()
+        when (uiModel) {
+            is SearchUiModel.None -> {}
+            is SearchUiModel.Success -> {
+                val model = uiModel as SearchUiModel.Success
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                ) {
+                    if (model.hasNoItem) {
+                        NoMovieItems(modifier = Modifier.align(Alignment.Center))
+                    } else {
+                        val context = LocalContext.current
+                        MovieList(
+                            movies = model.movies,
+                            onItemClick = {
+                                viewModel.onMovieClick()
+                                onItemClick(it)
+                            },
+                            onLongItemClick = {
+                                context.showToast(it.title)
+                            }
+                        )
+                    }
                 }
             }
         }

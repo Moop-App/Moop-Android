@@ -15,12 +15,12 @@
  */
 package soup.movie.feature.home.now
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -37,17 +37,14 @@ class HomeNowViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val _isError = MutableLiveData(false)
-    val isError: LiveData<Boolean>
-        get() = _isError
+    private val _isError = MutableStateFlow(false)
+    val isError: StateFlow<Boolean> = _isError
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>>
-        get() = _movies
+    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
+    val movies: StateFlow<List<Movie>> = _movies
 
     init {
         viewModelScope.launch {
@@ -61,7 +58,7 @@ class HomeNowViewModel @Inject constructor(
                 }
                 .onStart { delay(200) }
                 .collect {
-                    _movies.postValue(it)
+                    _movies.emit(it)
                 }
         }
     }
@@ -73,18 +70,18 @@ class HomeNowViewModel @Inject constructor(
     }
 
     private suspend fun updateList() {
-        if (_isLoading.value == true) {
+        if (_isLoading.value) {
             return
         }
-        _isLoading.postValue(true)
+        _isLoading.emit(true)
         try {
             repository.updateNowMovieList()
-            _isLoading.postValue(false)
-            _isError.postValue(false)
+            _isLoading.emit(false)
+            _isError.emit(false)
         } catch (t: Throwable) {
             Timber.w(t)
-            _isLoading.postValue(false)
-            _isError.postValue(true)
+            _isLoading.emit(false)
+            _isError.emit(true)
         }
     }
 }

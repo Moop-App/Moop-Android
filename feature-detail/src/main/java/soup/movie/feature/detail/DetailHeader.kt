@@ -268,7 +268,11 @@ internal fun FavoriteButton(
     onFavoriteChange: (Boolean) -> Unit,
 ) {
     val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected)
-    IconButton(onClick = { onFavoriteChange(!isFavorite) }) {
+    IconButton(
+        onClick = {
+            onFavoriteChange(!isFavorite)
+        }
+    ) {
         Image(
             rememberAnimatedVectorPainter(image, isFavorite),
             contentDescription = null,

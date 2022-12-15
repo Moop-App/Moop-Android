@@ -23,8 +23,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,6 +42,7 @@ import soup.movie.resources.R
 fun DetailNavGraph(
     viewModel: DetailViewModel,
 ) {
+    val uiModel: DetailUiModel by viewModel.uiModel.collectAsState()
     Box {
         var showShare by remember { mutableStateOf(false) }
         var showPoster by remember { mutableStateOf(false) }
@@ -50,6 +52,7 @@ fun DetailNavGraph(
         )
         DetailScreen(
             viewModel = viewModel,
+            uiModel = uiModel,
             onShareClick = {
                 showShare = true
             },
@@ -57,10 +60,10 @@ fun DetailNavGraph(
                 showPoster = true
             },
         )
-        val movie by viewModel.movie.observeAsState()
-        movie?.let {
+        val movie = (uiModel as? DetailUiModel.Success)?.header?.movie
+        if (movie != null) {
             DetailShare(
-                movie = it,
+                movie = movie,
                 onClose = { showShare = false },
                 onShareInstagram = {
                     viewModel.requestShareImage(
@@ -78,20 +81,20 @@ fun DetailNavGraph(
                 exit = fadeOut(),
             ) {
                 DetailPoster(
-                    movie = it,
+                    movie = movie,
                     upPress = { showPoster = false },
                 )
             }
         }
     }
 
-    val uiEvent by viewModel.uiEvent.observeAsState()
-    val event = uiEvent?.getContentIfNotHandled()
-    if (event != null) {
-        val context = LocalContext.current
-        when (event) {
-            is ShareImageAction -> context.shareImage(event)
-            is ToastAction -> context.showToast(event.resId)
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is ShareImageAction -> context.shareImage(event)
+                is ToastAction -> context.showToast(event.resId)
+            }
         }
     }
 }

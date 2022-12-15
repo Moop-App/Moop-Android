@@ -18,8 +18,8 @@ package soup.movie.feature.home.plan
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import soup.movie.feature.home.tab.HomeContentsScreen
 import soup.movie.model.Movie
 
@@ -30,20 +30,18 @@ internal fun HomePlanList(
     onItemClick: (Movie) -> Unit,
     onItemLongClick: (Movie) -> Unit,
 ) {
-    val isLoading by viewModel.isLoading.observeAsState(false)
-    val isError by viewModel.isError.observeAsState(false)
-    val movies by viewModel.movies.observeAsState()
-    movies?.let {
-        HomeContentsScreen(
-            state = state,
-            movies = it,
-            onItemClick = onItemClick,
-            onItemLongClick = onItemLongClick,
-            isLoading = isLoading,
-            isError = isError,
-            onErrorClick = {
-                viewModel.refresh()
-            },
-        )
-    }
+    val isLoading by viewModel.isLoading.collectAsState()
+    val isError by viewModel.isError.collectAsState()
+    val movies by viewModel.movies.collectAsState()
+    HomeContentsScreen(
+        state = state,
+        movies = movies,
+        onItemClick = onItemClick,
+        onItemLongClick = onItemLongClick,
+        isLoading = isLoading,
+        isError = isError,
+        onErrorClick = {
+            viewModel.refresh()
+        },
+    )
 }

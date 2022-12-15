@@ -25,9 +25,8 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
-    implementation libs.compose.runtimeLivedata
 
-    implementation libs.androidx.lifecycle.livedata
+    implementation libs.androidx.lifecycle.viewmodel.ktx
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

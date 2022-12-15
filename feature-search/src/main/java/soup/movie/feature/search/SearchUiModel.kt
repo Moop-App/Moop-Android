@@ -17,7 +17,10 @@ package soup.movie.feature.search
 
 import soup.movie.model.Movie
 
-data class SearchUiModel(
-    val movies: List<Movie>,
-    val hasNoItem: Boolean
-)
+sealed interface SearchUiModel {
+    object None : SearchUiModel
+    data class Success(
+        val movies: List<Movie>,
+        val hasNoItem: Boolean
+    ) : SearchUiModel
+}

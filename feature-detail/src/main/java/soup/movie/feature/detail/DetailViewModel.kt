@@ -15,13 +15,16 @@
  */
 package soup.movie.feature.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
@@ -31,11 +34,8 @@ import soup.movie.core.analytics.EventAnalytics
 import soup.movie.core.imageloading.ImageUriProvider
 import soup.movie.data.repository.MovieRepository
 import soup.movie.feature.common.ext.screenDays
-import soup.movie.feature.common.ui.EventLiveData
-import soup.movie.feature.common.ui.MutableEventLiveData
 import soup.movie.feature.common.util.MM_DD
 import soup.movie.feature.common.util.yesterday
-import soup.movie.model.Movie
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.toMovie
@@ -55,51 +55,33 @@ class DetailViewModel @Inject constructor(
 
     private val movieId: String = savedStateHandle["movieId"]!!
 
-    private val _movie = MutableLiveData<Movie>()
-    val movie: LiveData<Movie>
-        get() = _movie
+    private val _uiModel = MutableStateFlow<DetailUiModel>(DetailUiModel.None)
+    val uiModel: StateFlow<DetailUiModel> = _uiModel
 
-    private val _headerUiModel = MutableLiveData<HeaderUiModel>()
-    val headerUiModel: LiveData<HeaderUiModel>
-        get() = _headerUiModel
+    private val _isFavorite = MutableStateFlow(false)
+    val isFavorite: StateFlow<Boolean> = _isFavorite
 
-    private val _contentUiModel = MutableLiveData<ContentUiModel>()
-    val contentUiModel: LiveData<ContentUiModel>
-        get() = _contentUiModel
-
-    private val _favoriteUiModel = MutableLiveData<Boolean>()
-    val favoriteUiModel: LiveData<Boolean>
-        get() = _favoriteUiModel
-
-    private val _uiEvent = MutableEventLiveData<UiEvent>()
-    val uiEvent: EventLiveData<UiEvent>
-        get() = _uiEvent
-
-    private val _isError = MutableLiveData(false)
-    val isError: LiveData<Boolean>
-        get() = _isError
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent: SharedFlow<UiEvent> = _uiEvent.asSharedFlow()
 
     init {
         viewModelScope.launch {
-            val isFavoriteMovie: Boolean = repository.isFavoriteMovie(movieId)
-            _favoriteUiModel.value = isFavoriteMovie
-            loadDetail(movieId)?.also {
-                renderDetail(it, adsManager.getLoadedNativeAd())
-            }
+            _isFavorite.emit(repository.isFavoriteMovie(movieId))
+            loadDetail(movieId)
             adsManager.onNativeAdConsumed()
             adsManager.loadNextNativeAd()
         }
     }
 
-    private suspend fun loadDetail(movieId: String): MovieDetail? {
-        _isError.postValue(false)
+    private suspend fun loadDetail(movieId: String) {
         try {
-            return repository.getMovieDetail(movieId)
+            val detail = repository.getMovieDetail(movieId)
+            val adInfo = adsManager.getLoadedNativeAd()
+            renderDetail(detail, adInfo)
         } catch (t: Throwable) {
             Timber.w(t)
-            _isError.postValue(true)
+            _uiModel.emit(DetailUiModel.Failure)
         }
-        return null
     }
 
     private suspend fun renderDetail(
@@ -107,32 +89,34 @@ class DetailViewModel @Inject constructor(
         adInfo: NativeAdInfo?
     ) {
         withContext(defaultDispatcher) {
-            val movie = detail.toMovie()
-            _movie.postValue(movie)
-            _headerUiModel.postValue(
-                HeaderUiModel(
-                    movie = movie,
-                    showTm = detail.showTm ?: 0,
-                    nations = detail.nations.orEmpty(),
-                    companies = detail.companies.orEmpty()
+            _uiModel.emit(
+                DetailUiModel.Success(
+                    header = HeaderUiModel(
+                        movie = detail.toMovie(),
+                        showTm = detail.showTm ?: 0,
+                        nations = detail.nations.orEmpty(),
+                        companies = detail.companies.orEmpty()
+                    ),
+                    items = detail.toItemsUiModel(adInfo),
                 )
             )
-            _contentUiModel.postValue(detail.toContentUiModel(adInfo))
         }
     }
 
     fun requestShareImage(imageUrl: String) {
         viewModelScope.launch {
             val uri = imageUriProvider(imageUrl)
-            _uiEvent.event = if (uri != null) {
-                ShareImageAction(uri, "image/*")
-            } else {
-                ToastAction(R.string.action_share_poster_failed)
-            }
+            _uiEvent.emit(
+                if (uri != null) {
+                    ShareImageAction(uri, "image/*")
+                } else {
+                    ToastAction(R.string.action_share_poster_failed)
+                }
+            )
         }
     }
 
-    private fun MovieDetail.toContentUiModel(adInfo: NativeAdInfo?): ContentUiModel {
+    private fun MovieDetail.toItemsUiModel(adInfo: NativeAdInfo?): List<ContentItemUiModel> {
         val items = mutableListOf<ContentItemUiModel>()
         boxOffice?.run {
             items.add(
@@ -232,11 +216,11 @@ class DetailViewModel @Inject constructor(
             )
             items.add(TrailerFooterItemUiModel(movieTitle = title))
         }
-        return ContentUiModel(items)
+        return items
     }
 
     fun onFavoriteButtonClick(isFavorite: Boolean) {
-        val movie = _movie.value ?: return
+        val movie = (_uiModel.value as? DetailUiModel.Success)?.header?.movie ?: return
         viewModelScope.launch {
             if (isFavorite) {
                 repository.addFavoriteMovie(movie)
@@ -248,18 +232,18 @@ class DetailViewModel @Inject constructor(
                             movie.openDate
                         )
                     )
-                    _uiEvent.event = ToastAction(R.string.action_toast_opendate_alarm)
+                    _uiEvent.emit(ToastAction(R.string.action_toast_opendate_alarm))
                 }
             } else {
                 repository.removeFavoriteMovie(movie.id)
             }
-            _favoriteUiModel.value = isFavorite
+            _isFavorite.emit(isFavorite)
         }
     }
 
     fun onRetryClick() {
         viewModelScope.launch {
-            loadDetail(movieId)?.also { renderDetail(it, adsManager.getLoadedNativeAd()) }
+            loadDetail(movieId)
         }
     }
 
