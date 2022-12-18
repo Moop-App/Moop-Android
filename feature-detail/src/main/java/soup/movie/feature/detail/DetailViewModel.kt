@@ -33,9 +33,9 @@ import soup.movie.core.ads.NativeAdInfo
 import soup.movie.core.analytics.EventAnalytics
 import soup.movie.core.imageloading.ImageUriProvider
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.ext.screenDays
-import soup.movie.feature.common.util.MM_DD
-import soup.movie.feature.common.util.yesterday
+import soup.movie.domain.movie.MM_DD
+import soup.movie.domain.movie.screenDays
+import soup.movie.domain.movie.yesterday
 import soup.movie.model.MovieDetail
 import soup.movie.model.OpenDateAlarm
 import soup.movie.model.toMovie

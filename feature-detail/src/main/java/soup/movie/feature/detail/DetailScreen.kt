@@ -35,8 +35,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
-import soup.movie.feature.common.ext.executeWeb
-import soup.movie.feature.common.util.YouTube
+import soup.movie.core.external.YouTube
+import soup.movie.core.external.executeWeb
 import soup.movie.resources.R
 
 @Composable
@@ -76,7 +76,7 @@ internal fun DetailScreen(
                 }
                 is TrailerItemUiModel -> {
                     viewModel.clickTrailer()
-                    YouTube.executeApp(context, item.trailer)
+                    YouTube.executeApp(context, item.trailer.youtubeId)
                 }
                 is TrailerFooterItemUiModel -> {
                     viewModel.clickMoreTrailers()

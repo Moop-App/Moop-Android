@@ -87,7 +87,7 @@ import soup.movie.core.designsystem.theme.megaboxBg
 import soup.movie.core.designsystem.theme.megaboxText
 import soup.movie.core.designsystem.theme.naver
 import soup.movie.core.designsystem.theme.star
-import soup.movie.feature.common.ext.executeWeb
+import soup.movie.core.external.executeWeb
 import soup.movie.resources.R
 
 private val Colors.detailCardElevation: Dp

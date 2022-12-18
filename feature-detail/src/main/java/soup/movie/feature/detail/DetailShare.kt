@@ -41,8 +41,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ShareCompat
 import soup.movie.core.designsystem.theme.detailShareDim
-import soup.movie.feature.common.spec.FirebaseLink
-import soup.movie.feature.common.spec.KakaoLink
+import soup.movie.feature.deeplink.FirebaseLink
+import soup.movie.feature.deeplink.KakaoLink
 import soup.movie.model.Movie
 import soup.movie.resources.R
 
@@ -71,7 +71,7 @@ internal fun DetailShare(
         Spacer(modifier = Modifier.requiredSize(48.dp))
         IconButton(
             onClick = {
-                context.shareText(movie, "com.facebook.katana")
+                context.shareToFacebook(movie)
             },
             modifier = Modifier.padding(top = 4.dp),
         ) {
@@ -88,7 +88,7 @@ internal fun DetailShare(
         }
         IconButton(
             onClick = {
-                context.shareText(movie, "com.twitter.android")
+                context.shareToTwitter(movie)
             },
             modifier = Modifier.padding(top = 4.dp),
         ) {
@@ -120,7 +120,7 @@ internal fun DetailShare(
         }
         IconButton(
             onClick = {
-                context.shareText(movie, "jp.naver.line.android")
+                context.shareToLine(movie)
             },
             modifier = Modifier.padding(top = 4.dp),
         ) {
@@ -137,7 +137,7 @@ internal fun DetailShare(
         }
         IconButton(
             onClick = {
-                KakaoLink.share(context, movie)
+                context.shareToKakaoTalk(movie)
             },
             modifier = Modifier.padding(top = 4.dp),
         ) {
@@ -154,7 +154,7 @@ internal fun DetailShare(
         }
         IconButton(
             onClick = {
-                context.shareText(movie)
+                context.shareToOthers(movie)
             },
             modifier = Modifier.padding(top = 4.dp),
         ) {
@@ -172,8 +172,70 @@ internal fun DetailShare(
     }
 }
 
-private fun Context.shareText(movie: Movie, packageName: String? = null) {
-    FirebaseLink.createDetailLink(movie) { link ->
+private fun Context.shareToKakaoTalk(movie: Movie) {
+    KakaoLink.share(
+        context = this,
+        movieId = movie.id,
+        imageUrl = movie.posterUrl,
+        title = movie.title,
+        description = buildString {
+            append(movie.openDate)
+            val ageLabel = getString(
+                when {
+                    movie.age >= 19 -> R.string.movie_age_19
+                    movie.age >= 15 -> R.string.movie_age_15
+                    movie.age >= 12 -> R.string.movie_age_12
+                    movie.age >= 0 -> R.string.movie_age_all
+                    else -> R.string.movie_age_unknown
+                }
+            )
+            append(" / $ageLabel")
+        }
+    )
+}
+
+private fun Context.shareToFacebook(movie: Movie) {
+    shareText(movie, "com.facebook.katana")
+}
+
+private fun Context.shareToTwitter(movie: Movie) {
+    shareText(movie, "com.twitter.android")
+}
+
+private fun Context.shareToLine(movie: Movie) {
+    shareText(movie, "jp.naver.line.android")
+}
+
+private fun Context.shareToOthers(movie: Movie) {
+    shareText(movie, null)
+}
+
+private fun Context.shareText(movie: Movie, packageName: String?) {
+    FirebaseLink.createDetailLink(
+        movieId = movie.id,
+        imageUrl = movie.posterUrl,
+        title = movie.title,
+        description = buildString {
+            if (movie.isNow) {
+                append("현재상영중")
+            } else {
+                append("${movie.openDate}개봉")
+            }
+            val ageLabel = getString(
+                when {
+                    movie.age >= 19 -> R.string.movie_age_19
+                    movie.age >= 15 -> R.string.movie_age_15
+                    movie.age >= 12 -> R.string.movie_age_12
+                    movie.age >= 0 -> R.string.movie_age_all
+                    else -> R.string.movie_age_unknown
+                }
+            )
+            append(" / $ageLabel")
+            movie.genres?.let { genres ->
+                append(" / ${genres.joinToString()}")
+            }
+        },
+    ) { link ->
         ShareCompat.IntentBuilder(this)
             .setChooserTitle(R.string.action_share)
             .setText("[뭅] ${movie.title}\n$link")

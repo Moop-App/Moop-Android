@@ -17,7 +17,12 @@ android {
 dependencies {
     coreLibraryDesugaring libs.android.desugar.jdk
 
-    implementation project(":feature-common")
+    implementation project(":core-common")
+    implementation project(":core-resources")
+    implementation project(":data-repository-api")
+    implementation project(":model")
+    implementation project(":domain")
+    implementation libs.timber
 
     implementation libs.kotlin.stdlib
 

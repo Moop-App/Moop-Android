@@ -20,10 +20,15 @@ android {
 
 dependencies {
     implementation project(":core-analytics")
+    implementation project(":core-common")
     implementation project(":core-designsystem")
+    implementation project(":core-resources")
     implementation project(":data-settings-api")
-    implementation project(":feature-common")
+    implementation project(":data-repository-api")
+    implementation project(":model")
+    implementation project(":domain")
     implementation project(":feature-settings")
+    implementation libs.timber
 
     implementation libs.kotlin.stdlib
 

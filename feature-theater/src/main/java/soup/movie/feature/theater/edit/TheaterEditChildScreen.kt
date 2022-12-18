@@ -33,7 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import kotlinx.coroutines.launch
-import soup.movie.feature.common.ext.showToast
+import soup.movie.core.designsystem.showToast
 import soup.movie.feature.theater.TheaterFilterChip
 import soup.movie.model.Theater
 import soup.movie.resources.R

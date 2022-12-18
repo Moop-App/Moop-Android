@@ -45,10 +45,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import soup.movie.feature.common.ext.getDDayLabel
-import soup.movie.feature.common.ext.isBest
-import soup.movie.feature.common.ext.isDDay
-import soup.movie.feature.common.ext.isNew
+import soup.movie.domain.movie.getDDayLabel
+import soup.movie.domain.movie.isBest
+import soup.movie.domain.movie.isDDay
+import soup.movie.domain.movie.isNew
 import soup.movie.feature.home.favorite.MovieAgeBadge
 import soup.movie.feature.home.favorite.MovieBestTag
 import soup.movie.feature.home.favorite.MovieDDayTag
