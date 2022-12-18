@@ -18,8 +18,11 @@ android {
 }
 
 dependencies {
+    implementation project(":core-common")
+    implementation project(":core-designsystem")
+    implementation project(":core-resources")
     implementation project(":data-settings-api")
-    implementation project(":feature-common")
+    implementation project(":model")
 
     implementation libs.kotlin.stdlib
 

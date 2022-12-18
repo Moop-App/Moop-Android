@@ -73,4 +73,10 @@
     <string name="theme_option_battery_saver">기본 (절전모드 시 어둡게)</string>
 
     <string name="theater_map_title">지도</string>
+
+    <string name="movie_age_19">청소년관람불가</string>
+    <string name="movie_age_15">15세관람가</string>
+    <string name="movie_age_12">12세관람가</string>
+    <string name="movie_age_all">전체관람가</string>
+    <string name="movie_age_unknown">등급 미지정</string>
 </resources>

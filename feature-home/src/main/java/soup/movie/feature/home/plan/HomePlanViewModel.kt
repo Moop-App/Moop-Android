@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import soup.movie.data.repository.MovieRepository
 import soup.movie.data.settings.AppSettings
-import soup.movie.feature.common.ext.getDDay
+import soup.movie.domain.movie.getDDay
 import soup.movie.feature.home.domain.getMovieFilterFlow
 import soup.movie.model.Movie
 import timber.log.Timber
@@ -54,7 +54,7 @@ class HomePlanViewModel @Inject constructor(
             repository.getPlanMovieList()
                 .combine(appSettings.getMovieFilterFlow()) { movieList, movieFilter ->
                     movieList.asSequence()
-                        .sortedBy(Movie::getDDay)
+                        .sortedBy { it.getDDay() }
                         .filter { movieFilter(it) }
                         .toList()
                 }

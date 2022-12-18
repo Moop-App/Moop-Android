@@ -49,11 +49,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import soup.movie.feature.common.ext.getAgeLabel
-import soup.movie.feature.common.ext.getDDayLabel
-import soup.movie.feature.common.ext.isBest
-import soup.movie.feature.common.ext.isDDay
-import soup.movie.feature.common.ext.isNew
+import soup.movie.domain.movie.getDDayLabel
+import soup.movie.domain.movie.isBest
+import soup.movie.domain.movie.isDDay
+import soup.movie.domain.movie.isNew
 import soup.movie.feature.home.favorite.MovieAgeTag
 import soup.movie.feature.home.favorite.MovieBestTag
 import soup.movie.feature.home.favorite.MovieDDayTag
@@ -159,7 +158,15 @@ internal fun DetailHeader(
                         modifier = Modifier.alpha(0.5f),
                     )
                     Text(
-                        text = movie.getAgeLabel(),
+                        text = stringResource(
+                            when {
+                                movie.age >= 19 -> R.string.movie_age_19
+                                movie.age >= 15 -> R.string.movie_age_15
+                                movie.age >= 12 -> R.string.movie_age_12
+                                movie.age >= 0 -> R.string.movie_age_all
+                                else -> R.string.movie_age_unknown
+                            }
+                        ),
                         color = MaterialTheme.colors.onBackground,
                         style = MaterialTheme.typography.body2,
                         fontSize = 14.sp,

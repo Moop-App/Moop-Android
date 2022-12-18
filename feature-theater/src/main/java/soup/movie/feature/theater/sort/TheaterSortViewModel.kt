@@ -25,7 +25,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import soup.movie.data.settings.AppSettings
-import soup.movie.feature.common.ext.swap
 import soup.movie.model.Theater
 import javax.inject.Inject
 

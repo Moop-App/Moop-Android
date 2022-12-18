@@ -112,8 +112,12 @@ android {
 dependencies {
     implementation project(":core-ads")
     implementation project(":core-analytics")
+    implementation project(":core-appupdate")
+    implementation project(":core-common")
     implementation project(":core-designsystem")
     implementation project(":core-imageloading")
+    implementation project(":data-repository-api")
+    implementation project(":model")
     implementation project(":feature-home")
     implementation project(":feature-detail")
     implementation project(":feature-search")
@@ -121,13 +125,16 @@ dependencies {
     implementation project(":feature-settings")
     implementation project(":feature-theme")
     implementation project(":feature-work")
-    implementation project(":feature-common")
+    implementation project(":feature-deeplink")
     runtimeOnly project(":data-network-impl")
     runtimeOnly project(":data-database-impl")
     runtimeOnly project(":data-repository-impl")
     runtimeOnly project(":data-settings-impl")
+    implementation libs.timber
 
     implementation libs.kotlin.stdlib
+    implementation libs.coroutines.core
+    implementation libs.coroutines.android
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.activity.ktx

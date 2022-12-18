@@ -29,8 +29,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.R
 import soup.movie.config.Config
 import soup.movie.config.RemoteConfig
-import soup.movie.feature.common.spec.FirebaseLink
-import soup.movie.feature.common.spec.KakaoLink
+import soup.movie.feature.deeplink.FirebaseLink
+import soup.movie.feature.deeplink.KakaoLink
 import soup.movie.feature.work.LegacyWorker
 import soup.movie.feature.work.OpenDateAlarmWorker
 import soup.movie.feature.work.OpenDateSyncWorker

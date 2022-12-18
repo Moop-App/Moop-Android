@@ -21,6 +21,7 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import soup.movie.core.appupdate.InAppUpdateManager
 import timber.log.Timber
 import kotlin.coroutines.suspendCoroutine
 

@@ -24,8 +24,8 @@ import soup.compose.material.motion.animation.materialSharedAxisZOut
 import soup.compose.material.motion.navigation.MaterialMotionNavHost
 import soup.compose.material.motion.navigation.composable
 import soup.compose.material.motion.navigation.rememberMaterialMotionNavController
-import soup.movie.feature.common.ext.showToast
-import soup.movie.feature.common.util.Moop
+import soup.movie.core.designsystem.showToast
+import soup.movie.core.external.Moop
 import soup.movie.feature.theater.edit.TheaterEditScreen
 import soup.movie.feature.theater.edit.TheaterEditViewModel
 import soup.movie.feature.theater.sort.TheaterSortScreen

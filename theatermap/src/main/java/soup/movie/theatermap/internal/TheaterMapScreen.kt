@@ -74,9 +74,9 @@ import com.naver.maps.map.compose.rememberMarkerState
 import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.coroutines.launch
 import soup.movie.BuildConfig
-import soup.movie.feature.common.util.Cgv
-import soup.movie.feature.common.util.LotteCinema
-import soup.movie.feature.common.util.Megabox
+import soup.movie.core.external.Cgv
+import soup.movie.core.external.LotteCinema
+import soup.movie.core.external.Megabox
 import soup.movie.resources.R
 import soup.movie.util.LauncherIcons
 import kotlin.math.max

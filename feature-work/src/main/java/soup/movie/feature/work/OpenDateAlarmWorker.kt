@@ -27,10 +27,10 @@ import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import soup.movie.data.repository.MovieRepository
-import soup.movie.feature.common.util.YYYY_MM_DD
-import soup.movie.feature.common.util.currentTime
-import soup.movie.feature.common.util.plusDaysTo
-import soup.movie.feature.common.util.today
+import soup.movie.domain.movie.YYYY_MM_DD
+import soup.movie.domain.movie.currentTime
+import soup.movie.domain.movie.plusDaysTo
+import soup.movie.domain.movie.today
 import soup.movie.model.OpenDateAlarm
 import timber.log.Timber
 import java.time.DayOfWeek

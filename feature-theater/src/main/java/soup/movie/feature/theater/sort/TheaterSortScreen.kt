@@ -53,7 +53,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kotlinx.coroutines.launch
-import soup.movie.feature.common.util.debounce
+import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theater.draggableItem
 import soup.movie.feature.theater.draggableList

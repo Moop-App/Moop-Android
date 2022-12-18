@@ -1,0 +1,22 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.domain"
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring libs.android.desugar.jdk
+
+    implementation project(":model")
+    implementation libs.timber
+
+    implementation libs.kotlin.stdlib
+}

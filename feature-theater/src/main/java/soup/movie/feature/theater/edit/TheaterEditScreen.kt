@@ -69,7 +69,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.theme.divider
-import soup.movie.feature.common.util.debounce
+import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.model.Theater
 import soup.movie.resources.R
