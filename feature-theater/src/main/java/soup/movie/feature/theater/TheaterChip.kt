@@ -33,25 +33,25 @@ import soup.metronome.material.chip.ActionChip
 import soup.metronome.material.chip.ChipDefaults
 import soup.movie.core.designsystem.theme.cgvText
 import soup.movie.core.designsystem.util.debounce
-import soup.movie.model.Theater
-import soup.movie.model.TheaterType
+import soup.movie.model.TheaterModel
+import soup.movie.model.TheaterTypeModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TheaterChip(
-    theater: Theater,
-    onTheaterClick: (Theater) -> Unit = {}
+    theater: TheaterModel,
+    onTheaterClick: (TheaterModel) -> Unit = {}
 ) {
     when (theater.type) {
-        TheaterType.CGV -> CgvChip(
+        TheaterTypeModel.CGV -> CgvChip(
             text = theater.name,
             onClick = { debounce { onTheaterClick(theater) } }
         )
-        TheaterType.LOTTE -> LotteChip(
+        TheaterTypeModel.LOTTE -> LotteChip(
             text = theater.name,
             onClick = { debounce { onTheaterClick(theater) } }
         )
-        TheaterType.MEGABOX -> MegaboxChip(
+        TheaterTypeModel.MEGABOX -> MegaboxChip(
             text = theater.name,
             onClick = { debounce { onTheaterClick(theater) } }
         )

@@ -15,7 +15,13 @@
  */
 package soup.movie.model
 
-data class NaverInfo(
-    val star: String,
-    val url: String?
+/**
+ * @param rank 전일 순위
+ * @param audiCnt 전일 관객수
+ * @param audiAcc 누적 관객수
+ */
+data class BoxOfficeModel(
+    val rank: Int,
+    val audiCnt: Int,
+    val audiAcc: Int,
 )

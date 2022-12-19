@@ -23,8 +23,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
-import soup.movie.model.Theater
-import soup.movie.model.TheaterArea
+import soup.movie.model.TheaterAreaModel
+import soup.movie.model.TheaterModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -69,11 +69,11 @@ class TheaterEditViewModel @Inject constructor(
     val footerUiModel = manager.asSelectedTheaterListFlow()
         .map { TheaterEditFooterUiModel(it) }
 
-    fun add(theater: Theater): Boolean {
+    fun add(theater: TheaterModel): Boolean {
         return manager.add(theater)
     }
 
-    fun remove(theater: Theater) {
+    fun remove(theater: TheaterModel) {
         manager.remove(theater)
     }
 
@@ -81,7 +81,7 @@ class TheaterEditViewModel @Inject constructor(
         manager.save()
     }
 
-    private suspend fun List<TheaterArea>.toUiModel(selectedList: List<Theater>) =
+    private suspend fun List<TheaterAreaModel>.toUiModel(selectedList: List<TheaterModel>) =
         withContext(defaultDispatcher) {
             TheaterEditChildUiModel(
                 map { theaterArea ->

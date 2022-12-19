@@ -15,11 +15,11 @@
  */
 package soup.movie.feature.work
 
-import soup.movie.model.Movie
-import soup.movie.model.OpenDateAlarm
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
 
 interface NotificationBuilder {
 
-    fun showLegacyNotification(list: List<Movie>)
-    fun showAlarmNotification(list: List<OpenDateAlarm>)
+    fun showLegacyNotification(list: List<MovieModel>)
+    fun showAlarmNotification(list: List<OpenDateAlarmModel>)
 }

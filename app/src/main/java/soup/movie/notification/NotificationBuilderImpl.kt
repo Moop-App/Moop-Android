@@ -24,15 +24,15 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import soup.movie.R
 import soup.movie.feature.work.NotificationBuilder
-import soup.movie.model.Movie
-import soup.movie.model.OpenDateAlarm
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
 import soup.movie.ui.main.MainActivity
 
 class NotificationBuilderImpl(context: Context) : NotificationBuilder {
 
     private val applicationContext = context.applicationContext
 
-    override fun showLegacyNotification(list: List<Movie>) = applicationContext.run {
+    override fun showLegacyNotification(list: List<MovieModel>) = applicationContext.run {
         NotificationSpecs.notifyLegacy(this) {
             setStyle(NotificationCompat.BigTextStyle())
             setSmallIcon(R.drawable.ic_notify_default)
@@ -43,7 +43,7 @@ class NotificationBuilderImpl(context: Context) : NotificationBuilder {
         }
     }
 
-    override fun showAlarmNotification(list: List<OpenDateAlarm>) = applicationContext.run {
+    override fun showAlarmNotification(list: List<OpenDateAlarmModel>) = applicationContext.run {
         NotificationSpecs.notifyOpenDateAlarm(this) {
             setStyle(NotificationCompat.BigTextStyle())
             setSmallIcon(R.drawable.ic_notify_default)

@@ -16,15 +16,15 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.MetascoreInfo
+import soup.movie.model.MetascoreInfoModel
 
 @Serializable
 class MetascoreInfoResponse(
     val star: String? = null,
 )
 
-fun MetascoreInfoResponse.asModel(): MetascoreInfo {
-    return MetascoreInfo(
+fun MetascoreInfoResponse.asModel(): MetascoreInfoModel {
+    return MetascoreInfoModel(
         star = star,
     )
 }

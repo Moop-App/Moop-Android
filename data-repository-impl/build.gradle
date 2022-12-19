@@ -12,7 +12,7 @@ android {
 }
 
 dependencies {
-    implementation project(":model")
+    implementation project(':data-model')
     implementation project(":core-common")
     implementation project(":data-network-api")
     implementation project(":data-database-api")

@@ -36,9 +36,10 @@ import soup.movie.data.repository.MovieRepository
 import soup.movie.domain.movie.MM_DD
 import soup.movie.domain.movie.screenDays
 import soup.movie.domain.movie.yesterday
-import soup.movie.model.MovieDetail
-import soup.movie.model.OpenDateAlarm
-import soup.movie.model.toMovie
+import soup.movie.model.MovieDetailModel
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
+import soup.movie.model.TheaterRatingsModel
 import soup.movie.resources.R
 import timber.log.Timber
 import javax.inject.Inject
@@ -85,7 +86,7 @@ class DetailViewModel @Inject constructor(
     }
 
     private suspend fun renderDetail(
-        detail: MovieDetail,
+        detail: MovieDetailModel,
         adInfo: NativeAdInfo?
     ) {
         withContext(defaultDispatcher) {
@@ -116,7 +117,27 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun MovieDetail.toItemsUiModel(adInfo: NativeAdInfo?): List<ContentItemUiModel> {
+    private fun MovieDetailModel.toMovie(): MovieModel {
+        return MovieModel(
+            id = id,
+            score = score,
+            title = title,
+            posterUrl = posterUrl,
+            openDate = openDate,
+            isNow = isNow,
+            age = age,
+            nationFilter = nationFilter,
+            genres = genres,
+            boxOffice = boxOffice?.rank,
+            theater = TheaterRatingsModel(
+                cgv = cgv?.star,
+                lotte = lotte?.star,
+                megabox = megabox?.star,
+            ),
+        )
+    }
+
+    private fun MovieDetailModel.toItemsUiModel(adInfo: NativeAdInfo?): List<ContentItemUiModel> {
         val items = mutableListOf<ContentItemUiModel>()
         boxOffice?.run {
             items.add(
@@ -226,7 +247,7 @@ class DetailViewModel @Inject constructor(
                 repository.addFavoriteMovie(movie)
                 if (movie.isPlan) {
                     repository.insertOpenDateAlarms(
-                        OpenDateAlarm(
+                        OpenDateAlarmModel(
                             movie.id,
                             movie.title,
                             movie.openDate

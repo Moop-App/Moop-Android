@@ -15,19 +15,19 @@
  */
 package soup.movie.domain.movie
 
-import soup.movie.model.CgvInfo
-import soup.movie.model.LotteInfo
-import soup.movie.model.MegaboxInfo
-import soup.movie.model.Movie
-import soup.movie.model.MovieDetail
+import soup.movie.model.CgvInfoModel
+import soup.movie.model.LotteInfoModel
+import soup.movie.model.MegaboxInfoModel
+import soup.movie.model.MovieDetailModel
+import soup.movie.model.MovieModel
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-fun Movie.getDDay(): Long = openDate.toLocalDate()?.let {
+fun MovieModel.getDDay(): Long = openDate.toLocalDate()?.let {
     ChronoUnit.DAYS.between(today(), it)
 } ?: 999
 
-fun Movie.getDDayLabel(): String? = openDate.toLocalDate()?.let {
+fun MovieModel.getDDayLabel(): String? = openDate.toLocalDate()?.let {
     val dDay = ChronoUnit.DAYS.between(today(), it)
     return when {
         dDay <= 0 -> "NOW"
@@ -35,21 +35,21 @@ fun Movie.getDDayLabel(): String? = openDate.toLocalDate()?.let {
     }
 }
 
-private fun Movie.hasOpenDate(): Boolean = openDate.toLocalDate() != null
+private fun MovieModel.hasOpenDate(): Boolean = openDate.toLocalDate() != null
 
-fun Movie.isDDay(): Boolean = isPlan and hasOpenDate()
+fun MovieModel.isDDay(): Boolean = isPlan and hasOpenDate()
 
-fun Movie.isBest(): Boolean {
+fun MovieModel.isBest(): Boolean {
     return theater.cgv.eggIsOver(96) or
         theater.lotte.starIsOver(8.8) or
         theater.megabox.starIsOver(8.5)
 }
 
-fun Movie.isNew(): Boolean = isNow and isInThePastWeek()
+fun MovieModel.isNew(): Boolean = isNow and isInThePastWeek()
 
-fun Movie.isInThePastWeek(): Boolean = isIn(-6..0)
+fun MovieModel.isInThePastWeek(): Boolean = isIn(-6..0)
 
-fun Movie.isIn(dayRange: IntRange): Boolean {
+fun MovieModel.isIn(dayRange: IntRange): Boolean {
     val openDate = openDate.toLocalDate()
     if (openDate != null) {
         return ChronoUnit.DAYS.between(today(), openDate) in dayRange
@@ -57,7 +57,7 @@ fun Movie.isIn(dayRange: IntRange): Boolean {
     return false
 }
 
-fun MovieDetail.screenDays(): Int {
+fun MovieDetailModel.screenDays(): Int {
     val openDate = openDate.toLocalDate()
     if (openDate != null) {
         return ChronoUnit.DAYS.between(openDate, today()).toInt()
@@ -76,7 +76,7 @@ private fun String.toLocalDate(): LocalDate? = split(".").let {
     }
 }
 
-private fun CgvInfo?.eggIsOver(target: Int): Boolean {
+private fun CgvInfoModel?.eggIsOver(target: Int): Boolean {
     return this?.star.eggIsOver(target)
 }
 
@@ -88,11 +88,11 @@ private fun String?.eggIsOver(target: Int): Boolean {
     }
 }
 
-private fun LotteInfo?.starIsOver(target: Double): Boolean {
+private fun LotteInfoModel?.starIsOver(target: Double): Boolean {
     return this?.star.starIsOver(target)
 }
 
-private fun MegaboxInfo?.starIsOver(target: Double): Boolean {
+private fun MegaboxInfoModel?.starIsOver(target: Double): Boolean {
     return this?.star.starIsOver(target)
 }
 

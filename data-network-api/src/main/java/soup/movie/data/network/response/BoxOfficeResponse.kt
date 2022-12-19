@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.BoxOffice
+import soup.movie.model.BoxOfficeModel
 
 /**
  * @param rank 전일 순위
@@ -30,8 +30,8 @@ class BoxOfficeResponse(
     val audiAcc: Int,
 )
 
-fun BoxOfficeResponse.asModel(): BoxOffice {
-    return BoxOffice(
+fun BoxOfficeResponse.asModel(): BoxOfficeModel {
+    return BoxOfficeModel(
         rank = rank,
         audiCnt = audiCnt,
         audiAcc = audiAcc,

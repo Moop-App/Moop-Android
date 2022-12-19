@@ -70,8 +70,8 @@ import soup.movie.core.external.Moop
 import soup.movie.core.external.startActivitySafely
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theme.stringResIdOf
-import soup.movie.model.Theater
-import soup.movie.model.TheaterType
+import soup.movie.model.TheaterModel
+import soup.movie.model.TheaterTypeModel
 import soup.movie.resources.R
 
 @Composable
@@ -211,8 +211,8 @@ private fun SettingsThemeItem(
 
 @Composable
 private fun SettingsTheaterItem(
-    theaterList: List<Theater>,
-    onItemClick: (Theater) -> Unit,
+    theaterList: List<TheaterModel>,
+    onItemClick: (TheaterModel) -> Unit,
     onEditClick: () -> Unit,
 ) {
     Column(
@@ -379,11 +379,11 @@ private fun SettingsButton(
     )
 }
 
-private fun Context.executeWeb(theater: Theater) {
+private fun Context.executeWeb(theater: TheaterModel) {
     return when (theater.type) {
-        TheaterType.CGV -> Cgv.executeWeb(this, theater.code)
-        TheaterType.LOTTE -> LotteCinema.executeWeb(this, theater.code)
-        TheaterType.MEGABOX -> Megabox.executeWeb(this, theater.code)
+        TheaterTypeModel.CGV -> Cgv.executeWeb(this, theater.code)
+        TheaterTypeModel.LOTTE -> LotteCinema.executeWeb(this, theater.code)
+        TheaterTypeModel.MEGABOX -> Megabox.executeWeb(this, theater.code)
     }
 }
 

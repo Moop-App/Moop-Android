@@ -53,7 +53,7 @@ import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.favorite.HomeFavoriteList
 import soup.movie.feature.settings.SettingsNavGraph
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
@@ -62,7 +62,7 @@ fun MainScreen(
     viewModel: HomeViewModel,
     onSearchClick: () -> Unit,
     onTheaterMapClick: () -> Unit,
-    onMovieItemClick: (Movie) -> Unit,
+    onMovieItemClick: (MovieModel) -> Unit,
 ) {
     val currentMainTab by viewModel.selectedMainTab.collectAsState()
     val tabs = MainTabUiModel.values()

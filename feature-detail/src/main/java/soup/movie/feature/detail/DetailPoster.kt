@@ -28,12 +28,12 @@ import kotlinx.coroutines.launch
 import soup.metronome.zoomable.ExperimentalZoomableApi
 import soup.metronome.zoomable.ZoomableBox
 import soup.metronome.zoomable.rememberZoomableState
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 
 @OptIn(ExperimentalZoomableApi::class)
 @Composable
 internal fun DetailPoster(
-    movie: Movie,
+    movie: MovieModel,
     upPress: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()

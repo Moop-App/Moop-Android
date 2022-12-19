@@ -12,8 +12,7 @@ android {
 }
 
 dependencies {
-    implementation project(":model")
-
+    implementation project(':data-model')
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core

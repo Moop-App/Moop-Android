@@ -45,14 +45,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
 internal fun HomeContentsScreen(
-    movies: List<Movie>,
-    onItemClick: (Movie) -> Unit,
-    onItemLongClick: (Movie) -> Unit,
+    movies: List<MovieModel>,
+    onItemClick: (MovieModel) -> Unit,
+    onItemLongClick: (MovieModel) -> Unit,
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
     isLoading: Boolean = false,

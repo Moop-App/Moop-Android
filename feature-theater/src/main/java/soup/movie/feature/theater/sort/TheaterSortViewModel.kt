@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import soup.movie.data.settings.AppSettings
-import soup.movie.model.Theater
+import soup.movie.model.TheaterModel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,9 +33,9 @@ class TheaterSortViewModel @Inject constructor(
     private val appSettings: AppSettings
 ) : ViewModel() {
 
-    private var listSnapshot = mutableListOf<Theater>()
+    private var listSnapshot = mutableListOf<TheaterModel>()
 
-    var selectedTheaters by mutableStateOf<List<Theater>>(emptyList())
+    var selectedTheaters by mutableStateOf<List<TheaterModel>>(emptyList())
         private set
 
     init {
@@ -45,7 +45,7 @@ class TheaterSortViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun updateTheaters(it: List<Theater>) {
+    private fun updateTheaters(it: List<TheaterModel>) {
         listSnapshot = it.toMutableList()
         selectedTheaters = it
     }

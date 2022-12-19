@@ -15,7 +15,8 @@
  */
 package soup.movie.model
 
-data class Area(
-    val code: String,
-    val name: String
+data class MegaboxInfoModel(
+    val id: String,
+    val star: String,
+    val url: String?,
 )

@@ -25,7 +25,7 @@ dependencies {
     implementation project(":core-resources")
     implementation project(":data-settings-api")
     implementation project(":data-repository-api")
-    implementation project(":model")
+    implementation project(':data-model')
     implementation project(":domain")
     implementation project(":feature-settings")
     implementation libs.timber

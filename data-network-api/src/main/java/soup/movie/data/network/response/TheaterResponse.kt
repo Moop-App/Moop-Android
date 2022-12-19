@@ -16,8 +16,8 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.Theater
-import soup.movie.model.TheaterType
+import soup.movie.model.TheaterModel
+import soup.movie.model.TheaterTypeModel
 
 @Serializable
 class TheaterResponse(
@@ -28,8 +28,8 @@ class TheaterResponse(
     val lat: Double,
 )
 
-fun TheaterResponse.asModel(): Theater {
-    return Theater(
+fun TheaterResponse.asModel(): TheaterModel {
+    return TheaterModel(
         id = "$type:$code",
         type = TheaterTypeParser.parse(type),
         code = code,
@@ -41,11 +41,11 @@ fun TheaterResponse.asModel(): Theater {
 
 private object TheaterTypeParser {
 
-    fun parse(type: String): TheaterType {
+    fun parse(type: String): TheaterTypeModel {
         return when (type) {
-            "C" -> TheaterType.CGV
-            "L" -> TheaterType.LOTTE
-            "M" -> TheaterType.MEGABOX
+            "C" -> TheaterTypeModel.CGV
+            "L" -> TheaterTypeModel.LOTTE
+            "M" -> TheaterTypeModel.MEGABOX
             else -> throw IllegalArgumentException("$type is not valid type.")
         }
     }

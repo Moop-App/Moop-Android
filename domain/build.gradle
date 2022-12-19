@@ -14,8 +14,8 @@ android {
 
 dependencies {
     coreLibraryDesugaring libs.android.desugar.jdk
+    implementation project(':data-model')
 
-    implementation project(":model")
     implementation libs.timber
 
     implementation libs.kotlin.stdlib

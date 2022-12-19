@@ -59,14 +59,14 @@ import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.showToast
 import soup.movie.feature.home.tab.MovieList
 import soup.movie.feature.home.tab.NoMovieItems
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel,
     upPress: () -> Unit,
-    onItemClick: (Movie) -> Unit
+    onItemClick: (MovieModel) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.systemBarsPadding(),

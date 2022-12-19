@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 import soup.movie.data.repository.MovieRepository
 import soup.movie.data.settings.AppSettings
 import soup.movie.feature.home.domain.getMovieFilterFlow
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -43,8 +43,8 @@ class HomeNowViewModel @Inject constructor(
     private val _isError = MutableStateFlow(false)
     val isError: StateFlow<Boolean> = _isError
 
-    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
-    val movies: StateFlow<List<Movie>> = _movies
+    private val _movies = MutableStateFlow<List<MovieModel>>(emptyList())
+    val movies: StateFlow<List<MovieModel>> = _movies
 
     init {
         viewModelScope.launch {
@@ -52,7 +52,7 @@ class HomeNowViewModel @Inject constructor(
             repository.getNowMovieList()
                 .combine(appSettings.getMovieFilterFlow()) { movieList, movieFilter ->
                     movieList.asSequence()
-                        .sortedBy(Movie::score)
+                        .sortedBy(MovieModel::score)
                         .filter { movieFilter(it) }
                         .toList()
                 }

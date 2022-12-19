@@ -24,7 +24,7 @@ dependencies {
     implementation project(":core-external")
     implementation project(":core-resources")
     implementation project(":data-settings-api")
-    implementation project(":model")
+    implementation project(':data-model')
     implementation project(":feature-theater")
     implementation project(":feature-theme")
 

@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.TheaterAreaGroupModel
 
 @Serializable
 class TheaterAreaGroupResponse(
@@ -26,8 +26,8 @@ class TheaterAreaGroupResponse(
     val megabox: List<TheaterAreaResponse> = emptyList(),
 )
 
-fun TheaterAreaGroupResponse.asModel(): TheaterAreaGroup {
-    return TheaterAreaGroup(
+fun TheaterAreaGroupResponse.asModel(): TheaterAreaGroupModel {
+    return TheaterAreaGroupModel(
         cgv = cgv.map { it.asModel() },
         lotte = lotte.map { it.asModel() },
         megabox = megabox.map { it.asModel() },

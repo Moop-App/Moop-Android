@@ -33,8 +33,8 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import soup.movie.data.settings.AppSettings
-import soup.movie.model.Theater
-import soup.movie.model.TheaterType
+import soup.movie.model.TheaterModel
+import soup.movie.model.TheaterTypeModel
 import soup.movie.model.settings.AgeFilter
 import soup.movie.model.settings.GenreFilter
 import soup.movie.model.settings.TheaterFilter
@@ -125,7 +125,7 @@ class AppSettingsImpl(
 
     private val favoriteTheaterListKey = stringPreferencesKey("favorite_theaters")
 
-    override suspend fun setFavoriteTheaterList(list: List<Theater>) {
+    override suspend fun setFavoriteTheaterList(list: List<TheaterModel>) {
         withContext(ioDispatcher) {
             context.dataStore.edit { settings ->
                 val rawList = list.map { it.toRaw() }
@@ -134,11 +134,11 @@ class AppSettingsImpl(
         }
     }
 
-    override suspend fun getFavoriteTheaterList(): List<Theater> {
+    override suspend fun getFavoriteTheaterList(): List<TheaterModel> {
         return getFavoriteTheaterListFlow().first()
     }
 
-    override fun getFavoriteTheaterListFlow(): Flow<List<Theater>> {
+    override fun getFavoriteTheaterListFlow(): Flow<List<TheaterModel>> {
         return context.dataStore.data.map { preferences ->
             val string = preferences[favoriteTheaterListKey]
             if (string != null) {
@@ -165,9 +165,9 @@ private data class RawTheater(
     val lng: Double,
     val lat: Double,
 ) {
-    fun toModel() = Theater(
+    fun toModel() = TheaterModel(
         id = id,
-        type = TheaterType.valueOf(type),
+        type = TheaterTypeModel.valueOf(type),
         code = code,
         name = name,
         lng = lng,
@@ -175,7 +175,7 @@ private data class RawTheater(
     )
 }
 
-private fun Theater.toRaw() = RawTheater(
+private fun TheaterModel.toRaw() = RawTheater(
     id = id,
     type = type.name,
     code = code,

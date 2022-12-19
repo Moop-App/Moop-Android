@@ -15,11 +15,11 @@
  */
 package soup.movie.model
 
-data class Theater(
-    val id: String,
-    val type: TheaterType,
-    val code: String,
-    val name: String,
-    val lng: Double,
-    val lat: Double
+/**
+ * @param peopleNm 배우 (이름)
+ * @param cast 배우 (역할)
+ */
+data class ActorModel(
+    val peopleNm: String,
+    val cast: String,
 )

@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.Actor
+import soup.movie.model.ActorModel
 
 /**
  * @param peopleNm 배우 (이름)
@@ -28,8 +28,8 @@ class ActorResponse(
     val cast: String = "",
 )
 
-fun ActorResponse.asModel(): Actor {
-    return Actor(
+fun ActorResponse.asModel(): ActorModel {
+    return ActorModel(
         peopleNm = peopleNm,
         cast = cast,
     )

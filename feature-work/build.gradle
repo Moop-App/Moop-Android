@@ -20,7 +20,7 @@ dependencies {
     implementation project(":core-common")
     implementation project(":core-resources")
     implementation project(":data-repository-api")
-    implementation project(":model")
+    implementation project(':data-model')
     implementation project(":domain")
     implementation libs.timber
 

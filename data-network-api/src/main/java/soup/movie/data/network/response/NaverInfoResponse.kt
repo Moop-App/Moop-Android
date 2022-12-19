@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.NaverInfo
+import soup.movie.model.NaverInfoModel
 
 @Serializable
 class NaverInfoResponse(
@@ -24,8 +24,8 @@ class NaverInfoResponse(
     val url: String? = null,
 )
 
-fun NaverInfoResponse.asModel(): NaverInfo {
-    return NaverInfo(
+fun NaverInfoResponse.asModel(): NaverInfoModel {
+    return NaverInfoModel(
         star = star,
         url = url,
     )

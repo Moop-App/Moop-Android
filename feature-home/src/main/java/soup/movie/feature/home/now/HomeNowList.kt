@@ -21,14 +21,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import soup.movie.feature.home.tab.HomeContentsScreen
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 
 @Composable
 internal fun HomeNowList(
     viewModel: HomeNowViewModel,
     state: LazyGridState = rememberLazyGridState(),
-    onItemClick: (Movie) -> Unit,
-    onItemLongClick: (Movie) -> Unit,
+    onItemClick: (MovieModel) -> Unit,
+    onItemLongClick: (MovieModel) -> Unit,
 ) {
     val isLoading by viewModel.isLoading.collectAsState()
     val isError by viewModel.isError.collectAsState()

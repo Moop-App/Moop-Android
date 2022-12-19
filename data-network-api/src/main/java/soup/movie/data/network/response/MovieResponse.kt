@@ -17,7 +17,7 @@ package soup.movie.data.network.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 
 @Serializable
 class MovieResponse(
@@ -35,8 +35,8 @@ class MovieResponse(
     val theater: TheaterRatingsResponse,
 )
 
-fun MovieResponse.asModel(): Movie {
-    return Movie(
+fun MovieResponse.asModel(): MovieModel {
+    return MovieModel(
         id = id,
         score = score,
         title = title,

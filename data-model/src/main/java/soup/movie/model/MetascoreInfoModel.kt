@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 SOUP
+ * Copyright 2021 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
  */
 package soup.movie.model
 
-enum class TheaterType {
-    CGV,
-    LOTTE,
-    MEGABOX,
-}
+data class MetascoreInfoModel(
+    val star: String?,
+)

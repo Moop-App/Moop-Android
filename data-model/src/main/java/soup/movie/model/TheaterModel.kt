@@ -15,7 +15,11 @@
  */
 package soup.movie.model
 
-data class MovieList(
-    val lastUpdateTime: Long,
-    val list: List<Movie>
+data class TheaterModel(
+    val id: String,
+    val type: TheaterTypeModel,
+    val code: String,
+    val name: String,
+    val lng: Double,
+    val lat: Double,
 )

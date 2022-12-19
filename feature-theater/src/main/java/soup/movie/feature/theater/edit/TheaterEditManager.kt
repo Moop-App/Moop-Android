@@ -20,32 +20,32 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import soup.movie.data.repository.TheaterRepository
 import soup.movie.data.settings.AppSettings
-import soup.movie.model.Theater
-import soup.movie.model.TheaterArea
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.TheaterAreaGroupModel
+import soup.movie.model.TheaterAreaModel
+import soup.movie.model.TheaterModel
 
 class TheaterEditManager(
     private val repository: TheaterRepository,
     private val appSettings: AppSettings
 ) {
 
-    private val cgvSubject = MutableStateFlow<List<TheaterArea>>(emptyList())
-    private val lotteSubject = MutableStateFlow<List<TheaterArea>>(emptyList())
-    private val megaboxSubject = MutableStateFlow<List<TheaterArea>>(emptyList())
-    private val selectedTheatersChannel = MutableStateFlow<List<Theater>>(emptyList())
+    private val cgvSubject = MutableStateFlow<List<TheaterAreaModel>>(emptyList())
+    private val lotteSubject = MutableStateFlow<List<TheaterAreaModel>>(emptyList())
+    private val megaboxSubject = MutableStateFlow<List<TheaterAreaModel>>(emptyList())
+    private val selectedTheatersChannel = MutableStateFlow<List<TheaterModel>>(emptyList())
 
-    private var theaterList: List<Theater> = emptyList()
-    private var selectedItemSet: MutableSet<Theater> = mutableSetOf()
+    private var theaterList: List<TheaterModel> = emptyList()
+    private var selectedItemSet: MutableSet<TheaterModel> = mutableSetOf()
 
-    fun asCgvFlow(): Flow<List<TheaterArea>> = cgvSubject
+    fun asCgvFlow(): Flow<List<TheaterAreaModel>> = cgvSubject
 
-    fun asLotteFlow(): Flow<List<TheaterArea>> = lotteSubject
+    fun asLotteFlow(): Flow<List<TheaterAreaModel>> = lotteSubject
 
-    fun asMegaboxFlow(): Flow<List<TheaterArea>> = megaboxSubject
+    fun asMegaboxFlow(): Flow<List<TheaterAreaModel>> = megaboxSubject
 
-    fun asSelectedTheaterListFlow(): Flow<List<Theater>> = selectedTheatersChannel
+    fun asSelectedTheaterListFlow(): Flow<List<TheaterModel>> = selectedTheatersChannel
 
-    suspend fun loadAsync(): TheaterAreaGroup {
+    suspend fun loadAsync(): TheaterAreaGroupModel {
         setupSelectedList()
         return repository.getCodeList().also {
             setupTotalList(it)
@@ -55,9 +55,9 @@ class TheaterEditManager(
         }
     }
 
-    private fun setupTotalList(group: TheaterAreaGroup) {
+    private fun setupTotalList(group: TheaterAreaGroupModel) {
         theaterList = group.run {
-            (cgv + lotte + megabox).flatMap(TheaterArea::theaterList)
+            (cgv + lotte + megabox).flatMap(TheaterAreaModel::theaterList)
         }
     }
 
@@ -80,7 +80,7 @@ class TheaterEditManager(
             .toList()
     }
 
-    fun add(theater: Theater): Boolean {
+    fun add(theater: TheaterModel): Boolean {
         val isUnderLimit = selectedItemSet.size < MAX_ITEMS
         if (isUnderLimit) {
             selectedItemSet.add(theater)
@@ -89,7 +89,7 @@ class TheaterEditManager(
         return isUnderLimit
     }
 
-    fun remove(theater: Theater) {
+    fun remove(theater: TheaterModel) {
         selectedItemSet.remove(theater)
         updateSelectedItemCount()
     }
