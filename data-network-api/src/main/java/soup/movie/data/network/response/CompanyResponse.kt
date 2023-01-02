@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.Company
+import soup.movie.model.CompanyModel
 
 /**
  * @param companyNm 회사 (이름)
@@ -28,8 +28,8 @@ class CompanyResponse(
     val companyPartNm: String,
 )
 
-fun CompanyResponse.asModel(): Company {
-    return Company(
+fun CompanyResponse.asModel(): CompanyModel {
+    return CompanyModel(
         companyNm = companyNm,
         companyPartNm = companyPartNm,
     )

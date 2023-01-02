@@ -15,8 +15,7 @@
  */
 package soup.movie.model
 
-data class TheaterRatings(
-    val cgv: String?,
-    val lotte: String?,
-    val megabox: String?
+data class NaverInfoModel(
+    val star: String,
+    val url: String?,
 )

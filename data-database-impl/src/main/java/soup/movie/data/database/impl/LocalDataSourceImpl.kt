@@ -31,10 +31,10 @@ import soup.movie.data.database.impl.mapper.toMovie
 import soup.movie.data.database.impl.mapper.toMovieEntity
 import soup.movie.data.database.impl.mapper.toOpenDateAlarm
 import soup.movie.data.database.impl.mapper.toOpenDateAlarmEntity
-import soup.movie.model.Movie
-import soup.movie.model.MovieList
-import soup.movie.model.OpenDateAlarm
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.MovieListModel
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
+import soup.movie.model.TheaterAreaGroupModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -44,28 +44,28 @@ class LocalDataSourceImpl @Inject constructor(
     private val cacheDao: MovieCacheDao
 ) : LocalDataSource {
 
-    private var codeResponse: TheaterAreaGroup? = null
+    private var codeResponse: TheaterAreaGroupModel? = null
 
-    override suspend fun saveNowMovieList(movieList: MovieList) {
+    override suspend fun saveNowMovieList(movieList: MovieListModel) {
         saveMovieListAs(TYPE_NOW, movieList)
         favoriteMovieDao.updateAll(movieList.list.map { it.toFavoriteMovieEntity() })
     }
 
-    override fun getNowMovieListFlow(): Flow<List<Movie>> {
+    override fun getNowMovieListFlow(): Flow<List<MovieModel>> {
         return getMovieListFlow(TYPE_NOW)
     }
 
-    override suspend fun savePlanMovieList(movieList: MovieList) {
+    override suspend fun savePlanMovieList(movieList: MovieListModel) {
         saveMovieListAs(TYPE_PLAN, movieList)
         favoriteMovieDao.updateAll(movieList.list.map { it.toFavoriteMovieEntity() })
         openDateAlarmDao.updateAll(movieList.list.map { it.toOpenDateAlarmEntity() })
     }
 
-    override fun getPlanMovieListFlow(): Flow<List<Movie>> {
+    override fun getPlanMovieListFlow(): Flow<List<MovieModel>> {
         return getMovieListFlow(TYPE_PLAN)
     }
 
-    private suspend fun saveMovieListAs(type: String, movieList: MovieList) {
+    private suspend fun saveMovieListAs(type: String, movieList: MovieListModel) {
         cacheDao.insert(
             MovieListEntity(
                 type,
@@ -75,7 +75,7 @@ class LocalDataSourceImpl @Inject constructor(
         )
     }
 
-    private fun getMovieListFlow(type: String): Flow<List<Movie>> {
+    private fun getMovieListFlow(type: String): Flow<List<MovieModel>> {
         return cacheDao.getMovieListByType(type)
             .map { it.list.map { movieEntity -> movieEntity.toMovie() } }
             .catch { emit(emptyList()) }
@@ -89,19 +89,19 @@ class LocalDataSourceImpl @Inject constructor(
         return cacheDao.findByType(TYPE_PLAN).lastUpdateTime
     }
 
-    override suspend fun getAllMovieList(): List<Movie> {
+    override suspend fun getAllMovieList(): List<MovieModel> {
         return getNowMovieList() + getPlanMovieList()
     }
 
-    override suspend fun getNowMovieList(): List<Movie> {
+    override suspend fun getNowMovieList(): List<MovieModel> {
         return getMovieListOf(TYPE_NOW)
     }
 
-    private suspend fun getPlanMovieList(): List<Movie> {
+    private suspend fun getPlanMovieList(): List<MovieModel> {
         return getMovieListOf(TYPE_PLAN)
     }
 
-    private suspend fun getMovieListOf(type: String): List<Movie> {
+    private suspend fun getMovieListOf(type: String): List<MovieModel> {
         return try {
             cacheDao.findByType(type).list
                 .map { movieEntity -> movieEntity.toMovie() }
@@ -111,15 +111,15 @@ class LocalDataSourceImpl @Inject constructor(
         }
     }
 
-    override fun saveCodeList(response: TheaterAreaGroup) {
+    override fun saveCodeList(response: TheaterAreaGroupModel) {
         codeResponse = response
     }
 
-    override fun getCodeList(): TheaterAreaGroup? {
+    override fun getCodeList(): TheaterAreaGroupModel? {
         return codeResponse
     }
 
-    override suspend fun addFavoriteMovie(movie: Movie) {
+    override suspend fun addFavoriteMovie(movie: MovieModel) {
         favoriteMovieDao.insertFavoriteMovie(movie.toFavoriteMovieEntity())
     }
 
@@ -128,7 +128,7 @@ class LocalDataSourceImpl @Inject constructor(
         openDateAlarmDao.delete(movieId)
     }
 
-    override fun getFavoriteMovieList(): Flow<List<Movie>> {
+    override fun getFavoriteMovieList(): Flow<List<MovieModel>> {
         return favoriteMovieDao.getFavoriteMovieList().map {
             it.map { favoriteMovieEntity -> favoriteMovieEntity.toMovie() }
         }
@@ -141,7 +141,7 @@ class LocalDataSourceImpl @Inject constructor(
     /**
      * @param date yyyy.mm.dd ex) 2020.01.31
      */
-    override suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm> {
+    override suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarmModel> {
         return openDateAlarmDao.getAllUntil(date)
             .map { openDateAlarmEntity -> openDateAlarmEntity.toOpenDateAlarm() }
     }
@@ -150,11 +150,11 @@ class LocalDataSourceImpl @Inject constructor(
         return openDateAlarmDao.hasAlarms()
     }
 
-    override suspend fun insertOpenDateAlarm(alarm: OpenDateAlarm) {
+    override suspend fun insertOpenDateAlarm(alarm: OpenDateAlarmModel) {
         openDateAlarmDao.insert(alarm.toEntity())
     }
 
-    override suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>) {
+    override suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarmModel>) {
         return openDateAlarmDao.deleteAll(alarms.map { it.movieId })
     }
 }

@@ -16,7 +16,7 @@
 package soup.movie.feature.theater.edit
 
 import androidx.annotation.Keep
-import soup.movie.model.Theater
+import soup.movie.model.TheaterModel
 
 sealed class TheaterEditContentUiModel {
 
@@ -43,13 +43,13 @@ data class TheaterEditAreaGroupUiModel(
 
 @Keep
 data class TheaterEditTheaterUiModel(
-    val theater: Theater,
+    val theater: TheaterModel,
     val checked: Boolean
 )
 
 @Keep
 data class TheaterEditFooterUiModel(
-    val theaterList: List<Theater>
+    val theaterList: List<TheaterModel>
 ) {
 
     fun isFull(): Boolean = theaterList.size >= TheaterEditManager.MAX_ITEMS

@@ -71,7 +71,7 @@ import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.theme.divider
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theater.TheaterChip
-import soup.movie.model.Theater
+import soup.movie.model.TheaterModel
 import soup.movie.resources.R
 
 private enum class Page(val title: String) {
@@ -200,7 +200,7 @@ fun TheaterEditScreen(
 private fun TheaterEditFooter(
     uiModel: TheaterEditFooterUiModel,
     onClick: () -> Unit,
-    onTheaterClick: (Theater) -> Unit,
+    onTheaterClick: (TheaterModel) -> Unit,
     onConfirmClick: () -> Unit,
 ) {
     Column(
@@ -279,8 +279,8 @@ private fun TheaterEditFooterPeek(
 
 @Composable
 private fun TheaterEditFooterContents(
-    theaterList: List<Theater>,
-    onTheaterClick: (Theater) -> Unit,
+    theaterList: List<TheaterModel>,
+    onTheaterClick: (TheaterModel) -> Unit,
 ) {
     Box(
         modifier = Modifier

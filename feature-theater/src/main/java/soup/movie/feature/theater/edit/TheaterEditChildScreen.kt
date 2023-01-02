@@ -35,7 +35,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.showToast
 import soup.movie.feature.theater.TheaterFilterChip
-import soup.movie.model.Theater
+import soup.movie.model.TheaterModel
 import soup.movie.resources.R
 
 @Composable
@@ -71,8 +71,8 @@ internal fun MegaboxScreen(viewModel: TheaterEditViewModel) {
 @Composable
 private fun TheaterEditChildScreen(
     uiModel: TheaterEditChildUiModel,
-    onAddTheater: (Theater) -> Boolean,
-    onRemoveTheater: (Theater) -> Unit
+    onAddTheater: (TheaterModel) -> Boolean,
+    onRemoveTheater: (TheaterModel) -> Unit
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -109,7 +109,7 @@ private fun TheaterEditChildScreen(
 private fun TheaterAreaItem(
     title: String,
     theaterList: List<TheaterEditTheaterUiModel>,
-    onCheckedChange: (Theater, Boolean) -> Unit
+    onCheckedChange: (TheaterModel, Boolean) -> Unit
 ) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
         Text(

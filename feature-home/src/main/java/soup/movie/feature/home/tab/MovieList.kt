@@ -54,14 +54,14 @@ import soup.movie.feature.home.favorite.MovieBestTag
 import soup.movie.feature.home.favorite.MovieDDayTag
 import soup.movie.feature.home.favorite.MovieNewTag
 import soup.movie.feature.home.filter.rippleTheme
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
 fun MovieList(
-    movies: List<Movie>,
-    onItemClick: (Movie) -> Unit,
-    onLongItemClick: (Movie) -> Unit,
+    movies: List<MovieModel>,
+    onItemClick: (MovieModel) -> Unit,
+    onLongItemClick: (MovieModel) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(8.dp),
     state: LazyGridState = rememberLazyGridState()
@@ -90,9 +90,9 @@ fun MovieList(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun MovieItem(
-    movie: Movie,
-    onClick: (Movie) -> Unit,
-    onLongClick: (Movie) -> Unit,
+    movie: MovieModel,
+    onClick: (MovieModel) -> Unit,
+    onLongClick: (MovieModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {

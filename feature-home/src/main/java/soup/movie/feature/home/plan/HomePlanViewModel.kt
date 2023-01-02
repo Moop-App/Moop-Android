@@ -28,7 +28,7 @@ import soup.movie.data.repository.MovieRepository
 import soup.movie.data.settings.AppSettings
 import soup.movie.domain.movie.getDDay
 import soup.movie.feature.home.domain.getMovieFilterFlow
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -44,8 +44,8 @@ class HomePlanViewModel @Inject constructor(
     private val _isError = MutableStateFlow(false)
     val isError: StateFlow<Boolean> = _isError
 
-    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
-    val movies: StateFlow<List<Movie>>
+    private val _movies = MutableStateFlow<List<MovieModel>>(emptyList())
+    val movies: StateFlow<List<MovieModel>>
         get() = _movies
 
     init {

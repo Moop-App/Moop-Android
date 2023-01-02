@@ -15,6 +15,7 @@
  */
 package soup.movie.model
 
-data class RottenTomatoInfo(
-    val star: String?
+data class MovieListModel(
+    val lastUpdateTime: Long,
+    val list: List<MovieModel>,
 )

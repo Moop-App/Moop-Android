@@ -31,7 +31,7 @@ import soup.movie.domain.movie.YYYY_MM_DD
 import soup.movie.domain.movie.currentTime
 import soup.movie.domain.movie.plusDaysTo
 import soup.movie.domain.movie.today
-import soup.movie.model.OpenDateAlarm
+import soup.movie.model.OpenDateAlarmModel
 import timber.log.Timber
 import java.time.DayOfWeek
 import java.time.temporal.ChronoUnit
@@ -66,7 +66,7 @@ class OpenDateAlarmWorker @AssistedInject constructor(
         }
     }
 
-    private suspend fun getOpeningDateAlarmList(): List<OpenDateAlarm> {
+    private suspend fun getOpeningDateAlarmList(): List<OpenDateAlarmModel> {
         val nextMonday = today().plusDaysTo(DayOfWeek.MONDAY).YYYY_MM_DD()
         return repository.getOpenDateAlarmListUntil(nextMonday)
             .also { repository.deleteOpenDateAlarms(it) }

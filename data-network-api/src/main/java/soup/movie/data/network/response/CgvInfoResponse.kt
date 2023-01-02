@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.CgvInfo
+import soup.movie.model.CgvInfoModel
 
 @Serializable
 class CgvInfoResponse(
@@ -25,8 +25,8 @@ class CgvInfoResponse(
     val url: String? = null,
 )
 
-fun CgvInfoResponse.asModel(): CgvInfo {
-    return CgvInfo(
+fun CgvInfoResponse.asModel(): CgvInfoModel {
+    return CgvInfoModel(
         id = id,
         star = star,
         url = url,

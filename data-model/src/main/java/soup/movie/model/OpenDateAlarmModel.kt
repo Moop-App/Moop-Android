@@ -15,6 +15,8 @@
  */
 package soup.movie.model
 
-data class MetascoreInfo(
-    val star: String?
+data class OpenDateAlarmModel(
+    val movieId: String,
+    val title: String,
+    val openDate: String,
 )

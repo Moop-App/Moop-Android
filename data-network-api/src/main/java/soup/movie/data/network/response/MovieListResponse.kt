@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.MovieList
+import soup.movie.model.MovieListModel
 
 @Serializable
 class MovieListResponse(
@@ -24,8 +24,8 @@ class MovieListResponse(
     val list: List<MovieResponse> = emptyList(),
 )
 
-fun MovieListResponse.asModel(): MovieList {
-    return MovieList(
+fun MovieListResponse.asModel(): MovieListModel {
+    return MovieListModel(
         lastUpdateTime = lastUpdateTime,
         list = list.map { it.asModel() },
     )

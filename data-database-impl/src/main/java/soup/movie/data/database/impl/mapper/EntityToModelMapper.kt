@@ -18,17 +18,17 @@ package soup.movie.data.database.impl.mapper
 import soup.movie.data.database.impl.entity.FavoriteMovieEntity
 import soup.movie.data.database.impl.entity.MovieEntity
 import soup.movie.data.database.impl.entity.OpenDateAlarmEntity
-import soup.movie.model.Movie
-import soup.movie.model.OpenDateAlarm
-import soup.movie.model.TheaterRatings
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
+import soup.movie.model.TheaterRatingsModel
 
-fun MovieEntity.toMovie() = Movie(
+fun MovieEntity.toMovie() = MovieModel(
     id, score, title, posterUrl, openDate, isNow, age, nationFilter, genres, boxOffice,
-    TheaterRatings(cgv, lotte, megabox)
+    TheaterRatingsModel(cgv, lotte, megabox)
 )
 
-fun FavoriteMovieEntity.toMovie(): Movie {
-    return Movie(
+fun FavoriteMovieEntity.toMovie(): MovieModel {
+    return MovieModel(
         id = id,
         score = score,
         title = title,
@@ -39,8 +39,8 @@ fun FavoriteMovieEntity.toMovie(): Movie {
         nationFilter = nationFilter,
         genres = genres,
         boxOffice = boxOffice,
-        theater = TheaterRatings(cgv, lotte, megabox)
+        theater = TheaterRatingsModel(cgv, lotte, megabox)
     )
 }
 
-fun OpenDateAlarmEntity.toOpenDateAlarm() = OpenDateAlarm(movieId, title, openDate)
+fun OpenDateAlarmEntity.toOpenDateAlarm() = OpenDateAlarmModel(movieId, title, openDate)

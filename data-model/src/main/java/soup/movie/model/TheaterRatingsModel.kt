@@ -15,8 +15,8 @@
  */
 package soup.movie.model
 
-data class LotteInfo(
-    val id: String,
-    val star: String,
-    val url: String?
+data class TheaterRatingsModel(
+    val cgv: String?,
+    val lotte: String?,
+    val megabox: String?,
 )

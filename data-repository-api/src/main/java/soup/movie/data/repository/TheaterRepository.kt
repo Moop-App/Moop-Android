@@ -15,8 +15,8 @@
  */
 package soup.movie.data.repository
 
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.TheaterAreaGroupModel
 
 interface TheaterRepository {
-    suspend fun getCodeList(): TheaterAreaGroup
+    suspend fun getCodeList(): TheaterAreaGroupModel
 }

@@ -15,8 +15,8 @@
  */
 package soup.movie.model
 
-data class OpenDateAlarm(
-    val movieId: String,
-    val title: String,
-    val openDate: String
+data class LotteInfoModel(
+    val id: String,
+    val star: String,
+    val url: String?,
 )

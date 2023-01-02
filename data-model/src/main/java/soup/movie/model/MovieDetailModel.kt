@@ -24,7 +24,7 @@ package soup.movie.model
  * @param showTm 상영시간 (분)
  * @param boxOffice 박스오피스 정보
  */
-data class MovieDetail(
+data class MovieDetailModel(
     val id: String,
     val score: Int,
     val title: String,
@@ -35,40 +35,19 @@ data class MovieDetail(
     val nationFilter: List<String>?,
     val genres: List<String>?,
 
-    val boxOffice: BoxOffice?,
+    val boxOffice: BoxOfficeModel?,
     val showTm: Int?,
     val nations: List<String>?,
     val directors: List<String>?,
-    val actors: List<Actor>?,
-    val companies: List<Company>?,
-    val cgv: CgvInfo?,
-    val lotte: LotteInfo?,
-    val megabox: MegaboxInfo?,
-    val naver: NaverInfo?,
-    val imdb: ImdbInfo?,
-    val rt: RottenTomatoInfo?,
-    val mc: MetascoreInfo?,
+    val actors: List<ActorModel>?,
+    val companies: List<CompanyModel>?,
+    val cgv: CgvInfoModel?,
+    val lotte: LotteInfoModel?,
+    val megabox: MegaboxInfoModel?,
+    val naver: NaverInfoModel?,
+    val imdb: ImdbInfoModel?,
+    val rt: RottenTomatoInfoModel?,
+    val mc: MetascoreInfoModel?,
     val plot: String?,
-    val trailers: List<Trailer>?
+    val trailers: List<TrailerModel>?,
 )
-
-// TODO: remove this
-fun MovieDetail.toMovie(): Movie {
-    return Movie(
-        id = id,
-        score = score,
-        title = title,
-        posterUrl = posterUrl,
-        openDate = openDate,
-        isNow = isNow,
-        age = age,
-        nationFilter = nationFilter,
-        genres = genres,
-        boxOffice = boxOffice?.rank,
-        theater = TheaterRatings(
-            cgv = cgv?.star,
-            lotte = lotte?.star,
-            megabox = megabox?.star,
-        ),
-    )
-}

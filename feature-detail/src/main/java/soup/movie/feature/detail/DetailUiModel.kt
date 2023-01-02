@@ -17,9 +17,9 @@ package soup.movie.feature.detail
 
 import androidx.annotation.Keep
 import soup.movie.core.ads.NativeAdInfo
-import soup.movie.model.Company
-import soup.movie.model.Movie
-import soup.movie.model.Trailer
+import soup.movie.model.CompanyModel
+import soup.movie.model.MovieModel
+import soup.movie.model.TrailerModel
 
 sealed interface DetailUiModel {
     object None : DetailUiModel
@@ -32,10 +32,10 @@ sealed interface DetailUiModel {
 
 @Keep
 data class HeaderUiModel(
-    val movie: Movie,
+    val movie: MovieModel,
     val showTm: Int = 0,
     val nations: List<String> = emptyList(),
-    val companies: List<Company> = emptyList()
+    val companies: List<CompanyModel> = emptyList()
 )
 
 @Keep
@@ -125,7 +125,7 @@ class TrailerHeaderItemUiModel(
 
 @Keep
 class TrailerItemUiModel(
-    val trailer: Trailer
+    val trailer: TrailerModel
 ) : ContentItemUiModel()
 
 @Keep

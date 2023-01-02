@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.ImdbInfo
+import soup.movie.model.ImdbInfoModel
 
 @Serializable
 class ImdbInfoResponse(
@@ -25,8 +25,8 @@ class ImdbInfoResponse(
     val url: String? = null,
 )
 
-fun ImdbInfoResponse.asModel(): ImdbInfo {
-    return ImdbInfo(
+fun ImdbInfoResponse.asModel(): ImdbInfoModel {
+    return ImdbInfoModel(
         id = id,
         star = star,
         url = url,

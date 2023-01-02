@@ -22,7 +22,7 @@ import soup.movie.data.database.LocalDataSource
 import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.response.asModel
 import soup.movie.data.repository.TheaterRepository
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.TheaterAreaGroupModel
 import javax.inject.Inject
 
 class TheaterRepositoryImpl @Inject constructor(
@@ -31,7 +31,7 @@ class TheaterRepositoryImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : TheaterRepository {
 
-    override suspend fun getCodeList(): TheaterAreaGroup {
+    override suspend fun getCodeList(): TheaterAreaGroupModel {
         return withContext(ioDispatcher) {
             local.getCodeList() ?: remote.getCodeList().asModel().also {
                 local.saveCodeList(it)

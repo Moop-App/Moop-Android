@@ -32,7 +32,7 @@ import soup.movie.data.repository.MovieRepository
 import soup.movie.domain.movie.currentTime
 import soup.movie.domain.movie.isBest
 import soup.movie.domain.movie.plusDaysTo
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import timber.log.Timber
 import java.time.DayOfWeek
 import java.time.temporal.ChronoUnit
@@ -64,7 +64,7 @@ class LegacyWorker @AssistedInject constructor(
         }
     }
 
-    private suspend fun getRecommendedMovieList(): List<Movie> {
+    private suspend fun getRecommendedMovieList(): List<MovieModel> {
         return repository.updateAndGetNowMovieList().asSequence()
             .filter {
                 it.theater.run {

@@ -37,28 +37,28 @@ import soup.movie.core.designsystem.theme.cgvBg
 import soup.movie.core.designsystem.theme.cgvText
 import soup.movie.core.designsystem.theme.lotteText
 import soup.movie.core.designsystem.theme.megaboxText
-import soup.movie.model.Theater
-import soup.movie.model.TheaterType
+import soup.movie.model.TheaterModel
+import soup.movie.model.TheaterTypeModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun TheaterFilterChip(
-    theater: Theater,
+    theater: TheaterModel,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
     when (theater.type) {
-        TheaterType.CGV -> CgvFilterChip(
+        TheaterTypeModel.CGV -> CgvFilterChip(
             text = theater.name,
             checked = checked,
             onCheckedChange = onCheckedChange
         )
-        TheaterType.LOTTE -> LotteFilterChip(
+        TheaterTypeModel.LOTTE -> LotteFilterChip(
             text = theater.name,
             checked = checked,
             onCheckedChange = onCheckedChange
         )
-        TheaterType.MEGABOX -> MegaboxFilterChip(
+        TheaterTypeModel.MEGABOX -> MegaboxFilterChip(
             text = theater.name,
             checked = checked,
             onCheckedChange = onCheckedChange

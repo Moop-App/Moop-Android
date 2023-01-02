@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.LotteInfo
+import soup.movie.model.LotteInfoModel
 
 @Serializable
 class LotteInfoResponse(
@@ -25,8 +25,8 @@ class LotteInfoResponse(
     val url: String? = null,
 )
 
-fun LotteInfoResponse.asModel(): LotteInfo {
-    return LotteInfo(
+fun LotteInfoResponse.asModel(): LotteInfoModel {
+    return LotteInfoModel(
         id = id,
         star = star,
         url = url,

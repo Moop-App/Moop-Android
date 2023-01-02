@@ -15,19 +15,9 @@
  */
 package soup.movie.model
 
-data class Movie(
-    val id: String,
-    val score: Int,
+data class TrailerModel(
+    val youtubeId: String,
     val title: String,
-    val posterUrl: String,
-    val openDate: String,
-    val isNow: Boolean,
-    val age: Int,
-    val nationFilter: List<String>?,
-    val genres: List<String>?,
-    val boxOffice: Int?,
-    val theater: TheaterRatings
-) {
-
-    val isPlan: Boolean = !isNow
-}
+    val author: String,
+    val thumbnailUrl: String?,
+)

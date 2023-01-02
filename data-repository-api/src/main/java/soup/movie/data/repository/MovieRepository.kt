@@ -16,28 +16,28 @@
 package soup.movie.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import soup.movie.model.Movie
-import soup.movie.model.MovieDetail
-import soup.movie.model.OpenDateAlarm
+import soup.movie.model.MovieDetailModel
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
 
 interface MovieRepository {
 
-    fun getNowMovieList(): Flow<List<Movie>>
+    fun getNowMovieList(): Flow<List<MovieModel>>
     suspend fun updateNowMovieList()
-    suspend fun updateAndGetNowMovieList(): List<Movie>
-    fun getPlanMovieList(): Flow<List<Movie>>
+    suspend fun updateAndGetNowMovieList(): List<MovieModel>
+    fun getPlanMovieList(): Flow<List<MovieModel>>
     suspend fun updatePlanMovieList()
-    suspend fun getMovieDetail(movieId: String): MovieDetail
+    suspend fun getMovieDetail(movieId: String): MovieDetailModel
     suspend fun getGenreList(): List<String>
-    suspend fun searchMovie(query: String): List<Movie>
+    suspend fun searchMovie(query: String): List<MovieModel>
 
-    fun getFavoriteMovieList(): Flow<List<Movie>>
-    suspend fun addFavoriteMovie(movie: Movie)
+    fun getFavoriteMovieList(): Flow<List<MovieModel>>
+    suspend fun addFavoriteMovie(movie: MovieModel)
     suspend fun removeFavoriteMovie(movieId: String)
     suspend fun isFavoriteMovie(movieId: String): Boolean
 
-    suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm>
+    suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarmModel>
     suspend fun hasOpenDateAlarms(): Boolean
-    suspend fun insertOpenDateAlarms(alarm: OpenDateAlarm)
-    suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>)
+    suspend fun insertOpenDateAlarms(alarm: OpenDateAlarmModel)
+    suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarmModel>)
 }

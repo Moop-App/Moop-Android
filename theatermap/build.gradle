@@ -23,7 +23,7 @@ dependencies {
     implementation project(":core-designsystem")
     implementation project(":core-external")
     implementation project(":data-repository-api")
-    implementation project(":model")
+    implementation project(':data-model')
     implementation project(":app")
     implementation libs.timber
 

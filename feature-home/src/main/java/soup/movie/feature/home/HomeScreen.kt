@@ -58,7 +58,7 @@ import soup.movie.core.designsystem.showToast
 import soup.movie.feature.home.filter.HomeFilterScreen
 import soup.movie.feature.home.now.HomeNowList
 import soup.movie.feature.home.plan.HomePlanList
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -66,7 +66,7 @@ import soup.movie.resources.R
 internal fun HomeScreen(
     viewModel: HomeViewModel,
     onSearchClick: () -> Unit,
-    onMovieItemClick: (Movie) -> Unit,
+    onMovieItemClick: (MovieModel) -> Unit,
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()

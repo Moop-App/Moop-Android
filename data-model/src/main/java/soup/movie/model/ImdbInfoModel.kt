@@ -15,8 +15,8 @@
  */
 package soup.movie.model
 
-data class CgvInfo(
+data class ImdbInfoModel(
     val id: String,
     val star: String,
-    val url: String?
+    val url: String?,
 )

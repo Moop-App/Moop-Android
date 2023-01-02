@@ -16,32 +16,32 @@
 package soup.movie.data.database
 
 import kotlinx.coroutines.flow.Flow
-import soup.movie.model.Movie
-import soup.movie.model.MovieList
-import soup.movie.model.OpenDateAlarm
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.MovieListModel
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
+import soup.movie.model.TheaterAreaGroupModel
 
 interface LocalDataSource {
 
-    suspend fun saveNowMovieList(movieList: MovieList)
-    fun getNowMovieListFlow(): Flow<List<Movie>>
-    suspend fun savePlanMovieList(movieList: MovieList)
-    fun getPlanMovieListFlow(): Flow<List<Movie>>
+    suspend fun saveNowMovieList(movieList: MovieListModel)
+    fun getNowMovieListFlow(): Flow<List<MovieModel>>
+    suspend fun savePlanMovieList(movieList: MovieListModel)
+    fun getPlanMovieListFlow(): Flow<List<MovieModel>>
     suspend fun getNowLastUpdateTime(): Long
     suspend fun getPlanLastUpdateTime(): Long
-    suspend fun getAllMovieList(): List<Movie>
-    suspend fun getNowMovieList(): List<Movie>
+    suspend fun getAllMovieList(): List<MovieModel>
+    suspend fun getNowMovieList(): List<MovieModel>
 
-    fun saveCodeList(response: TheaterAreaGroup)
-    fun getCodeList(): TheaterAreaGroup?
+    fun saveCodeList(response: TheaterAreaGroupModel)
+    fun getCodeList(): TheaterAreaGroupModel?
 
-    suspend fun addFavoriteMovie(movie: Movie)
+    suspend fun addFavoriteMovie(movie: MovieModel)
     suspend fun removeFavoriteMovie(movieId: String)
-    fun getFavoriteMovieList(): Flow<List<Movie>>
+    fun getFavoriteMovieList(): Flow<List<MovieModel>>
     suspend fun isFavoriteMovie(movieId: String): Boolean
 
-    suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarm>
+    suspend fun getOpenDateAlarmListUntil(date: String): List<OpenDateAlarmModel>
     suspend fun hasOpenDateAlarms(): Boolean
-    suspend fun insertOpenDateAlarm(alarm: OpenDateAlarm)
-    suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarm>)
+    suspend fun insertOpenDateAlarm(alarm: OpenDateAlarmModel)
+    suspend fun deleteOpenDateAlarms(alarms: List<OpenDateAlarmModel>)
 }

@@ -15,8 +15,11 @@
  */
 package soup.movie.model
 
-data class TheaterAreaGroup(
-    val cgv: List<TheaterArea>,
-    val lotte: List<TheaterArea>,
-    val megabox: List<TheaterArea>
+/**
+ * @param companyNm 회사 (이름)
+ * @param companyPartNm 회사 (역할)
+ */
+data class CompanyModel(
+    val companyNm: String,
+    val companyPartNm: String,
 )

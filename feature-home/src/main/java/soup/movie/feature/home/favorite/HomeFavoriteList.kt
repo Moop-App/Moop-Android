@@ -36,7 +36,7 @@ import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import soup.movie.feature.home.tab.MovieList
 import soup.movie.feature.home.tab.NoMovieItems
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
@@ -44,8 +44,8 @@ internal fun HomeFavoriteList(
     viewModel: HomeFavoriteViewModel,
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
-    onItemClick: (Movie) -> Unit,
-    onItemLongClick: (Movie) -> Unit,
+    onItemClick: (MovieModel) -> Unit,
+    onItemLongClick: (MovieModel) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val isTopAtCurrentTab by remember {

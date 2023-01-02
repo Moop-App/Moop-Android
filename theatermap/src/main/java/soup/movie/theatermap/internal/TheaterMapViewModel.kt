@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import soup.movie.data.repository.TheaterRepository
-import soup.movie.model.TheaterAreaGroup
+import soup.movie.model.TheaterAreaGroupModel
 import timber.log.Timber
 
 internal class TheaterMapViewModel(
@@ -66,7 +66,7 @@ internal class TheaterMapViewModel(
         }
     }
 
-    private fun TheaterAreaGroup.toTheaterList(): List<TheaterMarkerUiModel> {
+    private fun TheaterAreaGroupModel.toTheaterList(): List<TheaterMarkerUiModel> {
         return cgv.flatMap { group ->
             group.theaterList.map {
                 CgvMarkerUiModel(

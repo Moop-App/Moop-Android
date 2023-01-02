@@ -58,7 +58,7 @@ import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theater.draggableItem
 import soup.movie.feature.theater.draggableList
 import soup.movie.feature.theater.rememberDraggableListState
-import soup.movie.model.Theater
+import soup.movie.model.TheaterModel
 import soup.movie.resources.R
 
 @Composable
@@ -133,7 +133,7 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
 
 @Composable
 private fun TheaterSortReorderList(
-    selectedTheaters: List<Theater>,
+    selectedTheaters: List<TheaterModel>,
     onMove: (fromIndex: Int, toIndex: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {

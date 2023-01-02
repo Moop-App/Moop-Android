@@ -17,7 +17,7 @@ package soup.movie.data.network.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import soup.movie.model.MovieDetail
+import soup.movie.model.MovieDetailModel
 
 /**
  * @param genres 장르
@@ -58,8 +58,8 @@ class MovieDetailResponse(
     val trailers: List<TrailerResponse>? = null,
 )
 
-fun MovieDetailResponse.asModel(): MovieDetail {
-    return MovieDetail(
+fun MovieDetailResponse.asModel(): MovieDetailModel {
+    return MovieDetailModel(
         id = id,
         score = score,
         title = title,

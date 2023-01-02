@@ -18,10 +18,10 @@ package soup.movie.data.database.impl.mapper
 import soup.movie.data.database.impl.entity.FavoriteMovieEntity
 import soup.movie.data.database.impl.entity.MovieEntity
 import soup.movie.data.database.impl.entity.OpenDateAlarmEntity
-import soup.movie.model.Movie
-import soup.movie.model.OpenDateAlarm
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
 
-fun Movie.toMovieEntity(): MovieEntity {
+fun MovieModel.toMovieEntity(): MovieEntity {
     return MovieEntity(
         id = id,
         score = score,
@@ -39,7 +39,7 @@ fun Movie.toMovieEntity(): MovieEntity {
     )
 }
 
-fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
+fun MovieModel.toFavoriteMovieEntity(): FavoriteMovieEntity {
     return FavoriteMovieEntity(
         id = id,
         score = score,
@@ -57,7 +57,7 @@ fun Movie.toFavoriteMovieEntity(): FavoriteMovieEntity {
     )
 }
 
-fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
+fun MovieModel.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = id,
         title = title,
@@ -65,7 +65,7 @@ fun Movie.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     )
 }
 
-fun OpenDateAlarm.toEntity(): OpenDateAlarmEntity {
+fun OpenDateAlarmModel.toEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = movieId,
         title = title,

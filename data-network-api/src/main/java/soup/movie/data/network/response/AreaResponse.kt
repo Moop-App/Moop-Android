@@ -16,7 +16,7 @@
 package soup.movie.data.network.response
 
 import kotlinx.serialization.Serializable
-import soup.movie.model.Area
+import soup.movie.model.AreaModel
 
 @Serializable
 class AreaResponse(
@@ -24,8 +24,8 @@ class AreaResponse(
     val name: String,
 )
 
-fun AreaResponse.asModel(): Area {
-    return Area(
+fun AreaResponse.asModel(): AreaModel {
+    return AreaModel(
         code = code,
         name = name,
     )

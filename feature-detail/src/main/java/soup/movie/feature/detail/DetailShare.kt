@@ -43,14 +43,14 @@ import androidx.core.app.ShareCompat
 import soup.movie.core.designsystem.theme.detailShareDim
 import soup.movie.feature.deeplink.FirebaseLink
 import soup.movie.feature.deeplink.KakaoLink
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
 internal fun DetailShare(
-    movie: Movie,
+    movie: MovieModel,
     onClose: () -> Unit,
-    onShareInstagram: (Movie) -> Unit,
+    onShareInstagram: (MovieModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -172,7 +172,7 @@ internal fun DetailShare(
     }
 }
 
-private fun Context.shareToKakaoTalk(movie: Movie) {
+private fun Context.shareToKakaoTalk(movie: MovieModel) {
     KakaoLink.share(
         context = this,
         movieId = movie.id,
@@ -194,23 +194,23 @@ private fun Context.shareToKakaoTalk(movie: Movie) {
     )
 }
 
-private fun Context.shareToFacebook(movie: Movie) {
+private fun Context.shareToFacebook(movie: MovieModel) {
     shareText(movie, "com.facebook.katana")
 }
 
-private fun Context.shareToTwitter(movie: Movie) {
+private fun Context.shareToTwitter(movie: MovieModel) {
     shareText(movie, "com.twitter.android")
 }
 
-private fun Context.shareToLine(movie: Movie) {
+private fun Context.shareToLine(movie: MovieModel) {
     shareText(movie, "jp.naver.line.android")
 }
 
-private fun Context.shareToOthers(movie: Movie) {
+private fun Context.shareToOthers(movie: MovieModel) {
     shareText(movie, null)
 }
 
-private fun Context.shareText(movie: Movie, packageName: String?) {
+private fun Context.shareText(movie: MovieModel, packageName: String?) {
     FirebaseLink.createDetailLink(
         movieId = movie.id,
         imageUrl = movie.posterUrl,

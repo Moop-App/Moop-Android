@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import soup.movie.common.IoDispatcher
 import soup.movie.data.repository.MovieRepository
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,13 +35,13 @@ class HomeFavoriteViewModel @Inject constructor(
     @IoDispatcher ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
-    val movies: StateFlow<List<Movie>> = _movies
+    private val _movies = MutableStateFlow<List<MovieModel>>(emptyList())
+    val movies: StateFlow<List<MovieModel>> = _movies
 
     init {
         repository.getFavoriteMovieList()
             .onEach {
-                val favoriteMovieList = it.sortedBy(Movie::openDate)
+                val favoriteMovieList = it.sortedBy(MovieModel::openDate)
                 _movies.emit(favoriteMovieList)
             }
             .flowOn(ioDispatcher)

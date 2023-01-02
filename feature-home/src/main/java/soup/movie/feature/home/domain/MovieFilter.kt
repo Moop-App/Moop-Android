@@ -15,7 +15,7 @@
  */
 package soup.movie.feature.home.domain
 
-import soup.movie.model.Movie
+import soup.movie.model.MovieModel
 import soup.movie.model.settings.AgeFilter
 import soup.movie.model.settings.GenreFilter
 import soup.movie.model.settings.GenreFilter.Companion.GENRE_ETC
@@ -27,13 +27,13 @@ class MovieFilter(
     private val genreFilter: GenreFilter
 ) {
 
-    operator fun invoke(movie: Movie): Boolean {
+    operator fun invoke(movie: MovieModel): Boolean {
         return movie.isFilterBy(theaterFilter) &&
             movie.isFilterBy(ageFilter) &&
             movie.isFilterBy(genreFilter)
     }
 
-    private fun Movie.isFilterBy(theaterFilter: TheaterFilter): Boolean {
+    private fun MovieModel.isFilterBy(theaterFilter: TheaterFilter): Boolean {
         val isScreeningAtCgv = theater.cgv != null
         val isScreeningAtLotteCinema = theater.lotte != null
         val isScreeningAtMegabox = theater.megabox != null
@@ -42,14 +42,14 @@ class MovieFilter(
             theaterFilter.hasMegabox() && isScreeningAtMegabox
     }
 
-    private fun Movie.isFilterBy(ageFilter: AgeFilter): Boolean {
+    private fun MovieModel.isFilterBy(ageFilter: AgeFilter): Boolean {
         return (ageFilter.hasAll() && age < 12) ||
             (ageFilter.has12() && age in 12..14) ||
             (ageFilter.has15() && age in 15..18) ||
             (ageFilter.has19() && age >= 19)
     }
 
-    private fun Movie.isFilterBy(genreFilter: GenreFilter): Boolean {
+    private fun MovieModel.isFilterBy(genreFilter: GenreFilter): Boolean {
         return genres?.any { it !in genreFilter.blacklist }
             ?: (genres.isNullOrEmpty() && GENRE_ETC !in genreFilter.blacklist)
     }
