@@ -53,6 +53,7 @@ import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.favorite.HomeFavoriteList
 import soup.movie.feature.settings.SettingsNavGraph
+import soup.movie.feature.theatermap.TheaterMapScreen
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -61,7 +62,6 @@ fun MainScreen(
     widthSizeClass: WindowWidthSizeClass,
     viewModel: HomeViewModel,
     onSearchClick: () -> Unit,
-    onTheaterMapClick: () -> Unit,
     onMovieItemClick: (MovieModel) -> Unit,
 ) {
     val currentMainTab by viewModel.selectedMainTab.collectAsState()
@@ -71,11 +71,7 @@ fun MainScreen(
         currentTab = currentMainTab,
         tabs = tabs,
         onTabSelected = { mainTab ->
-            if (mainTab == MainTabUiModel.TheaterMap) {
-                onTheaterMapClick()
-            } else {
-                viewModel.onMainTabSelected(mainTab)
-            }
+            viewModel.onMainTabSelected(mainTab)
         },
         modifier = Modifier.systemBarsPadding(),
     ) { paddingValues ->
@@ -101,7 +97,11 @@ fun MainScreen(
                         },
                     )
                 }
-                MainTabUiModel.TheaterMap -> {}
+                MainTabUiModel.TheaterMap -> {
+                    TheaterMapScreen(
+                        viewModel = hiltViewModel(),
+                    )
+                }
                 MainTabUiModel.Settings -> {
                     SettingsNavGraph()
                 }

@@ -16,8 +16,6 @@
 package soup.movie
 
 import android.app.Application
-import android.content.Context
-import com.google.android.play.core.splitcompat.SplitCompat
 import dagger.hilt.android.HiltAndroidApp
 import soup.movie.feature.theme.ThemeOptionManager
 import soup.movie.notification.NotificationChannels
@@ -32,10 +30,5 @@ class MovieApplication : Application() {
         super.onCreate()
         NotificationChannels.initialize(this)
         themeOptionManager.initialize()
-    }
-
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        SplitCompat.install(this)
     }
 }

@@ -45,7 +45,6 @@ private fun NavController.navigateToDetail(movieId: String) {
 fun MainNavGraph(
     mainViewModel: MainViewModel,
     widthSizeClass: WindowWidthSizeClass,
-    onTheaterMapClick: () -> Unit,
 ) {
     val navController = rememberNavController()
     NavHost(
@@ -60,7 +59,6 @@ fun MainNavGraph(
                 onSearchClick = {
                     navController.navigate(Screen.Search.route)
                 },
-                onTheaterMapClick = onTheaterMapClick,
                 onMovieItemClick = {
                     navController.navigateToDetail(movieId = it.id)
                 },
