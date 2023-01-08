@@ -40,6 +40,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ShareCompat
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.detailShareDim
 import soup.movie.feature.deeplink.FirebaseLink
 import soup.movie.feature.deeplink.KakaoLink
@@ -80,7 +81,7 @@ internal fun DetailShare(
                 modifier = Modifier.requiredSize(48.dp).padding(all = 4.dp),
             ) {
                 Image(
-                    painterResource(R.drawable.ic_logo_facebook),
+                    painterResource(MovieIcons.Facebook),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                 )
@@ -97,7 +98,7 @@ internal fun DetailShare(
                 modifier = Modifier.requiredSize(48.dp).padding(all = 4.dp),
             ) {
                 Image(
-                    painterResource(R.drawable.ic_logo_twitter),
+                    painterResource(MovieIcons.Twitter),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                 )
@@ -112,7 +113,7 @@ internal fun DetailShare(
                 modifier = Modifier.requiredSize(48.dp).padding(all = 4.dp),
             ) {
                 Image(
-                    painterResource(R.drawable.ic_logo_instagram),
+                    painterResource(MovieIcons.Instagram),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                 )
@@ -129,7 +130,7 @@ internal fun DetailShare(
                 modifier = Modifier.requiredSize(48.dp).padding(all = 4.dp),
             ) {
                 Image(
-                    painterResource(R.drawable.ic_logo_line),
+                    painterResource(MovieIcons.Line),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                 )
@@ -146,7 +147,7 @@ internal fun DetailShare(
                 modifier = Modifier.requiredSize(48.dp).padding(all = 4.dp),
             ) {
                 Image(
-                    painterResource(R.drawable.ic_logo_kakaotalk),
+                    painterResource(MovieIcons.KakaoTalk),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                 )
@@ -163,7 +164,7 @@ internal fun DetailShare(
                 modifier = Modifier.requiredSize(48.dp).padding(all = 4.dp),
             ) {
                 Image(
-                    painterResource(R.drawable.ic_logo_more),
+                    painterResource(MovieIcons.More),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                 )

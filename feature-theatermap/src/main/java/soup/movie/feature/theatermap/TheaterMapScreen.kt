@@ -35,8 +35,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -73,6 +71,7 @@ import com.naver.maps.map.compose.rememberFusedLocationSource
 import com.naver.maps.map.compose.rememberMarkerState
 import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.coroutines.launch
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.external.Cgv
 import soup.movie.core.external.LotteCinema
 import soup.movie.core.external.Megabox
@@ -318,7 +317,7 @@ private fun InfoButton(
             .requiredSize(48.dp)
     ) {
         Icon(
-            Icons.Rounded.Info,
+            MovieIcons.Info,
             contentDescription = null
         )
     }
@@ -356,9 +355,9 @@ private fun TheaterMarkerUiModel.getMarkerIcon(): OverlayImage {
 }
 
 private object TheaterMarkerIcons {
-    val Cgv = OverlayImage.fromResource(R.drawable.ic_marker_cgv)
-    val LotteCinema = OverlayImage.fromResource(R.drawable.ic_marker_lotte)
-    val Megabox = OverlayImage.fromResource(R.drawable.ic_marker_megabox)
+    val Cgv = OverlayImage.fromResource(MovieIcons.MarkerCgv)
+    val LotteCinema = OverlayImage.fromResource(MovieIcons.MarkerLotte)
+    val Megabox = OverlayImage.fromResource(MovieIcons.MarkerMegabox)
 }
 
 private fun TheaterMarkerUiModel.executeWeb(ctx: Context) {

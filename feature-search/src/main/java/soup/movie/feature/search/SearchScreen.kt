@@ -35,9 +35,6 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -56,6 +53,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
 import soup.movie.feature.home.tab.MovieList
 import soup.movie.feature.home.tab.NoMovieItems
@@ -113,7 +111,7 @@ fun SearchScreen(
                         leadingIcon = {
                             IconButton(onClick = upPress) {
                                 Icon(
-                                    Icons.Default.ArrowBack,
+                                    MovieIcons.ArrowBack,
                                     contentDescription = null
                                 )
                             }
@@ -121,7 +119,7 @@ fun SearchScreen(
                         trailingIcon = {
                             IconButton(onClick = { viewModel.onQueryChanged("") }) {
                                 Icon(
-                                    Icons.Default.Close,
+                                    MovieIcons.Close,
                                     contentDescription = null
                                 )
                             }

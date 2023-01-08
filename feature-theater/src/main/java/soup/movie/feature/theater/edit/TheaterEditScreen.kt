@@ -38,8 +38,6 @@ import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -68,6 +66,7 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.divider
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theater.TheaterChip
@@ -253,7 +252,7 @@ private fun TheaterEditFooterPeek(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     modifier = Modifier.padding(start = 8.dp),
                 )

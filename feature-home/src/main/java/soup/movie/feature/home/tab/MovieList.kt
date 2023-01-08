@@ -32,8 +32,6 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ViewModule
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -45,6 +43,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.domain.movie.getDDayLabel
 import soup.movie.domain.movie.isBest
 import soup.movie.domain.movie.isDDay
@@ -152,7 +151,7 @@ fun NoMovieItems(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            Icons.Rounded.ViewModule,
+            MovieIcons.ViewModule,
             contentDescription = null,
             colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
             modifier = Modifier.size(72.dp)

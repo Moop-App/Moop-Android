@@ -32,9 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.EntryChip
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.cgvBg
 import soup.movie.core.designsystem.theme.cgvText
-import soup.movie.resources.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -54,7 +54,7 @@ internal fun CgvFilterChip(
             checkedIcon = {},
             closeIcon = {
                 Image(
-                    painterResource(R.drawable.filter_chip_cgv_cancel),
+                    painterResource(MovieIcons.FilterChipCgvCancel),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = ChipDefaults.ChipEndPadding)
@@ -104,7 +104,7 @@ internal fun LotteFilterChip(
             checkedIcon = {},
             closeIcon = {
                 Image(
-                    painterResource(R.drawable.filter_chip_lotte_cancel),
+                    painterResource(MovieIcons.FilterChipLotteCancel),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = ChipDefaults.ChipEndPadding)
@@ -150,7 +150,7 @@ internal fun MegaboxFilterChip(
             checkedIcon = {},
             closeIcon = {
                 Image(
-                    painterResource(R.drawable.filter_chip_megabox_cancel),
+                    painterResource(MovieIcons.FilterChipMegaboxCancel),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = ChipDefaults.ChipEndPadding)

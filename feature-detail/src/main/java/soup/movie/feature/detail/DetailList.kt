@@ -51,10 +51,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.PrivacyTip
-import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material.icons.rounded.Subject
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -79,6 +75,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.core.ads.NativeAd
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.cgvBg
 import soup.movie.core.designsystem.theme.cgvText
 import soup.movie.core.designsystem.theme.lotteBg
@@ -486,7 +483,7 @@ private fun Plot(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    Icons.Rounded.Subject,
+                    MovieIcons.Subject,
                     contentDescription = null,
                     modifier = Modifier.requiredSize(20.dp),
                 )
@@ -606,7 +603,7 @@ private fun Imdb(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
-                    painterResource(R.drawable.ic_imdb),
+                    painterResource(MovieIcons.Imdb),
                     contentDescription = null,
                     modifier = Modifier
                         .wrapContentWidth()
@@ -625,7 +622,7 @@ private fun Imdb(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
-                    painterResource(R.drawable.ic_rt),
+                    painterResource(MovieIcons.RottenTomatoes),
                     contentDescription = null,
                     modifier = Modifier.requiredSize(24.dp),
                 )
@@ -640,9 +637,9 @@ private fun Imdb(
                             .toIntOrNull() ?: 0
                         Image(
                             if (score >= 60) {
-                                painterResource(R.drawable.ic_rt_fresh)
+                                painterResource(MovieIcons.RottenTomatoesFresh)
                             } else {
-                                painterResource(R.drawable.ic_rt_rotten)
+                                painterResource(MovieIcons.RottenTomatoesRotten)
                             },
                             contentDescription = null,
                             modifier = Modifier.requiredSize(16.dp),
@@ -663,7 +660,7 @@ private fun Imdb(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
-                    painterResource(R.drawable.ic_metacritic),
+                    painterResource(MovieIcons.Metacritic),
                     contentDescription = null,
                     modifier = Modifier
                         .wrapContentWidth()
@@ -755,7 +752,7 @@ private fun TrailerHeader(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
-                painter = painterResource(R.drawable.ic_logo_youtube),
+                painter = painterResource(MovieIcons.YouTube),
                 contentDescription = null,
                 modifier = Modifier.requiredWidth(48.dp).fillMaxHeight(),
                 contentScale = ContentScale.Inside,
@@ -774,7 +771,7 @@ private fun TrailerHeader(
                 onClick = onPrivacyTipClick,
             ) {
                 Image(
-                    Icons.Outlined.PrivacyTip,
+                    MovieIcons.PrivacyTip,
                     contentDescription = null,
                     modifier = Modifier.requiredSize(18.dp),
                     contentScale = ContentScale.Inside,
@@ -877,7 +874,7 @@ private fun DetailAd(
 @Composable
 private fun StarIcon(modifier: Modifier = Modifier) {
     Image(
-        Icons.Rounded.Star,
+        MovieIcons.Star,
         contentDescription = null,
         colorFilter = ColorFilter.tint(MaterialTheme.colors.star),
         modifier = modifier,

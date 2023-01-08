@@ -37,9 +37,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -53,6 +50,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kotlinx.coroutines.launch
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theater.draggableItem
@@ -83,7 +81,7 @@ fun TheaterSortScreen(
         floatingActionButton = {
             FloatingActionButton(onClick = { debounce(onAddItemClick) }) {
                 Icon(
-                    Icons.Rounded.Add,
+                    MovieIcons.Add,
                     contentDescription = stringResource(R.string.theater_select_action_confirm)
                 )
             }
@@ -116,7 +114,7 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize()
     ) {
         Image(
-            painterResource(R.drawable.ic_round_no_theaters),
+            painterResource(MovieIcons.NoTheaters),
             contentDescription = null,
             modifier = Modifier
                 .width(48.dp)
@@ -158,7 +156,7 @@ private fun TheaterSortReorderList(
                 TheaterChip(theater)
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
-                    Icons.Rounded.DragHandle,
+                    MovieIcons.DragHandle,
                     contentDescription = null,
                     contentScale = ContentScale.Inside,
                     modifier = Modifier
