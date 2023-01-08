@@ -31,7 +31,6 @@ dependencies {
     implementation libs.androidx.activity.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
-    implementation libs.compose.materialIconsExtended
     implementation libs.compose.ui
     implementation libs.accompanist.flowlayout
     implementation libs.accompanist.pager

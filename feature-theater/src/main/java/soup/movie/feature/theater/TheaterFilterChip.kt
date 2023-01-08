@@ -21,8 +21,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -33,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.cgvBg
 import soup.movie.core.designsystem.theme.cgvText
 import soup.movie.core.designsystem.theme.lotteText
@@ -80,7 +79,7 @@ private fun CgvFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
                         Color.Black.copy(alpha = 0.2f)
@@ -89,7 +88,7 @@ private fun CgvFilterChip(
             },
             checkedIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.cgvText),
                 )
@@ -126,7 +125,7 @@ private fun LotteFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
                         MaterialTheme.colors.lotteText.copy(alpha = 0.4f)
@@ -135,7 +134,7 @@ private fun LotteFilterChip(
             },
             checkedIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.lotteText),
                 )
@@ -171,7 +170,7 @@ private fun MegaboxFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
                         MaterialTheme.colors.megaboxText.copy(alpha = 0.4f)
@@ -180,7 +179,7 @@ private fun MegaboxFilterChip(
             },
             checkedIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.megaboxText),
                 )

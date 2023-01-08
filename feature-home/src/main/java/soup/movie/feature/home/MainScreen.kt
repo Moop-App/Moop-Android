@@ -37,9 +37,6 @@ import androidx.compose.material.NavigationRail
 import androidx.compose.material.NavigationRailItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Map
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -49,6 +46,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.favorite.HomeFavoriteList
@@ -167,7 +165,7 @@ private fun CompactScreen(
                                 MainTabUiModel.Home -> {
                                     Icon(
                                         rememberAnimatedVectorPainter(
-                                            AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected),
+                                            AnimatedImageVector.animatedVectorResource(MovieIcons.AvdHomeNowSelected),
                                             selected
                                         ),
                                         contentDescription = null,
@@ -176,7 +174,7 @@ private fun CompactScreen(
                                 MainTabUiModel.Favorite -> {
                                     Icon(
                                         rememberAnimatedVectorPainter(
-                                            AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected),
+                                            AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected),
                                             selected
                                         ),
                                         contentDescription = null,
@@ -184,13 +182,13 @@ private fun CompactScreen(
                                 }
                                 MainTabUiModel.TheaterMap -> {
                                     Icon(
-                                        rememberVectorPainter(Icons.Rounded.Map),
+                                        rememberVectorPainter(MovieIcons.Map),
                                         contentDescription = null,
                                     )
                                 }
                                 MainTabUiModel.Settings -> {
                                     Icon(
-                                        rememberVectorPainter(Icons.Rounded.Settings),
+                                        rememberVectorPainter(MovieIcons.Settings),
                                         contentDescription = null,
                                     )
                                 }
@@ -248,7 +246,7 @@ private fun MediumScreen(
                             MainTabUiModel.Home -> {
                                 Icon(
                                     rememberAnimatedVectorPainter(
-                                        AnimatedImageVector.animatedVectorResource(R.drawable.avd_home_now_selected),
+                                        AnimatedImageVector.animatedVectorResource(MovieIcons.AvdHomeNowSelected),
                                         selected
                                     ),
                                     contentDescription = null,
@@ -257,7 +255,7 @@ private fun MediumScreen(
                             MainTabUiModel.Favorite -> {
                                 Icon(
                                     rememberAnimatedVectorPainter(
-                                        AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected),
+                                        AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected),
                                         selected
                                     ),
                                     contentDescription = null,
@@ -265,13 +263,13 @@ private fun MediumScreen(
                             }
                             MainTabUiModel.TheaterMap -> {
                                 Icon(
-                                    rememberVectorPainter(Icons.Rounded.Map),
+                                    rememberVectorPainter(MovieIcons.Map),
                                     contentDescription = null,
                                 )
                             }
                             MainTabUiModel.Settings -> {
                                 Icon(
-                                    rememberVectorPainter(Icons.Rounded.Settings),
+                                    rememberVectorPainter(MovieIcons.Settings),
                                     contentDescription = null,
                                 )
                             }

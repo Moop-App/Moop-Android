@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.resources.R
 
 @Composable
@@ -47,7 +48,7 @@ internal fun DetailError(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
-            painterResource(R.drawable.ic_splash_launcher),
+            painterResource(MovieIcons.SplashLauncher),
             contentDescription = null,
             modifier = Modifier
                 .wrapContentWidth()

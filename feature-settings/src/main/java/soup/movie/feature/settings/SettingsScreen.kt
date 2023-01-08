@@ -42,12 +42,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.BugReport
-import androidx.compose.material.icons.rounded.Edit
-import androidx.compose.material.icons.rounded.NewReleases
-import androidx.compose.material.icons.rounded.Palette
-import androidx.compose.material.icons.rounded.Shop
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -61,6 +55,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.UnelevatedButton
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.divider
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.core.external.Cgv
@@ -124,7 +119,7 @@ internal fun SettingsScreen(
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        Icons.Rounded.NewReleases,
+                        MovieIcons.NewReleases,
                         contentDescription = null,
                         tint = MaterialTheme.colors.error
                     )
@@ -183,7 +178,7 @@ private fun SettingsThemeItem(
                 modifier = Modifier.size(48.dp)
             ) {
                 Icon(
-                    Icons.Rounded.Palette,
+                    MovieIcons.Palette,
                     contentDescription = null,
                     tint = MaterialTheme.colors.onBackground,
                 )
@@ -231,7 +226,7 @@ private fun SettingsTheaterItem(
                 modifier = Modifier.size(48.dp)
             ) {
                 Icon(
-                    Icons.Rounded.Edit,
+                    MovieIcons.Edit,
                     contentDescription = null,
                     tint = MaterialTheme.colors.onBackground,
                 )
@@ -293,13 +288,13 @@ private fun SettingsVersionItem(
             ) {
                 if (version?.isLatest == true) {
                     Icon(
-                        Icons.Rounded.Shop,
+                        MovieIcons.Shop,
                         contentDescription = null,
                         tint = MaterialTheme.colors.onSurface,
                     )
                 } else {
                     Icon(
-                        Icons.Rounded.NewReleases,
+                        MovieIcons.NewReleases,
                         contentDescription = null,
                         tint = MaterialTheme.colors.onError,
                     )
@@ -330,7 +325,7 @@ private fun SettingsFeedbackItem(
                 )
             }
             Icon(
-                Icons.Rounded.BugReport,
+                MovieIcons.BugReport,
                 contentDescription = null,
                 tint = MaterialTheme.colors.onSurface,
                 modifier = Modifier

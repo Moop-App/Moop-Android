@@ -35,8 +35,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,6 +47,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.domain.movie.getDDayLabel
 import soup.movie.domain.movie.isBest
 import soup.movie.domain.movie.isDDay
@@ -274,7 +273,7 @@ internal fun FavoriteButton(
     isFavorite: Boolean,
     onFavoriteChange: (Boolean) -> Unit,
 ) {
-    val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_favorite_selected)
+    val image = AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected)
     IconButton(
         onClick = {
             onFavoriteChange(!isFavorite)
@@ -295,7 +294,7 @@ internal fun ShareButton(
 ) {
     IconButton(onClick = onClick) {
         Image(
-            Icons.Default.Share,
+            MovieIcons.Share,
             contentDescription = null,
             modifier = Modifier.requiredSize(48.dp),
             contentScale = ContentScale.Inside,

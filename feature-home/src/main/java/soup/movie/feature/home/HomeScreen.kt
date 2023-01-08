@@ -36,9 +36,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.FilterList
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
@@ -54,6 +51,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
 import soup.movie.feature.home.filter.HomeFilterScreen
 import soup.movie.feature.home.now.HomeNowList
@@ -117,7 +115,7 @@ internal fun HomeScreen(
                 actions = {
                     IconButton(onClick = { onSearchClick() }) {
                         Icon(
-                            Icons.Rounded.Search,
+                            MovieIcons.Search,
                             contentDescription = null,
                         )
                     }
@@ -216,7 +214,7 @@ private fun HomeFilterButton(
         modifier = modifier,
     ) {
         Icon(
-            Icons.Rounded.FilterList,
+            MovieIcons.FilterList,
             contentDescription = stringResource(R.string.menu_filter)
         )
     }

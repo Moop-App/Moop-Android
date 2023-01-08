@@ -34,8 +34,6 @@ import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
@@ -54,6 +52,7 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.divider
 import soup.movie.resources.R
 
@@ -262,7 +261,7 @@ private fun GenreFilterChip(
             onCheckedChange = onCheckedChange,
             chipIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
                         Color.Black.copy(alpha = 0.2f)
@@ -271,7 +270,7 @@ private fun GenreFilterChip(
             },
             checkedIcon = {
                 Image(
-                    Icons.Rounded.Check,
+                    MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(Color(0x88000000)),
                 )

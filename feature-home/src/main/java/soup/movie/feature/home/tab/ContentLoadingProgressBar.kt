@@ -40,7 +40,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import soup.movie.resources.R
+import soup.movie.core.designsystem.icon.MovieIcons
 
 @Composable
 internal fun ContentLoadingProgressBar(
@@ -92,7 +92,7 @@ internal fun ContentLoadingProgressBar(
                     )
             )
             Icon(
-                painter = painterResource(R.drawable.ic_loading_logo),
+                painter = painterResource(MovieIcons.LoadingLogo),
                 contentDescription = null,
                 tint = MaterialTheme.colors.onSurface,
             )
