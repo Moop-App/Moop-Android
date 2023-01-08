@@ -30,7 +30,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -41,7 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ShareCompat
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.theme.detailShareDim
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.deeplink.FirebaseLink
 import soup.movie.feature.deeplink.KakaoLink
 import soup.movie.model.MovieModel
@@ -64,7 +63,7 @@ internal fun DetailShare(
             )
             .fillMaxSize()
             .systemBarsPadding()
-            .background(color = MaterialTheme.colors.detailShareDim)
+            .background(color = MovieTheme.colors.dim)
             .padding(horizontal = 16.dp)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.End,

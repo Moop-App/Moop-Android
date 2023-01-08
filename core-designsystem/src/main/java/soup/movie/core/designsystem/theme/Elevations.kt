@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.home.favorite
+package soup.movie.core.designsystem.theme
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import soup.movie.core.designsystem.theme.MovieTheme
-import soup.movie.feature.home.textUnit
 
-@Composable
-fun MovieDDayTag(
-    text: String,
-    modifier: Modifier = Modifier
-) {
-    MovieTextTag(
-        text = text,
-        tagBackgroundColor = MovieTheme.colors.tagDDay,
-        modifier = modifier,
-        fontSize = 12.dp.textUnit
-    )
-}
+@Immutable
+data class Elevations(
+    val card: Dp = 0.dp,
+    val bottomSheet: Dp = 0.dp,
+)
+
+internal val LocalElevations = staticCompositionLocalOf { Elevations() }

@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import soup.movie.core.designsystem.theme.MovieTheme
 
 @Composable
 internal fun MovieTextTag(
@@ -43,13 +43,13 @@ internal fun MovieTextTag(
         modifier = modifier
             .size(width = 36.dp, height = 18.dp)
             .background(color = tagBackgroundColor, shape = RoundedCornerShape(5.dp))
-            .border(1.dp, MaterialTheme.colors.background, shape = RoundedCornerShape(5.dp)),
+            .border(1.dp, MovieTheme.colors.background, shape = RoundedCornerShape(5.dp)),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
             modifier = Modifier.wrapContentHeight(),
-            color = MaterialTheme.colors.background,
+            color = MovieTheme.colors.background,
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,

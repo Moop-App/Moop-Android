@@ -29,7 +29,6 @@ import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
@@ -44,6 +43,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import soup.movie.core.designsystem.icon.MovieIcons
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.domain.movie.getDDayLabel
 import soup.movie.domain.movie.isBest
 import soup.movie.domain.movie.isDDay
@@ -97,8 +97,8 @@ private fun MovieItem(
     CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
         Surface(
             modifier = modifier,
-            color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f),
-            shape = MaterialTheme.shapes.medium,
+            color = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
+            shape = MovieTheme.shapes.medium,
             elevation = 0.dp
         ) {
             Box {
@@ -153,12 +153,12 @@ fun NoMovieItems(
         Image(
             MovieIcons.ViewModule,
             contentDescription = null,
-            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
+            colorFilter = ColorFilter.tint(color = MovieTheme.colors.onBackground),
             modifier = Modifier.size(72.dp)
         )
         Text(
             text = stringResource(R.string.no_movies_description),
-            color = MaterialTheme.colors.onBackground
+            color = MovieTheme.colors.onBackground
         )
     }
 }

@@ -19,7 +19,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
@@ -33,8 +32,7 @@ import androidx.compose.ui.unit.sp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.EntryChip
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.theme.cgvBg
-import soup.movie.core.designsystem.theme.cgvText
+import soup.movie.core.designsystem.theme.MovieTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -60,7 +58,7 @@ internal fun CgvFilterChip(
                         .padding(end = ChipDefaults.ChipEndPadding)
                         .padding(end = 4.dp),
                     colorFilter = ColorFilter.tint(
-                        if (checked) MaterialTheme.colors.cgvText
+                        if (checked) MovieTheme.colors.onCgv
                         else Color(0x66000000)
                     )
                 )
@@ -71,8 +69,8 @@ internal fun CgvFilterChip(
             enabled = enabled,
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             colors = ChipDefaults.filterChipColors(
-                checkedBackgroundColor = MaterialTheme.colors.cgvBg,
-                checkedContentColor = MaterialTheme.colors.cgvText,
+                checkedBackgroundColor = MovieTheme.colors.cgv,
+                checkedContentColor = MovieTheme.colors.onCgv,
                 uncheckedBackgroundColor = Color(0x55FFFFFF),
                 uncheckedContentColor = Color(0x66000000)
             )

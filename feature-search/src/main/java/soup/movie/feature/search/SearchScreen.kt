@@ -29,13 +29,11 @@ import androidx.compose.material.AppBarDefaults
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -55,6 +53,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.tab.MovieList
 import soup.movie.feature.home.tab.NoMovieItems
 import soup.movie.model.MovieModel
@@ -71,11 +70,11 @@ fun SearchScreen(
         topBar = {
             Surface(
                 modifier = Modifier.fillMaxWidth().height(56.dp),
-                color = MaterialTheme.colors.primarySurface,
+                color = MovieTheme.colors.primarySurface,
                 elevation = AppBarDefaults.TopAppBarElevation
             ) {
                 val focusManager = LocalFocusManager.current
-                val handleColor = MaterialTheme.colors.secondary
+                val handleColor = MovieTheme.colors.secondary
                 val contentAlpha = ContentAlpha.medium
                 val customTextSelectionColors = remember(handleColor, contentAlpha) {
                     TextSelectionColors(
@@ -125,13 +124,13 @@ fun SearchScreen(
                             }
                         },
                         colors = TextFieldDefaults.textFieldColors(
-                            cursorColor = MaterialTheme.colors.secondary,
+                            cursorColor = MovieTheme.colors.secondary,
                             backgroundColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent,
                             disabledIndicatorColor = Color.Transparent,
-                            leadingIconColor = MaterialTheme.colors.onSurface,
-                            trailingIconColor = MaterialTheme.colors.onSurface
+                            leadingIconColor = MovieTheme.colors.onSurface,
+                            trailingIconColor = MovieTheme.colors.onSurface
                         )
                     )
                 }

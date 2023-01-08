@@ -19,7 +19,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
@@ -32,10 +31,7 @@ import androidx.compose.ui.unit.dp
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.theme.cgvBg
-import soup.movie.core.designsystem.theme.cgvText
-import soup.movie.core.designsystem.theme.lotteText
-import soup.movie.core.designsystem.theme.megaboxText
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.model.TheaterModel
 import soup.movie.model.TheaterTypeModel
 
@@ -90,14 +86,14 @@ private fun CgvFilterChip(
                 Image(
                     MovieIcons.Check,
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.cgvText),
+                    colorFilter = ColorFilter.tint(MovieTheme.colors.onCgv),
                 )
             },
             enabled = enabled,
             border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             colors = ChipDefaults.filterChipColors(
-                checkedBackgroundColor = MaterialTheme.colors.cgvBg,
-                checkedContentColor = MaterialTheme.colors.cgvText,
+                checkedBackgroundColor = MovieTheme.colors.cgv,
+                checkedContentColor = MovieTheme.colors.onCgv,
                 uncheckedBackgroundColor = Color(0x55FFFFFF),
                 uncheckedContentColor = Color(0x66000000)
             )
@@ -128,7 +124,7 @@ private fun LotteFilterChip(
                     MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
-                        MaterialTheme.colors.lotteText.copy(alpha = 0.4f)
+                        MovieTheme.colors.onLotte.copy(alpha = 0.4f)
                     ),
                 )
             },
@@ -136,7 +132,7 @@ private fun LotteFilterChip(
                 Image(
                     MovieIcons.Check,
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.lotteText),
+                    colorFilter = ColorFilter.tint(MovieTheme.colors.onLotte),
                 )
             },
             enabled = enabled,
@@ -173,7 +169,7 @@ private fun MegaboxFilterChip(
                     MovieIcons.Check,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
-                        MaterialTheme.colors.megaboxText.copy(alpha = 0.4f)
+                        MovieTheme.colors.onMegabox.copy(alpha = 0.4f)
                     ),
                 )
             },
@@ -181,7 +177,7 @@ private fun MegaboxFilterChip(
                 Image(
                     MovieIcons.Check,
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.megaboxText),
+                    colorFilter = ColorFilter.tint(MovieTheme.colors.onMegabox),
                 )
             },
             enabled = enabled,

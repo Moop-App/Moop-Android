@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
@@ -41,11 +40,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.icon.MovieIcons
+import soup.movie.core.designsystem.theme.MovieTheme
 
 @Composable
 internal fun ContentLoadingProgressBar(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    backgroundColor: Color = MovieTheme.colors.surface,
     contentColor: Color = contentColorFor(backgroundColor),
     shape: Shape = CircleShape,
     elevation: Dp = 12.dp,
@@ -84,8 +84,8 @@ internal fun ContentLoadingProgressBar(
                         brush = Brush.sweepGradient(
                             listOf(
                                 Color.Transparent,
-                                MaterialTheme.colors.onSurface,
-                                MaterialTheme.colors.onSurface
+                                MovieTheme.colors.onSurface,
+                                MovieTheme.colors.onSurface
                             )
                         ),
                         shape = CircleShape
@@ -94,7 +94,7 @@ internal fun ContentLoadingProgressBar(
             Icon(
                 painter = painterResource(MovieIcons.LoadingLogo),
                 contentDescription = null,
-                tint = MaterialTheme.colors.onSurface,
+                tint = MovieTheme.colors.onSurface,
             )
         }
     }

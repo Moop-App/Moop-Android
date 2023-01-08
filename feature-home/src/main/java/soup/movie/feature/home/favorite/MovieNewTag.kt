@@ -15,16 +15,11 @@
  */
 package soup.movie.feature.home.favorite
 
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.textUnit
-
-private val Colors.tagNew: Color
-    get() = Color(0xFFF44336)
 
 @Composable
 fun MovieNewTag(
@@ -32,7 +27,7 @@ fun MovieNewTag(
 ) {
     MovieTextTag(
         text = "NEW",
-        tagBackgroundColor = MaterialTheme.colors.tagNew,
+        tagBackgroundColor = MovieTheme.colors.tagNew,
         modifier = modifier,
         fontSize = 11.dp.textUnit
     )

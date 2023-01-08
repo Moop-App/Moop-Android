@@ -33,7 +33,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberBottomSheetScaffoldState
@@ -53,6 +52,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.filter.HomeFilterScreen
 import soup.movie.feature.home.now.HomeNowList
 import soup.movie.feature.home.plan.HomePlanList
@@ -106,7 +106,7 @@ internal fun HomeScreen(
     BottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 0.dp,
-        sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
+        sheetElevation = MovieTheme.elevations.bottomSheet,
         sheetContent = {
             HomeFilterScreen(viewModel = hiltViewModel())
         },
@@ -128,7 +128,7 @@ internal fun HomeScreen(
                                     modifier = Modifier
                                         .padding(horizontal = 16.dp)
                                         .requiredSize(2.dp, 16.dp),
-                                    color = MaterialTheme.colors.onSurface,
+                                    color = MovieTheme.colors.onSurface,
                                 )
                             }
                             val selected = selectedTab == homeTab
@@ -139,9 +139,9 @@ internal fun HomeScreen(
                             Text(
                                 text = text,
                                 color = if (selected) {
-                                    MaterialTheme.colors.onSurface
+                                    MovieTheme.colors.onSurface
                                 } else {
-                                    MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                                    MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
                                 },
                                 modifier = Modifier
                                     .clickable {

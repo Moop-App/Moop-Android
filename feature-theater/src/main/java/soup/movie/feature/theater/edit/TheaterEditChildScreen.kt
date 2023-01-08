@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.showToast
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.theater.TheaterFilterChip
 import soup.movie.model.TheaterModel
 import soup.movie.resources.R
@@ -116,8 +116,8 @@ private fun TheaterAreaItem(
             text = title,
             modifier = Modifier.padding(all = 8.dp),
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.onBackground,
-            style = MaterialTheme.typography.subtitle1
+            color = MovieTheme.colors.onBackground,
+            style = MovieTheme.typography.subtitle1
         )
         FlowRow(mainAxisSpacing = 8.dp, modifier = Modifier.padding(all = 4.dp)) {
             theaterList.forEach { item ->
