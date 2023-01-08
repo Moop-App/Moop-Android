@@ -15,20 +15,19 @@
  */
 package soup.movie.ui.main
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.R
 import soup.movie.config.Config
 import soup.movie.config.RemoteConfig
+import soup.movie.core.designsystem.theme.MovieTheme
+import soup.movie.core.designsystem.windowsizeclass.calculateWindowSizeClass
 import soup.movie.feature.deeplink.FirebaseLink
 import soup.movie.feature.deeplink.KakaoLink
 import soup.movie.feature.work.LegacyWorker
@@ -40,24 +39,18 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(newBase)
-        SplitCompat.installActivity(this)
-    }
-
-    override fun applyOverrideConfiguration(overrideConfiguration: Configuration?) {
-        // https://issuetracker.google.com/issues/147937971
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
-            return
-        }
-        super.applyOverrideConfiguration(overrideConfiguration)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Moop)
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        setContentView(R.layout.main_activity)
+        setContent {
+            MovieTheme {
+                MainNavGraph(
+                    mainViewModel = viewModel,
+                    widthSizeClass = calculateWindowSizeClass(this).widthSizeClass,
+                )
+            }
+        }
 
         // TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true

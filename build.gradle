@@ -27,7 +27,6 @@ buildscript {
         classpath libs.kotlin.pluginGradle
         classpath libs.kotlin.serializationPluginGradle
         classpath libs.dagger.hilt.pluginGradle
-        classpath libs.androidx.navigation.safeArgsPluginGradle
         classpath libs.google.pluginGradle
         classpath libs.firebase.crashlytics.pluginGradle
         classpath libs.firebase.perf.pluginGradle

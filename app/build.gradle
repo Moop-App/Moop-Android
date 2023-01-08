@@ -3,7 +3,6 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
-    id "androidx.navigation.safeargs.kotlin"
 }
 if (file("google-services.json").exists()) {
     apply plugin: 'com.google.gms.google-services'
@@ -61,7 +60,6 @@ android {
                     filesAuthority     : filesAuthorityValue,
                     crashlytics_enabled: false
             ]
-            buildConfigField("boolean", "USE_FAKE_SPLIT", "Boolean.parseBoolean(\"${project.hasProperty("useFakeSplit")}\")")
         }
         benchmark {
             if (useReleaseKeystore) {
@@ -78,7 +76,6 @@ android {
                     filesAuthority     : filesAuthorityValue,
                     crashlytics_enabled: true
             ]
-            buildConfigField("boolean", "USE_FAKE_SPLIT", "false")
         }
         release {
             if (useReleaseKeystore) {
@@ -87,7 +84,7 @@ android {
                 signingConfig signingConfigs.debug
             }
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'proguard-rules-navigation.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             def filesAuthorityValue = 'soup.movie.shareprovider'
             buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
@@ -95,7 +92,6 @@ android {
                     filesAuthority     : filesAuthorityValue,
                     crashlytics_enabled: true
             ]
-            buildConfigField("boolean", "USE_FAKE_SPLIT", "false")
         }
     }
     testOptions {
@@ -106,7 +102,6 @@ android {
     lint {
         checkReleaseBuilds false
     }
-    dynamicFeatures = [":theatermap"]
 }
 
 dependencies {
@@ -122,6 +117,7 @@ dependencies {
     implementation project(":feature-detail")
     implementation project(":feature-search")
     implementation project(":feature-theater")
+    implementation project(":feature-theatermap")
     implementation project(":feature-settings")
     implementation project(":feature-theme")
     implementation project(":feature-work")
@@ -149,9 +145,6 @@ dependencies {
     implementation libs.androidx.lifecycle.compiler
 
     implementation libs.androidx.navigation.compose
-    implementation libs.androidx.navigation.fragment
-    implementation libs.androidx.navigation.ui
-    implementation libs.androidx.navigation.dynamicFeaturesFragment
 
     implementation libs.androidx.work.runtime
 
@@ -190,41 +183,3 @@ dependencyGuard {
     // All dependencies included in Production Release APK
     configuration("releaseRuntimeClasspath")
 }
-
-task buildNavigationProguard {
-    def navigationGraphXml = project.file("src/main/res/navigation/nav_graph.xml")
-    def proguardRules= project.file("proguard-rules-navigation.pro")
-    doLast {
-
-        // XmlParser didn't work so let me use the dirty hack
-        if (!navigationGraphXml.text.contains("xmlns:app=\"http://schemas.android.com/apk/res-auto\"")) {
-            throw new GradleScriptException("the namespace has been changed from app")
-        }
-
-        def fqdns = []
-
-        navigationGraphXml.eachLine {
-            def line = it.trim()
-
-            if (line.startsWith("android:name=\"")) {
-                def className = line.substring("android:name=\"".length(), line.lastIndexOf("\""))
-
-                if (className.contains(".")) {
-                    fqdns << className
-                }
-            } else if (line.startsWith("app:argType=\"")) {
-                def className = line.substring("app:argType=\"".length(), line.lastIndexOf("\""))
-
-                if (className.contains(".")) {
-                    fqdns << className
-                }
-            }
-        }
-
-        proguardRules.write(fqdns.sort().collect {
-            "-keepnames class $it"
-        }.join("\n"))
-    }
-}
-
-preBuild.dependsOn(buildNavigationProguard)

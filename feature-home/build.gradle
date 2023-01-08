@@ -3,7 +3,6 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "org.jetbrains.kotlin.kapt"
     id "dagger.hilt.android.plugin"
-    id "androidx.navigation.safeargs.kotlin"
 }
 
 apply from: rootProject.file('gradle/android.gradle')
@@ -27,6 +26,7 @@ dependencies {
     implementation project(":data-repository-api")
     implementation project(':data-model')
     implementation project(":domain")
+    implementation project(":feature-theatermap")
     implementation project(":feature-settings")
     implementation libs.timber
 
