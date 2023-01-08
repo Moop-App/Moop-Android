@@ -10,6 +10,5 @@ android {
 }
 
 dependencies {
-    implementation libs.timber
     implementation libs.kotlin.stdlib
 }
