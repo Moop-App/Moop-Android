@@ -107,7 +107,7 @@ android {
 dependencies {
     implementation project(":core-ads")
     implementation project(":core-analytics")
-    implementation project(":core-appupdate")
+    implementation project(":core-appupdate-api")
     implementation project(":core-common")
     implementation project(":core-designsystem")
     implementation project(":core-imageloading")
@@ -126,6 +126,7 @@ dependencies {
     runtimeOnly project(":data-database-impl")
     runtimeOnly project(":data-repository-impl")
     runtimeOnly project(":data-settings-impl")
+    runtimeOnly project(":core-appupdate-impl")
     implementation libs.timber
 
     implementation libs.kotlin.stdlib
@@ -136,9 +137,6 @@ dependencies {
     implementation libs.androidx.activity.ktx
     implementation libs.androidx.fragment
     implementation libs.androidx.startup
-
-    implementation libs.google.play.featureDelivery
-    implementation libs.google.play.appUpdate
 
     implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation libs.androidx.lifecycle.runtime

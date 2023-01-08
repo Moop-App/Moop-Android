@@ -134,8 +134,6 @@ com.google.android.gms:play-services-tasks:18.0.2
 com.google.android.play:app-update-ktx:2.0.1
 com.google.android.play:app-update:2.0.1
 com.google.android.play:core-common:2.0.2
-com.google.android.play:feature-delivery-ktx:2.0.1
-com.google.android.play:feature-delivery:2.0.1
 com.google.android.ump:user-messaging-platform:2.0.0
 com.google.code.findbugs:jsr305:3.0.2
 com.google.code.gson:gson:2.8.9
