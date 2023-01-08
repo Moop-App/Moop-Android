@@ -15,20 +15,11 @@
  */
 package soup.movie.feature.home.favorite
 
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.textUnit
-
-private val Colors.tagBest: Color
-    get() = if (isLight) {
-        Color(0xFFFF9800)
-    } else {
-        Color(0xFFFFB74D)
-    }
 
 @Composable
 fun MovieBestTag(
@@ -36,7 +27,7 @@ fun MovieBestTag(
 ) {
     MovieTextTag(
         text = "BEST",
-        tagBackgroundColor = MaterialTheme.colors.tagBest,
+        tagBackgroundColor = MovieTheme.colors.tagBest,
         modifier = modifier,
         fontSize = 11.dp.textUnit
     )

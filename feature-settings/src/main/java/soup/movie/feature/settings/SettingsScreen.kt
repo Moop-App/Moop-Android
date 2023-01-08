@@ -37,7 +37,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -56,7 +55,7 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.UnelevatedButton
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.theme.divider
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.core.external.Cgv
 import soup.movie.core.external.LotteCinema
@@ -121,7 +120,7 @@ internal fun SettingsScreen(
                     Icon(
                         MovieIcons.NewReleases,
                         contentDescription = null,
-                        tint = MaterialTheme.colors.error
+                        tint = MovieTheme.colors.error
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(text = stringResource(R.string.settings_version_update_title))
@@ -132,7 +131,7 @@ internal fun SettingsScreen(
                 TextButton(
                     onClick = { Moop.executePlayStore(context) },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colors.secondary
+                        contentColor = MovieTheme.colors.secondary
                     ),
                 ) {
                     Text(text = stringResource(R.string.settings_version_update_button_positive))
@@ -142,7 +141,7 @@ internal fun SettingsScreen(
                 TextButton(
                     onClick = { viewModel.showVersionUpdateDialog = false },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colors.secondary
+                        contentColor = MovieTheme.colors.secondary
                     ),
                 ) {
                     Text(text = stringResource(R.string.settings_version_update_button_negative))
@@ -180,7 +179,7 @@ private fun SettingsThemeItem(
                 Icon(
                     MovieIcons.Palette,
                     contentDescription = null,
-                    tint = MaterialTheme.colors.onBackground,
+                    tint = MovieTheme.colors.onBackground,
                 )
             }
         }
@@ -190,14 +189,14 @@ private fun SettingsThemeItem(
                 onClick = { debounce(onClick) },
                 modifier = Modifier.fillMaxSize(),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MaterialTheme.colors.surface
+                    backgroundColor = MovieTheme.colors.surface
                 )
             ) {
                 Text(
                     text = text,
                     modifier = Modifier.fillMaxWidth(),
                     fontSize = 17.sp,
-                    style = MaterialTheme.typography.body2
+                    style = MovieTheme.typography.body2
                 )
             }
         }
@@ -228,7 +227,7 @@ private fun SettingsTheaterItem(
                 Icon(
                     MovieIcons.Edit,
                     contentDescription = null,
-                    tint = MaterialTheme.colors.onBackground,
+                    tint = MovieTheme.colors.onBackground,
                 )
             }
         }
@@ -238,7 +237,7 @@ private fun SettingsTheaterItem(
                 Text(
                     text = stringResource(R.string.settings_theater_empty_description),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.body2
+                    style = MovieTheme.typography.body2
                 )
             } else {
                 FlowRow(mainAxisSpacing = 8.dp) {
@@ -276,7 +275,7 @@ private fun SettingsVersionItem(
                         }
                     }.orEmpty(),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.body2
+                    style = MovieTheme.typography.body2
                 )
             }
             IconButton(
@@ -290,13 +289,13 @@ private fun SettingsVersionItem(
                     Icon(
                         MovieIcons.Shop,
                         contentDescription = null,
-                        tint = MaterialTheme.colors.onSurface,
+                        tint = MovieTheme.colors.onSurface,
                     )
                 } else {
                     Icon(
                         MovieIcons.NewReleases,
                         contentDescription = null,
-                        tint = MaterialTheme.colors.onError,
+                        tint = MovieTheme.colors.onError,
                     )
                 }
             }
@@ -321,13 +320,13 @@ private fun SettingsFeedbackItem(
                 Text(
                     text = "개발자에게 버그 신고하기",
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.body2
+                    style = MovieTheme.typography.body2
                 )
             }
             Icon(
                 MovieIcons.BugReport,
                 contentDescription = null,
-                tint = MaterialTheme.colors.onSurface,
+                tint = MovieTheme.colors.onSurface,
                 modifier = Modifier
                     .padding(end = 16.dp)
                     .align(Alignment.CenterEnd)
@@ -344,7 +343,7 @@ private fun SettingsCategory(
     Text(
         text = text,
         modifier = modifier.fillMaxWidth(),
-        color = MaterialTheme.colors.onBackground,
+        color = MovieTheme.colors.onBackground,
         fontSize = 17.sp,
         fontWeight = FontWeight.Bold
     )
@@ -352,7 +351,7 @@ private fun SettingsCategory(
 
 @Composable
 private fun SettingsDivider() {
-    Divider(color = MaterialTheme.colors.divider)
+    Divider(color = MovieTheme.colors.divider)
 }
 
 @Composable
@@ -367,8 +366,8 @@ private fun SettingsButton(
         modifier = modifier,
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.onSurface.copy(alpha = 0.1f),
-            disabledBackgroundColor = MaterialTheme.colors.onSurface.copy(alpha = 0.05f)
+            backgroundColor = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
+            disabledBackgroundColor = MovieTheme.colors.onSurface.copy(alpha = 0.05f)
         ),
         content = content
     )

@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -35,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.icon.MovieIcons
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
 
 @Composable
@@ -61,7 +61,7 @@ internal fun DetailError(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(horizontal = 16.dp),
-            style = MaterialTheme.typography.h6,
+            style = MovieTheme.typography.h6,
             textAlign = TextAlign.Center,
         )
         TextButton(
@@ -70,7 +70,7 @@ internal fun DetailError(
         ) {
             Text(
                 text = stringResource(R.string.common_retry),
-                color = MaterialTheme.colors.secondary,
+                color = MovieTheme.colors.secondary,
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
         }

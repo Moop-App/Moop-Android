@@ -33,7 +33,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -51,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.icon.MovieIcons
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theater.draggableItem
@@ -119,11 +119,11 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .width(48.dp)
                 .height(68.dp),
-            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
+            colorFilter = ColorFilter.tint(color = MovieTheme.colors.onBackground),
         )
         Text(
             stringResource(R.string.theater_empty_description),
-            color = MaterialTheme.colors.onBackground,
+            color = MovieTheme.colors.onBackground,
             modifier = Modifier.padding(8.dp)
         )
     }
@@ -163,7 +163,7 @@ private fun TheaterSortReorderList(
                         .width(48.dp)
                         .fillMaxHeight()
                         .draggableItem(index, draggableListState),
-                    colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground),
+                    colorFilter = ColorFilter.tint(color = MovieTheme.colors.onBackground),
                 )
             }
         }

@@ -32,7 +32,6 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.NavigationRail
 import androidx.compose.material.NavigationRailItem
 import androidx.compose.material.Scaffold
@@ -48,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.favorite.HomeFavoriteList
 import soup.movie.feature.settings.SettingsNavGraph
@@ -212,8 +212,8 @@ private fun CompactScreen(
                                 onTabSelected(tab)
                             }
                         },
-                        selectedContentColor = MaterialTheme.colors.secondary,
-                        unselectedContentColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                        selectedContentColor = MovieTheme.colors.secondary,
+                        unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
                     )
                 }
             }
@@ -293,8 +293,8 @@ private fun MediumScreen(
                             onTabSelected(tab)
                         }
                     },
-                    selectedContentColor = MaterialTheme.colors.secondary,
-                    unselectedContentColor = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                    selectedContentColor = MovieTheme.colors.secondary,
+                    unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
                 )
             }
         }

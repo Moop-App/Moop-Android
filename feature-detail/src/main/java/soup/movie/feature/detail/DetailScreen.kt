@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -35,6 +34,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.external.YouTube
 import soup.movie.core.external.executeWeb
 import soup.movie.resources.R
@@ -102,7 +102,7 @@ internal fun DetailScreen(
                         text = buildAnnotatedString {
                             withStyle(
                                 SpanStyle(
-                                    color = MaterialTheme.colors.secondary,
+                                    color = MovieTheme.colors.secondary,
                                     textDecoration = TextDecoration.Underline,
                                 )
                             ) {
@@ -118,7 +118,7 @@ internal fun DetailScreen(
                 TextButton(
                     onClick = { showPrivacyDialog = false },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colors.secondary
+                        contentColor = MovieTheme.colors.secondary
                     ),
                 ) {
                     Text(text = stringResource(R.string.trailer_dialog_button))

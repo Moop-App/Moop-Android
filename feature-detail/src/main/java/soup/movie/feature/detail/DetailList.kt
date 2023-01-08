@@ -45,10 +45,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Chip
 import androidx.compose.material.ChipDefaults
-import androidx.compose.material.Colors
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -69,26 +67,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.core.ads.NativeAd
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.theme.cgvBg
-import soup.movie.core.designsystem.theme.cgvText
-import soup.movie.core.designsystem.theme.lotteBg
-import soup.movie.core.designsystem.theme.lotteText
-import soup.movie.core.designsystem.theme.megaboxBg
-import soup.movie.core.designsystem.theme.megaboxText
-import soup.movie.core.designsystem.theme.naver
-import soup.movie.core.designsystem.theme.star
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.external.executeWeb
 import soup.movie.resources.R
-
-private val Colors.detailCardElevation: Dp
-    get() = if (isLight) 10.dp else 1.dp
 
 @Composable
 internal fun DetailList(
@@ -200,8 +187,8 @@ private fun BoxOffice(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier.padding(top = 12.dp, bottom = 14.dp).fillMaxWidth(),
@@ -212,28 +199,28 @@ private fun BoxOffice(
             ) {
                 Text(
                     text = "박스오피스",
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     modifier = Modifier.alpha(0.7f),
                 )
                 Text(
                     text = stringResource(R.string.rank, uiModel.rank),
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.subtitle1,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.subtitle1,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 2.dp),
                 )
                 Text(
                     text = stringResource(R.string.rank_date, uiModel.rankDate),
-                    color = MaterialTheme.colors.surface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.surface,
+                    style = MovieTheme.typography.body2,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .background(
-                            color = MaterialTheme.colors.onSurface,
+                            color = MovieTheme.colors.onSurface,
                             shape = RoundedCornerShape(percent = 50)
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
@@ -245,28 +232,28 @@ private fun BoxOffice(
             ) {
                 Text(
                     text = "누적 관객수",
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     modifier = Modifier.alpha(0.7f),
                 )
                 Text(
                     text = stringResource(R.string.audience, uiModel.audience),
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.subtitle1,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.subtitle1,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 2.dp),
                 )
                 Text(
                     text = stringResource(R.string.screen_days, uiModel.screenDays),
-                    color = MaterialTheme.colors.surface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.surface,
+                    style = MovieTheme.typography.body2,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .background(
-                            color = MaterialTheme.colors.onSurface,
+                            color = MovieTheme.colors.onSurface,
                             shape = RoundedCornerShape(percent = 50)
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
@@ -278,8 +265,8 @@ private fun BoxOffice(
             ) {
                 Text(
                     text = "평점",
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     modifier = Modifier.alpha(0.7f),
                 )
                 Row(
@@ -289,8 +276,8 @@ private fun BoxOffice(
                     StarIcon(modifier = Modifier.requiredSize(16.dp))
                     Text(
                         text = uiModel.rating,
-                        color = MaterialTheme.colors.onSurface,
-                        style = MaterialTheme.typography.subtitle1,
+                        color = MovieTheme.colors.onSurface,
+                        style = MovieTheme.typography.subtitle1,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         maxLines = 1,
@@ -300,14 +287,14 @@ private fun BoxOffice(
                 }
                 Text(
                     text = "NAVER",
-                    color = MaterialTheme.colors.surface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onNaver,
+                    style = MovieTheme.typography.body2,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .background(
-                            color = MaterialTheme.colors.naver,
+                            color = MovieTheme.colors.naver,
                             shape = RoundedCornerShape(percent = 50)
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
@@ -329,8 +316,8 @@ private fun Cgv(
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 12.dp, end = 4.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Column(
             modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
@@ -339,14 +326,14 @@ private fun Cgv(
             Chip(
                 onClick = onClick,
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = MaterialTheme.colors.cgvBg,
-                    contentColor = MaterialTheme.colors.cgvText,
+                    backgroundColor = MovieTheme.colors.cgv,
+                    contentColor = MovieTheme.colors.onCgv,
                 ),
                 border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
             ) {
                 Text(
                     text = "CGV",
-                    style = MaterialTheme.typography.body2,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                 )
             }
@@ -357,8 +344,8 @@ private fun Cgv(
                 StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
                 )
@@ -379,8 +366,8 @@ private fun Lotte(
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Column(
             modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
@@ -389,13 +376,13 @@ private fun Lotte(
             Chip(
                 onClick = onClick,
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = MaterialTheme.colors.lotteBg,
-                    contentColor = MaterialTheme.colors.lotteText,
+                    backgroundColor = MovieTheme.colors.lotte,
+                    contentColor = MovieTheme.colors.onLotte,
                 ),
             ) {
                 Text(
                     text = "롯데시네마",
-                    style = MaterialTheme.typography.body2,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                 )
             }
@@ -406,8 +393,8 @@ private fun Lotte(
                 StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
                 )
@@ -428,8 +415,8 @@ private fun Megabox(
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 4.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Column(
             modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
@@ -438,13 +425,13 @@ private fun Megabox(
             Chip(
                 onClick = onClick,
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = MaterialTheme.colors.megaboxBg,
-                    contentColor = MaterialTheme.colors.megaboxText,
+                    backgroundColor = MovieTheme.colors.megabox,
+                    contentColor = MovieTheme.colors.onMegabox,
                 ),
             ) {
                 Text(
                     text = "메가박스",
-                    style = MaterialTheme.typography.body2,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                 )
             }
@@ -455,8 +442,8 @@ private fun Megabox(
                 StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
                 )
@@ -475,8 +462,8 @@ private fun Plot(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp).fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -491,8 +478,8 @@ private fun Plot(
                     text = "줄거리",
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.subtitle2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.subtitle2,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 8.dp),
                 )
@@ -502,8 +489,8 @@ private fun Plot(
             ReadMoreText(
                 text = uiModel.plot,
                 expanded = isExpanded,
-                color = MaterialTheme.colors.onSurface,
-                style = MaterialTheme.typography.body2,
+                color = MovieTheme.colors.onSurface,
+                style = MovieTheme.typography.body2,
                 modifier = Modifier
                     .clickable {
                         isExpanded = !isExpanded
@@ -512,7 +499,7 @@ private fun Plot(
                     .fillMaxWidth()
                     .animateContentSize(animationSpec = tween(durationMillis = 100)),
                 readMoreText = "더보기",
-                readMoreColor = MaterialTheme.colors.secondary,
+                readMoreColor = MovieTheme.colors.secondary,
                 readMoreFontWeight = FontWeight.Bold,
                 readMoreMaxLines = 3,
             )
@@ -529,8 +516,8 @@ private fun Naver(
     Card(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier.padding(vertical = 4.dp),
@@ -540,13 +527,13 @@ private fun Naver(
                 onClick = onClick,
                 modifier = Modifier.padding(horizontal = 12.dp),
                 colors = ChipDefaults.chipColors(
-                    backgroundColor = MaterialTheme.colors.naver,
+                    backgroundColor = MovieTheme.colors.naver,
                     contentColor = Color.White,
                 )
             ) {
                 Text(
                     text = "네이버",
-                    style = MaterialTheme.typography.body2,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                 )
             }
@@ -558,8 +545,8 @@ private fun Naver(
                 StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp),
                 )
@@ -570,7 +557,7 @@ private fun Naver(
             ) {
                 Text(
                     text = "자세히보기",
-                    color = MaterialTheme.colors.secondary,
+                    color = MovieTheme.colors.secondary,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
@@ -592,8 +579,8 @@ private fun Imdb(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
@@ -611,8 +598,8 @@ private fun Imdb(
                 )
                 Text(
                     text = uiModel.imdb,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 6.dp),
                 )
@@ -647,8 +634,8 @@ private fun Imdb(
                     }
                     Text(
                         text = uiModel.rottenTomatoes,
-                        color = MaterialTheme.colors.onSurface,
-                        style = MaterialTheme.typography.body2,
+                        color = MovieTheme.colors.onSurface,
+                        style = MovieTheme.typography.body2,
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(top = 6.dp),
@@ -668,8 +655,8 @@ private fun Imdb(
                 )
                 Text(
                     text = uiModel.metascore,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.body2,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 6.dp),
                 )
@@ -710,8 +697,8 @@ private fun Person(
         onClick = onClick,
         modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -720,16 +707,16 @@ private fun Person(
             Text(
                 text = uiModel.name,
                 maxLines = 1,
-                color = MaterialTheme.colors.onSurface,
-                style = MaterialTheme.typography.subtitle2,
+                color = MovieTheme.colors.onSurface,
+                style = MovieTheme.typography.subtitle2,
                 fontWeight = FontWeight.Bold,
             )
             if (uiModel.cast.isNotEmpty()) {
                 Text(
                     text = uiModel.cast,
                     maxLines = 1,
-                    color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.subtitle2,
+                    color = MovieTheme.colors.onSurface,
+                    style = MovieTheme.typography.subtitle2,
                 )
             }
         }
@@ -744,8 +731,8 @@ private fun TrailerHeader(
     Card(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
@@ -760,8 +747,8 @@ private fun TrailerHeader(
             Text(
                 text = stringResource(R.string.trailer_search_result, uiModel.movieTitle),
                 maxLines = 1,
-                color = MaterialTheme.colors.onSurface,
-                style = MaterialTheme.typography.subtitle2,
+                color = MovieTheme.colors.onSurface,
+                style = MovieTheme.typography.subtitle2,
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(start = 4.dp).weight(1f),
@@ -775,7 +762,7 @@ private fun TrailerHeader(
                     contentDescription = null,
                     modifier = Modifier.requiredSize(18.dp),
                     contentScale = ContentScale.Inside,
-                    colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onSurface),
+                    colorFilter = ColorFilter.tint(color = MovieTheme.colors.onSurface),
                 )
             }
         }
@@ -792,8 +779,8 @@ private fun TrailerItem(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RectangleShape,
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier
@@ -803,7 +790,7 @@ private fun TrailerItem(
         ) {
             AsyncImage(
                 uiModel.trailer.thumbnailUrl,
-                placeholder = ColorPainter(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)),
+                placeholder = ColorPainter(color = MovieTheme.colors.onSurface.copy(alpha = 0.1f)),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -815,14 +802,14 @@ private fun TrailerItem(
             ) {
                 Text(
                     text = uiModel.trailer.title,
-                    style = MaterialTheme.typography.body2,
+                    style = MovieTheme.typography.body2,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(top = 2.dp)
                 )
                 Text(
                     text = uiModel.trailer.author,
-                    style = MaterialTheme.typography.caption,
+                    style = MovieTheme.typography.caption,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(top = 4.dp)
@@ -841,8 +828,8 @@ private fun TrailerFooter(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 16.dp),
         shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         Box(
             modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
@@ -850,7 +837,7 @@ private fun TrailerFooter(
         ) {
             Text(
                 text = "더보기",
-                color = MaterialTheme.colors.secondary,
+                color = MovieTheme.colors.secondary,
                 fontWeight = FontWeight.Bold,
             )
         }
@@ -864,8 +851,8 @@ private fun DetailAd(
     Card(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = MaterialTheme.colors.detailCardElevation,
+        backgroundColor = MovieTheme.colors.surface,
+        elevation = MovieTheme.elevations.card,
     ) {
         NativeAd(uiModel.adInfo)
     }
@@ -876,7 +863,7 @@ private fun StarIcon(modifier: Modifier = Modifier) {
     Image(
         MovieIcons.Star,
         contentDescription = null,
-        colorFilter = ColorFilter.tint(MaterialTheme.colors.star),
+        colorFilter = ColorFilter.tint(MovieTheme.colors.star),
         modifier = modifier,
     )
 }

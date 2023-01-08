@@ -32,7 +32,6 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -67,7 +66,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.theme.divider
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.model.TheaterModel
@@ -117,7 +116,7 @@ fun TheaterEditScreen(
                 indicator = { tabPositions ->
                     TabRowDefaults.Indicator(
                         modifier = Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
-                        color = MaterialTheme.colors.secondary
+                        color = MovieTheme.colors.secondary
                     )
                 },
                 modifier = Modifier.shadow(elevation = 4.dp)
@@ -131,14 +130,14 @@ fun TheaterEditScreen(
                                 pagerState.animateScrollToPage(index)
                             }
                         },
-                        selectedContentColor = MaterialTheme.colors.secondary,
-                        unselectedContentColor = MaterialTheme.colors.onBackground
+                        selectedContentColor = MovieTheme.colors.secondary,
+                        unselectedContentColor = MovieTheme.colors.onBackground
                     )
                 }
             }
         },
         sheetPeekHeight = 60.dp,
-        sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
+        sheetElevation = if (MovieTheme.colors.isLight) 16.dp else 0.dp,
         sheetContent = {
             val uiModel by viewModel.footerUiModel.collectAsState(
                 TheaterEditFooterUiModel(emptyList())
@@ -187,7 +186,7 @@ fun TheaterEditScreen(
             )
             if (viewState is TheaterEditContentUiModel.LoadingState) {
                 CircularProgressIndicator(
-                    color = MaterialTheme.colors.secondary,
+                    color = MovieTheme.colors.secondary,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
@@ -240,7 +239,7 @@ private fun TheaterEditFooterPeek(
                 .padding(horizontal = 16.dp)
                 .weight(1f),
             fontSize = 14.sp,
-            color = MaterialTheme.colors.onSurface
+            color = MovieTheme.colors.onSurface
         )
         Surface(
             onClick = { debounce(onConfirmClick) },
@@ -248,7 +247,7 @@ private fun TheaterEditFooterPeek(
                 .padding(end = 8.dp)
                 .requiredSize(100.dp, 36.dp),
             shape = RoundedCornerShape(percent = 50),
-            color = if (isFull) MaterialTheme.colors.error else MaterialTheme.colors.secondary
+            color = if (isFull) MovieTheme.colors.error else MovieTheme.colors.secondary
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
@@ -286,13 +285,13 @@ private fun TheaterEditFooterContents(
             .fillMaxWidth()
             .requiredHeight(180.dp)
     ) {
-        Divider(color = MaterialTheme.colors.divider)
+        Divider(color = MovieTheme.colors.divider)
         if (theaterList.isEmpty()) {
             Text(
                 text = stringResource(R.string.theater_empty_description),
                 modifier = Modifier.align(Alignment.Center),
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.body2
+                style = MovieTheme.typography.body2
             )
         } else {
             FlowRow(

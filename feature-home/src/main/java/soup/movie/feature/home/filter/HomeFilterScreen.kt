@@ -32,7 +32,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -53,7 +52,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import soup.metronome.material.chip.ChipDefaults
 import soup.metronome.material.chip.FilterChip
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.theme.divider
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
 
 @Composable
@@ -85,7 +84,7 @@ internal fun HomeFilterScreen(
 @Composable
 private fun HomeFilterDivider() {
     Divider(
-        color = MaterialTheme.colors.divider,
+        color = MovieTheme.colors.divider,
         modifier = Modifier.padding(horizontal = 16.dp)
     )
 }
@@ -94,7 +93,7 @@ private fun HomeFilterDivider() {
 private fun HomeFilterCategory(text: String) {
     Text(
         text = text,
-        color = MaterialTheme.colors.onBackground,
+        color = MovieTheme.colors.onBackground,
         fontSize = 17.sp,
         fontWeight = FontWeight.Bold
     )

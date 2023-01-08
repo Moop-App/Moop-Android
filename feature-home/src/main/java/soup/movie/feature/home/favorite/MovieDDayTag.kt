@@ -15,20 +15,11 @@
  */
 package soup.movie.feature.home.favorite
 
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.textUnit
-
-private val Colors.tagDDay: Color
-    get() = if (isLight) {
-        Color(0xFF9E9E9E)
-    } else {
-        Color(0xFFE0E0E0)
-    }
 
 @Composable
 fun MovieDDayTag(
@@ -37,7 +28,7 @@ fun MovieDDayTag(
 ) {
     MovieTextTag(
         text = text,
-        tagBackgroundColor = MaterialTheme.colors.tagDDay,
+        tagBackgroundColor = MovieTheme.colors.tagDDay,
         modifier = modifier,
         fontSize = 12.dp.textUnit
     )

@@ -32,7 +32,6 @@ import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberBottomSheetScaffoldState
@@ -72,6 +71,7 @@ import com.naver.maps.map.compose.rememberMarkerState
 import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.icon.MovieIcons
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.external.Cgv
 import soup.movie.core.external.LotteCinema
 import soup.movie.core.external.Megabox
@@ -113,7 +113,7 @@ fun TheaterMapScreen(
         modifier = Modifier.systemBarsPadding(),
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 0.dp,
-        sheetElevation = if (MaterialTheme.colors.isLight) 16.dp else 0.dp,
+        sheetElevation = MovieTheme.elevations.bottomSheet,
         sheetContent = {
             TheaterMapFooter(
                 selectedTheater = viewModel.selectedTheater,
@@ -146,7 +146,7 @@ private fun TheaterMapContents(
     selectedTheater: TheaterMarkerUiModel?,
     onTheaterClick: (TheaterMarkerUiModel) -> Unit,
     modifier: Modifier = Modifier,
-    isLightTheme: Boolean = MaterialTheme.colors.isLight,
+    isLightTheme: Boolean = MovieTheme.colors.isLight,
     onMapClick: () -> Unit = {},
     onMapLoaded: () -> Unit = {},
 ) {
