@@ -7,14 +7,6 @@ buildscript {
             'versionCode': 106,
             'versionName': "1.0.6",
     ]
-    ext.firebase = [
-            'analytics'   : "com.google.firebase:firebase-analytics-ktx",
-            'config'      : "com.google.firebase:firebase-config-ktx",
-            'crashlytics' : "com.google.firebase:firebase-crashlytics-ktx",
-            'dynamicLinks': "com.google.firebase:firebase-dynamic-links-ktx",
-            'messaging'   : "com.google.firebase:firebase-messaging-ktx",
-            'perf'        : "com.google.firebase:firebase-perf-ktx",
-    ]
     repositories {
         google()
         mavenCentral()

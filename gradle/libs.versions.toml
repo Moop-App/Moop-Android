@@ -131,6 +131,12 @@ google-play-appUpdate = "com.google.android.play:app-update-ktx:2.0.1"
 google-ads = "com.google.android.gms:play-services-ads:21.3.0"
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version = "31.1.0" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-config = { module = "com.google.firebase:firebase-config-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-dynamicLinks = { module = "com.google.firebase:firebase-dynamic-links-ktx" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
 firebase-crashlytics-pluginGradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "2.9.2" }
 firebase-perf-pluginGradle = { module = "com.google.firebase:perf-plugin", version = "1.4.2" }
 
