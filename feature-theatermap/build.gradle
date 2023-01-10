@@ -19,12 +19,12 @@ android {
 
 dependencies {
     implementation project(":core-common")
-    implementation project(":core-resources")
     implementation project(":core-designsystem")
     implementation project(":core-external")
+    implementation project(":core-log")
+    implementation project(":core-resources")
     implementation project(":data-repository-api")
-    implementation project(':data-model')
-    implementation libs.timber
+    implementation project(":data-model")
 
     implementation libs.androidx.fragment
 

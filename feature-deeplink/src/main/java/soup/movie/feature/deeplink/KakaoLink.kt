@@ -22,7 +22,7 @@ import com.kakao.sdk.share.ShareClient
 import com.kakao.sdk.template.model.Content
 import com.kakao.sdk.template.model.FeedTemplate
 import com.kakao.sdk.template.model.Link
-import timber.log.Timber
+import soup.movie.log.Logger
 
 // TODO: Make this class to private
 object KakaoLink {
@@ -57,7 +57,7 @@ object KakaoLink {
         ShareClient.instance.shareDefault(context, defaultFeed) { sharingResult, error ->
             if (error != null) {
                 Toast.makeText(context, "실행할 앱을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
-                Timber.e(error)
+                Logger.e(error)
             } else if (sharingResult != null) {
                 context.startActivity(sharingResult.intent)
             }

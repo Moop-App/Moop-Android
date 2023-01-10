@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.util
+package soup.movie.log
 
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import timber.log.Timber
 
-class CrashlyticsTree : Timber.Tree() {
+class CrashlyticsTree : Logger.Tree {
 
     private val crashlytics = FirebaseCrashlytics.getInstance()
 

@@ -23,9 +23,10 @@ android {
 }
 
 dependencies {
-    implementation project(':data-model')
+    implementation project(":core-common")
+    implementation project(":core-log")
+    implementation project(":data-model")
     implementation project(":data-database-api")
-    implementation libs.timber
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization

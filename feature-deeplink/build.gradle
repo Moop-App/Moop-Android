@@ -10,7 +10,7 @@ android {
 }
 
 dependencies {
-    implementation libs.timber
+    implementation project(":core-log")
 
     implementation libs.kotlin.stdlib
 

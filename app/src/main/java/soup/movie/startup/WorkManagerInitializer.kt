@@ -52,6 +52,6 @@ class WorkManagerInitializer : Initializer<WorkManager> {
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
-        return listOf(TimberInitializer::class.java)
+        return listOf(LoggerInitializer::class.java)
     }
 }

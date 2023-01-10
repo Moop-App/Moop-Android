@@ -36,12 +36,12 @@ import soup.movie.data.repository.MovieRepository
 import soup.movie.domain.movie.MM_DD
 import soup.movie.domain.movie.screenDays
 import soup.movie.domain.movie.yesterday
+import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
 import soup.movie.model.TheaterRatingsModel
 import soup.movie.resources.R
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -80,7 +80,7 @@ class DetailViewModel @Inject constructor(
             val adInfo = adsManager.getLoadedNativeAd()
             renderDetail(detail, adInfo)
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             _uiModel.emit(DetailUiModel.Failure)
         }
     }

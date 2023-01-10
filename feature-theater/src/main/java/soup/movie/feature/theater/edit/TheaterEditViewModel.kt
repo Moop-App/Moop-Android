@@ -23,9 +23,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
+import soup.movie.log.Logger
 import soup.movie.model.TheaterAreaModel
 import soup.movie.model.TheaterModel
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,7 +40,7 @@ class TheaterEditViewModel @Inject constructor(
             manager.loadAsync()
             emit(TheaterEditContentUiModel.DoneState)
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             emit(TheaterEditContentUiModel.ErrorState)
         }
     }

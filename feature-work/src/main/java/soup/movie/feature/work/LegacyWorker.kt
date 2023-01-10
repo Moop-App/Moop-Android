@@ -32,8 +32,8 @@ import soup.movie.data.repository.MovieRepository
 import soup.movie.domain.movie.currentTime
 import soup.movie.domain.movie.isBest
 import soup.movie.domain.movie.plusDaysTo
+import soup.movie.log.Logger
 import soup.movie.model.MovieModel
-import timber.log.Timber
 import java.time.DayOfWeek
 import java.time.temporal.ChronoUnit
 import java.util.concurrent.TimeUnit
@@ -47,7 +47,7 @@ class LegacyWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        Timber.d("doWork: start!")
+        Logger.d("doWork: start!")
         return try {
             val movieList = getRecommendedMovieList()
             if (movieList.isNotEmpty()) {
@@ -55,7 +55,7 @@ class LegacyWorker @AssistedInject constructor(
             }
             Result.success()
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             if (runAttemptCount <= 3) {
                 Result.retry()
             } else {

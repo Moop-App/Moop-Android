@@ -18,16 +18,17 @@ package soup.movie.startup
 import android.content.Context
 import androidx.startup.Initializer
 import soup.movie.BuildConfig
-import soup.movie.util.CrashlyticsTree
-import timber.log.Timber
+import soup.movie.log.CrashlyticsTree
+import soup.movie.log.DebugTree
+import soup.movie.log.Logger
 
-class TimberInitializer : Initializer<Unit> {
+class LoggerInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+            Logger.plant(DebugTree())
         } else {
-            Timber.plant(CrashlyticsTree())
+            Logger.plant(CrashlyticsTree())
         }
     }
 

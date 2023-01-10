@@ -27,8 +27,8 @@ import soup.movie.feature.theatermap.internal.CgvMarkerUiModel
 import soup.movie.feature.theatermap.internal.LotteCinemaMarkerUiModel
 import soup.movie.feature.theatermap.internal.MegaboxMarkerUiModel
 import soup.movie.feature.theatermap.internal.TheaterMarkerUiModel
+import soup.movie.log.Logger
 import soup.movie.model.TheaterAreaGroupModel
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -68,7 +68,7 @@ class TheaterMapViewModel @Inject constructor(
         return try {
             repository.getCodeList().toTheaterList()
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             emptyList()
         }
     }

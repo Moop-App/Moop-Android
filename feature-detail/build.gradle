@@ -24,13 +24,13 @@ dependencies {
     implementation project(":core-designsystem")
     implementation project(":core-external")
     implementation project(":core-imageloading")
+    implementation project(":core-log")
     implementation project(":core-resources")
     implementation project(":data-repository-api")
-    implementation project(':data-model')
+    implementation project(":data-model")
     implementation project(":domain")
     implementation project(":feature-deeplink")
     implementation project(":feature-home")
-    implementation libs.timber
 
     implementation libs.kotlin.stdlib
 

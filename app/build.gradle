@@ -111,6 +111,7 @@ dependencies {
     implementation project(":core-common")
     implementation project(":core-designsystem")
     implementation project(":core-imageloading")
+    implementation project(":core-log")
     implementation project(":data-repository-api")
     implementation project(':data-model')
     implementation project(":feature-home")
@@ -127,7 +128,6 @@ dependencies {
     runtimeOnly project(":data-repository-impl")
     runtimeOnly project(":data-settings-impl")
     runtimeOnly project(":core-appupdate-impl")
-    implementation libs.timber
 
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core

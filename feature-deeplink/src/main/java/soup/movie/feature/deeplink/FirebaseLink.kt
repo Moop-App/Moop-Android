@@ -20,7 +20,7 @@ import android.net.Uri
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.ShortDynamicLink
-import timber.log.Timber
+import soup.movie.log.Logger
 
 // TODO: Make this class to private
 object FirebaseLink {
@@ -40,7 +40,7 @@ object FirebaseLink {
                 onResult(null)
             }
             .addOnFailureListener {
-                Timber.w(it)
+                Logger.w(it)
                 onResult(null)
             }
     }
@@ -76,7 +76,7 @@ object FirebaseLink {
                 it.shortLink?.let { link -> onResult(link) }
             }
             .addOnFailureListener {
-                Timber.w(it)
+                Logger.w(it)
             }
     }
 }

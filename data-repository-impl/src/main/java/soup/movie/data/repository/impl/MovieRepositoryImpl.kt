@@ -24,10 +24,10 @@ import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.response.asModel
 import soup.movie.data.repository.MovieRepository
 import soup.movie.data.repository.impl.util.SearchHelper
+import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
-import timber.log.Timber
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -50,7 +50,7 @@ class MovieRepositoryImpl @Inject constructor(
         val isStaleness = try {
             local.getNowLastUpdateTime() < remote.getNowLastUpdateTime()
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             true
         }
         if (isStaleness) {
@@ -74,7 +74,7 @@ class MovieRepositoryImpl @Inject constructor(
             val isStaleness = try {
                 local.getPlanLastUpdateTime() < remote.getPlanLastUpdateTime()
             } catch (t: Throwable) {
-                Timber.w(t)
+                Logger.w(t)
                 true
             }
             if (isStaleness) {
@@ -97,7 +97,7 @@ class MovieRepositoryImpl @Inject constructor(
                 .toSet()
                 .toList()
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             emptyList()
         }
     }

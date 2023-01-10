@@ -31,8 +31,8 @@ import soup.movie.domain.movie.YYYY_MM_DD
 import soup.movie.domain.movie.currentTime
 import soup.movie.domain.movie.plusDaysTo
 import soup.movie.domain.movie.today
+import soup.movie.log.Logger
 import soup.movie.model.OpenDateAlarmModel
-import timber.log.Timber
 import java.time.DayOfWeek
 import java.time.temporal.ChronoUnit
 import java.util.concurrent.TimeUnit
@@ -47,7 +47,7 @@ class OpenDateAlarmWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        Timber.d("doWork: start!")
+        Logger.d("doWork: start!")
         return try {
             if (repository.hasOpenDateAlarms()) {
                 val alarms = getOpeningDateAlarmList()
@@ -57,7 +57,7 @@ class OpenDateAlarmWorker @AssistedInject constructor(
             }
             Result.success()
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             if (runAttemptCount <= 3) {
                 Result.retry()
             } else {

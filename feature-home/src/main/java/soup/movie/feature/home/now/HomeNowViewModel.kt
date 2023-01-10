@@ -27,8 +27,8 @@ import kotlinx.coroutines.launch
 import soup.movie.data.repository.MovieRepository
 import soup.movie.data.settings.AppSettings
 import soup.movie.feature.home.domain.getMovieFilterFlow
+import soup.movie.log.Logger
 import soup.movie.model.MovieModel
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -79,7 +79,7 @@ class HomeNowViewModel @Inject constructor(
             _isLoading.emit(false)
             _isError.emit(false)
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             _isLoading.emit(false)
             _isError.emit(true)
         }

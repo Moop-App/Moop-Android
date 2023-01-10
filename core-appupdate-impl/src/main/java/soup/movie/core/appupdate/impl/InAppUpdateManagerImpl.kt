@@ -22,7 +22,7 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import soup.movie.core.appupdate.InAppUpdateManager
-import timber.log.Timber
+import soup.movie.log.Logger
 import kotlin.coroutines.suspendCoroutine
 
 class InAppUpdateManagerImpl(
@@ -38,7 +38,7 @@ class InAppUpdateManagerImpl(
                 appUpdateManager.requestAppUpdateInfo()
                     .availableVersionCode()
             } catch (e: Exception) {
-                Timber.w(e)
+                Logger.w(e)
                 InAppUpdateManager.UNKNOWN_VERSION_CODE
             }
         }

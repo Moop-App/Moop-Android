@@ -23,9 +23,8 @@ dependencies {
     implementation project(":core-designsystem")
     implementation project(":core-resources")
     implementation project(":data-repository-api")
-    implementation project(':data-model')
+    implementation project(":data-model")
     implementation project(":feature-home")
-    implementation libs.timber
 
     implementation libs.compose.foundation
     implementation libs.compose.material
