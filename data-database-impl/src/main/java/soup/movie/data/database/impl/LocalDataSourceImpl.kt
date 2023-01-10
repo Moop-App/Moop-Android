@@ -31,11 +31,11 @@ import soup.movie.data.database.impl.mapper.toMovie
 import soup.movie.data.database.impl.mapper.toMovieEntity
 import soup.movie.data.database.impl.mapper.toOpenDateAlarm
 import soup.movie.data.database.impl.mapper.toOpenDateAlarmEntity
+import soup.movie.log.Logger
 import soup.movie.model.MovieListModel
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
 import soup.movie.model.TheaterAreaGroupModel
-import timber.log.Timber
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
@@ -106,7 +106,7 @@ class LocalDataSourceImpl @Inject constructor(
             cacheDao.findByType(type).list
                 .map { movieEntity -> movieEntity.toMovie() }
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             emptyList()
         }
     }

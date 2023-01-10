@@ -29,7 +29,7 @@ import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import soup.movie.data.repository.MovieRepository
-import timber.log.Timber
+import soup.movie.log.Logger
 import java.util.concurrent.TimeUnit
 
 @HiltWorker
@@ -40,14 +40,14 @@ class OpenDateSyncWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        Timber.d("doWork: start!")
+        Logger.d("doWork: start!")
         return try {
             if (repository.hasOpenDateAlarms()) {
                 repository.updatePlanMovieList()
             }
             Result.success()
         } catch (t: Throwable) {
-            Timber.w(t)
+            Logger.w(t)
             if (runAttemptCount <= 3) {
                 Result.retry()
             } else {

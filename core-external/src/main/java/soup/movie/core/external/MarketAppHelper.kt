@@ -20,7 +20,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import timber.log.Timber
+import soup.movie.log.Logger
 
 private fun Context.executePlayStoreForApp(pkgName: String) {
     try {
@@ -31,7 +31,7 @@ private fun Context.executePlayStoreForApp(pkgName: String) {
             )
         )
     } catch (e: ActivityNotFoundException) {
-        Timber.w(e)
+        Logger.w(e)
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
@@ -88,7 +88,7 @@ object YouTube {
         try {
             ctx.startActivity(createTrailerAppIntent(youtubeId))
         } catch (e: ActivityNotFoundException) {
-            Timber.w(e)
+            Logger.w(e)
             ctx.startActivitySafely(
                 createTrailerWebIntent(youtubeId)
             )
@@ -118,7 +118,7 @@ object YouTube {
         try {
             ctx.startActivity(createSearchAppIntent(query))
         } catch (e: ActivityNotFoundException) {
-            Timber.w(e)
+            Logger.w(e)
             ctx.startActivitySafely(
                 createSearchWebIntent(
                     query

@@ -30,6 +30,6 @@ class CoilInitializer : Initializer<Unit> {
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
-        return listOf(TimberInitializer::class.java)
+        return listOf(LoggerInitializer::class.java)
     }
 }

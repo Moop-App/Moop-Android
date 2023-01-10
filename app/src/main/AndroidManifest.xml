@@ -91,7 +91,7 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="soup.movie.startup.TimberInitializer"
+                android:name="soup.movie.startup.LoggerInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="soup.movie.startup.CoilInitializer"

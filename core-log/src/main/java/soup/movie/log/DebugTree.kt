@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.log
 
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.data.repository.TheaterRepository
+import timber.log.Timber
 
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface TheaterMapModuleDependencies {
+class DebugTree : Logger.Tree {
+    private val delegate = Timber.DebugTree()
 
-    fun provideTheaterRepository(): TheaterRepository
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+        delegate.log(priority, tag, message, t)
+    }
 }

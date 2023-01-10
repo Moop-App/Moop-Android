@@ -21,6 +21,7 @@ dependencies {
     implementation project(":core-analytics")
     implementation project(":core-common")
     implementation project(":core-designsystem")
+    implementation project(":core-log")
     implementation project(":core-resources")
     implementation project(":data-settings-api")
     implementation project(":data-repository-api")
@@ -28,7 +29,6 @@ dependencies {
     implementation project(":domain")
     implementation project(":feature-theatermap")
     implementation project(":feature-settings")
-    implementation libs.timber
 
     implementation libs.kotlin.stdlib
 

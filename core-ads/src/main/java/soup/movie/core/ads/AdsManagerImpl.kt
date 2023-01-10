@@ -30,7 +30,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.IoDispatcher
-import timber.log.Timber
+import soup.movie.log.Logger
 import javax.inject.Inject
 
 @SuppressLint("MissingPermission")
@@ -54,7 +54,7 @@ class AdsManagerImpl @Inject constructor(
     }
 
     override fun getLoadedNativeAd(): NativeAdInfo? {
-        Timber.d("getLoadedNativeAd: state=$state")
+        Logger.d("getLoadedNativeAd: state=$state")
         return lastNativeAd?.let { NativeAdInfo(it) }
     }
 
@@ -68,11 +68,11 @@ class AdsManagerImpl @Inject constructor(
                 .forNativeAd {
                     lastNativeAd = it
                     state = State.LOADED
-                    Timber.d("loadNextNativeAd: State.LOADED")
+                    Logger.d("loadNextNativeAd: State.LOADED")
                 }
                 .withAdListener(object : AdListener() {
                     override fun onAdFailedToLoad(error: LoadAdError) {
-                        Timber.w("onAdFailedToLoad: errorCode=${error.code}")
+                        Logger.w("onAdFailedToLoad: errorCode=${error.code}")
                     }
                 })
                 .build()
@@ -81,7 +81,7 @@ class AdsManagerImpl @Inject constructor(
     }
 
     override fun onNativeAdConsumed() {
-        Timber.d("onNativeAdConsumed: State.CONSUMED")
+        Logger.d("onNativeAdConsumed: State.CONSUMED")
         state = State.CONSUMED
     }
 }

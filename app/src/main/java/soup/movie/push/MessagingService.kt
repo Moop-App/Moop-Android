@@ -21,22 +21,22 @@ import android.content.Intent
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import soup.movie.R
+import soup.movie.log.Logger
 import soup.movie.notification.NotificationSpecs
 import soup.movie.notification.NotificationSpecs.TYPE_EVENT
 import soup.movie.notification.NotificationSpecs.TYPE_NOTICE
 import soup.movie.ui.main.MainActivity
-import timber.log.Timber
 
 class MessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(s: String) {
-        Timber.d("onNewToken: token=$s")
+        Logger.d("onNewToken: token=$s")
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Timber.d("onMessageReceived: from=${remoteMessage.from}")
+        Logger.d("onMessageReceived: from=${remoteMessage.from}")
         val data = remoteMessage.data
-        Timber.d("Message data payload: $data")
+        Logger.d("Message data payload: $data")
         val type: String? = data["type"]
         val title: String? = data["title"]
         val text: String? = data["text"]
