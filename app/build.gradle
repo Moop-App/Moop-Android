@@ -154,12 +154,12 @@ dependencies {
     implementation libs.coil.runtime
 
     implementation platform(libs.firebase.bom)
-    implementation firebase.analytics
-    implementation firebase.config
-    implementation firebase.crashlytics
-    implementation firebase.messaging
-    implementation firebase.dynamicLinks
-    implementation firebase.perf
+    implementation libs.firebase.analytics
+    implementation libs.firebase.config
+    implementation libs.firebase.crashlytics
+    implementation libs.firebase.messaging
+    implementation libs.firebase.dynamicLinks
+    implementation libs.firebase.perf
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.navigation.compose

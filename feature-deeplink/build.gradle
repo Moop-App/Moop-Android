@@ -15,7 +15,7 @@ dependencies {
     implementation libs.kotlin.stdlib
 
     implementation platform(libs.firebase.bom)
-    implementation firebase.dynamicLinks
+    implementation libs.firebase.dynamicLinks
 
     implementation libs.kakaoLink
 }
