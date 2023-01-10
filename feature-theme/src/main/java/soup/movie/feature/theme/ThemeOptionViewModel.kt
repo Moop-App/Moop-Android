@@ -31,12 +31,12 @@ class ThemeOptionViewModel @Inject constructor(
         private set
 
     init {
-        items = themeOptionManager
-            .getOptions()
-            .map { ThemeSettingItemUiModel(it) }
-    }
-
-    fun onItemClick(item: ThemeSettingItemUiModel) {
-        themeOptionManager.apply(item.themeOption)
+        items = themeOptionManager.getOptions().map { themeOption ->
+            ThemeSettingItemUiModel(themeOption = themeOption).apply {
+                onItemClick = {
+                    themeOptionManager.apply(themeOption)
+                }
+            }
+        }
     }
 }
