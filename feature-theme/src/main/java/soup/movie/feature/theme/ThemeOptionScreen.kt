@@ -45,7 +45,6 @@ fun ThemeOptionScreen(
     ) { paddingValues ->
         ThemeOptionList(
             items = viewModel.items,
-            onItemClick = { viewModel.onItemClick(it) },
             modifier = Modifier.padding(paddingValues)
         )
     }
@@ -54,7 +53,6 @@ fun ThemeOptionScreen(
 @Composable
 private fun ThemeOptionList(
     items: List<ThemeSettingItemUiModel>,
-    onItemClick: (ThemeSettingItemUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -63,15 +61,14 @@ private fun ThemeOptionList(
             .verticalScroll(rememberScrollState())
     ) {
         items.forEach {
-            ThemeOptionItem(it, onItemClick)
+            ThemeOptionItem(it)
         }
     }
 }
 
 @Composable
 private fun ThemeOptionItem(
-    item: ThemeSettingItemUiModel,
-    onItemClick: (ThemeSettingItemUiModel) -> Unit,
+    uiModel: ThemeSettingItemUiModel,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -79,11 +76,11 @@ private fun ThemeOptionItem(
         modifier = modifier
             .fillMaxWidth()
             .height(60.dp)
-            .clickable { debounce { onItemClick(item) } }
+            .clickable { debounce { uiModel.onItemClick() } }
             .padding(horizontal = 24.dp)
     ) {
         Text(
-            text = stringResource(stringResIdOf(item.themeOption)),
+            text = stringResource(stringResIdOf(uiModel.themeOption)),
             fontSize = 17.sp
         )
     }

@@ -15,9 +15,8 @@
  */
 package soup.movie.feature.theme
 
-import androidx.annotation.Keep
-
-@Keep
-class ThemeSettingItemUiModel(
-    val themeOption: ThemeOption
-)
+data class ThemeSettingItemUiModel(
+    val themeOption: ThemeOption,
+) {
+    var onItemClick: () -> Unit = {}
+}
