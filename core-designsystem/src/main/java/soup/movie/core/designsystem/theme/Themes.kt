@@ -36,7 +36,7 @@ private val LightMovieColors = lightMovieColors(
     )
 )
 
-private val DarkMovieColors = lightMovieColors(
+private val DarkMovieColors = darkMovieColors(
     material = darkColors(
         primary = Color.Black,
         primaryVariant = Color.Black,
