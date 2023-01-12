@@ -53,13 +53,7 @@ android {
             firebaseCrashlytics {
                 mappingFileUploadEnabled false
             }
-
-            def filesAuthorityValue = 'soup.movie.debug.shareprovider'
-            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
-            manifestPlaceholders = [
-                    filesAuthority     : filesAuthorityValue,
-                    crashlytics_enabled: false
-            ]
+            manifestPlaceholders = [crashlytics_enabled: false]
         }
         benchmark {
             if (useReleaseKeystore) {
@@ -69,13 +63,6 @@ android {
             }
             matchingFallbacks = ['release']
             debuggable false
-
-            def filesAuthorityValue = 'soup.movie.shareprovider'
-            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
-            manifestPlaceholders = [
-                    filesAuthority     : filesAuthorityValue,
-                    crashlytics_enabled: true
-            ]
         }
         release {
             if (useReleaseKeystore) {
@@ -85,13 +72,7 @@ android {
             }
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            def filesAuthorityValue = 'soup.movie.shareprovider'
-            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
-            manifestPlaceholders = [
-                    filesAuthority     : filesAuthorityValue,
-                    crashlytics_enabled: true
-            ]
+            manifestPlaceholders = [crashlytics_enabled: true]
         }
     }
     testOptions {
@@ -110,7 +91,6 @@ dependencies {
     implementation project(":core-appupdate-api")
     implementation project(":core-common")
     implementation project(":core-designsystem")
-    implementation project(":core-imageloading")
     implementation project(":core-log")
     implementation project(":data-repository-api")
     implementation project(':data-model')
@@ -128,6 +108,7 @@ dependencies {
     runtimeOnly project(":data-repository-impl")
     runtimeOnly project(":data-settings-impl")
     runtimeOnly project(":core-appupdate-impl")
+    runtimeOnly project(":core-imageloading-impl")
 
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core
@@ -150,8 +131,6 @@ dependencies {
     kapt libs.dagger.hilt.compiler
     implementation libs.androidx.hilt.work
     kapt libs.androidx.hilt.compiler
-
-    implementation libs.coil.runtime
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics

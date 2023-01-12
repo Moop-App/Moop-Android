@@ -69,12 +69,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.core.ads.NativeAd
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.external.executeWeb
+import soup.movie.core.imageloading.AsyncImage
 import soup.movie.resources.R
 
 @Composable

@@ -1,0 +1,36 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.core.imageloading.impl"
+    buildTypes {
+        debug {
+            def filesAuthorityValue = 'soup.movie.debug.shareprovider'
+            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
+            manifestPlaceholders = [filesAuthority: filesAuthorityValue]
+        }
+        release {
+            def filesAuthorityValue = 'soup.movie.shareprovider'
+            buildConfigField 'String', 'FILES_AUTHORITY', "\"${filesAuthorityValue}\""
+            manifestPlaceholders = [filesAuthority: filesAuthorityValue]
+        }
+    }
+}
+
+dependencies {
+    implementation project(":core-common")
+    implementation project(":core-imageloading-api")
+    implementation libs.timber
+    implementation libs.kotlin.stdlib
+
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+
+    implementation libs.androidx.startup
+    implementation libs.coil.runtime
+}

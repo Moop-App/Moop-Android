@@ -22,12 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter
 import kotlinx.coroutines.launch
 import soup.metronome.zoomable.ExperimentalZoomableApi
 import soup.metronome.zoomable.ZoomableBox
 import soup.metronome.zoomable.rememberZoomableState
+import soup.movie.core.imageloading.AsyncImage
 import soup.movie.model.MovieModel
 
 @OptIn(ExperimentalZoomableApi::class)
@@ -55,11 +54,8 @@ internal fun DetailPoster(
             movie.posterUrl,
             contentDescription = movie.title,
             modifier = Modifier.fillMaxSize(),
-            transform = {
-                if (it is AsyncImagePainter.State.Success) {
-                    zoomableState.contentIntrinsicSize = it.painter.intrinsicSize
-                }
-                it
+            onSuccess = {
+                zoomableState.contentIntrinsicSize = it.intrinsicSize
             }
         )
     }

@@ -21,6 +21,7 @@ dependencies {
     implementation project(":core-analytics")
     implementation project(":core-common")
     implementation project(":core-designsystem")
+    implementation project(":core-imageloading-api")
     implementation project(":core-log")
     implementation project(":core-resources")
     implementation project(":data-settings-api")
@@ -44,7 +45,6 @@ dependencies {
     implementation libs.accompanist.swiperefresh
     implementation libs.metronome.material
     implementation libs.metronome.visibility
-    implementation libs.coil.compose
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler

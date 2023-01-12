@@ -21,30 +21,17 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import soup.movie.ads.AdsConfigImpl
 import soup.movie.analytics.EventAnalyticsImpl
-import soup.movie.common.IoDispatcher
 import soup.movie.core.ads.AdsConfig
 import soup.movie.core.analytics.EventAnalytics
-import soup.movie.core.imageloading.ImageUriProvider
 import soup.movie.feature.work.NotificationBuilder
-import soup.movie.imageloading.ImageUriProviderImpl
 import soup.movie.notification.NotificationBuilderImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
-
-    @Singleton
-    @Provides
-    fun provideImageUriProvider(
-        @ApplicationContext context: Context,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher,
-    ): ImageUriProvider {
-        return ImageUriProviderImpl(context, ioDispatcher)
-    }
 
     @Singleton
     @Provides
