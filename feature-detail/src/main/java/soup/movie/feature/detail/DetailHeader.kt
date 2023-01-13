@@ -45,9 +45,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
+import soup.movie.core.imageloading.AsyncImage
 import soup.movie.domain.movie.getDDayLabel
 import soup.movie.domain.movie.isBest
 import soup.movie.domain.movie.isDDay

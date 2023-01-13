@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.startup
+package soup.movie.core.imageloading.impl
 
 import android.content.Context
 import androidx.startup.Initializer
@@ -30,6 +30,6 @@ class CoilInitializer : Initializer<Unit> {
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
-        return listOf(LoggerInitializer::class.java)
+        return emptyList()
     }
 }

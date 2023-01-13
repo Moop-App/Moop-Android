@@ -23,7 +23,7 @@ dependencies {
     implementation project(":core-common")
     implementation project(":core-designsystem")
     implementation project(":core-external")
-    implementation project(":core-imageloading")
+    implementation project(":core-imageloading-api")
     implementation project(":core-log")
     implementation project(":core-resources")
     implementation project(":data-repository-api")
@@ -43,7 +43,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
     implementation libs.compose.animation.graphics
-    implementation libs.coil.compose
     implementation libs.readmore.material
     implementation libs.materialMotionCompose.core
     implementation libs.metronome.zoomable

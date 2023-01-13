@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.core.imageloading.impl.di
 
 import android.content.Context
 import dagger.Module
@@ -21,35 +21,22 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import soup.movie.ads.AdsConfigImpl
-import soup.movie.analytics.EventAnalyticsImpl
-import soup.movie.core.ads.AdsConfig
-import soup.movie.core.analytics.EventAnalytics
-import soup.movie.feature.work.NotificationBuilder
-import soup.movie.notification.NotificationBuilderImpl
+import kotlinx.coroutines.CoroutineDispatcher
+import soup.movie.common.IoDispatcher
+import soup.movie.core.imageloading.ImageUriProvider
+import soup.movie.core.imageloading.impl.ImageUriProviderImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ApplicationModule {
+class CoreImageLoadingModule {
 
     @Singleton
     @Provides
-    fun provideEventAnalytics(
-        @ApplicationContext context: Context
-    ): EventAnalytics = EventAnalyticsImpl(context)
-
-    @Singleton
-    @Provides
-    fun provideAdsConfig(
+    fun provideImageUriProvider(
         @ApplicationContext context: Context,
-    ): AdsConfig {
-        return AdsConfigImpl(context)
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
+    ): ImageUriProvider {
+        return ImageUriProviderImpl(context, ioDispatcher)
     }
-
-    @Singleton
-    @Provides
-    fun provideNotificationBuilder(
-        @ApplicationContext context: Context
-    ): NotificationBuilder = NotificationBuilderImpl(context)
 }
