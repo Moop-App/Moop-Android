@@ -63,6 +63,7 @@ android {
             }
             matchingFallbacks = ['release']
             debuggable false
+            manifestPlaceholders = [crashlytics_enabled: true]
         }
         release {
             if (useReleaseKeystore) {
