@@ -23,39 +23,39 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.launch
-import soup.metronome.zoomable.ExperimentalZoomableApi
-import soup.metronome.zoomable.ZoomableBox
-import soup.metronome.zoomable.rememberZoomableState
+import soup.compose.photo.ExperimentalPhotoApi
+import soup.compose.photo.PhotoBox
+import soup.compose.photo.rememberPhotoState
 import soup.movie.core.imageloading.AsyncImage
 import soup.movie.model.MovieModel
 
-@OptIn(ExperimentalZoomableApi::class)
+@OptIn(ExperimentalPhotoApi::class)
 @Composable
 internal fun DetailPoster(
     movie: MovieModel,
     upPress: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val zoomableState = rememberZoomableState()
+    val photoState = rememberPhotoState()
     BackHandler {
         coroutineScope.launch {
-            if (zoomableState.isScaled) {
-                zoomableState.animateToInitialState()
+            if (photoState.isScaled) {
+                photoState.animateToInitialState()
             } else {
                 upPress()
             }
         }
     }
-    ZoomableBox(
+    PhotoBox(
         modifier = Modifier.background(Color.Black),
-        state = zoomableState,
+        state = photoState,
     ) {
         AsyncImage(
             movie.posterUrl,
             contentDescription = movie.title,
             modifier = Modifier.fillMaxSize(),
             onSuccess = {
-                zoomableState.contentIntrinsicSize = it.intrinsicSize
+                photoState.setPhotoIntrinsicSize(it.intrinsicSize)
             }
         )
     }

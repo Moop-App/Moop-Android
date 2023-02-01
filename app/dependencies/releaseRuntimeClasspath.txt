@@ -29,6 +29,7 @@ androidx.compose.ui:ui-text:1.4.0-alpha03
 androidx.compose.ui:ui-unit:1.4.0-alpha03
 androidx.compose.ui:ui-util:1.4.0-alpha03
 androidx.compose.ui:ui:1.4.0-alpha03
+androidx.compose:compose-bom:2023.01.00
 androidx.concurrent:concurrent-futures:1.0.0
 androidx.constraintlayout:constraintlayout-core:1.0.4
 androidx.constraintlayout:constraintlayout:2.1.4
@@ -103,7 +104,6 @@ androidx.work:work-runtime:2.7.1
 com.getkeepsafe.relinker:relinker:1.4.4
 com.github.fornewid.metronome:material:0.5.2
 com.github.fornewid.metronome:visibility:0.5.2
-com.github.fornewid.metronome:zoomable:0.5.2
 com.google.accompanist:accompanist-drawablepainter:0.28.0
 com.google.accompanist:accompanist-flowlayout:0.28.0
 com.google.accompanist:accompanist-pager-indicators:0.28.0
@@ -198,6 +198,7 @@ io.github.aakira:napier:1.4.1
 io.github.fornewid:material-motion-compose-core:0.10.3
 io.github.fornewid:material-motion-compose-navigation:0.10.3
 io.github.fornewid:naver-map-compose:1.3.1
+io.github.fornewid:photo-compose:1.0.0
 javax.inject:javax.inject:1
 org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.5.21
 org.jetbrains.kotlin:kotlin-parcelize-runtime:1.5.21
