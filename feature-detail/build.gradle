@@ -45,7 +45,7 @@ dependencies {
     implementation libs.compose.animation.graphics
     implementation libs.readmore.material
     implementation libs.materialMotionCompose.core
-    implementation libs.metronome.zoomable
+    implementation libs.photo
 
     testImplementation project(":testing")
     androidTestImplementation project(":testing")
