@@ -80,6 +80,10 @@ subprojects {
     }
 }
 
+dependencyGuard {
+    configuration("classpath")
+}
+
 Object propOrDef(String propertyName, Object defaultValue) {
     def properties = new Properties()
     def keyFile = rootProject.file("signing/key.properties")
