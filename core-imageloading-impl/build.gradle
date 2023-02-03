@@ -25,7 +25,6 @@ android {
 dependencies {
     implementation project(":core-common")
     implementation project(":core-imageloading-api")
-    implementation libs.timber
     implementation libs.kotlin.stdlib
 
     implementation libs.dagger.hilt.android

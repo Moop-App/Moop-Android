@@ -1,10 +1,10 @@
 [versions]
 
 # Kotlin
-kotlin = "1.7.21"
+kotlin = "1.8.0"
 coroutines = "1.6.4"
 serialization = "1.4.1"
-ksp = "1.7.21-1.0.8"
+ksp = "1.8.0-1.0.9"
 
 # Dagger
 dagger = "2.44.2"
@@ -18,13 +18,13 @@ room = "2.4.3"
 work = "2.7.1"
 
 # Compose
-compose = "1.4.0-alpha03"
-composeCompiler = "1.4.0-alpha02"
-accompanist = "0.28.0"
+compose = "1.4.0-alpha05"
+composeCompiler = "1.4.0"
+accompanist = "0.29.1-alpha"
 metronome = "0.5.2"
 navermapcompose = "1.3.1"
-readmore = "1.3.1"
-materialmotion = "0.10.3"
+readmore = "1.3.4"
+materialmotion = "0.10.4"
 photo = "1.0.0"
 
 # Etc
@@ -34,7 +34,7 @@ dependencyGuard = "0.3.2"
 
 [libraries]
 
-android-pluginGradle = "com.android.tools.build:gradle:7.3.1"
+android-pluginGradle = "com.android.tools.build:gradle:7.4.1"
 android-desugar-jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
 
 # Kotlin
@@ -64,12 +64,12 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 
-androidx-appcompat = "androidx.appcompat:appcompat:1.5.1"
+androidx-appcompat = "androidx.appcompat:appcompat:1.6.0"
 androidx-browser = "androidx.browser:browser:1.4.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-core = "androidx.core:core-ktx:1.9.0"
 androidx-datastore-preferences = "androidx.datastore:datastore-preferences:1.0.0"
-androidx-fragment = "androidx.fragment:fragment-ktx:1.5.4"
+androidx-fragment = "androidx.fragment:fragment-ktx:1.5.5"
 
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycle" }
@@ -132,7 +132,7 @@ google-pluginGradle = "com.google.gms:google-services:4.3.14"
 google-play-appUpdate = "com.google.android.play:app-update-ktx:2.0.1"
 google-ads = "com.google.android.gms:play-services-ads:21.3.0"
 
-firebase-bom = { module = "com.google.firebase:firebase-bom", version = "31.1.0" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version = "31.2.0" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-config = { module = "com.google.firebase:firebase-config-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
@@ -149,7 +149,7 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 retrofit-runtime = "com.squareup.retrofit2:retrofit:2.9.0"
 retrofit-serialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
-kakaoLink = "com.kakao.sdk:v2-share:2.11.2"
+kakaoLink = "com.kakao.sdk:v2-share:2.12.1"
 naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
 timber = "com.jakewharton.timber:timber:5.0.1"
 
