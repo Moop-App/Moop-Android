@@ -31,12 +31,9 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -52,7 +49,6 @@ import soup.movie.feature.home.favorite.MovieAgeBadge
 import soup.movie.feature.home.favorite.MovieBestTag
 import soup.movie.feature.home.favorite.MovieDDayTag
 import soup.movie.feature.home.favorite.MovieNewTag
-import soup.movie.feature.home.filter.rippleTheme
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -94,49 +90,47 @@ private fun MovieItem(
     onLongClick: (MovieModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
-        Surface(
-            modifier = modifier,
-            color = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
-            shape = MovieTheme.shapes.medium,
-            elevation = 0.dp
-        ) {
-            Box {
-                AsyncImage(
-                    movie.posterUrl,
-                    contentDescription = movie.title,
+    Surface(
+        modifier = modifier,
+        color = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
+        shape = MovieTheme.shapes.medium,
+        elevation = 0.dp
+    ) {
+        Box {
+            AsyncImage(
+                movie.posterUrl,
+                contentDescription = movie.title,
+                modifier = Modifier
+                    .aspectRatio(27 / 40f)
+                    .combinedClickable(
+                        onClick = { onClick(movie) },
+                        onLongClick = { onLongClick(movie) }
+                    ),
+                contentScale = ContentScale.Crop
+            )
+            MovieAgeBadge(
+                age = movie.age,
+                modifier = Modifier
+                    .padding(7.dp)
+                    .align(Alignment.BottomStart)
+            )
+            when {
+                movie.isDDay() -> MovieDDayTag(
+                    text = movie.getDDayLabel().orEmpty(),
                     modifier = Modifier
-                        .aspectRatio(27 / 40f)
-                        .combinedClickable(
-                            onClick = { onClick(movie) },
-                            onLongClick = { onLongClick(movie) }
-                        ),
-                    contentScale = ContentScale.Crop
+                        .padding(4.dp)
+                        .align(Alignment.BottomEnd)
                 )
-                MovieAgeBadge(
-                    age = movie.age,
+                movie.isBest() -> MovieBestTag(
                     modifier = Modifier
-                        .padding(7.dp)
-                        .align(Alignment.BottomStart)
+                        .padding(4.dp)
+                        .align(Alignment.BottomEnd)
                 )
-                when {
-                    movie.isDDay() -> MovieDDayTag(
-                        text = movie.getDDayLabel().orEmpty(),
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .align(Alignment.BottomEnd)
-                    )
-                    movie.isBest() -> MovieBestTag(
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .align(Alignment.BottomEnd)
-                    )
-                    movie.isNew() -> MovieNewTag(
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .align(Alignment.BottomEnd)
-                    )
-                }
+                movie.isNew() -> MovieNewTag(
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .align(Alignment.BottomEnd)
+                )
             }
         }
     }

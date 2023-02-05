@@ -35,7 +35,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
     implementation libs.accompanist.flowlayout
-    implementation libs.metronome.material
     implementation libs.materialMotionCompose.navigation
 
     implementation libs.dagger.hilt.android

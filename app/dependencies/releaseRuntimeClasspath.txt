@@ -102,7 +102,6 @@ androidx.window:window:1.1.0-alpha04
 androidx.work:work-runtime-ktx:2.7.1
 androidx.work:work-runtime:2.7.1
 com.getkeepsafe.relinker:relinker:1.4.4
-com.github.fornewid.metronome:material:0.5.2
 com.github.fornewid.metronome:visibility:0.5.2
 com.google.accompanist:accompanist-drawablepainter:0.29.1-alpha
 com.google.accompanist:accompanist-flowlayout:0.29.1-alpha

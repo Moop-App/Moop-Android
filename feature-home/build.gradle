@@ -43,7 +43,6 @@ dependencies {
     implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
     implementation libs.accompanist.swiperefresh
-    implementation libs.metronome.material
     implementation libs.metronome.visibility
 
     implementation libs.dagger.hilt.android
