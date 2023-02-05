@@ -16,20 +16,14 @@
 package soup.movie.feature.theater
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Chip
+import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import soup.metronome.material.chip.ActionChip
-import soup.metronome.material.chip.ChipDefaults
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.model.TheaterModel
@@ -64,22 +58,19 @@ private fun CgvChip(
     onClick: () -> Unit = {},
     enabled: Boolean = true
 ) {
-    CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color(0xFFBDBDBD))) {
-        ActionChip(
-            onClick = onClick,
-            enabled = enabled,
-            border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
-            colors = ChipDefaults.actionChipColors(
-                backgroundColor = Color.White,
-                contentColor = MovieTheme.colors.onCgv,
-            )
-        ) {
-            Text(
-                text = text,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(ChipDefaults.TextPadding)
-            )
-        }
+    Chip(
+        onClick = onClick,
+        enabled = enabled,
+        border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
+        colors = ChipDefaults.chipColors(
+            backgroundColor = Color.White,
+            contentColor = MovieTheme.colors.onCgv,
+        )
+    ) {
+        Text(
+            text = text,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
 
@@ -90,21 +81,18 @@ private fun LotteChip(
     onClick: () -> Unit = {},
     enabled: Boolean = true
 ) {
-    CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
-        ActionChip(
-            onClick = onClick,
-            enabled = enabled,
-            colors = ChipDefaults.actionChipColors(
-                backgroundColor = Color(0xFFED1D24),
-                contentColor = Color.White
-            )
-        ) {
-            Text(
-                text = text,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(ChipDefaults.TextPadding)
-            )
-        }
+    Chip(
+        onClick = onClick,
+        enabled = enabled,
+        colors = ChipDefaults.chipColors(
+            backgroundColor = Color(0xFFED1D24),
+            contentColor = Color.White
+        )
+    ) {
+        Text(
+            text = text,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
 
@@ -115,34 +103,17 @@ private fun MegaboxChip(
     onClick: () -> Unit = {},
     enabled: Boolean = true
 ) {
-    CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color.White)) {
-        ActionChip(
-            onClick = onClick,
-            enabled = enabled,
-            colors = ChipDefaults.actionChipColors(
-                backgroundColor = Color(0xFF352263),
-                contentColor = Color.White
-            )
-        ) {
-            Text(
-                text = text,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(ChipDefaults.TextPadding)
-            )
-        }
-    }
-}
-
-@Composable
-internal fun rippleTheme(color: Color) = object : RippleTheme {
-
-    @Composable
-    override fun defaultColor(): Color {
-        return color
-    }
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha {
-        return RippleAlpha(1f, 1f, 1f, 1f)
+    Chip(
+        onClick = onClick,
+        enabled = enabled,
+        colors = ChipDefaults.chipColors(
+            backgroundColor = Color(0xFF352263),
+            contentColor = Color.White
+        )
+    ) {
+        Text(
+            text = text,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }

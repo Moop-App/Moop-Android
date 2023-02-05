@@ -30,14 +30,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ChipDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FilterChip
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -49,8 +47,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
-import soup.metronome.material.chip.ChipDefaults
-import soup.metronome.material.chip.FilterChip
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
@@ -254,53 +250,27 @@ private fun GenreFilterChip(
     onCheckedChange: (Boolean) -> Unit,
     enabled: Boolean = true
 ) {
-    CompositionLocalProvider(LocalRippleTheme provides rippleTheme(Color(0xFFBDBDBD))) {
-        FilterChip(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            chipIcon = {
-                Image(
-                    MovieIcons.Check,
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(
-                        Color.Black.copy(alpha = 0.2f)
-                    ),
-                )
-            },
-            checkedIcon = {
-                Image(
-                    MovieIcons.Check,
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(Color(0x88000000)),
-                )
-            },
-            enabled = enabled,
-            colors = ChipDefaults.filterChipColors(
-                checkedBackgroundColor = Color(0xEEDDDDDD),
-                checkedContentColor = Color(0x88000000),
-                uncheckedBackgroundColor = Color(0x33DDDDDD),
-                uncheckedContentColor = Color(0x44000000)
+    FilterChip(
+        selected = checked,
+        onClick = { onCheckedChange(!checked) },
+        selectedIcon = {
+            Image(
+                MovieIcons.Check,
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(Color(0x88000000)),
             )
-        ) {
-            Text(
-                text = text,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(ChipDefaults.TextPadding)
-            )
-        }
-    }
-}
-
-@Composable
-internal fun rippleTheme(color: Color) = object : RippleTheme {
-
-    @Composable
-    override fun defaultColor(): Color {
-        return color
-    }
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha {
-        return RippleAlpha(1f, 1f, 1f, 1f)
+        },
+        enabled = enabled,
+        colors = ChipDefaults.filterChipColors(
+            selectedBackgroundColor = Color(0xEEDDDDDD),
+            selectedContentColor = Color(0x88000000),
+            backgroundColor = Color(0x33DDDDDD),
+            contentColor = Color(0x44000000)
+        )
+    ) {
+        Text(
+            text = text,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
