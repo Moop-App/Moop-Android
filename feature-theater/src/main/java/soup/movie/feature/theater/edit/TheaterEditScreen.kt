@@ -16,6 +16,7 @@
 package soup.movie.feature.theater.edit
 
 import android.view.MotionEvent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetState
@@ -59,9 +62,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
-import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -91,6 +92,7 @@ private enum class Page(val title: String) {
 @OptIn(
     ExperimentalComposeUiApi::class,
     ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class,
     ExperimentalPagerApi::class
 )
 @Composable
@@ -174,7 +176,7 @@ fun TheaterEditScreen(
                     false
                 }
         ) {
-            HorizontalPager(count = pages.size, state = pagerState) { page ->
+            HorizontalPager(pageCount = pages.size, state = pagerState) { page ->
                 when (Page.of(page)) {
                     Page.CGV -> CgvScreen(viewModel)
                     Page.Lotte -> LotteScreen(viewModel)
