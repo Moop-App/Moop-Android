@@ -25,7 +25,7 @@ import soup.movie.ads.AdsConfigImpl
 import soup.movie.analytics.EventAnalyticsImpl
 import soup.movie.core.ads.AdsConfig
 import soup.movie.core.analytics.EventAnalytics
-import soup.movie.feature.work.NotificationBuilder
+import soup.movie.feature.tasks.NotificationBuilder
 import soup.movie.notification.NotificationBuilderImpl
 import javax.inject.Singleton
 

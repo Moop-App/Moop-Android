@@ -13,22 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.feature.tasks
 
-import android.content.Context
-import dagger.BindsInstance
-import dagger.Component
-import soup.movie.startup.WorkManagerInitializer
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
 
-@Component(dependencies = [InitializerDependencies::class])
-interface InitializerComponent {
+interface NotificationBuilder {
 
-    fun inject(initializer: WorkManagerInitializer)
-
-    @Component.Builder
-    interface Builder {
-        fun context(@BindsInstance context: Context): Builder
-        fun appDependencies(dependencies: InitializerDependencies): Builder
-        fun build(): InitializerComponent
-    }
+    fun showLegacyNotification(list: List<MovieModel>)
+    fun showAlarmNotification(list: List<OpenDateAlarmModel>)
 }

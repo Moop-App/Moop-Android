@@ -8,7 +8,7 @@ plugins {
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace "soup.movie.feature.work"
+    namespace 'soup.movie.feature.tasks.impl'
     compileOptions {
         coreLibraryDesugaringEnabled true
     }
@@ -17,6 +17,7 @@ android {
 dependencies {
     coreLibraryDesugaring libs.android.desugar.jdk
 
+    implementation project(":feature-tasks-api")
     implementation project(":core-common")
     implementation project(":core-log")
     implementation project(":core-resources")
