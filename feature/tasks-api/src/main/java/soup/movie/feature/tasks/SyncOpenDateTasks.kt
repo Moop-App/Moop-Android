@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.work
+package soup.movie.feature.tasks
 
-import soup.movie.model.MovieModel
-import soup.movie.model.OpenDateAlarmModel
-
-interface NotificationBuilder {
-
-    fun showLegacyNotification(list: List<MovieModel>)
-    fun showAlarmNotification(list: List<OpenDateAlarmModel>)
+interface SyncOpenDateTasks {
+    fun fetch()
 }

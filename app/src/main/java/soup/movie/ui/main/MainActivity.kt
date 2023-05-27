@@ -30,12 +30,14 @@ import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.calculateWindowSizeClass
 import soup.movie.feature.deeplink.FirebaseLink
 import soup.movie.feature.deeplink.KakaoLink
-import soup.movie.feature.work.LegacyWorker
-import soup.movie.feature.work.OpenDateAlarmWorker
-import soup.movie.feature.work.OpenDateSyncWorker
+import soup.movie.feature.tasks.RecommendMoviesTasks
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var recommendMoviesTasks: RecommendMoviesTasks
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -60,13 +62,12 @@ class MainActivity : AppCompatActivity() {
         val config: Config = RemoteConfig()
         config.fetchAndActivate {
             if (config.allowToRunLegacyWorker) {
-                LegacyWorker.enqueueWork(this)
+                recommendMoviesTasks.fetch()
             } else {
-                LegacyWorker.cancelWork(this)
+                recommendMoviesTasks.cancel()
             }
         }
-        OpenDateAlarmWorker.enqueuePeriodicWork(this)
-        OpenDateSyncWorker.enqueuePeriodicWork(this)
+        viewModel.onInit()
     }
 
     override fun onNewIntent(intent: Intent?) {

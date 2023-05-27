@@ -102,7 +102,8 @@ dependencies {
     implementation project(":feature-theatermap")
     implementation project(":feature-settings")
     implementation project(":feature-theme")
-    implementation project(":feature-work")
+    implementation project(':feature:tasks-api')
+    runtimeOnly project(':feature:tasks-impl')
     implementation project(":feature-deeplink")
     runtimeOnly project(":data-network-impl")
     runtimeOnly project(":data-database-impl")
@@ -126,12 +127,8 @@ dependencies {
 
     implementation libs.androidx.navigation.compose
 
-    implementation libs.androidx.work.runtime
-
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
-    implementation libs.androidx.hilt.work
-    kapt libs.androidx.hilt.compiler
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics

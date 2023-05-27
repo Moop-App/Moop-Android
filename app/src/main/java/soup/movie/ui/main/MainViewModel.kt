@@ -23,19 +23,25 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import soup.movie.core.ads.AdsManager
+import soup.movie.feature.tasks.AnnounceOpenDateTasks
+import soup.movie.feature.tasks.SyncOpenDateTasks
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    adsManager: AdsManager
+    private val adsManager: AdsManager,
+    private val announceOpenDateTasks: AnnounceOpenDateTasks,
+    private val syncOpenDateTasks: SyncOpenDateTasks,
 ) : ViewModel() {
 
     private val _uiEvent = MutableSharedFlow<MainUiEvent>()
     val uiEvent: SharedFlow<MainUiEvent> = _uiEvent.asSharedFlow()
 
-    init {
+    fun onInit() {
         viewModelScope.launch {
             adsManager.loadNextNativeAd()
+            announceOpenDateTasks.fetch()
+            syncOpenDateTasks.fetch()
         }
     }
 

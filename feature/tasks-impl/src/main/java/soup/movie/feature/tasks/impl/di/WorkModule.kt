@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,43 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.feature.tasks.impl.di
 
 import android.content.Context
+import androidx.work.WorkManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import soup.movie.ads.AdsConfigImpl
-import soup.movie.analytics.EventAnalyticsImpl
-import soup.movie.core.ads.AdsConfig
-import soup.movie.core.analytics.EventAnalytics
-import soup.movie.feature.tasks.NotificationBuilder
-import soup.movie.notification.NotificationBuilderImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ApplicationModule {
+class WorkModule {
 
     @Singleton
     @Provides
-    fun provideEventAnalytics(
+    fun providesWorkManager(
         @ApplicationContext context: Context
-    ): EventAnalytics = EventAnalyticsImpl(context)
-
-    @Singleton
-    @Provides
-    fun provideAdsConfig(
-        @ApplicationContext context: Context,
-    ): AdsConfig {
-        return AdsConfigImpl(context)
+    ): WorkManager {
+        return WorkManager.getInstance(context)
     }
-
-    @Singleton
-    @Provides
-    fun provideNotificationBuilder(
-        @ApplicationContext context: Context
-    ): NotificationBuilder = NotificationBuilderImpl(context)
 }

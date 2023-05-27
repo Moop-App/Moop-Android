@@ -13,22 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.feature.tasks.impl.di
 
-import android.content.Context
-import dagger.BindsInstance
-import dagger.Component
-import soup.movie.startup.WorkManagerInitializer
+import androidx.hilt.work.HiltWorkerFactory
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-@Component(dependencies = [InitializerDependencies::class])
-interface InitializerComponent {
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface InitializerDependencies {
 
-    fun inject(initializer: WorkManagerInitializer)
-
-    @Component.Builder
-    interface Builder {
-        fun context(@BindsInstance context: Context): Builder
-        fun appDependencies(dependencies: InitializerDependencies): Builder
-        fun build(): InitializerComponent
-    }
+    fun workerFactory(): HiltWorkerFactory
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.startup
+package soup.movie.feature.tasks.impl
 
 import android.content.Context
 import androidx.hilt.work.HiltWorkerFactory
@@ -21,8 +21,8 @@ import androidx.startup.Initializer
 import androidx.work.Configuration
 import androidx.work.WorkManager
 import dagger.hilt.android.EntryPointAccessors
-import soup.movie.di.DaggerInitializerComponent
-import soup.movie.di.InitializerDependencies
+import soup.movie.feature.tasks.impl.di.DaggerInitializerComponent
+import soup.movie.feature.tasks.impl.di.InitializerDependencies
 import javax.inject.Inject
 
 class WorkManagerInitializer : Initializer<WorkManager> {
@@ -52,6 +52,6 @@ class WorkManagerInitializer : Initializer<WorkManager> {
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
-        return listOf(LoggerInitializer::class.java)
+        return emptyList()
     }
 }

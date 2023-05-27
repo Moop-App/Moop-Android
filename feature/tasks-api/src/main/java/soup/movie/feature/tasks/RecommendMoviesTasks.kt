@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.feature.tasks
 
-import androidx.hilt.work.HiltWorkerFactory
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface InitializerDependencies {
-
-    fun workerFactory(): HiltWorkerFactory
+interface RecommendMoviesTasks {
+    fun fetch()
+    fun cancel()
 }
