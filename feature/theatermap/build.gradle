@@ -8,32 +8,36 @@ plugins {
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace 'soup.movie.feature.tasks.impl'
-    compileOptions {
-        coreLibraryDesugaringEnabled true
+    namespace "soup.movie.feature.theatermap"
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
     }
 }
 
 dependencies {
-    coreLibraryDesugaring libs.android.desugar.jdk
-
-    implementation project(":feature:tasks-api")
     implementation project(":core:common")
+    implementation project(":core:designsystem")
+    implementation project(":core:external")
     implementation project(":core:logger")
     implementation project(":core:resources")
     implementation project(":data:repository-api")
     implementation project(":data:model")
-    implementation project(":domain")
 
-    implementation libs.kotlin.stdlib
+    implementation libs.androidx.fragment
+
+    implementation libs.androidx.activity.compose
+    implementation libs.compose.foundation
+    implementation libs.compose.material
+    implementation libs.compose.ui
+    implementation libs.accompanist.drawablepainter
 
     implementation libs.dagger.hilt.android
     kapt libs.dagger.hilt.compiler
-    implementation libs.androidx.hilt.work
-    kapt libs.androidx.hilt.compiler
 
-    implementation libs.androidx.work.runtime
-    androidTestImplementation libs.androidx.work.testing
+    implementation libs.naverMapCompose
 
     testImplementation project(":testing")
     androidTestImplementation project(":testing")

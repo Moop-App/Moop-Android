@@ -1,0 +1,21 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.feature.deeplink"
+}
+
+dependencies {
+    implementation project(":core:logger")
+
+    implementation libs.kotlin.stdlib
+
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.dynamicLinks
+
+    implementation libs.kakaoLink
+}
