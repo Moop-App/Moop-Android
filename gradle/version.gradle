@@ -1,0 +1,4 @@
+ext {
+    versionCode = 106
+    versionName = "1.0.6"
+}

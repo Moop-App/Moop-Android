@@ -25,7 +25,7 @@ Create `signing/key.properties` with the following values:
 
 ```
 # DEBUG API
-MOOP_API_BASE_URL = "https://moop-public-api.firebaseio.com/alpha/"
+MOOP_API_BASE_URL = https://moop-public-api.firebaseio.com/alpha/
 ```
 
 
