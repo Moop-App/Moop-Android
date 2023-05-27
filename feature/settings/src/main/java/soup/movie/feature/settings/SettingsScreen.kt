@@ -53,6 +53,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
+import soup.movie.buildconfig.BuildConfig
 import soup.movie.core.designsystem.UnelevatedButton
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme

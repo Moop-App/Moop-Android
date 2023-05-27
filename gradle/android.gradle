@@ -3,8 +3,6 @@ android {
 
     defaultConfig {
         minSdk buildConfig.minSdk
-        buildConfigField 'int', 'VERSION_CODE', "${buildConfig.versionCode}"
-        buildConfigField 'String', 'VERSION_NAME', "\"${buildConfig.versionName}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

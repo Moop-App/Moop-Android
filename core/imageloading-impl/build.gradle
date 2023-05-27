@@ -8,6 +8,9 @@ apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.core.imageloading.impl"
+    buildFeatures {
+        buildConfig true
+    }
     buildTypes {
         debug {
             def filesAuthorityValue = 'soup.movie.debug.shareprovider'

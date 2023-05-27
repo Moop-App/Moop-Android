@@ -1,0 +1,18 @@
+plugins {
+    id 'com.android.library'
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace 'soup.movie.buildconfig'
+
+    defaultConfig {
+        buildConfigField "int", "VERSION_CODE", "Integer.valueOf(" + rootProject.ext.versionCode + ")"
+        buildConfigField "String", "VERSION_NAME", "String.valueOf(\"" + rootProject.ext.versionName + "\")"
+        buildConfigField "String", "API_BASE_URL", "String.valueOf(\"" + propOrDef("MOOP_API_BASE_URL", "https://moop-public-api.firebaseio.com/alpha/") + "\")"
+    }
+    buildFeatures {
+        buildConfig true
+    }
+}

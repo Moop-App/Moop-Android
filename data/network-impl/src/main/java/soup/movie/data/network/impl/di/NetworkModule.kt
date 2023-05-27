@@ -28,8 +28,8 @@ import okhttp3.Cache
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import soup.movie.buildconfig.BuildConfig
 import soup.movie.data.network.RemoteDataSource
-import soup.movie.data.network.impl.BuildConfig
 import soup.movie.data.network.impl.MovieApiService
 import soup.movie.data.network.impl.OkHttpInterceptors
 import soup.movie.data.network.impl.RemoteDataSourceImpl

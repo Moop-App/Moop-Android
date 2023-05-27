@@ -1,0 +1,18 @@
+plugins {
+    id 'com.android.library'
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace 'soup.movie.buildconfig'
+
+    defaultConfig {
+        buildConfigField "int", "VERSION_CODE", "Integer.valueOf(0)"
+        buildConfigField "String", "VERSION_NAME", "String.valueOf(\"0\")"
+        buildConfigField "String", "API_BASE_URL", "String.valueOf(\"stub\")"
+    }
+    buildFeatures {
+        buildConfig true
+    }
+}

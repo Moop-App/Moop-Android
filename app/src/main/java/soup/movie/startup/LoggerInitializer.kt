@@ -17,7 +17,7 @@ package soup.movie.startup
 
 import android.content.Context
 import androidx.startup.Initializer
-import soup.movie.BuildConfig
+import soup.movie.buildconfig.BuildConfig
 import soup.movie.log.CrashlyticsTree
 import soup.movie.log.DebugTree
 import soup.movie.log.Logger

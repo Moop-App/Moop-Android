@@ -1,11 +1,8 @@
 buildscript {
     ext.buildConfig = [
-            'appId'      : "soup.movie",
             'minSdk'     : 23,
             'targetSdk'  : 33,
             'compileSdk' : 33,
-            'versionCode': 106,
-            'versionName': "1.0.6",
     ]
     repositories {
         google()
@@ -31,6 +28,8 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.dependencyGuard)
 }
+
+apply from: "$rootDir/gradle/version.gradle"
 
 Plugin.metaClass.isAndroidApp = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.AppPlugin" }
 Plugin.metaClass.isDynamicFeature = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.DynamicFeaturePlugin" }
