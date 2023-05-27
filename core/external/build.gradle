@@ -6,11 +6,13 @@ plugins {
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace "soup.movie.feature.tasks"
+    namespace "soup.movie.core.external"
 }
 
 dependencies {
-    implementation project(":data:model")
+    implementation project(":core:logger")
 
     implementation libs.kotlin.stdlib
+
+    implementation libs.androidx.browser
 }

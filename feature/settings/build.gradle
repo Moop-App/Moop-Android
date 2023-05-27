@@ -1,0 +1,45 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+    id "dagger.hilt.android.plugin"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.feature.settings"
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
+    }
+}
+
+dependencies {
+    implementation project(":core:appupdate-api")
+    implementation project(":core:common")
+    implementation project(":core:designsystem")
+    implementation project(":core:external")
+    implementation project(":core:resources")
+    implementation project(":data:settings-api")
+    implementation project(":data:model")
+    implementation project(":feature:theater")
+    implementation project(":feature:theme")
+
+    implementation libs.kotlin.stdlib
+
+    implementation libs.androidx.hilt.navigation.compose
+    implementation libs.compose.foundation
+    implementation libs.compose.material
+    implementation libs.compose.ui
+    implementation libs.accompanist.flowlayout
+    implementation libs.materialMotionCompose.navigation
+
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+
+    testImplementation project(":testing")
+    androidTestImplementation project(":testing")
+}

@@ -6,17 +6,11 @@ plugins {
 apply from: rootProject.file('gradle/android.gradle')
 
 android {
-    namespace "soup.movie.domain"
-    compileOptions {
-        coreLibraryDesugaringEnabled true
-    }
+    namespace "soup.movie.data.repository"
 }
 
 dependencies {
-    coreLibraryDesugaring libs.android.desugar.jdk
-
-    implementation project(":core:common")
     implementation project(":data:model")
-
     implementation libs.kotlin.stdlib
+    implementation libs.coroutines.core
 }
