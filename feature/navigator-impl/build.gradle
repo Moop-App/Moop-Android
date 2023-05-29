@@ -1,0 +1,22 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.kapt"
+    id "dagger.hilt.android.plugin"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.feature.navigator.impl"
+}
+
+dependencies {
+    implementation project(":core:logger")
+    implementation project(":feature:navigator-api")
+
+    implementation libs.kotlin.stdlib
+
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.compiler
+}

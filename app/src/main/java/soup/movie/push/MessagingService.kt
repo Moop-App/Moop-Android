@@ -17,17 +17,22 @@ package soup.movie.push
 
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import soup.movie.R
+import dagger.hilt.android.AndroidEntryPoint
+import soup.movie.feature.navigator.AppNavigator
+import soup.movie.feature.notification.NotificationSpecs
+import soup.movie.feature.notification.NotificationSpecs.TYPE_EVENT
+import soup.movie.feature.notification.NotificationSpecs.TYPE_NOTICE
 import soup.movie.log.Logger
-import soup.movie.notification.NotificationSpecs
-import soup.movie.notification.NotificationSpecs.TYPE_EVENT
-import soup.movie.notification.NotificationSpecs.TYPE_NOTICE
-import soup.movie.ui.main.MainActivity
+import soup.movie.resources.R
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MessagingService : FirebaseMessagingService() {
+
+    @Inject
+    lateinit var navigator: AppNavigator
 
     override fun onNewToken(s: String) {
         Logger.d("onNewToken: token=$s")
@@ -69,7 +74,7 @@ class MessagingService : FirebaseMessagingService() {
     }
 
     private fun createLauncherIntent(): PendingIntent {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = navigator.createIntentToMain()
         return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie
+package soup.movie.feature.navigator.impl.di
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import soup.movie.feature.theme.ThemeOptionManager
-import javax.inject.Inject
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import soup.movie.feature.navigator.AppNavigator
+import soup.movie.feature.navigator.impl.AppNavigatorImpl
+import javax.inject.Singleton
 
-@HiltAndroidApp
-class MovieApplication : Application() {
+@Module
+@InstallIn(SingletonComponent::class)
+interface NavigatorModule {
 
-    @Inject lateinit var themeOptionManager: ThemeOptionManager
-
-    override fun onCreate() {
-        super.onCreate()
-        themeOptionManager.initialize()
-    }
+    @Singleton
+    @Binds
+    fun bindsAppNavigator(
+        impl: AppNavigatorImpl,
+    ): AppNavigator
 }

@@ -9,4 +9,3 @@ include ':buildconfig-stub'
 file("feature").eachDir { include ":feature:${it.name}" }
 file("data").eachDir { include ":data:${it.name}" }
 file("core").eachDir { include ":core:${it.name}" }
-include ':buildconfig-stub'

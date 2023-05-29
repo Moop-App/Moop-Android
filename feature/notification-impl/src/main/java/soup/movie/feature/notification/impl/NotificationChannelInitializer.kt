@@ -13,40 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.notification
+package soup.movie.feature.notification.impl
 
-import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
-import soup.movie.R
+import androidx.startup.Initializer
+import soup.movie.feature.notification.NotificationChannels
+import soup.movie.feature.notification.R
+import soup.movie.feature.notification.getNotificationManager
 
-object NotificationChannels {
+class NotificationChannelInitializer : Initializer<Unit> {
 
-    const val NOTICE = "NTC"
-    const val EVENT = "EVT" // Default
-    const val OPEN_DATE_ALARM = "ODA"
-
-    internal fun initialize(application: Application) {
+    override fun create(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            application.getNotificationManager()?.run {
+            context.getNotificationManager()?.run {
                 val notice = NotificationChannel(
-                    NOTICE,
-                    application.getString(R.string.notification_channel_notice),
+                    NotificationChannels.NOTICE,
+                    context.getString(R.string.notification_channel_notice),
                     NotificationManager.IMPORTANCE_HIGH
                 )
                 val event = NotificationChannel(
-                    EVENT,
-                    application.getString(R.string.notification_channel_event),
+                    NotificationChannels.EVENT,
+                    context.getString(R.string.notification_channel_event),
                     NotificationManager.IMPORTANCE_HIGH
                 )
                 val openDateAlarm = NotificationChannel(
-                    OPEN_DATE_ALARM,
-                    application.getString(R.string.notification_channel_open_date_alarm),
+                    NotificationChannels.OPEN_DATE_ALARM,
+                    context.getString(R.string.notification_channel_open_date_alarm),
                     NotificationManager.IMPORTANCE_HIGH
                 )
                 createNotificationChannels(listOf(notice, event, openDateAlarm))
             }
         }
+    }
+
+    override fun dependencies(): List<Class<out Initializer<*>>> {
+        return emptyList()
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie
+package soup.movie.di
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import soup.movie.feature.theme.ThemeOptionManager
-import javax.inject.Inject
+import android.content.Context
+import android.content.Intent
+import soup.movie.feature.navigator.MainNavigator
+import soup.movie.ui.main.MainActivity
 
-@HiltAndroidApp
-class MovieApplication : Application() {
+class MainNavigatorImpl(
+    private val context: Context,
+) : MainNavigator {
 
-    @Inject lateinit var themeOptionManager: ThemeOptionManager
-
-    override fun onCreate() {
-        super.onCreate()
-        themeOptionManager.initialize()
+    override fun createIntentToMain(): Intent {
+        return Intent(context, MainActivity::class.java)
     }
 }
