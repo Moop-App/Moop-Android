@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie
+package soup.movie.feature.notification
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import soup.movie.feature.theme.ThemeOptionManager
-import javax.inject.Inject
-
-@HiltAndroidApp
-class MovieApplication : Application() {
-
-    @Inject lateinit var themeOptionManager: ThemeOptionManager
-
-    override fun onCreate() {
-        super.onCreate()
-        themeOptionManager.initialize()
-    }
+interface ShowPushNotificationUseCase {
+    operator fun invoke(data: Map<String, String?>)
 }

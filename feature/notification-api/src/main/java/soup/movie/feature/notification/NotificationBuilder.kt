@@ -13,20 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie
+package soup.movie.feature.notification
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import soup.movie.feature.theme.ThemeOptionManager
-import javax.inject.Inject
+import soup.movie.model.MovieModel
+import soup.movie.model.OpenDateAlarmModel
 
-@HiltAndroidApp
-class MovieApplication : Application() {
+interface NotificationBuilder {
 
-    @Inject lateinit var themeOptionManager: ThemeOptionManager
-
-    override fun onCreate() {
-        super.onCreate()
-        themeOptionManager.initialize()
-    }
+    fun showLegacyNotification(list: List<MovieModel>)
+    fun showAlarmNotification(list: List<OpenDateAlarmModel>)
 }

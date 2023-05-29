@@ -1,0 +1,16 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+}
+
+apply from: rootProject.file('gradle/android.gradle')
+
+android {
+    namespace "soup.movie.feature.navigator"
+}
+
+dependencies {
+    implementation project(":core:logger")
+
+    implementation libs.kotlin.stdlib
+}

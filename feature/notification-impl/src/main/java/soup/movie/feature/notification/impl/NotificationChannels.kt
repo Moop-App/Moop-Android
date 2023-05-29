@@ -13,20 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie
+package soup.movie.feature.notification.impl
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-import soup.movie.feature.theme.ThemeOptionManager
-import javax.inject.Inject
-
-@HiltAndroidApp
-class MovieApplication : Application() {
-
-    @Inject lateinit var themeOptionManager: ThemeOptionManager
-
-    override fun onCreate() {
-        super.onCreate()
-        themeOptionManager.initialize()
-    }
+object NotificationChannels {
+    const val NOTICE = "NTC"
+    const val EVENT = "EVT" // Default
+    const val OPEN_DATE_ALARM = "ODA"
 }

@@ -25,8 +25,7 @@ import soup.movie.ads.AdsConfigImpl
 import soup.movie.analytics.EventAnalyticsImpl
 import soup.movie.core.ads.AdsConfig
 import soup.movie.core.analytics.EventAnalytics
-import soup.movie.feature.tasks.NotificationBuilder
-import soup.movie.notification.NotificationBuilderImpl
+import soup.movie.feature.navigator.MainNavigator
 import javax.inject.Singleton
 
 @Module
@@ -49,7 +48,9 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideNotificationBuilder(
-        @ApplicationContext context: Context
-    ): NotificationBuilder = NotificationBuilderImpl(context)
+    fun provideMainNavigator(
+        @ApplicationContext context: Context,
+    ): MainNavigator {
+        return MainNavigatorImpl(context)
+    }
 }

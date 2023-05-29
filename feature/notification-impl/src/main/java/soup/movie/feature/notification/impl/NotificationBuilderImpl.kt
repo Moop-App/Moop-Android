@@ -13,26 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.notification
+package soup.movie.feature.notification.impl
 
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import soup.movie.R
-import soup.movie.feature.tasks.NotificationBuilder
+import dagger.hilt.android.qualifiers.ApplicationContext
+import soup.movie.feature.navigator.AppNavigator
+import soup.movie.feature.notification.NotificationBuilder
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
-import soup.movie.ui.main.MainActivity
+import soup.movie.resources.R
+import javax.inject.Inject
 
-class NotificationBuilderImpl(context: Context) : NotificationBuilder {
+class NotificationBuilderImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val navigator: AppNavigator,
+) : NotificationBuilder {
 
-    private val applicationContext = context.applicationContext
-
-    override fun showLegacyNotification(list: List<MovieModel>) = applicationContext.run {
+    override fun showLegacyNotification(list: List<MovieModel>) = context.run {
         NotificationSpecs.notifyLegacy(this) {
             setStyle(NotificationCompat.BigTextStyle())
             setSmallIcon(R.drawable.ic_notify_default)
@@ -43,7 +45,7 @@ class NotificationBuilderImpl(context: Context) : NotificationBuilder {
         }
     }
 
-    override fun showAlarmNotification(list: List<OpenDateAlarmModel>) = applicationContext.run {
+    override fun showAlarmNotification(list: List<OpenDateAlarmModel>) = context.run {
         NotificationSpecs.notifyOpenDateAlarm(this) {
             setStyle(NotificationCompat.BigTextStyle())
             setSmallIcon(R.drawable.ic_notify_default)
@@ -55,7 +57,7 @@ class NotificationBuilderImpl(context: Context) : NotificationBuilder {
     }
 
     private fun Context.createLauncherIntent(): PendingIntent {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = navigator.createIntentToMain()
         val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_MUTABLE
         } else {
