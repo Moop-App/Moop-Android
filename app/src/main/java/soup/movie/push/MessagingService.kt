@@ -15,24 +15,19 @@
  */
 package soup.movie.push
 
-import android.app.PendingIntent
-import android.content.Context
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
-import soup.movie.feature.navigator.AppNavigator
-import soup.movie.feature.notification.NotificationSpecs
-import soup.movie.feature.notification.NotificationSpecs.TYPE_EVENT
-import soup.movie.feature.notification.NotificationSpecs.TYPE_NOTICE
+import soup.movie.feature.notification.ShowPushNotificationUseCase
 import soup.movie.log.Logger
-import soup.movie.resources.R
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MessagingService : FirebaseMessagingService() {
 
     @Inject
-    lateinit var navigator: AppNavigator
+    lateinit var showPushNotification: Lazy<ShowPushNotificationUseCase>
 
     override fun onNewToken(s: String) {
         Logger.d("onNewToken: token=$s")
@@ -40,41 +35,6 @@ class MessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Logger.d("onMessageReceived: from=${remoteMessage.from}")
-        val data = remoteMessage.data
-        Logger.d("Message data payload: $data")
-        val type: String? = data["type"]
-        val title: String? = data["title"]
-        val text: String? = data["text"]
-        if (type != null && title != null && text != null) {
-            when (type) {
-                TYPE_NOTICE -> notifyNotice(title = title, text = text)
-                TYPE_EVENT -> notifyEvent(title = title, text = text)
-            }
-        }
-    }
-
-    private fun Context.notifyNotice(title: String, text: String) {
-        NotificationSpecs.notifyAsNotice(this) {
-            setSmallIcon(R.drawable.ic_notify_default)
-            setContentTitle(title)
-            setContentText(text)
-            setAutoCancel(true)
-            setContentIntent(createLauncherIntent())
-        }
-    }
-
-    private fun Context.notifyEvent(title: String, text: String) {
-        NotificationSpecs.notifyAsEvent(this) {
-            setSmallIcon(R.drawable.ic_notify_default)
-            setContentTitle(title)
-            setContentText(text)
-            setAutoCancel(true)
-            setContentIntent(createLauncherIntent())
-        }
-    }
-
-    private fun createLauncherIntent(): PendingIntent {
-        val intent = navigator.createIntentToMain()
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        showPushNotification.get().invoke(data = remoteMessage.data)
     }
 }

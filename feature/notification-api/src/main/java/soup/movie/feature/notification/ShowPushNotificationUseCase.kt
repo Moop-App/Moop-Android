@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,6 @@
  */
 package soup.movie.feature.notification
 
-object NotificationChannels {
-
-    const val NOTICE = "NTC"
-    const val EVENT = "EVT" // Default
-    const val OPEN_DATE_ALARM = "ODA"
+interface ShowPushNotificationUseCase {
+    operator fun invoke(data: Map<String, String?>)
 }

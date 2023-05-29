@@ -19,14 +19,40 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.startup.Initializer
-import soup.movie.feature.notification.NotificationChannels
+import androidx.core.app.NotificationCompat.Builder
 import soup.movie.feature.notification.R
-import soup.movie.feature.notification.getNotificationManager
 
-class NotificationChannelInitializer : Initializer<Unit> {
+object NotificationSpecs {
 
-    override fun create(context: Context) {
+    fun notifyAsNotice(ctx: Context, intercept: Builder.() -> Builder) {
+        initialize(ctx)
+        ctx.getNotificationManager()?.run {
+            notify(1, Builder(ctx, NotificationChannels.NOTICE).intercept().build())
+        }
+    }
+
+    fun notifyAsEvent(ctx: Context, intercept: Builder.() -> Builder) {
+        initialize(ctx)
+        ctx.getNotificationManager()?.run {
+            notify(2, Builder(ctx, NotificationChannels.EVENT).intercept().build())
+        }
+    }
+
+    fun notifyLegacy(ctx: Context, intercept: Builder.() -> Builder) {
+        initialize(ctx)
+        ctx.getNotificationManager()?.run {
+            notify(3, Builder(ctx, NotificationChannels.EVENT).intercept().build())
+        }
+    }
+
+    fun notifyOpenDateAlarm(ctx: Context, intercept: Builder.() -> Builder) {
+        initialize(ctx)
+        ctx.getNotificationManager()?.run {
+            notify(4, Builder(ctx, NotificationChannels.OPEN_DATE_ALARM).intercept().build())
+        }
+    }
+
+    private fun initialize(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.getNotificationManager()?.run {
                 val notice = NotificationChannel(
@@ -49,7 +75,7 @@ class NotificationChannelInitializer : Initializer<Unit> {
         }
     }
 
-    override fun dependencies(): List<Class<out Initializer<*>>> {
-        return emptyList()
+    private fun Context.getNotificationManager(): NotificationManager? {
+        return getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
     }
 }

@@ -30,14 +30,12 @@ import soup.movie.resources.R
 import javax.inject.Inject
 
 class NotificationBuilderImpl @Inject constructor(
-    @ApplicationContext context: Context,
+    @ApplicationContext private val context: Context,
     private val navigator: AppNavigator,
 ) : NotificationBuilder {
 
-    private val applicationContext = context.applicationContext
-
-    override fun showLegacyNotification(list: List<MovieModel>) = applicationContext.run {
-        soup.movie.feature.notification.NotificationSpecs.notifyLegacy(this) {
+    override fun showLegacyNotification(list: List<MovieModel>) = context.run {
+        NotificationSpecs.notifyLegacy(this) {
             setStyle(NotificationCompat.BigTextStyle())
             setSmallIcon(R.drawable.ic_notify_default)
             setContentTitle(buildSpannedString { bold { append("간만에 영화 보는거 어때요? 👀🍿") } })
@@ -47,8 +45,8 @@ class NotificationBuilderImpl @Inject constructor(
         }
     }
 
-    override fun showAlarmNotification(list: List<OpenDateAlarmModel>) = applicationContext.run {
-        soup.movie.feature.notification.NotificationSpecs.notifyOpenDateAlarm(this) {
+    override fun showAlarmNotification(list: List<OpenDateAlarmModel>) = context.run {
+        NotificationSpecs.notifyOpenDateAlarm(this) {
             setStyle(NotificationCompat.BigTextStyle())
             setSmallIcon(R.drawable.ic_notify_default)
             setContentTitle(buildSpannedString { bold { append("관심가는 작품이 곧 개봉합니다! ⏰❤️") } })
