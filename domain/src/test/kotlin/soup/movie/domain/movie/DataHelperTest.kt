@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.util.helper
+package soup.movie.domain.movie
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import soup.movie.feature.common.util.calculateMinusDaysTo
-import soup.movie.feature.common.util.calculatePlusDaysTo
-import soup.movie.feature.common.util.isInWeekOfCultureDay
 import java.time.DayOfWeek.FRIDAY
 import java.time.DayOfWeek.MONDAY
 import java.time.DayOfWeek.SATURDAY
