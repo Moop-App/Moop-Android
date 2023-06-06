@@ -1,9 +1,4 @@
 buildscript {
-    ext.buildConfig = [
-            'minSdk'     : 23,
-            'targetSdk'  : 33,
-            'compileSdk' : 33,
-    ]
     repositories {
         google()
         mavenCentral()
@@ -31,10 +26,6 @@ plugins {
 
 apply from: "$rootDir/gradle/version.gradle"
 
-Plugin.metaClass.isAndroidApp = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.AppPlugin" }
-Plugin.metaClass.isDynamicFeature = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.DynamicFeaturePlugin" }
-Plugin.metaClass.isAndroidLibrary = {-> delegate.class.getCanonicalName() == "com.android.build.gradle.LibraryPlugin" }
-
 allprojects {
     repositories {
         google()
@@ -45,23 +36,6 @@ allprojects {
         maven { url 'https://maven.google.com/' }
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         maven { url 'https://naver.jfrog.io/artifactory/maven/' }
-    }
-    plugins.whenPluginAdded {
-        if (it.isAndroidApp() || it.isAndroidLibrary() || it.isDynamicFeature()) {
-            android.compileOptions {
-                sourceCompatibility JavaVersion.VERSION_1_8
-                targetCompatibility JavaVersion.VERSION_1_8
-            }
-        }
-    }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile).all {
-        kotlinOptions.freeCompilerArgs += ["-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"]
-    }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            jvmTarget = "1.8"
-            freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-        }
     }
 }
 
