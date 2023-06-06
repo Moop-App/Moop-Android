@@ -1,17 +1,10 @@
 plugins {
     id "moop.android.library"
+    id "moop.android.compose"
 }
-
-apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.core.imageloading"
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
-    }
 }
 
 dependencies {

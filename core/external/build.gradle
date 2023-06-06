@@ -2,8 +2,6 @@ plugins {
     id "moop.android.library"
 }
 
-apply from: rootProject.file('gradle/android.gradle')
-
 android {
     namespace "soup.movie.core.external"
 }

@@ -1,12 +1,9 @@
 plugins {
     id "moop.android.library"
-    id "org.jetbrains.kotlin.kapt"
+    id "moop.android.hilt"
     id "com.google.devtools.ksp"
     id "org.jetbrains.kotlin.plugin.serialization"
-    id "dagger.hilt.android.plugin"
 }
-
-apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.data.database.impl"
@@ -35,7 +32,4 @@ dependencies {
     implementation libs.androidx.room.runtime
     implementation libs.androidx.room.ktx
     ksp libs.androidx.room.compiler
-
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
 }

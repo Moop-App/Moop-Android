@@ -1,7 +1,7 @@
 plugins {
     id "moop.android.application"
-    id "org.jetbrains.kotlin.kapt"
-    id "dagger.hilt.android.plugin"
+    id "moop.android.compose"
+    id "moop.android.hilt"
 }
 if (file("google-services.json").exists()) {
     apply plugin: 'com.google.gms.google-services'
@@ -19,12 +19,6 @@ android {
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
     }
     signingConfigs {
         debug {
@@ -127,9 +121,6 @@ dependencies {
     implementation libs.androidx.lifecycle.compiler
 
     implementation libs.androidx.navigation.compose
-
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics

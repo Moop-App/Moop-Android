@@ -28,5 +28,13 @@ gradlePlugin {
             id = "moop.android.test"
             implementationClass = "AndroidTestConventionPlugin"
         }
+        register("androidHilt") {
+            id = "moop.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
+        register("androidCompose") {
+            id = "moop.android.compose"
+            implementationClass = "AndroidComposeConventionPlugin"
+        }
     }
 }
