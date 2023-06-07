@@ -1,10 +1,7 @@
 plugins {
     id "moop.android.library"
-    id "org.jetbrains.kotlin.kapt"
-    id "dagger.hilt.android.plugin"
+    id "moop.android.hilt"
 }
-
-apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.data.repository.impl"
@@ -23,7 +20,4 @@ dependencies {
     implementation libs.coroutines.android
 
     implementation libs.androidx.core
-
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
 }

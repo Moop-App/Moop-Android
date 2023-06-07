@@ -1,9 +1,7 @@
 plugins {
     id "moop.android.library"
-    id "org.jetbrains.kotlin.kapt"
+    id "moop.android.hilt"
 }
-
-apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.core.imageloading.impl"
@@ -28,9 +26,6 @@ dependencies {
     implementation project(":core:common")
     implementation project(":core:imageloading-api")
     implementation libs.kotlin.stdlib
-
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
 
     implementation libs.androidx.startup
     implementation libs.coil.runtime

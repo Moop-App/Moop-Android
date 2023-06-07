@@ -1,19 +1,11 @@
 plugins {
     id "moop.android.library"
-    id "org.jetbrains.kotlin.kapt"
-    id "dagger.hilt.android.plugin"
+    id "moop.android.compose"
+    id "moop.android.hilt"
 }
-
-apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.feature.settings"
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "${libs.versions.composeCompiler.get()}"
-    }
 }
 
 dependencies {
@@ -36,9 +28,6 @@ dependencies {
     implementation libs.compose.ui
     implementation libs.accompanist.flowlayout
     implementation libs.materialMotionCompose.navigation
-
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
 
     testImplementation project(":testing")
     androidTestImplementation project(":testing")

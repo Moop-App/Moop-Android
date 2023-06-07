@@ -4,8 +4,6 @@ plugins {
     id "org.jetbrains.kotlin.plugin.serialization"
 }
 
-apply from: rootProject.file('gradle/android.gradle')
-
 android {
     namespace "soup.movie.data.network"
 }

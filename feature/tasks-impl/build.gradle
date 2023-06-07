@@ -1,10 +1,8 @@
 plugins {
     id "moop.android.library"
+    id "moop.android.hilt"
     id "org.jetbrains.kotlin.kapt"
-    id "dagger.hilt.android.plugin"
 }
-
-apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace 'soup.movie.feature.tasks.impl'
@@ -27,8 +25,6 @@ dependencies {
 
     implementation libs.kotlin.stdlib
 
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
     implementation libs.androidx.hilt.work
     kapt libs.androidx.hilt.compiler
 

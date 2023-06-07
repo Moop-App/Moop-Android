@@ -1,11 +1,8 @@
 plugins {
     id "moop.android.library"
-    id "org.jetbrains.kotlin.kapt"
+    id "moop.android.hilt"
     id "org.jetbrains.kotlin.plugin.serialization"
-    id "dagger.hilt.android.plugin"
 }
-
-apply from: rootProject.file('gradle/android.gradle')
 
 android {
     namespace "soup.movie.data.network.impl"
@@ -26,7 +23,4 @@ dependencies {
 
     implementation libs.retrofit.runtime
     implementation libs.retrofit.serialization
-
-    implementation libs.dagger.hilt.android
-    kapt libs.dagger.hilt.compiler
 }
