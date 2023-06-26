@@ -17,8 +17,6 @@ package soup.movie.core.ads
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
@@ -27,8 +25,10 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.nativead.NativeAd
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import soup.movie.common.ApplicationScope
 import soup.movie.common.IoDispatcher
 import soup.movie.log.Logger
 import javax.inject.Inject
@@ -37,6 +37,7 @@ import javax.inject.Inject
 class AdsManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @ApplicationScope private val scope: CoroutineScope,
     private val config: AdsConfig,
 ) : AdsManager {
 
@@ -48,7 +49,7 @@ class AdsManagerImpl @Inject constructor(
     private var lastNativeAd: NativeAd? = null
 
     init {
-        ProcessLifecycleOwner.get().lifecycleScope.launch(ioDispatcher) {
+        scope.launch(ioDispatcher) {
             MobileAds.initialize(context)
         }
     }
