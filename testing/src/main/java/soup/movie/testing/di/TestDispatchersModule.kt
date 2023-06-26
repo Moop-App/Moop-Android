@@ -23,6 +23,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.TestDispatcher
 import soup.movie.common.DefaultDispatcher
 import soup.movie.common.IoDispatcher
+import soup.movie.common.MainDispatcher
+import soup.movie.common.MainImmediateDispatcher
 import soup.movie.common.di.DispatchersModule
 
 @Module
@@ -34,13 +36,25 @@ object TestDispatchersModule {
 
     @Provides
     @IoDispatcher
-    fun provideIoDispatcher(testDispatcher: TestDispatcher): CoroutineDispatcher {
+    fun providesIoDispatcher(testDispatcher: TestDispatcher): CoroutineDispatcher {
         return testDispatcher
     }
 
     @Provides
     @DefaultDispatcher
-    fun provideDefaultDispatcher(testDispatcher: TestDispatcher): CoroutineDispatcher {
+    fun providesDefaultDispatcher(testDispatcher: TestDispatcher): CoroutineDispatcher {
+        return testDispatcher
+    }
+
+    @Provides
+    @MainDispatcher
+    fun providesMainDispatcher(testDispatcher: TestDispatcher): CoroutineDispatcher {
+        return testDispatcher
+    }
+
+    @Provides
+    @MainImmediateDispatcher
+    fun providesMainImmediateDispatcher(testDispatcher: TestDispatcher): CoroutineDispatcher {
         return testDispatcher
     }
 }

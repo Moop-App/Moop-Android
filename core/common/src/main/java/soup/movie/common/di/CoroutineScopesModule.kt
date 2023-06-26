@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,37 +20,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import soup.movie.common.DefaultDispatcher
-import soup.movie.common.IoDispatcher
-import soup.movie.common.MainDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import soup.movie.common.ApplicationScope
 import soup.movie.common.MainImmediateDispatcher
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DispatchersModule {
+object CoroutineScopesModule {
 
+    @Singleton
     @Provides
-    @IoDispatcher
-    fun providesIoDispatcher(): CoroutineDispatcher {
-        return Dispatchers.IO
-    }
-
-    @Provides
-    @DefaultDispatcher
-    fun providesDefaultDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Default
-    }
-
-    @Provides
-    @MainDispatcher
-    fun providesMainDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main
-    }
-
-    @Provides
-    @MainImmediateDispatcher
-    fun providesMainImmediateDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main.immediate
-    }
+    @ApplicationScope
+    fun providesCoroutineScope(
+        @MainImmediateDispatcher dispatcher: CoroutineDispatcher,
+    ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
 }
