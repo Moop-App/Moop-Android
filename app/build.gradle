@@ -77,7 +77,6 @@ android {
 }
 
 dependencies {
-    implementation project(":buildconfig")
     implementation project(":core:ads")
     implementation project(":core:analytics")
     implementation project(":core:appupdate-api")

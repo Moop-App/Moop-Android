@@ -9,7 +9,6 @@ android {
 }
 
 dependencies {
-    compileOnly project(":buildconfig-stub")
     implementation project(":core:appupdate-api")
     implementation project(":core:common")
     implementation project(":core:designsystem")

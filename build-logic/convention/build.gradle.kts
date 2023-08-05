@@ -36,5 +36,9 @@ gradlePlugin {
             id = "moop.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
         }
+        register("androidBuildConfig") {
+            id = "moop.android.buildconfig"
+            implementationClass = "AndroidBuildConfigConventionPlugin"
+        }
     }
 }
