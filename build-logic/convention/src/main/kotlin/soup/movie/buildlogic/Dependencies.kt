@@ -14,3 +14,19 @@ fun DependencyHandler.kapt(dependencyNotation: Any): Dependency? {
 fun DependencyHandler.androidTestImplementation(dependencyNotation: Any): Dependency? {
     return add("androidTestImplementation", dependencyNotation)
 }
+
+fun DependencyHandler.compileOnly(dependencyNotation: Any): Dependency? {
+    return add("compileOnly", dependencyNotation)
+}
+
+fun DependencyHandler.project(
+    path: String,
+    configuration: String? = null,
+): Dependency {
+    return project(
+        mapOf(
+            "path" to path,
+            "configuration" to configuration,
+        ).filterValues { it != null }
+    )
+}
