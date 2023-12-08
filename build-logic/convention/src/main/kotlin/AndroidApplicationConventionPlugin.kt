@@ -17,7 +17,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             configureKotlin()
 
             dependencies {
-                implementation(project(path =":buildconfig"))
+                implementation(project(path = ":core:buildconfig"))
             }
         }
     }

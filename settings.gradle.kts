@@ -11,8 +11,6 @@ include(":app")
 include(":domain")
 include(":testing")
 include(":macrobenchmark")
-include(":buildconfig")
-include(":buildconfig-stub")
 
 File("feature").listFiles()?.forEach {
     include(":feature:${it.name}")

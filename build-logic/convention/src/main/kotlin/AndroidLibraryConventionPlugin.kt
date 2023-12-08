@@ -30,7 +30,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             configureKotlin()
 
             dependencies {
-                compileOnly(project(path = ":buildconfig-stub"))
+                compileOnly(project(path = ":core:buildconfig-stub"))
             }
         }
     }
