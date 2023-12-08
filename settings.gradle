@@ -7,6 +7,130 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com.android.*")
+                includeGroupByRegex("androidx.*")
+                includeGroupByRegex("com.google.*")
+            }
+        }
+        maven {
+            url "https://jitpack.io"
+            content {
+                includeGroup "com.github.fornewid.metronome"
+            }
+        }
+        maven {
+            url 'https://devrepo.kakao.com/nexus/content/groups/public/'
+            content {
+                includeGroup "com.kakao.sdk"
+            }
+        }
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+            content {
+                includeGroup "com.naver.maps"
+            }
+        }
+
+        mavenCentral()
+    }
+
+    repositories {
+        maven {
+            url 'https://registry.navercorp.com/maven-release'
+            content {
+                includeGroupByRegex "com.naver.*"
+                includeGroupByRegex "com.nhn.android.*"
+                includeGroupByRegex "com.nhncorp.*"
+                includeGroup "api-gateway-hmac"
+            }
+        }
+        maven {
+            url 'https://repo.linecorp.com/content/repositories/releases'
+            content {
+                includeGroupByRegex "jp.naver.*"
+                includeGroupByRegex "com.linecorp.*"
+                includeGroup "com.linecorp"
+
+                // TODO: 라이브러리 업데이트 필요
+                // 'com.google.android:flexbox'에 의한 의존성입니다.
+                // 3.0.0 버전부터 google maven에서 다운로드할 수 있고, 그 전은 JCenter에만 게시되어 있습니다.
+                // https://github.com/google/flexbox-layout/issues/566
+                includeGroup "com.google.android"
+
+                // TODO: 라이브러리 업데이트 필요
+                // 'com.naver.audioplatform:bgm-player'에 의한 의존성입니다.
+                // 2.13.3 버전부터 google maven에서 다운로드할 수 있고, 그 전은 JCenter에만 게시되어 있습니다.
+                // https://github.com/google/ExoPlayer/issues/5246
+                includeGroup "com.google.android.exoplayer"
+            }
+        }
+        maven {
+            url 'https://repo.linecorp.com/content/repositories/snapshots'
+            content {
+                includeGroupByRegex "jp.naver.*"
+                includeGroupByRegex "com.linecorp.*"
+                includeGroup "com.linecorp"
+            }
+        }
+        maven {
+            url "https://jitpack.io"
+            content {
+                includeGroup "com.github.chrisbanes"
+            }
+        }
+        maven {
+            url 'https://dev-maven.webtoons.com/repository/releases'
+            content {
+                includeGroup "com.naver.webtoon.android"
+                includeGroup "com.naver.webtoon"
+                includeGroup "com.hzn.lib"
+            }
+        }
+        maven {
+            url 'https://dev-maven.webtoons.com/repository/snapshots'
+            content {
+                includeGroup "com.naver.webtoon.android"
+            }
+        }
+        maven {
+            url 'http://nexus.localad.navercorp.com/content/repositories/releases/'
+            allowInsecureProtocol true
+            content {
+                includeGroup "com.naver.webtoon.android"
+                includeGroup "com.naver.gfpsdk"
+            }
+        }
+        maven {
+            url 'https://android-sdk.is.com/'
+            content {
+                includeGroupByRegex "com.ironsource.*"
+            }
+        }
+        maven {
+            url 'https://repo.nbt.com/repository/adison-ads-android'
+            credentials {
+                username 'dist'
+                password 'vtOpykLjF9I9o5UUuBEtKuTXcYM4db6Xzxd'
+            }
+            content {
+                includeGroup "co.adison"
+            }
+        }
+        maven {
+            url 'https://artifact.bytedance.com/repository/pangle'
+            content {
+                includeGroup 'com.pangle.global'
+            }
+        }
+        mavenCentral()
+    }
+}
+
 include ':app'
 include ':domain'
 include ':testing'
