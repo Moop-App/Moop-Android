@@ -1,0 +1,25 @@
+pluginManagement {
+    includeBuild("build-logic")
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+include ':app'
+include ':domain'
+include ':testing'
+include ':macrobenchmark'
+
+file("feature").eachDir { dir ->
+    include ":feature:${dir.name}"
+}
+
+file("data").eachDir { dir ->
+    include ":data:${dir.name}"
+}
+
+file("core").eachDir { dir ->
+    include ":core:${dir.name}"
+}
