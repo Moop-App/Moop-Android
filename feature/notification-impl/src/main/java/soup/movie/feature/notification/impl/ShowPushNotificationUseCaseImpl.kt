@@ -17,6 +17,7 @@ package soup.movie.feature.notification.impl
 
 import android.app.PendingIntent
 import android.content.Context
+import android.os.Build
 import dagger.hilt.android.qualifiers.ApplicationContext
 import soup.movie.feature.navigator.AppNavigator
 import soup.movie.feature.notification.ShowPushNotificationUseCase
@@ -64,7 +65,12 @@ class ShowPushNotificationUseCaseImpl @Inject constructor(
 
     private fun createLauncherIntent(): PendingIntent {
         val intent = navigator.createIntentToMain()
-        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_MUTABLE
+        } else {
+            PendingIntent.FLAG_ONE_SHOT
+        }
+        return PendingIntent.getActivity(context, 0, intent, flags)
     }
 
     companion object {
