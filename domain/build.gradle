@@ -12,7 +12,7 @@ android {
 dependencies {
     coreLibraryDesugaring libs.android.desugar.jdk
 
-    implementation project(":core:common")
+    implementation project(":core:kotlin")
     implementation project(":data:model")
 
     implementation libs.kotlin.stdlib

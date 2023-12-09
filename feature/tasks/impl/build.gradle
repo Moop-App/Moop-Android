@@ -14,7 +14,7 @@ android {
 dependencies {
     coreLibraryDesugaring libs.android.desugar.jdk
 
-    implementation project(":core:common")
+    implementation project(":core:kotlin")
     implementation project(":core:logger")
     implementation project(":core:resources")
     implementation project(":data:repository:api")
