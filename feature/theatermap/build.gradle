@@ -14,7 +14,7 @@ dependencies {
     implementation project(":core:external")
     implementation project(":core:logger")
     implementation project(":core:resources")
-    implementation project(":data:repository-api")
+    implementation project(":data:repository:api")
     implementation project(":data:model")
 
     implementation libs.androidx.fragment

@@ -5,17 +5,21 @@ plugins {
 }
 
 android {
-    namespace "soup.movie.data.settings.impl"
+    namespace "soup.movie.data.network.impl"
 }
 
 dependencies {
     implementation project(":core:common")
     implementation project(":data:model")
-    implementation project(":data:settings-api")
+    implementation project(":data:network:api")
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core
+    implementation libs.coroutines.android
 
-    implementation libs.androidx.datastore.preferences
+    implementation libs.androidx.core
+
+    implementation libs.retrofit.runtime
+    implementation libs.retrofit.serialization
 }

@@ -11,9 +11,9 @@ dependencies {
     implementation project(":core:common")
     implementation project(":core:logger")
     implementation project(":data:model")
-    implementation project(":data:network-api")
-    implementation project(":data:database-api")
-    implementation project(":data:repository-api")
+    implementation project(":data:network:api")
+    implementation project(":data:database:api")
+    implementation project(":data:repository:api")
 
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core
