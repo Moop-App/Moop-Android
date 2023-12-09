@@ -1,5 +1,9 @@
 [versions]
 
+# Android
+androidGradlePlugin = "8.1.4"
+gms = "4.3.14"
+
 # Kotlin
 kotlin = "1.8.10"
 coroutines = "1.6.4"
@@ -34,14 +38,12 @@ dependencyGuard = "0.3.2"
 
 [libraries]
 
-android-pluginGradle = "com.android.tools.build:gradle:8.1.4"
+# Android
 android-desugar-jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
 
 # Kotlin
 
-kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
-kotlin-serializationPluginGradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -50,7 +52,6 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 
 # Dagger
 
-dagger-hilt-pluginGradle = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 dagger-hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
@@ -128,7 +129,6 @@ androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 
 # Google
 
-google-pluginGradle = "com.google.gms:google-services:4.3.14"
 google-play-appUpdate = "com.google.android.play:app-update-ktx:2.0.1"
 google-ads = "com.google.android.gms:play-services-ads:21.3.0"
 
@@ -139,8 +139,6 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx"
 firebase-dynamicLinks = { module = "com.google.firebase:firebase-dynamic-links-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
-firebase-crashlytics-pluginGradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "2.9.2" }
-firebase-perf-pluginGradle = { module = "com.google.firebase:perf-plugin", version = "1.4.2" }
 
 # Etc
 
@@ -153,9 +151,19 @@ kakaoLink = "com.kakao.sdk:v2-share:2.13.0"
 naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
 timber = "com.jakewharton.timber:timber:5.0.1"
 
-dependencyGuard-pluginGradle = { module = "com.dropbox.dependency-guard:dependency-guard", version.ref = "dependencyGuard" }
+# Dependencies of the included build-logic
+android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
-spotless = { id = "com.diffplug.spotless", version = "6.11.0" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+gms = { id = "com.google.gms.google-services", version.ref = "gms" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+spotless = { id = "com.diffplug.spotless", version = "6.11.0" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.2" }
+firebase-perf = { id = "com.google.firebase.firebase-perf", version = "1.4.2" }

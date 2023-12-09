@@ -2,13 +2,13 @@ plugins {
     id "moop.android.application"
     id "moop.android.compose"
     id "moop.android.hilt"
+    alias libs.plugins.firebase.crashlytics
+    alias libs.plugins.firebase.perf
+    alias libs.plugins.dependencyGuard
 }
 if (file("google-services.json").exists()) {
     apply plugin: 'com.google.gms.google-services'
 }
-apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'com.google.firebase.firebase-perf'
-apply plugin: 'com.dropbox.dependency-guard'
 
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
 
