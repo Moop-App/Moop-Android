@@ -36,23 +36,23 @@ import soup.movie.model.TheaterTypeModel
 internal fun TheaterFilterChip(
     theater: TheaterModel,
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
+    onCheckedChange: (Boolean) -> Unit,
 ) {
     when (theater.type) {
         TheaterTypeModel.CGV -> CgvFilterChip(
             text = theater.name,
             checked = checked,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
         )
         TheaterTypeModel.LOTTE -> LotteFilterChip(
             text = theater.name,
             checked = checked,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
         )
         TheaterTypeModel.MEGABOX -> MegaboxFilterChip(
             text = theater.name,
             checked = checked,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
         )
     }
 }
@@ -63,7 +63,7 @@ private fun CgvFilterChip(
     text: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     FilterChip(
         selected = checked,
@@ -81,8 +81,8 @@ private fun CgvFilterChip(
             selectedBackgroundColor = MovieTheme.colors.cgv,
             selectedContentColor = MovieTheme.colors.onCgv,
             backgroundColor = Color(0x55FFFFFF),
-            contentColor = Color(0x66000000)
-        )
+            contentColor = Color(0x66000000),
+        ),
     ) {
         Text(
             text = text,
@@ -97,7 +97,7 @@ private fun LotteFilterChip(
     text: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     FilterChip(
         selected = checked,
@@ -114,8 +114,8 @@ private fun LotteFilterChip(
             selectedBackgroundColor = Color(0xFFED1D24),
             selectedContentColor = Color.White,
             backgroundColor = Color(0x66ED1D24),
-            contentColor = Color(0x77FFFFFF)
-        )
+            contentColor = Color(0x77FFFFFF),
+        ),
     ) {
         Text(
             text = text,
@@ -130,7 +130,7 @@ private fun MegaboxFilterChip(
     text: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     FilterChip(
         selected = checked,
@@ -147,8 +147,8 @@ private fun MegaboxFilterChip(
             selectedBackgroundColor = Color(0xFF352263),
             selectedContentColor = Color.White,
             backgroundColor = Color(0x77352263),
-            contentColor = Color(0x77FFFFFF)
-        )
+            contentColor = Color(0x77FFFFFF),
+        ),
     ) {
         Text(
             text = text,

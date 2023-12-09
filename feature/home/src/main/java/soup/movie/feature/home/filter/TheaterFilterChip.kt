@@ -38,7 +38,7 @@ internal fun CgvFilterChip(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     FilterChip(
         selected = checked,
@@ -49,9 +49,12 @@ internal fun CgvFilterChip(
                 painterResource(MovieIcons.FilterChipCgvCancel),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(
-                    if (checked) MovieTheme.colors.onCgv
-                    else Color(0x66000000)
-                )
+                    if (checked) {
+                        MovieTheme.colors.onCgv
+                    } else {
+                        Color(0x66000000)
+                    },
+                ),
             )
         },
         enabled = enabled,
@@ -60,8 +63,8 @@ internal fun CgvFilterChip(
             selectedBackgroundColor = MovieTheme.colors.cgv,
             selectedContentColor = MovieTheme.colors.onCgv,
             backgroundColor = Color(0x55FFFFFF),
-            contentColor = Color(0x66000000)
-        )
+            contentColor = Color(0x66000000),
+        ),
     ) {
         Text(
             text = text,
@@ -77,7 +80,7 @@ internal fun LotteFilterChip(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     FilterChip(
         selected = checked,
@@ -87,7 +90,7 @@ internal fun LotteFilterChip(
             Image(
                 painterResource(MovieIcons.FilterChipLotteCancel),
                 contentDescription = null,
-                colorFilter = if (checked) null else ColorFilter.tint(Color(0x77FFFFFF))
+                colorFilter = if (checked) null else ColorFilter.tint(Color(0x77FFFFFF)),
             )
         },
         enabled = enabled,
@@ -95,8 +98,8 @@ internal fun LotteFilterChip(
             selectedBackgroundColor = Color(0xFFED1D24),
             selectedContentColor = Color.White,
             backgroundColor = Color(0x66ED1D24),
-            contentColor = Color(0x77FFFFFF)
-        )
+            contentColor = Color(0x77FFFFFF),
+        ),
     ) {
         Text(
             text = text,
@@ -112,7 +115,7 @@ internal fun MegaboxFilterChip(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     FilterChip(
         selected = checked,
@@ -123,7 +126,7 @@ internal fun MegaboxFilterChip(
                 painterResource(MovieIcons.FilterChipMegaboxCancel),
                 contentDescription = null,
                 modifier = Modifier,
-                colorFilter = if (checked) null else ColorFilter.tint(Color(0x77FFFFFF))
+                colorFilter = if (checked) null else ColorFilter.tint(Color(0x77FFFFFF)),
             )
         },
         enabled = enabled,
@@ -131,8 +134,8 @@ internal fun MegaboxFilterChip(
             selectedBackgroundColor = Color(0xFF352263),
             selectedContentColor = Color.White,
             backgroundColor = Color(0x77352263),
-            contentColor = Color(0x77FFFFFF)
-        )
+            contentColor = Color(0x77FFFFFF),
+        ),
     ) {
         Text(
             text = text,

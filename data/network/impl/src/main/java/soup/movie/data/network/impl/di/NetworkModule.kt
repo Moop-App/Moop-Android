@@ -42,7 +42,7 @@ interface NetworkModule {
     @Binds
     @Singleton
     fun bindRemoteDataSource(
-        remoteDataSourceImpl: RemoteDataSourceImpl
+        remoteDataSourceImpl: RemoteDataSourceImpl,
     ): RemoteDataSource
 
     companion object {
@@ -55,7 +55,7 @@ interface NetworkModule {
         @Provides
         @Singleton
         internal fun provideMovieApiService(
-            okHttpClient: OkHttpClient
+            okHttpClient: OkHttpClient,
         ): MovieApiService {
             return Retrofit.Builder()
                 .baseUrl(BuildConfig.API_BASE_URL)
@@ -68,7 +68,7 @@ interface NetworkModule {
         @Provides
         @Singleton
         internal fun provideOkHttpClient(
-            @ApplicationContext context: Context
+            @ApplicationContext context: Context,
         ): OkHttpClient {
             return OkHttpClient.Builder()
                 .cache(Cache(context.cacheDir, 1 * 1024 * 1024)) // 1 MB

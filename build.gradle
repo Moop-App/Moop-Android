@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.dagger.hilt) apply false
-    alias(libs.plugins.spotless) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.dependencyGuard) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
@@ -13,20 +12,6 @@ plugins {
 }
 
 apply from: "$rootDir/gradle/version.gradle"
-
-subprojects {
-    apply plugin: 'com.diffplug.spotless'
-    spotless {
-        kotlin {
-            target '**/*.kt'
-            targetExclude("$buildDir/**/*.kt")
-            targetExclude('bin/**/*.kt')
-
-            ktlint("0.41.0")
-            licenseHeaderFile rootProject.file('spotless/copyright.kt')
-        }
-    }
-}
 
 Object propOrDef(String propertyName, Object defaultValue) {
     def properties = new Properties()

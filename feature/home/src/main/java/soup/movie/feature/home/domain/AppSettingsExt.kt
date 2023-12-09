@@ -28,8 +28,8 @@ fun AppSettings.getMovieFilterFlow(): Flow<MovieFilter> {
             MovieFilter(
                 theaterFilter,
                 ageFilter,
-                genreFilter
+                genreFilter,
             )
-        }
+        },
     )
 }

@@ -23,12 +23,12 @@ import soup.movie.feature.home.textUnit
 
 @Composable
 fun MovieBestTag(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     MovieTextTag(
         text = "BEST",
         tagBackgroundColor = MovieTheme.colors.tagBest,
         modifier = modifier,
-        fontSize = 11.dp.textUnit
+        fontSize = 11.dp.textUnit,
     )
 }

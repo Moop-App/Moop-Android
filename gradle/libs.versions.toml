@@ -163,7 +163,6 @@ dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-spotless = { id = "com.diffplug.spotless", version = "6.11.0" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.2" }
 firebase-perf = { id = "com.google.firebase.firebase-perf", version = "1.4.2" }

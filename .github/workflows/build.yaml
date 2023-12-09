@@ -13,10 +13,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -27,5 +28,17 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Build, lint and spotless
-        run: ./gradlew spotlessCheck dependencyGuard lintDebug assemble --scan
+      - name: Check dependencyGuard
+        run: ./gradlew dependencyGuard
+
+      - name: Check spotless
+        run: ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --stacktrace
+
+      - name: Check lint
+        run: ./gradlew lintDebug --stacktrace
+
+      - name: Build all build type and flavor permutations
+        run: ./gradlew assemble --stacktrace
+
+      - name: Run local tests
+        run: ./gradlew testDebug --stacktrace

@@ -27,10 +27,10 @@ import soup.movie.data.database.impl.entity.OpenDateAlarmEntity
 @Database(
     entities = [
         FavoriteMovieEntity::class,
-        OpenDateAlarmEntity::class
+        OpenDateAlarmEntity::class,
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
 @TypeConverters(FavoriteMovieTypeConverters::class)
 abstract class MovieDatabase : RoomDatabase() {

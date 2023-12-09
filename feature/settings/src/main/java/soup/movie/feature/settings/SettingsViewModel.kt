@@ -37,7 +37,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     themeOptionManager: ThemeOptionManager,
     appSettings: AppSettings,
-    appUpdateManager: InAppUpdateManager
+    appUpdateManager: InAppUpdateManager,
 ) : ViewModel() {
 
     // TODO: Fix again later. This is so ugly...
@@ -48,7 +48,7 @@ class SettingsViewModel @Inject constructor(
             .stateIn(
                 scope = viewModelScope,
                 initialValue = null,
-                started = SharingStarted.WhileSubscribed(5_000)
+                started = SharingStarted.WhileSubscribed(5_000),
             )
 
     val theaterUiModel: StateFlow<TheaterSettingUiModel?> =
@@ -58,7 +58,7 @@ class SettingsViewModel @Inject constructor(
             .stateIn(
                 scope = viewModelScope,
                 initialValue = null,
-                started = SharingStarted.WhileSubscribed(5_000)
+                started = SharingStarted.WhileSubscribed(5_000),
             )
 
     var versionUiModel = mutableStateOf<VersionSettingUiModel?>(null)
@@ -73,7 +73,7 @@ class SettingsViewModel @Inject constructor(
             versionUiModel.value = VersionSettingUiModel(
                 versionCode = BuildConfig.VERSION_CODE,
                 versionName = BuildConfig.VERSION_NAME,
-                isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
+                isLatest = BuildConfig.VERSION_CODE >= latestVersionCode,
             )
             showVersionUpdateDialog = isLatest.not()
         }

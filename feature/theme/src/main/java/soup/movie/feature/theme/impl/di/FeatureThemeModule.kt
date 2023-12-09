@@ -34,7 +34,7 @@ interface FeatureThemeModule {
     @Binds
     @Singleton
     fun provideThemeOptionManager(
-        themeOptionManagerImpl: ThemeOptionManagerImpl
+        themeOptionManagerImpl: ThemeOptionManagerImpl,
     ): ThemeOptionManager
 
     companion object {
@@ -42,7 +42,7 @@ interface FeatureThemeModule {
         @Singleton
         @Provides
         fun provideThemeOptionStore(
-            appSettings: AppSettings
+            appSettings: AppSettings,
         ): ThemeOptionStore {
             return object : ThemeOptionStore {
 

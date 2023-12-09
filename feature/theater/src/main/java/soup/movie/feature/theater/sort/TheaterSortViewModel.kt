@@ -30,7 +30,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TheaterSortViewModel @Inject constructor(
-    private val appSettings: AppSettings
+    private val appSettings: AppSettings,
 ) : ViewModel() {
 
     private var listSnapshot = mutableListOf<TheaterModel>()

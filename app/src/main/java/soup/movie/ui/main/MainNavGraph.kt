@@ -76,7 +76,7 @@ fun MainNavGraph(
         }
         composable(
             route = Screen.Detail.route + "/{movieId}",
-            arguments = listOf(navArgument("movieId") { nullable = false })
+            arguments = listOf(navArgument("movieId") { nullable = false }),
         ) {
             val viewModel = hiltViewModel<DetailViewModel>()
             DetailNavGraph(

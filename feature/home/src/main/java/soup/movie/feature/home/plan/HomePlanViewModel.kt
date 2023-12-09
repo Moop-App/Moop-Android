@@ -35,7 +35,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomePlanViewModel @Inject constructor(
     private val appSettings: AppSettings,
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
 ) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(false)

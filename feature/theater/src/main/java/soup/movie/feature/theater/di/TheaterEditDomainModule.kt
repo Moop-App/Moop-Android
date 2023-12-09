@@ -32,11 +32,11 @@ class TheaterEditDomainModule {
     @ViewModelScoped
     fun provideTheaterEditManager(
         repository: TheaterRepository,
-        appSettings: AppSettings
+        appSettings: AppSettings,
     ): TheaterEditManager {
         return TheaterEditManager(
             repository,
-            appSettings
+            appSettings,
         )
     }
 }

@@ -47,5 +47,5 @@ data class FavoriteMovieEntity(
     @ColumnInfo(name = "lotte")
     val lotte: String? = null,
     @ColumnInfo(name = "megabox")
-    val megabox: String? = null
+    val megabox: String? = null,
 )

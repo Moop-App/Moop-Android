@@ -43,7 +43,7 @@ interface DraggableListState {
 data class DraggableItemState(
     val dragging: Boolean,
     val offset: Offset,
-    val zIndex: Float
+    val zIndex: Float,
 )
 
 @Composable
@@ -58,7 +58,7 @@ fun rememberDraggableListState(
 }
 
 fun Modifier.draggableList(
-    listState: DraggableListState
+    listState: DraggableListState,
 ): Modifier = pointerInput(Unit) {
     detectDragGesturesAfterLongPress(
         onDragStart = { offset ->
@@ -73,13 +73,13 @@ fun Modifier.draggableList(
         },
         onDragCancel = {
             listState.onDragCancel()
-        }
+        },
     )
 }
 
 fun Modifier.draggableItem(
     index: Int,
-    listState: DraggableListState
+    listState: DraggableListState,
 ): Modifier = pointerInput(Unit) {
     detectDragGestures(
         onDragStart = {
@@ -94,13 +94,13 @@ fun Modifier.draggableItem(
         },
         onDragCancel = {
             listState.onDragCancel()
-        }
+        },
     )
 }
 
 class DefaultDraggableListState(
     private val lazyListState: LazyListState,
-    private val onMove: (fromIndex: Int, toIndex: Int) -> Unit
+    private val onMove: (fromIndex: Int, toIndex: Int) -> Unit,
 ) : DraggableListState {
 
     private var draggingDistance by mutableStateOf(0f)
@@ -177,7 +177,7 @@ class DefaultDraggableListState(
         return DraggableItemState(
             dragging = isDraggingItem,
             offset = offset,
-            zIndex = if (isDraggingItem) 1f else 0f
+            zIndex = if (isDraggingItem) 1f else 0f,
         )
     }
 

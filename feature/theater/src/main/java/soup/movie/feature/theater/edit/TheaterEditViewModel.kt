@@ -47,21 +47,21 @@ class TheaterEditViewModel @Inject constructor(
 
     val cgvUiModel = combine(
         manager.asCgvFlow(),
-        manager.asSelectedTheaterListFlow()
+        manager.asSelectedTheaterListFlow(),
     ) { cgv, selectedList ->
         cgv.toUiModel(selectedList)
     }
 
     val lotteUiModel = combine(
         manager.asLotteFlow(),
-        manager.asSelectedTheaterListFlow()
+        manager.asSelectedTheaterListFlow(),
     ) { lotte, selectedList ->
         lotte.toUiModel(selectedList)
     }
 
     val megaboxUiModel = combine(
         manager.asMegaboxFlow(),
-        manager.asSelectedTheaterListFlow()
+        manager.asSelectedTheaterListFlow(),
     ) { megabox, selectedList ->
         megabox.toUiModel(selectedList)
     }
@@ -90,11 +90,11 @@ class TheaterEditViewModel @Inject constructor(
                         theaterList = theaterArea.theaterList.map { theater ->
                             TheaterEditTheaterUiModel(
                                 theater = theater,
-                                checked = selectedList.any { it.id == theater.id }
+                                checked = selectedList.any { it.id == theater.id },
                             )
-                        }
+                        },
                     )
-                }
+                },
             )
         }
 }

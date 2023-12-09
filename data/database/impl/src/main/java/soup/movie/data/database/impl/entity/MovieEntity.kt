@@ -31,5 +31,5 @@ data class MovieEntity(
     val boxOffice: Int? = null,
     val cgv: String? = null,
     val lotte: String? = null,
-    val megabox: String? = null
+    val megabox: String? = null,
 )

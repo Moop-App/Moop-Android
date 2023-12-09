@@ -63,7 +63,7 @@ import soup.movie.resources.R
 fun TheaterSortScreen(
     viewModel: TheaterSortViewModel,
     upPress: () -> Unit,
-    onAddItemClick: () -> Unit
+    onAddItemClick: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     BackHandler {
@@ -75,17 +75,17 @@ fun TheaterSortScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(R.string.theater_sort_title)) }
+                title = { Text(text = stringResource(R.string.theater_sort_title)) },
             )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = { debounce(onAddItemClick) }) {
                 Icon(
                     MovieIcons.Add,
-                    contentDescription = stringResource(R.string.theater_select_action_confirm)
+                    contentDescription = stringResource(R.string.theater_select_action_confirm),
                 )
             }
-        }
+        },
     ) { paddingValues ->
         val selectedTheaters = viewModel.selectedTheaters
         val modifier = Modifier
@@ -100,7 +100,7 @@ fun TheaterSortScreen(
                 modifier = modifier,
                 onMove = { fromPosition, toPosition ->
                     viewModel.onItemMove(fromPosition, toPosition)
-                }
+                },
             )
         }
     }
@@ -111,7 +111,7 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
         Image(
             painterResource(MovieIcons.NoTheaters),
@@ -124,7 +124,7 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
         Text(
             stringResource(R.string.theater_empty_description),
             color = MovieTheme.colors.onBackground,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
         )
     }
 }
@@ -133,13 +133,13 @@ private fun TheaterSortNoItem(modifier: Modifier = Modifier) {
 private fun TheaterSortReorderList(
     selectedTheaters: List<TheaterModel>,
     onMove: (fromIndex: Int, toIndex: Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val lazyListState = rememberLazyListState()
     val draggableListState = rememberDraggableListState(lazyListState, onMove = onMove)
     LazyColumn(
         modifier = modifier.draggableList(draggableListState),
-        state = lazyListState
+        state = lazyListState,
     ) {
         itemsIndexed(selectedTheaters) { index, theater ->
             val itemState = draggableListState.getItemState(index)
@@ -151,7 +151,7 @@ private fun TheaterSortReorderList(
                     .height(48.dp)
                     .padding(horizontal = 12.dp)
                     .graphicsLayer { translationY = transY }
-                    .zIndex(itemState.zIndex)
+                    .zIndex(itemState.zIndex),
             ) {
                 TheaterChip(theater)
                 Spacer(modifier = Modifier.weight(1f))

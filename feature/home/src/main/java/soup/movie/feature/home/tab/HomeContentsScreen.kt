@@ -75,25 +75,25 @@ internal fun HomeContentsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(40.dp)
-                    .align(Alignment.BottomCenter)
+                    .align(Alignment.BottomCenter),
             )
         }
         AnimatedVisibility(
             visible = isLoading,
             modifier = Modifier.align(Alignment.TopCenter),
             enter = fadeIn(
-                animationSpec = tween(durationMillis = 400)
+                animationSpec = tween(durationMillis = 400),
             ),
             exit = slideOutVertically(
                 targetOffsetY = { -it },
-                animationSpec = tween(delayMillis = 500, durationMillis = 150)
-            )
+                animationSpec = tween(delayMillis = 500, durationMillis = 150),
+            ),
         ) {
             ContentLoadingProgressBar(
                 modifier = Modifier
                     .padding(top = 60.dp)
                     .padding(all = 12.dp)
-                    .size(size = 48.dp)
+                    .size(size = 48.dp),
             )
         }
     }
@@ -103,7 +103,7 @@ internal fun HomeContentsScreen(
 @Composable
 private fun CommonError(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         onClick = onClick,
@@ -127,7 +127,7 @@ private fun CommonError(
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                style = MovieTheme.typography.caption
+                style = MovieTheme.typography.caption,
             )
         }
     }

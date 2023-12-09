@@ -35,7 +35,7 @@ data class HeaderUiModel(
     val movie: MovieModel,
     val showTm: Int = 0,
     val nations: List<String> = emptyList(),
-    val companies: List<CompanyModel> = emptyList()
+    val companies: List<CompanyModel> = emptyList(),
 )
 
 @Keep
@@ -53,7 +53,7 @@ class CgvItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
     val rating: String,
-    val webLink: String?
+    val webLink: String?,
 )
 
 @Keep
@@ -61,7 +61,7 @@ class LotteItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
     val rating: String,
-    val webLink: String?
+    val webLink: String?,
 )
 
 @Keep
@@ -69,13 +69,13 @@ class MegaboxItemUiModel(
     val movieId: String,
     val hasInfo: Boolean,
     val rating: String,
-    val webLink: String?
+    val webLink: String?,
 )
 
 @Keep
 class NaverItemUiModel(
     val rating: String,
-    val webLink: String?
+    val webLink: String?,
 ) : ContentItemUiModel()
 
 @Keep
@@ -85,7 +85,7 @@ class BoxOfficeItemUiModel(
     val audience: Int,
     val screenDays: Int,
     val rating: String,
-    val webLink: String?
+    val webLink: String?,
 ) : ContentItemUiModel()
 
 @Keep
@@ -93,44 +93,44 @@ class ImdbItemUiModel(
     val imdb: String,
     val rottenTomatoes: String,
     val metascore: String,
-    val webLink: String?
+    val webLink: String?,
 ) : ContentItemUiModel()
 
 @Keep
 class PlotItemUiModel(
-    val plot: String
+    val plot: String,
 ) : ContentItemUiModel()
 
 @Keep
 class CastItemUiModel(
-    val persons: List<PersonUiModel>
+    val persons: List<PersonUiModel>,
 ) : ContentItemUiModel()
 
 @Keep
 class PersonUiModel(
     val name: String,
     val cast: String,
-    val query: String
+    val query: String,
 )
 
 @Keep
 class AdItemUiModel(
-    val adInfo: NativeAdInfo
+    val adInfo: NativeAdInfo,
 ) : ContentItemUiModel()
 
 @Keep
 class TrailerHeaderItemUiModel(
-    val movieTitle: String
+    val movieTitle: String,
 ) : ContentItemUiModel()
 
 @Keep
 class TrailerItemUiModel(
-    val trailer: TrailerModel
+    val trailer: TrailerModel,
 ) : ContentItemUiModel()
 
 @Keep
 class TrailerFooterItemUiModel(
-    val movieTitle: String
+    val movieTitle: String,
 ) : ContentItemUiModel()
 
 val ContentItemUiModel.id: String

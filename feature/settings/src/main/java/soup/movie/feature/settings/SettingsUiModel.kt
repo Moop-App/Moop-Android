@@ -23,17 +23,17 @@ sealed class SettingsUiModel
 
 @Keep
 data class TheaterSettingUiModel(
-    val theaterList: List<TheaterModel>
+    val theaterList: List<TheaterModel>,
 ) : SettingsUiModel()
 
 @Keep
 data class VersionSettingUiModel(
     val versionCode: Int,
     val versionName: String,
-    val isLatest: Boolean
+    val isLatest: Boolean,
 ) : SettingsUiModel()
 
 @Keep
 data class ThemeSettingUiModel(
-    val themeOption: ThemeOption
+    val themeOption: ThemeOption,
 )

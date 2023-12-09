@@ -23,7 +23,7 @@ data class MovieListEntity(
     @PrimaryKey
     val type: String,
     val lastUpdateTime: Long = 0,
-    val list: List<MovieEntity> = emptyList()
+    val list: List<MovieEntity> = emptyList(),
 ) {
 
     companion object {

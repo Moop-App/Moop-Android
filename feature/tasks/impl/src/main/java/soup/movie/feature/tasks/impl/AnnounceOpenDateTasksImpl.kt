@@ -33,7 +33,7 @@ class AnnounceOpenDateTasksImpl @Inject constructor(
     override fun fetch() {
         val request = PeriodicWorkRequestBuilder<AnnounceOpenDateWorker>(
             2,
-            TimeUnit.DAYS
+            TimeUnit.DAYS,
         )
             .setInitialDelay(calculateInitialDelayMinutes(), TimeUnit.MINUTES)
             .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 1, TimeUnit.MINUTES)
@@ -41,7 +41,7 @@ class AnnounceOpenDateTasksImpl @Inject constructor(
         workManager.enqueueUniquePeriodicWork(
             AnnounceOpenDateWorker.TAG,
             ExistingPeriodicWorkPolicy.KEEP,
-            request
+            request,
         )
     }
 

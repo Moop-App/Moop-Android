@@ -32,24 +32,24 @@ sealed class TheaterEditContentUiModel {
 
 @Keep
 data class TheaterEditChildUiModel(
-    val areaGroupList: List<TheaterEditAreaGroupUiModel>
+    val areaGroupList: List<TheaterEditAreaGroupUiModel>,
 )
 
 @Keep
 data class TheaterEditAreaGroupUiModel(
     val title: String,
-    val theaterList: List<TheaterEditTheaterUiModel>
+    val theaterList: List<TheaterEditTheaterUiModel>,
 )
 
 @Keep
 data class TheaterEditTheaterUiModel(
     val theater: TheaterModel,
-    val checked: Boolean
+    val checked: Boolean,
 )
 
 @Keep
 data class TheaterEditFooterUiModel(
-    val theaterList: List<TheaterModel>
+    val theaterList: List<TheaterModel>,
 ) {
 
     fun isFull(): Boolean = theaterList.size >= TheaterEditManager.MAX_ITEMS

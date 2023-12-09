@@ -63,7 +63,7 @@ class LauncherIcons(context: Context) {
         val shadow = getShadowBitmap(drawable)
         return ShadowDrawable(
             shadow,
-            drawable
+            drawable,
         )
     }
 
@@ -117,7 +117,7 @@ class LauncherIcons(context: Context) {
             this.state =
                 MyConstantState(
                     shadow,
-                    dr.constantState!!
+                    dr.constantState!!,
                 )
         }
 
@@ -138,7 +138,7 @@ class LauncherIcons(context: Context) {
 
             canvas.translate(
                 bounds.width() * factor * (ICON_SIZE_BLUR_FACTOR + ICON_SIZE_KEY_SHADOW_DELTA_FACTOR / 2),
-                bounds.height() * factor * ICON_SIZE_BLUR_FACTOR
+                bounds.height() * factor * ICON_SIZE_BLUR_FACTOR,
             )
             canvas.scale(factor, factor)
             super.draw(canvas)
@@ -147,14 +147,14 @@ class LauncherIcons(context: Context) {
 
         class MyConstantState internal constructor(
             val shadow: Bitmap,
-            val childState: ConstantState
+            val childState: ConstantState,
         ) : ConstantState() {
 
             val paint = Paint(Paint.FILTER_BITMAP_FLAG)
 
             override fun newDrawable(): Drawable {
                 return ShadowDrawable(
-                    this
+                    this,
                 )
             }
 
@@ -167,6 +167,7 @@ class LauncherIcons(context: Context) {
     companion object {
         // Percent of actual icon size
         private const val ICON_SIZE_BLUR_FACTOR = 0.5f / 48
+
         // Percent of actual icon size
         private const val ICON_SIZE_KEY_SHADOW_DELTA_FACTOR = 1f / 48
 

@@ -41,7 +41,7 @@ import javax.inject.Inject
 class LocalDataSourceImpl @Inject constructor(
     private val favoriteMovieDao: FavoriteMovieDao,
     private val openDateAlarmDao: OpenDateAlarmDao,
-    private val cacheDao: MovieCacheDao
+    private val cacheDao: MovieCacheDao,
 ) : LocalDataSource {
 
     private var codeResponse: TheaterAreaGroupModel? = null
@@ -70,8 +70,8 @@ class LocalDataSourceImpl @Inject constructor(
             MovieListEntity(
                 type,
                 movieList.lastUpdateTime,
-                movieList.list.map { it.toMovieEntity() }
-            )
+                movieList.list.map { it.toMovieEntity() },
+            ),
         )
     }
 

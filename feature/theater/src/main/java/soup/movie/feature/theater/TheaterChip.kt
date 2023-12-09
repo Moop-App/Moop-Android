@@ -33,20 +33,20 @@ import soup.movie.model.TheaterTypeModel
 @Composable
 fun TheaterChip(
     theater: TheaterModel,
-    onTheaterClick: (TheaterModel) -> Unit = {}
+    onTheaterClick: (TheaterModel) -> Unit = {},
 ) {
     when (theater.type) {
         TheaterTypeModel.CGV -> CgvChip(
             text = theater.name,
-            onClick = { debounce { onTheaterClick(theater) } }
+            onClick = { debounce { onTheaterClick(theater) } },
         )
         TheaterTypeModel.LOTTE -> LotteChip(
             text = theater.name,
-            onClick = { debounce { onTheaterClick(theater) } }
+            onClick = { debounce { onTheaterClick(theater) } },
         )
         TheaterTypeModel.MEGABOX -> MegaboxChip(
             text = theater.name,
-            onClick = { debounce { onTheaterClick(theater) } }
+            onClick = { debounce { onTheaterClick(theater) } },
         )
     }
 }
@@ -56,7 +56,7 @@ fun TheaterChip(
 private fun CgvChip(
     text: String,
     onClick: () -> Unit = {},
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     Chip(
         onClick = onClick,
@@ -65,7 +65,7 @@ private fun CgvChip(
         colors = ChipDefaults.chipColors(
             backgroundColor = Color.White,
             contentColor = MovieTheme.colors.onCgv,
-        )
+        ),
     ) {
         Text(
             text = text,
@@ -79,15 +79,15 @@ private fun CgvChip(
 private fun LotteChip(
     text: String,
     onClick: () -> Unit = {},
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     Chip(
         onClick = onClick,
         enabled = enabled,
         colors = ChipDefaults.chipColors(
             backgroundColor = Color(0xFFED1D24),
-            contentColor = Color.White
-        )
+            contentColor = Color.White,
+        ),
     ) {
         Text(
             text = text,
@@ -101,15 +101,15 @@ private fun LotteChip(
 private fun MegaboxChip(
     text: String,
     onClick: () -> Unit = {},
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     Chip(
         onClick = onClick,
         enabled = enabled,
         colors = ChipDefaults.chipColors(
             backgroundColor = Color(0xFF352263),
-            contentColor = Color.White
-        )
+            contentColor = Color.White,
+        ),
     ) {
         Text(
             text = text,

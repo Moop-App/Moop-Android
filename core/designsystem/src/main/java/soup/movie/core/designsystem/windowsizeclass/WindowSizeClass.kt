@@ -64,7 +64,7 @@ fun calculateWindowSizeClass(activity: Activity): WindowSizeClass {
 @Immutable
 class WindowSizeClass private constructor(
     val widthSizeClass: WindowWidthSizeClass,
-    val heightSizeClass: WindowHeightSizeClass
+    val heightSizeClass: WindowHeightSizeClass,
 ) {
     companion object {
         /**
@@ -115,7 +115,7 @@ class WindowSizeClass private constructor(
 @Immutable
 @kotlin.jvm.JvmInline
 value class WindowWidthSizeClass private constructor(
-    private val value: Int
+    private val value: Int,
 ) : Comparable<WindowWidthSizeClass> {
 
     override operator fun compareTo(other: WindowWidthSizeClass) = value.compareTo(other.value)
@@ -169,7 +169,7 @@ value class WindowWidthSizeClass private constructor(
 @Immutable
 @kotlin.jvm.JvmInline
 value class WindowHeightSizeClass private constructor(
-    private val value: Int
+    private val value: Int,
 ) : Comparable<WindowHeightSizeClass> {
 
     override operator fun compareTo(other: WindowHeightSizeClass) = value.compareTo(other.value)

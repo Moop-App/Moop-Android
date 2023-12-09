@@ -39,7 +39,7 @@ interface DatabaseModule {
     @Binds
     @Singleton
     fun provideLocalDataSource(
-        localDataSourceImpl: LocalDataSourceImpl
+        localDataSourceImpl: LocalDataSourceImpl,
     ): LocalDataSource
 
     companion object {
@@ -47,7 +47,7 @@ interface DatabaseModule {
         @Provides
         @Singleton
         fun provideFavoriteMovieDao(
-            movieDatabase: MovieDatabase
+            movieDatabase: MovieDatabase,
         ): FavoriteMovieDao {
             return movieDatabase.favoriteMovieDao()
         }
@@ -55,7 +55,7 @@ interface DatabaseModule {
         @Provides
         @Singleton
         fun provideOpenDateAlarmDao(
-            movieDatabase: MovieDatabase
+            movieDatabase: MovieDatabase,
         ): OpenDateAlarmDao {
             return movieDatabase.openDateAlarmDao()
         }
@@ -63,7 +63,7 @@ interface DatabaseModule {
         @Provides
         @Singleton
         fun provideMovieCacheDao(
-            movieCacheDatabase: MovieCacheDatabase
+            movieCacheDatabase: MovieCacheDatabase,
         ): MovieCacheDao {
             return movieCacheDatabase.movieCacheDao()
         }
@@ -71,7 +71,7 @@ interface DatabaseModule {
         @Provides
         @Singleton
         fun provideMovieDatabase(
-            @ApplicationContext context: Context
+            @ApplicationContext context: Context,
         ): MovieDatabase {
             return Room
                 .databaseBuilder(context, MovieDatabase::class.java, "movie.db")
@@ -81,7 +81,7 @@ interface DatabaseModule {
         @Provides
         @Singleton
         fun provideMovieCacheDatabase(
-            @ApplicationContext context: Context
+            @ApplicationContext context: Context,
         ): MovieCacheDatabase {
             return Room
                 .databaseBuilder(context, MovieCacheDatabase::class.java, "moop.db")

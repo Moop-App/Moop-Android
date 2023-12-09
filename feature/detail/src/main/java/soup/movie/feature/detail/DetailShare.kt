@@ -187,10 +187,10 @@ private fun Context.shareToKakaoTalk(movie: MovieModel) {
                     movie.age >= 12 -> R.string.movie_age_12
                     movie.age >= 0 -> R.string.movie_age_all
                     else -> R.string.movie_age_unknown
-                }
+                },
             )
             append(" / $ageLabel")
-        }
+        },
     )
 }
 
@@ -228,7 +228,7 @@ private fun Context.shareText(movie: MovieModel, packageName: String?) {
                     movie.age >= 12 -> R.string.movie_age_12
                     movie.age >= 0 -> R.string.movie_age_all
                     else -> R.string.movie_age_unknown
-                }
+                },
             )
             append(" / $ageLabel")
             movie.genres?.let { genres ->

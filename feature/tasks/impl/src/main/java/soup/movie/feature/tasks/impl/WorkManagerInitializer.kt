@@ -36,8 +36,8 @@ class WorkManagerInitializer : Initializer<WorkManager> {
             .appDependencies(
                 EntryPointAccessors.fromApplication(
                     context.applicationContext,
-                    InitializerDependencies::class.java
-                )
+                    InitializerDependencies::class.java,
+                ),
             )
             .build()
             .inject(this)
@@ -46,7 +46,7 @@ class WorkManagerInitializer : Initializer<WorkManager> {
             context,
             Configuration.Builder()
                 .setWorkerFactory(workerFactory)
-                .build()
+                .build(),
         )
         return WorkManager.getInstance(context)
     }

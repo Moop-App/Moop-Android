@@ -76,7 +76,8 @@ import soup.movie.resources.R
 private enum class Page(val title: String) {
     CGV("CGV"),
     Lotte("롯데시네마"),
-    Megabox("메가박스");
+    Megabox("메가박스"),
+    ;
 
     companion object {
         fun of(page: Int): Page {
@@ -93,12 +94,12 @@ private enum class Page(val title: String) {
     ExperimentalComposeUiApi::class,
     ExperimentalMaterialApi::class,
     ExperimentalFoundationApi::class,
-    ExperimentalPagerApi::class
+    ExperimentalPagerApi::class,
 )
 @Composable
 fun TheaterEditScreen(
     viewModel: TheaterEditViewModel,
-    upPress: () -> Unit
+    upPress: () -> Unit,
 ) {
     val pages = Page.values()
     val pagerState = rememberPagerState()
@@ -118,10 +119,10 @@ fun TheaterEditScreen(
                 indicator = { tabPositions ->
                     TabRowDefaults.Indicator(
                         modifier = Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
-                        color = MovieTheme.colors.secondary
+                        color = MovieTheme.colors.secondary,
                     )
                 },
-                modifier = Modifier.shadow(elevation = 4.dp)
+                modifier = Modifier.shadow(elevation = 4.dp),
             ) {
                 pages.forEachIndexed { index, page ->
                     Tab(
@@ -133,7 +134,7 @@ fun TheaterEditScreen(
                             }
                         },
                         selectedContentColor = MovieTheme.colors.secondary,
-                        unselectedContentColor = MovieTheme.colors.onBackground
+                        unselectedContentColor = MovieTheme.colors.onBackground,
                     )
                 }
             }
@@ -142,7 +143,7 @@ fun TheaterEditScreen(
         sheetElevation = if (MovieTheme.colors.isLight) 16.dp else 0.dp,
         sheetContent = {
             val uiModel by viewModel.footerUiModel.collectAsState(
-                TheaterEditFooterUiModel(emptyList())
+                TheaterEditFooterUiModel(emptyList()),
             )
             TheaterEditFooter(
                 uiModel = uiModel,
@@ -157,7 +158,7 @@ fun TheaterEditScreen(
                 onConfirmClick = {
                     viewModel.onConfirmClick()
                     upPress()
-                }
+                },
             )
         },
     ) { paddingValues ->
@@ -174,7 +175,7 @@ fun TheaterEditScreen(
                         }
                     }
                     false
-                }
+                },
         ) {
             HorizontalPager(pageCount = pages.size, state = pagerState) { page ->
                 when (Page.of(page)) {
@@ -184,12 +185,12 @@ fun TheaterEditScreen(
                 }
             }
             val viewState by viewModel.contentUiModel.collectAsState(
-                TheaterEditContentUiModel.LoadingState
+                TheaterEditContentUiModel.LoadingState,
             )
             if (viewState is TheaterEditContentUiModel.LoadingState) {
                 CircularProgressIndicator(
                     color = MovieTheme.colors.secondary,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center),
                 )
             }
         }
@@ -207,17 +208,17 @@ private fun TheaterEditFooter(
         modifier = Modifier.clickable(
             onClick = { debounce(onClick) },
             interactionSource = remember { MutableInteractionSource() },
-            indication = null
-        )
+            indication = null,
+        ),
     ) {
         TheaterEditFooterPeek(
             currentCount = uiModel.theaterList.size,
             isFull = uiModel.isFull(),
-            onConfirmClick = onConfirmClick
+            onConfirmClick = onConfirmClick,
         )
         TheaterEditFooterContents(
             theaterList = uiModel.theaterList,
-            onTheaterClick = onTheaterClick
+            onTheaterClick = onTheaterClick,
         )
     }
 }
@@ -227,13 +228,13 @@ private fun TheaterEditFooter(
 private fun TheaterEditFooterPeek(
     currentCount: Int,
     isFull: Boolean,
-    onConfirmClick: () -> Unit
+    onConfirmClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .requiredHeight(60.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = "자주가는 극장은 최대 10개까지\n선택할 수 있습니다.",
@@ -241,7 +242,7 @@ private fun TheaterEditFooterPeek(
                 .padding(horizontal = 16.dp)
                 .weight(1f),
             fontSize = 14.sp,
-            color = MovieTheme.colors.onSurface
+            color = MovieTheme.colors.onSurface,
         )
         Surface(
             onClick = { debounce(onConfirmClick) },
@@ -249,7 +250,7 @@ private fun TheaterEditFooterPeek(
                 .padding(end = 8.dp)
                 .requiredSize(100.dp, 36.dp),
             shape = RoundedCornerShape(percent = 50),
-            color = if (isFull) MovieTheme.colors.error else MovieTheme.colors.secondary
+            color = if (isFull) MovieTheme.colors.error else MovieTheme.colors.secondary,
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
@@ -270,7 +271,7 @@ private fun TheaterEditFooterPeek(
                 Text(
                     text = "/ 10",
                     modifier = Modifier.padding(end = 16.dp),
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
                 )
             }
         }
@@ -285,7 +286,7 @@ private fun TheaterEditFooterContents(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .requiredHeight(180.dp)
+            .requiredHeight(180.dp),
     ) {
         Divider(color = MovieTheme.colors.divider)
         if (theaterList.isEmpty()) {
@@ -293,13 +294,13 @@ private fun TheaterEditFooterContents(
                 text = stringResource(R.string.theater_empty_description),
                 modifier = Modifier.align(Alignment.Center),
                 textAlign = TextAlign.Center,
-                style = MovieTheme.typography.body2
+                style = MovieTheme.typography.body2,
             )
         } else {
             FlowRow(
                 modifier = Modifier.padding(all = 16.dp),
                 mainAxisSpacing = 8.dp,
-                crossAxisSpacing = 8.dp
+                crossAxisSpacing = 8.dp,
             ) {
                 theaterList.forEach { theater ->
                     TheaterChip(theater, onTheaterClick)

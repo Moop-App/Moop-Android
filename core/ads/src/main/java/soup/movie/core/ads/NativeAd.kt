@@ -30,6 +30,6 @@ fun NativeAd(adInfo: NativeAdInfo) {
         modifier = Modifier.fillMaxWidth().wrapContentHeight(),
         update = {
             it.setNativeAd(adInfo.nativeAd)
-        }
+        },
     )
 }

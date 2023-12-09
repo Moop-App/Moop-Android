@@ -27,5 +27,5 @@ data class OpenDateAlarmEntity(
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "open_date")
-    val openDate: String
+    val openDate: String,
 )

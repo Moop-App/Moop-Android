@@ -30,7 +30,7 @@ import soup.movie.feature.home.textUnit
 @Composable
 internal fun MovieAgeBadge(
     age: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val color: Color = when {
         age >= 19 -> MovieTheme.colors.ageTag19
@@ -43,14 +43,14 @@ internal fun MovieAgeBadge(
         modifier = modifier
             .size(10.dp)
             .background(color = color, shape = RoundedCornerShape(5.dp))
-            .border(1.dp, MovieTheme.colors.background, shape = RoundedCornerShape(5.dp))
+            .border(1.dp, MovieTheme.colors.background, shape = RoundedCornerShape(5.dp)),
     )
 }
 
 @Composable
 fun MovieAgeTag(
     age: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val (text, color) = when {
         age >= 19 -> "청불" to MovieTheme.colors.ageTag19
@@ -63,6 +63,6 @@ fun MovieAgeTag(
         text = text,
         tagBackgroundColor = color,
         modifier = modifier,
-        fontSize = 12.dp.textUnit
+        fontSize = 12.dp.textUnit,
     )
 }

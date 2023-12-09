@@ -28,7 +28,7 @@ internal class CgvMarkerUiModel(
     override val code: String,
     override val name: String,
     override val lng: Double,
-    override val lat: Double
+    override val lat: Double,
 ) : TheaterMarkerUiModel()
 
 internal class LotteCinemaMarkerUiModel(
@@ -36,7 +36,7 @@ internal class LotteCinemaMarkerUiModel(
     override val code: String,
     override val name: String,
     override val lng: Double,
-    override val lat: Double
+    override val lat: Double,
 ) : TheaterMarkerUiModel()
 
 internal class MegaboxMarkerUiModel(
@@ -44,5 +44,5 @@ internal class MegaboxMarkerUiModel(
     override val code: String,
     override val name: String,
     override val lng: Double,
-    override val lat: Double
+    override val lat: Double,
 ) : TheaterMarkerUiModel()

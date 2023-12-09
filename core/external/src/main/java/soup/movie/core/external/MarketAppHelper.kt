@@ -27,16 +27,16 @@ private fun Context.executePlayStoreForApp(pkgName: String) {
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$pkgName")
-            )
+                Uri.parse("market://details?id=$pkgName"),
+            ),
         )
     } catch (e: ActivityNotFoundException) {
         Logger.w(e)
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=$pkgName")
-            )
+                Uri.parse("https://play.google.com/store/apps/details?id=$pkgName"),
+            ),
         )
     }
 }
@@ -90,14 +90,14 @@ object YouTube {
         } catch (e: ActivityNotFoundException) {
             Logger.w(e)
             ctx.startActivitySafely(
-                createTrailerWebIntent(youtubeId)
+                createTrailerWebIntent(youtubeId),
             )
         }
     }
 
     private fun createTrailerAppIntent(id: String): Intent = Intent(
         Intent.ACTION_VIEW,
-        Uri.parse("vnd.youtube:$id")
+        Uri.parse("vnd.youtube:$id"),
     ).apply {
         flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Intent.FLAG_ACTIVITY_NEW_TASK or
@@ -110,7 +110,7 @@ object YouTube {
 
     private fun createTrailerWebIntent(id: String): Intent = Intent(
         Intent.ACTION_VIEW,
-        Uri.parse("https://www.youtube.com/watch?v=$id")
+        Uri.parse("https://www.youtube.com/watch?v=$id"),
     )
 
     fun executeAppWithQuery(ctx: Context, movieTitle: String) {
@@ -121,14 +121,14 @@ object YouTube {
             Logger.w(e)
             ctx.startActivitySafely(
                 createSearchWebIntent(
-                    query
-                )
+                    query,
+                ),
             )
         }
     }
 
     private fun createSearchAppIntent(query: String): Intent = Intent(
-        Intent.ACTION_SEARCH
+        Intent.ACTION_SEARCH,
     )
         .setPackage(packageName)
         .putExtra("query", query).apply {
@@ -143,6 +143,6 @@ object YouTube {
 
     private fun createSearchWebIntent(query: String): Intent = Intent(
         Intent.ACTION_VIEW,
-        Uri.parse("https://www.youtube.com/results?search_query=$query")
+        Uri.parse("https://www.youtube.com/results?search_query=$query"),
     )
 }

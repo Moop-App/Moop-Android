@@ -24,7 +24,7 @@ import soup.movie.model.TheaterRatingsModel
 
 fun MovieEntity.toMovie() = MovieModel(
     id, score, title, posterUrl, openDate, isNow, age, nationFilter, genres, boxOffice,
-    TheaterRatingsModel(cgv, lotte, megabox)
+    TheaterRatingsModel(cgv, lotte, megabox),
 )
 
 fun FavoriteMovieEntity.toMovie(): MovieModel {
@@ -39,7 +39,7 @@ fun FavoriteMovieEntity.toMovie(): MovieModel {
         nationFilter = nationFilter,
         genres = genres,
         boxOffice = boxOffice,
-        theater = TheaterRatingsModel(cgv, lotte, megabox)
+        theater = TheaterRatingsModel(cgv, lotte, megabox),
     )
 }
 

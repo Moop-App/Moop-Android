@@ -38,31 +38,31 @@ interface TasksModule {
 
     @Binds
     fun bindsRecommendMoviesTasks(
-        impl: RecommendMoviesTasksImpl
+        impl: RecommendMoviesTasksImpl,
     ): RecommendMoviesTasks
 
     @Binds
     fun bindsRecommendMoviesUseCase(
-        impl: RecommendMoviesUseCaseImpl
+        impl: RecommendMoviesUseCaseImpl,
     ): RecommendMoviesUseCase
 
     @Binds
     fun bindsAnnounceOpenDateTasks(
-        impl: AnnounceOpenDateTasksImpl
+        impl: AnnounceOpenDateTasksImpl,
     ): AnnounceOpenDateTasks
 
     @Binds
     fun bindsAnnounceOpenDateUseCase(
-        impl: AnnounceOpenDateUseCaseImpl
+        impl: AnnounceOpenDateUseCaseImpl,
     ): AnnounceOpenDateUseCase
 
     @Binds
     fun bindsSyncOpenDateTasks(
-        impl: SyncOpenDateTasksImpl
+        impl: SyncOpenDateTasksImpl,
     ): SyncOpenDateTasks
 
     @Binds
     fun bindsSyncOpenDateUseCase(
-        impl: SyncOpenDateUseCaseImpl
+        impl: SyncOpenDateUseCaseImpl,
     ): SyncOpenDateUseCase
 }

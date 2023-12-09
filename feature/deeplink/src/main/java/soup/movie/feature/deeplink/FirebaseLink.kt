@@ -58,18 +58,18 @@ object FirebaseLink {
             .setAndroidParameters(
                 DynamicLink.AndroidParameters.Builder("soup.movie")
                     .setMinimumVersion(92)
-                    .build()
+                    .build(),
             )
             .setIosParameters(
                 DynamicLink.IosParameters.Builder("com.kor45cw.Moop")
-                    .build()
+                    .build(),
             )
             .setSocialMetaTagParameters(
                 DynamicLink.SocialMetaTagParameters.Builder()
                     .setImageUrl(Uri.parse(imageUrl))
                     .setTitle(title)
                     .setDescription(description)
-                    .build()
+                    .build(),
             )
             .buildShortDynamicLink(ShortDynamicLink.Suffix.SHORT)
             .addOnSuccessListener {

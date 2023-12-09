@@ -27,12 +27,12 @@ object LocalDataSourceFactory {
         return LocalDataSourceImpl(
             movieDb.favoriteMovieDao(),
             movieDb.openDateAlarmDao(),
-            cacheDb.movieCacheDao()
+            cacheDb.movieCacheDao(),
         )
     }
 
     private fun createMovieDatabase(
-        context: Context
+        context: Context,
     ): MovieDatabase {
         return Room
             .databaseBuilder(context.applicationContext, MovieDatabase::class.java, "movie.db")
@@ -40,7 +40,7 @@ object LocalDataSourceFactory {
     }
 
     private fun createCacheDatabase(
-        context: Context
+        context: Context,
     ): MovieCacheDatabase {
         return Room
             .databaseBuilder(context.applicationContext, MovieCacheDatabase::class.java, "moop.db")

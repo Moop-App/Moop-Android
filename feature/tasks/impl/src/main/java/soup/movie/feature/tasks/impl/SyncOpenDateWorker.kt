@@ -27,7 +27,7 @@ import soup.movie.log.Logger
 class SyncOpenDateWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
-    private val syncOpenDate: SyncOpenDateUseCase
+    private val syncOpenDate: SyncOpenDateUseCase,
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {

@@ -30,7 +30,7 @@ object SearchHelper {
     // 자음
     private val INITIAL_SOUND = charArrayOf(
         'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ',
-        'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+        'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ',
     )
 
     private const val NO_MATCHED = -1
@@ -151,8 +151,11 @@ object SearchHelper {
                 }
             }
         }
-        return if (startIdx == -1 || endIdx == -1) null
-        else IntRange(startIdx, endIdx)
+        return if (startIdx == -1 || endIdx == -1) {
+            null
+        } else {
+            IntRange(startIdx, endIdx)
+        }
     }
 
     private fun isNotMatched(q: Char, v: Char): Boolean = !isMatched(q, v)
