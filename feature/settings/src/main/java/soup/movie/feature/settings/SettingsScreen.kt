@@ -81,9 +81,9 @@ internal fun SettingsScreen(
         modifier = Modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(R.string.menu_settings)) }
+                title = { Text(text = stringResource(R.string.menu_settings)) },
             )
-        }
+        },
     ) { paddingValues ->
         val context = LocalContext.current
         val theme by viewModel.themeUiModel.collectAsState()
@@ -93,20 +93,20 @@ internal fun SettingsScreen(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
         ) {
             SettingsThemeItem(theme, onClick = onThemeEditClick)
             SettingsDivider()
             SettingsTheaterItem(
                 theater?.theaterList.orEmpty(),
                 onItemClick = { theater -> context.executeWeb(theater) },
-                onEditClick = onTheaterEditClick
+                onEditClick = onTheaterEditClick,
             )
             SettingsDivider()
             SettingsVersionItem(
                 version = version,
                 onClick = onVersionClick,
-                onActionClick = onMarketIconClick
+                onActionClick = onMarketIconClick,
             )
             SettingsDivider()
             SettingsFeedbackItem(onClick = { context.goToEmail() })
@@ -121,7 +121,7 @@ internal fun SettingsScreen(
                     Icon(
                         MovieIcons.NewReleases,
                         contentDescription = null,
-                        tint = MovieTheme.colors.error
+                        tint = MovieTheme.colors.error,
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(text = stringResource(R.string.settings_version_update_title))
@@ -132,7 +132,7 @@ internal fun SettingsScreen(
                 TextButton(
                     onClick = { Moop.executePlayStore(context) },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MovieTheme.colors.secondary
+                        contentColor = MovieTheme.colors.secondary,
                     ),
                 ) {
                     Text(text = stringResource(R.string.settings_version_update_button_positive))
@@ -142,7 +142,7 @@ internal fun SettingsScreen(
                 TextButton(
                     onClick = { viewModel.showVersionUpdateDialog = false },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MovieTheme.colors.secondary
+                        contentColor = MovieTheme.colors.secondary,
                     ),
                 ) {
                     Text(text = stringResource(R.string.settings_version_update_button_negative))
@@ -163,19 +163,19 @@ private fun SettingsThemeItem(
         ""
     }
     Column(
-        modifier = Modifier.padding(top = 12.dp, bottom = 24.dp)
+        modifier = Modifier.padding(top = 12.dp, bottom = 24.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             SettingsCategory(
                 text = stringResource(R.string.settings_category_theme),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             )
             IconButton(
                 onClick = { debounce(onClick) },
-                modifier = Modifier.size(48.dp)
+                modifier = Modifier.size(48.dp),
             ) {
                 Icon(
                     MovieIcons.Palette,
@@ -190,14 +190,14 @@ private fun SettingsThemeItem(
                 onClick = { debounce(onClick) },
                 modifier = Modifier.fillMaxSize(),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MovieTheme.colors.surface
-                )
+                    backgroundColor = MovieTheme.colors.surface,
+                ),
             ) {
                 Text(
                     text = text,
                     modifier = Modifier.fillMaxWidth(),
                     fontSize = 17.sp,
-                    style = MovieTheme.typography.body2
+                    style = MovieTheme.typography.body2,
                 )
             }
         }
@@ -211,19 +211,19 @@ private fun SettingsTheaterItem(
     onEditClick: () -> Unit,
 ) {
     Column(
-        modifier = Modifier.padding(top = 12.dp, bottom = 24.dp)
+        modifier = Modifier.padding(top = 12.dp, bottom = 24.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             SettingsCategory(
                 text = stringResource(R.string.settings_category_theater),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             )
             IconButton(
                 onClick = { debounce(onEditClick) },
-                modifier = Modifier.size(48.dp)
+                modifier = Modifier.size(48.dp),
             ) {
                 Icon(
                     MovieIcons.Edit,
@@ -238,7 +238,7 @@ private fun SettingsTheaterItem(
                 Text(
                     text = stringResource(R.string.settings_theater_empty_description),
                     textAlign = TextAlign.Center,
-                    style = MovieTheme.typography.body2
+                    style = MovieTheme.typography.body2,
                 )
             } else {
                 FlowRow(mainAxisSpacing = 8.dp) {
@@ -255,17 +255,17 @@ private fun SettingsTheaterItem(
 private fun SettingsVersionItem(
     version: VersionSettingUiModel?,
     onClick: (VersionSettingUiModel) -> Unit,
-    onActionClick: () -> Unit = {}
+    onActionClick: () -> Unit = {},
 ) {
     Column(
-        modifier = Modifier.padding(vertical = 24.dp)
+        modifier = Modifier.padding(vertical = 24.dp),
     ) {
         SettingsCategory(text = stringResource(R.string.settings_category_version))
         Spacer(modifier = Modifier.height(12.dp))
         Box(modifier = Modifier.requiredHeight(48.dp)) {
             SettingsButton(
                 onClick = { debounce { version?.run(onClick) } },
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             ) {
                 Text(
                     text = version?.let { version ->
@@ -276,7 +276,7 @@ private fun SettingsVersionItem(
                         }
                     }.orEmpty(),
                     textAlign = TextAlign.Center,
-                    style = MovieTheme.typography.body2
+                    style = MovieTheme.typography.body2,
                 )
             }
             IconButton(
@@ -284,7 +284,7 @@ private fun SettingsVersionItem(
                 modifier = Modifier
                     .width(48.dp)
                     .padding(end = 4.dp)
-                    .align(Alignment.CenterEnd)
+                    .align(Alignment.CenterEnd),
             ) {
                 if (version?.isLatest == true) {
                     Icon(
@@ -306,22 +306,22 @@ private fun SettingsVersionItem(
 
 @Composable
 private fun SettingsFeedbackItem(
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Column(
-        modifier = Modifier.padding(vertical = 24.dp)
+        modifier = Modifier.padding(vertical = 24.dp),
     ) {
         SettingsCategory(text = stringResource(R.string.settings_category_feedback))
         Spacer(modifier = Modifier.height(12.dp))
         Box(modifier = Modifier.requiredHeight(48.dp)) {
             SettingsButton(
                 onClick = onClick,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             ) {
                 Text(
                     text = "개발자에게 버그 신고하기",
                     textAlign = TextAlign.Center,
-                    style = MovieTheme.typography.body2
+                    style = MovieTheme.typography.body2,
                 )
             }
             Icon(
@@ -330,7 +330,7 @@ private fun SettingsFeedbackItem(
                 tint = MovieTheme.colors.onSurface,
                 modifier = Modifier
                     .padding(end = 16.dp)
-                    .align(Alignment.CenterEnd)
+                    .align(Alignment.CenterEnd),
             )
         }
     }
@@ -339,14 +339,14 @@ private fun SettingsFeedbackItem(
 @Composable
 private fun SettingsCategory(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = text,
         modifier = modifier.fillMaxWidth(),
         color = MovieTheme.colors.onBackground,
         fontSize = 17.sp,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }
 
@@ -360,7 +360,7 @@ private fun SettingsButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     UnelevatedButton(
         onClick = onClick,
@@ -368,9 +368,9 @@ private fun SettingsButton(
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
-            disabledBackgroundColor = MovieTheme.colors.onSurface.copy(alpha = 0.05f)
+            disabledBackgroundColor = MovieTheme.colors.onSurface.copy(alpha = 0.05f),
         ),
-        content = content
+        content = content,
     )
 }
 
@@ -388,7 +388,7 @@ private fun Context.goToEmail() {
     intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("help.moop@gmail.com"))
     intent.putExtra(
         Intent.EXTRA_SUBJECT,
-        "뭅 v${BuildConfig.VERSION_NAME} 버그리포트"
+        "뭅 v${BuildConfig.VERSION_NAME} 버그리포트",
     )
     startActivitySafely(intent)
 }

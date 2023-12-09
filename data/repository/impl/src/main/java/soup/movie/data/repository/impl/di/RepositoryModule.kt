@@ -32,12 +32,12 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun provideMovieRepository(
-        movieRepositoryImpl: MovieRepositoryImpl
+        movieRepositoryImpl: MovieRepositoryImpl,
     ): MovieRepository
 
     @Binds
     @Singleton
     fun provideTheaterRepository(
-        theaterRepositoryImpl: TheaterRepositoryImpl
+        theaterRepositoryImpl: TheaterRepositoryImpl,
     ): TheaterRepository
 }

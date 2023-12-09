@@ -35,7 +35,7 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideEventAnalytics(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): EventAnalytics = EventAnalyticsImpl(context)
 
     @Singleton

@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ThemeOptionViewModel @Inject constructor(
-    private val themeOptionManager: ThemeOptionManager
+    private val themeOptionManager: ThemeOptionManager,
 ) : ViewModel() {
 
     var items by mutableStateOf<List<ThemeSettingItemUiModel>>(emptyList())

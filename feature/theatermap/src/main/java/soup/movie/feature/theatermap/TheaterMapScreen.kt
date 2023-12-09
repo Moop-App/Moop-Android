@@ -117,14 +117,14 @@ fun TheaterMapScreen(
         sheetContent = {
             TheaterMapFooter(
                 selectedTheater = viewModel.selectedTheater,
-                onClick = { viewModel.onTheaterUnselected() }
+                onClick = { viewModel.onTheaterUnselected() },
             )
         },
         topBar = {
             TopAppBar(
                 title = {
                     Text(text = stringResource(R.string.theater_map_title))
-                }
+                },
             )
         },
     ) { paddingValues ->
@@ -134,7 +134,7 @@ fun TheaterMapScreen(
             selectedTheater = viewModel.selectedTheater,
             onTheaterClick = { viewModel.onTheaterSelected(it) },
             onMapClick = { viewModel.onTheaterUnselected() },
-            onMapLoaded = { viewModel.onRefresh() }
+            onMapLoaded = { viewModel.onRefresh() },
         )
     }
 }
@@ -164,7 +164,7 @@ private fun TheaterMapContents(
             },
             extent = LatLngBounds.from(
                 LatLng(31.43, 122.37),
-                LatLng(44.35, 132.0)
+                LatLng(44.35, 132.0),
             ),
             minZoom = 6.0,
             isNightModeEnabled = isLightTheme.not(),
@@ -187,12 +187,12 @@ private fun TheaterMapContents(
         onMapClick = { _, _ ->
             onMapClick()
         },
-        onMapLoaded = { onMapLoaded() }
+        onMapLoaded = { onMapLoaded() },
     ) {
         theaters.forEach { theater ->
             Marker(
                 state = rememberMarkerState(
-                    position = LatLng(theater.lat, theater.lng)
+                    position = LatLng(theater.lat, theater.lng),
                 ),
                 captionText = theater.name,
                 icon = theater.getMarkerIcon(),
@@ -201,7 +201,7 @@ private fun TheaterMapContents(
                 onClick = {
                     onTheaterClick(theater)
                     true
-                }
+                },
             )
         }
     }
@@ -213,16 +213,16 @@ private fun TheaterMapContents(
                 cameraPositionState.animate(
                     update = CameraUpdate.scrollAndZoomTo(
                         LatLng(selectedTheater.lat, selectedTheater.lng),
-                        max(cameraPositionState.position.zoom, 16.0)
+                        max(cameraPositionState.position.zoom, 16.0),
                     ),
                     animation = CameraAnimation.Fly,
                 )
             } else {
                 cameraPositionState.animate(
                     update = CameraUpdate.zoomTo(
-                        min(cameraPositionState.position.zoom, 12.0)
+                        min(cameraPositionState.position.zoom, 12.0),
                     ),
-                    animation = CameraAnimation.Easing
+                    animation = CameraAnimation.Easing,
                 )
             }
         }
@@ -232,7 +232,7 @@ private fun TheaterMapContents(
 @Composable
 private fun TheaterMapFooter(
     selectedTheater: TheaterMarkerUiModel?,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -266,7 +266,7 @@ private fun TheaterMapFooter(
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                     mapIntent.setPackage(googleMapPackage)
                     context.startActivity(mapIntent)
-                }
+                },
             )
             val naverMapPackage = "com.nhn.android.nmap"
             MapButton(
@@ -280,7 +280,7 @@ private fun TheaterMapFooter(
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                     mapIntent.setPackage(naverMapPackage)
                     context.startActivity(mapIntent)
-                }
+                },
             )
             val kakaoMapPackage = "net.daum.android.map"
             MapButton(
@@ -294,12 +294,12 @@ private fun TheaterMapFooter(
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                     mapIntent.setPackage(kakaoMapPackage)
                     context.startActivity(mapIntent)
-                }
+                },
             )
             InfoButton(
                 onClick = {
                     selectedTheater.executeWeb(context)
-                }
+                },
             )
         }
     }
@@ -308,17 +308,17 @@ private fun TheaterMapFooter(
 @Composable
 private fun InfoButton(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     IconButton(
         onClick = onClick,
         modifier = modifier
             .padding(8.dp)
-            .requiredSize(48.dp)
+            .requiredSize(48.dp),
     ) {
         Icon(
             MovieIcons.Info,
-            contentDescription = null
+            contentDescription = null,
         )
     }
 }
@@ -327,7 +327,7 @@ private fun InfoButton(
 private fun MapButton(
     appIcon: Drawable?,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     if (appIcon != null) {
         IconButton(
@@ -335,7 +335,7 @@ private fun MapButton(
             modifier = modifier
                 .padding(6.dp)
                 .requiredSize(48.dp)
-                .shadow(elevation = 12.dp, CircleShape)
+                .shadow(elevation = 12.dp, CircleShape),
         ) {
             Image(
                 rememberDrawablePainter(appIcon),

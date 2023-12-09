@@ -50,8 +50,8 @@ class ImageUriProviderImpl(
             bitmap.toCacheFile(
                 appContext,
                 folderName = CACHE_DIRECTORY_NAME,
-                fileName = url.substring(url.lastIndexOf('/') + 1)
-            )
+                fileName = url.substring(url.lastIndexOf('/') + 1),
+            ),
         )
     }
 
@@ -64,8 +64,8 @@ class ImageUriProviderImpl(
             bitmap.toCacheFile(
                 appContext,
                 folderName = CACHE_DIRECTORY_NAME,
-                fileName = "share.jpg"
-            )
+                fileName = "share.jpg",
+            ),
         )
     }
 
@@ -79,7 +79,7 @@ class ImageUriProviderImpl(
     private fun Bitmap.toCacheFile(
         context: Context,
         folderName: String? = null,
-        fileName: String
+        fileName: String,
     ): File {
         val cacheDir = if (folderName.isNullOrBlank()) {
             context.cacheDir

@@ -51,19 +51,19 @@ internal fun DetailContent(
                                     isFavorite = isFavorite,
                                     onFavoriteChange = { isFavorite ->
                                         viewModel.onFavoriteButtonClick(isFavorite)
-                                    }
+                                    },
                                 )
                                 ShareButton(
                                     onClick = {
                                         onShareClick()
-                                    }
+                                    },
                                 )
-                            }
+                            },
                         )
                     },
                     items = uiModel.items,
                     viewModel = viewModel,
-                    onItemClick = { item -> onItemClick(item) }
+                    onItemClick = { item -> onItemClick(item) },
                 )
             }
             is DetailUiModel.Failure -> {

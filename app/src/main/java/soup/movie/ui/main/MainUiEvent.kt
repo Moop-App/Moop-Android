@@ -18,6 +18,6 @@ package soup.movie.ui.main
 sealed class MainUiEvent {
 
     class ShowDetailUiEvent(
-        val movieId: String
+        val movieId: String,
     ) : MainUiEvent()
 }

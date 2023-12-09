@@ -52,14 +52,14 @@ class SearchViewModel @Inject constructor(
             flowOf(
                 SearchUiModel.Success(
                     movies = movies,
-                    hasNoItem = query.isNotEmpty() && movies.isEmpty()
-                )
+                    hasNoItem = query.isNotEmpty() && movies.isEmpty(),
+                ),
             )
         }
         .stateIn(
             scope = viewModelScope,
             initialValue = SearchUiModel.None,
-            started = SharingStarted.WhileSubscribed(5_000)
+            started = SharingStarted.WhileSubscribed(5_000),
         )
 
     fun onQueryChanged(query: String) {

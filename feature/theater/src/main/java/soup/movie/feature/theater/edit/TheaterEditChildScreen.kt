@@ -44,7 +44,7 @@ internal fun CgvScreen(viewModel: TheaterEditViewModel) {
     TheaterEditChildScreen(
         uiModel = uiModel,
         onAddTheater = { viewModel.add(it) },
-        onRemoveTheater = { viewModel.remove(it) }
+        onRemoveTheater = { viewModel.remove(it) },
     )
 }
 
@@ -54,7 +54,7 @@ internal fun LotteScreen(viewModel: TheaterEditViewModel) {
     TheaterEditChildScreen(
         uiModel = uiModel,
         onAddTheater = { viewModel.add(it) },
-        onRemoveTheater = { viewModel.remove(it) }
+        onRemoveTheater = { viewModel.remove(it) },
     )
 }
 
@@ -64,7 +64,7 @@ internal fun MegaboxScreen(viewModel: TheaterEditViewModel) {
     TheaterEditChildScreen(
         uiModel = uiModel,
         onAddTheater = { viewModel.add(it) },
-        onRemoveTheater = { viewModel.remove(it) }
+        onRemoveTheater = { viewModel.remove(it) },
     )
 }
 
@@ -72,13 +72,13 @@ internal fun MegaboxScreen(viewModel: TheaterEditViewModel) {
 private fun TheaterEditChildScreen(
     uiModel: TheaterEditChildUiModel,
     onAddTheater: (TheaterModel) -> Boolean,
-    onRemoveTheater: (TheaterModel) -> Unit
+    onRemoveTheater: (TheaterModel) -> Unit,
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(all = 8.dp)
+        contentPadding = PaddingValues(all = 8.dp),
     ) {
         items(uiModel.areaGroupList) { item ->
             TheaterAreaItem(
@@ -91,15 +91,15 @@ private fun TheaterEditChildScreen(
                                 context.showToast(
                                     context.getString(
                                         R.string.theater_select_limit_description,
-                                        TheaterEditManager.MAX_ITEMS
-                                    )
+                                        TheaterEditManager.MAX_ITEMS,
+                                    ),
                                 )
                             }
                         } else {
                             onRemoveTheater(theater)
                         }
                     }
-                }
+                },
             )
         }
     }
@@ -109,7 +109,7 @@ private fun TheaterEditChildScreen(
 private fun TheaterAreaItem(
     title: String,
     theaterList: List<TheaterEditTheaterUiModel>,
-    onCheckedChange: (TheaterModel, Boolean) -> Unit
+    onCheckedChange: (TheaterModel, Boolean) -> Unit,
 ) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
         Text(
@@ -117,14 +117,14 @@ private fun TheaterAreaItem(
             modifier = Modifier.padding(all = 8.dp),
             fontWeight = FontWeight.Bold,
             color = MovieTheme.colors.onBackground,
-            style = MovieTheme.typography.subtitle1
+            style = MovieTheme.typography.subtitle1,
         )
         FlowRow(mainAxisSpacing = 8.dp, modifier = Modifier.padding(all = 4.dp)) {
             theaterList.forEach { item ->
                 TheaterFilterChip(
                     item.theater,
                     checked = item.checked,
-                    onCheckedChange = { checked -> onCheckedChange(item.theater, checked) }
+                    onCheckedChange = { checked -> onCheckedChange(item.theater, checked) },
                 )
             }
         }

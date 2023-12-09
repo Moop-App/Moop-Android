@@ -25,7 +25,7 @@ import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
 class TestDispatcherRule(
-    private val dispatcher: CoroutineDispatcher = StandardTestDispatcher()
+    private val dispatcher: CoroutineDispatcher = StandardTestDispatcher(),
 ) : TestRule {
     override fun apply(base: Statement, description: Description): Statement =
         object : Statement() {

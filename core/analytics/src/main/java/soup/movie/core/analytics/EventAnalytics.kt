@@ -19,21 +19,21 @@ import android.app.Activity
 
 interface EventAnalytics {
 
-    /* Common */
+    // Common
     fun screen(activity: Activity, screenName: String, screenClass: String?)
 
-    /* Main */
+    // Main
     fun clickMovie()
     fun clickMenuFilter()
 
-    /* Detail */
+    // Detail
     fun clickPoster()
     fun clickShare()
     fun clickCgvInfo()
     fun clickLotteInfo()
     fun clickMegaboxInfo()
 
-    /* Detail: Trailers */
+    // Detail: Trailers
     fun clickTrailer()
     fun clickMoreTrailers()
 }

@@ -36,16 +36,16 @@ import soup.movie.resources.R
 
 @Composable
 fun ThemeOptionScreen(
-    viewModel: ThemeOptionViewModel
+    viewModel: ThemeOptionViewModel,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
-        }
+        },
     ) { paddingValues ->
         ThemeOptionList(
             items = viewModel.items,
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues),
         )
     }
 }
@@ -58,7 +58,7 @@ private fun ThemeOptionList(
     Column(
         modifier = modifier
             .padding(8.dp)
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState()),
     ) {
         items.forEach {
             ThemeOptionItem(it)
@@ -77,11 +77,11 @@ private fun ThemeOptionItem(
             .fillMaxWidth()
             .height(60.dp)
             .clickable { debounce { uiModel.onItemClick() } }
-            .padding(horizontal = 24.dp)
+            .padding(horizontal = 24.dp),
     ) {
         Text(
             text = stringResource(stringResIdOf(uiModel.themeOption)),
-            fontSize = 17.sp
+            fontSize = 17.sp,
         )
     }
 }

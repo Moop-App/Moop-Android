@@ -33,7 +33,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TheaterMapViewModel @Inject constructor(
-    private val repository: TheaterRepository
+    private val repository: TheaterRepository,
 ) : ViewModel() {
 
     var uiModel by mutableStateOf<List<TheaterMarkerUiModel>>(emptyList())
@@ -81,7 +81,7 @@ class TheaterMapViewModel @Inject constructor(
                     code = it.code,
                     name = "CGV ${it.name}",
                     lat = it.lat,
-                    lng = it.lng
+                    lng = it.lng,
                 )
             }
         } + lotte.flatMap { group ->
@@ -91,7 +91,7 @@ class TheaterMapViewModel @Inject constructor(
                     code = it.code,
                     name = "롯데시네마 ${it.name}",
                     lat = it.lat,
-                    lng = it.lng
+                    lng = it.lng,
                 )
             }
         } + megabox.flatMap { group ->
@@ -101,7 +101,7 @@ class TheaterMapViewModel @Inject constructor(
                     code = it.code,
                     name = "메가박스 ${it.name}",
                     lat = it.lat,
-                    lng = it.lng
+                    lng = it.lng,
                 )
             }
         }

@@ -43,7 +43,7 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
         delegate.logEvent(Event.SHARE, Bundle().apply { params() })
     }
 
-    /* Common */
+    // Common
 
     override fun screen(activity: Activity, screenName: String, screenClass: String?) {
         logEvent(Event.SCREEN_VIEW) {
@@ -52,7 +52,7 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
         }
     }
 
-    /* Main */
+    // Main
 
     override fun clickMovie() {
         logSelectEvent {
@@ -66,7 +66,7 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
         }
     }
 
-    /* Detail */
+    // Detail
 
     override fun clickPoster() {
         logShareEvent {
@@ -101,7 +101,7 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
         }
     }
 
-    /* Detail: Trailers */
+    // Detail: Trailers
 
     override fun clickTrailer() {
         logSelectEvent {

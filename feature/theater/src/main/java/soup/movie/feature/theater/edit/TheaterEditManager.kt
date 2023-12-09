@@ -26,7 +26,7 @@ import soup.movie.model.TheaterModel
 
 class TheaterEditManager(
     private val repository: TheaterRepository,
-    private val appSettings: AppSettings
+    private val appSettings: AppSettings,
 ) {
 
     private val cgvSubject = MutableStateFlow<List<TheaterAreaModel>>(emptyList())
@@ -105,7 +105,7 @@ class TheaterEditManager(
                         }
                     }
                     .sortedBy { it.type }
-                    .toList()
+                    .toList(),
             )
         }
     }

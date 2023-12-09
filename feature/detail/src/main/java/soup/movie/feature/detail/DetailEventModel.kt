@@ -30,5 +30,5 @@ class ShareImageAction(
 @Keep
 class ToastAction(
     @StringRes
-    val resId: Int
+    val resId: Int,
 ) : UiEvent()

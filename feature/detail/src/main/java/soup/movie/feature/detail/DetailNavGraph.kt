@@ -48,7 +48,7 @@ fun DetailNavGraph(
         var showPoster by remember { mutableStateOf(false) }
         BackHandler(
             enabled = showShare,
-            onBack = { showShare = false }
+            onBack = { showShare = false },
         )
         DetailScreen(
             viewModel = viewModel,
@@ -67,12 +67,12 @@ fun DetailNavGraph(
                 onClose = { showShare = false },
                 onShareInstagram = {
                     viewModel.requestShareImage(
-                        imageUrl = it.posterUrl
+                        imageUrl = it.posterUrl,
                     )
                 },
                 modifier = Modifier.circularReveal(
                     visible = showShare,
-                    center = { Offset(x = it.width, y = 0f) }
+                    center = { Offset(x = it.width, y = 0f) },
                 ),
             )
             AnimatedVisibility(

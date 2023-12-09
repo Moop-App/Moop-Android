@@ -51,7 +51,7 @@ class AppSettingsImpl(
         name = context.preferencesName,
         produceMigrations = { context ->
             listOf(SharedPreferencesMigration(context, context.preferencesName))
-        }
+        },
     )
 
     private val theaterFilterKey = intPreferencesKey("theater_filter")
@@ -66,7 +66,7 @@ class AppSettingsImpl(
         return context.dataStore.data.map { preferences ->
             TheaterFilter(
                 preferences[theaterFilterKey]
-                    ?: TheaterFilter.FLAG_THEATER_ALL
+                    ?: TheaterFilter.FLAG_THEATER_ALL,
             )
         }
     }
@@ -82,7 +82,7 @@ class AppSettingsImpl(
     override fun getAgeFilterFlow(): Flow<AgeFilter> {
         return context.dataStore.data.map { preferences ->
             AgeFilter(
-                preferences[ageFilterKey] ?: AgeFilter.FLAG_AGE_DEFAULT
+                preferences[ageFilterKey] ?: AgeFilter.FLAG_AGE_DEFAULT,
             )
         }
     }

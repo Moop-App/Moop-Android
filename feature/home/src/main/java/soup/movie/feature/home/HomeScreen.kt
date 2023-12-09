@@ -80,7 +80,7 @@ internal fun HomeScreen(
         }
     }
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed)
+        bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed),
     )
     val bottomSheetState = bottomSheetScaffoldState.bottomSheetState
     val bottomSheetVisible by remember {
@@ -148,7 +148,7 @@ internal fun HomeScreen(
                                         if (selected) {
                                             coroutineScope.launch {
                                                 gridStates[homeTab.ordinal].animateScrollToItem(
-                                                    0
+                                                    0,
                                                 )
                                             }
                                         } else {
@@ -156,11 +156,11 @@ internal fun HomeScreen(
                                         }
                                     }
                                     .fillMaxHeight()
-                                    .wrapContentHeight()
+                                    .wrapContentHeight(),
                             )
                         }
                     }
-                }
+                },
             )
         },
     ) { paddingValues ->
@@ -215,7 +215,7 @@ private fun HomeFilterButton(
     ) {
         Icon(
             MovieIcons.FilterList,
-            contentDescription = stringResource(R.string.menu_filter)
+            contentDescription = stringResource(R.string.menu_filter),
         )
     }
 }

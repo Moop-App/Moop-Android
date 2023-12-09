@@ -32,8 +32,8 @@ private val LightMovieColors = lightMovieColors(
         primaryVariant = Color(0xFF9E9E9E),
         onPrimary = Color.Black,
         secondary = Color(0xFF2D7AF6),
-        onSecondary = Color.White
-    )
+        onSecondary = Color.White,
+    ),
 )
 
 private val DarkMovieColors = darkMovieColors(
@@ -43,7 +43,7 @@ private val DarkMovieColors = darkMovieColors(
         onPrimary = Color.White,
         secondary = Color(0xFF8EB5F0),
         onSecondary = Color.Black,
-    )
+    ),
 )
 
 private val LightElevations = Elevations(
@@ -59,7 +59,7 @@ private val DarkElevations = Elevations(
 @Composable
 fun MovieTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colors = if (darkTheme) {
         DarkMovieColors

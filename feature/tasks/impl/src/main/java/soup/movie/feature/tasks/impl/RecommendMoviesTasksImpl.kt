@@ -39,14 +39,14 @@ class RecommendMoviesTasksImpl @Inject constructor(
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build()
+                    .build(),
             )
             .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 1, TimeUnit.MINUTES)
             .build()
         workManager.enqueueUniqueWork(
             RecommendMoviesWorker.TAG,
             ExistingWorkPolicy.REPLACE,
-            request
+            request,
         )
     }
 

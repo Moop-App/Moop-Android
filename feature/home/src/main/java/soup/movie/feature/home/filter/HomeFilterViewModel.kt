@@ -45,7 +45,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeFilterViewModel @Inject constructor(
     private val repository: MovieRepository,
-    private val appSettings: AppSettings
+    private val appSettings: AppSettings,
 ) : ViewModel() {
 
     private var theaterFilter: TheaterFilter? = null
@@ -60,7 +60,7 @@ class HomeFilterViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             initialValue = null,
-            started = SharingStarted.WhileSubscribed(5_000)
+            started = SharingStarted.WhileSubscribed(5_000),
         )
 
     var genreFilterList by mutableStateOf<List<GenreFilterItem>>(emptyList())
@@ -83,7 +83,7 @@ class HomeFilterViewModel @Inject constructor(
                     genreFilterList = allGenre.map {
                         GenreFilterItem(
                             name = it,
-                            isChecked = filter.blacklist.contains(it).not()
+                            isChecked = filter.blacklist.contains(it).not(),
                         )
                     }
                 }
@@ -101,7 +101,7 @@ class HomeFilterViewModel @Inject constructor(
         return TheaterFilterUiModel(
             hasCgv = hasCgv(),
             hasLotteCinema = hasLotteCinema(),
-            hasMegabox = hasMegabox()
+            hasMegabox = hasMegabox(),
         )
     }
 
@@ -110,7 +110,7 @@ class HomeFilterViewModel @Inject constructor(
             hasAll = hasAll(),
             has12 = has12(),
             has15 = has15(),
-            has19 = has19()
+            has19 = has19(),
         )
     }
 

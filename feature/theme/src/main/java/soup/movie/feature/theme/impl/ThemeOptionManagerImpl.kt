@@ -35,7 +35,7 @@ class ThemeOptionManagerImpl @Inject constructor(
     private val options: List<ThemeOption> = listOf(
         ThemeOption.Light,
         ThemeOption.Dark,
-        defaultThemeOption
+        defaultThemeOption,
     )
 
     override fun initialize() {

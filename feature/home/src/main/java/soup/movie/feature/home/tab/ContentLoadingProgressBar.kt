@@ -55,11 +55,11 @@ internal fun ContentLoadingProgressBar(
         shape = shape,
         color = backgroundColor,
         contentColor = contentColor,
-        elevation = elevation
+        elevation = elevation,
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             val transition = rememberInfiniteTransition()
             val currentRotation by transition.animateFloat(
@@ -68,9 +68,9 @@ internal fun ContentLoadingProgressBar(
                 infiniteRepeatable(
                     animation = tween(
                         durationMillis = 500,
-                        easing = LinearEasing
-                    )
-                )
+                        easing = LinearEasing,
+                    ),
+                ),
             )
             Box(
                 modifier = Modifier
@@ -85,11 +85,11 @@ internal fun ContentLoadingProgressBar(
                             listOf(
                                 Color.Transparent,
                                 MovieTheme.colors.onSurface,
-                                MovieTheme.colors.onSurface
-                            )
+                                MovieTheme.colors.onSurface,
+                            ),
                         ),
-                        shape = CircleShape
-                    )
+                        shape = CircleShape,
+                    ),
             )
             Icon(
                 painter = painterResource(MovieIcons.LoadingLogo),

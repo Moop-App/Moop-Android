@@ -66,7 +66,7 @@ internal fun HomeFavoriteList(
             TopAppBar(
                 title = {
                     Text(text = stringResource(R.string.menu_favorite))
-                }
+                },
             )
         },
     ) { paddingValues ->

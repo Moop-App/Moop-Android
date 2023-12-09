@@ -35,7 +35,7 @@ fun MovieModel.toMovieEntity(): MovieEntity {
         boxOffice = boxOffice,
         cgv = theater.cgv,
         lotte = theater.lotte,
-        megabox = theater.megabox
+        megabox = theater.megabox,
     )
 }
 
@@ -53,7 +53,7 @@ fun MovieModel.toFavoriteMovieEntity(): FavoriteMovieEntity {
         boxOffice = boxOffice,
         cgv = theater.cgv,
         lotte = theater.lotte,
-        megabox = theater.megabox
+        megabox = theater.megabox,
     )
 }
 
@@ -61,7 +61,7 @@ fun MovieModel.toOpenDateAlarmEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = id,
         title = title,
-        openDate = openDate
+        openDate = openDate,
     )
 }
 
@@ -69,6 +69,6 @@ fun OpenDateAlarmModel.toEntity(): OpenDateAlarmEntity {
     return OpenDateAlarmEntity(
         movieId = movieId,
         title = title,
-        openDate = openDate
+        openDate = openDate,
     )
 }

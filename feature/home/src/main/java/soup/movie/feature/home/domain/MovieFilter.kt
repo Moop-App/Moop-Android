@@ -24,7 +24,7 @@ import soup.movie.model.settings.TheaterFilter
 class MovieFilter(
     private val theaterFilter: TheaterFilter,
     private val ageFilter: AgeFilter,
-    private val genreFilter: GenreFilter
+    private val genreFilter: GenreFilter,
 ) {
 
     operator fun invoke(movie: MovieModel): Boolean {

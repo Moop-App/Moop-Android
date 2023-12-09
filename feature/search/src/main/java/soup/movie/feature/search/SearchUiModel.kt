@@ -21,6 +21,6 @@ sealed interface SearchUiModel {
     object None : SearchUiModel
     data class Success(
         val movies: List<MovieModel>,
-        val hasNoItem: Boolean
+        val hasNoItem: Boolean,
     ) : SearchUiModel
 }

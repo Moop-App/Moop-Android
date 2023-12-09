@@ -87,7 +87,7 @@ class DetailViewModel @Inject constructor(
 
     private suspend fun renderDetail(
         detail: MovieDetailModel,
-        adInfo: NativeAdInfo?
+        adInfo: NativeAdInfo?,
     ) {
         withContext(defaultDispatcher) {
             _uiModel.emit(
@@ -96,10 +96,10 @@ class DetailViewModel @Inject constructor(
                         movie = detail.toMovie(),
                         showTm = detail.showTm ?: 0,
                         nations = detail.nations.orEmpty(),
-                        companies = detail.companies.orEmpty()
+                        companies = detail.companies.orEmpty(),
                     ),
                     items = detail.toItemsUiModel(adInfo),
-                )
+                ),
             )
         }
     }
@@ -112,7 +112,7 @@ class DetailViewModel @Inject constructor(
                     ShareImageAction(uri, "image/*")
                 } else {
                     ToastAction(R.string.action_share_poster_failed)
-                }
+                },
             )
         }
     }
@@ -147,8 +147,8 @@ class DetailViewModel @Inject constructor(
                     audience = audiAcc,
                     screenDays = screenDays(),
                     rating = naver?.star ?: NO_RATING,
-                    webLink = naver?.url
-                )
+                    webLink = naver?.url,
+                ),
             )
         }
         imdb?.run {
@@ -157,8 +157,8 @@ class DetailViewModel @Inject constructor(
                     imdb = star,
                     rottenTomatoes = rt?.star ?: NO_RATING,
                     metascore = mc?.star ?: NO_RATING,
-                    webLink = url
-                )
+                    webLink = url,
+                ),
             )
         }
         items.add(
@@ -167,29 +167,29 @@ class DetailViewModel @Inject constructor(
                     movieId = cgv?.id.orEmpty(),
                     hasInfo = cgv != null,
                     rating = cgv?.star ?: NO_RATING,
-                    webLink = cgv?.url
+                    webLink = cgv?.url,
                 ),
                 lotte = LotteItemUiModel(
                     movieId = lotte?.id.orEmpty(),
                     hasInfo = lotte != null,
                     rating = lotte?.star ?: NO_RATING,
-                    webLink = lotte?.url
+                    webLink = lotte?.url,
                 ),
                 megabox = MegaboxItemUiModel(
                     movieId = megabox?.id.orEmpty(),
                     hasInfo = megabox != null,
                     rating = megabox?.star ?: NO_RATING,
-                    webLink = megabox?.url
-                )
-            )
+                    webLink = megabox?.url,
+                ),
+            ),
         )
         if (boxOffice == null) {
             naver?.run {
                 items.add(
                     NaverItemUiModel(
                         rating = star,
-                        webLink = url
-                    )
+                        webLink = url,
+                    ),
                 )
             }
         }
@@ -205,9 +205,9 @@ class DetailViewModel @Inject constructor(
                 PersonUiModel(
                     name = it,
                     cast = "감독",
-                    query = "감독 $it"
+                    query = "감독 $it",
                 )
-            }
+            },
         )
         persons.addAll(
             actors.orEmpty().map {
@@ -215,9 +215,9 @@ class DetailViewModel @Inject constructor(
                 PersonUiModel(
                     name = it.peopleNm,
                     cast = cast,
-                    query = "배우 ${it.peopleNm}"
+                    query = "배우 ${it.peopleNm}",
                 )
-            }
+            },
         )
         if (persons.isNotEmpty()) {
             items.add(CastItemUiModel(persons = persons))
@@ -233,7 +233,7 @@ class DetailViewModel @Inject constructor(
             items.addAll(
                 trailers.map {
                     TrailerItemUiModel(trailer = it)
-                }
+                },
             )
             items.add(TrailerFooterItemUiModel(movieTitle = title))
         }
@@ -250,8 +250,8 @@ class DetailViewModel @Inject constructor(
                         OpenDateAlarmModel(
                             movie.id,
                             movie.title,
-                            movie.openDate
-                        )
+                            movie.openDate,
+                        ),
                     )
                     _uiEvent.emit(ToastAction(R.string.action_toast_opendate_alarm))
                 }

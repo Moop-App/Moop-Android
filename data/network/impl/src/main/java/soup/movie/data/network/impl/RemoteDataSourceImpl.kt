@@ -22,7 +22,7 @@ import soup.movie.data.network.response.TheaterAreaGroupResponse
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
-    private val apiService: MovieApiService
+    private val apiService: MovieApiService,
 ) : RemoteDataSource {
 
     override suspend fun getNowMovieList(): MovieListResponse {

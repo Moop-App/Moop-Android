@@ -56,7 +56,7 @@ internal fun HomeFilterScreen(
     viewModel: HomeFilterViewModel,
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
         item {
             HomeFilterTheater(viewModel)
@@ -71,7 +71,7 @@ internal fun HomeFilterScreen(
                 items = viewModel.genreFilterList,
                 onCheckedChange = { genreFilter, isChecked ->
                     viewModel.onGenreFilterClick(genreFilter.name, isChecked)
-                }
+                },
             )
         }
     }
@@ -81,7 +81,7 @@ internal fun HomeFilterScreen(
 private fun HomeFilterDivider() {
     Divider(
         color = MovieTheme.colors.divider,
-        modifier = Modifier.padding(horizontal = 16.dp)
+        modifier = Modifier.padding(horizontal = 16.dp),
     )
 }
 
@@ -91,7 +91,7 @@ private fun HomeFilterCategory(text: String) {
         text = text,
         color = MovieTheme.colors.onBackground,
         fontSize = 17.sp,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }
 
@@ -105,7 +105,7 @@ private fun HomeFilterTheater(viewModel: HomeFilterViewModel) {
                 .padding(top = 12.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
         ) {
             theaterUiModel?.let { uiModel ->
                 CgvFilterChip(
@@ -113,7 +113,7 @@ private fun HomeFilterTheater(viewModel: HomeFilterViewModel) {
                     checked = uiModel.hasCgv,
                     onCheckedChange = { isChecked ->
                         viewModel.onCgvFilterChanged(isChecked)
-                    }
+                    },
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 LotteFilterChip(
@@ -121,7 +121,7 @@ private fun HomeFilterTheater(viewModel: HomeFilterViewModel) {
                     checked = uiModel.hasLotteCinema,
                     onCheckedChange = { isChecked ->
                         viewModel.onLotteFilterChanged(isChecked)
-                    }
+                    },
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 MegaboxFilterChip(
@@ -129,7 +129,7 @@ private fun HomeFilterTheater(viewModel: HomeFilterViewModel) {
                     checked = uiModel.hasMegabox,
                     onCheckedChange = { isChecked ->
                         viewModel.onMegaboxFilterChanged(isChecked)
-                    }
+                    },
                 )
             }
         }
@@ -146,7 +146,7 @@ private fun HomeFilterAge(viewModel: HomeFilterViewModel) {
                 .padding(top = 12.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
         ) {
             ageUiModel?.let {
                 HomeFilterAgeText(
@@ -157,8 +157,8 @@ private fun HomeFilterAge(viewModel: HomeFilterViewModel) {
                         .clickable { viewModel.onAgeAllFilterClicked() }
                         .background(
                             color = if (it.hasAll) Color(0xFF4CAF50) else Color(0x664CAF50),
-                            shape = RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)
-                        )
+                            shape = RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp),
+                        ),
                 )
                 HomeFilterAgeText(
                     text = "12",
@@ -167,8 +167,8 @@ private fun HomeFilterAge(viewModel: HomeFilterViewModel) {
                         .padding(end = 2.dp)
                         .clickable { viewModel.onAge12FilterClicked() }
                         .background(
-                            color = if (it.has12) Color(0xFF2196F3) else Color(0x662196F3)
-                        )
+                            color = if (it.has12) Color(0xFF2196F3) else Color(0x662196F3),
+                        ),
                 )
                 HomeFilterAgeText(
                     text = "15",
@@ -177,8 +177,8 @@ private fun HomeFilterAge(viewModel: HomeFilterViewModel) {
                         .padding(end = 2.dp)
                         .clickable { viewModel.onAge15FilterClicked() }
                         .background(
-                            color = if (it.has15) Color(0xFFFFC107) else Color(0x66FFC107)
-                        )
+                            color = if (it.has15) Color(0xFFFFC107) else Color(0x66FFC107),
+                        ),
                 )
                 HomeFilterAgeText(
                     text = "청불",
@@ -187,8 +187,8 @@ private fun HomeFilterAge(viewModel: HomeFilterViewModel) {
                         .clickable { viewModel.onAge19FilterClicked() }
                         .background(
                             color = if (it.has19) Color(0xFFF44336) else Color(0x66F44336),
-                            shape = RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp)
-                        )
+                            shape = RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp),
+                        ),
                 )
             }
         }
@@ -199,7 +199,7 @@ private fun HomeFilterAge(viewModel: HomeFilterViewModel) {
 private fun HomeFilterAgeText(
     text: String,
     selected: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val textColor = if (selected) {
         Color.White
@@ -215,7 +215,7 @@ private fun HomeFilterAgeText(
         modifier = modifier
             .requiredWidth(72.dp)
             .wrapContentHeight()
-            .padding(vertical = 6.dp)
+            .padding(vertical = 6.dp),
     )
 }
 
@@ -223,19 +223,19 @@ private fun HomeFilterAgeText(
 @Composable
 private fun HomeFilterGenre(
     items: List<GenreFilterItem>,
-    onCheckedChange: (GenreFilterItem, Boolean) -> Unit
+    onCheckedChange: (GenreFilterItem, Boolean) -> Unit,
 ) {
     Column(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
         HomeFilterCategory(text = stringResource(R.string.filter_category_genre))
         FlowRow(
             modifier = Modifier.padding(top = 12.dp),
-            mainAxisSpacing = 8.dp
+            mainAxisSpacing = 8.dp,
         ) {
             items.forEach { genreFilter ->
                 GenreFilterChip(
                     genreFilter.name,
                     checked = genreFilter.isChecked,
-                    onCheckedChange = { onCheckedChange(genreFilter, it) }
+                    onCheckedChange = { onCheckedChange(genreFilter, it) },
                 )
             }
         }
@@ -248,7 +248,7 @@ private fun GenreFilterChip(
     text: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     FilterChip(
         selected = checked,
@@ -265,8 +265,8 @@ private fun GenreFilterChip(
             selectedBackgroundColor = Color(0xEEDDDDDD),
             selectedContentColor = Color(0x88000000),
             backgroundColor = Color(0x33DDDDDD),
-            contentColor = Color(0x44000000)
-        )
+            contentColor = Color(0x44000000),
+        ),
     ) {
         Text(
             text = text,

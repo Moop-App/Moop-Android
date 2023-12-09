@@ -50,9 +50,9 @@ object KakaoLink {
                 description = description,
                 imageUrl = imageUrl,
                 link = Link(
-                    androidExecutionParams = mapOf(MOVIE_ID to movieId)
-                )
-            )
+                    androidExecutionParams = mapOf(MOVIE_ID to movieId),
+                ),
+            ),
         )
         ShareClient.instance.shareDefault(context, defaultFeed) { sharingResult, error ->
             if (error != null) {

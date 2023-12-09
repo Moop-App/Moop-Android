@@ -37,14 +37,14 @@ internal fun MovieTextTag(
     text: String,
     tagBackgroundColor: Color,
     modifier: Modifier = Modifier,
-    fontSize: TextUnit = TextUnit.Unspecified
+    fontSize: TextUnit = TextUnit.Unspecified,
 ) {
     Box(
         modifier = modifier
             .size(width = 36.dp, height = 18.dp)
             .background(color = tagBackgroundColor, shape = RoundedCornerShape(5.dp))
             .border(1.dp, MovieTheme.colors.background, shape = RoundedCornerShape(5.dp)),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = text,
@@ -53,7 +53,7 @@ internal fun MovieTextTag(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            maxLines = 1
+            maxLines = 1,
         )
     }
 }

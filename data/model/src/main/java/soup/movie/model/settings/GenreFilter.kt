@@ -16,7 +16,7 @@
 package soup.movie.model.settings
 
 class GenreFilter(
-    val blacklist: Set<String>
+    val blacklist: Set<String>,
 ) {
 
     companion object {

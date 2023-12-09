@@ -104,7 +104,7 @@ internal fun DetailScreen(
                                 SpanStyle(
                                     color = MovieTheme.colors.secondary,
                                     textDecoration = TextDecoration.Underline,
-                                )
+                                ),
                             ) {
                                 append(url)
                             }
@@ -118,7 +118,7 @@ internal fun DetailScreen(
                 TextButton(
                     onClick = { showPrivacyDialog = false },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MovieTheme.colors.secondary
+                        contentColor = MovieTheme.colors.secondary,
                     ),
                 ) {
                     Text(text = stringResource(R.string.trailer_dialog_button))

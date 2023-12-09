@@ -82,7 +82,7 @@ internal fun DetailList(
     header: @Composable () -> Unit,
     items: List<ContentItemUiModel>,
     viewModel: DetailViewModel,
-    onItemClick: (ContentItemUiModel) -> Unit
+    onItemClick: (ContentItemUiModel) -> Unit,
 ) {
     LazyColumn(
         contentPadding = WindowInsets.systemBars.asPaddingValues(),
@@ -95,7 +95,7 @@ internal fun DetailList(
                 is BoxOfficeItemUiModel -> {
                     BoxOffice(
                         uiModel = item,
-                        onClick = { onItemClick(item) }
+                        onClick = { onItemClick(item) },
                     )
                 }
                 is TheatersItemUiModel -> {
@@ -130,19 +130,19 @@ internal fun DetailList(
                 is NaverItemUiModel -> {
                     Naver(
                         uiModel = item,
-                        onClick = { onItemClick(item) }
+                        onClick = { onItemClick(item) },
                     )
                 }
                 is ImdbItemUiModel -> {
                     Imdb(
                         uiModel = item,
-                        onClick = { onItemClick(item) }
+                        onClick = { onItemClick(item) },
                     )
                 }
                 is PlotItemUiModel -> {
                     Plot(
                         uiModel = item,
-                        onClick = { onItemClick(item) }
+                        onClick = { onItemClick(item) },
                     )
                 }
                 is CastItemUiModel -> {
@@ -153,18 +153,18 @@ internal fun DetailList(
                 is TrailerHeaderItemUiModel -> {
                     TrailerHeader(
                         uiModel = item,
-                        onPrivacyTipClick = { onItemClick(item) }
+                        onPrivacyTipClick = { onItemClick(item) },
                     )
                 }
                 is TrailerItemUiModel -> {
                     TrailerItem(
                         uiModel = item,
-                        onClick = { onItemClick(item) }
+                        onClick = { onItemClick(item) },
                     )
                 }
                 is TrailerFooterItemUiModel -> {
                     TrailerFooter(
-                        onClick = { onItemClick(item) }
+                        onClick = { onItemClick(item) },
                     )
                 }
                 is AdItemUiModel -> {
@@ -221,7 +221,7 @@ private fun BoxOffice(
                         .padding(top = 6.dp)
                         .background(
                             color = MovieTheme.colors.onSurface,
-                            shape = RoundedCornerShape(percent = 50)
+                            shape = RoundedCornerShape(percent = 50),
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
                 )
@@ -254,7 +254,7 @@ private fun BoxOffice(
                         .padding(top = 6.dp)
                         .background(
                             color = MovieTheme.colors.onSurface,
-                            shape = RoundedCornerShape(percent = 50)
+                            shape = RoundedCornerShape(percent = 50),
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
                 )
@@ -295,7 +295,7 @@ private fun BoxOffice(
                         .padding(top = 6.dp)
                         .background(
                             color = MovieTheme.colors.naver,
-                            shape = RoundedCornerShape(percent = 50)
+                            shape = RoundedCornerShape(percent = 50),
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
                 )
@@ -529,7 +529,7 @@ private fun Naver(
                 colors = ChipDefaults.chipColors(
                     backgroundColor = MovieTheme.colors.naver,
                     contentColor = Color.White,
-                )
+                ),
             ) {
                 Text(
                     text = "네이버",
@@ -674,14 +674,14 @@ private fun Cast(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
     ) {
         items(uiModel.persons) { item ->
             Person(
                 uiModel = item,
                 onClick = {
                     context.executeWeb("https://m.search.naver.com/search.naver?query=${item.query}")
-                }
+                },
             )
         }
     }
@@ -798,21 +798,21 @@ private fun TrailerItem(
                     .fillMaxHeight(),
             )
             Column(
-                modifier = Modifier.fillMaxSize().padding(start = 12.dp)
+                modifier = Modifier.fillMaxSize().padding(start = 12.dp),
             ) {
                 Text(
                     text = uiModel.trailer.title,
                     style = MovieTheme.typography.body2,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(top = 2.dp)
+                    modifier = Modifier.padding(top = 2.dp),
                 )
                 Text(
                     text = uiModel.trailer.author,
                     style = MovieTheme.typography.caption,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(top = 4.dp)
+                    modifier = Modifier.padding(top = 4.dp),
                 )
             }
         }

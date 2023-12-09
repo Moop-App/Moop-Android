@@ -59,7 +59,7 @@ fun MovieList(
     onLongItemClick: (MovieModel) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(8.dp),
-    state: LazyGridState = rememberLazyGridState()
+    state: LazyGridState = rememberLazyGridState(),
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 105.dp),
@@ -76,7 +76,7 @@ fun MovieList(
                 movie = movie,
                 onClick = onItemClick,
                 onLongClick = onLongItemClick,
-                modifier = Modifier.padding(4.dp)
+                modifier = Modifier.padding(4.dp),
             )
         }
     }
@@ -88,13 +88,13 @@ private fun MovieItem(
     movie: MovieModel,
     onClick: (MovieModel) -> Unit,
     onLongClick: (MovieModel) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier,
         color = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
         shape = MovieTheme.shapes.medium,
-        elevation = 0.dp
+        elevation = 0.dp,
     ) {
         Box {
             AsyncImage(
@@ -104,32 +104,32 @@ private fun MovieItem(
                     .aspectRatio(27 / 40f)
                     .combinedClickable(
                         onClick = { onClick(movie) },
-                        onLongClick = { onLongClick(movie) }
+                        onLongClick = { onLongClick(movie) },
                     ),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
             MovieAgeBadge(
                 age = movie.age,
                 modifier = Modifier
                     .padding(7.dp)
-                    .align(Alignment.BottomStart)
+                    .align(Alignment.BottomStart),
             )
             when {
                 movie.isDDay() -> MovieDDayTag(
                     text = movie.getDDayLabel().orEmpty(),
                     modifier = Modifier
                         .padding(4.dp)
-                        .align(Alignment.BottomEnd)
+                        .align(Alignment.BottomEnd),
                 )
                 movie.isBest() -> MovieBestTag(
                     modifier = Modifier
                         .padding(4.dp)
-                        .align(Alignment.BottomEnd)
+                        .align(Alignment.BottomEnd),
                 )
                 movie.isNew() -> MovieNewTag(
                     modifier = Modifier
                         .padding(4.dp)
-                        .align(Alignment.BottomEnd)
+                        .align(Alignment.BottomEnd),
                 )
             }
         }
@@ -138,21 +138,21 @@ private fun MovieItem(
 
 @Composable
 fun NoMovieItems(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             MovieIcons.ViewModule,
             contentDescription = null,
             colorFilter = ColorFilter.tint(color = MovieTheme.colors.onBackground),
-            modifier = Modifier.size(72.dp)
+            modifier = Modifier.size(72.dp),
         )
         Text(
             text = stringResource(R.string.no_movies_description),
-            color = MovieTheme.colors.onBackground
+            color = MovieTheme.colors.onBackground,
         )
     }
 }

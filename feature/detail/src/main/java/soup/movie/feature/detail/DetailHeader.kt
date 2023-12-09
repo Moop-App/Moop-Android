@@ -101,28 +101,28 @@ internal fun DetailHeader(
                             .clickable(
                                 onClick = { onPosterClick(movie) },
                             ),
-                        contentScale = ContentScale.Crop
+                        contentScale = ContentScale.Crop,
                     )
                 }
                 Column {
                     MovieAgeTag(
                         age = movie.age,
-                        modifier = Modifier.padding(top = 12.dp)
+                        modifier = Modifier.padding(top = 12.dp),
                     )
                     if (movie.isDDay()) {
                         MovieDDayTag(
                             text = movie.getDDayLabel().orEmpty(),
-                            modifier = Modifier.padding(top = 4.dp)
+                            modifier = Modifier.padding(top = 4.dp),
                         )
                     }
                     if (movie.isBest()) {
                         MovieBestTag(
-                            modifier = Modifier.padding(top = 4.dp)
+                            modifier = Modifier.padding(top = 4.dp),
                         )
                     }
                     if (movie.isNew()) {
                         MovieNewTag(
-                            modifier = Modifier.padding(top = 4.dp)
+                            modifier = Modifier.padding(top = 4.dp),
                         )
                     }
                 }
@@ -164,7 +164,7 @@ internal fun DetailHeader(
                                 movie.age >= 12 -> R.string.movie_age_12
                                 movie.age >= 0 -> R.string.movie_age_all
                                 else -> R.string.movie_age_unknown
-                            }
+                            },
                         ),
                         color = MovieTheme.colors.onBackground,
                         style = MovieTheme.typography.body2,
@@ -277,7 +277,7 @@ internal fun FavoriteButton(
     IconButton(
         onClick = {
             onFavoriteChange(!isFavorite)
-        }
+        },
     ) {
         Image(
             rememberAnimatedVectorPainter(image, isFavorite),

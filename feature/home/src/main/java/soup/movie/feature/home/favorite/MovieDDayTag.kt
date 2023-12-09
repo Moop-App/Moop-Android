@@ -24,12 +24,12 @@ import soup.movie.feature.home.textUnit
 @Composable
 fun MovieDDayTag(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     MovieTextTag(
         text = text,
         tagBackgroundColor = MovieTheme.colors.tagDDay,
         modifier = modifier,
-        fontSize = 12.dp.textUnit
+        fontSize = 12.dp.textUnit,
     )
 }

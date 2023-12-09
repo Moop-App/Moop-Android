@@ -89,14 +89,14 @@ fun SettingsNavGraph() {
                 },
                 onAddItemClick = {
                     navController.navigate(Screen.TheaterEdit.route)
-                }
+                },
             )
         }
         composable(Screen.TheaterEdit.route) {
             val viewModel = hiltViewModel<TheaterEditViewModel>()
             TheaterEditScreen(
                 viewModel = viewModel,
-                upPress = { navController.navigateUp() }
+                upPress = { navController.navigateUp() },
             )
         }
     }

@@ -130,7 +130,8 @@ private fun MainScaffold(
             )
         }
         WindowWidthSizeClass.Medium,
-        WindowWidthSizeClass.Expanded -> {
+        WindowWidthSizeClass.Expanded,
+        -> {
             MediumScreen(
                 currentTab = currentTab,
                 tabs = tabs,
@@ -166,7 +167,7 @@ private fun CompactScreen(
                                     Icon(
                                         rememberAnimatedVectorPainter(
                                             AnimatedImageVector.animatedVectorResource(MovieIcons.AvdHomeNowSelected),
-                                            selected
+                                            selected,
                                         ),
                                         contentDescription = null,
                                     )
@@ -175,7 +176,7 @@ private fun CompactScreen(
                                     Icon(
                                         rememberAnimatedVectorPainter(
                                             AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected),
-                                            selected
+                                            selected,
                                         ),
                                         contentDescription = null,
                                     )
@@ -201,7 +202,7 @@ private fun CompactScreen(
                                     MainTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
                                     MainTabUiModel.TheaterMap -> stringResource(R.string.menu_map)
                                     MainTabUiModel.Settings -> stringResource(R.string.menu_settings)
-                                }
+                                },
                             )
                         },
                         selected = selected,
@@ -213,7 +214,7 @@ private fun CompactScreen(
                             }
                         },
                         selectedContentColor = MovieTheme.colors.secondary,
-                        unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                        unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
                     )
                 }
             }
@@ -230,10 +231,10 @@ private fun MediumScreen(
     onTabSelected: (MainTabUiModel) -> Unit,
     modifier: Modifier = Modifier,
     onTabReselected: (MainTabUiModel) -> Unit = onTabSelected,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (PaddingValues) -> Unit,
 ) {
     Row(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
         NavigationRail(
             elevation = 24.dp,
@@ -247,7 +248,7 @@ private fun MediumScreen(
                                 Icon(
                                     rememberAnimatedVectorPainter(
                                         AnimatedImageVector.animatedVectorResource(MovieIcons.AvdHomeNowSelected),
-                                        selected
+                                        selected,
                                     ),
                                     contentDescription = null,
                                 )
@@ -256,7 +257,7 @@ private fun MediumScreen(
                                 Icon(
                                     rememberAnimatedVectorPainter(
                                         AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected),
-                                        selected
+                                        selected,
                                     ),
                                     contentDescription = null,
                                 )
@@ -282,7 +283,7 @@ private fun MediumScreen(
                                 MainTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
                                 MainTabUiModel.TheaterMap -> stringResource(R.string.menu_map)
                                 MainTabUiModel.Settings -> stringResource(R.string.menu_settings)
-                            }
+                            },
                         )
                     },
                     selected = selected,
@@ -294,7 +295,7 @@ private fun MediumScreen(
                         }
                     },
                     selectedContentColor = MovieTheme.colors.secondary,
-                    unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                    unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
                 )
             }
         }

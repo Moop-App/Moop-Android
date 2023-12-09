@@ -63,7 +63,7 @@ import soup.movie.resources.R
 fun SearchScreen(
     viewModel: SearchViewModel,
     upPress: () -> Unit,
-    onItemClick: (MovieModel) -> Unit
+    onItemClick: (MovieModel) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.systemBarsPadding(),
@@ -71,7 +71,7 @@ fun SearchScreen(
             Surface(
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 color = MovieTheme.colors.primarySurface,
-                elevation = AppBarDefaults.TopAppBarElevation
+                elevation = AppBarDefaults.TopAppBarElevation,
             ) {
                 val focusManager = LocalFocusManager.current
                 val handleColor = MovieTheme.colors.secondary
@@ -79,7 +79,7 @@ fun SearchScreen(
                 val customTextSelectionColors = remember(handleColor, contentAlpha) {
                     TextSelectionColors(
                         handleColor = handleColor,
-                        backgroundColor = handleColor.copy(alpha = contentAlpha)
+                        backgroundColor = handleColor.copy(alpha = contentAlpha),
                     )
                 }
                 CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {
@@ -96,12 +96,12 @@ fun SearchScreen(
                             .focusRequester(focusRequester),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Search
+                            imeAction = ImeAction.Search,
                         ),
                         keyboardActions = KeyboardActions(
                             onSearch = {
                                 focusManager.clearFocus()
-                            }
+                            },
                         ),
                         singleLine = true,
                         placeholder = {
@@ -111,7 +111,7 @@ fun SearchScreen(
                             IconButton(onClick = upPress) {
                                 Icon(
                                     MovieIcons.ArrowBack,
-                                    contentDescription = null
+                                    contentDescription = null,
                                 )
                             }
                         },
@@ -119,7 +119,7 @@ fun SearchScreen(
                             IconButton(onClick = { viewModel.onQueryChanged("") }) {
                                 Icon(
                                     MovieIcons.Close,
-                                    contentDescription = null
+                                    contentDescription = null,
                                 )
                             }
                         },
@@ -130,12 +130,12 @@ fun SearchScreen(
                             unfocusedIndicatorColor = Color.Transparent,
                             disabledIndicatorColor = Color.Transparent,
                             leadingIconColor = MovieTheme.colors.onSurface,
-                            trailingIconColor = MovieTheme.colors.onSurface
-                        )
+                            trailingIconColor = MovieTheme.colors.onSurface,
+                        ),
                     )
                 }
             }
-        }
+        },
     ) { paddingValues ->
         val uiModel by viewModel.uiModel.collectAsState()
         when (uiModel) {
@@ -145,7 +145,7 @@ fun SearchScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(paddingValues)
+                        .padding(paddingValues),
                 ) {
                     if (model.hasNoItem) {
                         NoMovieItems(modifier = Modifier.align(Alignment.Center))
@@ -159,7 +159,7 @@ fun SearchScreen(
                             },
                             onLongItemClick = {
                                 context.showToast(it.title)
-                            }
+                            },
                         )
                     }
                 }

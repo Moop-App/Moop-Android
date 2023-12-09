@@ -33,7 +33,7 @@ import soup.movie.model.MovieModel
 @Composable
 internal fun DetailPoster(
     movie: MovieModel,
-    upPress: () -> Unit
+    upPress: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val photoState = rememberPhotoState()
@@ -56,7 +56,7 @@ internal fun DetailPoster(
             modifier = Modifier.fillMaxSize(),
             onSuccess = {
                 photoState.setPhotoIntrinsicSize(it.intrinsicSize)
-            }
+            },
         )
     }
 }
