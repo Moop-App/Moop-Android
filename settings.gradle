@@ -40,19 +40,53 @@ dependencyResolutionManagement {
     }
 }
 
-include ':app'
-include ':domain'
-include ':testing'
-include ':macrobenchmark'
-
-file("feature").eachDir { dir ->
-    include ":feature:${dir.name}"
+// Automatically detect modules.
+rootDir.eachDir { dir ->
+    findModule("", dir).each { module ->
+        include "$module"
+    }
 }
 
-file("data").eachDir { dir ->
-    include ":data:${dir.name}"
+private static List<String> findModule(String parent, File dir) {
+    if (!dir.isDirectory() || isProject(dir)) {
+        return Collections.emptyList()
+    }
+
+    List<String> modules = new ArrayList<String>()
+    String current = "$parent:${dir.name}"
+    if (isModule(dir)) {
+        println "include '$current'"
+        modules.add("$current")
+    } else {
+        var files = dir.listFiles()
+        if (files != null) {
+            files.each { file ->
+                if (file.isDirectory()) {
+                    modules.addAll(findModule(current, file))
+                }
+            }
+        }
+    }
+    return modules
 }
 
-file("core").eachDir { dir ->
-    include ":core:${dir.name}"
+private static boolean isProject(File file) {
+    var files = file.listFiles()
+    if (files == null) {
+        return false
+    }
+    return files.any {
+        it.isFile() && (it.name == "settings.gradle" || it.name == "settings.gradle.kts")
+    }
+}
+
+private static boolean isModule(File file) {
+    var files = file.listFiles()
+    if (files == null) {
+        return false
+    }
+
+    return files.any {
+        it.isFile() && (it.name == "build.gradle" || it.name == "build.gradle.kts")
+    }
 }
