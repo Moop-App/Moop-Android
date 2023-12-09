@@ -11,8 +11,8 @@ dependencies {
     implementation project(":core:logger")
     implementation project(":core:resources")
     implementation project(":data:model")
-    implementation project(":feature:navigator-api")
-    implementation project(":feature:notification-api")
+    implementation project(":feature:navigator:api")
+    implementation project(":feature:notification:api")
 
     implementation libs.kotlin.stdlib
 }
