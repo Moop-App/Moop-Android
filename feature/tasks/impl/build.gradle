@@ -20,8 +20,8 @@ dependencies {
     implementation project(":data:repository:api")
     implementation project(":data:model")
     implementation project(":domain")
-    implementation project(":feature:tasks-api")
-    implementation project(":feature:notification-api")
+    implementation project(":feature:tasks:api")
+    implementation project(":feature:notification:api")
 
     implementation libs.kotlin.stdlib
 
