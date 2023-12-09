@@ -9,7 +9,7 @@ android {
 }
 
 dependencies {
-    implementation project(":core:appupdate-api")
+    implementation project(":core:appupdate:api")
     implementation project(":core:common")
     implementation project(":core:designsystem")
     implementation project(":core:external")
