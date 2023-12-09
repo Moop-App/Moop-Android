@@ -80,7 +80,7 @@ dependencies {
     implementation project(":core:ads")
     implementation project(":core:analytics")
     implementation project(":core:appupdate:api")
-    implementation project(":core:common")
+    implementation project(":core:kotlin")
     implementation project(":core:designsystem")
     implementation project(":core:logger")
     implementation project(":data:repository:api")
