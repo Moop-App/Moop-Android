@@ -1,0 +1,58 @@
+pluginManagement {
+    includeBuild("build-logic")
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com.android.*")
+                includeGroupByRegex("androidx.*")
+                includeGroupByRegex("com.google.*")
+            }
+        }
+        maven {
+            url "https://jitpack.io"
+            content {
+                includeGroup "com.github.fornewid.metronome"
+            }
+        }
+        maven {
+            url 'https://devrepo.kakao.com/nexus/content/groups/public/'
+            content {
+                includeGroup "com.kakao.sdk"
+            }
+        }
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+            content {
+                includeGroup "com.naver.maps"
+            }
+        }
+
+        mavenCentral()
+    }
+}
+
+include ':app'
+include ':domain'
+include ':testing'
+include ':macrobenchmark'
+
+file("feature").eachDir { dir ->
+    include ":feature:${dir.name}"
+}
+
+file("data").eachDir { dir ->
+    include ":data:${dir.name}"
+}
+
+file("core").eachDir { dir ->
+    include ":core:${dir.name}"
+}

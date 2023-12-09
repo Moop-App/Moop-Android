@@ -39,9 +39,6 @@
 -dontwarn org.jetbrains.annotations.**
 -keep class kotlin.Metadata { *; }
 
-# For dynamic-features module
--keep class soup.movie.theatermap.** { *; }
-
 # For kotlinx.serialization
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.SerializationKt

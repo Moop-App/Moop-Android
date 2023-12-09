@@ -1,11 +1,4 @@
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
-
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-        maven { url "https://jitpack.io" }
-    }
     dependencies {
         classpath libs.android.pluginGradle
         classpath libs.kotlin.pluginGradle
@@ -25,19 +18,6 @@ plugins {
 }
 
 apply from: "$rootDir/gradle/version.gradle"
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-        maven { url "https://jitpack.io" }
-        maven { url 'https://maven.google.com/' }
-        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
-        maven { url 'https://naver.jfrog.io/artifactory/maven/' }
-    }
-}
 
 subprojects {
     apply plugin: 'com.diffplug.spotless'
