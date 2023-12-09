@@ -28,4 +28,4 @@ jobs:
           java-version: 17
 
       - name: Build, lint and spotless
-        run: ./gradlew spotlessCheck dependencyGuard assemble lintDebug --scan
+        run: ./gradlew spotlessCheck dependencyGuard lintDebug assemble --scan
