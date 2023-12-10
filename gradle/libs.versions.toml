@@ -22,6 +22,7 @@ work = "2.8.1"
 
 # Google
 gms = "4.3.14"
+play-appupdate = "2.1.0"
 admob = "21.3.0"
 firebase-bom = "32.5.0"
 firebase-crashlytics = "2.9.9"
@@ -137,7 +138,7 @@ androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 
 # Google
 
-google-play-appUpdate = "com.google.android.play:app-update-ktx:2.0.1"
+google-play-appupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "play-appupdate" }
 google-admob = { module = "com.google.android.gms:play-services-ads", version.ref = "admob" }
 
 # https://firebase.google.com/support/release-notes/android#latest_sdk_versions
