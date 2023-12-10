@@ -17,8 +17,8 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.ui
 
-    implementation libs.google.ads
-    implementation libs.androidx.constraintlayout
+    implementation libs.google.admob
 
+    implementation libs.androidx.constraintlayout
     implementation libs.androidx.lifecycle.runtime
 }

@@ -3,7 +3,7 @@ plugins {
     id "moop.android.compose"
     id "moop.android.hilt"
     alias libs.plugins.firebase.crashlytics
-    alias libs.plugins.firebase.perf
+    alias libs.plugins.firebase.performance
     alias libs.plugins.dependencyGuard
 }
 if (file("google-services.json").exists()) {
@@ -123,11 +123,11 @@ dependencies {
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics
-    implementation libs.firebase.config
+    implementation libs.firebase.cloudmessaging
     implementation libs.firebase.crashlytics
-    implementation libs.firebase.messaging
-    implementation libs.firebase.dynamicLinks
-    implementation libs.firebase.perf
+    implementation libs.firebase.dynamiclinks
+    implementation libs.firebase.performance
+    implementation libs.firebase.remoteconfig
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.navigation.compose
