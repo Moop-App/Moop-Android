@@ -20,6 +20,6 @@ dependencies {
 
     implementation libs.androidx.core
 
-    implementation libs.retrofit.runtime
+    implementation libs.retrofit
     implementation libs.retrofit.serialization
 }

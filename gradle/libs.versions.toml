@@ -43,6 +43,8 @@ coil = "2.2.2"
 dependencyGuard = "0.3.2"
 retrofit = "2.9.0"
 retrofit-serialization = "1.0.0"
+timber = "5.0.1"
+kakao = "2.18.0"
 
 
 [libraries]
@@ -125,6 +127,8 @@ photo = { module = "io.github.fornewid:photo-compose", version.ref = "photo" }
 materialMotionCompose-core = { module = "io.github.fornewid:material-motion-compose-core", version.ref = "materialmotion" }
 materialMotionCompose-navigation = { module = "io.github.fornewid:material-motion-compose-navigation", version.ref = "materialmotion" }
 
+naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
+
 # Test
 test-junit =  "junit:junit:4.13"
 
@@ -155,15 +159,17 @@ firebase-remoteconfig = { module = "com.google.firebase:firebase-config" }
 coil-runtime = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
-retrofit-runtime = { module = "com.squareup.retrofit2:retrofit" , version.ref = "retrofit"}
-retrofit-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter" , version.ref = "retrofit-serialization"}
-kakaoLink = "com.kakao.sdk:v2-share:2.13.0"
-naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
-timber = "com.jakewharton.timber:timber:5.0.1"
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization" }
+
+kakao-share = { module = "com.kakao.sdk:v2-share", version.ref = "kakao" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
 
 # Dependencies of the included build-logic
 android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
