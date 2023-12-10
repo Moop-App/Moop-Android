@@ -1,6 +1,5 @@
 plugins {
     id "moop.android.library"
-    id "org.jetbrains.kotlin.kapt"
     id "org.jetbrains.kotlin.plugin.serialization"
 }
 

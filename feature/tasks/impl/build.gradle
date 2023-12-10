@@ -1,7 +1,7 @@
 plugins {
     id "moop.android.library"
     id "moop.android.hilt"
-    id "org.jetbrains.kotlin.kapt"
+    id "com.google.devtools.ksp"
 }
 
 android {
@@ -26,7 +26,7 @@ dependencies {
     implementation libs.kotlin.stdlib
 
     implementation libs.androidx.hilt.work
-    kapt libs.androidx.hilt.compiler
+    ksp libs.androidx.hilt.compiler
 
     implementation libs.androidx.work.runtime
     androidTestImplementation libs.androidx.work.testing
