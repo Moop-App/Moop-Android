@@ -4,20 +4,20 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import soup.movie.buildlogic.implementation
-import soup.movie.buildlogic.kapt
+import soup.movie.buildlogic.ksp
 
 class AndroidHiltConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
                 apply("dagger.hilt.android.plugin")
-                apply("org.jetbrains.kotlin.kapt")
+                apply("com.google.devtools.ksp")
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
                 implementation(libs.findLibrary("dagger.hilt.android").get())
-                kapt(libs.findLibrary("dagger.hilt.compiler").get())
+                ksp(libs.findLibrary("dagger.hilt.compiler").get())
             }
         }
     }
