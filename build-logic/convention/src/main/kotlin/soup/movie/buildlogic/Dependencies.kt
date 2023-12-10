@@ -7,8 +7,8 @@ fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? {
     return add("implementation", dependencyNotation)
 }
 
-fun DependencyHandler.kapt(dependencyNotation: Any): Dependency? {
-    return add("kapt", dependencyNotation)
+fun DependencyHandler.ksp(dependencyNotation: Any): Dependency? {
+    return add("ksp", dependencyNotation)
 }
 
 fun DependencyHandler.androidTestImplementation(dependencyNotation: Any): Dependency? {
