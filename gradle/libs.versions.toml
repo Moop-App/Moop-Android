@@ -2,7 +2,6 @@
 
 # Android
 androidGradlePlugin = "8.1.4"
-gms = "4.3.14"
 
 # Kotlin
 kotlin = "1.9.10"
@@ -20,6 +19,13 @@ lifecycle = "2.6.1"
 navigation = "2.6.0-alpha08"
 room = "2.4.3"
 work = "2.8.1"
+
+# Google
+gms = "4.3.14"
+admob = "21.3.0"
+firebase-bom = "32.5.0"
+firebase-crashlytics = "2.9.9"
+firebase-perf = "1.4.2"
 
 # Compose
 compose-bom = "2023.05.01"
@@ -132,15 +138,16 @@ androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 # Google
 
 google-play-appUpdate = "com.google.android.play:app-update-ktx:2.0.1"
-google-ads = "com.google.android.gms:play-services-ads:21.3.0"
+google-admob = { module = "com.google.android.gms:play-services-ads", version.ref = "admob" }
 
-firebase-bom = { module = "com.google.firebase:firebase-bom", version = "31.2.0" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
-firebase-config = { module = "com.google.firebase:firebase-config-ktx" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-firebase-dynamicLinks = { module = "com.google.firebase:firebase-dynamic-links-ktx" }
-firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
-firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
+# https://firebase.google.com/support/release-notes/android#latest_sdk_versions
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-cloudmessaging = { module = "com.google.firebase:firebase-messaging" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-dynamiclinks = { module = "com.google.firebase:firebase-dynamic-links" }
+firebase-performance = { module = "com.google.firebase:firebase-perf" }
+firebase-remoteconfig = { module = "com.google.firebase:firebase-config" }
 
 # Etc
 
@@ -166,5 +173,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.2" }
-firebase-perf = { id = "com.google.firebase.firebase-perf", version = "1.4.2" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
+firebase-performance = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf" }
