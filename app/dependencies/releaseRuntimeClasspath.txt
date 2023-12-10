@@ -173,7 +173,7 @@ com.google.firebase:firebase-perf:20.3.1
 com.google.firebase:protolite-well-known-types:18.0.0
 com.google.guava:listenablefuture:1.0
 com.google.protobuf:protobuf-javalite:3.17.3
-com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0
+com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0
 com.jakewharton.timber:timber:5.0.1
 com.kakao.sdk:v2-common:2.13.0
 com.kakao.sdk:v2-network:2.13.0
