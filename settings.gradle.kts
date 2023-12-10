@@ -14,7 +14,9 @@ dependencyResolutionManagement {
             content {
                 includeGroupByRegex("com.android.*")
                 includeGroupByRegex("androidx.*")
-                includeGroupByRegex("com.google.*")
+                includeGroupByRegex("com.google.android.*")
+                includeGroup("com.google.gms")
+                includeGroup("com.google.firebase")
             }
         }
         maven {
