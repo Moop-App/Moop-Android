@@ -139,7 +139,7 @@ dependencies {
 
     implementation libs.androidx.profileinstaller
 
-    implementation libs.kakaoLink
+    implementation libs.kakao.share
 
     testImplementation project(":testing")
     androidTestImplementation project(":testing")

@@ -13,5 +13,5 @@ dependencies {
     implementation project(":core:logger")
     implementation libs.kotlin.stdlib
 
-    implementation libs.google.play.appUpdate
+    implementation libs.google.play.appupdate
 }
