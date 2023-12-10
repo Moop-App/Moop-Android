@@ -9,13 +9,13 @@ android {
 }
 
 dependencies {
-    implementation project(":core:analytics")
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:resources")
-    implementation project(":data:repository:api")
-    implementation project(":data:model")
-    implementation project(":feature:home")
+    implementation projects.core.analytics
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.resources
+    implementation projects.data.repository.api
+    implementation projects.data.model
+    implementation projects.feature.home
 
     implementation libs.compose.foundation
     implementation libs.compose.material
@@ -23,6 +23,6 @@ dependencies {
 
     implementation libs.androidx.lifecycle.viewmodel.ktx
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }

@@ -42,6 +42,8 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 // Automatically detect modules.
 ModuleDetector.modules(rootDir).forEach { module ->
     include(module)

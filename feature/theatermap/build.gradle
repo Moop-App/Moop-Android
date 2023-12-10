@@ -9,13 +9,13 @@ android {
 }
 
 dependencies {
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:external")
-    implementation project(":core:logger")
-    implementation project(":core:resources")
-    implementation project(":data:repository:api")
-    implementation project(":data:model")
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.external
+    implementation projects.core.logger
+    implementation projects.core.resources
+    implementation projects.data.repository.api
+    implementation projects.data.model
 
     implementation libs.androidx.fragment
 
@@ -27,6 +27,6 @@ dependencies {
 
     implementation libs.naverMapCompose
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }

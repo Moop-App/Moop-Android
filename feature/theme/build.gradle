@@ -9,11 +9,11 @@ android {
 }
 
 dependencies {
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:resources")
-    implementation project(":data:settings:api")
-    implementation project(":data:model")
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.resources
+    implementation projects.data.settings.api
+    implementation projects.data.model
 
     implementation libs.kotlin.stdlib
 
@@ -22,6 +22,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }

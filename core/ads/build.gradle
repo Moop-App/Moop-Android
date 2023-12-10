@@ -9,8 +9,8 @@ android {
 }
 
 dependencies {
-    implementation project(":core:kotlin")
-    implementation project(":core:logger")
+    implementation projects.core.kotlin
+    implementation projects.core.logger
 
     implementation libs.kotlin.stdlib
 

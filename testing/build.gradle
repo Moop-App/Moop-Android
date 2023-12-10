@@ -8,9 +8,9 @@ android {
 }
 
 dependencies {
-    implementation project(":core:kotlin")
-    implementation project(":data:model")
-    implementation project(":data:repository:api")
+    implementation projects.core.kotlin
+    implementation projects.data.model
+    implementation projects.data.repository.api
 
     implementation libs.kotlin.stdlib
     api libs.coroutines.test
