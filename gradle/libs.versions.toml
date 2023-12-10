@@ -14,11 +14,21 @@ dagger = "2.48.1"
 androidxhilt = "1.1.0"
 
 # AndroidX
-activity = "1.6.1"
-lifecycle = "2.6.1"
-navigation = "2.6.0-alpha08"
-room = "2.4.3"
-work = "2.8.1"
+androidx-activity = "1.8.1"
+androidx-appcompat = "1.6.1"
+androidx-benchmark = "1.1.1"
+androidx-browser = "1.7.0"
+androidx-constraintlayout = "2.1.4"
+androidx-core = "1.12.0"
+androidx-datastore = "1.0.0"
+androidx-fragment = "1.6.2"
+androidx-lifecycle = "2.6.2"
+androidx-navigation = "2.7.5"
+androidx-profileinstaller = "1.3.0"
+androidx-room = "2.6.1"
+androidx-startup = "1.1.1"
+androidx-window = "1.2.0"
+androidx-work = "2.9.0"
 
 # Google
 gms = "4.3.14"
@@ -73,35 +83,34 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 
 # AndroidX
 
-androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidx-benchmark" }
+androidx-browser = { module = "androidx.browser:browser", version.ref = "androidx-browser" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core"}
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 
-androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
-androidx-browser = "androidx.browser:browser:1.5.0"
-androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-androidx-core = "androidx.core:core-ktx:1.10.0-rc01"
-androidx-datastore-preferences = "androidx.datastore:datastore-preferences:1.0.0"
-androidx-fragment = "androidx.fragment:fragment-ktx:1.5.6"
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "androidx-lifecycle" }
 
-androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycle" }
-androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "androidx-profileinstaller" }
 
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 
-androidx-startup = "androidx.startup:startup-runtime:1.1.1"
-androidx-window = "androidx.window:window:1.1.0-beta01"
+androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidx-startup" }
+androidx-window = { module = "androidx.window:window", version.ref = "androidx-window" }
 
-androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
-androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "work" }
-
-androidx-benchmark-macro-junit4 = "androidx.benchmark:benchmark-macro-junit4:1.1.1"
-androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.3.0"
+androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work" }
+androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "androidx-work" }
 
 # Compose
 
