@@ -1,4 +1,142 @@
+import java.util.regex.Pattern
+
+class Const {
+    static final VERSION_FILE = "version.properties"
+
+    // 00.00.00 or 00.00.00.00 only
+    static final VERSION_REGEX = "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:\\.([0-9]+))?\$"
+    static final VERSION_INTERVAL = 100 // 2 digits each (= 00.00.00.00)
+}
+
+class VersionInfo {
+    final int major
+    final int minor
+    final int patch
+    final int build
+
+    VersionInfo(int major, int minor, int patch, int build) {
+        this.major = major
+        this.minor = minor
+        this.patch = patch
+        this.build = build
+    }
+
+    int getVersionCode() {
+        final int interval = Const.VERSION_INTERVAL
+        final int BASE_MAJOR = Math.pow(interval, 3)
+        final int BASE_MINOR = Math.pow(interval, 2)
+        final int BASE_PATCH = Math.pow(interval, 1)
+        final int BASE_BUILD = Math.pow(interval, 0)
+        return BASE_MAJOR * major +
+                BASE_MINOR * minor +
+                BASE_PATCH * patch +
+                BASE_BUILD * build
+    }
+
+    String getVersionName() {
+        if (build != 0) {
+            return "$major.$minor.$patch.$build"
+        } else {
+            return "$major.$minor.$patch"
+        }
+    }
+
+    @Override
+    String toString() {
+        return "VersionInfo(code=${versionCode}, name=\"${versionName}\")"
+    }
+}
+
+static VersionInfo getVersionInfo(File file) throws Exception {
+    if (!file.exists()) {
+        throw new IllegalStateException("There is no '${file.name}' file.")
+    }
+
+    def versionText = file.text
+    if (!versionText.matches(Pattern.compile(Const.VERSION_REGEX))) {
+        throw new IllegalStateException("Invalid version(${versionText}) in '${file.name}' file.")
+    }
+
+    def versions = versionText.split('\\.').toList()
+    if (versions.size() < 3 || versions.size() > 4) {
+        throw new IllegalStateException("Invalid version(${versionText}) in '${file.name}' file.")
+    }
+
+    def majorStr = versions.get(0)
+    def minorStr = versions.get(1)
+    def patchStr = versions.get(2)
+    def buildStr
+    if (versions.size() == 4) {
+        buildStr = versions.get(3)
+    } else {
+        buildStr = "0"
+    }
+    if (!(majorStr.isInteger() && minorStr.isInteger() && patchStr.isInteger() && buildStr.isInteger())) {
+        throw new IllegalStateException("Invalid version(${versionText}) in '${file.name}' file.")
+    }
+
+    def major = majorStr.toInteger()
+    def minor = minorStr.toInteger()
+    def patch = patchStr.toInteger()
+    def build = buildStr.toInteger()
+    def interval = Const.VERSION_INTERVAL
+    if ((major == 0 && minor == 0 && patch == 0 && build == 0)
+            || !(0 <= major && major < interval)
+            || !(0 <= minor && minor < interval)
+            || !(0 <= patch && patch < interval)
+            || !(0 <= build && build < interval)
+    ) {
+        throw new IllegalStateException("Invalid version(${versionText}) in '${file.name}' file.")
+    }
+
+    return new VersionInfo(major, minor, patch, build)
+}
+
 ext {
-    versionCode = 106
-    versionName = "1.0.6"
+    def versionFile = new File("$rootDir/${Const.VERSION_FILE}")
+    def versionInfo = getVersionInfo(versionFile)
+    println "current: ${versionInfo}"
+
+    versionCode = versionInfo.versionCode
+    versionName = versionInfo.versionName
+}
+
+task incrementMajorVersion {
+    doLast {
+        def versionFile = new File("$rootDir/${Const.VERSION_FILE}")
+        def current = getVersionInfo(versionFile)
+        def increment = new VersionInfo(current.major + 1, 0, 0, 0)
+        println "incrementMajorVersion:\n - $current\n + $increment"
+        versionFile.text = increment.versionName
+    }
+}
+
+task incrementMinorVersion {
+    doLast {
+        def versionFile = new File("$rootDir/${Const.VERSION_FILE}")
+        def current = getVersionInfo(versionFile)
+        def increment = new VersionInfo(current.major, current.minor + 1, 0, 0)
+        println "incrementMinorVersion:\n - $current\n + $increment"
+        versionFile.text = increment.versionName
+    }
+}
+
+task incrementPatchVersion {
+    doLast {
+        def versionFile = new File("$rootDir/${Const.VERSION_FILE}")
+        def current = getVersionInfo(versionFile)
+        def increment = new VersionInfo(current.major, current.minor, current.patch + 1, 0)
+        println "incrementPatchVersion:\n - $current\n + $increment"
+        versionFile.text = increment.versionName
+    }
+}
+
+task incrementBuildVersion {
+    doLast {
+        def versionFile = new File("$rootDir/${Const.VERSION_FILE}")
+        def current = getVersionInfo(versionFile)
+        def increment = new VersionInfo(current.major, current.minor, current.patch, current.build + 1)
+        println "incrementBuildVersion:\n - $current\n + $increment"
+        versionFile.text = increment.versionName
+    }
 }
