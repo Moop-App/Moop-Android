@@ -8,8 +8,8 @@ android {
 }
 
 dependencies {
-    implementation project(":core:logger")
-    implementation project(":feature:navigator:api")
+    implementation projects.core.logger
+    implementation projects.feature.navigator.api
 
     implementation libs.kotlin.stdlib
 }

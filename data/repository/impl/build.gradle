@@ -8,12 +8,12 @@ android {
 }
 
 dependencies {
-    implementation project(":core:kotlin")
-    implementation project(":core:logger")
-    implementation project(":data:model")
-    implementation project(":data:network:api")
-    implementation project(":data:database:api")
-    implementation project(":data:repository:api")
+    implementation projects.core.kotlin
+    implementation projects.core.logger
+    implementation projects.data.model
+    implementation projects.data.network.api
+    implementation projects.data.database.api
+    implementation projects.data.repository.api
 
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core

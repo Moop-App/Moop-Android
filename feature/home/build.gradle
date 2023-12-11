@@ -9,18 +9,18 @@ android {
 }
 
 dependencies {
-    implementation project(":core:analytics")
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:imageloading:api")
-    implementation project(":core:logger")
-    implementation project(":core:resources")
-    implementation project(":data:settings:api")
-    implementation project(":data:repository:api")
-    implementation project(":data:model")
-    implementation project(":domain")
-    implementation project(":feature:theatermap")
-    implementation project(":feature:settings")
+    implementation projects.core.analytics
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.imageloading.api
+    implementation projects.core.logger
+    implementation projects.core.resources
+    implementation projects.data.settings.api
+    implementation projects.data.repository.api
+    implementation projects.data.model
+    implementation projects.domain
+    implementation projects.feature.theatermap
+    implementation projects.feature.settings
 
     implementation libs.kotlin.stdlib
 
@@ -36,6 +36,6 @@ dependencies {
     implementation libs.accompanist.swiperefresh
     implementation libs.metronome.visibility
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }

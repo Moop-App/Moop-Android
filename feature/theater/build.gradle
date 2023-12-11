@@ -9,13 +9,13 @@ android {
 }
 
 dependencies {
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:logger")
-    implementation project(":core:resources")
-    implementation project(":data:settings:api")
-    implementation project(":data:repository:api")
-    implementation project(":data:model")
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.logger
+    implementation projects.core.resources
+    implementation projects.data.settings.api
+    implementation projects.data.repository.api
+    implementation projects.data.model
 
     implementation libs.kotlin.stdlib
 
@@ -27,6 +27,6 @@ dependencies {
     implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }

@@ -9,19 +9,19 @@ android {
 }
 
 dependencies {
-    implementation project(":core:ads")
-    implementation project(":core:analytics")
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:external")
-    implementation project(":core:imageloading:api")
-    implementation project(":core:logger")
-    implementation project(":core:resources")
-    implementation project(":data:repository:api")
-    implementation project(":data:model")
-    implementation project(":domain")
-    implementation project(":feature:deeplink")
-    implementation project(":feature:home")
+    implementation projects.core.ads
+    implementation projects.core.analytics
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.external
+    implementation projects.core.imageloading.api
+    implementation projects.core.logger
+    implementation projects.core.resources
+    implementation projects.data.repository.api
+    implementation projects.data.model
+    implementation projects.domain
+    implementation projects.feature.deeplink
+    implementation projects.feature.home
 
     implementation libs.kotlin.stdlib
 
@@ -35,6 +35,6 @@ dependencies {
     implementation libs.materialMotionCompose.core
     implementation libs.photo
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }

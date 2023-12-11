@@ -77,34 +77,34 @@ android {
 }
 
 dependencies {
-    implementation project(":core:ads")
-    implementation project(":core:analytics")
-    implementation project(":core:appupdate:api")
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:logger")
-    implementation project(":data:repository:api")
-    implementation project(":data:model")
-    implementation project(":feature:home")
-    implementation project(":feature:detail")
-    implementation project(":feature:search")
-    implementation project(":feature:theater")
-    implementation project(":feature:theatermap")
-    implementation project(":feature:settings")
-    implementation project(":feature:theme")
-    implementation project(":feature:navigator:api")
-    runtimeOnly project(":feature:navigator:impl")
-    implementation project(":feature:notification:api")
-    runtimeOnly project(":feature:notification:impl")
-    implementation project(":feature:tasks:api")
-    runtimeOnly project(":feature:tasks:impl")
-    implementation project(":feature:deeplink")
-    runtimeOnly project(":data:network:impl")
-    runtimeOnly project(":data:database:impl")
-    runtimeOnly project(":data:repository:impl")
-    runtimeOnly project(":data:settings:impl")
-    runtimeOnly project(":core:appupdate:impl")
-    runtimeOnly project(":core:imageloading:impl")
+    implementation projects.core.ads
+    implementation projects.core.analytics
+    implementation projects.core.appupdate.api
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.logger
+    implementation projects.data.repository.api
+    implementation projects.data.model
+    implementation projects.feature.home
+    implementation projects.feature.detail
+    implementation projects.feature.search
+    implementation projects.feature.theater
+    implementation projects.feature.theatermap
+    implementation projects.feature.settings
+    implementation projects.feature.theme
+    implementation projects.feature.navigator.api
+    runtimeOnly projects.feature.navigator.impl
+    implementation projects.feature.notification.api
+    runtimeOnly projects.feature.notification.impl
+    implementation projects.feature.tasks.api
+    runtimeOnly projects.feature.tasks.impl
+    implementation projects.feature.deeplink
+    runtimeOnly projects.data.network.impl
+    runtimeOnly projects.data.database.impl
+    runtimeOnly projects.data.repository.impl
+    runtimeOnly projects.data.settings.impl
+    runtimeOnly projects.core.appupdate.impl
+    runtimeOnly projects.core.imageloading.impl
 
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core
@@ -141,8 +141,8 @@ dependencies {
 
     implementation libs.kakao.share
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }
 
 dependencyGuard {

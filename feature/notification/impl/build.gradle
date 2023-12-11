@@ -8,11 +8,11 @@ android {
 }
 
 dependencies {
-    implementation project(":core:logger")
-    implementation project(":core:resources")
-    implementation project(":data:model")
-    implementation project(":feature:navigator:api")
-    implementation project(":feature:notification:api")
+    implementation projects.core.logger
+    implementation projects.core.resources
+    implementation projects.data.model
+    implementation projects.feature.navigator.api
+    implementation projects.feature.notification.api
 
     implementation libs.kotlin.stdlib
 }

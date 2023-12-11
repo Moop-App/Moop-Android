@@ -9,15 +9,15 @@ android {
 }
 
 dependencies {
-    implementation project(":core:appupdate:api")
-    implementation project(":core:kotlin")
-    implementation project(":core:designsystem")
-    implementation project(":core:external")
-    implementation project(":core:resources")
-    implementation project(":data:settings:api")
-    implementation project(":data:model")
-    implementation project(":feature:theater")
-    implementation project(":feature:theme")
+    implementation projects.core.appupdate.api
+    implementation projects.core.kotlin
+    implementation projects.core.designsystem
+    implementation projects.core.external
+    implementation projects.core.resources
+    implementation projects.data.settings.api
+    implementation projects.data.model
+    implementation projects.feature.theater
+    implementation projects.feature.theme
 
     implementation libs.kotlin.stdlib
 
@@ -28,6 +28,6 @@ dependencies {
     implementation libs.accompanist.flowlayout
     implementation libs.materialMotionCompose.navigation
 
-    testImplementation project(":testing")
-    androidTestImplementation project(":testing")
+    testImplementation projects.testing
+    androidTestImplementation projects.testing
 }

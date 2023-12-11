@@ -9,9 +9,9 @@ android {
 }
 
 dependencies {
-    implementation project(":core:kotlin")
-    implementation project(":data:model")
-    implementation project(":data:settings:api")
+    implementation projects.core.kotlin
+    implementation projects.data.model
+    implementation projects.data.settings.api
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
