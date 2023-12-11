@@ -19,8 +19,11 @@ import android.view.MotionEvent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -60,8 +63,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -94,7 +95,6 @@ private enum class Page(val title: String) {
     ExperimentalComposeUiApi::class,
     ExperimentalMaterialApi::class,
     ExperimentalFoundationApi::class,
-    ExperimentalPagerApi::class,
 )
 @Composable
 fun TheaterEditScreen(
@@ -102,7 +102,7 @@ fun TheaterEditScreen(
     upPress: () -> Unit,
 ) {
     val pages = Page.values()
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { pages.size })
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
     FirstLaunchedEffect {
@@ -177,7 +177,7 @@ fun TheaterEditScreen(
                     false
                 },
         ) {
-            HorizontalPager(pageCount = pages.size, state = pagerState) { page ->
+            HorizontalPager(state = pagerState) { page ->
                 when (Page.of(page)) {
                     Page.CGV -> CgvScreen(viewModel)
                     Page.Lotte -> LotteScreen(viewModel)
@@ -278,6 +278,7 @@ private fun TheaterEditFooterPeek(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun TheaterEditFooterContents(
     theaterList: List<TheaterModel>,
@@ -299,8 +300,8 @@ private fun TheaterEditFooterContents(
         } else {
             FlowRow(
                 modifier = Modifier.padding(all = 16.dp),
-                mainAxisSpacing = 8.dp,
-                crossAxisSpacing = 8.dp,
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
             ) {
                 theaterList.forEach { theater ->
                     TheaterChip(theater, onTheaterClick)

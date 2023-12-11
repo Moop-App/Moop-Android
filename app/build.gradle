@@ -135,7 +135,6 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
     implementation libs.accompanist.drawablepainter
-    implementation libs.metronome.visibility
 
     implementation libs.androidx.profileinstaller
 

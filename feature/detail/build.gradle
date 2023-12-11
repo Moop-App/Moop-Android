@@ -32,8 +32,8 @@ dependencies {
     implementation libs.compose.ui
     implementation libs.compose.animation.graphics
     implementation libs.readmore.material
-    implementation libs.materialMotionCompose.core
-    implementation libs.photo
+    implementation libs.materialmotion.compose.core
+    implementation libs.photo.compose
 
     testImplementation projects.testing
     androidTestImplementation projects.testing

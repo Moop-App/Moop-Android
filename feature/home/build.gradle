@@ -30,11 +30,7 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
-    implementation libs.accompanist.flowlayout
-    implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
-    implementation libs.accompanist.swiperefresh
-    implementation libs.metronome.visibility
 
     testImplementation projects.testing
     androidTestImplementation projects.testing

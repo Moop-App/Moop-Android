@@ -23,8 +23,6 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
-    implementation libs.accompanist.flowlayout
-    implementation libs.accompanist.pager
     implementation libs.accompanist.pagerIndicators
 
     testImplementation projects.testing

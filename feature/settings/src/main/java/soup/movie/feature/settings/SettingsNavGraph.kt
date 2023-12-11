@@ -15,15 +15,14 @@
  */
 package soup.movie.feature.settings
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import soup.compose.material.motion.animation.materialSharedAxisZIn
 import soup.compose.material.motion.animation.materialSharedAxisZOut
-import soup.compose.material.motion.navigation.MaterialMotionNavHost
-import soup.compose.material.motion.navigation.composable
-import soup.compose.material.motion.navigation.rememberMaterialMotionNavController
 import soup.movie.core.designsystem.showToast
 import soup.movie.core.external.Moop
 import soup.movie.feature.theater.edit.TheaterEditScreen
@@ -41,11 +40,10 @@ private enum class Screen(val route: String) {
     TheaterEdit("TheaterEditScreen"),
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SettingsNavGraph() {
-    val navController = rememberMaterialMotionNavController()
-    MaterialMotionNavHost(
+    val navController = rememberNavController()
+    NavHost(
         navController,
         startDestination = Screen.Settings.route,
         enterTransition = { materialSharedAxisZIn(forward = true) },

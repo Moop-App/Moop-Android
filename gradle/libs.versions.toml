@@ -39,14 +39,13 @@ firebase-crashlytics = "2.9.9"
 firebase-perf = "1.4.2"
 
 # Compose
-compose-bom = "2023.05.01"
+compose-bom = "2023.10.01"
 composeCompiler = "1.5.3"
-accompanist = "0.30.0"
-metronome = "0.5.2"
-navermapcompose = "1.3.3"
-readmore = "1.4.0"
-materialmotion = "1.0.0"
-photo = "1.0.0"
+accompanist = "0.32.0"
+navermap-compose = "1.4.0"
+readmore = "1.4.3"
+materialmotion = "1.0.7"
+photo-compose = "1.0.1"
 
 # Etc
 coil = "2.2.2"
@@ -122,21 +121,15 @@ compose-ui = { module = "androidx.compose.ui:ui" }
 compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics" }
 
 accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
-accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
-accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-pagerIndicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
-accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
-
-metronome-visibility = { module = "com.github.fornewid.metronome:visibility", version.ref = "metronome" }
 
 readmore-material = { module = "com.webtoonscorp.android:readmore-material", version.ref = "readmore" }
 
-photo = { module = "io.github.fornewid:photo-compose", version.ref = "photo" }
+photo-compose = { module = "io.github.fornewid:photo-compose", version.ref = "photo-compose" }
 
-materialMotionCompose-core = { module = "io.github.fornewid:material-motion-compose-core", version.ref = "materialmotion" }
-materialMotionCompose-navigation = { module = "io.github.fornewid:material-motion-compose-navigation", version.ref = "materialmotion" }
+materialmotion-compose-core = { module = "io.github.fornewid:material-motion-compose-core", version.ref = "materialmotion" }
 
-naverMapCompose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermapcompose" }
+navermap-compose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermap-compose" }
 
 # Test
 test-junit =  "junit:junit:4.13"
