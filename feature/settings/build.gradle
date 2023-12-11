@@ -25,8 +25,8 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
-    implementation libs.accompanist.flowlayout
-    implementation libs.materialMotionCompose.navigation
+    implementation libs.androidx.navigation.compose
+    implementation libs.materialmotion.compose.core
 
     testImplementation projects.testing
     androidTestImplementation projects.testing

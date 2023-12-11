@@ -18,7 +18,6 @@ package soup.movie.feature.detail
 import android.content.Context
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
@@ -37,7 +36,6 @@ import soup.compose.material.motion.circularReveal
 import soup.movie.core.designsystem.showToast
 import soup.movie.resources.R
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun DetailNavGraph(
     viewModel: DetailViewModel,

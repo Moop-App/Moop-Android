@@ -18,8 +18,11 @@ package soup.movie.feature.settings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -52,7 +55,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.flowlayout.FlowRow
 import soup.movie.buildconfig.BuildConfig
 import soup.movie.core.designsystem.UnelevatedButton
 import soup.movie.core.designsystem.icon.MovieIcons
@@ -204,6 +206,7 @@ private fun SettingsThemeItem(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun SettingsTheaterItem(
     theaterList: List<TheaterModel>,
@@ -241,7 +244,9 @@ private fun SettingsTheaterItem(
                     style = MovieTheme.typography.body2,
                 )
             } else {
-                FlowRow(mainAxisSpacing = 8.dp) {
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
+                ) {
                     theaterList.forEach { theater ->
                         TheaterChip(theater, onItemClick)
                     }

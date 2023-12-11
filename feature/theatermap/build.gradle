@@ -25,7 +25,7 @@ dependencies {
     implementation libs.compose.ui
     implementation libs.accompanist.drawablepainter
 
-    implementation libs.naverMapCompose
+    implementation libs.navermap.compose
 
     testImplementation projects.testing
     androidTestImplementation projects.testing

@@ -15,7 +15,10 @@
  */
 package soup.movie.feature.theater.edit
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,11 +29,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.flowlayout.FlowRow
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.theme.MovieTheme
@@ -105,6 +108,7 @@ private fun TheaterEditChildScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun TheaterAreaItem(
     title: String,
@@ -119,7 +123,10 @@ private fun TheaterAreaItem(
             color = MovieTheme.colors.onBackground,
             style = MovieTheme.typography.subtitle1,
         )
-        FlowRow(mainAxisSpacing = 8.dp, modifier = Modifier.padding(all = 4.dp)) {
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
+            modifier = Modifier.padding(all = 4.dp),
+        ) {
             theaterList.forEach { item ->
                 TheaterFilterChip(
                     item.theater,
