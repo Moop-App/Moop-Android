@@ -78,7 +78,8 @@ android {
 
 dependencies {
     implementation projects.core.ads
-    implementation projects.core.analytics
+    implementation projects.core.analytics.api
+    runtimeOnly projects.core.analytics.impl
     implementation projects.core.appupdate.api
     implementation projects.core.kotlin
     implementation projects.core.designsystem
@@ -122,7 +123,6 @@ dependencies {
     implementation libs.androidx.navigation.compose
 
     implementation platform(libs.firebase.bom)
-    implementation libs.firebase.analytics
     implementation libs.firebase.cloudmessaging
     implementation libs.firebase.crashlytics
     implementation libs.firebase.dynamiclinks

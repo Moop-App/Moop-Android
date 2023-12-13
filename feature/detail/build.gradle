@@ -10,7 +10,7 @@ android {
 
 dependencies {
     implementation projects.core.ads
-    implementation projects.core.analytics
+    implementation projects.core.analytics.api
     implementation projects.core.kotlin
     implementation projects.core.designsystem
     implementation projects.core.external

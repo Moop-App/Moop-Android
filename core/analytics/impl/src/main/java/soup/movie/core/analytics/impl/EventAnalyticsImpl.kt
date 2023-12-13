@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2023 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.analytics
+package soup.movie.core.analytics.impl
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
+import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.FirebaseAnalytics.Event
-import com.google.firebase.analytics.FirebaseAnalytics.Param
+import com.google.firebase.analytics.analytics
 import soup.movie.core.analytics.EventAnalytics
+import javax.inject.Inject
+import javax.inject.Singleton
 
 private typealias Params = Bundle.() -> Unit
 
-class EventAnalyticsImpl(context: Context) : EventAnalytics {
+@Singleton
+class EventAnalyticsImpl @Inject constructor() : EventAnalytics {
 
     private val delegate by lazy {
-        FirebaseAnalytics.getInstance(context)
+        Firebase.analytics
     }
 
     private inline fun logEvent(name: String, params: Params) {
@@ -36,19 +38,19 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
     }
 
     private inline fun logSelectEvent(params: Params) {
-        delegate.logEvent(Event.SELECT_CONTENT, Bundle().apply { params() })
+        delegate.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, Bundle().apply { params() })
     }
 
     private inline fun logShareEvent(params: Params) {
-        delegate.logEvent(Event.SHARE, Bundle().apply { params() })
+        delegate.logEvent(FirebaseAnalytics.Event.SHARE, Bundle().apply { params() })
     }
 
     // Common
 
     override fun screen(activity: Activity, screenName: String, screenClass: String?) {
-        logEvent(Event.SCREEN_VIEW) {
-            putString(Param.SCREEN_NAME, screenName)
-            putString(Param.SCREEN_CLASS, screenClass ?: activity.javaClass.simpleName)
+        logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
+            putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
+            putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass ?: activity.javaClass.simpleName)
         }
     }
 
@@ -56,13 +58,13 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
 
     override fun clickMovie() {
         logSelectEvent {
-            putString(Param.CONTENT_TYPE, CONTENT_TYPE_MOVIE)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, CONTENT_TYPE_MOVIE)
         }
     }
 
     override fun clickMenuFilter() {
         logSelectEvent {
-            putString(Param.CONTENT_TYPE, "MenuFilterButton")
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "MenuFilterButton")
         }
     }
 
@@ -70,34 +72,34 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
 
     override fun clickPoster() {
         logShareEvent {
-            putString(Param.CONTENT_TYPE, CONTENT_TYPE_POSTER)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, CONTENT_TYPE_POSTER)
         }
     }
 
     override fun clickShare() {
         logShareEvent {
-            putString(Param.CONTENT_TYPE, CONTENT_TYPE_MOVIE)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, CONTENT_TYPE_MOVIE)
         }
     }
 
     override fun clickCgvInfo() {
         logSelectEvent {
-            putString(Param.CONTENT_TYPE, "InfoButton")
-            putString(Param.ITEM_BRAND, BRAND_CGV)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "InfoButton")
+            putString(FirebaseAnalytics.Param.ITEM_BRAND, BRAND_CGV)
         }
     }
 
     override fun clickLotteInfo() {
         logSelectEvent {
-            putString(Param.CONTENT_TYPE, "InfoButton")
-            putString(Param.ITEM_BRAND, BRAND_LOTTE)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "InfoButton")
+            putString(FirebaseAnalytics.Param.ITEM_BRAND, BRAND_LOTTE)
         }
     }
 
     override fun clickMegaboxInfo() {
         logSelectEvent {
-            putString(Param.CONTENT_TYPE, "InfoButton")
-            putString(Param.ITEM_BRAND, BRAND_MEGABOX)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "InfoButton")
+            putString(FirebaseAnalytics.Param.ITEM_BRAND, BRAND_MEGABOX)
         }
     }
 
@@ -105,15 +107,15 @@ class EventAnalyticsImpl(context: Context) : EventAnalytics {
 
     override fun clickTrailer() {
         logSelectEvent {
-            putString(Param.CONTENT_TYPE, CONTENT_TYPE_TRAILER)
-            putString(Param.ITEM_BRAND, BRAND_YOUTUBE)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, CONTENT_TYPE_TRAILER)
+            putString(FirebaseAnalytics.Param.ITEM_BRAND, BRAND_YOUTUBE)
         }
     }
 
     override fun clickMoreTrailers() {
-        logEvent(Event.SEARCH) {
-            putString(Param.CONTENT_TYPE, CONTENT_TYPE_TRAILER)
-            putString(Param.ITEM_BRAND, BRAND_YOUTUBE)
+        logEvent(FirebaseAnalytics.Event.SEARCH) {
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, CONTENT_TYPE_TRAILER)
+            putString(FirebaseAnalytics.Param.ITEM_BRAND, BRAND_YOUTUBE)
         }
     }
 
