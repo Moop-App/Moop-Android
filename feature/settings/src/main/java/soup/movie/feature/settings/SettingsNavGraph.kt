@@ -29,8 +29,8 @@ import soup.movie.feature.theater.edit.TheaterEditScreen
 import soup.movie.feature.theater.edit.TheaterEditViewModel
 import soup.movie.feature.theater.sort.TheaterSortScreen
 import soup.movie.feature.theater.sort.TheaterSortViewModel
-import soup.movie.feature.theme.ThemeOptionScreen
-import soup.movie.feature.theme.ThemeOptionViewModel
+import soup.movie.feature.theme.ThemeEntry
+import soup.movie.feature.theme.rememberThemeEntry
 import soup.movie.resources.R
 
 private enum class Screen(val route: String) {
@@ -75,8 +75,8 @@ fun SettingsNavGraph() {
             )
         }
         composable(Screen.ThemeOption.route) {
-            val viewModel = hiltViewModel<ThemeOptionViewModel>()
-            ThemeOptionScreen(viewModel = viewModel)
+            val entry: ThemeEntry = rememberThemeEntry()
+            entry.ThemeOptionScreen()
         }
         composable(Screen.TheaterSort.route) {
             val viewModel = hiltViewModel<TheaterSortViewModel>()

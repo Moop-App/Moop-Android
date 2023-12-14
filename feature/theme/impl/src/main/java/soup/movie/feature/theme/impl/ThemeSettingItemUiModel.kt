@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.theme
+package soup.movie.feature.theme.impl
+
+import soup.movie.feature.theme.ThemeOption
 
 data class ThemeSettingItemUiModel(
     val themeOption: ThemeOption,

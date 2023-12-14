@@ -17,7 +17,7 @@ dependencies {
     implementation projects.data.settings.api
     implementation projects.data.model
     implementation projects.feature.theater
-    implementation projects.feature.theme
+    implementation projects.feature.theme.api
 
     implementation libs.kotlin.stdlib
 

@@ -92,7 +92,8 @@ dependencies {
     implementation projects.feature.theater
     implementation projects.feature.theatermap
     implementation projects.feature.settings
-    implementation projects.feature.theme
+    implementation projects.feature.theme.api
+    runtimeOnly projects.feature.theme.impl
     implementation projects.feature.navigator.api
     runtimeOnly projects.feature.navigator.impl
     implementation projects.feature.notification.api
