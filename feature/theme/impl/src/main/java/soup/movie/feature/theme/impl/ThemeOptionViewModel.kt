@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.theme
+package soup.movie.feature.theme.impl
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import soup.movie.feature.theme.ThemeOptionManager
 import javax.inject.Inject
 
 @HiltViewModel

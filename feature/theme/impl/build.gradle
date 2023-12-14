@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace "soup.movie.feature.theme"
+    namespace "soup.movie.feature.theme.impl"
 }
 
 dependencies {
@@ -14,10 +14,12 @@ dependencies {
     implementation projects.core.resources
     implementation projects.data.settings.api
     implementation projects.data.model
+    implementation projects.feature.theme.api
 
     implementation libs.kotlin.stdlib
 
     implementation libs.androidx.appcompat
+    implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
