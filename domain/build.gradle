@@ -4,14 +4,9 @@ plugins {
 
 android {
     namespace "soup.movie.domain"
-    compileOptions {
-        coreLibraryDesugaringEnabled true
-    }
 }
 
 dependencies {
-    coreLibraryDesugaring libs.android.desugar.jdk
-
     implementation projects.core.kotlin
     implementation projects.data.model
 

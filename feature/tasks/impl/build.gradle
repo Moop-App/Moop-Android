@@ -6,14 +6,9 @@ plugins {
 
 android {
     namespace 'soup.movie.feature.tasks.impl'
-    compileOptions {
-        coreLibraryDesugaringEnabled true
-    }
 }
 
 dependencies {
-    coreLibraryDesugaring libs.android.desugar.jdk
-
     implementation projects.core.kotlin
     implementation projects.core.logger
     implementation projects.core.resources
