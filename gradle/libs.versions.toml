@@ -39,12 +39,12 @@ firebase-crashlytics = "2.9.9"
 firebase-perf = "1.4.2"
 
 # Compose
-compose-bom = "2023.10.01"
+compose-bom = "2024.02.01"
 composeCompiler = "1.5.3"
-accompanist = "0.32.0"
-navermap-compose = "1.4.0"
-readmore = "1.4.3"
-materialmotion = "1.0.7"
+accompanist = "0.34.0"
+navermap-compose = "1.5.5"
+readmore = "1.5.6"
+materialmotion = "1.1.3"
 photo-compose = "1.0.1"
 
 # Etc
