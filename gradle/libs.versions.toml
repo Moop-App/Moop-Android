@@ -24,7 +24,7 @@ androidx-datastore = "1.0.0"
 androidx-fragment = "1.6.2"
 androidx-lifecycle = "2.7.0"
 androidx-navigation = "2.7.7"
-androidx-profileinstaller = "1.3.0"
+androidx-profileinstaller = "1.3.1"
 androidx-room = "2.6.1"
 androidx-startup = "1.1.1"
 androidx-window = "1.2.0"
@@ -48,12 +48,12 @@ materialmotion = "1.1.3"
 photo-compose = "1.0.1"
 
 # Etc
-coil = "2.2.2"
+coil = "2.6.0"
 dependencyGuard = "0.3.2"
 retrofit = "2.9.0"
 retrofit-serialization = "1.0.0"
 timber = "5.0.1"
-kakao = "2.18.0"
+kakao = "2.19.0"
 
 
 [libraries]

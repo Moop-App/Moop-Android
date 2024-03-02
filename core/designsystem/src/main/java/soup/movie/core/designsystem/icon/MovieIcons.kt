@@ -16,9 +16,10 @@
 package soup.movie.core.designsystem.icon
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.Subject
 import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
@@ -34,13 +35,12 @@ import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.Shop
 import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material.icons.rounded.Subject
 import androidx.compose.material.icons.rounded.ViewModule
 import soup.movie.core.designsystem.R
 
 object MovieIcons {
     val Add = Icons.Rounded.Add
-    val ArrowBack = Icons.Rounded.ArrowBack
+    val ArrowBack = Icons.AutoMirrored.Rounded.ArrowBack
     val BugReport = Icons.Rounded.BugReport
     val Check = Icons.Rounded.Check
     val Close = Icons.Rounded.Close
@@ -57,7 +57,7 @@ object MovieIcons {
     val Share = Icons.Rounded.Share
     val Shop = Icons.Rounded.Shop
     val Star = Icons.Rounded.Star
-    val Subject = Icons.Rounded.Subject
+    val Subject = Icons.AutoMirrored.Rounded.Subject
     val ViewModule = Icons.Rounded.ViewModule
     val AvdFavoriteSelected = R.drawable.avd_favorite_selected
     val AvdHomeNowSelected = R.drawable.avd_home_now_selected
