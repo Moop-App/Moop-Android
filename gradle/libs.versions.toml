@@ -10,7 +10,7 @@ serialization = "1.6.3"
 ksp = "1.9.22-1.0.17"
 
 # Dagger
-dagger = "2.50"
+dagger = "2.51"
 androidxhilt = "1.2.0"
 
 # AndroidX
