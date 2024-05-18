@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import soup.movie.core.designsystem.theme.MovieTheme
 
 @Composable
@@ -53,6 +54,7 @@ internal fun MovieTextTag(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
+            lineHeight = 1.em,
             maxLines = 1,
         )
     }
