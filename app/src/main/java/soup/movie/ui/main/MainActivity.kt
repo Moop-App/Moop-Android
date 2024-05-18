@@ -70,12 +70,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.onInit()
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         handleDeepLink(intent)
     }
 
-    private fun handleDeepLink(intent: Intent?) {
+    private fun handleDeepLink(intent: Intent) {
         FirebaseLink.extractMovieId(intent) { movieId ->
             if (movieId != null) {
                 viewModel.requestMovie(movieId)
