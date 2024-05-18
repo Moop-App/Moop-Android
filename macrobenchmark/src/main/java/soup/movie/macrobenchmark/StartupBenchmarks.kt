@@ -85,7 +85,7 @@ class StartupBenchmarks {
                 // Check the UiAutomator documentation for more information on how to
                 // interact with the app.
                 // https://d.android.com/training/testing/other-components/ui-automator
-            }
+            },
         )
     }
 }
