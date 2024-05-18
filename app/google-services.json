@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "783959334963-4pshqpqoddg8l40niq0tqt2om8r7blk5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "soup.movie",
+            "certificate_hash": "8a40a734ae69787b2b28185a3319ef5a9dab4d0e"
+          }
+        },
+        {
           "client_id": "783959334963-gdql2t6lteo8neid2ffreaje7p1eqjgt.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -28,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "783959334963-hqd5i9l9nfp5mnb22dp4ptmv6pqqg7bp.apps.googleusercontent.com",
+              "client_id": "783959334963-gdql2t6lteo8neid2ffreaje7p1eqjgt.apps.googleusercontent.com",
               "client_type": 3
             },
             {
@@ -41,7 +49,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-1945197672769498~9188814837"
     },
     {
       "client_info": {
@@ -65,7 +74,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "783959334963-hqd5i9l9nfp5mnb22dp4ptmv6pqqg7bp.apps.googleusercontent.com",
+              "client_id": "783959334963-gdql2t6lteo8neid2ffreaje7p1eqjgt.apps.googleusercontent.com",
               "client_type": 3
             },
             {
