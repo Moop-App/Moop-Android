@@ -52,7 +52,7 @@ coil = "2.6.0"
 dependencyGuard = "0.3.2"
 retrofit = "2.11.0"
 timber = "5.0.1"
-kakao = "2.19.0"
+kakao = "2.20.1"
 
 
 [libraries]
