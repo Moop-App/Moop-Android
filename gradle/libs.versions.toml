@@ -1,7 +1,7 @@
 [versions]
 
 # Android
-androidGradlePlugin = "8.1.4"
+androidGradlePlugin = "8.3.2"
 
 # Kotlin
 kotlin = "1.9.24"
@@ -31,10 +31,10 @@ androidx-window = "1.2.0"
 androidx-work = "2.9.0"
 
 # Google
-gms = "4.3.14"
+gms = "4.4.1"
 play-appupdate = "2.1.0"
 admob = "21.3.0"
-firebase-bom = "32.5.0"
+firebase-bom = "33.0.0"
 firebase-crashlytics = "2.9.9"
 firebase-perf = "1.4.2"
 

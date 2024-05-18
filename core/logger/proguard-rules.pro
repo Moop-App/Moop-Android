@@ -1,0 +1,1 @@
+-dontwarn soup.movie.log.Logger
