@@ -151,5 +151,5 @@ dependencyGuard {
 }
 
 task applyDependencyBaseline {
-    dependsOn dependencyGuardBaseline
+    dependsOn "dependencyGuardBaseline"
 }
