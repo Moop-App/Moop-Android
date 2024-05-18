@@ -21,13 +21,13 @@ import soup.movie.model.TheaterModel
 sealed class TheaterEditContentUiModel {
 
     @Keep
-    object LoadingState : TheaterEditContentUiModel()
+    data object LoadingState : TheaterEditContentUiModel()
 
     @Keep
-    object ErrorState : TheaterEditContentUiModel()
+    data object ErrorState : TheaterEditContentUiModel()
 
     @Keep
-    object DoneState : TheaterEditContentUiModel()
+    data object DoneState : TheaterEditContentUiModel()
 }
 
 @Keep
