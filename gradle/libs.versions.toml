@@ -50,8 +50,7 @@ photo-compose = "1.0.1"
 # Etc
 coil = "2.6.0"
 dependencyGuard = "0.3.2"
-retrofit = "2.9.0"
-retrofit-serialization = "1.0.0"
+retrofit = "2.11.0"
 timber = "5.0.1"
 kakao = "2.19.0"
 
@@ -162,7 +161,7 @@ coil-runtime = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization" }
+retrofit-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
 
 kakao-share = { module = "com.kakao.sdk:v2-share", version.ref = "kakao" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }

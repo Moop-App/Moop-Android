@@ -16,7 +16,6 @@
 package soup.movie.data.network.impl.di
 
 import android.content.Context
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -28,6 +27,7 @@ import okhttp3.Cache
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import soup.movie.buildconfig.BuildConfig
 import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.impl.MovieApiService
