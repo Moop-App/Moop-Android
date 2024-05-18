@@ -4,13 +4,13 @@
 androidGradlePlugin = "8.1.4"
 
 # Kotlin
-kotlin = "1.9.10"
-coroutines = "1.7.3"
-serialization = "1.5.0"
-ksp = "1.9.10-1.0.13"
+kotlin = "1.9.24"
+coroutines = "1.8.1"
+serialization = "1.6.3"
+ksp = "1.9.24-1.0.20"
 
 # Dagger
-dagger = "2.50"
+dagger = "2.51.1"
 androidxhilt = "1.2.0"
 
 # AndroidX
@@ -40,7 +40,7 @@ firebase-perf = "1.4.2"
 
 # Compose
 compose-bom = "2024.02.01"
-composeCompiler = "1.5.3"
+compose-compiler = "1.5.14"
 accompanist = "0.34.0"
 navermap-compose = "1.5.5"
 readmore = "1.5.6"

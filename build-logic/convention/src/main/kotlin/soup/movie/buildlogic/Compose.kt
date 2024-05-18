@@ -14,7 +14,7 @@ fun Project.configureCompose() {
 
         composeOptions {
             kotlinCompilerExtensionVersion =
-                libs.findVersion("composeCompiler").get().toString()
+                libs.findVersion("compose-compiler").get().toString()
         }
 
         dependencies {

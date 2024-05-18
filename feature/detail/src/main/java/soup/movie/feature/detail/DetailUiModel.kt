@@ -22,8 +22,8 @@ import soup.movie.model.MovieModel
 import soup.movie.model.TrailerModel
 
 sealed interface DetailUiModel {
-    object None : DetailUiModel
-    object Failure : DetailUiModel
+    data object None : DetailUiModel
+    data object Failure : DetailUiModel
     data class Success(
         val header: HeaderUiModel,
         val items: List<ContentItemUiModel>,
