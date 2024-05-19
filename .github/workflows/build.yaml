@@ -39,6 +39,8 @@ jobs:
 
       - name: Build all build type and flavor permutations
         run: ./gradlew assemble --stacktrace
+          -x :macrobenchmark:collectNonMinifiedReleaseBaselineProfile
+          -x :macrobenchmark:pixel6Api34NonMinifiedReleaseAndroidTest
 
       - name: Run local tests
         run: ./gradlew testDebug --stacktrace

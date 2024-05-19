@@ -5,6 +5,7 @@ plugins {
     alias libs.plugins.firebase.crashlytics
     alias libs.plugins.firebase.performance
     alias libs.plugins.dependencyGuard
+    alias(libs.plugins.baselineprofile)
 }
 if (file("google-services.json").exists()) {
     apply plugin: 'com.google.gms.google-services'
@@ -77,6 +78,8 @@ android {
 }
 
 dependencies {
+    baselineProfile projects.macrobenchmark
+
     implementation projects.core.ads
     implementation projects.core.analytics.api
     runtimeOnly projects.core.analytics.impl
@@ -143,6 +146,7 @@ dependencies {
 
     testImplementation projects.testing
     androidTestImplementation projects.testing
+    androidTestImplementation libs.androidx.benchmark.macro.junit4
 }
 
 dependencyGuard {

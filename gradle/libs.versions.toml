@@ -16,7 +16,7 @@ androidxhilt = "1.2.0"
 # AndroidX
 androidx-activity = "1.9.0"
 androidx-appcompat = "1.6.1"
-androidx-benchmark = "1.1.1"
+androidx-benchmark = "1.2.4"
 androidx-browser = "1.8.0"
 androidx-constraintlayout = "2.1.4"
 androidx-core = "1.13.1"
@@ -131,15 +131,14 @@ materialmotion-compose-core = { module = "io.github.fornewid:material-motion-com
 navermap-compose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermap-compose" }
 
 # Test
-test-junit =  "junit:junit:4.13"
+test-junit =  "junit:junit:4.13.2"
 
 androidx-test-core = "androidx.test:core-ktx:1.5.0"
 androidx-test-rules = "androidx.test:rules:1.5.0"
-androidx-test-runner = "androidx.test:runner:1.5.0"
-androidx-test-ext-truth = "androidx.test.ext:truth:1.5.0"
-androidx-test-ext-junit = "androidx.test.ext:junit-ktx:1.1.4"
-androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.0"
-androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
+androidx-test-runner = "androidx.test:runner:1.5.2"
+androidx-test-ext-junit = "androidx.test.ext:junit-ktx:1.1.5"
+androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
+androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 
 # Google
 
@@ -183,3 +182,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
 firebase-performance = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf" }
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
