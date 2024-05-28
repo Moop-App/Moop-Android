@@ -4,10 +4,10 @@
 androidGradlePlugin = "8.3.2"
 
 # Kotlin
-kotlin = "1.9.24"
+kotlin = "2.0.0"
 coroutines = "1.8.1"
 serialization = "1.6.3"
-ksp = "1.9.24-1.0.20"
+ksp = "2.0.0-1.0.21"
 
 # Dagger
 dagger = "2.51.1"
@@ -40,7 +40,6 @@ firebase-perf = "1.4.2"
 
 # Compose
 compose-bom = "2024.05.00"
-compose-compiler = "1.5.14"
 accompanist = "0.34.0"
 navermap-compose = "1.5.7"
 readmore = "1.5.6"
@@ -169,6 +168,7 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 # Dependencies of the included build-logic
 android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-compiler-pluginGradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 
 [plugins]
@@ -178,6 +178,7 @@ gms = { id = "com.google.gms.google-services", version.ref = "gms" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
