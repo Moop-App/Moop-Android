@@ -21,7 +21,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 }
                 buildTypes {
                     release {
-                        isMinifyEnabled = true
+                        isMinifyEnabled = false
                         consumerProguardFiles("proguard-rules.pro")
                     }
                 }
