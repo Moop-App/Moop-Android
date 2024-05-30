@@ -23,7 +23,7 @@ androidx-core = "1.13.1"
 androidx-datastore = "1.1.1"
 androidx-fragment = "1.7.1"
 androidx-lifecycle = "2.8.1"
-androidx-navigation = "2.7.7"
+androidx-navigation = "2.8.0-beta02"
 androidx-profileinstaller = "1.3.1"
 androidx-room = "2.6.1"
 androidx-startup = "1.1.1"
@@ -39,8 +39,8 @@ firebase-crashlytics = "2.9.9"
 firebase-perf = "1.4.2"
 
 # Compose
-compose-bom = "2024.05.00"
-accompanist = "0.34.0"
+compose-bom = "2024.05.00-alpha03"
+accompanist = "0.35.1-alpha"
 navermap-compose = "1.5.7"
 readmore = "1.5.6"
 materialmotion = "1.1.3"
@@ -111,7 +111,7 @@ androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "
 
 # Compose
 
-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+compose-bom = { module = "dev.chrisbanes.compose:compose-bom", version.ref = "compose-bom" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-material = { module = "androidx.compose.material:material" }
 compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
@@ -119,7 +119,6 @@ compose-ui = { module = "androidx.compose.ui:ui" }
 compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics" }
 
 accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
-accompanist-pagerIndicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 
 readmore-material = { module = "com.webtoonscorp.android:readmore-material", version.ref = "readmore" }
 
