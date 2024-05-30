@@ -16,8 +16,8 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
-                implementation(libs.findLibrary("dagger.hilt.android").get())
-                ksp(libs.findLibrary("dagger.hilt.compiler").get())
+                implementation(libs.findLibrary("dagger-hilt-android").get())
+                ksp(libs.findLibrary("dagger-hilt-compiler").get())
             }
         }
     }

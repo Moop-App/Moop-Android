@@ -57,7 +57,7 @@ kakao = "2.20.1"
 [libraries]
 
 # Android
-android-desugar-jdk = "com.android.tools:desugar_jdk_libs:1.1.5"
+android-desugar-jdk = "com.android.tools:desugar_jdk_libs:2.0.4"
 
 # Kotlin
 
@@ -91,7 +91,6 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "androidx-lifecycle" }
 
