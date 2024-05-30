@@ -17,7 +17,6 @@ package soup.movie.feature.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -30,10 +29,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.text.withLink
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.external.YouTube
 import soup.movie.core.external.executeWeb
@@ -98,20 +99,25 @@ internal fun DetailScreen(
                     Text(text = stringResource(R.string.trailer_dialog_message))
 
                     val url = "https://policies.google.com/privacy"
-                    ClickableText(
+                    Text(
                         text = buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    color = MovieTheme.colors.secondary,
-                                    textDecoration = TextDecoration.Underline,
-                                ),
+                            withLink(
+                                LinkAnnotation.Url(
+                                    url = url,
+                                    styles = TextLinkStyles(
+                                        style = SpanStyle(
+                                            color = MovieTheme.colors.secondary,
+                                            textDecoration = TextDecoration.Underline,
+                                        ),
+                                    ),
+                                ) {
+                                    context.executeWeb(url)
+                                },
                             ) {
                                 append(url)
                             }
                         },
-                    ) {
-                        context.executeWeb(url)
-                    }
+                    )
                 }
             },
             confirmButton = {
