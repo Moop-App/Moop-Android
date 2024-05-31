@@ -33,7 +33,7 @@ androidx-work = "2.9.0"
 # Google
 gms = "4.4.1"
 play-appupdate = "2.1.0"
-admob = "21.5.0"
+admob = "22.6.0"
 firebase-bom = "33.0.0"
 firebase-crashlytics = "2.9.9"
 firebase-perf = "1.4.2"

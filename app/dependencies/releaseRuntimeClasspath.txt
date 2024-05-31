@@ -137,10 +137,10 @@ com.google.accompanist:accompanist-permissions:0.34.0
 com.google.android.datatransport:transport-api:3.1.0
 com.google.android.datatransport:transport-backend-cct:3.1.9
 com.google.android.datatransport:transport-runtime:3.1.9
-com.google.android.gms:play-services-ads-base:21.5.0
+com.google.android.gms:play-services-ads-base:22.6.0
 com.google.android.gms:play-services-ads-identifier:18.0.0
-com.google.android.gms:play-services-ads-lite:21.5.0
-com.google.android.gms:play-services-ads:21.5.0
+com.google.android.gms:play-services-ads-lite:22.6.0
+com.google.android.gms:play-services-ads:22.6.0
 com.google.android.gms:play-services-appset:16.0.1
 com.google.android.gms:play-services-base:18.1.0
 com.google.android.gms:play-services-basement:18.3.0
@@ -157,7 +157,7 @@ com.google.android.gms:play-services-tasks:18.1.0
 com.google.android.play:app-update-ktx:2.1.0
 com.google.android.play:app-update:2.1.0
 com.google.android.play:core-common:2.0.3
-com.google.android.ump:user-messaging-platform:2.0.0
+com.google.android.ump:user-messaging-platform:2.1.0
 com.google.code.findbugs:jsr305:3.0.2
 com.google.code.gson:gson:2.8.9
 com.google.dagger:dagger-lint-aar:2.51.1
