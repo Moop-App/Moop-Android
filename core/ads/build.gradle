@@ -18,6 +18,7 @@ dependencies {
     implementation libs.compose.ui
 
     implementation libs.google.admob
+    implementation libs.androidx.webkit
 
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.lifecycle.runtime
