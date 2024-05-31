@@ -137,10 +137,10 @@ com.google.accompanist:accompanist-permissions:0.34.0
 com.google.android.datatransport:transport-api:3.1.0
 com.google.android.datatransport:transport-backend-cct:3.1.9
 com.google.android.datatransport:transport-runtime:3.1.9
-com.google.android.gms:play-services-ads-base:21.3.0
+com.google.android.gms:play-services-ads-base:21.5.0
 com.google.android.gms:play-services-ads-identifier:18.0.0
-com.google.android.gms:play-services-ads-lite:21.3.0
-com.google.android.gms:play-services-ads:21.3.0
+com.google.android.gms:play-services-ads-lite:21.5.0
+com.google.android.gms:play-services-ads:21.5.0
 com.google.android.gms:play-services-appset:16.0.1
 com.google.android.gms:play-services-base:18.1.0
 com.google.android.gms:play-services-basement:18.3.0
