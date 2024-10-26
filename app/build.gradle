@@ -138,8 +138,6 @@ dependencies {
 
     implementation libs.androidx.profileinstaller
 
-    implementation libs.kakao.share
-
     testImplementation projects.testing
     androidTestImplementation projects.testing
     androidTestImplementation libs.androidx.benchmark.macro.junit4
