@@ -22,14 +22,12 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import soup.movie.core.ads.AdsManager
 import soup.movie.feature.tasks.AnnounceOpenDateTasks
 import soup.movie.feature.tasks.SyncOpenDateTasks
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val adsManager: AdsManager,
     private val announceOpenDateTasks: AnnounceOpenDateTasks,
     private val syncOpenDateTasks: SyncOpenDateTasks,
 ) : ViewModel() {
@@ -39,7 +37,6 @@ class MainViewModel @Inject constructor(
 
     fun onInit() {
         viewModelScope.launch {
-            adsManager.loadNextNativeAd()
             announceOpenDateTasks.fetch()
             syncOpenDateTasks.fetch()
         }

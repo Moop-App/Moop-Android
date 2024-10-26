@@ -31,12 +31,6 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="tiramisu">
 
-        <!-- https://issuetracker.google.com/issues/327696048 -->
-        <property
-            android:name="android.adservices.AD_SERVICES_CONFIG"
-            android:resource="@xml/gma_ad_services_config"
-            tools:replace="android:resource" />
-
         <profileable
             android:shell="true"
             tools:targetApi="q" />
@@ -50,9 +44,6 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="@string/naver_map_sdk_client_id" />
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_app_id" />
 
         <activity
             android:name=".ui.main.MainActivity"
