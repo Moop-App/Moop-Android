@@ -28,8 +28,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
-import soup.movie.core.ads.AdsManager
-import soup.movie.core.ads.NativeAdInfo
 import soup.movie.core.analytics.EventAnalytics
 import soup.movie.core.imageloading.ImageUriProvider
 import soup.movie.data.repository.MovieRepository
@@ -50,7 +48,6 @@ class DetailViewModel @Inject constructor(
     private val repository: MovieRepository,
     private val analytics: EventAnalytics,
     private val imageUriProvider: ImageUriProvider,
-    private val adsManager: AdsManager,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
@@ -69,16 +66,13 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             _isFavorite.emit(repository.isFavoriteMovie(movieId))
             loadDetail(movieId)
-            adsManager.onNativeAdConsumed()
-            adsManager.loadNextNativeAd()
         }
     }
 
     private suspend fun loadDetail(movieId: String) {
         try {
             val detail = repository.getMovieDetail(movieId)
-            val adInfo = adsManager.getLoadedNativeAd()
-            renderDetail(detail, adInfo)
+            renderDetail(detail)
         } catch (t: Throwable) {
             Logger.w(t)
             _uiModel.emit(DetailUiModel.Failure)
@@ -87,7 +81,6 @@ class DetailViewModel @Inject constructor(
 
     private suspend fun renderDetail(
         detail: MovieDetailModel,
-        adInfo: NativeAdInfo?,
     ) {
         withContext(defaultDispatcher) {
             _uiModel.emit(
@@ -98,7 +91,7 @@ class DetailViewModel @Inject constructor(
                         nations = detail.nations.orEmpty(),
                         companies = detail.companies.orEmpty(),
                     ),
-                    items = detail.toItemsUiModel(adInfo),
+                    items = detail.toItemsUiModel(),
                 ),
             )
         }
@@ -137,7 +130,7 @@ class DetailViewModel @Inject constructor(
         )
     }
 
-    private fun MovieDetailModel.toItemsUiModel(adInfo: NativeAdInfo?): List<ContentItemUiModel> {
+    private fun MovieDetailModel.toItemsUiModel(): List<ContentItemUiModel> {
         val items = mutableListOf<ContentItemUiModel>()
         boxOffice?.run {
             items.add(
@@ -221,10 +214,6 @@ class DetailViewModel @Inject constructor(
         )
         if (persons.isNotEmpty()) {
             items.add(CastItemUiModel(persons = persons))
-        }
-
-        adInfo?.let {
-            items.add(AdItemUiModel(it))
         }
 
         val trailers = trailers.orEmpty()

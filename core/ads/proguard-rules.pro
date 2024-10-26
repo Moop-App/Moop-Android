@@ -1,1 +1,0 @@
--dontwarn soup.movie.core.ads.NativeAdInfo

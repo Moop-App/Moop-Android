@@ -16,7 +16,6 @@
 package soup.movie.feature.detail
 
 import androidx.annotation.Keep
-import soup.movie.core.ads.NativeAdInfo
 import soup.movie.model.CompanyModel
 import soup.movie.model.MovieModel
 import soup.movie.model.TrailerModel
@@ -114,11 +113,6 @@ class PersonUiModel(
 )
 
 @Keep
-class AdItemUiModel(
-    val adInfo: NativeAdInfo,
-) : ContentItemUiModel()
-
-@Keep
 class TrailerHeaderItemUiModel(
     val movieTitle: String,
 ) : ContentItemUiModel()
@@ -141,7 +135,6 @@ val ContentItemUiModel.id: String
         is ImdbItemUiModel -> "imdb"
         is PlotItemUiModel -> "plot"
         is CastItemUiModel -> "cast"
-        is AdItemUiModel -> "ad"
         is TrailerHeaderItemUiModel -> "t_header"
         is TrailerItemUiModel -> "t_${trailer.youtubeId}"
         is TrailerFooterItemUiModel -> "t_footer"

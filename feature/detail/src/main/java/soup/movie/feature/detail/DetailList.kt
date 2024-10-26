@@ -70,7 +70,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.webtoonscorp.android.readmore.material.ReadMoreText
-import soup.movie.core.ads.NativeAd
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.external.executeWeb
@@ -165,11 +164,6 @@ internal fun DetailList(
                 is TrailerFooterItemUiModel -> {
                     TrailerFooter(
                         onClick = { onItemClick(item) },
-                    )
-                }
-                is AdItemUiModel -> {
-                    DetailAd(
-                        uiModel = item,
                     )
                 }
             }
@@ -841,20 +835,6 @@ private fun TrailerFooter(
                 fontWeight = FontWeight.Bold,
             )
         }
-    }
-}
-
-@Composable
-private fun DetailAd(
-    uiModel: AdItemUiModel,
-) {
-    Card(
-        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
-    ) {
-        NativeAd(uiModel.adInfo)
     }
 }
 

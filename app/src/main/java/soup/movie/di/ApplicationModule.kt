@@ -21,22 +21,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import soup.movie.ads.AdsConfigImpl
-import soup.movie.core.ads.AdsConfig
 import soup.movie.feature.navigator.MainNavigator
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
-
-    @Singleton
-    @Provides
-    fun provideAdsConfig(
-        @ApplicationContext context: Context,
-    ): AdsConfig {
-        return AdsConfigImpl(context)
-    }
 
     @Singleton
     @Provides
