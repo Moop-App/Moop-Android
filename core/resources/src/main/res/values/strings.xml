@@ -19,8 +19,7 @@
     <string name="filter_category_genre">Genre Filter</string>
 
     <string name="action_share">Share</string>
-    <string name="action_share_poster">Share poster</string>
-    <string name="action_share_poster_failed">Failed to share poster image.</string>
+    <string name="action_share_failed">Failed to share movie.</string>
     <string name="action_toast_opendate_alarm">⏰ I\'ll let you know when released.</string>
 
     <string name="time_minute">%d min.</string>

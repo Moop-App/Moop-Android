@@ -29,7 +29,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
 import soup.movie.core.analytics.EventAnalytics
-import soup.movie.core.imageloading.ImageUriProvider
 import soup.movie.data.repository.MovieRepository
 import soup.movie.domain.movie.MM_DD
 import soup.movie.domain.movie.screenDays
@@ -47,7 +46,6 @@ class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val repository: MovieRepository,
     private val analytics: EventAnalytics,
-    private val imageUriProvider: ImageUriProvider,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
@@ -93,19 +91,6 @@ class DetailViewModel @Inject constructor(
                     ),
                     items = detail.toItemsUiModel(),
                 ),
-            )
-        }
-    }
-
-    fun requestShareImage(imageUrl: String) {
-        viewModelScope.launch {
-            val uri = imageUriProvider(imageUrl)
-            _uiEvent.emit(
-                if (uri != null) {
-                    ShareImageAction(uri, "image/*")
-                } else {
-                    ToastAction(R.string.action_share_poster_failed)
-                },
             )
         }
     }

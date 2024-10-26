@@ -16,7 +16,6 @@
 package soup.movie.feature.detail
 
 import android.content.Context
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -28,51 +27,37 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
-import soup.compose.material.motion.circularReveal
 import soup.movie.core.designsystem.showToast
+import soup.movie.feature.deeplink.FirebaseLink
+import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
 fun DetailNavGraph(
     viewModel: DetailViewModel,
 ) {
+    val context = LocalContext.current
     val uiModel: DetailUiModel by viewModel.uiModel.collectAsState()
     Box {
-        var showShare by remember { mutableStateOf(false) }
+        val movie = (uiModel as? DetailUiModel.Success)?.header?.movie
         var showPoster by remember { mutableStateOf(false) }
-        BackHandler(
-            enabled = showShare,
-            onBack = { showShare = false },
-        )
         DetailScreen(
             viewModel = viewModel,
             uiModel = uiModel,
             onShareClick = {
-                showShare = true
+                if (movie != null) {
+                    context.shareText(movie)
+                } else {
+                    context.showToast(R.string.action_share_failed)
+                }
             },
             onPosterClick = {
                 showPoster = true
             },
         )
-        val movie = (uiModel as? DetailUiModel.Success)?.header?.movie
         if (movie != null) {
-            DetailShare(
-                movie = movie,
-                onClose = { showShare = false },
-                onShareInstagram = {
-                    viewModel.requestShareImage(
-                        imageUrl = it.posterUrl,
-                    )
-                },
-                modifier = Modifier.circularReveal(
-                    visible = showShare,
-                    center = { Offset(x = it.width, y = 0f) },
-                ),
-            )
             AnimatedVisibility(
                 visible = showPoster,
                 enter = fadeIn(),
@@ -86,24 +71,45 @@ fun DetailNavGraph(
         }
     }
 
-    val context = LocalContext.current
     LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is ShareImageAction -> context.shareImage(event)
                 is ToastAction -> context.showToast(event.resId)
             }
         }
     }
 }
 
-private fun Context.shareImage(action: ShareImageAction) {
-    ShareCompat.IntentBuilder(this)
-        .setChooserTitle(R.string.action_share_poster)
-        .setStream(action.imageUri)
-        .setType(action.mimeType)
-        .apply {
-            intent.setPackage("com.instagram.android")
-        }
-        .startChooser()
+private fun Context.shareText(movie: MovieModel) {
+    FirebaseLink.createDetailLink(
+        movieId = movie.id,
+        imageUrl = movie.posterUrl,
+        title = movie.title,
+        description = buildString {
+            if (movie.isNow) {
+                append("현재상영중")
+            } else {
+                append("${movie.openDate}개봉")
+            }
+            val ageLabel = getString(
+                when {
+                    movie.age >= 19 -> R.string.movie_age_19
+                    movie.age >= 15 -> R.string.movie_age_15
+                    movie.age >= 12 -> R.string.movie_age_12
+                    movie.age >= 0 -> R.string.movie_age_all
+                    else -> R.string.movie_age_unknown
+                },
+            )
+            append(" / $ageLabel")
+            movie.genres?.let { genres ->
+                append(" / ${genres.joinToString()}")
+            }
+        },
+    ) { link ->
+        ShareCompat.IntentBuilder(this)
+            .setChooserTitle(R.string.action_share)
+            .setText("[뭅] ${movie.title}\n$link")
+            .setType("text/plain")
+            .startChooser()
+    }
 }

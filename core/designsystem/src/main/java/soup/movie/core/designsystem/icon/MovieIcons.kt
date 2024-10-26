@@ -62,11 +62,6 @@ object MovieIcons {
     val FilterChipMegaboxCancel = R.drawable.filter_chip_megabox_cancel
     val Imdb = R.drawable.ic_imdb
     val LoadingLogo = R.drawable.ic_loading_logo
-    val Facebook = R.drawable.ic_logo_facebook
-    val Instagram = R.drawable.ic_logo_instagram
-    val Line = R.drawable.ic_logo_line
-    val More = R.drawable.ic_logo_more
-    val Twitter = R.drawable.ic_logo_twitter
     val YouTube = R.drawable.ic_logo_youtube
     val MarkerCgv = R.drawable.ic_marker_cgv
     val MarkerLotte = R.drawable.ic_marker_lotte
