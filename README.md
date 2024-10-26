@@ -15,10 +15,6 @@
 <a href="https://android-arsenal.com/api?level=23"><img alt="API" src="https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat"/></a>
 </p>
 
-## Download
-
-<a href='https://play.google.com/store/apps/details?id=soup.movie'><img height="60px" src='https://play.google.com/intl/en/badges/images/generic/ko_badge_web_generic.png'/></a>
-
 ## API Key
 
 Create `signing/key.properties` with the following values:
