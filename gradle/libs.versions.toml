@@ -31,7 +31,6 @@ androidx-work = "2.9.1"
 
 # Google
 gms = "4.4.1"
-play-appupdate = "2.1.0"
 firebase-bom = "33.0.0"
 firebase-crashlytics = "2.9.9"
 firebase-perf = "1.4.2"
@@ -135,8 +134,6 @@ androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
 androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 
 # Google
-
-google-play-appupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "play-appupdate" }
 
 # https://firebase.google.com/support/release-notes/android#latest_sdk_versions
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }

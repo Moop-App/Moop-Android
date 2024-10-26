@@ -27,13 +27,6 @@ data class TheaterSettingUiModel(
 ) : SettingsUiModel()
 
 @Keep
-data class VersionSettingUiModel(
-    val versionCode: Int,
-    val versionName: String,
-    val isLatest: Boolean,
-) : SettingsUiModel()
-
-@Keep
 data class ThemeSettingUiModel(
     val themeOption: ThemeOption,
 )

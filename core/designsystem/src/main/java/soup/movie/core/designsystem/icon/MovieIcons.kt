@@ -28,12 +28,10 @@ import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.FilterList
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Map
-import androidx.compose.material.icons.rounded.NewReleases
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material.icons.rounded.Share
-import androidx.compose.material.icons.rounded.Shop
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.ViewModule
 import soup.movie.core.designsystem.R
@@ -49,13 +47,11 @@ object MovieIcons {
     val FilterList = Icons.Rounded.FilterList
     val Info = Icons.Rounded.Info
     val Map = Icons.Rounded.Map
-    val NewReleases = Icons.Rounded.NewReleases
     val Palette = Icons.Rounded.Palette
     val PrivacyTip = Icons.Outlined.PrivacyTip
     val Search = Icons.Rounded.Search
     val Settings = Icons.Rounded.Settings
     val Share = Icons.Rounded.Share
-    val Shop = Icons.Rounded.Shop
     val Star = Icons.Rounded.Star
     val Subject = Icons.AutoMirrored.Rounded.Subject
     val ViewModule = Icons.Rounded.ViewModule

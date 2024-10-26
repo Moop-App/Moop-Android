@@ -16,22 +16,18 @@
 package soup.movie.feature.settings
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import soup.compose.material.motion.animation.materialSharedAxisZIn
 import soup.compose.material.motion.animation.materialSharedAxisZOut
-import soup.movie.core.designsystem.showToast
-import soup.movie.core.external.Moop
 import soup.movie.feature.theater.edit.TheaterEditScreen
 import soup.movie.feature.theater.edit.TheaterEditViewModel
 import soup.movie.feature.theater.sort.TheaterSortScreen
 import soup.movie.feature.theater.sort.TheaterSortViewModel
 import soup.movie.feature.theme.ThemeEntry
 import soup.movie.feature.theme.rememberThemeEntry
-import soup.movie.resources.R
 
 private enum class Screen(val route: String) {
     Settings("SettingsScreen"),
@@ -52,7 +48,6 @@ fun SettingsNavGraph() {
         popExitTransition = { materialSharedAxisZOut(forward = false) },
     ) {
         composable(Screen.Settings.route) {
-            val context = LocalContext.current
             val viewModel = hiltViewModel<SettingsViewModel>()
             SettingsScreen(
                 viewModel = viewModel,
@@ -61,16 +56,6 @@ fun SettingsNavGraph() {
                 },
                 onTheaterEditClick = {
                     navController.navigate(Screen.TheaterSort.route)
-                },
-                onVersionClick = {
-                    if (it.isLatest) {
-                        context.showToast(R.string.settings_version_toast)
-                    } else {
-                        Moop.executePlayStore(context)
-                    }
-                },
-                onMarketIconClick = {
-                    Moop.executePlayStore(context)
                 },
             )
         }

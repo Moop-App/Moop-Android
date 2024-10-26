@@ -32,17 +32,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -63,7 +60,6 @@ import soup.movie.core.designsystem.util.debounce
 import soup.movie.core.external.Cgv
 import soup.movie.core.external.LotteCinema
 import soup.movie.core.external.Megabox
-import soup.movie.core.external.Moop
 import soup.movie.core.external.startActivitySafely
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theme.stringResIdOf
@@ -76,8 +72,6 @@ internal fun SettingsScreen(
     viewModel: SettingsViewModel,
     onThemeEditClick: () -> Unit,
     onTheaterEditClick: () -> Unit,
-    onVersionClick: (VersionSettingUiModel) -> Unit,
-    onMarketIconClick: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier,
@@ -90,7 +84,6 @@ internal fun SettingsScreen(
         val context = LocalContext.current
         val theme by viewModel.themeUiModel.collectAsState()
         val theater by viewModel.theaterUiModel.collectAsState()
-        val version by viewModel.versionUiModel
         Column(
             modifier = Modifier
                 .padding(paddingValues)
@@ -105,52 +98,8 @@ internal fun SettingsScreen(
                 onEditClick = onTheaterEditClick,
             )
             SettingsDivider()
-            SettingsVersionItem(
-                version = version,
-                onClick = onVersionClick,
-                onActionClick = onMarketIconClick,
-            )
-            SettingsDivider()
             SettingsFeedbackItem(onClick = { context.goToEmail() })
         }
-    }
-    if (viewModel.showVersionUpdateDialog) {
-        val context = LocalContext.current
-        AlertDialog(
-            onDismissRequest = { viewModel.showVersionUpdateDialog = false },
-            title = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        MovieIcons.NewReleases,
-                        contentDescription = null,
-                        tint = MovieTheme.colors.error,
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.settings_version_update_title))
-                }
-            },
-            text = { Text(text = stringResource(R.string.settings_version_update_message)) },
-            confirmButton = {
-                TextButton(
-                    onClick = { Moop.executePlayStore(context) },
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = MovieTheme.colors.secondary,
-                    ),
-                ) {
-                    Text(text = stringResource(R.string.settings_version_update_button_positive))
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = { viewModel.showVersionUpdateDialog = false },
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = MovieTheme.colors.secondary,
-                    ),
-                ) {
-                    Text(text = stringResource(R.string.settings_version_update_button_negative))
-                }
-            },
-        )
     }
 }
 
@@ -250,59 +199,6 @@ private fun SettingsTheaterItem(
                     theaterList.forEach { theater ->
                         TheaterChip(theater, onItemClick)
                     }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun SettingsVersionItem(
-    version: VersionSettingUiModel?,
-    onClick: (VersionSettingUiModel) -> Unit,
-    onActionClick: () -> Unit = {},
-) {
-    Column(
-        modifier = Modifier.padding(vertical = 24.dp),
-    ) {
-        SettingsCategory(text = stringResource(R.string.settings_category_version))
-        Spacer(modifier = Modifier.height(12.dp))
-        Box(modifier = Modifier.requiredHeight(48.dp)) {
-            SettingsButton(
-                onClick = { debounce { version?.run(onClick) } },
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                Text(
-                    text = version?.let { version ->
-                        if (version.isLatest) {
-                            stringResource(R.string.settings_version_latest, version.versionName)
-                        } else {
-                            stringResource(R.string.settings_version_current, version.versionName)
-                        }
-                    }.orEmpty(),
-                    textAlign = TextAlign.Center,
-                    style = MovieTheme.typography.body2,
-                )
-            }
-            IconButton(
-                onClick = { debounce(onActionClick) },
-                modifier = Modifier
-                    .width(48.dp)
-                    .padding(end = 4.dp)
-                    .align(Alignment.CenterEnd),
-            ) {
-                if (version?.isLatest == true) {
-                    Icon(
-                        MovieIcons.Shop,
-                        contentDescription = null,
-                        tint = MovieTheme.colors.onSurface,
-                    )
-                } else {
-                    Icon(
-                        MovieIcons.NewReleases,
-                        contentDescription = null,
-                        tint = MovieTheme.colors.onError,
-                    )
                 }
             }
         }
