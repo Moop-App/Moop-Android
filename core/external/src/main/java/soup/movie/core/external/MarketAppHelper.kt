@@ -41,15 +41,6 @@ private fun Context.executePlayStoreForApp(pkgName: String) {
     }
 }
 
-object Moop {
-
-    private const val packageName = "soup.movie"
-
-    fun executePlayStore(ctx: Context) {
-        ctx.executePlayStoreForApp(packageName)
-    }
-}
-
 object Cgv {
 
     fun executeWeb(ctx: Context, theaterCode: String) {

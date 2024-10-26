@@ -15,9 +15,6 @@
  */
 package soup.movie.feature.settings
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,9 +23,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import soup.movie.buildconfig.BuildConfig
-import soup.movie.core.appupdate.InAppUpdateManager
 import soup.movie.data.settings.AppSettings
 import soup.movie.feature.theme.ThemeOptionManager
 import javax.inject.Inject
@@ -37,7 +31,6 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     themeOptionManager: ThemeOptionManager,
     appSettings: AppSettings,
-    appUpdateManager: InAppUpdateManager,
 ) : ViewModel() {
 
     // TODO: Fix again later. This is so ugly...
@@ -60,22 +53,4 @@ class SettingsViewModel @Inject constructor(
                 initialValue = null,
                 started = SharingStarted.WhileSubscribed(5_000),
             )
-
-    var versionUiModel = mutableStateOf<VersionSettingUiModel?>(null)
-        private set
-
-    var showVersionUpdateDialog by mutableStateOf(false)
-
-    init {
-        viewModelScope.launch {
-            val latestVersionCode = appUpdateManager.getAvailableVersionCode()
-            val isLatest = BuildConfig.VERSION_CODE >= latestVersionCode
-            versionUiModel.value = VersionSettingUiModel(
-                versionCode = BuildConfig.VERSION_CODE,
-                versionName = BuildConfig.VERSION_NAME,
-                isLatest = BuildConfig.VERSION_CODE >= latestVersionCode,
-            )
-            showVersionUpdateDialog = isLatest.not()
-        }
-    }
 }
