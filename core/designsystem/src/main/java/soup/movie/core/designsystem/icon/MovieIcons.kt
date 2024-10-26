@@ -64,7 +64,6 @@ object MovieIcons {
     val LoadingLogo = R.drawable.ic_loading_logo
     val Facebook = R.drawable.ic_logo_facebook
     val Instagram = R.drawable.ic_logo_instagram
-    val KakaoTalk = R.drawable.ic_logo_kakaotalk
     val Line = R.drawable.ic_logo_line
     val More = R.drawable.ic_logo_more
     val Twitter = R.drawable.ic_logo_twitter

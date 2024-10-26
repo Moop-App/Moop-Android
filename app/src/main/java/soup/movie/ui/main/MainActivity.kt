@@ -29,7 +29,6 @@ import soup.movie.config.RemoteConfig
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.calculateWindowSizeClass
 import soup.movie.feature.deeplink.FirebaseLink
-import soup.movie.feature.deeplink.KakaoLink
 import soup.movie.feature.tasks.RecommendMoviesTasks
 import javax.inject.Inject
 
@@ -79,10 +78,6 @@ class MainActivity : AppCompatActivity() {
         FirebaseLink.extractMovieId(intent) { movieId ->
             if (movieId != null) {
                 viewModel.requestMovie(movieId)
-            } else {
-                KakaoLink.extractMovieId(intent)?.let {
-                    viewModel.requestMovie(it)
-                }
             }
         }
     }

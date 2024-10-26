@@ -13,6 +13,4 @@ dependencies {
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.dynamiclinks
-
-    implementation libs.kakao.share
 }

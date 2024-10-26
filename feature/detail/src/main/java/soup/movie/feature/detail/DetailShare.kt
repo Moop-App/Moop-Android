@@ -42,7 +42,6 @@ import androidx.core.app.ShareCompat
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.deeplink.FirebaseLink
-import soup.movie.feature.deeplink.KakaoLink
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -137,23 +136,6 @@ internal fun DetailShare(
         }
         IconButton(
             onClick = {
-                context.shareToKakaoTalk(movie)
-            },
-            modifier = Modifier.padding(top = 4.dp),
-        ) {
-            Surface(
-                shape = CircleShape,
-                modifier = Modifier.requiredSize(48.dp).padding(all = 4.dp),
-            ) {
-                Image(
-                    painterResource(MovieIcons.KakaoTalk),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize(),
-                )
-            }
-        }
-        IconButton(
-            onClick = {
                 context.shareToOthers(movie)
             },
             modifier = Modifier.padding(top = 4.dp),
@@ -170,28 +152,6 @@ internal fun DetailShare(
             }
         }
     }
-}
-
-private fun Context.shareToKakaoTalk(movie: MovieModel) {
-    KakaoLink.share(
-        context = this,
-        movieId = movie.id,
-        imageUrl = movie.posterUrl,
-        title = movie.title,
-        description = buildString {
-            append(movie.openDate)
-            val ageLabel = getString(
-                when {
-                    movie.age >= 19 -> R.string.movie_age_19
-                    movie.age >= 15 -> R.string.movie_age_15
-                    movie.age >= 12 -> R.string.movie_age_12
-                    movie.age >= 0 -> R.string.movie_age_all
-                    else -> R.string.movie_age_unknown
-                },
-            )
-            append(" / $ageLabel")
-        },
-    )
 }
 
 private fun Context.shareToFacebook(movie: MovieModel) {

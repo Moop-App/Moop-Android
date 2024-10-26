@@ -39,9 +39,6 @@
             android:name="firebase_crashlytics_collection_enabled"
             android:value="${crashlytics_enabled}" />
         <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
-        <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="@string/naver_map_sdk_client_id" />
 
@@ -62,9 +59,6 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="kakaolink"
-                    android:scheme="@string/kakao_scheme" />
-                <data
                     android:host="moop.link"
                     android:scheme="https" />
                 <data
@@ -80,9 +74,6 @@
             tools:node="merge">
             <meta-data
                 android:name="soup.movie.startup.LoggerInitializer"
-                android:value="androidx.startup" />
-            <meta-data
-                android:name="soup.movie.startup.KakaoInitializer"
                 android:value="androidx.startup" />
         </provider>
 

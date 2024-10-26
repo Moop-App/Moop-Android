@@ -24,10 +24,6 @@
 -dontwarn android.support.**
 -dontwarn androidx.**
 
-# Kakao SDK
--keep class com.kakao.sdk.**.model.* { <fields>; }
--keep class * extends com.google.gson.TypeAdapter
-
 # Crashlytics
 -keep class com.crashlytics.** { *; }
 -dontwarn com.crashlytics.**
