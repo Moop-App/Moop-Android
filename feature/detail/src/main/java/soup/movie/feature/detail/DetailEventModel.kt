@@ -15,17 +15,10 @@
  */
 package soup.movie.feature.detail
 
-import android.net.Uri
 import androidx.annotation.Keep
 import androidx.annotation.StringRes
 
 sealed class UiEvent
-
-@Keep
-class ShareImageAction(
-    val imageUri: Uri,
-    val mimeType: String,
-) : UiEvent()
 
 @Keep
 class ToastAction(
