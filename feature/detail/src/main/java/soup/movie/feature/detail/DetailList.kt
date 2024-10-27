@@ -103,7 +103,6 @@ internal fun DetailList(
                         Cgv(
                             uiModel = item.cgv,
                             onClick = {
-                                viewModel.clickCgvInfo()
                                 ctx.executeWeb(item.cgv.webLink)
                             },
                             modifier = Modifier.weight(1f),
@@ -111,7 +110,6 @@ internal fun DetailList(
                         Lotte(
                             uiModel = item.lotte,
                             onClick = {
-                                viewModel.clickLotteInfo()
                                 ctx.executeWeb(item.lotte.webLink)
                             },
                             modifier = Modifier.weight(1f),
@@ -119,7 +117,6 @@ internal fun DetailList(
                         Megabox(
                             uiModel = item.megabox,
                             onClick = {
-                                viewModel.clickMegaboxInfo()
                                 ctx.executeWeb(item.megabox.webLink)
                             },
                             modifier = Modifier.weight(1f),

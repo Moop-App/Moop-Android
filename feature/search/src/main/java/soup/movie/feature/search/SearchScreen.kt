@@ -154,7 +154,6 @@ fun SearchScreen(
                         MovieList(
                             movies = model.movies,
                             onItemClick = {
-                                viewModel.onMovieClick()
                                 onItemClick(it)
                             },
                             onLongItemClick = {

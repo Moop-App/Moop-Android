@@ -136,7 +136,6 @@ androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 
 # https://firebase.google.com/support/release-notes/android#latest_sdk_versions
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-cloudmessaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-performance = { module = "com.google.firebase:firebase-perf" }

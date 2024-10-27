@@ -53,7 +53,6 @@ internal fun DetailScreen(
         viewModel = viewModel,
         uiModel = uiModel,
         onPosterClick = {
-            viewModel.clickPoster()
             onPosterClick()
         },
         onItemClick = { item ->
@@ -71,11 +70,9 @@ internal fun DetailScreen(
                     showPrivacyDialog = true
                 }
                 is TrailerItemUiModel -> {
-                    viewModel.clickTrailer()
                     YouTube.executeApp(context, item.trailer.youtubeId)
                 }
                 is TrailerFooterItemUiModel -> {
-                    viewModel.clickMoreTrailers()
                     YouTube.executeAppWithQuery(context, item.movieTitle)
                 }
                 else -> {}
