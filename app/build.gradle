@@ -101,7 +101,6 @@ dependencies {
     runtimeOnly projects.feature.notification.impl
     implementation projects.feature.tasks.api
     runtimeOnly projects.feature.tasks.impl
-    implementation projects.feature.deeplink
     runtimeOnly projects.data.network.impl
     runtimeOnly projects.data.database.impl
     runtimeOnly projects.data.repository.impl
@@ -126,7 +125,6 @@ dependencies {
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.cloudmessaging
     implementation libs.firebase.crashlytics
-    implementation libs.firebase.dynamiclinks
     implementation libs.firebase.performance
     implementation libs.firebase.remoteconfig
 

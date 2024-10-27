@@ -246,10 +246,6 @@ class DetailViewModel @Inject constructor(
         analytics.clickPoster()
     }
 
-    fun clickShare() {
-        analytics.clickShare()
-    }
-
     fun clickTrailer() {
         analytics.clickTrailer()
     }

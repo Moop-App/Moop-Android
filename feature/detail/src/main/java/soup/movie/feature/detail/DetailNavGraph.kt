@@ -15,7 +15,6 @@
  */
 package soup.movie.feature.detail
 
-import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -28,11 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.app.ShareCompat
 import soup.movie.core.designsystem.showToast
-import soup.movie.feature.deeplink.FirebaseLink
-import soup.movie.model.MovieModel
-import soup.movie.resources.R
 
 @Composable
 fun DetailNavGraph(
@@ -46,13 +41,6 @@ fun DetailNavGraph(
         DetailScreen(
             viewModel = viewModel,
             uiModel = uiModel,
-            onShareClick = {
-                if (movie != null) {
-                    context.shareText(movie)
-                } else {
-                    context.showToast(R.string.action_share_failed)
-                }
-            },
             onPosterClick = {
                 showPoster = true
             },
@@ -77,39 +65,5 @@ fun DetailNavGraph(
                 is ToastAction -> context.showToast(event.resId)
             }
         }
-    }
-}
-
-private fun Context.shareText(movie: MovieModel) {
-    FirebaseLink.createDetailLink(
-        movieId = movie.id,
-        imageUrl = movie.posterUrl,
-        title = movie.title,
-        description = buildString {
-            if (movie.isNow) {
-                append("현재상영중")
-            } else {
-                append("${movie.openDate}개봉")
-            }
-            val ageLabel = getString(
-                when {
-                    movie.age >= 19 -> R.string.movie_age_19
-                    movie.age >= 15 -> R.string.movie_age_15
-                    movie.age >= 12 -> R.string.movie_age_12
-                    movie.age >= 0 -> R.string.movie_age_all
-                    else -> R.string.movie_age_unknown
-                },
-            )
-            append(" / $ageLabel")
-            movie.genres?.let { genres ->
-                append(" / ${genres.joinToString()}")
-            }
-        },
-    ) { link ->
-        ShareCompat.IntentBuilder(this)
-            .setChooserTitle(R.string.action_share)
-            .setText("[뭅] ${movie.title}\n$link")
-            .setType("text/plain")
-            .startChooser()
     }
 }

@@ -29,7 +29,6 @@ internal fun DetailContent(
     viewModel: DetailViewModel,
     uiModel: DetailUiModel,
     onPosterClick: () -> Unit,
-    onShareClick: () -> Unit,
     onItemClick: (ContentItemUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -51,11 +50,6 @@ internal fun DetailContent(
                                     isFavorite = isFavorite,
                                     onFavoriteChange = { isFavorite ->
                                         viewModel.onFavoriteButtonClick(isFavorite)
-                                    },
-                                )
-                                ShareButton(
-                                    onClick = {
-                                        onShareClick()
                                     },
                                 )
                             },
