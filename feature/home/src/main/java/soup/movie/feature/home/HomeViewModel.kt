@@ -24,8 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-) : ViewModel() {
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _selectedMainTab = MutableStateFlow(MainTabUiModel.Home)
     val selectedMainTab: StateFlow<MainTabUiModel> = _selectedMainTab
