@@ -38,7 +38,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -284,21 +283,6 @@ internal fun FavoriteButton(
             contentDescription = null,
             modifier = Modifier.requiredSize(48.dp),
             contentScale = ContentScale.Inside,
-        )
-    }
-}
-
-@Composable
-internal fun ShareButton(
-    onClick: () -> Unit,
-) {
-    IconButton(onClick = onClick) {
-        Image(
-            MovieIcons.Share,
-            contentDescription = null,
-            modifier = Modifier.requiredSize(48.dp),
-            contentScale = ContentScale.Inside,
-            colorFilter = ColorFilter.tint(color = MovieTheme.colors.onBackground),
         )
     }
 }

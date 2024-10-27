@@ -139,7 +139,6 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-cloudmessaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
-firebase-dynamiclinks = { module = "com.google.firebase:firebase-dynamic-links" }
 firebase-performance = { module = "com.google.firebase:firebase-perf" }
 firebase-remoteconfig = { module = "com.google.firebase:firebase-config" }
 

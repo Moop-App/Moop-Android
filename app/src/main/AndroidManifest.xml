@@ -52,19 +52,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="moop.link"
-                    android:scheme="https" />
-                <data
-                    android:host="movie"
-                    android:scheme="moop" />
-            </intent-filter>
         </activity>
 
         <provider

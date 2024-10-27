@@ -19,7 +19,6 @@ dependencies {
     implementation projects.data.repository.api
     implementation projects.data.model
     implementation projects.domain
-    implementation projects.feature.deeplink
     implementation projects.feature.home
 
     implementation libs.kotlin.stdlib

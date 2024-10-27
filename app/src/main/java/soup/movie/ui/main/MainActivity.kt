@@ -15,7 +15,6 @@
  */
 package soup.movie.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -28,7 +27,6 @@ import soup.movie.config.Config
 import soup.movie.config.RemoteConfig
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.calculateWindowSizeClass
-import soup.movie.feature.deeplink.FirebaseLink
 import soup.movie.feature.tasks.RecommendMoviesTasks
 import javax.inject.Inject
 
@@ -56,8 +54,6 @@ class MainActivity : AppCompatActivity() {
         // TODO: Improve this please
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
 
-        handleDeepLink(intent)
-
         val config: Config = RemoteConfig()
         config.fetchAndActivate {
             if (config.allowToRunLegacyWorker) {
@@ -67,18 +63,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
         viewModel.onInit()
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        handleDeepLink(intent)
-    }
-
-    private fun handleDeepLink(intent: Intent) {
-        FirebaseLink.extractMovieId(intent) { movieId ->
-            if (movieId != null) {
-                viewModel.requestMovie(movieId)
-            }
-        }
     }
 }

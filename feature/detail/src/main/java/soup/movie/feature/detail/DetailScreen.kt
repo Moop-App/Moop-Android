@@ -44,7 +44,6 @@ import soup.movie.resources.R
 internal fun DetailScreen(
     viewModel: DetailViewModel,
     uiModel: DetailUiModel,
-    onShareClick: () -> Unit,
     onPosterClick: () -> Unit,
 ) {
     var showPrivacyDialog by remember { mutableStateOf(false) }
@@ -56,10 +55,6 @@ internal fun DetailScreen(
         onPosterClick = {
             viewModel.clickPoster()
             onPosterClick()
-        },
-        onShareClick = {
-            viewModel.clickShare()
-            onShareClick()
         },
         onItemClick = { item ->
             when (item) {
