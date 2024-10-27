@@ -21,13 +21,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import soup.movie.core.analytics.EventAnalytics
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val analytics: EventAnalytics,
-) : ViewModel() {
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _selectedMainTab = MutableStateFlow(MainTabUiModel.Home)
     val selectedMainTab: StateFlow<MainTabUiModel> = _selectedMainTab
@@ -45,13 +42,5 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _selectedHomeTab.emit(homeTab)
         }
-    }
-
-    fun onMovieClick() {
-        analytics.clickMovie()
-    }
-
-    fun onFilterButtonClick() {
-        analytics.clickMenuFilter()
     }
 }

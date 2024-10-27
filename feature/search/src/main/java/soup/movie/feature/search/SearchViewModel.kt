@@ -29,14 +29,12 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import soup.movie.core.analytics.EventAnalytics
 import soup.movie.data.repository.MovieRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val repository: MovieRepository,
-    private val analytics: EventAnalytics,
 ) : ViewModel() {
 
     private val _query = MutableStateFlow("")
@@ -66,9 +64,5 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             _query.emit(query)
         }
-    }
-
-    fun onMovieClick() {
-        analytics.clickMovie()
     }
 }

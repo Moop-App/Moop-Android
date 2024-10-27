@@ -87,7 +87,6 @@ fun MainScreen(
                     HomeFavoriteList(
                         viewModel = hiltViewModel(),
                         onItemClick = {
-                            viewModel.onMovieClick()
                             onMovieItemClick(it)
                         },
                         onItemLongClick = {

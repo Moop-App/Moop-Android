@@ -80,8 +80,6 @@ android {
 dependencies {
     baselineProfile projects.macrobenchmark
 
-    implementation projects.core.analytics.api
-    runtimeOnly projects.core.analytics.impl
     implementation projects.core.kotlin
     implementation projects.core.designsystem
     implementation projects.core.logger

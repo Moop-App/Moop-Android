@@ -28,7 +28,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
-import soup.movie.core.analytics.EventAnalytics
 import soup.movie.data.repository.MovieRepository
 import soup.movie.domain.movie.MM_DD
 import soup.movie.domain.movie.screenDays
@@ -45,7 +44,6 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val repository: MovieRepository,
-    private val analytics: EventAnalytics,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
@@ -240,30 +238,6 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             loadDetail(movieId)
         }
-    }
-
-    fun clickPoster() {
-        analytics.clickPoster()
-    }
-
-    fun clickTrailer() {
-        analytics.clickTrailer()
-    }
-
-    fun clickMoreTrailers() {
-        analytics.clickMoreTrailers()
-    }
-
-    fun clickCgvInfo() {
-        analytics.clickCgvInfo()
-    }
-
-    fun clickLotteInfo() {
-        analytics.clickLotteInfo()
-    }
-
-    fun clickMegaboxInfo() {
-        analytics.clickMegaboxInfo()
     }
 
     companion object {

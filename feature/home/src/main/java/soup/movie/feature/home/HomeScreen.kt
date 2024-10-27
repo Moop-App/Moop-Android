@@ -170,7 +170,6 @@ internal fun HomeScreen(
                     viewModel = hiltViewModel(),
                     state = gridStates[selectedTab.ordinal],
                     onItemClick = {
-                        viewModel.onMovieClick()
                         onMovieItemClick(it)
                     },
                     onItemLongClick = {
@@ -181,7 +180,6 @@ internal fun HomeScreen(
                     viewModel = hiltViewModel(),
                     state = gridStates[selectedTab.ordinal],
                     onItemClick = {
-                        viewModel.onMovieClick()
                         onMovieItemClick(it)
                     },
                     onItemLongClick = {
@@ -194,7 +192,6 @@ internal fun HomeScreen(
                     .padding(8.dp)
                     .align(Alignment.BottomEnd),
                 onClick = {
-                    viewModel.onFilterButtonClick()
                     coroutineScope.launch {
                         bottomSheetState.expand()
                     }
