@@ -27,7 +27,6 @@ import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.FilterList
 import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
@@ -45,7 +44,6 @@ object MovieIcons {
     val Edit = Icons.Rounded.Edit
     val FilterList = Icons.Rounded.FilterList
     val Info = Icons.Rounded.Info
-    val Map = Icons.Rounded.Map
     val Palette = Icons.Rounded.Palette
     val PrivacyTip = Icons.Outlined.PrivacyTip
     val Search = Icons.Rounded.Search
@@ -61,9 +59,6 @@ object MovieIcons {
     val Imdb = R.drawable.ic_imdb
     val LoadingLogo = R.drawable.ic_loading_logo
     val YouTube = R.drawable.ic_logo_youtube
-    val MarkerCgv = R.drawable.ic_marker_cgv
-    val MarkerLotte = R.drawable.ic_marker_lotte
-    val MarkerMegabox = R.drawable.ic_marker_megabox
     val Metacritic = R.drawable.ic_metacritic
     val NoTheaters = R.drawable.ic_round_no_theaters
     val RottenTomatoes = R.drawable.ic_rt

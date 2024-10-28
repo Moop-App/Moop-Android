@@ -16,7 +16,7 @@
 package soup.movie.feature.home
 
 enum class MainTabUiModel {
-    Home, Favorite, TheaterMap, Settings
+    Home, Favorite, Settings
 }
 
 enum class HomeTabUiModel {

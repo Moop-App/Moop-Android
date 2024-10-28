@@ -37,8 +37,6 @@ firebase-perf = "1.4.2"
 
 # Compose
 compose-bom = "2024.09.03"
-accompanist = "0.36.0"
-navermap-compose = "1.5.7"
 readmore = "1.5.6"
 materialmotion = "1.1.3"
 photo-compose = "1.0.1"
@@ -112,15 +110,11 @@ compose-materialIconsExtended = { module = "androidx.compose.material:material-i
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics" }
 
-accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
-
 readmore-material = { module = "com.webtoonscorp.android:readmore-material", version.ref = "readmore" }
 
 photo-compose = { module = "io.github.fornewid:photo-compose", version.ref = "photo-compose" }
 
 materialmotion-compose-core = { module = "io.github.fornewid:material-motion-compose-core", version.ref = "materialmotion" }
-
-navermap-compose = { module = "io.github.fornewid:naver-map-compose", version.ref = "navermap-compose" }
 
 # Test
 test-junit =  "junit:junit:4.13.2"

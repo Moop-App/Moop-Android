@@ -20,19 +20,6 @@ dependencyResolutionManagement {
                 includeGroup("com.google.testing.platform")
             }
         }
-        maven {
-            url = uri("https://devrepo.kakao.com/nexus/content/groups/public/")
-            content {
-                includeGroup("com.kakao.sdk")
-            }
-        }
-        maven {
-            url = uri("https://repository.map.naver.com/archive/maven")
-            content {
-                includeGroup("com.naver.maps")
-            }
-        }
-
         mavenCentral()
     }
 }

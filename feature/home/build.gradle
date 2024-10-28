@@ -18,7 +18,6 @@ dependencies {
     implementation projects.data.repository.api
     implementation projects.data.model
     implementation projects.domain
-    implementation projects.feature.theatermap
     implementation projects.feature.settings
 
     implementation libs.kotlin.stdlib

@@ -51,7 +51,6 @@ import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.favorite.HomeFavoriteList
 import soup.movie.feature.settings.SettingsNavGraph
-import soup.movie.feature.theatermap.TheaterMapScreen
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -92,11 +91,6 @@ fun MainScreen(
                         onItemLongClick = {
                             context.showToast(it.title)
                         },
-                    )
-                }
-                MainTabUiModel.TheaterMap -> {
-                    TheaterMapScreen(
-                        viewModel = hiltViewModel(),
                     )
                 }
                 MainTabUiModel.Settings -> {
@@ -180,12 +174,6 @@ private fun CompactScreen(
                                         contentDescription = null,
                                     )
                                 }
-                                MainTabUiModel.TheaterMap -> {
-                                    Icon(
-                                        rememberVectorPainter(MovieIcons.Map),
-                                        contentDescription = null,
-                                    )
-                                }
                                 MainTabUiModel.Settings -> {
                                     Icon(
                                         rememberVectorPainter(MovieIcons.Settings),
@@ -199,7 +187,6 @@ private fun CompactScreen(
                                 text = when (tab) {
                                     MainTabUiModel.Home -> stringResource(R.string.menu_home)
                                     MainTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
-                                    MainTabUiModel.TheaterMap -> stringResource(R.string.menu_map)
                                     MainTabUiModel.Settings -> stringResource(R.string.menu_settings)
                                 },
                             )
@@ -261,12 +248,6 @@ private fun MediumScreen(
                                     contentDescription = null,
                                 )
                             }
-                            MainTabUiModel.TheaterMap -> {
-                                Icon(
-                                    rememberVectorPainter(MovieIcons.Map),
-                                    contentDescription = null,
-                                )
-                            }
                             MainTabUiModel.Settings -> {
                                 Icon(
                                     rememberVectorPainter(MovieIcons.Settings),
@@ -280,7 +261,6 @@ private fun MediumScreen(
                             text = when (tab) {
                                 MainTabUiModel.Home -> stringResource(R.string.menu_home)
                                 MainTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
-                                MainTabUiModel.TheaterMap -> stringResource(R.string.menu_map)
                                 MainTabUiModel.Settings -> stringResource(R.string.menu_settings)
                             },
                         )

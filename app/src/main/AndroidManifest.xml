@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <queries>
@@ -13,11 +11,6 @@
 
             <data android:scheme="mailto" />
         </intent>
-
-        <package android:name="com.kakao.talk" />
-        <package android:name="com.google.android.apps.maps" />
-        <package android:name="com.nhn.android.nmap" />
-        <package android:name="net.daum.android.map" />
     </queries>
 
     <application
@@ -38,9 +31,6 @@
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="${crashlytics_enabled}" />
-        <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="@string/naver_map_sdk_client_id" />
 
         <activity
             android:name=".ui.main.MainActivity"
