@@ -16,15 +16,12 @@
 package soup.movie.feature.settings
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -52,7 +49,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import soup.movie.buildconfig.BuildConfig
 import soup.movie.core.designsystem.UnelevatedButton
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
@@ -60,7 +56,6 @@ import soup.movie.core.designsystem.util.debounce
 import soup.movie.core.external.Cgv
 import soup.movie.core.external.LotteCinema
 import soup.movie.core.external.Megabox
-import soup.movie.core.external.startActivitySafely
 import soup.movie.feature.theater.TheaterChip
 import soup.movie.feature.theme.stringResIdOf
 import soup.movie.model.TheaterModel
@@ -98,7 +93,6 @@ internal fun SettingsScreen(
                 onEditClick = onTheaterEditClick,
             )
             SettingsDivider()
-            SettingsFeedbackItem(onClick = { context.goToEmail() })
         }
     }
 }
@@ -206,38 +200,6 @@ private fun SettingsTheaterItem(
 }
 
 @Composable
-private fun SettingsFeedbackItem(
-    onClick: () -> Unit,
-) {
-    Column(
-        modifier = Modifier.padding(vertical = 24.dp),
-    ) {
-        SettingsCategory(text = stringResource(R.string.settings_category_feedback))
-        Spacer(modifier = Modifier.height(12.dp))
-        Box(modifier = Modifier.requiredHeight(48.dp)) {
-            SettingsButton(
-                onClick = onClick,
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                Text(
-                    text = "개발자에게 버그 신고하기",
-                    textAlign = TextAlign.Center,
-                    style = MovieTheme.typography.body2,
-                )
-            }
-            Icon(
-                MovieIcons.BugReport,
-                contentDescription = null,
-                tint = MovieTheme.colors.onSurface,
-                modifier = Modifier
-                    .padding(end = 16.dp)
-                    .align(Alignment.CenterEnd),
-            )
-        }
-    }
-}
-
-@Composable
 private fun SettingsCategory(
     text: String,
     modifier: Modifier = Modifier,
@@ -256,40 +218,10 @@ private fun SettingsDivider() {
     Divider(color = MovieTheme.colors.divider)
 }
 
-@Composable
-private fun SettingsButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    content: @Composable RowScope.() -> Unit,
-) {
-    UnelevatedButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
-            disabledBackgroundColor = MovieTheme.colors.onSurface.copy(alpha = 0.05f),
-        ),
-        content = content,
-    )
-}
-
 private fun Context.executeWeb(theater: TheaterModel) {
     return when (theater.type) {
         TheaterTypeModel.CGV -> Cgv.executeWeb(this, theater.code)
         TheaterTypeModel.LOTTE -> LotteCinema.executeWeb(this, theater.code)
         TheaterTypeModel.MEGABOX -> Megabox.executeWeb(this, theater.code)
     }
-}
-
-private fun Context.goToEmail() {
-    val intent = Intent(Intent.ACTION_SENDTO)
-    intent.data = Uri.parse("mailto:")
-    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("help.moop@gmail.com"))
-    intent.putExtra(
-        Intent.EXTRA_SUBJECT,
-        "뭅 v${BuildConfig.VERSION_NAME} 버그리포트",
-    )
-    startActivitySafely(intent)
 }
