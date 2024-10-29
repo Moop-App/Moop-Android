@@ -88,7 +88,6 @@ dependencies {
     implementation projects.feature.home
     implementation projects.feature.detail
     implementation projects.feature.search
-    implementation projects.feature.theater
     implementation projects.feature.settings
     implementation projects.feature.theme.api
     runtimeOnly projects.feature.theme.impl

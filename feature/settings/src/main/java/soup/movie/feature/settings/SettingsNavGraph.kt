@@ -22,18 +22,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import soup.compose.material.motion.animation.materialSharedAxisZIn
 import soup.compose.material.motion.animation.materialSharedAxisZOut
-import soup.movie.feature.theater.edit.TheaterEditScreen
-import soup.movie.feature.theater.edit.TheaterEditViewModel
-import soup.movie.feature.theater.sort.TheaterSortScreen
-import soup.movie.feature.theater.sort.TheaterSortViewModel
 import soup.movie.feature.theme.ThemeEntry
 import soup.movie.feature.theme.rememberThemeEntry
 
 private enum class Screen(val route: String) {
     Settings("SettingsScreen"),
     ThemeOption("ThemeEditScreen"),
-    TheaterSort("TheaterSortScreen"),
-    TheaterEdit("TheaterEditScreen"),
 }
 
 @Composable
@@ -54,33 +48,11 @@ fun SettingsNavGraph() {
                 onThemeEditClick = {
                     navController.navigate(Screen.ThemeOption.route)
                 },
-                onTheaterEditClick = {
-                    navController.navigate(Screen.TheaterSort.route)
-                },
             )
         }
         composable(Screen.ThemeOption.route) {
             val entry: ThemeEntry = rememberThemeEntry()
             entry.ThemeOptionScreen()
-        }
-        composable(Screen.TheaterSort.route) {
-            val viewModel = hiltViewModel<TheaterSortViewModel>()
-            TheaterSortScreen(
-                viewModel = viewModel,
-                upPress = {
-                    navController.navigateUp()
-                },
-                onAddItemClick = {
-                    navController.navigate(Screen.TheaterEdit.route)
-                },
-            )
-        }
-        composable(Screen.TheaterEdit.route) {
-            val viewModel = hiltViewModel<TheaterEditViewModel>()
-            TheaterEditScreen(
-                viewModel = viewModel,
-                upPress = { navController.navigateUp() },
-            )
         }
     }
 }

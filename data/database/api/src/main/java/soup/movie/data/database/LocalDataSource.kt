@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.Flow
 import soup.movie.model.MovieListModel
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
-import soup.movie.model.TheaterAreaGroupModel
 
 interface LocalDataSource {
 
@@ -31,9 +30,6 @@ interface LocalDataSource {
     suspend fun getPlanLastUpdateTime(): Long
     suspend fun getAllMovieList(): List<MovieModel>
     suspend fun getNowMovieList(): List<MovieModel>
-
-    fun saveCodeList(response: TheaterAreaGroupModel)
-    fun getCodeList(): TheaterAreaGroupModel?
 
     suspend fun addFavoriteMovie(movie: MovieModel)
     suspend fun removeFavoriteMovie(movieId: String)

@@ -17,16 +17,10 @@ package soup.movie.feature.settings
 
 import androidx.annotation.Keep
 import soup.movie.feature.theme.ThemeOption
-import soup.movie.model.TheaterModel
 
-sealed class SettingsUiModel
-
-@Keep
-data class TheaterSettingUiModel(
-    val theaterList: List<TheaterModel>,
-) : SettingsUiModel()
+sealed interface SettingsUiModel
 
 @Keep
 data class ThemeSettingUiModel(
     val themeOption: ThemeOption,
-)
+) : SettingsUiModel

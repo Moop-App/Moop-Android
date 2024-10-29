@@ -36,30 +36,13 @@
 
     <string name="menu_settings">설정</string>
 
-    <string name="settings_category_theater">자주가는 극장</string>
-    <string name="settings_theater_empty_description">선택된 극장이 없습니다</string>
     <string name="settings_category_theme">테마</string>
-
-    <string name="theater_sort_title">극장 순서 설정</string>
-
-    <string name="theater_edit_title">선호하는 극장 편집</string>
-
-    <string name="theater_select_limit_description">%d개까지 선택할 수 있습니다.\n더 추가하려면 선택된 항목을 지워주세요.</string>
-
-    <string name="theater_select_title">극장 선택</string>
-    <string name="theater_select_description">선호하는 극장을 선택해주세요</string>
-    <string name="theater_select_action_confirm">완료</string>
-    <string name="theater_select_action_cancel">취소</string>
-
-    <string name="theater_empty_description">선택된 극장이 없습니다</string>
 
     <string name="theme_option_title">테마 선택</string>
     <string name="theme_option_dark">어둡게</string>
     <string name="theme_option_light">밝게</string>
     <string name="theme_option_system">기본 (시스템 설정)</string>
     <string name="theme_option_battery_saver">기본 (절전모드 시 어둡게)</string>
-
-    <string name="theater_map_title">지도</string>
 
     <string name="movie_age_19">청소년관람불가</string>
     <string name="movie_age_15">15세관람가</string>

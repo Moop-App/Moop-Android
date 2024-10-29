@@ -35,7 +35,6 @@ import soup.movie.log.Logger
 import soup.movie.model.MovieListModel
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
-import soup.movie.model.TheaterAreaGroupModel
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
@@ -43,8 +42,6 @@ class LocalDataSourceImpl @Inject constructor(
     private val openDateAlarmDao: OpenDateAlarmDao,
     private val cacheDao: MovieCacheDao,
 ) : LocalDataSource {
-
-    private var codeResponse: TheaterAreaGroupModel? = null
 
     override suspend fun saveNowMovieList(movieList: MovieListModel) {
         saveMovieListAs(TYPE_NOW, movieList)
@@ -109,14 +106,6 @@ class LocalDataSourceImpl @Inject constructor(
             Logger.w(t)
             emptyList()
         }
-    }
-
-    override fun saveCodeList(response: TheaterAreaGroupModel) {
-        codeResponse = response
-    }
-
-    override fun getCodeList(): TheaterAreaGroupModel? {
-        return codeResponse
     }
 
     override suspend fun addFavoriteMovie(movie: MovieModel) {
