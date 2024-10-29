@@ -16,7 +16,6 @@
 package soup.movie.data.settings
 
 import kotlinx.coroutines.flow.Flow
-import soup.movie.model.TheaterModel
 import soup.movie.model.settings.AgeFilter
 import soup.movie.model.settings.GenreFilter
 import soup.movie.model.settings.TheaterFilter
@@ -35,8 +34,4 @@ interface AppSettings {
     suspend fun setThemeOption(themeOption: String)
     suspend fun getThemeOption(): String
     fun getThemeOptionFlow(): Flow<String>
-
-    suspend fun setFavoriteTheaterList(list: List<TheaterModel>)
-    suspend fun getFavoriteTheaterList(): List<TheaterModel>
-    fun getFavoriteTheaterListFlow(): Flow<List<TheaterModel>>
 }

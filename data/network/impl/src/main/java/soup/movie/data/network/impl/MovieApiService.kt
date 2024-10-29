@@ -21,7 +21,6 @@ import retrofit2.http.Path
 import soup.movie.data.network.impl.OkHttpInterceptors.HEADER_USE_CACHE
 import soup.movie.data.network.response.MovieDetailResponse
 import soup.movie.data.network.response.MovieListResponse
-import soup.movie.data.network.response.TheaterAreaGroupResponse
 
 interface MovieApiService {
 
@@ -47,8 +46,4 @@ interface MovieApiService {
     @Headers(HEADER_USE_CACHE)
     @GET("detail/{movieId}.json")
     suspend fun getMovieDetail(@Path("movieId") movieId: String): MovieDetailResponse
-
-    // 공통코드
-    @GET("code.json")
-    suspend fun getCodeList(): TheaterAreaGroupResponse
 }

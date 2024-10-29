@@ -23,25 +23,28 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import soup.movie.common.ApplicationScope
+import soup.movie.common.IoDispatcher
 import soup.movie.data.settings.AppSettings
-import soup.movie.model.TheaterModel
-import soup.movie.model.TheaterTypeModel
 import soup.movie.model.settings.AgeFilter
 import soup.movie.model.settings.GenreFilter
 import soup.movie.model.settings.TheaterFilter
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AppSettingsImpl(
-    private val context: Context,
-    private val ioDispatcher: CoroutineDispatcher,
+@Singleton
+class AppSettingsImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @ApplicationScope private val coroutineScope: CoroutineScope,
 ) : AppSettings {
 
     private val Context.preferencesName: String
@@ -55,6 +58,12 @@ class AppSettingsImpl(
     )
 
     private val theaterFilterKey = intPreferencesKey("theater_filter")
+
+    init {
+        coroutineScope.launch {
+            clearFavoriteTheaterList()
+        }
+    }
 
     override suspend fun setTheaterFilter(theaterFilter: TheaterFilter) {
         context.dataStore.edit { settings ->
@@ -125,27 +134,10 @@ class AppSettingsImpl(
 
     private val favoriteTheaterListKey = stringPreferencesKey("favorite_theaters")
 
-    override suspend fun setFavoriteTheaterList(list: List<TheaterModel>) {
+    private suspend fun clearFavoriteTheaterList() {
         withContext(ioDispatcher) {
             context.dataStore.edit { settings ->
-                val rawList = list.map { it.toRaw() }
-                settings[favoriteTheaterListKey] = Json.encodeToString(rawList)
-            }
-        }
-    }
-
-    override suspend fun getFavoriteTheaterList(): List<TheaterModel> {
-        return getFavoriteTheaterListFlow().first()
-    }
-
-    override fun getFavoriteTheaterListFlow(): Flow<List<TheaterModel>> {
-        return context.dataStore.data.map { preferences ->
-            val string = preferences[favoriteTheaterListKey]
-            if (string != null) {
-                val rawList: List<RawTheater> = Json.decodeFromString(string)
-                rawList.map { it.toModel() }
-            } else {
-                emptyList()
+                settings.remove(favoriteTheaterListKey)
             }
         }
     }
@@ -155,31 +147,3 @@ class AppSettingsImpl(
         private const val SEPARATOR = "|"
     }
 }
-
-@Serializable
-private data class RawTheater(
-    val id: String,
-    val type: String,
-    val code: String,
-    val name: String,
-    val lng: Double,
-    val lat: Double,
-) {
-    fun toModel() = TheaterModel(
-        id = id,
-        type = TheaterTypeModel.valueOf(type),
-        code = code,
-        name = name,
-        lng = lng,
-        lat = lat,
-    )
-}
-
-private fun TheaterModel.toRaw() = RawTheater(
-    id = id,
-    type = type.name,
-    code = code,
-    name = name,
-    lng = lng,
-    lat = lat,
-)

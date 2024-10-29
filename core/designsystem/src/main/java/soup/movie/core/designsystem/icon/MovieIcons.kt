@@ -19,11 +19,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.Subject
 import androidx.compose.material.icons.outlined.PrivacyTip
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.DragHandle
-import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.FilterList
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Palette
@@ -34,12 +31,9 @@ import androidx.compose.material.icons.rounded.ViewModule
 import soup.movie.core.designsystem.R
 
 object MovieIcons {
-    val Add = Icons.Rounded.Add
     val ArrowBack = Icons.AutoMirrored.Rounded.ArrowBack
     val Check = Icons.Rounded.Check
     val Close = Icons.Rounded.Close
-    val DragHandle = Icons.Rounded.DragHandle
-    val Edit = Icons.Rounded.Edit
     val FilterList = Icons.Rounded.FilterList
     val Info = Icons.Rounded.Info
     val Palette = Icons.Rounded.Palette
@@ -58,7 +52,6 @@ object MovieIcons {
     val LoadingLogo = R.drawable.ic_loading_logo
     val YouTube = R.drawable.ic_logo_youtube
     val Metacritic = R.drawable.ic_metacritic
-    val NoTheaters = R.drawable.ic_round_no_theaters
     val RottenTomatoes = R.drawable.ic_rt
     val RottenTomatoesFresh = R.drawable.ic_rt_fresh
     val RottenTomatoesRotten = R.drawable.ic_rt_rotten

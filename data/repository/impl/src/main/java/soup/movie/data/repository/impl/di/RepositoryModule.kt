@@ -20,9 +20,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import soup.movie.data.repository.MovieRepository
-import soup.movie.data.repository.TheaterRepository
 import soup.movie.data.repository.impl.MovieRepositoryImpl
-import soup.movie.data.repository.impl.TheaterRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -34,10 +32,4 @@ interface RepositoryModule {
     fun provideMovieRepository(
         movieRepositoryImpl: MovieRepositoryImpl,
     ): MovieRepository
-
-    @Binds
-    @Singleton
-    fun provideTheaterRepository(
-        theaterRepositoryImpl: TheaterRepositoryImpl,
-    ): TheaterRepository
 }

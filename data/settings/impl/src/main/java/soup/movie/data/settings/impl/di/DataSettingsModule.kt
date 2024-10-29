@@ -15,28 +15,19 @@
  */
 package soup.movie.data.settings.impl.di
 
-import android.content.Context
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
-import soup.movie.common.IoDispatcher
 import soup.movie.data.settings.AppSettings
 import soup.movie.data.settings.impl.AppSettingsImpl
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataSettingsModule {
+interface DataSettingsModule {
 
-    @Singleton
-    @Provides
-    fun provideAppSettings(
-        @ApplicationContext context: Context,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher,
-    ): AppSettings {
-        return AppSettingsImpl(context, ioDispatcher)
-    }
+    @Binds
+    fun bindAppSettings(
+        impl: AppSettingsImpl,
+    ): AppSettings
 }

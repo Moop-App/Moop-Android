@@ -18,7 +18,6 @@ package soup.movie.data.network.impl
 import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.response.MovieDetailResponse
 import soup.movie.data.network.response.MovieListResponse
-import soup.movie.data.network.response.TheaterAreaGroupResponse
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
@@ -43,9 +42,5 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getMovieDetail(movieId: String): MovieDetailResponse {
         return apiService.getMovieDetail(movieId)
-    }
-
-    override suspend fun getCodeList(): TheaterAreaGroupResponse {
-        return apiService.getCodeList()
     }
 }

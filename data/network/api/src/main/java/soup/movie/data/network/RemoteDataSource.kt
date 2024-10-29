@@ -17,7 +17,6 @@ package soup.movie.data.network
 
 import soup.movie.data.network.response.MovieDetailResponse
 import soup.movie.data.network.response.MovieListResponse
-import soup.movie.data.network.response.TheaterAreaGroupResponse
 
 interface RemoteDataSource {
 
@@ -31,7 +30,4 @@ interface RemoteDataSource {
 
     // 영화 상세정보
     suspend fun getMovieDetail(movieId: String): MovieDetailResponse
-
-    // 공통코드
-    suspend fun getCodeList(): TheaterAreaGroupResponse
 }

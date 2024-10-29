@@ -43,14 +43,4 @@ class SettingsViewModel @Inject constructor(
                 initialValue = null,
                 started = SharingStarted.WhileSubscribed(5_000),
             )
-
-    val theaterUiModel: StateFlow<TheaterSettingUiModel?> =
-        appSettings.getFavoriteTheaterListFlow()
-            .map { TheaterSettingUiModel(it) }
-            .distinctUntilChanged()
-            .stateIn(
-                scope = viewModelScope,
-                initialValue = null,
-                started = SharingStarted.WhileSubscribed(5_000),
-            )
 }
