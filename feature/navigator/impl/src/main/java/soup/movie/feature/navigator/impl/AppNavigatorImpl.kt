@@ -15,10 +15,20 @@
  */
 package soup.movie.feature.navigator.impl
 
+import android.content.Intent
 import soup.movie.feature.navigator.AppNavigator
+import soup.movie.feature.navigator.Destination
 import soup.movie.feature.navigator.MainNavigator
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AppNavigatorImpl @Inject constructor(
     private val mainNavigator: MainNavigator,
-) : AppNavigator, MainNavigator by mainNavigator
+) : AppNavigator {
+    override fun createIntent(destination: Destination): Intent {
+        return when (destination) {
+            is Destination.Main -> mainNavigator.createIntent(destination)
+        }
+    }
+}
