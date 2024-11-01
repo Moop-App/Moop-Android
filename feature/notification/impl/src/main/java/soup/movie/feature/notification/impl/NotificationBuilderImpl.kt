@@ -23,6 +23,7 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import dagger.hilt.android.qualifiers.ApplicationContext
 import soup.movie.feature.navigator.AppNavigator
+import soup.movie.feature.navigator.Destination
 import soup.movie.feature.notification.NotificationBuilder
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
@@ -57,7 +58,7 @@ class NotificationBuilderImpl @Inject constructor(
     }
 
     private fun Context.createLauncherIntent(): PendingIntent {
-        val intent = navigator.createIntentToMain()
+        val intent = navigator.createIntent(Destination.Main)
         val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_MUTABLE
         } else {

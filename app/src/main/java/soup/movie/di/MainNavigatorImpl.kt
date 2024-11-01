@@ -17,14 +17,17 @@ package soup.movie.di
 
 import android.content.Context
 import android.content.Intent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import soup.movie.feature.navigator.Destination
 import soup.movie.feature.navigator.MainNavigator
 import soup.movie.ui.main.MainActivity
+import javax.inject.Inject
 
-class MainNavigatorImpl(
-    private val context: Context,
+class MainNavigatorImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
 ) : MainNavigator {
 
-    override fun createIntentToMain(): Intent {
+    override fun createIntent(destination: Destination.Main): Intent {
         return Intent(context, MainActivity::class.java)
     }
 }

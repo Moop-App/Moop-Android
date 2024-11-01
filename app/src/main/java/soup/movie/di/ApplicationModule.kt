@@ -15,24 +15,18 @@
  */
 package soup.movie.di
 
-import android.content.Context
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import soup.movie.feature.navigator.MainNavigator
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ApplicationModule {
+interface ApplicationModule {
 
-    @Singleton
-    @Provides
+    @Binds
     fun provideMainNavigator(
-        @ApplicationContext context: Context,
-    ): MainNavigator {
-        return MainNavigatorImpl(context)
-    }
+        impl: MainNavigatorImpl,
+    ): MainNavigator
 }

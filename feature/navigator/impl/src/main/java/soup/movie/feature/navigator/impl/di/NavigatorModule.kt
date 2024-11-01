@@ -21,13 +21,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import soup.movie.feature.navigator.AppNavigator
 import soup.movie.feature.navigator.impl.AppNavigatorImpl
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 interface NavigatorModule {
 
-    @Singleton
     @Binds
     fun bindsAppNavigator(
         impl: AppNavigatorImpl,

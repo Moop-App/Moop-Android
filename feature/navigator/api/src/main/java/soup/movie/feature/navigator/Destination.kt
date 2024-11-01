@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 SOUP
+ * Copyright 2024 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
  */
 package soup.movie.feature.navigator
 
-import android.content.Intent
-
-interface AppNavigator {
-    fun createIntent(destination: Destination): Intent
+sealed interface Destination {
+    data object Main : Destination
 }

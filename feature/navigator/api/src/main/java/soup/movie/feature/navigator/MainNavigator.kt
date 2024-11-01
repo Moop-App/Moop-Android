@@ -18,5 +18,5 @@ package soup.movie.feature.navigator
 import android.content.Intent
 
 interface MainNavigator {
-    fun createIntentToMain(): Intent
+    fun createIntent(destination: Destination.Main): Intent
 }
