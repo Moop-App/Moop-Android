@@ -16,7 +16,6 @@
 package soup.movie.feature.tasks.impl
 
 import soup.movie.data.repository.MovieRepository
-import soup.movie.domain.movie.isBest
 import soup.movie.feature.notification.NotificationBuilder
 import soup.movie.model.MovieModel
 import javax.inject.Inject
@@ -44,8 +43,7 @@ class RecommendMoviesUseCaseImpl @Inject constructor(
                     cgv != null && lotte != null && megabox != null
                 }
             }
-            .filterIndexed { index, movie -> index < 3 || movie.isBest() }
-            .take(6)
+            .take(3)
             .toList()
     }
 }

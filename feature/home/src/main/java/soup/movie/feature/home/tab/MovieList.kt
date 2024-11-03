@@ -42,13 +42,9 @@ import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.imageloading.AsyncImage
 import soup.movie.domain.movie.getDDayLabel
-import soup.movie.domain.movie.isBest
 import soup.movie.domain.movie.isDDay
-import soup.movie.domain.movie.isNew
 import soup.movie.feature.home.favorite.MovieAgeBadge
-import soup.movie.feature.home.favorite.MovieBestTag
 import soup.movie.feature.home.favorite.MovieDDayTag
-import soup.movie.feature.home.favorite.MovieNewTag
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -114,19 +110,9 @@ private fun MovieItem(
                     .padding(7.dp)
                     .align(Alignment.BottomStart),
             )
-            when {
-                movie.isDDay() -> MovieDDayTag(
+            if (movie.isDDay()) {
+                MovieDDayTag(
                     text = movie.getDDayLabel().orEmpty(),
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .align(Alignment.BottomEnd),
-                )
-                movie.isBest() -> MovieBestTag(
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .align(Alignment.BottomEnd),
-                )
-                movie.isNew() -> MovieNewTag(
                     modifier = Modifier
                         .padding(4.dp)
                         .align(Alignment.BottomEnd),
