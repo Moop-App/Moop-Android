@@ -18,9 +18,6 @@ package soup.movie.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import soup.movie.feature.tasks.AnnounceOpenDateTasks
 import soup.movie.feature.tasks.SyncOpenDateTasks
@@ -32,19 +29,10 @@ class MainViewModel @Inject constructor(
     private val syncOpenDateTasks: SyncOpenDateTasks,
 ) : ViewModel() {
 
-    private val _uiEvent = MutableSharedFlow<MainUiEvent>()
-    val uiEvent: SharedFlow<MainUiEvent> = _uiEvent.asSharedFlow()
-
     fun onInit() {
         viewModelScope.launch {
             announceOpenDateTasks.fetch()
             syncOpenDateTasks.fetch()
-        }
-    }
-
-    fun requestMovie(movieId: String) {
-        viewModelScope.launch {
-            _uiEvent.emit(MainUiEvent.ShowDetailUiEvent(movieId))
         }
     }
 }

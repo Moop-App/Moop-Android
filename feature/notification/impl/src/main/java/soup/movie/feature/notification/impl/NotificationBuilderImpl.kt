@@ -25,7 +25,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import soup.movie.feature.navigator.AppNavigator
 import soup.movie.feature.navigator.Destination
 import soup.movie.feature.notification.NotificationBuilder
-import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
 import soup.movie.resources.R
 import javax.inject.Inject
@@ -34,17 +33,6 @@ class NotificationBuilderImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val navigator: AppNavigator,
 ) : NotificationBuilder {
-
-    override fun showLegacyNotification(list: List<MovieModel>) = context.run {
-        NotificationSpecs.notifyLegacy(this) {
-            setStyle(NotificationCompat.BigTextStyle())
-            setSmallIcon(R.drawable.ic_notify_default)
-            setContentTitle(buildSpannedString { bold { append("간만에 영화 보는거 어때요? 👀🍿") } })
-            setContentText(list.joinToString { it.title })
-            setAutoCancel(true)
-            setContentIntent(createLauncherIntent())
-        }
-    }
 
     override fun showAlarmNotification(list: List<OpenDateAlarmModel>) = context.run {
         NotificationSpecs.notifyOpenDateAlarm(this) {

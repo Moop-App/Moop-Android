@@ -33,7 +33,6 @@ androidx-work = "2.9.1"
 gms = "4.4.1"
 firebase-bom = "33.0.0"
 firebase-crashlytics = "2.9.9"
-firebase-perf = "1.4.2"
 
 # Compose
 compose-bom = "2024.09.03"
@@ -132,8 +131,6 @@ androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-cloudmessaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
-firebase-performance = { module = "com.google.firebase:firebase-perf" }
-firebase-remoteconfig = { module = "com.google.firebase:firebase-config" }
 
 # Etc
 
@@ -163,5 +160,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
-firebase-performance = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }

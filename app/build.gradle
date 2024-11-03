@@ -3,7 +3,6 @@ plugins {
     id "moop.android.compose"
     id "moop.android.hilt"
     alias libs.plugins.firebase.crashlytics
-    alias libs.plugins.firebase.performance
     alias libs.plugins.dependencyGuard
     alias(libs.plugins.baselineprofile)
 }
@@ -121,8 +120,6 @@ dependencies {
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.cloudmessaging
     implementation libs.firebase.crashlytics
-    implementation libs.firebase.performance
-    implementation libs.firebase.remoteconfig
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.navigation.compose
