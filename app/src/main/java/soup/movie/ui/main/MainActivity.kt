@@ -20,21 +20,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import soup.movie.R
-import soup.movie.config.Config
-import soup.movie.config.RemoteConfig
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.calculateWindowSizeClass
-import soup.movie.feature.tasks.RecommendMoviesTasks
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var recommendMoviesTasks: RecommendMoviesTasks
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -45,23 +37,11 @@ class MainActivity : AppCompatActivity() {
         setContent {
             MovieTheme {
                 MainNavGraph(
-                    mainViewModel = viewModel,
                     widthSizeClass = calculateWindowSizeClass(this).widthSizeClass,
                 )
             }
         }
 
-        // TODO: Improve this please
-        FirebaseMessaging.getInstance().isAutoInitEnabled = true
-
-        val config: Config = RemoteConfig()
-        config.fetchAndActivate {
-            if (config.allowToRunLegacyWorker) {
-                recommendMoviesTasks.fetch()
-            } else {
-                recommendMoviesTasks.cancel()
-            }
-        }
         viewModel.onInit()
     }
 }

@@ -16,7 +16,6 @@
 package soup.movie.ui.main
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -43,7 +42,6 @@ private fun NavController.navigateToDetail(movieId: String) {
 
 @Composable
 fun MainNavGraph(
-    mainViewModel: MainViewModel,
     widthSizeClass: WindowWidthSizeClass,
 ) {
     val navController = rememberNavController()
@@ -82,16 +80,6 @@ fun MainNavGraph(
             DetailNavGraph(
                 viewModel = viewModel,
             )
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        mainViewModel.uiEvent.collect { event ->
-            when (event) {
-                is MainUiEvent.ShowDetailUiEvent -> {
-                    navController.navigateToDetail(movieId = event.movieId)
-                }
-            }
         }
     }
 }
