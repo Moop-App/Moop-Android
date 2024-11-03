@@ -15,9 +15,6 @@
  */
 package soup.movie.domain.movie
 
-import soup.movie.model.CgvInfoModel
-import soup.movie.model.LotteInfoModel
-import soup.movie.model.MegaboxInfoModel
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.MovieModel
 import java.time.LocalDate
@@ -39,24 +36,6 @@ private fun MovieModel.hasOpenDate(): Boolean = openDate.toLocalDate() != null
 
 fun MovieModel.isDDay(): Boolean = isPlan and hasOpenDate()
 
-fun MovieModel.isBest(): Boolean {
-    return theater.cgv.eggIsOver(96) or
-        theater.lotte.starIsOver(8.8) or
-        theater.megabox.starIsOver(8.5)
-}
-
-fun MovieModel.isNew(): Boolean = isNow and isInThePastWeek()
-
-fun MovieModel.isInThePastWeek(): Boolean = isIn(-6..0)
-
-fun MovieModel.isIn(dayRange: IntRange): Boolean {
-    val openDate = openDate.toLocalDate()
-    if (openDate != null) {
-        return ChronoUnit.DAYS.between(today(), openDate) in dayRange
-    }
-    return false
-}
-
 fun MovieDetailModel.screenDays(): Int {
     val openDate = openDate.toLocalDate()
     if (openDate != null) {
@@ -73,33 +52,5 @@ private fun String.toLocalDate(): LocalDate? = split(".").let {
         LocalDate.of(it[0].toInt(), it[1].toInt(), it[2].toInt())
     } else {
         null
-    }
-}
-
-private fun CgvInfoModel?.eggIsOver(target: Int): Boolean {
-    return this?.star.eggIsOver(target)
-}
-
-private fun String?.eggIsOver(target: Int): Boolean {
-    return if (this == null || isBlank() || this == "?") {
-        false
-    } else {
-        this >= target.toString()
-    }
-}
-
-private fun LotteInfoModel?.starIsOver(target: Double): Boolean {
-    return this?.star.starIsOver(target)
-}
-
-private fun MegaboxInfoModel?.starIsOver(target: Double): Boolean {
-    return this?.star.starIsOver(target)
-}
-
-private fun String?.starIsOver(target: Double): Boolean {
-    return if (this == null || isBlank()) {
-        false
-    } else {
-        this >= target.toString()
     }
 }
