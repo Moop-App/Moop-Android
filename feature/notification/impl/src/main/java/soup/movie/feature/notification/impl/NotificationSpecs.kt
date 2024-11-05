@@ -18,7 +18,6 @@ package soup.movie.feature.notification.impl
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import androidx.core.app.NotificationCompat.Builder
 import soup.movie.feature.notification.R
 
@@ -38,13 +37,6 @@ object NotificationSpecs {
         }
     }
 
-    fun notifyLegacy(ctx: Context, intercept: Builder.() -> Builder) {
-        initialize(ctx)
-        ctx.getNotificationManager()?.run {
-            notify(3, Builder(ctx, NotificationChannels.EVENT).intercept().build())
-        }
-    }
-
     fun notifyOpenDateAlarm(ctx: Context, intercept: Builder.() -> Builder) {
         initialize(ctx)
         ctx.getNotificationManager()?.run {
@@ -53,25 +45,23 @@ object NotificationSpecs {
     }
 
     private fun initialize(context: Context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.getNotificationManager()?.run {
-                val notice = NotificationChannel(
-                    NotificationChannels.NOTICE,
-                    context.getString(R.string.notification_channel_notice),
-                    NotificationManager.IMPORTANCE_HIGH,
-                )
-                val event = NotificationChannel(
-                    NotificationChannels.EVENT,
-                    context.getString(R.string.notification_channel_event),
-                    NotificationManager.IMPORTANCE_HIGH,
-                )
-                val openDateAlarm = NotificationChannel(
-                    NotificationChannels.OPEN_DATE_ALARM,
-                    context.getString(R.string.notification_channel_open_date_alarm),
-                    NotificationManager.IMPORTANCE_HIGH,
-                )
-                createNotificationChannels(listOf(notice, event, openDateAlarm))
-            }
+        context.getNotificationManager()?.run {
+            val notice = NotificationChannel(
+                NotificationChannels.NOTICE,
+                context.getString(R.string.notification_channel_notice),
+                NotificationManager.IMPORTANCE_HIGH,
+            )
+            val event = NotificationChannel(
+                NotificationChannels.EVENT,
+                context.getString(R.string.notification_channel_event),
+                NotificationManager.IMPORTANCE_HIGH,
+            )
+            val openDateAlarm = NotificationChannel(
+                NotificationChannels.OPEN_DATE_ALARM,
+                context.getString(R.string.notification_channel_open_date_alarm),
+                NotificationManager.IMPORTANCE_HIGH,
+            )
+            createNotificationChannels(listOf(notice, event, openDateAlarm))
         }
     }
 
