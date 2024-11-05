@@ -18,7 +18,6 @@ package soup.movie.feature.notification.impl
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import androidx.core.app.NotificationCompat.Builder
 import soup.movie.feature.notification.R
 
@@ -35,13 +34,6 @@ object NotificationSpecs {
         initialize(ctx)
         ctx.getNotificationManager()?.run {
             notify(2, Builder(ctx, NotificationChannels.EVENT).intercept().build())
-        }
-    }
-
-    fun notifyLegacy(ctx: Context, intercept: Builder.() -> Builder) {
-        initialize(ctx)
-        ctx.getNotificationManager()?.run {
-            notify(3, Builder(ctx, NotificationChannels.EVENT).intercept().build())
         }
     }
 
