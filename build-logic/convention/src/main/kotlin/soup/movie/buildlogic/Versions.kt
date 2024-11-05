@@ -1,7 +1,7 @@
 package soup.movie.buildlogic
 
 object Versions {
-    const val minSdk = 23
+    const val minSdk = 26
     const val compileSdk = 35
-    const val targetSdk = 33
+    const val targetSdk = 35
 }
