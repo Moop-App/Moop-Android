@@ -20,7 +20,7 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.ui
 
-    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.lifecycle.viewmodel
 
     testImplementation projects.testing
     androidTestImplementation projects.testing
