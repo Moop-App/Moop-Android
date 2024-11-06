@@ -32,7 +32,7 @@ androidx-work = "2.10.0"
 # Google
 gms = "4.4.1"
 firebase-bom = "33.0.0"
-firebase-crashlytics = "2.9.9"
+firebase-crashlytics = "3.0.2"
 
 # Compose
 compose-bom = "2024.10.01"
