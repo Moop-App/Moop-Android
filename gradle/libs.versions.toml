@@ -1,7 +1,7 @@
 [versions]
 
 # Android
-androidGradlePlugin = "8.4.1"
+androidGradlePlugin = "8.7.1"
 
 # Kotlin
 kotlin = "2.0.20"
