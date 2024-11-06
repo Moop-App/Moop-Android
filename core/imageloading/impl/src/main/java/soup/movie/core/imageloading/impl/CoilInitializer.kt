@@ -17,16 +17,18 @@ package soup.movie.core.imageloading.impl
 
 import android.content.Context
 import androidx.startup.Initializer
-import coil.Coil
-import coil.ImageLoader
+import coil3.ImageLoader
+import coil3.SingletonImageLoader
+import coil3.request.crossfade
 
 class CoilInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
-        val imageLoader = ImageLoader.Builder(context)
-            .crossfade(true)
-            .build()
-        Coil.setImageLoader(imageLoader)
+        SingletonImageLoader.setSafe {
+            ImageLoader.Builder(context)
+                .crossfade(true)
+                .build()
+        }
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

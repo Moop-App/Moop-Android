@@ -17,12 +17,12 @@ package soup.movie.core.imageloading.impl
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.annotation.WorkerThread
 import androidx.core.content.FileProvider
-import coil.imageLoader
-import coil.request.ImageRequest
+import coil3.BitmapImage
+import coil3.imageLoader
+import coil3.request.ImageRequest
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import soup.movie.core.imageloading.ImageUriProvider
@@ -44,8 +44,8 @@ class ImageUriProviderImpl(
         val request = ImageRequest.Builder(appContext)
             .data(url)
             .build()
-        val result = appContext.imageLoader.execute(request).drawable
-        val bitmap = (result as? BitmapDrawable)?.bitmap ?: return null
+        val result = appContext.imageLoader.execute(request).image
+        val bitmap = (result as? BitmapImage)?.bitmap ?: return null
         return imageUriOf(
             bitmap.toCacheFile(
                 appContext,

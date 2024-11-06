@@ -29,4 +29,5 @@ dependencies {
 
     implementation libs.androidx.startup
     implementation libs.coil.runtime
+    implementation libs.coil.okhttp
 }
