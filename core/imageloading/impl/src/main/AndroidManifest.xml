@@ -11,16 +11,6 @@
                 android:name="soup.movie.core.imageloading.impl.CoilInitializer"
                 android:value="androidx.startup" />
         </provider>
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${filesAuthority}"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/coil_disk_cache_path" />
-        </provider>
     </application>
 
 </manifest>
