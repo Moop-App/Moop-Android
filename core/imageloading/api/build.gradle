@@ -8,8 +8,6 @@ android {
 }
 
 dependencies {
-    implementation projects.core.kotlin
-
     implementation libs.kotlin.stdlib
 
     implementation libs.compose.foundation
