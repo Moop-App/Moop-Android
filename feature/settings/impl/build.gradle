@@ -5,29 +5,27 @@ plugins {
 }
 
 android {
-    namespace "soup.movie.feature.home"
+    namespace "soup.movie.feature.settings.impl"
 }
 
 dependencies {
     implementation projects.core.kotlin
     implementation projects.core.designsystem
-    implementation projects.core.imageloading.api
-    implementation projects.core.logger
+    implementation projects.core.external
     implementation projects.core.resources
     implementation projects.data.settings.api
-    implementation projects.data.repository.api
     implementation projects.data.model
-    implementation projects.domain
     implementation projects.feature.settings.api
 
     implementation libs.kotlin.stdlib
 
-    implementation libs.androidx.activity.compose
+    implementation libs.androidx.appcompat
     implementation libs.androidx.hilt.navigation.compose
-    implementation libs.compose.animation.graphics
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
+    implementation libs.androidx.navigation.compose
+    implementation libs.materialmotion.compose.core
 
     testImplementation projects.testing
     androidTestImplementation projects.testing
