@@ -50,7 +50,7 @@ import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.favorite.HomeFavoriteList
-import soup.movie.feature.settings.SettingsNavGraph
+import soup.movie.feature.settings.rememberSettingsComposableFactory
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -94,7 +94,8 @@ fun MainScreen(
                     )
                 }
                 MainTabUiModel.Settings -> {
-                    SettingsNavGraph()
+                    val factory = rememberSettingsComposableFactory()
+                    factory.SettingsScreen()
                 }
             }
         }

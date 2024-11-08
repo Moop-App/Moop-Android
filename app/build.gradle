@@ -87,9 +87,8 @@ dependencies {
     implementation projects.feature.home
     implementation projects.feature.detail
     implementation projects.feature.search
-    implementation projects.feature.settings
-    implementation projects.feature.theme.api
-    runtimeOnly projects.feature.theme.impl
+    implementation projects.feature.settings.api
+    runtimeOnly projects.feature.settings.impl
     implementation projects.feature.navigator.api
     runtimeOnly projects.feature.navigator.impl
     implementation projects.feature.notification.api
