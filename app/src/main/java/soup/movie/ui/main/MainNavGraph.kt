@@ -25,8 +25,7 @@ import androidx.navigation.navArgument
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.detail.DetailNavGraph
 import soup.movie.feature.detail.DetailViewModel
-import soup.movie.feature.home.HomeViewModel
-import soup.movie.feature.home.MainScreen
+import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.feature.search.SearchScreen
 import soup.movie.feature.search.SearchViewModel
 
@@ -50,10 +49,9 @@ fun MainNavGraph(
         startDestination = Screen.Main.route,
     ) {
         composable(Screen.Main.route) {
-            val viewModel = hiltViewModel<HomeViewModel>()
-            MainScreen(
+            val factory = rememberHomeComposableFactory()
+            factory.HomeNavGraph(
                 widthSizeClass = widthSizeClass,
-                viewModel = viewModel,
                 onSearchClick = {
                     navController.navigate(Screen.Search.route)
                 },

@@ -49,8 +49,7 @@ import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.imageloading.AsyncImage
 import soup.movie.domain.movie.getDDayLabel
 import soup.movie.domain.movie.isDDay
-import soup.movie.feature.home.favorite.MovieAgeTag
-import soup.movie.feature.home.favorite.MovieDDayTag
+import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -62,6 +61,7 @@ internal fun DetailHeader(
     modifier: Modifier = Modifier,
     actions: @Composable () -> Unit = {},
 ) {
+    val factory = rememberHomeComposableFactory()
     val movie: MovieModel = uiModel.movie
     Column(modifier = modifier) {
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
@@ -100,12 +100,12 @@ internal fun DetailHeader(
                     )
                 }
                 Column {
-                    MovieAgeTag(
+                    factory.MovieAgeTag(
                         age = movie.age,
                         modifier = Modifier.padding(top = 12.dp),
                     )
                     if (movie.isDDay()) {
-                        MovieDDayTag(
+                        factory.MovieDDayTag(
                             text = movie.getDDayLabel().orEmpty(),
                             modifier = Modifier.padding(top = 4.dp),
                         )

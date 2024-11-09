@@ -84,7 +84,8 @@ dependencies {
     implementation projects.core.logger
     implementation projects.data.repository.api
     implementation projects.data.model
-    implementation projects.feature.home
+    implementation projects.feature.home.api
+    runtimeOnly projects.feature.home.impl
     implementation projects.feature.detail
     implementation projects.feature.search
     implementation projects.feature.settings.api

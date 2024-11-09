@@ -54,8 +54,7 @@ import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.theme.MovieTheme
-import soup.movie.feature.home.tab.MovieList
-import soup.movie.feature.home.tab.NoMovieItems
+import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -65,6 +64,7 @@ fun SearchScreen(
     upPress: () -> Unit,
     onItemClick: (MovieModel) -> Unit,
 ) {
+    val factory = rememberHomeComposableFactory()
     Scaffold(
         modifier = Modifier.systemBarsPadding(),
         topBar = {
@@ -148,10 +148,10 @@ fun SearchScreen(
                         .padding(paddingValues),
                 ) {
                     if (model.hasNoItem) {
-                        NoMovieItems(modifier = Modifier.align(Alignment.Center))
+                        factory.NoMovieItems(modifier = Modifier.align(Alignment.Center))
                     } else {
                         val context = LocalContext.current
-                        MovieList(
+                        factory.MovieList(
                             movies = model.movies,
                             onItemClick = {
                                 onItemClick(it)
