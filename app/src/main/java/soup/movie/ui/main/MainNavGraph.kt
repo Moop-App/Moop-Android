@@ -16,19 +16,15 @@
 package soup.movie.ui.main
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
-import soup.movie.feature.detail.DetailNavGraph
-import soup.movie.feature.detail.DetailViewModel
-import soup.movie.feature.home.HomeViewModel
-import soup.movie.feature.home.MainScreen
-import soup.movie.feature.search.SearchScreen
-import soup.movie.feature.search.SearchViewModel
+import soup.movie.feature.detail.rememberDetailComposableFactory
+import soup.movie.feature.home.rememberHomeComposableFactory
+import soup.movie.feature.search.rememberSearchComposableFactory
 
 private enum class Screen(val route: String) {
     Main("main"),
@@ -50,10 +46,9 @@ fun MainNavGraph(
         startDestination = Screen.Main.route,
     ) {
         composable(Screen.Main.route) {
-            val viewModel = hiltViewModel<HomeViewModel>()
-            MainScreen(
+            val factory = rememberHomeComposableFactory()
+            factory.HomeNavGraph(
                 widthSizeClass = widthSizeClass,
-                viewModel = viewModel,
                 onSearchClick = {
                     navController.navigate(Screen.Search.route)
                 },
@@ -63,9 +58,8 @@ fun MainNavGraph(
             )
         }
         composable(Screen.Search.route) {
-            val viewModel = hiltViewModel<SearchViewModel>()
-            SearchScreen(
-                viewModel = viewModel,
+            val factory = rememberSearchComposableFactory()
+            factory.SearchScreen(
                 upPress = { navController.navigateUp() },
                 onItemClick = {
                     navController.navigateToDetail(movieId = it.id)
@@ -76,10 +70,8 @@ fun MainNavGraph(
             route = Screen.Detail.route + "/{movieId}",
             arguments = listOf(navArgument("movieId") { nullable = false }),
         ) {
-            val viewModel = hiltViewModel<DetailViewModel>()
-            DetailNavGraph(
-                viewModel = viewModel,
-            )
+            val factory = rememberDetailComposableFactory()
+            factory.DetailNavGraph()
         }
     }
 }
