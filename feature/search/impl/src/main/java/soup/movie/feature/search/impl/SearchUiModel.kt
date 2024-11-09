@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.search
+package soup.movie.feature.search.impl
 
 import soup.movie.model.MovieModel
 

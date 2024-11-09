@@ -87,7 +87,8 @@ dependencies {
     implementation projects.feature.home.api
     runtimeOnly projects.feature.home.impl
     implementation projects.feature.detail
-    implementation projects.feature.search
+    implementation projects.feature.search.api
+    runtimeOnly projects.feature.search.impl
     implementation projects.feature.settings.api
     runtimeOnly projects.feature.settings.impl
     implementation projects.feature.navigator.api

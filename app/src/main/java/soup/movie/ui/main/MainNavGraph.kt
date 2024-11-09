@@ -26,8 +26,7 @@ import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.detail.DetailNavGraph
 import soup.movie.feature.detail.DetailViewModel
 import soup.movie.feature.home.rememberHomeComposableFactory
-import soup.movie.feature.search.SearchScreen
-import soup.movie.feature.search.SearchViewModel
+import soup.movie.feature.search.rememberSearchComposableFactory
 
 private enum class Screen(val route: String) {
     Main("main"),
@@ -61,9 +60,8 @@ fun MainNavGraph(
             )
         }
         composable(Screen.Search.route) {
-            val viewModel = hiltViewModel<SearchViewModel>()
-            SearchScreen(
-                viewModel = viewModel,
+            val factory = rememberSearchComposableFactory()
+            factory.SearchScreen(
                 upPress = { navController.navigateUp() },
                 onItemClick = {
                     navController.navigateToDetail(movieId = it.id)
