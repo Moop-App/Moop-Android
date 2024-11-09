@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.detail
+package soup.movie.feature.detail.impl
 
 import androidx.annotation.Keep
 import androidx.annotation.StringRes

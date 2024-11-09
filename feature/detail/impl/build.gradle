@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace "soup.movie.feature.detail"
+    namespace "soup.movie.feature.detail.impl"
 }
 
 dependencies {
@@ -19,6 +19,7 @@ dependencies {
     implementation projects.data.model
     implementation projects.domain
     implementation projects.feature.home.api
+    implementation projects.feature.detail.api
 
     implementation libs.kotlin.stdlib
 

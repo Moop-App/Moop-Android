@@ -16,15 +16,13 @@
 package soup.movie.ui.main
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
-import soup.movie.feature.detail.DetailNavGraph
-import soup.movie.feature.detail.DetailViewModel
+import soup.movie.feature.detail.rememberDetailComposableFactory
 import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.feature.search.rememberSearchComposableFactory
 
@@ -72,10 +70,8 @@ fun MainNavGraph(
             route = Screen.Detail.route + "/{movieId}",
             arguments = listOf(navArgument("movieId") { nullable = false }),
         ) {
-            val viewModel = hiltViewModel<DetailViewModel>()
-            DetailNavGraph(
-                viewModel = viewModel,
-            )
+            val factory = rememberDetailComposableFactory()
+            factory.DetailNavGraph()
         }
     }
 }

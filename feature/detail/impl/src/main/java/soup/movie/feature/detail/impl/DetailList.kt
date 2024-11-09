@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.detail
+package soup.movie.feature.detail.impl
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
