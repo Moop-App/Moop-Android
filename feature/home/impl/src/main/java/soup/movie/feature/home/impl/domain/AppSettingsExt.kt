@@ -23,12 +23,10 @@ fun AppSettings.getMovieFilterFlow(): Flow<MovieFilter> {
     return combine(
         getTheaterFilterFlow(),
         getAgeFilterFlow(),
-        getGenreFilterFlow(),
-        transform = { theaterFilter, ageFilter, genreFilter ->
+        transform = { theaterFilter, ageFilter ->
             MovieFilter(
                 theaterFilter,
                 ageFilter,
-                genreFilter,
             )
         },
     )

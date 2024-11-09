@@ -15,7 +15,6 @@
     <string name="menu_filter">Movie Filter</string>
     <string name="filter_category_theater">Theater Filter</string>
     <string name="filter_category_age">Age Filter</string>
-    <string name="filter_category_genre">Genre Filter</string>
 
     <string name="action_toast_opendate_alarm">⏰ I\'ll let you know when released.</string>
 

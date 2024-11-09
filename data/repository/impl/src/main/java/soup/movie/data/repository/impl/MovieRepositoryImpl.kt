@@ -89,19 +89,6 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getGenreList(): List<String> {
-        return try {
-            local.getAllMovieList()
-                .mapNotNull { it.genres }
-                .flatten()
-                .toSet()
-                .toList()
-        } catch (t: Throwable) {
-            Logger.w(t)
-            emptyList()
-        }
-    }
-
     override suspend fun searchMovie(query: String): List<MovieModel> {
         return local.getAllMovieList().asSequence()
             .filter { it.isMatchedWith(query) }

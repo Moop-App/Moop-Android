@@ -15,13 +15,10 @@
  */
 package soup.movie.feature.home.impl.filter
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,24 +29,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ChipDefaults
 import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FilterChip
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
 
@@ -66,15 +57,6 @@ fun HomeFilterScreen(
         item {
             HomeFilterDivider()
             HomeFilterAge(viewModel)
-        }
-        item {
-            HomeFilterDivider()
-            HomeFilterGenre(
-                items = viewModel.genreFilterList,
-                onCheckedChange = { genreFilter, isChecked ->
-                    viewModel.onGenreFilterClick(genreFilter.name, isChecked)
-                },
-            )
         }
     }
 }
@@ -219,63 +201,4 @@ private fun HomeFilterAgeText(
             .wrapContentHeight()
             .padding(vertical = 6.dp),
     )
-}
-
-@OptIn(
-    ExperimentalMaterialApi::class,
-    ExperimentalLayoutApi::class,
-)
-@Composable
-private fun HomeFilterGenre(
-    items: List<GenreFilterItem>,
-    onCheckedChange: (GenreFilterItem, Boolean) -> Unit,
-) {
-    Column(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
-        HomeFilterCategory(text = stringResource(R.string.filter_category_genre))
-        FlowRow(
-            modifier = Modifier.padding(top = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
-        ) {
-            items.forEach { genreFilter ->
-                GenreFilterChip(
-                    genreFilter.name,
-                    checked = genreFilter.isChecked,
-                    onCheckedChange = { onCheckedChange(genreFilter, it) },
-                )
-            }
-        }
-    }
-}
-
-@ExperimentalMaterialApi
-@Composable
-private fun GenreFilterChip(
-    text: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-    enabled: Boolean = true,
-) {
-    FilterChip(
-        selected = checked,
-        onClick = { onCheckedChange(!checked) },
-        selectedIcon = {
-            Image(
-                MovieIcons.Check,
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(Color(0x88000000)),
-            )
-        },
-        enabled = enabled,
-        colors = ChipDefaults.filterChipColors(
-            selectedBackgroundColor = Color(0xEEDDDDDD),
-            selectedContentColor = Color(0x88000000),
-            backgroundColor = Color(0x33DDDDDD),
-            contentColor = Color(0x44000000),
-        ),
-    ) {
-        Text(
-            text = text,
-            fontWeight = FontWeight.Bold,
-        )
-    }
 }

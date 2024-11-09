@@ -31,9 +31,3 @@ data class AgeFilterUiModel(
     val has15: Boolean,
     val has19: Boolean,
 )
-
-@Keep
-class GenreFilterItem(
-    val name: String,
-    val isChecked: Boolean,
-)

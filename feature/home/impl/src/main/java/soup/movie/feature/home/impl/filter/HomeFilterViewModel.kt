@@ -15,9 +15,6 @@
  */
 package soup.movie.feature.home.impl.filter
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +32,6 @@ import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_12
 import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_15
 import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_19
 import soup.movie.model.settings.AgeFilter.Companion.FLAG_AGE_ALL
-import soup.movie.model.settings.GenreFilter
 import soup.movie.model.settings.TheaterFilter
 import soup.movie.model.settings.TheaterFilter.Companion.FLAG_THEATER_CGV
 import soup.movie.model.settings.TheaterFilter.Companion.FLAG_THEATER_LOTTE
@@ -49,7 +45,6 @@ class HomeFilterViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var theaterFilter: TheaterFilter? = null
-    private var lastGenreFilter: GenreFilter? = null
 
     private val _theaterUiModel = MutableStateFlow<TheaterFilterUiModel?>(null)
     val theaterUiModel: StateFlow<TheaterFilterUiModel?> = _theaterUiModel
@@ -63,9 +58,6 @@ class HomeFilterViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5_000),
         )
 
-    var genreFilterList by mutableStateOf<List<GenreFilterItem>>(emptyList())
-        private set
-
     init {
         viewModelScope.launch {
             appSettings.getTheaterFilterFlow()
@@ -74,26 +66,6 @@ class HomeFilterViewModel @Inject constructor(
                     theaterFilter = it
                     _theaterUiModel.emit(it.toUiModel())
                 }
-        }
-        viewModelScope.launch {
-            val allGenre = getGenreList()
-            appSettings.getGenreFilterFlow()
-                .collect { filter ->
-                    lastGenreFilter = filter
-                    genreFilterList = allGenre.map {
-                        GenreFilterItem(
-                            name = it,
-                            isChecked = filter.blacklist.contains(it).not(),
-                        )
-                    }
-                }
-        }
-    }
-
-    private suspend fun getGenreList(): List<String> {
-        return mutableListOf<String>().apply {
-            addAll(repository.getGenreList())
-            add(GenreFilter.GENRE_ETC)
         }
     }
 
@@ -160,20 +132,6 @@ class HomeFilterViewModel @Inject constructor(
     private fun updateAgeFilter(flags: Int) {
         viewModelScope.launch {
             appSettings.setAgeFilter(AgeFilter(flags))
-        }
-    }
-
-    fun onGenreFilterClick(genre: String, isChecked: Boolean) {
-        val lastGenreSet = lastGenreFilter?.blacklist?.toMutableSet() ?: return
-        val changed = if (isChecked) {
-            lastGenreSet.remove(genre)
-        } else {
-            lastGenreSet.add(genre)
-        }
-        if (changed) {
-            viewModelScope.launch {
-                appSettings.setGenreFilter(GenreFilter(lastGenreSet))
-            }
         }
     }
 }

@@ -19,7 +19,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.Subject
 import androidx.compose.material.icons.outlined.PrivacyTip
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.FilterList
 import androidx.compose.material.icons.rounded.Info
@@ -32,7 +31,6 @@ import soup.movie.core.designsystem.R
 
 object MovieIcons {
     val ArrowBack = Icons.AutoMirrored.Rounded.ArrowBack
-    val Check = Icons.Rounded.Check
     val Close = Icons.Rounded.Close
     val FilterList = Icons.Rounded.FilterList
     val Info = Icons.Rounded.Info
