@@ -28,7 +28,6 @@ interface MovieRepository {
     fun getPlanMovieList(): Flow<List<MovieModel>>
     suspend fun updatePlanMovieList()
     suspend fun getMovieDetail(movieId: String): MovieDetailModel
-    suspend fun getGenreList(): List<String>
     suspend fun searchMovie(query: String): List<MovieModel>
 
     fun getFavoriteMovieList(): Flow<List<MovieModel>>

@@ -35,7 +35,6 @@ import soup.movie.common.ApplicationScope
 import soup.movie.common.IoDispatcher
 import soup.movie.data.settings.AppSettings
 import soup.movie.model.settings.AgeFilter
-import soup.movie.model.settings.GenreFilter
 import soup.movie.model.settings.TheaterFilter
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -61,7 +60,7 @@ class AppSettingsImpl @Inject constructor(
 
     init {
         coroutineScope.launch {
-            clearFavoriteTheaterList()
+            clearStaleData()
         }
     }
 
@@ -96,22 +95,6 @@ class AppSettingsImpl @Inject constructor(
         }
     }
 
-    private val genreFilterKey = stringPreferencesKey("favorite_genre")
-
-    override suspend fun setGenreFilter(genreFilter: GenreFilter) {
-        context.dataStore.edit { settings ->
-            settings[genreFilterKey] =
-                genreFilter.blacklist.joinToString(separator = SEPARATOR)
-        }
-    }
-
-    override fun getGenreFilterFlow(): Flow<GenreFilter> {
-        return context.dataStore.data.map { preferences ->
-            val genreString = preferences[genreFilterKey].orEmpty()
-            GenreFilter(genreString.split(SEPARATOR).toSet())
-        }
-    }
-
     private val themeOptionKey = stringPreferencesKey("theme_option")
 
     override suspend fun setThemeOption(themeOption: String) {
@@ -132,18 +115,12 @@ class AppSettingsImpl @Inject constructor(
         }
     }
 
-    private val favoriteTheaterListKey = stringPreferencesKey("favorite_theaters")
-
-    private suspend fun clearFavoriteTheaterList() {
+    private suspend fun clearStaleData() {
         withContext(ioDispatcher) {
             context.dataStore.edit { settings ->
-                settings.remove(favoriteTheaterListKey)
+                settings.remove(stringPreferencesKey("favorite_theaters"))
+                settings.remove(stringPreferencesKey("favorite_genre"))
             }
         }
-    }
-
-    companion object {
-
-        private const val SEPARATOR = "|"
     }
 }
