@@ -19,7 +19,6 @@ dependencies {
     implementation projects.data.model
     implementation projects.domain
     implementation projects.feature.home.api
-    implementation projects.feature.settings.api
 
     implementation libs.kotlin.stdlib
 

@@ -16,7 +16,7 @@
 package soup.movie.feature.home.impl
 
 enum class MainTabUiModel {
-    Home, Favorite, Settings
+    Home, Favorite
 }
 
 enum class HomeTabUiModel {

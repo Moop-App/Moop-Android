@@ -22,7 +22,7 @@ import javax.inject.Inject
 class SettingsComposableFactoryImpl @Inject constructor() : SettingsComposableFactory {
 
     @Composable
-    override fun SettingsScreen() {
-        SettingsNavGraph()
+    override fun SettingsNavGraph() {
+        soup.movie.feature.settings.impl.SettingsNavGraph()
     }
 }

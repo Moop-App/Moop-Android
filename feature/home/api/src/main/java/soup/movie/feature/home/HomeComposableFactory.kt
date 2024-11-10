@@ -32,6 +32,7 @@ interface HomeComposableFactory {
     fun HomeNavGraph(
         widthSizeClass: WindowWidthSizeClass,
         onSearchClick: () -> Unit,
+        onSettingsClick: () -> Unit,
         onMovieItemClick: (MovieModel) -> Unit,
     )
 

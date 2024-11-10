@@ -25,10 +25,12 @@ import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.detail.rememberDetailComposableFactory
 import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.feature.search.rememberSearchComposableFactory
+import soup.movie.feature.settings.rememberSettingsComposableFactory
 
 private enum class Screen(val route: String) {
     Main("main"),
     Search("search"),
+    Settings("settings"),
     Detail("detail"),
 }
 
@@ -52,6 +54,9 @@ fun MainNavGraph(
                 onSearchClick = {
                     navController.navigate(Screen.Search.route)
                 },
+                onSettingsClick = {
+                    navController.navigate(Screen.Settings.route)
+                },
                 onMovieItemClick = {
                     navController.navigateToDetail(movieId = it.id)
                 },
@@ -65,6 +70,10 @@ fun MainNavGraph(
                     navController.navigateToDetail(movieId = it.id)
                 },
             )
+        }
+        composable(Screen.Settings.route) {
+            val factory = rememberSettingsComposableFactory()
+            factory.SettingsNavGraph()
         }
         composable(
             route = Screen.Detail.route + "/{movieId}",
