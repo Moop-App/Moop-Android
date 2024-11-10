@@ -42,6 +42,8 @@ androidx.compose.ui:ui-graphics-android:1.7.5
 androidx.compose.ui:ui-graphics:1.7.5
 androidx.compose.ui:ui-text-android:1.7.5
 androidx.compose.ui:ui-text:1.7.5
+androidx.compose.ui:ui-tooling-preview-android:1.7.5
+androidx.compose.ui:ui-tooling-preview:1.7.5
 androidx.compose.ui:ui-unit-android:1.7.5
 androidx.compose.ui:ui-unit:1.7.5
 androidx.compose.ui:ui-util-android:1.7.5

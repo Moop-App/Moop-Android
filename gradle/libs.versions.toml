@@ -107,6 +107,8 @@ compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-material = { module = "androidx.compose.material:material" }
 compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
 compose-ui = { module = "androidx.compose.ui:ui" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose-animation-graphics = { module = "androidx.compose.animation:animation-graphics" }
 
 readmore-material = { module = "com.webtoonscorp.android:readmore-material", version.ref = "readmore" }
