@@ -25,6 +25,8 @@ package soup.movie.model
  * @param boxOffice 박스오피스 정보
  */
 data class MovieDetailModel(
+    val movie: MovieModel,
+
     val id: String,
     val score: Int,
     val title: String,

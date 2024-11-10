@@ -25,7 +25,7 @@ import dagger.hilt.components.SingletonComponent
 
 interface DetailComposableFactory {
     @Composable
-    fun DetailNavGraph()
+    fun DetailNavGraph(movieId: String)
 }
 
 @Composable

@@ -27,12 +27,11 @@ import soup.compose.photo.ExperimentalPhotoApi
 import soup.compose.photo.PhotoBox
 import soup.compose.photo.rememberPhotoState
 import soup.movie.core.imageloading.AsyncImage
-import soup.movie.model.MovieModel
 
 @OptIn(ExperimentalPhotoApi::class)
 @Composable
 internal fun DetailPoster(
-    movie: MovieModel,
+    posterUrl: String,
     upPress: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -51,8 +50,8 @@ internal fun DetailPoster(
         state = photoState,
     ) {
         AsyncImage(
-            movie.posterUrl,
-            contentDescription = movie.title,
+            posterUrl,
+            contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             onSuccess = {
                 photoState.setPhotoIntrinsicSize(it.intrinsicSize)

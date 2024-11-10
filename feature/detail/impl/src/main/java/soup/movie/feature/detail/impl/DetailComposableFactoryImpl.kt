@@ -16,16 +16,13 @@
 package soup.movie.feature.detail.impl
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import soup.movie.feature.detail.DetailComposableFactory
 import javax.inject.Inject
 
 class DetailComposableFactoryImpl @Inject constructor() : DetailComposableFactory {
 
     @Composable
-    override fun DetailNavGraph() {
-        DetailNavGraph(
-            viewModel = hiltViewModel(),
-        )
+    override fun DetailNavGraph(movieId: String) {
+        soup.movie.feature.detail.impl.DetailNavGraph(movieId = movieId)
     }
 }

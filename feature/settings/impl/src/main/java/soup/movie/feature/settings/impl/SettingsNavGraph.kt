@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kotlinx.serialization.Serializable
 import soup.compose.material.motion.animation.materialSharedAxisZIn
 import soup.compose.material.motion.animation.materialSharedAxisZOut
 import soup.movie.feature.settings.impl.home.SettingsScreen
@@ -29,9 +30,13 @@ import soup.movie.feature.settings.impl.home.SettingsViewModel
 import soup.movie.feature.settings.impl.theme.ThemeOptionScreen
 import soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
 
-private enum class Screen(val route: String) {
-    Settings("SettingsScreen"),
-    ThemeOption("ThemeEditScreen"),
+private sealed interface SettingsScreen {
+
+    @Serializable
+    data object Home : SettingsScreen
+
+    @Serializable
+    data object ThemeOption : SettingsScreen
 }
 
 @Composable
@@ -39,23 +44,23 @@ fun SettingsNavGraph() {
     val navController = rememberNavController()
     NavHost(
         navController,
-        startDestination = Screen.Settings.route,
+        startDestination = SettingsScreen.Home,
         enterTransition = { materialSharedAxisZIn(forward = true) },
         exitTransition = { materialSharedAxisZOut(forward = true) },
         popEnterTransition = { materialSharedAxisZIn(forward = false) },
         popExitTransition = { materialSharedAxisZOut(forward = false) },
         modifier = Modifier.systemBarsPadding(),
     ) {
-        composable(Screen.Settings.route) {
+        composable<SettingsScreen.Home> {
             val viewModel = hiltViewModel<SettingsViewModel>()
             SettingsScreen(
                 viewModel = viewModel,
                 onThemeEditClick = {
-                    navController.navigate(Screen.ThemeOption.route)
+                    navController.navigate(SettingsScreen.ThemeOption)
                 },
             )
         }
-        composable(Screen.ThemeOption.route) {
+        composable<SettingsScreen.ThemeOption> {
             val viewModel = hiltViewModel<ThemeOptionViewModel>()
             ThemeOptionScreen(viewModel.items)
         }

@@ -24,7 +24,8 @@ import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 
 interface SettingsComposableFactory {
-    @Composable fun SettingsNavGraph()
+    @Composable
+    fun SettingsNavGraph()
 }
 
 @Composable

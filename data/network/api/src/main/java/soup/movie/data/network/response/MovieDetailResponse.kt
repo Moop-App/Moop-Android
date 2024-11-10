@@ -18,6 +18,8 @@ package soup.movie.data.network.response
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import soup.movie.model.MovieDetailModel
+import soup.movie.model.MovieModel
+import soup.movie.model.TheaterRatingsModel
 
 /**
  * @param genres 장르
@@ -59,6 +61,24 @@ class MovieDetailResponse(
 
 fun MovieDetailResponse.asModel(): MovieDetailModel {
     return MovieDetailModel(
+        movie = MovieModel(
+            id = id,
+            score = score,
+            title = title,
+            posterUrl = posterUrl,
+            openDate = openDate,
+            isNow = isNow,
+            age = age,
+            nationFilter = nationFilter,
+            genres = genres,
+            boxOffice = boxOffice?.rank,
+            theater = TheaterRatingsModel(
+                cgv = cgv?.star,
+                lotte = lotte?.star,
+                megabox = megabox?.star,
+            ),
+        ),
+
         id = id,
         score = score,
         title = title,

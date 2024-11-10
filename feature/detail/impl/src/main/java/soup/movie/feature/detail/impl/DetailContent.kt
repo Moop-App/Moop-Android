@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 internal fun DetailContent(
     viewModel: DetailViewModel,
     uiModel: DetailUiModel,
-    onPosterClick: () -> Unit,
+    onPosterClick: (String) -> Unit,
     onItemClick: (ContentItemUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -42,7 +42,7 @@ internal fun DetailContent(
                         DetailHeader(
                             uiModel = uiModel.header,
                             onPosterClick = {
-                                onPosterClick()
+                                onPosterClick(uiModel.header.movie.posterUrl)
                             },
                             modifier = Modifier.padding(bottom = 8.dp),
                             actions = {

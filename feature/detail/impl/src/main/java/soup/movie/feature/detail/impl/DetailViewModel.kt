@@ -34,9 +34,7 @@ import soup.movie.domain.movie.screenDays
 import soup.movie.domain.movie.yesterday
 import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
-import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
-import soup.movie.model.TheaterRatingsModel
 import soup.movie.resources.R
 import javax.inject.Inject
 
@@ -82,7 +80,7 @@ class DetailViewModel @Inject constructor(
             _uiModel.emit(
                 DetailUiModel.Success(
                     header = HeaderUiModel(
-                        movie = detail.toMovie(),
+                        movie = detail.movie,
                         showTm = detail.showTm ?: 0,
                         nations = detail.nations.orEmpty(),
                         companies = detail.companies.orEmpty(),
@@ -91,26 +89,6 @@ class DetailViewModel @Inject constructor(
                 ),
             )
         }
-    }
-
-    private fun MovieDetailModel.toMovie(): MovieModel {
-        return MovieModel(
-            id = id,
-            score = score,
-            title = title,
-            posterUrl = posterUrl,
-            openDate = openDate,
-            isNow = isNow,
-            age = age,
-            nationFilter = nationFilter,
-            genres = genres,
-            boxOffice = boxOffice?.rank,
-            theater = TheaterRatingsModel(
-                cgv = cgv?.star,
-                lotte = lotte?.star,
-                megabox = megabox?.star,
-            ),
-        )
     }
 
     private fun MovieDetailModel.toItemsUiModel(): List<ContentItemUiModel> {
