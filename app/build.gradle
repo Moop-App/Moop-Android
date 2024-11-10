@@ -2,6 +2,7 @@ plugins {
     id "moop.android.application"
     id "moop.android.compose"
     id "moop.android.hilt"
+    id "org.jetbrains.kotlin.plugin.serialization"
     alias libs.plugins.firebase.crashlytics
     alias libs.plugins.dependencyGuard
     alias(libs.plugins.baselineprofile)
@@ -105,6 +106,7 @@ dependencies {
     runtimeOnly projects.core.imageloading.impl
 
     implementation libs.kotlin.stdlib
+    implementation libs.kotlin.serialization
     implementation libs.coroutines.core
     implementation libs.coroutines.android
 

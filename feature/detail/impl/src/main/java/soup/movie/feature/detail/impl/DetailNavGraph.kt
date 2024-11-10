@@ -15,55 +15,53 @@
  */
 package soup.movie.feature.detail.impl
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
-import soup.movie.core.designsystem.showToast
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import kotlinx.serialization.Serializable
+import soup.compose.material.motion.animation.materialSharedAxisZIn
+import soup.compose.material.motion.animation.materialSharedAxisZOut
+
+private sealed interface DetailScreen {
+
+    @Serializable
+    data class Home(val movieId: String) : DetailScreen
+
+    @Serializable
+    data class Poster(val posterUrl: String) : DetailScreen
+}
 
 @Composable
-fun DetailNavGraph(
-    viewModel: DetailViewModel,
-) {
-    val context = LocalContext.current
-    val uiModel: DetailUiModel by viewModel.uiModel.collectAsState()
-    Box {
-        val movie = (uiModel as? DetailUiModel.Success)?.header?.movie
-        var showPoster by remember { mutableStateOf(false) }
-        DetailScreen(
-            viewModel = viewModel,
-            uiModel = uiModel,
-            onPosterClick = {
-                showPoster = true
-            },
-        )
-        if (movie != null) {
-            AnimatedVisibility(
-                visible = showPoster,
-                enter = fadeIn(),
-                exit = fadeOut(),
-            ) {
-                DetailPoster(
-                    movie = movie,
-                    upPress = { showPoster = false },
-                )
-            }
+fun DetailNavGraph(movieId: String) {
+    val navController = rememberNavController()
+    NavHost(
+        navController,
+        startDestination = DetailScreen.Home(movieId),
+        enterTransition = { materialSharedAxisZIn(forward = true) },
+        exitTransition = { materialSharedAxisZOut(forward = true) },
+        popEnterTransition = { materialSharedAxisZIn(forward = false) },
+        popExitTransition = { materialSharedAxisZOut(forward = false) },
+    ) {
+        composable<DetailScreen.Home> {
+            val viewModel = hiltViewModel<DetailViewModel>()
+            DetailScreen(
+                viewModel = viewModel,
+                onPosterClick = {
+                    navController.navigate(DetailScreen.Poster(posterUrl = it))
+                },
+            )
         }
-    }
-
-    LaunchedEffect(Unit) {
-        viewModel.uiEvent.collect { event ->
-            when (event) {
-                is ToastAction -> context.showToast(event.resId)
-            }
+        composable<DetailScreen.Poster> { backStackEntry ->
+            val posterUrl = backStackEntry.toRoute<DetailScreen.Poster>().posterUrl
+            DetailPoster(
+                posterUrl = posterUrl,
+                upPress = {
+                    navController.navigateUp()
+                },
+            )
         }
     }
 }

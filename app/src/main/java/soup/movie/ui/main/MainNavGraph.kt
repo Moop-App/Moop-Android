@@ -16,26 +16,30 @@
 package soup.movie.ui.main
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
+import kotlinx.serialization.Serializable
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.detail.rememberDetailComposableFactory
 import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.feature.search.rememberSearchComposableFactory
 import soup.movie.feature.settings.rememberSettingsComposableFactory
 
-private enum class Screen(val route: String) {
-    Main("main"),
-    Search("search"),
-    Settings("settings"),
-    Detail("detail"),
-}
+private sealed interface Screen {
 
-private fun NavController.navigateToDetail(movieId: String) {
-    navigate(route = Screen.Detail.route + "/" + movieId)
+    @Serializable
+    data object Main : Screen
+
+    @Serializable
+    data object Search : Screen
+
+    @Serializable
+    data object Settings : Screen
+
+    @Serializable
+    data class Detail(val movieId: String) : Screen
 }
 
 @Composable
@@ -45,42 +49,40 @@ fun MainNavGraph(
     val navController = rememberNavController()
     NavHost(
         navController,
-        startDestination = Screen.Main.route,
+        startDestination = Screen.Main,
     ) {
-        composable(Screen.Main.route) {
+        composable<Screen.Main> {
             val factory = rememberHomeComposableFactory()
             factory.HomeNavGraph(
                 widthSizeClass = widthSizeClass,
                 onSearchClick = {
-                    navController.navigate(Screen.Search.route)
+                    navController.navigate(Screen.Search)
                 },
                 onSettingsClick = {
-                    navController.navigate(Screen.Settings.route)
+                    navController.navigate(Screen.Settings)
                 },
                 onMovieItemClick = {
-                    navController.navigateToDetail(movieId = it.id)
+                    navController.navigate(Screen.Detail(movieId = it.id))
                 },
             )
         }
-        composable(Screen.Search.route) {
+        composable<Screen.Search> {
             val factory = rememberSearchComposableFactory()
             factory.SearchScreen(
                 upPress = { navController.navigateUp() },
                 onItemClick = {
-                    navController.navigateToDetail(movieId = it.id)
+                    navController.navigate(Screen.Detail(movieId = it.id))
                 },
             )
         }
-        composable(Screen.Settings.route) {
+        composable<Screen.Settings> {
             val factory = rememberSettingsComposableFactory()
             factory.SettingsNavGraph()
         }
-        composable(
-            route = Screen.Detail.route + "/{movieId}",
-            arguments = listOf(navArgument("movieId") { nullable = false }),
-        ) {
+        composable<Screen.Detail> { backStackEntry ->
+            val movieId = backStackEntry.toRoute<Screen.Detail>().movieId
             val factory = rememberDetailComposableFactory()
-            factory.DetailNavGraph()
+            factory.DetailNavGraph(movieId = movieId)
         }
     }
 }

@@ -2,6 +2,7 @@ plugins {
     id "moop.android.library"
     id "moop.android.compose"
     id "moop.android.hilt"
+    id "org.jetbrains.kotlin.plugin.serialization"
 }
 
 android {
@@ -22,9 +23,11 @@ dependencies {
     implementation projects.feature.detail.api
 
     implementation libs.kotlin.stdlib
+    implementation libs.kotlin.serialization
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.navigation.compose
+    implementation libs.androidx.navigation.compose
     implementation libs.compose.foundation
     implementation libs.compose.material
     implementation libs.compose.ui
