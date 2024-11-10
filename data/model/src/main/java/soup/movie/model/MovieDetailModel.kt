@@ -16,7 +16,6 @@
 package soup.movie.model
 
 /**
- * @param genres 장르
  * @param nations 국가
  * @param companies 배급사/제작사
  * @param directors 감독
@@ -26,16 +25,6 @@ package soup.movie.model
  */
 data class MovieDetailModel(
     val movie: MovieModel,
-
-    val id: String,
-    val score: Int,
-    val title: String,
-    val posterUrl: String,
-    val openDate: String,
-    val isNow: Boolean,
-    val age: Int,
-    val nationFilter: List<String>?,
-    val genres: List<String>?,
 
     val boxOffice: BoxOfficeModel?,
     val showTm: Int?,

@@ -15,6 +15,9 @@
  */
 package soup.movie.model
 
+/**
+ * @param genres 장르
+ */
 data class MovieModel(
     val id: String,
     val score: Int,

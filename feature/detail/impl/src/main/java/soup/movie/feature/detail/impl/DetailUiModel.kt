@@ -130,8 +130,3 @@ val ContentItemUiModel.id: String
         is TrailerItemUiModel -> "t_${trailer.youtubeId}"
         is TrailerFooterItemUiModel -> "t_footer"
     }
-
-class MoviePosterUiModel(
-    val posterUrl: String,
-    val title: String,
-)
