@@ -4,10 +4,8 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
-import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 
 fun Project.configureCompose() {
     pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
@@ -20,11 +18,10 @@ fun Project.configureCompose() {
             val bom = libs.findLibrary("compose-bom").get()
             implementation(platform(bom))
             androidTestImplementation(platform(bom))
-        }
-    }
 
-    extensions.configure<ComposeCompilerGradlePluginExtension> {
-        enableStrongSkippingMode = false
+            implementation(libs.findLibrary("compose-ui-tooling-preview").get())
+            debugImplementation(libs.findLibrary("compose-ui-tooling").get())
+        }
     }
 }
 

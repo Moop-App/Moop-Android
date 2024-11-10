@@ -27,6 +27,7 @@ import soup.compose.material.motion.animation.materialSharedAxisZOut
 import soup.movie.feature.settings.impl.home.SettingsScreen
 import soup.movie.feature.settings.impl.home.SettingsViewModel
 import soup.movie.feature.settings.impl.theme.ThemeOptionScreen
+import soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
 
 private enum class Screen(val route: String) {
     Settings("SettingsScreen"),
@@ -55,7 +56,8 @@ fun SettingsNavGraph() {
             )
         }
         composable(Screen.ThemeOption.route) {
-            ThemeOptionScreen()
+            val viewModel = hiltViewModel<ThemeOptionViewModel>()
+            ThemeOptionScreen(viewModel.items)
         }
     }
 }

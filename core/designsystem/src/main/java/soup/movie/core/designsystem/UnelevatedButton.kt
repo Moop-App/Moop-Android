@@ -23,10 +23,13 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.tooling.preview.Preview
+import soup.movie.core.designsystem.theme.MovieTheme
 
 @Composable
 fun UnelevatedButton(
@@ -51,3 +54,13 @@ fun UnelevatedButton(
     contentPadding = contentPadding,
     content = content,
 )
+
+@Preview
+@Composable
+private fun UnelevatedButtonPreview() {
+    MovieTheme {
+        UnelevatedButton(onClick = {}) {
+            Text(text = "Button")
+        }
+    }
+}

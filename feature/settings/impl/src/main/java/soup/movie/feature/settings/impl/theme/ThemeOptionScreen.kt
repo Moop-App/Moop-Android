@@ -31,20 +31,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import soup.movie.core.designsystem.theme.MovieTheme
+import soup.movie.core.designsystem.tools.DevicePreviews
 import soup.movie.core.designsystem.util.debounce
+import soup.movie.feature.theme.ThemeOption
 import soup.movie.resources.R
 
 @Composable
-fun ThemeOptionScreen() {
-    val viewModel: ThemeOptionViewModel = hiltViewModel()
+fun ThemeOptionScreen(
+    items: List<ThemeSettingItemUiModel>,
+    modifier: Modifier = Modifier,
+) {
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
         },
+        modifier = modifier,
     ) { paddingValues ->
         ThemeOptionList(
-            items = viewModel.items,
+            items = items,
             modifier = Modifier.padding(paddingValues),
         )
     }
@@ -82,6 +87,18 @@ private fun ThemeOptionItem(
         Text(
             text = stringResource(stringResIdOf(uiModel.themeOption)),
             fontSize = 17.sp,
+        )
+    }
+}
+
+@DevicePreviews
+@Composable
+private fun ThemeOptionScreenPreview() {
+    MovieTheme {
+        ThemeOptionScreen(
+            items = ThemeOption.entries.map {
+                ThemeSettingItemUiModel(themeOption = it)
+            },
         )
     }
 }
