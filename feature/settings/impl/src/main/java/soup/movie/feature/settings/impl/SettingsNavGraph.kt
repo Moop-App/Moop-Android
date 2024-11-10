@@ -15,7 +15,9 @@
  */
 package soup.movie.feature.settings.impl
 
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -41,6 +43,7 @@ fun SettingsNavGraph() {
         exitTransition = { materialSharedAxisZOut(forward = true) },
         popEnterTransition = { materialSharedAxisZIn(forward = false) },
         popExitTransition = { materialSharedAxisZOut(forward = false) },
+        modifier = Modifier.systemBarsPadding(),
     ) {
         composable(Screen.Settings.route) {
             val viewModel = hiltViewModel<SettingsViewModel>()

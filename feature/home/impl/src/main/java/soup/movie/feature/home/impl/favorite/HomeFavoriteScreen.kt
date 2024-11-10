@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -34,16 +36,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
+import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.feature.home.impl.tab.MovieList
 import soup.movie.feature.home.impl.tab.NoMovieItems
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
 @Composable
-fun HomeFavoriteList(
+fun HomeFavoriteScreen(
     viewModel: HomeFavoriteViewModel,
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
+    onSettingsClick: () -> Unit,
     onItemClick: (MovieModel) -> Unit,
     onItemLongClick: (MovieModel) -> Unit,
 ) {
@@ -66,6 +70,14 @@ fun HomeFavoriteList(
             TopAppBar(
                 title = {
                     Text(text = stringResource(R.string.menu_favorite))
+                },
+                actions = {
+                    IconButton(onClick = { onSettingsClick() }) {
+                        Icon(
+                            MovieIcons.Settings,
+                            contentDescription = null,
+                        )
+                    }
                 },
             )
         },

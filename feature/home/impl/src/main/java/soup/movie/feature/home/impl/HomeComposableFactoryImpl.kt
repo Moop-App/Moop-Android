@@ -29,12 +29,14 @@ class HomeComposableFactoryImpl @Inject constructor() : HomeComposableFactory {
     override fun HomeNavGraph(
         widthSizeClass: WindowWidthSizeClass,
         onSearchClick: () -> Unit,
+        onSettingsClick: () -> Unit,
         onMovieItemClick: (MovieModel) -> Unit,
     ) {
         HomeNavGraph(
             widthSizeClass = widthSizeClass,
             viewModel = hiltViewModel(),
             onSearchClick = onSearchClick,
+            onSettingsClick = onSettingsClick,
             onMovieItemClick = onMovieItemClick,
         )
     }

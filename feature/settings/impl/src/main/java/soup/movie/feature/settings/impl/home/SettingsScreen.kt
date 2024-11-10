@@ -51,12 +51,13 @@ import soup.movie.feature.settings.impl.theme.stringResIdOf
 import soup.movie.resources.R
 
 @Composable
-internal fun SettingsScreen(
+fun SettingsScreen(
     viewModel: SettingsViewModel,
     onThemeEditClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
-        modifier = Modifier,
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(R.string.menu_settings)) },

@@ -40,7 +40,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -49,8 +48,7 @@ import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
-import soup.movie.feature.home.impl.favorite.HomeFavoriteList
-import soup.movie.feature.settings.rememberSettingsComposableFactory
+import soup.movie.feature.home.impl.favorite.HomeFavoriteScreen
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
@@ -59,6 +57,7 @@ fun HomeNavGraph(
     widthSizeClass: WindowWidthSizeClass,
     viewModel: HomeViewModel,
     onSearchClick: () -> Unit,
+    onSettingsClick: () -> Unit,
     onMovieItemClick: (MovieModel) -> Unit,
 ) {
     val currentMainTab by viewModel.selectedMainTab.collectAsState()
@@ -83,19 +82,14 @@ fun HomeNavGraph(
                 }
                 MainTabUiModel.Favorite -> {
                     val context = LocalContext.current
-                    HomeFavoriteList(
+                    HomeFavoriteScreen(
                         viewModel = hiltViewModel(),
-                        onItemClick = {
-                            onMovieItemClick(it)
-                        },
+                        onSettingsClick = onSettingsClick,
+                        onItemClick = onMovieItemClick,
                         onItemLongClick = {
                             context.showToast(it.title)
                         },
                     )
-                }
-                MainTabUiModel.Settings -> {
-                    val factory = rememberSettingsComposableFactory()
-                    factory.SettingsScreen()
                 }
             }
         }
@@ -175,12 +169,6 @@ private fun CompactScreen(
                                         contentDescription = null,
                                     )
                                 }
-                                MainTabUiModel.Settings -> {
-                                    Icon(
-                                        rememberVectorPainter(MovieIcons.Settings),
-                                        contentDescription = null,
-                                    )
-                                }
                             }
                         },
                         label = {
@@ -188,7 +176,6 @@ private fun CompactScreen(
                                 text = when (tab) {
                                     MainTabUiModel.Home -> stringResource(R.string.menu_home)
                                     MainTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
-                                    MainTabUiModel.Settings -> stringResource(R.string.menu_settings)
                                 },
                             )
                         },
@@ -249,12 +236,6 @@ private fun MediumScreen(
                                     contentDescription = null,
                                 )
                             }
-                            MainTabUiModel.Settings -> {
-                                Icon(
-                                    rememberVectorPainter(MovieIcons.Settings),
-                                    contentDescription = null,
-                                )
-                            }
                         }
                     },
                     label = {
@@ -262,7 +243,6 @@ private fun MediumScreen(
                             text = when (tab) {
                                 MainTabUiModel.Home -> stringResource(R.string.menu_home)
                                 MainTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
-                                MainTabUiModel.Settings -> stringResource(R.string.menu_settings)
                             },
                         )
                     },
