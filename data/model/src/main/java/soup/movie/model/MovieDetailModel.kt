@@ -44,7 +44,6 @@ data class MovieDetailModel(
     val cgv: CgvInfoModel?,
     val lotte: LotteInfoModel?,
     val megabox: MegaboxInfoModel?,
-    val naver: NaverInfoModel?,
     val imdb: ImdbInfoModel?,
     val rt: RottenTomatoInfoModel?,
     val mc: MetascoreInfoModel?,

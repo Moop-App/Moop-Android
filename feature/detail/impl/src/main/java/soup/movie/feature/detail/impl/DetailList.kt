@@ -19,7 +19,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -48,7 +47,6 @@ import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -56,7 +54,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
@@ -68,7 +65,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.webtoonscorp.android.readmore.material.ReadMoreText
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
@@ -123,12 +119,6 @@ internal fun DetailList(
                         )
                     }
                 }
-                is NaverItemUiModel -> {
-                    Naver(
-                        uiModel = item,
-                        onClick = { onItemClick(item) },
-                    )
-                }
                 is ImdbItemUiModel -> {
                     Imdb(
                         uiModel = item,
@@ -163,133 +153,6 @@ internal fun DetailList(
                         onClick = { onItemClick(item) },
                     )
                 }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-private fun BoxOffice(
-    uiModel: BoxOfficeItemUiModel,
-    onClick: () -> Unit,
-) {
-    Card(
-        onClick = onClick,
-        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
-    ) {
-        Row(
-            modifier = Modifier.padding(top = 12.dp, bottom = 14.dp).fillMaxWidth(),
-        ) {
-            Column(
-                modifier = Modifier.weight(1f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    text = "박스오피스",
-                    color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
-                    modifier = Modifier.alpha(0.7f),
-                )
-                Text(
-                    text = stringResource(R.string.rank, uiModel.rank),
-                    color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.subtitle1,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 2.dp),
-                )
-                Text(
-                    text = stringResource(R.string.rank_date, uiModel.rankDate),
-                    color = MovieTheme.colors.surface,
-                    style = MovieTheme.typography.body2,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .padding(top = 6.dp)
-                        .background(
-                            color = MovieTheme.colors.onSurface,
-                            shape = RoundedCornerShape(percent = 50),
-                        )
-                        .padding(vertical = 1.dp, horizontal = 8.dp),
-                )
-            }
-            Column(
-                modifier = Modifier.weight(1f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    text = "누적 관객수",
-                    color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
-                    modifier = Modifier.alpha(0.7f),
-                )
-                Text(
-                    text = stringResource(R.string.audience, uiModel.audience),
-                    color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.subtitle1,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 2.dp),
-                )
-                Text(
-                    text = stringResource(R.string.screen_days, uiModel.screenDays),
-                    color = MovieTheme.colors.surface,
-                    style = MovieTheme.typography.body2,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .padding(top = 6.dp)
-                        .background(
-                            color = MovieTheme.colors.onSurface,
-                            shape = RoundedCornerShape(percent = 50),
-                        )
-                        .padding(vertical = 1.dp, horizontal = 8.dp),
-                )
-            }
-            Column(
-                modifier = Modifier.weight(1f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    text = "평점",
-                    color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
-                    modifier = Modifier.alpha(0.7f),
-                )
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    StarIcon(modifier = Modifier.requiredSize(16.dp))
-                    Text(
-                        text = uiModel.rating,
-                        color = MovieTheme.colors.onSurface,
-                        style = MovieTheme.typography.subtitle1,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(top = 2.dp, start = 2.dp, end = 12.dp),
-                    )
-                }
-                Text(
-                    text = "NAVER",
-                    color = MovieTheme.colors.onNaver,
-                    style = MovieTheme.typography.body2,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .padding(top = 6.dp)
-                        .background(
-                            color = MovieTheme.colors.naver,
-                            shape = RoundedCornerShape(percent = 50),
-                        )
-                        .padding(vertical = 1.dp, horizontal = 8.dp),
-                )
             }
         }
     }
@@ -494,68 +357,6 @@ private fun Plot(
                 readMoreFontWeight = FontWeight.Bold,
                 readMoreMaxLines = 3,
             )
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-private fun Naver(
-    uiModel: NaverItemUiModel,
-    onClick: () -> Unit,
-) {
-    Card(
-        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
-    ) {
-        Row(
-            modifier = Modifier.padding(vertical = 4.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Chip(
-                onClick = onClick,
-                modifier = Modifier.padding(horizontal = 12.dp),
-                colors = ChipDefaults.chipColors(
-                    backgroundColor = MovieTheme.colors.naver,
-                    contentColor = Color.White,
-                ),
-            ) {
-                Text(
-                    text = "네이버",
-                    style = MovieTheme.typography.body2,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
-            Row(
-                modifier = Modifier.weight(1f),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
-                Text(
-                    text = uiModel.rating,
-                    color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(start = 4.dp),
-                )
-            }
-            TextButton(
-                onClick = onClick,
-                modifier = Modifier.fillMaxHeight(),
-            ) {
-                Text(
-                    text = "자세히보기",
-                    color = MovieTheme.colors.secondary,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .align(Alignment.CenterVertically),
-                )
-            }
         }
     }
 }

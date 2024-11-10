@@ -72,19 +72,11 @@ class MegaboxItemUiModel(
 )
 
 @Keep
-class NaverItemUiModel(
-    val rating: String,
-    val webLink: String?,
-) : ContentItemUiModel()
-
-@Keep
 class BoxOfficeItemUiModel(
     val rank: Int,
     val rankDate: String,
     val audience: Int,
     val screenDays: Int,
-    val rating: String,
-    val webLink: String?,
 ) : ContentItemUiModel()
 
 @Keep
@@ -130,7 +122,6 @@ class TrailerFooterItemUiModel(
 val ContentItemUiModel.id: String
     get() = when (this) {
         is TheatersItemUiModel -> "theaters"
-        is NaverItemUiModel -> "naver"
         is BoxOfficeItemUiModel -> "boxoffice"
         is ImdbItemUiModel -> "imdb"
         is PlotItemUiModel -> "plot"

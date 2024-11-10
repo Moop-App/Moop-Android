@@ -57,12 +57,6 @@ internal fun DetailScreen(
         },
         onItemClick = { item ->
             when (item) {
-                is BoxOfficeItemUiModel -> {
-                    context.executeWeb(item.webLink)
-                }
-                is NaverItemUiModel -> {
-                    context.executeWeb(item.webLink)
-                }
                 is ImdbItemUiModel -> {
                     context.executeWeb(item.webLink)
                 }

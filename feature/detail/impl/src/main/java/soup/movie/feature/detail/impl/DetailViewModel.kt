@@ -122,8 +122,6 @@ class DetailViewModel @Inject constructor(
                     rankDate = yesterday().MM_DD(),
                     audience = audiAcc,
                     screenDays = screenDays(),
-                    rating = naver?.star ?: NO_RATING,
-                    webLink = naver?.url,
                 ),
             )
         }
@@ -159,16 +157,6 @@ class DetailViewModel @Inject constructor(
                 ),
             ),
         )
-        if (boxOffice == null) {
-            naver?.run {
-                items.add(
-                    NaverItemUiModel(
-                        rating = star,
-                        webLink = url,
-                    ),
-                )
-            }
-        }
 
         val plot = plot.orEmpty()
         if (plot.isNotBlank()) {
