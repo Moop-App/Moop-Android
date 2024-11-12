@@ -37,7 +37,7 @@ private fun MovieModel.hasOpenDate(): Boolean = openDate.toLocalDate() != null
 fun MovieModel.isDDay(): Boolean = isPlan and hasOpenDate()
 
 fun MovieDetailModel.screenDays(): Int {
-    val openDate = openDate.toLocalDate()
+    val openDate = movie.openDate.toLocalDate()
     if (openDate != null) {
         return ChronoUnit.DAYS.between(openDate, today()).toInt()
     }
