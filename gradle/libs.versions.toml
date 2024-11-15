@@ -14,19 +14,18 @@ dagger = "2.52"
 androidxhilt = "1.2.0"
 
 # AndroidX
-androidx-activity = "1.9.3"
+androidx-activity = "1.10.0-beta01"
 androidx-appcompat = "1.7.0"
-androidx-benchmark = "1.2.4"
+androidx-benchmark = "1.3.3"
 androidx-browser = "1.8.0"
 androidx-core = "1.15.0"
 androidx-datastore = "1.1.1"
-androidx-fragment = "1.8.5"
-androidx-lifecycle = "2.8.7"
-androidx-navigation = "2.8.3"
+androidx-lifecycle = "2.9.0-alpha07"
+androidx-navigation = "2.9.0-alpha03"
 androidx-profileinstaller = "1.4.1"
-androidx-room = "2.6.1"
+androidx-room = "2.7.0-alpha11"
 androidx-startup = "1.2.0"
-androidx-window = "1.3.0"
+androidx-window = "1.4.0-alpha05"
 androidx-work = "2.10.0"
 
 # Google
@@ -35,13 +34,13 @@ firebase-bom = "33.5.1"
 firebase-crashlytics = "3.0.2"
 
 # Compose
-compose-bom = "2024.10.01"
+compose-bom = "2024.11.00"
 readmore = "1.5.6"
 materialmotion = "1.1.3"
 photo-compose = "1.0.1"
 
 # Etc
-coil = "3.0.1"
+coil = "3.0.3"
 dependencyGuard = "0.5.0"
 retrofit = "2.11.0"
 timber = "5.0.1"
@@ -50,7 +49,7 @@ timber = "5.0.1"
 [libraries]
 
 # Android
-android-desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.2"
+android-desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.3"
 
 # Kotlin
 
@@ -80,7 +79,6 @@ androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro
 androidx-browser = { module = "androidx.browser:browser", version.ref = "androidx-browser" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core"}
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
-androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "androidx-lifecycle" }
