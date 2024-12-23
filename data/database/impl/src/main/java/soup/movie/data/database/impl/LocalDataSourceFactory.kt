@@ -44,7 +44,7 @@ object LocalDataSourceFactory {
     ): MovieCacheDatabase {
         return Room
             .databaseBuilder(context.applicationContext, MovieCacheDatabase::class.java, "moop.db")
-            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration(dropAllTables = false)
             .build()
     }
 }
