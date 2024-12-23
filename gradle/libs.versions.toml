@@ -49,7 +49,7 @@ timber = "5.0.1"
 [libraries]
 
 # Android
-android-desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.3"
+android-desugar-jdk = "com.android.tools:desugar_jdk_libs:2.1.4"
 
 # Kotlin
 
