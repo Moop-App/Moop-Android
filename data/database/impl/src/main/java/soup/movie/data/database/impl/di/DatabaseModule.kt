@@ -85,7 +85,7 @@ interface DatabaseModule {
         ): MovieCacheDatabase {
             return Room
                 .databaseBuilder(context, MovieCacheDatabase::class.java, "moop.db")
-                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration(dropAllTables = false)
                 .build()
         }
     }
