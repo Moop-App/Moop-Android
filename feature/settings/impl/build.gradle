@@ -24,7 +24,7 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation
-    implementation libs.compose.material
+    implementation libs.compose.material3
     implementation libs.compose.ui
     implementation libs.androidx.navigation.compose
     implementation libs.materialmotion.compose.core

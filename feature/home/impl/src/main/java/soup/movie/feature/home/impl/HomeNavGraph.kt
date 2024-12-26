@@ -22,20 +22,20 @@ import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.NavigationRail
-import androidx.compose.material.NavigationRailItem
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -46,8 +46,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
-import soup.movie.core.designsystem.theme.MovieTheme
-import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.impl.favorite.HomeFavoriteScreen
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
@@ -145,10 +143,10 @@ private fun CompactScreen(
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            BottomNavigation {
+            NavigationBar {
                 tabs.forEach { tab ->
                     val selected = currentTab == tab
-                    BottomNavigationItem(
+                    NavigationBarItem(
                         icon = {
                             when (tab) {
                                 MainTabUiModel.Home -> {
@@ -187,8 +185,7 @@ private fun CompactScreen(
                                 onTabSelected(tab)
                             }
                         },
-                        selectedContentColor = MovieTheme.colors.secondary,
-                        unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
+                        colors = NavigationBarItemDefaults.colors(),
                     )
                 }
             }
@@ -210,9 +207,7 @@ private fun MediumScreen(
     Row(
         modifier = modifier.fillMaxSize(),
     ) {
-        NavigationRail(
-            elevation = 24.dp,
-        ) {
+        NavigationRail {
             tabs.forEach { tab ->
                 val selected = currentTab == tab
                 NavigationRailItem(
@@ -254,12 +249,11 @@ private fun MediumScreen(
                             onTabSelected(tab)
                         }
                     },
-                    selectedContentColor = MovieTheme.colors.secondary,
-                    unselectedContentColor = MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
+                    colors = NavigationRailItemDefaults.colors(),
                 )
             }
         }
-        Divider(modifier = Modifier.width(1.dp).fillMaxHeight())
+        VerticalDivider(thickness = 1.dp)
         content(PaddingValues())
     }
 }

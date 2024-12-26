@@ -16,7 +16,6 @@
 package soup.movie.feature.home.impl.tab
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,12 +28,12 @@ import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -88,9 +87,7 @@ private fun MovieItem(
 ) {
     Surface(
         modifier = modifier,
-        color = MovieTheme.colors.onSurface.copy(alpha = 0.1f),
-        shape = MovieTheme.shapes.medium,
-        elevation = 0.dp,
+        shape = MovieTheme.shapes.small,
     ) {
         Box {
             AsyncImage(
@@ -130,15 +127,13 @@ fun NoMovieItems(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Image(
+        Icon(
             MovieIcons.ViewModule,
             contentDescription = null,
-            colorFilter = ColorFilter.tint(color = MovieTheme.colors.onBackground),
             modifier = Modifier.size(72.dp),
         )
         Text(
             text = stringResource(R.string.no_movies_description),
-            color = MovieTheme.colors.onBackground,
         )
     }
 }

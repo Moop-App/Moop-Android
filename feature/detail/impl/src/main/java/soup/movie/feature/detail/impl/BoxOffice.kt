@@ -21,9 +21,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,18 +35,14 @@ import androidx.compose.ui.unit.sp
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BoxOffice(
     uiModel: BoxOfficeItemUiModel,
     onClick: () -> Unit,
 ) {
-    Card(
+    ElevatedCard(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier
@@ -61,13 +56,13 @@ fun BoxOffice(
                 Text(
                     text = "박스오피스",
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     modifier = Modifier.alpha(0.7f),
                 )
                 Text(
                     text = stringResource(R.string.rank, uiModel.rank),
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.subtitle1,
+                    style = MovieTheme.typography.titleMedium,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 2.dp),
@@ -75,7 +70,7 @@ fun BoxOffice(
                 Text(
                     text = stringResource(R.string.rank_date, uiModel.rankDate),
                     color = MovieTheme.colors.surface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
@@ -94,13 +89,13 @@ fun BoxOffice(
                 Text(
                     text = "누적 관객수",
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     modifier = Modifier.alpha(0.7f),
                 )
                 Text(
                     text = stringResource(R.string.audience, uiModel.audience),
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.subtitle1,
+                    style = MovieTheme.typography.titleMedium,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 2.dp),
@@ -108,7 +103,7 @@ fun BoxOffice(
                 Text(
                     text = stringResource(R.string.screen_days, uiModel.screenDays),
                     color = MovieTheme.colors.surface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier

@@ -15,10 +15,10 @@
  */
 package soup.movie.feature.home.impl
 
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.home.HomeComposableFactory
 import soup.movie.model.MovieModel
 import javax.inject.Inject

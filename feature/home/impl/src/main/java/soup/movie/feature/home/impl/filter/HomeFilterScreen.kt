@@ -29,8 +29,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -41,7 +42,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
 
 @Composable
@@ -63,8 +63,7 @@ fun HomeFilterScreen(
 
 @Composable
 private fun HomeFilterDivider() {
-    Divider(
-        color = MovieTheme.colors.divider,
+    HorizontalDivider(
         modifier = Modifier.padding(horizontal = 16.dp),
     )
 }
@@ -73,9 +72,7 @@ private fun HomeFilterDivider() {
 private fun HomeFilterCategory(text: String) {
     Text(
         text = text,
-        color = MovieTheme.colors.onBackground,
-        fontSize = 17.sp,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleMedium,
     )
 }
 

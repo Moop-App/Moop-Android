@@ -15,13 +15,13 @@
  */
 package soup.movie.ui.main
 
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
-import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.feature.detail.rememberDetailComposableFactory
 import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.feature.search.rememberSearchComposableFactory

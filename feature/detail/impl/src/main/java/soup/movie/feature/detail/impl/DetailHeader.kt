@@ -30,10 +30,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +52,6 @@ import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun DetailHeader(
     uiModel: HeaderUiModel,
@@ -71,7 +69,7 @@ internal fun DetailHeader(
                     .weight(1f)
                     .padding(end = 8.dp, top = 12.dp, bottom = 12.dp),
                 color = MovieTheme.colors.onBackground,
-                style = MovieTheme.typography.h6,
+                style = MovieTheme.typography.headlineSmall,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -84,7 +82,6 @@ internal fun DetailHeader(
                 Card(
                     onClick = { onPosterClick(movie) },
                     shape = RoundedCornerShape(4.dp),
-                    elevation = 0.dp,
                     modifier = Modifier.padding(end = 18.dp),
                 ) {
                     AsyncImage(
@@ -118,14 +115,14 @@ internal fun DetailHeader(
                         Text(
                             text = "개봉",
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.alpha(0.5f),
                         )
                         Text(
                             text = movie.openDate,
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
                             maxLines = 1,
@@ -137,7 +134,7 @@ internal fun DetailHeader(
                     Text(
                         text = "등급",
                         color = MovieTheme.colors.onBackground,
-                        style = MovieTheme.typography.body2,
+                        style = MovieTheme.typography.bodyMedium,
                         fontSize = 14.sp,
                         modifier = Modifier.alpha(0.5f),
                     )
@@ -152,7 +149,7 @@ internal fun DetailHeader(
                             },
                         ),
                         color = MovieTheme.colors.onBackground,
-                        style = MovieTheme.typography.body2,
+                        style = MovieTheme.typography.bodyMedium,
                         fontSize = 14.sp,
                         modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
                         maxLines = 1,
@@ -165,14 +162,14 @@ internal fun DetailHeader(
                         Text(
                             text = "장르",
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.alpha(0.5f),
                         )
                         Text(
                             text = genres.joinToString(separator = ", "),
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
                             maxLines = 1,
@@ -186,14 +183,14 @@ internal fun DetailHeader(
                         Text(
                             text = "국가",
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.alpha(0.5f),
                         )
                         Text(
                             text = nations.joinToString(separator = ", "),
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
                             maxLines = 1,
@@ -207,14 +204,14 @@ internal fun DetailHeader(
                         Text(
                             text = "러닝타임",
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.alpha(0.5f),
                         )
                         Text(
                             text = stringResource(R.string.time_minute, uiModel.showTm),
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
                             maxLines = 1,
@@ -232,14 +229,14 @@ internal fun DetailHeader(
                         Text(
                             text = "배급",
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.alpha(0.5f),
                         )
                         Text(
                             text = companies,
                             color = MovieTheme.colors.onBackground,
-                            style = MovieTheme.typography.body2,
+                            style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
                             modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
                             maxLines = 1,

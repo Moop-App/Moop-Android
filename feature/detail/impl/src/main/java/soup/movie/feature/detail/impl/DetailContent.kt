@@ -56,7 +56,6 @@ internal fun DetailContent(
                         )
                     },
                     items = uiModel.items,
-                    viewModel = viewModel,
                     onItemClick = { item -> onItemClick(item) },
                 )
             }

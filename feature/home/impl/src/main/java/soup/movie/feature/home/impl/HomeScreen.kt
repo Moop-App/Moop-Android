@@ -22,20 +22,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetValue
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Divider
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.rememberBottomSheetScaffoldState
-import androidx.compose.material.rememberBottomSheetState
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.VerticalDivider
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -58,6 +57,7 @@ import soup.movie.feature.home.impl.plan.HomePlanList
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
@@ -77,19 +77,17 @@ fun HomeScreen(
             }
         }
     }
-    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed),
-    )
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
     val bottomSheetState = bottomSheetScaffoldState.bottomSheetState
     val bottomSheetVisible by remember {
         derivedStateOf {
-            bottomSheetState.isExpanded
+            bottomSheetState.currentValue == SheetValue.Expanded
         }
     }
     BackHandler(enabled = bottomSheetVisible || isTopAtCurrentTab.not() || selectedTab != HomeTabUiModel.Now) {
         if (bottomSheetVisible) {
             coroutineScope.launch {
-                bottomSheetState.collapse()
+                bottomSheetState.partialExpand()
             }
         }
         if (isTopAtCurrentTab.not()) {
@@ -104,7 +102,6 @@ fun HomeScreen(
     BottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 0.dp,
-        sheetElevation = MovieTheme.elevations.bottomSheet,
         sheetContent = {
             HomeFilterScreen(viewModel = hiltViewModel())
         },
@@ -122,10 +119,11 @@ fun HomeScreen(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         homeTabs.forEachIndexed { index, homeTab ->
                             if (index > 0) {
-                                Divider(
+                                VerticalDivider(
+                                    thickness = 2.dp,
                                     modifier = Modifier
                                         .padding(horizontal = 16.dp)
-                                        .requiredSize(2.dp, 16.dp),
+                                        .requiredHeight(16.dp),
                                     color = MovieTheme.colors.onSurface,
                                 )
                             }
@@ -139,7 +137,7 @@ fun HomeScreen(
                                 color = if (selected) {
                                     MovieTheme.colors.onSurface
                                 } else {
-                                    MovieTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+                                    MovieTheme.colors.onSurface.copy(alpha = 0.38f)
                                 },
                                 modifier = Modifier
                                     .clickable {

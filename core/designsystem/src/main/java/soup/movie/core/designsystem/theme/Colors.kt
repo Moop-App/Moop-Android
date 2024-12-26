@@ -15,18 +15,16 @@
  */
 package soup.movie.core.designsystem.theme
 
-import androidx.compose.material.Colors
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
-import androidx.compose.material.primarySurface
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 @Stable
 data class MovieColors(
-    internal val material: Colors,
-    val divider: Color,
+    internal val material: ColorScheme,
     val star: Color,
     val dim: Color,
     val cgv: Color,
@@ -43,25 +41,17 @@ data class MovieColors(
     val ageTagUnknown: Color,
 ) {
     val primary: Color get() = material.primary
-    val primaryVariant: Color get() = material.primaryVariant
     val secondary: Color get() = material.secondary
-    val secondaryVariant: Color get() = material.secondaryVariant
     val background: Color get() = material.background
     val surface: Color get() = material.surface
     val error: Color get() = material.error
-    val onPrimary: Color get() = material.onPrimary
-    val onSecondary: Color get() = material.onSecondary
     val onBackground: Color get() = material.onBackground
     val onSurface: Color get() = material.onSurface
     val onError: Color get() = material.onError
-    val isLight: Boolean get() = material.isLight
-
-    val primarySurface: Color get() = material.primarySurface
 }
 
 fun lightMovieColors(
-    material: Colors = lightColors(),
-    divider: Color = Color(0xFFF5F5F5),
+    material: ColorScheme = lightColorScheme(),
     star: Color = Color(0xFFFFC107),
     dim: Color = Color(0xDDFFFFFF),
     cgv: Color = Color.White,
@@ -78,7 +68,6 @@ fun lightMovieColors(
     ageTagUnknown: Color = Color(0xFF9E9E9E),
 ): MovieColors = MovieColors(
     material = material,
-    divider = divider,
     star = star,
     dim = dim,
     cgv = cgv,
@@ -96,8 +85,7 @@ fun lightMovieColors(
 )
 
 fun darkMovieColors(
-    material: Colors = darkColors(),
-    divider: Color = Color(0xFF212121),
+    material: ColorScheme = darkColorScheme(),
     star: Color = Color(0xFFFFC107),
     dim: Color = Color(0xAA000000),
     cgv: Color = Color.White,
@@ -114,7 +102,6 @@ fun darkMovieColors(
     ageTagUnknown: Color = Color(0xFFE0E0E0),
 ): MovieColors = MovieColors(
     material = material,
-    divider = divider,
     star = star,
     dim = dim,
     cgv = cgv,
