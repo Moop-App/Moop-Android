@@ -1,6 +1,4 @@
 <resources>
-    <string name="default_notification_channel_id" translatable="false">EVT</string>
-
     <string name="notification_channel_notice">Notice</string>
     <string name="notification_channel_event">Event</string>
     <string name="notification_channel_open_date_alarm">Release Date Alarm</string>

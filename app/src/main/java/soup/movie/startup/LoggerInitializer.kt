@@ -18,7 +18,6 @@ package soup.movie.startup
 import android.content.Context
 import androidx.startup.Initializer
 import soup.movie.buildconfig.BuildConfig
-import soup.movie.log.CrashlyticsTree
 import soup.movie.log.DebugTree
 import soup.movie.log.Logger
 
@@ -27,8 +26,6 @@ class LoggerInitializer : Initializer<Unit> {
     override fun create(context: Context) {
         if (BuildConfig.DEBUG) {
             Logger.plant(DebugTree())
-        } else {
-            Logger.plant(CrashlyticsTree())
         }
     }
 
