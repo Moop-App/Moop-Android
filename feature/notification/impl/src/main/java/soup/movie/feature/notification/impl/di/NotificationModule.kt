@@ -20,9 +20,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import soup.movie.feature.notification.NotificationBuilder
-import soup.movie.feature.notification.ShowPushNotificationUseCase
 import soup.movie.feature.notification.impl.NotificationBuilderImpl
-import soup.movie.feature.notification.impl.ShowPushNotificationUseCaseImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -32,9 +30,4 @@ interface NotificationModule {
     fun bindsNotificationBuilder(
         impl: NotificationBuilderImpl,
     ): NotificationBuilder
-
-    @Binds
-    fun bindsShowPushNotificationUseCase(
-        impl: ShowPushNotificationUseCaseImpl,
-    ): ShowPushNotificationUseCase
 }
