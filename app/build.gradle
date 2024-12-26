@@ -3,12 +3,8 @@ plugins {
     id "moop.android.compose"
     id "moop.android.hilt"
     id "org.jetbrains.kotlin.plugin.serialization"
-    alias libs.plugins.firebase.crashlytics
     alias libs.plugins.dependencyGuard
     alias(libs.plugins.baselineprofile)
-}
-if (file("google-services.json").exists()) {
-    apply plugin: 'com.google.gms.google-services'
 }
 
 def useReleaseKeystore = rootProject.file("signing/app-release.jks").exists()
@@ -41,10 +37,6 @@ android {
         debug {
             signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
-            firebaseCrashlytics {
-                mappingFileUploadEnabled false
-            }
-            manifestPlaceholders = [crashlytics_enabled: false]
         }
         benchmark {
             if (useReleaseKeystore) {
@@ -54,7 +46,6 @@ android {
             }
             matchingFallbacks = ['release']
             debuggable false
-            manifestPlaceholders = [crashlytics_enabled: true]
         }
         release {
             if (useReleaseKeystore) {
@@ -64,7 +55,6 @@ android {
             }
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [crashlytics_enabled: true]
         }
     }
     testOptions {
@@ -119,10 +109,6 @@ dependencies {
     implementation libs.androidx.lifecycle.compiler
 
     implementation libs.androidx.navigation.compose
-
-    implementation platform(libs.firebase.bom)
-    implementation libs.firebase.cloudmessaging
-    implementation libs.firebase.crashlytics
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.navigation.compose

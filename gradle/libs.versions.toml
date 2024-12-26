@@ -28,11 +28,6 @@ androidx-startup = "1.2.0"
 androidx-window = "1.4.0-alpha05"
 androidx-work = "2.10.0"
 
-# Google
-gms = "4.4.2"
-firebase-bom = "33.5.1"
-firebase-crashlytics = "3.0.2"
-
 # Compose
 compose-bom = "2024.12.01"
 readmore = "1.5.6"
@@ -125,13 +120,6 @@ androidx-test-ext-junit = "androidx.test.ext:junit-ktx:1.1.5"
 androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
 androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 
-# Google
-
-# https://firebase.google.com/support/release-notes/android#latest_sdk_versions
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
-firebase-cloudmessaging = { module = "com.google.firebase:firebase-messaging" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
-
 # Etc
 
 coil-runtime = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
@@ -153,12 +141,10 @@ compose-compiler-pluginGradle = { module = "org.jetbrains.kotlin:compose-compile
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
-gms = { id = "com.google.gms.google-services", version.ref = "gms" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }

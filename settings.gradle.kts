@@ -15,8 +15,6 @@ dependencyResolutionManagement {
                 includeGroupByRegex("com.android.*")
                 includeGroupByRegex("androidx.*")
                 includeGroupByRegex("com.google.android.*")
-                includeGroup("com.google.gms")
-                includeGroup("com.google.firebase")
                 includeGroup("com.google.testing.platform")
             }
         }
