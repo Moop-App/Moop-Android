@@ -48,7 +48,7 @@ class SearchViewModel @Inject constructor(
         .flatMapLatest { query ->
             val movies = repository.searchMovie(query)
             flowOf(
-                SearchUiModel.Success(
+                SearchUiModel(
                     movies = movies,
                     hasNoItem = query.isNotEmpty() && movies.isEmpty(),
                 ),

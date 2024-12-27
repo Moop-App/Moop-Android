@@ -15,8 +15,11 @@
  */
 package soup.movie.feature.home.impl.favorite
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.impl.textUnit
@@ -39,4 +42,17 @@ fun MovieAgeTag(
         modifier = modifier,
         fontSize = 12.dp.textUnit,
     )
+}
+
+@PreviewLightDark
+@Composable
+private fun MovieAgeTagPreview() {
+    MovieTheme {
+        Surface {
+            MovieAgeTag(
+                age = 15,
+                modifier = Modifier.padding(all = 4.dp),
+            )
+        }
+    }
 }

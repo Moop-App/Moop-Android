@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2024 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,36 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.home.impl.favorite
+package soup.movie.feature.home.impl.filter
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.theme.MovieTheme
-import soup.movie.feature.home.impl.textUnit
 
 @Composable
-fun MovieDDayTag(
+fun HomeFilterCategory(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-    MovieTextTag(
+    Text(
         text = text,
-        tagBackgroundColor = MovieTheme.colors.tagDDay,
-        modifier = modifier,
-        fontSize = 12.dp.textUnit,
+        style = MaterialTheme.typography.titleMedium,
+        modifier = modifier.fillMaxWidth(),
     )
 }
 
 @PreviewLightDark
 @Composable
-private fun MovieDDayTagPreview() {
+private fun HomeFilterCategoryPreview() {
     MovieTheme {
-        MovieDDayTag(
-            text = "D-1",
-            modifier = Modifier.padding(all = 4.dp),
-        )
+        Surface {
+            HomeFilterCategory(text = "Category")
+        }
     }
 }
