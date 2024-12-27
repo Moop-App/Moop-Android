@@ -58,9 +58,6 @@ fun DetailNavGraph(movieId: String) {
             val posterUrl = backStackEntry.toRoute<DetailScreen.Poster>().posterUrl
             DetailPoster(
                 posterUrl = posterUrl,
-                upPress = {
-                    navController.navigateUp()
-                },
             )
         }
     }

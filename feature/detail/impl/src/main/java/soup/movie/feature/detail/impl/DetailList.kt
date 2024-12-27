@@ -45,6 +45,7 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -162,13 +163,13 @@ private fun Cgv(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    ElevatedCard(
+    OutlinedCard(
         onClick = onClick,
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 12.dp, end = 4.dp, bottom = 8.dp),
     ) {
         Column(
-            modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AssistChip(
@@ -177,7 +178,6 @@ private fun Cgv(
                     containerColor = MovieTheme.colors.cgv,
                     labelColor = MovieTheme.colors.onCgv,
                 ),
-                border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
                 label = {
                     Text(
                         text = "CGV",
@@ -209,13 +209,13 @@ private fun Lotte(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    ElevatedCard(
+    OutlinedCard(
         onClick = onClick,
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
     ) {
         Column(
-            modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AssistChip(
@@ -255,13 +255,13 @@ private fun Megabox(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    ElevatedCard(
+    OutlinedCard(
         onClick = onClick,
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 4.dp, end = 12.dp, bottom = 8.dp),
     ) {
         Column(
-            modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AssistChip(
@@ -300,7 +300,7 @@ private fun Plot(
     uiModel: PlotItemUiModel,
     onClick: () -> Unit,
 ) {
-    ElevatedCard(
+    OutlinedCard(
         onClick = onClick,
         modifier = Modifier
             .padding(start = 12.dp, end = 12.dp, bottom = 8.dp)
