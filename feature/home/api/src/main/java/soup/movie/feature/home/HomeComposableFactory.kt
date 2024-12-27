@@ -15,6 +15,7 @@
  */
 package soup.movie.feature.home
 
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -23,7 +24,6 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
-import soup.movie.core.designsystem.windowsizeclass.WindowWidthSizeClass
 import soup.movie.model.MovieModel
 
 interface HomeComposableFactory {

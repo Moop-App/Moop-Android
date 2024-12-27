@@ -15,9 +15,9 @@
  */
 package soup.movie.feature.detail.impl
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,7 +32,7 @@ internal fun DetailContent(
     onItemClick: (ContentItemUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Box(modifier = modifier) {
+    Surface(modifier = modifier) {
         when (uiModel) {
             is DetailUiModel.None -> {}
             is DetailUiModel.Success -> {
@@ -56,7 +56,6 @@ internal fun DetailContent(
                         )
                     },
                     items = uiModel.items,
-                    viewModel = viewModel,
                     onItemClick = { item -> onItemClick(item) },
                 )
             }

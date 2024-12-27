@@ -16,8 +16,8 @@
 package soup.movie.feature.detail.impl
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -30,32 +30,26 @@ import soup.movie.core.imageloading.AsyncImage
 
 @OptIn(ExperimentalPhotoApi::class)
 @Composable
-internal fun DetailPoster(
+fun DetailPoster(
     posterUrl: String,
-    upPress: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val photoState = rememberPhotoState()
-    BackHandler {
+    BackHandler(enabled = photoState.isScaled) {
         coroutineScope.launch {
-            if (photoState.isScaled) {
-                photoState.animateToInitialState()
-            } else {
-                upPress()
-            }
+            photoState.animateToInitialState()
         }
     }
-    PhotoBox(
-        modifier = Modifier.background(Color.Black),
-        state = photoState,
-    ) {
-        AsyncImage(
-            posterUrl,
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            onSuccess = {
-                photoState.setPhotoIntrinsicSize(it.intrinsicSize)
-            },
-        )
+    Surface(color = Color.Black) {
+        PhotoBox(state = photoState) {
+            AsyncImage(
+                posterUrl,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                onSuccess = {
+                    photoState.setPhotoIntrinsicSize(it.intrinsicSize)
+                },
+            )
+        }
     }
 }

@@ -23,9 +23,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -37,6 +38,7 @@ import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theme.ThemeOption
 import soup.movie.resources.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemeOptionScreen(
     items: List<ThemeSettingItemUiModel>,

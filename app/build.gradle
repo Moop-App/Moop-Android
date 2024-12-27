@@ -113,7 +113,8 @@ dependencies {
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.navigation.compose
     implementation libs.compose.foundation
-    implementation libs.compose.material
+    implementation libs.compose.material3
+    implementation libs.compose.material3.windowsizeclass
     implementation libs.compose.ui
 
     implementation libs.androidx.profileinstaller

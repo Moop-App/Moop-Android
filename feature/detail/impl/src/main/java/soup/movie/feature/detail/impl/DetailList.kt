@@ -17,7 +17,6 @@ package soup.movie.feature.detail.impl
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -41,12 +40,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Chip
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,7 +53,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.ColorPainter
@@ -76,7 +74,6 @@ import soup.movie.resources.R
 internal fun DetailList(
     header: @Composable () -> Unit,
     items: List<ContentItemUiModel>,
-    viewModel: DetailViewModel,
     onItemClick: (ContentItemUiModel) -> Unit,
 ) {
     LazyColumn(
@@ -158,39 +155,35 @@ internal fun DetailList(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun Cgv(
     uiModel: CgvItemUiModel,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Card(
+    OutlinedCard(
         onClick = onClick,
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 12.dp, end = 4.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Column(
-            modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Chip(
+            AssistChip(
                 onClick = onClick,
-                colors = ChipDefaults.chipColors(
-                    backgroundColor = MovieTheme.colors.cgv,
-                    contentColor = MovieTheme.colors.onCgv,
+                colors = AssistChipDefaults.assistChipColors(
+                    containerColor = MovieTheme.colors.cgv,
+                    labelColor = MovieTheme.colors.onCgv,
                 ),
-                border = BorderStroke(width = 1.dp, color = Color(0x229E9E9E)),
-            ) {
-                Text(
-                    text = "CGV",
-                    style = MovieTheme.typography.body2,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
+                label = {
+                    Text(
+                        text = "CGV",
+                        style = MovieTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
+            )
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
@@ -199,7 +192,7 @@ private fun Cgv(
                 Text(
                     text = uiModel.rating,
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
                 )
@@ -208,38 +201,35 @@ private fun Cgv(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun Lotte(
     uiModel: LotteItemUiModel,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Card(
+    OutlinedCard(
         onClick = onClick,
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Column(
-            modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Chip(
+            AssistChip(
                 onClick = onClick,
-                colors = ChipDefaults.chipColors(
-                    backgroundColor = MovieTheme.colors.lotte,
-                    contentColor = MovieTheme.colors.onLotte,
+                colors = AssistChipDefaults.assistChipColors(
+                    containerColor = MovieTheme.colors.lotte,
+                    labelColor = MovieTheme.colors.onLotte,
                 ),
-            ) {
-                Text(
-                    text = "롯데시네마",
-                    style = MovieTheme.typography.body2,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
+                label = {
+                    Text(
+                        text = "롯데시네마",
+                        style = MovieTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
+            )
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
@@ -248,7 +238,7 @@ private fun Lotte(
                 Text(
                     text = uiModel.rating,
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
                 )
@@ -257,38 +247,35 @@ private fun Lotte(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun Megabox(
     uiModel: MegaboxItemUiModel,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Card(
+    OutlinedCard(
         onClick = onClick,
         enabled = uiModel.hasInfo,
         modifier = modifier.padding(start = 4.dp, end = 12.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Column(
-            modifier = Modifier.padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Chip(
+            AssistChip(
                 onClick = onClick,
-                colors = ChipDefaults.chipColors(
-                    backgroundColor = MovieTheme.colors.megabox,
-                    contentColor = MovieTheme.colors.onMegabox,
+                colors = AssistChipDefaults.assistChipColors(
+                    containerColor = MovieTheme.colors.megabox,
+                    labelColor = MovieTheme.colors.onMegabox,
                 ),
-            ) {
-                Text(
-                    text = "메가박스",
-                    style = MovieTheme.typography.body2,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
+                label = {
+                    Text(
+                        text = "메가박스",
+                        style = MovieTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
+            )
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
@@ -297,7 +284,7 @@ private fun Megabox(
                 Text(
                     text = uiModel.rating,
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
                 )
@@ -306,18 +293,16 @@ private fun Megabox(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun Plot(
     uiModel: PlotItemUiModel,
     onClick: () -> Unit,
 ) {
-    Card(
+    OutlinedCard(
         onClick = onClick,
-        modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp).fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
+        modifier = Modifier
+            .padding(start = 12.dp, end = 12.dp, bottom = 8.dp)
+            .fillMaxWidth(),
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -333,7 +318,7 @@ private fun Plot(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.subtitle2,
+                    style = MovieTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 8.dp),
                 )
@@ -344,7 +329,7 @@ private fun Plot(
                 text = uiModel.plot,
                 expanded = isExpanded,
                 color = MovieTheme.colors.onSurface,
-                style = MovieTheme.typography.body2,
+                style = MovieTheme.typography.bodyMedium,
                 modifier = Modifier
                     .clickable {
                         isExpanded = !isExpanded
@@ -361,18 +346,14 @@ private fun Plot(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun Imdb(
     uiModel: ImdbItemUiModel,
     onClick: () -> Unit,
 ) {
-    Card(
+    ElevatedCard(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
@@ -391,7 +372,7 @@ private fun Imdb(
                 Text(
                     text = uiModel.imdb,
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 6.dp),
                 )
@@ -427,7 +408,7 @@ private fun Imdb(
                     Text(
                         text = uiModel.rottenTomatoes,
                         color = MovieTheme.colors.onSurface,
-                        style = MovieTheme.typography.body2,
+                        style = MovieTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(top = 6.dp),
@@ -448,7 +429,7 @@ private fun Imdb(
                 Text(
                     text = uiModel.metascore,
                     color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 6.dp),
                 )
@@ -479,18 +460,14 @@ private fun Cast(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun Person(
     uiModel: PersonUiModel,
     onClick: () -> Unit,
 ) {
-    Card(
+    ElevatedCard(
         onClick = onClick,
         modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -499,16 +476,14 @@ private fun Person(
             Text(
                 text = uiModel.name,
                 maxLines = 1,
-                color = MovieTheme.colors.onSurface,
-                style = MovieTheme.typography.subtitle2,
+                style = MovieTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
             )
             if (uiModel.cast.isNotEmpty()) {
                 Text(
                     text = uiModel.cast,
                     maxLines = 1,
-                    color = MovieTheme.colors.onSurface,
-                    style = MovieTheme.typography.subtitle2,
+                    style = MovieTheme.typography.titleMedium,
                 )
             }
         }
@@ -520,33 +495,38 @@ private fun TrailerHeader(
     uiModel: TrailerHeaderItemUiModel,
     onPrivacyTipClick: () -> Unit,
 ) {
-    Card(
+    ElevatedCard(
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .requiredHeight(48.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
                 painter = painterResource(MovieIcons.YouTube),
                 contentDescription = null,
-                modifier = Modifier.requiredWidth(48.dp).fillMaxHeight(),
+                modifier = Modifier
+                    .requiredWidth(48.dp)
+                    .fillMaxHeight(),
                 contentScale = ContentScale.Inside,
             )
             Text(
                 text = stringResource(R.string.trailer_search_result, uiModel.movieTitle),
                 maxLines = 1,
-                color = MovieTheme.colors.onSurface,
-                style = MovieTheme.typography.subtitle2,
+                style = MovieTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(start = 4.dp).weight(1f),
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .weight(1f),
             )
             IconButton(
-                modifier = Modifier.requiredWidth(48.dp).fillMaxHeight(),
+                modifier = Modifier
+                    .requiredWidth(48.dp)
+                    .fillMaxHeight(),
                 onClick = onPrivacyTipClick,
             ) {
                 Image(
@@ -561,18 +541,15 @@ private fun TrailerHeader(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TrailerItem(
     uiModel: TrailerItemUiModel,
     onClick: () -> Unit,
 ) {
-    Card(
+    ElevatedCard(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp),
         shape = RectangleShape,
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Row(
             modifier = Modifier
@@ -590,18 +567,20 @@ private fun TrailerItem(
                     .fillMaxHeight(),
             )
             Column(
-                modifier = Modifier.fillMaxSize().padding(start = 12.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 12.dp),
             ) {
                 Text(
                     text = uiModel.trailer.title,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(top = 2.dp),
                 )
                 Text(
                     text = uiModel.trailer.author,
-                    style = MovieTheme.typography.caption,
+                    style = MovieTheme.typography.bodySmall,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(top = 4.dp),
@@ -611,20 +590,19 @@ private fun TrailerItem(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TrailerFooter(
     onClick: () -> Unit,
 ) {
-    Card(
+    ElevatedCard(
         onClick = onClick,
         modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 16.dp),
         shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
-        backgroundColor = MovieTheme.colors.surface,
-        elevation = MovieTheme.elevations.card,
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth().requiredHeight(48.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .requiredHeight(48.dp),
             contentAlignment = Alignment.Center,
         ) {
             Text(

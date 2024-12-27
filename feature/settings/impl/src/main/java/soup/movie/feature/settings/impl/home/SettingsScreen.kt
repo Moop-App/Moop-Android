@@ -27,32 +27,51 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import soup.movie.core.designsystem.UnelevatedButton
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.settings.impl.theme.stringResIdOf
+import soup.movie.feature.theme.ThemeOption
 import soup.movie.resources.R
 
 @Composable
 fun SettingsScreen(
     viewModel: SettingsViewModel,
+    onThemeEditClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val theme by viewModel.themeUiModel.collectAsState()
+    SettingsScreen(
+        themeUiModel = theme,
+        onThemeEditClick = onThemeEditClick,
+        modifier = modifier,
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SettingsScreen(
+    themeUiModel: ThemeSettingUiModel?,
     onThemeEditClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -64,15 +83,14 @@ fun SettingsScreen(
             )
         },
     ) { paddingValues ->
-        val theme by viewModel.themeUiModel.collectAsState()
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
-            SettingsThemeItem(theme, onClick = onThemeEditClick)
-            SettingsDivider()
+            SettingsThemeItem(theme = themeUiModel, onClick = onThemeEditClick)
+            HorizontalDivider()
         }
     }
 }
@@ -105,24 +123,20 @@ private fun SettingsThemeItem(
                 Icon(
                     MovieIcons.Palette,
                     contentDescription = null,
-                    tint = MovieTheme.colors.onBackground,
                 )
             }
         }
         Spacer(modifier = Modifier.height(12.dp))
         Box(modifier = Modifier.requiredHeight(48.dp)) {
-            UnelevatedButton(
+            FilledTonalButton(
                 onClick = { debounce(onClick) },
                 modifier = Modifier.fillMaxSize(),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MovieTheme.colors.surface,
-                ),
             ) {
                 Text(
                     text = text,
                     modifier = Modifier.fillMaxWidth(),
                     fontSize = 17.sp,
-                    style = MovieTheme.typography.body2,
+                    style = MovieTheme.typography.bodyMedium,
                 )
             }
         }
@@ -137,13 +151,29 @@ private fun SettingsCategory(
     Text(
         text = text,
         modifier = modifier.fillMaxWidth(),
-        color = MovieTheme.colors.onBackground,
-        fontSize = 17.sp,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleMedium,
     )
 }
 
+@Preview
 @Composable
-private fun SettingsDivider() {
-    Divider(color = MovieTheme.colors.divider)
+private fun SettingsCategoryPreview() {
+    MaterialTheme {
+        Surface {
+            SettingsCategory(text = "Category")
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun SettingsScreenPreview() {
+    MovieTheme {
+        SettingsScreen(
+            themeUiModel = ThemeSettingUiModel(
+                themeOption = ThemeOption.System,
+            ),
+            onThemeEditClick = {},
+        )
+    }
 }

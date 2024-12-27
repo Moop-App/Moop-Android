@@ -16,44 +16,20 @@
 package soup.movie.core.designsystem.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 
 private val LightMovieColors = lightMovieColors(
-    material = lightColors(
-        primary = Color.White,
-        primaryVariant = Color(0xFF9E9E9E),
-        onPrimary = Color.Black,
-        secondary = Color(0xFF2D7AF6),
-        onSecondary = Color.White,
-    ),
+    material = lightColorScheme(),
 )
 
 private val DarkMovieColors = darkMovieColors(
-    material = darkColors(
-        primary = Color.Black,
-        primaryVariant = Color.Black,
-        onPrimary = Color.White,
-        secondary = Color(0xFF8EB5F0),
-        onSecondary = Color.Black,
-    ),
-)
-
-private val LightElevations = Elevations(
-    card = 10.dp,
-    bottomSheet = 16.dp,
-)
-
-private val DarkElevations = Elevations(
-    card = 1.dp,
-    bottomSheet = 0.dp,
+    material = darkColorScheme(),
 )
 
 @Composable
@@ -66,17 +42,9 @@ fun MovieTheme(
     } else {
         LightMovieColors
     }
-    val elevation = if (darkTheme) {
-        DarkElevations
-    } else {
-        LightElevations
-    }
-    CompositionLocalProvider(
-        LocalMovieColors provides colors,
-        LocalElevations provides elevation,
-    ) {
+    CompositionLocalProvider(LocalMovieColors provides colors) {
         MaterialTheme(
-            colors = colors.material,
+            colorScheme = colors.material,
             content = content,
         )
     }
@@ -95,8 +63,4 @@ object MovieTheme {
     val shapes: Shapes
         @Composable
         get() = MaterialTheme.shapes
-
-    val elevations: Elevations
-        @Composable
-        get() = LocalElevations.current
 }
