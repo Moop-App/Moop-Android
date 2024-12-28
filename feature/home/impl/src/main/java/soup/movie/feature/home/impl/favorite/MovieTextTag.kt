@@ -44,13 +44,13 @@ fun MovieTextTag(
         modifier = modifier
             .size(width = 36.dp, height = 18.dp)
             .background(color = tagBackgroundColor, shape = RoundedCornerShape(5.dp))
-            .border(1.dp, MovieTheme.colors.background, shape = RoundedCornerShape(5.dp)),
+            .border(1.dp, MovieTheme.colorScheme.background, shape = RoundedCornerShape(5.dp)),
         contentAlignment = Alignment.Center,
     ) {
         Text(
             text = text,
             modifier = Modifier.wrapContentHeight(),
-            color = MovieTheme.colors.background,
+            color = MovieTheme.colorScheme.background,
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,

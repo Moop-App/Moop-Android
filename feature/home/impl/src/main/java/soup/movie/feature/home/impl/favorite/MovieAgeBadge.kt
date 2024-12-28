@@ -44,7 +44,7 @@ fun MovieAgeBadge(
         modifier = modifier
             .size(10.dp)
             .background(color = color, shape = RoundedCornerShape(5.dp))
-            .border(1.dp, MovieTheme.colors.background, shape = RoundedCornerShape(5.dp)),
+            .border(1.dp, MovieTheme.colorScheme.background, shape = RoundedCornerShape(5.dp)),
     )
 }
 

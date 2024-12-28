@@ -191,7 +191,7 @@ private fun Cgv(
                 StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
@@ -237,7 +237,7 @@ private fun Lotte(
                 StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
@@ -283,7 +283,7 @@ private fun Megabox(
                 StarIcon(modifier = Modifier.requiredSize(width = 24.dp, height = 36.dp))
                 Text(
                     text = uiModel.rating,
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 4.dp, end = 8.dp),
@@ -317,7 +317,7 @@ private fun Plot(
                     text = "줄거리",
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 8.dp),
@@ -328,7 +328,7 @@ private fun Plot(
             ReadMoreText(
                 text = uiModel.plot,
                 expanded = isExpanded,
-                color = MovieTheme.colors.onSurface,
+                color = MovieTheme.colorScheme.onSurface,
                 style = MovieTheme.typography.bodyMedium,
                 modifier = Modifier
                     .clickable {
@@ -338,7 +338,7 @@ private fun Plot(
                     .fillMaxWidth()
                     .animateContentSize(animationSpec = tween(durationMillis = 100)),
                 readMoreText = "더보기",
-                readMoreColor = MovieTheme.colors.secondary,
+                readMoreColor = MovieTheme.colorScheme.secondary,
                 readMoreFontWeight = FontWeight.Bold,
                 readMoreMaxLines = 3,
             )
@@ -371,7 +371,7 @@ private fun Imdb(
                 )
                 Text(
                     text = uiModel.imdb,
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 6.dp),
@@ -407,7 +407,7 @@ private fun Imdb(
                     }
                     Text(
                         text = uiModel.rottenTomatoes,
-                        color = MovieTheme.colors.onSurface,
+                        color = MovieTheme.colorScheme.onSurface,
                         style = MovieTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
@@ -428,7 +428,7 @@ private fun Imdb(
                 )
                 Text(
                     text = uiModel.metascore,
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 6.dp),
@@ -534,7 +534,7 @@ private fun TrailerHeader(
                     contentDescription = null,
                     modifier = Modifier.requiredSize(18.dp),
                     contentScale = ContentScale.Inside,
-                    colorFilter = ColorFilter.tint(color = MovieTheme.colors.onSurface),
+                    colorFilter = ColorFilter.tint(color = MovieTheme.colorScheme.onSurface),
                 )
             }
         }
@@ -559,7 +559,7 @@ private fun TrailerItem(
         ) {
             AsyncImage(
                 uiModel.trailer.thumbnailUrl,
-                placeholder = ColorPainter(color = MovieTheme.colors.onSurface.copy(alpha = 0.1f)),
+                placeholder = ColorPainter(color = MovieTheme.colorScheme.onSurface.copy(alpha = 0.1f)),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -607,7 +607,7 @@ private fun TrailerFooter(
         ) {
             Text(
                 text = "더보기",
-                color = MovieTheme.colors.secondary,
+                color = MovieTheme.colorScheme.secondary,
                 fontWeight = FontWeight.Bold,
             )
         }

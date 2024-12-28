@@ -55,13 +55,10 @@ fun BoxOffice(
             ) {
                 Text(
                     text = "박스오피스",
-                    color = MovieTheme.colors.onSurface,
                     style = MovieTheme.typography.bodyMedium,
-                    modifier = Modifier.alpha(0.7f),
                 )
                 Text(
                     text = stringResource(R.string.rank, uiModel.rank),
-                    color = MovieTheme.colors.onSurface,
                     style = MovieTheme.typography.titleMedium,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
@@ -69,14 +66,14 @@ fun BoxOffice(
                 )
                 Text(
                     text = stringResource(R.string.rank_date, uiModel.rankDate),
-                    color = MovieTheme.colors.surface,
+                    color = MovieTheme.colorScheme.surface,
                     style = MovieTheme.typography.bodyMedium,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .background(
-                            color = MovieTheme.colors.onSurface,
+                            color = MovieTheme.colorScheme.onSurface,
                             shape = RoundedCornerShape(percent = 50),
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
@@ -88,13 +85,13 @@ fun BoxOffice(
             ) {
                 Text(
                     text = "누적 관객수",
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.bodyMedium,
                     modifier = Modifier.alpha(0.7f),
                 )
                 Text(
                     text = stringResource(R.string.audience, uiModel.audience),
-                    color = MovieTheme.colors.onSurface,
+                    color = MovieTheme.colorScheme.onSurface,
                     style = MovieTheme.typography.titleMedium,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
@@ -102,14 +99,14 @@ fun BoxOffice(
                 )
                 Text(
                     text = stringResource(R.string.screen_days, uiModel.screenDays),
-                    color = MovieTheme.colors.surface,
+                    color = MovieTheme.colorScheme.surface,
                     style = MovieTheme.typography.bodyMedium,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(top = 6.dp)
                         .background(
-                            color = MovieTheme.colors.onSurface,
+                            color = MovieTheme.colorScheme.onSurface,
                             shape = RoundedCornerShape(percent = 50),
                         )
                         .padding(vertical = 1.dp, horizontal = 8.dp),
