@@ -124,7 +124,7 @@ fun HomeScreen(
                                     modifier = Modifier
                                         .padding(horizontal = 16.dp)
                                         .requiredHeight(16.dp),
-                                    color = MovieTheme.colors.onSurface,
+                                    color = MovieTheme.colorScheme.onSurface,
                                 )
                             }
                             val selected = selectedTab == homeTab
@@ -135,9 +135,9 @@ fun HomeScreen(
                             Text(
                                 text = text,
                                 color = if (selected) {
-                                    MovieTheme.colors.onSurface
+                                    MovieTheme.colorScheme.onSurface
                                 } else {
-                                    MovieTheme.colors.onSurface.copy(alpha = 0.38f)
+                                    MovieTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                                 },
                                 modifier = Modifier
                                     .clickable {

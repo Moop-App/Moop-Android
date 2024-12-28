@@ -26,13 +26,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
@@ -47,7 +43,7 @@ fun CommonError(
         modifier = modifier
             .fillMaxWidth()
             .requiredHeight(40.dp),
-        color = MovieTheme.colors.error,
+        color = MovieTheme.colorScheme.error,
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -56,17 +52,12 @@ fun CommonError(
             Icon(
                 MovieIcons.Info,
                 contentDescription = null,
-                tint = MovieTheme.colors.onError,
             )
             Text(
                 text = stringResource(R.string.common_network_error),
-                modifier = Modifier.padding(start = 20.dp, end = 16.dp),
-                color = Color.White,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(start = 4.dp),
                 maxLines = 1,
-                style = MovieTheme.typography.bodySmall,
+                style = MovieTheme.typography.titleSmall,
             )
         }
     }

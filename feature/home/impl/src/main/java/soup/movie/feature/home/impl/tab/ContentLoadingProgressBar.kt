@@ -47,7 +47,7 @@ import soup.movie.core.designsystem.theme.MovieTheme
 @Composable
 fun ContentLoadingProgressBar(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MovieTheme.colors.surface,
+    backgroundColor: Color = MovieTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(backgroundColor),
     shape: Shape = CircleShape,
     elevation: Dp = 12.dp,
@@ -87,8 +87,8 @@ fun ContentLoadingProgressBar(
                         brush = Brush.sweepGradient(
                             listOf(
                                 Color.Transparent,
-                                MovieTheme.colors.onSurface,
-                                MovieTheme.colors.onSurface,
+                                MovieTheme.colorScheme.onSurface,
+                                MovieTheme.colorScheme.onSurface,
                             ),
                         ),
                         shape = CircleShape,
@@ -97,7 +97,7 @@ fun ContentLoadingProgressBar(
             Icon(
                 painter = painterResource(MovieIcons.LoadingLogo),
                 contentDescription = null,
-                tint = MovieTheme.colors.onSurface,
+                tint = MovieTheme.colorScheme.onSurface,
             )
         }
     }

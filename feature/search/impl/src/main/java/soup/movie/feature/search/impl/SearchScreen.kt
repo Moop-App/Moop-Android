@@ -105,7 +105,7 @@ private fun SearchScaffold(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                color = MovieTheme.colors.primary,
+                color = MovieTheme.colorScheme.primary,
             ) {
                 val focusManager = LocalFocusManager.current
                 val focusRequester = FocusRequester()

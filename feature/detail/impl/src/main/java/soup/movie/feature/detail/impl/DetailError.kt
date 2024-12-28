@@ -70,7 +70,7 @@ internal fun DetailError(
         ) {
             Text(
                 text = stringResource(R.string.common_retry),
-                color = MovieTheme.colors.secondary,
+                color = MovieTheme.colorScheme.secondary,
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
         }

@@ -101,7 +101,7 @@ fun DetailScreen(
                                     url = url,
                                     styles = TextLinkStyles(
                                         style = SpanStyle(
-                                            color = MovieTheme.colors.secondary,
+                                            color = MovieTheme.colorScheme.secondary,
                                             textDecoration = TextDecoration.Underline,
                                         ),
                                     ),
@@ -119,7 +119,7 @@ fun DetailScreen(
                 TextButton(
                     onClick = { showPrivacyDialog = false },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MovieTheme.colors.secondary,
+                        contentColor = MovieTheme.colorScheme.secondary,
                     ),
                 ) {
                     Text(text = stringResource(R.string.trailer_dialog_button))

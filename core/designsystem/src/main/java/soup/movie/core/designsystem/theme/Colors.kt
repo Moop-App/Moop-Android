@@ -15,16 +15,12 @@
  */
 package soup.movie.core.designsystem.theme
 
-import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 @Stable
 data class MovieColors(
-    internal val material: ColorScheme,
     val star: Color,
     val dim: Color,
     val cgv: Color,
@@ -39,19 +35,9 @@ data class MovieColors(
     val ageTag19: Color,
     val ageTagAll: Color,
     val ageTagUnknown: Color,
-) {
-    val primary: Color get() = material.primary
-    val secondary: Color get() = material.secondary
-    val background: Color get() = material.background
-    val surface: Color get() = material.surface
-    val error: Color get() = material.error
-    val onBackground: Color get() = material.onBackground
-    val onSurface: Color get() = material.onSurface
-    val onError: Color get() = material.onError
-}
+)
 
 fun lightMovieColors(
-    material: ColorScheme = lightColorScheme(),
     star: Color = Color(0xFFFFC107),
     dim: Color = Color(0xDDFFFFFF),
     cgv: Color = Color.White,
@@ -67,7 +53,6 @@ fun lightMovieColors(
     ageTagAll: Color = Color(0xFF4CAF50),
     ageTagUnknown: Color = Color(0xFF9E9E9E),
 ): MovieColors = MovieColors(
-    material = material,
     star = star,
     dim = dim,
     cgv = cgv,
@@ -85,7 +70,6 @@ fun lightMovieColors(
 )
 
 fun darkMovieColors(
-    material: ColorScheme = darkColorScheme(),
     star: Color = Color(0xFFFFC107),
     dim: Color = Color(0xAA000000),
     cgv: Color = Color.White,
@@ -101,7 +85,6 @@ fun darkMovieColors(
     ageTagAll: Color = Color(0xFF81C784),
     ageTagUnknown: Color = Color(0xFFE0E0E0),
 ): MovieColors = MovieColors(
-    material = material,
     star = star,
     dim = dim,
     cgv = cgv,

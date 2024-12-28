@@ -16,7 +16,6 @@
 package soup.movie.feature.home.impl.filter
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +30,7 @@ fun HomeFilterCategory(
 ) {
     Text(
         text = text,
-        style = MaterialTheme.typography.titleMedium,
+        style = MovieTheme.typography.titleMedium,
         modifier = modifier.fillMaxWidth(),
     )
 }
