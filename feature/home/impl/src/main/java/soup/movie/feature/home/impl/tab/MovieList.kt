@@ -18,26 +18,24 @@ package soup.movie.feature.home.impl.tab
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.imageloading.AsyncImage
 import soup.movie.domain.movie.getDDayLabel
@@ -45,7 +43,7 @@ import soup.movie.domain.movie.isDDay
 import soup.movie.feature.home.impl.favorite.MovieAgeBadge
 import soup.movie.feature.home.impl.favorite.MovieDDayTag
 import soup.movie.model.MovieModel
-import soup.movie.resources.R
+import soup.movie.model.TheaterRatingsModel
 
 @Composable
 fun MovieList(
@@ -87,6 +85,7 @@ private fun MovieItem(
 ) {
     Surface(
         modifier = modifier,
+        color = MaterialTheme.colorScheme.surfaceVariant,
         shape = MovieTheme.shapes.small,
     ) {
         Box {
@@ -119,21 +118,42 @@ private fun MovieItem(
     }
 }
 
+@PreviewLightDark
 @Composable
-fun NoMovieItems(
-    modifier: Modifier = Modifier,
+private fun MovieListPreview(
+    @PreviewParameter(MovieListPreviewParameterProvider::class) movies: List<MovieModel>,
 ) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Icon(
-            MovieIcons.ViewModule,
-            contentDescription = null,
-            modifier = Modifier.size(72.dp),
-        )
-        Text(
-            text = stringResource(R.string.no_movies_description),
-        )
+    MovieTheme {
+        Surface {
+            MovieList(
+                movies = movies,
+                onItemClick = {},
+                onLongItemClick = {},
+            )
+        }
     }
+}
+
+private class MovieListPreviewParameterProvider : PreviewParameterProvider<List<MovieModel>> {
+    override val values: Sequence<List<MovieModel>> = sequenceOf(
+        listOf(-1, 0, 11, 12, 14, 15, 18, 19, 20).mapIndexed { index, age ->
+            MovieModel(
+                id = index.toString(),
+                score = index,
+                title = "Movie Title",
+                posterUrl = "",
+                openDate = "2024.12.31",
+                isNow = false,
+                age = age,
+                nationFilter = null,
+                genres = null,
+                boxOffice = 0,
+                theater = TheaterRatingsModel(
+                    cgv = null,
+                    lotte = null,
+                    megabox = null,
+                ),
+            )
+        },
+    )
 }

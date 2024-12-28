@@ -18,11 +18,13 @@ package soup.movie.feature.home.impl.favorite
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.theme.MovieTheme
 
@@ -44,4 +46,15 @@ fun MovieAgeBadge(
             .background(color = color, shape = RoundedCornerShape(5.dp))
             .border(1.dp, MovieTheme.colors.background, shape = RoundedCornerShape(5.dp)),
     )
+}
+
+@PreviewLightDark
+@Composable
+private fun MovieAgeBadgePreview() {
+    MovieTheme {
+        MovieAgeBadge(
+            age = 15,
+            modifier = Modifier.padding(all = 4.dp),
+        )
+    }
 }

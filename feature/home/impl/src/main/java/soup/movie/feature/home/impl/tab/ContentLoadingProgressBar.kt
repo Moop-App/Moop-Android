@@ -24,6 +24,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -37,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.icon.MovieIcons
@@ -51,7 +53,7 @@ fun ContentLoadingProgressBar(
     elevation: Dp = 12.dp,
 ) {
     Surface(
-        modifier = modifier,
+        modifier = modifier.requiredSize(size = 48.dp),
         shape = shape,
         color = backgroundColor,
         contentColor = contentColor,
@@ -61,7 +63,7 @@ fun ContentLoadingProgressBar(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center,
         ) {
-            val transition = rememberInfiniteTransition()
+            val transition = rememberInfiniteTransition(label = "ContentLoadingProgressBar")
             val currentRotation by transition.animateFloat(
                 initialValue = 0f,
                 targetValue = 1f,
@@ -71,6 +73,7 @@ fun ContentLoadingProgressBar(
                         easing = LinearEasing,
                     ),
                 ),
+                label = "currentRotation",
             )
             Box(
                 modifier = Modifier
@@ -95,6 +98,18 @@ fun ContentLoadingProgressBar(
                 painter = painterResource(MovieIcons.LoadingLogo),
                 contentDescription = null,
                 tint = MovieTheme.colors.onSurface,
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun ContentLoadingProgressBarPreview() {
+    MovieTheme {
+        Surface {
+            ContentLoadingProgressBar(
+                modifier = Modifier.padding(16.dp),
             )
         }
     }

@@ -30,10 +30,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import soup.movie.core.designsystem.theme.MovieTheme
-import soup.movie.core.designsystem.tools.DevicePreviews
 import soup.movie.core.designsystem.util.debounce
 import soup.movie.feature.theme.ThemeOption
 import soup.movie.resources.R
@@ -93,7 +93,7 @@ private fun ThemeOptionItem(
     }
 }
 
-@DevicePreviews
+@PreviewLightDark
 @Composable
 private fun ThemeOptionScreenPreview() {
     MovieTheme {

@@ -16,6 +16,7 @@
 package soup.movie.feature.search.impl
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,6 +44,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
@@ -58,11 +60,51 @@ fun SearchScreen(
     onItemClick: (MovieModel) -> Unit,
 ) {
     val factory = rememberHomeComposableFactory()
+    val query by viewModel.query.collectAsState()
+    val uiModel by viewModel.uiModel.collectAsState()
+    SearchScaffold(
+        upPress = upPress,
+        query = query,
+        onQueryChanged = { viewModel.onQueryChanged(it) },
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+        ) {
+            if (uiModel.hasNoItem) {
+                factory.NoMovieItems(modifier = Modifier.align(Alignment.Center))
+            } else {
+                val context = LocalContext.current
+                factory.MovieList(
+                    movies = uiModel.movies,
+                    onItemClick = {
+                        onItemClick(it)
+                    },
+                    onLongItemClick = {
+                        context.showToast(it.title)
+                    },
+                    modifier = Modifier,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SearchScaffold(
+    upPress: () -> Unit,
+    query: String,
+    onQueryChanged: (String) -> Unit,
+    content: @Composable (PaddingValues) -> Unit,
+) {
     Scaffold(
         modifier = Modifier.systemBarsPadding(),
         topBar = {
             Surface(
-                modifier = Modifier.fillMaxWidth().height(56.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
                 color = MovieTheme.colors.primary,
             ) {
                 val focusManager = LocalFocusManager.current
@@ -71,11 +113,11 @@ fun SearchScreen(
                     focusRequester.requestFocus()
                 }
 
-                val query by viewModel.query.collectAsState()
                 TextField(
                     value = query,
-                    onValueChange = { viewModel.onQueryChanged(it) },
-                    modifier = Modifier.fillMaxSize()
+                    onValueChange = onQueryChanged,
+                    modifier = Modifier
+                        .fillMaxSize()
                         .focusRequester(focusRequester),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -99,7 +141,7 @@ fun SearchScreen(
                         }
                     },
                     trailingIcon = {
-                        IconButton(onClick = { viewModel.onQueryChanged("") }) {
+                        IconButton(onClick = { onQueryChanged("") }) {
                             Icon(
                                 MovieIcons.Close,
                                 contentDescription = null,
@@ -111,33 +153,18 @@ fun SearchScreen(
             }
         },
     ) { paddingValues ->
-        val uiModel by viewModel.uiModel.collectAsState()
-        when (uiModel) {
-            is SearchUiModel.None -> {}
-            is SearchUiModel.Success -> {
-                val model = uiModel as SearchUiModel.Success
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                ) {
-                    if (model.hasNoItem) {
-                        factory.NoMovieItems(modifier = Modifier.align(Alignment.Center))
-                    } else {
-                        val context = LocalContext.current
-                        factory.MovieList(
-                            movies = model.movies,
-                            onItemClick = {
-                                onItemClick(it)
-                            },
-                            onLongItemClick = {
-                                context.showToast(it.title)
-                            },
-                            modifier = Modifier,
-                        )
-                    }
-                }
-            }
-        }
+        content(paddingValues)
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun SearchScaffoldPreview() {
+    MovieTheme {
+        SearchScaffold(
+            upPress = {},
+            query = "",
+            onQueryChanged = {},
+        ) {}
     }
 }
