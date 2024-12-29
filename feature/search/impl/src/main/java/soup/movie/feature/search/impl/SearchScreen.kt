@@ -16,13 +16,15 @@
 package soup.movie.feature.search.impl
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -32,6 +34,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -68,7 +71,6 @@ fun SearchScreen(
     val uiModel by viewModel.uiModel.collectAsState()
 
     Scaffold(
-        modifier = Modifier.systemBarsPadding(),
         topBar = {
             SearchTopBar(
                 upPress = upPress,
@@ -108,15 +110,17 @@ fun SearchScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SearchTopBar(
     upPress: () -> Unit,
     query: String,
     onQueryChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
+    windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
 ) {
     Surface(
-        modifier = modifier
+        modifier = modifier.windowInsetsPadding(windowInsets)
             .fillMaxWidth()
             .height(56.dp),
         color = MovieTheme.colorScheme.primary,
