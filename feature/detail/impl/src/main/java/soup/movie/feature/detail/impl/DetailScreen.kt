@@ -22,7 +22,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,7 +36,6 @@ import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
-import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.external.YouTube
 import soup.movie.core.external.executeWeb
@@ -51,13 +49,6 @@ fun DetailScreen(
 ) {
     val context = LocalContext.current
     val uiModel: DetailUiModel by viewModel.uiModel.collectAsState()
-    LaunchedEffect(Unit) {
-        viewModel.uiEvent.collect { event ->
-            when (event) {
-                is ToastAction -> context.showToast(event.resId)
-            }
-        }
-    }
 
     var showPrivacyDialog by remember { mutableStateOf(false) }
     DetailContent(

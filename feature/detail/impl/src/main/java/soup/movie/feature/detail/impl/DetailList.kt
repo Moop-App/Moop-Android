@@ -75,8 +75,10 @@ internal fun DetailList(
     header: @Composable () -> Unit,
     items: List<ContentItemUiModel>,
     onItemClick: (ContentItemUiModel) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
+        modifier = modifier,
         contentPadding = WindowInsets.systemBars.asPaddingValues(),
     ) {
         item {
@@ -167,7 +169,9 @@ private fun Cgv(
         modifier = modifier.padding(start = 12.dp, end = 4.dp, bottom = 8.dp),
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AssistChip(
@@ -213,7 +217,9 @@ private fun Lotte(
         modifier = modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp),
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AssistChip(
@@ -259,7 +265,9 @@ private fun Megabox(
         modifier = modifier.padding(start = 4.dp, end = 12.dp, bottom = 8.dp),
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(top = 4.dp, bottom = 6.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 4.dp, bottom = 6.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AssistChip(

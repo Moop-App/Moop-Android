@@ -25,6 +25,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -51,8 +53,8 @@ fun HomeFavoriteScreen(
     state: LazyGridState = rememberLazyGridState(),
     onSettingsClick: () -> Unit,
     onItemClick: (MovieModel) -> Unit,
-    onItemLongClick: (MovieModel) -> Unit,
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     val isTopAtCurrentTab by remember {
         derivedStateOf {
@@ -83,8 +85,15 @@ fun HomeFavoriteScreen(
                 },
             )
         },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
     ) { paddingValues ->
-        Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+        ) {
             val movies by viewModel.movies.collectAsState()
             if (movies.isEmpty()) {
                 NoMovieItems(modifier = Modifier.align(Alignment.Center))
@@ -93,7 +102,11 @@ fun HomeFavoriteScreen(
                     state = state,
                     movies = movies,
                     onItemClick = onItemClick,
-                    onLongItemClick = onItemLongClick,
+                    onLongItemClick = {
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(message = it.title)
+                        }
+                    },
                 )
             }
         }

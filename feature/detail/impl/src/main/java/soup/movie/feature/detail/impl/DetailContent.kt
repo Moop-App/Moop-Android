@@ -17,12 +17,20 @@ package soup.movie.feature.detail.impl
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
+import soup.movie.resources.R
 
 @Composable
 internal fun DetailContent(
@@ -32,7 +40,14 @@ internal fun DetailContent(
     onItemClick: (ContentItemUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Surface(modifier = modifier) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+    Scaffold(
+        modifier = modifier,
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
+    ) { paddingValues ->
         when (uiModel) {
             is DetailUiModel.None -> {}
             is DetailUiModel.Success -> {
@@ -57,6 +72,7 @@ internal fun DetailContent(
                     },
                     items = uiModel.items,
                     onItemClick = { item -> onItemClick(item) },
+                    modifier = Modifier.padding(paddingValues),
                 )
             }
             is DetailUiModel.Failure -> {
@@ -64,8 +80,21 @@ internal fun DetailContent(
                     onRetryClick = {
                         viewModel.onRetryClick()
                     },
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.padding(paddingValues).fillMaxSize(),
                 )
+            }
+        }
+    }
+
+    val context = LocalContext.current
+    val showOpenDateAlarmMessage by viewModel.showOpenDateAlarmMessage.collectAsState()
+    LaunchedEffect(showOpenDateAlarmMessage) {
+        if (showOpenDateAlarmMessage) {
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(
+                    message = context.getString(R.string.action_toast_opendate_alarm),
+                )
+                viewModel.onOpenDateAlarmMessageShown()
             }
         }
     }
