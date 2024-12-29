@@ -16,5 +16,4 @@ dependencies {
     implementation libs.kotlin.stdlib
 
     implementation libs.compose.foundation
-    implementation libs.compose.material3.windowsizeclass
 }

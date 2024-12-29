@@ -15,7 +15,6 @@
  */
 package soup.movie.feature.home
 
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -30,7 +29,6 @@ interface HomeComposableFactory {
 
     @Composable
     fun HomeNavGraph(
-        widthSizeClass: WindowWidthSizeClass,
         onSearchClick: () -> Unit,
         onSettingsClick: () -> Unit,
         onMovieItemClick: (MovieModel) -> Unit,

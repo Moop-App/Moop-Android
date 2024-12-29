@@ -15,7 +15,6 @@
  */
 package soup.movie.ui.main
 
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -43,9 +42,7 @@ private sealed interface Screen {
 }
 
 @Composable
-fun MainNavGraph(
-    widthSizeClass: WindowWidthSizeClass,
-) {
+fun MainNavGraph() {
     val navController = rememberNavController()
     NavHost(
         navController,
@@ -54,7 +51,6 @@ fun MainNavGraph(
         composable<Screen.Main> {
             val factory = rememberHomeComposableFactory()
             factory.HomeNavGraph(
-                widthSizeClass = widthSizeClass,
                 onSearchClick = {
                     navController.navigate(Screen.Search)
                 },
