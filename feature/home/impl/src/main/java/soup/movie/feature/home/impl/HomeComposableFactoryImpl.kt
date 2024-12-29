@@ -15,7 +15,6 @@
  */
 package soup.movie.feature.home.impl
 
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,13 +26,11 @@ class HomeComposableFactoryImpl @Inject constructor() : HomeComposableFactory {
 
     @Composable
     override fun HomeNavGraph(
-        widthSizeClass: WindowWidthSizeClass,
         onSearchClick: () -> Unit,
         onSettingsClick: () -> Unit,
         onMovieItemClick: (MovieModel) -> Unit,
     ) {
         HomeNavGraph(
-            widthSizeClass = widthSizeClass,
             viewModel = hiltViewModel(),
             onSearchClick = onSearchClick,
             onSettingsClick = onSettingsClick,

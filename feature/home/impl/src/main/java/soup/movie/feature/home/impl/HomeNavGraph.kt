@@ -20,29 +20,15 @@ import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.NavigationRail
-import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.NavigationRailItemDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.showToast
@@ -52,24 +38,20 @@ import soup.movie.resources.R
 
 @Composable
 fun HomeNavGraph(
-    widthSizeClass: WindowWidthSizeClass,
     viewModel: HomeViewModel,
     onSearchClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onMovieItemClick: (MovieModel) -> Unit,
 ) {
     val currentMainTab by viewModel.selectedMainTab.collectAsState()
-    val tabs = MainTabUiModel.values()
-    MainScaffold(
-        widthSizeClass = widthSizeClass,
+    HomeScaffold(
         currentTab = currentMainTab,
-        tabs = tabs,
+        tabs = MainTabUiModel.entries.toTypedArray(),
         onTabSelected = { mainTab ->
             viewModel.onMainTabSelected(mainTab)
         },
-        modifier = Modifier.systemBarsPadding(),
-    ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
+    ) {
+        Box {
             when (currentMainTab) {
                 MainTabUiModel.Home -> {
                     HomeScreen(
@@ -94,144 +76,35 @@ fun HomeNavGraph(
     }
 }
 
-@Composable
-private fun MainScaffold(
-    widthSizeClass: WindowWidthSizeClass,
-    currentTab: MainTabUiModel,
-    tabs: Array<MainTabUiModel>,
-    onTabSelected: (MainTabUiModel) -> Unit,
-    modifier: Modifier = Modifier,
-    onTabReselected: (MainTabUiModel) -> Unit = onTabSelected,
-    content: @Composable (PaddingValues) -> Unit,
-) {
-    when (widthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
-            CompactScreen(
-                currentTab = currentTab,
-                tabs = tabs,
-                onTabSelected = onTabSelected,
-                onTabReselected = onTabReselected,
-                modifier = modifier,
-                content = content,
-            )
-        }
-        WindowWidthSizeClass.Medium,
-        WindowWidthSizeClass.Expanded,
-        -> {
-            MediumScreen(
-                currentTab = currentTab,
-                tabs = tabs,
-                onTabSelected = onTabSelected,
-                onTabReselected = onTabReselected,
-                modifier = modifier,
-                content = content,
-            )
-        }
-    }
-}
-
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
-private fun CompactScreen(
+private fun HomeScaffold(
     currentTab: MainTabUiModel,
     tabs: Array<MainTabUiModel>,
     onTabSelected: (MainTabUiModel) -> Unit,
     modifier: Modifier = Modifier,
     onTabReselected: (MainTabUiModel) -> Unit = onTabSelected,
-    content: @Composable (PaddingValues) -> Unit,
+    content: @Composable () -> Unit,
 ) {
-    Scaffold(
-        modifier = modifier,
-        bottomBar = {
-            NavigationBar {
-                tabs.forEach { tab ->
-                    val selected = currentTab == tab
-                    NavigationBarItem(
-                        icon = {
-                            when (tab) {
-                                MainTabUiModel.Home -> {
-                                    Icon(
-                                        rememberAnimatedVectorPainter(
-                                            AnimatedImageVector.animatedVectorResource(MovieIcons.AvdHomeNowSelected),
-                                            selected,
-                                        ),
-                                        contentDescription = null,
-                                    )
-                                }
-                                MainTabUiModel.Favorite -> {
-                                    Icon(
-                                        rememberAnimatedVectorPainter(
-                                            AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected),
-                                            selected,
-                                        ),
-                                        contentDescription = null,
-                                    )
-                                }
-                            }
-                        },
-                        label = {
-                            Text(
-                                text = when (tab) {
-                                    MainTabUiModel.Home -> stringResource(R.string.menu_home)
-                                    MainTabUiModel.Favorite -> stringResource(R.string.menu_favorite)
-                                },
-                            )
-                        },
-                        selected = selected,
-                        onClick = {
-                            if (selected) {
-                                onTabReselected(tab)
-                            } else {
-                                onTabSelected(tab)
-                            }
-                        },
-                        colors = NavigationBarItemDefaults.colors(),
-                    )
-                }
-            }
-        },
-        content = content,
-    )
-}
-
-@OptIn(ExperimentalAnimationGraphicsApi::class)
-@Composable
-private fun MediumScreen(
-    currentTab: MainTabUiModel,
-    tabs: Array<MainTabUiModel>,
-    onTabSelected: (MainTabUiModel) -> Unit,
-    modifier: Modifier = Modifier,
-    onTabReselected: (MainTabUiModel) -> Unit = onTabSelected,
-    content: @Composable (PaddingValues) -> Unit,
-) {
-    Row(
-        modifier = modifier.fillMaxSize(),
-    ) {
-        NavigationRail {
+    NavigationSuiteScaffold(
+        navigationSuiteItems = {
             tabs.forEach { tab ->
                 val selected = currentTab == tab
-                NavigationRailItem(
+                item(
                     icon = {
-                        when (tab) {
-                            MainTabUiModel.Home -> {
-                                Icon(
-                                    rememberAnimatedVectorPainter(
-                                        AnimatedImageVector.animatedVectorResource(MovieIcons.AvdHomeNowSelected),
-                                        selected,
-                                    ),
-                                    contentDescription = null,
-                                )
-                            }
-                            MainTabUiModel.Favorite -> {
-                                Icon(
-                                    rememberAnimatedVectorPainter(
-                                        AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected),
-                                        selected,
-                                    ),
-                                    contentDescription = null,
-                                )
-                            }
-                        }
+                        Icon(
+                            rememberAnimatedVectorPainter(
+                                animatedImageVector = when (tab) {
+                                    MainTabUiModel.Home ->
+                                        AnimatedImageVector.animatedVectorResource(MovieIcons.AvdHomeNowSelected)
+
+                                    MainTabUiModel.Favorite ->
+                                        AnimatedImageVector.animatedVectorResource(MovieIcons.AvdFavoriteSelected)
+                                },
+                                atEnd = selected,
+                            ),
+                            contentDescription = null,
+                        )
                     },
                     label = {
                         Text(
@@ -249,11 +122,10 @@ private fun MediumScreen(
                             onTabSelected(tab)
                         }
                     },
-                    colors = NavigationRailItemDefaults.colors(),
                 )
             }
-        }
-        VerticalDivider(thickness = 1.dp)
-        content(PaddingValues())
-    }
+        },
+        modifier = modifier,
+        content = content,
+    )
 }
