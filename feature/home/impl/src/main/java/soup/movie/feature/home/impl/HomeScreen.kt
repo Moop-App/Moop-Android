@@ -43,13 +43,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.showToast
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.impl.filter.HomeFilterScreen
 import soup.movie.feature.home.impl.now.HomeNowList
@@ -64,7 +62,6 @@ fun HomeScreen(
     onSearchClick: () -> Unit,
     onMovieItemClick: (MovieModel) -> Unit,
 ) {
-    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val selectedTab by viewModel.selectedHomeTab.collectAsState()
 
@@ -160,7 +157,11 @@ fun HomeScreen(
             )
         },
     ) { paddingValues ->
-        Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+        ) {
             when (selectedTab) {
                 HomeTabUiModel.Now -> HomeNowList(
                     viewModel = hiltViewModel(),
@@ -169,7 +170,9 @@ fun HomeScreen(
                         onMovieItemClick(it)
                     },
                     onItemLongClick = {
-                        context.showToast(it.title)
+                        coroutineScope.launch {
+                            bottomSheetScaffoldState.snackbarHostState.showSnackbar(message = it.title)
+                        }
                     },
                 )
                 HomeTabUiModel.Plan -> HomePlanList(
@@ -179,7 +182,9 @@ fun HomeScreen(
                         onMovieItemClick(it)
                     },
                     onItemLongClick = {
-                        context.showToast(it.title)
+                        coroutineScope.launch {
+                            bottomSheetScaffoldState.snackbarHostState.showSnackbar(message = it.title)
+                        }
                     },
                 )
             }

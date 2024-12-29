@@ -20,11 +20,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
@@ -35,7 +33,6 @@ import soup.movie.domain.movie.yesterday
 import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.OpenDateAlarmModel
-import soup.movie.resources.R
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,8 +50,8 @@ class DetailViewModel @Inject constructor(
     private val _isFavorite = MutableStateFlow(false)
     val isFavorite: StateFlow<Boolean> = _isFavorite
 
-    private val _uiEvent = MutableSharedFlow<UiEvent>()
-    val uiEvent: SharedFlow<UiEvent> = _uiEvent.asSharedFlow()
+    private val _showOpenDateAlarmMessage = MutableStateFlow(false)
+    val showOpenDateAlarmMessage: StateFlow<Boolean> = _showOpenDateAlarmMessage
 
     init {
         viewModelScope.launch {
@@ -179,7 +176,8 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onFavoriteButtonClick(isFavorite: Boolean) {
-        val movie = (_uiModel.value as? DetailUiModel.Success)?.header?.movie ?: return
+        val uiModel = _uiModel.value as? DetailUiModel.Success ?: return
+        val movie = uiModel.header.movie
         viewModelScope.launch {
             if (isFavorite) {
                 repository.addFavoriteMovie(movie)
@@ -191,13 +189,17 @@ class DetailViewModel @Inject constructor(
                             movie.openDate,
                         ),
                     )
-                    _uiEvent.emit(ToastAction(R.string.action_toast_opendate_alarm))
+                    _showOpenDateAlarmMessage.update { true }
                 }
             } else {
                 repository.removeFavoriteMovie(movie.id)
             }
             _isFavorite.emit(isFavorite)
         }
+    }
+
+    fun onOpenDateAlarmMessageShown() {
+        _showOpenDateAlarmMessage.update { false }
     }
 
     fun onRetryClick() {

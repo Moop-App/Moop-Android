@@ -19,7 +19,6 @@ import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
@@ -27,11 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import soup.movie.core.designsystem.icon.MovieIcons
-import soup.movie.core.designsystem.showToast
 import soup.movie.feature.home.impl.favorite.HomeFavoriteScreen
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
@@ -51,26 +48,20 @@ fun HomeNavGraph(
             viewModel.onMainTabSelected(mainTab)
         },
     ) {
-        Box {
-            when (currentMainTab) {
-                MainTabUiModel.Home -> {
-                    HomeScreen(
-                        viewModel = viewModel,
-                        onSearchClick = onSearchClick,
-                        onMovieItemClick = onMovieItemClick,
-                    )
-                }
-                MainTabUiModel.Favorite -> {
-                    val context = LocalContext.current
-                    HomeFavoriteScreen(
-                        viewModel = hiltViewModel(),
-                        onSettingsClick = onSettingsClick,
-                        onItemClick = onMovieItemClick,
-                        onItemLongClick = {
-                            context.showToast(it.title)
-                        },
-                    )
-                }
+        when (currentMainTab) {
+            MainTabUiModel.Home -> {
+                HomeScreen(
+                    viewModel = viewModel,
+                    onSearchClick = onSearchClick,
+                    onMovieItemClick = onMovieItemClick,
+                )
+            }
+            MainTabUiModel.Favorite -> {
+                HomeFavoriteScreen(
+                    viewModel = hiltViewModel(),
+                    onSettingsClick = onSettingsClick,
+                    onItemClick = onMovieItemClick,
+                )
             }
         }
     }
