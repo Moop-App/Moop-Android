@@ -19,57 +19,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import soup.movie.log.Logger
-
-private fun Context.executePlayStoreForApp(pkgName: String) {
-    try {
-        startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$pkgName"),
-            ),
-        )
-    } catch (e: ActivityNotFoundException) {
-        Logger.w(e)
-        startActivity(
-            Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=$pkgName"),
-            ),
-        )
-    }
-}
-
-object Cgv {
-
-    fun executeWeb(ctx: Context, theaterCode: String) {
-        ctx.executeWeb(detailWebUrl(theaterCode))
-    }
-
-    private fun detailWebUrl(theaterCode: String): String =
-        "https://m.cgv.co.kr/WebApp/TheaterV4/TheaterDetail.aspx?tc=$theaterCode"
-}
-
-object LotteCinema {
-
-    fun executeWeb(ctx: Context, theaterCode: String) {
-        ctx.executeWeb(detailWebUrl(theaterCode))
-    }
-
-    private fun detailWebUrl(theaterCode: String): String =
-        "https://www.lottecinema.co.kr/NLCMW/Cinema/Detail?cinemaID=$theaterCode"
-}
-
-object Megabox {
-
-    fun executeWeb(ctx: Context, theaterCode: String) {
-        ctx.executeWeb(detailWebUrl(theaterCode))
-    }
-
-    private fun detailWebUrl(theaterCode: String): String =
-        "https://m.megabox.co.kr/theater?brchNo=$theaterCode"
-}
 
 object YouTube {
 
@@ -90,13 +40,9 @@ object YouTube {
         Intent.ACTION_VIEW,
         Uri.parse("vnd.youtube:$id"),
     ).apply {
-        flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Intent.FLAG_ACTIVITY_NEW_TASK or
-                Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
-                Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
-        } else {
-            Intent.FLAG_ACTIVITY_NEW_TASK
-        }
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+            Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
+            Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
     }
 
     private fun createTrailerWebIntent(id: String): Intent = Intent(
@@ -110,27 +56,19 @@ object YouTube {
             ctx.startActivity(createSearchAppIntent(query))
         } catch (e: ActivityNotFoundException) {
             Logger.w(e)
-            ctx.startActivitySafely(
-                createSearchWebIntent(
-                    query,
-                ),
-            )
+            ctx.startActivitySafely(createSearchWebIntent(query))
         }
     }
 
-    private fun createSearchAppIntent(query: String): Intent = Intent(
-        Intent.ACTION_SEARCH,
-    )
-        .setPackage(packageName)
-        .putExtra("query", query).apply {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+    private fun createSearchAppIntent(query: String): Intent {
+        return Intent(Intent.ACTION_SEARCH)
+            .setPackage(packageName)
+            .putExtra("query", query).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK or
                     Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT
-            } else {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
-        }
+    }
 
     private fun createSearchWebIntent(query: String): Intent = Intent(
         Intent.ACTION_VIEW,
