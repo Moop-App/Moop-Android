@@ -33,6 +33,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
@@ -97,6 +98,7 @@ fun HomeScreen(
         }
     }
     BottomSheetScaffold(
+        containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 0.dp,
         sheetContent = {
@@ -104,6 +106,9 @@ fun HomeScreen(
         },
         topBar = {
             TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
+                ),
                 actions = {
                     IconButton(onClick = { onSearchClick() }) {
                         Icon(

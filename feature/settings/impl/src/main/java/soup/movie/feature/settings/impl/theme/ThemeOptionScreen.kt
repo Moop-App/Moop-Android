@@ -27,6 +27,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -45,8 +46,14 @@ fun ThemeOptionScreen(
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
+        containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
         topBar = {
-            TopAppBar(title = { Text(stringResource(R.string.theme_option_title)) })
+            TopAppBar(
+                title = { Text(stringResource(R.string.theme_option_title)) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
+                ),
+            )
         },
         modifier = modifier,
     ) { paddingValues ->
