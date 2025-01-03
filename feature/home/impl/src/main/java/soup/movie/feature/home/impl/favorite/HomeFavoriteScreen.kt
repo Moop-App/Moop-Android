@@ -29,6 +29,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -40,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.icon.MovieIcons
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.feature.home.impl.tab.MovieList
 import soup.movie.feature.home.impl.tab.NoMovieItems
 import soup.movie.model.MovieModel
@@ -69,9 +71,13 @@ fun HomeFavoriteScreen(
         }
     }
     Scaffold(
+        containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
         modifier = modifier,
         topBar = {
             TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
+                ),
                 title = {
                     Text(text = stringResource(R.string.menu_favorite))
                 },

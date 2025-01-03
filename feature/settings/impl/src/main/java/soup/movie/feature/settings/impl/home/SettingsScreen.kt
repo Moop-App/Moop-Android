@@ -35,6 +35,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -74,9 +75,13 @@ private fun SettingsScreen(
 ) {
     Scaffold(
         modifier = modifier,
+        containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(R.string.menu_settings)) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
+                ),
             )
         },
     ) { paddingValues ->

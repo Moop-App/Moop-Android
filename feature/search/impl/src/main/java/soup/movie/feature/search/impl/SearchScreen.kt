@@ -71,6 +71,7 @@ fun SearchScreen(
     val uiModel by viewModel.uiModel.collectAsState()
 
     Scaffold(
+        containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
         topBar = {
             SearchTopBar(
                 upPress = upPress,
@@ -123,7 +124,7 @@ private fun SearchTopBar(
         modifier = modifier.windowInsetsPadding(windowInsets)
             .fillMaxWidth()
             .height(56.dp),
-        color = MovieTheme.colorScheme.primary,
+        color = MovieTheme.colorScheme.surfaceContainerLowest,
     ) {
         val focusManager = LocalFocusManager.current
         val focusRequester = FocusRequester()

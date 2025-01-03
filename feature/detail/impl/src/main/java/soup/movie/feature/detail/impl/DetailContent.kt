@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.resources.R
 
 @Composable
@@ -47,6 +48,7 @@ internal fun DetailContent(
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
         },
+        containerColor = MovieTheme.colorScheme.surfaceContainerLowest,
     ) { paddingValues ->
         when (uiModel) {
             is DetailUiModel.None -> {}
