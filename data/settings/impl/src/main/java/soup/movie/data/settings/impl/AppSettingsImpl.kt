@@ -15,24 +15,17 @@
  */
 package soup.movie.data.settings.impl
 
-import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import soup.movie.common.ApplicationScope
-import soup.movie.common.IoDispatcher
 import soup.movie.data.settings.AppSettings
 import soup.movie.model.settings.AgeFilter
 import soup.movie.model.settings.TheaterFilter
@@ -41,20 +34,9 @@ import javax.inject.Singleton
 
 @Singleton
 class AppSettingsImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val preferences: DataStore<Preferences>,
     @ApplicationScope private val coroutineScope: CoroutineScope,
 ) : AppSettings {
-
-    private val Context.preferencesName: String
-        get() = packageName + "_preferences"
-
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-        name = context.preferencesName,
-        produceMigrations = { context ->
-            listOf(SharedPreferencesMigration(context, context.preferencesName))
-        },
-    )
 
     private val theaterFilterKey = intPreferencesKey("theater_filter")
 
@@ -65,13 +47,13 @@ class AppSettingsImpl @Inject constructor(
     }
 
     override suspend fun setTheaterFilter(theaterFilter: TheaterFilter) {
-        context.dataStore.edit { settings ->
+        preferences.edit { settings ->
             settings[theaterFilterKey] = theaterFilter.toFlags()
         }
     }
 
     override fun getTheaterFilterFlow(): Flow<TheaterFilter> {
-        return context.dataStore.data.map { preferences ->
+        return preferences.data.map { preferences ->
             TheaterFilter(
                 preferences[theaterFilterKey]
                     ?: TheaterFilter.FLAG_THEATER_ALL,
@@ -82,13 +64,13 @@ class AppSettingsImpl @Inject constructor(
     private val ageFilterKey = intPreferencesKey("age_filter")
 
     override suspend fun setAgeFilter(ageFilter: AgeFilter) {
-        context.dataStore.edit { settings ->
+        preferences.edit { settings ->
             settings[ageFilterKey] = ageFilter.toFlags()
         }
     }
 
     override fun getAgeFilterFlow(): Flow<AgeFilter> {
-        return context.dataStore.data.map { preferences ->
+        return preferences.data.map { preferences ->
             AgeFilter(
                 preferences[ageFilterKey] ?: AgeFilter.FLAG_AGE_DEFAULT,
             )
@@ -98,10 +80,8 @@ class AppSettingsImpl @Inject constructor(
     private val themeOptionKey = stringPreferencesKey("theme_option")
 
     override suspend fun setThemeOption(themeOption: String) {
-        withContext(ioDispatcher) {
-            context.dataStore.edit { settings ->
-                settings[themeOptionKey] = themeOption
-            }
+        preferences.edit { settings ->
+            settings[themeOptionKey] = themeOption
         }
     }
 
@@ -110,17 +90,15 @@ class AppSettingsImpl @Inject constructor(
     }
 
     override fun getThemeOptionFlow(): Flow<String> {
-        return context.dataStore.data.map { preferences ->
+        return preferences.data.map { preferences ->
             preferences[themeOptionKey].orEmpty()
         }
     }
 
     private suspend fun clearStaleData() {
-        withContext(ioDispatcher) {
-            context.dataStore.edit { settings ->
-                settings.remove(stringPreferencesKey("favorite_theaters"))
-                settings.remove(stringPreferencesKey("favorite_genre"))
-            }
+        preferences.edit { settings ->
+            settings.remove(stringPreferencesKey("favorite_theaters"))
+            settings.remove(stringPreferencesKey("favorite_genre"))
         }
     }
 }
