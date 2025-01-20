@@ -23,7 +23,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import soup.movie.common.ApplicationScope
-import soup.movie.common.MainImmediateDispatcher
+import soup.movie.common.DefaultDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -34,6 +34,6 @@ object CoroutineScopesModule {
     @Provides
     @ApplicationScope
     fun providesCoroutineScope(
-        @MainImmediateDispatcher dispatcher: CoroutineDispatcher,
+        @DefaultDispatcher dispatcher: CoroutineDispatcher,
     ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
 }
