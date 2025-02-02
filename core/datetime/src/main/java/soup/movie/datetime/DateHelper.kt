@@ -20,6 +20,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 private val ZONE_SEOUL = ZoneId.of("Asia/Seoul")
 fun currentTime(): LocalDateTime = LocalDateTime.now(ZONE_SEOUL)
@@ -51,4 +52,21 @@ fun LocalDate.MM_DD(): String {
 }
 fun LocalDate.YYYY_MM_DD(): String {
     return format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+}
+
+fun calculateDDay(openDate: LocalDate?, today: LocalDate): Long? {
+    return openDate?.let {
+        ChronoUnit.DAYS.between(today, it)
+    }
+}
+
+/**
+ * Valid format: YYYY.MM.DD
+ */
+fun String.toLocalDate(): LocalDate? = split(".").let {
+    return if (it.size == 3) {
+        LocalDate.of(it[0].toInt(), it[1].toInt(), it[2].toInt())
+    } else {
+        null
+    }
 }

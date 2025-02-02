@@ -17,9 +17,12 @@ package soup.movie.data.network.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import soup.movie.datetime.calculateDDay
+import soup.movie.datetime.toLocalDate
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.MovieModel
 import soup.movie.model.TheaterRatingsModel
+import java.time.LocalDate
 
 /**
  * @param genres 장르
@@ -59,7 +62,8 @@ class MovieDetailResponse(
     val trailers: List<TrailerResponse>? = null,
 )
 
-fun MovieDetailResponse.asModel(): MovieDetailModel {
+fun MovieDetailResponse.asModel(today: LocalDate): MovieDetailModel {
+    val openLocalDate = openDate.toLocalDate()
     return MovieDetailModel(
         movie = MovieModel(
             id = id,
@@ -77,6 +81,8 @@ fun MovieDetailResponse.asModel(): MovieDetailModel {
                 lotte = lotte?.star,
                 megabox = megabox?.star,
             ),
+            openLocalDate = openLocalDate,
+            dDay = if (!isNow) calculateDDay(openDate = openLocalDate, today = today) else null,
         ),
 
         boxOffice = boxOffice?.asModel(),

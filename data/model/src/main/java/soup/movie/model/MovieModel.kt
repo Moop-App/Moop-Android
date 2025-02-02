@@ -15,6 +15,8 @@
  */
 package soup.movie.model
 
+import java.time.LocalDate
+
 /**
  * @param genres 장르
  */
@@ -30,6 +32,8 @@ data class MovieModel(
     val genres: List<String>?,
     val boxOffice: Int?,
     val theater: TheaterRatingsModel,
+    val openLocalDate: LocalDate?,
+    val dDay: Long?,
 ) {
 
     val isPlan: Boolean = !isNow

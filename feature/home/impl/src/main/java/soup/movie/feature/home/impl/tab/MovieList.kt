@@ -37,12 +37,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.imageloading.AsyncImage
-import soup.movie.domain.movie.getDDayLabel
-import soup.movie.domain.movie.isDDay
 import soup.movie.feature.home.impl.favorite.MovieAgeBadge
 import soup.movie.feature.home.impl.favorite.MovieDDayTag
 import soup.movie.model.MovieModel
 import soup.movie.model.TheaterRatingsModel
+import soup.movie.resources.dDayStringResource
 
 @Composable
 fun MovieList(
@@ -105,13 +104,15 @@ private fun MovieItem(
                     .padding(7.dp)
                     .align(Alignment.BottomStart),
             )
-            if (movie.isDDay()) {
-                MovieDDayTag(
-                    text = movie.getDDayLabel().orEmpty(),
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .align(Alignment.BottomEnd),
-                )
+            if (movie.isPlan) {
+                movie.dDay?.let {
+                    MovieDDayTag(
+                        text = dDayStringResource(dDay = it),
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .align(Alignment.BottomEnd),
+                    )
+                }
             }
         }
     }
@@ -152,6 +153,8 @@ private class MovieListPreviewParameterProvider : PreviewParameterProvider<List<
                     lotte = null,
                     megabox = null,
                 ),
+                openLocalDate = null,
+                dDay = null,
             )
         },
     )

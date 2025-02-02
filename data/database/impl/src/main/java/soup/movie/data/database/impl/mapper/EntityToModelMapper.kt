@@ -18,16 +18,15 @@ package soup.movie.data.database.impl.mapper
 import soup.movie.data.database.impl.entity.FavoriteMovieEntity
 import soup.movie.data.database.impl.entity.MovieEntity
 import soup.movie.data.database.impl.entity.OpenDateAlarmEntity
+import soup.movie.datetime.calculateDDay
+import soup.movie.datetime.toLocalDate
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
 import soup.movie.model.TheaterRatingsModel
+import java.time.LocalDate
 
-fun MovieEntity.toMovie() = MovieModel(
-    id, score, title, posterUrl, openDate, isNow, age, nationFilter, genres, boxOffice,
-    TheaterRatingsModel(cgv, lotte, megabox),
-)
-
-fun FavoriteMovieEntity.toMovie(): MovieModel {
+fun MovieEntity.toMovie(today: LocalDate): MovieModel {
+    val openLocalDate = openDate.toLocalDate()
     return MovieModel(
         id = id,
         score = score,
@@ -40,7 +39,34 @@ fun FavoriteMovieEntity.toMovie(): MovieModel {
         genres = genres,
         boxOffice = boxOffice,
         theater = TheaterRatingsModel(cgv, lotte, megabox),
+        openLocalDate = openLocalDate,
+        dDay = if (!isNow) calculateDDay(openDate = openLocalDate, today = today) else null,
     )
 }
 
-fun OpenDateAlarmEntity.toOpenDateAlarm() = OpenDateAlarmModel(movieId, title, openDate)
+fun FavoriteMovieEntity.toMovie(today: LocalDate): MovieModel {
+    val openLocalDate = openDate.toLocalDate()
+    return MovieModel(
+        id = id,
+        score = score,
+        title = title,
+        posterUrl = posterUrl,
+        openDate = openDate,
+        isNow = isNow,
+        age = age,
+        nationFilter = nationFilter,
+        genres = genres,
+        boxOffice = boxOffice,
+        theater = TheaterRatingsModel(cgv, lotte, megabox),
+        openLocalDate = openLocalDate,
+        dDay = if (!isNow) calculateDDay(openDate = openLocalDate, today = today) else null,
+    )
+}
+
+fun OpenDateAlarmEntity.toOpenDateAlarm(): OpenDateAlarmModel {
+    return OpenDateAlarmModel(
+        movieId = movieId,
+        title = title,
+        openDate = openDate,
+    )
+}

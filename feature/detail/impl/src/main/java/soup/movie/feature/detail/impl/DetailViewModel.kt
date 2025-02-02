@@ -28,11 +28,13 @@ import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
 import soup.movie.data.repository.MovieRepository
 import soup.movie.datetime.MM_DD
+import soup.movie.datetime.today
 import soup.movie.datetime.yesterday
-import soup.movie.domain.movie.screenDays
 import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
+import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
+import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -210,5 +212,13 @@ class DetailViewModel @Inject constructor(
 
     companion object {
         private const val NO_RATING = "평점없음"
+
+        private fun MovieModel.screenDays(): Int {
+            val openDate = openLocalDate
+            if (openDate != null) {
+                return ChronoUnit.DAYS.between(openDate, today()).toInt()
+            }
+            return 0
+        }
     }
 }

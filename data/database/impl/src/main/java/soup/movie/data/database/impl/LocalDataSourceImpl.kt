@@ -31,6 +31,7 @@ import soup.movie.data.database.impl.mapper.toMovie
 import soup.movie.data.database.impl.mapper.toMovieEntity
 import soup.movie.data.database.impl.mapper.toOpenDateAlarm
 import soup.movie.data.database.impl.mapper.toOpenDateAlarmEntity
+import soup.movie.datetime.today
 import soup.movie.log.Logger
 import soup.movie.model.MovieListModel
 import soup.movie.model.MovieModel
@@ -73,8 +74,9 @@ class LocalDataSourceImpl @Inject constructor(
     }
 
     private fun getMovieListFlow(type: String): Flow<List<MovieModel>> {
+        val today = today()
         return cacheDao.getMovieListByType(type)
-            .map { it.list.map { movieEntity -> movieEntity.toMovie() } }
+            .map { it.list.map { movieEntity -> movieEntity.toMovie(today = today) } }
             .catch { emit(emptyList()) }
     }
 
@@ -100,8 +102,9 @@ class LocalDataSourceImpl @Inject constructor(
 
     private suspend fun getMovieListOf(type: String): List<MovieModel> {
         return try {
+            val today = today()
             cacheDao.findByType(type).list
-                .map { movieEntity -> movieEntity.toMovie() }
+                .map { movieEntity -> movieEntity.toMovie(today = today) }
         } catch (t: Throwable) {
             Logger.w(t)
             emptyList()
@@ -118,8 +121,9 @@ class LocalDataSourceImpl @Inject constructor(
     }
 
     override fun getFavoriteMovieList(): Flow<List<MovieModel>> {
+        val today = today()
         return favoriteMovieDao.getFavoriteMovieList().map {
-            it.map { favoriteMovieEntity -> favoriteMovieEntity.toMovie() }
+            it.map { favoriteMovieEntity -> favoriteMovieEntity.toMovie(today = today) }
         }
     }
 

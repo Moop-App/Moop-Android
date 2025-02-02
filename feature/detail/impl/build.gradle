@@ -19,7 +19,6 @@ dependencies {
     implementation projects.core.datetime
     implementation projects.data.repository.api
     implementation projects.data.model
-    implementation projects.domain
     implementation projects.feature.home.api
     implementation projects.feature.detail.api
 
