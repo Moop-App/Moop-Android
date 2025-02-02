@@ -12,6 +12,7 @@ dependencies {
     implementation projects.core.kotlin
     implementation projects.core.logger
     implementation projects.core.resources
+    implementation projects.core.datetime
     implementation projects.data.repository.api
     implementation projects.data.model
     implementation projects.domain

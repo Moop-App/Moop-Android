@@ -19,7 +19,7 @@ import androidx.work.BackoffPolicy
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import soup.movie.domain.movie.currentTime
+import soup.movie.datetime.currentTime
 import soup.movie.feature.tasks.AnnounceOpenDateTasks
 import java.time.temporal.ChronoUnit
 import java.util.concurrent.TimeUnit
