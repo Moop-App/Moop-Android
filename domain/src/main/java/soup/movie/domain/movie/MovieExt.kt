@@ -15,7 +15,7 @@
  */
 package soup.movie.domain.movie
 
-import soup.movie.model.MovieDetailModel
+import soup.movie.datetime.today
 import soup.movie.model.MovieModel
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
@@ -36,8 +36,8 @@ private fun MovieModel.hasOpenDate(): Boolean = openDate.toLocalDate() != null
 
 fun MovieModel.isDDay(): Boolean = isPlan and hasOpenDate()
 
-fun MovieDetailModel.screenDays(): Int {
-    val openDate = movie.openDate.toLocalDate()
+fun MovieModel.screenDays(): Int {
+    val openDate = openDate.toLocalDate()
     if (openDate != null) {
         return ChronoUnit.DAYS.between(openDate, today()).toInt()
     }

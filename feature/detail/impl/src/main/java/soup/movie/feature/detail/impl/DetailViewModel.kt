@@ -27,9 +27,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import soup.movie.common.DefaultDispatcher
 import soup.movie.data.repository.MovieRepository
-import soup.movie.domain.movie.MM_DD
+import soup.movie.datetime.MM_DD
+import soup.movie.datetime.yesterday
 import soup.movie.domain.movie.screenDays
-import soup.movie.domain.movie.yesterday
 import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.OpenDateAlarmModel
@@ -96,7 +96,7 @@ class DetailViewModel @Inject constructor(
                     rank = rank,
                     rankDate = yesterday().MM_DD(),
                     audience = audiAcc,
-                    screenDays = screenDays(),
+                    screenDays = movie.screenDays(),
                 ),
             )
         }

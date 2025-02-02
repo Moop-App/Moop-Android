@@ -16,9 +16,9 @@
 package soup.movie.feature.tasks.impl
 
 import soup.movie.data.repository.MovieRepository
-import soup.movie.domain.movie.YYYY_MM_DD
-import soup.movie.domain.movie.plusDaysTo
-import soup.movie.domain.movie.today
+import soup.movie.datetime.YYYY_MM_DD
+import soup.movie.datetime.plusDaysTo
+import soup.movie.datetime.today
 import soup.movie.feature.notification.NotificationBuilder
 import soup.movie.model.OpenDateAlarmModel
 import java.time.DayOfWeek

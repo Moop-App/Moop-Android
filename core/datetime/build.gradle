@@ -3,12 +3,11 @@ plugins {
 }
 
 android {
-    namespace "soup.movie.domain"
+    namespace "soup.movie.datetime"
 }
 
 dependencies {
     implementation projects.core.kotlin
-    implementation projects.core.datetime
     implementation projects.data.model
 
     implementation libs.kotlin.stdlib
