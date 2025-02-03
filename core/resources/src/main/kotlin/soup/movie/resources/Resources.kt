@@ -13,21 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.data.network.response
+package soup.movie.resources
 
-import kotlinx.serialization.Serializable
-import soup.movie.model.MovieListModel
-import java.time.LocalDate
-
-@Serializable
-class MovieListResponse(
-    val lastUpdateTime: Long,
-    val list: List<MovieResponse> = emptyList(),
-)
-
-fun MovieListResponse.asModel(today: LocalDate): MovieListModel {
-    return MovieListModel(
-        lastUpdateTime = lastUpdateTime,
-        list = list.map { it.asModel(today = today) },
-    )
+fun dDayStringResource(dDay: Long): String {
+    return when {
+        dDay <= 0 -> "NOW"
+        else -> "D-$dDay"
+    }
 }

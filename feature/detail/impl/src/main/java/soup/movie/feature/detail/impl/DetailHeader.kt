@@ -46,11 +46,10 @@ import androidx.compose.ui.unit.sp
 import soup.movie.core.designsystem.icon.MovieIcons
 import soup.movie.core.designsystem.theme.MovieTheme
 import soup.movie.core.imageloading.AsyncImage
-import soup.movie.domain.movie.getDDayLabel
-import soup.movie.domain.movie.isDDay
 import soup.movie.feature.home.rememberHomeComposableFactory
 import soup.movie.model.MovieModel
 import soup.movie.resources.R
+import soup.movie.resources.dDayStringResource
 
 @Composable
 internal fun DetailHeader(
@@ -62,7 +61,11 @@ internal fun DetailHeader(
     val factory = rememberHomeComposableFactory()
     val movie: MovieModel = uiModel.movie
     Column(modifier = modifier) {
-        Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+        ) {
             Text(
                 text = movie.title,
                 modifier = Modifier
@@ -75,7 +78,11 @@ internal fun DetailHeader(
             )
             actions()
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+        ) {
             Box(
                 contentAlignment = Alignment.TopEnd,
             ) {
@@ -101,15 +108,21 @@ internal fun DetailHeader(
                         age = movie.age,
                         modifier = Modifier.padding(top = 12.dp),
                     )
-                    if (movie.isDDay()) {
-                        factory.MovieDDayTag(
-                            text = movie.getDDayLabel().orEmpty(),
-                            modifier = Modifier.padding(top = 4.dp),
-                        )
+                    if (movie.isPlan) {
+                        movie.dDay?.let {
+                            factory.MovieDDayTag(
+                                text = dDayStringResource(dDay = it),
+                                modifier = Modifier.padding(top = 4.dp),
+                            )
+                        }
                     }
                 }
             }
-            Column(modifier = Modifier.fillMaxWidth().padding(start = 12.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 12.dp),
+            ) {
                 if (movie.openDate.isNotEmpty()) {
                     Row {
                         Text(
@@ -124,7 +137,9 @@ internal fun DetailHeader(
                             color = MovieTheme.colorScheme.onBackground,
                             style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
-                            modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 8.dp),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -151,7 +166,9 @@ internal fun DetailHeader(
                         color = MovieTheme.colorScheme.onBackground,
                         style = MovieTheme.typography.bodyMedium,
                         fontSize = 14.sp,
-                        modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 8.dp),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -171,7 +188,9 @@ internal fun DetailHeader(
                             color = MovieTheme.colorScheme.onBackground,
                             style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
-                            modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 8.dp),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -192,7 +211,9 @@ internal fun DetailHeader(
                             color = MovieTheme.colorScheme.onBackground,
                             style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
-                            modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 8.dp),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -213,7 +234,9 @@ internal fun DetailHeader(
                             color = MovieTheme.colorScheme.onBackground,
                             style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
-                            modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 8.dp),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -238,7 +261,9 @@ internal fun DetailHeader(
                             color = MovieTheme.colorScheme.onBackground,
                             style = MovieTheme.typography.bodyMedium,
                             fontSize = 14.sp,
-                            modifier = Modifier.fillMaxWidth().padding(start = 8.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 8.dp),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )

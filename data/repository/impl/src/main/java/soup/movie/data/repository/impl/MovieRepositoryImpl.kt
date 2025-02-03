@@ -24,6 +24,7 @@ import soup.movie.data.network.RemoteDataSource
 import soup.movie.data.network.response.asModel
 import soup.movie.data.repository.MovieRepository
 import soup.movie.data.repository.impl.util.SearchHelper
+import soup.movie.datetime.today
 import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.MovieModel
@@ -54,7 +55,7 @@ class MovieRepositoryImpl @Inject constructor(
             true
         }
         if (isStaleness) {
-            local.saveNowMovieList(remote.getNowMovieList().asModel())
+            local.saveNowMovieList(remote.getNowMovieList().asModel(today = today()))
         }
     }
 
@@ -78,14 +79,14 @@ class MovieRepositoryImpl @Inject constructor(
                 true
             }
             if (isStaleness) {
-                local.savePlanMovieList(remote.getPlanMovieList().asModel())
+                local.savePlanMovieList(remote.getPlanMovieList().asModel(today = today()))
             }
         }
     }
 
     override suspend fun getMovieDetail(movieId: String): MovieDetailModel {
         return withContext(ioDispatcher) {
-            remote.getMovieDetail(movieId).asModel()
+            remote.getMovieDetail(movieId).asModel(today = today())
         }
     }
 
