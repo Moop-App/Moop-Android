@@ -1,4 +1,4 @@
-name: Build & test
+name: "✅ ✔️ [ABC] Build & test"
 
 on:
   push:
