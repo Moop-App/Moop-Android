@@ -16,16 +16,14 @@
 package soup.movie.feature.detail.impl
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
-import soup.compose.material.motion.animation.materialSharedAxisZIn
-import soup.compose.material.motion.animation.materialSharedAxisZOut
 
-private sealed interface DetailScreen {
+private sealed interface DetailScreen : NavKey {
 
     @Serializable
     data class Home(val movieId: String) : DetailScreen
@@ -36,29 +34,34 @@ private sealed interface DetailScreen {
 
 @Composable
 fun DetailNavGraph(movieId: String) {
-    val navController = rememberNavController()
-    NavHost(
-        navController,
-        startDestination = DetailScreen.Home(movieId),
-        enterTransition = { materialSharedAxisZIn(forward = true) },
-        exitTransition = { materialSharedAxisZOut(forward = true) },
-        popEnterTransition = { materialSharedAxisZIn(forward = false) },
-        popExitTransition = { materialSharedAxisZOut(forward = false) },
-    ) {
-        composable<DetailScreen.Home> {
+    // Create navigation state with Detail.Home as the start route
+    val navigationState = rememberDetailNavigationState(
+        startRoute = DetailScreen.Home(movieId),
+    )
+
+    val navigator = remember { DetailNavigator(navigationState) }
+
+    // Define entry provider for detail destinations
+    val entryProvider = entryProvider<NavKey> {
+        entry<DetailScreen.Home> { key ->
             val viewModel = hiltViewModel<DetailViewModel>()
             DetailScreen(
                 viewModel = viewModel,
                 onPosterClick = {
-                    navController.navigate(DetailScreen.Poster(posterUrl = it))
+                    navigator.navigate(DetailScreen.Poster(posterUrl = it))
                 },
             )
         }
-        composable<DetailScreen.Poster> { backStackEntry ->
-            val posterUrl = backStackEntry.toRoute<DetailScreen.Poster>().posterUrl
+        entry<DetailScreen.Poster> { key ->
             DetailPoster(
-                posterUrl = posterUrl,
+                posterUrl = key.posterUrl,
             )
         }
     }
+
+    // Replace NavHost with NavDisplay
+    NavDisplay(
+        entries = navigationState.toEntries(entryProvider),
+        onBack = { navigator.goBack() },
+    )
 }

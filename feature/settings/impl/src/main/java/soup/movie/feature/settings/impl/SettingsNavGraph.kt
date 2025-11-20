@@ -16,19 +16,18 @@
 package soup.movie.feature.settings.impl
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
-import soup.compose.material.motion.animation.materialSharedAxisZIn
-import soup.compose.material.motion.animation.materialSharedAxisZOut
 import soup.movie.feature.settings.impl.home.SettingsScreen
 import soup.movie.feature.settings.impl.home.SettingsViewModel
 import soup.movie.feature.settings.impl.theme.ThemeOptionScreen
 import soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
 
-private sealed interface SettingsScreen {
+private sealed interface SettingsScreen : NavKey {
 
     @Serializable
     data object Home : SettingsScreen
@@ -39,27 +38,33 @@ private sealed interface SettingsScreen {
 
 @Composable
 fun SettingsNavGraph() {
-    val navController = rememberNavController()
-    NavHost(
-        navController,
-        startDestination = SettingsScreen.Home,
-        enterTransition = { materialSharedAxisZIn(forward = true) },
-        exitTransition = { materialSharedAxisZOut(forward = true) },
-        popEnterTransition = { materialSharedAxisZIn(forward = false) },
-        popExitTransition = { materialSharedAxisZOut(forward = false) },
-    ) {
-        composable<SettingsScreen.Home> {
+    // Create navigation state with Settings.Home as the start route
+    val navigationState = rememberSettingsNavigationState(
+        startRoute = SettingsScreen.Home,
+    )
+
+    val navigator = remember { SettingsNavigator(navigationState) }
+
+    // Define entry provider for settings destinations
+    val entryProvider = entryProvider<NavKey> {
+        entry<SettingsScreen.Home> {
             val viewModel = hiltViewModel<SettingsViewModel>()
             SettingsScreen(
                 viewModel = viewModel,
                 onThemeEditClick = {
-                    navController.navigate(SettingsScreen.ThemeOption)
+                    navigator.navigate(SettingsScreen.ThemeOption)
                 },
             )
         }
-        composable<SettingsScreen.ThemeOption> {
+        entry<SettingsScreen.ThemeOption> {
             val viewModel = hiltViewModel<ThemeOptionViewModel>()
             ThemeOptionScreen(viewModel.items)
         }
     }
+
+    // Replace NavHost with NavDisplay
+    NavDisplay(
+        entries = navigationState.toEntries(entryProvider),
+        onBack = { navigator.goBack() },
+    )
 }

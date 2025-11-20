@@ -26,7 +26,9 @@ dependencies {
     implementation libs.compose.foundation
     implementation libs.compose.material3
     implementation libs.compose.ui
-    implementation libs.androidx.navigation.compose
+    implementation libs.androidx.navigation3.ui
+    implementation libs.androidx.navigation3.runtime
+    implementation libs.androidx.lifecycle.viewmodel.navigation3
     implementation libs.materialmotion.compose.core
 
     testImplementation projects.testing
