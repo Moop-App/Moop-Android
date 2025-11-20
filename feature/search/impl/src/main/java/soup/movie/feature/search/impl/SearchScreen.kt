@@ -121,13 +121,14 @@ private fun SearchTopBar(
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
 ) {
     Surface(
-        modifier = modifier.windowInsetsPadding(windowInsets)
+        modifier = modifier
+            .windowInsetsPadding(windowInsets)
             .fillMaxWidth()
             .height(56.dp),
         color = MovieTheme.colorScheme.surfaceContainerLowest,
     ) {
         val focusManager = LocalFocusManager.current
-        val focusRequester = FocusRequester()
+        val focusRequester = remember { FocusRequester() }
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
         }
