@@ -14,16 +14,16 @@ dagger = "2.57.2"
 androidxhilt = "1.3.0"
 
 # AndroidX
-androidx-activity = "1.10.1"
-androidx-appcompat = "1.7.0"
+androidx-activity = "1.12.0"
+androidx-appcompat = "1.7.1"
 androidx-benchmark = "1.3.3"
 androidx-browser = "1.8.0"
-androidx-core = "1.16.0-alpha02"
+androidx-core = "1.17.0"
 androidx-datastore = "1.1.3"
 androidx-lifecycle = "2.9.0-alpha11"
+androidx-lifecycle-viewmodel-navigation3 = "2.10.0"
 androidx-navigation = "2.9.6"
-nav3Core = "1.0.0"
-lifecycleViewmodelNav3 = "2.10.0"
+androidx-navigation3 = "1.0.0"
 androidx-profileinstaller = "1.4.1"
 androidx-room = "2.7.0-rc01"
 androidx-startup = "1.2.0"
@@ -80,9 +80,9 @@ androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-common-ja
 
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
-androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "nav3Core" }
-androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3Core" }
-androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "lifecycleViewmodelNav3" }
+androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "androidx-navigation3" }
+androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "androidx-navigation3" }
+androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-lifecycle-viewmodel-navigation3" }
 
 androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "androidx-profileinstaller" }
 
