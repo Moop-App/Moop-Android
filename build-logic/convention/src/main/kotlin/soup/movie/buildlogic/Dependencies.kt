@@ -23,10 +23,6 @@ fun DependencyHandler.compileOnly(dependencyNotation: Any): Dependency? {
     return add("compileOnly", dependencyNotation)
 }
 
-fun DependencyHandler.coreLibraryDesugaring(dependencyNotation: Any): Dependency? {
-    return add("coreLibraryDesugaring", dependencyNotation)
-}
-
 fun DependencyHandler.project(
     path: String,
     configuration: String? = null,

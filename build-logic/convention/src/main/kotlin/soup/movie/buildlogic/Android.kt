@@ -20,12 +20,6 @@ fun Project.configureAndroid() {
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
-            isCoreLibraryDesugaringEnabled = true
-        }
-
-        val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-        dependencies {
-            coreLibraryDesugaring(libs.findLibrary("android.desugar.jdk").get())
         }
     }
 }
