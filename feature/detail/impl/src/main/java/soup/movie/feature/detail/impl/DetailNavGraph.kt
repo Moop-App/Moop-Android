@@ -17,13 +17,13 @@ package soup.movie.feature.detail.impl
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
 
-private sealed interface DetailScreen : NavKey {
+sealed interface DetailScreen : NavKey {
 
     @Serializable
     data class Home(val movieId: String) : DetailScreen
@@ -44,7 +44,11 @@ fun DetailNavGraph(movieId: String) {
     // Define entry provider for detail destinations
     val entryProvider = entryProvider<NavKey> {
         entry<DetailScreen.Home> { key ->
-            val viewModel = hiltViewModel<DetailViewModel>()
+            val viewModel = hiltViewModel<DetailViewModel, DetailViewModel.Factory>(
+                creationCallback = { factory ->
+                    factory.create(key)
+                }
+            )
             DetailScreen(
                 viewModel = viewModel,
                 onPosterClick = {
