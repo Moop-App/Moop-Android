@@ -19,6 +19,7 @@ dependencies {
     implementation projects.core.datetime
     implementation projects.data.repository.api
     implementation projects.data.model
+    implementation projects.feature.navigator.api
     implementation projects.feature.home.api
     implementation projects.feature.detail.api
 
@@ -26,7 +27,7 @@ dependencies {
     implementation libs.kotlin.serialization
 
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.hilt.navigation.compose
+    implementation libs.androidx.hilt.lifecycle.viewmodel.compose
     implementation libs.androidx.navigation3.ui
     implementation libs.androidx.navigation3.runtime
     implementation libs.androidx.lifecycle.viewmodel.navigation3

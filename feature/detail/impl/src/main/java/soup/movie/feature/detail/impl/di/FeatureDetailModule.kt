@@ -15,19 +15,25 @@
  */
 package soup.movie.feature.detail.impl.di
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.detail.DetailComposableFactory
-import soup.movie.feature.detail.impl.DetailComposableFactoryImpl
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.multibindings.IntoSet
+import soup.movie.feature.detail.impl.DetailNavGraph
+import soup.movie.feature.navigator.EntryProviderInstaller
+import soup.movie.feature.navigator.Navigator
+import soup.movie.feature.navigator.Screen
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface FeatureDetailModule {
+@InstallIn(ActivityRetainedComponent::class)
+object FeatureDetailModule {
 
-    @Binds
-    fun bindsDetailComposableFactoryImpl(
-        impl: DetailComposableFactoryImpl,
-    ): DetailComposableFactory
+    @IntoSet
+    @Provides
+    fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
+        entry<Screen.Detail> { key ->
+            DetailNavGraph(movieId = key.movieId)
+        }
+    }
 }

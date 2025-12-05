@@ -17,26 +17,11 @@ package soup.movie.feature.home.impl
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import soup.movie.feature.home.HomeComposableFactory
 import soup.movie.model.MovieModel
 import javax.inject.Inject
 
 class HomeComposableFactoryImpl @Inject constructor() : HomeComposableFactory {
-
-    @Composable
-    override fun HomeNavGraph(
-        onSearchClick: () -> Unit,
-        onSettingsClick: () -> Unit,
-        onMovieItemClick: (MovieModel) -> Unit,
-    ) {
-        HomeNavGraph(
-            viewModel = hiltViewModel(),
-            onSearchClick = onSearchClick,
-            onSettingsClick = onSettingsClick,
-            onMovieItemClick = onMovieItemClick,
-        )
-    }
 
     @Composable
     override fun MovieList(

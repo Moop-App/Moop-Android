@@ -15,19 +15,24 @@
  */
 package soup.movie.feature.settings.impl.di
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.settings.SettingsComposableFactory
-import soup.movie.feature.settings.impl.SettingsComposableFactoryImpl
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.multibindings.IntoSet
+import soup.movie.feature.navigator.EntryProviderInstaller
+import soup.movie.feature.navigator.Navigator
+import soup.movie.feature.navigator.Screen
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface FeatureSettingsModule {
+@InstallIn(ActivityRetainedComponent::class)
+object FeatureSettingsModule {
 
-    @Binds
-    fun bindsSettingsComposableFactory(
-        impl: SettingsComposableFactoryImpl,
-    ): SettingsComposableFactory
+    @IntoSet
+    @Provides
+    fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
+        entry<Screen.Settings> {
+            soup.movie.feature.settings.impl.SettingsNavGraph()
+        }
+    }
 }

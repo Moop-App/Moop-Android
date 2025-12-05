@@ -15,12 +15,20 @@
  */
 package soup.movie.feature.home.impl.di
 
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoSet
 import soup.movie.feature.home.HomeComposableFactory
 import soup.movie.feature.home.impl.HomeComposableFactoryImpl
+import soup.movie.feature.home.impl.HomeNavGraph
+import soup.movie.feature.navigator.EntryProviderInstaller
+import soup.movie.feature.navigator.Navigator
+import soup.movie.feature.navigator.Screen
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -30,4 +38,28 @@ interface FeatureHomeModule {
     fun bindsHomeComposableFactory(
         impl: HomeComposableFactoryImpl,
     ): HomeComposableFactory
+}
+
+@Module
+@InstallIn(ActivityRetainedComponent::class)
+object HomeModule {
+
+    @IntoSet
+    @Provides
+    fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
+        entry<Screen.Main> {
+            HomeNavGraph(
+                viewModel = hiltViewModel(),
+                onSearchClick = {
+                    navigator.navigate(Screen.Search)
+                },
+                onSettingsClick = {
+                    navigator.navigate(Screen.Settings)
+                },
+                onMovieItemClick = {
+                    navigator.navigate(Screen.Detail(movieId = it.id))
+                },
+            )
+        }
+    }
 }

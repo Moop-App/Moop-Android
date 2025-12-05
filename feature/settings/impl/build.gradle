@@ -16,13 +16,14 @@ dependencies {
     implementation projects.core.resources
     implementation projects.data.settings.api
     implementation projects.data.model
+    implementation projects.feature.navigator.api
     implementation projects.feature.settings.api
 
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
 
     implementation libs.androidx.appcompat
-    implementation libs.androidx.hilt.navigation.compose
+    implementation libs.androidx.hilt.lifecycle.viewmodel.compose
     implementation libs.compose.foundation
     implementation libs.compose.material3
     implementation libs.compose.ui

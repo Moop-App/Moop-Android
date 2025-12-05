@@ -20,12 +20,24 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import dagger.hilt.android.AndroidEntryPoint
+import soup.compose.material.motion.animation.materialSharedAxisZ
 import soup.movie.R
 import soup.movie.core.designsystem.theme.MovieTheme
+import soup.movie.feature.navigator.EntryProviderInstaller
+import soup.movie.feature.navigator.Navigator
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var navigator: Navigator
+
+    @Inject
+    lateinit var entryProviderScopes: Set<@JvmSuppressWildcards EntryProviderInstaller>
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -35,7 +47,16 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             MovieTheme {
-                MainNavGraph()
+                NavDisplay(
+                    backStack = navigator.backStack,
+                    onBack = { navigator.goBack() },
+                    transitionSpec = { materialSharedAxisZ(forward = true) },
+                    popTransitionSpec = { materialSharedAxisZ(forward = false) },
+                    predictivePopTransitionSpec = { materialSharedAxisZ(forward = false) },
+                    entryProvider = entryProvider {
+                        entryProviderScopes.forEach { builder -> this.builder() }
+                    }
+                )
             }
         }
 

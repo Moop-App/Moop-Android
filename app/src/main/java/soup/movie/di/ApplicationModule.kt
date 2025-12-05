@@ -26,7 +26,8 @@ import soup.movie.feature.navigator.MainNavigator
 interface ApplicationModule {
 
     @Binds
-    fun provideMainNavigator(
+    fun bindsMainNavigator(
         impl: MainNavigatorImpl,
     ): MainNavigator
 }
+
