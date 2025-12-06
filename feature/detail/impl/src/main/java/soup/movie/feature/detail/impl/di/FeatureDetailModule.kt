@@ -17,7 +17,9 @@ package soup.movie.feature.detail.impl.di
 
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
+import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation3.scene.DialogSceneStrategy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,7 +55,14 @@ object FeatureDetailModule {
                 },
             )
         }
-        entry<DetailScreenKey.Poster> { key ->
+        entry<DetailScreenKey.Poster>(
+            metadata = DialogSceneStrategy.dialog(
+                DialogProperties(
+                    usePlatformDefaultWidth = false,
+                    decorFitsSystemWindows = false,
+                ),
+            ),
+        ) { key ->
             DetailPoster(
                 posterUrl = key.posterUrl,
             )

@@ -30,11 +30,13 @@ import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
 import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
 import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import dagger.hilt.android.AndroidEntryPoint
 import soup.compose.material.motion.animation.materialSharedAxisZ
@@ -86,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     },
                 ) {
+                    val dialogSceneStrategy = remember { DialogSceneStrategy<NavKey>() }
                     val directive = calculatePaneScaffoldDirective(currentWindowAdaptiveInfo())
                         .copy(horizontalPartitionSpacerSize = 0.dp)
                     NavDisplay(
@@ -95,10 +98,10 @@ class MainActivity : AppCompatActivity() {
                             },
                         ),
                         onBack = { navigator.goBack() },
-                        sceneStrategy = rememberListDetailSceneStrategy(
+                        sceneStrategy = rememberListDetailSceneStrategy<NavKey>(
                             backNavigationBehavior = BackNavigationBehavior.PopLatest,
                             directive = directive,
-                        ),
+                        ) then dialogSceneStrategy,
                         transitionSpec = { materialSharedAxisZ(forward = true) },
                         popTransitionSpec = { materialSharedAxisZ(forward = false) },
                         predictivePopTransitionSpec = { materialSharedAxisZ(forward = false) },

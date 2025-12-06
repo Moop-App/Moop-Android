@@ -17,11 +17,9 @@ package soup.movie.feature.detail.impl
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.launch
 import soup.compose.photo.ExperimentalPhotoApi
 import soup.compose.photo.PhotoBox
@@ -40,16 +38,14 @@ fun DetailPoster(
             photoState.animateToInitialState()
         }
     }
-    Surface(color = Color.Black) {
-        PhotoBox(state = photoState) {
-            AsyncImage(
-                posterUrl,
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                onSuccess = {
-                    photoState.setPhotoIntrinsicSize(it.intrinsicSize)
-                },
-            )
-        }
+    PhotoBox(state = photoState, modifier = Modifier.fillMaxSize()) {
+        AsyncImage(
+            posterUrl,
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            onSuccess = {
+                photoState.setPhotoIntrinsicSize(it.intrinsicSize)
+            },
+        )
     }
 }
