@@ -32,6 +32,7 @@ import soup.movie.data.repository.MovieRepository
 import soup.movie.datetime.MM_DD
 import soup.movie.datetime.today
 import soup.movie.datetime.yesterday
+import soup.movie.feature.detail.DetailScreenKey
 import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.MovieModel
@@ -40,7 +41,7 @@ import java.time.temporal.ChronoUnit
 
 @HiltViewModel(assistedFactory = DetailViewModel.Factory::class)
 class DetailViewModel @AssistedInject constructor(
-    @Assisted private val input: DetailScreen.Home,
+    @Assisted private val input: DetailScreenKey.Root,
     private val repository: MovieRepository,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
@@ -225,6 +226,6 @@ class DetailViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(input: DetailScreen.Home): DetailViewModel
+        fun create(input: DetailScreenKey.Root): DetailViewModel
     }
 }

@@ -15,6 +15,7 @@
  */
 package soup.movie.feature.settings.impl.di
 
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +23,11 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.multibindings.IntoSet
 import soup.movie.feature.navigator.EntryProviderInstaller
 import soup.movie.feature.navigator.Navigator
-import soup.movie.feature.navigator.Screen
+import soup.movie.feature.settings.SettingsScreenKey
+import soup.movie.feature.settings.impl.home.SettingsScreen
+import soup.movie.feature.settings.impl.home.SettingsViewModel
+import soup.movie.feature.settings.impl.theme.ThemeOptionScreen
+import soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -31,8 +36,18 @@ object FeatureSettingsModule {
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<Screen.Settings> {
-            soup.movie.feature.settings.impl.SettingsNavGraph()
+        entry<SettingsScreenKey.Root> {
+            val viewModel = hiltViewModel<SettingsViewModel>()
+            SettingsScreen(
+                viewModel = viewModel,
+                onThemeEditClick = {
+                    navigator.navigate(SettingsScreenKey.ThemeOption)
+                },
+            )
+        }
+        entry<SettingsScreenKey.ThemeOption> {
+            val viewModel = hiltViewModel<ThemeOptionViewModel>()
+            ThemeOptionScreen(viewModel.items)
         }
     }
 }

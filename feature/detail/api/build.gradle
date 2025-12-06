@@ -1,7 +1,5 @@
 plugins {
     id "moop.android.library"
-    id "moop.android.compose"
-    id "moop.android.hilt"
 }
 
 android {
@@ -9,11 +7,10 @@ android {
 }
 
 dependencies {
-    implementation projects.core.kotlin
-    implementation projects.core.designsystem
-    implementation projects.core.resources
+    implementation projects.feature.navigator.api
 
     implementation libs.kotlin.stdlib
+    implementation libs.kotlin.serialization
 
-    implementation libs.compose.foundation
+    implementation libs.androidx.navigation3.runtime
 }

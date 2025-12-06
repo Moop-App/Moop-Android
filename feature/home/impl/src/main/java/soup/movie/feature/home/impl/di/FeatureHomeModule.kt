@@ -23,12 +23,15 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
+import soup.movie.feature.detail.DetailScreenKey
 import soup.movie.feature.home.HomeComposableFactory
+import soup.movie.feature.home.HomeScreenKey
 import soup.movie.feature.home.impl.HomeComposableFactoryImpl
 import soup.movie.feature.home.impl.HomeNavGraph
 import soup.movie.feature.navigator.EntryProviderInstaller
 import soup.movie.feature.navigator.Navigator
-import soup.movie.feature.navigator.Screen
+import soup.movie.feature.search.SearchScreenKey
+import soup.movie.feature.settings.SettingsScreenKey
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -47,17 +50,17 @@ object HomeModule {
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<Screen.Main> {
+        entry<HomeScreenKey.Root> {
             HomeNavGraph(
                 viewModel = hiltViewModel(),
                 onSearchClick = {
-                    navigator.navigate(Screen.Search)
+                    navigator.navigate(SearchScreenKey.Root)
                 },
                 onSettingsClick = {
-                    navigator.navigate(Screen.Settings)
+                    navigator.navigate(SettingsScreenKey.Root)
                 },
                 onMovieItemClick = {
-                    navigator.navigate(Screen.Detail(movieId = it.id))
+                    navigator.navigate(DetailScreenKey.Root(movieId = it.id))
                 },
             )
         }

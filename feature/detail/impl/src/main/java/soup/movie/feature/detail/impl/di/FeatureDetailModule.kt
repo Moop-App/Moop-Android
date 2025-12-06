@@ -15,15 +15,18 @@
  */
 package soup.movie.feature.detail.impl.di
 
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.multibindings.IntoSet
-import soup.movie.feature.detail.impl.DetailNavGraph
+import soup.movie.feature.detail.DetailScreenKey
+import soup.movie.feature.detail.impl.DetailPoster
+import soup.movie.feature.detail.impl.DetailScreen
+import soup.movie.feature.detail.impl.DetailViewModel
 import soup.movie.feature.navigator.EntryProviderInstaller
 import soup.movie.feature.navigator.Navigator
-import soup.movie.feature.navigator.Screen
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -32,8 +35,23 @@ object FeatureDetailModule {
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<Screen.Detail> { key ->
-            DetailNavGraph(movieId = key.movieId)
+        entry<DetailScreenKey.Root> { key ->
+            val viewModel = hiltViewModel<DetailViewModel, DetailViewModel.Factory>(
+                creationCallback = { factory ->
+                    factory.create(key)
+                }
+            )
+            DetailScreen(
+                viewModel = viewModel,
+                onPosterClick = {
+                    navigator.navigate(DetailScreenKey.Poster(posterUrl = it))
+                },
+            )
+        }
+        entry<DetailScreenKey.Poster> { key ->
+            DetailPoster(
+                posterUrl = key.posterUrl,
+            )
         }
     }
 }

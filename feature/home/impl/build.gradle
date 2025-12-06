@@ -19,6 +19,9 @@ dependencies {
     implementation projects.data.model
     implementation projects.feature.navigator.api
     implementation projects.feature.home.api
+    implementation projects.feature.detail.api
+    implementation projects.feature.search.api
+    implementation projects.feature.settings.api
 
     implementation libs.kotlin.stdlib
 

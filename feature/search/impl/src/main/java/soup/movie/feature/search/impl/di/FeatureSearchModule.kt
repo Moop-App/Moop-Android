@@ -21,9 +21,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.multibindings.IntoSet
+import soup.movie.feature.detail.DetailScreenKey
 import soup.movie.feature.navigator.EntryProviderInstaller
 import soup.movie.feature.navigator.Navigator
-import soup.movie.feature.navigator.Screen
+import soup.movie.feature.search.SearchScreenKey
 import soup.movie.feature.search.impl.SearchScreen
 
 @Module
@@ -33,12 +34,12 @@ object FeatureSearchModule {
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<Screen.Search> {
+        entry<SearchScreenKey.Root> {
             SearchScreen(
                 viewModel = hiltViewModel(),
                 upPress = { navigator.goBack() },
                 onItemClick = {
-                    navigator.navigate(Screen.Detail(movieId = it.id))
+                    navigator.navigate(DetailScreenKey.Root(movieId = it.id))
                 },
             )
         }
