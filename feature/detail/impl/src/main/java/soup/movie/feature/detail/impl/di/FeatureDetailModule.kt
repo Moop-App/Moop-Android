@@ -15,6 +15,8 @@
  */
 package soup.movie.feature.detail.impl.di
 
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.Module
 import dagger.Provides
@@ -32,10 +34,13 @@ import soup.movie.feature.navigator.Navigator
 @InstallIn(ActivityRetainedComponent::class)
 object FeatureDetailModule {
 
+    @OptIn(ExperimentalMaterial3AdaptiveApi::class)
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<DetailScreenKey.Root> { key ->
+        entry<DetailScreenKey.Root>(
+            metadata = ListDetailSceneStrategy.detailPane("main"),
+        ) { key ->
             val viewModel = hiltViewModel<DetailViewModel, DetailViewModel.Factory>(
                 creationCallback = { factory ->
                     factory.create(key)

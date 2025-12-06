@@ -15,6 +15,8 @@
  */
 package soup.movie.feature.home.impl.di
 
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.Binds
 import dagger.Module
@@ -47,10 +49,13 @@ interface FeatureHomeModule {
 @InstallIn(ActivityRetainedComponent::class)
 object HomeModule {
 
+    @OptIn(ExperimentalMaterial3AdaptiveApi::class)
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<HomeScreenKey.Root> {
+        entry<HomeScreenKey.Root>(
+            metadata = ListDetailSceneStrategy.listPane("main"),
+        ) {
             HomeNavGraph(
                 viewModel = hiltViewModel(),
                 onSearchClick = {

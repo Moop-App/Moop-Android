@@ -19,6 +19,12 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
+import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
+import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
@@ -41,15 +47,22 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
+    @OptIn(ExperimentalMaterial3AdaptiveApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Moop)
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             MovieTheme {
+                val directive = calculatePaneScaffoldDirective(currentWindowAdaptiveInfo())
+                    .copy(horizontalPartitionSpacerSize = 0.dp)
                 NavDisplay(
                     backStack = navigator.backStack,
                     onBack = { navigator.goBack() },
+                    sceneStrategy = rememberListDetailSceneStrategy(
+                        backNavigationBehavior = BackNavigationBehavior.PopLatest,
+                        directive = directive,
+                    ),
                     transitionSpec = { materialSharedAxisZ(forward = true) },
                     popTransitionSpec = { materialSharedAxisZ(forward = false) },
                     predictivePopTransitionSpec = { materialSharedAxisZ(forward = false) },
