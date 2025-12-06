@@ -25,6 +25,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.multibindings.IntoSet
 import soup.movie.feature.navigator.EntryProviderInstaller
 import soup.movie.feature.navigator.Navigator
+import soup.movie.feature.navigator.ScreenKey.Companion.SCENE_KEY_SETTINGS
 import soup.movie.feature.settings.SettingsScreenKey
 import soup.movie.feature.settings.impl.home.SettingsScreen
 import soup.movie.feature.settings.impl.home.SettingsViewModel
@@ -34,14 +35,13 @@ import soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 object FeatureSettingsModule {
-    private const val SCENE_KEY = "settings"
 
     @OptIn(ExperimentalMaterial3AdaptiveApi::class)
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<SettingsScreenKey.Root>(
-            metadata = ListDetailSceneStrategy.listPane(SCENE_KEY),
+        entry<SettingsScreenKey.Settings>(
+            metadata = ListDetailSceneStrategy.listPane(SCENE_KEY_SETTINGS),
         ) {
             val viewModel = hiltViewModel<SettingsViewModel>()
             SettingsScreen(
@@ -52,7 +52,7 @@ object FeatureSettingsModule {
             )
         }
         entry<SettingsScreenKey.ThemeOption>(
-            metadata = ListDetailSceneStrategy.detailPane(SCENE_KEY),
+            metadata = ListDetailSceneStrategy.detailPane(SCENE_KEY_SETTINGS),
         ) {
             val viewModel = hiltViewModel<ThemeOptionViewModel>()
             ThemeOptionScreen(viewModel.items)

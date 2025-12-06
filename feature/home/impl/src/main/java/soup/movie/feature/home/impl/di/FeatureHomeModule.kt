@@ -29,7 +29,8 @@ import soup.movie.feature.detail.DetailScreenKey
 import soup.movie.feature.home.HomeComposableFactory
 import soup.movie.feature.home.HomeScreenKey
 import soup.movie.feature.home.impl.HomeComposableFactoryImpl
-import soup.movie.feature.home.impl.HomeNavGraph
+import soup.movie.feature.home.impl.HomeScreen
+import soup.movie.feature.home.impl.favorite.HomeFavoriteScreen
 import soup.movie.feature.navigator.EntryProviderInstaller
 import soup.movie.feature.navigator.Navigator
 import soup.movie.feature.search.SearchScreenKey
@@ -53,19 +54,29 @@ object HomeModule {
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<HomeScreenKey.Root>(
-            metadata = ListDetailSceneStrategy.listPane("main"),
+        entry<HomeScreenKey.Home>(
+            metadata = ListDetailSceneStrategy.listPane("root"),
         ) {
-            HomeNavGraph(
+            HomeScreen(
                 viewModel = hiltViewModel(),
                 onSearchClick = {
                     navigator.navigate(SearchScreenKey.Root)
                 },
-                onSettingsClick = {
-                    navigator.navigate(SettingsScreenKey.Root)
-                },
                 onMovieItemClick = {
-                    navigator.navigate(DetailScreenKey.Root(movieId = it.id))
+                    navigator.navigate(DetailScreenKey.Movie(movieId = it.id))
+                },
+            )
+        }
+        entry<HomeScreenKey.Favorite>(
+            metadata = ListDetailSceneStrategy.listPane("root"),
+        ) {
+            HomeFavoriteScreen(
+                viewModel = hiltViewModel(),
+                onSettingsClick = {
+                    navigator.navigate(SettingsScreenKey.Settings)
+                },
+                onItemClick = {
+                    navigator.navigate(DetailScreenKey.Movie(movieId = it.id))
                 },
             )
         }

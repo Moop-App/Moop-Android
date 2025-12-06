@@ -41,7 +41,7 @@ import java.time.temporal.ChronoUnit
 
 @HiltViewModel(assistedFactory = DetailViewModel.Factory::class)
 class DetailViewModel @AssistedInject constructor(
-    @Assisted private val input: DetailScreenKey.Root,
+    @Assisted private val input: DetailScreenKey.Movie,
     private val repository: MovieRepository,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
@@ -226,6 +226,6 @@ class DetailViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(input: DetailScreenKey.Root): DetailViewModel
+        fun create(input: DetailScreenKey.Movie): DetailViewModel
     }
 }

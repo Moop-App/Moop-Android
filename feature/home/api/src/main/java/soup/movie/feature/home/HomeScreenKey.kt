@@ -6,5 +6,8 @@ import soup.movie.feature.navigator.ScreenKey
 sealed interface HomeScreenKey : ScreenKey {
 
     @Serializable
-    data object Root : HomeScreenKey
+    data object Home : HomeScreenKey
+
+    @Serializable
+    data object Favorite : HomeScreenKey
 }

@@ -39,7 +39,7 @@ object FeatureSearchModule {
                 viewModel = hiltViewModel(),
                 upPress = { navigator.goBack() },
                 onItemClick = {
-                    navigator.navigate(DetailScreenKey.Root(movieId = it.id))
+                    navigator.navigate(DetailScreenKey.Movie(movieId = it.id))
                 },
             )
         }

@@ -6,7 +6,7 @@ import soup.movie.feature.navigator.ScreenKey
 sealed interface SettingsScreenKey : ScreenKey {
 
     @Serializable
-    data object Root : SettingsScreenKey
+    data object Settings : SettingsScreenKey
 
     @Serializable
     data object ThemeOption : SettingsScreenKey

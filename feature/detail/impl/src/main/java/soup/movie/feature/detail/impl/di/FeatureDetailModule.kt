@@ -38,8 +38,8 @@ object FeatureDetailModule {
     @IntoSet
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
-        entry<DetailScreenKey.Root>(
-            metadata = ListDetailSceneStrategy.detailPane("main"),
+        entry<DetailScreenKey.Movie>(
+            metadata = ListDetailSceneStrategy.detailPane("root"),
         ) { key ->
             val viewModel = hiltViewModel<DetailViewModel, DetailViewModel.Factory>(
                 creationCallback = { factory ->

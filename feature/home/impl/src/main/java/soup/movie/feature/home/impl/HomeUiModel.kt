@@ -15,10 +15,6 @@
  */
 package soup.movie.feature.home.impl
 
-enum class MainTabUiModel {
-    Home, Favorite
-}
-
 enum class HomeTabUiModel {
     Now, Plan
 }
