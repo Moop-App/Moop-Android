@@ -46,7 +46,7 @@ object FeatureDetailModule {
             val viewModel = hiltViewModel<DetailViewModel, DetailViewModel.Factory>(
                 creationCallback = { factory ->
                     factory.create(key)
-                }
+                },
             )
             DetailScreen(
                 viewModel = viewModel,

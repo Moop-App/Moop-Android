@@ -27,7 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import soup.movie.core.designsystem.theme.MovieTheme
@@ -77,24 +77,27 @@ internal fun DetailContent(
                     modifier = Modifier.padding(paddingValues),
                 )
             }
+
             is DetailUiModel.Failure -> {
                 DetailError(
                     onRetryClick = {
                         viewModel.onRetryClick()
                     },
-                    modifier = Modifier.padding(paddingValues).fillMaxSize(),
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .fillMaxSize(),
                 )
             }
         }
     }
 
-    val context = LocalContext.current
     val showOpenDateAlarmMessage by viewModel.showOpenDateAlarmMessage.collectAsState()
+    val opendateAlarmMessage = stringResource(R.string.action_toast_opendate_alarm)
     LaunchedEffect(showOpenDateAlarmMessage) {
         if (showOpenDateAlarmMessage) {
             coroutineScope.launch {
                 snackbarHostState.showSnackbar(
-                    message = context.getString(R.string.action_toast_opendate_alarm),
+                    message = opendateAlarmMessage,
                 )
                 viewModel.onOpenDateAlarmMessageShown()
             }
