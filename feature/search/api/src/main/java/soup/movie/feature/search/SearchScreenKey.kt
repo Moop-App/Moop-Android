@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2025 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.feature.search
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.navigator.MainNavigator
+import kotlinx.serialization.Serializable
+import soup.movie.feature.navigator.ScreenKey
 
-@Module
-@InstallIn(SingletonComponent::class)
-interface ApplicationModule {
+sealed interface SearchScreenKey : ScreenKey {
 
-    @Binds
-    fun bindsMainNavigator(
-        impl: MainNavigatorImpl,
-    ): MainNavigator
+    @Serializable
+    data object Root : SearchScreenKey
 }

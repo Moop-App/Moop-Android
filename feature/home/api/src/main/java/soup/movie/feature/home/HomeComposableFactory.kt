@@ -28,13 +28,6 @@ import soup.movie.model.MovieModel
 interface HomeComposableFactory {
 
     @Composable
-    fun HomeNavGraph(
-        onSearchClick: () -> Unit,
-        onSettingsClick: () -> Unit,
-        onMovieItemClick: (MovieModel) -> Unit,
-    )
-
-    @Composable
     fun MovieList(
         movies: List<MovieModel>,
         onItemClick: (MovieModel) -> Unit,

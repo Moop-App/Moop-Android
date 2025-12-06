@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 SOUP
+ * Copyright 2025 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,16 @@ package soup.movie.di
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.navigator.MainNavigator
+import dagger.hilt.android.components.ActivityRetainedComponent
+import soup.movie.feature.navigator.Navigator
+import soup.movie.ui.main.NavigatorImpl
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface ApplicationModule {
+@InstallIn(ActivityRetainedComponent::class)
+interface AppModule {
 
     @Binds
-    fun bindsMainNavigator(
-        impl: MainNavigatorImpl,
-    ): MainNavigator
+    fun bindsNavigator(
+        impl: NavigatorImpl,
+    ): Navigator
 }

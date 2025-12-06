@@ -15,19 +15,47 @@
  */
 package soup.movie.feature.settings.impl.di
 
-import dagger.Binds
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.settings.SettingsComposableFactory
-import soup.movie.feature.settings.impl.SettingsComposableFactoryImpl
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.multibindings.IntoSet
+import soup.movie.feature.navigator.EntryProviderInstaller
+import soup.movie.feature.navigator.Navigator
+import soup.movie.feature.navigator.ScreenKey.Companion.SCENE_KEY_SETTINGS
+import soup.movie.feature.settings.SettingsScreenKey
+import soup.movie.feature.settings.impl.home.SettingsScreen
+import soup.movie.feature.settings.impl.home.SettingsViewModel
+import soup.movie.feature.settings.impl.theme.ThemeOptionScreen
+import soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface FeatureSettingsModule {
+@InstallIn(ActivityRetainedComponent::class)
+object FeatureSettingsModule {
 
-    @Binds
-    fun bindsSettingsComposableFactory(
-        impl: SettingsComposableFactoryImpl,
-    ): SettingsComposableFactory
+    @OptIn(ExperimentalMaterial3AdaptiveApi::class)
+    @IntoSet
+    @Provides
+    fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
+        entry<SettingsScreenKey.Settings>(
+            metadata = ListDetailSceneStrategy.listPane(SCENE_KEY_SETTINGS),
+        ) {
+            val viewModel = hiltViewModel<SettingsViewModel>()
+            SettingsScreen(
+                viewModel = viewModel,
+                onThemeEditClick = {
+                    navigator.navigate(SettingsScreenKey.ThemeOption)
+                },
+            )
+        }
+        entry<SettingsScreenKey.ThemeOption>(
+            metadata = ListDetailSceneStrategy.detailPane(SCENE_KEY_SETTINGS),
+        ) {
+            val viewModel = hiltViewModel<ThemeOptionViewModel>()
+            ThemeOptionScreen(viewModel.items)
+        }
+    }
 }

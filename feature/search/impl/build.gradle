@@ -14,15 +14,18 @@ dependencies {
     implementation projects.core.resources
     implementation projects.data.repository.api
     implementation projects.data.model
-    implementation projects.feature.search.api
+    implementation projects.feature.navigator.api
     implementation projects.feature.home.api
+    implementation projects.feature.detail.api
+    implementation projects.feature.search.api
 
     implementation libs.compose.foundation
     implementation libs.compose.material3
     implementation libs.compose.ui
 
-    implementation libs.androidx.hilt.navigation.compose
+    implementation libs.androidx.hilt.lifecycle.viewmodel.compose
     implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.androidx.navigation3.runtime
 
     testImplementation projects.testing
     androidTestImplementation projects.testing

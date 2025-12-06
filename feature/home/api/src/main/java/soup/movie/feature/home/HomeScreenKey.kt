@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 SOUP
+ * Copyright 2025 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.settings.impl
+package soup.movie.feature.home
 
-import androidx.compose.runtime.Composable
-import soup.movie.feature.settings.SettingsComposableFactory
-import javax.inject.Inject
+import kotlinx.serialization.Serializable
+import soup.movie.feature.navigator.ScreenKey
 
-class SettingsComposableFactoryImpl @Inject constructor() : SettingsComposableFactory {
+sealed interface HomeScreenKey : ScreenKey {
 
-    @Composable
-    override fun SettingsNavGraph() {
-        soup.movie.feature.settings.impl.SettingsNavGraph()
-    }
+    @Serializable
+    data object Home : HomeScreenKey
+
+    @Serializable
+    data object Favorite : HomeScreenKey
 }

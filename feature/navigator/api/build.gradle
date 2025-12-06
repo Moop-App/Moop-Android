@@ -10,4 +10,5 @@ dependencies {
     implementation projects.core.logger
 
     implementation libs.kotlin.stdlib
+    implementation libs.androidx.navigation3.runtime
 }

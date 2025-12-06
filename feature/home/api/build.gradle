@@ -12,8 +12,11 @@ dependencies {
     implementation projects.core.kotlin
     implementation projects.core.designsystem
     implementation projects.data.model
+    implementation projects.feature.navigator.api
 
     implementation libs.kotlin.stdlib
+    implementation libs.kotlin.serialization
 
+    implementation libs.androidx.navigation3.runtime
     implementation libs.compose.foundation
 }

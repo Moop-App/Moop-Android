@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 SOUP
+ * Copyright 2025 SOUP
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.feature.detail.impl
+package soup.movie.feature.navigator
 
-import androidx.compose.runtime.Composable
-import soup.movie.feature.detail.DetailComposableFactory
-import javax.inject.Inject
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 
-class DetailComposableFactoryImpl @Inject constructor() : DetailComposableFactory {
+typealias EntryProviderInstaller = EntryProviderScope<NavKey>.() -> Unit
 
-    @Composable
-    override fun DetailNavGraph(movieId: String) {
-        soup.movie.feature.detail.impl.DetailNavGraph(movieId = movieId)
-    }
+interface Navigator {
+    fun navigate(route: NavKey)
+    fun goBack()
 }

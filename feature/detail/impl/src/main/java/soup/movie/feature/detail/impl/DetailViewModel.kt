@@ -15,9 +15,11 @@
  */
 package soup.movie.feature.detail.impl
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,21 +32,21 @@ import soup.movie.data.repository.MovieRepository
 import soup.movie.datetime.MM_DD
 import soup.movie.datetime.today
 import soup.movie.datetime.yesterday
+import soup.movie.feature.detail.DetailScreenKey
 import soup.movie.log.Logger
 import soup.movie.model.MovieDetailModel
 import soup.movie.model.MovieModel
 import soup.movie.model.OpenDateAlarmModel
 import java.time.temporal.ChronoUnit
-import javax.inject.Inject
 
-@HiltViewModel
-class DetailViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+@HiltViewModel(assistedFactory = DetailViewModel.Factory::class)
+class DetailViewModel @AssistedInject constructor(
+    @Assisted private val input: DetailScreenKey.Movie,
     private val repository: MovieRepository,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    private val movieId: String = savedStateHandle["movieId"]!!
+    private val movieId: String = input.movieId
 
     private val _uiModel = MutableStateFlow<DetailUiModel>(DetailUiModel.None)
     val uiModel: StateFlow<DetailUiModel> = _uiModel
@@ -220,5 +222,10 @@ class DetailViewModel @Inject constructor(
             }
             return 0
         }
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(input: DetailScreenKey.Movie): DetailViewModel
     }
 }

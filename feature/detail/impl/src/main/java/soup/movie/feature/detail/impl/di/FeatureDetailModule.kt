@@ -15,19 +15,57 @@
  */
 package soup.movie.feature.detail.impl.di
 
-import dagger.Binds
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
+import androidx.compose.ui.window.DialogProperties
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation3.scene.DialogSceneStrategy
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.detail.DetailComposableFactory
-import soup.movie.feature.detail.impl.DetailComposableFactoryImpl
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.multibindings.IntoSet
+import soup.movie.feature.detail.DetailScreenKey
+import soup.movie.feature.detail.impl.DetailPoster
+import soup.movie.feature.detail.impl.DetailScreen
+import soup.movie.feature.detail.impl.DetailViewModel
+import soup.movie.feature.navigator.EntryProviderInstaller
+import soup.movie.feature.navigator.Navigator
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface FeatureDetailModule {
+@InstallIn(ActivityRetainedComponent::class)
+object FeatureDetailModule {
 
-    @Binds
-    fun bindsDetailComposableFactoryImpl(
-        impl: DetailComposableFactoryImpl,
-    ): DetailComposableFactory
+    @OptIn(ExperimentalMaterial3AdaptiveApi::class)
+    @IntoSet
+    @Provides
+    fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
+        entry<DetailScreenKey.Movie>(
+            metadata = ListDetailSceneStrategy.detailPane("root"),
+        ) { key ->
+            val viewModel = hiltViewModel<DetailViewModel, DetailViewModel.Factory>(
+                creationCallback = { factory ->
+                    factory.create(key)
+                },
+            )
+            DetailScreen(
+                viewModel = viewModel,
+                onPosterClick = {
+                    navigator.navigate(DetailScreenKey.Poster(posterUrl = it))
+                },
+            )
+        }
+        entry<DetailScreenKey.Poster>(
+            metadata = DialogSceneStrategy.dialog(
+                DialogProperties(
+                    usePlatformDefaultWidth = false,
+                    decorFitsSystemWindows = false,
+                ),
+            ),
+        ) { key ->
+            DetailPoster(
+                posterUrl = key.posterUrl,
+            )
+        }
+    }
 }

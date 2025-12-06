@@ -26,17 +26,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
 
-    private val _selectedMainTab = MutableStateFlow(MainTabUiModel.Home)
-    val selectedMainTab: StateFlow<MainTabUiModel> = _selectedMainTab
-
     private val _selectedHomeTab = MutableStateFlow(HomeTabUiModel.Now)
     val selectedHomeTab: StateFlow<HomeTabUiModel> = _selectedHomeTab
-
-    fun onMainTabSelected(mainTab: MainTabUiModel) {
-        viewModelScope.launch {
-            _selectedMainTab.emit(mainTab)
-        }
-    }
 
     fun onHomeTabSelected(homeTab: HomeTabUiModel) {
         viewModelScope.launch {

@@ -17,16 +17,20 @@ dependencies {
     implementation projects.data.settings.api
     implementation projects.data.repository.api
     implementation projects.data.model
+    implementation projects.feature.navigator.api
     implementation projects.feature.home.api
+    implementation projects.feature.detail.api
+    implementation projects.feature.search.api
+    implementation projects.feature.settings.api
 
     implementation libs.kotlin.stdlib
 
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.hilt.navigation.compose
-    implementation libs.compose.animation.graphics
+    implementation libs.androidx.hilt.lifecycle.viewmodel.compose
+    implementation libs.androidx.navigation3.runtime
     implementation libs.compose.foundation
     implementation libs.compose.material3
-    implementation libs.compose.material3.adaptivenavigation
+    implementation libs.compose.material3.adaptive.navigation3
     implementation libs.compose.ui
 
     testImplementation projects.testing

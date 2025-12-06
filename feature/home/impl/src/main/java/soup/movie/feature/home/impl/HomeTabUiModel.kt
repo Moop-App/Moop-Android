@@ -13,20 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package soup.movie.di
+package soup.movie.feature.home.impl
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.navigator.MainNavigator
-
-@Module
-@InstallIn(SingletonComponent::class)
-interface ApplicationModule {
-
-    @Binds
-    fun bindsMainNavigator(
-        impl: MainNavigatorImpl,
-    ): MainNavigator
+enum class HomeTabUiModel {
+    Now, Plan
 }

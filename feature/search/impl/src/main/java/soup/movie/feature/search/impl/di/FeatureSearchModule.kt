@@ -15,19 +15,33 @@
  */
 package soup.movie.feature.search.impl.di
 
-import dagger.Binds
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import soup.movie.feature.search.SearchComposableFactory
-import soup.movie.feature.search.impl.SearchComposableFactoryImpl
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.multibindings.IntoSet
+import soup.movie.feature.detail.DetailScreenKey
+import soup.movie.feature.navigator.EntryProviderInstaller
+import soup.movie.feature.navigator.Navigator
+import soup.movie.feature.search.SearchScreenKey
+import soup.movie.feature.search.impl.SearchScreen
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface FeatureSearchModule {
+@InstallIn(ActivityRetainedComponent::class)
+object FeatureSearchModule {
 
-    @Binds
-    fun bindsSearchComposableFactory(
-        impl: SearchComposableFactoryImpl,
-    ): SearchComposableFactory
+    @IntoSet
+    @Provides
+    fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller = {
+        entry<SearchScreenKey.Root> {
+            SearchScreen(
+                viewModel = hiltViewModel(),
+                upPress = { navigator.goBack() },
+                onItemClick = {
+                    navigator.navigate(DetailScreenKey.Movie(movieId = it.id))
+                },
+            )
+        }
+    }
 }
