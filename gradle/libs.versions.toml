@@ -1,12 +1,12 @@
 [versions]
 
 # Android
-androidGradlePlugin = "8.13.1"
+androidGradlePlugin = "8.13.2"
 
 # Kotlin
 kotlin = "2.2.21"
-coroutines = "1.10.1"
-serialization = "1.8.0"
+coroutines = "1.10.2"
+serialization = "1.9.0"
 ksp = "2.3.2"
 
 # Dagger
@@ -17,29 +17,28 @@ androidxhilt = "1.3.0"
 androidx-activity = "1.12.1"
 androidx-appcompat = "1.7.1"
 androidx-benchmark = "1.3.3"
-androidx-browser = "1.8.0"
+androidx-browser = "1.9.0"
 androidx-core = "1.17.0"
-androidx-datastore = "1.1.3"
+androidx-datastore = "1.2.0"
 androidx-lifecycle = "2.10.0"
-androidx-navigation = "2.9.6"
 androidx-navigation3 = "1.0.0"
 androidx-profileinstaller = "1.4.1"
-androidx-room = "2.7.0-rc01"
+androidx-room = "2.8.4"
 androidx-startup = "1.2.0"
-androidx-window = "1.4.0-beta02"
-androidx-work = "2.10.0"
+androidx-window = "1.5.1"
+androidx-work = "2.11.0"
 
 # Compose
-compose-bom = "2025.02.00"
+compose-bom = "2025.12.00"
 compose-material3-adaptive = "1.3.0-alpha05"
-readmore = "1.5.6"
-materialmotion = "1.1.3"
+readmore = "1.9.0"
+materialmotion = "2.0.1"
 photo-compose = "1.0.1"
 
 # Etc
-coil = "3.1.0"
+coil = "3.3.0"
 dependencyGuard = "0.5.0"
-retrofit = "2.11.0"
+retrofit = "3.0.0"
 timber = "5.0.1"
 
 
@@ -78,8 +77,6 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-compiler = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-lifecycle" }
-
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
 androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "androidx-navigation3" }
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "androidx-navigation3" }

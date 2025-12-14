@@ -16,6 +16,9 @@ fun Project.configureKotlin() {
 
                 // https://github.com/Kotlin/kotlinx.serialization/issues/2145#issuecomment-1653091753
                 "-Xstring-concat=inline",
+
+                // https://youtrack.jetbrains.com/projects/KT/issues/KT-73255/Change-defaulting-rule-for-annotations
+                "-Xannotation-default-target=param-property",
             )
         }
     }

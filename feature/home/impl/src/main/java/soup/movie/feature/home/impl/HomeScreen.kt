@@ -19,11 +19,9 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -152,9 +150,7 @@ fun HomeScreen(
                                         } else {
                                             viewModel.onHomeTabSelected(homeTab)
                                         }
-                                    }
-                                    .fillMaxHeight()
-                                    .wrapContentHeight(),
+                                    },
                             )
                         }
                     }

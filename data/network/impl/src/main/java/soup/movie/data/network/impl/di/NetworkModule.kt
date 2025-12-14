@@ -24,7 +24,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.Cache
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -59,7 +59,7 @@ interface NetworkModule {
         ): MovieApiService {
             return Retrofit.Builder()
                 .baseUrl(BuildConfig.API_BASE_URL)
-                .addConverterFactory(json.asConverterFactory(MediaType.get("application/json")))
+                .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
                 .client(okHttpClient)
                 .build()
                 .create(MovieApiService::class.java)
