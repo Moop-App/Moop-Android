@@ -39,6 +39,7 @@ photo-compose = "1.0.1"
 coil = "3.3.0"
 dependencyGuard = "0.5.0"
 manifestShield = "0.1.10"
+proguardShield = "0.0.3"
 retrofit = "3.0.0"
 timber = "5.0.1"
 
@@ -151,4 +152,5 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 manifestShield = { id = "io.github.fornewid.manifest-shield", version.ref = "manifestShield" }
+proguardShield = { id = "io.github.fornewid.proguard-shield", version.ref = "proguardShield" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }

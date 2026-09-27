@@ -18,6 +18,11 @@
 ./gradlew manifestShield
 ```
 
+- proguardShield
+```bash
+./gradlew proguardShieldFast
+```
+
 - spotless
 ```bash
 ./gradlew spotlessCheck --init-script gradle/init.gradle.kts
@@ -38,6 +43,11 @@
 - manifestShield
 ```bash
 ./gradlew manifestShieldBaseline
+```
+
+- proguardShield
+```bash
+./gradlew proguardShieldFastBaseline
 ```
 
 - spotless

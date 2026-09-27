@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.dependencyGuard) apply false
     alias(libs.plugins.manifestShield) apply false
+    alias(libs.plugins.proguardShield) apply false
     alias(libs.plugins.baselineprofile) apply false
 }
 
