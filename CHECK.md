@@ -47,7 +47,7 @@
 
 - proguardShield
 ```bash
-./gradlew proguardShieldBaseline
+./gradlew proguardShieldFastBaseline
 ```
 
 - spotless
