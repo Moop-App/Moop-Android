@@ -5,6 +5,7 @@ plugins {
     id "org.jetbrains.kotlin.plugin.serialization"
     alias libs.plugins.dependencyGuard
     alias libs.plugins.manifestShield
+    alias libs.plugins.proguardShield
     alias(libs.plugins.baselineprofile)
 }
 
@@ -138,6 +139,10 @@ dependencyGuard {
 }
 
 manifestShield {
+    configuration("release")
+}
+
+proguardShield {
     configuration("release")
 }
 

@@ -1,0 +1,451 @@
+-allowaccessmodification
+-assumenosideeffects class androidx.datastore.core.SharedCounter$Factory {
+private boolean isDalvik() return true;
+}
+-assumenosideeffects class androidx.startup.StartupLogger { public static <methods>; }
+-assumenosideeffects class kotlinx.coroutines.DebugKt {
+boolean getASSERTIONS_ENABLED() return false;
+boolean getDEBUG() return false;
+boolean getRECOVER_STACK_TRACES() return false;
+}
+-assumenosideeffects class kotlinx.coroutines.internal.FastServiceLoaderKt {
+boolean ANDROID_DETECTED return true;
+}
+-assumenosideeffects class kotlinx.coroutines.internal.MainDispatcherLoader {
+boolean FAST_SERVICE_LOADER_ENABLED return false;
+}
+-assumenosideeffects class kotlinx.coroutines.internal.MainDispatchersKt {
+boolean SUPPORT_MISSING return false;
+}
+-assumenosideeffects public class androidx.compose.runtime.Composer {
+void <clinit>();
+}
+-assumenosideeffects public class androidx.compose.runtime.ComposerImpl {
+void <clinit>();
+}
+-assumenosideeffects public class androidx.compose.runtime.ComposerKt {
+void sourceInformation(androidx.compose.runtime.Composer,java.lang.String);
+void sourceInformationMarkerStart(androidx.compose.runtime.Composer,int,java.lang.String);
+void sourceInformationMarkerEnd(androidx.compose.runtime.Composer);
+}
+-assumevalues class androidx.compose.runtime.tooling.ComposeStackTraceMode {
+private static boolean isMinified return true;
+}
+-dontnote android.net.http.**
+-dontnote android.support.**
+-dontnote androidx.**
+-dontnote com.android.vending.licensing.ILicensingService
+-dontnote com.google.android.vending.licensing.ILicensingService
+-dontnote com.google.vending.licensing.ILicensingService
+-dontnote java.lang.invoke.**
+-dontnote kotlinx.serialization.**
+-dontnote kotlinx.serialization.SerializationKt
+-dontnote org.apache.http.**
+-dontwarn android.support.**
+-dontwarn android.support.**
+-dontwarn android.view.DisplayListCanvas
+-dontwarn android.view.HardwareCanvas
+-dontwarn android.view.RenderNode
+-dontwarn androidx.**
+-dontwarn androidx.**
+-dontwarn androidx.lifecycle.LiveData
+-dontwarn androidx.room.paging.**
+-dontwarn coil3.PlatformContext
+-dontwarn com.crashlytics.**
+-dontwarn com.google.errorprone.annotations.*
+-dontwarn java.lang.ClassValue
+-dontwarn java.lang.instrument.ClassFileTransformer
+-dontwarn java.lang.instrument.Instrumentation
+-dontwarn javax.annotation.**
+-dontwarn javax.annotation.**
+-dontwarn kotlin.Unit
+-dontwarn kotlinx.serialization.internal.ClassValueReferences
+-dontwarn okhttp3.internal.platform.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn org.conscrypt.**
+-dontwarn org.jetbrains.annotations.**
+-dontwarn org.jetbrains.annotations.**
+-dontwarn org.openjsse.**
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions$*
+-dontwarn soup.movie.log.Logger
+-dontwarn sun.misc.Signal
+-dontwarn sun.misc.SignalHandler
+-identifiernamestring @dagger.internal.IdentifierNameString class ** {
+static java.lang.String *;
+}
+-if @kotlinx.serialization.Serializable class **
+-if @kotlinx.serialization.Serializable class **
+-if @kotlinx.serialization.Serializable class ** {
+public static ** INSTANCE;
+}
+-if @kotlinx.serialization.Serializable class ** {
+static **$* *;
+}
+-if @kotlinx.serialization.internal.NamedCompanion class *
+-if class androidx.window.layout.adapter.sidecar.SidecarCompat {
+public *** setExtensionCallback(androidx.window.layout.adapter.sidecar.ExtensionInterfaceCompat$ExtensionCallbackInterface);
+}
+-if interface * { @retrofit2.http.* <methods>; }
+-if interface * { @retrofit2.http.* <methods>; }
+-if interface * { @retrofit2.http.* public *** *(...); }
+-if public class ** extends androidx.fragment.app.Fragment
+-if public class androidx.compose.ui.platform.AndroidCompositionLocals_androidKt {
+public static *** getLocalLifecycleOwner();
+}
+-if public class androidx.compose.ui.platform.AndroidCompositionLocals_androidKt {
+public static *** getLocalSavedStateRegistryOwner();
+}
+-keep @android.support.annotation.Keep class * {*;}
+-keep @androidx.annotation.Keep class * {*;}
+-keep class * extends androidx.room.RoomDatabase { void <init>(); }
+-keep class * extends androidx.startup.Initializer {
+<init>();
+}
+-keep class * implements androidx.lifecycle.GeneratedAdapter {
+<init>(...);
+}
+-keep class * implements androidx.versionedparcelable.VersionedParcelable
+-keep class android.support.annotation.Keep
+-keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.view.menu.ActionMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.view.menu.ExpandedMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.view.menu.ListMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ActionBarContainer { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ActionBarContextView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ActionBarOverlayLayout { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ActionMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ActivityChooserView$InnerLayout { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.AlertDialogLayout { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ButtonBarLayout { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ContentFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.DialogTitle { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.FitWindowsFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.FitWindowsLinearLayout { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.SearchView$SearchAutoComplete { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.Toolbar { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.appcompat.widget.ViewStubCompat { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.browser.browseractions.BrowserActionsFallbackMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+-keep class androidx.core.widget.NestedScrollView { <init>(android.content.Context, android.util.AttributeSet); }
+-keep class androidx.profileinstaller.ProfileInstallReceiver { <init>(); }
+-keep class androidx.room.MultiInstanceInvalidationService { <init>(); }
+-keep class androidx.startup.InitializationProvider { <init>(); }
+-keep class androidx.window.layout.adapter.sidecar.SidecarCompat$TranslatingCallback,
+androidx.window.layout.adapter.sidecar.DistinctElementSidecarCallback {
+public *** onDeviceStateChanged(androidx.window.sidecar.SidecarDeviceState);
+public *** onWindowLayoutChanged(android.os.IBinder, androidx.window.sidecar.SidecarWindowLayoutInfo);
+}
+-keep class androidx.work.WorkerParameters
+-keep class androidx.work.impl.background.systemalarm.RescheduleReceiver { <init>(); }
+-keep class androidx.work.impl.background.systemjob.SystemJobService { <init>(); }
+-keep class androidx.work.impl.diagnostics.DiagnosticsReceiver { <init>(); }
+-keep class androidx.work.impl.foreground.SystemForegroundService { <init>(); }
+-keep class androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver { <init>(); }
+-keep class com.crashlytics.** { *; }
+-keep class kotlin.Metadata { *; }
+-keep class soup.movie.MovieApplication { <init>(); }
+-keep class soup.movie.data.database.internal.entity.** { *; }
+-keep class soup.movie.data.network.response.** { *; }
+-keep class soup.movie.ui.main.MainActivity { <init>(); }
+-keep interface androidx.window.area.reflectionguard.* {*;}
+-keep interface androidx.window.reflection.Consumer2 {
+public *** accept(***);
+}
+-keep interface androidx.window.reflection.JFunction2 {
+public *** apply(***);
+}
+-keep interface androidx.window.reflection.Predicate2 {
+public *** test(***);
+}
+-keep public class android.support.**Parcelizer { *; }
+-keep public class androidx.**Parcelizer { *; }
+-keep public class androidx.compose.ui.platform.AndroidCompositionLocals_androidKt {
+public static *** getLocalLifecycleOwner();
+}
+-keep public class androidx.compose.ui.platform.AndroidCompositionLocals_androidKt {
+public static *** getLocalSavedStateRegistryOwner();
+}
+-keep public class androidx.versionedparcelable.ParcelImpl
+-keep public class com.android.vending.licensing.ILicensingService
+-keep public class com.google.android.vending.licensing.ILicensingService
+-keep public class com.google.vending.licensing.ILicensingService
+-keep, allowshrinking, allowoptimization, allowobfuscation, allowaccessmodification class <1>
+-keep,allowobfuscation @interface androidx.annotation.Keep
+-keep,allowobfuscation interface * extends <1>
+-keep,allowobfuscation interface <1>
+-keep,allowobfuscation,allowshrinking @dagger.hilt.EntryPoint class *
+-keep,allowobfuscation,allowshrinking @dagger.hilt.android.EarlyEntryPoint class *
+-keep,allowobfuscation,allowshrinking @dagger.hilt.internal.ComponentEntryPoint class *
+-keep,allowobfuscation,allowshrinking @dagger.hilt.internal.GeneratedEntryPoint class *
+-keep,allowobfuscation,allowshrinking class * extends androidx.compose.ui.node.ModifierNodeElement
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.detail.impl.DetailViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.detail.impl.DetailViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.HomeViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.HomeViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.favorite.HomeFavoriteViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.favorite.HomeFavoriteViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.filter.HomeFilterViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.filter.HomeFilterViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.now.HomeNowViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.now.HomeNowViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.plan.HomePlanViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.home.impl.plan.HomePlanViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.search.impl.SearchViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.search.impl.SearchViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.settings.impl.home.SettingsViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.settings.impl.home.SettingsViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.feature.settings.impl.theme.ThemeOptionViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.ui.main.MainViewModel
+-keep,allowobfuscation,allowshrinking class soup.movie.ui.main.MainViewModel
+-keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+-keep,allowshrinking class androidx.window.layout.adapter.extensions.MulticastConsumer {
+void accept(androidx.window.extensions.layout.WindowLayoutInfo);
+}
+-keep,includedescriptorclasses class soup.movie.**$$serializer { *; }
+-keepattributes *Annotation*, InnerClasses
+-keepattributes AnnotationDefault
+-keepattributes AnnotationDefault,
+EnclosingMethod,
+InnerClasses,
+RuntimeVisibleAnnotations,
+RuntimeVisibleParameterAnnotations,
+RuntimeVisibleTypeAnnotations,
+Signature
+-keepattributes AnnotationDefault,
+RuntimeVisibleAnnotations,
+RuntimeVisibleParameterAnnotations,
+RuntimeVisibleTypeAnnotations
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepattributes RuntimeVisibleAnnotations,AnnotationDefault
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepclasseswithmembernames,includedescriptorclasses class * {
+native <methods>;
+}
+-keepclasseswithmembernames,includedescriptorclasses class androidx.datastore.core.NativeSharedCounter {
+native <methods>;
+}
+-keepclasseswithmembers class * {
+@android.support.annotation.Keep <fields>;
+}
+-keepclasseswithmembers class * {
+@android.support.annotation.Keep <init>(...);
+}
+-keepclasseswithmembers class * {
+@android.support.annotation.Keep <methods>;
+}
+-keepclasseswithmembers class * {
+@androidx.annotation.Keep <fields>;
+}
+-keepclasseswithmembers class * {
+@androidx.annotation.Keep <init>(...);
+}
+-keepclasseswithmembers class * {
+@androidx.annotation.Keep <methods>;
+}
+-keepclasseswithmembers class androidx.graphics.path.** {
+native <methods>;
+}
+-keepclasseswithmembers class soup.movie.** {
+kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclasseswithmembers,allowobfuscation public class <1> {
+public <init>();
+}
+-keepclasseswithmembers,allowobfuscation public class androidx.lifecycle.ReportFragment {
+public <init>();
+}
+-keepclassmembernames class * {
+static <1> *;
+}
+-keepclassmembernames,allowobfuscation,allowshrinking class androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper$Impl* {
+<methods>;
+}
+-keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.app.NotificationCompat$*$Api*Impl {
+<methods>;
+}
+-keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.os.UserHandleCompat$Api*Impl {
+<methods>;
+}
+-keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.view.ViewCompat$Api* {
+<methods>;
+}
+-keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.view.WindowInsetsCompat$*Impl* {
+<methods>;
+}
+-keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.widget.EdgeEffectCompat$Api*Impl {
+<methods>;
+}
+-keepclassmembers @kotlinx.serialization.Serializable class ** {
+public static ** INSTANCE;
+kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclassmembers class * extends android.app.Activity {
+public void *(android.view.View);
+}
+-keepclassmembers class * extends androidx.datastore.preferences.protobuf.GeneratedMessageLite {
+<fields>;
+}
+-keepclassmembers class * extends androidx.lifecycle.EmptyActivityLifecycleCallbacks { *; }
+-keepclassmembers class * extends androidx.work.InputMerger { void <init>(); }
+-keepclassmembers class * implements android.os.Parcelable {
+public static final ** CREATOR;
+}
+-keepclassmembers class * {
+@android.webkit.JavascriptInterface <methods>;
+}
+-keepclassmembers class ** {
+@androidx.lifecycle.OnLifecycleEvent *;
+}
+-keepclassmembers class <1> {
+public static <1> INSTANCE;
+kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclassmembers class <1> {
+static <1>$* Companion;
+}
+-keepclassmembers class <2>$<3> {
+kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclassmembers class androidx.compose.ui.graphics.layer.view.PlaceholderHardwareCanvas {
+public int drawRenderNode(...);
+public boolean isHardwareAccelerated();
+}
+-keepclassmembers class androidx.compose.ui.graphics.layer.view.ViewLayerContainer {
+protected void dispatchGetDisplayList();
+}
+-keepclassmembers class androidx.compose.ui.platform.AndroidComposeView {
+android.view.View findViewByAccessibilityIdTraversal(int);
+}
+-keepclassmembers class androidx.compose.ui.platform.ViewLayerContainer {
+protected void dispatchGetDisplayList();
+}
+-keepclassmembers class androidx.lifecycle.ReportFragment$LifecycleCallbacks { *; }
+-keepclassmembers class androidx.transition.ChangeBounds$* extends android.animation.AnimatorListenerAdapter {
+androidx.transition.ChangeBounds$ViewBounds mViewBounds;
+}
+-keepclassmembers class androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$* {
+void set*(***);
+*** get*();
+}
+-keepclassmembers class kotlin.coroutines.SafeContinuation {
+volatile <fields>;
+}
+-keepclassmembers class kotlinx.coroutines.** {
+volatile <fields>;
+}
+-keepclassmembers class soup.movie.** {
+*** Companion;
+}
+-keepclassmembers enum * {
+public static **[] values();
+public static ** valueOf(java.lang.String);
+}
+-keepclassmembers enum androidx.lifecycle.Lifecycle$Event {
+<fields>;
+}
+-keepclassmembers public class * extends android.view.View {
+void set*(***);
+*** get*();
+}
+-keepclassmembers public class * extends androidx.work.ListenableWorker {
+public <init>(...);
+}
+-keepclassmembers public class **$$serializer {
+private ** descriptor;
+}
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.AndroidViewModel {
+<init>(android.app.Application);
+}
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.AndroidViewModel {
+<init>(android.app.Application,androidx.lifecycle.SavedStateHandle);
+}
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
+<init>();
+}
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
+<init>(androidx.lifecycle.SavedStateHandle);
+}
+-keepclassmembers,allowobfuscation class * implements androidx.savedstate.SavedStateRegistry$AutoRecreated {
+<init>();
+}
+-keepclassmembers,allowobfuscation class * {
+@androidx.annotation.DoNotInline <methods>;
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static java.lang.Void throw*Exception(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+static java.lang.String exceptionMessage*(...);
+java.lang.String exceptionMessage*(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.**.* {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation class androidx.compose.runtime.** {
+static void throw*Exception(...);
+static void throw*ExceptionForNullCheck(...);
+static java.lang.Void throw*Exception(...);
+static java.lang.Void throw*ExceptionForNullCheck(...);
+static java.lang.String exceptionMessage*(...);
+java.lang.String exceptionMessage*(...);
+static void compose*RuntimeError(...);
+static java.lang.Void compose*RuntimeError(...);
+}
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+@retrofit2.http.* <methods>;
+}
+-keepnames @androidx.hilt.work.HiltWorker class * extends androidx.work.ListenableWorker
+-keepnames @kotlinx.serialization.internal.NamedCompanion class *
+-keepnames class * extends androidx.startup.Initializer
+-keepnames class * extends androidx.work.InputMerger
+-keepnames class * extends androidx.work.ListenableWorker
+-keepnames class androidx.compose.ui.input.pointer.PointerInputEventHandler {
+*;
+}
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
