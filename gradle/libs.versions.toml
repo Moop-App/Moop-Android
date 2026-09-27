@@ -38,6 +38,7 @@ photo-compose = "1.0.1"
 # Etc
 coil = "3.3.0"
 dependencyGuard = "0.5.0"
+manifestShield = "0.1.10"
 retrofit = "3.0.0"
 timber = "5.0.1"
 
@@ -149,4 +150,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
+manifestShield = { id = "io.github.fornewid.manifest-shield", version.ref = "manifestShield" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }

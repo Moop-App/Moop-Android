@@ -4,6 +4,7 @@ plugins {
     id "moop.android.hilt"
     id "org.jetbrains.kotlin.plugin.serialization"
     alias libs.plugins.dependencyGuard
+    alias libs.plugins.manifestShield
     alias(libs.plugins.baselineprofile)
 }
 
@@ -134,6 +135,10 @@ dependencies {
 dependencyGuard {
     // All dependencies included in Production Release APK
     configuration("releaseRuntimeClasspath")
+}
+
+manifestShield {
+    configuration("release")
 }
 
 task applyDependencyBaseline {
