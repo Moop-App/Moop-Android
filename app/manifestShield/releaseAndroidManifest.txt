@@ -1,0 +1,11 @@
+uses-permission:
+  android.permission.ACCESS_NETWORK_STATE
+  android.permission.FOREGROUND_SERVICE
+  android.permission.INTERNET
+  android.permission.POST_NOTIFICATIONS
+  android.permission.RECEIVE_BOOT_COMPLETED
+  android.permission.WAKE_LOCK
+  soup.movie.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+
+activity:
+  soup.movie.ui.main.MainActivity (exported)

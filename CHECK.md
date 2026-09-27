@@ -13,6 +13,11 @@
 ./gradlew dependencyGuard
 ```
 
+- manifestShield
+```bash
+./gradlew manifestShield
+```
+
 - spotless
 ```bash
 ./gradlew spotlessCheck --init-script gradle/init.gradle.kts
@@ -28,6 +33,11 @@
 - dependencyGuard
 ```bash
 ./gradlew dependencyGuardBaseline
+```
+
+- manifestShield
+```bash
+./gradlew manifestShieldBaseline
 ```
 
 - spotless
