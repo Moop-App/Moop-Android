@@ -6,14 +6,18 @@ import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.UntrackedTask
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
-import java.io.File
+import org.gradle.work.DisableCachingByDefault
 
 /**
  * Records module rule violations in module-rules.txt:
@@ -36,13 +40,20 @@ class ModuleRulesPlugin : Plugin<Project> {
                 outputFile.set(module.layout.buildDirectory.file("module-rules.txt"))
             }.flatMap { it.outputFile }
         }
-        val baseline = root.tasks.register<ModuleRulesTask>("moduleRulesBaseline") { update = true }
-        root.tasks.register<ModuleRulesTask>("moduleRules") { mustRunAfter(baseline) }
+        root.tasks.register<ModuleRulesTask>("moduleRulesBaseline") {
+            description = "Writes the module rule violations to module-rules.txt."
+            update.set(true)
+        }
+        root.tasks.register<ModuleRulesTask>("moduleRules") {
+            description = "Fails when the module rule violations differ from module-rules.txt."
+            update.set(false)
+        }
         root.tasks.withType<ModuleRulesTask>().configureEach {
             group = "verification"
             // Depending on the tasks by path makes configure-on-demand configure every module.
             dependsOn(modules.map { "${it.path}:moduleRulesInfo" })
             violationFiles.from(infoFiles)
+            baselineFile.set(root.layout.projectDirectory.file("module-rules.txt"))
         }
     }
 }
@@ -54,7 +65,7 @@ private fun Project.declaredDependencies(): Set<String> = configurations
     .map { it.path }
     .toSet()
 
-/** Writes the violations of one module for the root tasks to collect. */
+@DisableCachingByDefault(because = "Writes a few lines computed from its inputs")
 abstract class ModuleRulesInfoTask : DefaultTask() {
     @get:Input
     abstract val violations: ListProperty<String>
@@ -66,25 +77,27 @@ abstract class ModuleRulesInfoTask : DefaultTask() {
     fun write() = outputFile.get().asFile.writeText(violations.get().joinToString("") { "$it\n" })
 }
 
-/** Writes ([update]) or checks module-rules.txt. */
+@UntrackedTask(because = "Checks or rewrites module-rules.txt in the source tree")
 abstract class ModuleRulesTask : DefaultTask() {
     @get:InputFiles
+    @get:PathSensitive(PathSensitivity.NONE)
     abstract val violationFiles: ConfigurableFileCollection
 
     @get:Input
-    var update = false
+    abstract val update: Property<Boolean>
 
     @get:Internal
-    val baselineFile: File = project.file("module-rules.txt")
+    abstract val baselineFile: RegularFileProperty
 
     @TaskAction
     fun run() {
         val actual = violationFiles.flatMap { it.readLines() }.sorted()
-        if (update) {
-            baselineFile.writeText(actual.joinToString("") { "$it\n" })
+        val file = baselineFile.get().asFile
+        if (update.get()) {
+            file.writeText(actual.joinToString("") { "$it\n" })
             return
         }
-        val diff = baselineDiff(expected = baselineFile.takeIf { it.exists() }?.readLines().orEmpty(), actual = actual)
+        val diff = baselineDiff(expected = file.readLines(), actual = actual)
         if (diff.isNotEmpty()) {
             throw GradleException(
                 "Module rules changed in module-rules.txt:\n" + diff.joinToString("\n") +
@@ -100,9 +113,10 @@ abstract class ModuleRulesTask : DefaultTask() {
  */
 internal fun findViolations(path: String, hasHilt: Boolean, dependencies: Set<String>): List<String> = buildList {
     val isApp = path == ":app"
+    val layer = path.layer()
     if (hasHilt && !isApp && !path.isImpl()) add("hilt: $path")
     if (!isApp) dependencies.filter { it.isImpl() }.forEach { add("impl: $path -> $it") }
-    dependencies.filter { path.layer() >= 0 && it.layer() > path.layer() }.forEach { add("layer: $path -> $it") }
+    if (layer >= 0) dependencies.filter { it.layer() > layer }.forEach { add("layer: $path -> $it") }
 }
 
 internal fun baselineDiff(expected: List<String>, actual: List<String>): List<String> =
