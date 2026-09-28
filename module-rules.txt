@@ -1,0 +1,4 @@
+hilt: :core:kotlin
+hilt: :feature:home:api
+hilt: :testing
+layer: :core:datetime -> :data:model

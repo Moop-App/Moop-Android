@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.manifestShield) apply false
     alias(libs.plugins.proguardShield) apply false
     alias(libs.plugins.baselineprofile) apply false
+    id "moop.module.rules"
 }
 
 apply from: "$rootDir/gradle/version.gradle"

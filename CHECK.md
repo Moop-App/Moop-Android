@@ -23,6 +23,11 @@
 ./gradlew proguardShieldFast
 ```
 
+- moduleRules
+```bash
+./gradlew moduleRules
+```
+
 - spotless
 ```bash
 ./gradlew spotlessCheck --init-script gradle/init.gradle.kts
@@ -48,6 +53,11 @@
 - proguardShield
 ```bash
 ./gradlew proguardShieldFastBaseline
+```
+
+- moduleRules
+```bash
+./gradlew moduleRulesBaseline
 ```
 
 - spotless

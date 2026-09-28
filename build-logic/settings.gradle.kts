@@ -12,3 +12,4 @@ dependencyResolutionManagement {
 
 include(":convention")
 include(":module-detector")
+include(":module-rules")
