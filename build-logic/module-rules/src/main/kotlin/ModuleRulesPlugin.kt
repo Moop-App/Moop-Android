@@ -26,8 +26,8 @@ import org.gradle.work.DisableCachingByDefault
 class ModuleRulesPlugin : Plugin<Project> {
     override fun apply(root: Project) {
         val modules = root.subprojects.filter { it.buildFile.exists() }
-        val infoFiles = modules.map { module ->
-            module.tasks.register<ModuleRulesInfoTask>("moduleRulesInfo") {
+        val moduleViolationFiles = modules.map { module ->
+            module.tasks.register<ModuleRulesViolationsTask>("moduleRulesViolations") {
                 violations.set(
                     module.provider {
                         findViolations(
@@ -37,7 +37,7 @@ class ModuleRulesPlugin : Plugin<Project> {
                         )
                     },
                 )
-                outputFile.set(module.layout.buildDirectory.file("module-rules.txt"))
+                outputFile.set(module.layout.buildDirectory.file("module-rules-violations.txt"))
             }.flatMap { it.outputFile }
         }
         root.tasks.register<ModuleRulesTask>("moduleRulesBaseline") {
@@ -51,22 +51,22 @@ class ModuleRulesPlugin : Plugin<Project> {
         root.tasks.withType<ModuleRulesTask>().configureEach {
             group = "verification"
             // Depending on the tasks by path makes configure-on-demand configure every module.
-            dependsOn(modules.map { "${it.path}:moduleRulesInfo" })
-            violationFiles.from(infoFiles)
+            dependsOn(modules.map { "${it.path}:moduleRulesViolations" })
+            violationFiles.from(moduleViolationFiles)
             baselineFile.set(root.layout.projectDirectory.file("module-rules.txt"))
         }
     }
+
+    /** Module paths from the declaration buckets; AGP copies them, and the module itself, into classpaths. */
+    private fun Project.declaredDependencies(): Set<String> = configurations
+        .filter { !it.isCanBeResolved && !it.isCanBeConsumed }
+        .flatMap { it.dependencies.withType(ProjectDependency::class.java) }
+        .map { it.path }
+        .toSet()
 }
 
-/** Module paths from the declaration buckets; AGP copies them, and the module itself, into classpaths. */
-private fun Project.declaredDependencies(): Set<String> = configurations
-    .filter { !it.isCanBeResolved && !it.isCanBeConsumed }
-    .flatMap { it.dependencies.withType(ProjectDependency::class.java) }
-    .map { it.path }
-    .toSet()
-
 @DisableCachingByDefault(because = "Writes a few lines computed from its inputs")
-abstract class ModuleRulesInfoTask : DefaultTask() {
+abstract class ModuleRulesViolationsTask : DefaultTask() {
     @get:Input
     abstract val violations: ListProperty<String>
 
