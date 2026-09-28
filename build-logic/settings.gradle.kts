@@ -10,4 +10,5 @@ dependencyResolutionManagement {
     }
 }
 
-include(":convention", ":module-detector")
+include(":convention")
+include(":module-detector")
