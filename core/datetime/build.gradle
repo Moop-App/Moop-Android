@@ -8,7 +8,6 @@ android {
 
 dependencies {
     implementation projects.core.kotlin
-    implementation projects.data.model
 
     implementation libs.kotlin.stdlib
 
