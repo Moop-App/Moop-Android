@@ -1,7 +1,6 @@
 plugins {
-    id "moop.android.library"
+    id "moop.android.feature"
     id "moop.android.compose"
-    id "moop.android.hilt"
 }
 
 android {
@@ -15,8 +14,6 @@ dependencies {
     implementation projects.core.logger
     implementation projects.core.resources
     implementation projects.data.settings.api
-    implementation projects.data.repository.api
-    implementation projects.core.model
     implementation projects.feature.navigator.api
     implementation projects.feature.home.api
     implementation projects.feature.detail.api

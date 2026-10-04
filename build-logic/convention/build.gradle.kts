@@ -33,6 +33,10 @@ gradlePlugin {
             id = "moop.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidFeature") {
+            id = "moop.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
         register("androidTest") {
             id = "moop.android.test"
             implementationClass = "AndroidTestConventionPlugin"
