@@ -34,6 +34,9 @@ jobs:
       - name: Check manifestShield
         run: ./gradlew manifestShield
 
+      - name: Verify baselines are committed
+        run: test -z "$(git status --porcelain -- app/manifestShield app/dependencies)"
+
       - name: Check proguardShield
         run: ./gradlew proguardShieldFast
 
