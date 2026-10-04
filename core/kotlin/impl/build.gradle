@@ -8,5 +8,7 @@ android {
 }
 
 dependencies {
+    implementation projects.core.kotlin.api
+
     implementation libs.coroutines.android
 }
