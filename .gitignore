@@ -54,3 +54,6 @@ signing/key.properties
 freeline.py
 freeline/
 freeline_project_description.json
+
+# macOS
+.DS_Store
