@@ -1,5 +1,5 @@
 plugins {
-    id "moop.android.library"
+    id "moop.android.feature"
     id "moop.android.hilt"
 }
 

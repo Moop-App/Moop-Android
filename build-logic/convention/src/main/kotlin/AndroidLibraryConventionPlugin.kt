@@ -6,6 +6,7 @@ import org.gradle.kotlin.dsl.dependencies
 import soup.movie.buildlogic.compileOnly
 import soup.movie.buildlogic.configureAndroid
 import soup.movie.buildlogic.configureKotlin
+import soup.movie.buildlogic.implementation
 import soup.movie.buildlogic.project
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
@@ -31,6 +32,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             dependencies {
                 compileOnly(project(path = ":core:buildconfig-stub"))
+                implementation(project(path = ":core:model"))
             }
         }
     }

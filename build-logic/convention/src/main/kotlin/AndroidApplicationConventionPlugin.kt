@@ -18,6 +18,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
             dependencies {
                 implementation(project(path = ":core:buildconfig"))
+                implementation(project(path = ":core:model"))
             }
         }
     }
