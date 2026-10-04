@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    implementation projects.core.kotlin
+    implementation projects.core.kotlin.api
     implementation projects.core.designsystem
     implementation projects.core.imageloading.api
     implementation projects.core.logger

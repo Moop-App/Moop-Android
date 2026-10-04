@@ -72,7 +72,8 @@ android {
 dependencies {
     baselineProfile projects.macrobenchmark
 
-    implementation projects.core.kotlin
+    implementation projects.core.kotlin.api
+    runtimeOnly projects.core.kotlin.impl
     implementation projects.core.designsystem
     implementation projects.core.logger
     implementation projects.core.resources

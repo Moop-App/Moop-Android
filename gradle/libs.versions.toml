@@ -60,6 +60,7 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 dagger-hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
+javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "androidxhilt" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidxhilt" }
