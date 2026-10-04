@@ -9,7 +9,6 @@ android {
 }
 
 dependencies {
-    implementation projects.core.kotlin.api
     implementation projects.core.designsystem
     implementation projects.core.external
     implementation projects.core.resources
