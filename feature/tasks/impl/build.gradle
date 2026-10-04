@@ -1,6 +1,5 @@
 plugins {
     id "moop.android.feature"
-    id "com.google.devtools.ksp"
 }
 
 android {
@@ -14,9 +13,6 @@ dependencies {
     implementation projects.core.datetime
     implementation projects.feature.tasks.api
     implementation projects.feature.notification.api
-
-    implementation libs.androidx.hilt.work
-    ksp libs.androidx.hilt.compiler
 
     implementation libs.androidx.work.runtime
     androidTestImplementation libs.androidx.work.testing

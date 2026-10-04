@@ -15,14 +15,17 @@
  */
 package soup.movie.feature.tasks.impl.di
 
-import androidx.hilt.work.HiltWorkerFactory
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import soup.movie.feature.tasks.impl.AnnounceOpenDateUseCase
+import soup.movie.feature.tasks.impl.SyncOpenDateUseCase
 
 @EntryPoint
 @InstallIn(SingletonComponent::class)
-interface InitializerDependencies {
+interface WorkerEntryPoint {
 
-    fun workerFactory(): HiltWorkerFactory
+    fun syncOpenDate(): SyncOpenDateUseCase
+
+    fun announceOpenDate(): AnnounceOpenDateUseCase
 }

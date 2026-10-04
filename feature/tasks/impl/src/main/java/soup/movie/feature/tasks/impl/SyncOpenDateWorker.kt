@@ -16,19 +16,20 @@
 package soup.movie.feature.tasks.impl
 
 import android.content.Context
-import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.EntryPointAccessors
+import soup.movie.feature.tasks.impl.di.WorkerEntryPoint
 import soup.movie.log.Logger
 
-@HiltWorker
-class SyncOpenDateWorker @AssistedInject constructor(
-    @Assisted context: Context,
-    @Assisted params: WorkerParameters,
-    private val syncOpenDate: SyncOpenDateUseCase,
+class SyncOpenDateWorker(
+    context: Context,
+    params: WorkerParameters,
 ) : CoroutineWorker(context, params) {
+
+    private val syncOpenDate = EntryPointAccessors
+        .fromApplication(context, WorkerEntryPoint::class.java)
+        .syncOpenDate()
 
     override suspend fun doWork(): Result {
         Logger.d("doWork: start!")
