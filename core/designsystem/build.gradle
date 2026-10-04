@@ -10,8 +10,6 @@ android {
 dependencies {
     implementation projects.core.kotlin
 
-    implementation libs.kotlin.stdlib
-
     implementation libs.compose.foundation
     implementation libs.compose.materialIconsExtended
     implementation libs.compose.material3

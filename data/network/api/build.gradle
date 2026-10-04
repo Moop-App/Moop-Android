@@ -9,7 +9,6 @@ android {
 
 dependencies {
     implementation projects.core.datetime
-    implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core
     implementation libs.coroutines.android

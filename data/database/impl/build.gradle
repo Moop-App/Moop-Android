@@ -15,7 +15,6 @@ dependencies {
     implementation projects.core.datetime
     implementation projects.data.database.api
 
-    implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core
     implementation libs.coroutines.android

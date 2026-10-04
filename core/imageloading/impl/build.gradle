@@ -9,8 +9,6 @@ android {
 dependencies {
     implementation projects.core.imageloading.api
 
-    implementation libs.kotlin.stdlib
-
     implementation libs.androidx.startup
     implementation libs.coil.runtime
     implementation libs.coil.okhttp
