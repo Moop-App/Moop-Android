@@ -1,5 +1,8 @@
 import org.gradle.api.Plugin
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.initialization.Settings
+import org.gradle.api.provider.ValueSource
+import org.gradle.api.provider.ValueSourceParameters
 import java.io.File
 
 /**
@@ -8,8 +11,23 @@ import java.io.File
  */
 class ModuleDetectorPlugin : Plugin<Settings> {
     override fun apply(settings: Settings) {
-        settings.include(findModules(settings.rootDir))
+        val modules = settings.providers.of(ModulesValueSource::class.java) {
+            parameters.rootDir.set(settings.rootDir)
+        }
+        settings.include(modules.get())
     }
+}
+
+/**
+ * Makes the configuration cache compare only the detected modules,
+ * not every directory listed while detecting them.
+ */
+abstract class ModulesValueSource : ValueSource<List<String>, ModulesValueSource.Parameters> {
+    interface Parameters : ValueSourceParameters {
+        val rootDir: DirectoryProperty
+    }
+
+    override fun obtain(): List<String> = findModules(parameters.rootDir.get().asFile)
 }
 
 /**
