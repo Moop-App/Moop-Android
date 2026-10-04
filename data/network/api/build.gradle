@@ -9,7 +9,7 @@ android {
 
 dependencies {
     implementation projects.core.datetime
-    implementation projects.data.model
+    implementation projects.core.model
     implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core

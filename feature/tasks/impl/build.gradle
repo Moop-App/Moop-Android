@@ -14,7 +14,7 @@ dependencies {
     implementation projects.core.resources
     implementation projects.core.datetime
     implementation projects.data.repository.api
-    implementation projects.data.model
+    implementation projects.core.model
     implementation projects.feature.tasks.api
     implementation projects.feature.notification.api
 
