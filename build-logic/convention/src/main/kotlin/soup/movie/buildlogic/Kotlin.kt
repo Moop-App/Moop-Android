@@ -1,6 +1,9 @@
 package soup.movie.buildlogic
 
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -21,5 +24,10 @@ fun Project.configureKotlin() {
                 "-Xannotation-default-target=param-property",
             )
         }
+    }
+
+    val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+    dependencies {
+        implementation(platform(libs.findLibrary("kotlin-bom").get()))
     }
 }
