@@ -1,7 +1,6 @@
 plugins {
     id "moop.android.feature"
     id "moop.android.compose"
-    id "moop.android.hilt"
 }
 
 android {

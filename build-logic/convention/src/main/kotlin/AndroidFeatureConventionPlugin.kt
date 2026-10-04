@@ -7,7 +7,10 @@ import soup.movie.buildlogic.project
 class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("moop.android.library")
+            with(pluginManager) {
+                apply("moop.android.library")
+                apply("moop.android.hilt")
+            }
 
             dependencies {
                 implementation(project(path = ":data:repository:api"))
