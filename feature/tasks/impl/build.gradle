@@ -1,6 +1,5 @@
 plugins {
     id "moop.android.feature"
-    id "com.google.devtools.ksp"
 }
 
 android {
@@ -19,8 +18,4 @@ dependencies {
     ksp libs.androidx.hilt.compiler
 
     implementation libs.androidx.work.runtime
-    androidTestImplementation libs.androidx.work.testing
-
-    testImplementation projects.testing
-    androidTestImplementation projects.testing
 }
