@@ -15,7 +15,7 @@ dependencies {
     implementation projects.core.external
     implementation projects.core.resources
     implementation projects.data.settings.api
-    implementation projects.data.model
+    implementation projects.core.model
     implementation projects.feature.navigator.api
     implementation projects.feature.settings.api
 

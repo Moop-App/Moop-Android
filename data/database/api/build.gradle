@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation projects.data.model
+    implementation projects.core.model
     implementation libs.kotlin.stdlib
     implementation libs.coroutines.core
 }
