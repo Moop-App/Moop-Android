@@ -9,7 +9,6 @@ android {
 }
 
 dependencies {
-    implementation projects.core.kotlin.api
     implementation projects.data.network.api
 
     implementation libs.kotlin.serialization

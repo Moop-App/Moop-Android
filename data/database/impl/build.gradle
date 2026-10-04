@@ -10,7 +10,6 @@ android {
 }
 
 dependencies {
-    implementation projects.core.kotlin.api
     implementation projects.core.logger
     implementation projects.core.datetime
     implementation projects.data.database.api

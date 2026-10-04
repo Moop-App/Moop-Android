@@ -7,7 +7,6 @@ android {
 }
 
 dependencies {
-    implementation projects.core.kotlin.api
     implementation projects.core.logger
     implementation projects.core.resources
     implementation projects.core.datetime
