@@ -12,7 +12,6 @@ dependencies {
     implementation projects.core.kotlin
     implementation projects.data.settings.api
 
-    implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core
 

@@ -97,7 +97,6 @@ dependencies {
     runtimeOnly projects.data.settings.impl
     runtimeOnly projects.core.imageloading.impl
 
-    implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core
     implementation libs.coroutines.android

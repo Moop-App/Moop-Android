@@ -9,7 +9,5 @@ android {
 dependencies {
     implementation projects.core.kotlin
 
-    implementation libs.kotlin.stdlib
-
     testImplementation projects.testing
 }

@@ -20,8 +20,6 @@ dependencies {
     implementation projects.feature.search.api
     implementation projects.feature.settings.api
 
-    implementation libs.kotlin.stdlib
-
     implementation libs.androidx.activity.compose
     implementation libs.androidx.hilt.lifecycle.viewmodel.compose
     implementation libs.androidx.navigation3.runtime

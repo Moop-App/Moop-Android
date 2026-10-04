@@ -15,8 +15,6 @@ dependencies {
     implementation projects.feature.tasks.api
     implementation projects.feature.notification.api
 
-    implementation libs.kotlin.stdlib
-
     implementation libs.androidx.hilt.work
     ksp libs.androidx.hilt.compiler
 

@@ -17,7 +17,6 @@ dependencies {
     implementation projects.feature.navigator.api
     implementation projects.feature.settings.api
 
-    implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
 
     implementation libs.androidx.appcompat

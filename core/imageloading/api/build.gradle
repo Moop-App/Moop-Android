@@ -8,8 +8,6 @@ android {
 }
 
 dependencies {
-    implementation libs.kotlin.stdlib
-
     implementation libs.compose.foundation
     implementation libs.coil.compose
 }

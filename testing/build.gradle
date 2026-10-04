@@ -11,7 +11,6 @@ dependencies {
     implementation projects.core.kotlin
     implementation projects.data.repository.api
 
-    implementation libs.kotlin.stdlib
     api libs.coroutines.test
 
     api libs.dagger.hilt.testing

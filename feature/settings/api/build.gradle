@@ -10,7 +10,6 @@ dependencies {
     implementation projects.core.kotlin
     implementation projects.feature.navigator.api
 
-    implementation libs.kotlin.stdlib
     implementation libs.kotlin.serialization
     implementation libs.androidx.core
     implementation libs.androidx.navigation3.runtime
