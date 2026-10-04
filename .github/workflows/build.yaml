@@ -53,3 +53,6 @@ jobs:
 
       - name: Run local tests
         run: ./gradlew testDebug --stacktrace
+
+      - name: Run build-logic tests
+        run: ./gradlew -p build-logic test --stacktrace
