@@ -45,6 +45,10 @@ gradlePlugin {
             id = "moop.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidRoom") {
+            id = "moop.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
         register("androidCompose") {
             id = "moop.android.compose"
             implementationClass = "AndroidComposeConventionPlugin"
