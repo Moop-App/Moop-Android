@@ -1,21 +1,12 @@
 plugins {
     id "moop.android.library"
     id "moop.android.hilt"
-    id "com.google.devtools.ksp"
+    id "moop.android.room"
     id "org.jetbrains.kotlin.plugin.serialization"
 }
 
 android {
     namespace "soup.movie.data.database.impl"
-    defaultConfig {
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [
-                        "room.incremental": "true"
-                ]
-            }
-        }
-    }
 }
 
 dependencies {
@@ -29,8 +20,4 @@ dependencies {
     implementation libs.kotlin.serialization
     implementation libs.coroutines.core
     implementation libs.coroutines.android
-
-    implementation libs.androidx.room.runtime
-    implementation libs.androidx.room.ktx
-    ksp libs.androidx.room.compiler
 }

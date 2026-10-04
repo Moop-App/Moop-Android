@@ -87,7 +87,6 @@ androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstall
 
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 
 androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidx-startup" }
 androidx-window = { module = "androidx.window:window", version.ref = "androidx-window" }
