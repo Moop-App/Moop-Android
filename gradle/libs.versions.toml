@@ -92,7 +92,6 @@ androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = 
 androidx-window = { module = "androidx.window:window", version.ref = "androidx-window" }
 
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "androidx-work" }
-androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "androidx-work" }
 
 # Compose
 
