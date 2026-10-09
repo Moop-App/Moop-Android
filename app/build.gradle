@@ -6,6 +6,7 @@ plugins {
     alias libs.plugins.dependencyGuard
     alias libs.plugins.manifestShield
     alias libs.plugins.proguardShield
+    alias libs.plugins.highlander
     alias(libs.plugins.baselineprofile)
 }
 
@@ -142,6 +143,13 @@ manifestShield {
 
 proguardShield {
     configuration("release")
+}
+
+highlander {
+    configuration("release") {
+        largeFiles = true
+        largeFilesThresholdKb = 100
+    }
 }
 
 task applyDependencyBaseline {

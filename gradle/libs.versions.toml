@@ -38,6 +38,7 @@ photo-compose = "1.0.1"
 # Etc
 coil = "3.3.0"
 dependencyGuard = "0.5.0"
+highlander = "0.0.6"
 manifestShield = "0.1.10"
 proguardShield = "0.0.3"
 retrofit = "3.0.0"
@@ -152,4 +153,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 manifestShield = { id = "io.github.fornewid.manifest-shield", version.ref = "manifestShield" }
 proguardShield = { id = "io.github.fornewid.proguard-shield", version.ref = "proguardShield" }
+highlander = { id = "io.github.fornewid.highlander", version.ref = "highlander" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
