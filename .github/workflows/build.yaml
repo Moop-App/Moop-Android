@@ -37,6 +37,9 @@ jobs:
       - name: Check proguardShield
         run: ./gradlew proguardShieldFast
 
+      - name: Check highlander
+        run: ./gradlew highlander
+
       - name: Check moduleRules
         run: ./gradlew moduleRules
 

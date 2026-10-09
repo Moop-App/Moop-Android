@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.dependencyGuard) apply false
     alias(libs.plugins.manifestShield) apply false
     alias(libs.plugins.proguardShield) apply false
+    alias(libs.plugins.highlander) apply false
     alias(libs.plugins.baselineprofile) apply false
     id "moop.module.rules"
 }

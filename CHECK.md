@@ -23,6 +23,11 @@
 ./gradlew proguardShieldFast
 ```
 
+- highlander
+```bash
+./gradlew highlander
+```
+
 - moduleRules
 ```bash
 ./gradlew moduleRules
@@ -53,6 +58,11 @@
 - proguardShield
 ```bash
 ./gradlew proguardShieldFastBaseline
+```
+
+- highlander
+```bash
+./gradlew highlanderBaseline
 ```
 
 - moduleRules
